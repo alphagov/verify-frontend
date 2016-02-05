@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>VerifyFrontend</title>
+<% content_for :page_title, 'Verify Frontend' %>
+
+<% content_for :head do %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-</head>
-<body>
+<% end %>
 
-<%= yield %>
+<% content_for :content do %>
+  <main id="content">
+    <%= yield %>
+  </main>
+<% end %>
 
-</body>
-</html>
+<%= render file: 'layouts/govuk_template' %>
