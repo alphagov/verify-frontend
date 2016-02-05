@@ -1,5 +1,8 @@
 # FIXME: Google translated Welsh
 cy:
+  phase_banner:
+    title: Mae hwn yn wasanaeth newydd - Bydd eich %{feedback_link} yn ein helpu i wella.
+    feedback: adborth
   hub:
     start:
       title: Mewngofnodi gyda GOV.UK Verify
