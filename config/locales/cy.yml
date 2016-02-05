@@ -1,0 +1,8 @@
+# FIXME: Google translated Welsh
+cy:
+  hub:
+    start:
+      title: Mewngofnodi gyda GOV.UK Verify
+      answer_yes: Mae hyn yn fy amser cyntaf gan ddefnyddio GOV.UK Verify 
+      answer_no: Rwyf wedi defnyddio GOV.UK Verify cyn
+      continue: Parhau
