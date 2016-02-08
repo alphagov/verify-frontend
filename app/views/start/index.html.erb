@@ -1,3 +1,5 @@
+<% content_for :body_classes, 'hub-start' %>
+
 <h1><%= t 'hub.start.title' %></h1>
 
 <%= form_tag '#', id: 'validate-single-question' do %>
@@ -23,7 +25,7 @@
 
   <div class="form-group-tight">
     <div class="actions">
-      <input class="button-action" id="next-button" type="submit" value="<%= t 'hub.start.continue' %>" />
+      <input class="button" id="next-button" type="submit" value="<%= t 'hub.start.continue' %>" />
     </div>
   </div>
 <% end %>

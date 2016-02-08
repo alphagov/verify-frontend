@@ -11,7 +11,7 @@
 <% content_for :content do %>
   <main id="content">
     <%= render 'shared/phase_banner' %>
-    <%= yield %>
+    <%= content_for?(:main) ? yield(:main) : yield %>
   </main>
 <% end %>
 
