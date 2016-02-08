@@ -25,7 +25,7 @@ gem 'govuk_frontend_toolkit'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -48,4 +48,3 @@ group :test, :development do
   gem 'capybara', '~> 2.6'
   gem 'govuk-lint'
 end
-
