@@ -1,0 +1,3 @@
+before:
+  - bundle config --local build.nokogiri "--use-system-libraries --with-xml2-include=/usr/include/libxml2"
+after_install: 'packaging/postinst.sh'
