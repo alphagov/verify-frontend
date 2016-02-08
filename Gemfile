@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -26,6 +27,7 @@ gem 'govuk_frontend_toolkit'
 
 # Use Unicorn as the app server
 gem 'unicorn'
+gem "rack-handlers"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
