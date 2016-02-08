@@ -25,8 +25,7 @@ gem 'govuk_frontend_toolkit'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-gem 'unicorn'
+gem 'puma'
 gem "rack-handlers"
 
 # Use Capistrano for deployment

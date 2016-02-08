@@ -1,1 +1,1 @@
-web: bundle exec unicorn -p 50301 --env production
+web: bundle exec puma -p 50301 --env production
