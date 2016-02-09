@@ -7,8 +7,12 @@ class StartController < ApplicationController
     elsif validation.no_cookies?
       logger.info(validation.message)
       render "errors/no_cookies"
+    elsif validation.cookie_expired?
+      logger.info(validation.message)
+      render "errors/cookie_expired"
     else
-      render "something_went_wrong"
+      logger.info(validation.message)
+      render "errors/something_went_wrong"
     end
   end
 end

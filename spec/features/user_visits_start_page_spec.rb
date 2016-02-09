@@ -14,7 +14,7 @@ RSpec.describe 'When the user visits the start page' do
   let(:session_info_route) { 'http://api/api/session' }
   let(:secure_cookie) { "my-secure-cookie" }
   let(:session_id_cookie) { "my-session-id-cookie" }
-  let(:session_start_time_cookie) { "my-session-start-time-cookie" }
+  let(:session_start_time_cookie) { DateTime.now.to_i }
   let(:cookie_hash) {
     {
       "x-govuk-secure-cookie" => secure_cookie,
@@ -45,20 +45,40 @@ RSpec.describe 'When the user visits the start page' do
     expect(Rails.logger).to receive(:info).with("No session cookies can be found").at_least(:once)
     visit "/start"
     expect(page).to have_content "If you can't access GOV.UK Verify from a service, enable your cookies."
-    expect(a_request(:get, session_info_route)).to_not have_been_made
   end
 
-  it 'will display the generic error when start time cookie is missing'
-  it 'will display the generic error when the secure cookie is missing'
-  it 'will display the generic error when the session id cookie is missing'
+  it 'will display the generic error when start time cookie is missing' do
+    allow(Rails.logger).to receive(:info)
+    expect(Rails.logger).to receive(:info).with("The following cookies are missing: [session_start_time]").at_least(:once)
+    set_cookies(cookie_hash.except("session_start_time"))
+    visit '/start'
+    expect(page).to have_content "Sorry, something went wrong"
+  end
+
+  it 'will display the generic error when the secure cookie is missing' do
+    allow(Rails.logger).to receive(:info)
+    expect(Rails.logger).to receive(:info).with("The following cookies are missing: [x-govuk-secure-cookie]").at_least(:once)
+    set_cookies(cookie_hash.except("x-govuk-secure-cookie"))
+    visit '/start'
+    expect(page).to have_content "Sorry, something went wrong"
+  end
+
+  it 'will display the generic error when the session id cookie is missing' do
+    allow(Rails.logger).to receive(:info)
+    expect(Rails.logger).to receive(:info).with("The following cookies are missing: [x_govuk_session_cookie]").at_least(:once)
+    set_cookies(cookie_hash.except("x_govuk_session_cookie"))
+    visit '/start'
+    expect(page).to have_content "Sorry, something went wrong"
+  end
 
   it 'will display the timeout expiration error when the session start cookie is old' do
-    pending
-    stub_request(:get, session_info_route).to_return(status: 401, body: {'reason' => 'start time cookie expired'}.to_json)
+    allow(Rails.logger).to receive(:info)
+    expect(Rails.logger).to receive(:info).with("session_start_time cookie for session \"#{session_id_cookie}\" has expired").at_least(:once)
     set_session_cookies
+    expired_start_time = 2.hours.ago.to_i
+    set_cookies({"session_start_time" => expired_start_time})
     visit "/start"
-    expect(a_request(:get, session_info_route).with(headers: {"Cookie" => cookie_values})).to have_been_made.once
-    expect(page).to have_content "Please go back to your service to start again."
+    expect(page).to have_content "Your session has timed out"
+    expect(page).to have_content "Find the service you were using to start again"
   end
-  it 'will display the generic error when cookie validating fails'
 end
