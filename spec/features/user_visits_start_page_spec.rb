@@ -45,6 +45,7 @@ RSpec.describe 'When the user visits the start page' do
     expect(Rails.logger).to receive(:info).with("No session cookies can be found").at_least(:once)
     visit "/start"
     expect(page).to have_content "If you can't access GOV.UK Verify from a service, enable your cookies."
+    expect(page.status_code).to eql 403
   end
 
   it 'will display the generic error when start time cookie is missing' do
@@ -53,6 +54,7 @@ RSpec.describe 'When the user visits the start page' do
     set_cookies(cookie_hash.except("session_start_time"))
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
+    expect(page.status_code).to eql 500
   end
 
   it 'will display the generic error when the secure cookie is missing' do
@@ -61,6 +63,7 @@ RSpec.describe 'When the user visits the start page' do
     set_cookies(cookie_hash.except("x-govuk-secure-cookie"))
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
+    expect(page.status_code).to eql 500
   end
 
   it 'will display the generic error when the session id cookie is missing' do
@@ -69,6 +72,7 @@ RSpec.describe 'When the user visits the start page' do
     set_cookies(cookie_hash.except("x_govuk_session_cookie"))
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
+    expect(page.status_code).to eql 500
   end
 
   it 'will display the timeout expiration error when the session start cookie is old' do
@@ -80,5 +84,6 @@ RSpec.describe 'When the user visits the start page' do
     visit "/start"
     expect(page).to have_content "Your session has timed out"
     expect(page).to have_content "Find the service you were using to start again"
+    expect(page.status_code).to eql 400
   end
 end

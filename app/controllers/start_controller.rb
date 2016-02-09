@@ -4,15 +4,13 @@ class StartController < ApplicationController
     validation = CookieValidator.new.validate(cookies)
     if validation.ok?
       render "index"
-    elsif validation.no_cookies?
-      logger.info(validation.message)
-      render "errors/no_cookies"
-    elsif validation.cookie_expired?
-      logger.info(validation.message)
-      render "errors/cookie_expired"
     else
-      logger.info(validation.message)
-      render "errors/something_went_wrong"
+      render_error(validation)
     end
+  end
+
+  def render_error(validation)
+    logger.info(validation.message)
+    render "errors/#{validation.type}", status: validation.status
   end
 end

@@ -2,7 +2,7 @@ class CookieValidator
   class NoCookiesValidator
     def validate(cookies)
       if all_cookies_missing?(cookies)
-        NoCookiesValidation.new
+        ValidationFailure.no_cookies
       else
         SuccessfulValidation
       end
@@ -28,7 +28,7 @@ class CookieValidator
         missing_cookies << CookieNames::SECURE_COOKIE_NAME
       end
       if missing_cookies.any?
-        CookiesMissingValidation.new(missing_cookies)
+        ValidationFailure.cookies_missing(missing_cookies)
       else
         SuccessfulValidation
       end
@@ -56,12 +56,12 @@ class CookieValidator
         parsed_time = Time.at(Integer(start_time_cookie_value)).to_datetime
         if parsed_time <= 2.hours.ago
           session_id = cookies[CookieNames::SESSION_ID_COOKIE_NAME]
-          ExpiredStartTimeCookieValidation.new(session_id)
+          ValidationFailure.session_cookie_expired(session_id)
         else
           SuccessfulValidation
         end
       rescue TypeError, ArgumentError
-        SessionStartTimeParseValidation.new(start_time_cookie_value)
+        ValidationFailure.something_went_wrong("The session start time cookie, '#{start_time_cookie_value}', can't be parsed")
       end
     end
   end
@@ -78,98 +78,44 @@ class CookieValidator
     @validators.lazy.map { |validator| validator.validate(cookies) }.detect { |result| !result.ok? } || SuccessfulValidation
   end
 
-  class SessionStartTimeParseValidation
-    def initialize(cookie_value)
-      @cookie_value = cookie_value
+  class ValidationFailure
+    def self.something_went_wrong(message)
+      ValidationFailure.new(:something_went_wrong, :internal_server_error, message)
     end
+
+    def self.session_cookie_expired(session_id)
+      message = "session_start_time cookie for session \"#{session_id}\" has expired"
+      ValidationFailure.new(:cookie_expired, :bad_request, message)
+    end
+
+    def self.no_cookies
+      message = "No session cookies can be found"
+      ValidationFailure.new(:no_cookies, :forbidden, message)
+    end
+
+    def self.cookies_missing(cookies)
+      message = "The following cookies are missing: [#{cookies.join(', ')}]"
+      ValidationFailure.new(:something_went_wrong, :internal_server_error, message)
+    end
+
+    def initialize(type, status, message)
+      @type = type
+      @status = status
+      @message = message
+    end
+
+    attr_reader :type, :status, :message
 
     def ok?
       false
-    end
-
-    def no_cookies?
-      false
-    end
-
-    def message
-      "The session start time cookie, '#{@cookie_value}', can't be parsed"
-    end
-  end
-
-  class ExpiredStartTimeCookieValidation
-    def initialize(session_id)
-      @session_id = session_id
-    end
-
-    def ok?
-      false
-    end
-
-    def no_cookies?
-      false
-    end
-
-    def cookie_expired?
-      true
-    end
-
-    def message
-      "session_start_time cookie for session \"#{@session_id}\" has expired"
-    end
-  end
-
-  class CookiesMissingValidation
-    def initialize(missing_cookies)
-      @cookies = missing_cookies
-    end
-
-    def no_cookies?
-      false
-    end
-
-    def ok?
-      false
-    end
-
-    def cookie_expired?
-      false
-    end
-
-    def message
-      "The following cookies are missing: [#{@cookies.join(', ')}]"
     end
   end
 
   class Validation
-    def no_cookies?
-      false
-    end
-
     def ok?
       true
     end
-
-    def cookie_expired?
-      false
-    end
   end
 
-  class NoCookiesValidation
-    def no_cookies?
-      true
-    end
-
-    def ok?
-      false
-    end
-
-    def cookie_expired?
-      false
-    end
-
-    def message
-      "No session cookies can be found"
-    end
-  end
   SuccessfulValidation = Validation.new
 end
