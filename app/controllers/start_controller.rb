@@ -11,9 +11,9 @@ class StartController < ApplicationController
 
   def request_post
     if params['selection'] == 'true'
-      redirect_to "/about", status: :see_other
+      redirect_to about_path(locale: I18n.locale), status: :see_other
     else
-      redirect_to "/sign-in", status: :see_other
+      redirect_to sign_in_path(locale: I18n.locale), status: :see_other
     end
   end
 

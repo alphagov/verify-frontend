@@ -143,6 +143,9 @@ GEM
     rake (10.5.0)
     rdoc (4.2.1)
     ref (2.0.0)
+    route_translator (4.2.4)
+      actionpack (>= 3.2, < 5.0)
+      activesupport (>= 3.2, < 5.0)
     rspec-core (3.4.2)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -231,6 +234,7 @@ DEPENDENCIES
   rack-handlers
   rails (= 4.2.5.1)
   rails-i18n (~> 4.0)
+  route_translator (~> 4.2)
   rspec-rails (~> 3.4.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

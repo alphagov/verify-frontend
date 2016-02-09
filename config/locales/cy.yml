@@ -1,11 +1,15 @@
 # FIXME: Google translated Welsh
 cy:
+  routes:
+    start: dechrau
+    about: am
+    sign_in: mewngofnodi
   phase_banner:
     title: Mae hwn yn wasanaeth newydd - Bydd eich %{feedback_link} yn ein helpu i wella.
     feedback: adborth
   hub:
     start:
       title: Mewngofnodi gyda GOV.UK Verify
-      answer_yes: Mae hyn yn fy amser cyntaf gan ddefnyddio GOV.UK Verify 
-      answer_no: Rwyf wedi defnyddio GOV.UK Verify cyn
+      answer_yes: Mae hyn yn fy amser cyntaf gan ddefnyddio Verify
+      answer_no: Rwyf wedi defnyddio Verify cyn
       continue: Parhau

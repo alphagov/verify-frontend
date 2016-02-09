@@ -5,18 +5,19 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
   post 'SAML2/SSO' => 'saml#request_post'
-  post 'start' => 'start#request_post'
-  post 'dechrau' => 'start#request_post', defaults: { locale: 'cy' }
-  get 'start' => 'start#index'
-  get 'dechrau' => 'start#index', defaults: { locale: 'cy' }
-  get 'about' => 'about#index'
-  get 'sign-in' => 'sign_in#index'
 
   if ['test', 'development'].include? Rails.env
     get 'test-saml' => 'test_saml#index'
+  end
+
+  localized do
+    get 'start', to: 'start#index', as: :start
+    post 'start', to: 'start#request_post', as: :start
+
+    get 'sign_in', to: 'sign_in#index', as: :sign_in
+
+    get 'about', to: 'about#index', as: :about
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

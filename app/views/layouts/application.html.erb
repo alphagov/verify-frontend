@@ -15,4 +15,19 @@
   </main>
 <% end %>
 
+<% content_for :footer_support_links do %>
+  <h2 class="visuallyhidden">Support links</h2>
+  <ul>
+    <li><a href="https://gov.uk/help">Help</a></li>
+    <li>
+      <% if params[:locale] != 'cy' %>
+        <%= link_to 'Cymraeg', url_for(locale: 'cy'), lang: 'cy', hreflang: 'cy' %>
+      <% else %>
+        <%= link_to 'English', url_for(locale: 'en'), lang: 'en', hreflang: 'en' %>
+      <% end %>
+    </li>
+    <li>Built by the <a href="https://gds.blog.gov.uk">Government Digital Service</a></li>
+  </ul>
+<% end %>
+
 <%= render file: 'layouts/govuk_template' %>
