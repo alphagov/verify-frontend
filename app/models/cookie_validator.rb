@@ -50,6 +50,10 @@ class CookieValidator
   end
 
   class SessionStartTimeCookieValidator
+    def initialize(session_duration)
+      @session_duration = session_duration
+    end
+
     def validate(cookies)
       start_time_cookie_value = cookies[CookieNames::SESSION_STARTED_TIME_COOKIE_NAME]
       begin
@@ -66,11 +70,11 @@ class CookieValidator
     end
   end
 
-  def initialize
+  def initialize(session_duration)
     @validators = [
       NoCookiesValidator.new,
       MissingCookiesValidator.new,
-      SessionStartTimeCookieValidator.new
+      SessionStartTimeCookieValidator.new(session_duration)
     ]
   end
 
