@@ -1,0 +1,15 @@
+<% content_for :main do %>
+  <div class="content-inner start">
+    <div class="grid-row">
+      <div class="column-one-third">
+        <figure>
+          <%= image_tag 'govuk-verify.png', srcset: "#{asset_path 'govuk-verify.svg'} 1x", alt: 'GOV.UK Verify' %>
+        </figure>
+      </div>
+      <div class="column-two-thirds">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= render file: 'layouts/application' %>

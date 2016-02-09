@@ -2,14 +2,16 @@
 <% content_for :page_title, 'Verify Frontend' %>
 
 <% content_for :head do %>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <!--[if gt IE 8]><!--><%= stylesheet_link_tag 'style' %><!--<![endif]-->
+  <!--[if IE 8]><%= stylesheet_link_tag 'style-ie8' %><![endif]-->
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 <% end %>
 
 <% content_for :content do %>
   <main id="content">
-    <%= yield %>
+    <%= render 'shared/phase_banner' %>
+    <%= content_for?(:main) ? yield(:main) : yield %>
   </main>
 <% end %>
 

@@ -1,4 +1,5 @@
 class StartController < ApplicationController
+  layout 'start'
   def index
     validation = CookieValidator.new.validate(cookies)
     if validation.ok?

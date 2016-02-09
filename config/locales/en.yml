@@ -1,4 +1,7 @@
 en:
+  phase_banner:
+    title: This is a new service – your %{feedback_link} will help us to improve it.
+    feedback: feedback
   hub:
     start:
       title: Sign in with GOV.UK Verify
