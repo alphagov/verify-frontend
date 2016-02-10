@@ -1,0 +1,5 @@
+<%= form_tag('/SAML2/SSO') do -%>
+  <%= hidden_field_tag("SAMLRequest", "my-saml-request") %>
+  <%= hidden_field_tag("RelayState", 'my-relay-state') %>
+  <div><%= submit_tag "saml-post" %></div>
+<% end -%>

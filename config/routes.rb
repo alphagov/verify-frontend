@@ -7,8 +7,13 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  post 'SAML2/SSO' => 'saml#request_post'
   get 'start' => 'start#index'
   get 'dechrau' => 'start#index', defaults: { locale: 'cy' }
+
+  if ['test', 'development'].include? Rails.env
+    get 'test-saml' => 'test_saml#index'
+  end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

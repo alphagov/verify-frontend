@@ -33,6 +33,8 @@ gem "rack-handlers"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'http', '~> 1.0.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -50,5 +52,5 @@ group :test, :development do
   gem 'rspec-rails', '~> 3.4.0'
   gem 'capybara', '~> 2.6'
   gem 'govuk-lint'
-  gem 'webmock'
+  gem 'webmock', require: false
 end
