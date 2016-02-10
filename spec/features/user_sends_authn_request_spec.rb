@@ -21,9 +21,15 @@ RSpec.describe 'user sends authn requests' do
       click_button "saml-post"
       expect(page).to have_content "Sign in with GOV.UK Verify"
     end
-    it "will set the user's session cookies"
   end
   context "and it is not received successfully" do
-    it "will render the something went wrong page"
+    it "will render the something went wrong page" do
+      allow(Rails.logger).to receive(:error)
+      expect(Rails.logger).to receive(:error).with(kind_of(ApiClient::Error)).at_least(:once)
+      stub_request(:post, api_saml_endpoint).to_return(body: 'oh mah gawd', status: 500)
+      visit('/test-saml')
+      click_button "saml-post"
+      expect(page).to have_content "Sorry, something went wrong"
+    end
   end
 end
