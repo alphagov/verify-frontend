@@ -26,7 +26,7 @@ RSpec.describe 'user sends authn requests' do
     it "will render the something went wrong page" do
       allow(Rails.logger).to receive(:error)
       expect(Rails.logger).to receive(:error).with(kind_of(ApiClient::Error)).at_least(:once)
-      stub_request(:post, api_saml_endpoint).to_return(body: 'oh mah gawd', status: 500)
+      stub_request(:post, api_saml_endpoint).to_return(body: '{"message": "error"}', status: 500)
       visit('/test-saml')
       click_button "saml-post"
       expect(page).to have_content "Sorry, something went wrong"
