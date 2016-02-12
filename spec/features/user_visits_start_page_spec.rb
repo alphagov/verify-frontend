@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'models/cookie_names'
 
 RSpec.describe 'When the user visits the start page' do
   let(:session_info_route) { 'http://api/api/session' }
@@ -7,9 +8,9 @@ RSpec.describe 'When the user visits the start page' do
   let(:session_start_time_cookie) { DateTime.now.to_i }
   let(:cookie_hash) {
     {
-        "x-govuk-secure-cookie" => secure_cookie,
-        "session_start_time" => session_start_time_cookie,
-        "x_govuk_session_cookie" => session_id_cookie,
+        CookieNames::SECURE_COOKIE_NAME => secure_cookie,
+        CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => session_start_time_cookie,
+        CookieNames::SESSION_ID_COOKIE_NAME => session_id_cookie,
     }
   }
 
@@ -47,8 +48,8 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'will display the generic error when start time cookie is missing' do
     allow(Rails.logger).to receive(:info)
-    expect(Rails.logger).to receive(:info).with("The following cookies are missing: [session_start_time]").at_least(:once)
-    set_cookies(cookie_hash.except("session_start_time"))
+    expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME}]").at_least(:once)
+    set_cookies(cookie_hash.except(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME))
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_http_status :internal_server_error
@@ -56,8 +57,8 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'will display the generic error when the secure cookie is missing' do
     allow(Rails.logger).to receive(:info)
-    expect(Rails.logger).to receive(:info).with("The following cookies are missing: [x-govuk-secure-cookie]").at_least(:once)
-    set_cookies(cookie_hash.except("x-govuk-secure-cookie"))
+    expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SECURE_COOKIE_NAME}]").at_least(:once)
+    set_cookies(cookie_hash.except(CookieNames::SECURE_COOKIE_NAME))
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_http_status :internal_server_error
@@ -65,8 +66,8 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'will display the generic error when the session id cookie is missing' do
     allow(Rails.logger).to receive(:info)
-    expect(Rails.logger).to receive(:info).with("The following cookies are missing: [x_govuk_session_cookie]").at_least(:once)
-    set_cookies(cookie_hash.except("x_govuk_session_cookie"))
+    expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SESSION_ID_COOKIE_NAME}]").at_least(:once)
+    set_cookies(cookie_hash.except(CookieNames::SESSION_ID_COOKIE_NAME))
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_http_status :internal_server_error
@@ -74,10 +75,10 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'will display the timeout expiration error when the session start cookie is old' do
     allow(Rails.logger).to receive(:info)
-    expect(Rails.logger).to receive(:info).with("session_start_time cookie for session \"#{session_id_cookie}\" has expired").at_least(:once)
+    expect(Rails.logger).to receive(:info).with("#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME} cookie for session \"#{session_id_cookie}\" has expired").at_least(:once)
     set_session_cookies
     expired_start_time = 2.hours.ago.to_i
-    set_cookies({"session_start_time" => expired_start_time})
+    set_cookies({CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => expired_start_time})
     visit "/start"
     expect(page).to have_content "Your session has timed out"
     expect(page).to have_content "Find the service you were using to start again"

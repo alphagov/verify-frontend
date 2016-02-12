@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'models/cookie_names'
 
 RSpec.describe 'when user submits start page form' do
   let(:session_info_route) { 'http://api/api/session' }
@@ -7,9 +8,9 @@ RSpec.describe 'when user submits start page form' do
   let(:session_start_time_cookie) { DateTime.now.to_i }
   let(:cookie_hash) {
     {
-        "x-govuk-secure-cookie" => secure_cookie,
-        "session_start_time" => session_start_time_cookie,
-        "x_govuk_session_cookie" => session_id_cookie,
+        CookieNames::SECURE_COOKIE_NAME => secure_cookie,
+        CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => session_start_time_cookie,
+        CookieNames::SESSION_ID_COOKIE_NAME => session_id_cookie,
     }
   }
 

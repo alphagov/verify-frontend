@@ -8,7 +8,8 @@ class SamlController < ApplicationController
 
   def request_post
     cookies_from_api = authn_request_proxy.proxy(params['SAMLRequest'], params['RelayState'])
-    cookies_from_api.each { |name, value| cookies.permanent[name] = value}
+    cookies_hash = CookieFactory.new(Rails.configuration.x.cookies.secure).create(cookies_from_api)
+    cookies_hash.each { |name, value| cookies[name] = value }
     redirect_to '/start'
   end
 
