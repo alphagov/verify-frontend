@@ -1,10 +1,14 @@
 en:
+  routes:
+    start: start
+    about: about
+    sign_in: sign-in
   phase_banner:
     title: This is a new service – your %{feedback_link} will help us to improve it.
     feedback: feedback
   hub:
     start:
       title: Sign in with GOV.UK Verify
-      answer_yes: This is my first time using GOV.UK Verify
-      answer_no: I’ve used GOV.UK Verify before
+      answer_yes: This is my first time using Verify
+      answer_no: I’ve used Verify before
       continue: Continue

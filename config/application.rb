@@ -27,6 +27,11 @@ module VerifyFrontend
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.default_locale = :en
+
+    RouteTranslator.config do |config|
+      config.hide_locale = true
+      config.available_locales = [:en,:cy]
+    end
   end
 end
