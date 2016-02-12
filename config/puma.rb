@@ -1,8 +1,12 @@
 #!/usr/bin/env puma
 
+File.open('.env').each do |l|
+  v = l.split('=')
+  ENV[v[0]] = v[1]
+end
+
 environment 'production'
 
-daemonize
 pidfile 'tmp/puma.pid'
 state_path 'tmp/puma.state'
 stdout_redirect 'log/puma.stdout', 'log/puma.stderr', true
