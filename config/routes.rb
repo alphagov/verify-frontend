@@ -8,8 +8,12 @@ Rails.application.routes.draw do
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   post 'SAML2/SSO' => 'saml#request_post'
+  post 'start' => 'start#request_post'
+  post 'dechrau' => 'start#request_post', defaults: { locale: 'cy' }
   get 'start' => 'start#index'
   get 'dechrau' => 'start#index', defaults: { locale: 'cy' }
+  get 'about' => 'about#index'
+  get 'sign-in' => 'sign_in#index'
 
   if ['test', 'development'].include? Rails.env
     get 'test-saml' => 'test_saml#index'

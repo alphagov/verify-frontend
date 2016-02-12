@@ -9,6 +9,14 @@ class StartController < ApplicationController
     end
   end
 
+  def request_post
+    if params['selection'] == 'true'
+      redirect_to "/about", status: :see_other
+    else
+      redirect_to "/sign-in", status: :see_other
+    end
+  end
+
 private
 
   def render_error(validation)

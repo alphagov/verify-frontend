@@ -1,6 +1,18 @@
 require 'feature_helper'
 
 RSpec.describe 'When the user visits the start page' do
+  let(:session_info_route) { 'http://api/api/session' }
+  let(:secure_cookie) { "my-secure-cookie" }
+  let(:session_id_cookie) { "my-session-id-cookie" }
+  let(:session_start_time_cookie) { DateTime.now.to_i }
+  let(:cookie_hash) {
+    {
+        "x-govuk-secure-cookie" => secure_cookie,
+        "session_start_time" => session_start_time_cookie,
+        "x_govuk_session_cookie" => session_id_cookie,
+    }
+  }
+
   def set_cookies(hash)
     hash.each do |key, value|
       Capybara.current_session.driver.browser.set_cookie "#{key}=#{value}"
@@ -10,21 +22,6 @@ RSpec.describe 'When the user visits the start page' do
   def set_session_cookies
     set_cookies(cookie_hash)
   end
-
-  let(:session_info_route) { 'http://api/api/session' }
-  let(:secure_cookie) { "my-secure-cookie" }
-  let(:session_id_cookie) { "my-session-id-cookie" }
-  let(:session_start_time_cookie) { DateTime.now.to_i }
-  let(:cookie_hash) {
-    {
-      "x-govuk-secure-cookie" => secure_cookie,
-      "session_start_time" => session_start_time_cookie,
-      "x_govuk_session_cookie" => session_id_cookie,
-    }
-  }
-  let(:cookie_values) {
-    "some-cookie-values"
-  }
 
   it 'will display the start page in English' do
     set_session_cookies
