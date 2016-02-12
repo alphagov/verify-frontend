@@ -39,7 +39,7 @@ describe ApiClient do
       receive_request.and_return(status: 500, body: '{"message": "Failure"}')
       expect {
         ApiClient.new(host).post(path, request_body)
-      }.to raise_error ApiClient::Error, 'Received 500 Internal Server Error with message: \'Failure\''
+      }.to raise_error ApiClient::Error, 'Received 500 Internal Server Error with no errorType'
     end
 
     it 'raises an error when API response is not ok with no message' do
@@ -60,7 +60,7 @@ describe ApiClient do
       receive_request.and_return(status: 500, body: '{}')
       expect {
         ApiClient.new(host).post(path, request_body)
-      }.to raise_error ApiClient::Error, 'Received 500 Internal Server Error with no message'
+      }.to raise_error ApiClient::Error, 'Received 500 Internal Server Error with no errorType'
     end
   end
 end

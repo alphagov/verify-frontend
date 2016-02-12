@@ -1,4 +1,6 @@
 class SamlController < ApplicationController
+  protect_from_forgery except: :request_post
+
   rescue_from ApiClient::Error do |exception|
     logger.error(exception)
     render "errors/something_went_wrong"

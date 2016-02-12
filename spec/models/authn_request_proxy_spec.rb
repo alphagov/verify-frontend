@@ -9,8 +9,8 @@ describe AuthnRequestProxy do
   context 'if request was successful' do
     it 'should be ok and return cookies' do
       authn_request_body = {
-          'saml_request' => 'my-saml-request',
-          'relay_state' => 'my-relay-state'
+          AuthnRequestProxy::PARAM_SAML_REQUEST => 'my-saml-request',
+          AuthnRequestProxy::PARAM_RELAY_STATE => 'my-relay-state'
       }
       cookie_hash = {
           CookieNames::SESSION_ID_COOKIE_NAME => "my-session-id-cookie",

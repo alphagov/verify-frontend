@@ -11,10 +11,13 @@ class ApiClient
       parse_json(response)
     else
       json = parse_json(response)
-      message = json.fetch('message') {
-        raise Error, "Received #{response.status} with no message"
+      error_type = json.fetch('errorType') {
+        raise Error, "Received #{response.status} with no errorType"
       }
-      raise Error, "Received #{response.status} with message: '#{message}'"
+      error_id = json.fetch('errorId') {
+        raise Error, "Received #{response.status} with no errorId"
+      }
+      raise Error, "Received #{response.status} with error type: '#{error_type}' and errorId: '#{error_id}'"
     end
   end
 
