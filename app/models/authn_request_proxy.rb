@@ -3,7 +3,7 @@ class AuthnRequestProxy
   PATH = "/SAML2/SSO"
   PARAM_SAML_REQUEST = "samlRequest"
   PARAM_RELAY_STATE = "relayState"
-  PARAM_ORIGINATING_IP = "originating_ip"
+  PARAM_ORIGINATING_IP = "originatingIp"
 
   def initialize(api_client)
     @api_client = api_client
