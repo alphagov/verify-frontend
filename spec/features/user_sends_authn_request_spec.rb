@@ -15,12 +15,14 @@ RSpec.describe 'user sends authn requests' do
       }
       authn_request_body = {
           AuthnRequestProxy::PARAM_SAML_REQUEST => 'my-saml-request',
-          AuthnRequestProxy::PARAM_RELAY_STATE => 'my-relay-state'
+          AuthnRequestProxy::PARAM_RELAY_STATE => 'my-relay-state',
+          AuthnRequestProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
       }
       stub_request(:post, api_saml_endpoint).with(body: authn_request_body).to_return(body: cookie_hash.to_json, status: 201)
       visit('/test-saml')
       click_button "saml-post"
       expect(page).to have_content "Sign in with GOV.UK Verify"
+      visit('/test-saml')
     end
   end
   context "and it is not received successfully" do
