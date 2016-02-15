@@ -15,9 +15,13 @@ Rails.application.routes.draw do
     get 'start', to: 'start#index', as: :start
     post 'start', to: 'start#request_post', as: :start
 
-    get 'sign_in', to: 'sign_in#index', as: :sign_in
-
-    get 'about', to: 'about#index', as: :about
+    if Rails.env == 'development'
+      get 'sign_in', to: redirect('http://localhost:50190/sign-in')
+      get 'about', to: redirect('http://localhost:50190/about')
+    else
+      get 'sign_in', to: 'sign_in#index', as: :sign_in
+      get 'about', to: 'about#index', as: :about
+    end
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
