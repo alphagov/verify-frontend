@@ -11,7 +11,7 @@ class CookieValidator
   private
 
     def all_cookies_missing?(cookies)
-      cookies.select { |name, _| CookieNames.session_cookies.include?(name) }.empty?
+      cookies.select { |name, _| ::CookieNames.session_cookies.include?(name) }.empty?
     end
   end
 
@@ -19,13 +19,13 @@ class CookieValidator
     def validate(cookies)
       missing_cookies = []
       if start_time_cookie_missing?(cookies)
-        missing_cookies << CookieNames::SESSION_STARTED_TIME_COOKIE_NAME
+        missing_cookies << ::CookieNames::SESSION_STARTED_TIME_COOKIE_NAME
       end
       if session_id_cookie_missing?(cookies)
-        missing_cookies << CookieNames::SESSION_ID_COOKIE_NAME
+        missing_cookies << ::CookieNames::SESSION_ID_COOKIE_NAME
       end
       if secure_cookie_missing?(cookies)
-        missing_cookies << CookieNames::SECURE_COOKIE_NAME
+        missing_cookies << ::CookieNames::SECURE_COOKIE_NAME
       end
       if missing_cookies.any?
         ValidationFailure.cookies_missing(missing_cookies)
@@ -37,15 +37,15 @@ class CookieValidator
   private
 
     def start_time_cookie_missing?(cookies)
-      !cookies.key? CookieNames::SESSION_STARTED_TIME_COOKIE_NAME
+      !cookies.key? ::CookieNames::SESSION_STARTED_TIME_COOKIE_NAME
     end
 
     def secure_cookie_missing?(cookies)
-      !cookies.key? CookieNames::SECURE_COOKIE_NAME
+      !cookies.key? ::CookieNames::SECURE_COOKIE_NAME
     end
 
     def session_id_cookie_missing?(cookies)
-      !cookies.key? CookieNames::SESSION_ID_COOKIE_NAME
+      !cookies.key? ::CookieNames::SESSION_ID_COOKIE_NAME
     end
   end
 
@@ -55,11 +55,12 @@ class CookieValidator
     end
 
     def validate(cookies)
-      start_time_cookie_value = cookies[CookieNames::SESSION_STARTED_TIME_COOKIE_NAME]
+      start_time_cookie_value = cookies[::CookieNames::SESSION_STARTED_TIME_COOKIE_NAME]
       begin
         parsed_time = Time.at(Integer(start_time_cookie_value)).to_datetime
         if parsed_time <= 2.hours.ago
-          session_id = cookies[CookieNames::SESSION_ID_COOKIE_NAME]
+          session_id = cookies[::CookieNames::SESSION_ID_COOKIE_NAME]
+
           ValidationFailure.session_cookie_expired(session_id)
         else
           SuccessfulValidation
