@@ -18,11 +18,13 @@ Rails.application.routes.draw do
     if Rails.env == 'development'
       get 'sign_in', to: redirect('http://localhost:50190/sign-in')
       get 'about', to: redirect('http://localhost:50190/about')
-      get 'confirm-your-identity', to: redirect('http://localhost:50190/confirm-your-identity')
+      get 'confirm_your_identity', to: redirect('http://localhost:50190/confirm-your-identity')
+      get 'feedback', to: redirect('http://localhost:50190/feedback')
     else
       get 'sign_in', to: 'sign_in#index', as: :sign_in
       get 'about', to: 'about#index', as: :about
-      get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
+      get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
+      get 'feedback', to: 'feedback#index', as: :feedback
     end
   end
 
