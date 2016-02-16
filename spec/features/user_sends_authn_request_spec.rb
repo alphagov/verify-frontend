@@ -24,6 +24,22 @@ RSpec.describe 'user sends authn requests' do
       expect(page).to have_content "Sign in with GOV.UK Verify"
       visit('/test-saml')
     end
+    it 'will redirect the user to /confirm-your-identity when journey hint is set' do
+      cookie_hash = {
+        CookieNames::SESSION_ID_COOKIE_NAME => "my-session-id-cookie",
+        CookieNames::SECURE_COOKIE_NAME => "my-secure-cookie",
+        CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => session_start_time
+      }
+      authn_request_body = {
+          AuthnRequestProxy::PARAM_SAML_REQUEST => 'my-saml-request',
+          AuthnRequestProxy::PARAM_RELAY_STATE => 'my-relay-state',
+          AuthnRequestProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
+      }
+      stub_request(:post, api_saml_endpoint).with(body: authn_request_body).to_return(body: cookie_hash.to_json, status: 201)
+      visit('/test-saml')
+      click_button "saml-post-journey-hint"
+      expect(page).to have_title "Confirm your identity - GOV.UK Verify - GOV.UK"
+    end
   end
   context "and it is not received successfully" do
     it "will render the something went wrong page" do
