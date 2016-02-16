@@ -29,6 +29,7 @@ RSpec.describe 'When the user visits the start page' do
     visit '/start'
     expect(page).to have_content 'Sign in with GOV.UK Verify'
     expect(page).to have_css 'html[lang=en]'
+    expect(page).to have_link 'feedback', href: '/feedback?feedback-source=SIGN_IN_PAGE'
   end
 
   it 'will display the start page in Welsh' do
