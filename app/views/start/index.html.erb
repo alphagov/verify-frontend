@@ -1,6 +1,7 @@
+<% content_for :page_title, t('hub.start.title') %>
 <% content_for :body_classes, 'hub-start' %>
 
-<h1><%= t 'hub.start.title' %></h1>
+<h1><%= t 'hub.start.heading' %></h1>
 
 <%= form_tag '', id: 'validate-single-question' do %>
   <% if @has_error_message %>

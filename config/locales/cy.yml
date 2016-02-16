@@ -9,7 +9,8 @@ cy:
     feedback: adborth
   hub:
     start:
-      title: Mewngofnodi gyda GOV.UK Verify
+      title: Dechrau
+      heading: Mewngofnodi gyda GOV.UK Verify
       answer_yes: Mae hyn yn fy amser cyntaf gan ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify cyn
       continue: Parhau

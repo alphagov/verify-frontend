@@ -8,7 +8,8 @@ en:
     feedback: feedback
   hub:
     start:
-      title: Sign in with GOV.UK Verify
+      title: Start
+      heading: Sign in with GOV.UK Verify
       answer_yes: This is my first time using Verify
       answer_no: I’ve used Verify before
       continue: Continue
