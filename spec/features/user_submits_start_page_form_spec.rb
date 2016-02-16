@@ -5,7 +5,7 @@ RSpec.describe 'when user submits start page form' do
   let(:session_info_route) { 'http://api/api/session' }
   let(:secure_cookie) { "my-secure-cookie" }
   let(:session_id_cookie) { "my-session-id-cookie" }
-  let(:session_start_time_cookie) { DateTime.now.to_i }
+  let(:session_start_time_cookie) { create_session_start_time_cookie }
   let(:cookie_hash) {
     {
         CookieNames::SECURE_COOKIE_NAME => secure_cookie,

@@ -1,5 +1,11 @@
 require 'spec_helper'
 require 'models/cookie_validator'
+require 'models/cookie_validator/session_start_time_cookie_validator'
+require 'models/cookie_validator/missing_cookies_validator'
+require 'models/cookie_validator/no_cookies_validator'
+require 'models/cookie_validator/validation'
+require 'models/cookie_validator/successful_validation'
+require 'models/cookie_validator/validation_failure'
 require 'models/cookie_names'
 require 'active_support/core_ext/hash/except'
 require 'active_support/core_ext/date_time'
@@ -8,7 +14,7 @@ require 'active_support/core_ext/integer/time'
 describe CookieValidator do
   let(:cookies) {
     {
-      CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => DateTime.now.to_i.to_s,
+      CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => (DateTime.now.to_i * 1000).to_s,
       CookieNames::SESSION_ID_COOKIE_NAME => "my-session-id",
       CookieNames::SECURE_COOKIE_NAME => "my-secure-cookie"
     }
@@ -88,7 +94,7 @@ describe CookieValidator do
   end
 
   it "will fail validation if session start time cookie is expired" do
-    filter_cookies = cookies.merge({CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => session_expiry.hours.ago.to_i.to_s})
+    filter_cookies = cookies.merge({CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => (session_expiry.hours.ago.to_i * 1000).to_s})
     validation = cookie_validator.validate(filter_cookies)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :cookie_expired

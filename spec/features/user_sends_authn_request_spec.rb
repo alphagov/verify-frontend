@@ -4,9 +4,7 @@ require 'models/authn_request_proxy'
 RSpec.describe 'user sends authn requests' do
   let(:api_saml_endpoint) { 'http://localhost:50190/api/SAML2/SSO' }
   context 'and it is received successfully' do
-    let(:session_start_time) {
-      DateTime.now.to_i.to_s
-    }
+    let(:session_start_time) { create_session_start_time_cookie }
     it 'will redirect the user to /start' do
       cookie_hash = {
         CookieNames::SESSION_ID_COOKIE_NAME => "my-session-id-cookie",
