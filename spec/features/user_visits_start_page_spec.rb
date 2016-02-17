@@ -45,6 +45,7 @@ RSpec.describe 'When the user visits the start page' do
     visit "/start"
     expect(page).to have_content "If you can't access GOV.UK Verify from a service, enable your cookies."
     expect(page).to have_http_status :forbidden
+    expect(page).to have_link 'feedback', href: '/feedback?feedback-source=COOKIE_NOT_FOUND_PAGE'
   end
 
   it 'will display the generic error when start time cookie is missing' do
@@ -54,6 +55,7 @@ RSpec.describe 'When the user visits the start page' do
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_http_status :internal_server_error
+    expect(page).to have_link 'feedback', href: '/feedback?feedback-source=ERROR_PAGE'
   end
 
   it 'will display the generic error when the secure cookie is missing' do
@@ -63,6 +65,7 @@ RSpec.describe 'When the user visits the start page' do
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_http_status :internal_server_error
+    expect(page).to have_link 'feedback', href: '/feedback?feedback-source=ERROR_PAGE'
   end
 
   it 'will display the generic error when the session id cookie is missing' do
@@ -72,6 +75,7 @@ RSpec.describe 'When the user visits the start page' do
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_http_status :internal_server_error
+    expect(page).to have_link 'feedback', href: '/feedback?feedback-source=ERROR_PAGE'
   end
 
   it 'will display the timeout expiration error when the session start cookie is old' do
@@ -84,5 +88,6 @@ RSpec.describe 'When the user visits the start page' do
     expect(page).to have_content "Your session has timed out"
     expect(page).to have_content "Find the service you were using to start again"
     expect(page).to have_http_status :bad_request
+    expect(page).to have_link 'feedback', href: '/feedback?feedback-source=EXPIRED_ERROR_PAGE'
   end
 end
