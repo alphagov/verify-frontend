@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
 
+  rescue_from StandardError do |exception|
+    logger.error(exception)
+    render "errors/something_went_wrong"
+  end
+
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
