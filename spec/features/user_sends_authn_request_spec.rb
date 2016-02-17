@@ -44,6 +44,7 @@ RSpec.describe 'user sends authn requests' do
       allow(Rails.logger).to receive(:error)
       expect(Rails.logger).to receive(:error).with(kind_of(ApiClient::Error)).at_least(:once)
       stub_request(:post, api_saml_endpoint).to_return(body: '{"message": "error"}', status: 500)
+      stub_transactions_list
       visit('/test-saml')
       click_button "saml-post"
       expect(page).to have_content "Sorry, something went wrong"

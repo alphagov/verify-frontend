@@ -1,4 +1,4 @@
 en:
   rps:
     test-rp:
-      description: Register for an identity profile
+      name: Register for an identity profile

@@ -51,6 +51,7 @@ RSpec.describe 'When the user visits the start page' do
     allow(Rails.logger).to receive(:info)
     expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME}]").at_least(:once)
     set_cookies(cookie_hash.except(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME))
+    stub_transactions_list
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_http_status :internal_server_error
@@ -61,6 +62,7 @@ RSpec.describe 'When the user visits the start page' do
     allow(Rails.logger).to receive(:info)
     expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SECURE_COOKIE_NAME}]").at_least(:once)
     set_cookies(cookie_hash.except(CookieNames::SECURE_COOKIE_NAME))
+    stub_transactions_list
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_http_status :internal_server_error
@@ -71,6 +73,7 @@ RSpec.describe 'When the user visits the start page' do
     allow(Rails.logger).to receive(:info)
     expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SESSION_ID_COOKIE_NAME}]").at_least(:once)
     set_cookies(cookie_hash.except(CookieNames::SESSION_ID_COOKIE_NAME))
+    stub_transactions_list
     visit '/start'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_http_status :internal_server_error

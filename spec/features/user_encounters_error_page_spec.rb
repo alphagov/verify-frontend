@@ -5,26 +5,32 @@ RSpec.describe 'user encounters error page' do
   let(:api_transactions_endpoint) { 'http://localhost:50190/api/transactions' }
   let(:session_start_time) { create_session_start_time_cookie }
 
-  transactions = {
-      'public' => [
-          {'simpleId' => 'test-rp', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp'}
-      ],
-      'private' => [
-          {'simpleId' => 'some-simple-id', 'entityId' => 'some-entity-id'}
-      ]
-  }
 
   it 'will present the user with a list of transactions' do
+    stub_transactions_list
     stub_request(:post, api_saml_endpoint).to_return(status: 500)
-    stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"
   end
 
+  it 'will present the user with no list of transactions if we cant read the errors' do
+    bad_transactions_json = {
+        'public' => [{ 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp' }],
+        'private' => [{'simpleId' => 'some-simple-id', 'entityId' => 'some-entity-id' }]
+    }
+    stub_request(:post, api_saml_endpoint).to_return(status: 500)
+    stub_request(:get, api_transactions_endpoint).to_return(body: bad_transactions_json.to_json, status: 200)
+    visit '/test-saml'
+    click_button "saml-post"
+    expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to_not have_content "Find the service you were using to start again"
+  end
+
   it 'will present error page when timeout occurs in upstream systems' do
     stub_request(:post, api_saml_endpoint).to_timeout
+    stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content "Sorry, something went wrong"
@@ -32,6 +38,7 @@ RSpec.describe 'user encounters error page' do
 
   it 'will present error page when standard error occurs in upstream systems' do
     stub_request(:post, api_saml_endpoint).to_raise(StandardError)
+    stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content "Sorry, something went wrong"
