@@ -69,5 +69,12 @@ describe ApiClient do
         ApiClient.new(host).post(path, request_body)
       }.to raise_error ApiClient::Error, 'Received 500 Internal Server Error with error message: \'NONE\' and id: \'NONE\''
     end
+
+    it 'uses the correct user agent when acting as a client' do
+      receive_request.and_return(status: 201, body: '{}')
+      ApiClient.new(host).post(path, request_body)
+      expect(a_request(:post, "#{host}/api#{path}").with(headers: {'User-Agent' => 'Verify Frontend Micro Service Client'}))
+        .to have_been_made.once
+    end
   end
 end
