@@ -16,6 +16,8 @@ RSpec.describe 'user encounters error page' do
   end
 
   it 'will present the user with no list of transactions if we cant read the errors' do
+    allow(Rails.logger).to receive(:error)
+    expect(Rails.logger).to receive(:error).with(kind_of(KeyError)).at_least(:once)
     bad_transactions_json = {
         'public' => [{'homepage' => 'http://localhost:50130/test-rp' }],
         'private' => []
