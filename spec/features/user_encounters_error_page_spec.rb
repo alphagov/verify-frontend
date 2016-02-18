@@ -17,8 +17,8 @@ RSpec.describe 'user encounters error page' do
 
   it 'will present the user with no list of transactions if we cant read the errors' do
     bad_transactions_json = {
-        'public' => [{ 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp' }],
-        'private' => [{'simpleId' => 'some-simple-id', 'entityId' => 'some-entity-id' }]
+        'public' => [{'homepage' => 'http://localhost:50130/test-rp' }],
+        'private' => []
     }
     stub_request(:post, api_saml_endpoint).to_return(status: 500)
     stub_request(:get, api_transactions_endpoint).to_return(body: bad_transactions_json.to_json, status: 200)

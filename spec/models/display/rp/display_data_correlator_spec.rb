@@ -12,8 +12,8 @@ module Display
       let(:private_simple_id) { 'some-simple-id' }
 
       before(:each) do
-        allow(translator).to receive(:t).with('rps.test-rp.name').and_return(transaction_a_name)
-        allow(translator).to receive(:t).with('rps.some-simple-id.name').and_return(transaction_b_name)
+        allow(translator).to receive(:translate).with('rps.test-rp.name', raise: true).and_return(transaction_a_name)
+        allow(translator).to receive(:translate).with('rps.some-simple-id.name', raise: true).and_return(transaction_b_name)
       end
 
       it 'takes a list of transaction data and a translator with knowledge of RPs and return a list of transactions to display' do

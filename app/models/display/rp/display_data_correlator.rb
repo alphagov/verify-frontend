@@ -11,17 +11,20 @@ module Display
       def correlate(data, translator)
         public = data.fetch('public')
         public_transactions = public.map do |transaction|
-          simple_id = transaction.fetch('simpleId')
-          name = translator.t("rps.#{simple_id}.name")
+          name = translate_name(translator, transaction)
           Transaction.new(name, transaction.fetch('homepage'))
         end
         private = data.fetch('private')
         private_transactions = private.map do |transaction|
-          simple_id = transaction.fetch('simpleId')
-          name = translator.t("rps.#{simple_id}.name")
+          name = translate_name(translator, transaction)
           Transaction.new(name)
         end
         Transactions.new(public_transactions, private_transactions)
+      end
+
+      def translate_name(translator, transaction)
+        simple_id = transaction.fetch('simpleId')
+        translator.translate("rps.#{simple_id}.name", raise: true)
       end
     end
   end
