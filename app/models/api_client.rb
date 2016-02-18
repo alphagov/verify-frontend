@@ -6,7 +6,7 @@ class ApiClient
 
   def post(path, body)
     uri = @host + "/api" + path
-    response = HTTP.post(uri, json: body)
+    response = client.post(uri, json: body)
     if response.status == 201
       parse_json(response)
     else
@@ -26,5 +26,11 @@ class ApiClient
   end
 
   class Error < StandardError
+  end
+
+private
+
+  def client
+    HTTP['User-Agent' => 'Verify Frontend Micro Service Client']
   end
 end
