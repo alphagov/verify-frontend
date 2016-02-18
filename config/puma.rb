@@ -1,10 +1,5 @@
 #!/usr/bin/env puma
 
-File.open('.env').each do |l|
-  v = l.split('=')
-  ENV[v[0]] = v[1]
-end
-
 environment 'production'
 
 pidfile 'tmp/puma.pid'
