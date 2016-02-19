@@ -23,6 +23,6 @@ class SamlController < ApplicationController
 private
 
   def authn_request_proxy
-    AUTHN_REQUEST_PROXY
+    SESSION_PROXY
   end
 end

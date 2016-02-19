@@ -16,10 +16,10 @@ Rails.application.routes.draw do
     post 'start', to: 'start#request_post', as: :start
 
     if Rails.env == 'development'
-      get 'sign_in', to: redirect('http://localhost:50190/sign-in')
-      get 'about', to: redirect('http://localhost:50190/about')
-      get 'confirm_your_identity', to: redirect('http://localhost:50190/confirm-your-identity')
-      get 'feedback', to: redirect('http://localhost:50190/feedback')
+      get 'sign_in', to: redirect("#{API_HOST}/sign-in")
+      get 'about', to: redirect("#{API_HOST}/about")
+      get 'confirm_your_identity', to: redirect("#{API_HOST}/confirm-your-identity")
+      get 'feedback', to: redirect("#{API_HOST}/feedback")
     else
       get 'sign_in', to: 'sign_in#index', as: :sign_in
       get 'about', to: 'about#index', as: :about

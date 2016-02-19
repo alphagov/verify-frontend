@@ -1,6 +1,6 @@
 
-class AuthnRequestProxy
-  PATH = "/SAML2/SSO"
+class SessionProxy
+  PATH = "/session"
   PARAM_SAML_REQUEST = "samlRequest"
   PARAM_RELAY_STATE = "relayState"
   PARAM_ORIGINATING_IP = "originatingIp"

@@ -1,8 +1,8 @@
 require 'feature_helper'
-require 'models/authn_request_proxy'
+require 'models/session_proxy'
 
 RSpec.describe 'user sends authn requests' do
-  let(:api_saml_endpoint) { 'http://localhost:50190/api/SAML2/SSO' }
+  let(:api_saml_endpoint) { api_uri('session') }
   context 'and it is received successfully' do
     let(:session_start_time) { create_session_start_time_cookie }
     it 'will redirect the user to /start' do
@@ -12,9 +12,9 @@ RSpec.describe 'user sends authn requests' do
         CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => session_start_time
       }
       authn_request_body = {
-          AuthnRequestProxy::PARAM_SAML_REQUEST => 'my-saml-request',
-          AuthnRequestProxy::PARAM_RELAY_STATE => 'my-relay-state',
-          AuthnRequestProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
+          SessionProxy::PARAM_SAML_REQUEST => 'my-saml-request',
+          SessionProxy::PARAM_RELAY_STATE => 'my-relay-state',
+          SessionProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
       }
       stub_request(:post, api_saml_endpoint).with(body: authn_request_body).to_return(body: cookie_hash.to_json, status: 201)
       visit('/test-saml')
@@ -29,9 +29,9 @@ RSpec.describe 'user sends authn requests' do
         CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => session_start_time
       }
       authn_request_body = {
-          AuthnRequestProxy::PARAM_SAML_REQUEST => 'my-saml-request',
-          AuthnRequestProxy::PARAM_RELAY_STATE => 'my-relay-state',
-          AuthnRequestProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
+          SessionProxy::PARAM_SAML_REQUEST => 'my-saml-request',
+          SessionProxy::PARAM_RELAY_STATE => 'my-relay-state',
+          SessionProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
       }
       stub_request(:post, api_saml_endpoint).with(body: authn_request_body).to_return(body: cookie_hash.to_json, status: 201)
       visit('/test-saml')

@@ -1,7 +1,7 @@
 require 'feature_helper'
 
 RSpec.describe 'user encounters error page' do
-  let(:api_saml_endpoint) { 'http://localhost:50190/api/SAML2/SSO' }
+  let(:api_saml_endpoint) { api_uri('session') }
 
   it 'will present error page when timeout occurs in upstream systems' do
     stub_request(:post, api_saml_endpoint).to_timeout
