@@ -1,0 +1,4 @@
+en:
+  rps:
+    test-rp-noc3:
+      name: Register for an identity profile (forceauthn & no cycle3)

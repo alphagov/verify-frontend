@@ -1,0 +1,4 @@
+en:
+  rps:
+    test-rp-repudiation:
+      name: Register for an identity profile (repudiation step)

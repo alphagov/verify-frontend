@@ -1,6 +1,5 @@
 <% content_for :page_title, 'Your session has timed out' %>
 <% content_for :feedback_source, 'EXPIRED_ERROR_PAGE' %>
 <h1 class="heading-xlarge">Your session has timed out</h1>
-<h2 class="heading-medium">Find the service you were using to start again</h2>
-<%#TODO include transactions %>
+<%= render partial: 'errors/transaction_list' %>
 <p>Use the <%= link_to "feedback form", "/feedback", :query => {"feedback-source" =>'expired error page'} %> to ask a question, report a problem or suggest an improvement.</p>
