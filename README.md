@@ -22,4 +22,4 @@ If you don’t have ida-sample-rp running you can get to the start page on the n
 
 `./pre-commit.sh`
 
-This will (lint the application code)[https://github.com/alphagov/govuk-lint] and run the tests.
+This will [lint the application code](https://github.com/alphagov/govuk-lint) and run the tests.
