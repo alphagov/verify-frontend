@@ -38,4 +38,11 @@ RSpec.describe 'when user submits start page form' do
     click_button('next-button')
     expect(current_path).to eq('/sign-in')
   end
+
+  it 'will prompt for an answer if no answer is given' do
+    set_session_cookies
+    visit '/start'
+    click_button('next-button')
+    expect(page).to have_content "Please answer the question"
+  end
 end

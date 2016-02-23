@@ -5,10 +5,7 @@
 <h1><%= t 'hub.start.heading' %></h1>
 
 <%= form_tag '', id: 'validate-single-question' do %>
-  <% if @has_error_message %>
-    <div class="form-group validation-message" id="validation-error-message-no-js"><%= @error_message %></div>
-  <% end %>
-  <div class="form-group <%= @has_error_message ? 'error' : '' %>">
+  <div class="form-group <%= @error_message.present? ? 'error' : '' %>">
     <fieldset>
       <label class="block-label" for="yes" onclick="">
         <input id="yes" type="radio" name="selection" value="true" />
@@ -22,6 +19,9 @@
       </label>
     </fieldset>
   </div>
+  <% if @error_message.present? %>
+    <div class="form-group error validation-message" id="validation-error-message-no-js"><%= t @error_message %></div>
+  <% end %>
 
   <div id="validation-error-message-js"></div>
 
