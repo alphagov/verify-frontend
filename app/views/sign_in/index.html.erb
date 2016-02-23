@@ -1,7 +1,35 @@
-<% content_for :body_classes, 'hub-start' %>
-Who do you have an identity account with?
-<ul>
-  <% @list.each do |idp| -%>
-  <li><%= image_tag idp.logo_path %><%= idp.display_name %></li>
-  <% end -%>
-</ul>
+<% content_for(:title, t('hub.signin.title')) %>
+<%= link_to t('hub.signin.back'), :back, class: 'link-back' %>
+<h1 class="heading-xlarge"><%= t 'hub.signin.heading' %></h1>
+<p><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), about_path) %></p>
+
+<div class="grid-section">
+  <% @identity_providers.each do |identity_provider| %>
+          <div class="grid-1-3">
+            <div class="company">
+              <div class="company-inner">
+                <div class="company-logo">
+                  <div class="company-logo-inner">
+                    <%= image_tag identity_provider.logo_path, alt: identity_provider.display_name %>
+                  </div>
+                </div>
+                <%= form_tag 'identityProviderSelectedUri', class: 'idp-option' do %>
+                    <%= button_tag t('hub.signin.select_idp', name: identity_provider.display_name),
+                                   class: "button",
+                                   name: identity_provider.entity_id,
+                                   type: "submit",
+                                   value: identity_provider.display_name
+                    %>
+                    <input name="selected-idp" type="hidden" value="<%= identity_provider.entity_id %>" />
+                <% end %>
+              </div>
+            </div>
+          </div>
+  <% end %>
+</div>
+
+<div class="grid-section">
+  <div class="grid-2-3">
+    <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>
+  </div>
+</div>

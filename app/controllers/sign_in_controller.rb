@@ -1,6 +1,6 @@
 class SignInController < ApplicationController
   def index
-    @list = identity_provider_lister.list(cookies)
+    @identity_providers = identity_provider_lister.list(cookies)
     render 'index'
   end
 
