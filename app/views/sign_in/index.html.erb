@@ -2,6 +2,6 @@
 Who do you have an identity account with?
 <ul>
   <% @list.each do |idp| -%>
-  <li><%= idp.display_name %></li>
+  <li><%= image_tag idp.logo_path %><%= idp.display_name %></li>
   <% end -%>
 </ul>

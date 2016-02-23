@@ -46,6 +46,7 @@ RSpec.describe 'when user submits start page form' do
     expect(current_path).to eq('/sign-in')
     expect(page).to have_content 'Who do you have an identity account with?'
     expect(page).to have_content 'IDCorp'
+    expect(page).to have_css('img[src="/stub-logos/stub-idp-one.png"]')
   end
 
   it 'will prompt for an answer if no answer is given' do
