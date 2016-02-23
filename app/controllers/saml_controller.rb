@@ -1,5 +1,6 @@
 class SamlController < ApplicationController
   protect_from_forgery except: :request_post
+  skip_before_action :validate_cookies
 
   UNDETERMINED_IP = '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
 
