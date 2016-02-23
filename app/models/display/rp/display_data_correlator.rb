@@ -7,24 +7,27 @@ module Display
         end
       end
       Transaction = Struct.new(:name, :homepage)
+      def initialize(translator)
+        @translator = translator
+      end
 
-      def correlate(data, translator)
+      def correlate(data)
         public = data.fetch('public')
         public_transactions = public.map do |transaction|
-          name = translate_name(translator, transaction)
+          name = translate_name(transaction)
           Transaction.new(name, transaction.fetch('homepage'))
         end
         private = data.fetch('private')
         private_transactions = private.map do |transaction|
-          name = translate_name(translator, transaction)
+          name = translate_name(transaction)
           Transaction.new(name)
         end
         Transactions.new(public_transactions, private_transactions)
       end
 
-      def translate_name(translator, transaction)
+      def translate_name(transaction)
         simple_id = transaction.fetch('simpleId')
-        translator.translate("rps.#{simple_id}.name", raise: true)
+        @translator.translate("rps.#{simple_id}.name")
       end
     end
   end

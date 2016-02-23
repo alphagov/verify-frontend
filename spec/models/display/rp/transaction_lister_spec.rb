@@ -10,12 +10,11 @@ module Display
 
         transactions_list = double(:result_list)
         correlated_data = double(:correlated_data)
-        translator = double(:translator)
 
         expect(proxy).to receive(:transactions).and_return(transactions_list)
-        expect(correlator).to receive(:correlate).with(transactions_list, translator).and_return(correlated_data)
+        expect(correlator).to receive(:correlate).with(transactions_list).and_return(correlated_data)
 
-        list = TransactionLister.new(proxy, correlator).list(translator)
+        list = TransactionLister.new(proxy, correlator).list
 
         expect(list).to eq correlated_data
       end
@@ -26,12 +25,11 @@ module Display
 
         transactions_list = double(:result_list)
         correlated_data = double(:correlated_data)
-        translator = double(:translator)
 
         expect(proxy).to receive(:transactions).and_return(transactions_list)
-        expect(correlator).to receive(:correlate).with(transactions_list, translator).and_return(correlated_data)
+        expect(correlator).to receive(:correlate).with(transactions_list).and_return(correlated_data)
 
-        list = TransactionLister.new(proxy, correlator).list(translator)
+        list = TransactionLister.new(proxy, correlator).list
 
         expect(list).to eq correlated_data
       end

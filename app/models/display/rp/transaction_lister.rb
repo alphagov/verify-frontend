@@ -6,8 +6,8 @@ module Display
         @correlator = correlator
       end
 
-      def list(translator)
-        @correlator.correlate(@proxy.transactions, translator)
+      def list
+        @correlator.correlate(@proxy.transactions)
       rescue StandardError => e
         Rails.logger.error e
         e.backtrace.each { |line| Rails.logger.error line }

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def transactions_list
-    TRANSACTION_LISTER.list(I18n)
+    TRANSACTION_LISTER.list
   end
 
   def set_locale
