@@ -1,6 +1,7 @@
 
 class SessionProxy
   PATH = "/session"
+  IDP_PATH = "/session/idps"
   PARAM_SAML_REQUEST = "samlRequest"
   PARAM_RELAY_STATE = "relayState"
   PARAM_ORIGINATING_IP = "originatingIp"
@@ -16,5 +17,11 @@ class SessionProxy
         PARAM_ORIGINATING_IP => x_forwarded_for
     }
     @api_client.post(PATH, body)
+  end
+
+  def idps_for_session(cookies)
+    session_cookie_names = CookieNames.session_cookies
+    session_cookies = cookies.select { |name, _| session_cookie_names.include?(name) }.to_h
+    @api_client.get(IDP_PATH, cookies: session_cookies)
   end
 end

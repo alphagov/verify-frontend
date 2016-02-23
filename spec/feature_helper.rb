@@ -2,6 +2,13 @@ require 'rails_helper'
 require 'capybara/rspec'
 require 'webmock/rspec'
 
+def set_cookies(hash)
+  hash.each do |key, value|
+    Capybara.current_session.driver.browser.set_cookie "#{key}=#{value}"
+  end
+end
+
+
 def api_transactions_endpoint
   'http://localhost:50190/api/transactions'
 end

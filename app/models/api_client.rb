@@ -1,11 +1,13 @@
 require 'http'
 class ApiClient
+  DEFAULT_OPTIONS = {cookies: []}
+
   def initialize(host)
     @host = host
   end
 
-  def get(path)
-    response = client.get(uri(path))
+  def get(path, options = DEFAULT_OPTIONS)
+    response = client(options).get(uri(path))
     if response.status == 200
       parse_json(response)
     else
@@ -47,7 +49,7 @@ private
   class Error < StandardError
   end
 
-  def client
-    HTTP['User-Agent' => 'Verify Frontend Micro Service Client']
+  def client(options = DEFAULT_OPTIONS)
+    HTTP['User-Agent' => 'Verify Frontend Micro Service Client'].cookies(options[:cookies])
   end
 end

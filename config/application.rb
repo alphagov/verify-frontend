@@ -29,6 +29,7 @@ module VerifyFrontend
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :en
     config.i18n.load_path +=  Dir[File.join(ENV.fetch('RP_DISPLAY_LOCALES'), '*.{rb,yml}').to_s]
+    config.i18n.load_path +=  Dir[File.join(ENV.fetch('IDP_DISPLAY_LOCALES'), '*.{rb,yml}').to_s]
 
     RouteTranslator.config do |config|
       config.hide_locale = true

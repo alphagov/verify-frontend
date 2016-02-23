@@ -1,1 +1,7 @@
 <% content_for :body_classes, 'hub-start' %>
+Who do you have an identity account with?
+<ul>
+  <% @list.each do |idp| -%>
+  <li><%= idp.display_name %></li>
+  <% end -%>
+</ul>

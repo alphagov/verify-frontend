@@ -7,13 +7,20 @@ describe ApiClient do
   let(:response_body) { {'c' => 3} }
   let(:host) { 'http://localhost' }
   let(:path) { "/endpoint" }
+  let(:api_client) { ApiClient.new(host) }
 
   context "#get" do
+    it 'sets cookies if provided them' do
+      stub_request(:get, "#{host}/api#{path}").with(headers: {cookie: /COOKIE_NAME=some-val/}).and_return(status: 200, body: response_body.to_json)
+      response = api_client.get(path, cookies: {'COOKIE_NAME' => 'some-val'})
+      expect(a_request(:get, "#{host}/api#{path}").with(headers: {cookie: /COOKIE_NAME=some-val/})).to have_been_made.once
+      expect(response).to eql response_body
+    end
     it 'returns a JSON result when successful' do
       stub_request(:get, "#{host}/api#{path}").and_return(status: 200, body: response_body.to_json)
       response = ApiClient.new(host).get(path)
       expect(a_request(:get, "#{host}/api#{path}")).to have_been_made.once
-      expect(response).to eq response_body
+      expect(response).to eql response_body
     end
 
     it 'errors on receiving malformed JSON' do

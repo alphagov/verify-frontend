@@ -32,11 +32,20 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will display sign in with IDP page when user chooses no (sign in)' do
+    cookies_regex = "#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME}=#{session_start_time_cookie}; " +
+      "#{CookieNames::SECURE_COOKIE_NAME}=#{secure_cookie}; " +
+      "#{CookieNames::SESSION_ID_COOKIE_NAME}=#{session_id_cookie}"
+    expected_headers = {'Cookie' => cookies_regex}
+
+    body = [{'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com'}]
+    stub_request(:get, api_uri('session/idps')).with(headers: expected_headers).to_return(body: body.to_json)
     set_session_cookies
     visit '/start'
     choose('no')
     click_button('next-button')
     expect(current_path).to eq('/sign-in')
+    expect(page).to have_content 'Who do you have an identity account with?'
+    expect(page).to have_content 'IDCorp'
   end
 
   it 'will prompt for an answer if no answer is given' do

@@ -14,14 +14,13 @@ Rails.application.routes.draw do
   localized do
     get 'start', to: 'start#index', as: :start
     post 'start', to: 'start#request_post', as: :start
+    get 'sign_in', to: 'sign_in#index', as: :sign_in
 
     if Rails.env == 'development'
-      get 'sign_in', to: redirect("#{API_HOST}/sign-in")
       get 'about', to: redirect("#{API_HOST}/about")
       get 'confirm_your_identity', to: redirect("#{API_HOST}/confirm-your-identity")
       get 'feedback', to: redirect("#{API_HOST}/feedback")
     else
-      get 'sign_in', to: 'sign_in#index', as: :sign_in
       get 'about', to: 'about#index', as: :about
       get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
       get 'feedback', to: 'feedback#index', as: :feedback

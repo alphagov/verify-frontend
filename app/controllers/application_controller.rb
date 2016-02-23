@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from StandardError do |exception|
     logger.error(exception)
+    #exception.backtrace.each { |line| logger.error(line) }
     render "errors/something_went_wrong"
   end
 
