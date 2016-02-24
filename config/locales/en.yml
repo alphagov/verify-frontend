@@ -13,4 +13,4 @@ en:
       answer_yes: This is my first time using Verify
       answer_no: I’ve used Verify before
       continue: Continue
-      error_message: Please answer the question
+      error_message: Please select an option

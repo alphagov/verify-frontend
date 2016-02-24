@@ -43,6 +43,6 @@ RSpec.describe 'when user submits start page form' do
     set_session_cookies
     visit '/start'
     click_button('next-button')
-    expect(page).to have_content "Please answer the question"
+    expect(page).to have_content "Please select an option"
   end
 end

@@ -14,3 +14,4 @@ cy:
       answer_yes: Mae hyn yn fy amser cyntaf gan ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify cyn
       continue: Parhau
+      error_message: Dewiswch opsiwn
