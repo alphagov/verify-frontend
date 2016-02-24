@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 ./kill-service.sh
-rails s -d -p 50300
+bundle exec puma -e development -d -p 50300

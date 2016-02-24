@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [ -a 'tmp/pids/server.pid' ]
+if [ -a 'tmp/puma.pid' ]
 then
-  kill `cat tmp/pids/server.pid`
+  kill `cat tmp/puma.pid`
 fi
