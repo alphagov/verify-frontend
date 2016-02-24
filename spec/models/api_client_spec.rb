@@ -40,6 +40,17 @@ describe ApiClient do
     end
   end
 
+  context 'API raises session error' do
+    it 'raises a session error' do
+      error_body = {id: '0', type: 'SESSION_ERROR'}
+      stub_request(:get, "#{host}/api#{path}").and_return(status: 400, body: error_body.to_json)
+      expect {
+        ApiClient.new(host).get(path)
+      }.to raise_error ApiClient::SessionError, 'Received 400 Bad Request with type: \'SESSION_ERROR\' and id: \'0\''
+      expect(a_request(:get, "#{host}/api#{path}")).to have_been_made.once
+    end
+  end
+
   context "#post" do
     let(:receive_request) { stub_request(:post, "#{host}/api#{path}").with(body: request_body) }
 

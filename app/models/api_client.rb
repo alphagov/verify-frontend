@@ -31,7 +31,13 @@ private
     json = parse_json(response)
     error_message = json.fetch('message', 'NONE')
     error_id = json.fetch('id', 'NONE')
-    raise Error, "Received #{response.status} with error message: '#{error_message}' and id: '#{error_id}'"
+    error_type = json.fetch('type', 'NONE')
+    case error_type
+      when SessionError::TYPE
+        raise SessionError, "Received #{response.status} with type: '#{error_type}' and id: '#{error_id}'"
+      else
+        raise Error, "Received #{response.status} with error message: '#{error_message}' and id: '#{error_id}'"
+    end
   end
 
   def uri(path)
@@ -47,6 +53,10 @@ private
   end
 
   class Error < StandardError
+  end
+
+  class SessionError < StandardError
+    TYPE = 'SESSION_ERROR'
   end
 
   def client(options = DEFAULT_OPTIONS)
