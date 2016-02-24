@@ -97,6 +97,9 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-validation-rails (1.13.1)
+      railties (>= 3.2, < 5.0)
+      thor (~> 0.14)
     json (1.8.3)
     libv8 (3.16.14.13)
     loofah (2.0.3)
@@ -238,6 +241,7 @@ DEPENDENCIES
   jasmine-rails
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-validation-rails (~> 1.13, >= 1.13.1)
   puma
   rack-handlers
   rails (= 4.2.5.1)
