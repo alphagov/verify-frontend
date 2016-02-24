@@ -22,6 +22,10 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+# use jasmine-rails for js tests
+group :test, :development do
+  gem 'jasmine-rails'
+end
 
 gem 'govuk_template'
 gem 'govuk_frontend_toolkit'
