@@ -3,9 +3,12 @@ describe('The start page', function () {
   var $dom,
       formSpy,
       html = '<form id="start-page-form">'
-           +   '<input name=selection type=radio id=yes>'
-           +   '<input name=selection type=radio id=no>'
-           +   '<input type=submit>'
+           +   '<div class="form-group">'
+           +     '<input name=selection type=radio id=yes>'
+           +     '<input name=selection type=radio id=no>'
+           +     '<input type=submit>'
+           +   '</div>'
+           +   '<div id="validation-error-message-js"></div>'
            + '</form>';
 
   beforeEach(function () {
@@ -25,6 +28,7 @@ describe('The start page', function () {
       $(document).submit(formSpy);
       $('form').submit();
       expect(formSpy).toHaveBeenCalled();
+      expect($('.form-group').hasClass('error')).toBe(false);
     });
   });
 
@@ -33,6 +37,23 @@ describe('The start page', function () {
       $(document).submit(formSpy);
       $('form').submit();
       expect(formSpy).not.toHaveBeenCalled();
+      expect($('.form-group').hasClass('error')).toBe(true);
+    });
+  });
+
+  describe('when the form has errors and the user selects an option', function (){
+    var $formGroup;
+
+    beforeEach(function () {
+      $formGroup = $('.form-group');
+      $(document).submit(formSpy);
+      $('form').submit();
+    });
+
+    it('should remove the error message and highlights', function () {
+      expect($formGroup.hasClass('error')).toBe(true);
+      $('#yes').prop('checked', true).click();
+      expect($formGroup.hasClass('error')).toBe(false);
     });
   });
 });
