@@ -6,9 +6,7 @@
     <h1 class="heading-xlarge">You need to start again</h1>
     <p>For security reasons, if you use the back button to return from a certified company, you must start again.</p>
     <p><%= link_to 'Start again', '/redirect-to-service/error' %></p>
-    <p>Use the <%= link_to(
-                       t('phase_banner.feedback'),
-                       feedback_path('feedback-source' => feedback_source)
-                   ) %> to ask a question, report a problem or suggest an improvement.</p>
+    <p>Use the <%= link_to('feedback form', feedback_path('feedback-source' => feedback_source)) %>
+      to ask a question, report a problem or suggest an improvement.</p>
   </div>
 </div>
