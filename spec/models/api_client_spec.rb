@@ -40,13 +40,32 @@ describe ApiClient do
     end
   end
 
-  context 'API raises session error' do
+  context 'API request fails with an error type' do
     it 'raises a session error' do
       error_body = {id: '0', type: 'SESSION_ERROR'}
       stub_request(:get, "#{host}/api#{path}").and_return(status: 400, body: error_body.to_json)
       expect {
         ApiClient.new(host).get(path)
       }.to raise_error ApiClient::SessionError, 'Received 400 Bad Request with type: \'SESSION_ERROR\' and id: \'0\''
+      expect(a_request(:get, "#{host}/api#{path}")).to have_been_made.once
+    end
+
+    it 'raises a session timeout error' do
+      error_body = {id: '0', type: 'SESSION_TIMEOUT'}
+      stub_request(:get, "#{host}/api#{path}").and_return(status: 400, body: error_body.to_json)
+      expect {
+        ApiClient.new(host).get(path)
+      }.to raise_error ApiClient::SessionTimeoutError, 'Received 400 Bad Request with type: \'SESSION_TIMEOUT\' and id: \'0\''
+      expect(a_request(:get, "#{host}/api#{path}")).to have_been_made.once
+    end
+  end
+
+  context 'API request fails with no error type' do
+    it 'raises an error when API responds with 403 Forbidden' do
+      stub_request(:get, "#{host}/api#{path}").and_return(status: 403)
+      expect {
+        ApiClient.new(host).get(path)
+      }.to raise_error ApiClient::Error
       expect(a_request(:get, "#{host}/api#{path}")).to have_been_made.once
     end
   end

@@ -83,4 +83,13 @@ RSpec.describe 'user encounters error page' do
     expect(page).to have_content "Your session has timed out"
     expect(page).to have_content "Please go back to your service"
   end
+
+  it 'will present the something went wrong page when secure cookie is invalid' do
+    set_session_cookies
+    stub_transactions_list
+    stub_request(:get, api_idps_endpoint).and_return(status: 403)
+    visit '/sign-in'
+    expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"
+  end
 end
