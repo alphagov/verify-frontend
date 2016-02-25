@@ -10,9 +10,11 @@ require "action_controller/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
+
+require File.expand_path('../../lib/service_status_filter', __FILE__)
+
 Bundler.require(*Rails.groups)
 
 module VerifyFrontend
@@ -30,6 +32,8 @@ module VerifyFrontend
     config.i18n.default_locale = :en
     config.i18n.load_path +=  Dir[File.join(ENV.fetch('RP_DISPLAY_LOCALES'), '*.{rb,yml}').to_s]
     config.i18n.load_path +=  Dir[File.join(ENV.fetch('IDP_DISPLAY_LOCALES'), '*.{rb,yml}').to_s]
+
+    config.middleware.use 'ServiceStatusFilter'
 
     RouteTranslator.config do |config|
       config.hide_locale = true

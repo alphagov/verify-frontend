@@ -61,4 +61,5 @@ group :test, :development do
   gem 'capybara', '~> 2.6'
   gem 'govuk-lint'
   gem 'webmock', require: false
+  gem 'rack-test'
 end
