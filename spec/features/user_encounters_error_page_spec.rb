@@ -72,5 +72,15 @@ RSpec.describe 'user encounters error page' do
     stub_request(:get, api_idps_endpoint).and_return(status: 400, body: error_body.to_json)
     visit '/sign-in'
     expect(page).to have_content "You need to start again"
+    expect(page).to have_content "For security reasons"
+  end
+
+  it 'will present a session timeout error page when the API returns session timeout' do
+    set_session_cookies
+    error_body = {id: '0', type: 'SESSION_TIMEOUT'}
+    stub_request(:get, api_idps_endpoint).and_return(status: 400, body: error_body.to_json)
+    visit '/sign-in'
+    expect(page).to have_content "Your session has timed out"
+    expect(page).to have_content "Please go back to your service"
   end
 end

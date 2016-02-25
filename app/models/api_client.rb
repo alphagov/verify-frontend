@@ -33,10 +33,12 @@ private
     error_id = json.fetch('id', 'NONE')
     error_type = json.fetch('type', 'NONE')
     case error_type
-      when SessionError::TYPE
-        raise SessionError, "Received #{response.status} with type: '#{error_type}' and id: '#{error_id}'"
-      else
-        raise Error, "Received #{response.status} with error message: '#{error_message}' and id: '#{error_id}'"
+    when SessionError::TYPE
+      raise SessionError, "Received #{response.status} with type: '#{error_type}' and id: '#{error_id}'"
+    when SessionTimeoutError::TYPE
+      raise SessionTimeoutError, "Received #{response.status} with type: '#{error_type}' and id: '#{error_id}'"
+    else
+      raise Error, "Received #{response.status} with error message: '#{error_message}' and id: '#{error_id}'"
     end
   end
 
@@ -57,6 +59,10 @@ private
 
   class SessionError < StandardError
     TYPE = 'SESSION_ERROR'
+  end
+
+  class SessionTimeoutError < StandardError
+    TYPE = 'SESSION_TIMEOUT'
   end
 
   def client(options = DEFAULT_OPTIONS)

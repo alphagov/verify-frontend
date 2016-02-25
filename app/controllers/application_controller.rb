@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
     render "errors/session_error"
   end
 
+  rescue_from ApiClient::SessionTimeoutError do |exception|
+    logger.error(exception)
+    render "errors/session_timeout"
+  end
+
   def transactions_list
     TRANSACTION_LISTER.list
   end
