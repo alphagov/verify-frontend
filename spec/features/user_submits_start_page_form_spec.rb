@@ -31,11 +31,13 @@ RSpec.describe 'when user submits start page form' do
     expect(current_path).to eq('/about')
   end
 
-  it 'will display sign in with IDP page when user chooses no (sign in)' do
+  it 'will display sign in with IDP page when user chooses sign in' do
     cookies_regex = "#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME}=#{session_start_time_cookie}; " +
       "#{CookieNames::SECURE_COOKIE_NAME}=#{secure_cookie}; " +
       "#{CookieNames::SESSION_ID_COOKIE_NAME}=#{session_id_cookie}"
     expected_headers = {'Cookie' => cookies_regex}
+
+    Capybara.app_host = "http://user.myapp.com"
 
     body = [{'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com'}]
     stub_request(:get, api_uri('session/idps')).with(headers: expected_headers).to_return(body: body.to_json)
@@ -47,6 +49,9 @@ RSpec.describe 'when user submits start page form' do
     expect(page).to have_content 'Who do you have an identity account with?'
     expect(page).to have_content 'IDCorp'
     expect(page).to have_css('img[src="/stub-logos/stub-idp-one.png"]')
+    expect(page).to have_link 'Back', href: 'http://user.myapp.com/start'
+    expect(page).to have_link 'start now', href: '/about'
+    expect(page).to have_link "I can't remember which company verified me", href: '/forgot_company'
   end
 
   it 'will prompt for an answer if no answer is given' do
