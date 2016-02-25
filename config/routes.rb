@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     post 'start', to: 'start#request_post', as: :start
     get 'sign_in', to: 'sign_in#index', as: :sign_in
 
+    get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
+
     if Rails.env == 'development'
       get 'about', to: redirect("#{API_HOST}/about")
       get 'confirm_your_identity', to: redirect("#{API_HOST}/confirm-your-identity")
