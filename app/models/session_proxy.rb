@@ -10,7 +10,7 @@ class SessionProxy
     @api_client = api_client
   end
 
-  def proxy(saml_request, relay_state, x_forwarded_for)
+  def create_session(saml_request, relay_state, x_forwarded_for)
     body = {
         PARAM_SAML_REQUEST => saml_request,
         PARAM_RELAY_STATE => relay_state,

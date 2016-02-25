@@ -20,7 +20,7 @@ describe SessionProxy do
           CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time'
       }
       expect(api_client).to receive(:post).with(path, authn_request_body).and_return(cookie_hash)
-      cookies = SessionProxy.new(api_client).proxy('my-saml-request', 'my-relay-state', x_forwarded_for)
+      cookies = SessionProxy.new(api_client).create_session('my-saml-request', 'my-relay-state', x_forwarded_for)
       expect(cookies).to eq cookie_hash
     end
     it 'should return a list of IDP ids' do
