@@ -4,11 +4,6 @@ class SamlController < ApplicationController
 
   UNDETERMINED_IP = '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
 
-  rescue_from ApiClient::Error do |exception|
-    logger.error(exception)
-    render "errors/something_went_wrong"
-  end
-
   def request_post
     x_forwarded_for = request.headers.fetch("X-Forwarded-For", UNDETERMINED_IP)
     cookies_from_api = authn_request_proxy.proxy(params['SAMLRequest'], params['RelayState'], x_forwarded_for)
