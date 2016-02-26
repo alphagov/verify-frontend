@@ -5,27 +5,6 @@ RSpec.describe 'user encounters error page' do
   let(:api_idps_endpoint) { api_uri('session/idps') }
   let(:api_transactions_endpoint) { 'http://localhost:50190/api/transactions' }
 
-  let(:secure_cookie) { "my-secure-cookie" }
-  let(:session_id_cookie) { "my-session-id-cookie" }
-  let(:session_start_time_cookie) { create_session_start_time_cookie }
-  let(:cookie_hash) {
-    {
-        CookieNames::SECURE_COOKIE_NAME => secure_cookie,
-        CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => session_start_time_cookie,
-        CookieNames::SESSION_ID_COOKIE_NAME => session_id_cookie,
-    }
-  }
-
-  def set_cookies(hash)
-    hash.each do |key, value|
-      Capybara.current_session.driver.browser.set_cookie "#{key}=#{value}"
-    end
-  end
-
-  def set_session_cookies
-    set_cookies(cookie_hash)
-  end
-
   it 'will present the user with a list of transactions' do
     stub_transactions_list
     stub_request(:post, api_saml_endpoint).to_return(status: 500)

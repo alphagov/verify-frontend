@@ -35,3 +35,23 @@ end
 def expect_feedback_source_to_be(page, source)
   expect(page).to have_link 'feedback', href: "/feedback?feedback-source=#{source}"
 end
+
+def set_cookies(hash)
+  hash.each do |key, value|
+    Capybara.current_session.driver.browser.set_cookie "#{key}=#{value}"
+  end
+end
+
+def create_cookie_hash
+  {
+      CookieNames::SECURE_COOKIE_NAME => 'my-secure-cookie',
+      CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => create_session_start_time_cookie,
+      CookieNames::SESSION_ID_COOKIE_NAME => 'my-session-id-cookie',
+  }
+end
+
+def set_session_cookies
+  cookie_hash = create_cookie_hash
+  set_cookies(cookie_hash)
+  cookie_hash
+end
