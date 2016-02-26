@@ -31,3 +31,7 @@ end
 def api_uri(path)
   "#{API_HOST}/api/#{path}"
 end
+
+def expect_feedback_source_to_be(page, source)
+  expect(page).to have_link 'feedback', href: "/feedback?feedback-source=#{source}"
+end
