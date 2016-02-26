@@ -37,8 +37,6 @@ RSpec.describe 'when user submits start page form' do
       "#{CookieNames::SESSION_ID_COOKIE_NAME}=#{session_id_cookie}"
     expected_headers = {'Cookie' => cookies_regex}
 
-    Capybara.app_host = "http://user.myapp.com"
-
     body = [{'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com'}]
     stub_request(:get, api_uri('session/idps')).with(headers: expected_headers).to_return(body: body.to_json)
     set_session_cookies
@@ -49,7 +47,7 @@ RSpec.describe 'when user submits start page form' do
     expect(page).to have_content 'Who do you have an identity account with?'
     expect(page).to have_content 'IDCorp'
     expect(page).to have_css('img[src="/stub-logos/stub-idp-one.png"]')
-    expect(page).to have_link 'Back', href: 'http://user.myapp.com/start'
+    expect(page).to have_link 'Back', href: '/start'
     expect_feedback_source_to_be(page, 'SIGN_IN_PAGE')
     expect(page).to have_link 'start now', href: '/about'
     expect(page).to have_link "I can't remember which company verified me", href: '/forgot_company'

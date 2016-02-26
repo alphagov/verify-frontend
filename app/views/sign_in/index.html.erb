@@ -1,7 +1,7 @@
 <% content_for :feedback_source, 'SIGN_IN_PAGE' %>
 <% content_for(:title, t('hub.signin.title')) %>
 
-<%= link_to t('hub.signin.back'), :back, class: 'link-back' %>
+<%= link_to t('hub.signin.back'), start_path, class: 'link-back' %>
 <h1 class="heading-xlarge"><%= t 'hub.signin.heading' %></h1>
 <p><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), about_path) %></p>
 
