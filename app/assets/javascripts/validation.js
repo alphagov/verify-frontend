@@ -33,6 +33,9 @@
         },
         ignore: '.js-hidden *'
       });
+    },
+    attach: function () {
+      $('.js-validate').validate();
     }
   };
 

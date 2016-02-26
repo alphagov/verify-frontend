@@ -2,9 +2,9 @@
 describe('The start page', function () {
   var $dom,
       formSpy,
-      html = '<form id="start-page-form">'
+      html = '<form id="start-page-form" class="js-validate" novalidate>'
            +   '<div class="form-group">'
-           +     '<input name=selection type=radio id=yes>'
+           +     '<input name=selection type=radio id=yes required data-msg="Test error message">'
            +     '<input name=selection type=radio id=no>'
            +     '<input type=submit>'
            +   '</div>'
@@ -15,7 +15,7 @@ describe('The start page', function () {
     $dom = $(html);
     $(document.body).append($dom);
     window.GOVUK.validation.init();
-    window.GOVUK.startPage.init();
+    window.GOVUK.validation.attach();
     formSpy = jasmine.createSpy('formSpy')
       .and.callFake(function (e) { e.preventDefault(); });
   });
@@ -38,6 +38,7 @@ describe('The start page', function () {
       $('form').submit();
       expect(formSpy).not.toHaveBeenCalled();
       expect($('.form-group').hasClass('error')).toBe(true);
+      expect($('#validation-error-message-js').text()).toBe('Test error message')
     });
   });
 

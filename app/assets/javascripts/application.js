@@ -3,7 +3,8 @@
 //= require jquery.validate
 //= require_tree .
 
+window.GOVUK.validation.init();
+
 $(function () {
-  window.GOVUK.validation.init();
-  window.GOVUK.startPage.init();
+  window.GOVUK.validation.attach();
 });
