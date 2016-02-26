@@ -15,3 +15,11 @@ cy:
       answer_no: Rwyf wedi defnyddio Verify cyn
       continue: Parhau
       error_message: Dewiswch opsiwn
+    signin:
+      title: Mewngofnodi gyda chwmni ardystiedig
+      heading: Pwy ydych chi'n gennych gyfrif hunaniaeth gyda ?
+      back: Yn ôl
+      about_link: ddechrau nawr
+      registration_message_html: Os nad oes gennych gyfrif hunaniaeth, gallwch %{href}.
+      select_idp: Dewiswch %{name}
+      forgot_company: Ni allaf gofio pa gwmni gwirio mi

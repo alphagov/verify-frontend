@@ -2,3 +2,7 @@ en:
   idps:
     stub-idp-one:
       name: "IDCorp"
+cy:
+  idps:
+    stub-idp-one:
+      name: "Welsh IDCorp"
