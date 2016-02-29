@@ -19,7 +19,8 @@
           type: "PUT",
           url: '/api/select-idp',
           contentType: "application/json",
-          data: { entityId: entityId }
+          data: { entityId: entityId },
+          timeout: 5000
         }).done(function(response) {
           var $samlForm = $('#post-to-idp');
           $samlForm.prop('action', response.location);
