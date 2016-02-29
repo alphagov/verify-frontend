@@ -4,7 +4,7 @@
 describe('The sign in page', function () {
   var $dom,
       formSpy,
-      html = '<form class=select-idp-form>'
+      html = '<form class=select-idp-form action="">'
            +   '<button type=submit value=IDCorp></button>'
            + '</form>'
            + '<form id=post-to-idp>'
@@ -26,6 +26,7 @@ describe('The sign in page', function () {
   afterEach(function () {
     $dom.remove();
     jasmine.Ajax.uninstall();
+    $(document).off('submit');
   });
 
   describe('when the form is submitted', function () {
@@ -55,6 +56,24 @@ describe('The sign in page', function () {
       expect($samlForm.prop('action')).toBe('https://www.example.com/');
       expect($samlForm.find('input[name=SAMLRequest]').val()).toBe('a-saml-request');
       expect(formSpy).toHaveBeenCalled();
+    });
+    it('should submit IDP choice if AJAX request fails', function () {
+      var selectIdpFormSubmitted = false;
+      $(document).submit(function(e) {
+        e.preventDefault();
+        if (e.target.className === 'select-idp-form') {
+          selectIdpFormSubmitted = true;
+        }
+      });
+      jasmine.Ajax.stubRequest('/api/select-idp');
+
+      $('.select-idp-form button').click();
+      jasmine.Ajax.requests.mostRecent().respondWith({
+        status: 500,
+        responseText: JSON.stringify({})
+      });
+
+      expect(selectIdpFormSubmitted).toBe(true);
     });
   });
 });

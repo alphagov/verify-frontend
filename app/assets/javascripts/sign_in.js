@@ -10,10 +10,11 @@
     init: function () {
     },
     attach: function () {
-      $('.select-idp-form').on('submit', function (e) {
+      var $selectIdpForm = $('.select-idp-form');
+      $selectIdpForm.on('submit', function (e) {
         var entityId;
         e.preventDefault();
-        entityId = $(this).find('button').attr('name');
+        entityId = $selectIdpForm.find('button').attr('name');
         $.ajax({
           type: "PUT",
           url: '/api/select-idp',
@@ -25,7 +26,7 @@
           $samlForm.find('input[name=SAMLRequest]').val(response.samlRequest);
           $samlForm.submit();
         }).fail(function() {
-          $(this).off('submit').submit();
+          $selectIdpForm.off('submit').submit();
         });
         return false;
       });

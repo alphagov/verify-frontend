@@ -20,7 +20,10 @@ describe('The start page', function () {
       .and.callFake(function (e) { e.preventDefault(); });
   });
 
-  afterEach(function () { $dom.remove(); });
+  afterEach(function () {
+    $dom.remove();
+    $(document).off('submit');
+  });
 
   describe('when the user selects an option and submits the form', function () {
     it('should submit successfully', function () {
