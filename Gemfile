@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # use jasmine-rails for js tests
 group :test, :development do
   gem 'jasmine-rails'
+  gem 'selenium-webdriver'
 end
 
 gem 'govuk_template'
