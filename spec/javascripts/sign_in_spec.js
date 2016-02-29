@@ -10,6 +10,7 @@ describe('The sign in page', function () {
            + '<form id=post-to-idp>'
            +   '<input name=SAMLRequest type=hidden>'
            +   '<input name=RelayState type=hidden>'
+           +   '<input type=submit>'
            + '</form>';
 
 
@@ -36,10 +37,9 @@ describe('The sign in page', function () {
       expect(formSpy).not.toHaveBeenCalled();
       expect(jasmine.Ajax.requests.mostRecent().url).toBe('/api/select-idp');
     });
-    it('should populate the SAML request form with the AJAX response', function () {
+    it('should populate the SAML request form with the AJAX response and submit it', function () {
       $(document).submit(formSpy);
-      jasmine.Ajax
-        .stubRequest('/api/select-idp');
+      jasmine.Ajax.stubRequest('/api/select-idp');
 
       $('.select-idp-form button').click();
       jasmine.Ajax.requests.mostRecent().respondWith({
@@ -49,12 +49,12 @@ describe('The sign in page', function () {
           location: 'https://www.example.com'
         })
       });
-      expect(formSpy).not.toHaveBeenCalled();
       expect(jasmine.Ajax.requests.mostRecent().url).toBe('/api/select-idp');
       var $samlForm = $('#post-to-idp');
 
       expect($samlForm.prop('action')).toBe('https://www.example.com/');
       expect($samlForm.find('input[name=SAMLRequest]').val()).toBe('a-saml-request');
+      expect(formSpy).toHaveBeenCalled();
     });
   });
 });

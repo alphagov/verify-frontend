@@ -23,6 +23,7 @@
           var $samlForm = $('#post-to-idp');
           $samlForm.prop('action', response.location);
           $samlForm.find('input[name=SAMLRequest]').val(response.samlRequest);
+          $samlForm.submit();
         }).fail(function() {
           $(this).off('submit').submit();
         });
