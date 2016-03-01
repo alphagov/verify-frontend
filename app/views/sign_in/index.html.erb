@@ -35,3 +35,9 @@
     <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>
   </div>
 </div>
+
+<%= form_tag({}, {id: 'post-to-idp', class: 'js-hidden'}) do %>
+    <input name=SAMLRequest type=hidden>
+    <input name=RelayState type=hidden>
+    <input type=submit>
+<% end %>

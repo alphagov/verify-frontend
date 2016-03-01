@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   if ['test', 'development'].include? Rails.env
     get 'test-saml' => 'test_saml#index'
+    post 'test-idp-request-endpoint' => 'test_saml#idp_request'
   end
 
   localized do
