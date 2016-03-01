@@ -12,4 +12,5 @@ $(function () {
   new GOVUK.SelectionButtons($blockLabelInput);
 
   window.GOVUK.validation.attach();
+  window.GOVUK.signin.attach();
 });

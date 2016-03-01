@@ -10,7 +10,7 @@
     init: function () {
     },
     attach: function () {
-      var $selectIdpForm = $('.select-idp-form');
+      var $selectIdpForm = $('.idp-option');
       $selectIdpForm.on('submit', function (e) {
         var entityId;
         e.preventDefault();
@@ -19,7 +19,8 @@
           type: "PUT",
           url: '/api/select-idp',
           contentType: "application/json",
-          data: { entityId: entityId },
+          processData: false,
+          data: JSON.stringify({ entityId: entityId }),
           timeout: 5000
         }).done(function(response) {
           var $samlForm = $('#post-to-idp');

@@ -3,8 +3,9 @@
 
 describe('The sign in page', function () {
   var $dom,
+      $formButton,
       formSpy,
-      html = '<form class=select-idp-form action="">'
+      html = '<form class=idp-option action="">'
            +   '<button type=submit value=IDCorp></button>'
            + '</form>'
            + '<form id=post-to-idp>'
@@ -17,6 +18,7 @@ describe('The sign in page', function () {
   beforeEach(function () {
     $dom = $('<div>'+html+'</div>');
     $(document.body).append($dom);
+    $formButton = $('.idp-option button');
     window.GOVUK.signin.attach();
     formSpy = jasmine.createSpy('formSpy')
       .and.callFake(function (e) { e.preventDefault(); });
@@ -33,16 +35,21 @@ describe('The sign in page', function () {
     it('should PUT via AJAX to /select-idp', function () {
       $(document).submit(formSpy);
       jasmine.Ajax.stubRequest('/api/select-idp');
-
-      $('.select-idp-form button').click();
-      expect(formSpy).not.toHaveBeenCalled();
+      $formButton.click();
+      jasmine.Ajax.requests.mostRecent().respondWith({
+        status: 200,
+        responseText: JSON.stringify({
+          samlRequest: 'a-saml-request',
+          location: 'https://www.example.com'
+        })
+      });
       expect(jasmine.Ajax.requests.mostRecent().url).toBe('/api/select-idp');
     });
     it('should populate the SAML request form with the AJAX response and submit it', function () {
       $(document).submit(formSpy);
       jasmine.Ajax.stubRequest('/api/select-idp');
 
-      $('.select-idp-form button').click();
+      $formButton.click();
       jasmine.Ajax.requests.mostRecent().respondWith({
         status: 200,
         responseText: JSON.stringify({
@@ -61,13 +68,13 @@ describe('The sign in page', function () {
       var selectIdpFormSubmitted = false;
       $(document).submit(function(e) {
         e.preventDefault();
-        if (e.target.className === 'select-idp-form') {
+        if (e.target.className === 'idp-option') {
           selectIdpFormSubmitted = true;
         }
       });
       jasmine.Ajax.stubRequest('/api/select-idp');
 
-      $('.select-idp-form button').click();
+      $formButton.click();
       jasmine.Ajax.requests.mostRecent().respondWith({
         status: 500,
         responseText: JSON.stringify({})
