@@ -3,6 +3,7 @@ class SessionProxy
   PATH = "/session"
   IDP_PATH = "#{PATH}/idps"
   SELECT_IDP_PATH = "#{PATH}/select-idp"
+  IDP_AUTHN_REQUEST_PATH = "#{PATH}/idp-authn-request"
   PARAM_SAML_REQUEST = "samlRequest"
   PARAM_RELAY_STATE = "relayState"
   PARAM_ORIGINATING_IP = "originatingIp"
@@ -36,5 +37,10 @@ class SessionProxy
         PARAM_ENTITY_ID => entity_id
     }
     @api_client.put(SELECT_IDP_PATH, body, cookies: select_session_cookies(cookies))
+  end
+
+
+  def idp_authn_request(cookies)
+    @api_client.get(IDP_AUTHN_REQUEST_PATH, cookies: select_session_cookies(cookies))
   end
 end

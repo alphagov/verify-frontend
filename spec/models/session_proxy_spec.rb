@@ -61,4 +61,24 @@ describe SessionProxy do
     expect(api_client).to receive(:put).with(SessionProxy::SELECT_IDP_PATH, body, {cookies: expected_cookie_hash})
     SessionProxy.new(api_client).select_idp(cookie_hash, 'an-entity-id')
   end
+
+  it 'should get an IDP authn request' do
+    cookie_hash = {
+        CookieNames::SESSION_ID_COOKIE_NAME => "my-session-id-cookie",
+        CookieNames::SECURE_COOKIE_NAME => "my-secure-cookie",
+        CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
+        'SOME_OTHER_COOKIE' => 'something else'
+    }
+
+    expected_cookie_hash = {
+        CookieNames::SESSION_ID_COOKIE_NAME => "my-session-id-cookie",
+        CookieNames::SECURE_COOKIE_NAME => "my-secure-cookie",
+        CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
+    }
+    authn_request = double(:authn_request)
+
+    expect(api_client).to receive(:get).with('/session/idp-authn-request', {cookies: expected_cookie_hash}).and_return(authn_request)
+    result = SessionProxy.new(api_client).idp_authn_request(cookie_hash)
+    expect(result).to eq authn_request
+  end
 end
