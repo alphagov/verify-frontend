@@ -17,7 +17,7 @@
         entityId = $selectIdpForm.find('button').attr('name');
         $.ajax({
           type: "PUT",
-          url: '/api/select-idp',
+          url: '/select-idp',
           contentType: "application/json",
           processData: false,
           data: JSON.stringify({ entityId: entityId }),

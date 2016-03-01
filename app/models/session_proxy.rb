@@ -1,10 +1,12 @@
 
 class SessionProxy
   PATH = "/session"
-  IDP_PATH = "/session/idps"
+  IDP_PATH = "#{PATH}/idps"
+  SELECT_IDP_PATH = "#{PATH}/select-idp"
   PARAM_SAML_REQUEST = "samlRequest"
   PARAM_RELAY_STATE = "relayState"
   PARAM_ORIGINATING_IP = "originatingIp"
+  PARAM_ENTITY_ID = 'entityId'
 
   def initialize(api_client)
     @api_client = api_client
@@ -20,8 +22,19 @@ class SessionProxy
   end
 
   def idps_for_session(cookies)
-    session_cookie_names = CookieNames.session_cookies
-    session_cookies = cookies.select { |name, _| session_cookie_names.include?(name) }.to_h
+    session_cookies = select_session_cookies(cookies)
     @api_client.get(IDP_PATH, cookies: session_cookies)
+  end
+
+  def select_session_cookies(cookies)
+    session_cookie_names = CookieNames.session_cookies
+    cookies.select { |name, _| session_cookie_names.include?(name) }.to_h
+  end
+
+  def select_idp(cookies, entity_id)
+    body = {
+        PARAM_ENTITY_ID => entity_id
+    }
+    @api_client.put(SELECT_IDP_PATH, body, cookies: select_session_cookies(cookies))
   end
 end

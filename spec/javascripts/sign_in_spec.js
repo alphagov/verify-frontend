@@ -4,6 +4,7 @@
 describe('The sign in page', function () {
   var $dom,
       $formButton,
+      apiPath = '/select-idp',
       formSpy,
       html = '<form class=idp-option action="">'
            +   '<button type=submit value=IDCorp></button>'
@@ -34,7 +35,7 @@ describe('The sign in page', function () {
   describe('when the form is submitted', function () {
     it('should PUT via AJAX to /select-idp', function () {
       $(document).submit(formSpy);
-      jasmine.Ajax.stubRequest('/api/select-idp');
+      jasmine.Ajax.stubRequest(apiPath);
       $formButton.click();
       jasmine.Ajax.requests.mostRecent().respondWith({
         status: 200,
@@ -43,11 +44,11 @@ describe('The sign in page', function () {
           location: 'https://www.example.com'
         })
       });
-      expect(jasmine.Ajax.requests.mostRecent().url).toBe('/api/select-idp');
+      expect(jasmine.Ajax.requests.mostRecent().url).toBe(apiPath);
     });
     it('should populate the SAML request form with the AJAX response and submit it', function () {
       $(document).submit(formSpy);
-      jasmine.Ajax.stubRequest('/api/select-idp');
+      jasmine.Ajax.stubRequest(apiPath);
 
       $formButton.click();
       jasmine.Ajax.requests.mostRecent().respondWith({
@@ -57,7 +58,7 @@ describe('The sign in page', function () {
           location: 'https://www.example.com'
         })
       });
-      expect(jasmine.Ajax.requests.mostRecent().url).toBe('/api/select-idp');
+      expect(jasmine.Ajax.requests.mostRecent().url).toBe(apiPath);
       var $samlForm = $('#post-to-idp');
 
       expect($samlForm.prop('action')).toBe('https://www.example.com/');
@@ -72,7 +73,7 @@ describe('The sign in page', function () {
           selectIdpFormSubmitted = true;
         }
       });
-      jasmine.Ajax.stubRequest('/api/select-idp');
+      jasmine.Ajax.stubRequest(apiPath);
 
       $formButton.click();
       jasmine.Ajax.requests.mostRecent().respondWith({

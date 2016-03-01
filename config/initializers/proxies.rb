@@ -1,5 +1,5 @@
 API_HOST = ENV.fetch("API_HOST") { raise "An API host must be provided with API_HOST" }
-api_client = ApiClient.new(API_HOST)
+api_client = ApiClient.new(API_HOST, ApiResponseHandler.new)
 SESSION_PROXY = SessionProxy.new(api_client)
 
 federation_translator = Display::FederationTranslator.new
