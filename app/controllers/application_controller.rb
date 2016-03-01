@@ -12,17 +12,17 @@ class ApplicationController < ActionController::Base
     render "errors/something_went_wrong"
   end
 
-  rescue_from ApiClient::Error do |exception|
+  rescue_from Api::Error do |exception|
     logger.error(exception)
     render "errors/something_went_wrong"
   end
 
-  rescue_from ApiClient::SessionError do |exception|
+  rescue_from Api::SessionError do |exception|
     logger.error(exception)
     render "errors/session_error"
   end
 
-  rescue_from ApiClient::SessionTimeoutError do |exception|
+  rescue_from Api::SessionTimeoutError do |exception|
     logger.error(exception)
     render "errors/session_timeout"
   end
