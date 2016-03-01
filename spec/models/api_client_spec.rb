@@ -5,7 +5,7 @@ require 'webmock/rspec'
 describe ApiClient do
   let(:request_body) { {"a" => 1, "b" => 2} }
   let(:response_body) { {'c' => 3} }
-  let(:host) { 'http://localhost' }
+  let(:host) { 'http://api.com' }
   let(:path) { "/endpoint" }
   let(:api_client) { ApiClient.new(host) }
 

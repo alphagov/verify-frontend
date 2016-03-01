@@ -3,7 +3,6 @@ require 'feature_helper'
 RSpec.describe 'user encounters error page' do
   let(:api_saml_endpoint) { api_uri('session') }
   let(:api_idps_endpoint) { api_uri('session/idps') }
-  let(:api_transactions_endpoint) { 'http://localhost:50190/api/transactions' }
 
   it 'will present the user with a list of transactions' do
     stub_transactions_list

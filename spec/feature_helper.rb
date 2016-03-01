@@ -1,16 +1,10 @@
 require 'rails_helper'
 require 'capybara/rspec'
 require 'webmock/rspec'
-
-def set_cookies(hash)
-  hash.each do |key, value|
-    Capybara.current_session.driver.browser.set_cookie "#{key}=#{value}"
-  end
-end
-
+WebMock.disable_net_connect!(allow_localhost: true)
 
 def api_transactions_endpoint
-  'http://localhost:50190/api/transactions'
+  api_uri('transactions')
 end
 
 def stub_transactions_list
@@ -22,7 +16,6 @@ def stub_transactions_list
   }
   stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
 end
-
 
 def create_session_start_time_cookie
   DateTime.now.to_i * 1000
@@ -38,8 +31,10 @@ end
 
 def set_cookies(hash)
   driver = Capybara.current_session.driver
+  is_selenium_driver = driver.is_a? Capybara::Selenium::Driver
+  visit '/test-saml' if is_selenium_driver
   hash.each do |key, value|
-    if driver.is_a? Capybara::Selenium::Driver
+    if is_selenium_driver
       driver.browser.manage.add_cookie(name: key, value: value)
     else
       driver.browser.set_cookie "#{key}=#{value}"
