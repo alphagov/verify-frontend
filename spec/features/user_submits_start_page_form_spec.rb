@@ -3,7 +3,7 @@ require 'models/cookie_names'
 
 RSpec.describe 'when user submits start page form' do
   it 'will display about page when user chooses yes (registration)' do
-    set_session_cookies
+    set_session_cookies!
     visit '/start'
     choose('yes')
     click_button('next-button')
@@ -11,7 +11,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will display sign in with IDP page when user chooses sign in' do
-    cookies = set_session_cookies
+    cookies = set_session_cookies!
     cookie_names = [CookieNames::SESSION_STARTED_TIME_COOKIE_NAME, CookieNames::SECURE_COOKIE_NAME, CookieNames::SESSION_ID_COOKIE_NAME]
     expected_cookies_header = cookie_names.map { |name| "#{name}=#{cookies[name]}" }.join('; ')
     expected_headers = {'Cookie' => expected_cookies_header}
@@ -31,7 +31,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will prompt for an answer if no answer is given' do
-    set_session_cookies
+    set_session_cookies!
     visit '/start'
     click_button('next-button')
     expect(page).to have_content "Please select an option"

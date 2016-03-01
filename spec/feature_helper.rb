@@ -29,7 +29,7 @@ def expect_feedback_source_to_be(page, source)
   expect(page).to have_link 'feedback', href: "/feedback?feedback-source=#{source}"
 end
 
-def set_cookies(hash)
+def set_cookies!(hash)
   driver = Capybara.current_session.driver
   is_selenium_driver = driver.is_a? Capybara::Selenium::Driver
   visit '/test-saml' if is_selenium_driver
@@ -50,8 +50,8 @@ def create_cookie_hash
   }
 end
 
-def set_session_cookies
+def set_session_cookies!
   cookie_hash = create_cookie_hash
-  set_cookies(cookie_hash)
+  set_cookies!(cookie_hash)
   cookie_hash
 end

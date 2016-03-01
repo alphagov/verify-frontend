@@ -3,7 +3,7 @@ require 'models/cookie_names'
 
 RSpec.describe 'When the user visits the start page' do
   it 'will display the start page in English' do
-    set_session_cookies
+    set_session_cookies!
     visit '/start'
     expect(page).to have_content 'Sign in with GOV.UK Verify'
     expect(page).to have_css 'html[lang=en]'
@@ -11,7 +11,7 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'will display the start page in Welsh' do
-    set_session_cookies
+    set_session_cookies!
     visit '/dechrau'
     expect(page).to have_content 'Mewngofnodi gyda GOV.UK Verify'
     expect(page).to have_css 'html[lang=cy]'
@@ -36,7 +36,7 @@ RSpec.describe 'When the user visits the start page' do
       cookie_hash = create_cookie_hash
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME}]").at_least(:once)
-      set_cookies(cookie_hash.except(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME))
+      set_cookies!(cookie_hash.except(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME))
       visit '/start'
       expect(page).to have_content "Sorry, something went wrong"
       expect(page).to have_http_status :internal_server_error
@@ -47,7 +47,7 @@ RSpec.describe 'When the user visits the start page' do
       cookie_hash = create_cookie_hash
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SECURE_COOKIE_NAME}]").at_least(:once)
-      set_cookies(cookie_hash.except(CookieNames::SECURE_COOKIE_NAME))
+      set_cookies!(cookie_hash.except(CookieNames::SECURE_COOKIE_NAME))
       visit '/start'
       expect(page).to have_content "Sorry, something went wrong"
       expect(page).to have_http_status :internal_server_error
@@ -58,7 +58,7 @@ RSpec.describe 'When the user visits the start page' do
       cookie_hash = create_cookie_hash
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SESSION_ID_COOKIE_NAME}]").at_least(:once)
-      set_cookies(cookie_hash.except(CookieNames::SESSION_ID_COOKIE_NAME))
+      set_cookies!(cookie_hash.except(CookieNames::SESSION_ID_COOKIE_NAME))
       visit '/start'
       expect(page).to have_content "Sorry, something went wrong"
       expect(page).to have_http_status :internal_server_error
@@ -69,9 +69,9 @@ RSpec.describe 'When the user visits the start page' do
       session_id_cookie = create_cookie_hash[CookieNames::SESSION_ID_COOKIE_NAME]
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with("#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME} cookie for session \"#{session_id_cookie}\" has expired").at_least(:once)
-      set_session_cookies
+      set_session_cookies!
       expired_start_time = 2.hours.ago.to_i
-      set_cookies({CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => expired_start_time})
+      set_cookies!({CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => expired_start_time})
       visit "/start"
       expect(page).to have_content "Find the service you were using to start again"
       expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"
