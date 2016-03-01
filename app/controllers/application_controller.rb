@@ -9,22 +9,22 @@ class ApplicationController < ActionController::Base
   rescue_from StandardError do |exception|
     logger.error(exception)
     #exception.backtrace.each { |line| logger.error(line) }
-    render "errors/something_went_wrong"
+    render_error('something_went_wrong', :internal_server_error)
   end
 
   rescue_from Api::Error do |exception|
     logger.error(exception)
-    render "errors/something_went_wrong"
+    render_error('something_went_wrong', :internal_server_error)
   end
 
   rescue_from Api::SessionError do |exception|
     logger.error(exception)
-    render "errors/session_error"
+    render_error('session_error', :bad_request)
   end
 
   rescue_from Api::SessionTimeoutError do |exception|
     logger.error(exception)
-    render "errors/session_timeout"
+    render_error('session_timeout', :forbidden)
   end
 
   def transactions_list
@@ -37,14 +37,19 @@ class ApplicationController < ActionController::Base
 
   def validate_cookies
     validation = cookie_validator.validate(cookies)
-    render_error(validation) unless validation.ok?
+    unless validation.ok?
+      logger.info(validation.message)
+      render_error(validation.type, validation.status)
+    end
   end
 
 private
 
-  def render_error(validation)
-    logger.info(validation.message)
-    render "errors/#{validation.type}", status: validation.status
+  def render_error(partial, status)
+    respond_to do |format|
+      format.html { render "errors/#{partial}", status: status}
+      format.json { render json: {}, status: status}
+    end
   end
 
   def cookie_validator
