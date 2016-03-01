@@ -40,7 +40,7 @@ def set_cookies(hash)
   driver = Capybara.current_session.driver
   hash.each do |key, value|
     if driver.is_a? Capybara::Selenium::Driver
-      driver.browser.manage.add_cookie(:name=>key, :value=>value)
+      driver.browser.manage.add_cookie(name: key, value: value)
     else
       driver.browser.set_cookie "#{key}=#{value}"
     end
