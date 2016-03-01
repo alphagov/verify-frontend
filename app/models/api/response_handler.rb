@@ -11,7 +11,7 @@ module Api
   private
 
     def handle_error(body, status)
-      json = parse_json(body, status)
+      json = parse_json(body, status) || {}
       error_message = json.fetch('message', 'NONE')
       error_id = json.fetch('id', 'NONE')
       error_type = json.fetch('type', 'NONE')
@@ -27,6 +27,7 @@ module Api
 
 
     def parse_json(body, status)
+      return nil if body.empty?
       begin
         JSON.parse(body)
       rescue JSON::ParserError
