@@ -1,7 +1,7 @@
 require 'http'
 module Api
   class Client
-    DEFAULT_OPTIONS = {cookies: []}
+    DEFAULT_OPTIONS = {}
 
     def initialize(host, response_handler)
       @host = host
@@ -9,7 +9,7 @@ module Api
     end
 
     def get(path, options = DEFAULT_OPTIONS)
-      response = client(options).get(uri(path))
+      response = client(options).get(uri(path), params: options[:params])
       @response_handler.handle_response(response.status, 200, response.to_s)
     end
 
@@ -30,7 +30,7 @@ module Api
     end
 
     def client(options = DEFAULT_OPTIONS)
-      HTTP['User-Agent' => 'Verify Frontend Micro Service Client'].cookies(options[:cookies])
+      HTTP['User-Agent' => 'Verify Frontend Micro Service Client'].cookies(options.fetch(:cookies, {}))
     end
   end
 end

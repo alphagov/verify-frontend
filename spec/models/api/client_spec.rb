@@ -20,6 +20,14 @@ module Api
         expect(response).to eql response_body
       end
 
+      it 'set params if provided them' do
+        stub_request(:get, "#{host}/api#{path}").with(query: {'param1' => 'value1'}).and_return(status: 200, body: '{}')
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
+        response = api_client.get(path, params: {'param1' => 'value1'})
+        expect(a_request(:get, "#{host}/api#{path}").with(query: {'param1' => 'value1'})).to have_been_made.once
+        expect(response).to eql response_body
+      end
+
       it 'returns a JSON result when successful' do
         stub_request(:get, "#{host}/api#{path}").and_return(status: 200, body: '{}')
         expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)

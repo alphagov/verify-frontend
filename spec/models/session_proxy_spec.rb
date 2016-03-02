@@ -76,9 +76,10 @@ describe SessionProxy do
         CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
     }
     authn_request = double(:authn_request)
-
-    expect(api_client).to receive(:get).with('/session/idp-authn-request', {cookies: expected_cookie_hash}).and_return(authn_request)
-    result = SessionProxy.new(api_client).idp_authn_request(cookie_hash)
+    ip_address = '1.1.1.1'
+    params = {SessionProxy::PARAM_ORIGINATING_IP => ip_address}
+    expect(api_client).to receive(:get).with(SessionProxy::IDP_AUTHN_REQUEST_PATH, {cookies: expected_cookie_hash, params: params}).and_return(authn_request)
+    result = SessionProxy.new(api_client).idp_authn_request(cookie_hash, ip_address)
     expect(result).to eq authn_request
   end
 end
