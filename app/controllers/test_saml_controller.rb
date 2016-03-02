@@ -6,6 +6,9 @@ class TestSamlController < ApplicationController
   end
 
   def idp_request
-    render inline: "AUTHN REQUEST RECEIVED"
+    @saml_request = params['SAMLRequest']
+    @relay_state = params['RelayState']
+    @registration = params['registration']
+    render 'idp_request'
   end
 end

@@ -39,5 +39,6 @@
 <%= form_tag({}, {id: 'post-to-idp', class: 'js-hidden'}) do %>
     <input name=SAMLRequest type=hidden>
     <input name=RelayState type=hidden>
+    <input name=registration type=hidden>
     <input type=submit>
 <% end %>

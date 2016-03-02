@@ -26,6 +26,8 @@
           var $samlForm = $('#post-to-idp');
           $samlForm.prop('action', response.location);
           $samlForm.find('input[name=SAMLRequest]').val(response.samlRequest);
+          $samlForm.find('input[name=RelayState]').val(response.relayState);
+          $samlForm.find('input[name=registration]').val(response.registration);
           $samlForm.submit();
         }).fail(function() {
           $selectIdpForm.off('submit').submit();
