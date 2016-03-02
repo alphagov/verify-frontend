@@ -1,5 +1,7 @@
 // Import GOV.UK frontend toolkit
 @import "_govuk-elements";
 
+@import "_govuk-elements-overrides";
+
 // Specific pages
 @import "pages/_start";

@@ -55,6 +55,7 @@
 
 // Add selected state
 .js-enabled label.selected {
+  background: $white;
   border-color: $black;
 }
 
