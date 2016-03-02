@@ -57,9 +57,11 @@ describe SessionProxy do
         CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
     }
 
-    body = {'entityId' => 'an-entity-id'}
-    expect(api_client).to receive(:put).with(SessionProxy::SELECT_IDP_PATH, body, {cookies: expected_cookie_hash})
-    SessionProxy.new(api_client).select_idp(cookie_hash, 'an-entity-id')
+    ip_address = '1.1.1.1'
+    body = {'entityId' => 'an-entity-id', 'originatingIp' => ip_address}
+    expect(api_client).to receive(:put)
+      .with(SessionProxy::SELECT_IDP_PATH, body, {cookies: expected_cookie_hash})
+    SessionProxy.new(api_client).select_idp(cookie_hash, 'an-entity-id', ip_address)
   end
 
   it 'should get an IDP authn request' do
@@ -78,7 +80,9 @@ describe SessionProxy do
     authn_request = double(:authn_request)
     ip_address = '1.1.1.1'
     params = {SessionProxy::PARAM_ORIGINATING_IP => ip_address}
-    expect(api_client).to receive(:get).with(SessionProxy::IDP_AUTHN_REQUEST_PATH, {cookies: expected_cookie_hash, params: params}).and_return(authn_request)
+    expect(api_client).to receive(:get)
+      .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, {cookies: expected_cookie_hash, params: params})
+      .and_return(authn_request)
     result = SessionProxy.new(api_client).idp_authn_request(cookie_hash, ip_address)
     expect(result).to eq authn_request
   end

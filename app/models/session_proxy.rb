@@ -32,9 +32,10 @@ class SessionProxy
     cookies.select { |name, _| session_cookie_names.include?(name) }.to_h
   end
 
-  def select_idp(cookies, entity_id)
+  def select_idp(cookies, entity_id, originating_ip)
     body = {
-        PARAM_ENTITY_ID => entity_id
+        PARAM_ENTITY_ID => entity_id,
+        PARAM_ORIGINATING_IP => originating_ip
     }
     @api_client.put(SELECT_IDP_PATH, body, cookies: select_session_cookies(cookies))
   end
