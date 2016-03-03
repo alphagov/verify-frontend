@@ -20,6 +20,7 @@ RSpec.describe 'when user submits start page form' do
     visit '/start'
     choose('no')
     click_button('next-button')
+
     expect(current_path).to eq('/sign-in')
     expect(page).to have_content 'Who do you have an identity account with?'
     expect(page).to have_content 'IDCorp'
