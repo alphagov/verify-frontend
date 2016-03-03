@@ -44,7 +44,34 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     end
   end
 
-  context 'with JS disabled' do
-    it 'will display the interstitial page'
+  context 'with JS disabled', js: false do
+    it 'will display the interstitial page and on submit will redirect the user to IDP' do
+      idp_entity_id = 'http://idcorp.com'
+      body = [{'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id}]
+      location = '/test-idp-request-endpoint'
+      response = {'location' => location, 'samlRequest' => 'a-saml-request',
+                  'relayState' => 'a-relay-state', 'registration' => false}
+      originating_ip = '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
+
+      # Given
+      stub_request(:get, api_uri('session/idps')).to_return(body: body.to_json)
+      stub_request(:put, api_uri('session/select-idp'))
+        .to_return(body: {'encryptedEntityId' => 'an-encrypted-entity-id'}.to_json)
+      stub_request(:get, api_uri('session/idp-authn-request'))
+        .with(query: {'originatingIp' => originating_ip}).to_return(body: response.to_json)
+      set_session_cookies!
+
+      # When
+      visit '/sign-in'
+      click_button('IDCorp')
+
+      expect(page).to have_current_path('/redirect-to-idp')
+      click_button('continue')
+
+      expect(page).to have_current_path(location)
+      expect(page).to have_content("SAML Request is 'a-saml-request'")
+      expect(page).to have_content("relay state is 'a-relay-state'")
+      expect(page).to have_content("registration is 'false'")
+    end
   end
 end

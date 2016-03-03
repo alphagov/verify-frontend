@@ -1,0 +1,6 @@
+<%= form_tag(@location) do %>
+    <%= hidden_field_tag 'SAMLRequest', @saml_request %>
+    <%= hidden_field_tag 'RelayState', @relay_state %>
+    <%= hidden_field_tag 'registration', @registration %>
+    <%= submit_tag "continue" %>
+<% end %>

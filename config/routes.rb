@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   post 'SAML2/SSO' => 'saml#request_post'
+  get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
 
   if ['test', 'development'].include? Rails.env
     get 'test-saml' => 'test_saml#index'
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
     get 'start', to: 'start#index', as: :start
     post 'start', to: 'start#request_post', as: :start
     get 'sign_in', to: 'sign_in#index', as: :sign_in
+    post 'sign_in', to: 'sign_in#select_idp', as: :sign_in
 
     get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
 
