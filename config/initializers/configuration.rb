@@ -6,4 +6,5 @@ CONFIG = Configuration.load! do
   option 'api_host', 'API_HOST'
   option 'logo_directory', 'LOGO_DIRECTORY'
   option 'zdd_file', 'ZDD_LATCH'
+  option 'polling_wait_time', 'POLLING_WAIT_TIME'
 end
