@@ -20,8 +20,8 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       cookies = set_session_cookies!
       cookies[CookieNames::VERIFY_JOURNEY_HINT] = 'an-encrypted-entity-id'
       cookie_names = [
-          CookieNames::SESSION_STARTED_TIME_COOKIE_NAME,
           CookieNames::SECURE_COOKIE_NAME,
+          CookieNames::SESSION_STARTED_TIME_COOKIE_NAME,
           CookieNames::SESSION_ID_COOKIE_NAME,
           CookieNames::VERIFY_JOURNEY_HINT
       ]

@@ -23,13 +23,12 @@ class SessionProxy
   end
 
   def idps_for_session(cookies)
-    session_cookies = select_session_cookies(cookies)
+    session_cookies = select_cookies(cookies, CookieNames.session_cookies)
     @api_client.get(IDP_PATH, cookies: session_cookies)
   end
 
-  def select_session_cookies(cookies)
-    session_cookie_names = CookieNames.session_cookies
-    cookies.select { |name, _| session_cookie_names.include?(name) }.to_h
+  def select_cookies(cookies, allowed_cookie_names)
+    cookies.select { |name, _| allowed_cookie_names.include?(name) }.to_h
   end
 
   def select_idp(cookies, entity_id, originating_ip)
@@ -37,10 +36,10 @@ class SessionProxy
         PARAM_ENTITY_ID => entity_id,
         PARAM_ORIGINATING_IP => originating_ip
     }
-    @api_client.put(SELECT_IDP_PATH, body, cookies: select_session_cookies(cookies))
+    @api_client.put(SELECT_IDP_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
   end
 
   def idp_authn_request(cookies, originating_ip)
-    @api_client.get(IDP_AUTHN_REQUEST_PATH, cookies: select_session_cookies(cookies), params: {PARAM_ORIGINATING_IP => originating_ip})
+    @api_client.get(IDP_AUTHN_REQUEST_PATH, cookies: select_cookies(cookies, CookieNames.all_cookies), params: {PARAM_ORIGINATING_IP => originating_ip})
   end
 end
