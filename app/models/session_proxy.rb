@@ -40,6 +40,11 @@ class SessionProxy
   end
 
   def idp_authn_request(cookies, originating_ip)
-    @api_client.get(IDP_AUTHN_REQUEST_PATH, cookies: select_cookies(cookies, CookieNames.all_cookies), params: {PARAM_ORIGINATING_IP => originating_ip})
+    response = @api_client.get(IDP_AUTHN_REQUEST_PATH, cookies: select_cookies(cookies, CookieNames.all_cookies), params: {PARAM_ORIGINATING_IP => originating_ip})
+    OutboundSamlMessage.new(response).tap { |message|
+      raise ModelError, message.errors.full_messages.join(', ') unless message.valid?
+    }
   end
+
+  ModelError = Class.new(StandardError)
 end

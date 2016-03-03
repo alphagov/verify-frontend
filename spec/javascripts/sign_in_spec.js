@@ -40,7 +40,7 @@ describe('The sign in page', function () {
       jasmine.Ajax.requests.mostRecent().respondWith({
         status: 200,
         responseText: JSON.stringify({
-          samlRequest: 'a-saml-request',
+          saml_request: 'a-saml-request',
           location: 'https://www.example.com'
         })
       });
@@ -54,7 +54,7 @@ describe('The sign in page', function () {
       jasmine.Ajax.requests.mostRecent().respondWith({
         status: 200,
         responseText: JSON.stringify({
-          samlRequest: 'a-saml-request',
+          saml_request: 'a-saml-request',
           location: 'https://www.example.com'
         })
       });

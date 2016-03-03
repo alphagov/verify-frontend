@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'models/session_proxy'
 require 'models/cookie_names'
+require 'rails_helper'
 
 describe SessionProxy do
   let(:api_client) { double(:api_client) }
@@ -77,13 +78,52 @@ describe SessionProxy do
         CookieNames::SECURE_COOKIE_NAME => "my-secure-cookie",
         CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
     }
-    authn_request = double(:authn_request)
+    authn_request = {
+        'location' => 'some-location',
+        'samlRequest' => 'a-saml-request',
+        'relayState' => 'relay-state',
+        'registration' => false
+    }
     ip_address = '1.1.1.1'
     params = {SessionProxy::PARAM_ORIGINATING_IP => ip_address}
     expect(api_client).to receive(:get)
       .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, {cookies: expected_cookie_hash, params: params})
       .and_return(authn_request)
     result = SessionProxy.new(api_client).idp_authn_request(cookie_hash, ip_address)
-    expect(result).to eq authn_request
+    attributes = {
+        'location' => 'some-location',
+        'saml_request' => 'a-saml-request',
+        'relay_state' => 'relay-state',
+        'registration' => false
+    }
+    expect(result).to have_attributes(attributes)
+  end
+
+  it 'should fail to get an IDP authn request when fields are missing from response' do
+    cookie_hash = {
+        CookieNames::SESSION_ID_COOKIE_NAME => "my-session-id-cookie",
+        CookieNames::SECURE_COOKIE_NAME => "my-secure-cookie",
+        CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
+        'SOME_OTHER_COOKIE' => 'something else'
+    }
+
+    expected_cookie_hash = {
+        CookieNames::SESSION_ID_COOKIE_NAME => "my-session-id-cookie",
+        CookieNames::SECURE_COOKIE_NAME => "my-secure-cookie",
+        CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
+    }
+    authn_request = {
+        'location' => 'some-location',
+        'relayState' => 'relay-state',
+        'registration' => false
+    }
+    ip_address = '1.1.1.1'
+    params = {SessionProxy::PARAM_ORIGINATING_IP => ip_address}
+    expect(api_client).to receive(:get)
+      .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, {cookies: expected_cookie_hash, params: params})
+      .and_return(authn_request)
+    expect {
+      SessionProxy.new(api_client).idp_authn_request(cookie_hash, ip_address)
+    }.to raise_error SessionProxy::ModelError, "Saml request can't be blank"
   end
 end
