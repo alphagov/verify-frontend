@@ -8,7 +8,7 @@ describe 'service reports the on service status', type: :request do
 
   it "is not OK when ZDD_LATCH does exist" do
     file = Tempfile.new('zdd_file')
-    expect(ENV).to receive(:fetch).with("ZDD_LATCH").twice.and_return(file.path)
+    expect(CONFIG).to receive(:zdd_file).twice.and_return(file.path)
     response = get('/service-status')
     expect(response).to eql 503
     expect(@response.headers["Connection"]).to eql "close"

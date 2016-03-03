@@ -2,7 +2,7 @@ class ServiceStatusController < ApplicationController
   skip_before_action :validate_cookies
 
   def zdd_latch_file
-    ENV.fetch('ZDD_LATCH')
+    CONFIG.zdd_file
   end
 
   def index

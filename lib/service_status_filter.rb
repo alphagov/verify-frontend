@@ -4,7 +4,7 @@ class ServiceStatusFilter
   end
 
   def zdd_latch_file
-    ENV.fetch('ZDD_LATCH')
+    CONFIG.zdd_file
   end
 
   def call(env)
