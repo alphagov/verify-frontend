@@ -5,7 +5,8 @@ cy:
     about: am
     sign_in: mewngofnodi
   phase_banner:
-    title: Mae hwn yn wasanaeth newydd - Bydd eich %{feedback_link} yn ein helpu i wella.
+    title: Mae hwn yn wasanaeth newydd.
+    feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
     feedback: adborth
   hub:
     start:

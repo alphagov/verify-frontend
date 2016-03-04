@@ -1,12 +1,11 @@
 <div class="phase-banner-beta">
   <p>
     <strong class="phase-tag">BETA</strong>
-    <span><%= t(
-                  'phase_banner.title',
-                  feedback_link: link_to(
-                      t('phase_banner.feedback'),
-                      feedback_path('feedback-source' => feedback_source)
-                  )
-              ).html_safe %></span>
+    <span>
+      <%= t('phase_banner.title') %>
+      <% if feedback_source.present? %>
+      <%= t('phase_banner.feedback_message', feedback_link: link_to(t('phase_banner.feedback'), feedback_path('feedback-source' => feedback_source))).html_safe %>
+      <% end %>
+    </span>
   </p>
 </div>

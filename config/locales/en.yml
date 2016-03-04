@@ -4,7 +4,8 @@ en:
     about: about
     sign_in: sign-in
   phase_banner:
-    title: This is a trial service. Your %{feedback_link} will help us to improve it.
+    title: This is a trial service.
+    feedback_message: Your %{feedback_link} will help us to improve it.
     feedback: feedback
   hub:
     start:

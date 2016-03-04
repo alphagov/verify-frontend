@@ -1,6 +1,16 @@
-<%= form_tag(@saml_message.location) do %>
-    <%= hidden_field_tag 'SAMLRequest', @saml_message.saml_request %>
-    <%= hidden_field_tag 'RelayState', @saml_message.relay_state %>
-    <%= hidden_field_tag 'registration', @saml_message.registration %>
-    <%= submit_tag "continue" %>
-<% end %>
+<% content_for :page_title, 'Loading' %>
+
+<div class="content">
+  <div class="grid-section">
+    <div class="grid-2-3"><h1 class="heading-xlarge">Continue to next step</h1>
+      <div class="application-notice info-notice">
+        <p>Because Javascript is not enabled on your browser, you must press the continue button</p></div>
+        <%= form_tag(@saml_message.location) do %>
+            <%= hidden_field_tag 'SAMLRequest', @saml_message.saml_request %>
+            <%= hidden_field_tag 'RelayState', @saml_message.relay_state %>
+            <%= hidden_field_tag 'registration', @saml_message.registration %>
+            <%= submit_tag 'Continue', id: 'continue' %>
+        <% end %>
+    </div>
+  </div>
+</div>
