@@ -1,77 +1,83 @@
 require 'feature_helper'
 
+def given_api_requests_have_been_mocked!
+  stub_request(:get, api_uri('session/idps')).to_return(body: body.to_json)
+  stub_request(:put, api_uri('session/select-idp'))
+    .to_return(body: {'encryptedEntityId' => encrypted_entity_id}.to_json)
+  stub_request(:get, api_uri('session/idp-authn-request'))
+    .with(query: {'originatingIp' => originating_ip}).to_return(body: response.to_json)
+end
+
+def given_im_on_the_sign_page
+  cookies
+  visit '/sign-in'
+end
+
+def when_i_select_an_idp
+  click_button('IDCorp')
+end
+
+def then_im_at_the_idp
+  expect(a_request(:put, api_uri('session/select-idp'))
+             .with(body: {'entityId' => idp_entity_id, 'originatingIp' => originating_ip})).to have_been_made.once
+  expect(a_request(:get, api_uri('session/idp-authn-request'))
+             .with(query: {'originatingIp' => originating_ip})).to have_been_made.once
+  expect(page).to have_current_path(location)
+  expect(page).to have_content("SAML Request is 'a-saml-request'")
+  expect(page).to have_content("relay state is 'a-relay-state'")
+  expect(page).to have_content("registration is 'false'")
+  if is_selenium_driver?
+    journey_hint_cookie = Capybara.current_session.driver.browser.manage.all_cookies.detect do |cookie|
+      cookie[:name] == 'verify-journey-hint'
+    end
+    expect(journey_hint_cookie[:value]).to eql encrypted_entity_id
+  else
+    value = Capybara.current_session.driver.request.cookies['verify-journey-hint']
+    expect(value).to eql encrypted_entity_id
+  end
+end
+
+def then_im_at_the_interstitial_page
+  expect(page).to have_current_path('/redirect-to-idp')
+end
+
+def when_i_choose_to_continue
+  click_button('continue')
+end
+
 RSpec.describe 'user selects an IDP on the sign in page' do
+  let(:idp_entity_id) { 'http://idcorp.com' }
+  let(:body) { [{'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id}] }
+  let(:location) { '/test-idp-request-endpoint' }
+  let(:response) {
+    {
+      'location' => location,
+      'samlRequest' => 'a-saml-request',
+      'relayState' => 'a-relay-state',
+      'registration' => false
+    }
+  }
+  let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
+  let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
+  let(:cookies) { set_session_cookies! }
+
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP' do
-      idp_entity_id = 'http://idcorp.com'
-      body = [{'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id}]
-      location = '/test-idp-request-endpoint'
-      response = {'location' => location, 'samlRequest' => 'a-saml-request',
-        'relayState' => 'a-relay-state', 'registration' => false}
-      originating_ip = '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
-
-      # Given
-      stub_request(:get, api_uri('session/idps')).to_return(body: body.to_json)
-      stub_request(:put, api_uri('session/select-idp'))
-        .to_return(body: {'encryptedEntityId' => 'an-encrypted-entity-id'}.to_json)
-      stub_request(:get, api_uri('session/idp-authn-request'))
-        .with(query: {'originatingIp' => originating_ip}).to_return(body: response.to_json)
-
-      cookies = set_session_cookies!
-      cookies[CookieNames::VERIFY_JOURNEY_HINT] = 'an-encrypted-entity-id'
-      cookie_names = [
-          CookieNames::SECURE_COOKIE_NAME,
-          CookieNames::SESSION_STARTED_TIME_COOKIE_NAME,
-          CookieNames::SESSION_ID_COOKIE_NAME,
-          CookieNames::VERIFY_JOURNEY_HINT
-      ]
-      expected_cookies_header = cookie_names.map { |name| "#{name}=#{cookies[name]}" }.join('; ')
-      expected_headers = {'Cookie' => expected_cookies_header}
-
-      # When
-      visit '/sign-in'
-      click_button('IDCorp')
-
-      # Then
-      expect(a_request(:put, api_uri('session/select-idp'))
-        .with(body: {'entityId' => idp_entity_id, 'originatingIp' => originating_ip})).to have_been_made.once
-      expect(a_request(:get, api_uri('session/idp-authn-request'))
-        .with(query: {'originatingIp' => originating_ip}, headers: expected_headers)).to have_been_made.once
-      expect(page).to have_current_path(location)
-      expect(page).to have_content("SAML Request is 'a-saml-request'")
-      expect(page).to have_content("relay state is 'a-relay-state'")
-      expect(page).to have_content("registration is 'false'")
+      given_api_requests_have_been_mocked!
+      given_im_on_the_sign_page
+      when_i_select_an_idp
+      then_im_at_the_idp
     end
   end
 
   context 'with JS disabled', js: false do
     it 'will display the interstitial page and on submit will redirect the user to IDP' do
-      idp_entity_id = 'http://idcorp.com'
-      body = [{'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id}]
-      location = '/test-idp-request-endpoint'
-      response = {'location' => location, 'samlRequest' => 'a-saml-request',
-                  'relayState' => 'a-relay-state', 'registration' => false}
-      originating_ip = '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
-
-      # Given
-      stub_request(:get, api_uri('session/idps')).to_return(body: body.to_json)
-      stub_request(:put, api_uri('session/select-idp'))
-        .to_return(body: {'encryptedEntityId' => 'an-encrypted-entity-id'}.to_json)
-      stub_request(:get, api_uri('session/idp-authn-request'))
-        .with(query: {'originatingIp' => originating_ip}).to_return(body: response.to_json)
-      set_session_cookies!
-
-      # When
-      visit '/sign-in'
-      click_button('IDCorp')
-
-      expect(page).to have_current_path('/redirect-to-idp')
-      click_button('continue')
-
-      expect(page).to have_current_path(location)
-      expect(page).to have_content("SAML Request is 'a-saml-request'")
-      expect(page).to have_content("relay state is 'a-relay-state'")
-      expect(page).to have_content("registration is 'false'")
+      given_api_requests_have_been_mocked!
+      given_im_on_the_sign_page
+      when_i_select_an_idp
+      then_im_at_the_interstitial_page
+      when_i_choose_to_continue
+      then_im_at_the_idp
     end
   end
 end
