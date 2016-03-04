@@ -54,5 +54,3 @@ private
     render_error('something_went_wrong', :internal_server_error)
   end
 end
-
-
