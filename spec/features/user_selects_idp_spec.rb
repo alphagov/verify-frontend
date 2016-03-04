@@ -26,15 +26,7 @@ def then_im_at_the_idp
   expect(page).to have_content("SAML Request is 'a-saml-request'")
   expect(page).to have_content("relay state is 'a-relay-state'")
   expect(page).to have_content("registration is 'false'")
-  if is_selenium_driver?
-    journey_hint_cookie = Capybara.current_session.driver.browser.manage.all_cookies.detect do |cookie|
-      cookie[:name] == 'verify-journey-hint'
-    end
-    expect(journey_hint_cookie[:value]).to eql encrypted_entity_id
-  else
-    value = Capybara.current_session.driver.request.cookies['verify-journey-hint']
-    expect(value).to eql encrypted_entity_id
-  end
+  expect_cookie('verify-journey-hint', encrypted_entity_id)
 end
 
 def then_im_at_the_interstitial_page

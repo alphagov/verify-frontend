@@ -46,6 +46,21 @@ def set_cookies!(hash)
   end
 end
 
+def cookie_value(cookie_name)
+  if is_selenium_driver?
+    journey_hint_cookie = Capybara.current_session.driver.browser.manage.all_cookies.detect do |cookie|
+      cookie[:name] == cookie_name
+    end
+    journey_hint_cookie[:value]
+  else
+    Capybara.current_session.driver.request.cookies[cookie_name]
+  end
+end
+
+def expect_cookie(cookie_name, cookie_value)
+  expect(cookie_value(cookie_name)).to eql cookie_value
+end
+
 def create_cookie_hash
   {
       CookieNames::SECURE_COOKIE_NAME => 'my-secure-cookie',
