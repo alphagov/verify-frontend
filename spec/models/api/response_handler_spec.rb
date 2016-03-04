@@ -27,22 +27,29 @@ module Api
     end
 
     context 'on an unsuccessful response' do
+      it 'handles dropwizard validation errors' do
+        json = { 'errors' => ["something must be something", "other thing must be this thing"]}.to_json
+        error_message = 'something must be something, other thing must be this thing'
+        expect {
+          response_handler.handle_response(422, 200, json)
+        }.to raise_error Error, "Received 422 with error message: [#{error_message}] and id: 'NONE'"
+      end
       it 'errors when receiving 500 and empty JSON' do
         expect {
           response_handler.handle_response(500, 200, '')
-        }.to raise_error Error, 'Received 500 with error message: \'NONE\' and id: \'NONE\''
+        }.to raise_error Error, 'Received 500 with error message: [] and id: \'NONE\''
       end
 
       it 'raises an error when API response is not ok with message' do
         expect {
-          response_handler.handle_response(400, 200, '{"message": "Failure"}')
-        }.to raise_error Error, 'Received 400 with error message: \'Failure\' and id: \'NONE\''
+          response_handler.handle_response(400, 200, '{"errors": ["Failure"]}')
+        }.to raise_error Error, 'Received 400 with error message: [Failure] and id: \'NONE\''
       end
 
       it 'raises an error when API response is not ok with id' do
         expect {
           response_handler.handle_response(500, 200, '{"id": "1234"}')
-        }.to raise_error Error, 'Received 500 with error message: \'NONE\' and id: \'1234\''
+        }.to raise_error Error, 'Received 500 with error message: [] and id: \'1234\''
       end
 
 
@@ -55,7 +62,7 @@ module Api
       it 'raises an error when API response is not ok with JSON, but message missing' do
         expect {
           response_handler.handle_response(500, 200, '{}')
-        }.to raise_error Error, 'Received 500 with error message: \'NONE\' and id: \'NONE\''
+        }.to raise_error Error, 'Received 500 with error message: [] and id: \'NONE\''
       end
 
       it 'raises a session error' do
