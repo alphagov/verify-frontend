@@ -1,12 +1,8 @@
 class ServiceStatusController < ApplicationController
   skip_before_action :validate_cookies
 
-  def zdd_latch_file
-    CONFIG.zdd_file
-  end
-
   def index
-    if File.exist?(zdd_latch_file)
+    if ServiceStatus.unavailable?
       render nothing: true, status: 503
     else
       render nothing: true, status: 200
