@@ -8,7 +8,7 @@ def given_api_requests_have_been_mocked!
     .with(query: {'originatingIp' => originating_ip}).to_return(body: response.to_json)
 end
 
-def given_im_on_the_sign_page
+def given_im_on_the_sign_in_page
   cookies
   visit '/sign-in'
 end
@@ -56,7 +56,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP' do
       given_api_requests_have_been_mocked!
-      given_im_on_the_sign_page
+      given_im_on_the_sign_in_page
       when_i_select_an_idp
       then_im_at_the_idp
     end
@@ -65,7 +65,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   context 'with JS disabled', js: false do
     it 'will display the interstitial page and on submit will redirect the user to IDP' do
       given_api_requests_have_been_mocked!
-      given_im_on_the_sign_page
+      given_im_on_the_sign_in_page
       when_i_select_an_idp
       then_im_at_the_interstitial_page
       when_i_choose_to_continue
