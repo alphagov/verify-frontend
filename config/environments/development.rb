@@ -35,4 +35,19 @@ Rails.application.configure do
 
   #Cookie Configuration
   config.x.cookies.secure = false
+
+  config.logstash.type = :multi_logger
+
+  config.logstash.outputs = [
+      {
+          type: :file,
+          path: 'log/development.log',
+          formatter: ::Logger::Formatter
+      },
+      {
+          type: :file,
+          path: 'log/development-logstash.log',
+          formatter: :json_lines
+      }
+  ]
 end

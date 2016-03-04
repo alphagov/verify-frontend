@@ -33,5 +33,13 @@ module VerifyFrontend
       config.hide_locale = true
       config.available_locales = [:en,:cy]
     end
+
+    # we may be able to move this into config/environments/production.rb eventually, to remove an unnecessary dependency on LogStashLogger in development/test
+    LogStashLogger.configure do |config|
+      config.customize_event do |event|
+        event["session_id"] = RequestStore.store[:session_id] || "no-current-session"
+        event["level"] = event.remove "severity"
+      end
+    end
   end
 end
