@@ -6,26 +6,9 @@ class ApplicationController < ActionController::Base
   before_action :validate_cookies
   helper_method :transactions_list
 
-  rescue_from StandardError do |exception|
-    logger.error(exception)
-    #exception.backtrace.each { |line| logger.error(line) }
-    render_error('something_went_wrong', :internal_server_error)
-  end
-
-  rescue_from Api::Error do |exception|
-    logger.error(exception)
-    render_error('something_went_wrong', :internal_server_error)
-  end
-
-  rescue_from Api::SessionError do |exception|
-    logger.error(exception)
-    render_error('session_error', :bad_request)
-  end
-
-  rescue_from Api::SessionTimeoutError do |exception|
-    logger.error(exception)
-    render_error('session_timeout', :forbidden)
-  end
+  rescue_from StandardError, with: :something_went_wrong
+  rescue_from Api::SessionError, with: :session_error
+  rescue_from Api::SessionTimeoutError, with: :session_timeout
 
   def transactions_list
     TRANSACTION_LISTER.list
@@ -55,4 +38,21 @@ private
   def cookie_validator
     COOKIE_VALIDATOR
   end
+
+  def session_timeout(exception)
+    logger.error(exception)
+    render_error('session_timeout', :forbidden)
+  end
+
+  def session_error(exception)
+    logger.error(exception)
+    render_error('session_error', :bad_request)
+  end
+
+  def something_went_wrong(exception)
+    logger.error(exception)
+    render_error('something_went_wrong', :internal_server_error)
+  end
 end
+
+
