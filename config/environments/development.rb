@@ -41,12 +41,12 @@ Rails.application.configure do
   config.logstash.outputs = [
       {
           type: :file,
-          path: 'log/development.log',
+          path: 'log/production.log',
           formatter: ::Logger::Formatter
       },
       {
           type: :file,
-          path: 'log/development-logstash.log',
+          path: 'log/front-1.log',
           formatter: :json_lines
       }
   ]
