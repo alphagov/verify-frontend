@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
 
     put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
+    get 'service-status', to: 'service_status#index', as: :service_status
 
     if Rails.env == 'development'
       get 'about', to: redirect("#{API_HOST}/about")

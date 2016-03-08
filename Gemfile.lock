@@ -255,6 +255,7 @@ DEPENDENCIES
   jquery-validation-rails (~> 1.13, >= 1.13.1)
   puma
   rack-handlers
+  rack-test
   rails (= 4.2.5.2)
   rails-i18n (~> 4.0)
   route_translator (~> 4.2)
