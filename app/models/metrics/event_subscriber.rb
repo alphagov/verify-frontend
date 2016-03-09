@@ -4,7 +4,7 @@ module Metrics
       @event_source = event_source
     end
 
-    def report(filter, reporter)
+    def subscribe(filter, reporter)
       @event_source.subscribe filter do |*args|
         reporter.report(*args)
       end

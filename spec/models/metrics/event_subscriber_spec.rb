@@ -9,7 +9,7 @@ module Metrics
     it 'should subscribe to specific events from an events source' do
       expect(event_source).to receive(:subscribe).with('filter')
       event_subscriber = EventSubscriber.new(event_source)
-      event_subscriber.report('filter', reporter)
+      event_subscriber.subscribe('filter', reporter)
     end
   end
 end

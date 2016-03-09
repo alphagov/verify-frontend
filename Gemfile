@@ -29,6 +29,9 @@ group :test, :development do
   gem 'selenium-webdriver'
 end
 
+# Use graphite-api to talk to Graphite
+gem 'graphite-api', '~> 0.1.6'
+
 gem 'govuk_template'
 gem 'govuk_frontend_toolkit'
 
