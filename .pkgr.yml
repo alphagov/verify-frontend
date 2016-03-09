@@ -5,3 +5,5 @@ after_remove: 'packaging/postrm.sh'
 dependencies:
   - verify-frontend-federation-config
   - verify-frontend-app-config
+user: deployer
+group: deployer
