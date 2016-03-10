@@ -1,5 +1,11 @@
+require 'ssl_context_factory'
 API_HOST = CONFIG.api_host
-api_client = Api::Client.new(API_HOST, Api::ResponseHandler.new)
+
+context = SSLContextFactory.new.create_context(
+  cert_path: CONFIG.api_cert_path,
+)
+
+api_client = Api::Client.new(API_HOST, Api::ResponseHandler.new, ssl_context: context)
 SESSION_PROXY = SessionProxy.new(api_client)
 
 federation_translator = Display::FederationTranslator.new
