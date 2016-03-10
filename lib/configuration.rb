@@ -7,34 +7,50 @@ class Configuration
     config
   end
 
-  def option_string(name, envvar)
-    set_reader(name, fetch_env_var(envvar))
+  def option_string(name, envvar, options = {})
+    option(name, envvar, options)
   end
 
-  def option_int(name, envvar)
-    value = Integer(fetch_env_var(envvar))
-    set_reader(name, value)
-  rescue ArgumentError
-    raise InvalidEnvVarError, "Integer Environment Variable '#{envvar}' must be a valid integer"
+  def option_int(name, envvar, options = {})
+    option(name, envvar, options) do |value|
+      begin
+        Integer(value)
+      rescue ArgumentError
+        raise InvalidEnvVarError, "Integer Environment Variable '#{envvar}' must be a valid integer"
+      end
+    end
   end
 
-  def option_bool(name, envvar)
-    value = case fetch_env_var(envvar)
-            when 'true'
-              true
-            when 'false'
-              false
-            else
-              raise InvalidEnvVarError, "Boolean Environment Variable '#{envvar}' must be 'true' or 'false'"
-            end
-    set_reader(name, value)
+  def option_bool(name, envvar, options = {})
+    option(name, envvar, options) do |value|
+      case value
+      when 'true'
+        true
+      when 'false'
+        false
+      else
+        raise InvalidEnvVarError, "Boolean Environment Variable '#{envvar}' must be 'true' or 'false'"
+      end
+    end
   end
 
 private
 
-  def fetch_env_var(envvar)
+  def option(name, envvar, options = {})
+    env_value = fetch_env_var(envvar, options)
+    value = block_given? ? yield(env_value.to_s) : env_value
+    set_reader(name, value)
+  end
+
+  def fetch_env_var(envvar, options = {})
     ENV.fetch(envvar) do
-      raise MissingEnvVarError, "An Environment Variable named '#{envvar}' could not be found"
+      options.fetch(:default) {
+        if options[:allow_missing]
+          nil
+        else
+          raise MissingEnvVarError, "An Environment Variable named '#{envvar}' could not be found"
+        end
+      }
     end
   end
 
