@@ -37,7 +37,7 @@ module VerifyFrontend
     # we may be able to move this into config/environments/production.rb eventually, to remove an unnecessary dependency on LogStashLogger in development/test
     LogStashLogger.configure do |config|
       config.customize_event do |event|
-        event["session_id"] = RequestStore.store[:session_id] || "no-current-session"
+        event["SessionId"] = RequestStore.store[:session_id] || "no-current-session"
         event["level"] = event.remove "severity"
       end
     end
