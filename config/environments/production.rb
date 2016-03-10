@@ -73,8 +73,6 @@ Rails.application.configure do
   #Cookie Configuration
   config.x.cookies.secure = true
 
-  config.logstash.buffer_max_items = 5
-
   config.logstash.level = :info
 
   config.logstash.type = :multi_logger
