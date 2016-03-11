@@ -7,4 +7,5 @@ CONFIG = Configuration.load! do
   option_string 'logo_directory', 'LOGO_DIRECTORY'
   option_string 'zdd_file', 'ZDD_LATCH'
   option_string 'polling_wait_time', 'POLLING_WAIT_TIME'
+  option_string 'api_cert_path', 'API_CERT_PATH', allow_missing: true
 end

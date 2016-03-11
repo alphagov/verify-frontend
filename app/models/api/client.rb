@@ -3,23 +3,24 @@ module Api
   class Client
     DEFAULT_OPTIONS = {}
 
-    def initialize(host, response_handler)
+    def initialize(host, response_handler, options = {})
       @host = host
       @response_handler = response_handler
+      @ssl_context = options[:ssl_context]
     end
 
     def get(path, options = DEFAULT_OPTIONS)
-      response = client(options).get(uri(path), params: options[:params])
+      response = client(options).get(uri(path), params: options[:params], ssl_context: @ssl_context)
       @response_handler.handle_response(response.status, 200, response.to_s)
     end
 
     def post(path, body)
-      response = client.post(uri(path), json: body)
+      response = client.post(uri(path), json: body, ssl_context: @ssl_context)
       @response_handler.handle_response(response.status, 201, response.to_s)
     end
 
     def put(path, body, options = DEFAULT_OPTIONS)
-      response = client(options).put(uri(path), json: body)
+      response = client(options).put(uri(path), json: body, ssl_context: @ssl_context)
       @response_handler.handle_response(response.status, 200, response.to_s)
     end
 
