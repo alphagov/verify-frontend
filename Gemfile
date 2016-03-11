@@ -29,8 +29,8 @@ group :test, :development do
   gem 'selenium-webdriver'
 end
 
-# Use graphite-api to talk to Graphite
-gem 'graphite-api', '~> 0.1.6'
+# Use statsd-ruby to talk collect and send metrics to graphite
+gem 'statsd-ruby', '~> 1.3.0'
 
 gem 'govuk_template'
 gem 'govuk_frontend_toolkit'
