@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'models/metrics/event_subscriber'
+require 'metrics/event_subscriber'
 
 module Metrics
   describe EventSubscriber do

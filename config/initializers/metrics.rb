@@ -1,4 +1,5 @@
 require 'statsd-ruby'
+require 'metrics'
 
 if CONFIG.metrics_enabled
   event_source = ActiveSupport::Notifications

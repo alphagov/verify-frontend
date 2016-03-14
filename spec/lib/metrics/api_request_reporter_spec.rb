@@ -1,5 +1,6 @@
 require 'spec_helper'
-require 'models/metrics/api_request_reporter'
+require 'metrics'
+require 'metrics/api_request_reporter'
 
 module Metrics
   describe ApiRequestReporter do

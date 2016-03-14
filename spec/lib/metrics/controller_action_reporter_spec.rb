@@ -1,5 +1,6 @@
 require 'spec_helper'
-require 'models/metrics/controller_action_reporter'
+require 'metrics'
+require 'metrics/controller_action_reporter'
 
 module Metrics
   describe ControllerActionReporter do
