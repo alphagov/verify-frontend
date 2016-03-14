@@ -88,4 +88,6 @@ Rails.application.configure do
           formatter: :json_lines
       }
   ]
+
+  config.assets.prefix = '/new-assets'
 end
