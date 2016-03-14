@@ -15,7 +15,9 @@ module Api
     end
 
     def post(path, body)
-      response = client.post(uri(path), json: body, ssl_context: @ssl_context)
+      response = ActiveSupport::Notifications.instrument('api_request', path: path, method: 'post') do
+        client.post(uri(path), json: body, ssl_context: @ssl_context)
+      end
       @response_handler.handle_response(response.status, 201, response.to_s)
     end
 

@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'models/api/client'
 require 'webmock/rspec'
+require 'active_support'
 
 module Api
   describe Client do
@@ -70,6 +71,24 @@ module Api
           expect(a_request(:put, "#{host}/api#{path}").with(body: request_body)).to have_been_made.once
           expect(response).to eq response_body
         end
+      end
+    end
+
+    context 'logging' do
+      let(:receive_request) { stub_request(:post, "#{host}/api#{path}").with(body: request_body) }
+
+      it 'logs the API request' do
+        receive_request.and_return(status: 201, body: '{}')
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body)
+
+        reporter = double(:reporter)
+        allow(reporter).to receive(:report)
+        ActiveSupport::Notifications.subscribe(/api_request/) do |*args|
+          reporter.report(*args)
+        end
+
+        api_client.post(path, request_body)
+        expect(reporter).to have_received(:report).with(anything, anything, anything, anything, {path: path, method: 'post'})
       end
     end
   end
