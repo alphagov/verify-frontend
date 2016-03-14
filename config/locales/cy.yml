@@ -24,3 +24,9 @@ cy:
       registration_message_html: Os nad oes gennych gyfrif hunaniaeth, gallwch %{href}.
       select_idp: Dewiswch %{name}
       forgot_company: Ni allaf gofio pa gwmni gwirio mi
+    cookies:
+      title: Cwcis
+    feedback:
+      title: Adborth
+    privacy_notice:
+      title: Hysbysiad preifatrwydd
