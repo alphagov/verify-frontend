@@ -29,11 +29,15 @@ Rails.application.routes.draw do
       get 'about', to: redirect("#{API_HOST}/about")
       get 'confirm_your_identity', to: redirect("#{API_HOST}/confirm-your-identity")
       get 'feedback', to: redirect("#{API_HOST}/feedback")
+      get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
+      get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
       get 'forgot_company', to: redirect("#{API_HOST}/forgot-company")
     else
       get 'about', to: 'about#index', as: :about
       get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
       get 'feedback', to: 'feedback#index', as: :feedback
+      get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
+      get 'cookies', to: 'cookies#index', as: :cookies
       get 'forgot_company', to: 'forgot_company#index', as: :forgot_company
     end
   end

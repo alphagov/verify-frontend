@@ -22,6 +22,15 @@
   <h2 class="visuallyhidden">Support links</h2>
   <ul>
     <li><a href="https://gov.uk/help">Help</a></li>
+    <li><%= link_to(t('hub.cookies.title'), cookies_path) %></li>
+    <li><%= link_to(t('hub.privacy_notice.title'), privacy_notice_path) %></li>
+    <li>
+    <% if feedback_source.present? %>
+        <%= link_to(t('hub.feedback.title'), feedback_path('feedback-source' => feedback_source)).html_safe %>
+    <% else %>
+        <%= link_to(t('hub.feedback.title'), feedback_path) %>
+    <% end %>
+    </li>
     <li>Built by the <a href="https://gds.blog.gov.uk">Government Digital Service</a></li>
   </ul>
 <% end %>
