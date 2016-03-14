@@ -10,7 +10,9 @@ module Api
     end
 
     def get(path, options = DEFAULT_OPTIONS)
-      response = client(options).get(uri(path), params: options[:params], ssl_context: @ssl_context)
+      response = log_request(path, 'get') do
+        client(options).get(uri(path), params: options[:params], ssl_context: @ssl_context)
+      end
       @response_handler.handle_response(response.status, 200, response.to_s)
     end
 
@@ -22,7 +24,9 @@ module Api
     end
 
     def put(path, body, options = DEFAULT_OPTIONS)
-      response = client(options).put(uri(path), json: body, ssl_context: @ssl_context)
+      response = log_request(path, 'put') do
+        client(options).put(uri(path), json: body, ssl_context: @ssl_context)
+      end
       @response_handler.handle_response(response.status, 200, response.to_s)
     end
 

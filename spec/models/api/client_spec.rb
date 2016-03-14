@@ -75,20 +75,44 @@ module Api
     end
 
     context 'logging' do
-      let(:receive_request) { stub_request(:post, "#{host}/api#{path}").with(body: request_body) }
 
-      it 'logs the API request' do
-        receive_request.and_return(status: 201, body: '{}')
-        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body)
-
-        reporter = double(:reporter)
-        allow(reporter).to receive(:report)
-        ActiveSupport::Notifications.subscribe(/api_request/) do |*args|
-          reporter.report(*args)
+      def notification_payload_for
+        payload = nil
+        subscription = ActiveSupport::Notifications.subscribe(/api_request/) do |_,_,_,_,_payload|
+          payload = _payload
         end
 
-        api_client.post(path, request_body)
-        expect(reporter).to have_received(:report).with(anything, anything, anything, anything, {path: path, method: 'post'})
+        yield
+
+        ActiveSupport::Notifications.unsubscribe(subscription)
+        payload
+      end
+
+      it 'logs API gets' do
+        stub_request(:get, "#{host}/api#{path}").and_return(status: 200, body: '{}')
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
+
+        payload = notification_payload_for { api_client.get(path) }
+
+        expect(payload).to eql({path: path, method: 'get'})
+      end
+
+      it 'logs API puts' do
+        stub_request(:put, "#{host}/api#{path}").with(body: request_body).and_return(status: 200, body: '{}')
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
+
+        payload = notification_payload_for { api_client.put(path, request_body) }
+
+        expect(payload).to eql({path: path, method: 'put'})
+      end
+
+      it 'logs API posts' do
+        stub_request(:post, "#{host}/api#{path}").with(body: request_body).and_return(status: 201, body: '{}')
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body)
+
+        payload = notification_payload_for { api_client.post(path, request_body) }
+
+        expect(payload).to eql({path: path, method: 'post'})
       end
     end
   end
