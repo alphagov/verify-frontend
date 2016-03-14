@@ -8,10 +8,10 @@ module Metrics
 
     it 'should send total duration of event' do
       payload = {controller: 'SomeController', action: 'someAction'}
-      duration = 60
+      duration = 0.060
       start = Time.now
       finish = start + duration
-      expect(statsd).to receive(:timing).with("SomeController.someAction.total_duration", duration * 1000)
+      expect(statsd).to receive(:timing).with("SomeController.someAction.total_duration", duration * 1_000_000)
       allow(statsd).to receive(:timing)
       reporter.report('event_name', start, finish, 'notification_id', payload)
     end
