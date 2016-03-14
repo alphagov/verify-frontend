@@ -1,12 +1,15 @@
 <% transactions = transactions_list %>
 <% if transactions.any? %>
     <h2 class="heading-medium">Find the service you were using to start again</h2>
-    <ul>
+    <ul class="list-bullet">
       <% transactions.public.each do |transaction| -%>
           <li><%= link_to transaction.name, transaction.homepage %></li>
       <% end %>
       <% transactions.private.each do |transaction| -%>
-          <li><%= transaction.name %></li>
+        <li>
+          <%= transaction.name %>
+          <p class="form-hint">Follow the instructions contained in the email you received</p>
+        </li>
       <% end %>
     </ul>
 <% end %>
