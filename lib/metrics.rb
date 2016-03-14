@@ -9,8 +9,8 @@ module Metrics
   COUNT = 'count'
 
   def self.duration(finish, start)
-    # We would normally output ms, but collectd's statsd plugin expects seconds.
-    (finish - start) * 1_000_000
+    # The statsd plugin for collectd expects timing values in ms
+    (finish - start) * 1_000
   end
 
   def self.metric_key(source, metric)

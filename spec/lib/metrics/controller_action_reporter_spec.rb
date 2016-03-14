@@ -12,7 +12,7 @@ module Metrics
       duration = 0.060
       start = Time.now
       finish = start + duration
-      expect(statsd).to receive(:timing).with("SomeController.someAction.total_duration", duration * 1_000_000)
+      expect(statsd).to receive(:timing).with("SomeController.someAction.total_duration", duration * 1_000)
       allow(statsd).to receive(:timing)
       reporter.report('event_name', start, finish, 'notification_id', payload)
     end
