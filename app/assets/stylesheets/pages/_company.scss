@@ -1,0 +1,121 @@
+// Company
+// Used the sign-in page
+// =====================
+
+.company {
+  border-bottom: 1px solid $border-colour;
+  text-align: center;
+  @include media (tablet) {
+    border: 5px solid $panel-colour;
+    margin-bottom: 30px;
+  }
+}
+
+.company.no-underline {
+  border-bottom: none;
+  padding-bottom: 30px;
+  @include media (tablet) {
+    border: 5px solid $panel-colour;
+    margin-bottom: 30px;
+  }
+}
+
+.company-inner {
+  padding: 5px 0 18px 0;
+  @include media (tablet) {
+    padding: 20px;
+  }
+}
+
+
+.company-logo {
+  position: relative;
+  width: 50%;
+  padding-bottom: 25%;
+  margin: 0 auto 15px auto;
+  @include media (tablet) {
+    margin: 0 auto 15px auto;
+    width: 80%;
+    padding-bottom: 40%;
+  }
+}
+
+.company-logo-inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.company-logo-inner img {
+  max-width: 100%;
+}
+
+.company .button {
+  margin: 0 0 20px 0;
+}
+
+.company dialog .button {
+  margin: 0 0 15px 0;
+}
+
+.company-about {
+  @include core-16;
+  margin-bottom: 0;
+}
+
+.idp-choice {
+  padding: 15px 0;
+  border-bottom: 1px solid $grey-1;
+  @extend %contain-floats;
+  .company-logo {
+    width: auto;
+    padding: 0;
+    text-align: center;
+    img {
+      width: 67.5%;
+    }
+  }
+  @include media (tablet) {
+    padding-left: 230px;
+    min-height: 96px;
+    position: relative;
+    .company-logo {
+      position: absolute;
+      left: 0;
+      right: auto;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 200px;
+      height: 96px;
+      @include ie-lte(7) {
+        top: 15px;
+      }
+    }
+  }
+  .idp-option {
+    text-align: center;
+    @include media (tablet) {
+      text-align: left;
+    }
+    .button, .button-link {
+      margin-top: 30px;
+      @include media (tablet) {
+        min-width: 230px;
+        @include ie(7) {
+          min-width: 260px;
+        }
+        @include ie(6) {
+          width: 260px;
+        }
+      }
+    }
+  }
+}
+
+.large-top {
+  margin-top: 2em;
+}
+
