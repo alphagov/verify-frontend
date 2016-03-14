@@ -5,9 +5,9 @@
 <h1 class="heading-xlarge"><%= t 'hub.signin.heading' %></h1>
 <p><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), about_path) %></p>
 
-<div class="grid-section">
+<div class="grid-row">
   <% @identity_providers.each do |identity_provider| %>
-          <div class="grid-1-3">
+          <div class="column-one-third">
             <div class="company">
               <div class="company-inner">
                 <div class="company-logo">
@@ -30,8 +30,8 @@
   <% end %>
 </div>
 
-<div class="grid-section">
-  <div class="grid-2-3">
+<div class="grid-row">
+  <div class="column-two-thirds">
     <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>
   </div>
 </div>
