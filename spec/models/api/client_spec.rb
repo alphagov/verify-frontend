@@ -75,11 +75,10 @@ module Api
     end
 
     context 'logging' do
-
       def notification_payload_for
         payload = nil
-        subscription = ActiveSupport::Notifications.subscribe(/api_request/) do |_,_,_,_,_payload|
-          payload = _payload
+        subscription = ActiveSupport::Notifications.subscribe(/api_request/) do |_, _, _, _, the_payload|
+          payload = the_payload
         end
 
         yield

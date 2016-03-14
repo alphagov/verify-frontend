@@ -6,4 +6,6 @@ if CONFIG.metrics_enabled
   controller_action_reporter = Metrics::ControllerActionReporter.new(statsd_client)
   event_subscriber = Metrics::EventSubscriber.new(event_source)
   event_subscriber.subscribe(/process_action.action_controller/, controller_action_reporter)
+  api_request_reporter = Metrics::ApiRequestReporter.new(statsd_client)
+  event_subscriber.subscribe(/api_request/, api_request_reporter)
 end
