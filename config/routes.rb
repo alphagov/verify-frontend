@@ -32,7 +32,7 @@ Rails.application.routes.draw do
       get 'forgot_company', to: redirect("#{API_HOST}/forgot-company")
     else
       get 'about', to: 'about#index', as: :about
-      get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
+      get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
       get 'feedback', to: 'feedback#index', as: :feedback
       get 'forgot_company', to: 'forgot_company#index', as: :forgot_company
     end
