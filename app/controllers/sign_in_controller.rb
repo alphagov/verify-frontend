@@ -1,5 +1,7 @@
 class SignInController < ApplicationController
   UNDETERMINED_IP = '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
+  skip_before_action :verify_authenticity_token, only: [:select_idp]
+
   def index
     @identity_providers = identity_provider_lister.list(cookies)
     render 'index'
