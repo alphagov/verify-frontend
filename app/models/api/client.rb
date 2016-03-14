@@ -15,7 +15,7 @@ module Api
     end
 
     def post(path, body)
-      response = ActiveSupport::Notifications.instrument('api_request', path: path, method: 'post') do
+      response = log_request(path, 'post') do
         client.post(uri(path), json: body, ssl_context: @ssl_context)
       end
       @response_handler.handle_response(response.status, 201, response.to_s)
@@ -27,6 +27,12 @@ module Api
     end
 
   private
+
+    def log_request(path, method)
+      ActiveSupport::Notifications.instrument('api_request', path: path, method: method) do
+        yield
+      end
+    end
 
     def uri(path)
       @host + "/api" + path
