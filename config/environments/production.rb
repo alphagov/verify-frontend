@@ -44,9 +44,8 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
-  config.log_level = :debug
+  # Log level is configurable depending on environment.
+  config.log_level = ENV.fetch('LOG_LEVEL', :info).to_sym
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -72,4 +71,21 @@ Rails.application.configure do
 
   #Cookie Configuration
   config.x.cookies.secure = true
+
+  config.logstash.level = :info
+
+  config.logstash.type = :multi_logger
+
+  config.logstash.outputs = [
+      {
+          type: :file,
+          path: 'log/production.log',
+          formatter: ::Logger::Formatter
+      },
+      {
+          type: :file,
+          path: 'log/front-1.log',
+          formatter: :json_lines
+      }
+  ]
 end

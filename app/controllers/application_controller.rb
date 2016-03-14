@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :set_locale
+  before_filter :store_session_id
   before_action :validate_cookies
   helper_method :transactions_list
 
@@ -52,5 +53,9 @@ private
   def something_went_wrong(exception)
     logger.error(exception)
     render_error('something_went_wrong', :internal_server_error)
+  end
+
+  def store_session_id
+    RequestStore.store[:session_id] = request.cookies[CookieNames::SESSION_ID_COOKIE_NAME]
   end
 end
