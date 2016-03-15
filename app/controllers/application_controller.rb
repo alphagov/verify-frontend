@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :store_session_id
   before_action :validate_cookies
   helper_method :transactions_list
+  helper_method :piwik
 
   rescue_from StandardError, with: :something_went_wrong
   rescue_from Api::SessionError, with: :session_error
@@ -38,6 +39,10 @@ private
 
   def cookie_validator
     COOKIE_VALIDATOR
+  end
+
+  def piwik
+    PIWIK
   end
 
   def session_timeout(exception)

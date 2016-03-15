@@ -2,7 +2,7 @@
    'use strict';
 
     var _paq = [];
-    var url = 'http://localhost:4242/piwik.php';
+    var url = $('#piwik-url').text();
     _paq.push(['setDocumentTitle', document.title ]);
     _paq.push(["trackPageView"]);
     _paq.push(["enableLinkTracking"]);

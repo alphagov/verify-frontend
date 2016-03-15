@@ -15,6 +15,9 @@
     </div>
     <%= content_for?(:main) ? yield(:main) : yield %>
   </main>
+    <% if piwik.enabled? %>
+      <span class="hidden" id="piwik-url"><%= piwik.url %></span>
+    <% end %>
 <% end %>
 
 <% content_for :footer_support_links do %>
