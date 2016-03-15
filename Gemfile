@@ -62,6 +62,7 @@ group :test, :development do
   gem 'govuk-lint'
   gem 'webmock', require: false
   gem 'rack-test'
+  gem 'pact'
 end
 
 gem 'logstash-logger'
