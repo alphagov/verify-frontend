@@ -3,6 +3,17 @@ require 'capybara/rspec'
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 
+if ENV['HEADLESS'] == 'true'
+  require 'headless'
+  headless = Headless.new
+  headless.start
+  at_exit do
+    exit_status = $!.status if $!.is_a?(SystemExit)
+    headless.destroy
+    exit exit_status if exit_status
+  end
+end
+
 def api_transactions_endpoint
   api_uri('transactions')
 end
