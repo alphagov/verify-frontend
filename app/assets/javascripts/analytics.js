@@ -1,6 +1,9 @@
 (function () {
    'use strict';
-
+    var url = $('#piwik-url').text();
+    if(!url) {
+        return;
+    }
     var _paq = [];
     var url = $('#piwik-url').text();
     _paq.push(['setDocumentTitle', document.title ]);
