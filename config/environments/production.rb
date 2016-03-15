@@ -84,7 +84,7 @@ Rails.application.configure do
       },
       {
           type: :file,
-          path: 'log/front-1.log',
+          path: 'log/front.logstash.log',
           formatter: :json_lines
       }
   ]
