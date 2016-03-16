@@ -1,23 +1,36 @@
 (function () {
    'use strict';
-    var trackerUrl = $('#piwik-url').text();
+
+    function setPiwikVisitorIdCookie () {
+        var visitor_id = this.getVisitorId();
+        GOVUK.setCookie('PIWIK_VISITOR_ID', visitor_id);
+    }
+
+    var trackerUrl = $('#piwik-url').text(),
+        siteId,
+        customUrl,
+        piwikAnalyticsQueue;
+
     if(!trackerUrl) {
         return;
     }
-    var siteId = $('#piwik-site-id').text();
-    var customUrl = $('#piwik-custom-url').text();
-    var _paq = [];
-    _paq.push(['setDocumentTitle', document.title ]);
-    if(customUrl) {
-        _paq.push(['setCustomUrl', customUrl]);
+
+    siteId = $('#piwik-site-id').text();
+    customUrl = $('#piwik-custom-url').text();
+
+    piwikAnalyticsQueue = [
+      ['setDocumentTitle', document.title ],
+      ['trackPageView'],
+      ['enableLinkTracking'],
+      [setPiwikVisitorIdCookie],
+      ['setTrackerUrl', trackerUrl],
+      ['setSiteId', siteId]
+    ];
+
+    if (customUrl) {
+      // customUrl needs to go at the beginning of the piwik array
+      piwikAnalyticsQueue.unshift(['setCustomUrl', customUrl]);
     }
-    _paq.push(["trackPageView"]);
-    _paq.push(["enableLinkTracking"]);
-    _paq.push([ function() {
-        var visitor_id = this.getVisitorId();
-        GOVUK.setCookie("PIWIK_VISITOR_ID", visitor_id);
-    }]);
-    _paq.push(["setTrackerUrl", trackerUrl]);
-    _paq.push(["setSiteId", siteId]);
-    window._paq = _paq;
+
+    window._paq = piwikAnalyticsQueue;
 })();
