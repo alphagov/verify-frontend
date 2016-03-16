@@ -21,6 +21,9 @@
     <% if piwik_custom_url? %>
       <span class="hidden" id="piwik-custom-url"><%= piwik_custom_url %></span>
     <% end %>
+    <noscript>
+      <%= image_tag("#{piwik.url}?#{piwik_noscript_query_string}", style: 'border: 0', width: 0, height: 0, alt: '', id: 'piwik-noscript-tracker') %>
+    </noscript>
   <% end %>
 <% end %>
 
