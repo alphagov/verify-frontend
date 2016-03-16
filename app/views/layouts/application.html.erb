@@ -15,10 +15,13 @@
     </div>
     <%= content_for?(:main) ? yield(:main) : yield %>
   </main>
-    <% if piwik.enabled? %>
-      <span class="hidden" id="piwik-url"><%= piwik.url %></span>
-      <span class="hidden" id="piwik-site-id"><%= piwik.site_id %></span>
+  <% if piwik.enabled? %>
+    <span class="hidden" id="piwik-url"><%= piwik.url %></span>
+    <span class="hidden" id="piwik-site-id"><%= piwik.site_id %></span>
+    <% if piwik_custom_url? %>
+      <span class="hidden" id="piwik-custom-url"><%= piwik_custom_url %></span>
     <% end %>
+  <% end %>
 <% end %>
 
 <% content_for :footer_support_links do %>
@@ -39,6 +42,7 @@
 <% end %>
 
 <% content_for :body_end do %>
+
   <%= javascript_include_tag 'application' %>
 <% end %>
 <%= render file: 'layouts/govuk_template' %>
