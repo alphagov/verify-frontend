@@ -14,7 +14,7 @@ RSpec.describe 'When the user visits the start page', pact: true do
   it 'send a page view to analytics', js: true do
     piwik.given("whatever")
       .upon_receiving("a tracking request").
-      with(method: :get, path: '/piwik.php', query: pact_query('Start - GOV.UK Verify - GOV.UK')).
+      with(method: :get, path: '/piwik.php', query: pact_query('Start - GOV.UK Verify - GOV.UK', '5')).
       will_respond_with(status: 200)
 
     set_session_cookies!
@@ -23,10 +23,10 @@ RSpec.describe 'When the user visits the start page', pact: true do
   end
 end
 
-def pact_query(action_name)
+def pact_query(action_name, site_id)
   {
       'action_name' => action_name,
-      'idsite' => Pact.like('1'),
+      'idsite' => site_id,
       'rec' => Pact.like('1'),
       'r' => Pact.like('123456'),
       'h' => Pact.like('16'),
