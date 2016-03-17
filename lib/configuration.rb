@@ -60,5 +60,6 @@ private
       self;
     end
     eigenclass.class_eval { attr_reader name }
+    Rails.logger.debug("Config being set: Name: #{name}, Value: #{value}")
   end
 end

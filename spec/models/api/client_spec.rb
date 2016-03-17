@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'models/api/client'
 require 'webmock/rspec'
+require 'active_support'
 
 module Api
   describe Client do
@@ -70,6 +71,47 @@ module Api
           expect(a_request(:put, "#{host}/api#{path}").with(body: request_body)).to have_been_made.once
           expect(response).to eq response_body
         end
+      end
+    end
+
+    context 'logging' do
+      def notification_payload_for
+        payload = nil
+        subscription = ActiveSupport::Notifications.subscribe(/api_request/) do |_, _, _, _, the_payload|
+          payload = the_payload
+        end
+
+        yield
+
+        ActiveSupport::Notifications.unsubscribe(subscription)
+        payload
+      end
+
+      it 'logs API gets' do
+        stub_request(:get, "#{host}/api#{path}").and_return(status: 200, body: '{}')
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
+
+        payload = notification_payload_for { api_client.get(path) }
+
+        expect(payload).to eql({path: path, method: 'get'})
+      end
+
+      it 'logs API puts' do
+        stub_request(:put, "#{host}/api#{path}").with(body: request_body).and_return(status: 200, body: '{}')
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
+
+        payload = notification_payload_for { api_client.put(path, request_body) }
+
+        expect(payload).to eql({path: path, method: 'put'})
+      end
+
+      it 'logs API posts' do
+        stub_request(:post, "#{host}/api#{path}").with(body: request_body).and_return(status: 201, body: '{}')
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body)
+
+        payload = notification_payload_for { api_client.post(path, request_body) }
+
+        expect(payload).to eql({path: path, method: 'post'})
       end
     end
   end

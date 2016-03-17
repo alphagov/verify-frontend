@@ -29,6 +29,9 @@ group :test, :development do
   gem 'selenium-webdriver'
 end
 
+# Use statsd-ruby to talk collect and send metrics to graphite
+gem 'statsd-ruby', '~> 1.3.0'
+
 gem 'govuk_template'
 gem 'govuk_frontend_toolkit'
 
