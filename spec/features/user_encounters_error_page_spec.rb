@@ -10,6 +10,7 @@ RSpec.describe 'user encounters error page' do
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"
   end
 
@@ -26,6 +27,7 @@ RSpec.describe 'user encounters error page' do
     click_button "saml-post"
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to_not have_content "Find the service you were using to start again"
+    expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page.status_code).to eq(500)
   end
 
@@ -35,6 +37,7 @@ RSpec.describe 'user encounters error page' do
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page.status_code).to eq(500)
   end
 
@@ -44,6 +47,7 @@ RSpec.describe 'user encounters error page' do
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page.status_code).to eq(500)
   end
 
@@ -54,6 +58,7 @@ RSpec.describe 'user encounters error page' do
     visit '/sign-in'
     expect(page).to have_content "You need to start again"
     expect(page).to have_content "For security reasons"
+    expect(page).to have_css "#piwik-custom-url", text: "errors/session-error"
     expect(page.status_code).to eq(400)
   end
 
@@ -64,6 +69,7 @@ RSpec.describe 'user encounters error page' do
     visit '/sign-in'
     expect(page).to have_content "Your session has timed out"
     expect(page).to have_content "Please go back to your service"
+    expect(page).to have_css "#piwik-custom-url", text: "errors/timeout-error"
     expect(page.status_code).to eq(403)
   end
 
@@ -74,6 +80,7 @@ RSpec.describe 'user encounters error page' do
     visit '/sign-in'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"
+    expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page.status_code).to eq(500)
   end
 end

@@ -1,5 +1,7 @@
 <% content_for :page_title, 'Your session has timed out' %>
 <% content_for :feedback_source, 'EXPIRED_ERROR_PAGE' %>
+<% content_for :piwik_custom_path, '/errors/timeout-error' %>
+
 <h1 class="heading-xlarge">Your session has timed out</h1>
 <h2 class="heading-medium">Please go back to your service to start again.</h2>
 <p><%= link_to 'Start again', '/redirect-to-service/error' %></p>

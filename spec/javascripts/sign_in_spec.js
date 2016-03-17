@@ -1,3 +1,4 @@
+//= require jquery
 //= require sign_in
 //= require mock-ajax
 

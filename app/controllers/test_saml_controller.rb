@@ -1,5 +1,6 @@
 class TestSamlController < ApplicationController
   skip_before_action :validate_cookies
+  layout 'test'
 
   def index
     render 'index'

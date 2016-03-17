@@ -4,7 +4,6 @@
 <% content_for :head do %>
   <!--[if gt IE 8]><!--><%= stylesheet_link_tag 'style' %><!--<![endif]-->
   <!--[if IE 8]><%= stylesheet_link_tag 'style-ie8' %><![endif]-->
-  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 <% end %>
 
@@ -16,6 +15,7 @@
     </div>
     <%= content_for?(:main) ? yield(:main) : yield %>
   </main>
+  <%= render 'shared/piwik' %>
 <% end %>
 
 <% content_for :footer_support_links do %>
@@ -35,4 +35,8 @@
   </ul>
 <% end %>
 
+<% content_for :body_end do %>
+
+  <%= javascript_include_tag 'application' %>
+<% end %>
 <%= render file: 'layouts/govuk_template' %>

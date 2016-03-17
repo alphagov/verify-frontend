@@ -14,4 +14,7 @@ CONFIG = Configuration.load! do
   option_int 'statsd_slice', 'STATSD_SLICE_IN_SECONDS'
   option_int 'statsd_interval', 'STATSD_CLIENT_INTERVAL_IN_SECONDS'
   option_bool 'metrics_enabled', 'METRICS_ENABLED'
+  option_string 'piwik_host', 'PIWIK_HOST', allow_missing: true
+  option_int 'piwik_port', 'PIWIK_PORT', default: 443
+  option_int 'piwik_site_id', 'PIWIK_SITE_ID', default: 1
 end

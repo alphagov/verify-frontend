@@ -4,6 +4,7 @@
 //= require jquery.validate
 //= require govuk/selection-buttons
 //= require_tree .
+//= require piwik
 
 window.GOVUK.validation.init();
 
