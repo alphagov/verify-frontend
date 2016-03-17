@@ -106,6 +106,10 @@ GEM
       thor (~> 0.14)
     json (1.8.3)
     libv8 (3.16.14.13)
+    logstash-event (1.2.02)
+    logstash-logger (0.15.2)
+      logstash-event (~> 1.2)
+      stud
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -157,6 +161,7 @@ GEM
     rake (10.5.0)
     rdoc (4.2.1)
     ref (2.0.0)
+    request_store (1.3.0)
     route_translator (4.2.4)
       actionpack (>= 3.2, < 5.0)
       activesupport (>= 3.2, < 5.0)
@@ -211,6 +216,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     statsd-ruby (1.3.0)
+    stud (0.0.22)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -254,11 +260,13 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-validation-rails (~> 1.13, >= 1.13.1)
+  logstash-logger
   puma
   rack-handlers
   rack-test
   rails (= 4.2.5.2)
   rails-i18n (~> 4.0)
+  request_store
   route_translator (~> 4.2)
   rspec-rails (~> 3.4.0)
   sass-rails (~> 5.0)

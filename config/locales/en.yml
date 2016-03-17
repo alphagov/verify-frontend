@@ -23,3 +23,9 @@ en:
       registration_message_html: If you don't have an identity account, you can %{href}.
       select_idp: Select %{name}
       forgot_company: I can't remember which company verified me
+    cookies:
+      title: Cookies
+    feedback:
+      title: Feedback
+    privacy_notice:
+      title: Privacy notice

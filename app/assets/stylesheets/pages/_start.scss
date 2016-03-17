@@ -114,13 +114,12 @@
     @include core-24;
     background: transparent;
     border: 0;
+    &.selected {
+      background: transparent;
+    }
     &:hover {
       background-color: $link-hover-colour;
     }
-  }
-
-  label.focused {
-    outline: 3px solid $yellow;
   }
 
 }

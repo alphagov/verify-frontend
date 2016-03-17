@@ -66,3 +66,6 @@ group :test, :development do
   gem 'webmock', require: false
   gem 'rack-test'
 end
+
+gem 'logstash-logger'
+gem 'request_store'
