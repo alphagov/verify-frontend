@@ -4,6 +4,7 @@ cy:
     start: dechrau
     about: am
     sign_in: mewngofnodi
+    about_certified_companies: am-gwmniau-ardystiedig
   navigation:
     next: Nesaf
   phase_banner:
@@ -39,3 +40,9 @@ cy:
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig wirio'ch hunaniaeth . Maen nhw wedi bodloni holl safonau diogelwch a osodir gan y llywodraeth.
+      summary: Sut y gall cwmnïau wirio hunaniaeth
+      details:
+        p1: Gall y cwmnïau hyn yn defnyddio eu data eu hunain , a gallant gael mynediad data fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth gan pasbortau a thrwyddedau gyrru yn gywir.
+        p2: cwmnïau ardystiedig bodloni safonau preifatrwydd y llywodraeth, er mwyn i chi ymddiried ynddynt gyda eich gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.
+        p3: Ni fydd yna unrhyw effaith ar eich sgôr credyd .
+        p4: Mae mwy nag un cwmni ardystiedig yn golygu eich bod yn dewis pwy dilysu pwy ydych chi, ac mae'n golygu y system gyffredinol yn gryfach .

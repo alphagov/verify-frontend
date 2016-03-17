@@ -39,3 +39,9 @@ en:
     about_certified_companies:
       title: About certified companies
       a_certified_company_will_verify: A certified company will verify your identity. They've all met security standards set by government.
+      summary: How companies can verify identities
+      details:
+        p1: These companies can use their own data, and they can access data like credit records. They're able to check that information from passports and driving licences is correct.
+        p2: Certified companies meet government privacy standards, so you can trust them with your personal information. They won't share or sell your data for any other purposes without your consent.
+        p3: There won't be any effect on your credit score.
+        p4: More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.
