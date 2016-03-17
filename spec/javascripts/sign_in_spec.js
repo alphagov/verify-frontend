@@ -7,8 +7,11 @@ describe('The sign in page', function () {
       $formButton,
       apiPath = '/select-idp',
       formSpy,
-      html = '<form class=idp-option action="">'
+      html = '<form class="idp-option first-form" action="">'
            +   '<button type=submit value=IDCorp></button>'
+           + '</form>'
+           + '<form class="idp-option second-form" action="">'
+           +   '<button type=submit value=IDCorpZwei></button>'
            + '</form>'
            + '<form id=post-to-idp>'
            +   '<input name=SAMLRequest type=hidden>'
@@ -20,7 +23,7 @@ describe('The sign in page', function () {
   beforeEach(function () {
     $dom = $('<div>'+html+'</div>');
     $(document.body).append($dom);
-    $formButton = $('.idp-option button');
+    $formButton = $('.idp-option button[value=IDCorpZwei]');
     window.GOVUK.signin.attach();
     formSpy = jasmine.createSpy('formSpy')
       .and.callFake(function (e) { e.preventDefault(); });
@@ -67,12 +70,10 @@ describe('The sign in page', function () {
       expect(formSpy).toHaveBeenCalled();
     });
     it('should submit IDP choice if AJAX request fails', function () {
-      var selectIdpFormSubmitted = false;
+      var selectIdpFormSubmitted = [];
       $(document).submit(function(e) {
         e.preventDefault();
-        if (e.target.className === 'idp-option') {
-          selectIdpFormSubmitted = true;
-        }
+        selectIdpFormSubmitted.push(e.target.className);
       });
       jasmine.Ajax.stubRequest(apiPath);
 
@@ -82,7 +83,8 @@ describe('The sign in page', function () {
         responseText: JSON.stringify({})
       });
 
-      expect(selectIdpFormSubmitted).toBe(true);
+      expect(selectIdpFormSubmitted.length).toBe(1);
+      expect(selectIdpFormSubmitted[0]).toContain("second-form");
     });
   });
 });

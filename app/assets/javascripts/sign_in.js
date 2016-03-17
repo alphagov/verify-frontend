@@ -13,6 +13,7 @@
       var $selectIdpForm = $('.idp-option');
       $selectIdpForm.on('submit', function (e) {
         var entityId;
+        var originalForm = e.target;
         e.preventDefault();
         entityId = $selectIdpForm.find('button').attr('name');
         $.ajax({
@@ -30,7 +31,7 @@
           $samlForm.find('input[name=registration]').val(response.registration);
           $samlForm.submit();
         }).fail(function() {
-          $selectIdpForm.off('submit').submit();
+          $(originalForm).off('submit').submit();
         });
         return false;
       });
