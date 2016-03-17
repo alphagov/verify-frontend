@@ -4,6 +4,8 @@ cy:
     start: dechrau
     about: am
     sign_in: mewngofnodi
+  navigation:
+    next: Nesaf
   phase_banner:
     title: Mae hwn yn wasanaeth newydd.
     feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
@@ -30,3 +32,10 @@ cy:
       title: Adborth
     privacy_notice:
       title: Hysbysiad preifatrwydd
+    about:
+      title: Ynglŷn â sicrwydd hunaniaeth
+      verify_is_a_scheme: GOV.UK Verify yn gynllun i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein .
+      its_secure: Mae'n ddiogel, ac yn stopio rhywun esgus bod yn chi.
+    about_certified_companies:
+      title: Am gwmnïau ardystiedig
+      a_certified_company_will_verify: Bydd cwmni ardystiedig wirio'ch hunaniaeth . Maen nhw wedi bodloni holl safonau diogelwch a osodir gan y llywodraeth.

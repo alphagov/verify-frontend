@@ -1,0 +1,12 @@
+<% content_for :page_title, t('hub.about_certified_companies.title') %>
+<% content_for :feedback_source, 'ABOUT_CERTIFIED_COMPANIES_PAGE' %>
+
+<p><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
+
+<ul>
+  <% @identity_providers.each do |idp| %>
+    <li>
+      <%= image_tag idp.logo_path, alt: idp.display_name %>
+    </li>
+  <% end %>
+</ul>

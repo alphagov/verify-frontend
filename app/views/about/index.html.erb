@@ -1,1 +1,9 @@
-<% content_for :body_classes, 'hub-start' %>
+<% content_for :page_title, t('hub.about.title') %>
+<% content_for :feedback_source, 'ABOUT_PAGE' %>
+
+<p><%= t 'hub.about.verify_is_a_scheme' %></p>
+<p><%= t 'hub.about.its_secure' %></p>
+
+<div class="actions">
+  <%= link_to t('navigation.next'), about_certified_companies_path, class: 'button-action' %>
+</div>

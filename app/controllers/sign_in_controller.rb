@@ -7,10 +7,6 @@ class SignInController < ApplicationController
     render 'index'
   end
 
-  def identity_provider_lister
-    IDENTITY_PROVIDER_LISTER
-  end
-
   def select_idp
     originating_ip = request.headers.fetch("X-Forwarded-For", UNDETERMINED_IP)
     entity_id = params.fetch('selected-idp')

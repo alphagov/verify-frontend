@@ -25,15 +25,16 @@ Rails.application.routes.draw do
     put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
     get 'service-status', to: 'service_status#index', as: :service_status
 
+    get 'about', to: 'about#index', as: :about
+    get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
+
     if Rails.env == 'development'
-      get 'about', to: redirect("#{API_HOST}/about")
       get 'confirm_your_identity', to: redirect("#{API_HOST}/confirm-your-identity")
       get 'feedback', to: redirect("#{API_HOST}/feedback")
       get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
       get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
       get 'forgot_company', to: redirect("#{API_HOST}/forgot-company")
     else
-      get 'about', to: 'about#index', as: :about
       get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
       get 'feedback', to: 'feedback#index', as: :feedback
       get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
