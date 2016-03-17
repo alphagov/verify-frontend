@@ -1,13 +1,10 @@
-#!/bin/bash
-set -e
-set -u
+#!/bin/sh -eu
 
-if [ -e "/opt/front/upstart/front.conf" ];
-then
-     ln -fs /opt/front/upstart/front.conf /etc/init/front.conf
-     mkdir -p /ida
-     [ ! -L /ida/front ] && ln -s /opt/front /ida/front
-     exit 0;
-else
-exit 1;
-fi
+mkdir -p /ida
+[ ! -L /ida/front ] && ln -s /opt/front /ida/front
+
+# We manage service restarts via the meta package
+ln -fs /opt/front/upstart/front.conf /etc/init/front.conf
+
+# We want to ensure upstart realizes it's config may have changed.
+/sbin/initctl reload-configuration

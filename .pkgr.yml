@@ -2,8 +2,5 @@ before:
   - bundle config --local build.nokogiri "--use-system-libraries --with-xml2-include=/usr/include/libxml2"
 after_install: 'packaging/postinst.sh'
 after_remove: 'packaging/postrm.sh'
-dependencies:
-  - verify-frontend-federation-config
-  - verify-frontend-app-config
 user: deployer
 group: deployer
