@@ -11,10 +11,10 @@ module Analytics
     let(:action_name) { 'Sign In - idp-entity-id' }
 
     it 'should report all parameters to piwik' do
-      expect(request).to receive(:cookies).and_return({CookieNames::PIWIK_VISITOR_ID => 'VISITOR_ID'})
+      expect(request).to receive(:cookies).and_return(CookieNames::PIWIK_VISITOR_ID => 'VISITOR_ID')
       expect(request).to receive(:url).and_return('www.thing.com')
       expect(Time).to receive(:now).and_return(Time.new(2080))
-      expect(client).to receive(:report).with({
+      expect(client).to receive(:report).with(
         'rec' => '1',
         'apiv' => '1',
         'idsite' => site_id,
@@ -23,7 +23,7 @@ module Analytics
         'url' => 'www.thing.com',
         'cdt' => '2080-01-01 00:00:00',
         'cookie' => 'false'
-      })
+      )
       reporter.report(request, action_name)
     end
 
@@ -31,7 +31,7 @@ module Analytics
       expect(request).to receive(:cookies).and_return({})
       expect(request).to receive(:url).and_return('www.thing.com')
       expect(Time).to receive(:now).and_return(Time.new(2080))
-      expect(client).to receive(:report).with({
+      expect(client).to receive(:report).with(
         'rec' => '1',
         'apiv' => '1',
         'idsite' => site_id,
@@ -39,7 +39,7 @@ module Analytics
         'url' => 'www.thing.com',
         'cdt' => '2080-01-01 00:00:00',
         'cookie' => 'false'
-      })
+      )
       reporter.report(request, action_name)
     end
   end

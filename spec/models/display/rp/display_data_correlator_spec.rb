@@ -5,7 +5,7 @@ module Display
   module Rp
     describe DisplayDataCorrelator do
       let(:transaction_a_name) { 'Transaction A' }
-      let(:transaction_b_name) { 'Private Transaction B'}
+      let(:transaction_b_name) { 'Private Transaction B' }
       let(:translator) { double(:translator) }
       let(:homepage) { 'http://transaction-a.com' }
       let(:public_simple_id) { 'test-rp' }
@@ -44,7 +44,7 @@ module Display
       end
 
       it 'errors when public simpleId is missing' do
-        transaction_data = { 'public' => [{ 'homepage' => homepage }], 'private' => [{'simpleId' => private_simple_id}] }
+        transaction_data = { 'public' => [{ 'homepage' => homepage }], 'private' => [{ 'simpleId' => private_simple_id }] }
         expect {
           display_data_correlator.correlate(transaction_data)
         }.to raise_error KeyError
@@ -58,7 +58,7 @@ module Display
       end
 
       it 'errors when homepage is missing' do
-        transaction_data = { 'public' => [{ 'simpleId' => public_simple_id }], 'private' => [{'simpleId' => private_simple_id}] }
+        transaction_data = { 'public' => [{ 'simpleId' => public_simple_id }], 'private' => [{ 'simpleId' => private_simple_id }] }
         expect {
           display_data_correlator.correlate(transaction_data)
         }.to raise_error KeyError

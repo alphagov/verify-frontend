@@ -5,8 +5,8 @@ require 'active_support'
 
 module Api
   describe Client do
-    let(:request_body) { {'a' => 1, 'b' => 2} }
-    let(:response_body) { {'c' => 3} }
+    let(:request_body) { { 'a' => 1, 'b' => 2 } }
+    let(:response_body) { { 'c' => 3 } }
     let(:host) { 'http://api.com' }
     let(:path) { '/endpoint' }
     let(:response_handler) { double(:response_handler) }
@@ -14,18 +14,18 @@ module Api
 
     context '#get' do
       it 'sets cookies if provided them' do
-        stub_request(:get, "#{host}/api#{path}").with(headers: {cookie: /COOKIE_NAME=some-val/}).and_return(status: 200, body: '{}')
+        stub_request(:get, "#{host}/api#{path}").with(headers: { cookie: /COOKIE_NAME=some-val/ }).and_return(status: 200, body: '{}')
         expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
-        response = api_client.get(path, cookies: {'COOKIE_NAME' => 'some-val'})
-        expect(a_request(:get, "#{host}/api#{path}").with(headers: {cookie: /COOKIE_NAME=some-val/})).to have_been_made.once
+        response = api_client.get(path, cookies: { 'COOKIE_NAME' => 'some-val' })
+        expect(a_request(:get, "#{host}/api#{path}").with(headers: { cookie: /COOKIE_NAME=some-val/ })).to have_been_made.once
         expect(response).to eql response_body
       end
 
       it 'set params if provided them' do
-        stub_request(:get, "#{host}/api#{path}").with(query: {'param1' => 'value1'}).and_return(status: 200, body: '{}')
+        stub_request(:get, "#{host}/api#{path}").with(query: { 'param1' => 'value1' }).and_return(status: 200, body: '{}')
         expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
-        response = api_client.get(path, params: {'param1' => 'value1'})
-        expect(a_request(:get, "#{host}/api#{path}").with(query: {'param1' => 'value1'})).to have_been_made.once
+        response = api_client.get(path, params: { 'param1' => 'value1' })
+        expect(a_request(:get, "#{host}/api#{path}").with(query: { 'param1' => 'value1' })).to have_been_made.once
         expect(response).to eql response_body
       end
 
@@ -55,7 +55,7 @@ module Api
         receive_request.and_return(status: 201, body: '{}')
         expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body)
         api_client.post(path, request_body)
-        expect(a_request(:post, "#{host}/api#{path}").with(headers: {'User-Agent' => 'Verify Frontend Micro Service Client'}))
+        expect(a_request(:post, "#{host}/api#{path}").with(headers: { 'User-Agent' => 'Verify Frontend Micro Service Client' }))
           .to have_been_made.once
       end
     end
@@ -93,7 +93,7 @@ module Api
 
         payload = notification_payload_for { api_client.get(path) }
 
-        expect(payload).to eql({path: path, method: 'get'})
+        expect(payload).to eql(path: path, method: 'get')
       end
 
       it 'logs API puts' do
@@ -102,7 +102,7 @@ module Api
 
         payload = notification_payload_for { api_client.put(path, request_body) }
 
-        expect(payload).to eql({path: path, method: 'put'})
+        expect(payload).to eql(path: path, method: 'put')
       end
 
       it 'logs API posts' do
@@ -111,7 +111,7 @@ module Api
 
         payload = notification_payload_for { api_client.post(path, request_body) }
 
-        expect(payload).to eql({path: path, method: 'post'})
+        expect(payload).to eql(path: path, method: 'post')
       end
     end
   end

@@ -18,7 +18,7 @@ RSpec.describe 'user encounters error page' do
     allow(Rails.logger).to receive(:error)
     expect(Rails.logger).to receive(:error).with(kind_of(KeyError)).at_least(:once)
     bad_transactions_json = {
-        'public' => [{'homepage' => 'http://localhost:50130/test-rp' }],
+        'public' => [{ 'homepage' => 'http://localhost:50130/test-rp' }],
         'private' => []
     }
     stub_request(:post, api_saml_endpoint).to_return(status: 500)
@@ -53,7 +53,7 @@ RSpec.describe 'user encounters error page' do
 
   it 'will present session error page when session error occurs in upstream systems' do
     set_session_cookies!
-    error_body = {id: '0', type: 'SESSION_ERROR'}
+    error_body = { id: '0', type: 'SESSION_ERROR' }
     stub_request(:get, api_idps_endpoint).and_return(status: 400, body: error_body.to_json)
     visit '/sign-in'
     expect(page).to have_content "You need to start again"
@@ -64,7 +64,7 @@ RSpec.describe 'user encounters error page' do
 
   it 'will present a session timeout error page when the API returns session timeout' do
     set_session_cookies!
-    error_body = {id: '0', type: 'SESSION_TIMEOUT'}
+    error_body = { id: '0', type: 'SESSION_TIMEOUT' }
     stub_request(:get, api_idps_endpoint).and_return(status: 400, body: error_body.to_json)
     visit '/sign-in'
     expect(page).to have_content "Your session has timed out"

@@ -10,7 +10,7 @@ end
 def stub_transactions_list
   transactions = {
       'public' => [
-          {'simpleId' => 'test-rp', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp'}
+          { 'simpleId' => 'test-rp', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp' }
       ],
       'private' => []
   }

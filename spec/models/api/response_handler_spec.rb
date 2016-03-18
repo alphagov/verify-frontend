@@ -10,7 +10,7 @@ module Api
     let(:response_handler) { ResponseHandler.new }
     context 'on a successful response' do
       it 'should return a parsed response body on a successful response' do
-        expected_result = {'id' => '12'}
+        expected_result = { 'id' => '12' }
         result = response_handler.handle_response(200, 200, expected_result.to_json)
         expect(result).to eq(expected_result)
       end
@@ -28,7 +28,7 @@ module Api
 
     context 'on an unsuccessful response' do
       it 'handles dropwizard validation errors' do
-        json = { 'errors' => ["something must be something", "other thing must be this thing"]}.to_json
+        json = { 'errors' => ["something must be something", "other thing must be this thing"] }.to_json
         error_message = 'something must be something, other thing must be this thing'
         expect {
           response_handler.handle_response(422, 200, json)
@@ -66,14 +66,14 @@ module Api
       end
 
       it 'raises a session error' do
-        error_body = {id: '0', type: 'SESSION_ERROR'}
+        error_body = { id: '0', type: 'SESSION_ERROR' }
         expect {
           response_handler.handle_response(400, 200, error_body.to_json)
         }.to raise_error SessionError, 'Received 400 with type: \'SESSION_ERROR\' and id: \'0\''
       end
 
       it 'raises a session timeout error' do
-        error_body = {id: '0', type: 'SESSION_TIMEOUT'}
+        error_body = { id: '0', type: 'SESSION_TIMEOUT' }
         expect {
           response_handler.handle_response(400, 200, error_body.to_json)
         }.to raise_error SessionTimeoutError, 'Received 400 with type: \'SESSION_TIMEOUT\' and id: \'0\''

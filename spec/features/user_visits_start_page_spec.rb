@@ -71,7 +71,7 @@ RSpec.describe 'When the user visits the start page' do
       expect(Rails.logger).to receive(:info).with("#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME} cookie for session \"#{session_id_cookie}\" has expired").at_least(:once)
       set_session_cookies!
       expired_start_time = 2.hours.ago.to_i
-      set_cookies!({CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => expired_start_time})
+      set_cookies!(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => expired_start_time)
       visit "/start"
       expect(page).to have_content "Find the service you were using to start again"
       expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"
