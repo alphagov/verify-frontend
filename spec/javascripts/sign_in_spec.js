@@ -9,10 +9,10 @@ describe('The sign in page', function () {
       formSpy,
       html = '<div class="js-idp-option-container">'
            + '<form class="idp-option first-form" action="">'
-           +   '<button type=submit value=IDCorp></button>'
+           +   '<button type=submit name=IDCorp></button>'
            + '</form>'
            + '<form class="idp-option second-form" action="">'
-           +   '<button type=submit value=IDCorpZwei></button>'
+           +   '<button type=submit name=IDCorpZwei></button>'
            + '</form>'
            + '<form id=post-to-idp>'
            +   '<input name=SAMLRequest type=hidden>'
@@ -25,7 +25,7 @@ describe('The sign in page', function () {
   beforeEach(function () {
     $dom = $('<div>'+html+'</div>');
     $(document.body).append($dom);
-    $formButton = $('.idp-option button[value=IDCorpZwei]');
+    $formButton = $('.idp-option button[name=IDCorpZwei]');
     window.GOVUK.signin.attach();
     formSpy = jasmine.createSpy('formSpy')
       .and.callFake(function (e) { e.preventDefault(); });
@@ -51,6 +51,7 @@ describe('The sign in page', function () {
         })
       });
       expect(jasmine.Ajax.requests.mostRecent().url).toBe(apiPath);
+      expect(jasmine.Ajax.requests.mostRecent().params).toBe('{"entityId":"IDCorpZwei"}');
     });
     it('should populate the SAML request form with the AJAX response and submit it', function () {
       $(document).submit(formSpy);
