@@ -62,6 +62,6 @@ RSpec.describe Piwik do
 
   it 'is will raise when piwik_host is not valid uri' do
     expect(config).to receive(:piwik_host).and_return('foo:: :   :///').twice
-    expect{Piwik.new(config)}.to raise_error URI::InvalidURIError
+    expect { Piwik.new(config) }.to raise_error URI::InvalidURIError
   end
 end
