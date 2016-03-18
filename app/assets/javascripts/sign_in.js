@@ -24,7 +24,11 @@
           data: JSON.stringify({ entityId: entityId }),
           timeout: 5000
         }).done(function(response) {
-          var $samlForm = $('#post-to-idp');
+          var $samlForm;
+          if (!response.location) {
+            throw Error('Expected response to contain location');
+          }
+          $samlForm = $('#post-to-idp');
           $samlForm.prop('action', response.location);
           $samlForm.find('input[name=SAMLRequest]').val(response.saml_request);
           $samlForm.find('input[name=RelayState]').val(response.relay_state);

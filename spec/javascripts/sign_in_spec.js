@@ -89,5 +89,17 @@ describe('The sign in page', function () {
       expect(selectIdpFormSubmitted.length).toBe(1);
       expect(selectIdpFormSubmitted[0]).toContain("second-form");
     });
+    it('should throw an error if PUT responds with 200, but malformed content', function () {
+      jasmine.Ajax.stubRequest(apiPath);
+      $formButton.click();
+
+      var response = {
+        status: 200,
+        responseText: JSON.stringify({})
+      };
+      expect(function() {
+        jasmine.Ajax.requests.mostRecent().respondWith(response);
+      }).toThrow();
+    })
   });
 });
