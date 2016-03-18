@@ -1,0 +1,6 @@
+.panel-indent {
+  @extend %contain-floats;
+  clear: both;
+  border-left: 4px solid $border-colour;
+  padding: 10px 0 0 $gutter-half;
+}

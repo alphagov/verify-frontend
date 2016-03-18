@@ -1,9 +1,9 @@
 <% content_for :page_title, t('hub.about_certified_companies.title') %>
 <% content_for :feedback_source, 'ABOUT_CERTIFIED_COMPANIES_PAGE' %>
 
-<p xmlns="http://www.w3.org/1999/html"><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
+<p><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
 
-<ul>
+<ul class="list-companies">
   <% @identity_providers.each do |idp| %>
       <li>
         <%= image_tag idp.logo_path, alt: idp.display_name %>
@@ -12,7 +12,7 @@
 </ul>
 
 <div class="actions">
-  <%= link_to t('navigation.next'), about_identity_accounts_path, class: 'button-action' %>
+  <%= link_to t('navigation.next'), about_identity_accounts_path, class: 'button' %>
 </div>
 
 <details>

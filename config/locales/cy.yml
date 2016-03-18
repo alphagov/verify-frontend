@@ -8,6 +8,7 @@ cy:
     about_identity_accounts: am-hunaniaeth-cyfrifon
   navigation:
     next: Nesaf
+    start_now: Dechreuwch nawr
   phase_banner:
     title: Mae hwn yn wasanaeth newydd.
     feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
