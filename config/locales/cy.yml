@@ -53,3 +53,5 @@ cy:
         p1: Dilysu eich hunaniaeth yn cymryd tua 10 munud.
         p2: Yna byddwch gennych gyfrif hunaniaeth gyda'ch cwmni ardystiedig.
         p3: Gallwch gofrestru mewn lle bynnag y byddwch yn gweld y GOV.UK Verify logo.
+      summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
+      details: "GOV.UK Verify yn gynllun newydd , a gwasanaethau newydd yn ymuno drwy'r amser. Mae'r gwasanaethau presennol yw:"

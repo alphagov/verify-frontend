@@ -1,10 +1,14 @@
 module Display
   class FederationTranslator
     TranslationError = Class.new(StandardError)
-    def translate(key)
-      I18n.translate(key, raise: true)
+    def translate(key, opts = {})
+      I18n.t(key, opts.merge({ raise: true }))
     rescue I18n::MissingTranslationData => e
-      raise TranslationError, e
+      if I18n.locale != :en
+        translate(key, locale: :en)
+      else
+        raise TranslationError, e
+      end
     end
   end
 end

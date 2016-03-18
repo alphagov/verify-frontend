@@ -1,13 +1,13 @@
 require 'feature_helper'
 require 'models/cookie_names'
 
-RSpec.describe 'When the user visits the about certified companies page' do
+RSpec.describe 'When the user visits the about identity accounts page' do
   let(:simple_id) { 'stub-idp-one'}
   let(:idp_entity_id) { 'http://idcorp.com' }
 
   before(:each) do
-    stub_request(:get, api_uri('session/idps')).to_return(body: [{'simpleId' => simple_id, 'entityId' => idp_entity_id}].to_json)
     set_session_cookies!
+    stub_transactions_list
   end
 
   it 'includes the appropriate feedback source' do
@@ -20,5 +20,17 @@ RSpec.describe 'When the user visits the about certified companies page' do
     visit '/am-hunaniaeth-cyfrifon'
 
     expect(page).to have_content 'Dilysu eich hunaniaeth yn cymryd tua 10 munud.'
+  end
+
+  it 'will show "Where you can use your identity account" section listing public transactions' do
+    visit '/about-identity-accounts'
+
+    expect(page).to have_content 'Where you can use your identity account'
+    expect(page).to have_content 'GOV.UK Verify is a new scheme, and new services are joining all the time. The current services are:'
+    expect(page).to have_content 'Register for an identity profile'
+    expect(page).to have_content 'Register for an identity profile (forceauthn & no cycle3)'
+  end
+
+  it 'will go to about choosing a company page when next is clicked' do
   end
 end

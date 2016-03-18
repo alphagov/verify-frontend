@@ -52,4 +52,6 @@ en:
         p1: Verifying your identity takes about 10 minutes.
         p2: You’ll then have an identity account with your certified company.
         p3: You can sign in wherever you see the GOV.UK Verify logo.
+      summary: Where you can use your identity account
+      details: "GOV.UK Verify is a new scheme, and new services are joining all the time. The current services are:"
 

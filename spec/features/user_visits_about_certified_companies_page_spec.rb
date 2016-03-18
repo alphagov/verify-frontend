@@ -37,6 +37,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
   end
 
   it 'will go to about identity accounts page when next is clicked' do
+    stub_transactions_list
     stub_request(:get, api_uri('session/idps')).to_return(body: [{'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com'}].to_json)
 
     visit '/about-certified-companies'
