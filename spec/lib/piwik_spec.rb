@@ -19,6 +19,15 @@ RSpec.describe Piwik do
     expect(piwik.url).to eql 'http://www.example.com:1234/piwik.php'
   end
 
+  it 'reads config to generate a url' do
+    expect(config).to receive(:piwik_host).and_return('https://www.example.com').twice
+    expect(config).to receive(:piwik_port).and_return(443)
+
+    piwik = Piwik.new(config)
+
+    expect(piwik.url).to eql 'https://www.example.com/piwik.php'
+  end
+
   it 'has a site id' do
     expect(config).to receive(:piwik_site_id).and_return(5)
 
@@ -28,7 +37,7 @@ RSpec.describe Piwik do
   end
 
   it 'is disabled when piwik_host is nil' do
-    expect(config).to receive(:piwik_host).and_return(nil).twice
+    expect(config).to receive(:piwik_host).and_return(nil)
 
     piwik = Piwik.new(config)
 
@@ -36,7 +45,7 @@ RSpec.describe Piwik do
   end
 
   it 'is disabled when piwik_host is an empty string' do
-    expect(config).to receive(:piwik_host).and_return('').twice
+    expect(config).to receive(:piwik_host).and_return('')
 
     piwik = Piwik.new(config)
 
@@ -49,5 +58,10 @@ RSpec.describe Piwik do
     piwik = Piwik.new(config)
 
     expect(piwik.enabled?).to eql true
+  end
+
+  it 'is will raise when piwik_host is not valid uri' do
+    expect(config).to receive(:piwik_host).and_return('foo:: :   :///').twice
+    expect{Piwik.new(config)}.to raise_error URI::InvalidURIError
   end
 end
