@@ -31,6 +31,12 @@ RSpec.describe 'When the user visits the about identity accounts page' do
     expect(page).to have_content 'Register for an identity profile (forceauthn & no cycle3)'
   end
 
-  it 'will go to about choosing a company page when next is clicked' do
+  it 'will go to about choosing a company page when start now is clicked' do
+    stub_transactions_list
+
+    visit '/about-identity-accounts'
+    click_link('Start now')
+
+    expect(page).to have_current_path('/about-choosing-a-company')
   end
 end

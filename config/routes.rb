@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get 'about', to: 'about#index', as: :about
     get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
     get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
+    get 'about_choosing_a_company', to: 'about_choosing_a_company#index', as: :about_choosing_a_company
 
     if Rails.env == 'development'
       get 'confirm_your_identity', to: redirect("#{API_HOST}/confirm-your-identity")

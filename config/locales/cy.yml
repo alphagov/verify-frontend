@@ -6,9 +6,11 @@ cy:
     sign_in: mewngofnodi
     about_certified_companies: am-gwmniau-ardystiedig
     about_identity_accounts: am-hunaniaeth-cyfrifon
+    about_choosing_a_company: am-ddewis-a-gwmni
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
+    continue: parhau
   phase_banner:
     title: Mae hwn yn wasanaeth newydd.
     feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
@@ -56,3 +58,8 @@ cy:
         p3: Gallwch gofrestru mewn lle bynnag y byddwch yn gweld y GOV.UK Verify logo.
       summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
       details: "GOV.UK Verify yn gynllun newydd , a gwasanaethau newydd yn ymuno drwy'r amser. Mae'r gwasanaethau presennol yw:"
+    about_choosing_a_company:
+      title: Am ddewis cwmni
+      heading: Dod o hyd i'r cwmni hawl i wirio chi
+      p1: cwmnïau ardystiedig rhaid i ffyrdd gwahanol i wirio hunaniaeth , er enghraifft trwy wirio dogfennau adnabod , neu ddarparu app .
+      p2: Byddwn yn awr yn gofyn rhai cwestiynau i chi i wirio y gall cwmnïau wirio chi.

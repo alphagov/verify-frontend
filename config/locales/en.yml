@@ -4,10 +4,12 @@ en:
     about: about
     about_certified_companies: about-certified-companies
     about_identity_accounts: about-identity-accounts
+    about_choosing_a_company: about-choosing-a-company
     sign_in: sign-in
   navigation:
     next: Next
     start_now: Start now
+    continue: Continue
   phase_banner:
     title: This is a trial service.
     feedback_message: Your %{feedback_link} will help us to improve it.
@@ -55,4 +57,8 @@ en:
         p3: You can sign in wherever you see the GOV.UK Verify logo.
       summary: Where you can use your identity account
       details: "GOV.UK Verify is a new scheme, and new services are joining all the time. The current services are:"
-
+    about_choosing_a_company:
+      title: About choosing a company
+      heading: Finding the right company to verify you
+      p1: Certified companies have different ways to verify identities, for example by checking identity documents, or providing an app.
+      p2: We’ll now ask you some questions to check which companies can verify you.
