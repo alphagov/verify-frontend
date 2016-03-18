@@ -6,11 +6,12 @@ module Analytics
       @site_id = site_id
     end
 
-    def report(request)
+    def report(request, action_name)
       piwik_params = {
         'rec' => '1',
         'apiv' => '1',
-        'idsite' => @site_id
+        'idsite' => @site_id,
+        'action_name' => action_name
       }
       cookies = request.cookies
       piwik_params['_id'] = cookies[CookieNames::PIWIK_VISITOR_ID] if cookies.has_key? CookieNames::PIWIK_VISITOR_ID

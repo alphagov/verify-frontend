@@ -8,6 +8,7 @@ module Analytics
     let(:client) { double(:client) }
     let(:reporter) { Analytics::Reporter.new(client, site_id) }
     let(:request) { double(:request) }
+    let(:action_name) { 'Sign In - idp-entity-id' }
 
     it 'should report all parameters to piwik' do
       expect(request).to receive(:cookies).and_return({CookieNames::PIWIK_VISITOR_ID => 'VISITOR_ID'})
@@ -15,9 +16,10 @@ module Analytics
         'rec' => '1',
         'apiv' => '1',
         'idsite' => site_id,
-        '_id' => 'VISITOR_ID'
+        '_id' => 'VISITOR_ID',
+        'action_name' => 'Sign In - idp-entity-id',
       })
-      reporter.report(request)
+      reporter.report(request, action_name)
     end
 
     it 'should report all parameters except _id to piwik when no cookie' do
@@ -26,8 +28,9 @@ module Analytics
         'rec' => '1',
         'apiv' => '1',
         'idsite' => site_id,
+        'action_name' => 'Sign In - idp-entity-id',
       })
-      reporter.report(request)
+      reporter.report(request, action_name)
     end
   end
 end
