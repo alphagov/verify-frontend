@@ -8,8 +8,8 @@ table {
 
   th,
   td {
-    @include core-16;
-    padding: em(12, 16) em(20, 16) em(9, 16) 0;
+    @include core-19;
+    padding: em(12, 19) em(20, 19) em(9, 19) 0;
 
     text-align: left;
     color: $black;
@@ -24,9 +24,26 @@ table {
     }
   }
 
-  // Use tabular numbers for numeric table cells
+  // Allow a qualifying element, only table data cells should use tabular numbers
+  // scss-lint:disable QualifyingElement
   td.numeric {
     @include core-16($tabular-numbers: true);
     text-align: right;
+  }
+}
+
+.table-font-xsmall {
+
+  th {
+    @include bold-16;
+  }
+
+  td {
+    @include core-16;
+  }
+
+  th,
+  td {
+    padding: em(12, 16) em(20, 16) em(9, 16) 0;
   }
 }

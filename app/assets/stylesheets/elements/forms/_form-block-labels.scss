@@ -11,7 +11,7 @@
 
   background: $panel-colour;
   border: 1px solid $panel-colour;
-  padding: (18px $gutter $gutter-half $gutter*1.8);
+  padding: (18px $gutter $gutter-half $gutter * 1.8);
 
   margin-bottom: 10px;
   cursor: pointer; // Encourage clicking on block labels
@@ -30,6 +30,7 @@
     margin: 0;
     width: 29px;
     height: 29px;
+
     @include ie(8) {
       top: 12px;
     }
@@ -39,6 +40,7 @@
   &:hover {
     border-color: $black;
   }
+
 }
 
 .block-label:last-child {
@@ -53,6 +55,9 @@
 
 // Selected and focused states
 
+// Allow a qualifying element for the selected state
+// scss-lint:disable QualifyingElement
+
 // Add selected state
 .js-enabled label.selected {
   background: $white;
@@ -63,6 +68,8 @@
 .js-enabled label.focused {
   outline: 3px solid $focus-colour;
 }
+
+// scss-lint:enable QualifyingElement
 
 // Remove focus from radio/checkboxes
 .js-enabled .focused input:focus {
