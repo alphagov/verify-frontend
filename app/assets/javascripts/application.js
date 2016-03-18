@@ -1,4 +1,5 @@
 //= require vendor/polyfills/bind
+//= require elements/vendor/details.polyfill
 //= require jquery
 //= require jquery_ujs
 //= require jquery.validate
