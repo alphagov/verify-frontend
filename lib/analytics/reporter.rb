@@ -11,7 +11,8 @@ module Analytics
         'rec' => '1',
         'apiv' => '1',
         'idsite' => @site_id,
-        'action_name' => action_name
+        'action_name' => action_name,
+        'url' => request.url
       }
       cookies = request.cookies
       piwik_params['_id'] = cookies[CookieNames::PIWIK_VISITOR_ID] if cookies.has_key? CookieNames::PIWIK_VISITOR_ID

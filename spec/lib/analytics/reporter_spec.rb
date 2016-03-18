@@ -12,23 +12,27 @@ module Analytics
 
     it 'should report all parameters to piwik' do
       expect(request).to receive(:cookies).and_return({CookieNames::PIWIK_VISITOR_ID => 'VISITOR_ID'})
+      expect(request).to receive(:url).and_return('www.thing.com')
       expect(client).to receive(:report).with({
         'rec' => '1',
         'apiv' => '1',
         'idsite' => site_id,
         '_id' => 'VISITOR_ID',
         'action_name' => 'Sign In - idp-entity-id',
+        'url' => 'www.thing.com',
       })
       reporter.report(request, action_name)
     end
 
     it 'should report all parameters except _id to piwik when no cookie' do
       expect(request).to receive(:cookies).and_return({})
+      expect(request).to receive(:url).and_return('www.thing.com')
       expect(client).to receive(:report).with({
         'rec' => '1',
         'apiv' => '1',
         'idsite' => site_id,
         'action_name' => 'Sign In - idp-entity-id',
+        'url' => 'www.thing.com'
       })
       reporter.report(request, action_name)
     end
