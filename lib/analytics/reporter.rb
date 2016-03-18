@@ -12,7 +12,9 @@ module Analytics
         'apiv' => '1',
         'idsite' => @site_id,
         'action_name' => action_name,
-        'url' => request.url
+        'url' => request.url,
+        'cdt' => Time.now.strftime('%Y-%m-%d %H:%M:%S'),
+        'cookie' => 'false',
       }
       cookies = request.cookies
       piwik_params['_id'] = cookies[CookieNames::PIWIK_VISITOR_ID] if cookies.has_key? CookieNames::PIWIK_VISITOR_ID
