@@ -1,0 +1,8 @@
+en:
+  idps:
+    stub-idp-two:
+      name: "Bob's Identity Service"
+cy:
+  idps:
+    stub-idp-two:
+      name: "Welsh Bob's Identity Service"

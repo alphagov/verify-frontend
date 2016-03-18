@@ -1,0 +1,8 @@
+en:
+  idps:
+    stub-idp-zero:
+      name: "CitzenVerifier"
+cy:
+  idps:
+    stub-idp-zero:
+      name: "Welsh CitzenVerifier"

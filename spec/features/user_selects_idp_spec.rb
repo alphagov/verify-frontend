@@ -39,7 +39,15 @@ end
 
 RSpec.describe 'user selects an IDP on the sign in page' do
   let(:idp_entity_id) { 'http://idcorp.com' }
-  let(:body) { [{'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id}] }
+  let(:body) {
+    [
+      {'simpleId' => 'stub-idp-zero', 'entityId' => 'idp-zero'},
+      {'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id},
+      {'simpleId' => 'stub-idp-two', 'entityId' => 'idp-two'},
+      {'simpleId' => 'stub-idp-three', 'entityId' => 'idp-three'},
+      {'simpleId' => 'stub-idp-four', 'entityId' => 'idp-four'}
+    ]
+  }
   let(:location) { '/test-idp-request-endpoint' }
   let(:response) {
     {
