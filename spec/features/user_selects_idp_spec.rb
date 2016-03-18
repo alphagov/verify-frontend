@@ -6,6 +6,7 @@ def given_api_requests_have_been_mocked!
     .to_return(body: {'encryptedEntityId' => encrypted_entity_id}.to_json)
   stub_request(:get, api_uri('session/idp-authn-request'))
     .with(query: {'originatingIp' => originating_ip}).to_return(body: response.to_json)
+  stub_request(:get, PIWIK.url).with(query: hash_including({}))
 end
 
 def given_im_on_the_sign_in_page
@@ -24,9 +25,14 @@ def then_im_at_the_idp
   expect(page).to have_content("registration is 'false'")
   expect_cookie('verify-journey-hint', encrypted_entity_id)
   expect(a_request(:put, api_uri('session/select-idp'))
-             .with(body: {'entityId' => idp_entity_id, 'originatingIp' => originating_ip})).to have_been_made.once
+           .with(body: {'entityId' => idp_entity_id, 'originatingIp' => originating_ip})).to have_been_made.once
   expect(a_request(:get, api_uri('session/idp-authn-request'))
-             .with(query: {'originatingIp' => originating_ip})).to have_been_made.once
+           .with(query: {'originatingIp' => originating_ip})).to have_been_made.once
+  piwik_request = {
+    'rec' => '1',
+    'apiv' => '1'
+  }
+  expect(a_request(:get, PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 end
 
 def then_im_at_the_interstitial_page

@@ -11,6 +11,14 @@ Pact.service_consumer "browser" do
 end
 
 RSpec.describe 'When the user visits the start page', pact: true do
+  before(:all) do
+    WebMock.allow_net_connect!
+  end
+
+  after(:all) do
+    WebMock.disable_net_connect!(allow_localhost: true)
+  end
+
   context 'when JS is enabled', js: true do
     it 'sends a page view to analytics' do
       piwik.given("whatever")
