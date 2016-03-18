@@ -2,7 +2,7 @@ require 'feature_helper'
 require 'models/cookie_names'
 
 RSpec.describe 'When the user visits the about identity accounts page' do
-  let(:simple_id) { 'stub-idp-one'}
+  let(:simple_id) { 'stub-idp-one' }
   let(:idp_entity_id) { 'http://idcorp.com' }
 
   before(:each) do

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post 'SAML2/SSO' => 'saml#request_post'
   get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
 
-  if ['test', 'development'].include? Rails.env
+  if %w(test development).include? Rails.env
     get 'test-saml' => 'test_saml#index'
     post 'test-idp-request-endpoint' => 'test_saml#idp_request'
   end

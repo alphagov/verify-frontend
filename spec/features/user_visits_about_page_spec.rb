@@ -19,7 +19,7 @@ RSpec.describe 'When the user visits the about page' do
   end
 
   it 'will go to certified companies page when next is clicked' do
-    stub_request(:get, api_uri('session/idps')).to_return(body: [{'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com'}].to_json)
+    stub_request(:get, api_uri('session/idps')).to_return(body: [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com' }].to_json)
 
     visit '/about'
     expect(page).to have_content 'GOV.UK Verify is a scheme to fight the growing problem of online identity theft'
