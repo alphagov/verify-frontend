@@ -3,6 +3,7 @@ en:
     start: start
     about: about
     about_certified_companies: about-certified-companies
+    about_identity_accounts: about-identity-accounts
     sign_in: sign-in
   navigation:
     next: Next
@@ -45,3 +46,10 @@ en:
         p2: Certified companies meet government privacy standards, so you can trust them with your personal information. They won't share or sell your data for any other purposes without your consent.
         p3: There won't be any effect on your credit score.
         p4: More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.
+    about_identity_accounts:
+      title: About identity accounts
+      content:
+        p1: Verifying your identity takes about 10 minutes.
+        p2: You’ll then have an identity account with your certified company.
+        p3: You can sign in wherever you see the GOV.UK Verify logo.
+

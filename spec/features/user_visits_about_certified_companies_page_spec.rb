@@ -35,4 +35,13 @@ RSpec.describe 'When the user visits the about certified companies page' do
     expect(page).to have_content 'How companies can verify identities'
     expect(page).to have_content 'These companies can use their own data'
   end
+
+  it 'will go to about identity accounts page when next is clicked' do
+    stub_request(:get, api_uri('session/idps')).to_return(body: [{'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com'}].to_json)
+
+    visit '/about-certified-companies'
+    click_link('Next')
+
+    expect(page).to have_current_path('/about-identity-accounts')
+  end
 end

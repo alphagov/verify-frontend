@@ -1,0 +1,10 @@
+<% content_for :page_title, t('hub.about_identity_accounts.title') %>
+<% content_for :feedback_source, 'ABOUT_IDENTITY_ACCOUNTS_PAGE' %>
+
+<p xmlns="http://www.w3.org/1999/html"><%= t 'hub.about_identity_accounts.content.p1' %></p>
+<p xmlns="http://www.w3.org/1999/html"><%= t 'hub.about_identity_accounts.content.p2' %></p>
+<p xmlns="http://www.w3.org/1999/html"><%= t 'hub.about_identity_accounts.content.p3' %></p>
+
+<div class="actions">
+  <%= link_to t('navigation.next'), about_identity_accounts_path, class: 'button-action' %>
+</div>

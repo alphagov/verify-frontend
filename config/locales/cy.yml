@@ -5,6 +5,7 @@ cy:
     about: am
     sign_in: mewngofnodi
     about_certified_companies: am-gwmniau-ardystiedig
+    about_identity_accounts: am-hunaniaeth-cyfrifon
   navigation:
     next: Nesaf
   phase_banner:
@@ -46,3 +47,9 @@ cy:
         p2: cwmnïau ardystiedig bodloni safonau preifatrwydd y llywodraeth, er mwyn i chi ymddiried ynddynt gyda eich gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.
         p3: Ni fydd yna unrhyw effaith ar eich sgôr credyd .
         p4: Mae mwy nag un cwmni ardystiedig yn golygu eich bod yn dewis pwy dilysu pwy ydych chi, ac mae'n golygu y system gyffredinol yn gryfach .
+    about_identity_accounts:
+      title: Ynglŷn â chyfrifon hunaniaeth
+      content:
+        p1: Dilysu eich hunaniaeth yn cymryd tua 10 munud.
+        p2: Yna byddwch gennych gyfrif hunaniaeth gyda'ch cwmni ardystiedig.
+        p3: Gallwch gofrestru mewn lle bynnag y byddwch yn gweld y GOV.UK Verify logo.
