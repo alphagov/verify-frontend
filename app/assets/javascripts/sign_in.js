@@ -10,12 +10,12 @@
     init: function () {
     },
     attach: function () {
-      var $selectIdpForm = $('.idp-option');
-      $selectIdpForm.on('submit', function (e) {
+      var $container = $('.js-idp-option-container')
+      $container.on('submit', '.idp-option', function (e) {
         var entityId;
-        var originalForm = e.target;
+        var $originalForm = $(e.target);
         e.preventDefault();
-        entityId = $(originalForm).find('button').attr('name');
+        entityId = $originalForm.find('button').attr('name');
         $.ajax({
           type: "PUT",
           url: '/select-idp',
@@ -31,7 +31,8 @@
           $samlForm.find('input[name=registration]').val(response.registration);
           $samlForm.submit();
         }).fail(function() {
-          $(originalForm).off('submit').submit();
+          $container.off('submit');
+          $originalForm.submit();
         });
         return false;
       });

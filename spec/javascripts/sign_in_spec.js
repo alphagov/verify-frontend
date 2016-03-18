@@ -7,7 +7,8 @@ describe('The sign in page', function () {
       $formButton,
       apiPath = '/select-idp',
       formSpy,
-      html = '<form class="idp-option first-form" action="">'
+      html = '<div class="js-idp-option-container">'
+           + '<form class="idp-option first-form" action="">'
            +   '<button type=submit value=IDCorp></button>'
            + '</form>'
            + '<form class="idp-option second-form" action="">'
@@ -17,7 +18,8 @@ describe('The sign in page', function () {
            +   '<input name=SAMLRequest type=hidden>'
            +   '<input name=RelayState type=hidden>'
            +   '<input type=submit>'
-           + '</form>';
+           + '</form>'
+           + '</div>';
 
 
   beforeEach(function () {

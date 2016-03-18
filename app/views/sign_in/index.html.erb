@@ -5,7 +5,7 @@
 <h1 class="heading-xlarge"><%= t 'hub.signin.heading' %></h1>
 <p><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), about_path) %></p>
 
-<div class="grid-row">
+<div class="grid-row js-idp-option-container">
   <% @identity_providers.each do |identity_provider| %>
           <div class="column-one-third">
             <div class="company">
