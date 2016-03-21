@@ -30,8 +30,8 @@ module Analytics
       piwik_params['_cvar'] = custom_variable.to_json unless custom_variable.nil?
       referer = request.referer
       unless referer.nil?
-        piwik_params['urlref'] = 'http://something.else'
-        piwik_params['ref'] = 'http://something.else'
+        piwik_params['urlref'] = referer
+        piwik_params['ref'] = referer
       end
       @client.report(piwik_params)
     end
