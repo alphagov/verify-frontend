@@ -44,6 +44,7 @@ cy:
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig wirio'ch hunaniaeth . Maen nhw wedi bodloni holl safonau diogelwch a osodir gan y llywodraeth.
+      no_charge: Does dim tâl am y gwasanaeth hwn .
       summary: Sut y gall cwmnïau wirio hunaniaeth
       details:
         p1: Gall y cwmnïau hyn yn defnyddio eu data eu hunain , a gallant gael mynediad data fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth gan pasbortau a thrwyddedau gyrru yn gywir.
