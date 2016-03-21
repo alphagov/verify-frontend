@@ -1,10 +1,11 @@
 #!/bin/sh -eu
 bundle
+export HEADLESS=true
+export DISPLAY=:0
 bundle exec govuk-lint-ruby app lib spec
 bundle exec govuk-lint-sass app/assets/stylesheets
 bundle exec rspec
 bundle exec rake spec:javascripts
-HEADLESS=true DISPLAY=:0 ./pre-commit.sh
 RAILS_ENV=production bundle exec rake assets:precompile
 RAILS_ENV=production bundle exec rake tmp:clear
 
