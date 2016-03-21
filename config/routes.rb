@@ -36,12 +36,14 @@ Rails.application.routes.draw do
       get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
       get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
       get 'forgot_company', to: redirect("#{API_HOST}/forgot-company")
+      get 'select_documents', to: redirect("#{API_HOST}/select-documents"), as: :select_documents
     else
       get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
       get 'feedback', to: 'feedback#index', as: :feedback
       get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
       get 'cookies', to: 'cookies#index', as: :cookies
       get 'forgot_company', to: 'forgot_company#index', as: :forgot_company
+      get 'select_documents', to: 'select_documents#index', as: :select_documents
     end
   end
 
