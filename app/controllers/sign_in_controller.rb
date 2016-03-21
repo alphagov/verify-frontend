@@ -16,7 +16,8 @@ class SignInController < ApplicationController
     entity_id = params.fetch('selected-idp')
     select_idp_response = SESSION_PROXY.select_idp(cookies, entity_id, originating_ip)
     cookies[CookieNames::VERIFY_JOURNEY_HINT] = select_idp_response.encrypted_entity_id
-    ANALYTICS_REPORTER.report(request, "Sign In - #{entity_id}")
+    cvar = Analytics::CustomVariable.build(:select_idp, entity_id)
+    ANALYTICS_REPORTER.report_custom_variable(request, "Sign In - #{entity_id}", cvar)
     redirect_to redirect_to_idp_path
   end
 end

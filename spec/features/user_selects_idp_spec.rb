@@ -30,7 +30,8 @@ def then_im_at_the_idp
            .with(query: { 'originatingIp' => originating_ip })).to have_been_made.once
   piwik_request = {
     'rec' => '1',
-    'apiv' => '1'
+    'apiv' => '1',
+    '_cvar' => '{"3":["SIGNIN_IDP","http://idcorp.com"]}'
   }
   expect(a_request(:get, PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 end
