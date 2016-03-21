@@ -4,6 +4,14 @@ cy:
     start: dechrau
     about: am
     sign_in: mewngofnodi
+    about_certified_companies: am-gwmniau-ardystiedig
+    about_identity_accounts: am-hunaniaeth-cyfrifon
+    about_choosing_a_company: am-ddewis-a-gwmni
+    select_documents: select-documents
+  navigation:
+    next: Nesaf
+    start_now: Dechreuwch nawr
+    continue: parhau
   phase_banner:
     title: Mae hwn yn wasanaeth newydd.
     feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
@@ -30,3 +38,30 @@ cy:
       title: Adborth
     privacy_notice:
       title: Hysbysiad preifatrwydd
+    about:
+      title: Ynglŷn â sicrwydd hunaniaeth
+      verify_is_a_scheme: GOV.UK Verify yn gynllun i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein .
+      its_secure: Mae'n ddiogel, ac yn stopio rhywun esgus bod yn chi.
+    about_certified_companies:
+      title: Am gwmnïau ardystiedig
+      a_certified_company_will_verify: Bydd cwmni ardystiedig wirio'ch hunaniaeth . Maen nhw wedi bodloni holl safonau diogelwch a osodir gan y llywodraeth.
+      no_charge: Does dim tâl am y gwasanaeth hwn .
+      summary: Sut y gall cwmnïau wirio hunaniaeth
+      details:
+        p1: Gall y cwmnïau hyn yn defnyddio eu data eu hunain , a gallant gael mynediad data fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth gan pasbortau a thrwyddedau gyrru yn gywir.
+        p2: cwmnïau ardystiedig bodloni safonau preifatrwydd y llywodraeth, er mwyn i chi ymddiried ynddynt gyda eich gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.
+        p3: Ni fydd yna unrhyw effaith ar eich sgôr credyd .
+        p4: Mae mwy nag un cwmni ardystiedig yn golygu eich bod yn dewis pwy dilysu pwy ydych chi, ac mae'n golygu y system gyffredinol yn gryfach .
+    about_identity_accounts:
+      title: Ynglŷn â chyfrifon hunaniaeth
+      content:
+        p1: Dilysu eich hunaniaeth yn cymryd tua 10 munud.
+        p2: Yna byddwch gennych gyfrif hunaniaeth gyda'ch cwmni ardystiedig.
+        p3: Gallwch gofrestru mewn lle bynnag y byddwch yn gweld y GOV.UK Verify logo.
+      summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
+      details: "GOV.UK Verify yn gynllun newydd , a gwasanaethau newydd yn ymuno drwy'r amser. Mae'r gwasanaethau presennol yw:"
+    about_choosing_a_company:
+      title: Am ddewis cwmni
+      heading: Dod o hyd i'r cwmni hawl i wirio chi
+      p1: cwmnïau ardystiedig rhaid i ffyrdd gwahanol i wirio hunaniaeth , er enghraifft trwy wirio dogfennau adnabod , neu ddarparu app .
+      p2: Byddwn yn awr yn gofyn rhai cwestiynau i chi i wirio y gall cwmnïau wirio chi.

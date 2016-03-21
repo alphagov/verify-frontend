@@ -21,9 +21,12 @@ end
 def stub_transactions_list
   transactions = {
       'public' => [
-          { 'simpleId' => 'test-rp', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp' }
+          { 'simpleId' => 'test-rp', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp' },
+          { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3' }
       ],
-      'private' => []
+      'private' => [
+          { 'simpleId' => 'headless-rp', 'entityId' => 'some-entity-id' },
+      ]
   }
   stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
 end

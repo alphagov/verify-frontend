@@ -31,7 +31,7 @@ module VerifyFrontend
 
     RouteTranslator.config do |config|
       config.hide_locale = true
-      config.available_locales = [:en,:cy]
+      config.available_locales = [:en, :cy]
     end
   end
 end

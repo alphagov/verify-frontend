@@ -1,0 +1,30 @@
+<% content_for :page_title, t('hub.about_certified_companies.title') %>
+<% content_for :feedback_source, 'ABOUT_CERTIFIED_COMPANIES_PAGE' %>
+
+<p><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
+
+<ul class="list-companies">
+  <% @identity_providers.each do |idp| %>
+      <li>
+        <%= image_tag idp.logo_path, alt: idp.display_name %>
+      </li>
+  <% end %>
+</ul>
+
+<p><%= t 'hub.about_certified_companies.no_charge' %></p>
+
+<div class="actions">
+  <%= link_to t('navigation.next'), about_identity_accounts_path, class: 'button' %>
+</div>
+
+<details>
+  <summary>
+    <span class="summary"><%= t 'hub.about_certified_companies.summary' %></span>
+  </summary>
+  <div class="panel-indent">
+    <p><%= t 'hub.about_certified_companies.details.p1' %></p>
+    <p><%= t 'hub.about_certified_companies.details.p2' %></p>
+    <p><%= t 'hub.about_certified_companies.details.p3' %></p>
+    <p><%= t 'hub.about_certified_companies.details.p4' %></p>
+  </div>
+</details>

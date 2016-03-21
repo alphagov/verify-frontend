@@ -63,10 +63,6 @@
       background: $white;
       color: $mainstream-brand;
       font-weight: bold;
-
-      @include media(tablet) {
-        min-width: 150px;
-      }
     }
   }
 
@@ -88,7 +84,12 @@
       color: $white;
     }
 
-    p {
+    .panel-indent {
+      border-left-color: $white;
+    }
+
+    p,
+    ul {
       font-size: 1em;
     }
   }
@@ -136,4 +137,22 @@
     }
   }
 
+}
+
+// About certified companies
+.list-companies {
+  margin-bottom: $gutter-half;
+
+  li {
+    @include inline-block;
+    width: 50%;
+
+    @include media (tablet) {
+      width: 24%;
+    }
+  }
+
+  img {
+    width: 100%;
+  }
 }
