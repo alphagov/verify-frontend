@@ -62,10 +62,6 @@
       background: $white;
       color: $mainstream-brand;
       font-weight: bold;
-
-      @include media(tablet) {
-        min-width: 150px;
-      }
     }
   }
 
