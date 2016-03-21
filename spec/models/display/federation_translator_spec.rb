@@ -23,5 +23,10 @@ module Display
       I18n.locale = :cy
       expect(federation_translator.translate('name')).to eql("Bob")
     end
+
+    it "will raise an error if the key can't be found for another locale or English" do
+      I18n.locale = :cy
+      expect { federation_translator.translate('foobar') }.to raise_error FederationTranslator::TranslationError
+    end
   end
 end
