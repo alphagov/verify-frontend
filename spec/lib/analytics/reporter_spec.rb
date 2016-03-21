@@ -13,6 +13,7 @@ module Analytics
     it 'should report all parameters to piwik' do
       expect(request).to receive(:cookies).and_return(CookieNames::PIWIK_VISITOR_ID => 'VISITOR_ID')
       expect(request).to receive(:url).and_return('www.thing.com')
+      allow(request).to receive(:referer).and_return('http://www.example.com')
       expect(Time).to receive(:now).and_return(Time.new(2080))
       expect(client).to receive(:report).with(
         'rec' => '1',
@@ -23,14 +24,17 @@ module Analytics
         'url' => 'www.thing.com',
         'cdt' => '2080-01-01 00:00:00',
         'cookie' => 'false',
-        '_cvar' => '{"3":["SIGNIN_IDP","http://idcorp.com"]}'
+        '_cvar' => '{"3":["SIGNIN_IDP","http://idcorp.com"]}',
+        'urlref' => 'http://www.example.com',
+        'ref' => 'http://www.example.com',
       )
       reporter.report_custom_variable(request, action_name, '3' => ['SIGNIN_IDP', 'http://idcorp.com'])
     end
 
-    it 'should report all parameters except _id to piwik when no cookie' do
+    it 'should report all mandatory and exclude optional parameters' do
       expect(request).to receive(:cookies).and_return({})
       expect(request).to receive(:url).and_return('www.thing.com')
+      allow(request).to receive(:referer).and_return(nil)
       expect(Time).to receive(:now).and_return(Time.new(2080))
       expect(client).to receive(:report).with(
         'rec' => '1',
@@ -39,7 +43,7 @@ module Analytics
         'action_name' => 'Sign In - idp-entity-id',
         'url' => 'www.thing.com',
         'cdt' => '2080-01-01 00:00:00',
-        'cookie' => 'false'
+        'cookie' => 'false',
       )
       reporter.report(request, action_name)
     end

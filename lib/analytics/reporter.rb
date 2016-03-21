@@ -28,6 +28,11 @@ module Analytics
       cookies = request.cookies
       piwik_params['_id'] = cookies[CookieNames::PIWIK_VISITOR_ID] if cookies.has_key? CookieNames::PIWIK_VISITOR_ID
       piwik_params['_cvar'] = custom_variable.to_json unless custom_variable.nil?
+      referer = request.referer
+      unless referer.nil?
+        piwik_params['urlref'] = 'http://something.else'
+        piwik_params['ref'] = 'http://something.else'
+      end
       @client.report(piwik_params)
     end
   end
