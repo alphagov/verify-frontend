@@ -81,6 +81,7 @@ GEM
     govuk_template (0.17.0)
       rails (>= 3.1)
     hashdiff (0.3.0)
+    headless (2.2.2)
     http (1.0.3)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -300,6 +301,7 @@ DEPENDENCIES
   govuk-lint
   govuk_frontend_toolkit
   govuk_template
+  headless
   http (~> 1.0.0)
   jasmine-rails
   jbuilder (~> 2.0)

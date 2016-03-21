@@ -66,6 +66,7 @@ group :test, :development do
   gem 'webmock', require: false
   gem 'rack-test'
   gem 'pact'
+  gem 'headless'
 end
 
 gem 'logstash-logger'
