@@ -8,10 +8,12 @@
 
   margin-top: $gutter-half;
   margin-bottom: $gutter-half;
+
   @include media(tablet) {
     margin-top: $gutter;
     margin-bottom: $gutter;
   }
+
   @include media(desktop) {
     margin-bottom: -$gutter;
   }
@@ -21,19 +23,24 @@
   min-height: 480px;
 
   padding: $gutter;
+
   @include media(tablet) {
-    padding: $gutter*1.5;
+    padding: $gutter * 1.5;
   }
+
   @include media(desktop) {
     padding: 75px 70px;
   }
 
   h1 {
+
     @include bold-27;
+
     @include media (mobile) {
       margin-top: $gutter-half;
       margin-bottom: $gutter-half;
     }
+
     margin-bottom: $gutter;
   }
 
@@ -50,11 +57,13 @@
   }
 
   .actions {
-    margin: $gutter 0 $gutter-half 0;
+    margin: $gutter 0 $gutter-half;
+
     .button {
       background: $white;
       color: $mainstream-brand;
       font-weight: bold;
+
       @include media(tablet) {
         min-width: 150px;
       }
@@ -64,9 +73,11 @@
   // Figure is used to wrap the logo
   figure {
     max-width: 200px;
+
     img {
       width: 100%;
     }
+
     @include media(mobile) {
       width: 40%;
     }
@@ -76,6 +87,7 @@
     summary {
       color: $white;
     }
+
     p {
       font-size: 1em;
     }
@@ -97,26 +109,28 @@
     }
   }
 
-  .error, .validation-message {
+  .error,
+  .validation-message {
     border-color: $white;
   }
 
   .validation-message {
     color: $white;
-    #validation-error-link {
-      &:focus {
-        background-color: $mainstream-brand;
-      }
+
+    :focus {
+      background-color: $mainstream-brand;
     }
   }
 
-  .block-label{
+  .block-label {
     @include core-24;
     background: transparent;
     border: 0;
+
     &.selected {
       background: transparent;
     }
+
     &:hover {
       background-color: $link-hover-colour;
     }

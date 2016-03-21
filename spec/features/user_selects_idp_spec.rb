@@ -3,9 +3,9 @@ require 'feature_helper'
 def given_api_requests_have_been_mocked!
   stub_request(:get, api_uri('session/idps')).to_return(body: body.to_json)
   stub_request(:put, api_uri('session/select-idp'))
-    .to_return(body: {'encryptedEntityId' => encrypted_entity_id}.to_json)
+    .to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
   stub_request(:get, api_uri('session/idp-authn-request'))
-    .with(query: {'originatingIp' => originating_ip}).to_return(body: response.to_json)
+    .with(query: { 'originatingIp' => originating_ip }).to_return(body: response.to_json)
   stub_request(:get, PIWIK.url).with(query: hash_including({}))
 end
 
@@ -25,9 +25,9 @@ def then_im_at_the_idp
   expect(page).to have_content("registration is 'false'")
   expect_cookie('verify-journey-hint', encrypted_entity_id)
   expect(a_request(:put, api_uri('session/select-idp'))
-           .with(body: {'entityId' => idp_entity_id, 'originatingIp' => originating_ip})).to have_been_made.once
+           .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip })).to have_been_made.once
   expect(a_request(:get, api_uri('session/idp-authn-request'))
-           .with(query: {'originatingIp' => originating_ip})).to have_been_made.once
+           .with(query: { 'originatingIp' => originating_ip })).to have_been_made.once
   piwik_request = {
     'rec' => '1',
     'apiv' => '1'
@@ -47,11 +47,11 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:body) {
     [
-      {'simpleId' => 'stub-idp-zero', 'entityId' => 'idp-zero'},
-      {'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id},
-      {'simpleId' => 'stub-idp-two', 'entityId' => 'idp-two'},
-      {'simpleId' => 'stub-idp-three', 'entityId' => 'idp-three'},
-      {'simpleId' => 'stub-idp-four', 'entityId' => 'idp-four'}
+      { 'simpleId' => 'stub-idp-zero', 'entityId' => 'idp-zero' },
+      { 'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id },
+      { 'simpleId' => 'stub-idp-two', 'entityId' => 'idp-two' },
+      { 'simpleId' => 'stub-idp-three', 'entityId' => 'idp-three' },
+      { 'simpleId' => 'stub-idp-four', 'entityId' => 'idp-four' }
     ]
   }
   let(:location) { '/test-idp-request-endpoint' }

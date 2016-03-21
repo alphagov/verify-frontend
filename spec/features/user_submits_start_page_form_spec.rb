@@ -14,8 +14,8 @@ RSpec.describe 'when user submits start page form' do
     cookies = set_session_cookies!
     cookie_names = [CookieNames::SESSION_STARTED_TIME_COOKIE_NAME, CookieNames::SECURE_COOKIE_NAME, CookieNames::SESSION_ID_COOKIE_NAME]
     expected_cookies_header = cookie_names.map { |name| "#{name}=#{cookies[name]}" }.join('; ')
-    expected_headers = {'Cookie' => expected_cookies_header}
-    body = [{'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com'}]
+    expected_headers = { 'Cookie' => expected_cookies_header }
+    body = [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }]
     stub_request(:get, api_uri('session/idps')).with(headers: expected_headers).to_return(body: body.to_json)
     visit '/start'
     choose('no')

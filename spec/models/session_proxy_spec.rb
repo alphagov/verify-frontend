@@ -38,27 +38,27 @@ describe SessionProxy do
   it 'should return a list of IDP ids for the session' do
     idp_list = double(:idp_list)
 
-    expect(api_client).to receive(:get).with('/session/idps', {cookies: expected_cookie_hash}).and_return(idp_list)
+    expect(api_client).to receive(:get).with('/session/idps', cookies: expected_cookie_hash).and_return(idp_list)
     result = SessionProxy.new(api_client).idps_for_session(cookie_hash)
     expect(result).to eq idp_list
   end
 
   it 'should select an IDP for the session' do
     ip_address = '1.1.1.1'
-    body = {'entityId' => 'an-entity-id', 'originatingIp' => ip_address}
+    body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address }
     encrypted_entity_id = 'bob'
     expect(api_client).to receive(:put)
-      .with(SessionProxy::SELECT_IDP_PATH, body, {cookies: expected_cookie_hash})
-      .and_return({'encryptedEntityId' => encrypted_entity_id})
+      .with(SessionProxy::SELECT_IDP_PATH, body, cookies: expected_cookie_hash)
+      .and_return('encryptedEntityId' => encrypted_entity_id)
     result = SessionProxy.new(api_client).select_idp(cookie_hash, 'an-entity-id', ip_address)
     expect(result.encrypted_entity_id).to eql encrypted_entity_id
   end
 
   it 'should fail to select an IDP for the session if encrypted entity id is missing' do
     ip_address = '1.1.1.1'
-    body = {'entityId' => 'an-entity-id', 'originatingIp' => ip_address}
+    body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address }
     expect(api_client).to receive(:put)
-      .with(SessionProxy::SELECT_IDP_PATH, body, {cookies: expected_cookie_hash})
+      .with(SessionProxy::SELECT_IDP_PATH, body, cookies: expected_cookie_hash)
     expect {
       SessionProxy.new(api_client).select_idp(cookie_hash, 'an-entity-id', ip_address)
     }.to raise_error SessionProxy::ModelError, "Encrypted entity can't be blank"
@@ -72,9 +72,9 @@ describe SessionProxy do
         'registration' => false
     }
     ip_address = '1.1.1.1'
-    params = {SessionProxy::PARAM_ORIGINATING_IP => ip_address}
+    params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
     expect(api_client).to receive(:get)
-      .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, {cookies: expected_cookie_hash, params: params})
+      .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, cookies: expected_cookie_hash, params: params)
       .and_return(authn_request)
     result = SessionProxy.new(api_client).idp_authn_request(cookie_hash, ip_address)
     attributes = {
@@ -93,9 +93,9 @@ describe SessionProxy do
         'registration' => false
     }
     ip_address = '1.1.1.1'
-    params = {SessionProxy::PARAM_ORIGINATING_IP => ip_address}
+    params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
     expect(api_client).to receive(:get)
-      .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, {cookies: expected_cookie_hash, params: params})
+      .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, cookies: expected_cookie_hash, params: params)
       .and_return(authn_request)
     expect {
       SessionProxy.new(api_client).idp_authn_request(cookie_hash, ip_address)

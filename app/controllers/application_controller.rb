@@ -32,8 +32,8 @@ private
 
   def render_error(partial, status)
     respond_to do |format|
-      format.html { render "errors/#{partial}", status: status, layout: 'application'}
-      format.json { render json: {}, status: status}
+      format.html { render "errors/#{partial}", status: status, layout: 'application' }
+      format.json { render json: {}, status: status }
     end
   end
 

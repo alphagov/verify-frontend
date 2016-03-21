@@ -1,10 +1,10 @@
 // Import GOV.UK frontend toolkit
-@import "_govuk-elements";
-@import "_govuk-elements-overrides";
+@import "govuk-elements";
+@import "govuk-elements-overrides";
 
 // helpers for common page elements
 @import "helpers/available-languages";
 
 // Specific pages
-@import "pages/_start";
-@import "pages/_company";
+@import "pages/start";
+@import "pages/company";

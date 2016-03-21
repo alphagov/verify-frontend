@@ -8,7 +8,7 @@ module Metrics
     let(:reporter) { ApiRequestReporter.new(statsd) }
 
     it 'should send total duration of event' do
-      payload = {path: '/endpoint', method: 'get'}
+      payload = { path: '/endpoint', method: 'get' }
       duration = 0.060
       start = Time.now
       finish = start + duration

@@ -86,7 +86,7 @@ describe CookieValidator do
   end
 
   it "will fail validation if session start time cookie can't be parsed" do
-    filter_cookies = cookies.merge({CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => "unparsable"})
+    filter_cookies = cookies.merge(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => "unparsable")
     validation = cookie_validator.validate(filter_cookies)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
@@ -94,7 +94,7 @@ describe CookieValidator do
   end
 
   it "will fail validation if session start time cookie is expired" do
-    filter_cookies = cookies.merge({CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => (session_expiry.hours.ago.to_i * 1000).to_s})
+    filter_cookies = cookies.merge(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => (session_expiry.hours.ago.to_i * 1000).to_s)
     validation = cookie_validator.validate(filter_cookies)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :cookie_expired
