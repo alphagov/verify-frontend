@@ -6,16 +6,16 @@ module Analytics
       @ssl_context = ssl_context
     end
 
-    def report(params)
-      client.get(PIWIK.url, params: params, ssl_context: @ssl_context)
+    def report(params, headers = {})
+      client(headers).get(PIWIK.url, params: params, ssl_context: @ssl_context)
     rescue HTTP::Error => e
       Rails.logger.error('Analytics reporting error: ' + e.message)
     end
 
   private
 
-    def client
-      HTTP.headers('User-Agent' => 'Verify Frontend Micro Service Client')
+    def client(headers)
+      HTTP.headers(headers)
     end
   end
 end

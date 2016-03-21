@@ -23,5 +23,17 @@ module Analytics
 
       piwik_client.report({})
     end
+
+    it 'should forward headers' do
+      headers = {
+        'User-Agent' => 'TEST USER AGENT',
+        'Accept-Language' => 'en-GB',
+        'X-Forwarded-For' => '192.168.0.1',
+      }
+      expect(HTTP).to receive(:headers).with(headers).and_return(http)
+      expect(http).to receive(:get).with(PIWIK.url, params: {}, ssl_context: context)
+
+      piwik_client.report({}, headers)
+    end
   end
 end
