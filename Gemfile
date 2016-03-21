@@ -39,12 +39,15 @@ gem 'govuk_frontend_toolkit'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'puma'
-gem "rack-handlers"
+gem 'rack-handlers'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 gem 'http', '~> 1.0.0'
+
+# Use sentry-raven for sending logs to Sentry via the raven protocol
+gem 'sentry-raven'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
