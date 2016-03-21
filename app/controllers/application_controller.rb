@@ -1,3 +1,4 @@
+require 'redirect_with_see_other'
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -11,6 +12,8 @@ class ApplicationController < ActionController::Base
   rescue_from StandardError, with: :something_went_wrong
   rescue_from Api::SessionError, with: :session_error
   rescue_from Api::SessionTimeoutError, with: :session_timeout
+
+  prepend RedirectWithSeeOther
 
   def transactions_list
     TRANSACTION_LISTER.list
