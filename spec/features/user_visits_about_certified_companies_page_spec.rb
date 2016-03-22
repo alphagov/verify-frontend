@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
   it 'displays IdPs that are enabled' do
     visit '/about-certified-companies'
 
-    expect(page).to have_css("img[src*='#{simple_id}']")
+    expect(page).to have_css("img[src*='/white-logos/#{simple_id}']")
   end
 
   it 'will show "How companies can verify identities" section' do

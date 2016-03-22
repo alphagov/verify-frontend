@@ -6,10 +6,10 @@ module Display
         @display_correlator = display_correlator
       end
 
-      def list(cookie_jar)
+      def list(cookie_jar, logo_directory)
         idp_id_list = @session_proxy.idps_for_session(cookie_jar)
         # We need to randomise the order of IDPs so that it satisfies the need for us to be unbiased in displaying the IDPs.
-        @display_correlator.correlate(idp_id_list.shuffle)
+        @display_correlator.correlate(idp_id_list.shuffle, logo_directory)
       end
     end
   end

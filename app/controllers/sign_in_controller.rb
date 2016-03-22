@@ -3,7 +3,7 @@ class SignInController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:select_idp]
 
   def index
-    @identity_providers = identity_provider_lister.list(cookies)
+    @identity_providers = identity_provider_lister.list(cookies, CONFIG.logo_directory)
     render 'index'
   end
 

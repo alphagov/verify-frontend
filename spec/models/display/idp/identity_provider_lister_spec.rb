@@ -10,13 +10,14 @@ module Display
 
         idp_list = double(:idp_list)
         idp_display_data = double(:idp_display_data)
+        logo_directory = 'stub-logos/'
 
         lister = IdentityProviderLister.new(session_proxy, idp_display_correlator)
         expect(session_proxy).to receive(:idps_for_session).with(cookie_jar).and_return(idp_list)
-        expect(idp_display_correlator).to receive(:correlate).with(idp_list).and_return(idp_display_data)
+        expect(idp_display_correlator).to receive(:correlate).with(idp_list, logo_directory).and_return(idp_display_data)
         expect(idp_list).to receive(:shuffle).and_return(idp_list)
 
-        result = lister.list(cookie_jar)
+        result = lister.list(cookie_jar, logo_directory)
         expect(result).to eql(idp_display_data)
       end
     end

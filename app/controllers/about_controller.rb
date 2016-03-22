@@ -5,7 +5,7 @@ class AboutController < ApplicationController
   end
 
   def certified_companies
-    @identity_providers = identity_provider_lister.list(cookies)
+    @identity_providers = identity_provider_lister.list(cookies, CONFIG.white_logo_directory)
   end
 
   def choosing_a_company
