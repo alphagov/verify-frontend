@@ -6,7 +6,7 @@ def given_api_requests_have_been_mocked!
     .to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
   stub_request(:get, api_uri('session/idp-authn-request'))
     .with(query: { 'originatingIp' => originating_ip }).to_return(body: response.to_json)
-  stub_request(:get, PIWIK.url).with(query: hash_including({}))
+  stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 end
 
 def given_im_on_the_sign_in_page
@@ -33,7 +33,7 @@ def then_im_at_the_idp
     'apiv' => '1',
     '_cvar' => '{"3":["SIGNIN_IDP","http://idcorp.com"]}'
   }
-  expect(a_request(:get, PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+  expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 end
 
 def then_im_at_the_interstitial_page

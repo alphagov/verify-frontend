@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def piwik_noscript_query_string
     hash = {
-        idsite: piwik.site_id,
+        idsite: public_piwik.site_id,
         rec: 1,
         rand: Random.rand(2**32 - 1),
         action_name: content_for(:page_title),

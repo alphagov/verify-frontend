@@ -15,7 +15,7 @@ RSpec.describe 'When the user visits the start page' do
     capybara_server = Capybara::Server.new(MockPiwikMiddleware.new(request_log))
     capybara_server.boot
     server_url = "http://#{[capybara_server.host, capybara_server.port].join(':')}/piwik.php"
-    allow(PIWIK).to receive(:url).and_return(server_url)
+    allow(PUBLIC_PIWIK).to receive(:url).and_return(server_url)
   end
 
   after(:all) do

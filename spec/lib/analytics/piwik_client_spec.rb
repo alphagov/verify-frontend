@@ -6,12 +6,12 @@ module Analytics
   describe Analytics::PiwikClient do
     let(:http) { double(:http) }
     let(:context) { double(:context) }
-    let(:piwik_client) { PiwikClient.new(context) }
+    let(:piwik_client) { PiwikClient.new(INTERNAL_PIWIK.url, context) }
 
     it 'should make a get request with params' do
       params = { 'param_1' => 'param_1_val' }
       expect(HTTP).to receive(:headers).and_return(http)
-      expect(http).to receive(:get).with(PIWIK.url, params: params, ssl_context: context)
+      expect(http).to receive(:get).with(INTERNAL_PIWIK.url, params: params, ssl_context: context)
 
       piwik_client.report(params)
     end
@@ -31,7 +31,7 @@ module Analytics
         'X-Forwarded-For' => '192.168.0.1',
       }
       expect(HTTP).to receive(:headers).with(headers).and_return(http)
-      expect(http).to receive(:get).with(PIWIK.url, params: {}, ssl_context: context)
+      expect(http).to receive(:get).with(INTERNAL_PIWIK.url, params: {}, ssl_context: context)
 
       piwik_client.report({}, headers)
     end

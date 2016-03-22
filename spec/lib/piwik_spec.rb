@@ -2,66 +2,37 @@ require 'piwik'
 require 'active_support/core_ext/string'
 
 RSpec.describe Piwik do
-  let(:config) { double(:config) }
-
-  before(:each) do
-    allow(config).to receive(:piwik_host)
-    allow(config).to receive(:piwik_port)
-    allow(config).to receive(:piwik_site_id)
-  end
-
-  it 'reads config to generate a url' do
-    expect(config).to receive(:piwik_host).and_return('http://www.example.com').twice
-    expect(config).to receive(:piwik_port).and_return(1234)
-
-    piwik = Piwik.new(config)
-
+  it 'should correctly generate a url' do
+    piwik = Piwik.new('http://www.example.com', 1234, 1)
     expect(piwik.url).to eql 'http://www.example.com:1234/piwik.php'
   end
 
-  it 'reads config to generate a url' do
-    expect(config).to receive(:piwik_host).and_return('https://www.example.com').twice
-    expect(config).to receive(:piwik_port).and_return(443)
-
-    piwik = Piwik.new(config)
-
+  it 'should use default https port' do
+    piwik = Piwik.new('https://www.example.com', 443, 1)
     expect(piwik.url).to eql 'https://www.example.com/piwik.php'
   end
 
   it 'has a site id' do
-    expect(config).to receive(:piwik_site_id).and_return(5)
-
-    piwik = Piwik.new(config)
-
+    piwik = Piwik.new('https://www.example.com', 443, 5)
     expect(piwik.site_id).to eql 5
   end
 
   it 'is disabled when piwik_host is nil' do
-    expect(config).to receive(:piwik_host).and_return(nil)
-
-    piwik = Piwik.new(config)
-
+    piwik = Piwik.new(nil, 443, 5)
     expect(piwik.enabled?).to eql false
   end
 
   it 'is disabled when piwik_host is an empty string' do
-    expect(config).to receive(:piwik_host).and_return('')
-
-    piwik = Piwik.new(config)
-
+    piwik = Piwik.new('', 443, 5)
     expect(piwik.enabled?).to eql false
   end
 
   it 'is enabled when piwik_host is present' do
-    expect(config).to receive(:piwik_host).and_return('abc').twice
-
-    piwik = Piwik.new(config)
-
+    piwik = Piwik.new('https://www.example.com', 443, 5)
     expect(piwik.enabled?).to eql true
   end
 
-  it 'is will raise when piwik_host is not valid uri' do
-    expect(config).to receive(:piwik_host).and_return('foo:: :   :///').twice
-    expect { Piwik.new(config) }.to raise_error URI::InvalidURIError
+  it 'will raise when piwik_host is not valid uri' do
+    expect { Piwik.new('foo:: :   :///', 443, 5) }.to raise_error URI::InvalidURIError
   end
 end
