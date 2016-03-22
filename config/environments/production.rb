@@ -90,4 +90,6 @@ Rails.application.configure do
   ]
 
   config.assets.prefix = '/new-assets'
+
+  config.filter_parameters += [CookieNames::SECURE_COOKIE_NAME, Rails.application.config.session_options[:key]]
 end
