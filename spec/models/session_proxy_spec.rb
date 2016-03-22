@@ -38,9 +38,11 @@ describe SessionProxy do
   it 'should return a list of IDP ids for the session' do
     idp_list = double(:idp_list)
 
-    expect(api_client).to receive(:get).with('/session/idps', cookies: expected_cookie_hash).and_return(idp_list)
-    result = SessionProxy.new(api_client).idps_for_session(cookie_hash)
-    expect(result).to eq idp_list
+    expect(api_client).to receive(:get)
+      .with(SessionProxy::FEDERATION_INFO_PATH, cookies: expected_cookie_hash)
+      .and_return('idps' => idp_list, 'transactionEntityId' => 'some-id')
+    result = SessionProxy.new(api_client).federation_info_for_session(cookie_hash)
+    expect(result.idps).to eq idp_list
   end
 
   it 'should select an IDP for the session' do

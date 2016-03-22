@@ -1,7 +1,7 @@
 
 class SessionProxy
   PATH = "/session"
-  IDP_PATH = "#{PATH}/idps"
+  FEDERATION_INFO_PATH = "#{PATH}/federation"
   SELECT_IDP_PATH = "#{PATH}/select-idp"
   IDP_AUTHN_REQUEST_PATH = "#{PATH}/idp-authn-request"
   PARAM_SAML_REQUEST = "samlRequest"
@@ -22,9 +22,12 @@ class SessionProxy
     @api_client.post(PATH, body)
   end
 
-  def idps_for_session(cookies)
+  def federation_info_for_session(cookies)
     session_cookies = select_cookies(cookies, CookieNames.session_cookies)
-    @api_client.get(IDP_PATH, cookies: session_cookies)
+    response = @api_client.get(FEDERATION_INFO_PATH, cookies: session_cookies)
+    FederationInfoResponse.new(response || {}).tap { |message|
+      raise_if_invalid(message)
+    }
   end
 
   def select_cookies(cookies, allowed_cookie_names)

@@ -1,7 +1,8 @@
 module Analytics
   module CustomVariable
     CUSTOM_VARIABLES = {
-      select_idp: { name: 'SIGNIN_IDP', index: 3 }
+      select_idp: { name: 'SIGNIN_IDP', index: 3 },
+      rp: { name: 'RP', index: 1 }
     }
 
     def self.build(type, value)

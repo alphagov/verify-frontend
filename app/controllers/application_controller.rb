@@ -67,8 +67,4 @@ private
   def store_session_id
     RequestStore.store[:session_id] = request.cookies[CookieNames::SESSION_ID_COOKIE_NAME]
   end
-
-  def identity_provider_lister
-    IDENTITY_PROVIDER_LISTER
-  end
 end

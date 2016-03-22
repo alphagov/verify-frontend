@@ -36,7 +36,7 @@ def create_session_start_time_cookie
 end
 
 def api_uri(path)
-  "#{API_HOST}/api/#{path}"
+  URI.join(API_HOST, '/api/', path)
 end
 
 def expect_feedback_source_to_be(page, source)

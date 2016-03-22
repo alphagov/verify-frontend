@@ -6,7 +6,9 @@ RSpec.describe 'When the user visits the about certified companies page' do
   let(:idp_entity_id) { 'http://idcorp.com' }
 
   before(:each) do
-    stub_request(:get, api_uri('session/idps')).to_return(body: [{ 'simpleId' => simple_id, 'entityId' => idp_entity_id }].to_json)
+    body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com' }], 'transactionEntityId' => 'some-id' }
+    stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
+    stub_transactions_list
     set_session_cookies!
   end
 
@@ -37,9 +39,6 @@ RSpec.describe 'When the user visits the about certified companies page' do
   end
 
   it 'will go to about identity accounts page when next is clicked' do
-    stub_transactions_list
-    stub_request(:get, api_uri('session/idps')).to_return(body: [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com' }].to_json)
-
     visit '/about-certified-companies'
     click_link('Next')
 

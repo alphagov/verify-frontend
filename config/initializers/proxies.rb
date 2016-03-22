@@ -13,6 +13,6 @@ TRANSACTION_LISTER = Display::Rp::TransactionLister.new(
   Display::Rp::TransactionsProxy.new(api_client),
   Display::Rp::DisplayDataCorrelator.new(federation_translator))
 
-IDENTITY_PROVIDER_LISTER = Display::Idp::IdentityProviderLister.new(
+FEDERATION_INFO_GETTER = Display::Federation::FederationInfoGetter.new(
   SESSION_PROXY,
   Display::Idp::DisplayDataCorrelator.new(federation_translator, CONFIG.logo_directory, CONFIG.white_logo_directory))

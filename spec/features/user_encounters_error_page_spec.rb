@@ -2,7 +2,7 @@ require 'feature_helper'
 
 RSpec.describe 'user encounters error page' do
   let(:api_saml_endpoint) { api_uri('session') }
-  let(:api_idps_endpoint) { api_uri('session/idps') }
+  let(:api_federation_endpoint) { api_uri('session/federation') }
 
   it 'will present the user with a list of transactions' do
     stub_transactions_list
@@ -54,7 +54,7 @@ RSpec.describe 'user encounters error page' do
   it 'will present session error page when session error occurs in upstream systems' do
     set_session_cookies!
     error_body = { id: '0', type: 'SESSION_ERROR' }
-    stub_request(:get, api_idps_endpoint).and_return(status: 400, body: error_body.to_json)
+    stub_request(:get, api_federation_endpoint).and_return(status: 400, body: error_body.to_json)
     visit '/sign-in'
     expect(page).to have_content "You need to start again"
     expect(page).to have_content "For security reasons"
@@ -65,7 +65,7 @@ RSpec.describe 'user encounters error page' do
   it 'will present a session timeout error page when the API returns session timeout' do
     set_session_cookies!
     error_body = { id: '0', type: 'SESSION_TIMEOUT' }
-    stub_request(:get, api_idps_endpoint).and_return(status: 400, body: error_body.to_json)
+    stub_request(:get, api_federation_endpoint).and_return(status: 400, body: error_body.to_json)
     visit '/sign-in'
     expect(page).to have_content "Your session has timed out"
     expect(page).to have_content "Please go back to your service"
@@ -76,7 +76,7 @@ RSpec.describe 'user encounters error page' do
   it 'will present the something went wrong page when secure cookie is invalid' do
     set_session_cookies!
     stub_transactions_list
-    stub_request(:get, api_idps_endpoint).and_return(status: 403)
+    stub_request(:get, api_federation_endpoint).and_return(status: 403)
     visit '/sign-in'
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"

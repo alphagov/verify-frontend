@@ -1,7 +1,8 @@
 require 'feature_helper'
 
 def given_api_requests_have_been_mocked!
-  stub_request(:get, api_uri('session/idps')).to_return(body: body.to_json)
+  body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }], 'transactionEntityId' => 'some-id' }
+  stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
   stub_request(:put, api_uri('session/select-idp'))
     .to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
   stub_request(:get, api_uri('session/idp-authn-request'))

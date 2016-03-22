@@ -3,7 +3,10 @@ class SignInController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:select_idp]
 
   def index
-    @identity_providers = identity_provider_lister.list(cookies)
+    federation_info = FEDERATION_INFO_GETTER.get_info(cookies)
+    @identity_providers = federation_info[:idp_display_data]
+    cvar = Analytics::CustomVariable.build(:rp, federation_info[:transaction_entity_id])
+    ANALYTICS_REPORTER.report_custom_variable(request, 'The No option was selected on the introduction page', cvar)
     render 'index'
   end
 
