@@ -7,7 +7,7 @@ cy:
     about_certified_companies: am-gwmniau-ardystiedig
     about_identity_accounts: am-hunaniaeth-cyfrifon
     about_choosing_a_company: am-ddewis-a-gwmni
-    select_documents: select-documents
+    select_documents: dewiswch-ddogfennau
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -65,6 +65,8 @@ cy:
       heading: Dod o hyd i'r cwmni hawl i wirio chi
       p1: cwmnïau ardystiedig rhaid i ffyrdd gwahanol i wirio hunaniaeth , er enghraifft trwy wirio dogfennau adnabod , neu ddarparu app .
       p2: Byddwn yn awr yn gofyn rhai cwestiynau i chi i wirio y gall cwmnïau wirio chi.
+    select_documents:
+      title: Dewiswch yr holl ddogfennau sydd gennych
   errors:
     transaction_list:
       title: Dewch o hyd i'r gwasanaeth yr ydych yn ei ddefnyddio i ddechrau eto
