@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
   before_filter :store_session_id
+  before_filter :store_originating_ip
   before_action :validate_cookies
   helper_method :transactions_list
   helper_method :public_piwik
@@ -66,5 +67,9 @@ private
 
   def store_session_id
     RequestStore.store[:session_id] = request.cookies[CookieNames::SESSION_ID_COOKIE_NAME]
+  end
+
+  def store_originating_ip
+    OriginatingIpStore.store(request)
   end
 end

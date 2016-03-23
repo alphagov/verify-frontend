@@ -9,15 +9,20 @@ class SessionProxy
   PARAM_ORIGINATING_IP = "originatingIp"
   PARAM_ENTITY_ID = 'entityId'
 
-  def initialize(api_client)
+  def initialize(api_client, originating_ip_store)
     @api_client = api_client
+    @originating_ip_store = originating_ip_store
   end
 
-  def create_session(saml_request, relay_state, x_forwarded_for)
+  def originating_ip
+    @originating_ip_store.get
+  end
+
+  def create_session(saml_request, relay_state)
     body = {
         PARAM_SAML_REQUEST => saml_request,
         PARAM_RELAY_STATE => relay_state,
-        PARAM_ORIGINATING_IP => x_forwarded_for
+        PARAM_ORIGINATING_IP => originating_ip
     }
     @api_client.post(PATH, body)
   end
@@ -34,7 +39,7 @@ class SessionProxy
     cookies.select { |name, _| allowed_cookie_names.include?(name) }.to_h
   end
 
-  def select_idp(cookies, entity_id, originating_ip)
+  def select_idp(cookies, entity_id)
     body = {
         PARAM_ENTITY_ID => entity_id,
         PARAM_ORIGINATING_IP => originating_ip
@@ -45,7 +50,7 @@ class SessionProxy
     }
   end
 
-  def idp_authn_request(cookies, originating_ip)
+  def idp_authn_request(cookies)
     response = @api_client.get(IDP_AUTHN_REQUEST_PATH, cookies: select_cookies(cookies, CookieNames.all_cookies), params: { PARAM_ORIGINATING_IP => originating_ip })
     OutboundSamlMessage.new(response || {}).tap { |message|
       raise_if_invalid(message)

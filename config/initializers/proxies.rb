@@ -1,4 +1,5 @@
 require 'ssl_context_factory'
+require 'originating_ip_store'
 API_HOST = CONFIG.api_host
 
 context = SSLContextFactory.new.create_context(
@@ -6,7 +7,7 @@ context = SSLContextFactory.new.create_context(
 )
 
 api_client = Api::Client.new(API_HOST, Api::ResponseHandler.new, ssl_context: context)
-SESSION_PROXY = SessionProxy.new(api_client)
+SESSION_PROXY = SessionProxy.new(api_client, OriginatingIpStore)
 
 federation_translator = Display::FederationTranslator.new
 TRANSACTION_LISTER = Display::Rp::TransactionLister.new(
