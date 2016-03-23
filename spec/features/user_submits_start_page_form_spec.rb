@@ -2,16 +2,14 @@ require 'feature_helper'
 require 'models/cookie_names'
 
 def given_api_returns_federation_info
-  cookies = set_session_cookies!
-  cookie_names = [CookieNames::SESSION_STARTED_TIME_COOKIE_NAME, CookieNames::SECURE_COOKIE_NAME, CookieNames::SESSION_ID_COOKIE_NAME]
-  expected_cookies_header = cookie_names.map { |name| "#{name}=#{cookies[name]}" }.join('; ')
-  expected_headers = { 'Cookie' => expected_cookies_header }
   body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }], 'transactionEntityId' => 'some-id' }
-  stub_request(:get, api_uri('session/federation')).with(headers: expected_headers).to_return(body: body.to_json)
+  stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
 end
 
 RSpec.describe 'when user submits start page form' do
   it 'will display about page when user chooses yes (registration)' do
+    given_api_returns_federation_info
+    stub_request(:get, INTERNAL_PIWIK.url)
     set_session_cookies!
     visit '/start'
     choose('yes')
@@ -21,6 +19,7 @@ RSpec.describe 'when user submits start page form' do
 
   it 'will display sign in with IDP page when user chooses sign in' do
     given_api_returns_federation_info
+    set_session_cookies!
     visit '/start'
     choose('no')
     click_button('next-button')
@@ -36,9 +35,9 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will report user choice to analytics when user chooses no (sign in)' do
+    set_session_cookies!
     given_api_returns_federation_info
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-
     visit '/start'
     choose('no')
     click_button('next-button')
