@@ -5,7 +5,7 @@ class SignInController < ApplicationController
     federation_info = FEDERATION_INFO_GETTER.get_info(cookies)
     @identity_providers = federation_info[:idp_display_data]
     cvar = Analytics::CustomVariable.build(:rp, federation_info[:transaction_entity_id])
-    ANALYTICS_REPORTER.report_custom_variable(request, 'The No option was selected on the introduction page', cvar)
+    ANALYTICS_REPORTER.report_custom_variable(request, 'The No option was selected on the start page', cvar)
     render 'index'
   end
 

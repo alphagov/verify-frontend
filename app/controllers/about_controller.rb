@@ -3,7 +3,7 @@ class AboutController < ApplicationController
 
   def index
     cvar = Analytics::CustomVariable.build(:rp, federation_info[:transaction_entity_id])
-    ANALYTICS_REPORTER.report_custom_variable(request, 'The Yes option was selected on the introduction page', cvar)
+    ANALYTICS_REPORTER.report_custom_variable(request, 'The Yes option was selected on the start page', cvar)
   end
 
   def certified_companies
