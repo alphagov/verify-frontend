@@ -38,9 +38,11 @@ module Analytics
     end
 
     def headers(request)
+      headers = request.headers
       {
         'X-Forwarded-For' => originating_ip,
-        'Accept-Language' => request.headers['Accept-Language']
+        'User-Agent' => headers['User-Agent'],
+        'Accept-Language' => headers['Accept-Language']
       }
     end
 

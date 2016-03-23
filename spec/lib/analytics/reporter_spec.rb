@@ -11,10 +11,17 @@ module Analytics
     let(:request) { double(:request) }
     let(:action_name) { 'Sign In - idp-entity-id' }
     let(:request_headers) {
-      { 'Accept-Language' => 'lang' }
+      {
+        'Accept-Language' => 'en-US,en;q=0.5',
+        'User-Agent' => 'my user agent',
+      }
     }
     let(:piwik_headers) {
-      { 'X-Forwarded-For' => '1.1.1.1', 'Accept-Language' => 'lang' }
+      {
+        'Accept-Language' => 'en-US,en;q=0.5',
+        'X-Forwarded-For' => '1.1.1.1',
+        'User-Agent' => 'my user agent',
+      }
     }
 
     before :each do
