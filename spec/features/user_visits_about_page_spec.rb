@@ -32,7 +32,7 @@ RSpec.describe 'When the user visits the about page' do
 
     piwik_request = {
         '_cvar' => "{\"1\":[\"RP\",\"#{transaction_entity_id}\"]}",
-        'action_name' => 'The Yes option was selected on the introduction page',
+        'action_name' => 'The Yes option was selected on the start page',
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
