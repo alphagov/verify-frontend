@@ -1,10 +1,9 @@
 
 module Analytics
   class Reporter
-    def initialize(client, site_id, originating_ip_store)
+    def initialize(client, site_id)
       @client = client
       @site_id = site_id
-      @originating_ip_store = originating_ip_store
     end
 
     def report_custom_variable(request, action_name, custom_variable)
@@ -37,19 +36,15 @@ module Analytics
       @client.report(piwik_params, headers(request))
     end
 
+  private
+
     def headers(request)
       headers = request.headers
       {
-        'X-Forwarded-For' => originating_ip,
+        'X-Forwarded-For' => headers['X-Forwarded-For'],
         'User-Agent' => headers['User-Agent'],
         'Accept-Language' => headers['Accept-Language']
       }
-    end
-
-  private
-
-    def originating_ip
-      @originating_ip_store.get
     end
   end
 end

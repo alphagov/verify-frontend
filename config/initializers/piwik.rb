@@ -10,4 +10,4 @@ context = SSLContextFactory.new.create_context(
   cert_path: CONFIG.analytics_cert_path
 )
 client = Analytics::PiwikClient.new(INTERNAL_PIWIK.url, context)
-ANALYTICS_REPORTER = Analytics::Reporter.new(client, INTERNAL_PIWIK.site_id, OriginatingIpStore)
+ANALYTICS_REPORTER = Analytics::Reporter.new(client, INTERNAL_PIWIK.site_id)
