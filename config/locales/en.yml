@@ -64,6 +64,8 @@ en:
       heading: Finding the right company to verify you
       p1: Certified companies have different ways to verify identities, for example by checking identity documents, or providing an app.
       p2: We’ll now ask you some questions to check which companies can verify you.
+    select_documents:
+      title: Select all the documents you have
   errors:
     transaction_list:
       title: Find the service you were using to start again
