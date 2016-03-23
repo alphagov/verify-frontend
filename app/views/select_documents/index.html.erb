@@ -1,2 +1,57 @@
 <% content_for :page_title, t('hub.select_documents.title') %>
 <% content_for :feedback_source, 'SELECT_DOCUMENTS_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1><%= t 'hub.select_documents.heading' %></h1>
+    <%= form_tag '', id: 'validate-documents', novalidate: 'novalidate' do %>
+        <div class="form-group">
+          <fieldset>
+            <legend><%= t 'hub.select_documents.legend'%></legend>
+            <div class="form-group">
+              <fieldset class="inline">
+                <span>1. <%= t 'hub.select_documents.question.driving_licence'%></span>
+                <label class="block-label" for="driving_licence_yes">
+                  <input id="driving_licence_yes" type="radio" name="driving_licence" value="true"/>
+                  <span><span class="inner"><%= t 'option.yes'%></span></span>
+                </label>
+                <label class="block-label" for="driving_licence_no">
+                  <input id="driving_licence_no" type="radio" name="driving_licence" value="false"/>
+                  <span><span class="inner"><%= t 'option.no'%></span></span>
+                </label>
+              </fieldset>
+            </div>
+            <div class="form-group">
+              <fieldset class="inline">
+                <span>2. <%= t 'hub.select_documents.question.uk_passport'%></span>
+                <label class="block-label" for="passport_yes">
+                  <input id="passport_yes" type="radio" name="passport" value="true"/>
+                  <span><span class="inner"><%= t 'option.yes'%></span></span>
+                </label>
+                <label class="block-label" for="passport_no">
+                  <input id="passport_no" type="radio" name="passport" value="false"/>
+                  <span><span class="inner"><%= t 'option.no'%></span></span>
+                </label>
+              </fieldset>
+            </div>
+            <div class="form-group">
+              <fieldset class="inline">
+                <span>3. <%= t 'hub.select_documents.question.other_document'%></span>
+                <label class="block-label" for="other_passport_yes">
+                  <input id="other_passport_yes" type="radio" name="other_passport" value="true"/>
+                  <span><span class="inner"><%= t 'option.yes'%></span></span>
+                </label>
+                <label class="block-label" for="other_passport_no">
+                  <input id="other_passport_no" type="radio" name="other_passport" value="false"/>
+                  <span><span class="inner"><%= t 'option.no'%></span></span>
+                </label>
+              </fieldset>
+            </div>
+          </fieldset>
+        </div>
+        <div class="actions">
+          <%= link_to t('navigation.continue'), select_documents_path, class: 'button', id: 'next-button' %>
+        </div>
+    <% end %>
+  </div>
+</div>

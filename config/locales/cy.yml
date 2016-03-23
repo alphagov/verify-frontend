@@ -67,6 +67,12 @@ cy:
       p2: Byddwn yn awr yn gofyn rhai cwestiynau i chi i wirio y gall cwmnïau wirio chi.
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
+      heading: cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau adnabod er mwyn gwirio eich.
+      legend: A oes gennych y dogfennau hyn gyda chi?
+      question:
+        driving_licence: trwydded yrru cerdyn-llun yn y DU (ac eithrio Gogledd Iwerddon)
+        uk_passport: pasbort y DU
+        other_document: dogfen adnabod o wlad arall ( pasbort , cerdyn adnabod neu drwydded yrru )
   errors:
     transaction_list:
       title: Dewch o hyd i'r gwasanaeth yr ydych yn ei ddefnyddio i ddechrau eto

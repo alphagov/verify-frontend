@@ -17,4 +17,13 @@ RSpec.describe 'When the user visits the select documents page' do
 
     expect_feedback_source_to_be(page, 'SELECT_DOCUMENTS_PAGE')
   end
+
+  context 'will validate selections', js: false do
+    it 'will show an error message when no selections have been made' do
+      visit 'select-documents'
+
+      expect(page).to have_content 'Please select the documents you have'
+      expect(page).to have_css 'div.error'
+    end
+  end
 end

@@ -11,6 +11,9 @@ en:
     next: Next
     start_now: Start now
     continue: Continue
+  option:
+    yes: Yes
+    no: No
   phase_banner:
     title: This is a trial service.
     feedback_message: Your %{feedback_link} will help us to improve it.
@@ -66,6 +69,12 @@ en:
       p2: We’ll now ask you some questions to check which companies can verify you.
     select_documents:
       title: Select all the documents you have
+      heading: Certified companies use information from different identity documents to verify you.
+      legend: Do you have these documents with you?
+      question:
+        driving_licence: UK photocard driving licence (excluding Northern Ireland)
+        uk_passport: UK passport
+        other_document: Identity document from another country (passport, ID card or driving licence)
   errors:
     transaction_list:
       title: Find the service you were using to start again
