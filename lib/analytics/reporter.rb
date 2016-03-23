@@ -1,9 +1,10 @@
 
 module Analytics
   class Reporter
-    def initialize(client, site_id)
+    def initialize(client, site_id, originating_ip_store)
       @client = client
       @site_id = site_id
+      @originating_ip_store = originating_ip_store
     end
 
     def report_custom_variable(request, action_name, custom_variable)
@@ -33,7 +34,20 @@ module Analytics
         piwik_params['urlref'] = referer
         piwik_params['ref'] = referer
       end
-      @client.report(piwik_params)
+      @client.report(piwik_params, headers(request))
+    end
+
+    def headers(request)
+      {
+        'X-Forwarded-For' => originating_ip,
+        'Accept-Language' => request.headers['Accept-Language']
+      }
+    end
+
+  private
+
+    def originating_ip
+      @originating_ip_store.get
     end
   end
 end

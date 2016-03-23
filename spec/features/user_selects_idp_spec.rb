@@ -30,9 +30,8 @@ def then_im_at_the_idp
   expect(a_request(:get, api_uri('session/idp-authn-request'))
            .with(query: { 'originatingIp' => originating_ip })).to have_been_made.once
   piwik_request = {
-    'rec' => '1',
-    'apiv' => '1',
-    '_cvar' => '{"3":["SIGNIN_IDP","http://idcorp.com"]}'
+      '_cvar' => "{\"3\":[\"SIGNIN_IDP\",\"#{idp_entity_id}\"]}",
+      'action_name' => 'Sign In - ' + idp_entity_id,
   }
   expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 end
