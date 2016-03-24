@@ -34,7 +34,7 @@ describe("Select Documents Form", function () {
                                    '</fieldset>' +
                                  '</div>' +
                                  '<label class="block-label" for="no-documents" onclick="">' +
-                                   '<input id="no-documents" name="no_documents" value="true" type="checkbox"><span><span class="inner"></span></span>I don’t have any of these documents with me</label>' +
+                                   '<input id="no-documents" name="rails_no_documents" class="js-no-docs" value="true" type="checkbox"><span><span class="inner"></span></span>I don’t have any of these documents with me</label>' +
                                '</fieldset>' +
                              '</div>' +
                              '<div id="validation-error-message-js"></div>' +

@@ -20,14 +20,14 @@
     },
     unCheckNoDocuments: function() {
       // Un check "I don't have documents" if the user selects a document
-      var $checkbox = selectDocuments.$form.find('input[name=no_documents]:checked');
+      var $checkbox = selectDocuments.$form.find('.js-no-docs:checked');
       $checkbox.prop('checked',false);
       $checkbox.parent('.block-label').removeClass('selected');
     },
     init: function (){
       selectDocuments.$form = $('#validate-documents');
       if (selectDocuments.$form.length === 1) {
-        selectDocuments.$form.find('input[name=no_documents]').on('click',selectDocuments.markAllAsNo);
+        selectDocuments.$form.find('.js-no-docs').on('click',selectDocuments.markAllAsNo);
         selectDocuments.$form.find('input[type=radio][value=true]').on('click',selectDocuments.unCheckNoDocuments);
 
         $.validator.addMethod('selectDocumentsValidation', function(value, element) {
@@ -46,10 +46,10 @@
         }, $.validator.format('Please select the documents you have'));
         selectDocuments.$form.validate({
           rules: {
-            driving_licence: 'selectDocumentsValidation',
-            passport: 'selectDocumentsValidation',
-            other_passport: 'selectDocumentsValidation',
-            no_documents: 'selectDocumentsValidation'
+            'select_documents_form[uk_driving_licence]': 'selectDocumentsValidation',
+            'select_documents_form[uk_passport]': 'selectDocumentsValidation',
+            'select_documents_form[foreign_id]': 'selectDocumentsValidation',
+            'select_documents_form[no_docs]': 'selectDocumentsValidation'
           },
           groups: {
             // driving_licence is the first element, error should focus this

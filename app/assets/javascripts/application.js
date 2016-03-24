@@ -8,6 +8,7 @@
 //= require piwik
 
 window.GOVUK.validation.init();
+window.GOVUK.selectDocuments.init();
 
 $(function () {
   // Use GOV.UK selection-buttons.js to set selected and focused states for block labels
