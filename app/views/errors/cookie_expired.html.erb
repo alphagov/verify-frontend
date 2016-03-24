@@ -1,7 +1,11 @@
-<% content_for :page_title, 'Your session has timed out' %>
+<% content_for :page_title, t('errors.cookie_expired.title') %>
 <% content_for :feedback_source, 'EXPIRED_ERROR_PAGE' %>
 <% content_for :piwik_custom_path, '/errors/timeout-error' %>
 
-<h1 class="heading-xlarge">Your session has timed out</h1>
-<%= render partial: 'errors/transaction_list' %>
-<p>Use the <%= link_to "feedback form", "/feedback", :query => {"feedback-source" =>'expired error page'} %> to ask a question, report a problem or suggest an improvement.</p>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t 'errors.cookie_expired.title' %></h1>
+    <%= render partial: 'errors/transaction_list' %>
+    <p><%= t('errors.cookie_expired.feedback_message', feedback_link: link_to(t('errors.cookie_expired.feedback'), "/feedback", :query => {"feedback-source" =>'expired error page'})).html_safe %></p>
+  </div>
+</div>

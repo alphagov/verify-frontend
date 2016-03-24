@@ -45,7 +45,7 @@ RSpec.describe 'When the user visits the start page' do
       )
 
       visit '/start'
-      expect(page).to have_content "If you can't access GOV.UK Verify from a service, enable your cookies."
+      expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
     end
   end
 
@@ -68,7 +68,7 @@ RSpec.describe 'When the user visits the start page' do
     it 'sends a page view with a custom url for error pages' do
       stub_transactions_list
       visit '/start'
-      expect(page).to have_content "If you can't access GOV.UK Verify from a service, enable your cookies."
+      expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
       noscript_image = page.find(:id, 'piwik-noscript-tracker')
       expect(noscript_image).to_not be_nil
       image_src = noscript_image['src']

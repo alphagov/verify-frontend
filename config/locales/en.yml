@@ -64,3 +64,35 @@ en:
       heading: Finding the right company to verify you
       p1: Certified companies have different ways to verify identities, for example by checking identity documents, or providing an app.
       p2: We’ll now ask you some questions to check which companies can verify you.
+  errors:
+    transaction_list:
+      title: Find the service you were using to start again
+      hint: Follow the instructions contained in the email you received
+    cookie_expired:
+      title: Your session has timed out
+      feedback_message: Use the %{feedback_link} to ask a question, report a problem or suggest an improvement.
+      feedback: feedback
+    no_cookies:
+      title: Cookies Missing
+      heading: GOV.UK Verify
+      access_restriction: GOV.UK Verify can only be accessed from a government service.
+      read_more: 'Read the <a href="https://www.gov.uk/verify">Introduction to GOV.UK Verify</a> for more information.'
+      enable_cookies: If you can’t access GOV.UK Verify from a service, enable your cookies.
+    session_error:
+      title: Something went wrong
+      heading: You need to start again
+      security: For security reasons, if you use the back button to return from a certified company, you must start again.
+      start_again: Start again
+      feedback_message: Use the %{feedback_link} to ask a question, report a problem or suggest an improvement.
+      feedback: feedback
+    session_timeout:
+      title: Your session has timed out
+      return_to_service: Please go back to your service to start again.
+      start_again: Start again
+      feedback_message: Use the %{feedback_link} to ask a question, report a problem or suggest an improvement.
+      feedback: feedback
+    something_went_wrong:
+      title: Something went wrong
+      heading: Sorry, something went wrong
+      error_message: This may be because your session timed out or there was a system error.
+      start_again: Because this is a secure service, you'll need to start again.

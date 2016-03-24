@@ -65,3 +65,35 @@ cy:
       heading: Dod o hyd i'r cwmni hawl i wirio chi
       p1: cwmnïau ardystiedig rhaid i ffyrdd gwahanol i wirio hunaniaeth , er enghraifft trwy wirio dogfennau adnabod , neu ddarparu app .
       p2: Byddwn yn awr yn gofyn rhai cwestiynau i chi i wirio y gall cwmnïau wirio chi.
+  errors:
+    transaction_list:
+      title: Dewch o hyd i'r gwasanaeth yr ydych yn ei ddefnyddio i ddechrau eto
+      hint: Dilynwch y cyfarwyddiadau a gynhwysir yn yr e-bost a gawsoch
+    cookie_expired:
+      title: Mae eich sesiwn wedi goramseru
+      feedback_message: Defnyddiwch y %{feedback_link} i ofyn cwestiwn, rhoi gwybod am broblem neu awgrymu gwelliant.
+      feedback: adborth
+    no_cookies:
+      title: Cwcis ar goll
+      heading: GOV.UK Verify
+      access_restriction: Dim ond cael mynediad o wasanaeth y llywodraeth GOV.UK Verify.
+      read_more: 'Darllenwch y <a href="https://www.gov.uk/verify" hreflang="en">Cyflwyniad i GOV.UK Verify</a> am fwy o wybodaeth.'
+      enable_cookies: Os na allwch gael mynediad GOV.UK Verify o wasanaeth, yn galluogi eich cwcis.
+    session_error:
+      title: Aeth rhywbeth o'i le
+      heading: Mae angen i chi ddechrau eto
+      security: Am resymau diogelwch, os ydych yn defnyddio'r botwm yn ôl i ddychwelyd gan gwmni ardystiedig, rhaid i chi ddechrau eto.
+      start_again: Dechrau eto
+      feedback_message: Defnyddiwch y %{feedback_link} i ofyn cwestiwn, rhoi gwybod am broblem neu awgrymu gwelliant.
+      feedback: adborth
+    session_timeout:
+      title: Mae eich sesiwn wedi goramseru
+      return_to_service: Os gwelwch yn dda ewch yn ôl at eich gwasanaeth i ddechrau eto.
+      start_again: Dechrau eto
+      feedback_message: Defnyddiwch y %{feedback_link} i ofyn cwestiwn, rhoi gwybod am broblem neu awgrymu gwelliant.
+      feedback: adborth
+    something_went_wrong:
+      title: Aeth rhywbeth o'i le
+      heading: Mae'n ddrwg gennym, aeth rhywbeth o'i le
+      error_message: Gall hyn fod oherwydd bod eich sesiwn hamseru allan neu roedd gwall system.
+      start_again: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.

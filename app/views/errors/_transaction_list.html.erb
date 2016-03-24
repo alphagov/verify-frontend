@@ -1,6 +1,6 @@
 <% transactions = transactions_list %>
 <% if transactions.any? %>
-    <h2 class="heading-medium">Find the service you were using to start again</h2>
+    <h2 class="heading-medium"><%= t 'errors.transaction_list.title' %></h2>
     <ul class="list-bullet">
       <% transactions.public.each do |transaction| -%>
           <li><%= link_to transaction.name, transaction.homepage %></li>
@@ -8,7 +8,7 @@
       <% transactions.private.each do |transaction| -%>
         <li>
           <%= transaction.name %>
-          <p class="form-hint">Follow the instructions contained in the email you received</p>
+          <p class="form-hint"><%= t 'errors.transaction_list.hint' %></p>
         </li>
       <% end %>
     </ul>

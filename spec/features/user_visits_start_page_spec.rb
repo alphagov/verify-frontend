@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the start page' do
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with("No session cookies can be found").at_least(:once)
       visit "/start"
-      expect(page).to have_content "If you can't access GOV.UK Verify from a service, enable your cookies."
+      expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
       expect(page).to have_http_status :forbidden
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=COOKIE_NOT_FOUND_PAGE'
       expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"
