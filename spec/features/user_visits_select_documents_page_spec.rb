@@ -1,5 +1,5 @@
 require 'feature_helper'
-require 'models/cookie_names'
+require 'i18n'
 
 RSpec.describe 'When the user visits the select documents page' do
   before(:each) do
@@ -18,7 +18,32 @@ RSpec.describe 'When the user visits the select documents page' do
     expect_feedback_source_to_be(page, 'SELECT_DOCUMENTS_PAGE')
   end
 
+  it 'redirects to the select phone page when user has a driving licence' do
+    visit '/select-documents'
+
+    choose 'select_documents_form_uk_driving_licence_true'
+    click_button 'Continue'
+
+    expect(page).to have_current_path(select_phone_path)
+  end
+
+  it 'redirects to the select phone page when no docs checked' do
+    visit '/select-documents'
+
+    check I18n.translate('hub.select_documents.question.no_docs')
+    click_button 'Continue'
+
+    expect(page).to have_current_path(select_phone_path)
+  end
+
   context 'will validate selections', js: false do
+    it 'will show an error message when no selections have been made' do
+      visit 'select-documents'
+
+      click_button 'Continue'
+
+      expect(page).to have_content 'Please select the documents you have'
+    end
     it 'will show an error message when no selections have been made' do
       visit 'select-documents'
 
