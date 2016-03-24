@@ -69,7 +69,7 @@
               </fieldset>
             </div>
             <label class="block-label">
-              <%= f.check_box :no_docs, {}, 'true' %>
+              <%= f.check_box :no_docs, {class: 'js-no-docs'}, 'true' %>
               <span>
                 <span class="inner"></span>
               </span>
@@ -77,9 +77,13 @@
             </label>
           </fieldset>
         </div>
+
+        <div id="validation-error-message-js"></div>
+
         <div class="actions">
           <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
         </div>
-    <% end %>
+  <% end %>
+
   </div>
 </div>
