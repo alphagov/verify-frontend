@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
     get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
     get 'select_documents', to: 'select_documents#index', as: :select_documents
+    post 'select_documents', to: 'select_documents#select_documents', as: :select_documents
+
 
     if Rails.env == 'development'
       get 'confirm_your_identity', to: redirect("#{API_HOST}/confirm-your-identity")
@@ -37,6 +39,7 @@ Rails.application.routes.draw do
       get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
       get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
       get 'forgot_company', to: redirect("#{API_HOST}/forgot-company")
+      get 'select_phone', to: redirect("#{API_HOST}/select-phone")
     else
       get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
       get 'feedback', to: 'feedback#index', as: :feedback
