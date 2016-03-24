@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
       get 'cookies', to: 'cookies#index', as: :cookies
       get 'forgot_company', to: 'forgot_company#index', as: :forgot_company
+      get 'select_phone', to: 'select_phone#index'
     end
   end
 
