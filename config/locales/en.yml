@@ -75,6 +75,7 @@ en:
         driving_licence: UK photocard driving licence (excluding Northern Ireland)
         uk_passport: UK passport
         other_document: Identity document from another country (passport, ID card or driving licence)
+        no_docs: I don't have any of these documents with me
   errors:
     transaction_list:
       title: Find the service you were using to start again

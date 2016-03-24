@@ -22,8 +22,9 @@ RSpec.describe 'When the user visits the select documents page' do
     it 'will show an error message when no selections have been made' do
       visit 'select-documents'
 
+      click_button 'Continue'
+
       expect(page).to have_content 'Please select the documents you have'
-      expect(page).to have_css 'div.error'
     end
   end
 end
