@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
       get 'forgot_company', to: redirect("#{API_HOST}/forgot-company")
       get 'select_phone', to: redirect("#{API_HOST}/select-phone")
+      get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
     else
       get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
       get 'feedback', to: 'feedback#index', as: :feedback
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
       get 'cookies', to: 'cookies#index', as: :cookies
       get 'forgot_company', to: 'forgot_company#index', as: :forgot_company
       get 'select_phone', to: 'select_phone#index'
+      get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
     end
   end
 
