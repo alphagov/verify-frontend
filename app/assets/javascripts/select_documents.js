@@ -53,7 +53,7 @@
           },
           groups: {
             // driving_licence is the first element, error should focus this
-            driving_licence: 'driving_licence passport other_passport no_documents'
+            driving_licence: 'select_documents_form[uk_driving_licence] select_documents_form[uk_passport] select_documents_form[foreign_id] select_documents_form[no_docs]'
           },
           highlight: function(element, errorClass) {
             selectDocuments.$form.children('.form-group:first').addClass('error');
