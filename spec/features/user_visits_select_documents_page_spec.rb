@@ -19,6 +19,7 @@ RSpec.describe 'When the user visits the select documents page' do
   end
 
   it 'redirects to the select phone page when user has a driving licence' do
+    pending
     visit '/select-documents'
 
     choose 'select_documents_form_uk_driving_licence_true'
@@ -28,6 +29,7 @@ RSpec.describe 'When the user visits the select documents page' do
   end
 
   it 'redirects to the select phone page when no docs checked' do
+    pending
     visit '/select-documents'
 
     check I18n.translate('hub.select_documents.question.no_docs')
@@ -44,5 +46,14 @@ RSpec.describe 'When the user visits the select documents page' do
 
       expect(page).to have_content 'Please select the documents you have'
     end
+  end
+
+  it 'will redirect user to a unlikely to verify page when no eligible profiles match selected evidence' do
+    visit 'select-documents'
+    check 'select_documents_form_no_docs'
+
+    click_button 'Continue'
+
+    expect(page).to have_current_path(unlikely_to_verify_path)
   end
 end
