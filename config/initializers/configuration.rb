@@ -8,8 +8,6 @@ CONFIG = Configuration.load! do
   option_string 'white_logo_directory', 'WHITE_LOGO_DIRECTORY'
   option_string 'zdd_file', 'ZDD_LATCH'
   option_string 'polling_wait_time', 'POLLING_WAIT_TIME'
-  option_string 'api_cert_path', 'API_CERT_PATH', allow_missing: true
-  option_string 'analytics_cert_path', 'ANALYTICS_CERT_PATH', allow_missing: true
   option_bool 'metrics_enabled', 'METRICS_ENABLED'
   if metrics_enabled
     option_string 'statsd_host', 'STATSD_HOST'
