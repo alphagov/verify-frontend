@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'models/api/client'
 require 'webmock/rspec'
 require 'active_support'
+require 'connection_pool'
 
 module Api
   describe Client do
@@ -53,10 +54,13 @@ module Api
 
       it 'uses the correct user agent when acting as a client' do
         receive_request.and_return(status: 201, body: '{}')
-        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body)
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body).exactly(4).times
+        api_client.post(path, request_body)
+        api_client.post(path, request_body)
+        api_client.post(path, request_body)
         api_client.post(path, request_body)
         expect(a_request(:post, "#{host}/api#{path}").with(headers: { 'User-Agent' => 'Verify Frontend Micro Service Client' }))
-          .to have_been_made.once
+          .to have_been_made.times(4)
       end
     end
 

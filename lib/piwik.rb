@@ -6,7 +6,7 @@ class Piwik
   def initialize(host, port, site_id)
     @enabled = host.present?
     if @enabled
-      @url = URI.join("#{host}:#{port}", "/piwik.php").to_s
+      @url = URI.join("#{host}:#{port}", "/piwik.php")
     end
     @site_id = site_id
   end

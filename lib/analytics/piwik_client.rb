@@ -1,22 +1,20 @@
-require 'http'
+require 'pooling_client'
 
 module Analytics
   class PiwikClient
-    def initialize(piwik_url, ssl_context)
-      @ssl_context = ssl_context
-      @piwik_url = piwik_url
+    def initialize(piwik_url)
+      @path = piwik_url.path
+      @client = PoolingClient.new(piwik_url, {})
     end
 
     def report(params, headers = {})
-      client(headers).get(@piwik_url, params: params, ssl_context: @ssl_context)
+      client.get(@path, params: params, headers: headers)
     rescue HTTP::Error => e
       Rails.logger.error('Analytics reporting error: ' + e.message)
     end
 
   private
 
-    def client(headers)
-      HTTP.headers(headers)
-    end
+    attr_reader :client
   end
 end

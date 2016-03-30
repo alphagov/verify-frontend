@@ -21,7 +21,7 @@ RSpec.describe 'When a page with a virtual page view is visited' do
     }
     piwik_headers = {
         'X-Forwarded-For' => '1.1.1.1',
-        'Connection' => 'close',
+        'Connection' => 'Keep-Alive',
         'Host' => 'localhost:4242',
         'User-Agent' => 'my user agent',
         'Accept-Language' => 'en-US,en;q=0.5',

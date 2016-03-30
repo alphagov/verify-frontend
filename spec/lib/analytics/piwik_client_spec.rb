@@ -1,25 +1,28 @@
 require 'spec_helper'
-require 'analytics'
-require 'rails_helper'
+require 'analytics/piwik_client'
+require 'webmock/rspec'
 
 module Analytics
   describe Analytics::PiwikClient do
     let(:http) { double(:http) }
     let(:context) { double(:context) }
-    let(:piwik_client) { PiwikClient.new(INTERNAL_PIWIK.url, context) }
+    let(:url) { URI.parse("http://piwik.com/piwik.php") }
+    let(:piwik_client) { PiwikClient.new(url) }
 
     it 'should make a get request with params' do
       params = { 'param_1' => 'param_1_val' }
-      expect(HTTP).to receive(:headers).and_return(http)
-      expect(http).to receive(:get).with(INTERNAL_PIWIK.url, params: params, ssl_context: context)
-
+      stub_request(:get, url).with(query: params).and_return(status: 200)
       piwik_client.report(params)
+      expect(a_request(:get, url).with(query: params)).to have_been_made.once
     end
 
     it 'should log errors and continue' do
-      expect(HTTP).to receive(:headers).and_return(http)
-      expect(http).to receive(:get).and_raise(HTTP::Error)
-      expect(Rails.logger).to receive(:error)
+      rails = double(:rails)
+      stub_const("Rails", rails)
+      logger = double(:logger)
+      expect(rails).to receive(:logger).and_return logger
+      expect(logger).to receive(:error)
+      stub_request(:get, url).to_timeout
 
       piwik_client.report({})
     end
@@ -30,9 +33,7 @@ module Analytics
         'Accept-Language' => 'en-GB',
         'X-Forwarded-For' => '192.168.0.1',
       }
-      expect(HTTP).to receive(:headers).with(headers).and_return(http)
-      expect(http).to receive(:get).with(INTERNAL_PIWIK.url, params: {}, ssl_context: context)
-
+      stub_request(:get, url).with(headers: headers).and_return(status: 200)
       piwik_client.report({}, headers)
     end
   end

@@ -4,12 +4,12 @@ require 'active_support/core_ext/string'
 RSpec.describe Piwik do
   it 'should correctly generate a url' do
     piwik = Piwik.new('http://www.example.com', 1234, 1)
-    expect(piwik.url).to eql 'http://www.example.com:1234/piwik.php'
+    expect(piwik.url.to_s).to eql 'http://www.example.com:1234/piwik.php'
   end
 
   it 'should use default https port' do
     piwik = Piwik.new('https://www.example.com', 443, 1)
-    expect(piwik.url).to eql 'https://www.example.com/piwik.php'
+    expect(piwik.url.to_s).to eql 'https://www.example.com/piwik.php'
   end
 
   it 'has a site id' do

@@ -46,6 +46,8 @@ gem 'rack-handlers'
 
 gem 'http', '~> 1.0.0'
 
+gem 'connection_pool'
+
 # Use sentry-raven for sending logs to Sentry via the raven protocol
 gem 'sentry-raven'
 
