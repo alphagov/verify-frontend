@@ -46,14 +46,14 @@
         }, $.validator.format('Please select the documents you have'));
         selectDocuments.$form.validate({
           rules: {
-            'select_documents_form[uk_driving_licence]': 'selectDocumentsValidation',
-            'select_documents_form[uk_passport]': 'selectDocumentsValidation',
-            'select_documents_form[foreign_id]': 'selectDocumentsValidation',
+            'select_documents_form[driving_licence]': 'selectDocumentsValidation',
+            'select_documents_form[passport]': 'selectDocumentsValidation',
+            'select_documents_form[non_uk_id_document]': 'selectDocumentsValidation',
             'select_documents_form[no_docs]': 'selectDocumentsValidation'
           },
           groups: {
             // driving_licence is the first element, error should focus this
-            driving_licence: 'select_documents_form[uk_driving_licence] select_documents_form[uk_passport] select_documents_form[foreign_id] select_documents_form[no_docs]'
+            driving_licence: 'select_documents_form[driving_licence] select_documents_form[passport] select_documents_form[non_uk_id_document] select_documents_form[no_docs]'
           },
           highlight: function(element, errorClass) {
             selectDocuments.$form.children('.form-group:first').addClass('error');

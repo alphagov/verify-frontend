@@ -12,25 +12,25 @@ describe("Select Documents Form", function () {
                                  '<div class="form-group ">' +
                                    '<fieldset class="inline"><span>1. UK photocard driving licence (excluding Northern Ireland)</span>' +
                                      '<label class="block-label" for="driving_licence_yes" onclick="">' +
-                                       '<input id="driving_licence_yes" name="select_documents_form[uk_driving_licence]" value="true" type="radio"><span><span class="inner"></span></span>Yes</label>' +
+                                       '<input id="driving_licence_yes" name="select_documents_form[driving_licence]" value="true" type="radio"><span><span class="inner"></span></span>Yes</label>' +
                                      '<label class="block-label" for="driving_licence_no" onclick="">' +
-                                       '<input id="driving_licence_no" name="select_documents_form[uk_driving_licence]" value="false" type="radio"><span><span class="inner"></span></span>No</label>' +
+                                       '<input id="driving_licence_no" name="select_documents_form[driving_licence]" value="false" type="radio"><span><span class="inner"></span></span>No</label>' +
                                    '</fieldset>' +
                                  '</div>' +
                                  '<div class="form-group ">' +
                                    '<fieldset class="inline"><span>2. UK passport</span>' +
                                      '<label class="block-label" for="passport_yes" onclick="">' +
-                                       '<input id="passport_yes" name="select_documents_form[uk_passport]" value="true" type="radio"><span><span class="inner"></span></span>Yes</label>' +
+                                       '<input id="passport_yes" name="select_documents_form[passport]" value="true" type="radio"><span><span class="inner"></span></span>Yes</label>' +
                                      '<label class="block-label" for="passport_no" onclick="">' +
-                                       '<input id="passport_no" name="select_documents_form[uk_passport]" value="false" type="radio"><span><span class="inner"></span></span>No</label>' +
+                                       '<input id="passport_no" name="select_documents_form[passport]" value="false" type="radio"><span><span class="inner"></span></span>No</label>' +
                                    '</fieldset>' +
                                  '</div>' +'' +
                                  '<div class="form-group ">' +
                                    '<fieldset class="inline"><span>3. Passport from another country</span>' +
                                      '<label class="block-label" for="other_passport_yes" onclick="">' +
-                                       '<input id="other_passport_yes" name="select_documents_form[foreign_id]" value="true" type="radio"><span><span class="inner"></span></span>Yes</label>' +
+                                       '<input id="other_passport_yes" name="select_documents_form[non_uk_id_document]" value="true" type="radio"><span><span class="inner"></span></span>Yes</label>' +
                                      '<label class="block-label" for="other_passport_no" onclick="">' +
-                                       '<input id="other_passport_no" name="select_documents_form[foreign_id]" value="false" type="radio"><span><span class="inner"></span></span>No</label>' +
+                                       '<input id="other_passport_no" name="select_documents_form[non_uk_id_document]" value="false" type="radio"><span><span class="inner"></span></span>No</label>' +
                                    '</fieldset>' +
                                  '</div>' +
                                  '<label class="block-label" for="no-documents" onclick="">' +
@@ -75,30 +75,30 @@ describe("Select Documents Form", function () {
         selectDocumentsForm.triggerHandler('submit');
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
         // When - HACK one time click doesn’t work in the test ...
-        selectDocumentsForm.find('input[name="select_documents_form[uk_passport]"][value=true]').trigger('click');
-        selectDocumentsForm.find('input[name="select_documents_form[uk_passport]"][value=true]').trigger('click');
+        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=true]').trigger('click');
+        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=true]').trigger('click');
         // Then
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
     });
 
     it("should have errors when the only selection that implies no evidence is made.", function () {
-        selectDocumentsForm.find('input[name="select_documents_form[uk_passport]"][value=false]').trigger('click');
+        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=false]').trigger('click');
         selectDocumentsForm.triggerHandler('submit');
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('Please select the documents you have');
     });
 
     it("should have no error on submit when other passport is true and passport is false", function () {
-        selectDocumentsForm.find('input[name="select_documents_form[foreign_id]"][value=true]').trigger('click');
-        selectDocumentsForm.find('input[name="select_documents_form[uk_passport]"][value=false]').trigger('click');
+        selectDocumentsForm.find('input[name="select_documents_form[non_uk_id_document]"][value=true]').trigger('click');
+        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=false]').trigger('click');
         selectDocumentsForm.triggerHandler('submit');
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
     });
 
     it("should have no errors on submit when selections that imply evidence are made - Happy Path", function () {
-        selectDocumentsForm.find('input[name="select_documents_form[uk_passport]"][value=true]').trigger('click');
+        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=true]').trigger('click');
         selectDocumentsForm.triggerHandler('submit');
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');

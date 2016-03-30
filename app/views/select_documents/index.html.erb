@@ -15,14 +15,14 @@
               <fieldset class="inline">
                 <span>1. <%= t 'hub.select_documents.question.driving_licence'%></span>
                 <label class="block-label">
-                  <%= f.radio_button :uk_driving_licence, 'true' %>
+                  <%= f.radio_button :driving_licence, 'true' %>
                   <span>
                     <span class="inner"></span>
                   </span>
                   <%= t 'option.yes' %>
                 </label>
                 <label class="block-label">
-                  <%= f.radio_button :uk_driving_licence, 'false' %>
+                  <%= f.radio_button :driving_licence, 'false' %>
                   <span>
                     <span class="inner"></span>
                   </span>
@@ -32,16 +32,16 @@
             </div>
             <div class="form-group">
               <fieldset class="inline">
-                <span>2. <%= t 'hub.select_documents.question.uk_passport'%></span>
+                <span>2. <%= t 'hub.select_documents.question.passport'%></span>
                 <label class="block-label">
-                  <%= f.radio_button :uk_passport, 'true' %>
+                  <%= f.radio_button :passport, 'true' %>
                   <span>
                     <span class="inner"></span>
                   </span>
                   <%= t 'option.yes'%>
                 </label>
                 <label class="block-label" >
-                  <%= f.radio_button :uk_passport, 'false' %>
+                  <%= f.radio_button :passport, 'false' %>
                   <span>
                     <span class="inner"></span>
                   </span>
@@ -51,16 +51,16 @@
             </div>
             <div class="form-group">
               <fieldset class="inline">
-                <span>3. <%= t 'hub.select_documents.question.other_document'%></span>
+                <span>3. <%= t 'hub.select_documents.question.non_uk_id_document'%></span>
                 <label class="block-label" >
-                  <%= f.radio_button :foreign_id, 'true' %>
+                  <%= f.radio_button :non_uk_id_document, 'true' %>
                   <span>
                     <span class="inner"></span>
                   </span>
                   <%= t 'option.yes'%>
                 </label>
                 <label class="block-label" >
-                  <%= f.radio_button :foreign_id, 'false' %>
+                  <%= f.radio_button :non_uk_id_document, 'false' %>
                   <span>
                     <span class="inner"></span>
                   </span>
@@ -69,7 +69,7 @@
               </fieldset>
             </div>
             <label class="block-label">
-              <%= f.check_box :no_docs, {class: 'js-no-docs'}, 'true' %>
+              <%= f.check_box :no_docs, {class: 'js-no-docs'}, 'true', 'false' %>
               <span>
                 <span class="inner"></span>
               </span>

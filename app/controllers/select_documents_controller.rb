@@ -6,7 +6,7 @@ class SelectDocumentsController < ApplicationController
   def select_documents
     @form = SelectDocumentsForm.new(params[:select_documents_form])
     if @form.valid?
-      if idp_eligibility_checker.any_for_documents?(@form)
+      if idp_eligibility_checker.any_for_documents?(@form.selected_evidence)
         redirect_to select_phone_path
       else
         redirect_to unlikely_to_verify_path

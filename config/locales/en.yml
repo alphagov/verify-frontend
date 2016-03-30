@@ -73,8 +73,8 @@ en:
       legend: Do you have these documents with you?
       question:
         driving_licence: UK photocard driving licence (excluding Northern Ireland)
-        uk_passport: UK passport
-        other_document: Identity document from another country (passport, ID card or driving licence)
+        passport: UK passport
+        non_uk_id_document: Identity document from another country (passport, ID card or driving licence)
         no_docs: I don't have any of these documents with me
   errors:
     transaction_list:

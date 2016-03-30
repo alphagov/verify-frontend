@@ -1,16 +1,28 @@
 class SelectDocumentsForm
   include ActiveModel::Model
 
-  attr_reader :uk_driving_licence, :uk_passport, :foreign_id, :no_docs
+  DOCUMENT_ATTRIBUTES = [:passport, :driving_licence, :non_uk_id_document]
+
+  attr_reader :driving_licence, :passport, :non_uk_id_document, :no_docs
   validate :one_must_be_present
   validate :mandatory_fields_present, unless: :all_fields_blank?
   validate :no_contradictory_inputs
 
   def initialize(hash)
-    @uk_driving_licence = hash[:uk_driving_licence]
-    @uk_passport = hash[:uk_passport]
-    @foreign_id = hash[:foreign_id]
+    @driving_licence = hash[:driving_licence]
+    @passport = hash[:passport]
+    @non_uk_id_document = hash[:non_uk_id_document]
     @no_docs = hash[:no_docs]
+  end
+
+  def selected_evidence
+    result = []
+    DOCUMENT_ATTRIBUTES.each do |attr|
+      if send(attr) == 'true'
+        result << attr
+      end
+    end
+    result
   end
 
 private
@@ -60,6 +72,6 @@ private
   end
 
   def document_attributes
-    [uk_passport, uk_driving_licence, foreign_id]
+    [passport, driving_licence, non_uk_id_document]
   end
 end
