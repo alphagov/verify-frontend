@@ -22,7 +22,7 @@ RSpec.describe 'When the user visits the select documents page' do
     pending
     visit '/select-documents'
 
-    choose 'select_documents_form_uk_driving_licence_true'
+    choose 'select_documents_form_driving_licence_true'
     click_button 'Continue'
 
     expect(page).to have_current_path(select_phone_path)

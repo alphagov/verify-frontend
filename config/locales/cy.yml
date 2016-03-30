@@ -71,8 +71,9 @@ cy:
       legend: A oes gennych y dogfennau hyn gyda chi?
       question:
         driving_licence: trwydded yrru cerdyn-llun yn y DU (ac eithrio Gogledd Iwerddon)
-        uk_passport: pasbort y DU
-        other_document: dogfen adnabod o wlad arall ( pasbort , cerdyn adnabod neu drwydded yrru )
+        passport: pasbort y DU
+        non_uk_id_document: dogfen adnabod o wlad arall ( pasbort , cerdyn adnabod neu drwydded yrru )
+        no_docs: Dydw i ddim yn cael unrhyw un o'r dogfennau hyn gyda mi
   errors:
     transaction_list:
       title: Dewch o hyd i'r gwasanaeth yr ydych yn ei ddefnyddio i ddechrau eto
