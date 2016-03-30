@@ -70,5 +70,16 @@ describe SelectDocumentsForm do
       evidence = form.selected_evidence
       expect(evidence).to eql([:passport, :driving_licence])
     end
+
+    it 'should return a list of the selected evidence when there is an empty value' do
+      form = SelectDocumentsForm.new(
+        driving_licence: 'true',
+        passport: '',
+        non_uk_id_document: 'false',
+        no_docs: 'false'
+      )
+      evidence = form.selected_evidence
+      expect(evidence).to eql([:driving_licence])
+    end
   end
 end
