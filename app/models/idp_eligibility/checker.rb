@@ -1,12 +1,7 @@
 module IdpEligibility
   class Checker
-    def initialize
-      @idps = {}
-    end
-
-    def add_rule(idp, docs)
-      @idps[idp] ||= []
-      @idps[idp].push(Set.new docs)
+    def initialize(rules_repository)
+      @rules_repository = rules_repository
     end
 
     def any_for_documents?(evidence)
@@ -21,8 +16,8 @@ module IdpEligibility
 
     def idps_at_document_stage(evidence)
       user_docs = Set.new evidence
-      matching_idps = @idps.select do |_, val|
-        val.any? { |docs| (docs & docs_only).subset?(user_docs) }
+      matching_idps = @rules_repository.rules.select do |_, val|
+        val.any? { |docs| (Set.new(docs) & docs_only).subset?(user_docs) }
       end
       matching_idps.keys
     end

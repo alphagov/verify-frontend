@@ -22,4 +22,5 @@ CONFIG = Configuration.load! do
   option_int 'piwik_site_id', 'PIWIK_SITE_ID', default: 1
   option_int 'read_timeout', 'READ_TIMEOUT', default: 60
   option_int 'connect_timeout', 'CONNECT_TIMEOUT', default: 4
+  option_string 'rules_directory', 'RULES_DIRECTORY'
 end
