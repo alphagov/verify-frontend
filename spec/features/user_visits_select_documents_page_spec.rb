@@ -38,13 +38,14 @@ RSpec.describe 'When the user visits the select documents page' do
     expect(page).to have_current_path(select_phone_path)
   end
 
-  context 'will validate selections', js: false do
+  context 'without javascript', js: false do
     it 'will show an error message when no selections have been made' do
       visit 'select-documents'
 
       click_button 'Continue'
 
-      expect(page).to have_content 'Please select the documents you have'
+      expect(page).to have_css '.validation-message', text: 'Please select the documents you have'
+      expect(page).to have_css '.form-group.error'
     end
   end
 
