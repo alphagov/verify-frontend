@@ -1,0 +1,3 @@
+simpleId: "stub-idp-one"
+rules:
+  - [ "driving_licence" ]
