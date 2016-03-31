@@ -4,8 +4,9 @@ module IdpEligibility
       @rules_repository = rules_repository
     end
 
-    def any_for_documents?(evidence)
-      idps_at_document_stage(evidence).length > 0
+    def any_for_documents?(evidence, enabled_idps)
+      idps = idps_at_document_stage(evidence) & enabled_idps
+      idps.length > 0
     end
 
   private

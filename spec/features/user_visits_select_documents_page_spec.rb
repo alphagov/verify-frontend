@@ -19,7 +19,7 @@ RSpec.describe 'When the user visits the select documents page' do
   end
 
   it 'redirects to the select phone page when user has a driving licence' do
-    pending
+    stub_federation
     visit '/select-documents'
 
     choose 'select_documents_form_driving_licence_true'
@@ -29,7 +29,7 @@ RSpec.describe 'When the user visits the select documents page' do
   end
 
   it 'redirects to the select phone page when no docs checked' do
-    pending
+    stub_federation_no_docs
     visit '/select-documents'
 
     check I18n.translate('hub.select_documents.question.no_docs')
@@ -49,6 +49,7 @@ RSpec.describe 'When the user visits the select documents page' do
   end
 
   it 'will redirect user to a unlikely to verify page when no eligible profiles match selected evidence' do
+    stub_federation
     visit 'select-documents'
     check 'select_documents_form_no_docs'
 
