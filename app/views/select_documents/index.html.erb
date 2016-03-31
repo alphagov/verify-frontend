@@ -5,10 +5,12 @@
   <div class="column-two-thirds">
     <h1><%= t 'hub.select_documents.heading' %></h1>
     <% if flash[:errors] %>
-        <p><%= flash[:errors] %></p>
+      <div id="validation-error-message-no-js" class="validation-message form-group">
+        <p class="error"><%= flash[:errors] %></p>
+      </div>
     <% end %>
     <%= form_for @form, url: '', html: { id: 'validate-documents', novalidate: 'novalidate' } do |f| %>
-        <div class="form-group">
+        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
           <fieldset>
             <legend><%= t 'hub.select_documents.legend'%></legend>
             <div class="form-group">
@@ -76,7 +78,7 @@
               <%= t 'hub.select_documents.question.no_docs'%>
             </label>
           </fieldset>
-        </div>
+        <% end %>
 
         <div id="validation-error-message-js"></div>
 
