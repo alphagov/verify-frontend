@@ -11,7 +11,10 @@ module Display
         # We need to randomise the order of IDPs so that it satisfies the need for us to be unbiased in displaying the IDPs.
         idp_display_data = @display_correlator.correlate(federation_info.idps.shuffle)
 
-        { idp_display_data: idp_display_data, transaction_entity_id: federation_info.transaction_entity_id }
+        { idp_display_data: idp_display_data,
+          transaction_simple_id: federation_info.transaction_simple_id,
+          transaction_entity_id: federation_info.transaction_entity_id
+        }
       end
     end
   end

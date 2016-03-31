@@ -5,11 +5,12 @@ api_client = Api::Client.new(API_HOST, Api::ResponseHandler.new)
 
 SESSION_PROXY = SessionProxy.new(api_client, OriginatingIpStore)
 
-federation_translator = Display::FederationTranslator.new
+FEDERATION_TRANSLATOR = Display::FederationTranslator.new
+
 TRANSACTION_LISTER = Display::Rp::TransactionLister.new(
   Display::Rp::TransactionsProxy.new(api_client),
-  Display::Rp::DisplayDataCorrelator.new(federation_translator))
+  Display::Rp::DisplayDataCorrelator.new(FEDERATION_TRANSLATOR))
 
 FEDERATION_INFO_GETTER = Display::Federation::FederationInfoGetter.new(
   SESSION_PROXY,
-  Display::Idp::DisplayDataCorrelator.new(federation_translator, CONFIG.logo_directory, CONFIG.white_logo_directory))
+  Display::Idp::DisplayDataCorrelator.new(FEDERATION_TRANSLATOR, CONFIG.logo_directory, CONFIG.white_logo_directory))

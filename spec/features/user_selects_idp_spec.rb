@@ -9,9 +9,18 @@ def given_api_requests_have_been_mocked!
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 end
 
+def then_custom_variable_reported_for_sign_in
+  piwik_request = {
+      '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"]}",
+      'action_name' => "The No option was selected on the introduction page #{transaction_analytics_description}",
+  }
+  expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+end
+
 def given_im_on_the_sign_in_page
   cookies
   visit '/sign-in'
+  then_custom_variable_reported_for_sign_in
 end
 
 def when_i_select_an_idp
@@ -46,6 +55,7 @@ end
 RSpec.describe 'user selects an IDP on the sign in page' do
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:idp_display_name) { 'IDCorp' }
+  let(:transaction_analytics_description) { 'analytics description for test-rp' }
   let(:body) {
     [
       { 'simpleId' => 'stub-idp-zero', 'entityId' => 'idp-zero' },

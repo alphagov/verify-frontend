@@ -42,7 +42,7 @@ describe SessionProxy do
 
     expect(api_client).to receive(:get)
       .with(SessionProxy::FEDERATION_INFO_PATH, cookies: expected_cookie_hash)
-      .and_return('idps' => idp_list, 'transactionEntityId' => 'some-id')
+      .and_return('idps' => idp_list, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id')
     result = SessionProxy.new(api_client, originating_ip_store).federation_info_for_session(cookie_hash)
     expect(result.idps).to eq idp_list
   end
