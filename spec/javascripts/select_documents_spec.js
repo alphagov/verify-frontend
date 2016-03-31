@@ -5,7 +5,7 @@
 
 describe("Select Documents Form", function () {
 
-    var formWithNoErrors = '<form id="validate-documents" action="/select-documents" method="POST">' +
+    var formWithNoErrors = '<form id="validate-documents" action="/select-documents" method="POST" data-msg="Please select the documents you have">' +
                              '<div class="form-group ">' +
                                '<fieldset>' +
                                  '<legend>Do you have these documents with you?</legend>' +
