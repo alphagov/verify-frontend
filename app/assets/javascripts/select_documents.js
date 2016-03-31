@@ -43,7 +43,7 @@
             valid = false;
           }
           return valid;
-        }, $.validator.format('Please select the documents you have'));
+        }, $.validator.format(selectDocuments.$form.data('msg')));
         selectDocuments.$form.validate({
           rules: {
             'select_documents_form[driving_licence]': 'selectDocumentsValidation',
