@@ -25,6 +25,7 @@ private
   end
 
   def uri_with_evidence_query(path, selected_evidence)
+    selected_evidence = [:no_documents] if selected_evidence.empty?
     s = '?' + selected_evidence.collect { |evidence| "selected-evidence=#{evidence}" }.join('&')
     URI(path + s).to_s
   end

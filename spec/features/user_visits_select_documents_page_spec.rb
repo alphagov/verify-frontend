@@ -42,7 +42,7 @@ RSpec.describe 'When the user visits the select documents page' do
     check I18n.translate('hub.select_documents.question.no_docs')
     click_button 'Continue'
 
-    expect(page).to have_current_path(select_phone_path)
+    expect(page).to have_current_path(select_phone_path, only_path: true)
   end
 
   context 'without javascript', js: false do
@@ -80,6 +80,17 @@ RSpec.describe 'When the user visits the select documents page' do
 
       expect(page).to have_current_path(select_phone_path, only_path: true)
       expect_evidence_params(%w(driving_licence passport non_uk_id_document))
+    end
+
+    it 'redirects to the select phone page with selected-evidence param set to no-documents when no docs checked' do
+      stub_federation_no_docs
+      visit '/select-documents'
+
+      check 'select_documents_form_no_docs'
+      click_button 'Continue'
+
+      expect(page).to have_current_path(select_phone_path, only_path: true)
+      expect_evidence_params(%w(no_documents))
     end
   end
 end
