@@ -2,6 +2,13 @@ require 'feature_helper'
 require 'i18n'
 
 RSpec.describe 'When the user visits the select documents page' do
+  def expect_evidence_params(evidence)
+    current_uri = URI.parse(page.current_url)
+    query = CGI::parse(current_uri.query)
+    query_evidence = Set.new(query['selected-evidence'])
+    expect(query_evidence).to eql(Set.new(evidence))
+  end
+
   before(:each) do
     set_session_cookies!
   end
@@ -25,7 +32,7 @@ RSpec.describe 'When the user visits the select documents page' do
     choose 'select_documents_form_driving_licence_true'
     click_button 'Continue'
 
-    expect(page).to have_current_path(select_phone_path)
+    expect(page).to have_current_path(select_phone_path, only_path: true)
   end
 
   it 'redirects to the select phone page when no docs checked' do
@@ -57,5 +64,22 @@ RSpec.describe 'When the user visits the select documents page' do
     click_button 'Continue'
 
     expect(page).to have_current_path(unlikely_to_verify_path)
+  end
+
+  # The RackTest driver doesn't report multiple query params with the same key in page.current_url
+  # We set js to true so that the test runs in a real browser (using Selenium) instead
+  context 'with selenium', js: true do
+    it 'redirects to the select phone page with selected evidence query parameters' do
+      stub_federation
+      visit '/select-documents'
+
+      choose 'select_documents_form_driving_licence_true'
+      choose 'select_documents_form_passport_true'
+      choose 'select_documents_form_non_uk_id_document_true'
+      click_button 'Continue'
+
+      expect(page).to have_current_path(select_phone_path, only_path: true)
+      expect_evidence_params(%w(driving_licence passport non_uk_id_document))
+    end
   end
 end
