@@ -66,6 +66,18 @@ RSpec.describe 'When the user visits the select documents page' do
     expect(page).to have_current_path(unlikely_to_verify_path)
   end
 
+  it 'reports to Piwik' do
+    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+    piwik_request = {
+        'action_name' => 'Select Documents Next'
+    }
+
+    visit 'select-documents'
+    click_button 'Continue'
+
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+  end
+
   # The RackTest driver doesn't report multiple query params with the same key in page.current_url
   # We set js to true so that the test runs in a real browser (using Selenium) instead
   context 'with selenium', js: true do
