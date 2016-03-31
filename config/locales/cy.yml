@@ -74,6 +74,9 @@ cy:
         passport: pasbort y DU
         non_uk_id_document: dogfen adnabod o wlad arall ( pasbort , cerdyn adnabod neu drwydded yrru )
         no_docs: Dydw i ddim yn cael unrhyw un o'r dogfennau hyn gyda mi
+      errors:
+        no_selection: Dewiswch y dogfennau sydd gennych
+        invalid_selection: Gwiriwch eich dewis
   errors:
     transaction_list:
       title: Dewch o hyd i'r gwasanaeth yr ydych yn ei ddefnyddio i ddechrau eto
