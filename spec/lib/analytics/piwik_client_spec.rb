@@ -12,7 +12,8 @@ module Analytics
     it 'should make a get request with params' do
       params = { 'param_1' => 'param_1_val' }
       stub_request(:get, url).with(query: params).and_return(status: 200)
-      piwik_client.report(params)
+      thread = piwik_client.report(params)
+      thread.join
       expect(a_request(:get, url).with(query: params)).to have_been_made.once
     end
 
@@ -23,8 +24,8 @@ module Analytics
       expect(rails).to receive(:logger).and_return logger
       expect(logger).to receive(:error)
       stub_request(:get, url).to_timeout
-
-      piwik_client.report({})
+      thread = piwik_client.report({})
+      thread.join
     end
 
     it 'should forward headers' do
@@ -34,7 +35,9 @@ module Analytics
         'X-Forwarded-For' => '192.168.0.1',
       }
       stub_request(:get, url).with(headers: headers).and_return(status: 200)
-      piwik_client.report({}, headers)
+      thread = piwik_client.report({}, headers)
+      thread.join
+      expect(a_request(:get, url).with(headers: headers)).to have_been_made.once
     end
   end
 end

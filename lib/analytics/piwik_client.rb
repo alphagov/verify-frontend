@@ -8,9 +8,13 @@ module Analytics
     end
 
     def report(params, headers = {})
-      client.get(@path, params: params, headers: headers)
-    rescue HTTP::Error => e
-      Rails.logger.error('Analytics reporting error: ' + e.message)
+      Thread.new do
+        begin
+          client.get(@path, params: params, headers: headers)
+        rescue HTTP::Error => e
+          Rails.logger.error('Analytics reporting error: ' + e.message)
+        end
+      end
     end
 
   private
