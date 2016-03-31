@@ -6,8 +6,9 @@ class SelectDocumentsController < ApplicationController
   def select_documents
     @form = SelectDocumentsForm.new(params[:select_documents_form])
     if @form.valid?
-      if IDP_ELIGIBILITY_CHECKER.any_for_documents?(@form.selected_evidence, available_idps)
-        redirect_to select_phone_path
+      selected_evidence = @form.selected_evidence
+      if IDP_ELIGIBILITY_CHECKER.any_for_documents?(selected_evidence, available_idps)
+        redirect_to uri_with_evidence_query(select_phone_path, selected_evidence)
       else
         redirect_to unlikely_to_verify_path
       end
@@ -21,5 +22,10 @@ private
 
   def available_idps
     SESSION_PROXY.federation_info_for_session(cookies).idps.collect { |idp| idp['simpleId'] }
+  end
+
+  def uri_with_evidence_query(path, selected_evidence)
+    s = '?' + selected_evidence.collect { |evidence| "selected-evidence=#{evidence}" }.join('&')
+    URI(path + s).to_s
   end
 end
