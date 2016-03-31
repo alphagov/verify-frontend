@@ -15,7 +15,7 @@ def given_im_on_the_sign_in_page
 end
 
 def when_i_select_an_idp
-  click_button('IDCorp')
+  click_button(idp_display_name)
 end
 
 def then_im_at_the_idp
@@ -29,8 +29,8 @@ def then_im_at_the_idp
   expect(a_request(:get, api_uri('session/idp-authn-request'))
            .with(query: { 'originatingIp' => originating_ip })).to have_been_made.once
   piwik_request = {
-      '_cvar' => "{\"3\":[\"SIGNIN_IDP\",\"#{idp_entity_id}\"]}",
-      'action_name' => 'Sign In - ' + idp_entity_id,
+      '_cvar' => "{\"3\":[\"SIGNIN_IDP\",\"#{idp_display_name}\"]}",
+      'action_name' => 'Sign In - ' + idp_display_name,
   }
   expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 end
@@ -45,6 +45,7 @@ end
 
 RSpec.describe 'user selects an IDP on the sign in page' do
   let(:idp_entity_id) { 'http://idcorp.com' }
+  let(:idp_display_name) { 'IDCorp' }
   let(:body) {
     [
       { 'simpleId' => 'stub-idp-zero', 'entityId' => 'idp-zero' },

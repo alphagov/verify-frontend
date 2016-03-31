@@ -9,10 +9,10 @@ describe('The sign in page', function () {
       formSpy,
       html = '<div class="js-idp-option-container">'
            + '<form class="idp-option first-form" action="">'
-           +   '<button type=submit name=IDCorp></button>'
+           +   '<button type=submit name=IDCorp value="IDCorpDisplayName"></button>'
            + '</form>'
            + '<form class="idp-option second-form" action="">'
-           +   '<button type=submit name=IDCorpZwei></button>'
+           +   '<button type=submit name=IDCorpZwei value="IDCorpZweiDisplayName"></button>'
            + '</form>'
            + '<form id=post-to-idp>'
            +   '<input name=SAMLRequest type=hidden>'
@@ -51,7 +51,7 @@ describe('The sign in page', function () {
         })
       });
       expect(jasmine.Ajax.requests.mostRecent().url).toBe(apiPath);
-      expect(jasmine.Ajax.requests.mostRecent().params).toBe('{"entityId":"IDCorpZwei"}');
+      expect(jasmine.Ajax.requests.mostRecent().params).toBe('{"entityId":"IDCorpZwei","displayName":"IDCorpZweiDisplayName"}');
     });
     it('should populate the SAML request form with the AJAX response and submit it', function () {
       $(document).submit(formSpy);
