@@ -4,6 +4,7 @@ class SelectDocumentsController < ApplicationController
   end
 
   def select_documents
+    ANALYTICS_REPORTER.report(request, 'Select Documents Next')
     @form = SelectDocumentsForm.new(params[:select_documents_form])
     if @form.valid?
       selected_evidence = @form.selected_evidence
