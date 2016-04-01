@@ -5,8 +5,6 @@ api_client = Api::Client.new(API_HOST, Api::ResponseHandler.new)
 
 SESSION_PROXY = SessionProxy.new(api_client, OriginatingIpStore)
 
-FEDERATION_TRANSLATOR = Display::FederationTranslator.new
-
 TRANSACTION_LISTER = Display::Rp::TransactionLister.new(
   Display::Rp::TransactionsProxy.new(api_client),
   Display::Rp::DisplayDataCorrelator.new(FEDERATION_TRANSLATOR))

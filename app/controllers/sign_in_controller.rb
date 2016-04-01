@@ -4,11 +4,7 @@ class SignInController < ApplicationController
   def index
     federation_info = FEDERATION_INFO_GETTER.get_info(cookies)
     @identity_providers = federation_info[:idp_display_data]
-    transaction_analytics_description = FEDERATION_TRANSLATOR.translate("rps.#{federation_info[:transaction_simple_id]}.analyticsDescription")
-    ANALYTICS_REPORTER.report_custom_variable(
-      request,
-      "The No option was selected on the introduction page #{transaction_analytics_description}",
-      Analytics::CustomVariable.build(:rp, transaction_analytics_description))
+    FEDERATION_REPORTER.report_sign_in(federation_info[:transaction_simple_id], request)
     render 'index'
   end
 
