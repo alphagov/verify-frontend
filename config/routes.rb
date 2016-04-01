@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'forgot_company', to: 'forgot_company#index', as: :forgot_company
-    get 'select_phone', to: 'select_phone#index'
+    get 'select-phone', to: 'select_phone#index', as: :select_phone
     get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
   end
 
