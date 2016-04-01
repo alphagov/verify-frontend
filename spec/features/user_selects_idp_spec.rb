@@ -20,7 +20,6 @@ end
 def given_im_on_the_sign_in_page
   cookies
   visit '/sign-in'
-  then_custom_variable_reported_for_sign_in
 end
 
 def when_i_select_an_idp
@@ -82,6 +81,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     it 'will redirect the user to the IDP' do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
+      then_custom_variable_reported_for_sign_in
       when_i_select_an_idp
       then_im_at_the_idp
     end
@@ -91,6 +91,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     it 'will display the interstitial page and on submit will redirect the user to IDP' do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
+      then_custom_variable_reported_for_sign_in
       when_i_select_an_idp
       then_im_at_the_interstitial_page
       when_i_choose_to_continue
