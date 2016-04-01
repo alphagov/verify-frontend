@@ -78,23 +78,8 @@ RSpec.describe 'When the user visits the select documents page' do
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
 
-  # The RackTest driver doesn't report multiple query params with the same key in page.current_url
-  # We set js to true so that the test runs in a real browser (using Selenium) instead
-  context 'with selenium', js: true do
-    it 'redirects to the select phone page with selected evidence query parameters' do
-      stub_federation
-      visit '/select-documents'
-
-      choose 'select_documents_form_driving_licence_true'
-      choose 'select_documents_form_passport_true'
-      choose 'select_documents_form_non_uk_id_document_true'
-      click_button 'Continue'
-
-      expect(page).to have_current_path(select_phone_path, only_path: true)
-      expect_evidence_params(%w(driving_licence passport non_uk_id_document))
-    end
-
-    it 'redirects to the select phone page with selected-evidence param set to no-documents when no docs checked' do
+  context 'when redirecting to the select phone page' do
+    it 'sets selected-evidence param to no-documents when no docs checked' do
       stub_federation_no_docs
       visit '/select-documents'
 
@@ -103,6 +88,23 @@ RSpec.describe 'When the user visits the select documents page' do
 
       expect(page).to have_current_path(select_phone_path, only_path: true)
       expect_evidence_params(%w(no_documents))
+    end
+
+    # The RackTest driver doesn't report multiple query params with the same key in page.current_url
+    # We set js to true so that the test runs in a real browser (using Selenium) instead
+    context 'with selenium', js: true do
+      it 'includes selected-evidence params for all selected documents' do
+        stub_federation
+        visit '/select-documents'
+
+        choose 'select_documents_form_driving_licence_true'
+        choose 'select_documents_form_passport_true'
+        choose 'select_documents_form_non_uk_id_document_true'
+        click_button 'Continue'
+
+        expect(page).to have_current_path(select_phone_path, only_path: true)
+        expect_evidence_params(%w(driving_licence passport non_uk_id_document))
+      end
     end
   end
 end
