@@ -26,24 +26,19 @@
     },
     init: function (){
       selectDocuments.$form = $('#validate-documents');
+
       if (selectDocuments.$form.length === 1) {
         selectDocuments.$form.find('.js-no-docs').on('click',selectDocuments.markAllAsNo);
         selectDocuments.$form.find('input[type=radio][value=true]').on('click',selectDocuments.unCheckNoDocuments);
 
         $.validator.addMethod('selectDocumentsValidation', function(value, element) {
-          var valid = true;
-          var noSelections = function() {
-            return selectDocuments.$form.find('input').filter(':checked').length === 0;
-          };
-          var insufficientSelectionsThatImplyNoEvidence = function() {
-            var checkedElements = selectDocuments.$form.find('input').filter(':checked');
-            return (checkedElements.length === 1 && checkedElements.val() === 'false');
-          };
-          if (noSelections() || insufficientSelectionsThatImplyNoEvidence()) {
-            valid = false;
-          }
-          return valid;
+          var numberOfDocumentQuestions = 3;
+          var checkedElements = selectDocuments.$form.find('input[type=radio]').filter(':checked');
+          var allDocumentQuestionsAnswered = checkedElements.length === numberOfDocumentQuestions;
+          var hasAtLeastOneDocument = checkedElements.filter('[value=true]').length > 0;
+          return allDocumentQuestionsAnswered || hasAtLeastOneDocument;
         }, $.validator.format(selectDocuments.$form.data('msg')));
+
         selectDocuments.$form.validate({
           rules: {
             'select_documents_form[driving_licence]': 'selectDocumentsValidation',
@@ -62,7 +57,6 @@
             selectDocuments.$form.children('.form-group:first').removeClass('error');
           }
         });
-
       }
     }
   };

@@ -89,6 +89,14 @@ describe("Select Documents Form", function () {
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('Please select the documents you have');
     });
 
+    it("should have errors when only 2 selections are made and both imply no evidence.", function () {
+        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=false]').trigger('click');
+        selectDocumentsForm.find('input[name="select_documents_form[driving_licence]"][value=false]').trigger('click');
+        selectDocumentsForm.triggerHandler('submit');
+        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
+        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('Please select the documents you have');
+    });
+
     it("should have no error on submit when other passport is true and passport is false", function () {
         selectDocumentsForm.find('input[name="select_documents_form[non_uk_id_document]"][value=true]').trigger('click');
         selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=false]').trigger('click');
@@ -99,6 +107,22 @@ describe("Select Documents Form", function () {
 
     it("should have no errors on submit when selections that imply evidence are made - Happy Path", function () {
         selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=true]').trigger('click');
+        selectDocumentsForm.triggerHandler('submit');
+        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
+        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
+    });
+
+    it("should have no errors on submit when all selections imply no evidence", function () {
+        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=false]').trigger('click');
+        selectDocumentsForm.find('input[name="select_documents_form[driving_licence]"][value=false]').trigger('click');
+        selectDocumentsForm.find('input[name="select_documents_form[non_uk_id_document]"][value=false]').trigger('click');
+        selectDocumentsForm.triggerHandler('submit');
+        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
+        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
+    });
+
+    it("should have no errors on submit when no documents selected", function () {
+        selectDocumentsForm.find('input[name="select_documents_form[no_docs]"][value=true]').trigger('click');
         selectDocumentsForm.triggerHandler('submit');
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
