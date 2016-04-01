@@ -39,5 +39,14 @@ module Analytics
       thread.join
       expect(a_request(:get, url).with(headers: headers)).to have_been_made.once
     end
+
+    context "can be not async" do
+      it "will return the response" do
+        stub_request(:get, url).and_return(status: 200)
+        response = PiwikClient.new(url, async: false).report({}, {})
+        expect(response.status).to eql 200
+        expect(a_request(:get, url)).to have_been_made.once
+      end
+    end
   end
 end
