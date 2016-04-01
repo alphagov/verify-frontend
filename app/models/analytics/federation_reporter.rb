@@ -21,7 +21,7 @@ module Analytics
           @federation_translator.translate("rps.#{transaction_simple_id}.analyticsDescription")
         @analytics_reporter.report_custom_variable(
           request,
-          "#{action} #{transaction_analytics_description}",
+          action,
           Analytics::CustomVariable.build(:rp, transaction_analytics_description))
       rescue Display::FederationTranslator::TranslationError => e
         Rails.logger.warn e

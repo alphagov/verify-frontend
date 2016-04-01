@@ -12,7 +12,7 @@ end
 def then_custom_variable_reported_for_sign_in
   piwik_request = {
       '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"]}",
-      'action_name' => "The No option was selected on the introduction page #{transaction_analytics_description}",
+      'action_name' => 'The No option was selected on the introduction page',
   }
   expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 end
