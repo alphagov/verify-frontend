@@ -31,7 +31,7 @@ RSpec.describe 'when user submits start page form' do
     expect(page).to have_link 'Back', href: '/start'
     expect_feedback_source_to_be(page, 'SIGN_IN_PAGE')
     expect(page).to have_link 'start now', href: '/about'
-    expect(page).to have_link "I can’t remember which company verified me", href: '/forgot_company'
+    expect(page).to have_link "I can’t remember which company verified me", href: '/forgot-company'
   end
 
   it 'will report user choice to analytics when user chooses no (sign in)' do
