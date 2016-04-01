@@ -1,6 +1,5 @@
 <% content_for :page_title, t('hub.select_documents.title') %>
 <% content_for :feedback_source, 'SELECT_DOCUMENTS_PAGE' %>
-<% content_for :body_classes, 'select-documents' %>
 
 <div class="grid-row">
   <div class="column-two-thirds">
@@ -10,7 +9,7 @@
         <p class="error"><%= flash[:errors] %></p>
       </div>
     <% end %>
-    <%= form_for @form, url: '', html: { id: 'validate-documents', novalidate: 'novalidate', 'data-msg': t('hub.select_documents.errors.no_selection')} do |f| %>
+    <%= form_for @form, url: '', html: { id: 'validate-documents', class: 'select-documents-form', novalidate: 'novalidate', 'data-msg': t('hub.select_documents.errors.no_selection')} do |f| %>
         <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
           <fieldset>
             <legend><%= t 'hub.select_documents.legend'%></legend>

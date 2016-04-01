@@ -1,7 +1,5 @@
-.select-documents {
-  #validate-documents {
-    margin-top: em(45, 19);
-  }
+.select-documents-form {
+  margin-top: em(45, 19);
 
   .form-label-bold {
     @include bold-24();
@@ -12,22 +10,27 @@
     legend {
       margin-bottom: $gutter;
     }
+
     .form-group {
       margin: 0 0 15px;
+
       .inline {
         border-bottom: 1px solid $grey-1;
         padding: 0 0 15px;
+
         >span {
           display: inline-block;
           vertical-align: middle;
           width: 50%;
           margin: 0 10px 0 0;
+
           @include media (mobile) {
             display: block;
             margin: 0 0 5px;
             width: 100%;
           }
         }
+
         >.block-label {
           float: none;
           vertical-align: middle;
@@ -38,6 +41,7 @@
       }
     }
   }
+
   .valid-note {
     margin-bottom: $gutter;
   }
