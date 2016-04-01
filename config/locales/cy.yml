@@ -1,17 +1,16 @@
-# FIXME: Google translated Welsh
 cy:
   routes:
     start: dechrau
     about: am
     sign_in: mewngofnodi
-    about_certified_companies: am-gwmniau-ardystiedig
-    about_identity_accounts: am-hunaniaeth-cyfrifon
-    about_choosing_a_company: am-ddewis-a-gwmni
-    select_documents: dewiswch-ddogfennau
+    about_certified_companies: am-gwmnïau-ardystiedig
+    about_identity_accounts: am-gyfrifon-hunaniaeth
+    about_choosing_a_company: am-ddewis-cwmni
+    select_documents: dewis-dogfennau
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
-    continue: parhau
+    continue: Parhau
   phase_banner:
     title: Mae hwn yn wasanaeth newydd.
     feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
@@ -20,18 +19,18 @@ cy:
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify
-      answer_yes: Mae hyn yn fy amser cyntaf gan ddefnyddio Verify
-      answer_no: Rwyf wedi defnyddio Verify cyn
+      answer_yes: Dyma'r tro cyntaf i mi ddefnyddio Verify
+      answer_no: Rwyf wedi defnyddio Verify o'r blaen
       continue: Parhau
       error_message: Dewiswch opsiwn
     signin:
       title: Mewngofnodi gyda chwmni ardystiedig
-      heading: Pwy ydych chi'n gennych gyfrif hunaniaeth gyda ?
+      heading: Gyda phwy mae gennych gyfrif hunaniaeth?
       back: Yn ôl
-      about_link: ddechrau nawr
+      about_link: Dechreuwch nawr
       registration_message_html: Os nad oes gennych gyfrif hunaniaeth, gallwch %{href}.
-      select_idp: Dewiswch %{name}
-      forgot_company: Ni allaf gofio pa gwmni gwirio mi
+      select_idp: Ddewis %{name}
+      forgot_company: Ni allaf gofio pa gwmni wnaeth fy nilysu
     cookies:
       title: Cwcis
     feedback:
@@ -39,32 +38,33 @@ cy:
     privacy_notice:
       title: Hysbysiad preifatrwydd
     about:
-      title: Ynglŷn â sicrwydd hunaniaeth
-      verify_is_a_scheme: GOV.UK Verify yn gynllun i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein .
-      its_secure: Mae'n ddiogel, ac yn stopio rhywun esgus bod yn chi.
+      title: Am sicrwydd hunaniaeth
+      verify_is_a_scheme: Mae GOV.UK Verify yn gynllun i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
+      its_secure: Mae'n ddiogel, ac yn atal rhywun esgus mai chi ydynt.
     about_certified_companies:
       title: Am gwmnïau ardystiedig
-      a_certified_company_will_verify: Bydd cwmni ardystiedig wirio'ch hunaniaeth . Maen nhw wedi bodloni holl safonau diogelwch a osodir gan y llywodraeth.
-      no_charge: Does dim tâl am y gwasanaeth hwn .
+      a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
+      no_charge: Nid oes tâl am y gwasanaeth hwn.
       summary: Sut y gall cwmnïau wirio hunaniaeth
       details:
-        p1: Gall y cwmnïau hyn yn defnyddio eu data eu hunain , a gallant gael mynediad data fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth gan pasbortau a thrwyddedau gyrru yn gywir.
-        p2: cwmnïau ardystiedig bodloni safonau preifatrwydd y llywodraeth, er mwyn i chi ymddiried ynddynt gyda eich gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.
-        p3: Ni fydd yna unrhyw effaith ar eich sgôr credyd .
-        p4: Mae mwy nag un cwmni ardystiedig yn golygu eich bod yn dewis pwy dilysu pwy ydych chi, ac mae'n golygu y system gyffredinol yn gryfach .
+        p1: Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth o basbortau a thrwyddedau gyrru yn gywir.
+        p2: Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda'ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.
+        p3: Ni fydd unrhyw effaith ar eich sgôr credyd.
+        p4: Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi'n dewis pwy sy'n dilysu eich hunaniaeth, ac mae'n golygu bod y system yn ei gyfanrwydd yn gryfach.
     about_identity_accounts:
-      title: Ynglŷn â chyfrifon hunaniaeth
+      title: Am gyfrifon hunaniaeth
       content:
-        p1: Dilysu eich hunaniaeth yn cymryd tua 10 munud.
-        p2: Yna byddwch gennych gyfrif hunaniaeth gyda'ch cwmni ardystiedig.
-        p3: Gallwch gofrestru mewn lle bynnag y byddwch yn gweld y GOV.UK Verify logo.
+        p1: Mae dilysu eich hunaniaeth yn cymryd tua 10 munud.
+        p2: Yna bydd gennych gyfrif hunaniaeth gyda'ch cwmni ardystiedig.
+        p3: Gallwch fewngofnodi lle bynnag y byddwch yn gweld logo GOV.UK Verify.
       summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
-      details: "GOV.UK Verify yn gynllun newydd , a gwasanaethau newydd yn ymuno drwy'r amser. Mae'r gwasanaethau presennol yw:"
+      details: "Mae GOV.UK Verify yn gynllun newydd ac mae gwasanaethau newydd yn ymuno drwy'r amser. Y gwasanaethau presennol yw:"
     about_choosing_a_company:
       title: Am ddewis cwmni
-      heading: Dod o hyd i'r cwmni hawl i wirio chi
-      p1: cwmnïau ardystiedig rhaid i ffyrdd gwahanol i wirio hunaniaeth , er enghraifft trwy wirio dogfennau adnabod , neu ddarparu app .
-      p2: Byddwn yn awr yn gofyn rhai cwestiynau i chi i wirio y gall cwmnïau wirio chi.
+      heading: Dod o hyd i'r cwmni iawn i'ch dilysu chi
+      p1: Mae gan gwmnïau ardystiedig ffyrdd gwahanol o wirio hunaniaeth, er enghraifft trwy wirio dogfennau adnabod neu ddarparu ap.
+      p2: Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.
+# FIXME: The following text was translated with Google Translate
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
       heading: cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau adnabod er mwyn gwirio eich.
@@ -77,35 +77,36 @@ cy:
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych
         invalid_selection: Gwiriwch eich dewis
+# FIXME: The preceeding text was translated with Google Translate
   errors:
     transaction_list:
-      title: Dewch o hyd i'r gwasanaeth yr ydych yn ei ddefnyddio i ddechrau eto
-      hint: Dilynwch y cyfarwyddiadau a gynhwysir yn yr e-bost a gawsoch
+      title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
+      hint: Dilynwch y cyfarwyddiadau sydd yn yr e-bost a gawsoch
     cookie_expired:
-      title: Mae eich sesiwn wedi goramseru
-      feedback_message: Defnyddiwch y %{feedback_link} i ofyn cwestiwn, rhoi gwybod am broblem neu awgrymu gwelliant.
+      title: Mae eich sesiwn wedi amseru allan
+      feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
       feedback: adborth
     no_cookies:
-      title: Cwcis ar goll
+      title: Cwcis Ar Goll
       heading: GOV.UK Verify
-      access_restriction: Dim ond cael mynediad o wasanaeth y llywodraeth GOV.UK Verify.
+      access_restriction: Gellir ond cael mynediad i GOV.UK Verify o wasanaeth y llywodraeth.
       read_more: 'Darllenwch y <a href="https://www.gov.uk/verify" hreflang="en">Cyflwyniad i GOV.UK Verify</a> am fwy o wybodaeth.'
-      enable_cookies: Os na allwch gael mynediad GOV.UK Verify o wasanaeth, yn galluogi eich cwcis.
+      enable_cookies: Os na allwch gael mynediad i GOV.UK Verify o wasanaeth, dylech alluogi eich cwcis.
     session_error:
-      title: Aeth rhywbeth o'i le
+      title: Mae rhywbeth wedi mynd o'i le
       heading: Mae angen i chi ddechrau eto
-      security: Am resymau diogelwch, os ydych yn defnyddio'r botwm yn ôl i ddychwelyd gan gwmni ardystiedig, rhaid i chi ddechrau eto.
+      security: Am resymau diogelwch, os ydych yn defnyddio'r botwm 'back' i ddychwelyd o gwmni ardystiedig, mae'n rhaid i chi ddechrau eto.
       start_again: Dechrau eto
-      feedback_message: Defnyddiwch y %{feedback_link} i ofyn cwestiwn, rhoi gwybod am broblem neu awgrymu gwelliant.
+      feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
       feedback: adborth
     session_timeout:
-      title: Mae eich sesiwn wedi goramseru
-      return_to_service: Os gwelwch yn dda ewch yn ôl at eich gwasanaeth i ddechrau eto.
+      title: Mae eich sesiwn wedi amseru allan
+      return_to_service: Dylech fynd yn ôl at eich gwasanaeth i ddechrau eto.
       start_again: Dechrau eto
-      feedback_message: Defnyddiwch y %{feedback_link} i ofyn cwestiwn, rhoi gwybod am broblem neu awgrymu gwelliant.
+      feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
       feedback: adborth
     something_went_wrong:
-      title: Aeth rhywbeth o'i le
-      heading: Mae'n ddrwg gennym, aeth rhywbeth o'i le
-      error_message: Gall hyn fod oherwydd bod eich sesiwn hamseru allan neu roedd gwall system.
+      title: Mae rhywbeth wedi mynd o'i le
+      heading: Mae'n ddrwg gennym, mae rhywbeth wedi mynd o'i le
+      error_message: Gall hyn fod oherwydd bod eich sesiwn wedi'i amseru allan neu roedd gwall yn y system.
       start_again: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.
