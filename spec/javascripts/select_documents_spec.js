@@ -48,15 +48,51 @@ describe("Select Documents Form", function () {
     var selectDocumentsForm;
     var $dom;
 
+    function answerQuestion(document, answer) {
+        selectDocumentsForm.find('input[name="select_documents_form[' + document + ']"][value=' + answer + ']')
+            .prop('checked', true)
+            .trigger('click');
+    }
+
+    function submitForm() {
+        selectDocumentsForm.triggerHandler('submit')
+    }
+
+    function expectErrorMessage(error) {
+        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
+        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe(error);
+    }
+
+    function expectNoError() {
+        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
+        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
+    }
+
     beforeEach(function () {
-        $dom = $('<div>'+formWithNoErrors+'</div>');
+        $dom = $('<div>' + formWithNoErrors + '</div>');
         $(document.body).append($dom);
         GOVUK.validation.init();
         GOVUK.selectDocuments.init();
         selectDocumentsForm = GOVUK.selectDocuments.$form;
+        this.noDocsCheckbox = selectDocumentsForm.find('input[name="select_documents_form[no_docs]"][value=true]');
+        this.selectNoPassport = function () {
+            answerQuestion('passport', false);
+        };
+        this.selectYesPassport = function () {
+            answerQuestion('passport', true);
+        };
+        this.selectNoDrivingLicence = function () {
+            answerQuestion('driving_licence', false);
+        };
+        this.selectNoNonUKIdDocument = function () {
+            answerQuestion('non_uk_id_document', false);
+        };
+        this.selectYesNonUKIdDocument = function () {
+            answerQuestion('non_uk_id_document', true);
+        };
     });
 
-    afterEach(function() {
+    afterEach(function () {
         $dom.remove();
     });
 
@@ -65,66 +101,69 @@ describe("Select Documents Form", function () {
     });
 
     it("should have errors on submit when no selections made.", function () {
-        selectDocumentsForm.triggerHandler('submit');
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
-        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('Please select the documents you have');
+        submitForm();
+        expectErrorMessage('Please select the documents you have');
     });
 
     it("should clear errors when at least one selection that implies evidence is made after failed validation.", function () {
-        // Given
-        selectDocumentsForm.triggerHandler('submit');
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
-        // When - HACK one time click doesn’t work in the test ...
-        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=true]').trigger('click');
-        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=true]').trigger('click');
-        // Then
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
-        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
+        submitForm();
+        expectErrorMessage('Please select the documents you have');
+
+        this.selectYesPassport();
+
+        expectNoError();
     });
 
     it("should have errors when the only selection that implies no evidence is made.", function () {
-        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=false]').trigger('click');
-        selectDocumentsForm.triggerHandler('submit');
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
-        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('Please select the documents you have');
+        this.selectNoPassport();
+        submitForm();
+        expectErrorMessage('Please select the documents you have');
     });
 
     it("should have errors when only 2 selections are made and both imply no evidence.", function () {
-        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=false]').trigger('click');
-        selectDocumentsForm.find('input[name="select_documents_form[driving_licence]"][value=false]').trigger('click');
-        selectDocumentsForm.triggerHandler('submit');
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
-        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('Please select the documents you have');
+        this.selectNoPassport();
+        this.selectNoDrivingLicence();
+        submitForm();
+        expectErrorMessage('Please select the documents you have');
     });
 
     it("should have no error on submit when other passport is true and passport is false", function () {
-        selectDocumentsForm.find('input[name="select_documents_form[non_uk_id_document]"][value=true]').trigger('click');
-        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=false]').trigger('click');
-        selectDocumentsForm.triggerHandler('submit');
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
-        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
+        this.selectYesNonUKIdDocument();
+        this.selectNoPassport();
+        submitForm();
+        expectNoError();
     });
 
     it("should have no errors on submit when selections that imply evidence are made - Happy Path", function () {
-        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=true]').trigger('click');
-        selectDocumentsForm.triggerHandler('submit');
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
-        expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
+        this.selectYesPassport();
+        submitForm();
+        expectNoError();
     });
 
     it("should have no errors on submit when all selections imply no evidence", function () {
-        selectDocumentsForm.find('input[name="select_documents_form[passport]"][value=false]').trigger('click');
-        selectDocumentsForm.find('input[name="select_documents_form[driving_licence]"][value=false]').trigger('click');
-        selectDocumentsForm.find('input[name="select_documents_form[non_uk_id_document]"][value=false]').trigger('click');
-        selectDocumentsForm.triggerHandler('submit');
+        this.selectNoPassport();
+        this.selectNoDrivingLicence();
+        this.selectNoNonUKIdDocument();
+        submitForm();
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
     });
 
     it("should have no errors on submit when no documents selected", function () {
-        selectDocumentsForm.find('input[name="select_documents_form[no_docs]"][value=true]').trigger('click');
-        selectDocumentsForm.triggerHandler('submit');
+        this.noDocsCheckbox.trigger('click');
+        submitForm();
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
+    });
+
+    it("should select No for all document questions when no documents checkbox is checked", function () {
+        this.noDocsCheckbox.trigger('click');
+        expect(selectDocumentsForm.find('input[type=radio][value=false]:checked').length).toBe(3);
+    });
+
+    it("should uncheck the no documents checkbox when a Yes answer is selected", function () {
+        this.noDocsCheckbox.trigger('click');
+        this.selectYesPassport();
+        expect(this.noDocsCheckbox.is(':checked')).toBe(false);
     });
 });
