@@ -18,7 +18,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
     expect_feedback_source_to_be(page, 'ABOUT_CERTIFIED_COMPANIES_PAGE')
   end
 
-  it 'displays content in Welsh' do
+  it 'displays content in Welsh', pending: true do
     visit '/am-gwmniau-ardystiedig'
 
     expect(page).to have_content 'Sut y gall cwmnïau wirio hunaniaeth'

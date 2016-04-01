@@ -19,37 +19,36 @@ Rails.application.routes.draw do
     post 'start', to: 'start#request_post', as: :start
     get 'sign_in', to: 'sign_in#index', as: :sign_in
     post 'sign_in', to: 'sign_in#select_idp', as: :sign_in
+  end
 
-    get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
+  get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
 
-    put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
-    get 'service-status', to: 'service_status#index', as: :service_status
+  put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
+  get 'service-status', to: 'service_status#index', as: :service_status
 
-    get 'about', to: 'about#index', as: :about
-    get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
-    get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
-    get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
-    get 'select_documents', to: 'select_documents#index', as: :select_documents
-    post 'select_documents', to: 'select_documents#select_documents', as: :select_documents
+  get 'about', to: 'about#index', as: :about
+  get 'about-certified-companies', to: 'about#certified_companies', as: :about_certified_companies
+  get 'about-identity-accounts', to: 'about#identity_accounts', as: :about_identity_accounts
+  get 'about-choosing-a-company', to: 'about#choosing_a_company', as: :about_choosing_a_company
+  get 'select-documents', to: 'select_documents#index', as: :select_documents
+  post 'select-documents', to: 'select_documents#select_documents', as: :select_documents_submit
 
-
-    if Rails.env == 'development'
-      get 'confirm_your_identity', to: redirect("#{API_HOST}/confirm-your-identity")
-      get 'feedback', to: redirect("#{API_HOST}/feedback")
-      get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
-      get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
-      get 'forgot_company', to: redirect("#{API_HOST}/forgot-company")
-      get 'select_phone', to: redirect("#{API_HOST}/select-phone")
-      get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
-    else
-      get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
-      get 'feedback', to: 'feedback#index', as: :feedback
-      get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
-      get 'cookies', to: 'cookies#index', as: :cookies
-      get 'forgot_company', to: 'forgot_company#index', as: :forgot_company
-      get 'select_phone', to: 'select_phone#index'
-      get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
-    end
+  if Rails.env == 'development'
+    get 'confirm_your_identity', to: redirect("#{API_HOST}/confirm-your-identity")
+    get 'feedback', to: redirect("#{API_HOST}/feedback")
+    get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
+    get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
+    get 'forgot_company', to: redirect("#{API_HOST}/forgot-company")
+    get 'select_phone', to: redirect("#{API_HOST}/select-phone")
+    get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
+  else
+    get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
+    get 'feedback', to: 'feedback#index', as: :feedback
+    get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
+    get 'cookies', to: 'cookies#index', as: :cookies
+    get 'forgot_company', to: 'forgot_company#index', as: :forgot_company
+    get 'select_phone', to: 'select_phone#index'
+    get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

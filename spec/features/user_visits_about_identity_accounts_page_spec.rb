@@ -16,7 +16,7 @@ RSpec.describe 'When the user visits the about identity accounts page' do
     expect_feedback_source_to_be(page, 'ABOUT_IDENTITY_ACCOUNTS_PAGE')
   end
 
-  it 'displays content in Welsh' do
+  it 'displays content in Welsh', pending: true do
     visit '/am-hunaniaeth-cyfrifon'
 
     expect(page).to have_content 'Dilysu eich hunaniaeth yn cymryd tua 10 munud.'
