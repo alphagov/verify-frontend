@@ -1,5 +1,6 @@
 require 'models/display/idp/display_data_correlator'
 require 'models/display/federation_translator'
+require 'logger_helper'
 
 module Display
   module Idp
@@ -23,10 +24,7 @@ module Display
 
       it "will skip IDP if translations can't be found" do
         translation_error = Display::FederationTranslator::TranslationError.new
-        logger = double(:logger)
-        rails_double = double(:rails, logger: logger)
-        stub_const('Rails', rails_double)
-        expect(logger).to receive(:error).with(translation_error).at_least(:once)
+        expect(stub_logger).to receive(:error).with(translation_error).at_least(:once)
 
         allow(translator).to receive(:translate).with('idps.test-simple-id.name').and_raise(translation_error)
         idp_list = [{ 'simpleId' => 'test-simple-id', 'entityId' => 'test-entity-id' }]
