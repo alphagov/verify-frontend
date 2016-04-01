@@ -3,6 +3,11 @@
 mkdir -p /ida
 [ ! -L /ida/front ] && ln -s /opt/front /ida/front
 
+# set file ownerships to root except those written to by the app
+chown -R root:root /opt/front
+chown -R deployer:deployer /opt/front/tmp
+chown -R deployer:deployer /opt/front/log
+
 # We manage service restarts via the meta package
 ln -fs /opt/front/upstart/front.conf /etc/init/front.conf
 
