@@ -1,0 +1,12 @@
+<% content_for :page_title, t('errors.page_not_found.title') %>
+<% content_for :feedback_source, 'ERROR_PAGE' %>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t 'errors.page_not_found.heading' %></h1>
+    <p><%= t 'errors.page_not_found.reason_pre' %></p>
+    <ul class="list-bullet">
+      <li><%= t 'errors.page_not_found.reason_one' %></li>
+      <li><%= t 'errors.page_not_found.reason_two' %></li>
+    </ul>
+  </div>
+</div>

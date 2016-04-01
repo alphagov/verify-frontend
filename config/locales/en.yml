@@ -111,3 +111,10 @@ en:
       heading: Sorry, something went wrong
       error_message: This may be because your session timed out or there was a system error.
       start_again: Because this is a secure service, you'll need to start again.
+    page_not_found:
+      title: This page can't be found
+      heading: This page can't be found
+      reason_pre: "This may be because:"
+      reason_one: the link you clicked is broken
+      reason_two: you entered an incorrect web address
+
