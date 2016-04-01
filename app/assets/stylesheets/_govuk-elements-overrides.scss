@@ -1,5 +1,8 @@
 // Custom radio buttons & checkboxes
 .block-label {
+  background-color: transparent;
+  border: 0;
+
   [type="checkbox"],
   [type="radio"] {
     border: 0;
