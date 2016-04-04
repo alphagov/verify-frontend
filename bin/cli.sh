@@ -287,16 +287,7 @@ while : ; do
       # fix port
       export PORT=$PORT_WAS
 
-      # Do not use su, to avoid creating a new process. Note: chroot version
-      # is too old on Ubuntu Lucid, so this will fail. It works on Debian
-      # Squeeze though (and later).
-      # Do not chroot if current user is APP_USER.
-      if [ $(id -u) = $(id -u ${APP_USER}) ]; then
-        exec sh -c "cd $(_p ${APP_HOME}) && $runnable"
-      else
-        additional_groups="$(id -Gn ${APP_USER} |  tr ' ' ',')"
-        exec chroot --userspec ${APP_USER}:${APP_GROUP} --groups="${additional_groups}" "/" sh -c "cd $(_p ${APP_HOME}) && $runnable"
-      fi
+      exec sh -c "cd $(_p ${APP_HOME}) && $runnable"
 
       break ;;
 
