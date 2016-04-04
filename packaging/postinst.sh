@@ -12,3 +12,4 @@ ln -fs /opt/front/upstart/front.conf /etc/init/front.conf
 chown -R deployer:deployer /opt/front/log
 chown -R deployer:deployer /var/log/front
 chown -R deployer:deployer /opt/front/tmp
+chgrp deployer /etc/front
