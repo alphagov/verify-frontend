@@ -9,8 +9,8 @@ class SignInController < ApplicationController
   end
 
   def select_idp
-    entity_id = params.fetch('selected-idp-entity-id')
-    display_name = params.fetch('selected-idp-display-name')
+    entity_id = params.fetch('selected-idp-entity-id') { params.fetch('selected-idp') }
+    display_name = params.fetch('selected-idp-display-name', entity_id)
     select_idp_response = SESSION_PROXY.select_idp(cookies, entity_id)
     cookies[CookieNames::VERIFY_JOURNEY_HINT] = select_idp_response.encrypted_entity_id
     cvar = Analytics::CustomVariable.build(:select_idp, display_name)
