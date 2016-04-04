@@ -32,10 +32,8 @@ def stub_transactions_list
 end
 
 def stub_federation(idp_entity_id = 'http://idcorp.com')
-  body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => "#{idp_entity_id}" }], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-entity-id' }
+  body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id }], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-entity-id' }
   stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
-  # body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => "#{idp_entity_id}" }], 'transactionEntityId' => 'some-id' }
-  # stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
 end
 
 def stub_federation_no_docs
