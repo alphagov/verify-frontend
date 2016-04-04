@@ -10,4 +10,5 @@ ln -fs /opt/front/upstart/front.conf /etc/init/front.conf
 /sbin/initctl reload-configuration
 
 chown -R deployer:deployer /opt/front/log
+chown -R deployer:deployer /var/log/front
 chown -R deployer:deployer /opt/front/tmp
