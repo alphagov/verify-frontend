@@ -1,4 +1,11 @@
 
+<% if params[:locale] == 'cy' %>
+<div class="banner-translation-in-progress">
+  <% if feedback_source.present? %>
+  <%= t('translation_in_progress_banner.message', feedback_link: link_to(t('translation_in_progress_banner.feedback'), feedback_path('feedback-source' => feedback_source))).html_safe %>
+  <% end %>
+</div>
+<% end %>
 <div class="available-languages">
   <ul>
     <li class="translation">
