@@ -4,7 +4,7 @@
 set -e
 set -o pipefail
 
-APP_NAME=$(basename $0)
+APP_NAME=front
 # useful for testing
 ROOT_PATH=${ROOT_PATH:="/"}
 # store original pwd
