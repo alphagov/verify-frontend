@@ -12,16 +12,18 @@
     attach: function () {
       var $container = $('.js-idp-option-container')
       $container.on('submit', '.idp-option', function (e) {
-        var entityId;
+        var entityId, displayName;
         var $originalForm = $(e.target);
         e.preventDefault();
-        entityId = $originalForm.find('button').attr('name');
+        var selectIdpButton = $originalForm.find('button');
+        entityId = selectIdpButton.attr('name');
+        displayName = selectIdpButton.attr('value');
         $.ajax({
           type: 'PUT',
           url: '/select-idp',
           contentType: "application/json",
           processData: false,
-          data: JSON.stringify({ entityId: entityId }),
+          data: JSON.stringify({ entityId: entityId, displayName: displayName }),
           timeout: 5000
         }).done(function(response) {
           var $samlForm;

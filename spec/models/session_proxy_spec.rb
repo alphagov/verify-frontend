@@ -42,9 +42,20 @@ describe SessionProxy do
 
     expect(api_client).to receive(:get)
       .with(SessionProxy::FEDERATION_INFO_PATH, cookies: expected_cookie_hash)
-      .and_return('idps' => idp_list, 'transactionEntityId' => 'some-id')
+      .and_return('idps' => idp_list, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id')
     result = SessionProxy.new(api_client, originating_ip_store).federation_info_for_session(cookie_hash)
     expect(result.idps).to eq idp_list
+  end
+
+  it 'should fail to return federation info if transaction simple id is missing' do
+    idp_list = double(:idp_list)
+
+    expect(api_client).to receive(:get)
+      .with(SessionProxy::FEDERATION_INFO_PATH, cookies: expected_cookie_hash)
+      .and_return('idps' => idp_list, 'transactionEntityId' => 'some-id')
+    expect {
+      SessionProxy.new(api_client, originating_ip_store).federation_info_for_session(cookie_hash)
+    }.to raise_error SessionProxy::ModelError, 'Transaction simple can\'t be blank'
   end
 
   it 'should select an IDP for the session' do

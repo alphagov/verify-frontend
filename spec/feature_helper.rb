@@ -31,13 +31,13 @@ def stub_transactions_list
   stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
 end
 
-def stub_federation
-  body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }], 'transactionEntityId' => 'some-id' }
+def stub_federation(idp_entity_id = 'http://idcorp.com')
+  body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id }], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-entity-id' }
   stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
 end
 
 def stub_federation_no_docs
-  body = { 'idps' => [{ 'simpleId' => 'stub-idp-no-docs', 'entityId' => 'http://idcorp.nodoc.com' }], 'transactionEntityId' => 'some-id' }
+  body = { 'idps' => [{ 'simpleId' => 'stub-idp-no-docs', 'entityId' => 'http://idcorp.nodoc.com' }], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
   stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
 end
 

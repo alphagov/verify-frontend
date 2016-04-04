@@ -2,7 +2,7 @@ require 'feature_helper'
 
 RSpec.describe 'When a page with a virtual page view is visited' do
   it 'sends a virtual page view to analytics' do
-    body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com' }], 'transactionEntityId' => 'some-id' }
+    body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com' }], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
     stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     set_session_cookies!

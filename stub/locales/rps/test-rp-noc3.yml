@@ -2,3 +2,4 @@ en:
   rps:
     test-rp-noc3:
       name: Register for an identity profile (forceauthn & no cycle3)
+      analyticsDescription: analytics description for test-rp-noc3

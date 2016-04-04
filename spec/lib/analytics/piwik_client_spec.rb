@@ -42,6 +42,11 @@ module Analytics
 
     context "can be not async" do
       it "will return the response" do
+        rails = double(:rails)
+        stub_const("Rails", rails)
+        logger = double(:logger)
+        expect(rails).to receive(:logger).and_return logger
+        expect(logger).to receive(:debug)
         stub_request(:get, url).and_return(status: 200)
         response = PiwikClient.new(url, async: false).report({}, {})
         expect(response.status).to eql 200

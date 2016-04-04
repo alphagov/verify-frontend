@@ -9,13 +9,21 @@ def given_api_requests_have_been_mocked!
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 end
 
+def then_custom_variable_reported_for_sign_in
+  piwik_request = {
+      '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"]}",
+      'action_name' => 'The No option was selected on the introduction page',
+  }
+  expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+end
+
 def given_im_on_the_sign_in_page
   cookies
   visit '/sign-in'
 end
 
 def when_i_select_an_idp
-  click_button('IDCorp')
+  click_button(idp_display_name)
 end
 
 def then_im_at_the_idp
@@ -29,8 +37,8 @@ def then_im_at_the_idp
   expect(a_request(:get, api_uri('session/idp-authn-request'))
            .with(query: { 'originatingIp' => originating_ip })).to have_been_made.once
   piwik_request = {
-      '_cvar' => "{\"3\":[\"SIGNIN_IDP\",\"#{idp_entity_id}\"]}",
-      'action_name' => 'Sign In - ' + idp_entity_id,
+      '_cvar' => "{\"3\":[\"SIGNIN_IDP\",\"#{idp_display_name}\"]}",
+      'action_name' => 'Sign In - ' + idp_display_name,
   }
   expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 end
@@ -45,6 +53,8 @@ end
 
 RSpec.describe 'user selects an IDP on the sign in page' do
   let(:idp_entity_id) { 'http://idcorp.com' }
+  let(:idp_display_name) { 'IDCorp' }
+  let(:transaction_analytics_description) { 'analytics description for test-rp' }
   let(:body) {
     [
       { 'simpleId' => 'stub-idp-zero', 'entityId' => 'idp-zero' },
@@ -71,6 +81,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     it 'will redirect the user to the IDP' do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
+      then_custom_variable_reported_for_sign_in
       when_i_select_an_idp
       then_im_at_the_idp
     end
@@ -80,6 +91,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     it 'will display the interstitial page and on submit will redirect the user to IDP' do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
+      then_custom_variable_reported_for_sign_in
       when_i_select_an_idp
       then_im_at_the_interstitial_page
       when_i_choose_to_continue

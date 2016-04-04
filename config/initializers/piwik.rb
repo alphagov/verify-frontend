@@ -11,3 +11,5 @@ if INTERNAL_PIWIK.enabled?
 else
   ANALYTICS_REPORTER = Analytics::NullReporter.new
 end
+
+FEDERATION_REPORTER = Analytics::FederationReporter.new(FEDERATION_TRANSLATOR, ANALYTICS_REPORTER)

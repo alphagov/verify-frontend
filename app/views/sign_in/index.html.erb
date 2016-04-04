@@ -22,7 +22,8 @@
                                    type: "submit",
                                    value: identity_provider.display_name
                     %>
-                    <input name="selected-idp" type="hidden" value="<%= identity_provider.entity_id %>" />
+                    <%= hidden_field_tag 'selected-idp-entity-id', identity_provider.entity_id %>
+                    <%= hidden_field_tag 'selected-idp-display-name', identity_provider.display_name %>
                 <% end %>
               </div>
             </div>

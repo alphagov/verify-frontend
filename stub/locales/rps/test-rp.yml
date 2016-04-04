@@ -2,3 +2,4 @@ en:
   rps:
     test-rp:
       name: Register for an identity profile
+      analyticsDescription: analytics description for test-rp

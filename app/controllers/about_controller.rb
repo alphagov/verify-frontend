@@ -2,8 +2,7 @@ class AboutController < ApplicationController
   layout 'start', except: [:choosing_a_company]
 
   def index
-    cvar = Analytics::CustomVariable.build(:rp, federation_info[:transaction_entity_id])
-    ANALYTICS_REPORTER.report_custom_variable(request, 'The Yes option was selected on the start page', cvar)
+    FEDERATION_REPORTER.report_registration(federation_info[:transaction_simple_id], request)
   end
 
   def certified_companies
