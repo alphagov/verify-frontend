@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   get 'select-documents', to: 'select_documents#index', as: :select_documents
   post 'select-documents', to: 'select_documents#select_documents', as: :select_documents_submit
+  get 'select-phone', to: 'select_phone#index', as: :select_phone
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
@@ -41,7 +42,6 @@ Rails.application.routes.draw do
     get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
     get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
-    get 'select-phone', to: redirect("#{API_HOST}/select-phone"), as: :select_phone
     get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
@@ -49,7 +49,6 @@ Rails.application.routes.draw do
     get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
-    get 'select-phone', to: 'select_phone#index', as: :select_phone
     get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
   end
 

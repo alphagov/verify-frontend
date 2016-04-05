@@ -6,6 +6,7 @@ en:
     about_identity_accounts: about-identity-accounts
     about_choosing_a_company: about-choosing-a-company
     select_documents: select-documents
+    select_phone: select-phone
     sign_in: sign-in
   navigation:
     next: Next
@@ -79,6 +80,9 @@ en:
       errors:
         no_selection: Please select the documents you have
         invalid_selection: Please check your selection
+    select_phone:
+      title: Do you have a mobile phone or tablet?
+      heading: Certified companies can send security codes to your mobile.
   errors:
     transaction_list:
       title: Find the service you were using to start again

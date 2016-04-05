@@ -7,6 +7,9 @@ cy:
     about_identity_accounts: am-gyfrifon-hunaniaeth
     about_choosing_a_company: am-ddewis-cwmni
     select_documents: dewis-dogfennau
+    # FIXME: The following text was translated with Google Translate
+    select_phone: dethol-ffon   # should be dethol-ffôn but URIs need to be ASCII only
+    # FIXME: The preceeding text was translated with Google Translate
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -81,6 +84,9 @@ cy:
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych
         invalid_selection: Gwiriwch eich dewis
+    select_phone:
+      title: A oes gennych ffôn symudol neu dabled?
+      heading: gall cwmnïau ardystiedig anfon codau diogelwch i'ch ffôn symudol.
 # FIXME: The preceeding text was translated with Google Translate
   errors:
     transaction_list:
