@@ -3,10 +3,10 @@ require 'uri'
 class Piwik
   attr_reader :url, :site_id
 
-  def initialize(host, port, site_id)
+  def initialize(host, site_id)
     @enabled = host.present?
     if @enabled
-      @url = URI.join("#{host}:#{port}", "/piwik.php")
+      @url = URI.parse(File.join(host, "piwik.php"))
     end
     @site_id = site_id
   end
