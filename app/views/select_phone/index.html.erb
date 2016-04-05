@@ -4,10 +4,39 @@
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1><%= t 'hub.select_phone.heading' %></h1>
+    <% if flash[:errors] %>
+        <div id="validation-error-message-no-js" class="validation-message form-group">
+          <p class="error"><%= flash[:errors] %></p>
+        </div>
+    <% end %>
     <%= form_for @form, url: select_phone_submit_path do |f| %>
-      <div class="actions">
-        <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
-      </div>
+        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+            <fieldset>
+              <legend><%= t 'hub.select_phone.legend' %></legend>
+              <div class="form-group">
+                <fieldset class="inline">
+                  <span>1. <%= t 'hub.select_phone.question.mobile_phone' %></span>
+                  <label class="block-label">
+                    <%= f.radio_button :mobile_phone, 'true' %>
+                    <span>
+                      <span class="inner"></span>
+                    </span>
+                    <%= t 'option.yes' %>
+                  </label>
+                  <label class="block-label">
+                    <%= f.radio_button :mobile_phone, 'false' %>
+                    <span>
+                      <span class="inner"></span>
+                    </span>
+                    <%= t 'option.no' %>
+                  </label>
+                </fieldset>
+              </div>
+            </fieldset>
+            <div class="actions">
+              <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+            </div>
+        <% end %>
     <% end %>
   </div>
 </div>

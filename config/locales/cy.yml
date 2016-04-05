@@ -87,6 +87,12 @@ cy:
     select_phone:
       title: A oes gennych ffôn symudol neu dabled?
       heading: gall cwmnïau ardystiedig anfon codau diogelwch i'ch ffôn symudol.
+      legend: A oes gennych ffôn symudol neu dabled?
+      question:
+        mobile_phone: A oes gennych ffôn symudol neu dabled?
+      errors:
+        no_selection: Os gwelwch yn dda ateb y cwestiwn
+        invalid_selection: Gwiriwch eich dewis
 # FIXME: The preceeding text was translated with Google Translate
   errors:
     transaction_list:

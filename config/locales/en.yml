@@ -83,6 +83,12 @@ en:
     select_phone:
       title: Do you have a mobile phone or tablet?
       heading: Certified companies can send security codes to your mobile.
+      legend: Do you have a mobile phone or tablet?
+      question:
+        mobile_phone: Do you have a mobile phone or tablet?
+      errors:
+        no_selection: Please answer the question
+        invalid_selection: Please check your selection
   errors:
     transaction_list:
       title: Find the service you were using to start again
