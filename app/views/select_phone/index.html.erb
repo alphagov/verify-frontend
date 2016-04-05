@@ -9,7 +9,7 @@
           <p class="error"><%= flash[:errors] %></p>
         </div>
     <% end %>
-    <%= form_for @form, url: select_phone_submit_path do |f| %>
+    <%= form_for @form, url: select_phone_submit_path, class: 'select-phone-form' do |f| %>
         <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
             <fieldset>
               <legend><%= t 'hub.select_phone.legend' %></legend>

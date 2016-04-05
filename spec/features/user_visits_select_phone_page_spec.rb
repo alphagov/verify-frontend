@@ -5,6 +5,17 @@ RSpec.describe 'When the user visits the select phone page' do
     set_session_cookies!
   end
 
+  it 'redirects to the will it work for me page when user has a phone' do
+    pending
+    visit '/select-phone?selected_evidence=passport'
+
+    choose 'select_phone_form_mobile_phone_true'
+    choose 'select_phone_form_smart_phone_true'
+    click_button 'Continue'
+
+    expect(page).to have_current_path(will_it_work_for_me_path)
+  end
+
   it 'includes the appropriate feedback source' do
     visit '/select-phone'
 
