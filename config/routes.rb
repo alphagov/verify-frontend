@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get 'select-documents', to: 'select_documents#index', as: :select_documents
   post 'select-documents', to: 'select_documents#select_documents', as: :select_documents_submit
   get 'select-phone', to: 'select_phone#index', as: :select_phone
+  post 'select-phone', to: 'select_phone#select_phone', as: :select_phone_submit
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity

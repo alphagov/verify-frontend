@@ -4,5 +4,10 @@
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1><%= t 'hub.select_phone.heading' %></h1>
+    <%= form_for @form, url: select_phone_submit_path do |f| %>
+      <div class="actions">
+        <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+      </div>
+    <% end %>
   </div>
 </div>
