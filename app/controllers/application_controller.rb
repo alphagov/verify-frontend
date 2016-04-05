@@ -32,6 +32,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_secure_cookie(name, value)
+    cookies[name] = {
+      value: value,
+      httponly: true,
+      secure: Rails.configuration.x.cookies.secure
+    }
+  end
+
 private
 
   def render_error(partial, status)
