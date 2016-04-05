@@ -48,7 +48,7 @@ def then_im_at_the_interstitial_page
 end
 
 def when_i_choose_to_continue
-  click_button('continue')
+  click_button('Continue')
 end
 
 RSpec.describe 'user selects an IDP on the sign in page' do
