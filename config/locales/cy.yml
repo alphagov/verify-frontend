@@ -14,6 +14,12 @@ cy:
     next: Nesaf
     start_now: Dechreuwch nawr
     continue: Parhau
+  option:
+    # FIXME: The following text was translated with Google Translate
+    yes: ie
+    no: dim
+    unknown: Nid wyf yn gwybod
+    # FIXME: The preceeding text was translated with Google Translate
   phase_banner:
     title: Mae hwn yn wasanaeth newydd.
     feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
@@ -87,9 +93,10 @@ cy:
     select_phone:
       title: A oes gennych ffôn symudol neu dabled?
       heading: gall cwmnïau ardystiedig anfon codau diogelwch i'ch ffôn symudol.
-      legend: A oes gennych ffôn symudol neu dabled?
       question:
         mobile_phone: A oes gennych ffôn symudol neu dabled?
+        smart_phone: Gallwch osod apps ar eich dyfais?
+        landline: A oes gennych linell tir?
       errors:
         no_selection: Os gwelwch yn dda ateb y cwestiwn
         invalid_selection: Gwiriwch eich dewis

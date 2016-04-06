@@ -4,18 +4,19 @@
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1><%= t 'hub.select_phone.heading' %></h1>
-    <% if flash[:errors] %>
-        <div id="validation-error-message-no-js" class="validation-message form-group">
-          <p class="error"><%= flash[:errors] %></p>
-        </div>
-    <% end %>
+
     <%= form_for @form, url: select_phone_submit_path, class: 'select-phone-form' do |f| %>
+        <% if flash[:errors] %>
+            <div id="validation-error-message-no-js" class="validation-message form-group">
+              <p class="error"><%= flash[:errors] %></p>
+            </div>
+        <% end %>
+
         <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
             <fieldset>
-              <legend><%= t 'hub.select_phone.legend' %></legend>
+              <legend><%= t 'hub.select_phone.question.mobile_phone' %></legend>
               <div class="form-group">
                 <fieldset class="inline">
-                  <span>1. <%= t 'hub.select_phone.question.mobile_phone' %></span>
                   <label class="block-label">
                     <%= f.radio_button :mobile_phone, 'true' %>
                     <span>
@@ -33,10 +34,63 @@
                 </fieldset>
               </div>
             </fieldset>
-            <div class="actions">
-              <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
-            </div>
         <% end %>
-    <% end %>
+        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+            <fieldset>
+              <legend><%= t 'hub.select_phone.question.smart_phone' %></legend>
+              <div class="form-group">
+                <fieldset class="inline">
+                  <label class="block-label">
+                    <%= f.radio_button :smart_phone, 'true' %>
+                    <span>
+                      <span class="inner"></span>
+                    </span>
+                    <%= t 'option.yes' %>
+                  </label>
+                  <label class="block-label">
+                    <%= f.radio_button :smart_phone, 'false' %>
+                    <span>
+                      <span class="inner"></span>
+                    </span>
+                    <%= t 'option.no' %>
+                  </label>
+                  <label class="block-label">
+                    <%= f.radio_button :smart_phone, 'false' %>
+                    <span>
+                      <span class="inner"></span>
+                    </span>
+                    <%= t 'option.unknown' %>
+                  </label>
+                </fieldset>
+              </div>
+            </fieldset>
+        <% end %>
+        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+            <fieldset>
+              <legend><%= t 'hub.select_phone.question.landline' %></legend>
+              <div class="form-group">
+                <fieldset class="inline">
+                  <label class="block-label">
+                    <%= f.radio_button :landline, 'true' %>
+                    <span>
+                      <span class="inner"></span>
+                    </span>
+                    <%= t 'option.yes' %>
+                  </label>
+                  <label class="block-label">
+                    <%= f.radio_button :landline, 'false' %>
+                    <span>
+                      <span class="inner"></span>
+                    </span>
+                    <%= t 'option.no' %>
+                  </label>
+                </fieldset>
+              </div>
+            </fieldset>
+        <% end %>
+        <div class="actions">
+          <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+        </div>
+  <% end %>
   </div>
 </div>

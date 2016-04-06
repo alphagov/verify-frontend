@@ -6,11 +6,11 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   it 'redirects to the will it work for me page when user has a phone' do
-    pending
     visit '/select-phone?selected_evidence=passport'
 
     choose 'select_phone_form_mobile_phone_true'
     choose 'select_phone_form_smart_phone_true'
+    choose 'select_phone_form_landline_true'
     click_button 'Continue'
 
     expect(page).to have_current_path(will_it_work_for_me_path)

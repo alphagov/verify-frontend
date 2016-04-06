@@ -15,6 +15,7 @@ en:
   option:
     yes: Yes
     no: No
+    unknown: I don’t know
   phase_banner:
     title: This is a trial service.
     feedback_message: Your %{feedback_link} will help us to improve it.
@@ -83,9 +84,10 @@ en:
     select_phone:
       title: Do you have a mobile phone or tablet?
       heading: Certified companies can send security codes to your mobile.
-      legend: Do you have a mobile phone or tablet?
       question:
         mobile_phone: Do you have a mobile phone or tablet?
+        smart_phone: Can you install apps on your device?
+        landline: Do you have a landline?
       errors:
         no_selection: Please answer the question
         invalid_selection: Please check your selection

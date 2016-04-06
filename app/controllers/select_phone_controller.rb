@@ -5,9 +5,11 @@ class SelectPhoneController < ApplicationController
 
   def select_phone
     @form = SelectPhoneForm.new(params[:select_phone_form] || {})
-    unless @form.valid?
+    if @form.valid?
+      redirect_to will_it_work_for_me_path
+    else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
+      render :index
     end
-    render :index
   end
 end
