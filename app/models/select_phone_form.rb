@@ -3,12 +3,24 @@ class SelectPhoneForm
 
   attr_accessor :mobile_phone, :smart_phone, :landline
 
+  PHONE_ATTRIBUTES = [:mobile_phone, :smart_phone, :landline]
+
   validate :check_valid
 
   def initialize(params)
     @mobile_phone = params[:mobile_phone]
     @smart_phone = params[:smart_phone]
     @landline = params[:landline]
+  end
+
+  def selected_evidence
+    result = []
+    PHONE_ATTRIBUTES.each do |attr|
+      if send(attr) == 'true'
+        result << attr
+      end
+    end
+    result
   end
 
 private

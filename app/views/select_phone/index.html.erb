@@ -5,7 +5,7 @@
   <div class="column-two-thirds">
     <h1><%= t 'hub.select_phone.heading' %></h1>
 
-    <%= form_for @form, url: select_phone_submit_path, class: 'select-phone-form' do |f| %>
+    <%= form_for @form, url: '', class: 'select-phone-form' do |f| %>
         <% if flash[:errors] %>
             <div id="validation-error-message-no-js" class="validation-message form-group">
               <p class="error"><%= flash[:errors] %></p>

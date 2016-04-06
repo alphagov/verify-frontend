@@ -1,4 +1,5 @@
 require 'select_documents_form_mapper'
+require 'evidence_query_string_builder'
 
 class SelectDocumentsController < ApplicationController
   protect_from_forgery except: :select_documents
@@ -13,7 +14,9 @@ class SelectDocumentsController < ApplicationController
     if @form.valid?
       selected_evidence = @form.selected_evidence
       if IDP_ELIGIBILITY_CHECKER.any_for_documents?(selected_evidence, available_idps)
-        redirect_to uri_with_evidence_query(select_phone_path, selected_evidence)
+        uri = URI(select_phone_path)
+        uri.query = EvidenceQueryStringBuilder.build(selected_evidence)
+        redirect_to uri.to_s
       else
         redirect_to unlikely_to_verify_path
       end
@@ -27,11 +30,5 @@ private
 
   def available_idps
     SESSION_PROXY.federation_info_for_session(cookies).idps.collect { |idp| idp['simpleId'] }
-  end
-
-  def uri_with_evidence_query(path, selected_evidence)
-    selected_evidence = [:no_documents] if selected_evidence.empty?
-    s = '?' + selected_evidence.collect { |evidence| "selected-evidence=#{evidence}" }.join('&')
-    URI(path + s).to_s
   end
 end
