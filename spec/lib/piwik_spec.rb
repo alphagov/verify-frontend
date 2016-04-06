@@ -4,7 +4,7 @@ require 'active_support/core_ext/string'
 RSpec.describe Piwik do
   it 'should correctly generate a url' do
     piwik = Piwik.new('http://www.example.com:1234/foo', 1)
-    expect(piwik.url.to_s).to eql 'http://www.example.com:1234/foo/piwik.php'
+    expect(piwik.url.to_s).to eql 'http://www.example.com:1234/foo'
   end
 
   it 'has a site id' do
