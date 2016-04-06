@@ -12,10 +12,10 @@ RSpec.describe 'When the user visits the about choosing a company page' do
     expect_feedback_source_to_be(page, 'ABOUT_CHOOSING_A_COMPANY_PAGE')
   end
 
-  it 'will display content in Welsh', pending: true do
-    visit '/am-ddewis-a-gwmni'
+  it 'will display content in Welsh' do
+    visit '/am-ddewis-cwmni'
 
-    expect(page).to have_content 'Dod o hyd i\'r cwmni hawl i wirio chi'
+    expect(page).to have_content 'Dod o hyd i\'r cwmni iawn i\'ch dilysu chi'
   end
 
   it 'will take user to select documents page when user clicks "Continue"' do
