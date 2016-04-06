@@ -1,14 +1,6 @@
 require 'feature_helper'
 
 RSpec.describe 'When the user visits the select phone page' do
-  def expect_evidence_params(evidence)
-    current_uri = URI.parse(page.current_url)
-    expect(current_uri.query).to_not be_nil
-    query = CGI::parse(current_uri.query)
-    query_evidence = Set.new(query['selected-evidence'])
-    expect(query_evidence).to eql(Set.new(evidence))
-  end
-
   before(:each) do
     set_session_cookies!
   end
@@ -35,7 +27,7 @@ RSpec.describe 'When the user visits the select phone page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
-      expect_evidence_params(%w(mobile_phone smart_phone passport driving_licence))
+      expect(query_params['selected-evidence'].to_set).to eql %w(mobile_phone smart_phone passport driving_licence).to_set
     end
   end
 

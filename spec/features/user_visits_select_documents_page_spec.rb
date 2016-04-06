@@ -2,13 +2,6 @@ require 'feature_helper'
 require 'i18n'
 
 RSpec.describe 'When the user visits the select documents page' do
-  def expect_evidence_params(evidence)
-    current_uri = URI.parse(page.current_url)
-    query = CGI::parse(current_uri.query)
-    query_evidence = Set.new(query['selected-evidence'])
-    expect(query_evidence).to eql(Set.new(evidence))
-  end
-
   before(:each) do
     set_session_cookies!
   end
@@ -87,7 +80,7 @@ RSpec.describe 'When the user visits the select documents page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(select_phone_path, only_path: true)
-      expect_evidence_params(%w(no_documents))
+      expect(query_params['selected-evidence'].to_set).to eql %w(no_documents).to_set
     end
 
     # The RackTest driver doesn't report multiple query params with the same key in page.current_url
@@ -103,7 +96,7 @@ RSpec.describe 'When the user visits the select documents page' do
         click_button 'Continue'
 
         expect(page).to have_current_path(select_phone_path, only_path: true)
-        expect_evidence_params(%w(driving_licence passport non_uk_id_document))
+        expect(query_params['selected-evidence'].to_set).to eql %w(driving_licence passport non_uk_id_document).to_set
       end
     end
   end

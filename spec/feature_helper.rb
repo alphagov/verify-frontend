@@ -98,3 +98,8 @@ def set_session_cookies!
   set_cookies!(cookie_hash)
   cookie_hash
 end
+
+def query_params
+  current_uri = URI.parse(page.current_url)
+  current_uri.query ? CGI::parse(current_uri.query) : {}
+end
