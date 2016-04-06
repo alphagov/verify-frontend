@@ -43,6 +43,7 @@ cy:
     about:
       title: Am sicrwydd hunaniaeth
       verify_is_a_scheme: Mae GOV.UK Verify yn gynllun i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
+      # FIXME: The following requires re-translating since we added the word 'from' to the English
       its_secure: Mae'n ddiogel, ac yn atal rhywun esgus mai chi ydynt.
     about_certified_companies:
       title: Am gwmnïau ardystiedig
