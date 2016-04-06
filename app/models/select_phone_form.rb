@@ -1,9 +1,8 @@
 class SelectPhoneForm
   include ActiveModel::Model
+  include Evidence
 
   attr_accessor :mobile_phone, :smart_phone, :landline
-
-  PHONE_ATTRIBUTES = [:mobile_phone, :smart_phone, :landline]
 
   validate :check_valid
 
@@ -16,7 +15,7 @@ class SelectPhoneForm
   def selected_evidence
     result = []
     PHONE_ATTRIBUTES.each do |attr|
-      if send(attr) == 'true'
+      if public_send(attr) == 'true'
         result << attr
       end
     end

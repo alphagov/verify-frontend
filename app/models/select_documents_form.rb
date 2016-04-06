@@ -1,7 +1,6 @@
 class SelectDocumentsForm
   include ActiveModel::Model
-
-  DOCUMENT_ATTRIBUTES = [:passport, :driving_licence, :non_uk_id_document]
+  include Evidence
 
   attr_reader :driving_licence, :passport, :non_uk_id_document, :no_documents
   validate :one_must_be_present
@@ -18,7 +17,7 @@ class SelectDocumentsForm
   def selected_evidence
     result = []
     DOCUMENT_ATTRIBUTES.each do |attr|
-      if send(attr) == 'true'
+      if public_send(attr) == 'true'
         result << attr
       end
     end
