@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -12,6 +11,7 @@ Rails.application.routes.draw do
   match "/404", to: "errors#page_not_found", via: :all
 
   if %w(test development).include? Rails.env
+    mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
     get 'test-saml' => 'test_saml#index'
     post 'test-idp-request-endpoint' => 'test_saml#idp_request'
   end
