@@ -8,7 +8,7 @@ class StartController < ApplicationController
   def request_post
     if params['selection'].blank?
       @error_message = 'hub.start.error_message'
-      render "index"
+      render 'index'
     elsif params['selection'] == 'true'
       redirect_to about_path(locale: I18n.locale), status: :see_other
     else

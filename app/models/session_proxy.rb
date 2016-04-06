@@ -1,13 +1,13 @@
 
 class SessionProxy
-  PATH = "/session"
-  FEDERATION_INFO_PATH = "#{PATH}/federation"
-  SELECT_IDP_PATH = "#{PATH}/select-idp"
-  IDP_AUTHN_REQUEST_PATH = "#{PATH}/idp-authn-request"
-  PARAM_SAML_REQUEST = "samlRequest"
-  PARAM_RELAY_STATE = "relayState"
-  PARAM_ORIGINATING_IP = "originatingIp"
-  PARAM_ENTITY_ID = 'entityId'
+  PATH = '/session'.freeze
+  FEDERATION_INFO_PATH = "#{PATH}/federation".freeze
+  SELECT_IDP_PATH = "#{PATH}/select-idp".freeze
+  IDP_AUTHN_REQUEST_PATH = "#{PATH}/idp-authn-request".freeze
+  PARAM_SAML_REQUEST = 'samlRequest'.freeze
+  PARAM_RELAY_STATE = 'relayState'.freeze
+  PARAM_ORIGINATING_IP = 'originatingIp'.freeze
+  PARAM_ENTITY_ID = 'entityId'.freeze
 
   def initialize(api_client, originating_ip_store)
     @api_client = api_client
@@ -20,9 +20,9 @@ class SessionProxy
 
   def create_session(saml_request, relay_state)
     body = {
-        PARAM_SAML_REQUEST => saml_request,
-        PARAM_RELAY_STATE => relay_state,
-        PARAM_ORIGINATING_IP => originating_ip
+      PARAM_SAML_REQUEST => saml_request,
+      PARAM_RELAY_STATE => relay_state,
+      PARAM_ORIGINATING_IP => originating_ip
     }
     @api_client.post(PATH, body)
   end
@@ -41,8 +41,8 @@ class SessionProxy
 
   def select_idp(cookies, entity_id)
     body = {
-        PARAM_ENTITY_ID => entity_id,
-        PARAM_ORIGINATING_IP => originating_ip
+      PARAM_ENTITY_ID => entity_id,
+      PARAM_ORIGINATING_IP => originating_ip
     }
     response = @api_client.put(SELECT_IDP_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
     SelectIdpResponse.new(response || {}).tap { |message|
