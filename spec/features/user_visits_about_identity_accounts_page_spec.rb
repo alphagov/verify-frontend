@@ -16,10 +16,10 @@ RSpec.describe 'When the user visits the about identity accounts page' do
     expect_feedback_source_to_be(page, 'ABOUT_IDENTITY_ACCOUNTS_PAGE')
   end
 
-  it 'displays content in Welsh', pending: true do
-    visit '/am-hunaniaeth-cyfrifon'
+  it 'displays content in Welsh' do
+    visit '/am-gyfrifon-hunaniaeth'
 
-    expect(page).to have_content 'Dilysu eich hunaniaeth yn cymryd tua 10 munud.'
+    expect(page).to have_content 'Mae dilysu eich hunaniaeth yn cymryd tua 10 munud.'
   end
 
   it 'will show "Where you can use your identity account" section listing public transactions' do

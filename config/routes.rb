@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     post 'start', to: 'start#request_post', as: :start
     get 'sign_in', to: 'sign_in#index', as: :sign_in
     post 'sign_in', to: 'sign_in#select_idp', as: :sign_in
+    get 'about', to: 'about#index', as: :about
+    get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
+    get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
+    get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
@@ -28,10 +32,6 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
 
-  get 'about', to: 'about#index', as: :about
-  get 'about-certified-companies', to: 'about#certified_companies', as: :about_certified_companies
-  get 'about-identity-accounts', to: 'about#identity_accounts', as: :about_identity_accounts
-  get 'about-choosing-a-company', to: 'about#choosing_a_company', as: :about_choosing_a_company
   get 'select-documents', to: 'select_documents#index', as: :select_documents
   post 'select-documents', to: 'select_documents#select_documents', as: :select_documents_submit
 

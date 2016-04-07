@@ -19,7 +19,7 @@ RSpec.describe 'When the user visits the about page' do
     expect_feedback_source_to_be(page, 'ABOUT_PAGE')
   end
 
-  it 'will display the about page in Welsh', pending: true do
+  it 'will display the about page in Welsh' do
     visit '/am'
     expect(page).to have_content 'GOV.UK Verify yn gynllun i frwydro yn erbyn'
     expect(page).to have_css 'html[lang=cy]'
