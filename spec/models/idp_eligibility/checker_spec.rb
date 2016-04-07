@@ -2,10 +2,24 @@ require 'spec_helper'
 require 'models/idp_eligibility/checker'
 module IdpEligibility
   describe Checker do
-    describe '#idps_at_document_stage' do
-      let(:rules_repository) { double(:rules_repository) }
-      before(:each) { @checker = Checker.new(rules_repository) }
+    let(:rules_repository) { double(:rules_repository) }
+    before(:each) { @checker = Checker.new(rules_repository) }
 
+    describe '#any?' do
+      it 'should return true when user has evidence accepted by an idp' do
+        allow(rules_repository).to receive(:rules).and_return('idp' => [[:mobile_phone]])
+        user_evidence = [:mobile_phone]
+        expect(@checker.any?(user_evidence, ['idp'])).to be_truthy
+      end
+
+      it 'should return false when user does not have evidence accepted by any idp' do
+        allow(rules_repository).to receive(:rules).and_return('idp' => [[:mobile_phone]])
+        user_evidence = [:landline]
+        expect(@checker.any?(user_evidence, ['idp'])).to be_falsey
+      end
+    end
+
+    describe '#any_for_documents?' do
       it 'should return false when no idp rules are set up' do
         allow(rules_repository).to receive(:rules).and_return({})
         user_docs = [:passport]
