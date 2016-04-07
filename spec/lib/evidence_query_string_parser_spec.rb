@@ -1,3 +1,4 @@
+require 'models/evidence'
 require 'evidence_query_string_parser'
 
 describe EvidenceQueryStringParser do
@@ -21,8 +22,13 @@ describe EvidenceQueryStringParser do
     expect(result).to eql(%w(passport))
   end
 
-  it 'should return nil for empty values' do
-    result = EvidenceQueryStringParser.parse('selected-evidence=&selected-evidence=test')
-    expect(result).to eql([nil, 'test'])
+  it 'should ignore empty values' do
+    result = EvidenceQueryStringParser.parse('selected-evidence=&selected-evidence=passport')
+    expect(result).to eql(['passport'])
+  end
+
+  it 'should drop unrecognised inputs' do
+    result = EvidenceQueryStringParser.parse('selected-evidence=something')
+    expect(result).to eql([])
   end
 end
