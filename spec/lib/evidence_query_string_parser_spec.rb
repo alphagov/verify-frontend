@@ -14,17 +14,17 @@ describe EvidenceQueryStringParser do
 
   it 'should return repeated parameters in an array' do
     result = EvidenceQueryStringParser.parse('selected-evidence=passport&selected-evidence=driving_licence')
-    expect(result).to eql(%w(passport driving_licence))
+    expect(result).to eql([:passport, :driving_licence])
   end
 
   it 'should return single parameters in an array' do
     result = EvidenceQueryStringParser.parse('selected-evidence=passport')
-    expect(result).to eql(%w(passport))
+    expect(result).to eql([:passport])
   end
 
   it 'should ignore empty values' do
     result = EvidenceQueryStringParser.parse('selected-evidence=&selected-evidence=passport')
-    expect(result).to eql(['passport'])
+    expect(result).to eql([:passport])
   end
 
   it 'should drop unrecognised inputs' do

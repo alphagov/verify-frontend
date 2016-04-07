@@ -5,21 +5,24 @@ RSpec.describe 'When the user visits the select phone page' do
     set_session_cookies!
   end
 
-  it 'redirects to the will it work for me page when user has a phone' do
-    visit '/select-phone?selected_evidence=passport'
+  context 'with javascript disabled' do
+    it 'redirects to the will it work for me page when user has a phone' do
+      visit '/select-phone?selected_evidence=passport'
 
-    choose 'select_phone_form_mobile_phone_true'
-    choose 'select_phone_form_smart_phone_true'
-    choose 'select_phone_form_landline_true'
-    click_button 'Continue'
+      choose 'select_phone_form_mobile_phone_true'
+      choose 'select_phone_form_smart_phone_true'
+      choose 'select_phone_form_landline_true'
+      click_button 'Continue'
 
-    expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
+      expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
+    end
   end
 
   # The RackTest driver doesn't report multiple query params with the same key in page.current_url
   # We set js to true so that the test runs in a real browser (using Selenium) instead
-  context 'with selenium', js: true do
+  context 'with javascript enabled', js: true do
     it 'redirects to the will it work for me page when user has a phone' do
+      stub_federation
       visit '/select-phone?selected-evidence=passport&selected-evidence=driving_licence'
 
       choose 'select_phone_form_mobile_phone_true'
