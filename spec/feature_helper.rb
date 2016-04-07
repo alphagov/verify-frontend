@@ -3,6 +3,14 @@ require 'capybara/rspec'
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 
+Capybara.register_driver :no_js_selenium do |app|
+  require 'selenium/webdriver'
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  profile["javascript.enabled"] = false
+
+  Capybara::Selenium::Driver.new(app, profile: profile)
+end
+
 if ENV['HEADLESS'] == 'true'
   require 'headless'
   headless = Headless.new

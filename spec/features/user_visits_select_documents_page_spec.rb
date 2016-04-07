@@ -83,9 +83,7 @@ RSpec.describe 'When the user visits the select documents page' do
       expect(query_params['selected-evidence'].to_set).to eql %w(no_documents).to_set
     end
 
-    # The RackTest driver doesn't report multiple query params with the same key in page.current_url
-    # We set js to true so that the test runs in a real browser (using Selenium) instead
-    context 'with selenium', js: true do
+    context 'with javascript disabled', driver: :no_js_selenium do
       it 'includes selected-evidence params for all selected documents' do
         stub_federation
         visit '/select-documents'
