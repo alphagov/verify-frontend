@@ -15,13 +15,7 @@ class SelectDocumentsForm
   end
 
   def selected_evidence
-    result = []
-    DOCUMENT_ATTRIBUTES.each do |attr|
-      if public_send(attr) == 'true'
-        result << attr
-      end
-    end
-    result
+    DOCUMENT_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
   end
 
 private

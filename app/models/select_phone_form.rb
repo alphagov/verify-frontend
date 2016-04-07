@@ -13,13 +13,7 @@ class SelectPhoneForm
   end
 
   def selected_evidence
-    result = []
-    PHONE_ATTRIBUTES.each do |attr|
-      if public_send(attr) == 'true'
-        result << attr
-      end
-    end
-    result
+    PHONE_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
   end
 
 private
