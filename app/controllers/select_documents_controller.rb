@@ -1,3 +1,5 @@
+require 'select_documents_form_mapper'
+
 class SelectDocumentsController < ApplicationController
   def index
     @form = SelectDocumentsForm.new({})
@@ -5,7 +7,7 @@ class SelectDocumentsController < ApplicationController
 
   def select_documents
     ANALYTICS_REPORTER.report(request, 'Select Documents Next')
-    @form = SelectDocumentsForm.new(params[:select_documents_form])
+    @form = SelectDocumentsForm.new(SelectDocumentsFormMapper.map(params))
     if @form.valid?
       selected_evidence = @form.selected_evidence
       if IDP_ELIGIBILITY_CHECKER.any_for_documents?(selected_evidence, available_idps)
