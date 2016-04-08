@@ -32,24 +32,24 @@ module Api
         error_message = 'something must be something, other thing must be this thing'
         expect {
           response_handler.handle_response(422, 200, json)
-        }.to raise_error Error, "Received 422 with error message: [#{error_message}] and id: 'NONE'"
+        }.to raise_error Error, "Received 422 with error message: [#{error_message}], type: 'NONE' and id: 'NONE'"
       end
       it 'errors when receiving 500 and empty JSON' do
         expect {
           response_handler.handle_response(500, 200, '')
-        }.to raise_error Error, 'Received 500 with error message: [] and id: \'NONE\''
+        }.to raise_error Error, 'Received 500 with error message: [], type: \'NONE\' and id: \'NONE\''
       end
 
       it 'raises an error when API response is not ok with message' do
         expect {
-          response_handler.handle_response(400, 200, '{"errors": ["Failure"]}')
-        }.to raise_error Error, 'Received 400 with error message: [Failure] and id: \'NONE\''
+          response_handler.handle_response(400, 200, '{"errors": ["Failure"], "type": "BAD THING"}')
+        }.to raise_error Error, 'Received 400 with error message: [Failure], type: \'BAD THING\' and id: \'NONE\''
       end
 
       it 'raises an error when API response is not ok with id' do
         expect {
           response_handler.handle_response(500, 200, '{"id": "1234"}')
-        }.to raise_error Error, 'Received 500 with error message: [] and id: \'1234\''
+        }.to raise_error Error, 'Received 500 with error message: [], type: \'NONE\' and id: \'1234\''
       end
 
 
@@ -62,21 +62,21 @@ module Api
       it 'raises an error when API response is not ok with JSON, but message missing' do
         expect {
           response_handler.handle_response(500, 200, '{}')
-        }.to raise_error Error, 'Received 500 with error message: [] and id: \'NONE\''
+        }.to raise_error Error, 'Received 500 with error message: [], type: \'NONE\' and id: \'NONE\''
       end
 
       it 'raises a session error' do
         error_body = { id: '0', type: 'SESSION_ERROR' }
         expect {
           response_handler.handle_response(400, 200, error_body.to_json)
-        }.to raise_error SessionError, 'Received 400 with type: \'SESSION_ERROR\' and id: \'0\''
+        }.to raise_error SessionError, 'Received 400 with error message: [], type: \'SESSION_ERROR\' and id: \'0\''
       end
 
       it 'raises a session timeout error' do
         error_body = { id: '0', type: 'SESSION_TIMEOUT' }
         expect {
           response_handler.handle_response(400, 200, error_body.to_json)
-        }.to raise_error SessionTimeoutError, 'Received 400 with type: \'SESSION_TIMEOUT\' and id: \'0\''
+        }.to raise_error SessionTimeoutError, 'Received 400 with error message: [], type: \'SESSION_TIMEOUT\' and id: \'0\''
       end
     end
   end
