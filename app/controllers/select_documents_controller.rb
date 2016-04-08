@@ -1,6 +1,8 @@
 require 'select_documents_form_mapper'
 
 class SelectDocumentsController < ApplicationController
+  protect_from_forgery except: :select_documents
+
   def index
     @form = SelectDocumentsForm.new({})
   end
