@@ -71,7 +71,7 @@ RSpec.describe 'When the user visits the select documents page' do
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
 
-  context 'when redirecting to the select phone page', js: true do
+  context 'when redirecting to the select phone page' do
     it 'sets selected-evidence param to no-documents when no docs checked' do
       stub_federation_no_docs
       visit '/select-documents'
