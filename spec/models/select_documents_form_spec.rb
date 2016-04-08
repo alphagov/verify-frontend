@@ -18,7 +18,7 @@ describe SelectDocumentsForm do
 
   it 'should be valid if user selects No docs only' do
     form = SelectDocumentsForm.new(
-      no_docs: 'true'
+      no_documents: 'true'
     )
     expect(form).to be_valid
   end
@@ -53,7 +53,7 @@ describe SelectDocumentsForm do
       driving_licence: 'true',
       passport: 'true',
       non_uk_id_document: 'true',
-      no_docs: 'true'
+      no_documents: 'true'
     )
     expect(form).to_not be_valid
     expect(form.errors.full_messages).to eql ['Please check your selection']
@@ -65,7 +65,7 @@ describe SelectDocumentsForm do
         driving_licence: 'true',
         passport: 'true',
         non_uk_id_document: 'false',
-        no_docs: 'false'
+        no_documents: 'false'
       )
       evidence = form.selected_evidence
       expect(evidence).to eql([:passport, :driving_licence])
@@ -76,7 +76,7 @@ describe SelectDocumentsForm do
         driving_licence: 'true',
         passport: '',
         non_uk_id_document: 'false',
-        no_docs: 'false'
+        no_documents: 'false'
       )
       evidence = form.selected_evidence
       expect(evidence).to eql([:driving_licence])

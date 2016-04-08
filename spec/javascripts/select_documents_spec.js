@@ -34,7 +34,7 @@ describe("Select Documents Form", function () {
                                    '</fieldset>' +
                                  '</div>' +
                                  '<label class="block-label" for="no-documents" onclick="">' +
-                                   '<input id="no-documents" name="select_documents_form[no_docs]" class="js-no-docs" value="true" type="checkbox"><span><span class="inner"></span></span>I don’t have any of these documents with me</label>' +
+                                   '<input id="no-documents" name="select_documents_form[no_documents]" class="js-no-docs" value="true" type="checkbox"><span><span class="inner"></span></span>I don’t have any of these documents with me</label>' +
                                '</fieldset>' +
                              '</div>' +
                              '<div id="validation-error-message-js"></div>' +
@@ -74,7 +74,7 @@ describe("Select Documents Form", function () {
         GOVUK.validation.init();
         GOVUK.selectDocuments.init();
         selectDocumentsForm = GOVUK.selectDocuments.$form;
-        this.noDocsCheckbox = selectDocumentsForm.find('input[name="select_documents_form[no_docs]"][value=true]');
+        this.noDocumentsCheckbox = selectDocumentsForm.find('input[name="select_documents_form[no_documents]"][value=true]');
         this.selectNoPassport = function () {
             answerQuestion('passport', false);
         };
@@ -150,20 +150,20 @@ describe("Select Documents Form", function () {
     });
 
     it("should have no errors on submit when no documents selected", function () {
-        this.noDocsCheckbox.trigger('click');
+        this.noDocumentsCheckbox.trigger('click');
         submitForm();
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
     });
 
     it("should select No for all document questions when no documents checkbox is checked", function () {
-        this.noDocsCheckbox.trigger('click');
+        this.noDocumentsCheckbox.trigger('click');
         expect(selectDocumentsForm.find('input[type=radio][value=false]:checked').length).toBe(3);
     });
 
     it("should uncheck the no documents checkbox when a Yes answer is selected", function () {
-        this.noDocsCheckbox.trigger('click');
+        this.noDocumentsCheckbox.trigger('click');
         this.selectYesPassport();
-        expect(this.noDocsCheckbox.is(':checked')).toBe(false);
+        expect(this.noDocumentsCheckbox.is(':checked')).toBe(false);
     });
 });

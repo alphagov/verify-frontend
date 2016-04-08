@@ -75,7 +75,7 @@ en:
         driving_licence: UK photocard driving licence (excluding Northern Ireland)
         passport: UK passport
         non_uk_id_document: Identity document from another country (passport, ID card or driving licence)
-        no_docs: I don't have any of these documents with me
+        no_documents: I don't have any of these documents with me
       errors:
         no_selection: Please select the documents you have
         invalid_selection: Please check your selection

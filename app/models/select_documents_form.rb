@@ -3,7 +3,7 @@ class SelectDocumentsForm
 
   DOCUMENT_ATTRIBUTES = [:passport, :driving_licence, :non_uk_id_document]
 
-  attr_reader :driving_licence, :passport, :non_uk_id_document, :no_docs
+  attr_reader :driving_licence, :passport, :non_uk_id_document, :no_documents
   validate :one_must_be_present
   validate :mandatory_fields_present, unless: :all_fields_blank?
   validate :no_contradictory_inputs
@@ -12,7 +12,7 @@ class SelectDocumentsForm
     @driving_licence = hash[:driving_licence]
     @passport = hash[:passport]
     @non_uk_id_document = hash[:non_uk_id_document]
-    @no_docs = hash[:no_docs]
+    @no_documents = hash[:no_documents]
   end
 
   def selected_evidence
@@ -38,7 +38,7 @@ private
   end
 
   def no_contradictory_inputs
-    if no_docs_checked? && any_yes_answers?
+    if no_documents_checked? && any_yes_answers?
       errors.add(:base, I18n.t('hub.select_documents.errors.invalid_selection'))
     end
   end
@@ -46,13 +46,13 @@ private
   # If the user hasn't selected "yes" as the answer to any of the document questions then
   # they must answer no for all of the document questions, or select "no docs"
   def mandatory_fields_present
-    unless any_yes_answers? || all_no_answers? || no_docs_checked?
+    unless any_yes_answers? || all_no_answers? || no_documents_checked?
       add_documents_error
     end
   end
 
-  def no_docs_checked?
-    no_docs == 'true'
+  def no_documents_checked?
+    no_documents == 'true'
   end
 
   def all_no_answers?
@@ -68,7 +68,7 @@ private
   end
 
   def field_attributes
-    document_attributes + [no_docs]
+    document_attributes + [no_documents]
   end
 
   def document_attributes

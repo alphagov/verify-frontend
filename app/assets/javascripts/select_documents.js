@@ -44,11 +44,11 @@
             'select_documents_form[driving_licence]': 'selectDocumentsValidation',
             'select_documents_form[passport]': 'selectDocumentsValidation',
             'select_documents_form[non_uk_id_document]': 'selectDocumentsValidation',
-            'select_documents_form[no_docs]': 'selectDocumentsValidation'
+            'select_documents_form[no_documents]': 'selectDocumentsValidation'
           },
           groups: {
             // driving_licence is the first element, error should focus this
-            driving_licence: 'select_documents_form[driving_licence] select_documents_form[passport] select_documents_form[non_uk_id_document] select_documents_form[no_docs]'
+            driving_licence: 'select_documents_form[driving_licence] select_documents_form[passport] select_documents_form[non_uk_id_document] select_documents_form[no_documents]'
           },
           highlight: function(element, errorClass) {
             selectDocuments.$form.children('.form-group:first').addClass('error');

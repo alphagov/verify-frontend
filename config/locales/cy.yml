@@ -77,7 +77,7 @@ cy:
         driving_licence: trwydded yrru cerdyn-llun yn y DU (ac eithrio Gogledd Iwerddon)
         passport: pasbort y DU
         non_uk_id_document: dogfen adnabod o wlad arall ( pasbort , cerdyn adnabod neu drwydded yrru )
-        no_docs: Dydw i ddim yn cael unrhyw un o'r dogfennau hyn gyda mi
+        no_documents: Dydw i ddim yn cael unrhyw un o'r dogfennau hyn gyda mi
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych
         invalid_selection: Gwiriwch eich dewis
