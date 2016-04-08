@@ -41,7 +41,7 @@
             'select_phone_form[landline]': errorMessage
           }
         });
-        selectPhone.$form.find('#select_phone_form_mobile_phone_false,#select_phone_form_mobile_phone_true').on('click',selectPhone.toggleSecondaryQuestion);
+        selectPhone.$form.find('input[name="select_phone_form[mobile_phone]"]').on('click',selectPhone.toggleSecondaryQuestion);
         selectPhone.toggleSecondaryQuestion();
       }
     }
