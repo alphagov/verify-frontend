@@ -4,42 +4,19 @@
 describe("Select Phone form", function () {
 
   var formWithNoErrors = '' +
-    '<form novalidate="novalidate" method="POST" action="/select-phone" id="validate-phone" data-msg="Please answer the question">' +
+    '<form novalidate="novalidate" id="validate-phone" data-msg="Please answer the question">' +
       '<div class="form-group">' +
-        '<fieldset class="inline">' +
-          '<legend>Do you have a mobile phone or tablet?</legend>' +
-          '<label for="select_phone_form_mobile_phone_true">' +
-          '<input id="select_phone_form_mobile_phone_true" name="select_phone_form[mobile_phone]" value="true" type="radio">' +
-          '<span><span class="inner"></span></span>Yes</label>' +
-          '<label for="select_phone_form_mobile_phone_false">' +
-          '<input id="select_phone_form_mobile_phone_false" name="select_phone_form[mobile_phone]" value="false" type="radio">' +
-          '<span><span class="inner"></span></span>No</label>' +
-        '</fieldset>' +
+        '<input id="select_phone_form_mobile_phone_true" name="select_phone_form[mobile_phone]" value="true" type="radio">' +
+        '<input id="select_phone_form_mobile_phone_false" name="select_phone_form[mobile_phone]" value="false" type="radio">' +
       '</div>' +
       '<div id="smartphone-question" class="form-group js-hidden">' +
-        '<fieldset>' +
-          '<legend>Can you install apps on your device?</legend>' +
-          '<label for="smart_phone-yes">' +
-          '<input id="smart_phone-yes" name="select_phone_form[smart_phone]" value="true" type="radio">' +
-          '<span><span class="inner"></span></span>Yes</label>' +
-          '<label for="smart_phone-no">' +
-          '<input id="smart_phone-no" name="select_phone_form[smart_phone]" value="false" type="radio">' +
-          '<span><span class="inner"></span></span>No</label>' +
-          '<label for="smart_phone-unknown">' +
-          '<input id="smart_phone-unknown" name="select_phone_form[smart_phone]" value="false" type="radio">' +
-          '<span><span class="inner"></span></span>I don’t know</label>' +
-        '</fieldset>' +
+        '<input id="smart_phone-yes" name="select_phone_form[smart_phone]" value="true" type="radio">' +
+        '<input id="smart_phone-no" name="select_phone_form[smart_phone]" value="false" type="radio">' +
+        '<input id="smart_phone-unknown" name="select_phone_form[smart_phone]" value="false" type="radio">' +
       '</div>' +
       '<div id="landline-question" class="form-group js-hidden">' +
-        '<fieldset class="inline">' +
-          '<legend>Do you have a landline?</legend>' +
-          '<label for="landline_phone-yes">' +
-          '<input id="landline_phone-yes" name="select_phone_form[landline]" value="true" type="radio">' +
-          '<span><span class="inner"></span></span>Yes</label>' +
-          '<label for="landline_phone-no">' +
-          '<input id="landline_phone-no" name="select_phone_form[landline]" value="false" type="radio">' +
-          '<span><span class="inner"></span></span>No</label>' +
-        '</fieldset>' +
+        '<input id="landline_phone-yes" name="select_phone_form[landline]" value="true" type="radio">' +
+        '<input id="landline_phone-no" name="select_phone_form[landline]" value="false" type="radio">' +
       '</div>' +
       '<div id="validation-error-message-js"></div>' +
       '<div class="form-group">' +
