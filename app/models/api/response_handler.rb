@@ -12,17 +12,22 @@ module Api
 
     def handle_error(body, status)
       json = parse_json(body, status) || {}
-      error_id = json.fetch('id', 'NONE')
-      error_type = json.fetch('type', 'NONE')
-      case error_type
+      error_message = message(status, json)
+      case json.fetch('type', 'NONE')
       when SessionError::TYPE
-        raise SessionError, "Received #{status} with type: '#{error_type}' and id: '#{error_id}'"
+        raise SessionError, error_message
       when SessionTimeoutError::TYPE
-        raise SessionTimeoutError, "Received #{status} with type: '#{error_type}' and id: '#{error_id}'"
+        raise SessionTimeoutError, error_message
       else
-        error_message = json.fetch('errors', []).join(', ')
-        raise Error, "Received #{status} with error message: [#{error_message}] and id: '#{error_id}'"
+        raise Error, error_message
       end
+    end
+
+    def message(status, json)
+      id = json.fetch('id', 'NONE')
+      type = json.fetch('type', 'NONE')
+      errors = json.fetch('errors', []).join(', ')
+      "Received #{status} with error message: [#{errors}], type: '#{type}' and id: '#{id}'"
     end
 
 
