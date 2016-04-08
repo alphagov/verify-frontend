@@ -71,7 +71,7 @@ RSpec.describe 'When the user visits the select documents page' do
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
 
-  context 'when redirecting to the select phone page' do
+  context 'when redirecting to the select phone page', js: true do
     it 'sets selected-evidence param to no-documents when no docs checked' do
       stub_federation_no_docs
       visit '/select-documents'
@@ -82,20 +82,19 @@ RSpec.describe 'When the user visits the select documents page' do
       expect(page).to have_current_path(select_phone_path, only_path: true)
       expect(query_params['selected-evidence'].to_set).to eql %w(no_documents).to_set
     end
+  end
+  context 'with javascript enabled', js: true do
+    it 'includes selected-evidence params for all selected documents' do
+      stub_federation
+      visit '/select-documents'
 
-    context 'with javascript disabled', driver: :no_js_selenium do
-      it 'includes selected-evidence params for all selected documents' do
-        stub_federation
-        visit '/select-documents'
+      choose 'select_documents_form_driving_licence_true'
+      choose 'select_documents_form_passport_true'
+      choose 'select_documents_form_non_uk_id_document_true'
+      click_button 'Continue'
 
-        choose 'select_documents_form_driving_licence_true'
-        choose 'select_documents_form_passport_true'
-        choose 'select_documents_form_non_uk_id_document_true'
-        click_button 'Continue'
-
-        expect(page).to have_current_path(select_phone_path, only_path: true)
-        expect(query_params['selected-evidence'].to_set).to eql %w(driving_licence passport non_uk_id_document).to_set
-      end
+      expect(page).to have_current_path(select_phone_path, only_path: true)
+      expect(query_params['selected-evidence'].to_set).to eql %w(driving_licence passport non_uk_id_document).to_set
     end
   end
 end

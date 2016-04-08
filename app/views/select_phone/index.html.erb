@@ -5,7 +5,7 @@
   <div class="column-two-thirds">
     <h1><%= t 'hub.select_phone.heading' %></h1>
 
-    <%= form_for @form, url: '', class: 'select-phone-form' do |f| %>
+    <%= form_for @form, url: '', html: { id: 'validate-phone', class: 'select-phone-form', novalidate: 'novalidate', 'data-msg': t('hub.select_phone.errors.no_selection')} do |f| %>
         <% if flash[:errors] %>
             <div id="validation-error-message-no-js" class="validation-message form-group">
               <p class="error"><%= flash[:errors] %></p>
@@ -35,7 +35,7 @@
               </div>
             </fieldset>
         <% end %>
-        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+        <%= content_tag :div, id: 'smartphone-question', class: flash[:errors] ? "form-group error" : "form-group" do %>
             <fieldset>
               <legend><%= t 'hub.select_phone.question.smart_phone' %></legend>
               <div class="form-group">
@@ -65,7 +65,7 @@
               </div>
             </fieldset>
         <% end %>
-        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+        <%= content_tag :div, id: 'landline-question', class: flash[:errors] ? "form-group error" : "form-group" do %>
             <fieldset>
               <legend><%= t 'hub.select_phone.question.landline' %></legend>
               <div class="form-group">
@@ -88,6 +88,9 @@
               </div>
             </fieldset>
         <% end %>
+
+        <div id="validation-error-message-js"></div>
+
         <div class="actions">
           <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
         </div>

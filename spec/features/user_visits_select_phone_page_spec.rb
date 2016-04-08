@@ -5,10 +5,10 @@ RSpec.describe 'When the user visits the select phone page' do
     set_session_cookies!
   end
 
-  context 'with javascript disabled', driver: :no_js_selenium do
+  context 'with javascript disabled' do
     it 'redirects to the will it work for me page when user has a phone' do
-      stub_federation
-      visit '/select-phone?selected-evidence=driving_licence'
+      stub_federation_no_docs
+      visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_true'
       choose 'select_phone_form_smart_phone_true'

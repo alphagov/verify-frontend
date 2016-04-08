@@ -6,16 +6,16 @@
 
   var selectPhone = {
     toggleSecondaryQuestion: function() {
-      var mobilePhoneState = selectPhone.$form.serializeArray();
-      if (mobilePhoneState[0] === undefined) {
+      var mobilePhoneState = $('input[name="select_phone_form[mobile_phone]"]:checked').val();
+      if (mobilePhoneState === undefined) {
         selectPhone.$smartphoneQuestion.add(selectPhone.$landlineQuestion)
           .addClass('js-hidden', true)
           .find('.selected').removeClass('selected').find('input').prop('checked',false);
-      } else if (mobilePhoneState[0].value === 'true') {
+      } else if (mobilePhoneState === 'true') {
         selectPhone.$smartphoneQuestion.removeClass('js-hidden');
         selectPhone.$landlineQuestion.addClass('js-hidden').removeClass('error')
           .find('.selected').removeClass('selected').find('input').prop('checked',false);
-      } else if (mobilePhoneState[0].value === 'false') {
+      } else if (mobilePhoneState === 'false') {
         selectPhone.$smartphoneQuestion.addClass('js-hidden').removeClass('error')
           .find('.selected').removeClass('selected').find('input').prop('checked',false);
         selectPhone.$landlineQuestion.removeClass('js-hidden');
@@ -40,7 +40,7 @@
             'select_phone_form[landline]': 'Please answer the question'
           }
         });
-        selectPhone.$form.find('#mobile_phone-no,#mobile_phone-yes').on('click',selectPhone.toggleSecondaryQuestion);
+        selectPhone.$form.find('#select_phone_form_mobile_phone_false,#select_phone_form_mobile_phone_true').on('click',selectPhone.toggleSecondaryQuestion);
         selectPhone.toggleSecondaryQuestion();
       }
     }
