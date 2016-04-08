@@ -4,7 +4,7 @@
 describe("Select Phone form", function () {
 
   var formWithNoErrors = '' +
-    '<form novalidate="novalidate" method="POST" action="/select-phone" id="validate-phone">' +
+    '<form novalidate="novalidate" method="POST" action="/select-phone" id="validate-phone" data-msg="Please answer the question">' +
       '<div class="form-group">' +
         '<fieldset class="inline">' +
           '<legend>Do you have a mobile phone or tablet?</legend>' +

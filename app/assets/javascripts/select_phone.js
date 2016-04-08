@@ -27,6 +27,7 @@
       selectPhone.$form = $('#validate-phone');
       selectPhone.$smartphoneQuestion = $('#smartphone-question');
       selectPhone.$landlineQuestion = $('#landline-question');
+      var errorMessage = selectPhone.$form.data('msg');
       if (selectPhone.$form.length === 1) {
         selectPhone.validator = selectPhone.$form.validate({
           rules: {
@@ -35,9 +36,9 @@
             'select_phone_form[landline]': 'required'
           },
           messages: {
-            'select_phone_form[mobile_phone]': 'Please answer the question',
-            'select_phone_form[smart_phone]': 'Please answer the question',
-            'select_phone_form[landline]': 'Please answer the question'
+            'select_phone_form[mobile_phone]': errorMessage,
+            'select_phone_form[smart_phone]': errorMessage,
+            'select_phone_form[landline]': errorMessage
           }
         });
         selectPhone.$form.find('#select_phone_form_mobile_phone_false,#select_phone_form_mobile_phone_true').on('click',selectPhone.toggleSecondaryQuestion);
