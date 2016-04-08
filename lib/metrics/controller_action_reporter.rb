@@ -8,7 +8,8 @@ module Metrics
       # args name and id get passed from ActiveSupport, however we will not need them to report.
       source = [payload[:controller], payload[:action]]
       @statsd_client.timing(Metrics::metric_key(source, TOTAL_DURATION), Metrics::duration(finish, start))
-      @statsd_client.timing(Metrics::metric_key(source, VIEW_RUNTIME), payload[:view_runtime])
+      view_runtime = payload[:view_runtime]
+      @statsd_client.timing(Metrics::metric_key(source, VIEW_RUNTIME), view_runtime) unless view_runtime.nil?
     end
   end
 end

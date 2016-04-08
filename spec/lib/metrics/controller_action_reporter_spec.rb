@@ -24,5 +24,15 @@ module Metrics
       expect(statsd).to receive(:timing).with("AnotherController.anotherAction.view_runtime", view_runtime)
       reporter.report('event_name', Time.now, Time.now, 'notification_id', payload)
     end
+
+    it 'should not send view rendering time if none is provided' do
+      # Rails only sets view_runtime when rendering a view,
+      # so it isn't set for redirects or AJAX responses.
+      view_runtime = nil
+      payload = { controller: 'AnotherController', action: 'anotherAction', view_runtime: view_runtime }
+      allow(statsd).to receive(:timing)
+      expect(statsd).not_to receive(:timing).with("AnotherController.anotherAction.view_runtime", view_runtime)
+      reporter.report('event_name', Time.now, Time.now, 'notification_id', payload)
+    end
   end
 end
