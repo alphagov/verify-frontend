@@ -13,79 +13,67 @@
         <% end %>
 
         <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
-            <fieldset>
+            <fieldset class="inline">
               <legend><%= t 'hub.select_phone.question.mobile_phone' %></legend>
-              <div class="form-group">
-                <fieldset class="inline">
-                  <label class="block-label">
-                    <%= f.radio_button :mobile_phone, 'true' %>
-                    <span>
-                      <span class="inner"></span>
-                    </span>
-                    <%= t 'option.yes' %>
-                  </label>
-                  <label class="block-label">
-                    <%= f.radio_button :mobile_phone, 'false' %>
-                    <span>
-                      <span class="inner"></span>
-                    </span>
-                    <%= t 'option.no' %>
-                  </label>
-                </fieldset>
-              </div>
+              <label class="block-label">
+                <%= f.radio_button :mobile_phone, 'true' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.yes' %>
+              </label>
+              <label class="block-label">
+                <%= f.radio_button :mobile_phone, 'false' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.no' %>
+              </label>
             </fieldset>
         <% end %>
         <%= content_tag :div, id: 'smartphone-question', class: flash[:errors] ? "form-group error" : "form-group" do %>
             <fieldset>
               <legend><%= t 'hub.select_phone.question.smart_phone' %></legend>
-              <div class="form-group">
-                <fieldset class="inline">
-                  <label class="block-label">
-                    <%= f.radio_button :smart_phone, 'true' %>
-                    <span>
-                      <span class="inner"></span>
-                    </span>
-                    <%= t 'option.yes' %>
-                  </label>
-                  <label class="block-label">
-                    <%= f.radio_button :smart_phone, 'false' %>
-                    <span>
-                      <span class="inner"></span>
-                    </span>
-                    <%= t 'option.no' %>
-                  </label>
-                  <label class="block-label">
-                    <%= f.radio_button :smart_phone, 'false' %>
-                    <span>
-                      <span class="inner"></span>
-                    </span>
-                    <%= t 'option.unknown' %>
-                  </label>
-                </fieldset>
-              </div>
+              <label class="block-label">
+                <%= f.radio_button :smart_phone, 'true' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.yes' %>
+              </label>
+              <label class="block-label">
+                <%= f.radio_button :smart_phone, 'false' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.no' %>
+              </label>
+              <label class="block-label">
+                <%= f.radio_button :smart_phone, 'false' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.unknown' %>
+              </label>
             </fieldset>
         <% end %>
         <%= content_tag :div, id: 'landline-question', class: flash[:errors] ? "form-group error" : "form-group" do %>
-            <fieldset>
+            <fieldset class="inline">
               <legend><%= t 'hub.select_phone.question.landline' %></legend>
-              <div class="form-group">
-                <fieldset class="inline">
-                  <label class="block-label">
-                    <%= f.radio_button :landline, 'true' %>
-                    <span>
-                      <span class="inner"></span>
-                    </span>
-                    <%= t 'option.yes' %>
-                  </label>
-                  <label class="block-label">
-                    <%= f.radio_button :landline, 'false' %>
-                    <span>
-                      <span class="inner"></span>
-                    </span>
-                    <%= t 'option.no' %>
-                  </label>
-                </fieldset>
-              </div>
+              <label class="block-label">
+                <%= f.radio_button :landline, 'true' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.yes' %>
+              </label>
+              <label class="block-label">
+                <%= f.radio_button :landline, 'false' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.no' %>
+              </label>
             </fieldset>
         <% end %>
 
