@@ -18,6 +18,7 @@ describe SelectDocumentsFormMapper do
   it 'uses select_documents_form fields from new frontend when they exist' do
     params = { 'select_documents_form' => { 'driving_licence' => 'true', 'no_documents' => 'false' } }
     actual = SelectDocumentsFormMapper.map(params)
-    expect(actual).to eql(params['select_documents_form'])
+    expected = { 'driving_licence' => 'true', 'no_documents' => 'false' }
+    expect(actual).to eql(expected)
   end
 end
