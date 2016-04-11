@@ -2,12 +2,12 @@ en:
   routes:
     start: start
     about: about
+    sign_in: sign-in
     about_certified_companies: about-certified-companies
     about_identity_accounts: about-identity-accounts
     about_choosing_a_company: about-choosing-a-company
     select_documents: select-documents
     select_phone: select-phone
-    sign_in: sign-in
   navigation:
     next: Next
     start_now: Start now
@@ -129,4 +129,3 @@ en:
       reason_pre: "This may be because:"
       reason_one: the link you clicked is broken
       reason_two: you entered an incorrect web address
-
