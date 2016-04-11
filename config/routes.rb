@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
     get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
     get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
+    get 'select_documents', to: 'select_documents#index', as: :select_documents
+    post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
@@ -32,8 +34,6 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
 
-  get 'select-documents', to: 'select_documents#index', as: :select_documents
-  post 'select-documents', to: 'select_documents#select_documents', as: :select_documents_submit
   get 'select-phone', to: 'select_phone#index', as: :select_phone
   post 'select-phone', to: 'select_phone#select_phone', as: :select_phone_submit
 
