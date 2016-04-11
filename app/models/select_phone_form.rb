@@ -2,7 +2,7 @@ class SelectPhoneForm
   include ActiveModel::Model
   include Evidence
 
-  attr_accessor :mobile_phone, :smart_phone, :landline
+  attr_reader :mobile_phone, :smart_phone, :landline
 
   validate :check_valid
 
