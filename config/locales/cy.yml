@@ -7,19 +7,15 @@ cy:
     about_identity_accounts: am-gyfrifon-hunaniaeth
     about_choosing_a_company: am-ddewis-cwmni
     select_documents: dewis-dogfennau
-    # FIXME: The following text was translated with Google Translate
-    select_phone: dethol-ffon   # should be dethol-ffôn but URIs need to be ASCII only
-    # FIXME: The preceeding text was translated with Google Translate
+    select_phone: select-phone
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
     continue: Parhau
   option:
-    # FIXME: The following text was translated with Google Translate
-    yes: ie
-    no: dim
-    unknown: Nid wyf yn gwybod
-    # FIXME: The preceeding text was translated with Google Translate
+    yes: Yes
+    no: No
+    unknown: I don’t know
   phase_banner:
     title: Mae hwn yn wasanaeth newydd.
     feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
@@ -77,30 +73,28 @@ cy:
       heading: Dod o hyd i'r cwmni iawn i'ch dilysu chi
       p1: Mae gan gwmnïau ardystiedig ffyrdd gwahanol o wirio hunaniaeth, er enghraifft trwy wirio dogfennau adnabod neu ddarparu ap.
       p2: Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.
-# FIXME: The following text was translated with Google Translate
     select_documents:
-      title: Dewiswch yr holl ddogfennau sydd gennych
-      heading: cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau adnabod er mwyn gwirio eich.
-      legend: A oes gennych y dogfennau hyn gyda chi?
+      title: Select all the documents you have
+      heading: Certified companies use information from different identity documents to verify you.
+      legend: Do you have these documents with you?
       question:
-        driving_licence: trwydded yrru cerdyn-llun yn y DU (ac eithrio Gogledd Iwerddon)
-        passport: pasbort y DU
-        non_uk_id_document: dogfen adnabod o wlad arall ( pasbort , cerdyn adnabod neu drwydded yrru )
-        no_documents: Dydw i ddim yn cael unrhyw un o'r dogfennau hyn gyda mi
+        driving_licence: UK photocard driving licence (excluding Northern Ireland)
+        passport: UK passport
+        non_uk_id_document: Identity document from another country (passport, ID card or driving licence)
+        no_documents: I don't have any of these documents with me
       errors:
-        no_selection: Dewiswch y dogfennau sydd gennych
-        invalid_selection: Gwiriwch eich dewis
+        no_selection: Please select the documents you have
+        invalid_selection: Please check your selection
     select_phone:
-      title: A oes gennych ffôn symudol neu dabled?
-      heading: gall cwmnïau ardystiedig anfon codau diogelwch i'ch ffôn symudol.
+      title: Do you have a mobile phone or tablet?
+      heading: Certified companies can send security codes to your mobile.
       question:
-        mobile_phone: A oes gennych ffôn symudol neu dabled?
-        smart_phone: Gallwch osod apps ar eich dyfais?
-        landline: A oes gennych linell tir?
+        mobile_phone: Do you have a mobile phone or tablet?
+        smart_phone: Can you install apps on your device?
+        landline: Do you have a landline?
       errors:
         no_selection: Please answer all the questions
-        invalid_selection: Gwiriwch eich dewis
-# FIXME: The preceding text was translated with Google Translate
+        invalid_selection: Please check your selection
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
@@ -133,11 +127,9 @@ cy:
       heading: Mae'n ddrwg gennym, mae rhywbeth wedi mynd o'i le
       error_message: Gall hyn fod oherwydd bod eich sesiwn wedi'i amseru allan neu roedd gwall yn y system.
       start_again: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.
-# FIXME: The following text was translated with Google Translate
     page_not_found:
-      title: Ni all y dudalen i'w weld
-      heading: Ni all y dudalen i'w weld
-      reason_pre: "Gall hyn fod oherwydd:"
-      reason_one: y cyswllt i chi glicio cael ei dorri
-      reason_two: a roesoch cyfeiriad gwe anghywir
-# FIXME: The preceding text was translated with Google Translate
+      title: This page can't be found
+      heading: This page can't be found
+      reason_pre: "This may be because:"
+      reason_one: the link you clicked is broken
+      reason_two: you entered an incorrect web address
