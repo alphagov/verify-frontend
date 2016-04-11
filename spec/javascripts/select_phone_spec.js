@@ -3,6 +3,10 @@
 
 describe("Select Phone form", function () {
 
+  function check($radioButton) {
+    $radioButton.prop('checked', true).triggerHandler('click');
+  }
+
   var formWithNoErrors = '' +
     '<form novalidate="novalidate" id="validate-phone" data-msg="Please answer the question">' +
       '<div class="form-group">' +
@@ -64,14 +68,14 @@ describe("Select Phone form", function () {
     });
 
     it("mobile answered no", function () {
-      selectPhoneForm.find('#select_phone_form_mobile_phone_false').prop('checked', true).triggerHandler('click');
+      check(selectPhoneForm.find('#select_phone_form_mobile_phone_false'));
       selectPhoneForm.triggerHandler('submit');
       expect(selectPhoneForm.find('#validation-error-message-js').text()).toBe('Please answer the question');
       expect(selectPhoneForm.children('#landline-question').is('.error')).toBe(true);
     });
 
     it("mobile answered yes", function () {
-      selectPhoneForm.find('#select_phone_form_mobile_phone_true').prop('checked', true).triggerHandler('click');
+      check(selectPhoneForm.find('#select_phone_form_mobile_phone_true'));
       selectPhoneForm.triggerHandler('submit');
       expect(selectPhoneForm.find('#validation-error-message-js').text()).toBe('Please answer the question');
       expect(selectPhoneForm.children('#smartphone-question').is('.error')).toBe(true);
@@ -85,36 +89,36 @@ describe("Select Phone form", function () {
     }
 
     it("mobile answered yes and smartphone answered no", function () {
-      selectPhoneForm.find('#select_phone_form_mobile_phone_true').prop('checked', true).triggerHandler('click');
-      selectPhoneForm.find('#smart_phone-no').prop('checked', true).triggerHandler('click');
+      check(selectPhoneForm.find('#select_phone_form_mobile_phone_true'));
+      check(selectPhoneForm.find('#smart_phone-no'));
       selectPhoneForm.triggerHandler('submit');
       expectNoErrors();
     });
 
     it("mobile answered yes and smartphone answered dont know", function () {
-      selectPhoneForm.find('#select_phone_form_mobile_phone_true').prop('checked', true).triggerHandler('click');
-      selectPhoneForm.find('#smart_phone-unknown').prop('checked', true).triggerHandler('click');
+      check(selectPhoneForm.find('#select_phone_form_mobile_phone_true'));
+      check(selectPhoneForm.find('#smart_phone-unknown'));
       selectPhoneForm.triggerHandler('submit');
       expectNoErrors();
     });
 
     it("mobile answered yes and smartphone answered yes", function () {
-      selectPhoneForm.find('#select_phone_form_mobile_phone_true').prop('checked', true).triggerHandler('click');
-      selectPhoneForm.find('#smart_phone-yes').prop('checked', true).triggerHandler('click');
+      check(selectPhoneForm.find('#select_phone_form_mobile_phone_true'));
+      check(selectPhoneForm.find('#smart_phone-yes'));
       selectPhoneForm.triggerHandler('submit');
       expectNoErrors();
     });
 
     it("mobile answered no and landline answered yes", function () {
-      selectPhoneForm.find('#select_phone_form_mobile_phone_false').prop('checked', true).triggerHandler('click');
-      selectPhoneForm.find('#landline_phone-yes').prop('checked', true).triggerHandler('click');
+      check(selectPhoneForm.find('#select_phone_form_mobile_phone_false'));
+      check(selectPhoneForm.find('#landline_phone-yes'));
       selectPhoneForm.triggerHandler('submit');
       expectNoErrors();
     });
 
     it("answered no to mobile phone and landline questions", function () {
-      selectPhoneForm.find('#select_phone_form_mobile_phone_false').prop('checked', true).triggerHandler('click');
-      selectPhoneForm.find('#landline_phone-no').prop('checked', true).triggerHandler('click');
+      check(selectPhoneForm.find('#select_phone_form_mobile_phone_false'));
+      check(selectPhoneForm.find('#landline_phone-no'));
       selectPhoneForm.triggerHandler('submit');
       expectNoErrors();
     });
