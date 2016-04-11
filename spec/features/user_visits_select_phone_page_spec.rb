@@ -42,6 +42,16 @@ RSpec.describe 'When the user visits the select phone page' do
       expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
       expect(query_params['selected-evidence'].to_set).to eql %w(mobile_phone smart_phone passport driving_licence).to_set
     end
+
+    it 'should display a validation message when user does not answer mobile phone question' do
+      stub_federation
+      visit '/select-phone?selected-evidence=passport&selected-evidence=driving_licence'
+
+      click_button 'Continue'
+
+      expect(page).to have_current_path(select_phone_path, only_path: true)
+      expect(page).to have_css '#validation-error-message-js', text: 'Please answer the question'
+    end
   end
 
   it 'includes the appropriate feedback source' do
