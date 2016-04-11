@@ -42,12 +42,24 @@ RSpec.describe 'user encounters error page' do
   end
 
   it 'will present error page when standard error occurs in upstream systems' do
-    stub_request(:post, api_saml_endpoint).to_raise(StandardError)
+    e = StandardError.new("my message")
+    stub_request(:post, api_saml_endpoint).to_raise(e)
     stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
+    expect(page.status_code).to eq(500)
+  end
+
+  it 'will log to raven when standard error' do
+    e = StandardError.new("my message")
+    expect(Raven).to receive(:capture_exception).with(e)
+    stub_request(:post, api_saml_endpoint).to_raise(e)
+    stub_transactions_list
+    visit '/test-saml'
+    click_button "saml-post"
+    expect(page).to have_content "Sorry, something went wrong"
     expect(page.status_code).to eq(500)
   end
 
