@@ -7,7 +7,7 @@ cy:
     about_identity_accounts: am-gyfrifon-hunaniaeth
     about_choosing_a_company: am-ddewis-cwmni
     select_documents: select-documents-cy
-    select_phone: select-phone
+    select_phone: select-phone-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
