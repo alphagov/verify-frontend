@@ -6,7 +6,7 @@ cy:
     about_certified_companies: am-gwmniau-ardystiedig
     about_identity_accounts: am-gyfrifon-hunaniaeth
     about_choosing_a_company: am-ddewis-cwmni
-    select_documents: dewis-dogfennau
+    select_documents: select-documents
     select_phone: select-phone
   navigation:
     next: Nesaf
