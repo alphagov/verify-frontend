@@ -75,4 +75,18 @@ RSpec.describe 'When the user visits the select phone page' do
       expect(page).to have_css '.form-group.error'
     end
   end
+
+  it 'reports to Piwik' do
+    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+    piwik_request = { 'action_name' => 'Select Phone Next' }
+
+    stub_federation
+    visit '/select-phone?selected-evidence=passport&selected-evidence=driving_licence'
+
+    choose 'select_phone_form_mobile_phone_true'
+    choose 'select_phone_form_smart_phone_true'
+    click_button 'Continue'
+
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+  end
 end

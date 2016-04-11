@@ -7,6 +7,7 @@ class SelectPhoneController < ApplicationController
   end
 
   def select_phone
+    ANALYTICS_REPORTER.report(request, 'Select Phone Next')
     @form = SelectPhoneForm.new(params[:select_phone_form] || {})
     if @form.valid?
       selected_evidence = @form.selected_evidence.concat EvidenceQueryStringParser.parse(request.query_string)
