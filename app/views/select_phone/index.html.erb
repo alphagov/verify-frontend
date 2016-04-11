@@ -3,7 +3,7 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h1><%= t 'hub.select_phone.heading' %></h1>
+    <h1 class="heading-banner-top-margin"><%= t 'hub.select_phone.heading' %></h1>
 
     <%= form_for @form, url: '', html: { id: 'validate-phone', class: 'select-phone-form', novalidate: 'novalidate', 'data-msg': t('hub.select_phone.errors.no_selection')} do |f| %>
         <% if flash[:errors] %>
