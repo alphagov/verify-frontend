@@ -50,7 +50,7 @@ RSpec.describe 'When the user visits the select phone page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(select_phone_path, only_path: true)
-      expect(page).to have_css '#validation-error-message-js', text: 'Please answer the question'
+      expect(page).to have_css '#validation-error-message-js', text: 'Please answer all the questions'
     end
   end
 
@@ -71,7 +71,7 @@ RSpec.describe 'When the user visits the select phone page' do
       visit '/select-phone'
       click_button 'Continue'
 
-      expect(page).to have_css '.validation-message', text: 'Please answer the question'
+      expect(page).to have_css '.validation-message', text: 'Please answer all the questions'
       expect(page).to have_css '.form-group.error'
     end
   end

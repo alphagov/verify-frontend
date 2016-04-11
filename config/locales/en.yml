@@ -89,7 +89,7 @@ en:
         smart_phone: Can you install apps on your device?
         landline: Do you have a landline?
       errors:
-        no_selection: Please answer the question
+        no_selection: Please answer all the questions
         invalid_selection: Please check your selection
   errors:
     transaction_list:

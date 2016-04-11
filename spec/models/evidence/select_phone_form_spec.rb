@@ -60,7 +60,7 @@ module Evidence
     def test_form_missing_data(form_fields = {})
       form = SelectPhoneForm.new(form_fields)
       expect(form.valid?).to eql false
-      expect(form.errors.full_messages).to eql ['Please answer the question']
+      expect(form.errors.full_messages).to eql ['Please answer all the questions']
     end
 
     def test_form_inconsistent_data(form_fields = {})

@@ -98,9 +98,9 @@ cy:
         smart_phone: Gallwch osod apps ar eich dyfais?
         landline: A oes gennych linell tir?
       errors:
-        no_selection: Os gwelwch yn dda ateb y cwestiwn
+        no_selection: Please answer all the questions
         invalid_selection: Gwiriwch eich dewis
-# FIXME: The preceeding text was translated with Google Translate
+# FIXME: The preceding text was translated with Google Translate
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
