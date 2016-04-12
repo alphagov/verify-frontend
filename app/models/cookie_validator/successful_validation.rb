@@ -1,3 +1,3 @@
 class CookieValidator
-  SuccessfulValidation = Validation.new
+  SuccessfulValidation = Validation.new.freeze
 end

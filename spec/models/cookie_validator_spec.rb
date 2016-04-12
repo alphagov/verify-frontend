@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'models/cookie_validator'
+require 'models/cookie_validator/session_id_cookie_validator'
 require 'models/cookie_validator/session_start_time_cookie_validator'
 require 'models/cookie_validator/missing_cookies_validator'
 require 'models/cookie_validator/no_cookies_validator'
@@ -99,5 +100,13 @@ describe CookieValidator do
     expect(validation).to_not be_ok
     expect(validation.type).to eql :cookie_expired
     expect(validation.message).to eql 'session_start_time cookie for session "my-session-id" has expired'
+  end
+
+  it "will fail validation if session id cookie is set to 'no-current-session'" do
+    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'no-current-session'
+    validation = cookie_validator.validate(cookies)
+    expect(validation).to_not be_ok
+    expect(validation.type).to eql :something_went_wrong
+    expect(validation.message).to eql "Secure cookie was set to a deleted session value 'no-current-session', indicating a previously completed session."
   end
 end
