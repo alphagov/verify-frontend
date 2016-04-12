@@ -43,6 +43,10 @@
 
 }
 
+.min-width {
+  min-width: 24em;
+}
+
 .block-label:last-child {
   margin-bottom: 0;
 }
@@ -50,6 +54,7 @@
 // To stack horizontally, use .inline on parent, to sit block labels next to each other
 .inline .block-label {
   clear: none;
+  min-width: 30px;
   margin-right: 10px;
 }
 
