@@ -1,3 +1,4 @@
+require 'select_phone_form_mapper'
 require 'evidence_query_string_parser'
 require 'evidence_query_string_builder'
 
