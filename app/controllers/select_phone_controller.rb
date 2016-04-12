@@ -2,6 +2,8 @@ require 'evidence_query_string_parser'
 require 'evidence_query_string_builder'
 
 class SelectPhoneController < ApplicationController
+  protect_from_forgery except: :select_phone
+
   def index
     @form = SelectPhoneForm.new({})
   end
