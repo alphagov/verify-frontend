@@ -15,4 +15,9 @@ describe EvidenceQueryStringBuilder do
     query_string = EvidenceQueryStringBuilder.build([:passport, :driving_licence])
     expect(query_string).to eql 'selected-evidence=passport&selected-evidence=driving_licence'
   end
+
+  it 'should build a landline_phone query string from landline evidence' do
+    query_string = EvidenceQueryStringBuilder.build([:landline])
+    expect(query_string).to eql 'selected-evidence=landline_phone'
+  end
 end
