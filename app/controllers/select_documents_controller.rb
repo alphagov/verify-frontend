@@ -2,8 +2,6 @@ require 'select_documents_form_mapper'
 require 'evidence_query_string_builder'
 
 class SelectDocumentsController < ApplicationController
-  protect_from_forgery except: :select_documents
-
   def index
     @form = SelectDocumentsForm.new({})
   end
