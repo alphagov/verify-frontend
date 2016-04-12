@@ -19,6 +19,11 @@ class CookieValidator
       ValidationFailure.new(:something_went_wrong, :internal_server_error, message)
     end
 
+    DELETED_SESSION_MESSAGE = "Secure cookie was set to a deleted session value 'no-current-session', indicating a previously completed session.".freeze
+    def self.deleted_session
+      ValidationFailure.new(:something_went_wrong, :forbidden, DELETED_SESSION_MESSAGE)
+    end
+
     def initialize(type, status, message)
       @type = type
       @status = status
