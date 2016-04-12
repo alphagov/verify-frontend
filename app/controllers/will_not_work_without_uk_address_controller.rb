@@ -1,0 +1,2 @@
+class WillNotWorkWithoutUkAddressController < ApplicationController
+end
