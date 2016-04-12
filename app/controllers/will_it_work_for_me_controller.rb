@@ -5,6 +5,14 @@ class WillItWorkForMeController < ApplicationController
 
   def will_it_work_for_me
     @form = WillItWorkForMeForm.new(params[:will_it_work_for_me_form])
+    uri = get_redirect_uri
+    uri.query = request.query_string
+    redirect_to uri.to_s
+  end
+
+private
+
+  def get_redirect_uri
     if @form.resident_last_12_months?
       if @form.above_age_threshold?
         path_to_redirect = choose_a_certified_company_path
@@ -18,8 +26,6 @@ class WillItWorkForMeController < ApplicationController
     else
       path_to_redirect = why_might_this_not_work_for_me_path
     end
-    uri = URI(path_to_redirect)
-    uri.query = request.query_string
-    redirect_to uri.to_s
+    URI(path_to_redirect)
   end
 end
