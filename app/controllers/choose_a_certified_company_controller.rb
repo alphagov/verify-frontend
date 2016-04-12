@@ -1,0 +1,2 @@
+class ChooseACertifiedCompanyController < ApplicationController
+end

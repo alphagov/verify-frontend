@@ -36,6 +36,11 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
 
+  get 'select-phone', to: 'select_phone#index', as: :select_phone
+  post 'select-phone', to: 'select_phone#select_phone', as: :select_phone_submit
+  get 'will-it-work-for-me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
+  post 'will-it-work-for-me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
     get 'feedback', to: redirect("#{API_HOST}/feedback")
@@ -43,9 +48,8 @@ Rails.application.routes.draw do
     get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
-    get 'will-it-work-for-me', to: redirect("#{API_HOST}/will-it-work-for-me"), as: :will_it_work_for_me
     get 'no-mobile-phone', to: redirect("#{API_HOST}/no-mobile-phone"), as: :no_mobile_phone
-
+    get 'choose-a-certified-company', to: redirect("#{API_HOST}/choose-a-certified-company"), as: :choose_a_certified_company
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
@@ -53,8 +57,9 @@ Rails.application.routes.draw do
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
     get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
-    get 'will-it-work-for-me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
     get 'no-mobile-phone', to: 'no_mobile_phone#index', as: :no_mobile_phone
+    get 'choose-a-certified-company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
+
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

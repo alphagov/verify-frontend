@@ -1,0 +1,51 @@
+<% content_for :page_title, t('hub.will_it_work_for_me.title') %>
+<% content_for :feedback_source, 'WILL_IT_WORK_FOR_ME_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= form_for @form, url: '', html: { id: 'validate-will-it-work-for-me', class: 'will-it-work-for-me-form', novalidate: 'novalidate'} do |f| %>
+        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+            <fieldset class="inline">
+              <legend><%= t 'hub.will_it_work_for_me.question.above_age_threshold' %></legend>
+              <label class="block-label">
+                <%= f.radio_button :above_age_threshold, 'true' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.yes' %>
+              </label>
+              <label class="block-label">
+                <%= f.radio_button :above_age_threshold, 'false' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.no' %>
+              </label>
+            </fieldset>
+        <% end %>
+        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+            <fieldset class="inline">
+              <legend><%= t 'hub.will_it_work_for_me.question.resident_last_12_months' %></legend>
+              <label class="block-label">
+                <%= f.radio_button :resident_last_12_months, 'true' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.yes' %>
+              </label>
+              <label class="block-label">
+                <%= f.radio_button :resident_last_12_months, 'false' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'option.no' %>
+              </label>
+            </fieldset>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+        </div>
+    <% end %>
+  </div>
+</div>

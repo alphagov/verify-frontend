@@ -91,6 +91,8 @@ en:
       errors:
         no_selection: Please answer all the questions
         invalid_selection: Please check your selection
+    will_it_work_for_me:
+      title: Can I be verified?
   errors:
     transaction_list:
       title: Find the service you were using to start again
