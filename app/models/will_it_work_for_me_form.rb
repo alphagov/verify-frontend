@@ -20,4 +20,8 @@ class WillItWorkForMeForm
   def no_uk_address?
     not_resident_reason == 'NoAddress'
   end
+
+  def above_age_threshold?
+    above_age_threshold == 'true'
+  end
 end

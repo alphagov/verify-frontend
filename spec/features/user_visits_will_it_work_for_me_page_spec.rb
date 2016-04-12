@@ -34,9 +34,19 @@ RSpec.describe 'When the user visits the will it work for me page' do
     expect(page).to have_current_path(why_might_this_not_work_for_me_path)
   end
 
+  it 'redirects to the why-might-this-not-work-for-me page when user is under 20' do
+    visit '/will-it-work-for-me'
+    choose 'will_it_work_for_me_form_above_age_threshold_false'
+    choose 'will_it_work_for_me_form_resident_last_12_months_true'
+
+    click_button 'Continue'
+
+    expect(page).to have_current_path(why_might_this_not_work_for_me_path)
+  end
+
   it 'redirects to the may-not-work-if-you-live-overseas page when user is over 20 and has address in the uk but not a resident' do
     visit '/will-it-work-for-me'
-    choose 'will_it_work_for_me_form_above_age_threshold_true'
+    choose 'will_it_work_for_me_form_above_age_threshold_false'
     choose 'will_it_work_for_me_form_resident_last_12_months_false'
     choose 'will_it_work_for_me_form_not_resident_reason_addressbutnotresident'
 
@@ -47,7 +57,7 @@ RSpec.describe 'When the user visits the will it work for me page' do
 
   it 'redirects to the will-not-work-without-uk-address page when user is over 20 and has no address in the uk' do
     visit '/will-it-work-for-me'
-    choose 'will_it_work_for_me_form_above_age_threshold_true'
+    choose 'will_it_work_for_me_form_above_age_threshold_false'
     choose 'will_it_work_for_me_form_resident_last_12_months_false'
     choose 'will_it_work_for_me_form_not_resident_reason_noaddress'
 
