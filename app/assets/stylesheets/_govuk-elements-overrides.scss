@@ -162,3 +162,12 @@
     text-decoration: none;
   }
 }
+
+// Inline fieldsets
+.form-group .inline {
+  white-space: nowrap;
+
+  span {
+    white-space: normal;
+  }
+}
