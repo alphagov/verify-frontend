@@ -4,13 +4,13 @@ module IdpEligibility
 
     def initialize(rules_hash)
       @rules = {}
-      rules_hash.each { |simple_id, rules| @rules[simple_id] = symbolize_rules(rules) }
+      rules_hash.each { |simple_id, rules| @rules[simple_id] = symbolize_rules(rules).to_set }
     end
 
   private
 
     def symbolize_rules(rule_list)
-      rule_list.collect { |evidence| evidence.collect(&:to_sym) }
+      rule_list.collect { |evidence| evidence.collect(&:to_sym).to_set }
     end
   end
 end

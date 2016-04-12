@@ -14,7 +14,7 @@ class SelectPhoneController < ApplicationController
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Phone Next')
       selected_evidence = @form.selected_evidence.concat IdpEligibility::EvidenceQueryStringParser.parse(request.query_string)
-      if IDP_ELIGIBILITY_CHECKER.any?(selected_evidence, available_idps)
+      if idp_eligibility_checker.any?(selected_evidence, available_idps)
         redirect_to build_uri_with_evidence(will_it_work_for_me_path, selected_evidence)
       else
         redirect_to build_uri_with_evidence(no_mobile_phone_path, selected_evidence)
@@ -35,5 +35,9 @@ private
     uri = URI(path)
     uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(evidence)
     uri.to_s
+  end
+
+  def idp_eligibility_checker
+    IDP_ELIGIBILITY_CHECKER
   end
 end
