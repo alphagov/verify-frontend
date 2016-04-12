@@ -93,6 +93,14 @@ en:
         invalid_selection: Please check your selection
     will_it_work_for_me:
       title: Can I be verified?
+      question:
+        above_age_threshold: Are you 20 or over?
+        resident_last_12_months: Have you lived in the UK for the last 12 months?
+        not_resident_reason:
+          title: Which of these applies to you?
+          recently: I moved to the UK in the last 12 months
+          not_resident: I have an address in the UK but I don’t live there
+          no_address: I don’t have a UK address
   errors:
     transaction_list:
       title: Find the service you were using to start again

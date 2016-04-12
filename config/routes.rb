@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
     get 'no-mobile-phone', to: redirect("#{API_HOST}/no-mobile-phone"), as: :no_mobile_phone
     get 'choose-a-certified-company', to: redirect("#{API_HOST}/choose-a-certified-company"), as: :choose_a_certified_company
+    get 'why-might-this-not-work-for-me', to: redirect("#{API_HOST}/why-might-this-not-work-for-me"), as: :why_might_this_not_work_for_me
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
@@ -59,7 +60,7 @@ Rails.application.routes.draw do
     get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
     get 'no-mobile-phone', to: 'no_mobile_phone#index', as: :no_mobile_phone
     get 'choose-a-certified-company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
-
+    get 'why-might-this-not-work-for-me', to: 'why_might_this_not_work_for_me#index', as: :why_might_this_not_work_for_me
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

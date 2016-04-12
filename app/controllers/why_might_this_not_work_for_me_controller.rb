@@ -1,0 +1,2 @@
+class WhyMightThisNotWorkForMeController < ApplicationController
+end

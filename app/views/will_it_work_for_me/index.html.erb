@@ -42,6 +42,32 @@
               </label>
             </fieldset>
         <% end %>
+        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+            <fieldset class="inline">
+              <legend><%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %></legend>
+              <label class="block-label">
+                <%= f.radio_button :not_resident_reason, 'MovedRecently' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'hub.will_it_work_for_me.question.not_resident_reason.recently' %>
+              </label>
+              <label class="block-label">
+                <%= f.radio_button :not_resident_reason, 'AddressButNotResident' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'hub.will_it_work_for_me.question.not_resident_reason.not_resident' %>
+              </label>
+              <label class="block-label">
+                <%= f.radio_button :not_resident_reason, 'NoAddress' %>
+                <span>
+                  <span class="inner"></span>
+                </span>
+                <%= t 'hub.will_it_work_for_me.question.not_resident_reason.no_address' %>
+              </label>
+            </fieldset>
+        <% end %>
 
         <div class="actions">
           <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
