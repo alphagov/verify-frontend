@@ -3,7 +3,7 @@ class SelectPhoneFormMapper
     if params.has_key?('select_phone_form')
       params['select_phone_form']
     else
-      Hash[params.map { |key, value| [lookup_key(key), value] }]
+      HashWithIndifferentAccess[params.map { |key, value| [lookup_key(key), value] }]
     end
   end
 

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'active_support/hash_with_indifferent_access'
 require 'select_phone_form_mapper'
 
 describe SelectPhoneFormMapper do
@@ -14,5 +15,12 @@ describe SelectPhoneFormMapper do
     actual = SelectPhoneFormMapper.map(params)
     expected = { 'mobile_phone' => 'true', 'smart_phone' => 'true' }
     expect(actual).to eql(expected)
+  end
+
+  it 'returns a hash with indifferent access' do
+    params = { 'mobile_phone' => 'true', 'smart_phone' => 'true' }
+    actual = SelectPhoneFormMapper.map(params)
+    expect(actual).to be_an_instance_of(HashWithIndifferentAccess)
+    expect(actual[:mobile_phone]).to eql('true')
   end
 end
