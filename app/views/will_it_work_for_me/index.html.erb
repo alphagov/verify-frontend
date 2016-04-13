@@ -4,6 +4,11 @@
 <div class="grid-row">
   <div class="column-two-thirds">
     <%= form_for @form, url: '', html: { id: 'validate-will-it-work-for-me', class: 'will-it-work-for-me-form', novalidate: 'novalidate'} do |f| %>
+        <% if flash[:errors] %>
+            <div id="validation-error-message-no-js" class="validation-message form-group">
+              <p class="error"><%= flash[:errors] %></p>
+            </div>
+        <% end %>
         <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
             <fieldset class="inline">
               <legend><%= t 'hub.will_it_work_for_me.question.above_age_threshold' %></legend>

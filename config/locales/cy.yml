@@ -105,6 +105,8 @@ cy:
           recently: I moved to the UK in the last 12 months
           not_resident: I have an address in the UK but I don’t live there
           no_address: I don’t have a UK address
+        errors:
+          no_selection: Please answer all the questions
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynwch y cyfarwyddiadau sydd yn yr e-bost a gawsoch

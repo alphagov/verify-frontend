@@ -101,6 +101,8 @@ en:
           recently: I moved to the UK in the last 12 months
           not_resident: I have an address in the UK but I don’t live there
           no_address: I don’t have a UK address
+        errors:
+          no_selection: Please answer all the questions
   errors:
     transaction_list:
       title: Find the service you were using to start again

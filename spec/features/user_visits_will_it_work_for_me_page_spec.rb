@@ -65,4 +65,13 @@ RSpec.describe 'When the user visits the will it work for me page' do
 
     expect(page).to have_current_path(will_not_work_without_uk_address_path)
   end
+
+  it 'shows a validation message when form is invalid' do
+    visit '/will-it-work-for-me'
+
+    click_button 'Continue'
+
+    expect(page).to have_current_path(will_it_work_for_me_path)
+    expect(page).to have_content 'Please answer all the questions'
+  end
 end

@@ -3,6 +3,8 @@ class WillItWorkForMeForm
 
   attr_reader :above_age_threshold, :resident_last_12_months, :not_resident_reason
 
+  validate :age_threshold_question_answered, :residency_questions_answered
+
   def initialize(hash)
     @above_age_threshold = hash[:above_age_threshold]
     @resident_last_12_months = hash[:resident_last_12_months]
@@ -23,5 +25,27 @@ class WillItWorkForMeForm
 
   def above_age_threshold?
     above_age_threshold == 'true'
+  end
+
+private
+
+  def residency_questions_answered
+    if resident_last_12_months.blank?
+      set_validation_error
+    end
+
+    if !resident_last_12_months? && not_resident_reason.blank?
+      set_validation_error
+    end
+  end
+
+  def age_threshold_question_answered
+    if above_age_threshold.blank?
+      set_validation_error
+    end
+  end
+
+  def set_validation_error
+    errors.set(:base, [I18n.t('hub.will_it_work_for_me.question.errors.no_selection')])
   end
 end
