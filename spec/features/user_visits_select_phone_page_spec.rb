@@ -78,7 +78,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
   it 'reports to Piwik' do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-    piwik_request = { 'action_name' => 'Select Phone Next' }
+    piwik_request = { 'action_name' => 'Phone Next' }
 
     stub_federation
     visit '/select-phone?selected-evidence=passport&selected-evidence=driving_licence'
