@@ -12,3 +12,8 @@ TRANSACTION_LISTER = Display::Rp::TransactionLister.new(
 FEDERATION_INFO_GETTER = Display::Federation::FederationInfoGetter.new(
   SESSION_PROXY,
   Display::Idp::DisplayDataCorrelator.new(FEDERATION_TRANSLATOR, CONFIG.logo_directory, CONFIG.white_logo_directory))
+
+TRANSACTION_INFO_GETTER = Display::Rp::TransactionInfoGetter.new(
+  SESSION_PROXY,
+  Display::Rp::Repository.new(FEDERATION_TRANSLATOR)
+)

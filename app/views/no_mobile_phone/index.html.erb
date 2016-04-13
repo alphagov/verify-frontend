@@ -1,0 +1,15 @@
+<% content_for :page_title, t('hub.no_mobile_phone.title') %>
+<% content_for :feedback_source, 'NO_MOBILE_PHONE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t 'hub.no_mobile_phone.heading' %></h1>
+
+    <p><%= t 'hub.no_mobile_phone.p1', other_ways_description: @other_ways_description %></p>
+    <p><%= t 'hub.no_mobile_phone.p2' %></p>
+    <h2 class="heading-medium"><%= t 'hub.no_mobile_phone.other_ways_heading', other_ways_description: @other_ways_description %></h2>
+    <div class="other-ways">
+      <p><%= @other_ways_text.html_safe %></p>
+    </div>
+  </div>
+</div>

@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   post 'select-phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'will-it-work-for-me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
   post 'will-it-work-for-me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+  get 'no-mobile-phone', to: 'no_mobile_phone#index', as: :no_mobile_phone
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
@@ -48,7 +49,6 @@ Rails.application.routes.draw do
     get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
-    get 'no-mobile-phone', to: redirect("#{API_HOST}/no-mobile-phone"), as: :no_mobile_phone
     get 'choose-a-certified-company', to: redirect("#{API_HOST}/choose-a-certified-company"), as: :choose_a_certified_company
     get 'why-might-this-not-work-for-me', to: redirect("#{API_HOST}/why-might-this-not-work-for-me"), as: :why_might_this_not_work_for_me
     get 'may-not-work-if-you-live-overseas', to: redirect("#{API_HOST}/may-not-work-if-you-live-overseas"), as: :may_not_work_if_you_live_overseas
@@ -60,7 +60,6 @@ Rails.application.routes.draw do
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
     get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
-    get 'no-mobile-phone', to: 'no_mobile_phone#index', as: :no_mobile_phone
     get 'choose-a-certified-company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
     get 'why-might-this-not-work-for-me', to: 'why_might_this_not_work_for_me#index', as: :why_might_this_not_work_for_me
     get 'may-not-work-if-you-live-overseas', to: 'may_not_work_if_you_live_overseas#index', as: :may_not_work_if_you_live_overseas

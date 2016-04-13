@@ -103,6 +103,12 @@ en:
           no_address: I don’t have a UK address
         errors:
           no_selection: Please answer all the questions
+    no_mobile_phone:
+      title: Other ways to access the service
+      heading: GOV.UK Verify won’t work for you
+      p1: You need a phone or tablet to use GOV.UK Verify. If you don’t have either of these, there are other ways you can %{other_ways_description}
+      p2: If you don’t have a passport or UK driving licence, you will also need to install an app.
+      other_ways_heading: Other ways to %{other_ways_description}
   errors:
     transaction_list:
       title: Find the service you were using to start again
