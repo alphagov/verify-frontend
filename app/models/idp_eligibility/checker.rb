@@ -1,5 +1,7 @@
 module IdpEligibility
   class Checker
+    include Evidence
+
     def initialize(rules_repository)
       @rules_repository = rules_repository
     end
@@ -23,7 +25,7 @@ module IdpEligibility
   private
 
     def docs_only_mask
-      [:passport, :driving_licence, :non_uk_id_document].to_set
+      DOCUMENT_ATTRIBUTES.to_set
     end
 
     def idps_at_document_stage(evidence)
