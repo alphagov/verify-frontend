@@ -66,12 +66,26 @@ RSpec.describe 'When the user visits the will it work for me page' do
     expect(page).to have_current_path(will_not_work_without_uk_address_path)
   end
 
-  it 'shows a validation message when form is invalid' do
-    visit '/will-it-work-for-me'
+  context 'shows a validation message when form is invalid' do
+    it 'when js is off' do
+      visit '/will-it-work-for-me'
 
-    click_button 'Continue'
+      click_button 'Continue'
 
-    expect(page).to have_current_path(will_it_work_for_me_path)
-    expect(page).to have_content 'Please answer all the questions'
+      expect(page).to have_current_path(will_it_work_for_me_path)
+      expect(page).to have_content 'Please answer all the questions'
+    end
+
+    it 'when js is on', js: true do
+      visit '/will-it-work-for-me'
+      choose 'will_it_work_for_me_form_above_age_threshold_false'
+      expect(page).to_not have_content(I18n.t('hub.will_it_work_for_me.question.not_resident_reason.title'))
+      choose 'will_it_work_for_me_form_resident_last_12_months_false'
+      expect(page).to have_content(I18n.t('hub.will_it_work_for_me.question.not_resident_reason.title'))
+      click_button 'Continue'
+
+      expect(page).to have_current_path(will_it_work_for_me_path)
+      expect(page).to have_css '#validation-error-message-js', text: 'Please answer all the questions'
+    end
   end
 end
