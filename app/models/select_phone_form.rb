@@ -1,6 +1,6 @@
 class SelectPhoneForm
   include ActiveModel::Model
-  include Evidence
+  include IdpEligibility::Evidence
 
   attr_reader :mobile_phone, :smart_phone, :landline
 

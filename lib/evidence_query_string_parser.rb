@@ -1,5 +1,5 @@
 class EvidenceQueryStringParser
-  include Evidence
+  include IdpEligibility::Evidence
 
   def self.parse(query_string)
     result = []

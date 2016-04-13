@@ -1,4 +1,3 @@
-require 'models/evidence'
 require 'evidence_query_string_parser'
 
 describe EvidenceQueryStringParser do

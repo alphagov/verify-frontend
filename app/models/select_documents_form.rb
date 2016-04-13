@@ -1,6 +1,6 @@
 class SelectDocumentsForm
   include ActiveModel::Model
-  include Evidence
+  include IdpEligibility::Evidence
 
   attr_reader :driving_licence, :passport, :non_uk_id_document, :no_documents
   validate :one_must_be_present
