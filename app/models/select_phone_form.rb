@@ -3,7 +3,8 @@ class SelectPhoneForm
 
   attr_reader :mobile_phone, :smart_phone, :landline
 
-  validate :check_valid
+  validate :smart_phone_not_specified_when_required
+  validate :landline_not_specified_when_required, unless: :invalid_selection
 
   def initialize(params)
     @mobile_phone = params[:mobile_phone]
@@ -17,21 +18,26 @@ class SelectPhoneForm
 
 private
 
-  def check_valid
-    if mobile_phone != 'false' && smart_phone_not_specified?
-      errors.set(:base, [I18n.t('hub.select_phone.errors.no_selection')])
-      return
+  def landline_not_specified_when_required
+    if has_no_mobile_phone? && landline_not_specified?
+      add_no_selection_error
     end
+  end
 
+  def smart_phone_not_specified_when_required
+    if mobile_phone != 'false' && smart_phone_not_specified?
+      add_no_selection_error
+    end
+  end
+
+  def invalid_selection
     if has_no_mobile_phone? && has_smart_phone?
       errors.set(:base, [I18n.t('hub.select_phone.errors.invalid_selection')])
-      return
     end
+  end
 
-    if has_no_mobile_phone? && landline_not_specified?
-      errors.set(:base, [I18n.t('hub.select_phone.errors.no_selection')])
-      return
-    end
+  def add_no_selection_error
+    errors.set(:base, [I18n.t('hub.select_phone.errors.no_selection')])
   end
 
   def landline_not_specified?
