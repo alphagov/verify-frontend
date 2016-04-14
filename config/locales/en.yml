@@ -8,6 +8,7 @@ en:
     about_choosing_a_company: about-choosing-a-company
     select_documents: select-documents
     select_phone: select-phone
+    no_mobile_phone: no-mobile-phone
   navigation:
     next: Next
     start_now: Start now

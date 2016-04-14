@@ -9,6 +9,7 @@ cy:
     select_documents: select-documents-cy
     select_phone: select-phone-cy
     will_it_work_for_me: will-it-work-for-me-cy
+    no_mobile_phone: no-mobile-phone-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
