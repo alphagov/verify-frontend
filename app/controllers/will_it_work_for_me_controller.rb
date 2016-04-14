@@ -6,6 +6,7 @@ class WillItWorkForMeController < ApplicationController
   def will_it_work_for_me
     @form = WillItWorkForMeForm.new(params[:will_it_work_for_me_form] || {})
     if @form.valid?
+      ANALYTICS_REPORTER.report(request, 'Can I be Verified Next')
       uri = URI(redirect_path)
       uri.query = request.query_string
       redirect_to uri.to_s

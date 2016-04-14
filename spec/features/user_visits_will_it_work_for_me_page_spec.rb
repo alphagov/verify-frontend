@@ -88,4 +88,27 @@ RSpec.describe 'When the user visits the will it work for me page' do
       expect(page).to have_css '#validation-error-message-js', text: 'Please answer all the questions'
     end
   end
+
+  it 'reports to Piwik when the form is valid' do
+    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+    piwik_request = { 'action_name' => 'Can I be Verified Next' }
+
+    visit '/will-it-work-for-me?selected-evidence=driving_licence&selected-evidence=landline'
+    choose 'will_it_work_for_me_form_above_age_threshold_true'
+    choose 'will_it_work_for_me_form_resident_last_12_months_true'
+
+    click_button 'Continue'
+
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+  end
+
+  it 'does not report to Piwik when the form is invalid' do
+    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+    piwik_request = { 'action_name' => 'Can I be Verified Next' }
+
+    visit '/will-it-work-for-me?selected-evidence=driving_licence&selected-evidence=landline'
+    click_button 'Continue'
+
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to_not have_been_made
+  end
 end
