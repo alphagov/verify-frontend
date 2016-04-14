@@ -10,6 +10,12 @@ RSpec.describe 'When the user visits the will it work for me page' do
     expect_feedback_source_to_be(page, 'WILL_IT_WORK_FOR_ME_PAGE')
   end
 
+  it 'displays the page in Welsh', pending: true do
+    visit '/will-it-work-for-me-cy'
+    expect(page).to have_title 'Can I be verified? - GOV.UK Verify - GOV.UK'
+    expect(page).to have_css 'html[lang=cy]'
+  end
+
   #JS has to be on, so it uses the real browser and query params can be inspected
   it 'redirects to the choose-a-company page when user is over 20 and is a uk resident', js: true do
     stub_federation

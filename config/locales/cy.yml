@@ -8,6 +8,7 @@ cy:
     about_choosing_a_company: am-ddewis-cwmni
     select_documents: select-documents-cy
     select_phone: select-phone-cy
+    will_it_work_for_me: will-it-work-for-me-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
