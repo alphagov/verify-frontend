@@ -3,5 +3,5 @@ before:
 after_install: 'packaging/postinst.sh'
 after_remove: 'packaging/postrm.sh'
 user: root
-group: root
+group: deployer
 cli: cli.sh
