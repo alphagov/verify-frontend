@@ -1,13 +1,9 @@
+require 'query_string_parser'
+
 class EvidenceQueryStringParser
   def self.parse(query_string)
-    result = []
-    query_string.split('&').each do |pair|
-      key, value = pair.split('=')
-      matching_attribute = IdpEligibility::Evidence::ALL_ATTRIBUTES.detect { |attr| value == attr.to_s }
-      if key == 'selected-evidence' && !matching_attribute.nil?
-        result << matching_attribute
-      end
-    end
-    result
+    query_params = QueryStringParser.parse(query_string)
+    selected_evidence = query_params.fetch('selected-evidence', [])
+    ALL_ATTRIBUTES.select { |evidence| selected_evidence.include? evidence.to_s }
   end
 end
