@@ -1,3 +1,5 @@
+require 'spec_helper'
+require 'models/idp_eligibility/evidence'
 require 'evidence_query_string_parser'
 
 describe EvidenceQueryStringParser do
