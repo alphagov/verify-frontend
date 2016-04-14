@@ -1,6 +1,6 @@
 require 'select_phone_form_mapper'
 require 'evidence_query_string_parser'
-require 'evidence_query_string_builder'
+require 'idp_eligibility/evidence_query_string_builder'
 
 class SelectPhoneController < ApplicationController
   protect_from_forgery except: :select_phone
@@ -16,7 +16,7 @@ class SelectPhoneController < ApplicationController
       selected_evidence = @form.selected_evidence.concat EvidenceQueryStringParser.parse(request.query_string)
       if IDP_ELIGIBILITY_CHECKER.any?(selected_evidence, available_idps)
         uri = URI(will_it_work_for_me_path)
-        uri.query = EvidenceQueryStringBuilder.build(selected_evidence)
+        uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(selected_evidence)
         redirect_to uri.to_s
       else
         redirect_to no_mobile_phone_path
