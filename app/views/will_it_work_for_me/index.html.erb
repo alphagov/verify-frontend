@@ -3,6 +3,7 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
+    <h1 class="heading-banner-top-margin"/>
     <%= form_for @form, url: '', html: { id: 'validate-will-it-work-for-me', class: 'will-it-work-for-me-form', novalidate: 'novalidate', 'data-msg': t('hub.will_it_work_for_me.question.errors.no_selection')} do |f| %>
         <% if flash[:errors] %>
             <div id="validation-error-message-no-js" class="validation-message form-group">
@@ -47,7 +48,7 @@
               </label>
             </fieldset>
         <% end %>
-        <%= content_tag :div, id: :not_resident_reason, class: flash[:errors] ? 'form-group error' : 'form-group' do %>
+        <%= content_tag :div, id: :not_resident_reason, class: flash[:errors] ? 'form-group error' : 'form-group not-resident-reason' do %>
             <fieldset class="inline">
               <legend><%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %></legend>
               <label class="block-label">
