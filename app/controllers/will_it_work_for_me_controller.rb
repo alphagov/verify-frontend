@@ -1,10 +1,14 @@
+require 'will_it_work_for_me_form_mapper'
+
 class WillItWorkForMeController < ApplicationController
+  protect_from_forgery except: :will_it_work_for_me
+
   def index
     @form = WillItWorkForMeForm.new({})
   end
 
   def will_it_work_for_me
-    @form = WillItWorkForMeForm.new(params[:will_it_work_for_me_form] || {})
+    @form = WillItWorkForMeForm.new(WillItWorkForMeFormMapper.map(params) || {})
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Can I be Verified Next')
       uri = URI(redirect_path)
