@@ -6,8 +6,8 @@ module Display
     describe 'Repository' do
       it 'should get other ways data given a simple_id' do
         translator = double(:translator)
-        allow(translator).to receive(:translate).with('rps.test-rp.otherWaysDescription').and_return('Other ways description')
-        allow(translator).to receive(:translate).with('rps.test-rp.otherWaysText').and_return('Other ways text')
+        allow(translator).to receive(:translate).with('rps.test-rp.other_ways_description').and_return('Other ways description')
+        allow(translator).to receive(:translate).with('rps.test-rp.other_ways_text').and_return('Other ways text')
         repository = Repository.new(translator)
 
         result = repository.fetch('test-rp')

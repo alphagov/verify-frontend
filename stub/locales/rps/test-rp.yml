@@ -3,5 +3,5 @@ en:
     test-rp:
       name: Register for an identity profile
       analyticsDescription: analytics description for test-rp
-      otherWaysText: Other ways text <a href='http://www.example.com'>with a link</a>
-      otherWaysDescription: Other ways description
+      other_ways_text: Other ways text <a href='http://www.example.com'>with a link</a>
+      other_ways_description: Other ways description
