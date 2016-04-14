@@ -1,4 +1,4 @@
-if Rails.env == :production
+if Rails.env == 'production'
   LogStashLogger.configure do |config|
     config.customize_event do |event|
       event["SessionId"] = RequestStore.store[:session_id] || "no-current-session"
