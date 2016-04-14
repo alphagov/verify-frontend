@@ -13,7 +13,7 @@ class SelectPhoneForm
   end
 
   def selected_evidence
-    Evidence::PHONE_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
+    PHONE_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
   end
 
 private

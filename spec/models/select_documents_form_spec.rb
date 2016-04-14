@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'rails_helper'
-require 'evidence'
 
 describe SelectDocumentsForm do
   it 'should be invalid if all inputs are empty' do

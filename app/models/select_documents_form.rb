@@ -15,7 +15,7 @@ class SelectDocumentsForm
   end
 
   def selected_evidence
-    Evidence::DOCUMENT_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
+    DOCUMENT_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
   end
 
 private
