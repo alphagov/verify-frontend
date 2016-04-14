@@ -72,22 +72,5 @@ Rails.application.configure do
   #Cookie Configuration
   config.x.cookies.secure = true
 
-  config.logstash.level = :info
-
-  config.logstash.type = :multi_logger
-
-  config.logstash.outputs = [
-      {
-          type: :file,
-          path: 'log/production.log',
-          formatter: ::Logger::Formatter
-      },
-      {
-          type: :file,
-          path: 'log/front.logstash.log',
-          formatter: :json_lines
-      }
-  ]
-
   config.assets.prefix = '/new-assets'
 end
