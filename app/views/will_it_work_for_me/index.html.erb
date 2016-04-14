@@ -10,7 +10,7 @@
               <p class="error"><%= flash[:errors] %></p>
             </div>
         <% end %>
-        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+        <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
               <legend><%= t 'hub.will_it_work_for_me.question.above_age_threshold' %></legend>
               <label class="block-label">
@@ -29,7 +29,7 @@
               </label>
             </fieldset>
         <% end %>
-        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+        <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
               <legend><%= t 'hub.will_it_work_for_me.question.resident_last_12_months' %></legend>
               <label class="block-label">
@@ -48,7 +48,7 @@
               </label>
             </fieldset>
         <% end %>
-        <%= content_tag :div, id: :not_resident_reason, class: flash[:errors] ? 'form-group error' : 'form-group not-resident-reason' do %>
+        <%= content_tag :div, id: :not_resident_reason, class: hidden_form_question_class do %>
             <fieldset class="inline">
               <legend><%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %></legend>
               <label class="block-label">

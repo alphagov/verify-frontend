@@ -49,3 +49,9 @@
 .js-enabled .js-hidden {
   display: none;
 }
+
+// Show grey highlighter only for hidden questions
+.hidden-question {
+  padding-left: 20px;
+  border-left: 4px solid $grey-1;
+}
