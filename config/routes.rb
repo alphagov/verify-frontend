@@ -27,15 +27,14 @@ Rails.application.routes.draw do
     get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
     get 'select_documents', to: 'select_documents#index', as: :select_documents
     post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
+    get 'select_phone', to: 'select_phone#index', as: :select_phone
+    post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
 
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
-
-  get 'select-phone', to: 'select_phone#index', as: :select_phone
-  post 'select-phone', to: 'select_phone#select_phone', as: :select_phone_submit
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
