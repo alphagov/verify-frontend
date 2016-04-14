@@ -10,9 +10,9 @@ class SelectPhoneController < ApplicationController
   end
 
   def select_phone
-    ANALYTICS_REPORTER.report(request, 'Phone Next')
     @form = SelectPhoneForm.new(SelectPhoneFormMapper.map(params))
     if @form.valid?
+      ANALYTICS_REPORTER.report(request, 'Phone Next')
       selected_evidence = @form.selected_evidence.concat EvidenceQueryStringParser.parse(request.query_string)
       if IDP_ELIGIBILITY_CHECKER.any?(selected_evidence, available_idps)
         uri = URI(will_it_work_for_me_path)

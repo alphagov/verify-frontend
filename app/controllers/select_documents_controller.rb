@@ -7,9 +7,9 @@ class SelectDocumentsController < ApplicationController
   end
 
   def select_documents
-    ANALYTICS_REPORTER.report(request, 'Select Documents Next')
     @form = SelectDocumentsForm.new(SelectDocumentsFormMapper.map(params))
     if @form.valid?
+      ANALYTICS_REPORTER.report(request, 'Select Documents Next')
       selected_evidence = @form.selected_evidence
       if IDP_ELIGIBILITY_CHECKER.any_for_documents?(selected_evidence, available_idps)
         uri = URI(select_phone_path)

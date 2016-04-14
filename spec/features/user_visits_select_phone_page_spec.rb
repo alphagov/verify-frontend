@@ -76,7 +76,7 @@ RSpec.describe 'When the user visits the select phone page' do
     end
   end
 
-  it 'reports to Piwik' do
+  it 'reports to Piwik when form is valid' do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     piwik_request = { 'action_name' => 'Phone Next' }
 
@@ -88,5 +88,15 @@ RSpec.describe 'When the user visits the select phone page' do
     click_button 'Continue'
 
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+  end
+
+  it 'does not report to Piwik when form is invalid' do
+    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+    piwik_request = { 'action_name' => 'Phone Next' }
+    visit '/select-phone?selected-evidence=passport&selected-evidence=driving_licence'
+
+    click_button 'Continue'
+
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to_not have_been_made
   end
 end
