@@ -1,6 +1,5 @@
 class SelectPhoneForm
   include ActiveModel::Model
-  include IdpEligibility::Evidence
 
   attr_reader :mobile_phone, :smart_phone, :landline
 
@@ -13,7 +12,7 @@ class SelectPhoneForm
   end
 
   def selected_evidence
-    PHONE_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
+    IdpEligibility::Evidence::PHONE_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
   end
 
 private

@@ -1,6 +1,5 @@
 class SelectDocumentsForm
   include ActiveModel::Model
-  include IdpEligibility::Evidence
 
   attr_reader :driving_licence, :passport, :non_uk_id_document, :no_documents
   validate :one_must_be_present
@@ -15,7 +14,7 @@ class SelectDocumentsForm
   end
 
   def selected_evidence
-    DOCUMENT_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
+    IdpEligibility::Evidence::DOCUMENT_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
   end
 
 private
