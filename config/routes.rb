@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
 
+  get 'choose-a-certified-company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
+
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
     get 'feedback', to: redirect("#{API_HOST}/feedback")
@@ -49,7 +51,7 @@ Rails.application.routes.draw do
     get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
-    get 'choose-a-certified-company', to: redirect { |_, request| "#{API_HOST}/choose-a-certified-company?#{request.query_string}" }, as: :choose_a_certified_company
+    get 'why-companies', to: redirect("#{API_HOST}/why-companies"), as: :why_companies
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
@@ -57,7 +59,7 @@ Rails.application.routes.draw do
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
     get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
-    get 'choose-a-certified-company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
+    get 'why-companies', to: 'why_companies#index', as: :why_companies
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

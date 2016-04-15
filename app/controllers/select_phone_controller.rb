@@ -27,7 +27,7 @@ class SelectPhoneController < ApplicationController
 private
 
   def available_idps
-    SESSION_PROXY.federation_info_for_session(cookies).idps.collect { |idp| idp['simpleId'] }
+    SESSION_PROXY.federation_info_for_session(cookies).idps
   end
 
   def build_uri_with_evidence(path, evidence)

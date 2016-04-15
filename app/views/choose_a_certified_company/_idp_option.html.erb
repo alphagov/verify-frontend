@@ -1,0 +1,35 @@
+<div class="idp-choice">
+  <div class="company-logo">
+    <%= image_tag identity_provider.logo_path, alt: identity_provider.display_name %>
+    <p class="company-about">
+      <a class="js-show js-dialog" href="#about-<%= identity_provider.simple_id %>">About <%= identity_provider.display_name %></a>
+    </p>
+  </div>
+  <%= form_tag({}, {class: 'idp-option'}) do %>
+      <% button_class = recommended ? 'button' : 'button-link' %>
+      <%= button_tag t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
+                     class: button_class,
+                     name: identity_provider.simple_id,
+                     type: 'submit',
+                     value: identity_provider.display_name
+      %>
+      <%= hidden_field_tag 'selected-idp', identity_provider.entity_id %>
+      <%= hidden_field_tag 'recommended-idp', true %>
+  <% end %>
+  <dialog aria-labelledby="dialog-title-<%= identity_provider.simple_id %>" id="about-<%= identity_provider.simple_id %>">
+    <div class="dialog-inner"><h3 class="heading-medium" id="dialog-title-<%= identity_provider.simple_id %>"><%= identity_provider.display_name %></h3>
+      <%= form_tag({}, {class: 'js-show'}) do %>
+          <%= button_tag t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
+                         class: 'button',
+                         name: identity_provider.simple_id,
+                         type: 'submit',
+                         value: identity_provider.display_name
+          %>
+          <%= hidden_field_tag 'selected-idp', identity_provider.entity_id %>
+          <%= hidden_field_tag 'recommended-idp', true %>
+      <% end %>
+      <p class="subtitle">Information provided by <%= identity_provider.display_name %></p>
+      <p><%= identity_provider.about_content.html_safe %></p>
+    </div>
+  </dialog>
+</div>

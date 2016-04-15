@@ -1,6 +1,9 @@
 module Display
   module Idp
-    DisplayData = Struct.new(:entity_id, :display_name, :logo_path, :white_logo_path)
+    DisplayData = Struct.new(:identity_provider, :display_name, :logo_path, :white_logo_path, :about_content) do
+      delegate :entity_id, to: :identity_provider
+      delegate :simple_id, to: :identity_provider
+    end
 
     class DisplayDataCorrelator
       def initialize(translator, logo_directory, white_logo_directory)
@@ -16,12 +19,12 @@ module Display
     private
 
       def correlate_display_data(idp)
-        simple_id = idp['simpleId']
-        key = "idps.#{simple_id}.name"
+        simple_id = idp.simple_id
         logo_path = File.join(@logo_directory, "#{simple_id}.png")
         white_logo_path = File.join(@white_logo_directory, "#{simple_id}.png")
-        name = @translator.translate(key)
-        DisplayData.new(idp.fetch('entityId'), name, logo_path, white_logo_path)
+        name = @translator.translate("idps.#{simple_id}.name")
+        about = @translator.translate("idps.#{simple_id}.about")
+        DisplayData.new(idp, name, logo_path, white_logo_path, about)
       rescue FederationTranslator::TranslationError => e
         Rails.logger.error(e)
         nil

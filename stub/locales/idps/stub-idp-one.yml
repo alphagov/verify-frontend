@@ -2,6 +2,7 @@ en:
   idps:
     stub-idp-one:
       name: "IDCorp"
+      about: "<p>ID Corp is the premier identity proofing service around. Come get some.</p>"
 cy:
   idps:
     stub-idp-one:

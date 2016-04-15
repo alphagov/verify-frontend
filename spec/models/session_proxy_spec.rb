@@ -37,18 +37,21 @@ describe SessionProxy do
     expect(cookies).to eq cookie_hash
   end
 
-  it 'should return a list of IDP ids for the session' do
-    idp_list = double(:idp_list)
+  it 'should return a list of IDPs for the session' do
+    idp = { 'simpleId' => 'idp', 'entityId' => 'something' }
 
     expect(api_client).to receive(:get)
       .with(SessionProxy::FEDERATION_INFO_PATH, cookies: expected_cookie_hash)
-      .and_return('idps' => idp_list, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id')
+      .and_return('idps' => [idp], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id')
+
     result = SessionProxy.new(api_client, originating_ip_store).federation_info_for_session(cookie_hash)
-    expect(result.idps).to eq idp_list
+    expect(result.idps.size).to eql 1
+    expect(result.idps.first.simple_id).to eql 'idp'
+    expect(result.idps.first.entity_id).to eql 'something'
   end
 
   it 'should fail to return federation info if transaction simple id is missing' do
-    idp_list = double(:idp_list)
+    idp_list = []
 
     expect(api_client).to receive(:get)
       .with(SessionProxy::FEDERATION_INFO_PATH, cookies: expected_cookie_hash)

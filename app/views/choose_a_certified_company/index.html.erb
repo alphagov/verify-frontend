@@ -1,0 +1,23 @@
+<% content_for :page_title, t('hub.choose_a_certified_company.title') %>
+<% content_for :feedback_source, 'CHOOSE_A_CERTIFIED_COMPANY' %>
+
+<div class="content-inner">
+  <div class="grid-section">
+    <div class="grid-2-3"><h2 class="heading-medium"><%= t 'hub.choose_a_certified_company.heading' %></h2>
+      <ul class="list-bullet">
+        <li><%= link_to(t('hub.choose_a_certified_company.why_companies'), @why_companies_link) %></li>
+      </ul>
+      <p><%= t 'hub.choose_a_certified_company.idp_count_html', recommended_count: @identity_providers.recommended.length %></p>
+    </div>
+    <div id="matching-idps">
+      <% @identity_providers.recommended.each do |identity_provider| %>
+        <%= render partial: 'idp_option', locals: {recommended: true, identity_provider: identity_provider} %>
+      <% end %>
+    </div>
+    <div id="non-matching-idps">
+      <% @identity_providers.non_recommended.each do |identity_provider| %>
+          <%= render partial: 'idp_option', locals: {recommended: false, identity_provider: identity_provider} %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -9,16 +9,19 @@ module Display
         session_proxy = double(:session_proxy)
         idp_display_correlator = double(:idp_display_correlator)
 
-        idp_list = double(:idp_list)
+        idp_list = [{ 'simpleId' => 'idp', 'entityId' => 'something' }]
         transaction_simple_id = 'simple_id_blah'
         transaction_entity_id = 'entity_id_blah'
-        federation_info = FederationInfoResponse.new('idps' => idp_list, 'transactionSimpleId' => transaction_simple_id, 'transactionEntityId' => transaction_entity_id)
+        federation_info = double(:federation_info)
         idp_display_data = double(:idp_display_data)
 
         federation_info_getter = FederationInfoGetter.new(session_proxy, idp_display_correlator)
         expect(session_proxy).to receive(:federation_info_for_session).with(cookie_jar).and_return(federation_info)
-        expect(idp_display_correlator).to receive(:correlate).with(idp_list).and_return(idp_display_data)
+        expect(federation_info).to receive(:idps).and_return(idp_list)
+        expect(federation_info).to receive(:transaction_simple_id).and_return(transaction_simple_id)
+        expect(federation_info).to receive(:transaction_entity_id).and_return(transaction_entity_id)
         expect(idp_list).to receive(:shuffle).and_return(idp_list)
+        expect(idp_display_correlator).to receive(:correlate).with(idp_list).and_return(idp_display_data)
 
         hash = federation_info_getter.get_info(cookie_jar)
         expect(hash[:idp_display_data]).to eql(idp_display_data)

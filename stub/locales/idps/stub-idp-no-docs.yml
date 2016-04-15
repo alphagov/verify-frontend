@@ -1,0 +1,9 @@
+en:
+  idps:
+    stub-idp-no-docs:
+      name: "No Docs IDP"
+      about: "The number one source of identities without documents."
+cy:
+  idps:
+    stub-idp-no-docs:
+      name: "Welsh No Docs IDP"

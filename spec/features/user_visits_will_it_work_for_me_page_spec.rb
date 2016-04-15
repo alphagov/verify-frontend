@@ -97,6 +97,7 @@ RSpec.describe 'When the user visits the will it work for me page' do
   end
 
   it 'reports to Piwik when the form is valid' do
+    stub_federation
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     piwik_request = { 'action_name' => 'Can I be Verified Next' }
 

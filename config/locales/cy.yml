@@ -156,6 +156,12 @@ cy:
       other_ways_heading: Other ways to %{other_ways_description}
       heading: GOV.UK Verify will not work for you
       explanation: You need a current UK address to get your identity verified.
+    choose_a_certified_company:
+      title: Choose a certified company
+      heading: Choose a company
+      why_companies: Why there’s a choice of companies
+      choose_idp: "Choose %{name}"
+      idp_count_html: "Based on your answers, %{recommended_count}&nbsp;companies can verify you now:"
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
