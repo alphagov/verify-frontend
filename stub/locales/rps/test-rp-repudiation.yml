@@ -3,3 +3,5 @@ en:
     test-rp-repudiation:
       name: Register for an identity profile (repudiation step)
       analytics_description: analytics description for test-rp-repudiation
+      other_ways_text: If you can't verify your identity using GOV.UK Verify, there are other ways to <a href='http://www.example.com'>register for an identity profile (repudiation step)</a>
+      other_ways_description: other ways to register for an identity profile (repudiation step)

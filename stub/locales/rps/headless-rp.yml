@@ -3,3 +3,5 @@ en:
     headless-rp:
       name: Become the headless horse person
       analytics_description: analytics description for headless-rp
+      other_ways_text: If you can't verify your identity using GOV.UK Verify, there are other ways to <a href='http://www.example.com'>become the headless horseperson</a>
+      other_ways_description: other ways to become the headless horseperson
