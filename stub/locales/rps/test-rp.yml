@@ -2,6 +2,6 @@ en:
   rps:
     test-rp:
       name: Register for an identity profile
-      analyticsDescription: analytics description for test-rp
+      analytics_description: analytics description for test-rp
       other_ways_text: Other ways text <a href='http://www.example.com'>with a link</a>
       other_ways_description: Other ways description

@@ -18,7 +18,7 @@ module Analytics
     def report_action(transaction_simple_id, request, action)
       begin
         transaction_analytics_description =
-          @federation_translator.translate("rps.#{transaction_simple_id}.analyticsDescription")
+          @federation_translator.translate("rps.#{transaction_simple_id}.analytics_description")
         @analytics_reporter.report_custom_variable(
           request,
           action,
