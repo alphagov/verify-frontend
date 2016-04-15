@@ -15,11 +15,9 @@ class SelectPhoneController < ApplicationController
       ANALYTICS_REPORTER.report(request, 'Phone Next')
       selected_evidence = @form.selected_evidence.concat IdpEligibility::EvidenceQueryStringParser.parse(request.query_string)
       if IDP_ELIGIBILITY_CHECKER.any?(selected_evidence, available_idps)
-        uri = URI(will_it_work_for_me_path)
-        uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(selected_evidence)
-        redirect_to uri.to_s
+        redirect_to build_uri_with_evidence(will_it_work_for_me_path, selected_evidence)
       else
-        redirect_to no_mobile_phone_path
+        redirect_to build_uri_with_evidence(no_mobile_phone_path, selected_evidence)
       end
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
@@ -31,5 +29,11 @@ private
 
   def available_idps
     SESSION_PROXY.federation_info_for_session(cookies).idps.collect { |idp| idp['simpleId'] }
+  end
+
+  def build_uri_with_evidence(path, evidence)
+    uri = URI(path)
+    uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(evidence)
+    uri.to_s
   end
 end
