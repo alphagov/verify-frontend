@@ -3,6 +3,7 @@ require 'feature_helper'
 RSpec.describe 'When the user visits the will it work for me page' do
   before(:each) do
     set_session_cookies!
+    stub_federation
   end
 
   it 'includes the appropriate feedback source' do

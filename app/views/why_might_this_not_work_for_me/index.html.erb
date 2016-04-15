@@ -6,5 +6,10 @@
     <h1 class="heading-xlarge"><%= t 'hub.why_might_this_not_work_for_me.heading' %></h1>
 
     <p> <a href="<%= @try_to_verify %>"><%= t 'hub.why_might_this_not_work_for_me.try_to_verify' %></a> </p>
+
+    <h2 class="heading-medium"><%= t 'hub.why_might_this_not_work_for_me.other_ways_heading', other_ways_description: @other_ways_description %></h2>
+    <div class="other-ways">
+      <p><%= @other_ways_text.html_safe %></p>
+    </div>
   </div>
 </div>

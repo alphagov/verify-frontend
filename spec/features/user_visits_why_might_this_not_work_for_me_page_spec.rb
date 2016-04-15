@@ -3,6 +3,7 @@ require 'feature_helper'
 RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
   before(:each) do
     set_session_cookies!
+    stub_federation
   end
 
   context 'with javascript enabled', js: true do
@@ -14,6 +15,11 @@ RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
   end
 
   it 'includes other ways text' do
+    visit '/why-might-this-not-work-for-me'
+
+    expect(page).to have_content("If you can't verify your identity using GOV.UK Verify, you can register for an identity profile here")
+    expect(page).to have_content('register for an identity profile')
+    expect(page).to have_link 'here', href: 'http://www.example.com'
   end
 
   it 'includes the appropriate feedback source' do

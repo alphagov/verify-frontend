@@ -115,6 +115,7 @@ en:
       title: Why this might not work for me
       heading: You might not be able to have your identity verified
       try_to_verify: I’d like to try to verify my identity online
+      other_ways_heading: Other ways to %{other_ways_description}
   errors:
     transaction_list:
       title: Find the service you were using to start again
