@@ -2,4 +2,4 @@ en:
   rps:
     test-rp-repudiation:
       name: Register for an identity profile (repudiation step)
-      analyticsDescription: analytics description for test-rp-repudiation
+      analytics_description: analytics description for test-rp-repudiation

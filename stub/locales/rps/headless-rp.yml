@@ -2,4 +2,4 @@ en:
   rps:
     headless-rp:
       name: Become the headless horse person
-      analyticsDescription: analytics description for headless-rp
+      analytics_description: analytics description for headless-rp

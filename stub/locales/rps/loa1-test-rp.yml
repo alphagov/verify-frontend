@@ -2,4 +2,4 @@ en:
   rps:
     loa1-test-rp:
       name: register for an LOA1 identity profile
-      analyticsDescription: analytics description for loa1-test-rp
+      analytics_description: analytics description for loa1-test-rp

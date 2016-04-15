@@ -16,7 +16,7 @@ module Analytics
         simple_id = 'id'
         description = 'description'
         allow(federation_translator).to receive(:translate)
-          .with('rps.id.analyticsDescription')
+          .with('rps.id.analytics_description')
           .and_return(description)
         expect(analytics_reporter).to receive(:report_custom_variable)
           .with(
@@ -32,7 +32,7 @@ module Analytics
         simple_id = 'id'
         description = 'description'
         allow(federation_translator).to receive(:translate)
-          .with('rps.id.analyticsDescription')
+          .with('rps.id.analytics_description')
           .and_return(description)
         expect(analytics_reporter).to receive(:report_custom_variable)
           .with(
@@ -47,7 +47,7 @@ module Analytics
       it 'should not report custom variable if transaction analytics description is not available' do
         translation_error = Display::FederationTranslator::TranslationError.new
         allow(federation_translator).to receive(:translate)
-          .with('rps.id.analyticsDescription')
+          .with('rps.id.analytics_description')
           .and_raise(translation_error)
         expect(stub_logger).to receive(:warn).with(translation_error).at_least(:once)
         allow(analytics_reporter).to receive(:report_custom_variable)
