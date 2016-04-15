@@ -10,6 +10,7 @@ cy:
     select_phone: select-phone-cy
     will_it_work_for_me: will-it-work-for-me-cy
     no_mobile_phone: no-mobile-phone-cy
+    why-might-this-not-work-for-me: why-might-this-not-work-for-me-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -115,6 +116,10 @@ cy:
       p1: You need a phone or tablet to use GOV.UK Verify. If you don’t have either of these, there are other ways you can %{other_ways_description}.
       p2: If you don’t have a passport or UK driving licence, you will also need to install an app.
       other_ways_heading: Other ways to %{other_ways_description}
+    why_might_this_not_work_for_me:
+      title: Why this might not work for me
+      heading: You might not be able to have your identity verified
+      try_to_verify: I’d like to try to verify my identity online
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
