@@ -5,6 +5,24 @@
   <div class="column-two-thirds">
     <h1 class="heading-xlarge"><%= t 'hub.why_might_this_not_work_for_me.heading' %></h1>
 
+    <p><%= t 'hub.why_might_this_not_work_for_me.explanation' %></p>
+
+    <h2 class="heading-medium"><%= t 'hub.why_might_this_not_work_for_me.what_youll_need' %></h2>
+
+    <p><%= t 'hub.why_might_this_not_work_for_me.if_you_have_these' %>:</p>
+
+    <ul class="list-bullet">
+      <li><%= t 'hub.why_might_this_not_work_for_me.current_account' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.credit_card' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.personal_loan' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.mortgage' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.gas_electricity_bills' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.mobile_phone_contract' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.registered_to_vote' %></li>
+    </ul>
+
+    <p><%= t 'hub.why_might_this_not_work_for_me.youll_also_need' %></p>
+
     <p> <a href="<%= @try_to_verify %>"><%= t 'hub.why_might_this_not_work_for_me.try_to_verify' %></a> </p>
 
     <h2 class="heading-medium"><%= t 'hub.why_might_this_not_work_for_me.other_ways_heading', other_ways_description: @other_ways_description %></h2>
