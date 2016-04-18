@@ -29,7 +29,6 @@ Rails.application.routes.draw do
     post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
     get 'select_phone', to: 'select_phone#index', as: :select_phone
     post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
-    get 'no_mobile_phone', to: 'no_mobile_phone#index', as: :no_mobile_phone
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
@@ -41,6 +40,7 @@ Rails.application.routes.draw do
   post 'select-phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'will-it-work-for-me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
   post 'will-it-work-for-me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+  get 'no-mobile-phone', to: 'no_mobile_phone#index', as: :no_mobile_phone
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
