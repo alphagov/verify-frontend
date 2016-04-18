@@ -6,6 +6,16 @@ RSpec.describe 'When the user visits the select phone page' do
     stub_federation
   end
 
+  it 'displays the page in Welsh' do
+    visit '/no-mobile-phone-cy'
+    expect(page).to have_css 'html[lang=cy]'
+  end
+
+  it 'displays the page in English' do
+    visit '/no-mobile-phone'
+    expect(page).to have_css 'html[lang=en]'
+  end
+
   it 'includes the appropriate feedback source' do
     visit '/no-mobile-phone'
 
