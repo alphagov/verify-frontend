@@ -55,4 +55,19 @@ RSpec.describe 'When the user visits the choose a certified company page' do
       expect(page).to have_button('Choose IDCorp')
     end
   end
+
+  it 'redirects to the redirect warning page when selecting the recommended IDP', js: true do
+    entity_id = 'http://idcorp.com'
+    stub_federation(entity_id)
+    visit '/choose-a-certified-company?selected-evidence=mobile_phone'
+
+    within('#non-matching-idps') do
+      click_button 'Choose IDCorp'
+    end
+
+    expect(page).to have_current_path(redirect_to_idp_warning_path, only_path: true)
+    expect(query_params['selected-evidence']).to eql ['mobile_phone']
+    expect(query_params['recommended-idp']).to eql ['false']
+    expect(query_params['selected-idp']).to eql [entity_id]
+  end
 end

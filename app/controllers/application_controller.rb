@@ -42,6 +42,12 @@ class ApplicationController < ActionController::Base
 
 private
 
+  def uri_with_query(path, query_string)
+    uri = URI(path)
+    uri.query = query_string
+    uri.to_s
+  end
+
   def render_error(partial, status)
     respond_to do |format|
       format.html { render "errors/#{partial}", status: status, layout: 'application' }

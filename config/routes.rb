@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get 'service-status', to: 'service_status#index', as: :service_status
 
   get 'choose-a-certified-company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
+  post 'choose-a-certified-company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
     get 'why-companies', to: redirect("#{API_HOST}/why-companies"), as: :why_companies
+    get 'redirect-to-idp-warning', to: redirect("#{API_HOST}/redirect-to-idp-warning"), as: :redirect_to_idp_warning
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
@@ -60,6 +62,7 @@ Rails.application.routes.draw do
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
     get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
     get 'why-companies', to: 'why_companies#index', as: :why_companies
+    get 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
