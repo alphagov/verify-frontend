@@ -13,4 +13,10 @@ RSpec.describe 'When the user visits the will-not-work-without-uk-address page' 
     expect(page).to have_content('register for an identity profile')
     expect(page).to have_link 'here', href: 'http://www.example.com'
   end
+
+  it 'includes the appropriate feedback source' do
+    visit '/will-not-work-without-uk-address'
+
+    expect_feedback_source_to_be(page, 'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE')
+  end
 end
