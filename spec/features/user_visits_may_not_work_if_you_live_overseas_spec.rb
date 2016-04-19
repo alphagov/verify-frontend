@@ -19,4 +19,12 @@ RSpec.describe 'When the user visits the may-not-work-if-you-live-overseas page'
 
     expect_feedback_source_to_be(page, 'MAY_NOT_WORK_IF_YOU_LIVE_OVERSEAS_PAGE')
   end
+
+  it 'includes other ways text' do
+    visit '/may-not-work-if-you-live-overseas'
+
+    expect(page).to have_content("If you can't verify your identity using GOV.UK Verify, you can register for an identity profile here")
+    expect(page).to have_content('register for an identity profile')
+    expect(page).to have_link 'here', href: 'http://www.example.com'
+  end
 end
