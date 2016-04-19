@@ -10,6 +10,7 @@ cy:
     select_phone: select-phone-cy
     will_it_work_for_me: will-it-work-for-me-cy
     no_mobile_phone: no-mobile-phone-cy
+    why-might-this-not-work-for-me: why-might-this-not-work-for-me-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -115,6 +116,22 @@ cy:
       p1: You need a phone or tablet to use GOV.UK Verify. If you don’t have either of these, there are other ways you can %{other_ways_description}.
       p2: If you don’t have a passport or UK driving licence, you will also need to install an app.
       other_ways_heading: Other ways to %{other_ways_description}
+    why_might_this_not_work_for_me:
+      title: Why this might not work for me
+      heading: You might not be able to have your identity verified
+      try_to_verify: I’d like to try to verify my identity online
+      other_ways_heading: Other ways to %{other_ways_description}
+      explanation: To verify an identity, certified companies access credit records then ask you to confirm this information. Most young people and newcomers to the UK have a limited &lsquo;credit history&rsquo;, companies might not be able to check your identity in this way.
+      what_youll_need: What you’ll need on your credit record
+      if_you_have_these: Your identity might be verified if you have 2 or more of the following
+      current_account: current account with a UK bank
+      credit_card: credit card
+      personal_loan: personal loan
+      mortgage: mortgage
+      gas_electricity_bills: gas or electricity bills
+      mobile_phone_contract: mobile phone contract
+      registered_to_vote: you’re registered to vote
+      youll_also_need: You’ll also need a UK passport or a UK driving licence.
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
