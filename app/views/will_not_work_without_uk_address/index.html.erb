@@ -1,0 +1,10 @@
+<% content_for :page_title, t('hub.will_not_work_without_uk_address.title') %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h2 class="heading-medium"><%= t 'hub.will_not_work_without_uk_address.other_ways_heading', other_ways_description: @other_ways_description %></h2>
+    <div class="other-ways other-ways-to-complete-transaction">
+      <%= @other_ways_text.html_safe %>
+    </div>
+  </div>
+</div>
