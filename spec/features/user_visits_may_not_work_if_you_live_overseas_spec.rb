@@ -10,8 +10,13 @@ RSpec.describe 'When the user visits the may-not-work-if-you-live-overseas page'
     it 'contains the choose certified company link with selected evidence params' do
       visit '/may-not-work-if-you-live-overseas?selected-evidence=smart_phone&selected-evidence=mobile_phone&selected-evidence=driving_licence&selected-evidence=passport'
 
-      puts page.body
       expect(page).to have_link "I’d like to try to verify my identity online", href: "/choose-a-certified-company?selected-evidence=smart_phone&selected-evidence=mobile_phone&selected-evidence=driving_licence&selected-evidence=passport"
     end
+  end
+
+  it 'includes the appropriate feedback source' do
+    visit '/may-not-work-if-you-live-overseas'
+
+    expect_feedback_source_to_be(page, 'MAY_NOT_WORK_IF_YOU_LIVE_OVERSEAS_PAGE')
   end
 end
