@@ -5,6 +5,26 @@
   <div class="column-two-thirds">
     <h1 class="heading-xlarge"><%= t 'hub.may_not_work_if_you_live_overseas.heading' %></h1>
 
+    <p><%= t 'hub.may_not_work_if_you_live_overseas.explanation1' %></p>
+    <p><%= t 'hub.may_not_work_if_you_live_overseas.explanation2' %></p>
+
+    <h2 class="heading-medium"><%= t 'hub.may_not_work_if_you_live_overseas.what_youll_need' %></h2>
+
+    <p><%= t 'hub.may_not_work_if_you_live_overseas.if_you_have_these' %>:</p>
+
+    <ul class="list-bullet">
+      <li><%= t 'hub.may_not_work_if_you_live_overseas.current_account_overdraft' %></li>
+      <li><%= t 'hub.may_not_work_if_you_live_overseas.credit_card' %></li>
+      <li><%= t 'hub.may_not_work_if_you_live_overseas.phone_contract' %></li>
+      <li><%= t 'hub.may_not_work_if_you_live_overseas.gas_electricity_bills' %></li>
+      <li><%= t 'hub.may_not_work_if_you_live_overseas.mortgage' %></li>
+      <li><%= t 'hub.may_not_work_if_you_live_overseas.student_loan' %></li>
+      <li><%= t 'hub.may_not_work_if_you_live_overseas.payday_loan' %></li>
+      <li><%= t 'hub.may_not_work_if_you_live_overseas.mail_order_account' %></li>
+    </ul>
+
+    <p><%= t 'hub.may_not_work_if_you_live_overseas.youll_also_need' %></p>
+
     <p> <a href="<%= @try_to_verify %>"><%= t 'hub.may_not_work_if_you_live_overseas.try_to_verify' %></a> </p>
 
     <h2 class="heading-medium"><%= t 'hub.may_not_work_if_you_live_overseas.other_ways_heading', other_ways_description: @other_ways_description %></h2>
