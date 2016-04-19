@@ -11,7 +11,7 @@ class SelectDocumentsController < ApplicationController
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Select Documents Next')
       selected_evidence = @form.selected_evidence
-      if IDP_ELIGIBILITY_CHECKER.any_for_documents?(selected_evidence, available_idps)
+      if documents_eligibility_checker.any?(selected_evidence, available_idps)
         uri = URI(select_phone_path)
         uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(selected_evidence)
         redirect_to uri.to_s
@@ -28,5 +28,9 @@ private
 
   def available_idps
     SESSION_PROXY.federation_info_for_session(cookies).idps.collect { |idp| idp['simpleId'] }
+  end
+
+  def documents_eligibility_checker
+    DOCUMENTS_ELIGIBILITY_CHECKER
   end
 end
