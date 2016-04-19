@@ -3,3 +3,22 @@
     font-weight: bold;
   }
 }
+
+.other-ways-to-complete-transaction {
+
+  ul {
+    margin-bottom: $gutter-half;
+    padding: 0;
+
+    @include media(tablet) {
+      margin-bottom: $gutter;
+    }
+
+    li {
+      list-style-type: disc;
+      margin-bottom: em(5, 19);
+      margin-left: em(20, 19);
+    }
+  }
+
+}
