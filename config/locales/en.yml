@@ -149,6 +149,8 @@ en:
     will_not_work_without_uk_address:
       title: GOV.UK Verify will not work for you
       other_ways_heading: Other ways to %{other_ways_description}
+      heading: GOV.UK Verify will not work for you
+      explanation: You need a current UK address to get your identity verified.
   errors:
     transaction_list:
       title: Find the service you were using to start again
