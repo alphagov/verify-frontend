@@ -7,9 +7,7 @@
 
     <p><%= t 'hub.no_mobile_phone.p1', other_ways_description: @other_ways_description %></p>
     <p><%= t 'hub.no_mobile_phone.p2' %></p>
-    <h2 class="heading-medium"><%= t 'hub.no_mobile_phone.other_ways_heading', other_ways_description: @other_ways_description %></h2>
-    <div class="other-ways">
-      <p><%= @other_ways_text.html_safe %></p>
-    </div>
+
+    <%= render partial: 'shared/other_ways', locals: {other_ways_text: @other_ways_text, other_ways_description: @other_ways_description} %>
   </div>
 </div>

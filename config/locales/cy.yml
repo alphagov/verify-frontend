@@ -28,6 +28,7 @@ cy:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth
   hub:
+    other_ways_heading: Other ways to %{other_ways_description}
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify
@@ -116,7 +117,6 @@ cy:
       heading: GOV.UK Verify won’t work for you
       p1: You need a phone or tablet to use GOV.UK Verify. If you don’t have either of these, there are other ways you can %{other_ways_description}.
       p2: If you don’t have a passport or UK driving licence, you will also need to install an app.
-      other_ways_heading: Other ways to %{other_ways_description}
     may_not_work_if_you_live_overseas:
       title: You might not be able to have your identity verified
       heading: You might not be able to have your identity verified
@@ -139,7 +139,6 @@ cy:
       title: Why this might not work for me
       heading: You might not be able to have your identity verified
       try_to_verify: I’d like to try to verify my identity online
-      other_ways_heading: Other ways to %{other_ways_description}
       explanation: To verify an identity, certified companies access credit records then ask you to confirm this information. Most young people and newcomers to the UK have a limited &lsquo;credit history&rsquo;, companies might not be able to check your identity in this way.
       what_youll_need: What you’ll need on your credit record
       if_you_have_these: Your identity might be verified if you have 2 or more of the following
