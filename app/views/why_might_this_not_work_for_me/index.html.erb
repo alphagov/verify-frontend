@@ -23,7 +23,8 @@
 
     <p><%= t 'hub.why_might_this_not_work_for_me.youll_also_need' %></p>
 
-    <p> <a href="<%= @try_to_verify %>"><%= t 'hub.why_might_this_not_work_for_me.try_to_verify' %></a> </p>
+    <p><%= link_to t('hub.why_might_this_not_work_for_me.try_to_verify'), @try_to_verify %></p>
+
 
     <h2 class="heading-medium"><%= t 'hub.why_might_this_not_work_for_me.other_ways_heading', other_ways_description: @other_ways_description %></h2>
     <div class="other-ways other-ways-to-complete-transaction">
