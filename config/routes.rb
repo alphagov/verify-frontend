@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   post 'select-phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'will-it-work-for-me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
   post 'will-it-work-for-me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+  get 'may-not-work-if-you-live-overseas', to: 'may_not_work_if_you_live_overseas#index', as: :may_not_work_if_you_live_overseas
   get 'why-might-this-not-work-for-me', to: 'why_might_this_not_work_for_me#index', as: :why_might_this_not_work_for_me
 
   if Rails.env == 'development'
@@ -50,8 +51,7 @@ Rails.application.routes.draw do
     get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
-    get 'choose-a-certified-company', to: redirect("#{API_HOST}/choose-a-certified-company"), as: :choose_a_certified_company
-    get 'may-not-work-if-you-live-overseas', to: redirect("#{API_HOST}/may-not-work-if-you-live-overseas"), as: :may_not_work_if_you_live_overseas
+    get 'choose-a-certified-company', to: redirect { |_, request| "#{API_HOST}/choose-a-certified-company?#{request.query_string}" }, as: :choose_a_certified_company
     get 'will-not-work-without-uk-address', to: redirect("#{API_HOST}/will-not-work-without-uk-address"), as: :will_not_work_without_uk_address
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
@@ -61,7 +61,6 @@ Rails.application.routes.draw do
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
     get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
     get 'choose-a-certified-company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
-    get 'may-not-work-if-you-live-overseas', to: 'may_not_work_if_you_live_overseas#index', as: :may_not_work_if_you_live_overseas
     get 'will-not-work-without-uk-address', to: 'will_not_work_without_uk_address#index', as: :will_not_work_without_uk_address
   end
 
