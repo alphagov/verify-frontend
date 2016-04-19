@@ -7,6 +7,7 @@
 //= require_tree .
 //= require piwik
 //= require trap
+//= require fingerprint2
 
 window.GOVUK.validation.init();
 window.GOVUK.selectDocuments.init();
