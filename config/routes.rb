@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
     get 'choose-a-certified-company', to: redirect { |_, request| "#{API_HOST}/choose-a-certified-company?#{request.query_string}" }, as: :choose_a_certified_company
+    get '/assets2/fp.gif', :to => proc {|env| [200, {}, ['OK']] }
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
