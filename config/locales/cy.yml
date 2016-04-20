@@ -165,6 +165,7 @@ cy:
       zero_companies_html: "no&nbsp;companies"
       one_company_html: "1&nbsp;company"
       multiple_companies_html: "%{count}&nbsp;companies"
+      non_recommended_idps: "Based on your answers, these companies are unlikely to verify you now:"
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

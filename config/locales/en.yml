@@ -161,6 +161,7 @@ en:
       zero_companies_html: "no&nbsp;companies"
       one_company_html: "1&nbsp;company"
       multiple_companies_html: "%{count}&nbsp;companies"
+      non_recommended_idps: "Based on your answers, these companies are unlikely to verify you now:"
   errors:
     transaction_list:
       title: Find the service you were using to start again

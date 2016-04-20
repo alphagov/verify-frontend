@@ -14,11 +14,13 @@
         <%= render partial: 'idp_option', locals: {recommended: true, identity_provider: identity_provider} %>
       <% end %>
     </div>
-
-    <div id="non-matching-idps">
-      <% @identity_providers.non_recommended.each do |identity_provider| %>
-          <%= render partial: 'idp_option', locals: {recommended: false, identity_provider: identity_provider} %>
-      <% end %>
-    </div>
+    <% if @identity_providers.non_recommended.any? %>
+        <div id="non-matching-idps">
+          <%= t 'hub.choose_a_certified_company.non_recommended_idps' %>
+          <% @identity_providers.non_recommended.each do |identity_provider| %>
+              <%= render partial: 'idp_option', locals: {recommended: false, identity_provider: identity_provider} %>
+          <% end %>
+        </div>
+    <% end %>
   </div>
 </div>

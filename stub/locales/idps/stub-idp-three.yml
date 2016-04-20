@@ -2,7 +2,9 @@ en:
   idps:
     stub-idp-three:
       name: "Carol's Secure ID"
+      about: "<p>Carol's Secure ID is the premier identity proofing service around. Come get some.</p>"
 cy:
   idps:
     stub-idp-three:
       name: "Carol's Welsh Secure ID"
+      about: "<p>Carol's Secure ID is the premier identity proofing service around. Come get some.</p>"
