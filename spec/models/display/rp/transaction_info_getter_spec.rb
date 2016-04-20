@@ -15,9 +15,7 @@ module Display
         other_ways_data = OpenStruct.new(other_ways_description: 'Other ways description', other_ways_text: 'Other ways text')
         expect(session_proxy).to receive(:federation_info_for_session).with(cookie_jar).and_return(federation_info)
         expect(repository).to receive(:fetch).with(simple_id).and_return(other_ways_data)
-
-        result = described_class.new(session_proxy, repository).get_info(cookie_jar)
-
+        result = TransactionInfoGetter.new(session_proxy, repository).get_info(cookie_jar)
         expect(result).to eql(other_ways_data)
       end
     end

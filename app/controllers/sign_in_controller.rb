@@ -2,9 +2,11 @@ class SignInController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:select_idp]
 
   def index
-    federation_info = FEDERATION_INFO_GETTER.get_info(cookies)
-    @identity_providers = federation_info[:idp_display_data]
-    FEDERATION_REPORTER.report_sign_in(federation_info[:transaction_simple_id], request)
+    federation_info = SESSION_PROXY.federation_info_for_session(cookies)
+
+    @identity_providers = IDP_DISPLAY_DATA_CORRELATOR.correlate(federation_info.idps)
+
+    FEDERATION_REPORTER.report_sign_in(federation_info.transaction_simple_id, request)
     render 'index'
   end
 

@@ -13,7 +13,8 @@ module Display
       end
 
       def correlate(idp_list)
-        idp_list.map { |idp| correlate_display_data(idp) }.reject(&:nil?)
+        # We need to randomise the order of IDPs so that it satisfies the need for us to be unbiased in displaying the IDPs.
+        idp_list.map { |idp| correlate_display_data(idp) }.reject(&:nil?).shuffle
       end
 
     private

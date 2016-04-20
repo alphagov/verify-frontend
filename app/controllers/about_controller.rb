@@ -2,11 +2,11 @@ class AboutController < ApplicationController
   layout 'start', except: [:choosing_a_company]
 
   def index
-    FEDERATION_REPORTER.report_registration(federation_info[:transaction_simple_id], request)
+    FEDERATION_REPORTER.report_registration(federation_info.transaction_simple_id, request)
   end
 
   def certified_companies
-    @identity_providers = federation_info[:idp_display_data]
+    @identity_providers = IDP_DISPLAY_DATA_CORRELATOR.correlate(federation_info.idps)
   end
 
   def choosing_a_company
@@ -15,6 +15,6 @@ class AboutController < ApplicationController
 private
 
   def federation_info
-    FEDERATION_INFO_GETTER.get_info(cookies)
+    SESSION_PROXY.federation_info_for_session(cookies)
   end
 end

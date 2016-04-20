@@ -6,9 +6,11 @@ class ChooseACertifiedCompanyController < ApplicationController
     evidence_query_string_value = IdpEligibility::EvidenceQueryStringBuilder.build(selected_evidence)
     @why_companies_link = uri_with_query(why_companies_path, evidence_query_string_value)
 
-    federation_info = FEDERATION_INFO_GETTER.get_info(cookies)
-    idps = federation_info[:idp_display_data]
-    @identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence, idps)
+    federation_info = SESSION_PROXY.federation_info_for_session(cookies)
+
+    idp_display_data = IDP_DISPLAY_DATA_CORRELATOR.correlate(federation_info.idps)
+
+    @identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence, idp_display_data)
   end
 
   def select_idp
