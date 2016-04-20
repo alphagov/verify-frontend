@@ -38,35 +38,7 @@
 <% content_for :body_end do %>
 
   <%= javascript_include_tag 'application' %>
-
-  <%# Browser Fingerprinting Code Begins %>
-  <%# ensure that the epoch is increased whenever the fingerprint algorithm is changed in any way - this will ensure that we compare like with like %>
-  <%= image_tag('', style: 'border: 0', height: '1', width: '1', id: 'fp_img') %>
-  <%= javascript_tag do %>
-    var fingerprintEpoch = '4';
-    // disabling javascript font parsing, this is very slow, and the canvas because it yields a different fingerprint for the first page loaded
-    var options = {excludeJsFonts: true, excludeCanvas: true};
-    var componentsToExclude = ['webgl'];
-    // based on jQuery's param implementation https://github.com/jquery/jquery/blob/master/src/serialize.js
-    var serialiseComponents = function(components) {
-      r = [];
-      jQuery.each(components, function() {
-        if(componentsToExclude.indexOf(this.key) == -1) {
-          r[r.length] = encodeURIComponent(this.key) + "=" + encodeURIComponent(this.value);
-        }
-      });
-      return r.join("&");
-    };
-    new Fingerprint2(options).get(function(result, components){
-      document.getElementById('fp_img').src = '/assets2/fp.gif?hash='+fingerprintEpoch+'-'+result+'&cache_bust='+(new Date().getTime())+'&components='+serialiseComponents(components);
-    });
-  <% end %>
-
-  <noscript style="positior: absolute;">
-    <%= image_tag('/assets2/fp.gif?hash=noJS', style: 'border: 0', height: '1', width: '1', id: 'fp_img_no_js') %>
-  </noscript>
-
-  <%# Browser Fingerprinting Code Ends %>
+  <%= render 'shared/fingerprint' %>
 
 <% end %>
 <%= render file: 'layouts/govuk_template' %>
