@@ -7,9 +7,14 @@ SESSION_PROXY = SessionProxy.new(api_client, OriginatingIpStore)
 
 TRANSACTION_LISTER = Display::Rp::TransactionLister.new(
   Display::Rp::TransactionsProxy.new(api_client),
-  Display::Rp::DisplayDataCorrelator.new(FEDERATION_TRANSLATOR))
+  Display::Rp::DisplayDataCorrelator.new(FEDERATION_TRANSLATOR)
+)
 
-IDP_DISPLAY_DATA_CORRELATOR = Display::Idp::DisplayDataCorrelator.new(FEDERATION_TRANSLATOR, CONFIG.logo_directory, CONFIG.white_logo_directory)
+IDENTITY_PROVIDER_DISPLAY_DECORATOR = Display::IdentityProviderDisplayDecorator.new(
+  FEDERATION_TRANSLATOR,
+  CONFIG.logo_directory,
+  CONFIG.white_logo_directory
+)
 
 TRANSACTION_INFO_GETTER = Display::Rp::TransactionInfoGetter.new(
   SESSION_PROXY,

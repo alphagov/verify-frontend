@@ -8,7 +8,7 @@ class ChooseACertifiedCompanyController < ApplicationController
 
     federation_info = SESSION_PROXY.federation_info_for_session(cookies)
 
-    idp_display_data = IDP_DISPLAY_DATA_CORRELATOR.correlate(federation_info.idps)
+    idp_display_data = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(federation_info.idps)
 
     @identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence, idp_display_data)
   end
