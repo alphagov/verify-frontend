@@ -27,7 +27,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   it 'displays recommended IDPs', js: true do
     stub_federation
-    visit '/choose-a-certified-company?selected-evidence=mobile_phone&selected-evidence=driving_licence'
+    visit '/choose-a-certified-company?selected-evidence=passport&selected-evidence=mobile_phone&selected-evidence=driving_licence'
 
     expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
     expect(page).to have_content('Based on your answers, 3 companies can verify you now:')
@@ -63,10 +63,12 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     end
   end
 
-  it 'redirects to the redirect warning page when selecting the recommended IDP', js: true do
+  it 'redirects to the redirect warning page when selecting a non-recommended IDP', js: true do
     entity_id = 'http://idcorp.com'
     stub_federation(entity_id)
     visit '/choose-a-certified-company?selected-evidence=mobile_phone&selected-evidence=passport'
+
+    click_link 'Show all companies'
 
     within('#non-matching-idps') do
       click_button 'Choose IDCorp'

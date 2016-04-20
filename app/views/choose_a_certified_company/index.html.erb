@@ -15,8 +15,20 @@
       <% end %>
     </div>
     <% if @non_recommended_idps.any? %>
-        <div id="non-matching-idps">
-          <%= t 'hub.choose_a_certified_company.non_recommended_idps' %>
+        <div id="non-matching-idps-warning" class="js-show">
+          <div class="grid-section">
+            <div class="grid-2-3">
+              <p class="large-top">
+                We&rsquo;ve filtered out <%= @non_recommended_idps.length %>, as they&rsquo;re unlikely to be able to verify you based on your answers.
+              </p>
+              <%= link_to 'Show all companies', '#non-matching-idps', {role: 'button'} %>
+            </div>
+          </div>
+        </div>
+        <div id="non-matching-idps" class="js-hidden">
+          <p class="large-top">
+            <%= t 'hub.choose_a_certified_company.non_recommended_idps' %>
+          </p>
           <% @non_recommended_idps.each do |identity_provider| %>
               <%= render partial: 'idp_option', locals: {recommended: false, identity_provider: identity_provider} %>
           <% end %>
