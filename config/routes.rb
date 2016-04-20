@@ -38,9 +38,9 @@ Rails.application.routes.draw do
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
-
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
+  get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
 
   get 'choose-a-certified-company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
   post 'choose-a-certified-company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
