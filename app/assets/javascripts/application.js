@@ -6,7 +6,6 @@
 //= require govuk/selection-buttons
 //= require_tree .
 //= require piwik
-//= require fingerprint2
 
 window.GOVUK.validation.init();
 window.GOVUK.selectDocuments.init();

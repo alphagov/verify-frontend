@@ -38,9 +38,9 @@ Rails.application.routes.draw do
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
-
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
+  get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
@@ -50,7 +50,6 @@ Rails.application.routes.draw do
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
     get 'choose-a-certified-company', to: redirect { |_, request| "#{API_HOST}/choose-a-certified-company?#{request.query_string}" }, as: :choose_a_certified_company
-    get '/assets2/fp.gif', :to => proc {|env| [200, {}, ['OK']] }
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
