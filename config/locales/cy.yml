@@ -117,7 +117,7 @@ cy:
       p2: If you don’t have a passport or UK driving licence, you will also need to install an app.
       other_ways_heading: Other ways to %{other_ways_description}
     why_might_this_not_work_for_me:
-      title: Why this might not work for me
+      title: Why might this not work for me
       heading: You might not be able to have your identity verified
       try_to_verify: I’d like to try to verify my identity online
       other_ways_heading: Other ways to %{other_ways_description}
