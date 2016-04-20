@@ -1,9 +1,9 @@
 class QueryStringParser
   def self.parse(query_string)
     result = {}
-    query_string.split('&').each do |pair|
-      key, value = pair.split('=')
-      unless value.nil?
+    URI.decode_www_form(query_string).each do |pair|
+      key, value = pair
+      unless value.nil? || value.empty?
         result[key] ||= []
         result[key] << value
       end
