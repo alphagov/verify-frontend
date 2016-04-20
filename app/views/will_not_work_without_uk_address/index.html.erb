@@ -1,0 +1,12 @@
+<% content_for :page_title, t('hub.will_not_work_without_uk_address.title') %>
+<% content_for :feedback_source, 'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t 'hub.will_not_work_without_uk_address.heading' %></h1>
+
+    <p><%= t 'hub.will_not_work_without_uk_address.explanation' %></p>
+
+    <%= render partial: 'shared/other_ways', locals: { other_ways_text: @other_ways_text, other_ways_description: @other_ways_description } %>
+  </div>
+</div>
