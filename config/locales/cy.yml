@@ -161,7 +161,10 @@ cy:
       heading: Choose a company
       why_companies: Why there’s a choice of companies
       choose_idp: "Choose %{name}"
-      idp_count_html: "Based on your answers, %{recommended_count}&nbsp;companies can verify you now:"
+      idp_count_html: "Based on your answers, %{company_count_html} can verify you now:"
+      zero_companies_html: "no&nbsp;companies"
+      one_company_html: "1&nbsp;company"
+      multiple_companies_html: "%{count}&nbsp;companies"
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

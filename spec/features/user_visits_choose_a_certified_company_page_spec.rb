@@ -25,27 +25,33 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     expect(actual_evidence).to eql expected_evidence
   end
 
-  it 'displays a recommended IDP' do
+  it 'displays recommended IDPs' do
     stub_federation_no_docs
     visit '/choose-a-certified-company?selected-evidence=mobile_phone'
 
     expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
-    expect(page).to have_button('Choose No Docs IDP')
-    expect(page).to have_content('Based on your answers, 1 companies can verify you now:')
+    expect(page).to have_content('Based on your answers, 1 company can verify you now:')
+    within('#matching-idps') do
+      expect(page).to have_button('Choose No Docs IDP')
+    end
   end
 
-  it 'displays another IDP' do
+  it 'displays only non recommended IDPs if no recommendations' do
     stub_federation
     visit '/choose-a-certified-company?selected-evidence=driving_licence&selected-evidence=mobile_phone'
 
     expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
-    expect(page).to have_button('Choose IDCorp')
+    within('#non-matching-idps') do
+      expect(page).to have_button('Choose IDCorp')
+    end
+    expect(page).to have_content('Based on your answers, no companies can verify you now:')
   end
 
   it 'recommends some IDPs and hides others' do
     stub_federation_no_docs
     visit '/choose-a-certified-company'
 
+    expect(page).to have_content('Based on your answers, 1 company can verify you now:')
     within('#matching-idps') do
       expect(page).to have_button('Choose No Docs IDP')
       expect(page).to_not have_button('Choose IDCorp')
@@ -59,14 +65,14 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   it 'redirects to the redirect warning page when selecting the recommended IDP', js: true do
     entity_id = 'http://idcorp.com'
     stub_federation(entity_id)
-    visit '/choose-a-certified-company?selected-evidence=mobile_phone'
+    visit '/choose-a-certified-company?selected-evidence=mobile_phone&selected-evidence=passport'
 
     within('#non-matching-idps') do
       click_button 'Choose IDCorp'
     end
 
     expect(page).to have_current_path(redirect_to_idp_warning_path, only_path: true)
-    expect(query_params['selected-evidence']).to eql ['mobile_phone']
+    expect(query_params['selected-evidence']).to eql %w(mobile_phone passport)
     expect(query_params['recommended-idp']).to eql ['false']
     expect(query_params['selected-idp']).to eql [entity_id]
   end
