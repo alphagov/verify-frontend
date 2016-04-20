@@ -11,9 +11,8 @@ class WillItWorkForMeController < ApplicationController
     @form = WillItWorkForMeForm.new(WillItWorkForMeFormMapper.map(params) || {})
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Can I be Verified Next')
-      uri = URI(redirect_path)
-      uri.query = request.query_string
-      redirect_to uri.to_s
+      selected_evidence = IdpEligibility::EvidenceQueryStringParser.parse(request.query_string)
+      redirect_to build_uri_with_evidence(redirect_path, selected_evidence)
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index
@@ -21,6 +20,12 @@ class WillItWorkForMeController < ApplicationController
   end
 
 private
+
+  def build_uri_with_evidence(path, evidence)
+    uri = URI(path)
+    uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(evidence)
+    uri.to_s
+  end
 
   def redirect_path
     if @form.resident_last_12_months?

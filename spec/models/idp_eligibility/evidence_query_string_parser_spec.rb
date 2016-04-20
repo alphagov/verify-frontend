@@ -33,5 +33,10 @@ module IdpEligibility
       result = EvidenceQueryStringParser.parse('selected-evidence=something')
       expect(result).to eql([])
     end
+
+    it 'should convert landline_phone into landline' do
+      result = EvidenceQueryStringParser.parse('selected-evidence=landline_phone')
+      expect(result).to eql([:landline])
+    end
   end
 end
