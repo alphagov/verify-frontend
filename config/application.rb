@@ -29,7 +29,9 @@ module VerifyFrontend
     config.i18n.default_locale = :en
 
     config.exceptions_app = self.routes
-
+    
+    #remove default rails headers as they are added by reverse proxy
+    config.action_dispatch.default_headers.clear
     RouteTranslator.config do |config|
       config.hide_locale = true
       config.available_locales = [:en, :cy]
