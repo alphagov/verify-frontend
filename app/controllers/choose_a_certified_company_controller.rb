@@ -8,9 +8,10 @@ class ChooseACertifiedCompanyController < ApplicationController
 
     federation_info = SESSION_PROXY.federation_info_for_session(cookies)
 
-    idp_display_data = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(federation_info.idps)
+    grouped_identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence, federation_info.idps)
 
-    @identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence, idp_display_data)
+    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(grouped_identity_providers.recommended)
+    @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(grouped_identity_providers.non_recommended)
   end
 
   def select_idp
