@@ -22,16 +22,8 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   context 'when JS is enabled', js: true do
-    after(:each) do
-      errors = page.driver.browser.manage.logs.get(:browser)
-      if errors.present?
-        message = errors.map(&:message).join("\n")
-        puts message
-      end
-    end
-
     it 'requests the fingerprint asset with the fingerprint in the query params' do
-      # skip('Fingerprint.js does not behave as expected on Travis') if ENV['TRAVIS'] == 'true'
+      skip('Fingerprint.js does not behave as expected on Travis') if ENV['TRAVIS'] == 'true'
       query_params_hash = nil
       expect(request_log).to receive(:log) { |arg| query_params_hash = arg }
       set_session_cookies!
