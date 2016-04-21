@@ -70,13 +70,13 @@
                 </label>
               </fieldset>
             </div>
-            <label class="block-label">
+            <%= f.label :no_documents, {class: 'block-label'} do %>
               <%= f.check_box :no_documents, {class: 'js-no-docs'}, 'true', 'false' %>
               <span>
                 <span class="inner"></span>
               </span>
               <%= t 'hub.select_documents.question.no_documents'%>
-            </label>
+            <% end %>
           </fieldset>
         <% end %>
 
