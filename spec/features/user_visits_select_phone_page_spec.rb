@@ -31,6 +31,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
       expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
       expect(query_params['selected-evidence'].to_set).to eql %w(mobile_phone smart_phone passport driving_licence).to_set
+      expect(current_session['selected_evidence']).to eql('phone' => %w{mobile_phone smart_phone})
     end
 
     it 'should display a validation message when user does not answer mobile phone question' do
@@ -53,6 +54,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
       expect(page).to have_current_path(no_mobile_phone_path, only_path: true)
       expect(query_params['selected-evidence'].to_set).to eql %w(passport driving_licence non_uk_id_document).to_set
+      expect(current_session['selected_evidence']).to eql('phone' => [])
     end
   end
 

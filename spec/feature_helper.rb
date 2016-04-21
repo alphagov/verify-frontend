@@ -86,7 +86,7 @@ def cookie_value(cookie_name)
     end
     journey_hint_cookie[:value]
   else
-    Capybara.current_session.driver.request.cookies[cookie_name]
+    Capybara.current_session.driver.request.cookies.fetch(cookie_name)
   end
 end
 
@@ -111,4 +111,33 @@ end
 def query_params
   current_uri = URI.parse(page.current_url)
   current_uri.query ? CGI::parse(current_uri.query) : {}
+end
+
+def decrypt_session_cookie(cookie)
+  cookie = CGI.unescape(cookie)
+  config = Rails.application.config
+  secrets = Rails.application.secrets
+
+  encrypted_cookie_salt = config.action_dispatch.encrypted_cookie_salt # "encrypted cookie" by default
+  encrypted_signed_cookie_salt = config.action_dispatch.encrypted_signed_cookie_salt # "signed encrypted cookie" by default
+
+  key_generator = ActiveSupport::KeyGenerator.new(secrets.secret_key_base, iterations: 1000)
+  secret = key_generator.generate_key(encrypted_cookie_salt)
+  sign_secret = key_generator.generate_key(encrypted_signed_cookie_salt)
+
+  serializer = ActionDispatch::Cookies::JsonSerializer
+
+  encryptor = ActiveSupport::MessageEncryptor.new(secret, sign_secret, serializer: serializer)
+  encryptor.decrypt_and_verify(cookie)
+end
+
+def current_session
+  session_key = Rails
+    .application
+    .config
+    .session_options
+    .fetch(:key)
+
+  session_cookie = cookie_value(session_key)
+  decrypt_session_cookie(session_cookie)
 end
