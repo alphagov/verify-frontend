@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     get 'select_phone', to: 'select_phone#index', as: :select_phone
     post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
     get 'no_mobile_phone', to: 'no_mobile_phone#index', as: :no_mobile_phone
+    get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
+    post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
@@ -39,8 +41,6 @@ Rails.application.routes.draw do
 
   get 'select-phone', to: 'select_phone#index', as: :select_phone
   post 'select-phone', to: 'select_phone#select_phone', as: :select_phone_submit
-  get 'will-it-work-for-me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
-  post 'will-it-work-for-me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
   get 'may-not-work-if-you-live-overseas', to: 'may_not_work_if_you_live_overseas#index', as: :may_not_work_if_you_live_overseas
   get 'why-might-this-not-work-for-me', to: 'why_might_this_not_work_for_me#index', as: :why_might_this_not_work_for_me
   get 'will-not-work-without-uk-address', to: 'will_not_work_without_uk_address#index', as: :will_not_work_without_uk_address

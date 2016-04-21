@@ -11,7 +11,7 @@ RSpec.describe 'When the user visits the will it work for me page' do
     expect_feedback_source_to_be(page, 'WILL_IT_WORK_FOR_ME_PAGE')
   end
 
-  it 'displays the page in Welsh', pending: true do
+  it 'displays the page in Welsh' do
     visit '/will-it-work-for-me-cy'
     expect(page).to have_title 'Can I be verified? - GOV.UK Verify - GOV.UK'
     expect(page).to have_css 'html[lang=cy]'
