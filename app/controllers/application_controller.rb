@@ -40,6 +40,18 @@ class ApplicationController < ActionController::Base
     }
   end
 
+  def store_selected_evidence(hash)
+    stored_selected_evidence.merge!(hash)
+  end
+
+  def stored_selected_evidence
+    session[:selected_evidence] ||= {}
+  end
+
+  def selected_evidence_values
+    stored_selected_evidence.values.flatten
+  end
+
 private
 
   def render_error(partial, status)
