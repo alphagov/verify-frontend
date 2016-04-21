@@ -47,7 +47,7 @@ dialog::backdrop {
     margin-left: -300px;
 
     max-height: 90%;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   @include ie(6) {

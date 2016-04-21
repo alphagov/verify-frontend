@@ -6,6 +6,7 @@
 //= require govuk/selection-buttons
 //= require_tree .
 //= require piwik
+//= require trap
 
 window.GOVUK.validation.init();
 window.GOVUK.selectDocuments.init();

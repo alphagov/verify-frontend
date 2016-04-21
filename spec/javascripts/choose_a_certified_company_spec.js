@@ -5,9 +5,9 @@ describe("Choose a certified company", function () {
 
   var nonMatchingIdps = '' +
     '<div id="non-matching-idps-warning" class="js-show">' +
-    '<a role="button" href="#non-matching-idps">Show all companies</a>' +
+      '<a role="button" href="#non-matching-idps">Show all companies</a>' +
     '</div>' +
-    '<div id="non-matching-idps" class="js-hidden">';
+    '<div id="non-matching-idps" class="js-hidden"></div>';
 
   var $dom;
   $('html').addClass('js-enabled');
