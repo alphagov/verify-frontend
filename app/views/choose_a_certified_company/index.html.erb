@@ -19,9 +19,9 @@
           <div class="grid-section">
             <div class="grid-2-3">
               <p class="large-top">
-                We&rsquo;ve filtered out <%= @non_recommended_idps.length %>, as they&rsquo;re unlikely to be able to verify you based on your answers.
+                <%= t 'hub.choose_a_certified_company.filtered_idps_message', non_recommended_idps_count: @non_recommended_idps.length %>
               </p>
-              <%= link_to 'Show all companies', '#non-matching-idps', {role: 'button'} %>
+              <%= link_to(t('hub.choose_a_certified_company.show_all_companies'), '#non-matching-idps', {role: 'button'}) %>
             </div>
           </div>
         </div>

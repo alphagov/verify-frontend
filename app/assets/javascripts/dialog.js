@@ -26,9 +26,6 @@
             'role': 'dialog'
           });
 
-        // Add a close button
-        $dialog.append('<a href="#" class="dialog-close js-dialog-close" role="button">close</a>');
-
         // Add an translucent background
         var $dialogBackdrop = $('<div class="dialog-backdrop"></div>');
         $('body').prepend($dialogBackdrop);
@@ -49,8 +46,6 @@
         var $close = $dialog.find(".js-dialog-close");
 
         var closeDialog = function () {
-          // Remove close button
-          $close.remove();
           // remove dialog attributes and empty dialog
           $dialog.removeAttr('open role aria-labelledby tabindex');
           // Hide dialog

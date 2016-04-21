@@ -71,7 +71,10 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     click_link 'Show all companies'
 
     within('#non-matching-idps') do
-      click_button 'Choose IDCorp'
+      click_link 'About IDCorp'
+      within('#about-stub-idp-one') do
+        click_button 'Choose IDCorp'
+      end
     end
 
     expect(page).to have_current_path(redirect_to_idp_warning_path, only_path: true)

@@ -2,7 +2,7 @@
   <div class="company-logo">
     <%= image_tag identity_provider.logo_path, alt: identity_provider.display_name %>
     <p class="company-about">
-      <a class="js-show js-dialog" href="#about-<%= identity_provider.simple_id %>">About <%= identity_provider.display_name %></a>
+      <%= link_to(t('hub.choose_a_certified_company.about_idp', name: identity_provider.display_name), "#about-#{identity_provider.simple_id}", {class: 'js-show js-dialog'}) %>
     </p>
   </div>
   <%= form_tag('', {class: 'idp-option'}) do %>
@@ -28,8 +28,9 @@
           <%= hidden_field_tag 'selected-idp', identity_provider.entity_id %>
           <%= hidden_field_tag 'recommended-idp', recommended %>
       <% end %>
-      <p class="subtitle">Information provided by <%= identity_provider.display_name %></p>
+      <p class="subtitle"><%= t 'hub.choose_a_certified_company.dialog.information_provided_by', name: identity_provider.display_name %></p>
       <p><%= identity_provider.about_content.html_safe %></p>
+      <%= link_to t('hub.choose_a_certified_company.dialog.close'), '#', {class: 'dialog-close js-dialog-close', role: 'button'} %>
     </div>
   </dialog>
 </div>

@@ -166,6 +166,12 @@ cy:
       one_company_html: "1&nbsp;company"
       multiple_companies_html: "%{count}&nbsp;companies"
       non_recommended_idps: "Based on your answers, these companies are unlikely to verify you now:"
+      show_all_companies: Show all companies
+      filtered_idps_message: "We’ve filtered out %{non_recommended_idps_count}, as they’re unlikely to be able to verify you based on your answers."
+      about_idp: About %{name}
+      dialog:
+        information_provided_by: Information provided by %{name}
+        close: close
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
