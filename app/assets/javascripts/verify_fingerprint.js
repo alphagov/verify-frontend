@@ -17,7 +17,7 @@
 
     function reportFingerprint(path, epoch, imageElement) {
         // disabling javascript font parsing, this is very slow, and the canvas because it yields a different fingerprint for the first page loaded
-        var options = {excludeJsFonts: true, excludeCanvas: true};
+        var options = {excludeJsFonts: true, excludeCanvas: true, excludeWebGL: true};
         new Fingerprint2(options).get(function(result, components){
             imageElement.src = path + '?hash='+epoch+'-'+result+'&cache_bust='+(new Date().getTime())+'&components='+serialiseComponents(components);
         });
