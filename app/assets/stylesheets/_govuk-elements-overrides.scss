@@ -163,11 +163,12 @@
   }
 }
 
-// Inline fieldsets
-.form-group .inline {
-  white-space: nowrap;
+@include media (tablet) {
+  .form-group .inline {
+    white-space: nowrap;
 
-  span {
-    white-space: normal;
+    span {
+      white-space: normal;
+    }
   }
 }
