@@ -1,4 +1,3 @@
-require 'select_phone_form_mapper'
 require 'idp_eligibility/evidence_query_string_parser'
 require 'idp_eligibility/evidence_query_string_builder'
 
@@ -10,7 +9,7 @@ class SelectPhoneController < ApplicationController
   end
 
   def select_phone
-    @form = SelectPhoneForm.new(SelectPhoneFormMapper.map(params))
+    @form = SelectPhoneForm.new(params['select_phone_form'] || {})
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Phone Next')
       selected_evidence = @form.selected_evidence.concat IdpEligibility::EvidenceQueryStringParser.parse(request.query_string)

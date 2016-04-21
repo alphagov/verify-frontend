@@ -1,4 +1,3 @@
-require 'select_documents_form_mapper'
 require 'idp_eligibility/evidence_query_string_builder'
 
 class SelectDocumentsController < ApplicationController
@@ -7,7 +6,7 @@ class SelectDocumentsController < ApplicationController
   end
 
   def select_documents
-    @form = SelectDocumentsForm.new(SelectDocumentsFormMapper.map(params))
+    @form = SelectDocumentsForm.new(params['select_documents_form'] || {})
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Select Documents Next')
       selected_evidence = @form.selected_evidence
