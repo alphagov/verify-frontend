@@ -6,6 +6,12 @@ RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
     stub_federation
   end
 
+  it 'displays the page in Welsh' do
+    visit '/why-might-this-not-work-for-me-cy'
+    expect(page).to have_content("If you can't verify your identity using GOV.UK Verify, you can register for an identity profile here")
+    expect(page).to have_css 'html[lang=cy]'
+  end
+
   context 'with javascript enabled', js: true do
     it 'contains the choose certified company link with selected evidence params' do
       visit '/why-might-this-not-work-for-me?selected-evidence=smart_phone&selected-evidence=mobile_phone&selected-evidence=driving_licence&selected-evidence=passport'

@@ -6,9 +6,9 @@ RSpec.describe 'When the user visits the select documents page' do
     set_session_cookies!
   end
 
-  it 'displays the page in Welsh', pending: true do
-    visit '/dewiswch-ddogfennau'
-    expect(page).to have_title 'Dewiswch yr holl ddogfennau sydd gennych - GOV.UK Verify - GOV.UK'
+  it 'displays the page in Welsh' do
+    visit '/select-documents-cy'
+    expect(page).to have_title 'Select all the documents you have - GOV.UK Verify - GOV.UK'
     expect(page).to have_css 'html[lang=cy]'
   end
 

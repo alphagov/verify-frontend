@@ -32,18 +32,15 @@ Rails.application.routes.draw do
     get 'no_mobile_phone', to: 'no_mobile_phone#index', as: :no_mobile_phone
     get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
     post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+    get 'may_not_work_if_you_live_overseas', to: 'may_not_work_if_you_live_overseas#index', as: :may_not_work_if_you_live_overseas
+    get 'why_might_this_not_work_for_me', to: 'why_might_this_not_work_for_me#index', as: :why_might_this_not_work_for_me
+    get 'will_not_work_without_uk_address', to: 'will_not_work_without_uk_address#index', as: :will_not_work_without_uk_address
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
 
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
-
-  get 'select-phone', to: 'select_phone#index', as: :select_phone
-  post 'select-phone', to: 'select_phone#select_phone', as: :select_phone_submit
-  get 'may-not-work-if-you-live-overseas', to: 'may_not_work_if_you_live_overseas#index', as: :may_not_work_if_you_live_overseas
-  get 'why-might-this-not-work-for-me', to: 'why_might_this_not_work_for_me#index', as: :why_might_this_not_work_for_me
-  get 'will-not-work-without-uk-address', to: 'will_not_work_without_uk_address#index', as: :will_not_work_without_uk_address
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
