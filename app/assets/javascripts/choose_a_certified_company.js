@@ -6,8 +6,6 @@
 
   var chooseACertifiedCompany = {
     init: function() {
-      var dialog = new Dialog();
-      dialog.init();
       var $nonMatchingIdps = $('#non-matching-idps'),
         $warning = $('#non-matching-idps-warning'),
         $showCompanies = $warning.find('a');

@@ -13,6 +13,7 @@ window.GOVUK.selectDocuments.init();
 window.GOVUK.selectPhone.init();
 window.GOVUK.willItWorkForMe.init();
 window.GOVUK.chooseACertifiedCompany.init();
+window.GOVUK.dialog.init();
 
 $(function () {
   // Use GOV.UK selection-buttons.js to set selected and focused states for block labels

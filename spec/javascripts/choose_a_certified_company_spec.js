@@ -27,6 +27,4 @@ describe("Choose a certified company", function () {
     expect($('#non-matching-idps-warning').is('.hidden')).toBe(true);
     expect($('#non-matching-idps').is('.js-hidden')).toBe(false);
   });
-
-  it("should pop up modal when 'about-company' is clicked");
 });
