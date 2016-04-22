@@ -13,10 +13,12 @@ cy:
     may_not_work_if_you_live_overseas: may-not-work-if-you-live-overseas-cy
     why_might_this_not_work_for_me: why-might-this-not-work-for-me-cy
     will_not_work_without_uk_address: will-not-work-without-uk-address-cy
+    why_companies: why-companies-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
     continue: Parhau
+    back: Back
   option:
     yes: Yes
     no: No
@@ -173,6 +175,15 @@ cy:
       dialog:
         information_provided_by: Information provided by %{name}
         close: close
+    why_companies:
+      title: Why there’s a choice of companies
+      content:
+        p1: More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.
+        p2: It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.
+        p3: When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide from passports and driving licences is correct.
+        p4: Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.
+        p5: There’s no effect on your credit score.
+        choose_a_company: Choose a company
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
