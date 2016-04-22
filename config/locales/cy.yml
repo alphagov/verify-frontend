@@ -6,8 +6,8 @@ cy:
     about_certified_companies: am-gwmniau-ardystiedig
     about_identity_accounts: am-gyfrifon-hunaniaeth
     about_choosing_a_company: am-ddewis-cwmni
-    select_documents: select-documents-cy
-    select_phone: select-phone-cy
+    select_documents: dewis-dogfennau
+    select_phone: dewis-ffôn
     will_it_work_for_me: will-it-work-for-me-cy
     no_mobile_phone: no-mobile-phone-cy
     may_not_work_if_you_live_overseas: may-not-work-if-you-live-overseas-cy
@@ -19,8 +19,8 @@ cy:
     continue: Parhau
   option:
     yes: Yes
-    no: No
-    unknown: I don’t know
+    no: Na
+    unknown: Ddim yn gwybod
   phase_banner:
     title: Mae hwn yn wasanaeth newydd.
     feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
@@ -54,8 +54,7 @@ cy:
     about:
       title: Am sicrwydd hunaniaeth
       verify_is_a_scheme: Mae GOV.UK Verify yn gynllun i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
-      # FIXME: The following requires re-translating since we added the word 'from' to the English
-      its_secure: Mae'n ddiogel, ac yn atal rhywun esgus mai chi ydynt.
+      its_secure: Mae'n ddiogel, ac yn atal rhywun rhag esgus bod yn chi.
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
@@ -80,24 +79,24 @@ cy:
       p1: Mae gan gwmnïau ardystiedig ffyrdd gwahanol o wirio hunaniaeth, er enghraifft trwy wirio dogfennau adnabod neu ddarparu ap.
       p2: Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.
     select_documents:
-      title: Select all the documents you have
-      heading: Certified companies use information from different identity documents to verify you.
-      legend: Do you have these documents with you?
+      title: Dewiswch yr holl ddogfennau sydd gennych
+      heading: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i'ch dilysu.
+      legend: Ydy'r dogfennau hyn gyda chi?
       question:
-        driving_licence: UK photocard driving licence (excluding Northern Ireland)
-        passport: UK passport
-        non_uk_id_document: Identity document from another country (passport, ID card or driving licence)
-        no_documents: I don't have any of these documents with me
+        driving_licence: Trwydded yrru gyda llun y DU (ac eithrio Gogledd Iwerddon)
+        passport: Pasport y DU
+        non_uk_id_document: Dogfen hunaniaeth o wlad arall (pasport, cerdyn ID neu drwydded yrru)
+        no_documents: Nid oes gennyf y dogfennau hyn gyda mi
       errors:
-        no_selection: Please select the documents you have
-        invalid_selection: Please check your selection
+        no_selection: Dewiswch y dogfennau sydd gennych
+        invalid_selection: Edrychwch dros eich dewis
     select_phone:
-      title: Do you have a mobile phone or tablet?
-      heading: Certified companies can send security codes to your mobile.
+      title: Oes gennych ffôn symudol neu lechen?
+      heading: Gall cwmniau ardystiedig anfon codau diogelwch i'ch ffôn symudol.
       question:
-        mobile_phone: Do you have a mobile phone or tablet?
-        smart_phone: Can you install apps on your device?
-        landline: Do you have a landline?
+        mobile_phone: Oes gennych ffôn symudol neu lechen?
+        smart_phone: Allwch chi osod apps ar eich dyfais?
+        landline: Oes gennych chi linell daear?
       errors:
         no_selection: Please answer all the questions
         invalid_selection: Please check your selection
@@ -185,7 +184,7 @@ cy:
       heading: GOV.UK Verify
       access_restriction: Gellir ond cael mynediad i GOV.UK Verify o wasanaeth y llywodraeth.
       read_more: 'Darllenwch y <a href="https://www.gov.uk/verify" hreflang="en">Cyflwyniad i GOV.UK Verify</a> am fwy o wybodaeth.'
-      enable_cookies: Os na allwch gael mynediad i GOV.UK Verify o wasanaeth, dylech alluogi eich cwcis.
+      enable_cookies: Os na allwch gael mynediad i GOV.UK Verify o wasanaeth y llywodraeth, dylech alluogi eich cwcis.
     session_error:
       title: Mae rhywbeth wedi mynd o'i le
       heading: Mae angen i chi ddechrau eto
@@ -205,8 +204,8 @@ cy:
       error_message: Gall hyn fod oherwydd bod eich sesiwn wedi'i amseru allan neu roedd gwall yn y system.
       start_again: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.
     page_not_found:
-      title: This page can't be found
-      heading: This page can't be found
-      reason_pre: "This may be because:"
-      reason_one: the link you clicked is broken
-      reason_two: you entered an incorrect web address
+      title: Ni ellir dod o hyd i'r dudalen hon
+      heading: Ni ellir dod o hyd i'r dudalen hon
+      reason_pre: "Gallai hyn fod oherwydd:"
+      reason_one: bod y ddolen rydych wedi clicio arni wedi torri
+      reason_two: rydych wedi rhoi cyfeiriad gwefan anghywir
