@@ -20,7 +20,6 @@ en:
     continue: Continue
     back: Back
   option:
-    yes: Yes
     no: No
     unknown: I don’t know
   phase_banner:
@@ -81,6 +80,7 @@ en:
       title: Select all the documents you have
       heading: Certified companies use information from different identity documents to verify you.
       legend: Do you have these documents with you?
+      documents_option_yes: 'Yes'
       question:
         driving_licence: UK photocard driving licence (excluding Northern Ireland)
         passport: UK passport
@@ -94,14 +94,18 @@ en:
       heading: Certified companies can send security codes to your mobile.
       question:
         mobile_phone: Do you have a mobile phone or tablet?
+        mobile_phone_option_yes: 'Yes'
         smart_phone: Can you install apps on your device?
+        smart_phone_option_yes: 'Yes'
         landline: Do you have a landline?
+        landline_option_yes: 'Yes'
       errors:
         no_selection: Please answer all the questions
         invalid_selection: Please check your selection
     will_it_work_for_me:
       title: Can I be verified?
       question:
+        option_yes: 'Yes'
         above_age_threshold: Are you 20 or over?
         resident_last_12_months: Have you lived in the UK for the last 12 months?
         not_resident_reason:

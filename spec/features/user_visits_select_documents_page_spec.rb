@@ -7,8 +7,8 @@ RSpec.feature 'When the user visits the select documents page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/select-documents-cy'
-    expect(page).to have_title 'Select all the documents you have - GOV.UK Verify - GOV.UK'
+    visit '/dewis-dogfennau'
+    expect(page).to have_title 'Dewiswch yr holl ddogfennau sydd gennych'
     expect(page).to have_css 'html[lang=cy]'
   end
 

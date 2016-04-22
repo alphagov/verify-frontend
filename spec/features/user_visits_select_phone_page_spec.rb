@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'uri'
 
 RSpec.describe 'When the user visits the select phone page' do
   before(:each) do
@@ -64,8 +65,8 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/select-phone-cy'
-    expect(page).to have_title 'Do you have a mobile phone or tablet? - GOV.UK Verify - GOV.UK'
+    visit URI.escape('dewis-ffôn')
+    expect(page).to have_title 'Oes gennych ffôn symudol neu lechen?'
     expect(page).to have_css 'html[lang=cy]'
   end
 
