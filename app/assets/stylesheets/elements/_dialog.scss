@@ -9,6 +9,10 @@ dialog {
   padding: 0;
   text-align: left;
   margin: 0;
+
+  .heading-medium {
+    margin-top: 0;
+  }
 }
 
 dialog:not([open]) {

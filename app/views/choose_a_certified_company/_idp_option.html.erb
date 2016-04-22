@@ -5,8 +5,8 @@
       <%= link_to(t('hub.choose_a_certified_company.about_idp', name: identity_provider.display_name), "#about-#{identity_provider.simple_id}", {class: 'js-show js-dialog'}) %>
     </p>
   </div>
+  <% button_class = recommended ? 'button' : 'button-link' %>
   <%= form_tag('', {class: 'idp-option'}) do %>
-      <% button_class = recommended ? 'button' : 'button-link' %>
       <%= button_tag t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
                      class: button_class,
                      name: identity_provider.simple_id,
@@ -20,7 +20,7 @@
     <div class="dialog-inner"><h3 class="heading-medium" id="dialog-title-<%= identity_provider.simple_id %>"><%= identity_provider.display_name %></h3>
       <%= form_tag('', {class: 'js-show'}) do %>
           <%= button_tag t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
-                         class: 'button',
+                         class: button_class,
                          name: identity_provider.simple_id,
                          type: 'submit',
                          value: identity_provider.display_name
