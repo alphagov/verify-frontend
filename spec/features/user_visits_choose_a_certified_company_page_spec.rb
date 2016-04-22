@@ -85,7 +85,9 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   end
 
   it 'displays the page in Welsh', pending: true do
+    stub_federation
     visit '/choose-a-certified-company-cy'
+    expect(page).to have_title 'Choose a certified company - GOV.UK Verify - GOV.UK'
     expect(page).to have_css 'html[lang=cy]'
   end
 end
