@@ -46,6 +46,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
       expect(page).to have_button('Choose IDCorp')
     end
     expect(page).to have_content('Based on your answers, no companies can verify you now:')
+    expect(page).to have_content('We’ve filtered out 3 companies, as they’re unlikely to be able to verify you based on your answers.')
   end
 
   it 'recommends some IDPs and hides others' do

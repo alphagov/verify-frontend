@@ -7,7 +7,10 @@
       <ul class="list-bullet">
         <li><%= link_to(t('hub.choose_a_certified_company.why_companies'), @why_companies_link) %></li>
       </ul>
-      <p><%= recommended_company_message(@recommended_idps.length) %></p>
+      <p class="large-top">
+        <%= t 'hub.choose_a_certified_company.idp_count_html',
+              company_count: t('hub.choose_a_certified_company.company_html', count: @recommended_idps.length) %>
+      </p>
     </div>
     <div id="matching-idps">
       <% @recommended_idps.each do |identity_provider| %>
@@ -19,7 +22,8 @@
           <div class="grid-section">
             <div class="grid-2-3">
               <p class="large-top">
-                <%= t 'hub.choose_a_certified_company.filtered_idps_message', non_recommended_idps_count: @non_recommended_idps.length %>
+                <%= t 'hub.choose_a_certified_company.filtered_idps_message_html',
+                      company_count: t('hub.choose_a_certified_company.company_html', count: @non_recommended_idps.length) %>
               </p>
               <%= link_to(t('hub.choose_a_certified_company.show_all_companies'), '#non-matching-idps', {role: 'button'}) %>
             </div>

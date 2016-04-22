@@ -157,13 +157,14 @@ en:
       heading: Choose a company
       why_companies: Why there’s a choice of companies
       choose_idp: "Choose %{name}"
-      idp_count_html: "Based on your answers, %{company_count_html} can verify you now:"
-      zero_companies_html: "no&nbsp;companies"
-      one_company_html: "1&nbsp;company"
-      multiple_companies_html: "%{count}&nbsp;companies"
+      idp_count_html: "Based on your answers, %{company_count} can verify you now:"
+      company_html:
+        zero: no&nbsp;companies
+        one: 1&nbsp;company
+        other: "%{count}&nbsp;companies"
       non_recommended_idps: "Based on your answers, these companies are unlikely to verify you now:"
       show_all_companies: Show all companies
-      filtered_idps_message: "We’ve filtered out %{non_recommended_idps_count}, as they’re unlikely to be able to verify you based on your answers."
+      filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
       about_idp: About %{name}
       dialog:
         information_provided_by: Information provided by %{name}
