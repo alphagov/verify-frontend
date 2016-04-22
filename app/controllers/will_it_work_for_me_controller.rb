@@ -1,6 +1,4 @@
 class WillItWorkForMeController < ApplicationController
-  protect_from_forgery except: :will_it_work_for_me
-
   def index
     @form = WillItWorkForMeForm.new({})
   end
