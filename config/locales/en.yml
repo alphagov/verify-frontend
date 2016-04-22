@@ -178,13 +178,13 @@ en:
         close: close
     why_companies:
       title: Why there’s a choice of companies
-      content:
-        p1: More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.
-        p2: It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.
-        p3: When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide from passports and driving licences is correct.
-        p4: Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.
-        p5: There’s no effect on your credit score.
-        choose_a_company: Choose a company
+      choose_a_company: Choose a company
+      content_html: |
+        <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
+        <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
+        <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
+        <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p>There’s no effect on your credit score.</p>
   errors:
     transaction_list:
       title: Find the service you were using to start again
