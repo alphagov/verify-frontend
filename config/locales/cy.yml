@@ -18,7 +18,6 @@ cy:
     start_now: Dechreuwch nawr
     continue: Parhau
   option:
-    yes: Yes
     no: Na
     unknown: Ddim yn gwybod
   phase_banner:
@@ -82,6 +81,7 @@ cy:
       title: Dewiswch yr holl ddogfennau sydd gennych
       heading: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i'ch dilysu.
       legend: Ydy'r dogfennau hyn gyda chi?
+      documents_option_yes: Ydy
       question:
         driving_licence: Trwydded yrru gyda llun y DU (ac eithrio Gogledd Iwerddon)
         passport: Pasport y DU
@@ -95,16 +95,20 @@ cy:
       heading: Gall cwmniau ardystiedig anfon codau diogelwch i'ch ffôn symudol.
       question:
         mobile_phone: Oes gennych ffôn symudol neu lechen?
+        mobile_phone_option_yes: Oes
         smart_phone: Allwch chi osod apps ar eich dyfais?
+        smart_phone_option_yes: Gallaf
         landline: Oes gennych chi linell daear?
+        landline_option_yes: Oes
       errors:
         no_selection: Please answer all the questions
         invalid_selection: Please check your selection
     will_it_work_for_me:
       title: Can I be verified?
       question:
-        above_age_threshold: Are you 20 or over?
-        resident_last_12_months: Have you lived in the UK for the last 12 months?
+        option_yes: Ydw
+        above_age_threshold: Ydych chi’n 20 oed neu drosodd?
+        resident_last_12_months: Ydych chi wedi byw yn y DU am y 12 mis diwethaf?
         not_resident_reason:
           title: Which of these applies to you?
           recently: I moved to the UK in the last 12 months
