@@ -10,7 +10,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     stub_federation
     visit '/choose-a-certified-company'
 
-    expect_feedback_source_to_be(page, 'CHOOSE_A_CERTIFIED_COMPANY')
+    expect_feedback_source_to_be(page, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE')
   end
 
   it 'passes selected evidence on to why-companies page', js: true do
