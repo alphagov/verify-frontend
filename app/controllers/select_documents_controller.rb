@@ -10,7 +10,6 @@ class SelectDocumentsController < ApplicationController
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Select Documents Next')
       selected_evidence = @form.selected_evidence
-      store_selected_evidence(documents: selected_evidence)
       if documents_eligibility_checker.any?(selected_evidence, available_idps)
         uri = URI(select_phone_path)
         uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(selected_evidence)

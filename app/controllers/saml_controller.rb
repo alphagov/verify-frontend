@@ -3,7 +3,6 @@ class SamlController < ApplicationController
   skip_before_action :validate_cookies
 
   def request_post
-    reset_session
     cookies_from_api = authn_request_proxy.create_session(params['SAMLRequest'], params['RelayState'])
     cookies_from_api.each { |name, value| set_secure_cookie(name, value) }
     if params['journey_hint'].present?

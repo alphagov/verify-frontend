@@ -1,7 +1,7 @@
 require 'feature_helper'
 require 'i18n'
 
-RSpec.feature 'When the user visits the select documents page' do
+RSpec.describe 'When the user visits the select documents page' do
   before(:each) do
     set_session_cookies!
   end
@@ -26,7 +26,6 @@ RSpec.feature 'When the user visits the select documents page' do
     click_button 'Continue'
 
     expect(page).to have_current_path(select_phone_path, only_path: true)
-    expect(current_session["selected_evidence"]).to eql("documents" => %w{driving_licence})
   end
 
   it 'redirects to the select phone page when no docs checked' do
