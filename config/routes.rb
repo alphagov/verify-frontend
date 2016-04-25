@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     get 'may_not_work_if_you_live_overseas', to: 'may_not_work_if_you_live_overseas#index', as: :may_not_work_if_you_live_overseas
     get 'why_might_this_not_work_for_me', to: 'why_might_this_not_work_for_me#index', as: :why_might_this_not_work_for_me
     get 'will_not_work_without_uk_address', to: 'will_not_work_without_uk_address#index', as: :will_not_work_without_uk_address
+    get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
+    post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
+    get 'why_companies', to: 'why_companies#index', as: :why_companies
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
@@ -42,9 +45,6 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
 
-  get 'choose-a-certified-company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
-  post 'choose-a-certified-company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
-  get 'why-companies', to: 'why_companies#index', as: :why_companies
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity

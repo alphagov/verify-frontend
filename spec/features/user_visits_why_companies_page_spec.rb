@@ -12,7 +12,7 @@ RSpec.describe 'When the user visits the why companies page' do
     expect_feedback_source_to_be(page, 'WHY_COMPANIES_PAGE')
   end
 
-  it 'displays the page in Welsh', pending: true do
+  it 'displays the page in Welsh' do
     visit '/why-companies-cy'
     expect(page).to have_title 'Why there’s a choice of companies - GOV.UK Verify - GOV.UK'
     expect(page).to have_css 'html[lang=cy]'

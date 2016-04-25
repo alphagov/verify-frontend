@@ -84,7 +84,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     expect(query_params['selected-idp']).to eql [entity_id]
   end
 
-  it 'displays the page in Welsh', pending: true do
+  it 'displays the page in Welsh' do
     stub_federation
     visit '/choose-a-certified-company-cy'
     expect(page).to have_title 'Choose a certified company - GOV.UK Verify - GOV.UK'
