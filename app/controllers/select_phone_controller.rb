@@ -10,7 +10,9 @@ class SelectPhoneController < ApplicationController
     @form = SelectPhoneForm.new(params['select_phone_form'] || {})
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Phone Next')
-      selected_evidence = @form.selected_evidence.concat IdpEligibility::EvidenceQueryStringParser.parse(request.query_string)
+      selected_phone_evidence = @form.selected_evidence
+      store_selected_evidence(phone: selected_phone_evidence)
+      selected_evidence = selected_phone_evidence + IdpEligibility::EvidenceQueryStringParser.parse(request.query_string)
       if idp_eligibility_checker.any?(selected_evidence, available_idps)
         redirect_to build_uri_with_evidence(will_it_work_for_me_path, selected_evidence)
       else

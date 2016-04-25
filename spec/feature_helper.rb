@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'capybara/rspec'
 require 'webmock/rspec'
+require 'rack_session_access/capybara'
 WebMock.disable_net_connect!(allow_localhost: true)
 
 if ENV['HEADLESS'] == 'true'
@@ -86,7 +87,7 @@ def cookie_value(cookie_name)
     end
     journey_hint_cookie[:value]
   else
-    Capybara.current_session.driver.request.cookies[cookie_name]
+    Capybara.current_session.driver.request.cookies.fetch(cookie_name)
   end
 end
 

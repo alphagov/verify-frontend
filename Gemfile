@@ -71,6 +71,7 @@ group :test, :development do
   gem 'webmock', require: false
   gem 'rack-test'
   gem 'sinatra'
+  gem 'rack_session_access'
   gem 'headless'
 end
 

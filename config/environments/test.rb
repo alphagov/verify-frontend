@@ -37,4 +37,7 @@ Rails.application.configure do
 
   #Cookie Configuration
   config.x.cookies.secure = false
+
+  # Access to rack session
+  config.middleware.use RackSessionAccess::Middleware
 end
