@@ -17,6 +17,7 @@ module Display
       expect(translator).to receive(:translate).with('idps.test-simple-id.about').and_return('Test About Content')
       expect(translator).to receive(:translate).with('idps.test-simple-id.requirements').and_return(requirements)
       expect(translator).to receive(:translate).with('idps.test-simple-id.special_no_docs_instructions_html').and_return('instructions html')
+      expect(translator).to receive(:translate).with('idps.test-simple-id.no_docs_requirement').and_return('no docs requirement')
       result = decorator.decorate(idp_list)
       expected_result = [
         ViewableIdentityProvider.new(
@@ -26,7 +27,8 @@ module Display
           '/stub-logos/white/test-simple-id.png',
           'Test About Content',
           requirements,
-          'instructions html'
+          'instructions html',
+          'no docs requirement'
         )
       ]
       expect(result).to eql expected_result

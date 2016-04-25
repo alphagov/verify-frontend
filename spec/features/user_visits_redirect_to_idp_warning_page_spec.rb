@@ -86,11 +86,13 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     end
   end
 
-  it 'includes specific IDP text when user has no documents' do
+  it 'includes specific IDP text and link to the other ways when user has no documents' do
+    stub_federation_no_docs
     given_a_session_with_no_document_evidence
     visit '/redirect-to-idp-warning'
 
     expect(page).to have_content 'You’ll now verify your identity on No Docs IDP’s website.'
     expect(page).to have_content 'Additional IDP Instructions'
+    expect(page).to have_link 'other ways to register for an identity profile', href: other_ways_to_access_service_path
   end
 end

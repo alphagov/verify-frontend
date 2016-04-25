@@ -204,6 +204,8 @@ cy:
         p2: They’ll give you an identity account you can use wherever you see the GOV.UK Verify logo.
       non_recommended:
         requirements: "To be verified with %{name}, you’ll need:"
+      other_ways_link: "other ways to %{transaction}"
+      no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

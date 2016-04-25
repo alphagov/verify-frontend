@@ -55,12 +55,14 @@ Rails.application.routes.draw do
     get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
     get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
+    get 'other-ways-to-access-service', to: redirect("#{API_HOST}/other-ways-to-access-service"), as: :other_ways_to_access_service
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
     get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
+    get 'other-ways-to-access-service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

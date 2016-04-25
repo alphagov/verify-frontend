@@ -6,6 +6,7 @@ en:
       requirements:
         - "A requirement"
       special_no_docs_instructions_html: "<p>Additional IDP Instructions</p>"
+      no_docs_requirement: "If you do not have a current account"
 cy:
   idps:
     stub-idp-no-docs:

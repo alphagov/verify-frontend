@@ -1,5 +1,5 @@
 class RedirectToIdpWarningController < ApplicationController
-  helper_method :user_has_no_docs?
+  helper_method :user_has_no_docs?, :other_ways_description
 
   def index
     idp = IdentityProvider.new(session.fetch(:selected_idp))
@@ -18,6 +18,11 @@ class RedirectToIdpWarningController < ApplicationController
   end
 
 private
+
+  def other_ways_description
+    transaction = TRANSACTION_INFO_GETTER.get_info(cookies)
+    @other_ways_description = transaction.other_ways_description
+  end
 
   def user_has_no_docs?
     (stored_selected_evidence['documents'] || []).empty?

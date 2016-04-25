@@ -21,7 +21,8 @@ module Display
       about = @translator.translate("idps.#{simple_id}.about")
       requirements = @translator.translate("idps.#{simple_id}.requirements")
       special_no_docs_instructions = decorate_special_no_docs_instructions(simple_id)
-      ViewableIdentityProvider.new(idp, name, logo_path, white_logo_path, about, requirements, special_no_docs_instructions)
+      no_docs_requirement = decorate_no_docs_requirement(simple_id)
+      ViewableIdentityProvider.new(idp, name, logo_path, white_logo_path, about, requirements, special_no_docs_instructions, no_docs_requirement)
     rescue FederationTranslator::TranslationError => e
       Rails.logger.error(e)
       nil
@@ -29,6 +30,12 @@ module Display
 
     def decorate_special_no_docs_instructions(simple_id)
       @translator.translate("idps.#{simple_id}.special_no_docs_instructions_html")
+    rescue FederationTranslator::TranslationError
+      ''
+    end
+
+    def decorate_no_docs_requirement(simple_id)
+      @translator.translate("idps.#{simple_id}.no_docs_requirement")
     rescue FederationTranslator::TranslationError
       ''
     end
