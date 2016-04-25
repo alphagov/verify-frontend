@@ -26,7 +26,7 @@ RSpec.feature 'When the user visits the select documents page' do
     click_button 'Continue'
 
     expect(page).to have_current_path(select_phone_path, only_path: true)
-    expect(current_session["selected_evidence"]).to eql("documents" => %w{driving_licence})
+    expect(page.get_rack_session['selected_evidence']).to eql('documents' => %w{driving_licence})
   end
 
   it 'redirects to the select phone page when no docs checked' do

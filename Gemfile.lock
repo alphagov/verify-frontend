@@ -138,6 +138,9 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack_session_access (0.1.1)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (4.2.5.2)
       actionmailer (= 4.2.5.2)
       actionpack (= 4.2.5.2)
@@ -283,6 +286,7 @@ DEPENDENCIES
   puma
   rack-handlers
   rack-test
+  rack_session_access
   rails (= 4.2.5.2)
   rails-i18n (~> 4.0)
   request_store
