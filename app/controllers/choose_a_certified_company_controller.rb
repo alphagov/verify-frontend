@@ -20,6 +20,7 @@ class ChooseACertifiedCompanyController < ApplicationController
     selected_idp = params.fetch('selected-idp')
     recommended_idp = params.fetch('recommended-idp')
     idp_choice = QueryStringBuilder.build('selected-idp' => selected_idp, 'recommended-idp' => recommended_idp)
+    session[:selected_idp] = IdentityProvider.new(params['identity_provider'] || {})
 
     redirect_to uri_with_query(redirect_to_idp_warning_path, [evidence_query_string_value, idp_choice].join('&'))
   end

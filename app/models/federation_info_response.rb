@@ -7,7 +7,7 @@ class FederationInfoResponse
   validate :consistent_idps
 
   def initialize(hash)
-    @idps = hash['idps'].map { |idp| IdentityProvider.new(idp) }
+    @idps = hash['idps'].map { |idp| IdentityProvider.from_api(idp) }
     @transaction_simple_id = hash['transactionSimpleId']
     @transaction_entity_id = hash['transactionEntityId']
   end

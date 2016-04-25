@@ -6,8 +6,8 @@
     </p>
   </div>
   <% button_class = recommended ? 'button' : 'button-link' %>
-  <%= form_tag('', {class: 'idp-option'}) do %>
-      <%= button_tag t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
+  <%= form_for(identity_provider, url: '', html: {class: 'idp-option'}) do |f| %>
+      <%= f.button t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
                      class: button_class,
                      name: identity_provider.simple_id,
                      type: 'submit',
@@ -15,11 +15,13 @@
       %>
       <%= hidden_field_tag 'selected-idp', identity_provider.entity_id %>
       <%= hidden_field_tag 'recommended-idp', recommended %>
+      <%= f.hidden_field :entity_id %>
+      <%= f.hidden_field :simple_id %>
   <% end %>
   <dialog aria-labelledby="dialog-title-<%= identity_provider.simple_id %>" id="about-<%= identity_provider.simple_id %>">
     <div class="dialog-inner"><h3 class="heading-medium" id="dialog-title-<%= identity_provider.simple_id %>"><%= identity_provider.display_name %></h3>
-      <%= form_tag('', {class: 'js-show'}) do %>
-          <%= button_tag t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
+      <%= form_for(identity_provider, url: '', html: {class: 'js-show'}) do |f| %>
+          <%= f.button t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
                          class: button_class,
                          name: identity_provider.simple_id,
                          type: 'submit',
@@ -27,6 +29,8 @@
           %>
           <%= hidden_field_tag 'selected-idp', identity_provider.entity_id %>
           <%= hidden_field_tag 'recommended-idp', recommended %>
+          <%= f.hidden_field :entity_id %>
+          <%= f.hidden_field :simple_id %>
       <% end %>
       <p class="subtitle"><%= t 'hub.choose_a_certified_company.dialog.information_provided_by', name: identity_provider.display_name %></p>
       <p><%= identity_provider.about_content.html_safe %></p>
