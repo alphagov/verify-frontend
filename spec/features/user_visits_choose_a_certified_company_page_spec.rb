@@ -83,6 +83,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     expect(query_params['recommended-idp']).to eql ['false']
     expect(query_params['selected-idp']).to eql [entity_id]
     expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one')
+    expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql false
   end
 
   it 'displays the page in Welsh', pending: true do
