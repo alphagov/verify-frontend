@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'redirect-to-idp-warning', to: redirect("#{API_HOST}/redirect-to-idp-warning"), as: :redirect_to_idp_warning
+    post 'redirect-to-idp-warning', to: redirect("#{API_HOST}/redirect-to-idp-warning"), as: :redirect_to_idp_warning_submit
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
     get 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+    post 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
