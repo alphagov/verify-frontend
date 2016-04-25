@@ -12,8 +12,11 @@ module Display
     it 'takes a list of IDP data and a translator with knowledge of IDPs and returns a list of IDPs to display' do
       idp = double(:idp_one, 'simple_id' => 'test-simple-id', 'entity_id' => 'test-entity-id')
       idp_list = [idp]
+      requirements = ['requirement 1', 'requirement 2']
       expect(translator).to receive(:translate).with('idps.test-simple-id.name').and_return('Test Display Name')
       expect(translator).to receive(:translate).with('idps.test-simple-id.about').and_return('Test About Content')
+      expect(translator).to receive(:translate).with('idps.test-simple-id.requirements').and_return(requirements)
+      expect(translator).to receive(:translate).with('idps.test-simple-id.special_no_docs_instructions_html').and_return('instructions html')
       result = decorator.decorate(idp_list)
       expected_result = [
         ViewableIdentityProvider.new(
@@ -21,7 +24,9 @@ module Display
           'Test Display Name',
           '/stub-logos/test-simple-id.png',
           '/stub-logos/white/test-simple-id.png',
-          'Test About Content'
+          'Test About Content',
+          requirements,
+          'instructions html'
         )
       ]
       expect(result).to eql expected_result

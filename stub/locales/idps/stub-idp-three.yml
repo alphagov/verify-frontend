@@ -3,8 +3,20 @@ en:
     stub-idp-three:
       name: "Carol's Secure ID"
       about: "<p>Carol's Secure ID is the premier identity proofing service around. Come get some.</p>"
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence
+      special_no_docs_instructions_html: |
+        <h2 class="heading-medium">Requirements</h2>
+        <ul id="requirements" class="list-bullet">
+          <li>A left leg</li>
+        </ul>
+        <p>Stick your left leg in, stick your left leg out</p>
 cy:
   idps:
     stub-idp-three:
       name: "Carol's Welsh Secure ID"
       about: "<p>Carol's Secure ID is the premier identity proofing service around. Come get some.</p>"
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence

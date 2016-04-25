@@ -20,6 +20,20 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       selected_evidence: { phone: %w(mobile_phone smart_phone), documents: %w(passport) },
     )
   }
+  let(:given_a_session_with_non_recommended_idp) {
+    page.set_rack_session(
+      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      selected_idp_was_recommended: false,
+      selected_evidence: { phone: %w(mobile_phone smart_phone), documents: %w(passport) },
+    )
+  }
+  let(:given_a_session_with_no_document_evidence) {
+    page.set_rack_session(
+      selected_idp: { entity_id: 'http://idpnodocs.com', simple_id: 'stub-idp-no-docs' },
+      selected_idp_was_recommended: true,
+      selected_evidence: { phone: %w(mobile_phone smart_phone), documents: [] },
+    )
+  }
 
   before(:each) do
     set_session_cookies!
@@ -27,7 +41,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   it 'includes the appropriate feedback source and page title' do
     given_a_session_with_document_evidence
-    visit '/redirect-to-idp-warning?selected-evidence=mobile_phone&selected-evidence=smart_phone&selected-idp=http://idcorp.com&recommended-idp=true'
+    visit '/redirect-to-idp-warning'
 
     expect(page).to have_title "You'll now be redirected - GOV.UK Verify - GOV.UK"
     expect_feedback_source_to_be(page, 'REDIRECT_TO_IDP_WARNING_PAGE')
@@ -51,5 +65,32 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     click_button 'Continue to IDCorp'
 
     expect(page).to have_current_path(redirect_to_idp_path)
+  end
+
+  it 'includes the recommended text when selection is a recommended idp' do
+    given_a_session_with_document_evidence
+    visit '/redirect-to-idp-warning'
+
+    expect(page).to have_content 'You’ll now verify your identity on IDCorp’s website.'
+    expect(page).to_not have_content 'Additional IDP instructions'
+  end
+
+  it 'includes the recommended text when selection is a non recommended idp' do
+    given_a_session_with_non_recommended_idp
+    visit '/redirect-to-idp-warning'
+
+    expect(page).to have_content 'To be verified with IDCorp, you’ll need:'
+    within('#requirements') do
+      expect(page).to have_content('a UK passport')
+      expect(page).to have_content('a UK photocard driving licence')
+    end
+  end
+
+  it 'includes specific IDP text when user has no documents' do
+    given_a_session_with_no_document_evidence
+    visit '/redirect-to-idp-warning'
+
+    expect(page).to have_content 'You’ll now verify your identity on No Docs IDP’s website.'
+    expect(page).to have_content 'Additional IDP Instructions'
   end
 end

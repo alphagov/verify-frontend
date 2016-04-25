@@ -19,10 +19,18 @@ module Display
       white_logo_path = File.join(@white_logo_directory, "#{simple_id}.png")
       name = @translator.translate("idps.#{simple_id}.name")
       about = @translator.translate("idps.#{simple_id}.about")
-      ViewableIdentityProvider.new(idp, name, logo_path, white_logo_path, about)
+      requirements = @translator.translate("idps.#{simple_id}.requirements")
+      special_no_docs_instructions = decorate_special_no_docs_instructions(simple_id)
+      ViewableIdentityProvider.new(idp, name, logo_path, white_logo_path, about, requirements, special_no_docs_instructions)
     rescue FederationTranslator::TranslationError => e
       Rails.logger.error(e)
       nil
+    end
+
+    def decorate_special_no_docs_instructions(simple_id)
+      @translator.translate("idps.#{simple_id}.special_no_docs_instructions_html")
+    rescue FederationTranslator::TranslationError
+      ''
     end
   end
 end

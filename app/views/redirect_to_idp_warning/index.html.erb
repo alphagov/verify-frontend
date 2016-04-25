@@ -3,6 +3,12 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
+    <% if @recommended %>
+        <%= render partial: 'recommended', locals: { idp: @idp } %>
+    <% else %>
+        <%= render partial: 'non_recommended', locals: { idp: @idp } %>
+    <% end %>
+
     <%= form_tag('') do %>
         <%= button_tag t('hub.redirect_to_idp_warning.continue_to_idp', name: @idp.display_name),
                        class: 'button',

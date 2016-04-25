@@ -3,7 +3,15 @@ en:
     stub-idp-one:
       name: "IDCorp"
       about: "<p>ID Corp is the premier identity proofing service around. Come get some.</p>"
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence
+
 cy:
   idps:
     stub-idp-one:
       name: "Welsh IDCorp"
+      about: "<p>ID Corp is the premier identity proofing service around. Come get some.</p>"
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence

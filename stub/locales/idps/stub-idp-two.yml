@@ -3,8 +3,14 @@ en:
     stub-idp-two:
       name: "Bob's Identity Service"
       about: "<p>Bob's Identity Service is the premier identity proofing service around. Come get some.</p>"
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence
 cy:
   idps:
     stub-idp-two:
       name: "Welsh Bob's Identity Service"
       about: "<p>Bob's Identity Service is the premier identity proofing service around. Come get some.</p>"
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence

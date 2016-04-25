@@ -3,6 +3,9 @@ en:
     stub-idp-no-docs:
       name: "No Docs IDP"
       about: "The number one source of identities without documents."
+      requirements:
+        - "A requirement"
+      special_no_docs_instructions_html: "<p>Additional IDP Instructions</p>"
 cy:
   idps:
     stub-idp-no-docs:
