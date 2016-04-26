@@ -10,6 +10,12 @@ RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
     visit '/pam-efallai-na-fydd-hyn-yn-gweithio-i-mi'
     expect(page).to have_content("If you can't verify your identity using GOV.UK Verify, you can register for an identity profile here")
     expect(page).to have_css 'html[lang=cy]'
+
+    # Temporary: remove once new routes are live
+    visit '/why-might-this-not-work-for-me-cy'
+    expect(page).to have_content("If you can't verify your identity using GOV.UK Verify, you can register for an identity profile here")
+    expect(page).to have_css 'html[lang=cy]'
+    # /Temporary
   end
 
   context 'with javascript enabled', js: true do

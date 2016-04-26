@@ -41,6 +41,20 @@ Rails.application.routes.draw do
     get 'unlikely_to_verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
   end
 
+  # Temporary: remove once new routes are live
+  get 'will-it-work-for-me-cy', to: 'will_it_work_for_me#index', locale: :cy
+  post 'will-it-work-for-me-cy', to: 'will_it_work_for_me#will_it_work_for_me', locale: :cy
+  get 'no-mobile-phone-cy', to: 'no_mobile_phone#index', locale: :cy
+  get 'may-not-work-if-you-live-overseas-cy', to: 'may_not_work_if_you_live_overseas#index', locale: :cy
+  get 'why-might-this-not-work-for-me-cy', to: 'why_might_this_not_work_for_me#index', locale: :cy
+  get 'will-not-work-without-uk-address-cy', to: 'will_not_work_without_uk_address#index', locale: :cy
+  get 'choose-a-certified-company-cy', to: 'choose_a_certified_company#index', locale: :cy
+  post 'choose-a-certified-company-cy', to: 'choose_a_certified_company#select_idp', locale: :cy
+  get 'why-companies-cy', to: 'why_companies#index', locale: :cy
+  get 'dewis-ffôn', to: 'select_phone#index', locale: :cy
+  post 'dewis-ffôn', to: 'select_phone#select_phone', locale: :cy
+  # /Temporary
+
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
 
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
