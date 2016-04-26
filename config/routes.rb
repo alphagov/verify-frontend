@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
     post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
     get 'why_companies', to: 'why_companies#index', as: :why_companies
+    get 'unlikely_to_verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
@@ -52,7 +53,6 @@ Rails.application.routes.draw do
     get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
     get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
-    get 'unlikely-to-verify', to: redirect("#{API_HOST}/unlikely-to-verify"), as: :unlikely_to_verify
     get 'redirect-to-idp-warning', to: redirect("#{API_HOST}/redirect-to-idp-warning"), as: :redirect_to_idp_warning
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
@@ -60,7 +60,6 @@ Rails.application.routes.draw do
     get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
-    get 'unlikely-to-verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
     get 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
   end
 

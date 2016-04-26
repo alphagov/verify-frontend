@@ -15,6 +15,7 @@ cy:
     will_not_work_without_uk_address: will-not-work-without-uk-address-cy
     choose_a_certified_company: choose-a-certified-company-cy
     why_companies: why-companies-cy
+    unlikely_to_verify: unlikely-to-verify-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -191,6 +192,10 @@ cy:
         <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
         <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
         <p>There’s no effect on your credit score.</p>
+    unlikely_to_verify:
+      title: Other ways to access the service
+      heading: GOV.UK Verify won’t work for you
+      explanation: You need a valid passport, photocard driving licence or national identity card (ID card) to get your identity verified.
   errors:
     transaction_list:
       title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
