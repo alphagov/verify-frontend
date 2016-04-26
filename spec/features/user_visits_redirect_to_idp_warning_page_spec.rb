@@ -11,7 +11,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       'location' => location,
       'samlRequest' => 'a-saml-request',
       'relayState' => 'a-relay-state',
-      'registration' => false
+      'registration' => true
     }
   }
   let(:idp_entity_id) { 'http://idcorp.com' }
@@ -87,6 +87,35 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     expect(select_idp_stub_request).to have_been_made.once
     expect(piwik_registration_virtual_page).to have_been_made.once
     expect_cookie('verify-journey-hint', encrypted_entity_id)
+  end
+
+  context 'with JS enabled', js: true do
+    it 'will redirect the user to the IDP on Continue' do
+      stub_federation
+      given_a_session_with_document_evidence
+
+      visit '/redirect-to-idp-warning'
+
+      select_idp_stub_request
+      stub_idp_authn_request
+      expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
+
+      piwik_request = {
+          '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
+          'action_name' => "IDCorp was chosen for registration (recommended) #{selected_evidence.values.flatten.join(', ')}",
+      }
+      piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
+
+      click_button 'Continue to IDCorp'
+
+      expect(select_idp_stub_request).to have_been_made.once
+      expect(piwik_registration_virtual_page).to have_been_made.once
+      expect_cookie('verify-journey-hint', encrypted_entity_id)
+      expect(page).to have_current_path(location)
+      expect(page).to have_content("SAML Request is 'a-saml-request'")
+      expect(page).to have_content("relay state is 'a-relay-state'")
+      expect(page).to have_content("registration is 'true'")
+    end
   end
 
   it 'goes to "redirect-to-idp" page on submit for non-recommended idp' do

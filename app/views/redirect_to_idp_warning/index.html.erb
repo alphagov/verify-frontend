@@ -1,7 +1,7 @@
 <% content_for :page_title, t('hub.redirect_to_idp_warning.title') %>
 <% content_for :feedback_source, 'REDIRECT_TO_IDP_WARNING_PAGE' %>
 
-<div class="grid-row">
+<div class="grid-row js-continue-to-idp" data-location="<%= redirect_to_idp_warning_submit_ajax_path %>">
   <div class="column-two-thirds">
     <% if @recommended %>
         <%= render partial: 'recommended', locals: { idp: @idp } %>
@@ -9,7 +9,7 @@
         <%= render partial: 'non_recommended', locals: { idp: @idp } %>
     <% end %>
 
-    <%= form_tag('') do %>
+    <%= form_tag('', class: 'js-idp-form') do %>
         <%= button_tag t('hub.redirect_to_idp_warning.continue_to_idp', name: @idp.display_name),
                        class: 'button',
                        type: 'submit'
@@ -20,3 +20,10 @@
     <% end %>
   </div>
 </div>
+
+<%= form_tag({}, {id: 'post-to-idp', class: 'hidden'}) do %>
+    <input name=SAMLRequest type=hidden>
+    <input name=RelayState type=hidden>
+    <input name=registration type=hidden>
+    <input type=submit>
+<% end %>

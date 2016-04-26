@@ -10,13 +10,23 @@ class RedirectToIdpWarningController < ApplicationController
   end
 
   def continue
-    select_idp_response = SESSION_PROXY.select_idp(cookies, selected_identity_provider.entity_id, true)
-    set_secure_cookie(CookieNames::VERIFY_JOURNEY_HINT, select_idp_response.encrypted_entity_id)
-    report_registration_idp
+    select_registration_idp
     redirect_to redirect_to_idp_path
   end
 
+  def continue_ajax
+    select_registration_idp
+    authn_request_json = SESSION_PROXY.idp_authn_request(cookies)
+    render json: authn_request_json
+  end
+
 private
+
+  def select_registration_idp
+    select_idp_response = SESSION_PROXY.select_idp(cookies, selected_identity_provider.entity_id, true)
+    set_secure_cookie(CookieNames::VERIFY_JOURNEY_HINT, select_idp_response.encrypted_entity_id)
+    report_registration_idp
+  end
 
   def report_registration_idp
     cvar = Analytics::CustomVariable.build(:register_idp, decorated_idp.display_name)

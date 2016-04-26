@@ -10,8 +10,8 @@
     init: function () {
     },
     attach: function () {
-      var $container = $('.js-idp-option-container')
-      $container.on('submit', '.idp-option', function (e) {
+      var $container = $('.js-continue-to-idp');
+      $container.on('submit', '.js-idp-form', function (e) {
         var entityId, displayName;
         var $originalForm = $(e.target);
         e.preventDefault();
@@ -20,7 +20,7 @@
         displayName = selectIdpButton.attr('value');
         $.ajax({
           type: 'PUT',
-          url: '/select-idp',
+          url: $container.data('location'),
           contentType: "application/json",
           processData: false,
           data: JSON.stringify({ entityId: entityId, displayName: displayName }),

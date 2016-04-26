@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 
   get 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
   post 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+  put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
