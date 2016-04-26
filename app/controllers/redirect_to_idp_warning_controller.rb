@@ -2,7 +2,7 @@ class RedirectToIdpWarningController < ApplicationController
   helper_method :user_has_no_docs?, :other_ways_description
 
   def index
-    idp = IdentityProvider.new(session.fetch(:selected_idp))
+    idp = selected_identity_provider
     decorated_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate([idp])
     unless decorated_idps.any?
       # TODO Make pretty
@@ -14,10 +14,16 @@ class RedirectToIdpWarningController < ApplicationController
   end
 
   def continue
+    select_idp_response = SESSION_PROXY.select_idp(cookies, selected_identity_provider.entity_id, true)
+    set_secure_cookie(CookieNames::VERIFY_JOURNEY_HINT, select_idp_response.encrypted_entity_id)
     redirect_to redirect_to_idp_path
   end
 
 private
+
+  def selected_identity_provider
+    IdentityProvider.new(session.fetch(:selected_idp))
+  end
 
   def other_ways_description
     transaction = TRANSACTION_INFO_GETTER.get_info(cookies)

@@ -63,7 +63,7 @@ describe SessionProxy do
 
   it 'should select an IDP for the session' do
     ip_address = '1.1.1.1'
-    body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address }
+    body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => false }
     encrypted_entity_id = 'bob'
     expect(api_client).to receive(:put)
       .with(SessionProxy::SELECT_IDP_PATH, body, cookies: expected_cookie_hash)
@@ -73,9 +73,21 @@ describe SessionProxy do
     expect(result.encrypted_entity_id).to eql encrypted_entity_id
   end
 
+  it 'should select an IDP for the session when registering' do
+    ip_address = '1.1.1.1'
+    body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => true }
+    encrypted_entity_id = 'bob'
+    expect(api_client).to receive(:put)
+      .with(SessionProxy::SELECT_IDP_PATH, body, cookies: expected_cookie_hash)
+      .and_return('encryptedEntityId' => encrypted_entity_id)
+    expect(originating_ip_store).to receive(:get).and_return(ip_address)
+    result = SessionProxy.new(api_client, originating_ip_store).select_idp(cookie_hash, 'an-entity-id', true)
+    expect(result.encrypted_entity_id).to eql encrypted_entity_id
+  end
+
   it 'should fail to select an IDP for the session if encrypted entity id is missing' do
     ip_address = '1.1.1.1'
-    body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address }
+    body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => false }
     expect(api_client).to receive(:put)
       .with(SessionProxy::SELECT_IDP_PATH, body, cookies: expected_cookie_hash)
     expect(originating_ip_store).to receive(:get).and_return(ip_address)

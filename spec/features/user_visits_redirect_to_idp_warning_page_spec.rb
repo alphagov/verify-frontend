@@ -13,16 +13,17 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       'registration' => false
     }
   }
+  let(:idp_entity_id) { 'http://idcorp.com' }
   let(:given_a_session_with_document_evidence) {
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: true,
       selected_evidence: { phone: %w(mobile_phone smart_phone), documents: %w(passport) },
     )
   }
   let(:given_a_session_with_non_recommended_idp) {
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: false,
       selected_evidence: { phone: %w(mobile_phone smart_phone), documents: %w(passport) },
     )
@@ -57,14 +58,22 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   it 'goes to "redirect-to-idp" page on submit' do
     stub_federation
     given_a_session_with_document_evidence
-    stub_request(:get, api_uri('session/idp-authn-request'))
-      .with(query: { 'originatingIp' => originating_ip }).to_return(body: response.to_json)
 
     visit '/redirect-to-idp-warning'
+
+    select_idp_stub_request = stub_request(:put, api_uri('session/select-idp'))
+      .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => true })
+      .to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
+
+    stub_request(:get, api_uri('session/idp-authn-request'))
+      .with(query: { 'originatingIp' => originating_ip })
+      .to_return(body: response.to_json)
 
     click_button 'Continue to IDCorp'
 
     expect(page).to have_current_path(redirect_to_idp_path)
+    expect(select_idp_stub_request).to have_been_made.once
+    expect_cookie('verify-journey-hint', encrypted_entity_id)
   end
 
   it 'includes the recommended text when selection is a recommended idp' do
