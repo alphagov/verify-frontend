@@ -1,4 +1,6 @@
 class RedirectToIdpWarningController < ApplicationController
+  protect_from_forgery except: :continue
+
   helper_method :user_has_no_docs?, :other_ways_description
 
   def index
