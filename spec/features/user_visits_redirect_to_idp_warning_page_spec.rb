@@ -5,6 +5,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
   let(:location) { '/test-idp-request-endpoint' }
+  let(:selected_evidence) { { phone: %w(mobile_phone smart_phone), documents: %w(passport) } }
   let(:response) {
     {
       'location' => location,
@@ -18,14 +19,14 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     page.set_rack_session(
       selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: true,
-      selected_evidence: { phone: %w(mobile_phone smart_phone), documents: %w(passport) },
+      selected_evidence: selected_evidence,
     )
   }
   let(:given_a_session_with_non_recommended_idp) {
     page.set_rack_session(
       selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: false,
-      selected_evidence: { phone: %w(mobile_phone smart_phone), documents: %w(passport) },
+      selected_evidence: selected_evidence,
     )
   }
   let(:given_a_session_with_no_document_evidence) {
@@ -34,6 +35,16 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       selected_idp_was_recommended: true,
       selected_evidence: { phone: %w(mobile_phone smart_phone), documents: [] },
     )
+  }
+  let(:select_idp_stub_request) {
+    stub_request(:put, api_uri('session/select-idp'))
+      .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => true })
+      .to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
+  }
+  let(:stub_idp_authn_request) {
+    stub_request(:get, api_uri('session/idp-authn-request'))
+      .with(query: { 'originatingIp' => originating_ip })
+      .to_return(body: response.to_json)
   }
 
   before(:each) do
@@ -61,18 +72,43 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
     visit '/redirect-to-idp-warning'
 
-    select_idp_stub_request = stub_request(:put, api_uri('session/select-idp'))
-      .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => true })
-      .to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
+    select_idp_stub_request
+    stub_idp_authn_request
 
-    stub_request(:get, api_uri('session/idp-authn-request'))
-      .with(query: { 'originatingIp' => originating_ip })
-      .to_return(body: response.to_json)
+    piwik_request = {
+      '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
+      'action_name' => "IDCorp was chosen for registration (recommended) #{selected_evidence.values.flatten.join(', ')}",
+    }
+    piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 
     click_button 'Continue to IDCorp'
 
     expect(page).to have_current_path(redirect_to_idp_path)
     expect(select_idp_stub_request).to have_been_made.once
+    expect(piwik_registration_virtual_page).to have_been_made.once
+    expect_cookie('verify-journey-hint', encrypted_entity_id)
+  end
+
+  it 'goes to "redirect-to-idp" page on submit for non-recommended idp' do
+    stub_federation
+    given_a_session_with_non_recommended_idp
+
+    visit '/redirect-to-idp-warning'
+
+    select_idp_stub_request
+    stub_idp_authn_request
+
+    piwik_request = {
+        '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
+        'action_name' => "IDCorp was chosen for registration (not recommended) #{selected_evidence.values.flatten.join(', ')}",
+    }
+    piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
+
+    click_button 'Continue to IDCorp'
+
+    expect(page).to have_current_path(redirect_to_idp_path)
+    expect(select_idp_stub_request).to have_been_made.once
+    expect(piwik_registration_virtual_page).to have_been_made.once
     expect_cookie('verify-journey-hint', encrypted_entity_id)
   end
 
