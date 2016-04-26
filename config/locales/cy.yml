@@ -7,20 +7,20 @@ cy:
     about_identity_accounts: am-gyfrifon-hunaniaeth
     about_choosing_a_company: am-ddewis-cwmni
     select_documents: dewis-dogfennau
-    select_phone: dewis-ffôn
-    will_it_work_for_me: will-it-work-for-me-cy
-    no_mobile_phone: no-mobile-phone-cy
-    may_not_work_if_you_live_overseas: may-not-work-if-you-live-overseas-cy
-    why_might_this_not_work_for_me: why-might-this-not-work-for-me-cy
-    will_not_work_without_uk_address: will-not-work-without-uk-address-cy
-    choose_a_certified_company: choose-a-certified-company-cy
-    why_companies: why-companies-cy
+    select_phone: dewis-ffon
+    will_it_work_for_me: ni-fydd-yn-gweithio-i-mi
+    no_mobile_phone: dim-ffon-symudol
+    may_not_work_if_you_live_overseas: efallai-na-fydd-yn-gweithio-os-ydych-yn-byw-dramor
+    why_might_this_not_work_for_me: pam-efallai-na-fydd-hyn-yn-gweithio-i-mi
+    will_not_work_without_uk_address: ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du
+    choose_a_certified_company: dewis-cwmni-ardystiedig
+    why_companies: pam-cwmniau
     unlikely_to_verify: unlikely-to-verify-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
     continue: Parhau
-    back: Back
+    back: Yn ôl
   option:
     no: Na
     unknown: Ddim yn gwybod
@@ -32,7 +32,7 @@ cy:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth
   hub:
-    other_ways_heading: Other ways to %{other_ways_description}
+    other_ways_heading: Ffyrdd eraill i %{other_ways_description}
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify
@@ -96,7 +96,7 @@ cy:
         invalid_selection: Edrychwch dros eich dewis
     select_phone:
       title: Oes gennych ffôn symudol neu lechen?
-      heading: Gall cwmniau ardystiedig anfon codau diogelwch i'ch ffôn symudol.
+      heading: Gall cwmnïau ardystiedig anfon codau diogelwch i'ch ffôn symudol.
       question:
         mobile_phone: Oes gennych ffôn symudol neu lechen?
         mobile_phone_option_yes: Oes
@@ -105,93 +105,93 @@ cy:
         landline: Oes gennych chi linell daear?
         landline_option_yes: Oes
       errors:
-        no_selection: Please answer all the questions
-        invalid_selection: Please check your selection
+        no_selection: Dylech ateb pob cwestiwn
+        invalid_selection: Dylech edrych dros eich dewis
     will_it_work_for_me:
-      title: Can I be verified?
+      title: Allai i gael fy nilysu?
       question:
         option_yes: Ydw
         above_age_threshold: Ydych chi’n 20 oed neu drosodd?
         resident_last_12_months: Ydych chi wedi byw yn y DU am y 12 mis diwethaf?
         not_resident_reason:
-          title: Which of these applies to you?
-          recently: I moved to the UK in the last 12 months
-          not_resident: I have an address in the UK but I don’t live there
-          no_address: I don’t have a UK address
+          title: Pa un o'r rhain sy'n berthnasol i chi?
+          recently: Rwyf wedi symud i'r DU yn y 12 mis diwethaf
+          not_resident: Mae gennyf gyfeiriad yn y DU ond nid wyf yn byw yno
+          no_address: Nid oes gennyf gyfeiriad yn y DU
         errors:
-          no_selection: Please answer all the questions
+          no_selection: Dylech ateb pob cwestiwn
     no_mobile_phone:
-      title: Other ways to access the service
-      heading: GOV.UK Verify won’t work for you
-      p1: You need a phone or tablet to use GOV.UK Verify. If you don’t have either of these, there are other ways you can %{other_ways_description}.
-      p2: If you don’t have a passport or UK driving licence, you will also need to install an app.
+      title: Ffyrdd eraill i gael mynediad i'r gwasanaeth
+      heading: Ni fydd GOV.UK Verify yn gweithio i chi
+      p1: Rydych angen ffôn neu lechen i ddefnyddio GOV.UK Verify. Os nad oes gennych un o'r rhain, mae ffyrdd eraill y gallwch %{other_ways_description}.
+      p2: Os nad oes gennych basport neu drwydded yrru’r DU byddwch hefyd angen gosod app.
     may_not_work_if_you_live_overseas:
-      title: You might not be able to have your identity verified
-      heading: You might not be able to have your identity verified
-      try_to_verify: I’d like to try to verify my identity online
-      other_ways_heading: Other ways to %{other_ways_description}
-      explanation1: To verify an identity, certified companies access credit records then may ask you to confirm this information. Most people living outside the UK have a limited activity history on their UK credit record, so companies might not be able to check your identity in this way.
-      explanation2: Your 'activity history' includes how often you use your credit accounts, and if you open accounts such as a mortgage, overdraft or loan.
-      what_youll_need: What you’ll need
-      if_you_have_these: Your identity might be verified if you've regularly used at least 1 of the following UK accounts over the last 6 months
-      current_account_overdraft: current account overdraft
-      credit_card: credit card
-      phone_contract: mobile phone or landline contract
-      gas_electricity_bills: gas or electricity bills
-      mortgage: mortgage
-      student_loan: student loan
-      payday_loan: payday loan
-      mail_order_account: mail order account
-      youll_also_need: You'll also need a UK passport or a UK driving licence.
+      title: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi'i ddilysu
+      heading: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi'i ddilysu
+      try_to_verify: Hoffwn roi cynnig ar ddilysu fy hunaniaeth ar-lein
+      other_ways_heading: Ffyrdd eraill i %{other_ways_description}
+      explanation1: I ddilysu hunaniaeth, mae cwmnïau ardystiedig yn cael mynediad i gofnodion credyd ac yna gallant ofyn i chi gadarnhau'r wybodaeth hyn. Mae gan y mwyfrif o bobl sy'n byw y tu allan i'r DU hanes gweithgaredd cyfyngedig ar eu cofnod credyd y DU, felly efallai na fydd cwmnïau yn gallu gwirio eich hunaniaeth yn y ffordd hyn.
+      explanation2: Mae eich 'hanes gweithgaredd' yn cynnwys pa mor aml rydych yn defnyddio eich cyfrifon credyd, ac os ydych yn agor cyfrifon fel morgais, gorddrafft neu fenthyciad.
+      what_youll_need: Beth fyddwch ei angen
+      if_you_have_these: Efallai y gall eich hunaniaeth gael ei ddilysu os ydych wedi defnyddio o leiaf 1 o gyfrifon y DU canlynol yn rheolaidd dros y 6 mis diwethaf
+      current_account_overdraft: gorddrafft cyfrif cyfredol
+      credit_card: cerdyn credyd
+      phone_contract: cytundeb ffôn symudol neu linell daear
+      gas_electricity_bills: biliau nwy neu drydan
+      mortgage: morgais
+      student_loan: benthyciad myfyriwr
+      payday_loan: benthyciad diwrnod cyflog
+      mail_order_account: cyfrif archebu drwy'r post
+      youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru'r DU.
     why_might_this_not_work_for_me:
-      title: Why might this not work for me
-      heading: You might not be able to have your identity verified
-      try_to_verify: I’d like to try to verify my identity online
-      explanation: To verify an identity, certified companies access credit records then ask you to confirm this information. Most young people and newcomers to the UK have a limited &lsquo;credit history&rsquo;, companies might not be able to check your identity in this way.
-      what_youll_need: What you’ll need on your credit record
-      if_you_have_these: Your identity might be verified if you have 2 or more of the following
-      current_account: current account with a UK bank
-      credit_card: credit card
-      personal_loan: personal loan
-      mortgage: mortgage
-      gas_electricity_bills: gas or electricity bills
-      mobile_phone_contract: mobile phone contract
-      registered_to_vote: you’re registered to vote
-      youll_also_need: You’ll also need a UK passport or a UK driving licence.
+      title: Pam efallai na fydd hyn yn gweithio i mi
+      heading: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi'i ddilysu
+      try_to_verify: Hoffwn roi cynnig ar ddilysu fy hunaniaeth ar-lein
+      explanation: I ddilysu hunaniaeth, mae cwmnïau ardystiedig yn cael mynediad i'ch cofnodion credyd ac yna yn gofyn i chi gadarnhau'r wybodaeth hyn. Mae gan y mwyafrif o bobl ifanc a newydd ddyfodiaid i'r DU &lsquo;hanes credyd&rsquo; cyfyngedig, efallai na fydd cwmnïau yn gallu gwirio eich hunaniaeth yn y ffordd hyn.
+      what_youll_need: Beth fyddwch ei angen ar eich cofnod credyd
+      if_you_have_these: Efallai y gall eich hunaniaeth gael ei ddilysu os oes gennych 2 neu fwy o'r canlynol
+      current_account: cyfrif cyfredol gyda banc yn y DU
+      credit_card: cerdyn credyd
+      personal_loan: benthyciad personol
+      mortgage: morgais
+      gas_electricity_bills: biliau nwy neu drydan
+      mobile_phone_contract: cytundeb ffôn symudol
+      registered_to_vote: rydych wedi cofrestru i bleidleisio
+      youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru'r DU.
     will_not_work_without_uk_address:
-      title: GOV.UK Verify will not work for you
-      other_ways_heading: Other ways to %{other_ways_description}
-      heading: GOV.UK Verify will not work for you
-      explanation: You need a current UK address to get your identity verified.
+      title: Ni fydd GOV.UK Verify yn gweithio i chi
+      other_ways_heading: Ffyrdd eraill i %{other_ways_description}
+      heading: Ni fydd GOV.UK Verify yn gweithio i chi
+      explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi'i ddilysu.
     choose_a_certified_company:
-      title: Choose a certified company
-      heading: Choose a company
-      why_companies: Why there’s a choice of companies
-      choose_idp: "Choose %{name}"
-      idp_count_html: "Based on your answers, %{company_count} can verify you now:"
+      title: Dewiswch gwmni ardystiedig
+      heading: Dewiswch gwmni
+      why_companies: Pam fod dewis o gwmnïau
+      choose_idp: "Dewiswch %{name}"
+      idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
       company_html:
-        zero: no&nbsp;companies
-        one: 1&nbsp;company
-        two: 2&nbsp;companies
-        few: "%{count}&nbsp;companies"
-        many: "%{count}&nbsp;companies"
-        other: "%{count}&nbsp;companies"
-      non_recommended_idps: "Based on your answers, these companies are unlikely to verify you now:"
-      show_all_companies: Show all companies
-      filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
-      about_idp: About %{name}
+        zero: no&nbsp;cwmni
+        one: 1&nbsp;cwmni
+        two: 2&nbsp;gwmni
+        few: "%{count}&nbsp;o gwmnïau"
+        many: "%{count}&nbsp;o gwmnïau"
+        other: "%{count}&nbsp;o gwmnïau"
+      non_recommended_idps: "Yn seiliedig ar eich atebion, mae'r cwmnïau hyn yn annhebygol o'ch dilysu nawr:"
+      show_all_companies: Dangos pob cwmni
+      filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
+      about_idp: Am %{name}
       dialog:
-        information_provided_by: Information provided by %{name}
-        close: close
+        information_provided_by: Gwybodaeth a ddarparwyd gan %{name}
+        close: cau
     why_companies:
-      title: Why there’s a choice of companies
-      choose_a_company: Choose a company
+      title: Pam fod dewis o gwmnïau
+      choose_a_company: Dewiswch gwmni
       content_html: |
-        <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
-        <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
-        <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
-        <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
-        <p>There’s no effect on your credit score.</p>
+        <p>Mae mwy nag un cwmni ardystiedig yn golygu system mwy diogel - nid yw gwybodaeth yn cael ei gadw mewn un lle, ond mae'n cael ei rannu mewn nifer o wahannol lefydd, sydd yn ei gwneud yn fwy diogel.</p>
+        <p>Eich hawl chi yw dewis pwy ydych chi eisiau delio â hwy o'r cwmnïau hyn. Eich hawl chi yw hefyd newid pa gwmni rydych yn deilo ag ef ar unrhyw adeg.</p>
+        <p>Wrth ddilysu eich hunaniaeth, gall y cwmnïau hyn ddefnyddio eu cofnodion eu hunain, ac maent wedi cael eu hardystio i gael mynediad i wybodaeth fel cofnodion credyd. Maent yn gwneud hyn i wirio bod y wybodaeth rydych yn ei ddarparu o basbortau a thrwyddedau gyrru yn gywir.</p>
+        <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda'ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
+        <p>Nid oes effaith ar eich sgor credyd.</p>
     unlikely_to_verify:
       title: Other ways to access the service
       heading: GOV.UK Verify won’t work for you

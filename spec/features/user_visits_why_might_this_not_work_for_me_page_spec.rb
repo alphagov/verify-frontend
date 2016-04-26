@@ -7,7 +7,7 @@ RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/why-might-this-not-work-for-me-cy'
+    visit '/pam-efallai-na-fydd-hyn-yn-gweithio-i-mi'
     expect(page).to have_content("If you can't verify your identity using GOV.UK Verify, you can register for an identity profile here")
     expect(page).to have_css 'html[lang=cy]'
   end

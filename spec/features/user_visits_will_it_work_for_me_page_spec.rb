@@ -12,8 +12,8 @@ RSpec.describe 'When the user visits the will it work for me page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/will-it-work-for-me-cy'
-    expect(page).to have_title 'Can I be verified? - GOV.UK Verify - GOV.UK'
+    visit '/ni-fydd-yn-gweithio-i-mi'
+    expect(page).to have_title 'Allai i gael fy nilysu? - GOV.UK Verify - GOV.UK'
     expect(page).to have_css 'html[lang=cy]'
   end
 

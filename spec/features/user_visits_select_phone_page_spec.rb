@@ -65,7 +65,7 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   it 'displays the page in Welsh' do
-    visit URI.escape('dewis-ffôn')
+    visit 'dewis-ffon'
     expect(page).to have_title 'Oes gennych ffôn symudol neu lechen?'
     expect(page).to have_css 'html[lang=cy]'
   end
