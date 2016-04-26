@@ -50,15 +50,6 @@
   display: none;
 }
 
-// Show, when javascript is enabled
-.js-show {
-  display: none;
-
-  .js-enabled & {
-    display: block;
-  }
-}
-
 // Show grey highlighter only for hidden questions
 .hidden-question {
   padding-left: 20px;

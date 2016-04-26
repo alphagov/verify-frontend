@@ -104,14 +104,6 @@ main {
 
 }
 
-.heading-banner-top-margin {
-  margin-top: em(25, 24);
-
-  @include media(tablet) {
-    margin-top: em(45, 36);
-  }
-}
-
 .heading-medium {
   @include bold-24();
 

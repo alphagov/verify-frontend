@@ -6,7 +6,6 @@
   @include box-sizing (border-box);
   padding: em(10) em(15) em(5);
   vertical-align: top;
-  margin: 0 15px 15px 0;
 
   @include media (mobile) {
     width: 100%;
