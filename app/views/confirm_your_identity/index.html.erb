@@ -1,1 +1,5 @@
-<% content_for :page_title, 'Confirm your identity' %>
+<% content_for :page_title, t('hub.confirm_your_identity.title') %>
+<% content_for :feedback_source, 'CONFIRM_YOUR_IDENTITY' %>
+
+<p><%= t 'hub.confirm_your_identity.need_to_signin_again', transaction_name: @transaction_name %></p>
+<p><%= link_to t('hub.confirm_your_identity.use_other_idp'), sign_in_path %></p>

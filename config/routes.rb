@@ -51,14 +51,13 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
+  get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
 
   if Rails.env == 'development'
-    get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
     get 'feedback', to: redirect("#{API_HOST}/feedback")
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'other-ways-to-access-service', to: redirect("#{API_HOST}/other-ways-to-access-service"), as: :other_ways_to_access_service
   else
-    get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
     get 'other-ways-to-access-service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service

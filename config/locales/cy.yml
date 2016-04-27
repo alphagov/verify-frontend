@@ -20,6 +20,7 @@ cy:
     redirect_to_idp_warning: redirect-to-idp-warning-cy
     privacy_notice: privacy-notice-cy
     cookies: cookies-cy
+    confirm_your_identity: confirm-your-identity-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -213,6 +214,10 @@ cy:
         requirements: "To be verified with %{name}, you’ll need:"
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
+    confirm_your_identity:
+      title: Confirm your identity
+      use_other_idp: If this isn’t the company that verified you, %{href} sign in with a different certified company.
+      need_to_signin_again: In order to %{transaction_name}, you need to sign in again with your certified company. You don’t need to register again.
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
