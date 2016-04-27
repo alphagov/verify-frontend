@@ -4,5 +4,9 @@ module Display
     delegate :simple_id, to: :identity_provider
     delegate :model_name, to: :identity_provider
     delegate :to_key, to: :identity_provider
+
+    def viewable?
+      true
+    end
   end
 end

@@ -10,8 +10,8 @@ class ChooseACertifiedCompanyController < ApplicationController
 
     grouped_identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence, federation_info.idps)
 
-    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(grouped_identity_providers.recommended)
-    @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(grouped_identity_providers.non_recommended)
+    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
+    @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.non_recommended)
   end
 
   def select_idp

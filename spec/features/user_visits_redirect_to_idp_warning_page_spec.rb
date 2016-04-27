@@ -15,6 +15,13 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     }
   }
   let(:idp_entity_id) { 'http://idcorp.com' }
+  let(:given_an_idp_with_no_display_data) {
+    page.set_rack_session(
+      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-x' },
+      selected_idp_was_recommended: true,
+      selected_evidence: selected_evidence,
+    )
+  }
   let(:given_a_session_with_document_evidence) {
     page.set_rack_session(
       selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
@@ -64,6 +71,15 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     visit '/redirect-to-idp-warning'
 
     expect(page).to have_content 'something went wrong'
+  end
+
+  it 'will render the error page given a session with an IDP that has no display data' do
+    given_an_idp_with_no_display_data
+    stub_transactions_list
+
+    visit '/redirect-to-idp-warning'
+
+    expect(page).to have_content('Sorry, something went wrong')
   end
 
   it 'goes to "redirect-to-idp" page on submit' do
