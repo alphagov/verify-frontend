@@ -38,5 +38,7 @@
 <% content_for :body_end do %>
 
   <%= javascript_include_tag 'application' %>
+  <%= render 'shared/fingerprint' %>
+
 <% end %>
 <%= render file: 'layouts/govuk_template' %>

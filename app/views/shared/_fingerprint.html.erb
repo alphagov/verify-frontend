@@ -1,0 +1,10 @@
+<%= image_tag('', style: 'border: 0', height: '1', width: '1', id: 'fp_img') %>
+<%= javascript_tag do %>
+    // ensure that the epoch is increased whenever the fingerprint algorithm is changed in any way - this will ensure that we compare like with like
+    var fingerprintEpoch = 4;
+    reportFingerprint('<%= fingerprint_path %>', fingerprintEpoch, document.getElementById('fp_img'));
+<% end %>
+
+<noscript style="position: absolute;">
+  <%= image_tag('/assets2/fp.gif?hash=noJS', style: 'border: 0', height: '1', width: '1', id: 'fp_img_no_js') %>
+</noscript>
