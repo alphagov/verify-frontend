@@ -50,6 +50,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-puma (1.0.1)
+      capybara
+      puma
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     concurrent-ruby (1.0.1)
@@ -270,6 +273,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara (~> 2.6)
+  capybara-puma
   connection_pool
   dotenv-rails
   govuk-lint
