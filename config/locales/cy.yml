@@ -33,10 +33,6 @@ cy:
   option:
     "no": "Na"
     unknown: Ddim yn gwybod
-  phase_banner:
-    title: Mae hwn yn wasanaeth newydd.
-    feedback_message: Bydd eich %{feedback_link} yn ein helpu i wella.
-    feedback: adborth
   translation_in_progress_banner:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth

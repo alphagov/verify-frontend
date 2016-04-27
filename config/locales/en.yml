@@ -33,10 +33,6 @@ en:
   option:
     "no": "No"
     unknown: I don’t know
-  phase_banner:
-    title: This is a trial service.
-    feedback_message: Your %{feedback_link} will help us to improve it.
-    feedback: feedback
   footer:
     support_links: Support links
     help: Help
