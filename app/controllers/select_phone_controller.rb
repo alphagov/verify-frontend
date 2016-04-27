@@ -1,6 +1,3 @@
-require 'idp_eligibility/evidence_query_string_parser'
-require 'idp_eligibility/evidence_query_string_builder'
-
 class SelectPhoneController < ApplicationController
   def index
     @form = SelectPhoneForm.new({})
@@ -10,13 +7,11 @@ class SelectPhoneController < ApplicationController
     @form = SelectPhoneForm.new(params['select_phone_form'] || {})
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Phone Next')
-      selected_phone_evidence = @form.selected_evidence
-      store_selected_evidence(phone: selected_phone_evidence)
-      selected_evidence = selected_phone_evidence + IdpEligibility::EvidenceQueryStringParser.parse(request.query_string)
+      store_selected_evidence(phone: @form.selected_evidence)
       if idp_eligibility_checker.any?(selected_evidence_values, available_idps)
-        redirect_to build_uri_with_evidence(will_it_work_for_me_path, selected_evidence)
+        redirect_to will_it_work_for_me_path
       else
-        redirect_to build_uri_with_evidence(no_mobile_phone_path, selected_evidence)
+        redirect_to no_mobile_phone_path
       end
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
@@ -28,12 +23,6 @@ private
 
   def available_idps
     SESSION_PROXY.federation_info_for_session(cookies).idps
-  end
-
-  def build_uri_with_evidence(path, evidence)
-    uri = URI(path)
-    uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(evidence)
-    uri.to_s
   end
 
   def idp_eligibility_checker

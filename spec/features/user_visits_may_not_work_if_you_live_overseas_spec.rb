@@ -8,9 +8,9 @@ RSpec.describe 'When the user visits the may-not-work-if-you-live-overseas page'
 
   context 'with javascript enabled', js: true do
     it 'contains the choose certified company link with selected evidence params' do
-      visit '/may-not-work-if-you-live-overseas?selected-evidence=smart_phone&selected-evidence=mobile_phone&selected-evidence=driving_licence&selected-evidence=passport'
+      visit '/may-not-work-if-you-live-overseas'
 
-      expect(page).to have_link "I’d like to try to verify my identity online", href: "/choose-a-certified-company?selected-evidence=smart_phone&selected-evidence=mobile_phone&selected-evidence=driving_licence&selected-evidence=passport"
+      expect(page).to have_link "I’d like to try to verify my identity online", href: "/choose-a-certified-company"
     end
   end
 

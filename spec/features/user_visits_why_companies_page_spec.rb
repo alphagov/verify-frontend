@@ -19,9 +19,9 @@ RSpec.describe 'When the user visits the why companies page' do
   end
 
   it 'includes links to choose-a-certified-company page with the selected evidence', js: true do
-    visit '/why-companies?selected-evidence=passport&selected-evidence=driving_licence&selected-evidence=non_uk_id_document'
+    visit '/why-companies'
     expect(page).to have_title('Why there’s a choice of companies - GOV.UK Verify - GOV.UK')
-    expect(page).to have_link 'Back', href: '/choose-a-certified-company?selected-evidence=passport&selected-evidence=driving_licence&selected-evidence=non_uk_id_document'
-    expect(page).to have_link 'Choose a company', href: '/choose-a-certified-company?selected-evidence=passport&selected-evidence=driving_licence&selected-evidence=non_uk_id_document'
+    expect(page).to have_link 'Back', href: '/choose-a-certified-company'
+    expect(page).to have_link 'Choose a company', href: '/choose-a-certified-company'
   end
 end

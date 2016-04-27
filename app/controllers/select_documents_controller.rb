@@ -1,5 +1,3 @@
-require 'idp_eligibility/evidence_query_string_builder'
-
 class SelectDocumentsController < ApplicationController
   def index
     @form = SelectDocumentsForm.new({})
@@ -12,9 +10,7 @@ class SelectDocumentsController < ApplicationController
       selected_evidence = @form.selected_evidence
       store_selected_evidence(documents: selected_evidence)
       if documents_eligibility_checker.any?(selected_evidence_values, available_idps)
-        uri = URI(select_phone_path)
-        uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(selected_evidence)
-        redirect_to uri.to_s
+        redirect_to select_phone_path
       else
         redirect_to unlikely_to_verify_path
       end

@@ -95,21 +95,6 @@ RSpec.feature 'When the user visits the select documents page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(select_phone_path, only_path: true)
-      expect(query_params['selected-evidence'].to_set).to eql %w(no_documents).to_set
-    end
-  end
-  context 'with javascript enabled', js: true do
-    it 'includes selected-evidence params for all selected documents' do
-      stub_federation
-      visit '/select-documents'
-
-      choose 'select_documents_form_driving_licence_true'
-      choose 'select_documents_form_passport_true'
-      choose 'select_documents_form_non_uk_id_document_true'
-      click_button 'Continue'
-
-      expect(page).to have_current_path(select_phone_path, only_path: true)
-      expect(query_params['selected-evidence'].to_set).to eql %w(driving_licence passport non_uk_id_document).to_set
     end
   end
 end

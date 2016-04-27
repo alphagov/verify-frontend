@@ -17,9 +17,9 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   let(:given_a_session_without_selected_evidence) {
     page.set_rack_session(
-        selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
-        selected_idp_was_recommended: true,
-        selected_evidence: {},
+      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      selected_idp_was_recommended: true,
+      selected_evidence: {},
     )
   }
 
@@ -30,25 +30,12 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     expect_feedback_source_to_be(page, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE')
   end
 
-  it 'passes selected evidence on to why-companies page', js: true do
+  it 'displays recommended IDPs' do
     stub_federation
     given_a_session_with_selected_evidence
+    visit '/choose-a-certified-company'
 
-    visit '/choose-a-certified-company?selected-evidence=driving_licence&selected-evidence=passport&selected-evidence=non_uk_id_document'
-    click_link 'Why there’s a choice of companies'
-
-    expect(page).to have_current_path(why_companies_path, only_path: true)
-    actual_evidence = query_params.fetch('selected-evidence', []).to_set
-    expected_evidence = %w(driving_licence passport non_uk_id_document).to_set
-    expect(actual_evidence).to eql expected_evidence
-  end
-
-  it 'displays recommended IDPs', js: true do
-    stub_federation
-    given_a_session_with_selected_evidence
-    visit '/choose-a-certified-company?selected-evidence=passport&selected-evidence=mobile_phone&selected-evidence=driving_licence'
-
-    expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
+    expect(page).to have_current_path(choose_a_certified_company_path)
     expect(page).to have_content('Based on your answers, 3 companies can verify you now:')
     within('#matching-idps') do
       expect(page).to have_button('Choose IDCorp')
@@ -60,7 +47,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     stub_federation
     given_a_session_without_selected_evidence
     visit '/choose-a-certified-company'
-    expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
+    expect(page).to have_current_path(choose_a_certified_company_path)
     within('#non-matching-idps') do
       expect(page).to have_content('Based on your answers, these companies are unlikely to verify you now:')
       expect(page).to have_button('Choose IDCorp')
@@ -85,10 +72,10 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     end
   end
 
-  it 'redirects to the redirect warning page when selecting a non-recommended IDP', js: true do
+  it 'redirects to the redirect warning page when selecting a non-recommended IDP' do
     entity_id = 'http://idcorp.com'
     stub_federation(entity_id)
-    visit '/choose-a-certified-company?selected-evidence=mobile_phone&selected-evidence=passport'
+    visit '/choose-a-certified-company'
 
     click_link 'Show all companies'
 
@@ -99,10 +86,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
       end
     end
 
-    expect(page).to have_current_path(redirect_to_idp_warning_path, only_path: true)
-    expect(query_params['selected-evidence']).to eql %w(mobile_phone passport)
-    expect(query_params['recommended-idp']).to eql ['false']
-    expect(query_params['selected-idp']).to eql [entity_id]
+    expect(page).to have_current_path(redirect_to_idp_warning_path)
     expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one')
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql false
   end
