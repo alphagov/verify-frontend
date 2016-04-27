@@ -9,7 +9,7 @@ module IdpEligibility
     end
 
     def any?(evidence, enabled_idps)
-      filter_recommended_idps(evidence, enabled_idps).length > 0
+      !filter_recommended_idps(evidence, enabled_idps).empty?
     end
 
     def group_by_recommendation(evidence, enabled_idps)
