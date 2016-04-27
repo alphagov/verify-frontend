@@ -1,17 +1,17 @@
 //= require jquery
-//= require sign_in
+//= require continue_to_idp.js
 //= require mock-ajax
 
-describe('The sign in page', function () {
+describe('Continue to IDP', function () {
   var $dom,
       $formButton,
-      apiPath = '/select-idp',
+      apiPath = '/foobar',
       formSpy,
-      html = '<div class="js-idp-option-container">'
-           + '<form class="idp-option first-form" action="">'
+      html = '<div class="js-continue-to-idp" data-location="/foobar">'
+           + '<form class="js-idp-form first-form" action="">'
            +   '<button type=submit name=IDCorp value="IDCorpDisplayName"></button>'
            + '</form>'
-           + '<form class="idp-option second-form" action="">'
+           + '<form class="js-idp-form second-form" action="">'
            +   '<button type=submit name=IDCorpZwei value="IDCorpZweiDisplayName"></button>'
            + '</form>'
            + '<form id=post-to-idp>'
@@ -25,7 +25,7 @@ describe('The sign in page', function () {
   beforeEach(function () {
     $dom = $('<div>'+html+'</div>');
     $(document.body).append($dom);
-    $formButton = $('.idp-option button[name=IDCorpZwei]');
+    $formButton = $('.js-idp-form button[name=IDCorpZwei]');
     window.GOVUK.signin.attach();
     formSpy = jasmine.createSpy('formSpy')
       .and.callFake(function (e) { e.preventDefault(); });
@@ -39,7 +39,7 @@ describe('The sign in page', function () {
   });
 
   describe('when the form is submitted', function () {
-    it('should PUT via AJAX to /select-idp', function () {
+    it('should PUT via AJAX to /foobar', function () {
       $(document).submit(formSpy);
       jasmine.Ajax.stubRequest(apiPath);
       $formButton.click();

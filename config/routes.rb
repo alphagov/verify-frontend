@@ -46,6 +46,9 @@ Rails.application.routes.draw do
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
 
+  get 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+  post 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+  put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
@@ -53,14 +56,14 @@ Rails.application.routes.draw do
     get 'privacy-notice', to: redirect("#{API_HOST}/privacy-notice"), as: :privacy_notice
     get 'cookies', to: redirect("#{API_HOST}/cookies"), as: :cookies
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
-    get 'redirect-to-idp-warning', to: redirect("#{API_HOST}/redirect-to-idp-warning"), as: :redirect_to_idp_warning
+    get 'other-ways-to-access-service', to: redirect("#{API_HOST}/other-ways-to-access-service"), as: :other_ways_to_access_service
   else
     get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'feedback', to: 'feedback#index', as: :feedback
     get 'privacy-notice', to: 'privacy_notice#index', as: :privacy_notice
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
-    get 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+    get 'other-ways-to-access-service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

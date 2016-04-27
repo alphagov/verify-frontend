@@ -6,7 +6,7 @@ class AboutController < ApplicationController
   end
 
   def certified_companies
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(federation_info.idps)
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(federation_info.idps)
   end
 
   def choosing_a_company

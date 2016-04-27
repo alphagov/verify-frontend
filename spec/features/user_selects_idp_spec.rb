@@ -33,7 +33,7 @@ def then_im_at_the_idp
   expect(page).to have_content("registration is 'false'")
   expect_cookie('verify-journey-hint', encrypted_entity_id)
   expect(a_request(:put, api_uri('session/select-idp'))
-           .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip })).to have_been_made.once
+           .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => false })).to have_been_made.once
   expect(a_request(:get, api_uri('session/idp-authn-request'))
            .with(query: { 'originatingIp' => originating_ip })).to have_been_made.once
   piwik_request = {
@@ -82,6 +82,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
       then_custom_variable_reported_for_sign_in
+      expect_any_instance_of(SelectIdpController).to receive(:select_idp).and_call_original
       when_i_select_an_idp
       then_im_at_the_idp
     end

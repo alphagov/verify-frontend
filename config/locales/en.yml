@@ -190,6 +190,16 @@ en:
       title: Other ways to access the service
       heading: GOV.UK Verify won’t work for you
       explanation: You need a valid passport, photocard driving licence or national identity card (ID card) to get your identity verified.
+    redirect_to_idp_warning:
+      title: "You'll now be redirected - GOV.UK Verify - GOV.UK"
+      continue_to_idp: Continue to %{name}
+      recommended:
+        p1: You’ll now verify your identity on %{name}’s website.
+        p2: They’ll give you an identity account you can use wherever you see the GOV.UK Verify logo.
+      non_recommended:
+        requirements: "To be verified with %{name}, you’ll need:"
+      other_ways_link: "other ways to %{transaction}"
+      no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
   errors:
     transaction_list:
       title: Find the service you were using to start again
