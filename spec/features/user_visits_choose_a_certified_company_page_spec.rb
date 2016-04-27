@@ -6,6 +6,23 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     set_session_cookies!
   end
 
+  let(:selected_evidence) { { documents: [:passport, :driving_licence], phone: [:mobile_phone] } }
+  let(:given_a_session_with_selected_evidence) {
+    page.set_rack_session(
+      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      selected_idp_was_recommended: true,
+      selected_evidence: selected_evidence,
+    )
+  }
+
+  let(:given_a_session_without_selected_evidence) {
+    page.set_rack_session(
+        selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+        selected_idp_was_recommended: true,
+        selected_evidence: {},
+    )
+  }
+
   it 'includes the appropriate feedback source' do
     stub_federation
     visit '/choose-a-certified-company'
@@ -15,6 +32,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   it 'passes selected evidence on to why-companies page', js: true do
     stub_federation
+    given_a_session_with_selected_evidence
 
     visit '/choose-a-certified-company?selected-evidence=driving_licence&selected-evidence=passport&selected-evidence=non_uk_id_document'
     click_link 'Why there’s a choice of companies'
@@ -27,6 +45,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   it 'displays recommended IDPs', js: true do
     stub_federation
+    given_a_session_with_selected_evidence
     visit '/choose-a-certified-company?selected-evidence=passport&selected-evidence=mobile_phone&selected-evidence=driving_licence'
 
     expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
@@ -39,6 +58,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   it 'displays only non recommended IDPs if no recommendations' do
     stub_federation
+    given_a_session_without_selected_evidence
     visit '/choose-a-certified-company'
     expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
     within('#non-matching-idps') do
@@ -51,6 +71,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   it 'recommends some IDPs and hides others' do
     stub_federation_no_docs
+    given_a_session_without_selected_evidence
     visit '/choose-a-certified-company'
 
     expect(page).to have_content('Based on your answers, 1 company can verify you now:')

@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
   end
 
   def selected_evidence_values
-    stored_selected_evidence.values.flatten
+    stored_selected_evidence.values.flatten.map(&:to_sym)
   end
 
 private

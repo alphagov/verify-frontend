@@ -13,7 +13,7 @@ class SelectPhoneController < ApplicationController
       selected_phone_evidence = @form.selected_evidence
       store_selected_evidence(phone: selected_phone_evidence)
       selected_evidence = selected_phone_evidence + IdpEligibility::EvidenceQueryStringParser.parse(request.query_string)
-      if idp_eligibility_checker.any?(selected_evidence, available_idps)
+      if idp_eligibility_checker.any?(selected_evidence_values, available_idps)
         redirect_to build_uri_with_evidence(will_it_work_for_me_path, selected_evidence)
       else
         redirect_to build_uri_with_evidence(no_mobile_phone_path, selected_evidence)

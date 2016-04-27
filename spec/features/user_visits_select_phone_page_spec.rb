@@ -2,6 +2,15 @@ require 'feature_helper'
 require 'uri'
 
 RSpec.describe 'When the user visits the select phone page' do
+  let(:selected_evidence) { { documents: [:passport, :driving_licence] } }
+  let(:given_a_session_with_document_evidence) {
+    page.set_rack_session(
+      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      selected_idp_was_recommended: true,
+      selected_evidence: selected_evidence,
+    )
+  }
+
   before(:each) do
     set_session_cookies!
   end
@@ -23,6 +32,8 @@ RSpec.describe 'When the user visits the select phone page' do
   context 'with javascript enabled', js: true do
     it 'redirects to the will it work for me page when user has a phone' do
       stub_federation
+      given_a_session_with_document_evidence
+
       visit '/select-phone?selected-evidence=passport&selected-evidence=driving_licence'
 
       choose 'select_phone_form_mobile_phone_true'
@@ -31,7 +42,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
       expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
       expect(query_params['selected-evidence'].to_set).to eql %w(mobile_phone smart_phone passport driving_licence).to_set
-      expect(page.get_rack_session['selected_evidence']).to eql('phone' => %w{mobile_phone smart_phone})
+      expect(page.get_rack_session['selected_evidence']).to eql('phone' => %w{mobile_phone smart_phone}, 'documents' => %w{passport driving_licence})
     end
 
     it 'should display a validation message when user does not answer mobile phone question' do

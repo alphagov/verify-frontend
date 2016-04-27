@@ -11,7 +11,7 @@ class SelectDocumentsController < ApplicationController
       ANALYTICS_REPORTER.report(request, 'Select Documents Next')
       selected_evidence = @form.selected_evidence
       store_selected_evidence(documents: selected_evidence)
-      if documents_eligibility_checker.any?(selected_evidence, available_idps)
+      if documents_eligibility_checker.any?(selected_evidence_values, available_idps)
         uri = URI(select_phone_path)
         uri.query = IdpEligibility::EvidenceQueryStringBuilder.build(selected_evidence)
         redirect_to uri.to_s
