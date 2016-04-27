@@ -3,10 +3,10 @@ require 'metrics/controller_action_reporter'
 require 'metrics/event_subscriber'
 
 module Metrics
-  KEY_DELIMITER = '.'
-  TOTAL_DURATION = 'total_duration'
-  VIEW_RUNTIME = 'view_runtime'
-  COUNT = 'count'
+  KEY_DELIMITER = '.'.freeze
+  TOTAL_DURATION = 'total_duration'.freeze
+  VIEW_RUNTIME = 'view_runtime'.freeze
+  COUNT = 'count'.freeze
 
   def self.duration(finish, start)
     # The statsd plugin for collectd expects timing values in ms

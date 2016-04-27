@@ -173,3 +173,16 @@
   }
 }
 
+// Show, when javascript is enabled
+.js-show {
+  display: none;
+
+  .js-enabled & {
+    display: block;
+  }
+}
+
+// Conversational headings
+.heading-banner-top-margin {
+  margin-top: em(20, 16);
+}
