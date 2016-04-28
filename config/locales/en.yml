@@ -16,6 +16,7 @@ en:
     choose_a_certified_company: choose-a-certified-company
     why_companies: why-companies
     unlikely_to_verify: unlikely-to-verify
+    redirect_to_idp_warning: redirect-to-idp-warning
   navigation:
     next: Next
     start_now: Start now

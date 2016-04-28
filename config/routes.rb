@@ -39,16 +39,15 @@ Rails.application.routes.draw do
     post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
     get 'why_companies', to: 'why_companies#index', as: :why_companies
     get 'unlikely_to_verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
+    get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+    post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+    put 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
-
-  get 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
-  post 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
-  put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
 
   if Rails.env == 'development'
     get 'confirm-your-identity', to: redirect("#{API_HOST}/confirm-your-identity"), as: :confirm_your_identity
