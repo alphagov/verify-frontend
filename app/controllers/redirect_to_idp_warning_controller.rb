@@ -45,7 +45,8 @@ private
   def report_registration(idp)
     cvar = Analytics::CustomVariable.build(:register_idp, idp.display_name)
     recommended = recommended? ? '(recommended)' : '(not recommended)'
-    action = "#{idp.display_name} was chosen for registration #{recommended} #{selected_evidence_values.join(', ')}"
+    list_of_evidence = selected_evidence_values.sort.join(', ')
+    action = "#{idp.display_name} was chosen for registration #{recommended} #{list_of_evidence}"
     ANALYTICS_REPORTER.report_custom_variable(request, action, cvar)
   end
 
