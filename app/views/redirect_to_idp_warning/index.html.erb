@@ -12,6 +12,7 @@
     <%= form_tag('', class: 'js-idp-form') do %>
         <%= button_tag t('hub.redirect_to_idp_warning.continue_to_idp', name: @idp.display_name),
                        class: 'button',
+                       id: 'continue-to-idp-button',
                        type: 'submit'
         %>
     <% end %>
