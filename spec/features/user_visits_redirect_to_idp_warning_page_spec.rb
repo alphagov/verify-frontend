@@ -93,7 +93,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
     piwik_request = {
       '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
-      'action_name' => "IDCorp was chosen for registration (recommended) #{selected_evidence.values.flatten.sort.join(', ')}",
+      'action_name' => "IDCorp was chosen for registration (recommended) with evidence #{selected_evidence.values.flatten.sort.join(', ')}",
     }
     piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 
@@ -118,7 +118,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
       piwik_request = {
           '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
-          'action_name' => "IDCorp was chosen for registration (recommended) #{selected_evidence.values.flatten.sort.join(', ')}",
+          'action_name' => "IDCorp was chosen for registration (recommended) with evidence #{selected_evidence.values.flatten.sort.join(', ')}",
       }
       piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 
@@ -145,7 +145,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
     piwik_request = {
         '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
-        'action_name' => "IDCorp was chosen for registration (not recommended) #{selected_evidence.values.flatten.sort.sort.join(', ')}",
+        'action_name' => "IDCorp was chosen for registration (not recommended) with evidence #{selected_evidence.values.flatten.sort.sort.join(', ')}",
     }
     piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 
