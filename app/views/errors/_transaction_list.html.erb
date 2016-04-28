@@ -1,7 +1,7 @@
 <% transactions = transactions_list %>
 <% if transactions.any? %>
     <h2 class="heading-medium"><%= t 'errors.transaction_list.title' %></h2>
-    <ul class="list-bullet">
+    <ul class="list-bullet list">
       <% transactions.public.each do |transaction| -%>
           <li><%= link_to transaction.name, transaction.homepage %></li>
       <% end %>
