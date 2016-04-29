@@ -53,7 +53,7 @@ en:
     privacy_notice:
       title: Privacy notice
     about:
-      title: About identity assurance
+      title: About
       verify_is_a_scheme: GOV.UK Verify is a scheme to fight the growing problem of online identity theft.
       its_secure: It’s secure, and stops someone from pretending to be you.
     about_certified_companies:
