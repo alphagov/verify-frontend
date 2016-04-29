@@ -109,9 +109,9 @@ def set_session_cookies!
   cookie_hash
 end
 
-def set_verify_front_journey_hint_cookie!
+def set_verify_front_journey_hint_cookie!(cookie_value)
   cookie_hash = create_cookie_hash
-  cookie_hash[CookieNames::VERIFY_JOURNEY_HINT] = 'encrypted-entity-id'
+  cookie_hash[CookieNames::VERIFY_JOURNEY_HINT] = cookie_value
   set_cookies!(cookie_hash)
   cookie_hash
 end
