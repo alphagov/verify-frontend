@@ -2,4 +2,9 @@
 <% content_for :feedback_source, 'CONFIRM_YOUR_IDENTITY' %>
 
 <p><%= t 'hub.confirm_your_identity.need_to_signin_again', transaction_name: @transaction_name %></p>
+
+<div class="grid-row js-continue-to-idp" data-location="/select-idp">
+  <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
+</div>
+
 <p><%= link_to t('hub.confirm_your_identity.use_other_idp'), sign_in_path %></p>

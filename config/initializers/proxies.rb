@@ -4,6 +4,7 @@ API_HOST = CONFIG.api_host
 api_client = Api::Client.new(API_HOST, Api::ResponseHandler.new)
 
 SESSION_PROXY = SessionProxy.new(api_client, OriginatingIpStore)
+COOKIE_DECRYPTOR = CookieDecryptorProxy.new(api_client)
 
 TRANSACTION_LISTER = Display::Rp::TransactionLister.new(
   Display::Rp::TransactionsProxy.new(api_client),

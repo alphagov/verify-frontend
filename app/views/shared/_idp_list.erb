@@ -1,0 +1,23 @@
+  <% identity_providers.each do |identity_provider| %>
+      <div class="column-one-third">
+        <div class="company">
+          <div class="company-inner">
+            <div class="company-logo">
+              <div class="company-logo-inner">
+                <%= image_tag identity_provider.logo_path, alt: identity_provider.display_name %>
+              </div>
+            </div>
+            <%= form_tag({}, {class: 'idp-option js-idp-form'}) do %>
+                <%= button_tag t('hub.signin.select_idp', name: identity_provider.display_name),
+                               class: "button",
+                               name: identity_provider.entity_id,
+                               type: "submit",
+                               value: identity_provider.display_name
+                %>
+                <%= hidden_field_tag 'selected-idp-entity-id', identity_provider.entity_id %>
+                <%= hidden_field_tag 'selected-idp-display-name', identity_provider.display_name %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  <% end %>
