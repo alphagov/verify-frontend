@@ -15,9 +15,9 @@ module Api
       @response_handler.handle_response(response.status, 200, response.to_s)
     end
 
-    def post(path, body)
+    def post(path, body, options = {})
       response = log_request(path, 'post') do
-        client.post(uri(path), body)
+        client.post(uri(path), body, options)
       end
       @response_handler.handle_response(response.status, 201, response.to_s)
     end

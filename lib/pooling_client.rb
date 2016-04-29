@@ -24,7 +24,7 @@ class PoolingClient
     cookies = transform_cookies(options.fetch(:cookies, {}))
     client_pool.with do |client|
       client
-        .post(path, json: body, cookies: cookies)
+        .post(path, json: body, cookies: cookies, headers: options.fetch(:headers, {}))
         .flush
     end
   end
