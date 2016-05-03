@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
     get 'test-saml' => 'test_saml#index'
     post 'test-idp-request-endpoint' => 'test_saml#idp_request'
+    get 'test-journey-hint' => 'test_journey_hint_cookie#index', as: :test_journey_hint
+    post 'test-journey-hint' => 'test_journey_hint_cookie#set_cookie', as: :test_journey_hint_submit
   end
 
   localized do

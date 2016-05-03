@@ -109,14 +109,13 @@ def set_session_cookies!
   cookie_hash
 end
 
-def set_verify_front_journey_hint_cookie!(cookie_value)
-  cookie_hash = create_cookie_hash
-  cookie_hash[CookieNames::VERIFY_JOURNEY_HINT] = cookie_value
-  set_cookies!(cookie_hash)
-  cookie_hash
-end
-
 def query_params
   current_uri = URI.parse(page.current_url)
   current_uri.query ? CGI::parse(current_uri.query) : {}
+end
+
+def set_journey_hint_cookie(entity_id)
+  visit '/test-journey-hint'
+  fill_in 'entity-id', with: entity_id
+  click_button 'journey-hint-post'
 end

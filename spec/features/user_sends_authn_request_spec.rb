@@ -6,6 +6,7 @@ RSpec.describe 'user sends authn requests' do
   context 'and it is received successfully' do
     let(:session_start_time) { create_session_start_time_cookie }
     it 'will redirect the user to /start' do
+      stub_federation
       session = {
           'transactionSimpleId' => 'my_transaction_simple_id',
           'sessionStartTime' => '32503680000000',
@@ -34,6 +35,8 @@ RSpec.describe 'user sends authn requests' do
     end
 
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
+      set_journey_hint_cookie('https://idcorp.com')
+      stub_federation
       session = {
           'transactionSimpleId' => 'my_transaction_simple_id',
           'sessionStartTime' => '32503680000000',
