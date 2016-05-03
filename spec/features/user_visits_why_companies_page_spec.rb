@@ -13,9 +13,15 @@ RSpec.describe 'When the user visits the why companies page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/why-companies-cy'
-    expect(page).to have_title 'Why there’s a choice of companies - GOV.UK Verify - GOV.UK'
+    visit '/pam-cwmniau'
+    expect(page).to have_title 'Pam fod dewis o gwmnïau - GOV.UK Verify - GOV.UK'
     expect(page).to have_css 'html[lang=cy]'
+
+    # Temporary: remove once new routes are live
+    visit '/why-companies-cy'
+    expect(page).to have_title 'Pam fod dewis o gwmnïau - GOV.UK Verify - GOV.UK'
+    expect(page).to have_css 'html[lang=cy]'
+    # /Temporary
   end
 
   it 'includes links to choose-a-certified-company page with the selected evidence', js: true do

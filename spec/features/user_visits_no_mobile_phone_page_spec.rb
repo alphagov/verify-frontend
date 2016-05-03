@@ -7,8 +7,13 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   it 'displays the page in Welsh' do
+    visit '/dim-ffon-symudol'
+    expect(page).to have_css 'html[lang=cy]'
+
+    # Temporary: remove once new routes are live
     visit '/no-mobile-phone-cy'
     expect(page).to have_css 'html[lang=cy]'
+    # /Temporary
   end
 
   it 'displays the page in English' do
