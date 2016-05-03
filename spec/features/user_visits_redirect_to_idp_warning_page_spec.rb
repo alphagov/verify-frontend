@@ -111,6 +111,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     expect(select_idp_stub_request).to have_been_made.once
     expect(piwik_registration_virtual_page).to have_been_made.once
     expect_cookie('verify-journey-hint', encrypted_entity_id)
+    expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   end
 
   context 'with JS enabled', js: true do
@@ -135,6 +136,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       expect(select_idp_stub_request).to have_been_made.once
       expect(piwik_registration_virtual_page).to have_been_made.once
       expect_cookie('verify-journey-hint', encrypted_entity_id)
+      expect(cookie_value('verify-front-journey-hint')).to_not be_nil
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")
@@ -163,6 +165,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     expect(select_idp_stub_request).to have_been_made.once
     expect(piwik_registration_virtual_page).to have_been_made.once
     expect_cookie('verify-journey-hint', encrypted_entity_id)
+    expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   end
 
   it 'includes the recommended text when selection is a recommended idp' do

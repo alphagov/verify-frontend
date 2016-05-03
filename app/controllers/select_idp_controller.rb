@@ -6,6 +6,7 @@ class SelectIdpController < ApplicationController
     cvar = Analytics::CustomVariable.build(:select_idp, display_name)
     ANALYTICS_REPORTER.report_custom_variable(request, "Sign In - #{display_name}", cvar)
     set_secure_cookie(CookieNames::VERIFY_JOURNEY_HINT, select_idp_response.encrypted_entity_id)
+    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = entity_id
     authn_request_json = SESSION_PROXY.idp_authn_request(cookies)
     render json: authn_request_json
   end

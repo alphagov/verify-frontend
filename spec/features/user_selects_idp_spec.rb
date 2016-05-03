@@ -32,6 +32,7 @@ def then_im_at_the_idp
   expect(page).to have_content("relay state is 'a-relay-state'")
   expect(page).to have_content("registration is 'false'")
   expect_cookie('verify-journey-hint', encrypted_entity_id)
+  expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   expect(a_request(:put, api_uri('session/select-idp'))
            .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => false })).to have_been_made.once
   expect(a_request(:get, api_uri('session/idp-authn-request'))

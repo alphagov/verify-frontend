@@ -39,6 +39,7 @@ private
   def select_registration(idp)
     select_idp_response = SESSION_PROXY.select_idp(cookies, idp.entity_id, true)
     set_secure_cookie(CookieNames::VERIFY_JOURNEY_HINT, select_idp_response.encrypted_entity_id)
+    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = idp.entity_id
     report_registration(idp)
   end
 
