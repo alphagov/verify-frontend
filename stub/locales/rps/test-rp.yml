@@ -4,7 +4,7 @@ en:
       name: Register for an identity profile
       analytics_description: analytics description for test-rp
       other_ways_text: |
-        <p>If you can't verify your identity using GOV.UK Verify, you can register for an identity profile <a href="http://www.example.com">here</a>.</p>
+        <p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href="http://www.example.com">here</a>.</p>
         <p>Tell us your:</p>
         <ul>
          <li>name</li>

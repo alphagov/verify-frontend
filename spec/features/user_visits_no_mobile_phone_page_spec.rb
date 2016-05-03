@@ -30,7 +30,7 @@ RSpec.describe 'When the user visits the select phone page' do
   it 'includes other ways text' do
     visit '/no-mobile-phone'
 
-    expect(page).to have_content("If you can't verify your identity using GOV.UK Verify, you can register for an identity profile here")
+    expect(page).to have_content('If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile here')
     expect(page).to have_content('register for an identity profile')
     expect(page).to have_css('a[href=\'http://www.example.com\']', 'here')
   end

@@ -1,8 +1,8 @@
 en:
   idps:
     stub-idp-three:
-      name: "Carol's Secure ID"
-      about: "<p>Carol's Secure ID is the premier identity proofing service around. Come get some.</p>"
+      name: "Carol’s Secure ID"
+      about: "<p>Carol’s Secure ID is the premier identity proofing service around. Come get some.</p>"
       requirements:
         - a UK passport
         - a UK photocard driving licence
@@ -15,8 +15,8 @@ en:
 cy:
   idps:
     stub-idp-three:
-      name: "Carol's Welsh Secure ID"
-      about: "<p>Carol's Secure ID is the premier identity proofing service around. Come get some.</p>"
+      name: "Carol’s Welsh Secure ID"
+      about: "<p>Carol’s Secure ID is the premier identity proofing service around. Come get some.</p>"
       requirements:
         - a UK passport
         - a UK photocard driving licence
