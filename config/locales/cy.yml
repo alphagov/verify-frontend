@@ -37,8 +37,8 @@ cy:
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify
-      answer_yes: Dyma'r tro cyntaf i mi ddefnyddio Verify
-      answer_no: Rwyf wedi defnyddio Verify o'r blaen
+      answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
+      answer_no: Rwyf wedi defnyddio Verify o’r blaen
       continue: Parhau
       error_message: Dewiswch opsiwn
     signin:
@@ -58,7 +58,7 @@ cy:
     about:
       title: Am
       verify_is_a_scheme: Mae GOV.UK Verify yn gynllun i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
-      its_secure: Mae'n ddiogel, ac yn atal rhywun rhag esgus bod yn chi.
+      its_secure: Mae’n ddiogel, ac yn atal rhywun rhag esgus bod yn chi.
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
@@ -66,26 +66,26 @@ cy:
       summary: Sut y gall cwmnïau wirio hunaniaeth
       details:
         p1: Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth o basbortau a thrwyddedau gyrru yn gywir.
-        p2: Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda'ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.
+        p2: Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.
         p3: Ni fydd unrhyw effaith ar eich sgôr credyd.
-        p4: Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi'n dewis pwy sy'n dilysu eich hunaniaeth, ac mae'n golygu bod y system yn ei gyfanrwydd yn gryfach.
+        p4: Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.
     about_identity_accounts:
       title: Am gyfrifon hunaniaeth
       content:
         p1: Mae dilysu eich hunaniaeth yn cymryd tua 10 munud.
-        p2: Yna bydd gennych gyfrif hunaniaeth gyda'ch cwmni ardystiedig.
+        p2: Yna bydd gennych gyfrif hunaniaeth gyda’ch cwmni ardystiedig.
         p3: Gallwch fewngofnodi lle bynnag y byddwch yn gweld logo GOV.UK Verify.
       summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
-      details: "Mae GOV.UK Verify yn gynllun newydd ac mae gwasanaethau newydd yn ymuno drwy'r amser. Y gwasanaethau presennol yw:"
+      details: "Mae GOV.UK Verify yn gynllun newydd ac mae gwasanaethau newydd yn ymuno drwy’r amser. Y gwasanaethau presennol yw:"
     about_choosing_a_company:
       title: Am ddewis cwmni
-      heading: Dod o hyd i'r cwmni iawn i'ch dilysu chi
+      heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
       p1: Mae gan gwmnïau ardystiedig ffyrdd gwahanol o wirio hunaniaeth, er enghraifft trwy wirio dogfennau adnabod neu ddarparu ap.
       p2: Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
-      heading: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i'ch dilysu.
-      legend: Ydy'r dogfennau hyn gyda chi?
+      heading: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
+      legend: Ydy’r dogfennau hyn gyda chi?
       documents_option_yes: Ydy
       question:
         driving_licence: Trwydded yrru gyda llun y DU (ac eithrio Gogledd Iwerddon)
@@ -97,7 +97,7 @@ cy:
         invalid_selection: Edrychwch dros eich dewis
     select_phone:
       title: Oes gennych ffôn symudol neu lechen?
-      heading: Gall cwmnïau ardystiedig anfon codau diogelwch i'ch ffôn symudol.
+      heading: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.
       question:
         mobile_phone: Oes gennych ffôn symudol neu lechen?
         mobile_phone_option_yes: Oes
@@ -115,24 +115,24 @@ cy:
         above_age_threshold: Ydych chi’n 20 oed neu drosodd?
         resident_last_12_months: Ydych chi wedi byw yn y DU am y 12 mis diwethaf?
         not_resident_reason:
-          title: Pa un o'r rhain sy'n berthnasol i chi?
-          recently: Rwyf wedi symud i'r DU yn y 12 mis diwethaf
+          title: Pa un o’r rhain sy’n berthnasol i chi?
+          recently: Rwyf wedi symud i’r DU yn y 12 mis diwethaf
           not_resident: Mae gennyf gyfeiriad yn y DU ond nid wyf yn byw yno
           no_address: Nid oes gennyf gyfeiriad yn y DU
         errors:
           no_selection: Dylech ateb pob cwestiwn
     no_mobile_phone:
-      title: Ffyrdd eraill i gael mynediad i'r gwasanaeth
+      title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
-      p1: Rydych angen ffôn neu lechen i ddefnyddio GOV.UK Verify. Os nad oes gennych un o'r rhain, mae ffyrdd eraill y gallwch %{other_ways_description}.
+      p1: Rydych angen ffôn neu lechen i ddefnyddio GOV.UK Verify. Os nad oes gennych un o’r rhain, mae ffyrdd eraill y gallwch %{other_ways_description}.
       p2: Os nad oes gennych basport neu drwydded yrru’r DU byddwch hefyd angen gosod app.
     may_not_work_if_you_live_overseas:
-      title: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi'i ddilysu
-      heading: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi'i ddilysu
+      title: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi’i ddilysu
+      heading: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi’i ddilysu
       try_to_verify: Hoffwn roi cynnig ar ddilysu fy hunaniaeth ar-lein
       other_ways_heading: Ffyrdd eraill i %{other_ways_description}
-      explanation1: I ddilysu hunaniaeth, mae cwmnïau ardystiedig yn cael mynediad i gofnodion credyd ac yna gallant ofyn i chi gadarnhau'r wybodaeth hyn. Mae gan y mwyfrif o bobl sy'n byw y tu allan i'r DU hanes gweithgaredd cyfyngedig ar eu cofnod credyd y DU, felly efallai na fydd cwmnïau yn gallu gwirio eich hunaniaeth yn y ffordd hyn.
-      explanation2: Mae eich 'hanes gweithgaredd' yn cynnwys pa mor aml rydych yn defnyddio eich cyfrifon credyd, ac os ydych yn agor cyfrifon fel morgais, gorddrafft neu fenthyciad.
+      explanation1: I ddilysu hunaniaeth, mae cwmnïau ardystiedig yn cael mynediad i gofnodion credyd ac yna gallant ofyn i chi gadarnhau’r wybodaeth hyn. Mae gan y mwyfrif o bobl sy’n byw y tu allan i’r DU hanes gweithgaredd cyfyngedig ar eu cofnod credyd y DU, felly efallai na fydd cwmnïau yn gallu gwirio eich hunaniaeth yn y ffordd hyn.
+      explanation2: Mae eich ‘hanes gweithgaredd’ yn cynnwys pa mor aml rydych yn defnyddio eich cyfrifon credyd, ac os ydych yn agor cyfrifon fel morgais, gorddrafft neu fenthyciad.
       what_youll_need: Beth fyddwch ei angen
       if_you_have_these: Efallai y gall eich hunaniaeth gael ei ddilysu os ydych wedi defnyddio o leiaf 1 o gyfrifon y DU canlynol yn rheolaidd dros y 6 mis diwethaf
       current_account_overdraft: gorddrafft cyfrif cyfredol
@@ -142,15 +142,15 @@ cy:
       mortgage: morgais
       student_loan: benthyciad myfyriwr
       payday_loan: benthyciad diwrnod cyflog
-      mail_order_account: cyfrif archebu drwy'r post
-      youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru'r DU.
+      mail_order_account: cyfrif archebu drwy’r post
+      youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru’r DU.
     why_might_this_not_work_for_me:
       title: Pam efallai na fydd hyn yn gweithio i mi
-      heading: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi'i ddilysu
+      heading: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi’i ddilysu
       try_to_verify: Hoffwn roi cynnig ar ddilysu fy hunaniaeth ar-lein
-      explanation: I ddilysu hunaniaeth, mae cwmnïau ardystiedig yn cael mynediad i'ch cofnodion credyd ac yna yn gofyn i chi gadarnhau'r wybodaeth hyn. Mae gan y mwyafrif o bobl ifanc a newydd ddyfodiaid i'r DU &lsquo;hanes credyd&rsquo; cyfyngedig, efallai na fydd cwmnïau yn gallu gwirio eich hunaniaeth yn y ffordd hyn.
+      explanation: I ddilysu hunaniaeth, mae cwmnïau ardystiedig yn cael mynediad i’ch cofnodion credyd ac yna yn gofyn i chi gadarnhau’r wybodaeth hyn. Mae gan y mwyafrif o bobl ifanc a newydd ddyfodiaid i’r DU &lsquo;hanes credyd&rsquo; cyfyngedig, efallai na fydd cwmnïau yn gallu gwirio eich hunaniaeth yn y ffordd hyn.
       what_youll_need: Beth fyddwch ei angen ar eich cofnod credyd
-      if_you_have_these: Efallai y gall eich hunaniaeth gael ei ddilysu os oes gennych 2 neu fwy o'r canlynol
+      if_you_have_these: Efallai y gall eich hunaniaeth gael ei ddilysu os oes gennych 2 neu fwy o’r canlynol
       current_account: cyfrif cyfredol gyda banc yn y DU
       credit_card: cerdyn credyd
       personal_loan: benthyciad personol
@@ -158,12 +158,12 @@ cy:
       gas_electricity_bills: biliau nwy neu drydan
       mobile_phone_contract: cytundeb ffôn symudol
       registered_to_vote: rydych wedi cofrestru i bleidleisio
-      youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru'r DU.
+      youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru’r DU.
     will_not_work_without_uk_address:
       title: Ni fydd GOV.UK Verify yn gweithio i chi
       other_ways_heading: Ffyrdd eraill i %{other_ways_description}
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
-      explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi'i ddilysu.
+      explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi’i ddilysu.
     choose_a_certified_company:
       title: Dewiswch gwmni ardystiedig
       heading: Dewiswch gwmni
@@ -177,7 +177,7 @@ cy:
         few: "%{count}&nbsp;o gwmnïau"
         many: "%{count}&nbsp;o gwmnïau"
         other: "%{count}&nbsp;o gwmnïau"
-      non_recommended_idps: "Yn seiliedig ar eich atebion, mae'r cwmnïau hyn yn annhebygol o'ch dilysu nawr:"
+      non_recommended_idps: "Yn seiliedig ar eich atebion, mae’r cwmnïau hyn yn annhebygol o’ch dilysu nawr:"
       show_all_companies: Dangos pob cwmni
       filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
       about_idp: Am %{name}
@@ -188,10 +188,10 @@ cy:
       title: Pam fod dewis o gwmnïau
       choose_a_company: Dewiswch gwmni
       content_html: |
-        <p>Mae mwy nag un cwmni ardystiedig yn golygu system mwy diogel - nid yw gwybodaeth yn cael ei gadw mewn un lle, ond mae'n cael ei rannu mewn nifer o wahannol lefydd, sydd yn ei gwneud yn fwy diogel.</p>
-        <p>Eich hawl chi yw dewis pwy ydych chi eisiau delio â hwy o'r cwmnïau hyn. Eich hawl chi yw hefyd newid pa gwmni rydych yn deilo ag ef ar unrhyw adeg.</p>
+        <p>Mae mwy nag un cwmni ardystiedig yn golygu system mwy diogel - nid yw gwybodaeth yn cael ei gadw mewn un lle, ond mae’n cael ei rannu mewn nifer o wahannol lefydd, sydd yn ei gwneud yn fwy diogel.</p>
+        <p>Eich hawl chi yw dewis pwy ydych chi eisiau delio â hwy o’r cwmnïau hyn. Eich hawl chi yw hefyd newid pa gwmni rydych yn deilo ag ef ar unrhyw adeg.</p>
         <p>Wrth ddilysu eich hunaniaeth, gall y cwmnïau hyn ddefnyddio eu cofnodion eu hunain, ac maent wedi cael eu hardystio i gael mynediad i wybodaeth fel cofnodion credyd. Maent yn gwneud hyn i wirio bod y wybodaeth rydych yn ei ddarparu o basbortau a thrwyddedau gyrru yn gywir.</p>
-        <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda'ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
+        <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Nid oes effaith ar eich sgor credyd.</p>
     unlikely_to_verify:
       title: Other ways to access the service
@@ -209,7 +209,7 @@ cy:
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
   errors:
     transaction_list:
-      title: Dod o hyd i'r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
+      title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynwch y cyfarwyddiadau sydd yn yr e-bost a gawsoch
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan
@@ -222,9 +222,9 @@ cy:
       read_more: 'Darllenwch y <a href="https://www.gov.uk/verify" hreflang="en">Cyflwyniad i GOV.UK Verify</a> am fwy o wybodaeth.'
       enable_cookies: Os na allwch gael mynediad i GOV.UK Verify o wasanaeth y llywodraeth, dylech alluogi eich cwcis.
     session_error:
-      title: Mae rhywbeth wedi mynd o'i le
+      title: Mae rhywbeth wedi mynd o’i le
       heading: Mae angen i chi ddechrau eto
-      security: Am resymau diogelwch, os ydych yn defnyddio'r botwm 'back' i ddychwelyd o gwmni ardystiedig, mae'n rhaid i chi ddechrau eto.
+      security: Am resymau diogelwch, os ydych yn defnyddio’r botwm ‘back’ i ddychwelyd o gwmni ardystiedig, mae’n rhaid i chi ddechrau eto.
       start_again: Dechrau eto
       feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
       feedback: adborth
@@ -235,13 +235,13 @@ cy:
       feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
       feedback: adborth
     something_went_wrong:
-      title: Mae rhywbeth wedi mynd o'i le
-      heading: Mae'n ddrwg gennym, mae rhywbeth wedi mynd o'i le
-      error_message: Gall hyn fod oherwydd bod eich sesiwn wedi'i amseru allan neu roedd gwall yn y system.
+      title: Mae rhywbeth wedi mynd o’i le
+      heading: Mae’n ddrwg gennym, mae rhywbeth wedi mynd o’i le
+      error_message: Gall hyn fod oherwydd bod eich sesiwn wedi’i amseru allan neu roedd gwall yn y system.
       start_again: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.
     page_not_found:
-      title: Ni ellir dod o hyd i'r dudalen hon
-      heading: Ni ellir dod o hyd i'r dudalen hon
+      title: Ni ellir dod o hyd i’r dudalen hon
+      heading: Ni ellir dod o hyd i’r dudalen hon
       reason_pre: "Gallai hyn fod oherwydd:"
       reason_one: bod y ddolen rydych wedi clicio arni wedi torri
       reason_two: rydych wedi rhoi cyfeiriad gwefan anghywir
