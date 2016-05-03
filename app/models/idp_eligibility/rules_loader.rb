@@ -1,4 +1,6 @@
 require 'yaml'
+require 'idp_eligibility/attribute_masker'
+require 'idp_eligibility/evidence'
 
 module IdpEligibility
   class RulesLoader
@@ -6,18 +8,30 @@ module IdpEligibility
     attr_reader :non_recommended_rules
     def initialize(rules_path)
       @rules_path = rules_path
+      @document_attribute_masker = AttributeMasker.new(Evidence::DOCUMENT_ATTRIBUTES)
     end
 
     def load
       recommended_rules = load_rules("recommended_rules")
       non_recommended_rules = load_rules("non_recommended_rules")
       all_rules = merge_rules(recommended_rules, non_recommended_rules)
-      RulesRepository.new(recommended_rules, non_recommended_rules, all_rules, idps_with_hints)
+      document_rules = apply_documents_mask(all_rules)
+      GroupedRules.new(
+        RulesRepository.new(recommended_rules),
+        RulesRepository.new(non_recommended_rules),
+        RulesRepository.new(all_rules),
+        RulesRepository.new(document_rules),
+        idps_with_hints
+      )
     end
 
-    RulesRepository = Struct.new(:recommended_rules, :non_recommended_rules, :all_rules, :idps_with_hints)
+    GroupedRules = Struct.new(:recommended_rules, :non_recommended_rules, :all_rules, :document_rules, :idps_with_hints)
 
   private
+
+    def apply_documents_mask(rules)
+      @document_attribute_masker.mask(rules)
+    end
 
     def load_rules(type)
       load_yaml.inject({}) do |rules, yaml|

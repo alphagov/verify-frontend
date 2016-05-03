@@ -1,5 +1,5 @@
 module IdpEligibility
-  class MaskingRulesRepository
+  class AttributeMasker
     def initialize(rule_mask)
       @rule_mask = rule_mask
     end

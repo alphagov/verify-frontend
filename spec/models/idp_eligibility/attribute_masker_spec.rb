@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'models/idp_eligibility/masking_rules_repository'
+require 'idp_eligibility/attribute_masker'
 
 module IdpEligibility
-  RSpec.describe MaskingRulesRepository do
+  RSpec.describe AttributeMasker do
     it 'applies a mask of whitelisted attributes to every rule contained within an exisiting repository' do
       mask = %w{passport driving_licence}
       unmasked = {
@@ -13,7 +13,7 @@ module IdpEligibility
         'idp_one' => [%w{passport}, %w{driving_licence}, []],
         'idp_two' => [%w{passport driving_licence}, []]
       }
-      expect(MaskingRulesRepository.new(mask).mask(unmasked)).to eql expected
+      expect(AttributeMasker.new(mask).mask(unmasked)).to eql expected
     end
   end
 end

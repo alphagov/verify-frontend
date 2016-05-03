@@ -1,16 +1,28 @@
+require 'set'
 module IdpEligibility
   class RulesRepository
     attr_reader :rules
 
-    def initialize(rules_hash)
-      @rules = {}
-      rules_hash.each { |simple_id, rules| @rules[simple_id] = symbolize_rules(rules.fetch(:rules)).to_set }
+    def initialize(rules)
+      @rules = rules
     end
 
-  private
+    def idps_for_profile(evidence)
+      evidence_set = evidence.to_set
+      matching_profiles = @rules.select do |_, evidence_collection|
+        evidence_collection
+        .map(&:to_set)
+        .any? { |evidence_rule| evidence_rule.subset?(evidence_set) }
+      end
+      matching_profiles.keys
+    end
 
-    def symbolize_rules(rule_list)
-      rule_list.collect { |evidence| evidence.collect(&:to_sym).to_set }
+    def ==(other)
+      if other.is_a?(RulesRepository)
+        self.rules == other.rules
+      else
+        super
+      end
     end
   end
 end
