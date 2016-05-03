@@ -1,9 +1,13 @@
+require 'idp_eligibility/checker'
+require 'idp_eligibility/evidence'
+require 'idp_eligibility/masking_rules_repository'
+
 module IdpEligibility
-  class DocumentChecker < DelegateClass(IdpEligibility::Checker)
+  class DocumentChecker < DelegateClass(Checker)
     def initialize(rules_repository)
       attributes = Evidence::DOCUMENT_ATTRIBUTES
-      masking_rules_repository = IdpEligibility::MaskingRulesRepository.new(rules_repository, attributes)
-      super(IdpEligibility::Checker.new(masking_rules_repository))
+      masked_rules = MaskingRulesRepository.new(attributes).mask(rules_repository)
+      super(IdpEligibility::Checker.new(masked_rules))
     end
   end
 end

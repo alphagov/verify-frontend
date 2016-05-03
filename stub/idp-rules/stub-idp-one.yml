@@ -1,3 +1,4 @@
 simpleIds: [ "stub-idp-one" ]
-rules:
+recommended_rules:
   - [ "driving_licence", "mobile_phone" ]
+non_recommended_rules: []

@@ -1,8 +1,11 @@
 module IdpEligibility
   class MaskingRulesRepository
-    attr_reader :rules
-    def initialize(repository, rule_mask)
-      @rules = apply_mask(repository.rules, rule_mask)
+    def initialize(rule_mask)
+      @rule_mask = rule_mask
+    end
+
+    def mask(rules)
+      apply_mask(rules, @rule_mask)
     end
 
   private

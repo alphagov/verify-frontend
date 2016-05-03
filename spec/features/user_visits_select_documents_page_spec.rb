@@ -27,7 +27,7 @@ RSpec.feature 'When the user visits the select documents page' do
     choose 'select_documents_form_passport_false'
     click_button 'Continue'
 
-    expect(page).to have_current_path(select_phone_path, only_path: true)
+    expect(page).to have_current_path(select_phone_path)
     expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'driving_licence' => true, 'passport' => false })
   end
 

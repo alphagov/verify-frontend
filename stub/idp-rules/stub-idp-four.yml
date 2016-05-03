@@ -1,3 +1,4 @@
 simpleIds: [ "stub-idp-four" ]
-rules:
+recommended_rules:
   - [ "non_uk_id_document" ]
+non_recommended_rules: []
