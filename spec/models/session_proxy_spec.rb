@@ -1,7 +1,7 @@
 require 'spec_helper'
+require 'rails_helper'
 require 'models/session_proxy'
 require 'models/cookie_names'
-require 'rails_helper'
 
 describe SessionProxy do
   let(:api_client) { double(:api_client) }
@@ -37,7 +37,11 @@ describe SessionProxy do
       expect(api_client).to receive(:post).with(path, authn_request_body, headers: headers).and_return(api_response)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       response = session_proxy.create_session('my-saml-request', 'my-relay-state')
-      expect(response).to eq SessionProxy::SessionResponse.new('my-session-id-cookie', 'my-session-start-time', 'my-secure-cookie', 'transaction-simple-id')
+      expect(response).to be_valid
+      expect(response.session_id).to eq 'my-session-id-cookie'
+      expect(response.session_start_time).to eq 'my-session-start-time'
+      expect(response.secure_cookie).to eq 'my-secure-cookie'
+      expect(response.transaction_simple_id).to eq 'transaction-simple-id'
     end
 
     it 'should accept old response format when a session is created' do
@@ -58,7 +62,26 @@ describe SessionProxy do
 
       response = session_proxy.create_session('my-saml-request', 'my-relay-state')
 
-      expect(response).to eq SessionProxy::SessionResponse.new('my-session-id-cookie', 'my-session-start-time', 'my-secure-cookie', nil)
+      expect(response).to be_valid
+      expect(response.session_id).to eq 'my-session-id-cookie'
+      expect(response.session_start_time).to eq 'my-session-start-time'
+      expect(response.secure_cookie).to eq 'my-secure-cookie'
+      expect(response.transaction_simple_id).to be_nil
+    end
+
+    it 'should raise an Error if no session values are returned' do
+      ip_address = '127.0.0.1'
+      authn_request_body = {
+          SessionProxy::PARAM_SAML_REQUEST => 'my-saml-request',
+          SessionProxy::PARAM_RELAY_STATE => 'my-relay-state',
+          SessionProxy::PARAM_ORIGINATING_IP => ip_address
+      }
+      headers = { 'Accept' => 'application/vnd.uk.gov.verify.session+json, application/json' }
+      expect(api_client).to receive(:post).with(path, authn_request_body, headers: headers).and_return({})
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect {
+        session_proxy.create_session('my-saml-request', 'my-relay-state')
+      }.to raise_error StandardError, 'Missing mandatory field in API response'
     end
   end
 
