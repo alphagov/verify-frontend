@@ -9,20 +9,6 @@ class SessionProxy
   PARAM_ENTITY_ID = 'entityId'.freeze
   PARAM_REGISTRATION = 'registration'.freeze
 
-  class SessionResponse
-    include ActiveModel::Model
-
-    attr_reader :session_id, :session_start_time, :secure_cookie, :transaction_simple_id
-    validates :session_id, :session_start_time, :secure_cookie, presence: true
-
-    def initialize(session_id, session_start_time, secure_cookie, transaction_simple_id)
-      @session_id = session_id
-      @session_start_time = session_start_time
-      @secure_cookie = secure_cookie
-      @transaction_simple_id = transaction_simple_id
-    end
-  end
-
   def initialize(api_client, originating_ip_store)
     @api_client = api_client
     @originating_ip_store = originating_ip_store
