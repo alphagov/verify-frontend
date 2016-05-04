@@ -51,7 +51,7 @@ RSpec.feature 'When the user visits the select documents page' do
   end
 
   it 'will redirect user to a unlikely to verify page when no eligible profiles match selected evidence' do
-    page.set_rack_session('transaction_simple_id' => 'test-rp')
+    page.set_rack_session(transaction_simple_id: 'test-rp')
     stub_federation
     visit 'select-documents'
     check 'select_documents_form_no_documents'

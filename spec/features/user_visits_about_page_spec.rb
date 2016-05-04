@@ -9,7 +9,7 @@ RSpec.describe 'When the user visits the about page' do
 
   context 'session cookie contains transaction id' do
     before(:each) do
-      page.set_rack_session('transaction_simple_id' => 'test-rp')
+      page.set_rack_session(transaction_simple_id: 'test-rp')
     end
     it "will display the page and report the user's selection to piwik" do
       visit '/about'

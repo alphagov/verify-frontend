@@ -6,7 +6,7 @@ module Display
   module Rp
     describe TransactionInfoGetter do
       let(:session_proxy) { double(:session_proxy) }
-      let(:session) { { 'transaction_simple_id' => 'simple-id' } }
+      let(:session) { { transaction_simple_id: 'simple-id' } }
       let(:repository) { double(:repository) }
 
       it 'should return the transaction info from session' do

@@ -3,7 +3,7 @@ require 'feature_helper'
 RSpec.describe 'When the user visits the unlikely-to-verify page' do
   before(:each) do
     set_session_cookies!
-    page.set_rack_session('transaction_simple_id' => 'test-rp')
+    page.set_rack_session(transaction_simple_id: 'test-rp')
   end
 
   it 'displays the page in Welsh' do

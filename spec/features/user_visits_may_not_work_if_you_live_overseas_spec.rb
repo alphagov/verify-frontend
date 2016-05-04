@@ -6,7 +6,7 @@ RSpec.describe 'When the user visits the may-not-work-if-you-live-overseas page'
   end
 
   it 'includes the appropriate feedback source amd other ways text' do
-    page.set_rack_session('transaction_simple_id' => 'test-rp')
+    page.set_rack_session(transaction_simple_id: 'test-rp')
     visit '/may-not-work-if-you-live-overseas'
 
     expect_feedback_source_to_be(page, 'MAY_NOT_WORK_IF_YOU_LIVE_OVERSEAS_PAGE')
