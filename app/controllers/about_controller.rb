@@ -2,7 +2,10 @@ class AboutController < ApplicationController
   layout 'start', except: [:choosing_a_company]
 
   def index
-    FEDERATION_REPORTER.report_registration(federation_info.transaction_simple_id, request)
+    FEDERATION_REPORTER.report_registration(
+      session['transaction_simple_id'] || federation_info.transaction_simple_id,
+      request
+    )
   end
 
   def certified_companies
