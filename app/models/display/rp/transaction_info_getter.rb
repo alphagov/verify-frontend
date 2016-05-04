@@ -6,9 +6,18 @@ module Display
         @repository = repository
       end
 
-      def get_info(cookie_jar)
-        federation_info = session_proxy.federation_info_for_session(cookie_jar)
-        repository.fetch(federation_info.transaction_simple_id)
+      def get_info(cookie_jar, session)
+        repository.fetch(transaction_simple_id(cookie_jar, session))
+      end
+
+      def transaction_simple_id(cookie_jar, session)
+        simple_id = session['transaction_simple_id']
+        if simple_id.nil?
+          federation_info = session_proxy.federation_info_for_session(cookie_jar)
+          federation_info.transaction_simple_id
+        else
+          simple_id
+        end
       end
 
     private
