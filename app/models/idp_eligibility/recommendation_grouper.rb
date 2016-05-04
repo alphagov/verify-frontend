@@ -2,10 +2,10 @@ module IdpEligibility
   class RecommendationGrouper
     GroupedIdps = Struct.new(:recommended, :non_recommended)
 
-    def initialize(recommended_rules, non_recommended_rules, filter = Filter.new)
+    def initialize(recommended_rules, non_recommended_rules)
       @recommended_rules = recommended_rules
       @non_recommended_rules = non_recommended_rules
-      @filter = filter
+      @filter = Filter.new
     end
 
     def group_by_recommendation(evidence, enabled_idps)
