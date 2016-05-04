@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'idp_eligibility/rules_repository'
 require 'idp_eligibility/rules_loader'
+require 'idp_eligibility/profile'
 
 module IdpEligibility
   describe RulesLoader do
@@ -10,7 +11,7 @@ module IdpEligibility
 
     describe '#load' do
       it 'should load recommended rules from YAML files' do
-        evidence = [%i(passport driving_licence)]
+        evidence = [Profile.new(%i(passport driving_licence))]
         rules_repository = RulesRepository.new(
           'example-idp' => evidence,
           'example-idp-two' => evidence,
@@ -20,7 +21,7 @@ module IdpEligibility
       end
 
       it 'should load non recommended rules from YAML files' do
-        evidence = [%i(passport mobile_phone)]
+        evidence = [Profile.new(%i(passport mobile_phone))]
         rules_repository = RulesRepository.new(
           'example-idp' => evidence,
           'example-idp-stub' => evidence,
@@ -30,7 +31,7 @@ module IdpEligibility
       end
 
       it 'should load all rules from YAML files' do
-        evidence = [%i{passport driving_licence}, %i(passport mobile_phone)]
+        evidence = [Profile.new(%i{passport driving_licence}), Profile.new(%i(passport mobile_phone))]
         rules_repository = RulesRepository.new(
           'example-idp' => evidence,
           'example-idp-stub' => evidence,
@@ -40,7 +41,7 @@ module IdpEligibility
       end
 
       it 'should supply a seperate repository of document rules' do
-        evidence = [%i{passport driving_licence}, %i(passport)]
+        evidence = [Profile.new(%i{passport driving_licence}), Profile.new(%i(passport))]
         rules_repository = RulesRepository.new(
           'example-idp' => evidence,
           'example-idp-stub' => evidence,

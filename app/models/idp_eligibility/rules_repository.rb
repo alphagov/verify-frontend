@@ -9,10 +9,8 @@ module IdpEligibility
 
     def idps_for_profile(evidence)
       evidence_set = evidence.to_set
-      matching_profiles = @rules.select do |_, evidence_collection|
-        evidence_collection
-        .map(&:to_set)
-        .any? { |evidence_rule| evidence_rule.subset?(evidence_set) }
+      matching_profiles = @rules.select do |_simple_id, profile_collection|
+        profile_collection.any? { |profile| profile.applies_to?(evidence_set) }
       end
       matching_profiles.keys
     end

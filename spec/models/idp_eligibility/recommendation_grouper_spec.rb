@@ -1,6 +1,7 @@
 require 'idp_eligibility/rules_repository'
 require 'idp_eligibility/recommendation_grouper'
 require 'idp_eligibility/filter'
+require 'idp_eligibility/profile'
 require 'set'
 
 module IdpEligibility
@@ -8,8 +9,10 @@ module IdpEligibility
     let(:idp_one) { double(:idp_one, simple_id: 'idp') }
     let(:idp_two) { double(:idp_one, simple_id: 'idp2') }
     let(:singleton_idp) { [idp_one] }
-    let(:recommended_rules) { RulesRepository.new('idp' => [[:passport]]) }
-    let(:non_recommended_rules) { RulesRepository.new('idp' => [[:driving_licence]], 'idp2' => [[:passport]]) }
+    let(:passport_profile) { Profile.new([:passport]) }
+    let(:driving_licence_profile) { Profile.new([:driving_licence]) }
+    let(:recommended_rules) { RulesRepository.new('idp' => [passport_profile]) }
+    let(:non_recommended_rules) { RulesRepository.new('idp' => [driving_licence_profile], 'idp2' => [passport_profile]) }
     let(:grouper) { RecommendationGrouper.new(recommended_rules, non_recommended_rules) }
 
     describe '#recommended?' do
