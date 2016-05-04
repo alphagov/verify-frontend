@@ -186,3 +186,28 @@
 .heading-banner-top-margin {
   margin-top: em(20, 16);
 }
+
+// For "Last updated" footer at the end of privacy-notice page
+.meta-data {
+  @include core-16;
+  color: $secondary-text-colour;
+  p {
+    text-align: left;
+    a {
+      color: $secondary-text-colour;
+    }
+    @include core-16
+  }
+}
+
+// For the user support address at the end of privacy-notice page
+address {
+  font-style: normal;
+}
+
+
+// For paragraphs with the <strong> tag in the privacy-notice page
+b,
+strong {
+  font-weight: bold;
+}
