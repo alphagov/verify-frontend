@@ -64,7 +64,7 @@ private
   end
 
   def other_ways_description
-    transaction = TRANSACTION_INFO_GETTER.get_info(cookies, session)
+    transaction = TRANSACTION_INFO_GETTER.get_info(session)
     @other_ways_description = transaction.other_ways_description
   end
 

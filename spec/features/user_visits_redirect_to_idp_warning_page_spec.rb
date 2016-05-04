@@ -188,7 +188,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   end
 
   it 'includes specific IDP text and link to the other ways when user has no documents' do
-    stub_federation_no_docs
+    page.set_rack_session('transaction_simple_id' => 'test-rp')
     given_a_session_with_no_document_evidence
     visit '/redirect-to-idp-warning'
 

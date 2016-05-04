@@ -29,6 +29,7 @@ RSpec.describe 'When the user visits the select phone page' do
     end
 
     it 'allows you to overwrite the values of your selected evidence' do
+      page.set_rack_session(transaction_simple_id: 'test-rp')
       stub_federation
       given_a_session_with_document_evidence
 
@@ -112,6 +113,7 @@ RSpec.describe 'When the user visits the select phone page' do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     piwik_request = { 'action_name' => 'Phone Next' }
 
+    page.set_rack_session('transaction_simple_id' => 'test-rp')
     stub_federation
     visit '/select-phone'
 

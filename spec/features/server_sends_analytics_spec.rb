@@ -2,8 +2,7 @@ require 'feature_helper'
 
 RSpec.describe 'When a page with a virtual page view is visited' do
   it 'sends a virtual page view to analytics' do
-    body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com' }], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
-    stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
+    page.set_rack_session('transaction_simple_id' => 'test-rp')
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     set_session_cookies!
     Capybara.current_session.driver.header('User-Agent', 'my user agent')

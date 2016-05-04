@@ -3,7 +3,7 @@ require 'feature_helper'
 RSpec.describe 'When the user visits the will-not-work-without-uk-address page' do
   before(:each) do
     set_session_cookies!
-    stub_federation
+    page.set_rack_session('transaction_simple_id' => 'test-rp')
   end
 
   it 'includes other ways text' do

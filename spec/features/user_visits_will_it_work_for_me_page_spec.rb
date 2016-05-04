@@ -3,7 +3,7 @@ require 'feature_helper'
 RSpec.describe 'When the user visits the will it work for me page' do
   before(:each) do
     set_session_cookies!
-    stub_federation
+    page.set_rack_session('transaction_simple_id' => 'test-rp')
   end
 
   it 'includes the appropriate feedback source' do
