@@ -14,6 +14,7 @@ describe SessionProxy do
       CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
     }
   }
+  let(:session_proxy) { SessionProxy.new(api_client, originating_ip_store) }
 
   describe('#create_session') do
     let(:api_response) {
@@ -35,7 +36,7 @@ describe SessionProxy do
       headers = { 'Accept' => 'application/vnd.uk.gov.verify.session+json, application/json' }
       expect(api_client).to receive(:post).with(path, authn_request_body, headers: headers).and_return(api_response)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      response = SessionProxy.new(api_client, originating_ip_store).create_session('my-saml-request', 'my-relay-state')
+      response = session_proxy.create_session('my-saml-request', 'my-relay-state')
       expect(response).to eq SessionProxy::SessionResponse.new('my-session-id-cookie', 'my-session-start-time', 'my-secure-cookie', 'transaction-simple-id')
     end
 
@@ -55,7 +56,7 @@ describe SessionProxy do
       expect(api_client).to receive(:post).with(path, authn_request_body, headers: headers).and_return(old_api_response)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
 
-      response = SessionProxy.new(api_client, originating_ip_store).create_session('my-saml-request', 'my-relay-state')
+      response = session_proxy.create_session('my-saml-request', 'my-relay-state')
 
       expect(response).to eq SessionProxy::SessionResponse.new('my-session-id-cookie', 'my-session-start-time', 'my-secure-cookie', nil)
     end
@@ -69,7 +70,7 @@ describe SessionProxy do
         .with(SessionProxy::FEDERATION_INFO_PATH, cookies: cookies)
         .and_return('idps' => [idp], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id')
 
-      result = SessionProxy.new(api_client, originating_ip_store).federation_info_for_session(cookies)
+      result = session_proxy.federation_info_for_session(cookies)
       expect(result.idps.size).to eql 1
       expect(result.idps.first.simple_id).to eql 'idp'
       expect(result.idps.first.entity_id).to eql 'something'
@@ -82,7 +83,7 @@ describe SessionProxy do
         .with(SessionProxy::FEDERATION_INFO_PATH, cookies: cookies)
         .and_return('idps' => idp_list, 'transactionEntityId' => 'some-id')
       expect {
-        SessionProxy.new(api_client, originating_ip_store).federation_info_for_session(cookies)
+        session_proxy.federation_info_for_session(cookies)
       }.to raise_error SessionProxy::ModelError, 'Transaction simple can\'t be blank'
     end
   end
@@ -96,7 +97,7 @@ describe SessionProxy do
         .with(SessionProxy::SELECT_IDP_PATH, body, cookies: cookies)
         .and_return('encryptedEntityId' => encrypted_entity_id)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      result = SessionProxy.new(api_client, originating_ip_store).select_idp(cookies, 'an-entity-id')
+      result = session_proxy.select_idp(cookies, 'an-entity-id')
       expect(result.encrypted_entity_id).to eql encrypted_entity_id
     end
 
@@ -108,7 +109,7 @@ describe SessionProxy do
         .with(SessionProxy::SELECT_IDP_PATH, body, cookies: cookies)
         .and_return('encryptedEntityId' => encrypted_entity_id)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      result = SessionProxy.new(api_client, originating_ip_store).select_idp(cookies, 'an-entity-id', true)
+      result = session_proxy.select_idp(cookies, 'an-entity-id', true)
       expect(result.encrypted_entity_id).to eql encrypted_entity_id
     end
 
@@ -119,7 +120,7 @@ describe SessionProxy do
         .with(SessionProxy::SELECT_IDP_PATH, body, cookies: cookies)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
-        SessionProxy.new(api_client, originating_ip_store).select_idp(cookies, 'an-entity-id')
+        session_proxy.select_idp(cookies, 'an-entity-id')
       }.to raise_error SessionProxy::ModelError, "Encrypted entity can't be blank"
     end
   end
@@ -138,7 +139,7 @@ describe SessionProxy do
         .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, cookies: cookies, params: params)
         .and_return(authn_request)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      result = SessionProxy.new(api_client, originating_ip_store).idp_authn_request(cookies)
+      result = session_proxy.idp_authn_request(cookies)
       attributes = {
           'location' => 'some-location',
           'saml_request' => 'a-saml-request',
@@ -161,7 +162,7 @@ describe SessionProxy do
         .and_return(authn_request)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
-        SessionProxy.new(api_client, originating_ip_store).idp_authn_request(cookies)
+        session_proxy.idp_authn_request(cookies)
       }.to raise_error SessionProxy::ModelError, "Saml request can't be blank"
     end
   end
