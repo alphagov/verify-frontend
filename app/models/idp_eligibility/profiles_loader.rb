@@ -16,16 +16,16 @@ module IdpEligibility
       non_recommended_profiles = load_profiles("non_recommended_profiles")
       all_profiles = merge_profiles(recommended_profiles, non_recommended_profiles)
       document_profiles = apply_documents_mask(all_profiles)
-      GroupedRules.new(
-        RulesRepository.new(recommended_profiles),
-        RulesRepository.new(non_recommended_profiles),
-        RulesRepository.new(all_profiles),
-        RulesRepository.new(document_profiles),
+      LoadedProfileFilters.new(
+        ProfileFilter.new(recommended_profiles),
+        ProfileFilter.new(non_recommended_profiles),
+        ProfileFilter.new(all_profiles),
+        ProfileFilter.new(document_profiles),
         idps_with_hints
       )
     end
 
-    GroupedRules = Struct.new(:recommended_profiles, :non_recommended_profiles, :all_profiles, :document_profiles, :idps_with_hints)
+    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :all_profiles, :document_profiles, :idps_with_hints)
 
   private
 

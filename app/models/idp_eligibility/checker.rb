@@ -1,13 +1,13 @@
 require 'idp_eligibility/filter'
 module IdpEligibility
   class Checker
-    def initialize(rules_repository)
-      @rules_repository = rules_repository
+    def initialize(profile_filter)
+      @profile_filter = profile_filter
       @filter = Filter.new
     end
 
     def any?(evidence, enabled_idps)
-      @filter.filter_idps(@rules_repository, evidence, enabled_idps).any?
+      @filter.filter_idps(@profile_filter, evidence, enabled_idps).any?
     end
   end
 end
