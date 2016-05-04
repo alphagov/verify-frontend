@@ -8,7 +8,7 @@ class SelectDocumentsController < ApplicationController
     if @form.valid?
       ANALYTICS_REPORTER.report(request, 'Select Documents Next')
       selected_evidence = @form.selected_evidence
-      store_selected_evidence(documents: selected_evidence)
+      store_selected_evidence('documents', selected_evidence)
       if documents_eligibility_checker.any?(selected_evidence_values, available_idps)
         redirect_to select_phone_path
       else

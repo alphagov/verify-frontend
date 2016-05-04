@@ -27,6 +27,25 @@ RSpec.describe 'When the user visits the select phone page' do
 
       expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
     end
+
+    it 'allows you to overwrite the values of your selected evidence' do
+      stub_federation
+      given_a_session_with_document_evidence
+
+      visit '/select-phone'
+
+      choose 'select_phone_form_mobile_phone_true'
+      choose 'select_phone_form_smart_phone_true'
+      click_button 'Continue'
+
+      visit '/select-phone'
+      choose 'select_phone_form_mobile_phone_false'
+      choose 'select_phone_form_landline_false'
+      click_button 'Continue'
+
+      expect(page).to have_current_path(no_mobile_phone_path)
+      expect(page.get_rack_session['selected_evidence']).to eql('phone' => [], 'documents' => %w{passport driving_licence})
+    end
   end
 
   context 'with javascript enabled', js: true do

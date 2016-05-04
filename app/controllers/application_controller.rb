@@ -40,8 +40,8 @@ class ApplicationController < ActionController::Base
     }
   end
 
-  def store_selected_evidence(hash)
-    stored_selected_evidence.merge!(hash)
+  def store_selected_evidence(stage, evidence)
+    stored_selected_evidence[stage] = evidence
   end
 
   def stored_selected_evidence
