@@ -4,8 +4,13 @@ class SamlController < ApplicationController
 
   def request_post
     reset_session
-    cookies_from_api = authn_request_proxy.create_session(params['SAMLRequest'], params['RelayState'])
-    cookies_from_api.each { |name, value| set_secure_cookie(name, value) }
+    response = authn_request_proxy.create_session(params['SAMLRequest'], params['RelayState'])
+
+    set_secure_cookie(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME, response.session_start_time)
+    set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, response.session_id)
+    set_secure_cookie(CookieNames::SECURE_COOKIE_NAME, response.secure_cookie)
+    session['transaction_simple_id'] = response.transaction_simple_id
+
     if params['journey_hint'].present?
       redirect_to confirm_your_identity_path
     else

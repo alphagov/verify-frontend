@@ -1,4 +1,3 @@
-
 class SessionProxy
   PATH = '/session'.freeze
   FEDERATION_INFO_PATH = "#{PATH}/federation".freeze
@@ -9,6 +8,8 @@ class SessionProxy
   PARAM_ORIGINATING_IP = 'originatingIp'.freeze
   PARAM_ENTITY_ID = 'entityId'.freeze
   PARAM_REGISTRATION = 'registration'.freeze
+
+  SessionResponse = Struct.new(:session_id, :session_start_time, :secure_cookie, :transaction_simple_id)
 
   def initialize(api_client, originating_ip_store)
     @api_client = api_client
@@ -25,7 +26,11 @@ class SessionProxy
       PARAM_RELAY_STATE => relay_state,
       PARAM_ORIGINATING_IP => originating_ip
     }
-    @api_client.post(PATH, body)
+    api_response = @api_client.post(PATH, body, headers: { 'Accept' => 'application/vnd.uk.gov.verify.session+json, application/json' })
+    SessionResponse.new(api_response.fetch('sessionId', api_response[CookieNames::SESSION_ID_COOKIE_NAME]),
+                    api_response.fetch('sessionStartTime', api_response[CookieNames::SESSION_STARTED_TIME_COOKIE_NAME]),
+                    api_response.fetch('secureCookie', api_response[CookieNames::SECURE_COOKIE_NAME]),
+                    api_response['transactionSimpleId'])
   end
 
   def federation_info_for_session(cookies)
