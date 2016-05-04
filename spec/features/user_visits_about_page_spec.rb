@@ -48,11 +48,11 @@ RSpec.describe 'When the user visits the about page' do
       }
       expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
     end
-  end
 
-  it 'will display the about page in Welsh' do
-    visit '/am'
-    expect(page).to have_content 'GOV.UK Verify yn gynllun i frwydro yn erbyn'
-    expect(page).to have_css 'html[lang=cy]'
+    it 'will display the about page in Welsh' do
+      visit '/am'
+      expect(page).to have_content 'GOV.UK Verify yn gynllun i frwydro yn erbyn'
+      expect(page).to have_css 'html[lang=cy]'
+    end
   end
 end
