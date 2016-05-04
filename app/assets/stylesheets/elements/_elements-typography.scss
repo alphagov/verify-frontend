@@ -286,3 +286,9 @@ hr {
     margin-left: -$gutter-half;
   }
 }
+
+// For paragraphs with the <strong> tag in the privacy-notice page
+b,
+strong {
+  font-weight: bold;
+}
