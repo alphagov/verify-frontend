@@ -35,7 +35,7 @@ RSpec.describe 'user sends authn requests' do
     end
 
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
-      set_journey_hint_cookie('https://idcorp.com')
+      set_journey_hint_cookie('http://idcorp.com')
       stub_federation
       session = {
           'transactionSimpleId' => 'my_transaction_simple_id',

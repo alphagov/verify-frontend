@@ -87,7 +87,7 @@ def cookie_value(cookie_name)
     end
     journey_hint_cookie[:value]
   else
-    Capybara.current_session.driver.request.cookies.fetch(cookie_name)
+    Capybara.current_session.driver.request.cookies[cookie_name]
   end
 end
 
