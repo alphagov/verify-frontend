@@ -1,6 +1,6 @@
 simpleIds: [ "example-idp", "example-idp-stub" ]
 sendHints: true
-recommended_rules:
+recommended_profiles:
   - [ "passport", "driving_licence" ]
-non_recommended_rules:
+non_recommended_profiles:
   - [ "passport", "mobile_phone" ]
