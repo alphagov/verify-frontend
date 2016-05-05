@@ -24,7 +24,7 @@ class SessionProxy
       PARAM_RELAY_STATE => relay_state,
       PARAM_ORIGINATING_IP => originating_ip
     }
-    response = @api_client.post(PATH, body, headers: { 'Accept' => 'application/vnd.uk.gov.verify.session+json, application/json' })
+    response = @api_client.post(PATH, body)
     SessionResponse.new(response || {}).tap(&:validate)
   end
 

@@ -33,8 +33,7 @@ describe SessionProxy do
           SessionProxy::PARAM_RELAY_STATE => 'my-relay-state',
           SessionProxy::PARAM_ORIGINATING_IP => ip_address
       }
-      headers = { 'Accept' => 'application/vnd.uk.gov.verify.session+json, application/json' }
-      expect(api_client).to receive(:post).with(path, authn_request_body, headers: headers).and_return(api_response)
+      expect(api_client).to receive(:post).with(path, authn_request_body).and_return(api_response)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       response = session_proxy.create_session('my-saml-request', 'my-relay-state')
       expect(response).to be_valid
@@ -51,8 +50,7 @@ describe SessionProxy do
           SessionProxy::PARAM_RELAY_STATE => 'my-relay-state',
           SessionProxy::PARAM_ORIGINATING_IP => ip_address
       }
-      headers = { 'Accept' => 'application/vnd.uk.gov.verify.session+json, application/json' }
-      expect(api_client).to receive(:post).with(path, authn_request_body, headers: headers).and_return({})
+      expect(api_client).to receive(:post).with(path, authn_request_body).and_return({})
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
         session_proxy.create_session('my-saml-request', 'my-relay-state')
