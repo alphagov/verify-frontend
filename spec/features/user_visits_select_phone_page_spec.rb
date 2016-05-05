@@ -96,12 +96,6 @@ RSpec.describe 'When the user visits the select phone page' do
     visit 'dewis-ffon'
     expect(page).to have_title 'Oes gennych ffôn symudol neu lechen?'
     expect(page).to have_css 'html[lang=cy]'
-
-    # Temporary: remove once new routes are live
-    visit URI.escape('dewis-ffôn')
-    expect(page).to have_title 'Oes gennych ffôn symudol neu lechen?'
-    expect(page).to have_css 'html[lang=cy]'
-    # /Temporary
   end
 
   context 'with javascript turned off', js: false do
