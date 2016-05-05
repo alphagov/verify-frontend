@@ -21,11 +21,6 @@
         <%= other_ways(@idp) %>
     <% end %>
   </div>
+  <%= render partial: 'shared/continue_to_idp_form' %>
 </div>
 
-<%= form_tag({}, {id: 'post-to-idp', class: 'hidden'}) do %>
-    <input name=SAMLRequest type=hidden>
-    <input name=RelayState type=hidden>
-    <input name=registration type=hidden>
-    <input type=submit>
-<% end %>

@@ -5,6 +5,7 @@
 
 <div class="grid-row js-continue-to-idp" data-location="/select-idp">
   <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
+  <%= render partial: 'shared/continue_to_idp_form' %>
 </div>
 
 <p><%= link_to t('hub.confirm_your_identity.use_other_idp'), sign_in_path %></p>
