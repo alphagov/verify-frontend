@@ -80,6 +80,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP' do
+      page.set_rack_session(transaction_simple_id: 'test-rp')
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
       then_custom_variable_reported_for_sign_in
@@ -91,6 +92,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
   context 'with JS disabled', js: false do
     it 'will display the interstitial page and on submit will redirect the user to IDP' do
+      page.set_rack_session(transaction_simple_id: 'test-rp')
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
       then_custom_variable_reported_for_sign_in

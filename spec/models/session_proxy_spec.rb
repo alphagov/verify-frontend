@@ -71,17 +71,6 @@ describe SessionProxy do
       expect(result.idps.first.simple_id).to eql 'idp'
       expect(result.idps.first.entity_id).to eql 'something'
     end
-
-    it 'should fail to return federation info if transaction simple id is missing' do
-      idp_list = []
-
-      expect(api_client).to receive(:get)
-        .with(SessionProxy::FEDERATION_INFO_PATH, cookies: cookies)
-        .and_return('idps' => idp_list, 'transactionEntityId' => 'some-id')
-      expect {
-        session_proxy.federation_info_for_session(cookies)
-      }.to raise_error Api::Response::ModelError, 'Transaction simple can\'t be blank'
-    end
   end
 
   describe('#identity_providers') do

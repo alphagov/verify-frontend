@@ -2,7 +2,6 @@ require 'feature_helper'
 require 'models/cookie_names'
 
 RSpec.describe 'When the user visits the about page' do
-  let(:transaction_entity_id) { 'some-id' }
   before(:each) do
     set_session_cookies!
   end

@@ -36,6 +36,7 @@ RSpec.describe 'when user submits start page form' do
 
   it 'will report user choice to analytics when user chooses no (sign in)' do
     set_session_cookies!
+    page.set_rack_session(transaction_simple_id: 'test-rp')
     given_api_returns_federation_info
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     visit '/start'
