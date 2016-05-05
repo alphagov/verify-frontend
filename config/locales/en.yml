@@ -49,6 +49,7 @@ en:
       about_link: start now
       registration_message_html: If you don’t have an identity account, you can %{href}.
       select_idp: Select %{name}
+      sign_in_idp: Sign in with %{name}
       forgot_company: I can’t remember which company verified me
     cookies:
       title: Cookies
@@ -210,7 +211,8 @@ en:
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
     confirm_your_identity:
       title: Confirm your identity
-      use_other_idp: If this isn’t the company that verified you, %{href} sign in with a different certified company.
+      use_other_idp: If this isn’t the company that verified you, %{sign_in_link}.
+      sign_in_link_message: sign in with a different certified company
       need_to_signin_again: In order to %{transaction_name}, you need to sign in again with your certified company. You don’t need to register again.
   errors:
     transaction_list:
