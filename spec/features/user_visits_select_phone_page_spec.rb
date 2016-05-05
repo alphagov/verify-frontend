@@ -47,6 +47,14 @@ RSpec.describe 'When the user visits the select phone page' do
       expect(page).to have_current_path(no_mobile_phone_path)
       expect(page.get_rack_session['selected_evidence']).to eql('phone' => [], 'documents' => %w{passport driving_licence})
     end
+
+    it 'shows an error message when no selections are made' do
+      visit '/select-phone'
+      click_button 'Continue'
+
+      expect(page).to have_css '.validation-message', text: 'Please answer all the questions'
+      expect(page).to have_css '.form-group.error'
+    end
   end
 
   context 'with javascript enabled', js: true do
@@ -97,16 +105,6 @@ RSpec.describe 'When the user visits the select phone page' do
     visit 'dewis-ffon'
     expect(page).to have_title 'Oes gennych ffôn symudol neu lechen?'
     expect(page).to have_css 'html[lang=cy]'
-  end
-
-  context 'with javascript turned off', js: false do
-    it 'shows an error message when no selections are made' do
-      visit '/select-phone'
-      click_button 'Continue'
-
-      expect(page).to have_css '.validation-message', text: 'Please answer all the questions'
-      expect(page).to have_css '.form-group.error'
-    end
   end
 
   it 'reports to Piwik when form is valid' do
