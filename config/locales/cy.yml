@@ -180,8 +180,7 @@ cy:
         few: "%{count}&nbsp;o gwmnïau"
         many: "%{count}&nbsp;o gwmnïau"
         other: "%{count}&nbsp;o gwmnïau"
-      non_recommended_idps: "Yn seiliedig ar eich atebion, mae’r cwmnïau hyn yn annhebygol o’ch dilysu nawr:"
-      show_all_companies: Dangos pob cwmni
+      show_all_companies: Companies that are unlikely to verify you
       filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
       about_idp: Am %{name}
       dialog:
