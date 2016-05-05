@@ -23,7 +23,7 @@ class SelectDocumentsController < ApplicationController
 private
 
   def available_idps
-    SESSION_PROXY.federation_info_for_session(cookies).idps
+    SESSION_PROXY.identity_providers(cookies)
   end
 
   def documents_eligibility_checker

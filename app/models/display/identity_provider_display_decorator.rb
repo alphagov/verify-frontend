@@ -18,6 +18,7 @@ module Display
   private
 
     def correlate_display_data(idp)
+      return not_viewable(idp) if idp.nil?
       simple_id = idp.simple_id
       logo_path = File.join(@logo_directory, "#{simple_id}.png")
       white_logo_path = File.join(@white_logo_directory, "#{simple_id}.png")
@@ -29,6 +30,10 @@ module Display
       ViewableIdentityProvider.new(idp, name, logo_path, white_logo_path, about, requirements, special_no_docs_instructions, no_docs_requirement)
     rescue FederationTranslator::TranslationError => e
       Rails.logger.error(e)
+      not_viewable(idp)
+    end
+
+    def not_viewable(idp)
       NotViewableIdentityProvider.new(idp)
     end
 

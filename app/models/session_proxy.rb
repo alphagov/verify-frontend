@@ -34,6 +34,10 @@ class SessionProxy
     FederationInfoResponse.new(response || {}).tap(&:validate)
   end
 
+  def identity_providers(cookies)
+    federation_info_for_session(cookies).idps
+  end
+
   def select_cookies(cookies, allowed_cookie_names)
     cookies.select { |name, _| allowed_cookie_names.include?(name) }.to_h
   end

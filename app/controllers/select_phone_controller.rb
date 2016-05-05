@@ -22,7 +22,7 @@ class SelectPhoneController < ApplicationController
 private
 
   def available_idps
-    SESSION_PROXY.federation_info_for_session(cookies).idps
+    SESSION_PROXY.identity_providers(cookies)
   end
 
   def idp_eligibility_checker

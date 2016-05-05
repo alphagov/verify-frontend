@@ -56,5 +56,10 @@ module Display
       result = decorator.decorate_collection(idp_list)
       expect(result).to eql []
     end
+
+    it "will return a non viewable if provided a nil value" do
+      result = decorator.decorate(nil)
+      expect(result).to be_a(NotViewableIdentityProvider)
+    end
   end
 end

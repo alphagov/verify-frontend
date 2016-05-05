@@ -14,6 +14,7 @@ en:
     why_might_this_not_work_for_me: why-might-this-not-work-for-me
     will_not_work_without_uk_address: will-not-work-without-uk-address
     choose_a_certified_company: choose-a-certified-company
+    choose_a_certified_company_about: choose-a-certified-company/:company
     why_companies: why-companies
     unlikely_to_verify: unlikely-to-verify
     redirect_to_idp_warning: redirect-to-idp-warning
@@ -178,6 +179,10 @@ en:
       filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
       about_idp: About %{name}
       dialog:
+        information_provided_by: Information provided by %{name}
+        close: close
+      about:
+        title: About %{name}
         information_provided_by: Information provided by %{name}
         close: close
     why_companies:

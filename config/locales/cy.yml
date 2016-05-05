@@ -14,6 +14,7 @@ cy:
     why_might_this_not_work_for_me: pam-efallai-na-fydd-hyn-yn-gweithio-i-mi
     will_not_work_without_uk_address: ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du
     choose_a_certified_company: dewis-cwmni-ardystiedig
+    choose_a_certified_company_about: dewis-cwmni-ardystiedig/:company
     why_companies: pam-cwmniau
     unlikely_to_verify: unlikely-to-verify-cy
     redirect_to_idp_warning: redirect-to-idp-warning-cy
@@ -184,6 +185,10 @@ cy:
       filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
       about_idp: Am %{name}
       dialog:
+        information_provided_by: Gwybodaeth a ddarparwyd gan %{name}
+        close: cau
+      about:
+        title: Am %{name}
         information_provided_by: Gwybodaeth a ddarparwyd gan %{name}
         close: cau
     why_companies:

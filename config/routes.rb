@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get 'why_might_this_not_work_for_me', to: 'why_might_this_not_work_for_me#index', as: :why_might_this_not_work_for_me
     get 'will_not_work_without_uk_address', to: 'will_not_work_without_uk_address#index', as: :will_not_work_without_uk_address
     get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
+    get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
     post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
     get 'why_companies', to: 'why_companies#index', as: :why_companies
     get 'unlikely_to_verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify

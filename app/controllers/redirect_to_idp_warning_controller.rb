@@ -19,7 +19,7 @@ class RedirectToIdpWarningController < ApplicationController
       select_registration(idp)
       redirect_to redirect_to_idp_path
     else
-      something_went_wrong("Couldn't display IDP with entity id: #{@idp.entity_id}")
+      something_went_wrong("Couldn't display IDP with entity id: #{idp.entity_id}")
     end
   end
 
