@@ -56,7 +56,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
         session_proxy.create_session('my-saml-request', 'my-relay-state')
-      }.to raise_error StandardError, 'Missing mandatory field in API response'
+      }.to raise_error Api::Response::ModelError, "Session can't be blank, Session start time can't be blank, Secure cookie can't be blank"
     end
   end
 
@@ -82,7 +82,7 @@ describe SessionProxy do
         .and_return('idps' => idp_list, 'transactionEntityId' => 'some-id')
       expect {
         session_proxy.federation_info_for_session(cookies)
-      }.to raise_error SessionProxy::ModelError, 'Transaction simple can\'t be blank'
+      }.to raise_error Api::Response::ModelError, 'Transaction simple can\'t be blank'
     end
   end
 
@@ -119,7 +119,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
         session_proxy.select_idp(cookies, 'an-entity-id')
-      }.to raise_error SessionProxy::ModelError, "Encrypted entity can't be blank"
+      }.to raise_error Api::Response::ModelError, "Encrypted entity can't be blank"
     end
   end
 
@@ -161,7 +161,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
         session_proxy.idp_authn_request(cookies)
-      }.to raise_error SessionProxy::ModelError, "Saml request can't be blank"
+      }.to raise_error Api::Response::ModelError, "Saml request can't be blank"
     end
   end
 end

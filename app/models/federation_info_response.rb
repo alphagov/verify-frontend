@@ -1,6 +1,4 @@
-class FederationInfoResponse
-  include ActiveModel::Model
-
+class FederationInfoResponse < Api::Response
   attr_reader :idps, :transaction_simple_id, :transaction_entity_id
   validates_presence_of :transaction_entity_id
   validates_presence_of :transaction_simple_id

@@ -1,13 +1,11 @@
-class SessionResponse
-  include ActiveModel::Model
-
+class SessionResponse < Api::Response
   attr_reader :session_id, :session_start_time, :secure_cookie, :transaction_simple_id
   validates :session_id, :session_start_time, :secure_cookie, presence: true
 
-  def initialize(session_id, session_start_time, secure_cookie, transaction_simple_id)
-    @session_id = session_id
-    @session_start_time = session_start_time
-    @secure_cookie = secure_cookie
-    @transaction_simple_id = transaction_simple_id
+  def initialize(hash)
+    @session_id = hash['sessionId']
+    @session_start_time = hash['sessionStartTime']
+    @secure_cookie = hash['secureCookie']
+    @transaction_simple_id = hash['transactionSimpleId']
   end
 end
