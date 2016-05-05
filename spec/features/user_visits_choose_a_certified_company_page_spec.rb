@@ -49,7 +49,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     visit '/choose-a-certified-company'
     expect(page).to have_current_path(choose_a_certified_company_path)
     within('#non-matching-idps') do
-      expect(page).to have_content('Based on your answers, these companies are unlikely to verify you now:')
       expect(page).to have_button('Choose IDCorp')
     end
     expect(page).to have_content('Based on your answers, no companies can verify you now:')
@@ -76,8 +75,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     entity_id = 'http://idcorp.com'
     stub_federation(entity_id)
     visit '/choose-a-certified-company'
-
-    click_link 'Show all companies'
 
     within('#non-matching-idps') do
       click_link 'About IDCorp'

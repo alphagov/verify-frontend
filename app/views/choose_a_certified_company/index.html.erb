@@ -2,9 +2,10 @@
 <% content_for :feedback_source, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE' %>
 
 <div class="content-inner">
-  <div class="grid-section">
-    <div class="grid-2-3"><h2 class="heading-medium"><%= t 'hub.choose_a_certified_company.heading' %></h2>
-      <ul class="list bullet">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h2 class="heading-medium"><%= t 'hub.choose_a_certified_company.heading' %></h2>
+      <ul class="list list-bullet">
         <li><%= link_to(t('hub.choose_a_certified_company.why_companies'), why_companies_path) %></li>
       </ul>
       <p class="large-top">
@@ -12,31 +13,32 @@
               company_count: t('hub.choose_a_certified_company.company_html', count: @recommended_idps.length) %>
       </p>
     </div>
-    <div id="matching-idps">
-      <% @recommended_idps.each do |identity_provider| %>
-        <%= render partial: 'idp_option', locals: {recommended: true, identity_provider: identity_provider} %>
-      <% end %>
-    </div>
-    <% if @non_recommended_idps.any? %>
-        <div id="non-matching-idps-warning" class="js-show">
-          <div class="grid-section">
-            <div class="grid-2-3">
-              <p class="large-top">
-                <%= t 'hub.choose_a_certified_company.filtered_idps_message_html',
-                      company_count: t('hub.choose_a_certified_company.company_html', count: @non_recommended_idps.length) %>
-              </p>
-              <%= link_to(t('hub.choose_a_certified_company.show_all_companies'), '#non-matching-idps', {role: 'button'}) %>
-            </div>
-          </div>
-        </div>
-        <div id="non-matching-idps" class="js-hidden">
-          <p class="large-top">
-            <%= t 'hub.choose_a_certified_company.non_recommended_idps' %>
-          </p>
-          <% @non_recommended_idps.each do |identity_provider| %>
-              <%= render partial: 'idp_option', locals: {recommended: false, identity_provider: identity_provider} %>
-          <% end %>
-        </div>
+  </div>
+  <div id="matching-idps">
+    <% @recommended_idps.each do |identity_provider| %>
+      <%= render partial: 'idp_option', locals: {recommended: true, identity_provider: identity_provider} %>
     <% end %>
   </div>
+  <% if @non_recommended_idps.any? %>
+    <div id="non-matching-idps">
+      <div class="grid-row">
+        <div class="column-two-thirds">
+          <p class="large-top">
+            <%= t 'hub.choose_a_certified_company.filtered_idps_message_html',
+                  company_count: t('hub.choose_a_certified_company.company_html', count: @non_recommended_idps.length) %>
+          </p>
+        </div>
+      </div>
+      <details>
+        <summary>
+          <span class="summary"><%= t 'hub.choose_a_certified_company.show_all_companies' %><span>
+        </summary>
+        <div class="panel-indent">
+          <% @non_recommended_idps.each do |identity_provider| %>
+            <%= render partial: 'idp_option', locals: {recommended: false, identity_provider: identity_provider} %>
+          <% end %>
+        </div>
+      </details>
+    </div>
+  <% end %>
 </div>
