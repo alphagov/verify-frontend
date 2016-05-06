@@ -7,7 +7,7 @@ class TestJourneyHintCookieController < ApplicationController
   end
 
   def set_cookie
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = params['entity-id']
+    set_journey_hint(params['entity-id'], params['locale'])
     render nothing: true
   end
 end

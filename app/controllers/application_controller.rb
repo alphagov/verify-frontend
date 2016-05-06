@@ -52,6 +52,16 @@ class ApplicationController < ActionController::Base
     stored_selected_evidence.values.flatten.map(&:to_sym)
   end
 
+  def set_journey_hint(idp_entity_id, locale)
+    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: idp_entity_id, locale: locale }.to_json
+  end
+
+  def journey_hint_value
+    JSON.parse(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] ||= '')
+  rescue JSON::ParserError
+    nil
+  end
+
 private
 
   def uri_with_query(path, query_string)

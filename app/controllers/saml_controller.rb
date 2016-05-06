@@ -11,10 +11,15 @@ class SamlController < ApplicationController
     set_secure_cookie(CookieNames::SECURE_COOKIE_NAME, response.secure_cookie)
     session[:transaction_simple_id] = response.transaction_simple_id
 
+    # We can't set the I18n.locale value after it has already been set in ApplicationController due to the bug detailed
+    # here:
+    #    https://github.com/svenfuchs/i18n/issues/275
+    locale = journey_hint_value.nil? ? I18n.default_locale : journey_hint_value['locale'].to_sym
+
     if params['journey_hint'].present?
-      redirect_to confirm_your_identity_path
+      redirect_to "/#{I18n.t('routes.confirm_your_identity', locale: locale)}"
     else
-      redirect_to start_path
+      redirect_to "/#{I18n.t('routes.start', locale: locale)}"
     end
   end
 

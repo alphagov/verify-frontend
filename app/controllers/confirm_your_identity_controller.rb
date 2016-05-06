@@ -1,20 +1,28 @@
 class ConfirmYourIdentityController < ApplicationController
   def index
-    idp_entity_id = cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]
+    journey_hint = journey_hint_value
 
-    @identity_providers = idp_entity_id.nil? ? [] : retrieve_last_used_idp(idp_entity_id)
+    if journey_hint.nil?
+      cookie_error('missing verify-front-journey-hint')
+    else
+      entity_id = journey_hint['entity_id']
 
-    if @identity_providers.empty?
-      Rails.logger.warn("invalid verify-front-journey-hint entity-id #{idp_entity_id}")
-      cookies.delete(CookieNames::VERIFY_FRONT_JOURNEY_HINT)
-      redirect_to sign_in_path
+      @transaction_name = TRANSACTION_INFO_GETTER.get_info(cookies).name
+      @identity_providers = entity_id.nil? ? [] : retrieve_last_used_idp(entity_id)
+
+      if @identity_providers.empty?
+        cookie_error("invalid verify-front-journey-hint entity-id #{entity_id}")
+      end
     end
-
-    transaction_details = TRANSACTION_INFO_GETTER.get_info(cookies)
-    @transaction_name = transaction_details.name
   end
 
 private
+
+  def cookie_error(string)
+    Rails.logger.warn(string)
+    cookies.delete(CookieNames::VERIFY_FRONT_JOURNEY_HINT)
+    redirect_to sign_in_path
+  end
 
   def retrieve_last_used_idp(idp_entity_id)
     federation_info = SESSION_PROXY.federation_info_for_session(cookies)
