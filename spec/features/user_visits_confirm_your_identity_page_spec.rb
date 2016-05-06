@@ -1,27 +1,16 @@
 require 'feature_helper'
+require 'api_test_helper'
+
+def stub_api_and_analytics(idp_location)
+  stub_federation
+  stub_session_select_idp_request('an-encrypted-entity-id')
+  stub_session_idp_authn_request(originating_ip, idp_location, false)
+  stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+end
 
 RSpec.describe 'When the user visits the confirm-your-identity page' do
   let(:idp_location) { '/test-idp-request-endpoint' }
-  let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
-
-  def response(location)
-    {
-        'location' => location,
-        'samlRequest' => 'a-saml-request',
-        'relayState' => 'a-relay-state',
-        'registration' => false
-    }
-  end
-
-  def stub_api_and_analytics(idp_location)
-    stub_federation
-    stub_request(:put, api_uri('session/select-idp'))
-        .to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
-    stub_request(:get, api_uri('session/idp-authn-request'))
-        .with(query: { 'originatingIp' => originating_ip }).to_return(body: response(idp_location).to_json)
-    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-  end
 
   describe 'and the journey hint cookie is set' do
     before(:each) do

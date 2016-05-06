@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'api_test_helper'
 require 'i18n'
 
 RSpec.feature 'When the user visits the select documents page' do

@@ -15,48 +15,8 @@ if ENV['HEADLESS'] == 'true'
   end
 end
 
-def api_transactions_endpoint
-  api_uri('transactions')
-end
-
-def stub_transactions_list
-  transactions = {
-      'public' => [
-          { 'simpleId' => 'test-rp', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp' },
-          { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3' }
-      ],
-      'private' => [
-          { 'simpleId' => 'headless-rp', 'entityId' => 'some-entity-id' },
-      ]
-  }
-  stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
-end
-
-def stub_federation(idp_entity_id = 'http://idcorp.com')
-  idps = [
-    { 'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id },
-    { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id' },
-    { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id' }
-  ]
-  body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-entity-id' }
-  stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
-end
-
-def stub_federation_no_docs
-  idps = [
-    { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' },
-    { 'simpleId' => 'stub-idp-no-docs', 'entityId' => 'http://idcorp.nodoc.com' }
-  ]
-  body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
-  stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
-end
-
-def create_session_start_time_cookie
+def current_time_in_millis
   DateTime.now.to_i * 1000
-end
-
-def api_uri(path)
-  URI.join(API_HOST, '/api/', path)
 end
 
 def expect_feedback_source_to_be(page, source)
@@ -98,7 +58,7 @@ end
 def create_cookie_hash
   {
       CookieNames::SECURE_COOKIE_NAME => 'my-secure-cookie',
-      CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => create_session_start_time_cookie,
+      CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => current_time_in_millis,
       CookieNames::SESSION_ID_COOKIE_NAME => 'my-session-id-cookie',
   }
 end

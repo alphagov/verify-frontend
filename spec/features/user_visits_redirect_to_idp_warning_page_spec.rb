@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'api_test_helper'
 require 'i18n'
 
 RSpec.describe 'When the user visits the redirect to IDP warning page' do
@@ -6,14 +7,6 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
   let(:location) { '/test-idp-request-endpoint' }
   let(:selected_evidence) { { phone: %w(mobile_phone smart_phone), documents: %w(passport) } }
-  let(:response) {
-    {
-      'location' => location,
-      'samlRequest' => 'a-saml-request',
-      'relayState' => 'a-relay-state',
-      'registration' => true
-    }
-  }
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:given_an_idp_with_no_display_data) {
     page.set_rack_session(
@@ -44,14 +37,10 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     )
   }
   let(:select_idp_stub_request) {
-    stub_request(:put, api_uri('session/select-idp'))
-      .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => true })
-      .to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
-  }
-  let(:stub_idp_authn_request) {
-    stub_request(:get, api_uri('session/idp-authn-request'))
-      .with(query: { 'originatingIp' => originating_ip })
-      .to_return(body: response.to_json)
+    stub_session_select_idp_request(
+      encrypted_entity_id,
+       'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => true
+    )
   }
 
   before(:each) do
@@ -97,7 +86,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     visit '/redirect-to-idp-warning'
 
     select_idp_stub_request
-    stub_idp_authn_request
+    stub_session_idp_authn_request(originating_ip, location, false)
 
     piwik_request = {
       '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
@@ -116,20 +105,19 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP on Continue' do
+      piwik_request = {
+        '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
+        'action_name' => "IDCorp was chosen for registration (recommended) with evidence #{selected_evidence.values.flatten.sort.join(', ')}",
+      }
+      stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+      piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
       stub_federation
       given_a_session_with_document_evidence
-
       visit '/redirect-to-idp-warning'
 
       select_idp_stub_request
-      stub_idp_authn_request
+      stub_session_idp_authn_request(originating_ip, location, true)
       expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
-
-      piwik_request = {
-          '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
-          'action_name' => "IDCorp was chosen for registration (recommended) with evidence #{selected_evidence.values.flatten.sort.join(', ')}",
-      }
-      piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 
       click_button 'Continue to IDCorp'
 
@@ -151,7 +139,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     visit '/redirect-to-idp-warning'
 
     select_idp_stub_request
-    stub_idp_authn_request
+    stub_session_idp_authn_request(originating_ip, location, false)
 
     piwik_request = {
         '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",

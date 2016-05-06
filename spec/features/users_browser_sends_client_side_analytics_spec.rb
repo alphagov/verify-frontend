@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'api_test_helper'
 require 'mock_piwik_middleware'
 require 'models/cookie_names'
 require 'sinatra/base'

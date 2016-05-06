@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'api_test_helper'
 require 'i18n'
 
 RSpec.describe 'When the user visits the choose a certified company page' do

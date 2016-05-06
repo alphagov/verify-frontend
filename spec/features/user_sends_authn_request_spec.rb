@@ -1,10 +1,11 @@
 require 'feature_helper'
+require 'api_test_helper'
 require 'models/session_proxy'
 
 RSpec.describe 'user sends authn requests' do
   let(:api_saml_endpoint) { api_uri('session') }
   context 'and it is received successfully' do
-    let(:session_start_time) { create_session_start_time_cookie }
+    let(:session_start_time) { current_time_in_millis }
     it 'will redirect the user to /start' do
       stub_federation
       session = {

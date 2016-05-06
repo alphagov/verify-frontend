@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'api_test_helper'
 require 'models/cookie_names'
 
 RSpec.describe 'When the user visits the about certified companies page' do

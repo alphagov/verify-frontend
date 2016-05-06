@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'api_test_helper'
 
 RSpec.describe 'When the user visits the will-not-work-without-uk-address page' do
   before(:each) do

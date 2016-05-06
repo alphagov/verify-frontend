@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'api_test_helper'
 
 RSpec.describe 'When the user visits the unlikely-to-verify page' do
   before(:each) do

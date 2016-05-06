@@ -1,11 +1,10 @@
 require 'feature_helper'
+require 'api_test_helper'
 
 def given_api_requests_have_been_mocked!
   stub_federation
-  stub_request(:put, api_uri('session/select-idp'))
-    .to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
-  stub_request(:get, api_uri('session/idp-authn-request'))
-    .with(query: { 'originatingIp' => originating_ip }).to_return(body: response.to_json)
+  stub_session_select_idp_request(encrypted_entity_id)
+  stub_session_idp_authn_request(originating_ip, location, false)
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 end
 
@@ -66,14 +65,6 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     ]
   }
   let(:location) { '/test-idp-request-endpoint' }
-  let(:response) {
-    {
-      'location' => location,
-      'samlRequest' => 'a-saml-request',
-      'relayState' => 'a-relay-state',
-      'registration' => false
-    }
-  }
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
   let(:cookies) { set_session_cookies! }

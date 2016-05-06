@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'api_test_helper'
 
 RSpec.describe 'user encounters error page' do
   let(:api_saml_endpoint) { api_uri('session') }
