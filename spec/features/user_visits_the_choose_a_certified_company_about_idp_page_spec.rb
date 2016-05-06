@@ -16,7 +16,7 @@ RSpec.feature 'user visits the choose a certified about idp page', type: :featur
     given_a_session_with_selected_evidence
     visit choose_a_certified_company_about_path('stub-idp-one')
     # expect(page).to have_content("Choose IDCorp")
-    expect(page).to have_content("ID Corp is the premier identity proofing service around. Come get some.")
+    expect(page).to have_content("ID Corp is the premier identity proofing service around.")
     click_button "Choose IDCorp"
     expect(page).to have_current_path(redirect_to_idp_warning_path)
     expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one')

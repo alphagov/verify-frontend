@@ -6,14 +6,11 @@
 @import "helpers/available-languages";
 @import "helpers/panels";
 
-// Verify only elements
-@import "helpers/dialog";
-
 // Specific pages
 @import "pages/start";
 @import "pages/company";
 @import "pages/select-documents";
-@import "pages/other-ways";
+@import "pages/config_provided_html";
 @import "pages/select-phone";
 @import "pages/choose_a_certified_company";
 

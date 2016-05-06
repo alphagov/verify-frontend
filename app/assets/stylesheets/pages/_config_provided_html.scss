@@ -1,0 +1,12 @@
+.other-ways-to-complete-transaction,
+.about-idp-content {
+  strong {
+    font-weight: bold;
+  }
+
+  // scss-lint:disable PlaceholderInExtend
+  ul {
+    @extend .list;
+    @extend .list-bullet;
+  }
+}

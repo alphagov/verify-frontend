@@ -6,8 +6,10 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <h1 class="heading-large"><%= @idp.display_name %></h1>
-      <p class="subtitle"><%= t 'hub.choose_a_certified_company.about.information_provided_by', name: @idp.display_name %></p>
-      <p><%= @idp.about_content.html_safe %></p>
+      <div class="about-idp-content">
+        <p class="subtitle"><%= t 'hub.choose_a_certified_company.about.information_provided_by', name: @idp.display_name %></p>
+        <p><%= @idp.about_content.html_safe %></p>
+      </div>
       <%= render partial: 'select_idp_form', locals: {recommended: @recommended, identity_provider: @idp} %>
     </div>
   </div>
