@@ -40,4 +40,14 @@ RSpec.feature 'user visits the choose a certified about idp page', type: :featur
     visit choose_a_certified_company_about_path('foobar')
     expect(page).to have_content(I18n.translate("errors.page_not_found.title"))
   end
+
+  scenario 'user clicks back link from choose-a-certified-company-about page' do
+    entity_id = 'my-entity-id'
+    stub_federation(entity_id)
+    set_session_cookies!
+    given_a_session_with_selected_evidence
+    visit choose_a_certified_company_about_path('stub-idp-one')
+    click_link 'Back'
+    expect(page).to have_current_path(choose_a_certified_company_path)
+  end
 end
