@@ -1,5 +1,9 @@
+// from govuk_frontend_toolkit
 //= require vendor/polyfills/bind
-//= require elements/vendor/details.polyfill
+
+// from govuk_elements
+//= require details.polyfill
+
 //= require jquery
 //= require jquery_ujs
 //= require jquery.validate

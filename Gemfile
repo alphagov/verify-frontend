@@ -34,6 +34,7 @@ gem 'statsd-ruby', '~> 1.3.0'
 
 gem 'govuk_template'
 gem 'govuk_frontend_toolkit'
+gem 'govuk_elements_rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
