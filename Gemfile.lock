@@ -55,7 +55,7 @@ GEM
       puma
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
-    concurrent-ruby (1.0.1)
+    concurrent-ruby (1.0.2)
     connection_pool (2.2.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -77,6 +77,10 @@ GEM
     govuk-lint (1.0.0)
       rubocop (~> 0.39.0)
       scss_lint (~> 0.44.0)
+    govuk_elements_rails (1.1.4)
+      govuk_frontend_toolkit (>= 4.10.0)
+      rails (>= 4.1.0)
+      sass (>= 3.2.0)
     govuk_frontend_toolkit (4.10.0)
       rails (>= 3.1.0)
       sass (>= 3.2.0)
@@ -277,6 +281,7 @@ DEPENDENCIES
   connection_pool
   dotenv-rails
   govuk-lint
+  govuk_elements_rails
   govuk_frontend_toolkit
   govuk_template
   headless
