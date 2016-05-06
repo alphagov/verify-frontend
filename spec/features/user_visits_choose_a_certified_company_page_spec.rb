@@ -77,15 +77,22 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     visit '/choose-a-certified-company'
 
     within('#non-matching-idps') do
-      click_link 'About IDCorp'
-      within('#about-stub-idp-one') do
-        click_button 'Choose IDCorp'
-      end
+      click_button 'Choose IDCorp'
     end
 
     expect(page).to have_current_path(redirect_to_idp_warning_path)
     expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one')
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql false
+  end
+
+  it 'redirects to the choose a certified company about page when selecting About link' do
+    entity_id = 'http://idcorp.com'
+    stub_federation(entity_id)
+    visit '/choose-a-certified-company'
+
+    click_link 'About IDCorp'
+
+    expect(page).to have_current_path(choose_a_certified_company_about_path('stub-idp-one'))
   end
 
   it 'displays the page in Welsh' do

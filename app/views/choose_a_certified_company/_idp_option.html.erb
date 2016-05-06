@@ -2,7 +2,7 @@
   <div class="company-logo">
     <%= image_tag identity_provider.logo_path, alt: identity_provider.display_name %>
     <p class="company-about">
-      <%= link_to(t('hub.choose_a_certified_company.about_idp', name: identity_provider.display_name), "#about-#{identity_provider.simple_id}", {class: 'js-show js-dialog'}) %>
+      <%= link_to(t('hub.choose_a_certified_company.about_idp', name: identity_provider.display_name), choose_a_certified_company_about_path(identity_provider.simple_id)) %>
     </p>
   </div>
   <% button_class = recommended ? 'button' : 'button-link' %>
@@ -18,23 +18,4 @@
       <%= f.hidden_field :entity_id %>
       <%= f.hidden_field :simple_id %>
   <% end %>
-  <dialog aria-labelledby="dialog-title-<%= identity_provider.simple_id %>" id="about-<%= identity_provider.simple_id %>">
-    <div class="dialog-inner"><h3 class="heading-medium" id="dialog-title-<%= identity_provider.simple_id %>"><%= identity_provider.display_name %></h3>
-      <%= form_for(identity_provider, url: '', html: {class: 'js-show'}) do |f| %>
-          <%= f.button t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
-                         class: button_class,
-                         name: identity_provider.simple_id,
-                         type: 'submit',
-                         value: identity_provider.display_name
-          %>
-          <%= hidden_field_tag 'selected-idp', identity_provider.entity_id %>
-          <%= hidden_field_tag 'recommended-idp', recommended %>
-          <%= f.hidden_field :entity_id %>
-          <%= f.hidden_field :simple_id %>
-      <% end %>
-      <p class="subtitle"><%= t 'hub.choose_a_certified_company.dialog.information_provided_by', name: identity_provider.display_name %></p>
-      <p><%= identity_provider.about_content.html_safe %></p>
-      <%= link_to t('hub.choose_a_certified_company.dialog.close'), '#', {class: 'dialog-close js-dialog-close js-show', role: 'button'} %>
-    </div>
-  </dialog>
 </div>
