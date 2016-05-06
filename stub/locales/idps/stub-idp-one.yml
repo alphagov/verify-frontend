@@ -2,6 +2,7 @@ en:
   idps:
     stub-idp-one:
       name: "IDCorp"
+      tagline: "a really cool identity provider"
       about: |
           <p>ID Corp is the premier identity proofing service around.</p>
           <ul>

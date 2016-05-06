@@ -15,6 +15,7 @@ module Display
       requirements = ['requirement 1', 'requirement 2']
 
       expect(translator).to receive(:translate).with('idps.test-simple-id.name').and_return('Test Display Name')
+      expect(translator).to receive(:translate).with('idps.test-simple-id.tagline').and_return('A great tagline')
       expect(translator).to receive(:translate).with('idps.test-simple-id.about').and_return('Test About Content')
       expect(translator).to receive(:translate).with('idps.test-simple-id.requirements').and_return(requirements)
       expect(translator).to receive(:translate).with('idps.test-simple-id.special_no_docs_instructions_html').and_return('instructions html')
@@ -24,6 +25,7 @@ module Display
       expected_result = ViewableIdentityProvider.new(
         idp,
         'Test Display Name',
+        'A great tagline',
         '/stub-logos/test-simple-id.png',
         '/stub-logos/white/test-simple-id.png',
         'Test About Content',

@@ -12,7 +12,7 @@
               <div class="company-inner">
                 <div class="company-logo">
                   <div class="company-logo-inner">
-                    <%= image_tag identity_provider.logo_path, alt: identity_provider.display_name %>
+                    <%= image_tag identity_provider.logo_path, alt: idp_tagline(identity_provider) %>
                   </div>
                 </div>
                 <%= form_tag({}, {class: 'idp-option js-idp-form'}) do %>

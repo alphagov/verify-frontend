@@ -6,7 +6,7 @@
 <ul class="list-companies">
   <% @identity_providers.each do |idp| %>
       <li>
-        <%= image_tag idp.white_logo_path, alt: idp.display_name %>
+        <%= image_tag idp.white_logo_path, alt: idp_tagline(idp) %>
       </li>
   <% end %>
 </ul>

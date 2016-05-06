@@ -37,4 +37,8 @@ module ApplicationHelper
   def fingerprint_path
     FINGERPRINT_CONFIG.endpoint
   end
+
+  def idp_tagline(identity_provider)
+    identity_provider.display_name + (identity_provider.tagline.nil? ? '' : ": #{identity_provider.tagline}")
+  end
 end
