@@ -78,14 +78,6 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
   let(:cookies) { set_session_cookies! }
 
-  def then_some_idps_have_taglines
-    expect(page).to have_css('img[alt="IDCorp: a really cool identity provider"]')
-  end
-
-  def then_some_idps_do_not_have_taglines
-    expect(page).to have_css('img[alt="Bob’s Identity Service"]')
-  end
-
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
@@ -102,8 +94,8 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     it 'shows the IDP tag line' do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
-      then_some_idps_have_taglines
-      then_some_idps_do_not_have_taglines
+      expect(page).to have_css('img[alt="IDCorp: a really cool identity provider"]')
+      expect(page).to have_css('img[alt="Bob’s Identity Service"]')
     end
 
     it 'will display the interstitial page and on submit will redirect the user to IDP' do
