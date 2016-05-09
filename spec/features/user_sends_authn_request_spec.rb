@@ -2,21 +2,6 @@ require 'feature_helper'
 require 'api_test_helper'
 require 'models/session_proxy'
 
-def stub_api_saml_endpoint
-  session = {
-    'transactionSimpleId' => 'test-rp',
-    'sessionStartTime' => '32503680000000',
-    'sessionId' => 'session_id',
-    'secureCookie' => 'secure_cookie'
-  }
-  authn_request_body = {
-    SessionProxy::PARAM_SAML_REQUEST => 'my-saml-request',
-    SessionProxy::PARAM_RELAY_STATE => 'my-relay-state',
-    SessionProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
-  }
-  stub_request(:post, api_saml_endpoint).with(body: authn_request_body).to_return(body: session.to_json, status: 201)
-end
-
 RSpec.describe 'user sends authn requests' do
   let(:api_saml_endpoint) { api_uri('session') }
 

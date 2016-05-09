@@ -1,13 +1,13 @@
 <% content_for :page_title, t('hub.confirm_your_identity.title') %>
 <% content_for :feedback_source, 'CONFIRM_YOUR_IDENTITY' %>
 
-<div class="verify-logo">
+<div class="verify-logo heading-banner-top-margin">
   <%= image_tag 'govuk-verify-small-black-text.png', alt: 'GOV.UK VERIFY' %>
 </div>
 
 <p><%= t 'hub.confirm_your_identity.need_to_signin_again', transaction_name: @transaction_name %></p>
 
-<div class="grid-row js-continue-to-idp" data-location="/select-idp">
+<div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'select_idp', action: 'select_idp', locale: I18n.locale)  %>">
   <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers, non_repudiation: true} %>
   <%= render partial: 'shared/continue_to_idp_form' %>
 </div>

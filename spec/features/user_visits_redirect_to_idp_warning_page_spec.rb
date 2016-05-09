@@ -103,35 +103,6 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   end
 
-  context 'with JS enabled', js: true do
-    it 'will redirect the user to the IDP on Continue' do
-      piwik_request = {
-        '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
-        'action_name' => "IDCorp was chosen for registration (recommended) with evidence #{selected_evidence.values.flatten.sort.join(', ')}",
-      }
-      stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-      piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
-      stub_federation
-      given_a_session_with_document_evidence
-      visit '/redirect-to-idp-warning'
-
-      select_idp_stub_request
-      stub_session_idp_authn_request(originating_ip, location, true)
-      expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
-
-      click_button 'Continue to IDCorp'
-
-      expect(select_idp_stub_request).to have_been_made.once
-      expect(piwik_registration_virtual_page).to have_been_made.once
-      expect_cookie('verify-journey-hint', encrypted_entity_id)
-      expect(cookie_value('verify-front-journey-hint')).to_not be_nil
-      expect(page).to have_current_path(location)
-      expect(page).to have_content("SAML Request is 'a-saml-request'")
-      expect(page).to have_content("relay state is 'a-relay-state'")
-      expect(page).to have_content("registration is 'true'")
-    end
-  end
-
   it 'goes to "redirect-to-idp" page on submit for non-recommended idp' do
     stub_federation
     given_a_session_with_non_recommended_idp
@@ -183,5 +154,34 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     expect(page).to have_content 'You’ll now verify your identity on No Docs IDP’s website.'
     expect(page).to have_content 'Additional IDP Instructions'
     expect(page).to have_link 'other ways to register for an identity profile', href: other_ways_to_access_service_path
+  end
+
+  context 'with JS enabled', js: true do
+    it 'will redirect the user to the IDP on Continue' do
+      piwik_request = {
+        '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
+        'action_name' => "IDCorp was chosen for registration (recommended) with evidence #{selected_evidence.values.flatten.sort.join(', ')}",
+      }
+      stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+      piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
+      stub_federation
+      given_a_session_with_document_evidence
+      visit '/redirect-to-idp-warning'
+
+      select_idp_stub_request
+      stub_session_idp_authn_request(originating_ip, location, true)
+      expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
+
+      click_button 'Continue to IDCorp'
+
+      expect(select_idp_stub_request).to have_been_made.once
+      expect(piwik_registration_virtual_page).to have_been_made.once
+      expect_cookie('verify-journey-hint', encrypted_entity_id)
+      expect(cookie_value('verify-front-journey-hint')).to_not be_nil
+      expect(page).to have_current_path(location)
+      expect(page).to have_content("SAML Request is 'a-saml-request'")
+      expect(page).to have_content("relay state is 'a-relay-state'")
+      expect(page).to have_content("registration is 'true'")
+    end
   end
 end

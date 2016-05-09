@@ -45,12 +45,12 @@ Rails.application.routes.draw do
     get 'unlikely_to_verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
     get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
-    put 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
     get 'privacy_notice', to: 'privacy_notice#index', as: :privacy_notice
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
   end
 
+  put 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status

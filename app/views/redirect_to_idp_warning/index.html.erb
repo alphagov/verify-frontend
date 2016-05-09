@@ -1,7 +1,7 @@
 <% content_for :page_title, t('hub.redirect_to_idp_warning.title') %>
 <% content_for :feedback_source, 'REDIRECT_TO_IDP_WARNING_PAGE' %>
 
-<div class="grid-row js-continue-to-idp" data-location="<%= redirect_to_idp_warning_submit_ajax_path %>">
+<div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'redirect_to_idp_warning', action: 'continue_ajax', locale: I18n.locale)  %>">
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'hub.redirect_to_idp_warning.continue_to_idp', name: @idp.display_name %></h1>
     <% if @recommended %>
