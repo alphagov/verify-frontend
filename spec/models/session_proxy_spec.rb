@@ -167,4 +167,39 @@ describe SessionProxy do
       }.to raise_error Api::Response::ModelError, "Saml request can't be blank"
     end
   end
+
+  describe '#idp_authn_response' do
+    it 'should return a confirmation result' do
+      ip_address = '1.2.3.4'
+      expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect(api_client).to receive(:put)
+        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request)
+        .and_return(
+          'idpResult' => 'some-location',
+          'isRegistration' => false,
+        )
+
+      response = session_proxy.idp_authn_response('saml-response', 'relay-state')
+
+      attributes = {
+        idp_result: 'some-location',
+        is_registration: false,
+      }
+      expect(response).to have_attributes(attributes)
+    end
+
+    it 'should raise an error when fields are missing from the api response' do
+      ip_address = '1.2.3.4'
+      expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect(api_client).to receive(:put)
+        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request)
+        .and_return({})
+
+      expect {
+        session_proxy.idp_authn_response('saml-response', 'relay-state')
+      }.to raise_error Api::Response::ModelError, "Idp result can't be blank, Is registration is not included in the list"
+    end
+  end
 end

@@ -3,7 +3,9 @@ class SessionProxy
   FEDERATION_INFO_PATH = "#{PATH}/federation".freeze
   SELECT_IDP_PATH = "#{PATH}/select-idp".freeze
   IDP_AUTHN_REQUEST_PATH = "#{PATH}/idp-authn-request".freeze
+  IDP_AUTHN_RESPONSE_PATH = "#{PATH}/idp-authn-response".freeze
   PARAM_SAML_REQUEST = 'samlRequest'.freeze
+  PARAM_SAML_RESPONSE = 'samlResponse'.freeze
   PARAM_RELAY_STATE = 'relayState'.freeze
   PARAM_ORIGINATING_IP = 'originatingIp'.freeze
   PARAM_ENTITY_ID = 'entityId'.freeze
@@ -55,5 +57,15 @@ class SessionProxy
   def idp_authn_request(cookies)
     response = @api_client.get(IDP_AUTHN_REQUEST_PATH, cookies: select_cookies(cookies, CookieNames.all_cookies), params: { PARAM_ORIGINATING_IP => originating_ip })
     OutboundSamlMessage.new(response || {}).tap(&:validate)
+  end
+
+  def idp_authn_response(saml_response, relay_state)
+    body = {
+        PARAM_RELAY_STATE => relay_state,
+        PARAM_SAML_RESPONSE => saml_response,
+        PARAM_ORIGINATING_IP => originating_ip
+    }
+    response = @api_client.put(IDP_AUTHN_RESPONSE_PATH, body)
+    IdpAuthnResponse.new(response || {}).tap(&:validate)
   end
 end
