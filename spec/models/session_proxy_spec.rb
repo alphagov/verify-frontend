@@ -54,7 +54,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
         session_proxy.create_session('my-saml-request', 'my-relay-state')
-      }.to raise_error Api::Response::ModelError, "Session can't be blank, Session start time can't be blank, Secure cookie can't be blank"
+      }.to raise_error Api::Response::ModelError, "Session can't be blank, Session start time can't be blank, Secure cookie can't be blank, Transaction simple can't be blank"
     end
   end
 
