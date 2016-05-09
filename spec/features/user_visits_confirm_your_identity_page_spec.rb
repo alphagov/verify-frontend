@@ -8,15 +8,20 @@ def stub_api_and_analytics(idp_location)
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 end
 
+def set_up_session(idp_entity_id)
+  stub_api_and_analytics(idp_location)
+  set_session_cookies!
+  set_journey_hint_cookie(idp_entity_id)
+  page.set_rack_session(transaction_simple_id: 'test-rp')
+end
+
 RSpec.describe 'When the user visits the confirm-your-identity page' do
   let(:idp_location) { '/test-idp-request-endpoint' }
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
 
   describe 'and the journey hint cookie is set' do
     before(:each) do
-      stub_api_and_analytics(idp_location)
-      set_session_cookies!
-      set_journey_hint_cookie('http://idcorp.com')
+      set_up_session('http://idcorp.com')
     end
 
     it 'displays the page in Welsh' do
@@ -107,9 +112,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
     end
 
     it 'should redirect to sign in page when the journey cookie has an invalid entity ID' do
-      stub_federation
-      set_session_cookies!
-      set_journey_hint_cookie('bad-entity-id')
+      set_up_session('bad-entity-id')
       visit '/confirm-your-identity'
       expect(page).to have_title 'Sign in with a certified company - GOV.UK Verify - GOV.UK'
       expect(page).to have_current_path(sign_in_path)

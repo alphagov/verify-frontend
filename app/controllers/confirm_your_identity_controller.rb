@@ -7,7 +7,7 @@ class ConfirmYourIdentityController < ApplicationController
     else
       entity_id = journey_hint['entity_id']
 
-      @transaction_name = TRANSACTION_INFO_GETTER.get_info(cookies).name
+      @transaction_name = TRANSACTION_INFO_GETTER.get_info(session).name
       @identity_providers = entity_id.nil? ? [] : retrieve_last_used_idp(entity_id)
 
       if @identity_providers.empty?

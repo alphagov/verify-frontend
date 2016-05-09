@@ -48,13 +48,13 @@ Rails.application.routes.draw do
     put 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
     get 'privacy_notice', to: 'privacy_notice#index', as: :privacy_notice
     get 'cookies', to: 'cookies#index', as: :cookies
+    get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
   end
 
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
   put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
-  get 'confirm-your-identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")

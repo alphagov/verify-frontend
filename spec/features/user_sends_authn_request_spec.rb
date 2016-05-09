@@ -4,7 +4,7 @@ require 'models/session_proxy'
 
 def stub_api_saml_endpoint
   session = {
-    'transactionSimpleId' => 'my_transaction_simple_id',
+    'transactionSimpleId' => 'test-rp',
     'sessionStartTime' => '32503680000000',
     'sessionId' => 'session_id',
     'secureCookie' => 'secure_cookie'
@@ -31,7 +31,7 @@ RSpec.describe 'user sends authn requests' do
 
       expect(page).to have_title 'Start - GOV.UK Verify - GOV.UK'
 
-      expect(page.get_rack_session['transaction_simple_id']).to eql 'my_transaction_simple_id'
+      expect(page.get_rack_session['transaction_simple_id']).to eql 'test-rp'
       expect(cookie_value(CookieNames::SECURE_COOKIE_NAME)).not_to be_empty
 
       cookies = Capybara.current_session.driver.request.cookies

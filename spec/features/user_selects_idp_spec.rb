@@ -17,7 +17,7 @@ def then_custom_variable_reported_for_sign_in
 end
 
 def given_im_on_the_sign_in_page
-  cookies
+  set_session_cookies!
   visit '/sign-in'
 end
 
@@ -67,7 +67,6 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   let(:location) { '/test-idp-request-endpoint' }
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
-  let(:cookies) { set_session_cookies! }
 
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP' do
