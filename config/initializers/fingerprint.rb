@@ -1,1 +1,1 @@
-FINGERPRINT_CONFIG = OpenStruct.new(endpoint: '/assets2/fp.gif')
+FINGERPRINT_CONFIG = '/assets2/fp.gif'.freeze

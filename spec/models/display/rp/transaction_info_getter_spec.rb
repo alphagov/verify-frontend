@@ -11,7 +11,7 @@ module Display
 
       it 'should return the transaction info from session' do
         simple_id = 'simple-id'
-        other_ways_data = OpenStruct.new(other_ways_description: 'Other ways description', other_ways_text: 'Other ways text')
+        other_ways_data = Repository::RpDisplayData.new('Other ways description', 'Other ways text')
         expect(repository).to receive(:fetch).with(simple_id).and_return(other_ways_data)
         result = TransactionInfoGetter.new(session_proxy, repository).get_info(session)
         expect(result).to eql(other_ways_data)
