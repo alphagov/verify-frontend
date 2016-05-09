@@ -51,8 +51,8 @@ Rails.application.routes.draw do
   end
 
   put 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
+  put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
-  put 'select-idp', to: 'select_idp#select_idp', as: :select_idp
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
 

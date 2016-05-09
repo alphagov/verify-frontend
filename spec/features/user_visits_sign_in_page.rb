@@ -74,7 +74,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
       then_custom_variable_reported_for_sign_in
-      expect_any_instance_of(SelectIdpController).to receive(:select_idp).and_call_original
+      expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
       when_i_select_an_idp
       then_im_at_the_idp
     end

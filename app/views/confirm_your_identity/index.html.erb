@@ -7,7 +7,7 @@
 
 <p><%= t 'hub.confirm_your_identity.need_to_signin_again', transaction_name: @transaction_name %></p>
 
-<div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'select_idp', action: 'select_idp', locale: I18n.locale)  %>">
+<div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale)  %>">
   <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers, non_repudiation: true} %>
   <%= render partial: 'shared/continue_to_idp_form' %>
 </div>
