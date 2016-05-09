@@ -4,7 +4,7 @@ class SamlController < ApplicationController
 
   def request_post
     reset_session
-    response = authn_request_proxy.create_session(params['SAMLRequest'], params['RelayState'])
+    response = SESSION_PROXY.create_session(params['SAMLRequest'], params['RelayState'])
 
     set_secure_cookie(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME, response.session_start_time)
     set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, response.session_id)
@@ -23,9 +23,8 @@ class SamlController < ApplicationController
     end
   end
 
-private
-
-  def authn_request_proxy
-    SESSION_PROXY
+  def response_post
+    SESSION_PROXY.idp_authn_response(params['SAMLResponse'], params['RelayState'])
+    redirect_to confirmation_path
   end
 end
