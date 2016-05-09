@@ -9,6 +9,10 @@ en:
             <li>Identity</li>
             <li>Verification</li>
           </ul>
+          <ol>
+            <li>Tell us about yourself</li>
+            <li>Create a password</li>
+          </ol>
       requirements:
         - a UK passport
         - a UK photocard driving licence

@@ -9,4 +9,8 @@
     @extend .list;
     @extend .list-bullet;
   }
+
+  ol {
+    @extend .list-number;
+  }
 }
