@@ -1,4 +1,6 @@
 class SignInController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:select_idp]
+
   def index
     federation_info = SESSION_PROXY.federation_info_for_session(cookies)
 
