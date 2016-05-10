@@ -24,7 +24,22 @@ class SamlController < ApplicationController
   end
 
   def response_post
-    SESSION_PROXY.idp_authn_response(params['SAMLResponse'], params['RelayState'])
-    redirect_to confirmation_path
+    response = SESSION_PROXY.idp_authn_response(params['SAMLResponse'], params['RelayState'])
+    case response.idp_result
+    when 'SUCCESS'
+      if response.is_registration
+        redirect_to confirmation_path
+      else
+        redirect_to response_processing_path
+      end
+    when 'CANCEL'
+      redirect_to start_path
+    else
+      if response.is_registration
+        redirect_to failed_registration_path
+      else
+        redirect_to failed_sign_in_path
+      end
+    end
   end
 end
