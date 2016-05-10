@@ -2,6 +2,12 @@
 // Used the sign-in page
 // =====================
 
+.company-wrapper {
+  &.clear-left {
+    clear: left;
+  }
+}
+
 .company {
   border-bottom: 1px solid $border-colour;
   text-align: center;

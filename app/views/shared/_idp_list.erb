@@ -1,5 +1,5 @@
-  <% identity_providers.each do |identity_provider| %>
-      <div class="column-one-third">
+  <% identity_providers.each_with_index do |identity_provider, idx| %>
+      <div class="column-one-third company-wrapper <%= idx % 3 == 0 ? 'clear-left' : nil %>">
         <div class="company">
           <div class="company-inner">
             <div class="company-logo">
