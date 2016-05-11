@@ -4,7 +4,7 @@
 
 <h1><%= t 'hub.start.heading' %></h1>
 
-<%= form_tag '', id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate' do %>
+<%= form_tag start_path, id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate' do %>
   <div class="form-group <%= @error_message.present? ? 'error' : '' %>">
     <fieldset>
       <label class="block-label" for="yes" onclick="">
