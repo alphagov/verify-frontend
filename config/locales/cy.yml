@@ -16,10 +16,10 @@ cy:
     choose_a_certified_company: dewis-cwmni-ardystiedig
     choose_a_certified_company_about: dewis-cwmni-ardystiedig/:company
     why_companies: pam-cwmniau
-    unlikely_to_verify: unlikely-to-verify-cy
-    redirect_to_idp_warning: redirect-to-idp-warning-cy
-    privacy_notice: privacy-notice-cy
-    cookies: cookies-cy
+    unlikely_to_verify: anhebygol-i-ddilysu
+    redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
+    privacy_notice: hysbysiad-preifatrwydd
+    cookies: cwcis
     confirm_your_identity: confirm-your-identity-cy
   navigation:
     next: Nesaf
@@ -52,7 +52,7 @@ cy:
       about_link: Dechreuwch nawr
       registration_message_html: Os nad oes gennych gyfrif hunaniaeth, gallwch %{href}.
       select_idp: Ddewis %{name}
-      sign_in_idp: Sign in with %{name}
+      sign_in_idp: Llofnodi i mewn gyda %{name}
       forgot_company: Ni allaf gofio pa gwmni wnaeth fy nilysu
     cookies:
       title: Cwcis
@@ -202,24 +202,24 @@ cy:
         <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Nid oes effaith ar eich sgor credyd.</p>
     unlikely_to_verify:
-      title: Other ways to access the service
-      heading: GOV.UK Verify won’t work for you
-      explanation: You need a valid passport, photocard driving licence or national identity card (ID card) to get your identity verified.
+      title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
+      heading: Ni fydd GOV.UK Verify yn gweithio i chi
+      explanation: Rydych angen pasport, trwydded yrru llun neu gerdyn adnabod cenedlaethol (cerdyn ID) dilys i gael eich hunaniaeth wedi’i ddilysu.
     redirect_to_idp_warning:
-      title: "You'll now be redirected - GOV.UK Verify - GOV.UK"
-      continue_to_idp: Continue to %{name}
+      title: "Byddwch nawr yn cael eich ailgyfeirio"
+      continue_to_idp: Parhau i %{name}
       recommended:
-        p1: You’ll now verify your identity on %{name}’s website.
-        p2: They’ll give you an identity account you can use wherever you see the GOV.UK Verify logo.
+        p1: Byddwch nawr yn dilysu eich hunaniaeth ar wefan %{name}.
+        p2: Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio ble bynnag rydych yn gweld logo GOV.UK Verify.
       non_recommended:
-        requirements: "To be verified with %{name}, you’ll need:"
-      other_ways_link: "other ways to %{transaction}"
-      no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
+        requirements: "I gael eich dilysu gyda %{name}, byddwch angen:"
+      other_ways_link: "ffyrdd eraill i %{transaction}"
+      no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
     confirm_your_identity:
-      title: Confirm your identity
-      use_other_idp: If this isn’t the company that verified you, %{sign_in_link}.
-      sign_in_link_message: sign in with a different certified company
-      need_to_signin_again: In order to %{transaction_name}, you need to sign in again with your certified company. You don’t need to register again.
+      title: Cadarnhau eich hunaniaeth
+      use_other_idp: Os nad hwn yw’r cwmni a wnaeth eich dilysu, %{sign_in_link}.
+      sign_in_link_message: llofnodwch i mewn gyda chwmni ardystiedig gwahanol
+      need_to_signin_again: Er mwyn %{transaction_name}, mae angen i chi lofnodi i mewn eto gyda’ch cwmni ardystiedig. Nid oes angen i chi gofrestru eto.
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

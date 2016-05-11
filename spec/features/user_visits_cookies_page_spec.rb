@@ -19,7 +19,7 @@ RSpec.describe 'When the user visits the cookies page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/cookies-cy'
+    visit '/cwcis'
     expect(page).to have_content("Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg.")
   end
 

@@ -40,7 +40,7 @@ RSpec.describe 'user sends authn requests' do
       stub_api_saml_endpoint
       visit('/test-saml')
       click_button 'saml-post-journey-hint'
-      expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
+      expect(page).to have_title 'Cadarnhau eich hunaniaeth - GOV.UK Verify - GOV.UK'
       expect(page).to have_css 'html[lang=cy]'
     end
   end

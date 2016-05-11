@@ -57,9 +57,9 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   it 'supports the welsh language' do
     given_a_session_with_document_evidence
-    visit '/redirect-to-idp-warning-cy'
+    visit '/ailgyfeirio-i-rybudd-idp'
 
-    expect(page).to have_title "You'll now be redirected - GOV.UK Verify - GOV.UK"
+    expect(page).to have_title "Byddwch nawr yn cael eich ailgyfeirio - GOV.UK Verify - GOV.UK"
     expect(page).to have_css 'html[lang=cy]'
   end
 
