@@ -1,0 +1,18 @@
+.cookies-table {
+  td {
+    vertical-align: top;
+    width: 30%;
+  }
+
+  td+td {
+    width: 45%;
+  }
+
+  td+td+td {
+    width: 25%;
+  }
+
+  var {
+    font-style: normal;
+  }
+}
