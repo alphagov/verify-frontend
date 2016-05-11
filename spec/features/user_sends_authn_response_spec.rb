@@ -18,22 +18,28 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
 
   it 'will redirect the user to /confirmation when successfully registered' do
     api_request = stub_api_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => true)
+    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/confirmation'
     expect(api_request).to have_been_made.once
+    piwik_request = { 'action_name' => 'Success - REGISTER_WITH_IDP' }
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
 
   it 'will redirect the user to /start when they cancel registration at the IDP' do
     api_request = stub_api_response(session_id, 'idpResult' => 'CANCEL', 'isRegistration' => true)
 
+    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/start'
     expect(api_request).to have_been_made.once
+    piwik_request = { 'action_name' => 'Cancel - REGISTER_WITH_IDP' }
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
 
   it 'will redirect the user to /failed-registration when they failed registration at the IDP' do
@@ -48,11 +54,14 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   it 'will redirect the user to /failed-sign-in when they failed sign in at the IDP' do
     api_request = stub_api_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => false)
 
+    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/failed-sign-in'
     expect(api_request).to have_been_made.once
+    piwik_request = { 'action_name' => 'Failure - SIGN_IN_WITH_IDP' }
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
 
   it 'will redirect the user to /response-processing on successful sign in at the IDP' do

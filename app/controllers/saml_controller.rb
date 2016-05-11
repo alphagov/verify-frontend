@@ -2,6 +2,9 @@ class SamlController < ApplicationController
   protect_from_forgery except: [:request_post, :response_post]
   skip_before_action :validate_cookies
 
+  SIGNING_IN_STATE = 'SIGN_IN_WITH_IDP'.freeze
+  REGISTERING_STATE = 'REGISTER_WITH_IDP'.freeze
+
   def request_post
     reset_session
     response = SESSION_PROXY.create_session(params['SAMLRequest'], params['RelayState'])
@@ -29,16 +32,20 @@ class SamlController < ApplicationController
     end
 
     response = SESSION_PROXY.idp_authn_response(cookies, params['SAMLResponse'], params['RelayState'])
+    user_state = response.is_registration ? REGISTERING_STATE : SIGNING_IN_STATE
     case response.idp_result
     when 'SUCCESS'
+      ANALYTICS_REPORTER.report(request, "Success - #{user_state}")
       if response.is_registration
         redirect_to confirmation_path
       else
         redirect_to response_processing_path
       end
     when 'CANCEL'
+      ANALYTICS_REPORTER.report(request, "Cancel - #{user_state}")
       redirect_to start_path
     else
+      ANALYTICS_REPORTER.report(request, "Failure - #{user_state}")
       if response.is_registration
         redirect_to failed_registration_path
       else
