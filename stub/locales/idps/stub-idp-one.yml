@@ -13,7 +13,7 @@ en:
             <li>Tell us about yourself</li>
             <li>Create a password</li>
           </ol>
-          Once you get verified you can transact with online government services.
+          <p>Once you get verified you can transact with online government services.</p>
       requirements:
         - a UK passport
         - a UK photocard driving licence
