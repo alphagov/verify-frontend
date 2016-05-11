@@ -11,6 +11,6 @@
 <% end -%>
 <%= form_tag('/SAML2/SSO/Response/POST') do -%>
     <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
-    <%= hidden_field_tag('RelayState', 'my-relay-state') %>
+    <%= hidden_field_tag('RelayState', params['session-id']) %>
     <div><%= submit_tag 'saml-response-post' %></div>
 <% end -%>

@@ -24,6 +24,10 @@ class SamlController < ApplicationController
   end
 
   def response_post
+    if params['RelayState'] != cookies[CookieNames::SESSION_ID_COOKIE_NAME]
+      raise StandardError, 'Relay state should match session id'
+    end
+
     response = SESSION_PROXY.idp_authn_response(cookies, params['SAMLResponse'], params['RelayState'])
     case response.idp_result
     when 'SUCCESS'

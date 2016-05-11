@@ -2,11 +2,24 @@ require 'feature_helper'
 require 'api_test_helper'
 
 RSpec.describe 'User returns from an IDP with an AuthnResponse' do
-  it 'will redirect the user to /confirmation when successfully registered' do
-    set_session_cookies!
-    api_request = stub_api_response('idpResult' => 'SUCCESS', 'isRegistration' => true)
+  let(:session_cookies) { set_session_cookies! }
+  let(:session_id) { session_cookies[CookieNames::SESSION_ID_COOKIE_NAME] }
 
-    visit('/test-saml')
+  before(:each) { session_cookies }
+
+  it 'will show the something went wrong page when relay state and session id mismatch' do
+    stub_transactions_list
+
+    visit('/test-saml?session-id=junk')
+    click_button 'saml-response-post'
+
+    expect(page).to have_content 'something went wrong'
+  end
+
+  it 'will redirect the user to /confirmation when successfully registered' do
+    api_request = stub_api_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => true)
+
+    visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/confirmation'
@@ -14,11 +27,9 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   end
 
   it 'will redirect the user to /start when they cancel registration at the IDP' do
-    set_session_cookies!
+    api_request = stub_api_response(session_id, 'idpResult' => 'CANCEL', 'isRegistration' => true)
 
-    api_request = stub_api_response('idpResult' => 'CANCEL', 'isRegistration' => true)
-
-    visit('/test-saml')
+    visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/start'
@@ -26,9 +37,8 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   end
 
   it 'will redirect the user to /failed-registration when they failed registration at the IDP' do
-    set_session_cookies!
-    api_request = stub_api_response('idpResult' => 'OTHER', 'isRegistration' => true)
-    visit('/test-saml')
+    api_request = stub_api_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => true)
+    visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/failed-registration'
@@ -36,10 +46,9 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   end
 
   it 'will redirect the user to /failed-sign-in when they failed sign in at the IDP' do
-    set_session_cookies!
-    api_request = stub_api_response('idpResult' => 'OTHER', 'isRegistration' => false)
+    api_request = stub_api_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => false)
 
-    visit('/test-saml')
+    visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/failed-sign-in'
@@ -47,11 +56,9 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   end
 
   it 'will redirect the user to /response-processing on successful sign in at the IDP' do
-    set_session_cookies!
+    api_request = stub_api_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => false)
 
-    api_request = stub_api_response('idpResult' => 'SUCCESS', 'isRegistration' => false)
-
-    visit('/test-saml')
+    visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/response-processing'
@@ -61,10 +68,10 @@ end
 
 private
 
-def stub_api_response(response)
+def stub_api_response(relay_state, response)
   authn_response_body = {
     SessionProxy::PARAM_SAML_RESPONSE => 'my-saml-response',
-    SessionProxy::PARAM_RELAY_STATE => 'my-relay-state',
+    SessionProxy::PARAM_RELAY_STATE => relay_state,
     SessionProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
   }
 
