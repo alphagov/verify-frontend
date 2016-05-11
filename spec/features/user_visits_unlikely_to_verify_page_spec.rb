@@ -8,8 +8,8 @@ RSpec.describe 'When the user visits the unlikely-to-verify page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/unlikely-to-verify-cy'
-    expect(page).to have_content('You need a valid passport, photocard driving licence or national identity card (ID card) to get your identity verified.')
+    visit '/anhebygol-i-ddilysu'
+    expect(page).to have_content('Rydych angen pasport, trwydded yrru llun neu gerdyn adnabod cenedlaethol (cerdyn ID) dilys i gael eich hunaniaeth wedi’i ddilysu.')
     expect(page).to have_css 'html[lang=cy]'
   end
 

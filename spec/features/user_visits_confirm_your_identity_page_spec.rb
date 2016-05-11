@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     it 'displays the page in Welsh' do
       visit '/confirm-your-identity-cy'
-      expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
+      expect(page).to have_title 'Cadarnhau eich hunaniaeth - GOV.UK Verify - GOV.UK'
       expect(page).to have_css 'html[lang=cy]'
     end
 
@@ -131,7 +131,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
       visit '/test-saml'
       click_button 'saml-post-journey-hint'
-      expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
+      expect(page).to have_title 'Cadarnhau eich hunaniaeth - GOV.UK Verify - GOV.UK'
       expect(page).to have_current_path('/confirm-your-identity-cy')
       expect(page).to have_css 'html[lang=cy]'
     end
@@ -147,14 +147,14 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
       visit '/redirect-to-idp-warning'
 
       click_link 'Cymraeg'
-      expect(page).to have_current_path('/redirect-to-idp-warning-cy')
+      expect(page).to have_current_path('/ailgyfeirio-i-rybudd-idp')
       click_button 'IDCorp'
 
       stub_api_saml_endpoint
       visit '/test-saml'
       click_button 'saml-post-journey-hint'
 
-      expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
+      expect(page).to have_title 'Cadarnhau eich hunaniaeth - GOV.UK Verify - GOV.UK'
       expect(page).to have_current_path('/confirm-your-identity-cy')
       expect(page).to have_css 'html[lang=cy]'
     end

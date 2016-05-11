@@ -11,9 +11,8 @@ RSpec.describe 'When the user visits the privacy notice page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/privacy-notice-cy'
+    visit '/hysbysiad-preifatrwydd'
     expect(page).to have_content("Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg.")
-    #TODO update test when Welsh translations are in
   end
 
   it 'includes the appropriate feedback source' do
