@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  post 'SAML2/SSO' => 'saml#request_post'
-  post 'SAML2/SSO/Response/POST' => 'saml#response_post'
+  post 'SAML2/SSO' => 'authn_request#rp_request'
+  post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
 
   match "/404", to: "errors#page_not_found", via: :all
