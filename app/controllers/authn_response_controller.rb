@@ -12,24 +12,17 @@ class AuthnResponseController < ApplicationController
 
     response = SESSION_PROXY.idp_authn_response(cookies, params['SAMLResponse'], params['RelayState'])
     user_state = response.is_registration ? REGISTERING_STATE : SIGNING_IN_STATE
+
     case response.idp_result
     when 'SUCCESS'
       ANALYTICS_REPORTER.report(request, "Success - #{user_state}")
-      if response.is_registration
-        redirect_to confirmation_path
-      else
-        redirect_to response_processing_path
-      end
+      redirect_to response.is_registration ? confirmation_path : response_processing_path
     when 'CANCEL'
       ANALYTICS_REPORTER.report(request, "Cancel - #{user_state}")
       redirect_to internationalise_route('start')
     else
       ANALYTICS_REPORTER.report(request, "Failure - #{user_state}")
-      if response.is_registration
-        redirect_to failed_registration_path
-      else
-        redirect_to failed_sign_in_path
-      end
+      redirect_to response.is_registration ? failed_registration_path : failed_sign_in_path
     end
   end
 end
