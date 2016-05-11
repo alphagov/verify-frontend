@@ -19,9 +19,9 @@
 <% end %>
 
 <% content_for :footer_support_links do %>
-  <h2 class="visuallyhidden">Support links</h2>
+  <h2 class="visuallyhidden"><%= t 'footer.support_links' %></h2>
   <ul>
-    <li><a href="https://gov.uk/help">Help</a></li>
+    <li><a href="https://gov.uk/help" hreflang="en"><%= t 'footer.help' %></a></li>
     <li><%= link_to(t('hub.cookies.title'), cookies_path) %></li>
     <li><%= link_to(t('hub.privacy_notice.title'), privacy_notice_path) %></li>
     <li>
@@ -31,7 +31,7 @@
         <%= link_to(t('hub.feedback.title'), feedback_path) %>
     <% end %>
     </li>
-    <li>Built by the <a href="https://gds.blog.gov.uk">Government Digital Service</a></li>
+    <li><%= t 'footer.built_by_the' %> <a href="https://gds.blog.gov.uk" lang="en" hreflang="en">Government Digital Service</a></li>
   </ul>
 <% end %>
 

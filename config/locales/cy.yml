@@ -37,6 +37,10 @@ cy:
   translation_in_progress_banner:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth
+  footer:
+    support_links: Support links
+    help: Help
+    built_by_the: Built by the
   hub:
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
     start:

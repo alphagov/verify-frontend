@@ -34,6 +34,10 @@ en:
     title: This is a trial service.
     feedback_message: Your %{feedback_link} will help us to improve it.
     feedback: feedback
+  footer:
+    support_links: Support links
+    help: Help
+    built_by_the: Built by the
   hub:
     other_ways_heading: Other ways to %{other_ways_description}
     start:
