@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     get 'start', to: 'start#index', as: :start
     post 'start', to: 'start#request_post', as: :start
     get 'sign_in', to: 'sign_in#index', as: :sign_in
-    post 'sign_in', to: 'sign_in#select_idp', as: :sign_in
+    post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
     get 'about', to: 'about#index', as: :about
     get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
     get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts

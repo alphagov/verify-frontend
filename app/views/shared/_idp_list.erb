@@ -7,7 +7,7 @@
                 <%= image_tag identity_provider.logo_path, alt: idp_tagline(identity_provider) %>
               </div>
             </div>
-            <%= form_tag(sign_in_path, {class: 'idp-option js-idp-form'}) do %>
+            <%= form_tag(sign_in_submit_path, {class: 'idp-option js-idp-form'}) do %>
                 <% button_text = local_assigns.fetch(:non_repudiation, false) ? 'hub.signin.sign_in_idp' : 'hub.signin.select_idp' %>
                 <%= button_tag t(button_text, name: identity_provider.display_name),
                                class: "button",
