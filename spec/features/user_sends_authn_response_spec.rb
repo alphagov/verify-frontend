@@ -29,14 +29,15 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
 
-  it 'will redirect the user to /start when they cancel registration at the IDP' do
+  it 'will redirect the user to a localised start page when they cancel registration at the IDP' do
+    set_journey_hint_cookie(nil, 'cy')
     api_request = stub_api_response(session_id, 'idpResult' => 'CANCEL', 'isRegistration' => true)
 
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
-    expect(page).to have_current_path '/start'
+    expect(page).to have_current_path '/dechrau'
     expect(api_request).to have_been_made.once
     piwik_request = { 'action_name' => 'Cancel - REGISTER_WITH_IDP' }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
