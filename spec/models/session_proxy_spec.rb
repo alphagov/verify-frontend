@@ -174,13 +174,13 @@ describe SessionProxy do
       expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:put)
-        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request)
+        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request, cookies: cookies)
         .and_return(
           'idpResult' => 'some-location',
           'isRegistration' => false,
         )
 
-      response = session_proxy.idp_authn_response('saml-response', 'relay-state')
+      response = session_proxy.idp_authn_response(cookies, 'saml-response', 'relay-state')
 
       attributes = {
         idp_result: 'some-location',
@@ -194,11 +194,11 @@ describe SessionProxy do
       expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:put)
-        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request)
+        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request, cookies: cookies)
         .and_return({})
 
       expect {
-        session_proxy.idp_authn_response('saml-response', 'relay-state')
+        session_proxy.idp_authn_response(cookies, 'saml-response', 'relay-state')
       }.to raise_error Api::Response::ModelError, "Idp result can't be blank, Is registration is not included in the list"
     end
   end

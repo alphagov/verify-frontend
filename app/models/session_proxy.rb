@@ -59,13 +59,13 @@ class SessionProxy
     OutboundSamlMessage.new(response || {}).tap(&:validate)
   end
 
-  def idp_authn_response(saml_response, relay_state)
+  def idp_authn_response(cookies, saml_response, relay_state)
     body = {
         PARAM_RELAY_STATE => relay_state,
         PARAM_SAML_RESPONSE => saml_response,
         PARAM_ORIGINATING_IP => originating_ip
     }
-    response = @api_client.put(IDP_AUTHN_RESPONSE_PATH, body)
+    response = @api_client.put(IDP_AUTHN_RESPONSE_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
     IdpAuthnResponse.new(response || {}).tap(&:validate)
   end
 end

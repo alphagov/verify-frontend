@@ -1,5 +1,5 @@
 class SamlController < ApplicationController
-  protect_from_forgery except: :request_post
+  protect_from_forgery except: [:request_post, :response_post]
   skip_before_action :validate_cookies
 
   def request_post
@@ -24,7 +24,7 @@ class SamlController < ApplicationController
   end
 
   def response_post
-    response = SESSION_PROXY.idp_authn_response(params['SAMLResponse'], params['RelayState'])
+    response = SESSION_PROXY.idp_authn_response(cookies, params['SAMLResponse'], params['RelayState'])
     case response.idp_result
     when 'SUCCESS'
       if response.is_registration
