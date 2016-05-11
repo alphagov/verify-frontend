@@ -21,6 +21,7 @@ cy:
     privacy_notice: hysbysiad-preifatrwydd
     cookies: cwcis
     confirm_your_identity: confirm-your-identity-cy
+    confirmation: confirmation-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -220,6 +221,10 @@ cy:
       use_other_idp: Os nad hwn yw’r cwmni a wnaeth eich dilysu, %{sign_in_link}.
       sign_in_link_message: llofnodwch i mewn gyda chwmni ardystiedig gwahanol
       need_to_signin_again: Er mwyn %{transaction_name}, mae angen i chi lofnodi i mewn eto gyda’ch cwmni ardystiedig. Nid oes angen i chi gofrestru eto.
+    confirmation:
+      title: Your identity has been verified
+      message: You can now sign in wherever you see the GOV.UK Verify logo
+      heading: "%{idp_name} has verified your identity"
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

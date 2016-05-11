@@ -4,7 +4,13 @@ require 'api_test_helper'
 RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   let(:session_cookies) { set_session_cookies! }
   let(:session_id) { session_cookies[CookieNames::SESSION_ID_COOKIE_NAME] }
-
+  let(:stub_session) {
+    page.set_rack_session(
+      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      selected_idp_was_recommended: true,
+      transaction_simple_id: 'test-rp'
+    )
+  }
   before(:each) { session_cookies }
 
   it 'will show the something went wrong page when relay state and session id mismatch' do
@@ -18,6 +24,8 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
 
   it 'will redirect the user to /confirmation when successfully registered' do
     api_request = stub_api_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => true)
+    stub_federation
+    stub_session
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
     visit("/test-saml?session-id=#{session_id}")

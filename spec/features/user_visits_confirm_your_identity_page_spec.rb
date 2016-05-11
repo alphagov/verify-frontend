@@ -43,7 +43,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     it 'includes rp display name in text' do
       visit '/confirm-your-identity'
-      expect(page).to have_text 'In order to Register for an identity profile'
+      expect(page).to have_text 'In order to register for an identity profile'
     end
 
     it 'should include a link to sign-in in case listed idp is incorrect' do

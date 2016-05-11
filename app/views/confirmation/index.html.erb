@@ -1,0 +1,9 @@
+<% content_for :body_classes, 'hub-start' %>
+<% content_for :page_title, t('hub.confirmation.title') %>
+<% content_for :feedback_source, 'CONFIRMATION_PAGE' %>
+
+<h1><%= t 'hub.confirmation.heading', idp_name: @idp_name %></h1>
+<p><%= t 'hub.confirmation.message' %></p>
+<div class="actions">
+  <%= link_to @transaction_name.capitalize, response_processing_path, class: 'button' %>
+</div>

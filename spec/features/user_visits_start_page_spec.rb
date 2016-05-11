@@ -30,7 +30,7 @@ RSpec.describe 'When the user visits the start page' do
       expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
       expect(page).to have_http_status :forbidden
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=COOKIE_NOT_FOUND_PAGE'
-      expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"
+      expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
     end
 
     it 'will display the generic error when start time cookie is missing' do
@@ -75,7 +75,7 @@ RSpec.describe 'When the user visits the start page' do
       set_cookies!(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => expired_start_time)
       visit "/start"
       expect(page).to have_content "Find the service you were using to start again"
-      expect(page).to have_link "Register for an identity profile", href: "http://localhost:50130/test-rp"
+      expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
       expect(page).to have_http_status :bad_request
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=EXPIRED_ERROR_PAGE'
     end
