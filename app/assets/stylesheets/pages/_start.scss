@@ -113,14 +113,7 @@
   .error,
   .validation-message {
     border-color: $white;
-  }
-
-  .validation-message {
-    color: $white;
-
-    :focus {
-      background-color: $mainstream-brand;
-    }
+    color: inherit;
   }
 
   .block-label {
