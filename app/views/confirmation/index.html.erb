@@ -5,5 +5,5 @@
 <h1><%= t 'hub.confirmation.heading', idp_name: @idp_name %></h1>
 <p><%= t 'hub.confirmation.message' %></p>
 <div class="actions">
-  <%= link_to @transaction_name.capitalize, response_processing_path, class: 'button' %>
+  <%= link_to @transaction_name.capitalize, response_processing_path, class: 'button', id:'next-button' %>
 </div>
