@@ -1,9 +1,4 @@
 .select-documents-form {
-
-  .form-label-bold {
-    @include bold-24();
-    margin-bottom: 1em;
-  }
   margin-top: $gutter * 1.5;
 
   fieldset {
