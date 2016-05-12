@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   helper_method :public_piwik
 
   rescue_from StandardError, with: :something_went_wrong unless Rails.env == 'development'
+  rescue_from Errors::WarningLevelError, with: :something_went_wrong_warn
   rescue_from Api::SessionError, with: :session_error
   rescue_from Api::SessionTimeoutError, with: :session_timeout
 
@@ -97,6 +98,11 @@ private
 
   def something_went_wrong(exception)
     logger.error(exception)
+    render_error('something_went_wrong', :internal_server_error)
+  end
+
+  def something_went_wrong_warn(exception)
+    logger.warn(exception)
     render_error('something_went_wrong', :internal_server_error)
   end
 

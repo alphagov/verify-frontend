@@ -16,6 +16,9 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   it 'will show the something went wrong page when relay state and session id mismatch' do
     stub_transactions_list
 
+    allow(Rails.logger).to receive(:warn)
+    expect(Rails.logger).to receive(:warn).with(kind_of(Errors::WarningLevelError)).once
+
     visit('/test-saml?session-id=junk')
     click_button 'saml-response-post'
 
