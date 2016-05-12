@@ -1,13 +1,9 @@
 .select-documents-form {
-  margin-top: em(45, 19);
-
-  .form-label-bold {
-    @include bold-24();
-    margin-bottom: 1em;
-  }
+  margin-top: $gutter * 1.5;
 
   fieldset {
     legend {
+      @include bold-19;
       margin-bottom: $gutter;
     }
 

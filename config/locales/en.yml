@@ -87,7 +87,7 @@ en:
       p2: We’ll now ask you some questions to check which companies can verify you.
     select_documents:
       title: Select all the documents you have
-      heading: Certified companies use information from different identity documents to verify you.
+      explanation: Certified companies use information from different identity documents to verify you.
       legend: Do you have these documents with you?
       documents_option_yes: 'Yes'
       question:
@@ -100,7 +100,7 @@ en:
         invalid_selection: Please check your selection
     select_phone:
       title: Do you have a mobile phone or tablet?
-      heading: Certified companies can send security codes to your mobile.
+      explanation: Certified companies can send security codes to your mobile.
       question:
         mobile_phone: Do you have a mobile phone or tablet?
         mobile_phone_option_yes: 'Yes'
@@ -113,6 +113,7 @@ en:
         invalid_selection: Please check your selection
     will_it_work_for_me:
       title: Can I be verified?
+      heading: About you
       question:
         option_yes: 'Yes'
         above_age_threshold: Are you 20 or over?

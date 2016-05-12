@@ -90,7 +90,7 @@ cy:
       p2: Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
-      heading: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
+      explanation: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
       legend: Ydy’r dogfennau hyn gyda chi?
       documents_option_yes: Ydy
       question:
@@ -103,7 +103,7 @@ cy:
         invalid_selection: Edrychwch dros eich dewis
     select_phone:
       title: Oes gennych ffôn symudol neu lechen?
-      heading: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.
+      explanation: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.
       question:
         mobile_phone: Oes gennych ffôn symudol neu lechen?
         mobile_phone_option_yes: Oes
@@ -116,6 +116,7 @@ cy:
         invalid_selection: Dylech edrych dros eich dewis
     will_it_work_for_me:
       title: Allai i gael fy nilysu?
+      heading: About you
       question:
         option_yes: Ydw
         above_age_threshold: Ydych chi’n 20 oed neu drosodd?
