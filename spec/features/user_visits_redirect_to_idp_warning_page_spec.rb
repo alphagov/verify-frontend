@@ -99,7 +99,6 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     expect(page).to have_current_path(redirect_to_idp_path)
     expect(select_idp_stub_request).to have_been_made.once
     expect(piwik_registration_virtual_page).to have_been_made.once
-    expect_cookie('verify-journey-hint', encrypted_entity_id)
     expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   end
 
@@ -123,7 +122,6 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     expect(page).to have_current_path(redirect_to_idp_path)
     expect(select_idp_stub_request).to have_been_made.once
     expect(piwik_registration_virtual_page).to have_been_made.once
-    expect_cookie('verify-journey-hint', encrypted_entity_id)
     expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   end
 
@@ -176,7 +174,6 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
       expect(select_idp_stub_request).to have_been_made.once
       expect(piwik_registration_virtual_page).to have_been_made.once
-      expect_cookie('verify-journey-hint', encrypted_entity_id)
       expect(cookie_value('verify-front-journey-hint')).to_not be_nil
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")

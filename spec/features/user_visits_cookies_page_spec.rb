@@ -12,7 +12,6 @@ RSpec.describe 'When the user visits the cookies page' do
     expect(page).to have_content('_pk_id')
     expect(page).to have_content('_pk_ses')
     expect(page).to have_content('_pk_ref')
-    expect(page).to have_content('verify-journey-hint')
     expect(page).to have_content('verify-front-journey-hint')
     expect(page).to have_content('PIWIK_VISITOR_ID')
     expect(page).to have_content('ab_test')

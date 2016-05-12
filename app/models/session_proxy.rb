@@ -50,8 +50,7 @@ class SessionProxy
       PARAM_ORIGINATING_IP => originating_ip,
       PARAM_REGISTRATION => registration
     }
-    response = @api_client.put(SELECT_IDP_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
-    SelectIdpResponse.new(response || {}).tap(&:validate)
+    @api_client.put(SELECT_IDP_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
   end
 
   def idp_authn_request(cookies)

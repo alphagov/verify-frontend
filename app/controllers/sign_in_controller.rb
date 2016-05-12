@@ -24,8 +24,7 @@ class SignInController < ApplicationController
 private
 
   def sign_in(entity_id, display_name)
-    select_idp_response = SESSION_PROXY.select_idp(cookies, entity_id)
-    set_secure_cookie(CookieNames::VERIFY_JOURNEY_HINT, select_idp_response.encrypted_entity_id)
+    SESSION_PROXY.select_idp(cookies, entity_id)
     set_journey_hint(entity_id, I18n.locale)
     cvar = Analytics::CustomVariable.build(:select_idp, display_name)
     ANALYTICS_REPORTER.report_custom_variable(request, "Sign In - #{display_name}", cvar)
