@@ -64,8 +64,7 @@ private
   end
 
   def other_ways_description
-    transaction = TRANSACTION_INFO_GETTER.get_info(session)
-    @other_ways_description = transaction.other_ways_description
+    @other_ways_description = current_transaction.other_ways_description
   end
 
   def user_has_no_docs?

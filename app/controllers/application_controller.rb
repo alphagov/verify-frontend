@@ -21,6 +21,18 @@ class ApplicationController < ActionController::Base
     TRANSACTION_LISTER.list
   end
 
+  def current_transaction
+    @current_transaction ||= TRANSACTION_INFO_GETTER.get_info(session)
+  end
+
+  def current_transaction_simple_id
+    session[:transaction_simple_id]
+  end
+
+  def set_current_transaction_simple_id(simple_id)
+    session[:transaction_simple_id] = simple_id
+  end
+
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end

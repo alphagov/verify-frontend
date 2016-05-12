@@ -4,7 +4,7 @@ class SignInController < ApplicationController
 
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(federation_info.idps)
 
-    FEDERATION_REPORTER.report_sign_in(session[:transaction_simple_id], request)
+    FEDERATION_REPORTER.report_sign_in(current_transaction_simple_id, request)
     render 'index'
   end
 
