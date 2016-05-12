@@ -23,7 +23,7 @@ class AuthnResponseController < ApplicationController
       redirect_to response.is_registration ? confirmation_path : response_processing_path
     when 'CANCEL'
       ANALYTICS_REPORTER.report(request, "Cancel - #{user_state}")
-      redirect_to start_path
+      redirect_to response.is_registration ? failed_registration_path : start_path
     else
       ANALYTICS_REPORTER.report(request, "Failure - #{user_state}")
       redirect_to response.is_registration ? failed_registration_path : failed_sign_in_path
