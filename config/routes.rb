@@ -49,9 +49,9 @@ Rails.application.routes.draw do
     get 'privacy_notice', to: 'privacy_notice#index', as: :privacy_notice
     get 'cookies', to: 'cookies#index', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
-    get 'confirmation', to: 'confirmation#index', as: :confirmation
   end
 
+  get 'confirmation', to: 'confirmation#index', as: :confirmation
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
