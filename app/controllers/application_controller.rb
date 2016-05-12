@@ -111,11 +111,4 @@ private
   def locale_from_journey_hint
     journey_hint_value.nil? ? I18n.default_locale : journey_hint_value['locale'].to_sym
   end
-
-  # We can't set the I18n.locale value after it has already been set in ApplicationController due to the bug detailed
-  # here:
-  #    https://github.com/svenfuchs/i18n/issues/275
-  def internationalise_route(key)
-    "/#{I18n.t('routes.' + key, locale: locale_from_journey_hint)}"
-  end
 end

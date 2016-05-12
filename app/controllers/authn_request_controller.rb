@@ -2,6 +2,10 @@ class AuthnRequestController < ApplicationController
   protect_from_forgery except: :rp_request
   skip_before_action :validate_cookies
 
+  def set_locale
+    I18n.locale = locale_from_journey_hint
+  end
+
   def rp_request
     reset_session
     response = SESSION_PROXY.create_session(params['SAMLRequest'], params['RelayState'])
@@ -12,9 +16,9 @@ class AuthnRequestController < ApplicationController
     session[:transaction_simple_id] = response.transaction_simple_id
 
     if params['journey_hint'].present?
-      redirect_to internationalise_route('confirm_your_identity')
+      redirect_to confirm_your_identity_path
     else
-      redirect_to internationalise_route('start')
+      redirect_to start_path
     end
   end
 end

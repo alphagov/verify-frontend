@@ -5,6 +5,10 @@ class AuthnResponseController < ApplicationController
   SIGNING_IN_STATE = 'SIGN_IN_WITH_IDP'.freeze
   REGISTERING_STATE = 'REGISTER_WITH_IDP'.freeze
 
+  def set_locale
+    I18n.locale = locale_from_journey_hint
+  end
+
   def idp_response
     if params['RelayState'] != cookies[CookieNames::SESSION_ID_COOKIE_NAME]
       raise StandardError, 'Relay state should match session id'
@@ -19,7 +23,7 @@ class AuthnResponseController < ApplicationController
       redirect_to response.is_registration ? confirmation_path : response_processing_path
     when 'CANCEL'
       ANALYTICS_REPORTER.report(request, "Cancel - #{user_state}")
-      redirect_to internationalise_route('start')
+      redirect_to start_path
     else
       ANALYTICS_REPORTER.report(request, "Failure - #{user_state}")
       redirect_to response.is_registration ? failed_registration_path : failed_sign_in_path
