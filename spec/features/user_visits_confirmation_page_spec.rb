@@ -29,7 +29,6 @@ RSpec.describe 'When user visits the confirmation page' do
   end
 
   it 'displays the page in Welsh' do
-    pending 'Localised route'
     visit '/confirmation-cy'
     expect(page).to have_css('html[lang=cy]')
   end
