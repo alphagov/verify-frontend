@@ -1,5 +1,5 @@
 class ConfirmationController < ApplicationController
-  layout 'start'
+  layout 'slides'
 
   def index
     selected_idp = session.fetch(:selected_idp)

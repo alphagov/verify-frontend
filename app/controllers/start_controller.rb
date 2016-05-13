@@ -1,5 +1,5 @@
 class StartController < ApplicationController
-  layout 'start'
+  layout 'slides'
 
   def index
     render 'index'
