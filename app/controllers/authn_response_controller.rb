@@ -1,6 +1,5 @@
 class AuthnResponseController < ApplicationController
   protect_from_forgery except: :idp_response
-  skip_before_action :validate_cookies
 
   SIGNING_IN_STATE = 'SIGN_IN_WITH_IDP'.freeze
   REGISTERING_STATE = 'REGISTER_WITH_IDP'.freeze
