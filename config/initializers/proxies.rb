@@ -16,7 +16,4 @@ IDENTITY_PROVIDER_DISPLAY_DECORATOR = Display::IdentityProviderDisplayDecorator.
   CONFIG.white_logo_directory
 )
 
-TRANSACTION_INFO_GETTER = Display::Rp::TransactionInfoGetter.new(
-  SESSION_PROXY,
-  Display::Rp::Repository.new(FEDERATION_TRANSLATOR)
-)
+RELYING_PARTY_REPOSITORY = Display::Rp::Repository.new(FEDERATION_TRANSLATOR)
