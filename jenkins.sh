@@ -1,4 +1,5 @@
-#!/bin/sh -eu
+#!/bin/bash -eu
+
 bundle
 export HEADLESS=true
 export DISPLAY=:0
