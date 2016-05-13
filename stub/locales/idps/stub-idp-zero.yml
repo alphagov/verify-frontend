@@ -2,6 +2,8 @@ en:
   idps:
     stub-idp-zero:
       name: "CitzenVerifier"
+      contact_details: |
+        <strong id="stub-idp-zero-contact-details">0 Null Drive, Nowheresville</strong>
 cy:
   idps:
     stub-idp-zero:

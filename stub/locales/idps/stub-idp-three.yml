@@ -12,6 +12,8 @@ en:
           <li>A left leg</li>
         </ul>
         <p>Stick your left leg in, stick your left leg out</p>
+      contact_details: |
+        <strong id="stub-idp-three-contact-details">3 Pie Sq</strong>
 cy:
   idps:
     stub-idp-three:

@@ -129,4 +129,8 @@ private
   def locale_from_journey_hint
     journey_hint_value.nil? ? I18n.default_locale : journey_hint_value['locale'].to_sym
   end
+
+  def selected_identity_provider
+    IdentityProvider.new(session.fetch(:selected_idp))
+  end
 end

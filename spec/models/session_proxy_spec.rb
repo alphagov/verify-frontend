@@ -185,4 +185,14 @@ describe SessionProxy do
       }.to raise_error Api::Response::ModelError, "Idp result can't be blank, Is registration is not included in the list"
     end
   end
+
+  describe '#restart_session' do
+    it 'should return a confirmation result' do
+      expect(api_client).to receive(:put)
+        .with(SessionProxy::SESSION_STATE_PATH, nil, cookies: cookies)
+        .and_return(status: 200)
+
+      session_proxy.restart_session(cookies)
+    end
+  end
 end

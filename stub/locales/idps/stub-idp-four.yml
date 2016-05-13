@@ -2,6 +2,8 @@ en:
   idps:
     stub-idp-four:
       name: "Best ID"
+      contact_details: |
+        <strong id="stub-idp-four-contact-details">4 Head Road</strong>
 cy:
   idps:
     stub-idp-four:

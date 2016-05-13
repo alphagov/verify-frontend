@@ -6,6 +6,8 @@ en:
       requirements:
         - a UK passport
         - a UK photocard driving licence
+      contact_details: |
+        <strong id="stub-idp-two-contact-details">5 Somewhere Avenue</strong>
 cy:
   idps:
     stub-idp-two:

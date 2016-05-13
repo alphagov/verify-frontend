@@ -4,6 +4,7 @@ class SessionProxy
   SELECT_IDP_PATH = "#{PATH}/select-idp".freeze
   IDP_AUTHN_REQUEST_PATH = "#{PATH}/idp-authn-request".freeze
   IDP_AUTHN_RESPONSE_PATH = "#{PATH}/idp-authn-response".freeze
+  SESSION_STATE_PATH = "#{PATH}/state".freeze
   PARAM_SAML_REQUEST = 'samlRequest'.freeze
   PARAM_SAML_RESPONSE = 'samlResponse'.freeze
   PARAM_RELAY_STATE = 'relayState'.freeze
@@ -66,5 +67,9 @@ class SessionProxy
     }
     response = @api_client.put(IDP_AUTHN_RESPONSE_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
     IdpAuthnResponse.new(response || {}).tap(&:validate)
+  end
+
+  def restart_session(cookies)
+    @api_client.put(SESSION_STATE_PATH, nil, cookies: select_cookies(cookies, CookieNames.session_cookies))
   end
 end

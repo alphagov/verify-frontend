@@ -28,7 +28,10 @@ module Display
       requirements = @translator.translate("idps.#{simple_id}.requirements")
       special_no_docs_instructions = decorate_special_no_docs_instructions(simple_id)
       no_docs_requirement = decorate_no_docs_requirement(simple_id)
-      ViewableIdentityProvider.new(idp, name, tagline, logo_path, white_logo_path, about, requirements, special_no_docs_instructions, no_docs_requirement)
+      contact_details = @translator.translate("idps.#{simple_id}.contact_details")
+      ViewableIdentityProvider.new(idp, name, tagline, logo_path, white_logo_path,
+                                   about, requirements, special_no_docs_instructions,
+                                   no_docs_requirement, contact_details)
     rescue FederationTranslator::TranslationError => e
       Rails.logger.error(e)
       not_viewable(idp)

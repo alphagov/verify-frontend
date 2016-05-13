@@ -17,7 +17,8 @@ en:
       requirements:
         - a UK passport
         - a UK photocard driving licence
-
+      contact_details: |
+        <strong id="stub-idp-one-contact-details">100 IDCorp Lane</strong>
 cy:
   idps:
     stub-idp-one:

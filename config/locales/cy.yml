@@ -230,6 +230,11 @@ cy:
       title: Your identity has been verified
       message: You can now sign in wherever you see the GOV.UK Verify logo
       heading: "%{idp_name} has verified your identity"
+    failed_registration:
+      title: Unable to verify your identity
+      heading: "%{idp_name} was unable to verify your identity"
+      contact_details_intro: "Contact %{idp_name} for more information"
+      try_another_company: Try another certified company
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
