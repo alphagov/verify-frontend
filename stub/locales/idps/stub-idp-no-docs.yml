@@ -2,7 +2,7 @@ en:
   idps:
     stub-idp-no-docs:
       name: "No Docs IDP"
-      about: "The number one source of identities without documents."
+      about: "<p>The number one source of identities without documents.</p>"
       requirements:
         - "A requirement"
       special_no_docs_instructions_html: "<p>Additional IDP Instructions</p>"

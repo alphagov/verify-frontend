@@ -17,58 +17,58 @@
             <div class="form-group">
               <fieldset class="inline">
                 <span>1. <%= t 'hub.select_documents.question.driving_licence'%></span>
-                <label class="block-label">
+                <%= f.label :driving_licence_true, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :driving_licence, 'true' %>
                   <span>
                     <span class="inner"></span>
                   </span>
                   <%= t 'hub.select_documents.documents_option_yes' %>
-                </label>
-                <label class="block-label">
+                <% end %>
+                <%= f.label :driving_licence_false, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :driving_licence, 'false' %>
                   <span>
                     <span class="inner"></span>
                   </span>
                   <%= t 'option.no'%>
-                </label>
+                <% end %>
               </fieldset>
             </div>
             <div class="form-group">
               <fieldset class="inline">
                 <span>2. <%= t 'hub.select_documents.question.passport'%></span>
-                <label class="block-label">
+                <%= f.label :passport_true, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :passport, 'true' %>
                   <span>
                     <span class="inner"></span>
                   </span>
                   <%= t 'hub.select_documents.documents_option_yes'%>
-                </label>
-                <label class="block-label" >
+                <% end %>
+                <%= f.label :passport_false, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :passport, 'false' %>
                   <span>
                     <span class="inner"></span>
                   </span>
                   <%= t 'option.no'%>
-                </label>
+                <% end %>
               </fieldset>
             </div>
             <div class="form-group">
               <fieldset class="inline">
                 <span>3. <%= t 'hub.select_documents.question.non_uk_id_document'%></span>
-                <label class="block-label" >
+                <%= f.label :non_uk_id_document_true, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :non_uk_id_document, 'true' %>
                   <span>
                     <span class="inner"></span>
                   </span>
                   <%= t 'hub.select_documents.documents_option_yes'%>
-                </label>
-                <label class="block-label" >
+                <% end %>
+                <%= f.label :non_uk_id_document_false, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :non_uk_id_document, 'false' %>
                   <span>
                     <span class="inner"></span>
                   </span>
                   <%= t 'option.no'%>
-                </label>
+                <% end %>
               </fieldset>
             </div>
             <%= f.label :no_documents, {class: 'block-label'} do %>
