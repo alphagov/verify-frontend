@@ -46,8 +46,8 @@ Rails.application.routes.draw do
     get 'unlikely_to_verify', to: 'unlikely_to_verify#index', as: :unlikely_to_verify
     get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
-    get 'privacy_notice', to: 'privacy_notice#index', as: :privacy_notice
-    get 'cookies', to: 'cookies#index', as: :cookies
+    get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
+    get 'cookies', to: 'static#cookies', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'confirmation', to: 'confirmation#index', as: :confirmation
   end
