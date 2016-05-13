@@ -73,8 +73,10 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
         click_button 'Sign in with IDCorp'
         expect(page).to have_current_path(idp_location)
       end
+    end
 
-      it 'should allow the user to select a new IDP and update the cookie' do
+    describe 'and the user wants to select a new IDP' do
+      it 'should update the cookie' do
         # User has previously chosen IDCorp
         visit '/confirm-your-identity'
         expect(page).to have_button('Sign in with IDCorp')
@@ -84,11 +86,13 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
         new_idp_location = '/another-idp-endpoint'
         stub_api_and_analytics(new_idp_location)
         click_button 'Select Bob'
+        click_button 'Continue'
         expect(page).to have_current_path(new_idp_location)
 
         # The new IDP is displayed for non-repudiation
         visit '/confirm-your-identity'
         click_button 'Sign in with Bob'
+        click_button 'Continue'
         expect(page).to have_current_path(new_idp_location)
       end
     end
@@ -120,7 +124,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
     end
   end
 
-  describe 'when the user changes language', js: true do
+  describe 'when the user changes language' do
     it 'will preserve the language from sign-in' do
       set_up_session('stub-idp-one')
       stub_api_saml_endpoint

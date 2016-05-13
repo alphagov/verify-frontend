@@ -19,7 +19,7 @@ RSpec.describe 'When the user visits the why companies page' do
     expect(page).to have_css 'html[lang=cy]'
   end
 
-  it 'includes links to choose-a-certified-company page with the selected evidence', js: true do
+  it 'includes links to choose-a-certified-company page' do
     visit '/why-companies'
     expect(page).to have_title('Why there’s a choice of companies - GOV.UK Verify - GOV.UK')
     expect(page).to have_link 'Back', href: '/choose-a-certified-company'

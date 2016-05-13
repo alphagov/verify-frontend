@@ -18,8 +18,7 @@ RSpec.describe 'When the user visits the will it work for me page' do
     expect(page).to have_css 'html[lang=cy]'
   end
 
-  #JS has to be on, so it uses the real browser and query params can be inspected
-  it 'redirects to the choose-a-company page when user is over 20 and is a uk resident', js: true do
+  it 'redirects to the choose-a-company page when user is over 20 and is a uk resident' do
     stub_federation
     visit '/will-it-work-for-me'
 
