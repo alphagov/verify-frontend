@@ -1,5 +1,5 @@
 class AboutController < ApplicationController
-  layout 'start', except: [:choosing_a_company]
+  layout 'slides', except: [:choosing_a_company]
 
   def index
     FEDERATION_REPORTER.report_registration(
