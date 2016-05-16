@@ -20,6 +20,11 @@ class SelectDocumentsController < ApplicationController
     end
   end
 
+  def unlikely_to_verify
+    @other_ways_description = current_transaction.other_ways_description
+    @other_ways_text = current_transaction.other_ways_text
+  end
+
 private
 
   def available_idps

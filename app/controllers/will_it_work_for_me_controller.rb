@@ -14,6 +14,21 @@ class WillItWorkForMeController < ApplicationController
     end
   end
 
+  def why_might_this_not_work_for_me
+    @other_ways_description = current_transaction.other_ways_description
+    @other_ways_text = current_transaction.other_ways_text
+  end
+
+  def may_not_work_if_you_live_overseas
+    @other_ways_description = current_transaction.other_ways_description
+    @other_ways_text = current_transaction.other_ways_text
+  end
+
+  def will_not_work_without_uk_address
+    @other_ways_description = current_transaction.other_ways_description
+    @other_ways_text = current_transaction.other_ways_text
+  end
+
 private
 
   def redirect_path
