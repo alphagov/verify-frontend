@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   def hidden_form_question_class
-    [form_question_class, 'panel-indent', 'js-hidden'].join(' ')
+    [form_question_class, 'panel', 'panel-border-narrow', 'js-hidden'].join(' ')
   end
 
   def fingerprint_path
