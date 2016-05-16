@@ -31,12 +31,6 @@ class SessionProxy
     SessionResponse.new(response || {}).tap(&:validate)
   end
 
-  def federation_info_for_session(cookies)
-    session_cookies = select_cookies(cookies, CookieNames.session_cookies)
-    response = @api_client.get(FEDERATION_INFO_PATH, cookies: session_cookies)
-    FederationInfoResponse.new(response || {}).tap(&:validate)
-  end
-
   def identity_providers(cookies)
     federation_info_for_session(cookies).idps
   end
@@ -71,5 +65,13 @@ class SessionProxy
 
   def restart_session(cookies)
     @api_client.put(SESSION_STATE_PATH, nil, cookies: select_cookies(cookies, CookieNames.session_cookies))
+  end
+
+private
+
+  def federation_info_for_session(cookies)
+    session_cookies = select_cookies(cookies, CookieNames.session_cookies)
+    response = @api_client.get(FEDERATION_INFO_PATH, cookies: session_cookies)
+    FederationInfoResponse.new(response || {}).tap(&:validate)
   end
 end

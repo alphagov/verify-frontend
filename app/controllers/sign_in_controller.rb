@@ -1,8 +1,8 @@
 class SignInController < ApplicationController
   def index
-    federation_info = SESSION_PROXY.federation_info_for_session(cookies)
-
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(federation_info.idps)
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
+      SESSION_PROXY.identity_providers(cookies)
+    )
 
     FEDERATION_REPORTER.report_sign_in(current_transaction_simple_id, request)
     render 'index'
