@@ -57,6 +57,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   it 'will redirect the user to /failed-registration when they cancel at the IDP' do
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      transaction_simple_id: 'test-rp'
     )
     api_request = stub_api_response(session_id, 'idpResult' => 'CANCEL', 'isRegistration' => true)
     visit("/test-saml?session-id=#{session_id}")
@@ -69,6 +70,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   it 'will redirect the user to /failed-registration when they failed registration at the IDP' do
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      transaction_simple_id: 'test-rp'
     )
     api_request = stub_api_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => true)
     visit("/test-saml?session-id=#{session_id}")

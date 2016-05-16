@@ -229,6 +229,7 @@ en:
       heading: "%{idp_name} was unable to verify your identity"
       contact_details_intro: "Contact %{idp_name} for more information"
       try_another_company: Try another certified company
+      other_ways_link: "Other ways to access %{transaction_name}"
   errors:
     transaction_list:
       title: Find the service you were using to start again

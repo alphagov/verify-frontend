@@ -1,24 +1,31 @@
 <% content_for :page_title, t('hub.failed_registration.title') %>
 <% content_for :feedback_source, 'FAILED_REGISTRATION_PAGE' %>
 
-<%= t 'hub.failed_registration.heading', idp_name: @idp.display_name %>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t 'hub.failed_registration.heading', idp_name: @idp.display_name %></h1>
 
-<h2 class="heading-medium">
-  <%= t 'hub.failed_registration.what_to_do_next' %>
-</h2>
+    <h2 class="heading-medium">
+      <%= t 'hub.failed_registration.what_to_do_next' %>
+    </h2>
 
-<p><%= t 'hub.failed_registration.what_to_do_next_intro' %></p>
+    <p><%= t 'hub.failed_registration.what_to_do_next_intro' %></p>
 
-<ol class="list-number">
-  <li>
-    <%= t 'hub.failed_registration.contact_details_intro', idp_name: @idp.display_name %>
-    <div class="panel-indent-wide">
-      <%= @idp.contact_details.html_safe %>
-    </div>
-  </li>
-  <li>
-    <%= form_tag(try_another_idp_path) do %>
-      <%= button_tag t('hub.failed_registration.try_another_company') %>
-    <% end %>
-  </li>
-</ol>
+    <ol class="list list-number">
+      <li>
+        <%= t 'hub.failed_registration.contact_details_intro', idp_name: @idp.display_name %>
+        <div>
+          <%= @idp.contact_details.html_safe %>
+        </div>
+      </li>
+      <li>
+        <%= form_tag(try_another_idp_path) do %>
+            <%= button_tag t('hub.failed_registration.try_another_company') %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to t('hub.failed_registration.other_ways_link', transaction_name: @transaction_name), other_ways_to_access_service_path %>
+      </li>
+    </ol>
+  </div>
+</div>

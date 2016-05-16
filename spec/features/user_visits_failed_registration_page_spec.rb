@@ -9,6 +9,7 @@ RSpec.describe 'When the user visits the failed registration page' do
   it 'includes expected content' do
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      transaction_simple_id: 'test-rp'
     )
     visit '/failed-registration'
 
@@ -16,14 +17,19 @@ RSpec.describe 'When the user visits the failed registration page' do
     expect(page).to have_content 'IDCorp was unable to verify your identity'
     expect(page).to have_content 'Contact IDCorp for more information'
     expect(page).to have_css 'strong', text: '100 IDCorp Lane'
+    expect(page).to have_link(
+      'Other ways to access register for an identity profile',
+      href: other_ways_to_access_service_path
+    )
   end
 
   it 'includes a link to try another idp' do
     restart_request = stub_request(:put, api_uri('session/state')).to_return(status: 200)
-
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
+      transaction_simple_id: 'test-rp'
     )
+
     visit '/failed-registration'
     click_button 'Try another certified company'
 
