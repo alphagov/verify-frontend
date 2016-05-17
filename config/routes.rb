@@ -58,7 +58,9 @@ Rails.application.routes.draw do
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
   get 'failed-registration', to: 'failed_registration#index', as: :failed_registration
+  get 'failed-registration-cy', to: 'failed_registration#index'
   get 'failed-sign-in', to: 'failed_sign_in#index', as: :failed_sign_in
+  get 'failed-sign-in-cy', to: 'failed_sign_in#index'
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
