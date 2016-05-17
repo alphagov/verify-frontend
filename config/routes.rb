@@ -58,18 +58,17 @@ Rails.application.routes.draw do
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
   get 'failed-registration', to: 'failed_registration#index', as: :failed_registration
+  get 'failed-sign-in', to: 'failed_sign_in#index', as: :failed_sign_in
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'other-ways-to-access-service', to: redirect("#{API_HOST}/other-ways-to-access-service"), as: :other_ways_to_access_service
-    get 'failed-sign-in', to: redirect("#{API_HOST}/failed-sign-in"), as: :failed_sign_in
     get 'response-processing', to: redirect("#{API_HOST}/response-processing"), as: :response_processing
   else
     get 'feedback', to: 'feedback#index', as: :feedback
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
     get 'other-ways-to-access-service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
-    get 'failed-sign-in', to: 'failed_sign_in#index', as: :failed_sign_in
     get 'response-processing', to: 'response_processing#index', as: :response_processing
   end
 

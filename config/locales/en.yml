@@ -237,6 +237,13 @@ en:
           <li>you live outside the UK</li>
           <li>this is a new service and we are still improving how people can be verified</li>
         </ul>
+    failed_sign_in:
+      title: Unable to sign you in
+      heading: "%{idp_name} couldn’t sign you in"
+      reasons_html: |
+        <p>You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.</p>
+        <p>You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
+      start_again: "Start again"
   errors:
     transaction_list:
       title: Find the service you were using to start again

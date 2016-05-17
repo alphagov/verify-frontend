@@ -1,5 +1,5 @@
 class FailedSignInController < ApplicationController
   def index
-    render nothing: true
+    @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
   end
 end
