@@ -9,6 +9,7 @@
   <%= form_for(identity_provider, url: choose_a_certified_company_submit_path, html: {class: 'idp-option', id: nil}) do |f| %>
       <%= f.button t('hub.choose_a_certified_company.choose_idp', name: identity_provider.display_name),
                      class: button_class,
+                     role: 'link',
                      name: identity_provider.simple_id,
                      id: nil,
                      type: 'submit',
