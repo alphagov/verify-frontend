@@ -24,16 +24,14 @@ RSpec.describe 'When the user visits the failed registration page' do
   end
 
   it 'includes a link to try another idp' do
-    restart_request = stub_request(:put, api_uri('session/state')).to_return(status: 200)
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
       transaction_simple_id: 'test-rp'
     )
 
     visit '/failed-registration'
-    click_button 'Try another certified company'
+    click_link 'Try another certified company'
 
     expect(page).to have_current_path(select_documents_path)
-    expect(restart_request).to have_been_made.once
   end
 end

@@ -63,10 +63,6 @@ class SessionProxy
     IdpAuthnResponse.new(response || {}).tap(&:validate)
   end
 
-  def restart_session(cookies)
-    @api_client.put(SESSION_STATE_PATH, nil, cookies: select_cookies(cookies, CookieNames.session_cookies))
-  end
-
 private
 
   def federation_info_for_session(cookies)
