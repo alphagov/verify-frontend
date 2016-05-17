@@ -1,6 +1,6 @@
 <div class="idp-choice">
   <div class="company-logo">
-    <%= image_tag identity_provider.logo_path, alt: idp_tagline(identity_provider) %>
+    <%= image_tag identity_provider.logo_path, alt: '' %>
     <p class="company-about">
       <%= link_to(t('hub.choose_a_certified_company.about_idp', name: identity_provider.display_name), choose_a_certified_company_about_path(identity_provider.simple_id)) %>
     </p>
