@@ -18,7 +18,13 @@ en:
         - a UK passport
         - a UK photocard driving licence
       contact_details: |
-        <strong id="stub-idp-one-contact-details">100 IDCorp Lane</strong>
+        <p>
+          <strong id="stub-idp-one-contact-details">100 IDCorp Lane</strong>
+          <br/>Telephone: 0123456789
+          <br/>Monday to Friday, 8am to 8pm
+          <br/>Saturday and Sunday, 8am to 5pm
+          <br/>Closed on bank holidays
+        </p>
 cy:
   idps:
     stub-idp-one:
@@ -32,3 +38,11 @@ cy:
       requirements:
         - a UK passport
         - a UK photocard driving licence
+      contact_details: |
+        <p>
+          <strong id="stub-idp-one-contact-details">100 IDCorp Lane</strong>
+          <br/>Telephone: 0123456789
+          <br/>Monday to Friday, 8am to 8pm
+          <br/>Saturday and Sunday, 8am to 5pm
+          <br/>Closed on bank holidays
+        </p>
