@@ -236,6 +236,13 @@ cy:
       contact_details_intro: "Contact %{idp_name} for more information"
       try_another_company: Try another certified company
       other_ways_link: "Other ways to access %{transaction_name}"
+      reasons_html: |
+        <p>There are a few reasons why this might happen, including:</p>
+        <ul class="list list-bullet">
+          <li>you’ve recently had a change in your circumstances, and they aren’t yet updated online</li>
+          <li>you live outside the UK</li>
+          <li>this is a new service and we are still improving how people can be verified</li>
+        </ul>
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
