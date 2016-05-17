@@ -58,21 +58,6 @@ describe SessionProxy do
     end
   end
 
-  describe('#federation_info_for_session') do
-    it 'should return a list of IDPs for the session' do
-      idp = { 'simpleId' => 'idp', 'entityId' => 'something' }
-
-      expect(api_client).to receive(:get)
-        .with(SessionProxy::FEDERATION_INFO_PATH, cookies: cookies)
-        .and_return('idps' => [idp], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id')
-
-      result = session_proxy.federation_info_for_session(cookies)
-      expect(result.idps.size).to eql 1
-      expect(result.idps.first.simple_id).to eql 'idp'
-      expect(result.idps.first.entity_id).to eql 'something'
-    end
-  end
-
   describe('#identity_providers') do
     it 'should return a list of IDPs for the session' do
       idp = { 'simpleId' => 'idp', 'entityId' => 'something' }

@@ -17,10 +17,6 @@ class AboutController < ApplicationController
 
 private
 
-  def federation_info
-    SESSION_PROXY.federation_info_for_session(cookies)
-  end
-
   def identity_providers
     SESSION_PROXY.identity_providers(cookies)
   end

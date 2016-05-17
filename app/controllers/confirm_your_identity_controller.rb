@@ -24,9 +24,9 @@ private
     redirect_to sign_in_path
   end
 
-  def retrieve_last_used_idp(idp_entity_id)
-    federation_info = SESSION_PROXY.federation_info_for_session(cookies)
-    var = federation_info.idps.select { |idp| idp.entity_id == idp_entity_id }
-    IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(var)
+  def retrieve_last_used_idp(entity_id)
+    IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
+      SESSION_PROXY.identity_providers(cookies).select { |idp| idp.entity_id == entity_id }
+    )
   end
 end
