@@ -22,17 +22,6 @@ RSpec.describe 'When the user visits the failed registration page' do
       'Other ways to access register for an identity profile',
       href: other_ways_to_access_service_path
     )
-  end
-
-  it 'includes a link to try another idp' do
-    page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
-      transaction_simple_id: 'test-rp'
-    )
-
-    visit '/failed-registration'
-    click_link 'Try another certified company'
-
-    expect(page).to have_current_path(select_documents_path)
+    expect(page).to have_link('Try another certified company', href: select_documents_path)
   end
 end
