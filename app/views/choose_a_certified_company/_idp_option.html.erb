@@ -16,7 +16,7 @@
       %>
       <%= hidden_field_tag 'selected-idp', identity_provider.entity_id, id: nil %>
       <%= hidden_field_tag 'recommended-idp', recommended, id: nil %>
-      <%= f.hidden_field :entity_id, id: nil %>
-      <%= f.hidden_field :simple_id, id: nil %>
+      <%= f.hidden_field :entity_id, id: nil, class: 'js-entity-id' %>
+      <%= f.hidden_field :simple_id, id: nil, class: 'js-simple-id' %>
   <% end %>
 </div>

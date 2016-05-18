@@ -12,12 +12,18 @@ class SignInController < ApplicationController
     entity_id = params.fetch('selected-idp-entity-id') { params.fetch('selected-idp') }
     display_name = params.fetch('selected-idp-display-name', entity_id)
     sign_in(entity_id, display_name)
+    if params.has_key? 'identity_provider'
+      session[:selected_idp] = IdentityProvider.new(params.fetch('identity_provider'))
+    end
     redirect_to redirect_to_idp_path
   end
 
   def select_idp_ajax
     sign_in(params.fetch('entityId'), params.fetch('displayName'))
     authn_request_json = SESSION_PROXY.idp_authn_request(cookies)
+    if params.has_key? 'simpleId'
+      session[:selected_idp] = IdentityProvider.new('simple_id' => params.fetch('simpleId'), 'entity_id' => params.fetch('entityId'))
+    end
     render json: authn_request_json
   end
 

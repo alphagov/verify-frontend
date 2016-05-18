@@ -76,6 +76,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
       when_i_select_an_idp
       then_im_at_the_idp
+      expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one')
     end
   end
 
@@ -96,6 +97,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       then_im_at_the_interstitial_page
       when_i_choose_to_continue
       then_im_at_the_idp
+      expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one')
     end
   end
 end

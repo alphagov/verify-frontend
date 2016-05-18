@@ -12,18 +12,18 @@
     attach: function () {
       var $container = $('.js-continue-to-idp');
       $container.on('submit', '.js-idp-form', function (e) {
-        var entityId, displayName;
+        var simpleId, entityId, displayName;
         var $originalForm = $(e.target);
         e.preventDefault();
-        var selectIdpButton = $originalForm.find('button');
-        entityId = selectIdpButton.attr('name');
-        displayName = selectIdpButton.attr('value');
+        displayName = $originalForm.find('.js-display-name').val();
+        entityId = $originalForm.find('.js-entity-id').val();
+        simpleId = $originalForm.find('.js-simple-id').val();
         $.ajax({
           type: 'PUT',
           url: $container.data('location'),
           contentType: "application/json",
           processData: false,
-          data: JSON.stringify({ entityId: entityId, displayName: displayName }),
+          data: JSON.stringify({ entityId: entityId, displayName: displayName, simpleId: simpleId }),
           timeout: 5000
         }).done(function(response) {
           var $samlForm;

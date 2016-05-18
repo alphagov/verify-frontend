@@ -7,17 +7,22 @@
                 <%= image_tag identity_provider.logo_path, alt: idp_tagline(identity_provider) %>
               </div>
             </div>
-            <%= form_tag(sign_in_submit_path, {class: 'idp-option js-idp-form'}) do %>
+
+            <%= form_for(identity_provider, url: sign_in_submit_path, html: {class: 'idp-option js-idp-form', id: nil}) do |f| %>
                 <% button_text = local_assigns.fetch(:non_repudiation, false) ? 'hub.signin.sign_in_idp' : 'hub.signin.select_idp' %>
-                <%= button_tag t(button_text, name: identity_provider.display_name),
-                               class: "button",
-                               name: identity_provider.entity_id,
-                               type: "submit",
-                               value: identity_provider.display_name
+                <%= f.button t(button_text, name: identity_provider.display_name),
+                             class: 'button',
+                             name: identity_provider.entity_id,
+                             id: nil,
+                             type: 'submit',
+                             value: identity_provider.display_name
                 %>
                 <%= hidden_field_tag 'selected-idp-entity-id', identity_provider.entity_id, id: nil %>
                 <%= hidden_field_tag 'selected-idp-display-name', identity_provider.display_name, id: nil %>
-            <% end %>
+                <%= f.hidden_field :entity_id, id: nil, class: 'js-entity-id' %>
+                <%= f.hidden_field :simple_id, id: nil, class: 'js-simple-id' %>
+                <%= f.hidden_field :display_name, id: nil, class: 'js-display-name' %>
+          <% end %>
           </div>
         </div>
       </div>
