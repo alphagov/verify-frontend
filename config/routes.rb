@@ -62,7 +62,8 @@ Rails.application.routes.draw do
   get 'failed-sign-in', to: 'failed_sign_in#index', as: :failed_sign_in
   get 'failed-sign-in-cy', to: 'failed_sign_in#index'
   get 'other-ways-to-access-service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
-  get 'other-ways-to-access-service-cy', to: 'other_ways_to_access_service#index'
+  get 'other-ways-to-access-service-cy', to: 'other_ways_to_access_service#index' #TODO: delete after localization
+  get 'other-ways-to-access', to: 'other_ways_to_access_service#index' #TODO: delete after localization
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
