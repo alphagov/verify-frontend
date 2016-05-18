@@ -14,6 +14,14 @@ module Display
       end
 
       class NoTransactions
+        def public
+          []
+        end
+
+        def private
+          []
+        end
+
         def any?
           false
         end
