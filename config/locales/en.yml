@@ -246,6 +246,8 @@ en:
         <p>You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.</p>
         <p>You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
       start_again: "Start again"
+    other_ways_to_access_service:
+      title: Other ways to access the service
   errors:
     transaction_list:
       title: Find the service you were using to start again
