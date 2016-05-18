@@ -61,16 +61,16 @@ Rails.application.routes.draw do
   get 'failed-registration-cy', to: 'failed_registration#index'
   get 'failed-sign-in', to: 'failed_sign_in#index', as: :failed_sign_in
   get 'failed-sign-in-cy', to: 'failed_sign_in#index'
+  get 'other-ways-to-access-service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
+  get 'other-ways-to-access-service-cy', to: 'other_ways_to_access_service#index'
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
-    get 'other-ways-to-access-service', to: redirect("#{API_HOST}/other-ways-to-access-service"), as: :other_ways_to_access_service
     get 'response-processing', to: redirect("#{API_HOST}/response-processing"), as: :response_processing
   else
     get 'feedback', to: 'feedback#index', as: :feedback
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
-    get 'other-ways-to-access-service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
     get 'response-processing', to: 'response_processing#index', as: :response_processing
   end
 
