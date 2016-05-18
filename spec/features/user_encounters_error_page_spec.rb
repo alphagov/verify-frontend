@@ -96,4 +96,13 @@ RSpec.describe 'user encounters error page' do
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page.status_code).to eq(500)
   end
+
+  it 'will present the something went wrong page when secure cookie is invalid' do
+    set_session_cookies!
+    stub_transactions_list
+    stub_request(:get, api_federation_endpoint).and_return(status: 403)
+    visit sign_in_cy_path
+    expect(page).to have_content I18n.translate('errors.something_went_wrong.heading', locale: :cy)
+    expect(page.status_code).to eq(500)
+  end
 end

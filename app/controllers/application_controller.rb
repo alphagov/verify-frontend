@@ -84,6 +84,7 @@ private
   end
 
   def render_error(partial, status)
+    set_locale
     respond_to do |format|
       format.html { render "errors/#{partial}", status: status, layout: 'application' }
       format.json { render json: {}, status: status }
