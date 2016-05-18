@@ -1,6 +1,8 @@
 <% content_for :page_title, t('hub.select_documents.title') %>
 <% content_for :feedback_source, 'SELECT_DOCUMENTS_PAGE' %>
 
+<div id="no-documents-message" class="visually-hidden" aria-live="assertive" data-no-documents-message="<%= h t('hub.select_documents.no_documents_message') %>"></div>
+
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'hub.select_documents.title' %></h1>
@@ -29,7 +31,7 @@
                   <span>
                     <span class="inner"></span>
                   </span>
-                  <%= t 'option.no'%>
+                  <%= t 'option.no' %>
                 <% end %>
               </fieldset>
             </div>
@@ -48,7 +50,7 @@
                   <span>
                     <span class="inner"></span>
                   </span>
-                  <%= t 'option.no'%>
+                  <%= t 'option.no' %>
                 <% end %>
               </fieldset>
             </div>
@@ -67,7 +69,7 @@
                   <span>
                     <span class="inner"></span>
                   </span>
-                  <%= t 'option.no'%>
+                  <%= t 'option.no' %>
                 <% end %>
               </fieldset>
             </div>
@@ -76,7 +78,7 @@
               <span>
                 <span class="inner"></span>
               </span>
-              <%= t 'hub.select_documents.question.no_documents'%>
+              <%= t 'hub.select_documents.question.no_documents' %>
             <% end %>
           </fieldset>
         <% end %>
@@ -86,7 +88,7 @@
         <div class="actions">
           <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
         </div>
-  <% end %>
+    <% end %>
 
   </div>
 </div>

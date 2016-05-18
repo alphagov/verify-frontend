@@ -92,6 +92,7 @@ en:
     select_documents:
       title: Select all the documents you have
       explanation: Certified companies use information from different identity documents to verify you.
+      no_documents_message: Your document choices have been set to ‘no’.
       legend: Do you have these documents with you?
       documents_option_yes: 'Yes'
       question:

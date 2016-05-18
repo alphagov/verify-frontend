@@ -95,6 +95,7 @@ cy:
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
       explanation: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
+      no_documents_message: Your document choices have been set to ‘no’.
       legend: Ydy’r dogfennau hyn gyda chi?
       documents_option_yes: Ydy
       question:

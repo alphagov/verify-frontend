@@ -11,11 +11,14 @@
     markAllAsNo: function() {
       // Mark all documents as 'No' when "I don't have documents" is selected
       var $checkbox = $(this);
-      var checkboxValue = $checkbox.val();
+      var checkboxValue = $checkbox.prop('checked');
       var $noAnswers = selectDocuments.$form.find('input[type=radio][value=false]');
 
-      if (checkboxValue === "true") {
+      if (checkboxValue === true) {
         $noAnswers.trigger('click');
+        selectDocuments.speakWarningMessage();
+      } else {
+        selectDocuments.$noDocumentsMessage.empty();
       }
     },
     unCheckNoDocuments: function() {
@@ -24,8 +27,13 @@
       $checkbox.prop('checked',false);
       $checkbox.parent('.block-label').removeClass('selected');
     },
+    speakWarningMessage: function(){
+      // let screenreader users know their choices have changed by reading a notice
+      selectDocuments.$noDocumentsMessage.text(selectDocuments.$noDocumentsMessage.data('no-documents-message'));
+    },
     init: function (){
       selectDocuments.$form = $('#validate-documents');
+      selectDocuments.$noDocumentsMessage = $('#no-documents-message');
 
       if (selectDocuments.$form.length === 1) {
         selectDocuments.$form.find('.js-no-docs').on('click',selectDocuments.markAllAsNo);

@@ -5,7 +5,8 @@
 
 describe("Select Documents Form", function () {
 
-    var formWithNoErrors = '<form id="validate-documents" action="/select-documents" method="POST" data-msg="Please select the documents you have">' +
+    var formWithNoErrors = '<p id="no-documents-message" class="visually-hidden" aria-live="assertive" data-no-documents-message="Your document choices have been set to ‘no’."></p>' +
+                           '<form id="validate-documents" action="/select-documents" method="POST" data-msg="Please select the documents you have">' +
                              '<div class="form-group ">' +
                                '<fieldset>' +
                                  '<legend>Do you have these documents with you?</legend>' +
@@ -165,5 +166,15 @@ describe("Select Documents Form", function () {
         this.noDocumentsCheckbox.trigger('click');
         this.selectYesPassport();
         expect(this.noDocumentsCheckbox.is(':checked')).toBe(false);
+    });
+
+    it("should alert screen readers users when no documents checkbox is checked", function () {
+        this.noDocumentsCheckbox.trigger('click');
+        expect(GOVUK.selectDocuments.$noDocumentsMessage.text()).toBe('Your document choices have been set to ‘no’.');
+    });
+
+    it("should reset the alert when no documents checkbox is unchecked", function () {
+        this.noDocumentsCheckbox.trigger('click').trigger('click');
+        expect(GOVUK.selectDocuments.$noDocumentsMessage.text()).toBe('');
     });
 });
