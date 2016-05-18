@@ -239,9 +239,8 @@ cy:
       reasons_html: |
         <p>There are a few reasons why this might happen, including:</p>
         <ul class="list list-bullet">
-          <li>you’ve recently had a change in your circumstances, and they aren’t yet updated online</li>
-          <li>you live outside the UK</li>
-          <li>this is a new service and we are still improving how people can be verified</li>
+          <li>you’ve recently had a change in your circumstances, and they aren’t updated online</li>
+          <li>the certified company doesn’t have access to enough information about you</li>
         </ul>
       what_to_do_next_intro: "You can try the following:"
       what_to_do_next: "What to do next"
