@@ -243,6 +243,8 @@ cy:
           <li>you live outside the UK</li>
           <li>this is a new service and we are still improving how people can be verified</li>
         </ul>
+      what_to_do_next_intro: "You can try the following:"
+      what_to_do_next: "What to do next"
     failed_sign_in:
       title: Unable to sign you in
       heading: "%{idp_name} couldn’t sign you in"
