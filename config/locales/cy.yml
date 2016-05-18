@@ -28,7 +28,7 @@ cy:
     continue: Parhau
     back: Yn ôl
   option:
-    no: Na
+    "no": "Na"
     unknown: Ddim yn gwybod
   phase_banner:
     title: Mae hwn yn wasanaeth newydd.

@@ -28,7 +28,7 @@ en:
     continue: Continue
     back: Back
   option:
-    no: No
+    "no": "No"
     unknown: I don’t know
   phase_banner:
     title: This is a trial service.
