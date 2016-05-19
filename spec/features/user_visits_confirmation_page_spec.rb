@@ -29,7 +29,7 @@ RSpec.describe 'When user visits the confirmation page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/confirmation-cy'
+    visit '/cadarnhad'
     expect(page).to have_css('html[lang=cy]')
   end
 

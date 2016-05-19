@@ -20,8 +20,8 @@ cy:
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
     privacy_notice: hysbysiad-preifatrwydd
     cookies: cwcis
-    confirm_your_identity: confirm-your-identity-cy
-    confirmation: confirmation-cy
+    confirm_your_identity: cadarnhau-eich-hunaniaeth
+    confirmation: cadarnhad
     failed_registration: failed-registration-cy
     failed_sign_in: failed-sign-in-cy
   navigation:
@@ -40,9 +40,9 @@ cy:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth
   footer:
-    support_links: Support links
+    support_links: Dolenni cymorth
     help: Help
-    built_by_the: Built by the
+    built_by_the: Adeiladwyd gan yr
   hub:
     other_ways_title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
@@ -124,7 +124,7 @@ cy:
         invalid_selection: Dylech edrych dros eich dewis
     will_it_work_for_me:
       title: Allai i gael fy nilysu?
-      heading: About you
+      heading: Amdanoch chi
       question:
         option_yes: Ydw
         above_age_threshold: Ydych chi’n 20 oed neu drosodd?
@@ -189,7 +189,7 @@ cy:
         few: "%{count}&nbsp;o gwmnïau"
         many: "%{count}&nbsp;o gwmnïau"
         other: "%{count}&nbsp;o gwmnïau"
-      show_all_companies: Companies that are unlikely to verify you
+      show_all_companies: Cwmniau sy'n annhebygol o'ch dilysu chi
       filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
       about_idp: Am %{name}
       dialog:
@@ -227,9 +227,9 @@ cy:
       sign_in_link_message: llofnodwch i mewn gyda chwmni ardystiedig gwahanol
       need_to_signin_again: Er mwyn %{transaction_name}, mae angen i chi lofnodi i mewn eto gyda’ch cwmni ardystiedig. Nid oes angen i chi gofrestru eto.
     confirmation:
-      title: Your identity has been verified
-      message: You can now sign in wherever you see the GOV.UK Verify logo
-      heading: "%{idp_name} has verified your identity"
+      title: Mae eich hunaniaeth wedi cael ei ddilysu
+      message: Gallwch nawr fewngofnodi ble bynnag rydych yn gweld logo GOV.UK Verify logo
+      heading: Mae "%{idp_name} wedi dilysu eich hunaniaeth"
     failed_registration:
       title: Unable to verify your identity
       heading: "%{idp_name} was unable to verify your identity"
