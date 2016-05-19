@@ -22,6 +22,8 @@ cy:
     cookies: cwcis
     confirm_your_identity: confirm-your-identity-cy
     confirmation: confirmation-cy
+    failed_registration: failed-registration-cy
+    failed_sign_in: failed-sign-in-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr

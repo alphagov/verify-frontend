@@ -50,6 +50,8 @@ Rails.application.routes.draw do
     get 'cookies', to: 'static#cookies', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'confirmation', to: 'confirmation#index', as: :confirmation
+    get 'failed_registration', to: 'failed_registration#index', as: :failed_registration
+    get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
@@ -57,10 +59,6 @@ Rails.application.routes.draw do
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
-  get 'failed-registration', to: 'failed_registration#index', as: :failed_registration
-  get 'failed-registration-cy', to: 'failed_registration#index'
-  get 'failed-sign-in', to: 'failed_sign_in#index', as: :failed_sign_in
-  get 'failed-sign-in-cy', to: 'failed_sign_in#index'
   get 'other-ways-to-access-service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
   get 'other-ways-to-access-service-cy', to: 'other_ways_to_access_service#index' #TODO: delete after localization
   get 'other-ways-to-access', to: 'other_ways_to_access_service#index' #TODO: delete after localization

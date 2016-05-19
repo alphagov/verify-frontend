@@ -22,6 +22,8 @@ en:
     cookies: cookies
     confirm_your_identity: confirm-your-identity
     confirmation: confirmation
+    failed_registration: failed-registration
+    failed_sign_in: failed-sign-in
   navigation:
     next: Next
     start_now: Start now
