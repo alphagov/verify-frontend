@@ -42,6 +42,7 @@ cy:
     help: Help
     built_by_the: Built by the
   hub:
+    other_ways_title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
     start:
       title: Dechrau
@@ -134,7 +135,6 @@ cy:
         errors:
           no_selection: Dylech ateb pob cwestiwn
     no_mobile_phone:
-      title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
       p1: Rydych angen ffôn neu lechen i ddefnyddio GOV.UK Verify. Os nad oes gennych un o’r rhain, mae ffyrdd eraill y gallwch %{other_ways_description}.
       p2: Os nad oes gennych basport neu drwydded yrru’r DU byddwch hefyd angen gosod app.
@@ -142,7 +142,6 @@ cy:
       title: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi’i ddilysu
       heading: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi’i ddilysu
       try_to_verify: Hoffwn roi cynnig ar ddilysu fy hunaniaeth ar-lein
-      other_ways_heading: Ffyrdd eraill i %{other_ways_description}
       explanation1: I ddilysu hunaniaeth, mae cwmnïau ardystiedig yn cael mynediad i gofnodion credyd ac yna gallant ofyn i chi gadarnhau’r wybodaeth hyn. Mae gan y mwyfrif o bobl sy’n byw y tu allan i’r DU hanes gweithgaredd cyfyngedig ar eu cofnod credyd y DU, felly efallai na fydd cwmnïau yn gallu gwirio eich hunaniaeth yn y ffordd hyn.
       explanation2: Mae eich ‘hanes gweithgaredd’ yn cynnwys pa mor aml rydych yn defnyddio eich cyfrifon credyd, ac os ydych yn agor cyfrifon fel morgais, gorddrafft neu fenthyciad.
       what_youll_need: Beth fyddwch ei angen
@@ -173,7 +172,6 @@ cy:
       youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru’r DU.
     will_not_work_without_uk_address:
       title: Ni fydd GOV.UK Verify yn gweithio i chi
-      other_ways_heading: Ffyrdd eraill i %{other_ways_description}
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
       explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi’i ddilysu.
     choose_a_certified_company:
@@ -209,7 +207,6 @@ cy:
         <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Nid oes effaith ar eich sgor credyd.</p>
     unlikely_to_verify:
-      title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
       explanation: Rydych angen pasport, trwydded yrru llun neu gerdyn adnabod cenedlaethol (cerdyn ID) dilys i gael eich hunaniaeth wedi’i ddilysu.
     redirect_to_idp_warning:
@@ -252,8 +249,6 @@ cy:
         <p>You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.</p>
         <p>You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
       start_again: "Start again"
-    other_ways_to_access_service:
-      title: Other ways to access the service
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

@@ -39,6 +39,7 @@ en:
     help: Help
     built_by_the: Built by the
   hub:
+    other_ways_title: Other ways to access the service
     other_ways_heading: Other ways to %{other_ways_description}
     start:
       title: Start
@@ -131,7 +132,6 @@ en:
         errors:
           no_selection: Please answer all the questions
     no_mobile_phone:
-      title: Other ways to access the service
       heading: GOV.UK Verify won’t work for you
       p1: You need a phone or tablet to use GOV.UK Verify. If you don’t have either of these, there are other ways you can %{other_ways_description}.
       p2: If you don’t have a passport or UK driving licence, you will also need to install an app.
@@ -139,7 +139,6 @@ en:
       title: You might not be able to have your identity verified
       heading: You might not be able to have your identity verified
       try_to_verify: I’d like to try to verify my identity online
-      other_ways_heading: Other ways to %{other_ways_description}
       explanation1: To verify an identity, certified companies access credit records then may ask you to confirm this information. Most people living outside the UK have a limited activity history on their UK credit record, so companies might not be able to check your identity in this way.
       explanation2: Your ‘activity history’ includes how often you use your credit accounts, and if you open accounts such as a mortgage, overdraft or loan.
       what_youll_need: What you’ll need
@@ -170,7 +169,6 @@ en:
       youll_also_need: You’ll also need a UK passport or a UK driving licence.
     will_not_work_without_uk_address:
       title: GOV.UK Verify will not work for you
-      other_ways_heading: Other ways to %{other_ways_description}
       heading: GOV.UK Verify will not work for you
       explanation: You need a current UK address to get your identity verified.
     choose_a_certified_company:
@@ -203,7 +201,6 @@ en:
         <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
         <p>There’s no effect on your credit score.</p>
     unlikely_to_verify:
-      title: Other ways to access the service
       heading: GOV.UK Verify won’t work for you
       explanation: You need a valid passport, photocard driving licence or national identity card (ID card) to get your identity verified.
     redirect_to_idp_warning:
@@ -246,8 +243,6 @@ en:
         <p>You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.</p>
         <p>You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
       start_again: "Start again"
-    other_ways_to_access_service:
-      title: Other ways to access the service
   errors:
     transaction_list:
       title: Find the service you were using to start again
