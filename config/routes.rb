@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     get 'confirmation', to: 'confirmation#index', as: :confirmation
     get 'failed_registration', to: 'failed_registration#index', as: :failed_registration
     get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
+    get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
@@ -59,9 +60,6 @@ Rails.application.routes.draw do
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
-  get 'other-ways-to-access-service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
-  get 'other-ways-to-access-service-cy', to: 'other_ways_to_access_service#index' #TODO: delete after localization
-  get 'other-ways-to-access', to: 'other_ways_to_access_service#index' #TODO: delete after localization
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
