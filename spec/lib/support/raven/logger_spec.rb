@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'logger'
 require 'support/raven/logger'
-
+require 'action_controller/metal/exceptions'
 describe Support::Raven::Logger do
   let(:logger) { Support::Raven::Logger.new }
   context "#error" do
@@ -10,6 +10,14 @@ describe Support::Raven::Logger do
       stub_const("Raven", raven)
       error = StandardError.new
       expect(raven).to receive(:capture_exception).with(error)
+      logger.error(error)
+    end
+
+    it 'will not send routing exceptions to sentry' do
+      raven = double(:raven)
+      stub_const("Raven", raven)
+      error = ActionController::RoutingError.new(nil)
+      expect(raven).to_not receive(:capture_exception).with(error)
       logger.error(error)
     end
 

@@ -31,7 +31,7 @@ module Support
 
       class RavenWriter
         def write(exception = nil)
-          unless exception.nil?
+          unless exception.nil? || exception.is_a?(ActionController::RoutingError)
             ::Raven.capture_exception(exception)
           end
         end
