@@ -1,5 +1,5 @@
 class ResponseProcessingController < ApplicationController
   def index
-    render nothing: true
+    @rp_name = current_transaction.rp_name
   end
 end

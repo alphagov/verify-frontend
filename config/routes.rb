@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
+  get 'response-processing' => 'response_processing#index', as: :response_processing
 
   match "/404", to: "errors#page_not_found", via: :all
 
@@ -64,11 +65,9 @@ Rails.application.routes.draw do
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
-    get 'response-processing', to: redirect("#{API_HOST}/response-processing"), as: :response_processing
   else
     get 'feedback', to: 'feedback#index', as: :feedback
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
-    get 'response-processing', to: 'response_processing#index', as: :response_processing
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

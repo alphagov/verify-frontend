@@ -1,7 +1,7 @@
 module Display
   module Rp
     class Repository
-      RpDisplayData = Struct.new(:other_ways_text, :other_ways_description, :name)
+      RpDisplayData = Struct.new(:other_ways_text, :other_ways_description, :name, :rp_name)
 
       def initialize(translator)
         @translator = translator
@@ -14,7 +14,8 @@ module Display
         other_ways_text = @translator.translate("rps.#{simple_id}.other_ways_text")
         other_ways_description = @translator.translate("rps.#{simple_id}.other_ways_description")
         name = @translator.translate("rps.#{simple_id}.name")
-        RpDisplayData.new(other_ways_text, other_ways_description, name)
+        rp_name = @translator.translate("rps.#{simple_id}.rp_name")
+        RpDisplayData.new(other_ways_text, other_ways_description, name, rp_name)
       end
     end
   end
