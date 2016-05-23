@@ -18,13 +18,13 @@ class AuthnResponseController < ApplicationController
 
     case response.idp_result
     when 'SUCCESS'
-      ANALYTICS_REPORTER.report(request, "Success - #{user_state}")
+      report_to_analytics("Success - #{user_state}")
       redirect_to response.is_registration ? confirmation_path : response_processing_path
     when 'CANCEL'
-      ANALYTICS_REPORTER.report(request, "Cancel - #{user_state}")
+      report_to_analytics("Cancel - #{user_state}")
       redirect_to response.is_registration ? failed_registration_path : start_path
     else
-      ANALYTICS_REPORTER.report(request, "Failure - #{user_state}")
+      report_to_analytics("Failure - #{user_state}")
       redirect_to response.is_registration ? failed_registration_path : failed_sign_in_path
     end
   end

@@ -6,7 +6,7 @@ class WillItWorkForMeController < ApplicationController
   def will_it_work_for_me
     @form = WillItWorkForMeForm.new(params['will_it_work_for_me_form'] || {})
     if @form.valid?
-      ANALYTICS_REPORTER.report(request, 'Can I be Verified Next')
+      report_to_analytics('Can I be Verified Next')
       redirect_to redirect_path
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')

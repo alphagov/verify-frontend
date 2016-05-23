@@ -6,7 +6,7 @@ class SelectDocumentsController < ApplicationController
   def select_documents
     @form = SelectDocumentsForm.new(params['select_documents_form'] || {})
     if @form.valid?
-      ANALYTICS_REPORTER.report(request, 'Select Documents Next')
+      report_to_analytics('Select Documents Next')
       selected_evidence = @form.selected_evidence
       store_selected_evidence('documents', selected_evidence)
       if documents_eligibility_checker.any?(selected_evidence_values, available_idps)
