@@ -44,6 +44,7 @@ RSpec.describe 'When user visits the confirmation page' do
   end
 
   it 'sends user to response-processing page when they click the link' do
+    stub_matching_outcome
     visit '/confirmation'
     click_link I18n.t('rps.test-rp.name').capitalize
     expect(page).to have_current_path(response_processing_path)

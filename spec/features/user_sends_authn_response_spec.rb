@@ -111,6 +111,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
 
   it 'will redirect the user to /response-processing on successful sign in at the IDP' do
     stub_session
+    stub_matching_outcome
     api_request = stub_api_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => false)
 
     visit("/test-saml?session-id=#{session_id}")
