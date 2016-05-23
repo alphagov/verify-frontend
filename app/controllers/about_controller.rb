@@ -9,15 +9,9 @@ class AboutController < ApplicationController
   end
 
   def certified_companies
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(identity_providers)
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers)
   end
 
   def choosing_a_company
-  end
-
-private
-
-  def identity_providers
-    SESSION_PROXY.identity_providers(cookies)
   end
 end

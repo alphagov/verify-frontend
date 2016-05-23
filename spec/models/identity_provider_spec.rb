@@ -23,4 +23,16 @@ RSpec.describe IdentityProvider do
     expect(idp.simple_id).to eql 'simpleId1'
     expect(idp.entity_id).to eql 'entityId1'
   end
+
+  it 'should load from session' do
+    idp = IdentityProvider.from_session('entity_id' => 'entityId1', 'simple_id' => 'simpleId1')
+    expect(idp.simple_id).to eql 'simpleId1'
+    expect(idp.entity_id).to eql 'entityId1'
+  end
+
+  it 'should load from session' do
+    provider = IdentityProvider.new('entity_id' => 'entityId1', 'simple_id' => 'simpleId1')
+    idp = IdentityProvider.from_session(provider)
+    expect(idp).to eql provider
+  end
 end

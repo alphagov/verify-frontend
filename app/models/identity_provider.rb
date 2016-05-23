@@ -15,4 +15,9 @@ class IdentityProvider
       'entity_id' => hash['entityId']
     )
   end
+
+  def self.from_session(object)
+    return object if object.is_a? IdentityProvider
+    return new(object) if object.is_a? Hash
+  end
 end
