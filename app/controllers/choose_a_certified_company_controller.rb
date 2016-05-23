@@ -1,6 +1,4 @@
 class ChooseACertifiedCompanyController < ApplicationController
-  protect_from_forgery except: :select_idp
-
   def index
     grouped_identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence_values, identity_providers)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
