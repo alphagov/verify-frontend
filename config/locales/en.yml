@@ -249,6 +249,11 @@ en:
     response_processing:
       heading: "%{rp_name} is processing your details"
       bear_with_us: "This may take a few seconds, please bear with us."
+      matching_error:
+        problem: "Sorry, %{rp_name} is having technical problems."
+        start_again_link: start again
+        start_again_message_html: "Please %{start_again_link} in a few minutes by signing in with your certified company."
+        other_ways: "If you continue having problems, there are others ways to %{other_ways_description}."
   errors:
     transaction_list:
       title: Find the service you were using to start again
