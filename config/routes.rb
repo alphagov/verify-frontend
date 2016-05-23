@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
+  get '/humans.txt', to: 'static#humanstxt'
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")

@@ -6,4 +6,8 @@ class StaticController < ApplicationController
 
   def privacy_notice
   end
+
+  def humanstxt
+    render 'static/humans.txt.erb'
+  end
 end
