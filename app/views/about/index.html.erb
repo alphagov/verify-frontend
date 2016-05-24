@@ -1,4 +1,4 @@
-<% content_for :page_title, t('hub.about.title') %>
+<%= render partial: 'shared/page_title', locals: {:title_key => 'hub.about.title'} %>
 <% content_for :feedback_source, 'ABOUT_PAGE' %>
 
 <p><%= t 'hub.about.verify_is_a_scheme' %></p>

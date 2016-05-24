@@ -1,4 +1,4 @@
-<% content_for :page_title, t('errors.something_went_wrong.title') %>
+<%= render partial: 'shared/page_title', locals: {:title_key => 'errors.something_went_wrong.title'} %>
 <% content_for :feedback_source, 'ERROR_PAGE' %>
 <% content_for :piwik_custom_path, 'errors/generic-error' %>
 
