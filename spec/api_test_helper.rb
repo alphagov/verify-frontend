@@ -74,3 +74,7 @@ def stub_api_saml_endpoint
   }
   stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: session.to_json, status: 201)
 end
+
+def stub_matching_outcome(outcome = MatchingOutcomeResponse::WAIT)
+  stub_request(:get, api_uri('session/matching-outcome')).to_return(body: { 'outcome' => outcome }.to_json)
+end

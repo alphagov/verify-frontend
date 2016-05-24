@@ -15,6 +15,7 @@ module Display
         allow(translator).to receive(:translate).with('rps.test-rp.other_ways_description').and_return('Other ways description')
         allow(translator).to receive(:translate).with('rps.test-rp.other_ways_text').and_return('Other ways text')
         allow(translator).to receive(:translate).with('rps.test-rp.name').and_return('Display name')
+        allow(translator).to receive(:translate).with('rps.test-rp.rp_name').and_return('Test RP')
         repository = Repository.new(translator)
 
         result = repository.fetch('test-rp')
@@ -22,6 +23,7 @@ module Display
         expect(result.other_ways_description).to eql('Other ways description')
         expect(result.other_ways_text).to eql('Other ways text')
         expect(result.name).to eql('Display name')
+        expect(result.rp_name).to eql('Test RP')
       end
     end
   end

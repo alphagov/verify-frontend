@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
+  get 'response-processing' => 'response_processing#index', as: :response_processing
 
   match "/404", to: "errors#page_not_found", via: :all
 
@@ -57,18 +58,21 @@ Rails.application.routes.draw do
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
-  get '/redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error")
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
     get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
-    get 'response-processing', to: redirect("#{API_HOST}/response-processing"), as: :response_processing
+    get 'redirect-to-service/signing-in', to: redirect("#{API_HOST}/redirect-to-service/signing-in"), as: :redirect_signing_in
+    get 'redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error"), as: :redirect_to_service_error
+    get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
   else
     get 'feedback', to: 'feedback#index', as: :feedback
     get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
-    get 'response-processing', to: 'response_processing#index', as: :response_processing
+    get 'redirect-to-service/signing-in', to: proc { |_| [200, {}, ['OK']] }, as: :redirect_signing_in
+    get 'redirect-to-service/error', to: proc { |_| [200, {}, ['OK']] }, as: :redirect_to_service_error
+    get 'further-information', to: proc { |_| [200, {}, ['OK']] }, as: :further_information
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

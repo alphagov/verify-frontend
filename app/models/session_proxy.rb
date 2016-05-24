@@ -5,6 +5,7 @@ class SessionProxy
   IDP_AUTHN_REQUEST_PATH = "#{PATH}/idp-authn-request".freeze
   IDP_AUTHN_RESPONSE_PATH = "#{PATH}/idp-authn-response".freeze
   SESSION_STATE_PATH = "#{PATH}/state".freeze
+  MATCHING_OUTCOME_PATH = "#{PATH}/matching-outcome".freeze
   PARAM_SAML_REQUEST = 'samlRequest'.freeze
   PARAM_SAML_RESPONSE = 'samlResponse'.freeze
   PARAM_RELAY_STATE = 'relayState'.freeze
@@ -61,6 +62,11 @@ class SessionProxy
     }
     response = @api_client.put(IDP_AUTHN_RESPONSE_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
     IdpAuthnResponse.new(response || {}).tap(&:validate)
+  end
+
+  def matching_outcome(cookies)
+    response = @api_client.get(MATCHING_OUTCOME_PATH, cookies: select_cookies(cookies, CookieNames.session_cookies))
+    MatchingOutcomeResponse.new(response || {}).tap(&:validate).outcome
   end
 
 private

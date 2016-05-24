@@ -170,4 +170,26 @@ describe SessionProxy do
       }.to raise_error Api::Response::ModelError, "Idp result can't be blank, Is registration is not included in the list"
     end
   end
+
+  describe '#matching_outcome' do
+    it 'should return a matching outcome' do
+      expect(api_client).to receive(:get)
+        .with(SessionProxy::MATCHING_OUTCOME_PATH, cookies: cookies)
+        .and_return('outcome' => 'GOTO_HUB_LANDING_PAGE')
+
+      response = session_proxy.matching_outcome(cookies)
+
+      expect(response).to eql MatchingOutcomeResponse::GOTO_HUB_LANDING_PAGE
+    end
+
+    it 'should raise an error when the API responds with an unknown value' do
+      expect(api_client).to receive(:get)
+        .with(SessionProxy::MATCHING_OUTCOME_PATH, cookies: cookies)
+        .and_return('outcome' => 'BANANA')
+
+      expect {
+        session_proxy.matching_outcome(cookies)
+      }.to raise_error Api::Response::ModelError, 'Outcome BANANA is not an allowed value for a matching outcome'
+    end
+  end
 end
