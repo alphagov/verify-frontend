@@ -22,6 +22,7 @@ RSpec.describe 'When the user visits the response processing page' do
     visit '/response-processing'
     expect(page).to have_content I18n.t('hub.response_processing.heading', rp_name: 'Test RP')
     expect(page).to have_css('img.loading')
+    expect(page).to have_css 'meta[http-equiv=refresh]', visible: false
   end
 
   it 'redirects to start page when response is GOTO_HUB_LANDING_PAGE' do

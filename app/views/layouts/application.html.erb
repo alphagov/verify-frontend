@@ -5,6 +5,9 @@
   <!--[if gt IE 8]><!--><%= stylesheet_link_tag 'style' %><!--<![endif]-->
   <!--[if IE 8]><%= stylesheet_link_tag 'style-ie8' %><![endif]-->
   <%= csrf_meta_tags %>
+  <% if content_for?(:meta_refresh) %>
+    <meta http-equiv="refresh" content="<%= yield(:meta_refresh) %>">
+  <% end %>
 <% end %>
 
 <% content_for :content do %>
