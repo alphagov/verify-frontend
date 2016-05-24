@@ -16,7 +16,7 @@ module ApplicationHelper
         idsite: public_piwik.site_id,
         rec: 1,
         rand: Random.rand(2**32 - 1),
-        action_name: content_for(:page_title),
+        action_name: "#{content_for(:page_title_in_english)} - GOV.UK Verify - GOV.UK",
     }
     hash[:url] = piwik_custom_url if piwik_custom_url?
     hash.to_query

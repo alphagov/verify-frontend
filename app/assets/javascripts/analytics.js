@@ -9,7 +9,8 @@
     var trackerUrl = $('#piwik-url').text(),
         siteId,
         customUrl,
-        piwikAnalyticsQueue;
+        piwikAnalyticsQueue,
+        enTitle;
 
     if(!trackerUrl) {
         return;
@@ -17,9 +18,10 @@
 
     siteId = $('#piwik-site-id').text();
     customUrl = $('#piwik-custom-url').text();
+    enTitle = $('meta[name="verify|title"]').attr("content") + " - GOV.UK Verify - GOV.UK";
 
     piwikAnalyticsQueue = [
-      ['setDocumentTitle', document.title ],
+      ['setDocumentTitle', enTitle ],
       ['trackPageView'],
       ['enableLinkTracking'],
       [setPiwikVisitorIdCookie],
