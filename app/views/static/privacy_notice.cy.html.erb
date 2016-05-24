@@ -1,4 +1,8 @@
 <% content_for :page_title, 'Hysbysiad preifatrwydd' %>
+<% content_for :page_title_in_english, 'Privacy notice' %>
+<% content_for :head do
+  tag('meta', :name => 'verify|title', :content => content_for(:page_title_in_english))
+end %>
 <% content_for :feedback_source, 'PRIVACY_NOTICE_PAGE' %>
 
 <div class="grid-row">

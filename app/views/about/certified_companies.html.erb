@@ -1,4 +1,4 @@
-<% content_for :page_title, t('hub.about_certified_companies.title') %>
+<%= render partial: 'shared/page_title', locals: {:title_key => 'hub.about_certified_companies.title'} %>
 <% content_for :feedback_source, 'ABOUT_CERTIFIED_COMPANIES_PAGE' %>
 
 <p><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>

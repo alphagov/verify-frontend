@@ -1,4 +1,8 @@
 <% content_for :page_title, 'Cookies' %>
+<% content_for :page_title_in_english, 'Cookies' %>
+<% content_for :head do
+  tag('meta', :name => 'verify|title', :content => content_for(:page_title_in_english))
+end %>
 <% content_for :feedback_source, 'COOKIES_INFO_PAGE' %>
 
 <div class="grid-row">
