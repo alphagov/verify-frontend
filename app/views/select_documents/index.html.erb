@@ -1,4 +1,4 @@
-<% content_for :page_title, t('hub.select_documents.title') %>
+<%= render partial: 'shared/page_title', locals: {:title_key => 'hub.select_documents.title'} %>
 <% content_for :feedback_source, 'SELECT_DOCUMENTS_PAGE' %>
 
 <div id="no-documents-message" class="visually-hidden" aria-live="assertive" data-no-documents-message="<%= h t('hub.select_documents.no_documents_message') %>"></div>

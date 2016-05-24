@@ -1,4 +1,4 @@
-<% content_for :page_title, t('hub.signin.title') %>
+<%= render partial: 'shared/page_title', locals: {:title_key => 'hub.signin.title'} %>
 <% content_for :feedback_source, 'SIGN_IN_PAGE' %>
 
 <%= link_to t('navigation.back'), start_path, class: 'link-back' %>
