@@ -11,11 +11,6 @@
 
   @include media(tablet) {
     margin-top: $gutter;
-    margin-bottom: $gutter;
-  }
-
-  @include media(desktop) {
-    margin-bottom: -$gutter;
   }
 
   @include box-sizing(border-box);
