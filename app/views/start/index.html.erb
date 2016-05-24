@@ -1,4 +1,4 @@
-<% content_for :page_title, t('hub.start.title') %>
+<%= render partial: 'shared/page_title', locals: {:title_key => 'hub.start.title'} %>
 <% content_for :body_classes, 'hub-start' %>
 <% content_for :feedback_source, 'START_PAGE' %>
 
