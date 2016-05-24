@@ -42,10 +42,10 @@ end
 
 def cookie_value(cookie_name)
   if is_selenium_driver?
-    journey_hint_cookie = Capybara.current_session.driver.browser.manage.all_cookies.detect do |cookie|
-      cookie[:name] == cookie_name
-    end
-    journey_hint_cookie[:value]
+    all_cookies = Capybara.current_session.driver.browser.manage.all_cookies
+    cookie = all_cookies.detect { |c| c[:name] == cookie_name }
+    raise "Could not find cookie with name #{cookie_name.inspect}, cookies were #{all_cookies.inspect}" unless cookie
+    cookie[:value]
   else
     Capybara.current_session.driver.request.cookies[cookie_name]
   end
