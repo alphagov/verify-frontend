@@ -269,7 +269,7 @@ cy:
       title: Cwcis Ar Goll
       heading: GOV.UK Verify
       access_restriction: Gellir ond cael mynediad i GOV.UK Verify o wasanaeth y llywodraeth.
-      read_more: 'Darllenwch y <a href="https://www.gov.uk/verify" hreflang="en">Cyflwyniad i GOV.UK Verify</a> am fwy o wybodaeth.'
+      read_more_html: 'Darllenwch y <a href="https://www.gov.uk/verify" hreflang="en">Cyflwyniad i GOV.UK Verify</a> am fwy o wybodaeth.'
       enable_cookies: Os na allwch gael mynediad i GOV.UK Verify o wasanaeth y llywodraeth, dylech alluogi eich cwcis.
     session_error:
       title: Mae rhywbeth wedi mynd o’i le

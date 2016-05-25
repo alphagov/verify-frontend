@@ -263,7 +263,7 @@ en:
       title: Cookies Missing
       heading: GOV.UK Verify
       access_restriction: GOV.UK Verify can only be accessed from a government service.
-      read_more: 'Read the <a href="https://www.gov.uk/verify">Introduction to GOV.UK Verify</a> for more information.'
+      read_more_html: 'Read the <a href="https://www.gov.uk/verify">Introduction to GOV.UK Verify</a> for more information.'
       enable_cookies: If you can’t access GOV.UK Verify from a service, enable your cookies.
     session_error:
       title: Something went wrong
