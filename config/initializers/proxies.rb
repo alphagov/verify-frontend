@@ -10,10 +10,10 @@ TRANSACTION_LISTER = Display::Rp::TransactionLister.new(
   Display::Rp::DisplayDataCorrelator.new(FEDERATION_TRANSLATOR)
 )
 
-IDENTITY_PROVIDER_DISPLAY_DECORATOR = Display::IdentityProviderDisplayDecorator.new(
-  FEDERATION_TRANSLATOR,
-  CONFIG.logo_directory,
-  CONFIG.white_logo_directory
-)
-
-RELYING_PARTY_REPOSITORY = Display::Rp::Repository.new(FEDERATION_TRANSLATOR)
+Rails.application.config.after_initialize do
+  IDENTITY_PROVIDER_DISPLAY_DECORATOR = Display::IdentityProviderDisplayDecorator.new(
+    IDP_DISPLAY_REPOSITORY,
+    CONFIG.logo_directory,
+    CONFIG.white_logo_directory
+  )
+end

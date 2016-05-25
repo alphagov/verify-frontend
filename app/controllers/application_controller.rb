@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_transaction
-    @current_transaction ||= RELYING_PARTY_REPOSITORY.fetch(current_transaction_simple_id)
+    @current_transaction ||= RP_DISPLAY_REPOSITORY.fetch(current_transaction_simple_id)
   end
 
   def current_transaction_simple_id
