@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
   get 'response-processing' => 'response_processing#index', as: :response_processing
+  get 'response-processing-cy' => 'response_processing#index'
 
   match "/404", to: "errors#page_not_found", via: :all
 
