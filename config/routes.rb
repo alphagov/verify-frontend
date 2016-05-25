@@ -61,16 +61,16 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
+  get 'forgot-company', to: 'static#forgot_company', as: :forgot_company
+  get 'forgot-company-cy', to: 'static#forgot_company'
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
-    get 'forgot-company', to: redirect("#{API_HOST}/forgot-company"), as: :forgot_company
     get 'redirect-to-service/signing-in', to: redirect("#{API_HOST}/redirect-to-service/signing-in"), as: :redirect_signing_in
     get 'redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error"), as: :redirect_to_service_error
     get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
   else
     get 'feedback', to: 'feedback#index', as: :feedback
-    get 'forgot-company', to: 'forgot_company#index', as: :forgot_company
     get 'redirect-to-service/signing-in', to: proc { |_| [200, {}, ['OK']] }, as: :redirect_signing_in
     get 'redirect-to-service/error', to: proc { |_| [200, {}, ['OK']] }, as: :redirect_to_service_error
     get 'further-information', to: proc { |_| [200, {}, ['OK']] }, as: :further_information

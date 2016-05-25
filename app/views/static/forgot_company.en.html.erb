@@ -1,0 +1,18 @@
+<%= render partial: 'shared/page_title', locals: {:title_key => 'hub.forgot_company.title'} %>
+<% content_for :feedback_source, 'FORGOT_COMPANY_PAGE' %>
+
+<%= link_to t('navigation.back'), sign_in_path, class: 'link-back' %>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge">We can’t tell you which company verified you</h1>
+    <p>Security standards mean GOV.UK can’t store your information, so we can’t tell you which company you registered with.</p>
+    <p>Look for correspondence from a certified company. Check your:</p>
+    <ul class="list-bullet list">
+      <li>email inbox for the confirmation email</li>
+      <li>spam folder and deleted emails</li>
+      <li>texts on your mobile phone</li>
+    </ul>
+    <p>You can try to get your identity verified by a certified company again.</p>
+    </div>
+  </div>
+</div>
