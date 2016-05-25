@@ -250,6 +250,7 @@ cy:
         <p>You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
       start_again: "Start again"
     response_processing:
+      title: Please wait
       heading: "%{rp_name} is processing your details"
       bear_with_us: "This may take a few seconds, please bear with us."
       matching_error:
