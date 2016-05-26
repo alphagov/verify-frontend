@@ -25,6 +25,7 @@ cy:
     failed_registration: failed-registration-cy
     failed_sign_in: failed-sign-in-cy
     other_ways_to_access_service: other-ways-to-access-service-cy
+    forgot_company: forgot-company-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr

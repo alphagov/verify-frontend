@@ -23,7 +23,7 @@ RSpec.describe 'When the user visits the forgot company page' do
   end
 
   it 'displays content in Welsh' do
-    visit '/forgot-company?locale=cy'#TODO change to Welsh route
+    visit '/forgot-company-cy'
 
     expect(page).to have_content 'We can’t tell you which company verified you'
     expect(page).to have_content 'Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg.'
