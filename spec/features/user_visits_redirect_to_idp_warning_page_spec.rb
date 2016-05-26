@@ -160,7 +160,6 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
         '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
         'action_name' => "IDCorp was chosen for registration (recommended) with evidence #{selected_evidence.values.flatten.sort.join(', ')}",
       }
-      stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
       piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
       stub_federation
       given_a_session_with_document_evidence
