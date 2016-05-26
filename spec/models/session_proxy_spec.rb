@@ -192,4 +192,35 @@ describe SessionProxy do
       }.to raise_error Api::Response::ModelError, 'Outcome BANANA is not an allowed value for a matching outcome'
     end
   end
+
+  describe '#response_for_rp' do
+    it 'should return an rp response' do
+      expect(api_client).to receive(:get)
+        .with(SessionProxy::RESPONSE_FOR_RP_PATH, cookies: cookies)
+        .and_return(
+          'postEndpoint' => 'http://www.example.com',
+          'samlMessage' => 'a saml message',
+          'relayState' => 'a relay state'
+        )
+
+      actual_response = session_proxy.response_for_rp(cookies)
+
+      expected_attributes = {
+        'location' => 'http://www.example.com',
+        'saml_message' => 'a saml message',
+        'relay_state' => 'a relay state'
+      }
+      expect(actual_response).to have_attributes(expected_attributes)
+    end
+
+    it 'should raise an error when the API responds with an unknown value' do
+      expect(api_client).to receive(:get)
+        .with(SessionProxy::RESPONSE_FOR_RP_PATH, cookies: cookies)
+        .and_return('outcome' => 'BANANA')
+
+      expect {
+        session_proxy.response_for_rp(cookies)
+      }.to raise_error(Api::Response::ModelError, "Location can't be blank, Saml message can't be blank")
+    end
+  end
 end

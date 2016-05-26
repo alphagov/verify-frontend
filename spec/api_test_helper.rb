@@ -78,3 +78,12 @@ end
 def stub_matching_outcome(outcome = MatchingOutcomeResponse::WAIT)
   stub_request(:get, api_uri('session/matching-outcome')).to_return(body: { 'outcome' => outcome }.to_json)
 end
+
+def stub_response_for_rp
+  response_body = {
+    'postEndpoint' => '/test-rp',
+    'samlMessage' => 'a saml message',
+    'relayState' => 'a relay state'
+  }
+  stub_request(:get, api_uri('session/response-for-rp')).to_return(body: response_body.to_json)
+end

@@ -9,12 +9,17 @@ Rails.application.routes.draw do
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
   get 'redirect-to-idp-cy' => 'redirect_to_idp#index'
+  get 'response-processing' => 'response_processing#index', as: :response_processing
+  get 'response-processing-cy' => 'response_processing#index'
+  get 'redirect-to-service/signing-in' => 'redirect_to_service#signing_in', as: :redirect_signing_in
+  get 'redirect-to-service/signing-in-cy' => 'redirect_to_service#signing_in'
 
   match "/404", to: "errors#page_not_found", via: :all
 
   if %w(test development).include? Rails.env
     mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
     get 'test-saml' => 'test_saml#index'
+    post 'test-rp', to: proc { |_| [200, {}, ['OK']] }
     post 'test-idp-request-endpoint' => 'test_saml#idp_request'
     post 'another-idp-endpoint' => 'test_saml#idp_request'
     get 'test-journey-hint' => 'test_journey_hint_cookie#index', as: :test_journey_hint
@@ -65,12 +70,10 @@ Rails.application.routes.draw do
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
-    get 'redirect-to-service/signing-in', to: redirect("#{API_HOST}/redirect-to-service/signing-in"), as: :redirect_signing_in
     get 'redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error"), as: :redirect_to_service_error
     get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
   else
     get 'feedback', to: 'feedback#index', as: :feedback
-    get 'redirect-to-service/signing-in', to: proc { |_| [200, {}, ['OK']] }, as: :redirect_signing_in
     get 'redirect-to-service/error', to: proc { |_| [200, {}, ['OK']] }, as: :redirect_to_service_error
     get 'further-information', to: proc { |_| [200, {}, ['OK']] }, as: :further_information
   end

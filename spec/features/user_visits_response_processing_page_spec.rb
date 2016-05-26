@@ -34,6 +34,7 @@ RSpec.describe 'When the user visits the response processing page' do
   end
 
   it 'redirects to signing in page when response is SEND_NO_MATCH_RESPONSE_TO_TRANSACTION' do
+    stub_response_for_rp
     stub_matching_outcome(MatchingOutcomeResponse::SEND_NO_MATCH_RESPONSE_TO_TRANSACTION)
     stubbed_report_request = stub_matching_report('No Match')
     visit '/response-processing'
@@ -42,6 +43,7 @@ RSpec.describe 'When the user visits the response processing page' do
   end
 
   it 'redirects to signing in page when response is SEND_SUCCESSFUL_MATCH_RESPONSE_TO_TRANSACTION' do
+    stub_response_for_rp
     stub_matching_outcome(MatchingOutcomeResponse::SEND_SUCCESSFUL_MATCH_RESPONSE_TO_TRANSACTION)
     stubbed_report_request = stub_matching_report('Match')
     visit '/response-processing'
@@ -50,6 +52,7 @@ RSpec.describe 'When the user visits the response processing page' do
   end
 
   it 'redirects to signing in page when response is SEND_USER_ACCOUNT_CREATED_RESPONSE_TO_TRANSACTION' do
+    stub_response_for_rp
     stubbed_report_request = stub_unknown_user_report
     stub_matching_outcome(MatchingOutcomeResponse::SEND_USER_ACCOUNT_CREATED_RESPONSE_TO_TRANSACTION)
     visit '/response-processing'

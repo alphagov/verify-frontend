@@ -2,7 +2,8 @@ require 'feature_helper'
 require 'models/cookie_names'
 
 def given_api_returns_federation_info
-  body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
+  body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }],
+           'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
   stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
 end
 
