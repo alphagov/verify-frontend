@@ -26,7 +26,7 @@ private
 
   def retrieve_last_used_idp(entity_id)
     IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      SESSION_PROXY.identity_providers(cookies).select { |idp| idp.entity_id == entity_id }
+      current_identity_providers.select { |idp| idp.entity_id == entity_id }
     )
   end
 end

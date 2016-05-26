@@ -132,7 +132,12 @@ private
   end
 
   def selected_identity_provider
-    IdentityProvider.new(session.fetch(:selected_idp))
+    IdentityProvider.from_session(session.fetch(:selected_idp))
+  end
+
+  def current_identity_providers
+    session[:identity_providers] ||= SESSION_PROXY.identity_providers(cookies)
+    @current_identity_providers ||= session[:identity_providers].map { |obj| IdentityProvider.from_session(obj) }
   end
 
   def report_to_analytics(action_name)

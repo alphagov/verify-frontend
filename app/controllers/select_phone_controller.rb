@@ -8,7 +8,7 @@ class SelectPhoneController < ApplicationController
     if @form.valid?
       report_to_analytics('Phone Next')
       store_selected_evidence('phone', @form.selected_evidence)
-      if idp_eligibility_checker.any?(selected_evidence_values, available_idps)
+      if idp_eligibility_checker.any?(selected_evidence_values, current_identity_providers)
         redirect_to will_it_work_for_me_path
       else
         redirect_to no_mobile_phone_path
@@ -25,10 +25,6 @@ class SelectPhoneController < ApplicationController
   end
 
 private
-
-  def available_idps
-    SESSION_PROXY.identity_providers(cookies)
-  end
 
   def idp_eligibility_checker
     IDP_ELIGIBILITY_CHECKER

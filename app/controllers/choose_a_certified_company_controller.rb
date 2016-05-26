@@ -1,6 +1,6 @@
 class ChooseACertifiedCompanyController < ApplicationController
   def index
-    grouped_identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence_values, identity_providers)
+    grouped_identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence_values, current_identity_providers)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.non_recommended)
   end
@@ -13,7 +13,7 @@ class ChooseACertifiedCompanyController < ApplicationController
 
   def about
     simple_id = params[:company]
-    matching_idp = identity_providers.detect { |idp| idp.simple_id == simple_id }
+    matching_idp = current_identity_providers.detect { |idp| idp.simple_id == simple_id }
     @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
     if @idp.viewable?
       grouped_identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence_values, [@idp])
@@ -22,11 +22,5 @@ class ChooseACertifiedCompanyController < ApplicationController
     else
       render 'errors/404', status: 404
     end
-  end
-
-private
-
-  def identity_providers
-    SESSION_PROXY.identity_providers(cookies)
   end
 end

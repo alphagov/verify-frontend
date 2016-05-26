@@ -1,7 +1,7 @@
 class SignInController < ApplicationController
   def index
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      SESSION_PROXY.identity_providers(cookies)
+      current_identity_providers
     )
 
     FEDERATION_REPORTER.report_sign_in(current_transaction_simple_id, request)
