@@ -11,8 +11,12 @@ Rails.application.routes.draw do
   get 'redirect-to-idp-cy' => 'redirect_to_idp#index'
   get 'response-processing' => 'response_processing#index', as: :response_processing
   get 'response-processing-cy' => 'response_processing#index'
-  get 'redirect-to-service/signing-in' => 'redirect_to_service#signing_in', as: :redirect_signing_in
+  get 'redirect-to-service/signing-in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
   get 'redirect-to-service/signing-in-cy' => 'redirect_to_service#signing_in'
+  get 'redirect-to-service/start-again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
+  get 'redirect-to-service/start-again-cy' => 'redirect_to_service#start_again'
+  get 'redirect-to-service/error' => 'redirect_to_service#start_again', as: :redirect_to_service_error
+  get 'redirect-to-service/error-cy' => 'redirect_to_service#start_again'
 
   match "/404", to: "errors#page_not_found", via: :all
 
@@ -70,11 +74,9 @@ Rails.application.routes.draw do
 
   if Rails.env == 'development'
     get 'feedback', to: redirect("#{API_HOST}/feedback")
-    get 'redirect-to-service/error', to: redirect("#{API_HOST}/redirect-to-service/error"), as: :redirect_to_service_error
     get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
   else
     get 'feedback', to: 'feedback#index', as: :feedback
-    get 'redirect-to-service/error', to: proc { |_| [200, {}, ['OK']] }, as: :redirect_to_service_error
     get 'further-information', to: proc { |_| [200, {}, ['OK']] }, as: :further_information
   end
 

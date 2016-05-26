@@ -262,6 +262,11 @@ cy:
         other_ways: "If you continue having problems, there are others ways to %{other_ways_description}."
     forgot_company:
       title: Advice for forgotten company
+    redirect_to_service:
+      signing_in:
+        title: "Please wait. Signing you in"
+      start_again:
+        title: "Please wait. Starting again."
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

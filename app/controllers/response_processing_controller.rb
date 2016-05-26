@@ -8,13 +8,13 @@ class ResponseProcessingController < ApplicationController
       redirect_to start_path
     when MatchingOutcomeResponse::SEND_NO_MATCH_RESPONSE_TO_TRANSACTION
       report_to_analytics('Matching Outcome - No Match')
-      redirect_to redirect_signing_in_path
+      redirect_to redirect_to_service_signing_in_path
     when MatchingOutcomeResponse::SEND_SUCCESSFUL_MATCH_RESPONSE_TO_TRANSACTION
       report_to_analytics('Matching Outcome - Match')
-      redirect_to redirect_signing_in_path
+      redirect_to redirect_to_service_signing_in_path
     when MatchingOutcomeResponse::SEND_USER_ACCOUNT_CREATED_RESPONSE_TO_TRANSACTION
       report_to_analytics('Unknown User Outcome - Account Created')
-      redirect_to redirect_signing_in_path
+      redirect_to redirect_to_service_signing_in_path
     when MatchingOutcomeResponse::GET_C3_DATA
       report_to_analytics('Matching Outcome - Cycle3')
       redirect_to further_information_path
