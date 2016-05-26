@@ -23,4 +23,5 @@ $(function () {
 
   window.GOVUK.validation.attach();
   window.GOVUK.signin.attach();
+  window.GOVUK.autoSubmitForm.attach();
 });

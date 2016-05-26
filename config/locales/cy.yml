@@ -265,8 +265,10 @@ cy:
     redirect_to_service:
       signing_in:
         title: "Please wait. Signing you in"
+        transition_heading: "%{rp_name} is processing your details"
       start_again:
         title: "Please wait. Starting again."
+        transition_heading: "Starting again"
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

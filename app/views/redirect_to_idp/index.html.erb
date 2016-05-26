@@ -1,20 +1,15 @@
 <% content_for :page_title, 'Loading' %>
 
-<script>
-  function init(){document.forms[0].submit();}
-  window.onload=init;
-</script>
-
 <div class="content">
   <div class="grid-row">
     <div class="column-two-thirds"><h1 class="heading-xlarge">Continue to next step</h1>
       <div class="application-notice info-notice">
         <p>Because Javascript is not enabled on your browser, you must press the continue button</p></div>
-        <%= form_tag(@saml_message.location) do %>
+        <%= form_tag(@saml_message.location, class: 'js-auto-submit') do %>
             <%= hidden_field_tag 'SAMLRequest', @saml_message.saml_request %>
             <%= hidden_field_tag 'RelayState', @saml_message.relay_state %>
             <%= hidden_field_tag 'registration', @saml_message.registration %>
-            <%= submit_tag 'Continue', id: 'continue-button' %>
+            <%= submit_tag 'Continue', id: 'continue-button', class: 'button' %>
         <% end %>
     </div>
   </div>

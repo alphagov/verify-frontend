@@ -1,23 +1,25 @@
 <% content_for :page_title, @title %>
 
-<script>
-  function init(){document.forms[0].submit();}
-  window.onload=init;
-</script>
-<div class="content-inner">
+<div class="content-inner js-hidden">
   <div class="grid-row">
     <div class="column-two-thirds">
       <h1 class="heading-xlarge">Continue to next step</h1>
       <div class="application-notice info-notice">
         <p>Because Javascript is not enabled on your browser, you must press the continue button</p>
       </div>
-      <%= form_tag(@response_for_rp.location) do %>
+      <%= form_tag(@response_for_rp.location, class: 'js-auto-submit') do %>
           <%= hidden_field_tag 'SAMLResponse', @response_for_rp.saml_message %>
           <% if @response_for_rp.relay_state %>
             <%= hidden_field_tag 'RelayState', @response_for_rp.relay_state %>
           <% end %>
-          <%= submit_tag 'Continue', id: 'continue-button' %>
+          <%= submit_tag 'Continue', id: 'continue-button', class: 'button' %>
       <% end %>
     </div>
   </div>
+</div>
+
+<div class="response-processing js-show">
+  <h1 class="heading-xlarge"><%= @transition_message %></h1>
+  <p>This may take a few seconds, please bear with us.</p>
+  <%= image_tag 'loading.gif', alt: 'Loading…', class: 'loading' %>
 </div>

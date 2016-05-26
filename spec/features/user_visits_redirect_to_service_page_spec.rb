@@ -8,10 +8,11 @@ end
 RSpec.describe 'When the user visits the redirect to service page' do
   before(:each) do
     set_session_cookies!
+    page.set_rack_session(transaction_simple_id: 'test-rp')
   end
 
   context 'without javascript' do
-    it 'will redirect to service when path is signing-in' do
+    it 'should redirect to service when path is signing-in' do
       api_request = stub_response_for_rp
 
       visit redirect_to_service_signing_in_path
@@ -49,6 +50,17 @@ RSpec.describe 'When the user visits the redirect to service page' do
       expect(hidden_field_value('RelayState')).to eql('a relay state')
 
       click_button 'Continue'
+      expect(page).to have_current_path('/test-rp')
+      expect(api_request).to have_been_made.once
+    end
+  end
+
+  context 'with javascript' do
+    it 'should redirect to service when path is signing-in', js: true do
+      api_request = stub_response_for_rp
+
+      visit redirect_to_service_signing_in_path
+
       expect(page).to have_current_path('/test-rp')
       expect(api_request).to have_been_made.once
     end
