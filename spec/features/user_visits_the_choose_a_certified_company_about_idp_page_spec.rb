@@ -15,7 +15,6 @@ RSpec.feature 'user visits the choose a certified about idp page', type: :featur
     set_session_cookies!
     given_a_session_with_selected_evidence
     visit choose_a_certified_company_about_path('stub-idp-one')
-    # expect(page).to have_content("Choose IDCorp")
     expect(page).to have_content("ID Corp is the premier identity proofing service around.")
     click_button "Choose IDCorp"
     expect(page).to have_current_path(redirect_to_idp_warning_path)
