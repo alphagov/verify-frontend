@@ -1,6 +1,6 @@
 class RedirectToServiceController < ApplicationController
   def signing_in
-    @title = t('hub.redirect_to_service.signing_in.title')
+    @title = 'hub.redirect_to_service.signing_in.title'
     @response_for_rp = SESSION_PROXY.response_for_rp(cookies)
     @rp_name = current_transaction.rp_name
     @transition_message = t('hub.redirect_to_service.signing_in.transition_heading', rp_name: @rp_name)
@@ -8,7 +8,7 @@ class RedirectToServiceController < ApplicationController
   end
 
   def start_again
-    @title = t('hub.redirect_to_service.start_again.title')
+    @title = 'hub.redirect_to_service.start_again.title'
     @response_for_rp = SESSION_PROXY.response_for_rp(cookies)
     @rp_name = current_transaction.rp_name
     @transition_message = t('hub.redirect_to_service.start_again.transition_heading', rp_name: @rp_name)

@@ -1,4 +1,4 @@
-<% content_for :page_title, @title %>
+<%= render partial: 'shared/page_title', locals: {:title_key => @title} %>
 
 <div class="content-inner js-hidden">
   <div class="grid-row">
