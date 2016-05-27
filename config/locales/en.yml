@@ -26,6 +26,7 @@ en:
     failed_sign_in: failed-sign-in
     other_ways_to_access_service: other-ways-to-access-service
     forgot_company: forgot-company
+    response_processing: response-processing
   navigation:
     next: Next
     start_now: Start now
