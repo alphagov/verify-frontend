@@ -263,12 +263,16 @@ cy:
     forgot_company:
       title: Advice for forgotten company
     redirect_to_service:
+      heading: "Continue to next step"
       signing_in:
         title: "Please wait. Signing you in"
         transition_heading: "%{rp_name} is processing your details"
       start_again:
         title: "Please wait. Starting again."
         transition_heading: "Starting again"
+      no_javascript: "Because Javascript is not enabled on your browser, you must press the continue button"
+      loading: "Loading…"
+      please_wait: "This may take a few seconds, please bear with us."
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
