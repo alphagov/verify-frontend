@@ -9,8 +9,6 @@ Rails.application.routes.draw do
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
   get 'redirect-to-idp-cy' => 'redirect_to_idp#index'
-  get 'response-processing' => 'response_processing#index', as: :response_processing
-  get 'response-processing-cy' => 'response_processing#index'
 
   match "/404", to: "errors#page_not_found", via: :all
 
@@ -57,6 +55,7 @@ Rails.application.routes.draw do
     get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
     get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
     get 'forgot_company', to: 'static#forgot_company', as: :forgot_company
+    get 'response_processing', to: 'response_processing#index', as: :response_processing
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
