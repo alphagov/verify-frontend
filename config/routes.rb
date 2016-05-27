@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
+  get 'redirect-to-idp-cy' => 'redirect_to_idp#index'
   get 'response-processing' => 'response_processing#index', as: :response_processing
   get 'response-processing-cy' => 'response_processing#index'
 
