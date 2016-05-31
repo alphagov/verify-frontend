@@ -53,7 +53,7 @@ end
 def stub_piwik_idp_selection(idp_name)
   piwik_request = {
       '_cvar' => "{\"5\":[\"IDP_SELECTION\",\"#{idp_name}\"]}",
-      'action_name' => "IDP choices" #TODO clarify what the action name should be with Olly
+      'action_name' => "IDP selection" #TODO clarify what the action name should be with Olly
   }
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 end
