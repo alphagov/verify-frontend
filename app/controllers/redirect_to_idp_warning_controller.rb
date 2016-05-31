@@ -38,17 +38,25 @@ private
     SESSION_PROXY.select_idp(cookies, idp.entity_id, true)
     set_journey_hint(idp.entity_id, I18n.locale)
     report_registration(idp)
-    register_idp_selected(idp)
+    register_idp_selected(idp.display_name)
     report_selected_idps
   end
 
-  def register_idp_selected(idp)
-    session[:selected_idps] = Set.new unless session.has_key? :selected_idps
-    session[:selected_idps] << idp.display_name
+  def selected_idp_names
+    session[:selected_idp_names] ||= []
+  end
+
+  def idp_recorder
+    SessionIdpSelectionRecorder.new(selected_idp_names)
+  end
+
+  def register_idp_selected(idp_name)
+    idp_recorder.idp_selected(idp_name)
+    session[:selected_idp_names] = idp_recorder.idp_names
   end
 
   def report_selected_idps
-    cvar = Analytics::CustomVariable.build(:idp_selection, session[:selected_idps].to_a.join(', '))
+    cvar = Analytics::CustomVariable.build(:idp_selection, idp_recorder.idp_string)
     action = "IDP choices"
     ANALYTICS_REPORTER.report_custom_variable(request, action, cvar)
   end
