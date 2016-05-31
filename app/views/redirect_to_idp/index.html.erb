@@ -2,9 +2,9 @@
 
 <div class="content">
   <div class="grid-row">
-    <div class="column-two-thirds"><h1 class="heading-xlarge">Continue to next step</h1>
+    <div class="column-two-thirds"><h1 class="heading-xlarge"><%= t('hub.redirect_to_idp.heading')%></h1>
       <div class="application-notice info-notice">
-        <p>Because Javascript is not enabled on your browser, you must press the continue button</p>
+        <p><%= t('hub.redirect_to_idp.description')%></p>
       </div>
       <%= form_tag(@saml_message.location, class: 'js-auto-submit') do %>
           <%= hidden_field_tag 'SAMLRequest', @saml_message.saml_request %>

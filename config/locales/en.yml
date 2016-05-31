@@ -27,6 +27,7 @@ en:
     other_ways_to_access_service: other-ways-to-access-service
     forgot_company: forgot-company
     response_processing: response-processing
+    redirect_to_idp: redirect-to-idp
   navigation:
     next: Next
     start_now: Start now
@@ -267,6 +268,9 @@ en:
       no_javascript: Because Javascript is not enabled on your browser, you must press the continue button
       please_wait: This may take a few seconds, please bear with us.
       loading: "Loading…"
+    redirect_to_idp:
+      heading: Continue to next step
+      description: Because Javascript is not enabled on your browser, you must press the continue button
   errors:
     transaction_list:
       title: Find the service you were using to start again
