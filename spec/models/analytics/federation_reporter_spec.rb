@@ -12,14 +12,14 @@ module Analytics
     let(:request) { double(:request) }
 
     it 'should report custom variable for idp selection' do
-      idp_names_string = 'A,B,C,D'
+      idp_names = %w(A B C D)
       expect(analytics_reporter).to receive(:report_custom_variable)
         .with(
           request,
           'IDP selection',
           5 => %w[IDP_SELECTION A,B,C,D]
         )
-      federation_reporter.report_idp_selection(idp_names_string, request)
+      federation_reporter.report_idp_selection(idp_names, request)
     end
 
     it 'should report custom variable for sign in' do

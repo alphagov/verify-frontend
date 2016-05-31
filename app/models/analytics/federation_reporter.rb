@@ -13,8 +13,8 @@ module Analytics
       report_action(transaction_simple_id, request, 'The Yes option was selected on the start page')
     end
 
-    def report_idp_selection(idp_names_string, request)
-      cvar = Analytics::CustomVariable.build(:idp_selection, idp_names_string)
+    def report_idp_selection(idp_names, request)
+      cvar = Analytics::CustomVariable.build(:idp_selection, idp_names.join(','))
       @analytics_reporter.report_custom_variable(request, 'IDP selection', cvar)
     end
 

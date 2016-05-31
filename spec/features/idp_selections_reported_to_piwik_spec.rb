@@ -34,7 +34,7 @@ RSpec.describe 'When the user selects an IDP' do
 
   it 'appends the IdP name on subsequent selections' do
     idcorp_piwik_request = stub_piwik_idp_selection('IDCorp')
-    idcorp_and_bobs_piwik_request = stub_piwik_idp_selection("IDCorp, Bob’s Identity Service")
+    idcorp_and_bobs_piwik_request = stub_piwik_idp_selection("IDCorp,Bob’s Identity Service")
 
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'

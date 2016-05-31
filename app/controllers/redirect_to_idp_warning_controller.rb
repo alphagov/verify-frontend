@@ -1,4 +1,5 @@
 class RedirectToIdpWarningController < ApplicationController
+  SELECTED_IDP_HISTORY_LENGTH = 5
   helper_method :user_has_no_docs?, :other_ways_description
 
   def index
@@ -38,14 +39,12 @@ private
     SESSION_PROXY.select_idp(cookies, idp.entity_id, true)
     set_journey_hint(idp.entity_id, I18n.locale)
     report_registration(idp)
-    idp_recorder = SessionIdpSelectionRecorder.new(session[:selected_idp_names] ||= [])
-    register_idp_selected(idp_recorder, idp.display_name)
-    FEDERATION_REPORTER.report_idp_selection(idp_recorder.idp_string, request)
-  end
-
-  def register_idp_selected(idp_recorder, idp_name)
-    idp_recorder.idp_selected(idp_name)
-    session[:selected_idp_names] = idp_recorder.idp_names
+    selected_idp_names = session[:selected_idp_names] || []
+    unless selected_idp_names.size >= SELECTED_IDP_HISTORY_LENGTH
+      selected_idp_names << idp.display_name
+      session[:selected_idp_names] = selected_idp_names
+    end
+    FEDERATION_REPORTER.report_idp_selection(selected_idp_names, request)
   end
 
   def report_registration(idp)
