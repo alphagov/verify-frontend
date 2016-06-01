@@ -1,4 +1,5 @@
 class RedirectToIdpWarningController < ApplicationController
+  SELECTED_IDP_HISTORY_LENGTH = 5
   helper_method :user_has_no_docs?, :other_ways_description
 
   def index
@@ -37,15 +38,17 @@ private
   def select_registration(idp)
     SESSION_PROXY.select_idp(cookies, idp.entity_id, true)
     set_journey_hint(idp.entity_id, I18n.locale)
-    report_registration(idp)
+    FEDERATION_REPORTER.report_idp_registration(request, idp.display_name, selected_evidence_values, recommended?)
+    register_idp_selection(idp.display_name)
   end
 
-  def report_registration(idp)
-    cvar = Analytics::CustomVariable.build(:register_idp, idp.display_name)
-    recommended = recommended? ? '(recommended)' : '(not recommended)'
-    list_of_evidence = selected_evidence_values.sort.join(', ')
-    action = "#{idp.display_name} was chosen for registration #{recommended} with evidence #{list_of_evidence}"
-    ANALYTICS_REPORTER.report_custom_variable(request, action, cvar)
+  def register_idp_selection(idp_name)
+    selected_idp_names = session[:selected_idp_names] || []
+    if selected_idp_names.size < SELECTED_IDP_HISTORY_LENGTH
+      selected_idp_names << idp_name
+      session[:selected_idp_names] = selected_idp_names
+    end
+    FEDERATION_REPORTER.report_idp_selection(selected_idp_names, request)
   end
 
   def recommended?
