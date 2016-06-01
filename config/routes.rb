@@ -7,13 +7,6 @@ Rails.application.routes.draw do
 
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
-  get 'redirect-to-service/signing-in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
-  get 'redirect-to-service/signing-in-cy' => 'redirect_to_service#signing_in'
-  get 'redirect-to-service/start-again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
-  get 'redirect-to-service/start-again-cy' => 'redirect_to_service#start_again'
-  get 'redirect-to-service/error' => 'redirect_to_service#start_again', as: :redirect_to_service_error
-  get 'redirect-to-service/error-cy' => 'redirect_to_service#start_again'
-
   match "/404", to: "errors#page_not_found", via: :all
 
   if %w(test development).include? Rails.env
@@ -62,6 +55,9 @@ Rails.application.routes.draw do
     get 'forgot_company', to: 'static#forgot_company', as: :forgot_company
     get 'response_processing', to: 'response_processing#index', as: :response_processing
     get 'redirect_to_idp', to: 'redirect_to_idp#index', as: :redirect_to_idp
+    get 'redirect_to_service_signing_in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
+    get 'redirect_to_service_start_again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
+    get 'redirect_to_service_error' => 'redirect_to_service#start_again', as: :redirect_to_service_error
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax

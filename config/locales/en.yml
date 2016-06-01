@@ -28,6 +28,9 @@ en:
     forgot_company: forgot-company
     response_processing: response-processing
     redirect_to_idp: redirect-to-idp
+    redirect_to_service_signing_in: redirect-to-service/signing-in
+    redirect_to_service_start_again: redirect-to-service/start-again
+    redirect_to_service_error: redirect-to-service/error
   navigation:
     next: Next
     start_now: Start now

@@ -28,6 +28,9 @@ cy:
     forgot_company: forgot-company-cy
     response_processing: response-processing-cy
     redirect_to_idp: redirect-to-idp-cy
+    redirect_to_service_signing_in: redirect-to-service/signing-in-cy
+    redirect_to_service_start_again: redirect-to-service/start-again-cy
+    redirect_to_service_error: redirect-to-service/error-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr

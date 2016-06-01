@@ -26,6 +26,21 @@ RSpec.describe 'When the user visits the redirect to service page' do
   end
 
   context 'without javascript' do
+    it 'supports the welsh language for signing in' do
+      visit 'redirect-to-service/signing-in-cy'
+      expect(page).to have_css 'html[lang=cy]'
+    end
+
+    it 'supports the welsh language for start again' do
+      visit 'redirect-to-service/start-again-cy'
+      expect(page).to have_css 'html[lang=cy]'
+    end
+
+    it 'supports the welsh language for error' do
+      visit 'redirect-to-service/error-cy'
+      expect(page).to have_css 'html[lang=cy]'
+    end
+
     it 'should redirect to service when path is signing-in' do
       visit redirect_to_service_signing_in_path
       verify_redirect_to_service(I18n.t('hub.redirect_to_service.signing_in.title'))
