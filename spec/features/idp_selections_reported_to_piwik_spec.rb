@@ -49,6 +49,17 @@ RSpec.describe 'When the user selects an IDP' do
 
     expect(idcorp_and_bobs_piwik_request).to have_been_made.once
   end
+
+  it 'truncates IdP names' do
+    idps = %w(A B C D E)
+    idcorp_piwik_request = stub_piwik_idp_selection_list(idps.join(','))
+    page.set_rack_session(selected_idp_names: idps)
+    visit '/choose-a-certified-company'
+    click_button 'Choose IDCorp'
+    click_button 'Continue to IDCorp'
+
+    expect(idcorp_piwik_request).to have_been_made.once
+  end
 end
 
 def stub_idp_select_request(idp_entity_id)

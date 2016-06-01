@@ -22,6 +22,41 @@ module Analytics
       federation_reporter.report_idp_selection(idp_names, request)
     end
 
+    describe '#report_idp_registration' do
+      it 'should report correctly if IdP was recommended' do
+        idp_name = 'IDCorp'
+        expect(analytics_reporter).to receive(:report_custom_variable)
+          .with(
+            request,
+            "#{idp_name} was chosen for registration (recommended) with evidence passport",
+            2 => ['REGISTER_IDP', idp_name]
+          )
+        federation_reporter.report_idp_registration(request, idp_name, %w(passport), true)
+      end
+
+      it 'should report correctly if IdP was not recommended' do
+        idp_name = 'IDCorp'
+        expect(analytics_reporter).to receive(:report_custom_variable)
+          .with(
+            request,
+            "#{idp_name} was chosen for registration (not recommended) with evidence passport",
+            2 => ['REGISTER_IDP', idp_name]
+          )
+        federation_reporter.report_idp_registration(request, idp_name, %w(passport), false)
+      end
+
+      it 'should sort evidence' do
+        idp_name = 'IDCorp'
+        expect(analytics_reporter).to receive(:report_custom_variable)
+          .with(
+            request,
+            "#{idp_name} was chosen for registration (recommended) with evidence driving_licence, passport",
+            2 => ['REGISTER_IDP', idp_name]
+          )
+        federation_reporter.report_idp_registration(request, idp_name, %w(passport driving_licence), true)
+      end
+    end
+
     it 'should report custom variable for sign in' do
       simple_id = 'id'
       description = 'description'

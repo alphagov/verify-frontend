@@ -18,6 +18,14 @@ module Analytics
       @analytics_reporter.report_custom_variable(request, 'IDP selection', cvar)
     end
 
+    def report_idp_registration(request, idp_name, evidence, recommended)
+      cvar = Analytics::CustomVariable.build(:register_idp, idp_name)
+      recommended_str = recommended ? '(recommended)' : '(not recommended)'
+      list_of_evidence = evidence.sort.join(', ')
+      action = "#{idp_name} was chosen for registration #{recommended_str} with evidence #{list_of_evidence}"
+      @analytics_reporter.report_custom_variable(request, action, cvar)
+    end
+
   private
 
     def report_action(transaction_simple_id, request, action)
