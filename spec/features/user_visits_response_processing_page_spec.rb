@@ -81,4 +81,10 @@ RSpec.describe 'When the user visits the response processing page' do
     expect(page).to have_title('Something went wrong - GOV.UK Verify - GOV.UK')
     expect(stubbed_report_request).to have_been_made.once
   end
+
+  it 'displays the content in Welsh' do
+    stub_matching_outcome
+    visit '/response-processing-cy'
+    expect(page).to have_css 'html[lang=cy]'
+  end
 end
