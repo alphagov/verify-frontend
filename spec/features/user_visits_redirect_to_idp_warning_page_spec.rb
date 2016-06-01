@@ -1,5 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
+require 'piwik_test_helper'
 require 'i18n'
 
 RSpec.describe 'When the user visits the redirect to IDP warning page' do
@@ -88,11 +89,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_request = {
-      '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
-      'action_name' => "IDCorp was chosen for registration (recommended) with evidence #{selected_evidence.values.flatten.sort.join(', ')}",
-    }
-    piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence)
 
     click_button 'Continue to IDCorp'
 
@@ -111,11 +108,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_request = {
-        '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
-        'action_name' => "IDCorp was chosen for registration (not recommended) with evidence #{selected_evidence.values.flatten.sort.sort.join(', ')}",
-    }
-    piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence, recommended: false)
 
     click_button 'Continue to IDCorp'
 
@@ -156,11 +149,8 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP on Continue' do
-      piwik_request = {
-        '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"IDCorp\"]}",
-        'action_name' => "IDCorp was chosen for registration (recommended) with evidence #{selected_evidence.values.flatten.sort.join(', ')}",
-      }
-      piwik_registration_virtual_page = stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
+      piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence)
+      stub_piwik_idp_selection_list('IDCorp')
       stub_federation
       given_a_session_with_document_evidence
       visit '/redirect-to-idp-warning'

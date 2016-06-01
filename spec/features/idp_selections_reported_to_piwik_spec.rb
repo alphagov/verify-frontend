@@ -1,5 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
+require 'piwik_test_helper'
 
 RSpec.describe 'When the user selects an IDP' do
   let(:selected_evidence) { { phone: %w(mobile_phone smart_phone), documents: %w(passport) } }
@@ -22,7 +23,7 @@ RSpec.describe 'When the user selects an IDP' do
   end
 
   it 'reports the IDP name to piwik' do
-    piwik_registration_virtual_page = stub_piwik_idp_selection('IDCorp')
+    piwik_registration_virtual_page = stub_piwik_idp_selection_list('IDCorp')
 
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
@@ -33,8 +34,8 @@ RSpec.describe 'When the user selects an IDP' do
 
 
   it 'appends the IdP name on subsequent selections' do
-    idcorp_piwik_request = stub_piwik_idp_selection('IDCorp')
-    idcorp_and_bobs_piwik_request = stub_piwik_idp_selection("IDCorp,Bob’s Identity Service")
+    idcorp_piwik_request = stub_piwik_idp_selection_list('IDCorp')
+    idcorp_and_bobs_piwik_request = stub_piwik_idp_selection_list("IDCorp,Bob’s Identity Service")
 
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
@@ -48,14 +49,6 @@ RSpec.describe 'When the user selects an IDP' do
 
     expect(idcorp_and_bobs_piwik_request).to have_been_made.once
   end
-end
-
-def stub_piwik_idp_selection(idp_name)
-  piwik_request = {
-      '_cvar' => "{\"5\":[\"IDP_SELECTION\",\"#{idp_name}\"]}",
-      'action_name' => "IDP selection" #TODO clarify what the action name should be with Olly
-  }
-  stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 end
 
 def stub_idp_select_request(idp_entity_id)
