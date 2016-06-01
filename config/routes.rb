@@ -7,8 +7,6 @@ Rails.application.routes.draw do
 
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
-  get 'redirect-to-idp' => 'redirect_to_idp#index', as: :redirect_to_idp
-  get 'redirect-to-idp-cy' => 'redirect_to_idp#index'
   get 'redirect-to-service/signing-in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
   get 'redirect-to-service/signing-in-cy' => 'redirect_to_service#signing_in'
   get 'redirect-to-service/start-again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
@@ -63,6 +61,7 @@ Rails.application.routes.draw do
     get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
     get 'forgot_company', to: 'static#forgot_company', as: :forgot_company
     get 'response_processing', to: 'response_processing#index', as: :response_processing
+    get 'redirect_to_idp', to: 'redirect_to_idp#index', as: :redirect_to_idp
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax

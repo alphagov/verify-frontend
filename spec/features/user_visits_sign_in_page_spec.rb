@@ -16,9 +16,9 @@ def then_custom_variable_reported_for_sign_in
   expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 end
 
-def given_im_on_the_sign_in_page
+def given_im_on_the_sign_in_page(locale = 'en')
   set_session_cookies!
-  visit '/sign-in'
+  visit "/#{I18n.t('routes.sign_in', locale: locale)}"
 end
 
 def when_i_select_an_idp
@@ -42,8 +42,8 @@ def then_im_at_the_idp
   expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 end
 
-def then_im_at_the_interstitial_page
-  expect(page).to have_current_path('/redirect-to-idp')
+def then_im_at_the_interstitial_page(locale = 'en')
+  expect(page).to have_current_path("/#{I18n.t('routes.redirect_to_idp', locale: locale)}")
 end
 
 def when_i_choose_to_continue
@@ -98,6 +98,15 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       when_i_choose_to_continue
       then_im_at_the_idp
       expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one')
+    end
+
+    it 'will display the interstitial page in welsh' do
+      page.set_rack_session(transaction_simple_id: 'test-rp')
+      given_api_requests_have_been_mocked!
+      given_im_on_the_sign_in_page 'cy'
+      then_custom_variable_reported_for_sign_in
+      when_i_select_an_idp
+      then_im_at_the_interstitial_page 'cy'
     end
   end
 end
