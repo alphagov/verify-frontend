@@ -161,13 +161,13 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
       click_button 'Continue to IDCorp'
 
-      expect(select_idp_stub_request).to have_been_made.once
-      expect(piwik_registration_virtual_page).to have_been_made.once
-      expect(cookie_value('verify-front-journey-hint')).to_not be_nil
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")
       expect(page).to have_content("registration is 'true'")
+      expect(select_idp_stub_request).to have_been_made.once
+      expect(piwik_registration_virtual_page).to have_been_made.once
+      expect(cookie_value('verify-front-journey-hint')).to_not be_nil
     end
   end
 end
