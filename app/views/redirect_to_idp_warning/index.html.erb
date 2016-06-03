@@ -17,7 +17,7 @@
                        type: 'submit'
         %>
     <% end %>
-    <% if user_has_no_docs? && @recommended %>
+    <% if user_has_no_docs_or_foreign_id_only? && @recommended %>
         <%= other_ways(@idp) %>
     <% end %>
   </div>

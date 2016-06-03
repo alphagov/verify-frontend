@@ -1,0 +1,3 @@
+simpleIds: [ "stub-idp-four" ]
+rules:
+  - [ "non_uk_id_document" ]
