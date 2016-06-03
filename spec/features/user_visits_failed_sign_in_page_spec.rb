@@ -19,7 +19,7 @@ RSpec.describe 'When the user visits the failed sign in page' do
   end
 
   it 'displays the content in Welsh' do
-    visit '/failed-sign-in-cy'
+    visit '/mewngofnodi-wedi-methu'
 
     expect(page).to have_css 'html[lang=cy]'
   end

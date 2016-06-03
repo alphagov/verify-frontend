@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the failed registration page' do
   end
 
   it 'displays the content in Welsh' do
-    visit '/failed-registration-cy'
+    visit '/cofrestru-wedi-methu'
 
     expect(page).to have_css 'html[lang=cy]'
   end

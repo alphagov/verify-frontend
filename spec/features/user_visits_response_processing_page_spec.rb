@@ -84,7 +84,7 @@ RSpec.describe 'When the user visits the response processing page' do
 
   it 'displays the content in Welsh' do
     stub_matching_outcome
-    visit '/response-processing-cy'
+    visit '/prosesu-ymateb'
     expect(page).to have_css 'html[lang=cy]'
   end
 end
