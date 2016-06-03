@@ -66,7 +66,9 @@ Rails.application.routes.draw do
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
 
   if Rails.env == 'development'
-    get 'feedback', to: redirect("#{API_HOST}/feedback")
+    get 'feedback', to: 'feedback#index', as: :feedback
+    post 'feedback', to: 'feedback#submit', as: :feedback_submit
+    get 'feedback_sent', to: 'feedback#sent', as: :feedback_sent
     get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
   else
     get 'feedback', to: 'feedback#index', as: :feedback

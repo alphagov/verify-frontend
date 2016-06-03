@@ -1,0 +1,83 @@
+<%= render partial: 'shared/page_title', locals: {:title_key => 'hub.feedback.title'} %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= t 'hub.feedback.heading' %></h1>
+
+    <%= t 'hub.feedback.introduction_html' %>
+
+    <% if flash[:errors] %>
+      <div id="validation-error-message-no-js" class="validation-message form-group">
+        <p class="error"><%= flash[:errors] %></p>
+      </div>
+    <% end %>
+
+    <% if @has_email_sending_error %>
+      <div class="error-summary" aria-labelledby="error-summary-heading" role="group" tabindex="-1">
+        <h2 class="heading-medium error-summary-heading" id="error-summary-heading"><%= t 'hub.feedback.errors.heading' %></h2>
+        <ul class="error-summary-list">
+          <li><%= t 'hub.feedback.errors.send_failure' %></li>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_for @form, url: feedback_submit_path, html: { class: 'feedback-form', id: 'feedback', novalidate: true } do |f| %>
+      <fieldset>
+        <div class="form-group">
+          <%= f.label :what, t('hub.feedback.questions.what'), class: 'form-label' %>
+          <%= f.text_area :what, rows: 10, cols: 80, class: 'form-control', required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :details, t('hub.feedback.questions.details'), class: 'form-label' %>
+          <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control', required: true %>
+        </div>
+
+        <fieldset class="inline">
+          <legend class="heading-medium"><%= t 'hub.feedback.questions.reply' %></legend>
+          <%= f.label :reply_true, {class: 'block-label', onclick: ''} do %>
+            <%= f.radio_button :reply, 'true' %>
+            <span>
+              <span class="inner"></span>
+            </span>
+            <%= t 'hub.feedback.questions.reply_option_yes' %>
+          <% end %>
+          <%= f.label :reply_false, {class: 'block-label', onclick: ''} do %>
+            <%= f.radio_button :reply, 'false' %>
+            <span>
+              <span class="inner"></span>
+            </span>
+            <%= t 'option.no' %>
+          <% end %>
+        </fieldset>
+
+        <div class="panel panel-border-narrow reply-fields js-hidden">
+          <p><%= t 'hub.feedback.request_reply' %></p>
+
+          <div class="form-group">
+            <%= f.label :name, t('hub.feedback.questions.name'), class: 'form-label' %>
+            <%= f.text_field :name, class: 'form-control form-control-3-4' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email, class: 'form-label' do %>
+              <%= t('hub.feedback.questions.email') %>
+              <span class="form-hint"><%= t('hub.feedback.questions.email_hint') %></span>
+            <% end %>
+            <%= f.email_field :email, class: 'form-control form-control-3-4' %>
+          </div>
+        </div>
+
+        <%= f.hidden_field :referer %>
+        <%= f.hidden_field :user_agent %>
+        <%= f.hidden_field :js_disabled, value: true %>
+
+        <div id="validation-error-message-js"></div>
+
+        <div class="actions">
+          <%= f.submit t('hub.feedback.send_message'), class: 'button' %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

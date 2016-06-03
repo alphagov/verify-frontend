@@ -31,6 +31,8 @@ cy:
     redirect_to_service_signing_in: redirect-to-service/signing-in-cy
     redirect_to_service_start_again: redirect-to-service/start-again-cy
     redirect_to_service_error: redirect-to-service/error-cy
+    feedback: feedback-cy
+    feedback_sent: feedback-sent-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -280,6 +282,36 @@ cy:
     redirect_to_idp:
       heading: Parhau i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
+    feedback:
+      title: Feedback
+      heading: Send your feedback to GOV.UK Verify
+      introduction_html: |
+        <p>You can use the form below to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
+        <p><strong>Please don’t include any personal or financial information, for example your National Insurance or credit card numbers.</strong></p>
+      request_reply: If you’d like GOV.UK Verify to get back to you, please leave your details below.
+      questions:
+        what: What were you trying to do?
+        details: Please provide details of your question, problem or feedback
+        reply: Do you want a reply?
+        reply_option_yes: "Yes"
+        name: Name
+        email: Email address
+        email_hint: We’ll only use this to reply to your message.
+      errors:
+        heading: There was a problem submitting the form
+        no_selection: Please answer the questions
+        name: Please enter a name
+        email: Please enter a valid email address
+        send_failure: Unfortunately, we are unable to record your feedback at the moment. Please try again later.
+      send_message: Send message
+    feedback_sent:
+      title: Feedback
+      heading: Your feedback
+      subheading: Thank you
+      message_email: Your message has been sent and the team will get back to you to answer any questions as soon as possible.
+      message_no_email: Your feedback has been received.
+      start_again_link: Return to registering for an identity profile
+      session_timeout: Sorry, but your session has timed out. To ensure your security, you need to start again.
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
