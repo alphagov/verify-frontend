@@ -149,7 +149,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     given_a_session_with_no_document_evidence
     visit '/redirect-to-idp-warning'
 
-    expect(page).to have_content 'You’ll now verify your identity on No Docs IDP’s website.'
+    expect(page).to have_content I18n.t 'hub.redirect_to_idp_warning.recommended.p1', name: 'No Docs IDP'
     expect(page).to have_content 'Additional IDP Instructions'
     expect(page).to have_link 'other ways to register for an identity profile', href: other_ways_to_access_service_path
   end
@@ -159,7 +159,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     given_a_session_with_non_uk_id_document_evidence
     visit '/redirect-to-idp-warning'
 
-    expect(page).to have_content 'You’ll now verify your identity on Best ID’s website.'
+    expect(page).to have_content I18n.t 'hub.redirect_to_idp_warning.recommended.p1', name: 'Best ID'
     expect(page).to have_content 'Additional IDP Instructions'
     expect(page).to have_link 'other ways to register for an identity profile', href: other_ways_to_access_service_path
   end
