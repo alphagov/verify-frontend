@@ -37,6 +37,13 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       selected_evidence: { phone: %w(mobile_phone smart_phone), documents: [] },
     )
   }
+  let(:given_a_session_with_non_uk_id_document_evidence) {
+    page.set_rack_session(
+      selected_idp: { entity_id: 'http://idpwithnonukid.com', simple_id: 'stub-idp-four' },
+      selected_idp_was_recommended: true,
+      selected_evidence: { phone: %w(mobile_phone smart_phone), documents: %w(non_uk_id_document) },
+    )
+  }
   let(:select_idp_stub_request) {
     stub_session_select_idp_request(
       encrypted_entity_id,
@@ -143,6 +150,16 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     visit '/redirect-to-idp-warning'
 
     expect(page).to have_content 'You’ll now verify your identity on No Docs IDP’s website.'
+    expect(page).to have_content 'Additional IDP Instructions'
+    expect(page).to have_link 'other ways to register for an identity profile', href: other_ways_to_access_service_path
+  end
+
+  it 'includes specific IDP text and link to the other ways when user has only foreign id document' do
+    page.set_rack_session(transaction_simple_id: 'test-rp')
+    given_a_session_with_non_uk_id_document_evidence
+    visit '/redirect-to-idp-warning'
+
+    expect(page).to have_content 'You’ll now verify your identity on Best ID’s website.'
     expect(page).to have_content 'Additional IDP Instructions'
     expect(page).to have_link 'other ways to register for an identity profile', href: other_ways_to_access_service_path
   end

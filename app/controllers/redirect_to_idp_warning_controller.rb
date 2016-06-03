@@ -1,6 +1,6 @@
 class RedirectToIdpWarningController < ApplicationController
   SELECTED_IDP_HISTORY_LENGTH = 5
-  helper_method :user_has_no_docs?, :other_ways_description
+  helper_method :user_has_no_docs_or_foreign_id_only?, :other_ways_description
 
   def index
     @idp = decorated_idp
@@ -63,7 +63,15 @@ private
     @other_ways_description = current_transaction.other_ways_description
   end
 
+  def user_has_no_docs_or_foreign_id_only?
+    user_has_no_docs? || user_has_foreign_doc_only?
+  end
+
   def user_has_no_docs?
     (stored_selected_evidence['documents'] || []).empty?
+  end
+
+  def user_has_foreign_doc_only?
+    stored_selected_evidence['documents'] == ['non_uk_id_document']
   end
 end

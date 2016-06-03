@@ -2,6 +2,14 @@ en:
   idps:
     stub-idp-four:
       name: "Best ID"
+      tagline: "a really really cool identity provider"
+      about: |
+          <p>Best ID is the premier identity proofing service around.</p>
+          <p>Once you get verified you can transact with online government services.</p>
+      requirements:
+        - "A requirement"
+      special_no_docs_instructions_html: "<p>Additional IDP Instructions</p>"
+      no_docs_requirement: "If you do not have a current account"
       contact_details: |
         <strong id="stub-idp-four-contact-details">4 Head Road</strong>
 cy:

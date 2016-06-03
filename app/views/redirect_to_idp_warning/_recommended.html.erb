@@ -1,4 +1,4 @@
-<% if user_has_no_docs? %>
+<% if user_has_no_docs_or_foreign_id_only? %>
     <%= idp.special_no_docs_instructions.html_safe %>
 <% end %>
 
