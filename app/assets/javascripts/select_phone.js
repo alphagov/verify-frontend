@@ -29,7 +29,7 @@
       selectPhone.$landlineQuestion = $('#landline-question');
       var errorMessage = selectPhone.$form.data('msg');
       if (selectPhone.$form.length === 1) {
-        selectPhone.validator = selectPhone.$form.validate({
+        selectPhone.validator = selectPhone.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
           rules: {
             'select_phone_form[mobile_phone]': 'required',
             'select_phone_form[smart_phone]': 'required',
@@ -40,7 +40,7 @@
             'select_phone_form[smart_phone]': errorMessage,
             'select_phone_form[landline]': errorMessage
           }
-        });
+        }));
         selectPhone.$form.find('input[name="select_phone_form[mobile_phone]"]').on('click',selectPhone.toggleSecondaryQuestion);
         selectPhone.toggleSecondaryQuestion();
       }

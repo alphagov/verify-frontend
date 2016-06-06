@@ -47,7 +47,7 @@
           return allDocumentQuestionsAnswered || hasAtLeastOneDocument;
         }, $.validator.format(selectDocuments.$form.data('msg')));
 
-        selectDocuments.$form.validate({
+        selectDocuments.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
           rules: {
             'select_documents_form[driving_licence]': 'selectDocumentsValidation',
             'select_documents_form[passport]': 'selectDocumentsValidation',
@@ -64,7 +64,7 @@
           unhighlight: function(element, errorClass) {
             selectDocuments.$form.children('.form-group:first').removeClass('error');
           }
-        });
+        }));
       }
     }
   };

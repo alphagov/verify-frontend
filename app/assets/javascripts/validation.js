@@ -19,23 +19,25 @@
   if(typeof root.GOVUK === 'undefined') { root.GOVUK = {}; }
 
   root.GOVUK.validation = {
+    radiosValidation: {
+      focusInvalid: false,
+      errorElement: 'a',
+      wrapper: 'div',
+      errorPlacement: placeErrorMessages,
+      highlight: function(element) {
+        $(element).closest('.form-group').addClass('error');
+      },
+      unhighlight: function(element) {
+        $(element).closest('.form-group').removeClass('error');
+      }
+    },
     init: function (){
       $.validator.setDefaults({
-        focusInvalid: false,
-        errorElement: 'a',
-        wrapper: 'div',
-        errorPlacement: placeErrorMessages,
-        highlight: function(element) {
-          $(element).closest('.form-group').addClass('error');
-        },
-        unhighlight: function(element) {
-          $(element).closest('.form-group').removeClass('error');
-        },
         ignore: '.js-hidden *'
       });
     },
     attach: function () {
-      $('.js-validate').validate();
+      $('.js-validate').validate(GOVUK.validation.radiosValidation);
     }
   };
 

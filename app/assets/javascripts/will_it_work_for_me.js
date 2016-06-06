@@ -11,7 +11,7 @@
             willItWorkForMe.$notResidentReasonSection = $('#not_resident_reason');
             var errorMessage = willItWorkForMe.$form.data('msg');
             if (willItWorkForMe.$form.length === 1) {
-                willItWorkForMe.validator = willItWorkForMe.$form.validate({
+                willItWorkForMe.validator = willItWorkForMe.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
                     rules: {
                         'will_it_work_for_me_form[above_age_threshold]': 'required',
                         'will_it_work_for_me_form[resident_last_12_months]': 'required',
@@ -27,7 +27,7 @@
                         'will_it_work_for_me_form[resident_last_12_months]': errorMessage,
                         'will_it_work_for_me_form[not_resident_reason]': errorMessage
                     }
-                });
+                }));
                 willItWorkForMe.setNotResidentReasonSectionVisibility();
                 willItWorkForMe.$form.find('input[name="will_it_work_for_me_form[resident_last_12_months]"]').on('click', willItWorkForMe.setNotResidentReasonSectionVisibility);
             }
