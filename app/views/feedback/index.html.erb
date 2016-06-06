@@ -25,12 +25,12 @@
       <fieldset>
         <div class="form-group">
           <%= f.label :what, t('hub.feedback.questions.what'), class: 'form-label' %>
-          <%= f.text_area :what, rows: 10, cols: 80, class: 'form-control', required: true %>
+          <%= f.text_area :what, rows: 10, cols: 80, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
         </div>
 
         <div class="form-group">
           <%= f.label :details, t('hub.feedback.questions.details'), class: 'form-label' %>
-          <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control', required: true %>
+          <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
         </div>
 
         <div class="form-section">
@@ -57,7 +57,7 @@
 
             <div class="form-group">
               <%= f.label :name, t('hub.feedback.questions.name'), class: 'form-label' %>
-              <%= f.text_field :name, class: 'form-control form-control-3-4' %>
+              <%= f.text_field :name, class: 'form-control form-control-3-4', data: { 'msg-required': t('hub.feedback.errors.name') } %>
             </div>
 
             <div class="form-group">
@@ -65,7 +65,7 @@
                 <%= t('hub.feedback.questions.email') %>
                 <span class="form-hint"><%= t('hub.feedback.questions.email_hint') %></span>
               <% end %>
-              <%= f.email_field :email, class: 'form-control form-control-3-4' %>
+              <%= f.email_field :email, class: 'form-control form-control-3-4', data: { msg: t('hub.feedback.errors.email') } %>
             </div>
           </div>
         </div>

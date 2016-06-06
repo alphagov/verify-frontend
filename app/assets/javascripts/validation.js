@@ -39,7 +39,9 @@
           $(element).closest('.form-group').addClass('error');
         },
         unhighlight: function(element) {
-          $(element).closest('.form-group').removeClass('error');
+          var formGroup = $(element).closest('.form-group');
+          formGroup.removeClass('error');
+          formGroup.find('.error-message').hide();
         },
         ignore: '.js-hidden *'
       });

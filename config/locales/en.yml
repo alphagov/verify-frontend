@@ -294,6 +294,7 @@ en:
       errors:
         heading: There was a problem submitting the form
         no_selection: Please answer the questions
+        details: Please provide details
         name: Please enter a name
         email: Please enter a valid email address
         send_failure: Unfortunately, we are unable to record your feedback at the moment. Please try again later.
