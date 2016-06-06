@@ -1,4 +1,6 @@
 class ResponseProcessingController < ApplicationController
+  before_action :hide_available_languages
+
   def index
     @rp_name = current_transaction.rp_name
     outcome = SESSION_PROXY.matching_outcome(cookies)

@@ -1,4 +1,6 @@
 class RedirectToServiceController < ApplicationController
+  before_action :hide_available_languages
+
   def signing_in
     redirect_to_service('hub.redirect_to_service.signing_in.title', 'hub.redirect_to_service.signing_in.transition_heading')
   end

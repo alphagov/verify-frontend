@@ -13,7 +13,7 @@
 <% content_for :content do %>
   <main id="content">
     <div class="grid-row">
-      <%= render 'shared/available_languages' %>
+      <%= render 'shared/available_languages' unless @hide_available_languages %>
     </div>
     <%= content_for?(:main) ? yield(:main) : yield %>
     <%= render 'shared/feedback_link' if feedback_source.present? %>

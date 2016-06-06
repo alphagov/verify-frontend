@@ -143,4 +143,8 @@ private
   def report_to_analytics(action_name)
     ANALYTICS_REPORTER.report(request, action_name)
   end
+
+  def hide_available_languages
+    @hide_available_languages = true
+  end
 end
