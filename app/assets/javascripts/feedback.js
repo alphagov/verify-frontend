@@ -21,15 +21,14 @@
 
       if (feedback.$form.length === 1) {
         feedback.$replyRadios.on('click',feedback.toggleReply);
-        feedback.toggleReply();
         feedback.validator = feedback.$form.validate({
-          errorPlacement: null,
           rules: {
             'feedback_form[name]': 'required',
             'feedback_form[email]': 'required'
           }
         });
         feedback.$form.find('#feedback_form_js_disabled').val(false);
+        feedback.toggleReply();
       }
     }
   };

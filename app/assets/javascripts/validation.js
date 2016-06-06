@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  function placeErrorMessages($error, $element) {
+  function placeRadioErrorMessages($error, $element) {
     $error.addClass('validation-message form-group');
     $error.children('a')
       .attr({ href: '#' + $element.attr('id') })
@@ -23,16 +23,24 @@
       focusInvalid: false,
       errorElement: 'a',
       wrapper: 'div',
-      errorPlacement: placeErrorMessages,
-      highlight: function(element) {
-        $(element).closest('.form-group').addClass('error');
-      },
-      unhighlight: function(element) {
-        $(element).closest('.form-group').removeClass('error');
-      }
+      errorPlacement: placeRadioErrorMessages
     },
     init: function (){
       $.validator.setDefaults({
+        errorElement: 'span',
+        errorPlacement: function($error, $element) {
+          var $label = $element.prev('label');
+          $error.removeClass('error');
+          $error.addClass('error-message');
+          $label.children('.error-message').remove();
+          $label.append($error);
+        },
+        highlight: function(element) {
+          $(element).closest('.form-group').addClass('error');
+        },
+        unhighlight: function(element) {
+          $(element).closest('.form-group').removeClass('error');
+        },
         ignore: '.js-hidden *'
       });
     },
