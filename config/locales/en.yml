@@ -274,6 +274,7 @@ en:
     redirect_to_idp:
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
+      loading: Loading
   errors:
     transaction_list:
       title: Find the service you were using to start again

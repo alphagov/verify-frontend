@@ -280,6 +280,7 @@ cy:
     redirect_to_idp:
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
+      loading: Loading
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
