@@ -33,38 +33,40 @@
           <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control', required: true %>
         </div>
 
-        <fieldset class="inline">
-          <legend class="heading-medium"><%= t 'hub.feedback.questions.reply' %></legend>
-          <%= f.label :reply_true, {class: 'block-label', onclick: ''} do %>
-            <%= f.radio_button :reply, 'true' %>
-            <span>
-              <span class="inner"></span>
-            </span>
-            <%= t 'hub.feedback.questions.reply_option_yes' %>
-          <% end %>
-          <%= f.label :reply_false, {class: 'block-label', onclick: ''} do %>
-            <%= f.radio_button :reply, 'false' %>
-            <span>
-              <span class="inner"></span>
-            </span>
-            <%= t 'option.no' %>
-          <% end %>
-        </fieldset>
-
-        <div class="panel panel-border-narrow reply-fields js-hidden">
-          <p><%= t 'hub.feedback.request_reply' %></p>
-
-          <div class="form-group">
-            <%= f.label :name, t('hub.feedback.questions.name'), class: 'form-label' %>
-            <%= f.text_field :name, class: 'form-control form-control-3-4' %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :email, class: 'form-label' do %>
-              <%= t('hub.feedback.questions.email') %>
-              <span class="form-hint"><%= t('hub.feedback.questions.email_hint') %></span>
+        <div class="form-section">
+          <fieldset class="inline">
+            <legend class="heading-medium"><%= t 'hub.feedback.questions.reply' %></legend>
+            <%= f.label :reply_true, {class: 'block-label', onclick: ''} do %>
+              <%= f.radio_button :reply, 'true' %>
+              <span>
+                <span class="inner"></span>
+              </span>
+              <%= t 'hub.feedback.questions.reply_option_yes' %>
             <% end %>
-            <%= f.email_field :email, class: 'form-control form-control-3-4' %>
+            <%= f.label :reply_false, {class: 'block-label', onclick: ''} do %>
+              <%= f.radio_button :reply, 'false' %>
+              <span>
+                <span class="inner"></span>
+              </span>
+              <%= t 'option.no' %>
+            <% end %>
+          </fieldset>
+
+          <div class="panel panel-border-narrow reply-fields js-hidden">
+            <p><%= t 'hub.feedback.request_reply' %></p>
+
+            <div class="form-group">
+              <%= f.label :name, t('hub.feedback.questions.name'), class: 'form-label' %>
+              <%= f.text_field :name, class: 'form-control form-control-3-4' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :email, class: 'form-label' do %>
+                <%= t('hub.feedback.questions.email') %>
+                <span class="form-hint"><%= t('hub.feedback.questions.email_hint') %></span>
+              <% end %>
+              <%= f.email_field :email, class: 'form-control form-control-3-4' %>
+            </div>
           </div>
         </div>
 
