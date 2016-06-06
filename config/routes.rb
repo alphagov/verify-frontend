@@ -65,14 +65,15 @@ Rails.application.routes.draw do
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
 
+  get 'feedback', to: 'feedback#index', as: :feedback
+  post 'feedback', to: 'feedback#submit', as: :feedback_submit
+
   if Rails.env == 'development'
-    get 'feedback', to: 'feedback#index', as: :feedback
-    post 'feedback', to: 'feedback#submit', as: :feedback_submit
-    get 'feedback_sent', to: 'feedback#sent', as: :feedback_sent
     get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
+    get 'feedback_sent', to: redirect("#{API_HOST}/feedback-sent"), as: :feedback_sent
   else
-    get 'feedback', to: 'feedback#index', as: :feedback
     get 'further-information', to: proc { |_| [200, {}, ['OK']] }, as: :further_information
+    get 'feedback_sent', to: proc { |_| [200, {}, ['OK']] }, as: :feedback_sent
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

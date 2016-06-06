@@ -70,8 +70,6 @@ cy:
       forgot_company: Ni allaf gofio pa gwmni wnaeth fy nilysu
     cookies:
       title: Cwcis
-    feedback:
-      title: Adborth
     privacy_notice:
       title: Hysbysiad preifatrwydd
     about:
@@ -283,7 +281,7 @@ cy:
       heading: Parhau i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
     feedback:
-      title: Feedback
+      title: Adborth
       heading: Send your feedback to GOV.UK Verify
       introduction_html: |
         <p>You can use the form below to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
