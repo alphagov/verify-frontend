@@ -22,11 +22,11 @@ cy:
     cookies: cwcis
     confirm_your_identity: cadarnhau-eich-hunaniaeth
     confirmation: cadarnhad
-    failed_registration: failed-registration-cy
-    failed_sign_in: failed-sign-in-cy
-    other_ways_to_access_service: other-ways-to-access-service-cy
-    forgot_company: forgot-company-cy
-    response_processing: response-processing-cy
+    failed_registration: cofrestru-wedi-methu
+    failed_sign_in: mewngofnodi-wedi-methu
+    other_ways_to_access_service: ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth
+    forgot_company: wedi-anghofio-cwmni
+    response_processing: prosesu-ymateb
     redirect_to_idp: redirect-to-idp-cy
     redirect_to_service_signing_in: redirect-to-service/signing-in-cy
     redirect_to_service_start_again: redirect-to-service/start-again-cy
@@ -42,7 +42,7 @@ cy:
   translation_in_progress_banner:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth
-  feedback_link: Your feedback will help us to improve GOV.UK Verify.
+  feedback_link: Bydd eich adborth yn ein helpu i wella GOV.UK Verify.
   footer:
     support_links: Dolenni cymorth
     help: Help
@@ -193,7 +193,7 @@ cy:
         few: "%{count}&nbsp;o gwmnïau"
         many: "%{count}&nbsp;o gwmnïau"
         other: "%{count}&nbsp;o gwmnïau"
-      show_all_companies: Cwmniau sy'n annhebygol o'ch dilysu chi
+      show_all_companies: Cwmniau sy’n annhebygol o’ch dilysu chi
       filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
       about_idp: Am %{name}
       dialog:
@@ -235,37 +235,37 @@ cy:
       message: Gallwch nawr fewngofnodi ble bynnag rydych yn gweld logo GOV.UK Verify logo
       heading: Mae "%{idp_name} wedi dilysu eich hunaniaeth"
     failed_registration:
-      title: Unable to verify your identity
-      heading: "%{idp_name} was unable to verify your identity"
-      contact_details_intro: "Contact %{idp_name} for more information"
-      try_another_company: Try another certified company
-      other_ways_link: "Other ways to access %{transaction_name}"
+      title: Methu dilysu eich hunaniaeth
+      heading: Roedd "%{idp_name} yn methu dilysu eich hunaniaeth"
+      contact_details_intro: "Cysylltwch â %{idp_name} am fwy o wybodaeth"
+      try_another_company: Rhowch gynnig ar gwmni ardystiedig arall
+      other_ways_link: "Ffyrdd eraill o gael mynediad i %{transaction_name}"
       reasons_html: |
-        <p>There are a few reasons why this might happen, including:</p>
+        <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
-          <li>you’ve recently had a change in your circumstances, and they aren’t updated online</li>
-          <li>the certified company doesn’t have access to enough information about you</li>
+          <li>rydych yn ddiweddar wedi cael newid yn eich amgylchiadau, ac nid ydynt wedi cael eu diweddaru ar-lein</li>
+          <li>nid oes gan y cwmni ardystiedig fynediad i ddigon o wybodaeth amdanoch</li>
         </ul>
-      what_to_do_next_intro: "You can try the following:"
-      what_to_do_next: "What to do next"
+      what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
+      what_to_do_next: "Beth i’w wneud nesaf"
     failed_sign_in:
-      title: Unable to sign you in
-      heading: "%{idp_name} couldn’t sign you in"
+      title: Methu eich mewngofnodi
+      heading: Ni all "%{idp_name} eich mewngofnodi"
       reasons_html: |
-        <p>You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.</p>
-        <p>You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
-      start_again: "Start again"
+        <p>Efallai eich bod wedi dewis y cwmni anghywir. Edrychwch ar eich e-byst a negeseuon testun am gadarnhad o bwy wnaeth eich dilysu.</p>
+        <p>Gallwch gael eich dilysu gan gwmni arall unrhyw bryd. Ni fyddwch yn colli unrhyw ddata ar wasanaethau GOV.UK rydych wedi’u defnyddio.</p>
+      start_again: "Dechrau eto"
     response_processing:
-      title: Please wait
-      heading: "%{rp_name} is processing your details"
-      bear_with_us: "This may take a few seconds, please bear with us."
+      title: Arhoswch
+      heading: Mae "%{rp_name} yn prosesu eich manylion"
+      bear_with_us: "Gallai hyn gymryd ychydig o eiliadau, diolch am eich amynedd."
       matching_error:
-        problem: "Sorry, %{rp_name} is having technical problems."
-        start_again_link: start again
-        start_again_message_html: "Please %{start_again_link} in a few minutes by signing in with your certified company."
-        other_ways: "If you continue having problems, there are others ways to %{other_ways_description}."
+        problem: "Mae’n ddrwg gennym, mae %{rp_name} yn cael problemau technegol."
+        start_again_link: dechrau eto
+        start_again_message_html: "Dylech %{start_again_link} mewn ychydig o funudau drwy fewngofnodi gyda’ch cwmni ardystiedig."
+        other_ways: "Os byddwch yn parhau i gael problemau, mae ffyrdd eraill i %{other_ways_description}."
     forgot_company:
-      title: Advice for forgotten company
+      title: Cyngor ar gyfer cwmni sydd wedi’i anghofio
     redirect_to_service:
       heading: "Continue to next step"
       signing_in:
@@ -278,12 +278,12 @@ cy:
       loading: "Loading…"
       please_wait: "This may take a few seconds, please bear with us."
     redirect_to_idp:
-      heading: Continue to next step
-      description: Because Javascript is not enabled on your browser, you must press the continue button
+      heading: Parhau i’r cam nesaf
+      description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
-      hint: Follow the instructions you received.
+      hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan
       feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
