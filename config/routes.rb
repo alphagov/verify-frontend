@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     get 'redirect_to_idp', to: 'redirect_to_idp#index', as: :redirect_to_idp
     get 'redirect_to_service_signing_in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
     get 'redirect_to_service_start_again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
-    get 'redirect_to_service_error' => 'redirect_to_service#start_again', as: :redirect_to_service_error
+    get 'redirect_to_service_error' => 'redirect_to_service#error', as: :redirect_to_service_error
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax

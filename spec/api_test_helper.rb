@@ -85,5 +85,14 @@ def stub_response_for_rp
     'samlMessage' => 'a saml message',
     'relayState' => 'a relay state'
   }
-  stub_request(:get, api_uri('session/response-for-rp')).to_return(body: response_body.to_json)
+  stub_request(:get, api_uri('session/response-for-rp/success')).to_return(body: response_body.to_json)
+end
+
+def stub_error_response_for_rp
+  response_body = {
+      'postEndpoint' => '/test-rp',
+      'samlMessage' => 'a saml message',
+      'relayState' => 'a relay state'
+  }
+  stub_request(:get, api_uri('session/response-for-rp/error')).to_return(body: response_body.to_json)
 end

@@ -19,13 +19,41 @@ def check_session_reset
 end
 
 RSpec.describe 'When the user visits the redirect to service page' do
-  before(:each) do
-    set_session_cookies!
-    page.set_rack_session(transaction_simple_id: 'test-rp')
-    @api_request = stub_response_for_rp
+  context 'with error response' do
+    before(:each) do
+      set_session_cookies!
+      page.set_rack_session(transaction_simple_id: 'test-rp')
+      @api_request = stub_error_response_for_rp
+    end
+
+    it 'supports the welsh language for error' do
+      visit 'redirect-to-service/error-cy'
+      expect(page).to have_css 'html[lang=cy]'
+    end
+
+    it 'should redirect to service when path is error' do
+      visit redirect_to_service_error_path
+      verify_redirect_to_service(I18n.t('hub.redirect_to_service.start_again.title'))
+
+      click_button I18n.t('navigation.continue')
+      expect(page).to have_current_path('/test-rp')
+    end
   end
 
-  context 'without javascript' do
+  context 'with success response' do
+    before(:each) do
+      set_session_cookies!
+      page.set_rack_session(transaction_simple_id: 'test-rp')
+      @api_request = stub_response_for_rp
+    end
+
+    it 'when js is on should redirect to service when path is signing-in', js: true do
+      visit redirect_to_service_signing_in_path
+
+      expect(page).to have_current_path('/test-rp')
+      expect(@api_request).to have_been_made.once
+    end
+
     it 'does not show language links' do
       visit 'redirect-to-service/signing-in'
       expect(page).to_not have_link 'Cymraeg'
@@ -38,11 +66,6 @@ RSpec.describe 'When the user visits the redirect to service page' do
 
     it 'supports the welsh language for start again' do
       visit 'redirect-to-service/start-again-cy'
-      expect(page).to have_css 'html[lang=cy]'
-    end
-
-    it 'supports the welsh language for error' do
-      visit 'redirect-to-service/error-cy'
       expect(page).to have_css 'html[lang=cy]'
     end
 
@@ -62,14 +85,6 @@ RSpec.describe 'When the user visits the redirect to service page' do
       expect(page).to have_current_path('/test-rp')
     end
 
-    it 'should redirect to service when path is error' do
-      visit redirect_to_service_error_path
-      verify_redirect_to_service(I18n.t('hub.redirect_to_service.start_again.title'))
-
-      click_button I18n.t('navigation.continue')
-      expect(page).to have_current_path('/test-rp')
-    end
-
     it 'should clear session when visiting start again' do
       visit redirect_to_service_start_again_path
       check_session_reset
@@ -78,15 +93,6 @@ RSpec.describe 'When the user visits the redirect to service page' do
     it 'should clear session when signing in' do
       visit redirect_to_service_signing_in_path
       check_session_reset
-    end
-  end
-
-  context 'with javascript' do
-    it 'should redirect to service when path is signing-in', js: true do
-      visit redirect_to_service_signing_in_path
-
-      expect(page).to have_current_path('/test-rp')
-      expect(@api_request).to have_been_made.once
     end
   end
 end
