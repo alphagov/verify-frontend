@@ -193,7 +193,7 @@ cy:
         few: "%{count}&nbsp;o gwmnïau"
         many: "%{count}&nbsp;o gwmnïau"
         other: "%{count}&nbsp;o gwmnïau"
-      show_all_companies: Cwmniau sy'n annhebygol o'ch dilysu chi
+      show_all_companies: Cwmniau sy’n annhebygol o’ch dilysu chi
       filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
       about_idp: Am %{name}
       dialog:
@@ -247,13 +247,13 @@ cy:
           <li>nid oes gan y cwmni ardystiedig fynediad i ddigon o wybodaeth amdanoch</li>
         </ul>
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
-      what_to_do_next: "Beth i'w wneud nesaf"
+      what_to_do_next: "Beth i’w wneud nesaf"
     failed_sign_in:
       title: Methu eich mewngofnodi
       heading: Ni all "%{idp_name} eich mewngofnodi"
       reasons_html: |
         <p>Efallai eich bod wedi dewis y cwmni anghywir. Edrychwch ar eich e-byst a negeseuon testun am gadarnhad o bwy wnaeth eich dilysu.</p>
-        <p>Gallwch gael eich dilysu gan gwmni arall unrhyw bryd. Ni fyddwch yn colli unrhyw ddata ar wasanaethau GOV.UK rydych wedi'u defnyddio.</p>
+        <p>Gallwch gael eich dilysu gan gwmni arall unrhyw bryd. Ni fyddwch yn colli unrhyw ddata ar wasanaethau GOV.UK rydych wedi’u defnyddio.</p>
       start_again: "Dechrau eto"
     response_processing:
       title: Arhoswch
@@ -265,7 +265,7 @@ cy:
         start_again_message_html: "Dylech %{start_again_link} mewn ychydig o funudau drwy fewngofnodi gyda’ch cwmni ardystiedig."
         other_ways: "Os byddwch yn parhau i gael problemau, mae ffyrdd eraill i %{other_ways_description}."
     forgot_company:
-      title: Cyngor ar gyfer cwmni sydd wedi'i anghofio
+      title: Cyngor ar gyfer cwmni sydd wedi’i anghofio
     redirect_to_service:
       heading: "Continue to next step"
       signing_in:
