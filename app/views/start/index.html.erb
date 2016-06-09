@@ -2,7 +2,7 @@
 <% content_for :body_classes, 'hub-start' %>
 <% content_for :feedback_source, 'START_PAGE' %>
 
-<h1><%= t 'hub.start.heading' %></h1>
+<h1 class="heading-large"><%= t 'hub.start.heading' %></h1>
 
 <%= form_tag start_path, id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate' do %>
   <div class="form-group <%= @error_message.present? ? 'error' : '' %>">
