@@ -63,8 +63,8 @@ cy:
       back: Yn ôl
       about_link: Dechreuwch nawr
       registration_message_html: Os nad oes gennych gyfrif hunaniaeth, gallwch %{href}.
-      select_idp: Ddewis %{name}
-      sign_in_idp: Llofnodi i mewn gyda %{name}
+      select_idp: Ddewis %{display_name}
+      sign_in_idp: Llofnodi i mewn gyda %{display_name}
       forgot_company: Ni allaf gofio pa gwmni wnaeth fy nilysu
     cookies:
       title: Cwcis
@@ -184,7 +184,7 @@ cy:
       title: Dewiswch gwmni ardystiedig
       heading: Dewiswch gwmni
       why_companies: Pam fod dewis o gwmnïau
-      choose_idp: "Dewiswch %{name}"
+      choose_idp: "Dewiswch %{display_name}"
       idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
       company_html:
         zero: no&nbsp;cwmni
@@ -195,13 +195,13 @@ cy:
         other: "%{count}&nbsp;o gwmnïau"
       show_all_companies: Cwmniau sy’n annhebygol o’ch dilysu chi
       filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
-      about_idp: Am %{name}
+      about_idp: Am %{display_name}
       dialog:
-        information_provided_by: Gwybodaeth a ddarparwyd gan %{name}
+        information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
         close: cau
       about:
-        title: Am %{name}
-        information_provided_by: Gwybodaeth a ddarparwyd gan %{name}
+        title: Am %{display_name}
+        information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
         close: cau
     why_companies:
       title: Pam fod dewis o gwmnïau
@@ -217,12 +217,12 @@ cy:
       explanation: Rydych angen pasport, trwydded yrru llun neu gerdyn adnabod cenedlaethol (cerdyn ID) dilys i gael eich hunaniaeth wedi’i ddilysu.
     redirect_to_idp_warning:
       title: "Byddwch nawr yn cael eich ailgyfeirio"
-      continue_to_idp: Parhau i %{name}
+      continue_to_idp: Parhau i %{display_name}
       recommended:
-        p1: Byddwch nawr yn dilysu eich hunaniaeth ar wefan %{name}.
+        p1: Byddwch nawr yn dilysu eich hunaniaeth ar wefan %{display_name}.
         p2: Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio ble bynnag rydych yn gweld logo GOV.UK Verify.
       non_recommended:
-        requirements: "I gael eich dilysu gyda %{name}, byddwch angen:"
+        requirements: "I gael eich dilysu gyda %{display_name}, byddwch angen:"
       other_ways_link: "ffyrdd eraill i %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
     confirm_your_identity:
@@ -233,11 +233,11 @@ cy:
     confirmation:
       title: Mae eich hunaniaeth wedi cael ei ddilysu
       message: Gallwch nawr fewngofnodi ble bynnag rydych yn gweld logo GOV.UK Verify logo
-      heading: Mae "%{idp_name} wedi dilysu eich hunaniaeth"
+      heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
     failed_registration:
       title: Methu dilysu eich hunaniaeth
-      heading: Roedd "%{idp_name} yn methu dilysu eich hunaniaeth"
-      contact_details_intro: "Cysylltwch â %{idp_name} am fwy o wybodaeth"
+      heading: Roedd "%{display_name} yn methu dilysu eich hunaniaeth"
+      contact_details_intro: "Cysylltwch â %{display_name} am fwy o wybodaeth"
       try_another_company: Rhowch gynnig ar gwmni ardystiedig arall
       other_ways_link: "Ffyrdd eraill o gael mynediad i %{transaction_name}"
       reasons_html: |
@@ -250,7 +250,7 @@ cy:
       what_to_do_next: "Beth i’w wneud nesaf"
     failed_sign_in:
       title: Methu eich mewngofnodi
-      heading: Ni all "%{idp_name} eich mewngofnodi"
+      heading: Ni all "%{display_name} eich mewngofnodi"
       reasons_html: |
         <p>Efallai eich bod wedi dewis y cwmni anghywir. Edrychwch ar eich e-byst a negeseuon testun am gadarnhad o bwy wnaeth eich dilysu.</p>
         <p>Gallwch gael eich dilysu gan gwmni arall unrhyw bryd. Ni fyddwch yn colli unrhyw ddata ar wasanaethau GOV.UK rydych wedi’u defnyddio.</p>

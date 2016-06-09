@@ -10,7 +10,7 @@
 
             <%= form_for(identity_provider, url: sign_in_submit_path, html: {class: 'idp-option js-idp-form', id: nil}) do |f| %>
                 <% button_text = local_assigns.fetch(:non_repudiation, false) ? 'hub.signin.sign_in_idp' : 'hub.signin.select_idp' %>
-                <%= f.button t(button_text, name: identity_provider.display_name),
+                <%= f.button t(button_text, display_name: identity_provider.display_name),
                              class: 'button',
                              name: identity_provider.entity_id,
                              id: nil,

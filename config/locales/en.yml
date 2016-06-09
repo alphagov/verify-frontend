@@ -60,8 +60,8 @@ en:
       back: Back
       about_link: start now
       registration_message_html: If you don’t have an identity account, you can %{href}.
-      select_idp: Select %{name}
-      sign_in_idp: Sign in with %{name}
+      select_idp: Select %{display_name}
+      sign_in_idp: Sign in with %{display_name}
       forgot_company: I can’t remember which company verified me
     cookies:
       title: Cookies
@@ -181,7 +181,7 @@ en:
       title: Choose a certified company
       heading: Choose a company
       why_companies: Why there’s a choice of companies
-      choose_idp: "Choose %{name}"
+      choose_idp: "Choose %{display_name}"
       idp_count_html: "Based on your answers, %{company_count} can verify you now:"
       company_html:
         zero: no&nbsp;companies
@@ -189,13 +189,13 @@ en:
         other: "%{count}&nbsp;companies"
       show_all_companies: Companies that are unlikely to verify you
       filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
-      about_idp: About %{name}
+      about_idp: About %{display_name}
       dialog:
-        information_provided_by: Information provided by %{name}
+        information_provided_by: Information provided by %{display_name}
         close: close
       about:
-        title: About %{name}
-        information_provided_by: Information provided by %{name}
+        title: About %{display_name}
+        information_provided_by: Information provided by %{display_name}
         close: close
     why_companies:
       title: Why there’s a choice of companies
@@ -211,12 +211,12 @@ en:
       explanation: You need a valid passport, photocard driving licence or national identity card (ID card) to get your identity verified.
     redirect_to_idp_warning:
       title: "You'll now be redirected"
-      continue_to_idp: Continue to %{name}
+      continue_to_idp: Continue to %{display_name}
       recommended:
-        p1: You’ll now verify your identity on %{name}’s website.
+        p1: You’ll now verify your identity on %{display_name}’s website.
         p2: They’ll give you an identity account you can use wherever you see the GOV.UK Verify logo.
       non_recommended:
-        requirements: "To be verified with %{name}, you’ll need:"
+        requirements: "To be verified with %{display_name}, you’ll need:"
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
     confirm_your_identity:
@@ -227,11 +227,11 @@ en:
     confirmation:
       title: Your identity has been verified
       message: You can now sign in wherever you see the GOV.UK Verify logo
-      heading: "%{idp_name} has verified your identity"
+      heading: "%{display_name} has verified your identity"
     failed_registration:
       title: Unable to verify your identity
-      heading: "%{idp_name} was unable to verify your identity"
-      contact_details_intro: "Contact %{idp_name} for more information"
+      heading: "%{display_name} was unable to verify your identity"
+      contact_details_intro: "Contact %{display_name} for more information"
       try_another_company: Try another certified company
       other_ways_link: "Other ways to access %{transaction_name}"
       reasons_html: |
@@ -244,7 +244,7 @@ en:
       what_to_do_next: "What to do next"
     failed_sign_in:
       title: Unable to sign you in
-      heading: "%{idp_name} couldn’t sign you in"
+      heading: "%{display_name} couldn’t sign you in"
       reasons_html: |
         <p>You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.</p>
         <p>You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>

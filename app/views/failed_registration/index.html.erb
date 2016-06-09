@@ -3,7 +3,7 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h1 class="heading-xlarge"><%= t 'hub.failed_registration.heading', idp_name: @idp.display_name %></h1>
+    <h1 class="heading-xlarge"><%= t 'hub.failed_registration.heading', display_name: @idp.display_name %></h1>
 
     <%= t 'hub.failed_registration.reasons_html' %>
 
@@ -15,7 +15,7 @@
 
     <ol class="list list-number">
       <li>
-        <%= t 'hub.failed_registration.contact_details_intro', idp_name: @idp.display_name %>
+        <%= t 'hub.failed_registration.contact_details_intro', display_name: @idp.display_name %>
         <div>
           <%= @idp.contact_details.html_safe %>
         </div>

@@ -1,4 +1,4 @@
-<p><%= t 'hub.redirect_to_idp_warning.non_recommended.requirements', name: idp.display_name %></p>
+<p><%= t 'hub.redirect_to_idp_warning.non_recommended.requirements', display_name: idp.display_name %></p>
 <ul id="requirements" class="list list-bullet">
   <% idp.requirements.each do |requirement| -%>
     <li><%= requirement %></li>
