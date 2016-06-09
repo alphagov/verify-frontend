@@ -25,7 +25,7 @@ RSpec.describe 'When user visits the confirmation page' do
 
   it 'displays the IDP name' do
     visit '/confirmation'
-    expect(page).to have_text(I18n.t('hub.confirmation.heading', idp_name: 'IDCorp'))
+    expect(page).to have_text(I18n.t('hub.confirmation.heading', display_name: 'IDCorp'))
   end
 
   it 'displays the page in Welsh' do

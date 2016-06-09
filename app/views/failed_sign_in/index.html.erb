@@ -3,7 +3,7 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h1 class="heading-xlarge"><%= t 'hub.failed_sign_in.heading', idp_name: @idp.display_name %></h1>
+    <h1 class="heading-xlarge"><%= t 'hub.failed_sign_in.heading', display_name: @idp.display_name %></h1>
 
     <%= t 'hub.failed_sign_in.reasons_html' %>
     <%= link_to t('hub.failed_sign_in.start_again'), start_path, class: 'button', id: 'startAgain' %>
