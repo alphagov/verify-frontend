@@ -58,7 +58,7 @@ describe("Feedback Form", function () {
                              '</div>' +
                              '<input name="feedback_form[referer]" id="feedback_form_referer" type="hidden">' +
                              '<input name="feedback_form[user_agent]" id="feedback_form_user_agent" type="hidden">' +
-                             '<input value="false" name="feedback_form[js_disabled]" id="feedback_form_js_disabled" type="hidden">' +
+                             '<input value="true" name="feedback_form[js_disabled]" id="feedback_form_js_disabled" type="hidden">' +
                              '<div class="actions">' +
                                '<input name="commit" value="Send message" class="button" type="submit">' +
                              '</div>' +
@@ -134,4 +134,7 @@ describe("Feedback Form", function () {
     expectNoError();
   });
 
+  it("should set JS disabled to false", function () {
+    expect(feedbackForm.find('#feedback_form_js_disabled').val()).toBe("false");
+  });
 });
