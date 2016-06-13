@@ -3,20 +3,21 @@ class FeedbackForm
 
   attr_reader :what, :details, :reply, :name, :email, :referer, :user_agent, :js_disabled
   validate :mandatory_fields_present, :name_should_be_present,
-           :what_should_be_present, :details_should_be_present
-  validates :email, format: { with: /@/,
-                             message: I18n.t('hub.feedback.errors.email') },
-            if: :email_required?
+           :what_should_be_present, :details_should_be_present,
+           :email_format_should_be_valid, :email_should_be_present
 
   def initialize(hash)
-    @what = hash[:what]
-    @details = hash[:details]
-    @name = hash[:name]
-    @email = hash[:email]
-    @reply = hash[:reply]
-    @referer = hash[:referer]
-    @user_agent = hash[:user_agent]
-    @js_disabled = hash[:js_disabled]
+    sanitizer = Rails::Html::WhiteListSanitizer.new
+    allowed_replies = { 'true' => 'true', 'false' => 'false', nil => nil }
+
+    @what = sanitizer.sanitize hash[:what]
+    @details = sanitizer.sanitize hash[:details]
+    @name = sanitizer.sanitize hash[:name]
+    @email = sanitizer.sanitize hash[:email]
+    @reply = allowed_replies.fetch(hash[:reply], 'false')
+    @referer = sanitizer.sanitize hash[:referer]
+    @user_agent = sanitizer.sanitize hash[:user_agent]
+    @js_disabled = hash[:js_disabled] == 'true' ? 'true' : 'false'
   end
 
 private
@@ -53,11 +54,11 @@ private
     end
   end
 
-  def email_required?
-    if reply_required?
+  def email_format_should_be_valid
+    if reply_required? && @email && !@email.match(/@/)
       errors.set(:base, [I18n.t('hub.feedback.errors.no_selection')])
+      errors.set(:email, [I18n.t('hub.feedback.errors.email')])
     end
-    reply_required?
   end
 
   def details_missing?
