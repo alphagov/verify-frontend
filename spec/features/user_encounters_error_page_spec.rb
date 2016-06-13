@@ -83,6 +83,7 @@ RSpec.describe 'user encounters error page' do
     expect(page).to have_content "Your session has timed out"
     expect(page).to have_content "Please go back to your service"
     expect(page).to have_css "#piwik-custom-url", text: "errors/timeout-error"
+    expect(page).to have_css "a[href*=EXPIRED_ERROR_PAGE]"
     expect(page.status_code).to eq(403)
   end
 

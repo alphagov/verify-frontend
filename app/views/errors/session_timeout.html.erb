@@ -7,6 +7,6 @@
     <h1 class="heading-xlarge"><%= t 'errors.session_timeout.title' %></h1>
     <h2 class="heading-medium"><%= t 'errors.session_timeout.return_to_service' %></h2>
     <p><%= link_to t('errors.session_timeout.start_again'), '/redirect-to-service/error' %></p>
-    <p><%= t('errors.session_timeout.feedback_message', feedback_link: link_to(t('errors.session_timeout.feedback'), "/feedback", :query => {"feedback-source" =>'expired error page'})).html_safe %></p>
+    <p><%= t('errors.session_timeout.feedback_message', feedback_link: link_to(t('errors.session_timeout.feedback'), feedback_path('feedback-source': feedback_source))).html_safe %></p>
   </div>
 </div>
