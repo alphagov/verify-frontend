@@ -1,6 +1,6 @@
 class FeedbackController < ApplicationController
   def index
-    @form = FeedbackForm.new({})
+    @form = FeedbackForm.new(referer: request.referer, user_agent: request.user_agent)
   end
 
   def submit

@@ -23,16 +23,22 @@
 
     <%= form_for @form, url: feedback_submit_path, html: { class: 'feedback-form', id: 'feedback', novalidate: true } do |f| %>
         <fieldset>
-          <%= content_tag :div, class: flash[:errors] ? 'form-group error' : 'form-group' do %>
+          <%= content_tag :div, class: @form.errors.include?(:what) ? 'form-group error' : 'form-group' do %>
             <div class="form-group">
               <%= f.label :what, t('hub.feedback.questions.what'), class: 'form-label' %>
+              <% if @form.errors.include?(:what)%>
+                  <span class="validation-message"><%= @form.errors[:what].first %></span>
+              <% end %>
               <%= f.text_area :what, rows: 10, cols: 80, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
             </div>
           <% end %>
 
-          <%= content_tag :div, class: flash[:errors] ? 'form-group error' : 'form-group' do %>
+          <%= content_tag :div, class: @form.errors.include?(:details) ? 'form-group error' : 'form-group' do %>
             <div class="form-group">
               <%= f.label :details, t('hub.feedback.questions.details'), class: 'form-label' %>
+              <% if @form.errors.include?(:details)%>
+                  <span class="validation-message"><%= @form.errors[:details].first %></span>
+              <% end %>
               <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
             </div>
           <% end %>
