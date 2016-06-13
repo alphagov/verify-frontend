@@ -14,11 +14,19 @@
         border-bottom: 1px solid $grey-1;
         padding: 0 0 15px;
 
+        @include media (tablet) {
+          white-space: nowrap;
+        }
+
         >span {
           display: inline-block;
           vertical-align: middle;
           width: 50%;
           margin: 0 10px 0 0;
+
+          @include media (tablet) {
+            white-space: normal;
+          }
 
           @include media (mobile) {
             display: block;

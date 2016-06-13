@@ -1,9 +1,11 @@
 // Import GOV.UK frontend toolkit
 @import "govuk-elements";
-@import "govuk-elements-overrides";
 
 // helpers for common page elements
 @import "helpers/available-languages";
+@import "helpers/block-label";
+@import "helpers/validation-message";
+@import "helpers/meta-data";
 @import "helpers/feedback-link";
 
 // Specific pages
@@ -15,5 +17,7 @@
 @import "pages/choose_a_certified_company";
 @import "pages/confirm_your_identity";
 @import "pages/cookies";
+@import "pages/privacy-notice";
 @import "pages/response_processing";
 @import "pages/feedback";
+@import "pages/redirect-to-service";
