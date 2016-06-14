@@ -22,6 +22,20 @@ module Analytics
       federation_reporter.report_idp_selection(idp_names, request)
     end
 
+    describe '#report_sign_in_idp_selection' do
+      it 'should build correct report' do
+        idp_display_name = 'IDCorp'
+        expect(analytics_reporter).to receive(:report_custom_variable)
+          .with(
+            request,
+            "Sign In - #{idp_display_name}",
+            3 => ['SIGNIN_IDP', idp_display_name]
+          )
+
+        federation_reporter.report_sign_in_idp_selection(request, idp_display_name)
+      end
+    end
+
     describe '#report_idp_registration' do
       it 'should report correctly if IdP was recommended' do
         idp_name = 'IDCorp'

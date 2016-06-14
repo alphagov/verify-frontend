@@ -29,7 +29,6 @@ private
   def sign_in(entity_id, display_name)
     SESSION_PROXY.select_idp(cookies, entity_id)
     set_journey_hint(entity_id, I18n.locale)
-    cvar = Analytics::CustomVariable.build(:select_idp, display_name)
-    ANALYTICS_REPORTER.report_custom_variable(request, "Sign In - #{display_name}", cvar)
+    FEDERATION_REPORTER.report_sign_in_idp_selection(request, display_name)
   end
 end
