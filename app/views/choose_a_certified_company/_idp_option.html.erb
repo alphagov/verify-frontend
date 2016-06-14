@@ -14,9 +14,6 @@
                      type: 'submit',
                      value: identity_provider.display_name
       %>
-      <%= hidden_field_tag 'selected-idp', identity_provider.entity_id, id: nil %>
-      <%= hidden_field_tag 'recommended-idp', recommended, id: nil %>
-      <%= f.hidden_field :entity_id, id: nil, class: 'js-entity-id' %>
-      <%= f.hidden_field :simple_id, id: nil, class: 'js-simple-id' %>
+      <%= hidden_field_tag 'simple_id', identity_provider.simple_id, id: nil %>
   <% end %>
 </div>

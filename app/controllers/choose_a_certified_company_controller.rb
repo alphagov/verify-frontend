@@ -6,21 +6,20 @@ class ChooseACertifiedCompanyController < ApplicationController
   end
 
   def select_idp
-    session[:selected_idp] = IdentityProvider.new(params.fetch('identity_provider'))
-    session[:selected_idp_was_recommended] = params.fetch('recommended-idp') == 'true'
-    redirect_to redirect_to_idp_warning_path
+    for_viewable_idp(params.fetch('simple_id')) do |decorated_idp|
+      session[:selected_idp] = decorated_idp.identity_provider
+      session[:selected_idp_was_recommended] =
+        IDP_ELIGIBILITY_CHECKER.recommended?(decorated_idp.identity_provider, selected_evidence_values, current_identity_providers)
+      redirect_to redirect_to_idp_warning_path
+    end
   end
 
   def about
-    simple_id = params[:company]
-    matching_idp = current_identity_providers.detect { |idp| idp.simple_id == simple_id }
-    @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
-    if @idp.viewable?
+    for_viewable_idp(params[:company]) do |decorated_idp|
+      @idp = decorated_idp
       grouped_identity_providers = IDP_ELIGIBILITY_CHECKER.group_by_recommendation(selected_evidence_values, [@idp])
       @recommended = grouped_identity_providers.recommended.any?
       render 'about'
-    else
-      render 'errors/404', status: 404
     end
   end
 end

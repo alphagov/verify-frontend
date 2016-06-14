@@ -9,19 +9,20 @@ class SignInController < ApplicationController
   end
 
   def select_idp
-    idp_form = params.fetch('identity_provider')
-    idp = IdentityProvider.new(idp_form)
-    display_name = idp_form.fetch('display_name', idp.entity_id)
-    sign_in(idp.entity_id, display_name)
-    session[:selected_idp] = idp
-    redirect_to redirect_to_idp_path
+    for_viewable_idp(params.fetch('simple_id')) do |decorated_idp|
+      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
+      session[:selected_idp] = decorated_idp.identity_provider
+      redirect_to redirect_to_idp_path
+    end
   end
 
   def select_idp_ajax
-    sign_in(params.fetch('entityId'), params.fetch('displayName'))
-    authn_request_json = SESSION_PROXY.idp_authn_request(cookies)
-    session[:selected_idp] = IdentityProvider.new('simple_id' => params.fetch('simpleId'), 'entity_id' => params.fetch('entityId'))
-    render json: authn_request_json
+    for_viewable_idp(params.fetch('simpleId')) do |decorated_idp|
+      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
+      authn_request_json = SESSION_PROXY.idp_authn_request(cookies)
+      session[:selected_idp] = decorated_idp.identity_provider
+      render json: authn_request_json
+    end
   end
 
 private

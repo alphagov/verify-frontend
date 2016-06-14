@@ -64,5 +64,23 @@ module IdpEligibility
         expect(grouped_idps.non_recommended).to eql([])
       end
     end
+
+    describe '#recommended?' do
+      it 'should return false when idp cannot verify with evidence' do
+        enabled_idps = singleton_idp
+        allow(rules_repository).to receive(:rules).and_return('idp' => [[:passport]])
+        user_docs = [:driving_licence]
+
+        expect(checker.recommended?(idp1, user_docs, enabled_idps)).to eql(false)
+      end
+
+      it 'should return true when idp can verify with evidence' do
+        enabled_idps = singleton_idp
+        allow(rules_repository).to receive(:rules).and_return('idp' => [[:passport]])
+        user_docs = [:passport]
+
+        expect(checker.recommended?(idp1, user_docs, enabled_idps)).to eql(true)
+      end
+    end
   end
 end

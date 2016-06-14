@@ -99,6 +99,14 @@ private
     end
   end
 
+  def render_not_found
+    set_locale
+    respond_to do |format|
+      format.html { render 'errors/404', status: 404 }
+      format.json { render json: {}, status: 404 }
+    end
+  end
+
   def cookie_validator
     COOKIE_VALIDATOR
   end
@@ -154,5 +162,16 @@ private
 
   def hide_available_languages
     @hide_available_languages = true
+  end
+
+  def for_viewable_idp(simple_id)
+    matching_idp = current_identity_providers.detect { |idp| idp.simple_id == simple_id }
+    idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
+    if idp.viewable?
+      yield idp
+    else
+      logger.error 'Unrecognised IdP simple id'
+      render_not_found
+    end
   end
 end
