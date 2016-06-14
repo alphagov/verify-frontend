@@ -36,5 +36,9 @@ module VerifyFrontend
       config.hide_locale = true
       config.available_locales = [:en, :cy]
     end
+
+    # by default rails wraps invalid inputs with <div class="field_with_errors">
+    # we have our own way of styling errors, so we don't need this behaviour:
+    config.action_view.field_error_proc = Proc.new { |html_tag| html_tag }
   end
 end

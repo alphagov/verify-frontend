@@ -3,7 +3,7 @@ class FeedbackForm
 
   attr_reader :what, :details, :reply, :name, :email, :referer, :user_agent, :js_disabled
   validate :mandatory_fields_present, :name_should_be_present,
-           :what_should_be_present, :details_should_be_present,
+           :what_should_be_present, :details_should_be_present, :reply_should_be_present,
            :email_format_should_be_valid, :email_should_be_present
 
   def initialize(hash)
@@ -25,6 +25,12 @@ private
   def mandatory_fields_present
     if what_missing? || details_missing? || @reply.blank?
       errors.set(:base, [I18n.t('hub.feedback.errors.no_selection')])
+    end
+  end
+
+  def reply_should_be_present
+    if @reply.blank?
+      errors.set(:reply, [I18n.t('hub.feedback.errors.reply')])
     end
   end
 

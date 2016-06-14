@@ -11,22 +11,24 @@ describe("Feedback Form", function () {
       '<textarea required="required" data-msg="Please provide details" name="feedback_form[what]" id="feedback_form_what"></textarea>' +
       '<label for="feedback_form_details">Please provide details of your question, problem or feedback</label>' +
       '<textarea required="required" data-msg="Please provide details" name="feedback_form[details]" id="feedback_form_details"></textarea>' +
-      '<legend>Do you want a reply?</legend>' +
-      '<label for="feedback_form_reply_true">' +
-        '<input value="true" name="feedback_form[reply]" id="feedback_form_reply_true" type="radio">' +
-        'Yes' +
-      '</label>' +
-      '<label for="feedback_form_reply_false">' +
-        '<input value="false" name="feedback_form[reply]" id="feedback_form_reply_false" type="radio">' +
-        'No' +
-      '</label>' +
+      '<fieldset class="form-group">' +
+        '<legend>Do you want a reply?</legend>' +
+        '<label for="feedback_form_reply_true">' +
+          '<input required data-msg="Please select an option" value="true" name="feedback_form[reply]" id="feedback_form_reply_true" type="radio">' +
+          'Yes' +
+        '</label>' +
+        '<label for="feedback_form_reply_false">' +
+          '<input required data-msg="Please select an option" value="false" name="feedback_form[reply]" id="feedback_form_reply_false" type="radio">' +
+          'No' +
+        '</label>' +
+      '</fieldset>' +
       '<div class="reply-fields js-hidden">' +
         '<label for="feedback_form_name">Name</label>' +
-        '<input data-msg-required="Please enter a name" name="feedback_form[name]" id="feedback_form_name" type="text">' +
+        '<input required data-msg="Please enter a name" name="feedback_form[name]" id="feedback_form_name" type="text">' +
         '<label for="feedback_form_email">' +
           'Email address' +
         '</label>' +
-        '<input data-msg="Please enter a valid email address" name="feedback_form[email]" id="feedback_form_email" type="email">' +
+        '<input required data-msg="Please enter a valid email address" name="feedback_form[email]" id="feedback_form_email" type="email">' +
       '</div>' +
       '<input name="feedback_form[referer]" id="feedback_form_referer" type="hidden">' +
       '<input name="feedback_form[user_agent]" id="feedback_form_user_agent" type="hidden">' +
@@ -66,6 +68,7 @@ describe("Feedback Form", function () {
     submitForm();
     expect(feedbackForm.find('.error-message').eq(0).text()).toBe('Please provide details');
     expect(feedbackForm.find('.error-message').eq(1).text()).toBe('Please provide details');
+    expect(feedbackForm.find('.error-message').eq(2).text()).toBe('Please select an option');
   });
 
   it("should not show name and email fields on initialising the form", function () {
@@ -77,9 +80,10 @@ describe("Feedback Form", function () {
     expect(feedbackForm.find('.reply-fields').is(':not(.js-hidden)')).toBe(true);
   });
 
-  it("should not validate name and email fields when they are hidden", function () {
+  it("should not validate name and email fields when no reply required", function () {
     feedbackForm.find('#feedback_form_what').val('abc');
     feedbackForm.find('#feedback_form_details').val('xyz');
+    feedbackForm.find('#feedback_form_reply_false').prop('checked', true).trigger('click');
     submitForm();
     expectNoError();
   });

@@ -29,7 +29,7 @@
       $.validator.setDefaults({
         errorElement: 'span',
         errorPlacement: function($error, $element) {
-          var $label = $element.prev('label');
+          var $label = $('label[for=' + $element.attr('id') + ']');
           $error.removeClass('error');
           $error.addClass('error-message');
           $label.children('.error-message').remove();

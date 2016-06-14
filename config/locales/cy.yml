@@ -302,6 +302,7 @@ cy:
         name: Please enter a name
         email: Please enter a valid email address
         send_failure: Unfortunately, we are unable to record your feedback at the moment. Please try again later.
+        reply: Please select an option
       send_message: Send message
     feedback_sent:
       title: Feedback

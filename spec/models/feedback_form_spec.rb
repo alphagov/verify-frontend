@@ -7,6 +7,7 @@ describe FeedbackForm do
     name_error_message = 'Name ' + I18n.t('hub.feedback.errors.name')
     no_selection_error_message = I18n.t('hub.feedback.errors.no_selection')
     email_error_message = 'Email ' + I18n.t('hub.feedback.errors.email')
+    reply_error_message = 'Reply ' + I18n.t('hub.feedback.errors.reply')
 
     it 'no answers given' do
       form = FeedbackForm.new({})
@@ -19,7 +20,7 @@ describe FeedbackForm do
       form = FeedbackForm.new(what: 'what i was doing', details: 'what happened')
 
       expect(form).to_not be_valid
-      expect(form.errors.full_messages).to eql [no_selection_error_message]
+      expect(form.errors.full_messages).to eql [no_selection_error_message, reply_error_message]
     end
 
     it 'what were you trying to do question was not answered' do

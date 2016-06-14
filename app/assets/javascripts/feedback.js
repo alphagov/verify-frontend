@@ -4,6 +4,19 @@
     $ = root.jQuery;
   if(typeof root.GOVUK === 'undefined') { root.GOVUK = {}; }
 
+  /**
+   * The reply radios need special treatment because unlike
+   * most other radios on verify they cohabit with textareas
+   * and inputs.
+   */
+  function placeReplyRadioErrorMessage($element, $error) {
+    if ($element.attr('name') === 'feedback_form[reply]') {
+      var $replyFieldset = $element.closest('.form-group');
+      $replyFieldset.children('.error-message').remove();
+      $replyFieldset.prepend($error);
+    }
+  }
+
   var feedback = {
     toggleReply: function() {
       var requiresReply = feedback.$replyRadios.filter(':checked').val() === 'true';
@@ -22,9 +35,9 @@
       if (feedback.$form.length === 1) {
         feedback.$replyRadios.on('click',feedback.toggleReply);
         feedback.validator = feedback.$form.validate({
-          rules: {
-            'feedback_form[name]': 'required',
-            'feedback_form[email]': 'required'
+          errorPlacement: function($error, $element) {
+            $.validator.defaults.errorPlacement($error, $element);
+            placeReplyRadioErrorMessage($element, $error);
           }
         });
         feedback.$form.find('#feedback_form_js_disabled').val(false);
