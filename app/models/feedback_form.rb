@@ -8,13 +8,16 @@ class FeedbackForm
 
   def initialize(hash)
     sanitizer = Rails::Html::WhiteListSanitizer.new
-    allowed_replies = { 'true' => 'true', 'false' => 'false', nil => nil }
 
     @what = sanitizer.sanitize hash[:what]
     @details = sanitizer.sanitize hash[:details]
+
+    allowed_replies = ['true', 'false', nil]
+    @reply = allowed_replies.include?(hash[:reply]) ? hash[:reply] : 'false'
+
     @name = sanitizer.sanitize hash[:name]
     @email = sanitizer.sanitize hash[:email]
-    @reply = allowed_replies.fetch(hash[:reply], 'false')
+
     @referer = sanitizer.sanitize hash[:referer]
     @user_agent = sanitizer.sanitize hash[:user_agent]
     @js_disabled = hash[:js_disabled] == 'true' ? 'true' : 'false'
