@@ -13,7 +13,7 @@ def then_custom_variable_reported_for_sign_in
       '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"]}",
       'action_name' => 'The No option was selected on the introduction page',
   }
-  expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+  expect(a_piwik_request.with(query: hash_including(piwik_request))).to have_been_made.once
 end
 
 def given_im_on_the_sign_in_page(locale = 'en')
@@ -23,6 +23,10 @@ end
 
 def when_i_select_an_idp
   click_button(idp_display_name)
+end
+
+def a_piwik_request
+  a_request(:get, INTERNAL_PIWIK.url)
 end
 
 def then_im_at_the_idp
@@ -39,7 +43,7 @@ def then_im_at_the_idp
       '_cvar' => "{\"3\":[\"SIGNIN_IDP\",\"#{idp_display_name}\"]}",
       'action_name' => 'Sign In - ' + idp_display_name,
   }
-  expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+  expect(a_piwik_request.with(query: hash_including(piwik_request))).to have_been_made.once
 end
 
 def then_im_at_the_interstitial_page(locale = 'en')
@@ -107,6 +111,19 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       then_custom_variable_reported_for_sign_in
       when_i_select_an_idp
       then_im_at_the_interstitial_page 'cy'
+    end
+
+    it 'rejects unrecognised simple ids' do
+      page.set_rack_session(transaction_simple_id: 'test-rp')
+      given_api_requests_have_been_mocked!
+      given_im_on_the_sign_in_page
+
+      first('input[value=stub-idp-one]', visible: false).set('bob')
+      when_i_select_an_idp
+
+      expect(page).to have_content(I18n.translate('errors.page_not_found.title'))
+      expect(a_piwik_request).to have_not_been_made
+      expect(page.get_rack_session['selected_idp']).to be_nil
     end
   end
 end

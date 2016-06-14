@@ -1,6 +1,7 @@
 require 'feature_helper'
+require 'api_test_helper'
 
-RSpec.feature 'user visits the choose a certified about idp page', type: :feature do
+RSpec.feature 'user visits the choose a certified company about idp page', type: :feature do
   let(:selected_evidence) { { documents: [:passport, :driving_licence], phone: [:mobile_phone] } }
   let(:given_a_session_with_selected_evidence) {
     page.set_rack_session(
@@ -9,7 +10,7 @@ RSpec.feature 'user visits the choose a certified about idp page', type: :featur
       selected_evidence: selected_evidence,
     )
   }
-  scenario 'user visit about page for stub-idp-one and chooses it when its recommended' do
+  scenario 'user chooses a recommended idp' do
     entity_id = 'my-entity-id'
     stub_federation(entity_id)
     set_session_cookies!
@@ -22,14 +23,14 @@ RSpec.feature 'user visits the choose a certified about idp page', type: :featur
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
   end
 
-  scenario 'user visit about page for a non-existent idp' do
+  scenario 'for a non-existent idp' do
     stub_federation
     set_session_cookies!
     visit choose_a_certified_company_about_path('foobar')
     expect(page).to have_content(I18n.translate("errors.page_not_found.title"))
   end
 
-  scenario 'user visit about page for a idp that is not viewable' do
+  scenario 'for an idp that is not viewable' do
     idps = [
         { 'simpleId' => 'foobar', 'entityId' => 'foobar' },
     ]
@@ -40,7 +41,7 @@ RSpec.feature 'user visits the choose a certified about idp page', type: :featur
     expect(page).to have_content(I18n.translate("errors.page_not_found.title"))
   end
 
-  scenario 'user clicks back link from choose-a-certified-company-about page' do
+  scenario 'user clicks back link' do
     entity_id = 'my-entity-id'
     stub_federation(entity_id)
     set_session_cookies!
