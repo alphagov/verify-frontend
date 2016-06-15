@@ -164,6 +164,13 @@ private
     @hide_available_languages = true
   end
 
+  def select_viewable_idp(simple_id)
+    for_viewable_idp(simple_id) do |decorated_idp|
+      session[:selected_idp] = decorated_idp.identity_provider
+      yield decorated_idp
+    end
+  end
+
   def for_viewable_idp(simple_id)
     matching_idp = current_identity_providers.detect { |idp| idp.simple_id == simple_id }
     idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
