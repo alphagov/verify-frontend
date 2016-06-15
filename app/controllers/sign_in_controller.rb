@@ -9,7 +9,7 @@ class SignInController < ApplicationController
   end
 
   def select_idp
-    for_viewable_idp(params.fetch('simple_id')) do |decorated_idp|
+    for_viewable_idp(params.fetch('simple_id') { params.fetch('identity_provider').fetch('simple_id') }) do |decorated_idp|
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       session[:selected_idp] = decorated_idp.identity_provider
       redirect_to redirect_to_idp_path
