@@ -23,7 +23,15 @@ class FeedbackForm
     @js_disabled = hash[:js_disabled] == 'true' ? 'true' : 'false'
   end
 
-private
+  def data_to_submit
+    ''
+  end
+
+  def reply_required?
+    @reply == 'true'
+  end
+
+  private
 
   def mandatory_fields_present
     if what_missing? || details_missing? || @reply.blank?
@@ -76,10 +84,6 @@ private
 
   def what_missing?
     @what.blank?
-  end
-
-  def reply_required?
-    @reply == 'true'
   end
 
   def email_missing?
