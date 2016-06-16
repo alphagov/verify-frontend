@@ -12,7 +12,7 @@ class FeedbackService
 
 private
   
-  COMMENT_TEMPLATE = %{User feedback received
+  ERROR_MESSAGE_TEMPLATE = %{User feedback received
 
 session id: <%= session_id %>
 
@@ -33,7 +33,7 @@ With email: <%= presented_email(form) %>
 }
 
   def comment_value(session_id, form)
-    ERB.new(COMMENT_TEMPLATE).result(binding)
+    ERB.new(ERROR_MESSAGE_TEMPLATE).result(binding)
   end
 
   def subject(form)
