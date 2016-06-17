@@ -1,0 +1,17 @@
+// Error messages
+.validation-message {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: $red;
+  font-weight: bold;
+
+  .error {
+    display: block;
+    padding: 15px;
+    margin: 15px 0;
+    color: $red;
+    background: transparent;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
