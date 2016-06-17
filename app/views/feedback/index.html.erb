@@ -6,7 +6,7 @@
 
     <% if flash[:errors] %>
         <div id="validation-error-message-no-js" class="validation-message form-group">
-          <p class="error"><%= @form.errors[:base].first %></p>
+          <p class="error"><%= flash[:errors] %></p>
         </div>
     <% end %>
 

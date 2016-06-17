@@ -31,7 +31,7 @@ class FeedbackForm
     @reply == 'true'
   end
 
-  private
+private
 
   def mandatory_fields_present
     if what_missing? || details_missing? || @reply.blank?

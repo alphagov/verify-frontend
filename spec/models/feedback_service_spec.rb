@@ -37,8 +37,8 @@ With email: #{default_email}
 }
   }
 
- let(:enquiry_comment_value)  {
-   %{User feedback received
+  let(:enquiry_comment_value) {
+    %{User feedback received
 
 session id: #{session_id}
 
@@ -60,7 +60,6 @@ With email: #{email}
   }
 
   it 'will use the feedback form to submit an Enquiry ticket to zendesk' do
-
     expect(form).to receive(:name).and_return(name).twice
     expect(form).to receive(:email).and_return(email).twice
     expect(form).to receive(:referer).and_return(referer)
@@ -71,8 +70,12 @@ With email: #{email}
     expect(form).to receive(:reply_required?).and_return(true).exactly(5).times
 
 
-    expected_ticket = {:subject => 'Enquiry', :comment => {:value => enquiry_comment_value }, :requester => {name: name, email: email}}
-    expect(zendesk_client).to receive(:create_ticket).with(expected_ticket).and_return true
+    expected_ticket = {
+                        subject: 'Enquiry',
+                        comment: { value: enquiry_comment_value },
+                        requester: { name: name, email: email }
+                      }
+    expect(zendesk_client).to receive(:submit).with(session_id, expected_ticket).and_return true
 
 
     expect(feedback_service.submit!(session_id, form)).to eql(true)
@@ -89,8 +92,12 @@ With email: #{email}
     expect(form).to receive(:reply_required?).and_return(false).exactly(5).times
 
 
-    expected_ticket = {:subject => 'Feedback', :comment => {:value => feedback_comment_value }, :requester => {name: '', email: default_email}}
-    expect(zendesk_client).to receive(:create_ticket).with(expected_ticket).and_return true
+    expected_ticket = {
+                        subject: 'Feedback',
+                        comment: { value: feedback_comment_value },
+                        requester: { name: '', email: default_email }
+                      }
+    expect(zendesk_client).to receive(:submit).with(session_id, expected_ticket).and_return true
 
     expect(feedback_service.submit!(session_id, form)).to eql(true)
   end

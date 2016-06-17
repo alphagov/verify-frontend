@@ -1,9 +1,8 @@
 require 'feature_helper'
 
 RSpec.feature 'When the user visits the feedback page' do
-  before(:each) do
-    set_session_cookies!
-  end
+  let(:session_cookies) { set_session_cookies! }
+  let(:session_id) { session_cookies[CookieNames::SESSION_ID_COOKIE_NAME] }
 
   it 'should show errors for all input fields when missing input', js: true do
     visit feedback_path
@@ -65,6 +64,20 @@ RSpec.feature 'When the user visits the feedback page' do
 
     click_button I18n.t('hub.feedback.send_message')
     expect(page).to have_current_path(feedback_sent_path)
+  end
+
+  it 'should not go to feedback sent page when a error with zendesk occurs' do
+    visit feedback_path
+
+    fill_in 'feedback_form_what', with: 'break_zendesk'
+    fill_in 'feedback_form_details', with: 'Some details'
+    choose 'feedback_form_reply_false'
+    fill_in 'feedback_form_name', with: 'Bob Smith'
+    fill_in 'feedback_form_email', with: 'bob@smith.com'
+
+    click_button I18n.t('hub.feedback.send_message')
+    expect(page).to have_current_path(feedback_path)
+    expect(page).to have_content('Unfortunately, we are unable to record your feedback at the moment. Please try again later.')
   end
 
   it 'should contain referer, user_agent and js_disabled values on page' do
