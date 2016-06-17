@@ -26,6 +26,11 @@ module Analytics
       @analytics_reporter.report_custom_variable(request, action, cvar)
     end
 
+    def report_sign_in_idp_selection(request, idp_display_name)
+      cvar = Analytics::CustomVariable.build(:select_idp, idp_display_name)
+      @analytics_reporter.report_custom_variable(request, "Sign In - #{idp_display_name}", cvar)
+    end
+
   private
 
     def report_action(transaction_simple_id, request, action)
