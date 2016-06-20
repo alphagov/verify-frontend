@@ -10,6 +10,14 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_css('.form-group.error', count: 3)
     expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.reply'))
     expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.details'), count: 2)
+
+    choose 'feedback_form_reply_true'
+    click_button I18n.t('hub.feedback.send_message')
+
+    expect(page).to_not have_css('.error-message', text: I18n.t('hub.feedback.errors.reply'))
+    expect(page).to have_css('.form-group.error', count: 4)
+    expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.name'))
+    expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.email'))
   end
 
   it 'should show errors for all input fields when missing input and user wants a reply' do
@@ -105,7 +113,6 @@ RSpec.feature 'When the user visits the feedback page' do
   it 'should contain referer, user_agent and js_disabled values on page' do
     visit feedback_path
 
-    # TODO how can we check the values of the hidden fields?
     expect(page).to have_css('#feedback_form_referer', visible: false)
     expect(page).to have_css('#feedback_form_user_agent', visible: false)
     expect(page).to have_css('#feedback_form_js_disabled', visible: false)
