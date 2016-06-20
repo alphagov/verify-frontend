@@ -23,10 +23,12 @@ RSpec.describe 'When the user visits the select phone page' do
 
       choose 'select_phone_form_mobile_phone_true'
       choose 'select_phone_form_smart_phone_true'
-      choose 'select_phone_form_landline_true'
+      choose 'select_phone_form_landline_false'
       click_button 'Continue'
 
       expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
+      expect(page.get_rack_session['selected_evidence']).to eql('phone' => %w(mobile_phone smart_phone))
+      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => 'true', 'smart_phone' => 'true', 'landline' => 'false' })
     end
 
     it 'allows you to overwrite the values of your selected evidence' do

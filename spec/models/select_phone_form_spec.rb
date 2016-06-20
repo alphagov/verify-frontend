@@ -50,6 +50,25 @@ describe SelectPhoneForm do
     test_form_valid mobile_phone: 'true', smart_phone: 'true', landline: 'true'
   end
 
+  describe '#selected_answers' do
+    it 'should return a hash of the selected answers' do
+      form = SelectPhoneForm.new(
+        mobile_phone: 'true'
+      )
+      evidence = form.selected_answers
+      expect(evidence).to eql(mobile_phone: 'true')
+    end
+
+    it 'should not return selected answers when there is no value' do
+      form = SelectPhoneForm.new(
+        mobile_phone: 'false',
+        smart_phone: ''
+      )
+      evidence = form.selected_answers
+      expect(evidence).to eql(mobile_phone: 'false')
+    end
+  end
+
   def test_form_valid(form_fields = {})
     form = SelectPhoneForm.new(form_fields)
     expect(form.valid?).to eql true

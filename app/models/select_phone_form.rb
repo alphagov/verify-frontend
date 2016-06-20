@@ -16,6 +16,17 @@ class SelectPhoneForm
     IdpEligibility::Evidence::PHONE_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
   end
 
+  def selected_answers
+    answers = {}
+    IdpEligibility::Evidence::PHONE_ATTRIBUTES.each do |attr|
+      result = public_send(attr)
+      if %w(true false).include?(result)
+        answers[attr] = result
+      end
+    end
+    answers
+  end
+
 private
 
   def landline_not_specified_when_required

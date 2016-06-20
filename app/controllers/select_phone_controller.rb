@@ -8,6 +8,7 @@ class SelectPhoneController < ApplicationController
     if @form.valid?
       report_to_analytics('Phone Next')
       store_selected_evidence('phone', @form.selected_evidence)
+      store_selected_answers('phone', @form.selected_answers)
       if idp_eligibility_checker.any?(selected_evidence_values, current_identity_providers)
         redirect_to will_it_work_for_me_path
       else
