@@ -17,6 +17,19 @@ class SelectDocumentsForm
     IdpEligibility::Evidence::DOCUMENT_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
   end
 
+  def selected_answers
+    answers = {}
+    IdpEligibility::Evidence::DOCUMENT_ATTRIBUTES.each do |attr|
+      result = public_send(attr)
+      if no_documents_checked?
+        answers[attr] = 'false'
+      elsif %w(true false).include?(result)
+        answers[attr] = result
+      end
+    end
+    answers
+  end
+
 private
 
   def one_must_be_present

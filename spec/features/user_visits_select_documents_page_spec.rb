@@ -24,10 +24,12 @@ RSpec.feature 'When the user visits the select documents page' do
     visit '/select-documents'
 
     choose 'select_documents_form_driving_licence_true'
+    choose 'select_documents_form_passport_false'
     click_button 'Continue'
 
     expect(page).to have_current_path(select_phone_path, only_path: true)
     expect(page.get_rack_session['selected_evidence']).to eql('documents' => %w{driving_licence})
+    expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'driving_licence' => 'true', 'passport' => 'false' })
   end
 
   it 'redirects to the select phone page when no docs checked' do

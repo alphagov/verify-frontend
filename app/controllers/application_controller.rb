@@ -57,8 +57,16 @@ class ApplicationController < ActionController::Base
     stored_selected_evidence[stage] = evidence
   end
 
+  def store_selected_answers(stage, answers)
+    stored_selected_answers[stage] = answers
+  end
+
   def stored_selected_evidence
     session[:selected_evidence] ||= {}
+  end
+
+  def stored_selected_answers
+    session[:selected_answers] ||= {}
   end
 
   def selected_evidence_values
