@@ -8,40 +8,41 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
   let(:location) { '/test-idp-request-endpoint' }
   let(:selected_evidence) { { phone: %w(mobile_phone smart_phone), documents: %w(passport) } }
+  let(:selected_answers) { { phone: { mobile_phone: true, smart_phone: true }, documents: { passport: true } } }
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:given_an_idp_with_no_display_data) {
     page.set_rack_session(
       selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-x' },
       selected_idp_was_recommended: true,
-      selected_evidence: selected_evidence,
+      selected_answers: selected_answers,
     )
   }
   let(:given_a_session_with_document_evidence) {
     page.set_rack_session(
       selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: true,
-      selected_evidence: selected_evidence,
+      selected_answers: selected_answers,
     )
   }
   let(:given_a_session_with_non_recommended_idp) {
     page.set_rack_session(
       selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: false,
-      selected_evidence: selected_evidence,
+      selected_answers: selected_answers,
     )
   }
   let(:given_a_session_with_no_document_evidence) {
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idpnodocs.com', simple_id: 'stub-idp-no-docs' },
       selected_idp_was_recommended: true,
-      selected_evidence: { phone: %w(mobile_phone smart_phone), documents: [] },
+      selected_answers: { phone: { mobile_phone: true, smart_phone: true }, documents: {} },
     )
   }
   let(:given_a_session_with_non_uk_id_document_evidence) {
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idpwithnonukid.com', simple_id: 'stub-idp-four' },
       selected_idp_was_recommended: true,
-      selected_evidence: { phone: %w(mobile_phone smart_phone), documents: %w(non_uk_id_document) },
+      selected_answers: { phone: { mobile_phone: true, smart_phone: true }, documents: { non_uk_id_document: true } },
     )
   }
   let(:select_idp_stub_request) {

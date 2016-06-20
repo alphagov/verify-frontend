@@ -144,7 +144,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
       page.set_rack_session(
         selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
         selected_idp_was_recommended: true,
-        selected_evidence: { phone: %w(mobile_phone smart_phone), documents: %w(passport) },
+        selected_answers: { phone: { mobile_phone: true, smart_phone: true }, documents: { passport: true } },
       )
       set_up_session('stub-idp-one')
 

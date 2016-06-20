@@ -56,7 +56,7 @@ describe SelectPhoneForm do
         mobile_phone: 'true'
       )
       evidence = form.selected_answers
-      expect(evidence).to eql(mobile_phone: 'true')
+      expect(evidence).to eql(mobile_phone: true)
     end
 
     it 'should not return selected answers when there is no value' do
@@ -65,7 +65,7 @@ describe SelectPhoneForm do
         smart_phone: ''
       )
       evidence = form.selected_answers
-      expect(evidence).to eql(mobile_phone: 'false')
+      expect(evidence).to eql(mobile_phone: false)
     end
   end
 

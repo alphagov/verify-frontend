@@ -7,9 +7,8 @@ class SelectPhoneController < ApplicationController
     @form = SelectPhoneForm.new(params['select_phone_form'] || {})
     if @form.valid?
       report_to_analytics('Phone Next')
-      store_selected_evidence('phone', @form.selected_evidence)
-      store_selected_answers('phone', @form.selected_answers)
-      if idp_eligibility_checker.any?(selected_evidence_values, current_identity_providers)
+      selected_answer_store.store_selected_answers('phone', @form.selected_answers)
+      if idp_eligibility_checker.any?(selected_answer_store.selected_evidence, current_identity_providers)
         redirect_to will_it_work_for_me_path
       else
         redirect_to no_mobile_phone_path

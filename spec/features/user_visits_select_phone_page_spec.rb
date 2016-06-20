@@ -3,12 +3,12 @@ require 'api_test_helper'
 require 'uri'
 
 RSpec.describe 'When the user visits the select phone page' do
-  let(:selected_evidence) { { documents: [:passport, :driving_licence] } }
+  let(:selected_answers) { { documents: { passport: true, driving_licence: true } } }
   let(:given_a_session_with_document_evidence) {
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: true,
-      selected_evidence: selected_evidence,
+      selected_answers: selected_answers,
     )
   }
 
@@ -27,8 +27,7 @@ RSpec.describe 'When the user visits the select phone page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
-      expect(page.get_rack_session['selected_evidence']).to eql('phone' => %w(mobile_phone smart_phone))
-      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => 'true', 'smart_phone' => 'true', 'landline' => 'false' })
+      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true, 'smart_phone' => true, 'landline' => false })
     end
 
     it 'allows you to overwrite the values of your selected evidence' do
@@ -48,7 +47,9 @@ RSpec.describe 'When the user visits the select phone page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(no_mobile_phone_path)
-      expect(page.get_rack_session['selected_evidence']).to eql('phone' => [], 'documents' => %w{passport driving_licence})
+      expect(page.get_rack_session['selected_answers']).to eql(
+        'phone' => { 'mobile_phone' => false, 'landline' => false },
+        'documents' => { 'passport' => true, 'driving_licence' => true })
     end
 
     it 'shows an error message when no selections are made' do
@@ -72,7 +73,9 @@ RSpec.describe 'When the user visits the select phone page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(will_it_work_for_me_path)
-      expect(page.get_rack_session['selected_evidence']).to eql('phone' => %w{mobile_phone smart_phone}, 'documents' => %w{passport driving_licence})
+      expect(page.get_rack_session['selected_answers']).to eql(
+        'phone' => { 'mobile_phone' => true, 'smart_phone' => true },
+        'documents' => { 'passport' => true, 'driving_licence' => true })
     end
 
     it 'should display a validation message when user does not answer mobile phone question' do
@@ -94,7 +97,7 @@ RSpec.describe 'When the user visits the select phone page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(no_mobile_phone_path)
-      expect(page.get_rack_session['selected_evidence']).to eql('phone' => [])
+      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => false, 'landline' => false })
     end
   end
 

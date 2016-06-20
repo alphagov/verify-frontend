@@ -47,7 +47,7 @@ private
       selected_idp_names << idp_name
       session[:selected_idp_names] = selected_idp_names
     end
-    FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_evidence_values, recommended?)
+    FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended?)
   end
 
   def recommended?
@@ -67,10 +67,10 @@ private
   end
 
   def user_has_no_docs?
-    (stored_selected_evidence['documents'] || []).empty?
+    selected_answer_store.selected_evidence_for('documents').empty?
   end
 
   def user_has_foreign_doc_only?
-    stored_selected_evidence['documents'] == ['non_uk_id_document']
+    selected_answer_store.selected_evidence_for('documents') == [:non_uk_id_document]
   end
 end
