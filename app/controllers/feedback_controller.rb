@@ -13,7 +13,7 @@ class FeedbackController < ApplicationController
         query_params = { "emailProvided" => @form.reply_required?, "sessionValid" => session_id.present? }
         redirect_to feedback_sent_path(query_params)
       else
-        flash.now[:errors] = t('hub.feedback.errors.send_failure')
+        @has_email_sending_error = true
         render :index
       end
     else

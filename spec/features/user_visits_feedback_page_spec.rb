@@ -107,7 +107,8 @@ RSpec.feature 'When the user visits the feedback page' do
 
     click_button I18n.t('hub.feedback.send_message')
     expect(page).to have_current_path(feedback_path)
-    expect(page).to have_content('Unfortunately, we are unable to record your feedback at the moment. Please try again later.')
+    expect(page).to have_content(I18n.t('hub.feedback.errors.heading'))
+    expect(page).to have_content(I18n.t('hub.feedback.errors.send_failure'))
   end
 
   it 'should contain referer, user_agent and js_disabled values on page' do
