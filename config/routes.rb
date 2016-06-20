@@ -70,10 +70,10 @@ Rails.application.routes.draw do
 
   if Rails.env == 'development'
     get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
-    get 'feedback_sent', to: redirect("#{API_HOST}/feedback-sent"), as: :feedback_sent
+    get 'feedback/feedback-sent', to: redirect("#{API_HOST}/feedback/feedback-sent"), as: :feedback_sent
   else
     get 'further-information', to: proc { |_| [200, {}, ['OK']] }, as: :further_information
-    get 'feedback_sent', to: proc { |_| [200, {}, ['OK']] }, as: :feedback_sent
+    get 'feedback/feedback-sent', to: proc { |_| [200, {}, ['OK']] }, as: :feedback_sent
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
