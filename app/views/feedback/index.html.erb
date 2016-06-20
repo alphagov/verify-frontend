@@ -27,7 +27,7 @@
             <div class="form-group">
               <%= f.label :what, t('hub.feedback.questions.what'), class: 'form-label' %>
               <% if @form.errors.include?(:what)%>
-                  <span class="validation-message"><%= @form.errors[:what].first %></span>
+                  <span class="error-message"><%= @form.errors[:what].first %></span>
               <% end %>
               <%= f.text_area :what, rows: 10, cols: 80, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
             </div>
@@ -37,33 +37,36 @@
             <div class="form-group">
               <%= f.label :details, t('hub.feedback.questions.details'), class: 'form-label' %>
               <% if @form.errors.include?(:details)%>
-                  <span class="validation-message"><%= @form.errors[:details].first %></span>
+                  <span class="error-message"><%= @form.errors[:details].first %></span>
               <% end %>
               <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
             </div>
           <% end %>
 
           <div class="form-section">
-            <%= content_tag :fieldset, class: @form.errors.include?(:reply) ? 'form-group inline error' : 'form-group inline' do %>
-              <% if @form.errors.include?(:reply)%>
-                <span class="validation-message"><%= @form.errors[:reply].first %></span>
-              <% end %>
+            <fieldset>
               <legend class="heading-medium"><%= t 'hub.feedback.questions.reply' %></legend>
-              <%= f.label :reply_true, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :reply, 'true', required: true, data: { msg: t('hub.feedback.errors.reply')} %>
-                <span>
-                  <span class="inner"></span>
-                </span>
-                <%= t 'hub.feedback.questions.reply_option_yes' %>
+              <%= content_tag :div, class: @form.errors.include?(:reply) ? 'form-group inline error' : 'form-group inline' do %>
+                <% if @form.errors.include?(:reply)%>
+                  <span class="error-message"><%= @form.errors[:reply].first %></span>
+                <% end %>
+
+                <%= f.label :reply_true, {class: 'block-label', onclick: ''} do %>
+                  <%= f.radio_button :reply, 'true', required: true, data: { msg: t('hub.feedback.errors.reply')} %>
+                  <span>
+                    <span class="inner"></span>
+                  </span>
+                  <%= t 'hub.feedback.questions.reply_option_yes' %>
+                <% end %>
+                <%= f.label :reply_false, {class: 'block-label', onclick: ''} do %>
+                  <%= f.radio_button :reply, 'false', required: true, data: { msg: t('hub.feedback.errors.reply')} %>
+                  <span>
+                    <span class="inner"></span>
+                  </span>
+                  <%= t 'option.no' %>
+                <% end %>
               <% end %>
-              <%= f.label :reply_false, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :reply, 'false', required: true, data: { msg: t('hub.feedback.errors.reply')} %>
-                <span>
-                  <span class="inner"></span>
-                </span>
-                <%= t 'option.no' %>
-              <% end %>
-            <% end %>
+            </fieldset>
 
             <div class="panel panel-border-narrow reply-fields js-hidden">
               <p><%= t 'hub.feedback.request_reply' %></p>
@@ -72,7 +75,7 @@
                 <div class="form-group">
                   <%= f.label :name, t('hub.feedback.questions.name'), class: 'form-label' %>
                   <% if @form.errors.include?(:name) %>
-                      <span class="validation-message"><%= @form.errors[:name].first %></span>
+                      <span class="error-message"><%= @form.errors[:name].first %></span>
                   <% end %>
                   <%= f.text_field :name, required: true, class: 'form-control form-control-3-4', data: { 'msg-required': t('hub.feedback.errors.name') } %>
                 </div>
@@ -85,7 +88,7 @@
                     <span class="form-hint"><%= t('hub.feedback.questions.email_hint') %></span>
                   <% end %>
                   <% if @form.errors.include?(:email)%>
-                      <span class="validation-message"><%= @form.errors[:email].first %></span>
+                      <span class="error-message"><%= @form.errors[:email].first %></span>
                   <% end %>
                   <%= f.email_field :email, required: true, class: 'form-control form-control-3-4', data: { msg: t('hub.feedback.errors.email') } %>
                 </div>
