@@ -79,13 +79,17 @@ def stub_matching_outcome(outcome = MatchingOutcomeResponse::WAIT)
   stub_request(:get, api_uri('session/matching-outcome')).to_return(body: { 'outcome' => outcome }.to_json)
 end
 
+def x_forwarded_for
+  { "X-Forwarded-For" => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
+end
+
 def stub_response_for_rp
   response_body = {
     'postEndpoint' => '/test-rp',
     'samlMessage' => 'a saml message',
     'relayState' => 'a relay state'
   }
-  stub_request(:get, api_uri('session/response-for-rp/success')).to_return(body: response_body.to_json)
+  stub_request(:get, api_uri('session/response-for-rp/success')).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
 end
 
 def stub_error_response_for_rp
@@ -94,5 +98,5 @@ def stub_error_response_for_rp
       'samlMessage' => 'a saml message',
       'relayState' => 'a relay state'
   }
-  stub_request(:get, api_uri('session/response-for-rp/error')).to_return(body: response_body.to_json)
+  stub_request(:get, api_uri('session/response-for-rp/error')).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
 end

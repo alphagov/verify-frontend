@@ -24,6 +24,10 @@ class SessionProxy
     @originating_ip_store.get
   end
 
+  def x_forwarded_for
+    { "X-Forwarded-For" => originating_ip }
+  end
+
   def create_session(saml_request, relay_state)
     body = {
       PARAM_SAML_REQUEST => saml_request,
@@ -72,12 +76,16 @@ class SessionProxy
   end
 
   def response_for_rp(cookies)
-    response = @api_client.get(RESPONSE_FOR_RP_PATH, cookies: select_cookies(cookies, CookieNames.session_cookies))
+    response = @api_client.get(RESPONSE_FOR_RP_PATH,
+                               headers: x_forwarded_for,
+                               cookies: select_cookies(cookies, CookieNames.session_cookies))
     ResponseForRp.new(response || {}).tap(&:validate)
   end
 
   def error_response_for_rp(cookies)
-    response = @api_client.get(ERROR_RESPONSE_FOR_RP_PATH, cookies: select_cookies(cookies, CookieNames.session_cookies))
+    response = @api_client.get(ERROR_RESPONSE_FOR_RP_PATH,
+                               headers: x_forwarded_for,
+                               cookies: select_cookies(cookies, CookieNames.session_cookies))
     ResponseForRp.new(response || {}).tap(&:validate)
   end
 
