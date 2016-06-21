@@ -1,3 +1,4 @@
 simpleIds: [ "stub-idp-one" ]
+sendHints: true
 rules:
   - [ "driving_licence", "mobile_phone" ]
