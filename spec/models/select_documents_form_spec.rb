@@ -77,16 +77,16 @@ describe SelectDocumentsForm do
         non_uk_id_document: '',
         no_documents: 'false'
       )
-      evidence = form.selected_answers
-      expect(evidence).to eql(driving_licence: true)
+      answers = form.selected_answers
+      expect(answers).to eql(driving_licence: true)
     end
 
     it 'should return all documents answers as false if no documents is checked' do
       form = SelectDocumentsForm.new(
         no_documents: 'true'
       )
-      evidence = form.selected_answers
-      expect(evidence).to eql(driving_licence: false, passport: false, non_uk_id_document: false)
+      answers = form.selected_answers
+      expect(answers).to eql(driving_licence: false, passport: false, non_uk_id_document: false)
     end
   end
 end
