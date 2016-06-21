@@ -113,12 +113,12 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       then_im_at_the_interstitial_page 'cy'
     end
 
-    it 'rejects unrecognised simple ids' do
+    it 'rejects unrecognised entity ids' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
 
-      first('input[value=stub-idp-one]', visible: false).set('bob')
+      first('input[value="http://idcorp.com"]', visible: false).set('bob')
       when_i_select_an_idp
 
       expect(page).to have_content(I18n.translate('errors.page_not_found.title'))

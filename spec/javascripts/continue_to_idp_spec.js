@@ -10,11 +10,11 @@ describe('Continue to IDP', function () {
       html = '<div class="js-continue-to-idp" data-location="/foobar">'
            + '<form class="js-idp-form first-form" action="">'
            +   '<button type=submit value="IDCorpDisplayName"></button>'
-           +   '<input class=js-simple-id type="hidden" value="idcorp-simple-id" name="company">'
+           +   '<input class=js-entity-id type="hidden" value="idcorp-entity-id" name="company">'
            + '</form>'
            + '<form class="js-idp-form second-form" action="">'
            +   '<button type=submit value="IDCorpZweiDisplayName"></button>'
-           +   '<input class=js-simple-id type="hidden" value="idcorpzwei-simple-id" name="company">'
+           +   '<input class=js-entity-id type="hidden" value="idcorpzwei-entity-id" name="company">'
            + '</form>'
            + '<form id=post-to-idp>'
            +   '<input name=SAMLRequest type=hidden>'
@@ -53,7 +53,7 @@ describe('Continue to IDP', function () {
         })
       });
       expect(jasmine.Ajax.requests.mostRecent().url).toBe(apiPath);
-      expect(jasmine.Ajax.requests.mostRecent().params).toBe('{"simpleId":"idcorpzwei-simple-id"}');
+      expect(jasmine.Ajax.requests.mostRecent().params).toBe('{"entityId":"idcorpzwei-entity-id"}');
     });
     it('should populate the SAML request form with the AJAX response and submit it', function () {
       $(document).submit(formSpy);

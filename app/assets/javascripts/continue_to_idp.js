@@ -14,13 +14,13 @@
       $container.on('submit', '.js-idp-form', function (e) {
         var $originalForm = $(e.target);
         e.preventDefault();
-        var simpleId = $originalForm.find('.js-simple-id').val();
+        var entityId = $originalForm.find('.js-entity-id').val();
         $.ajax({
           type: 'PUT',
           url: $container.data('location'),
           contentType: "application/json",
           processData: false,
-          data: JSON.stringify({ simpleId: simpleId }),
+          data: JSON.stringify({ entityId: entityId }),
           timeout: 5000
         }).done(function(response) {
           var $samlForm;

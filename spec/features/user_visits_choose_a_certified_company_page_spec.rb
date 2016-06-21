@@ -100,7 +100,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     given_a_session_with_selected_evidence
     visit '/choose-a-certified-company'
 
-    first('input[value=stub-idp-one]', visible: false).set('bob')
+    first('input[value="http://idcorp.com"]', visible: false).set('bob')
     within('#matching-idps') do
       click_button 'Choose IDCorp'
     end
