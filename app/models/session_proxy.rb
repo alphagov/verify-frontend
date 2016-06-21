@@ -72,12 +72,12 @@ class SessionProxy
   end
 
   def response_for_rp(cookies)
-    response = @api_client.get(RESPONSE_FOR_RP_PATH, cookies: select_cookies(cookies, CookieNames.session_cookies))
+    response = @api_client.get(RESPONSE_FOR_RP_PATH, cookies: select_cookies(cookies, CookieNames.session_cookies), params: { PARAM_ORIGINATING_IP => originating_ip })
     ResponseForRp.new(response || {}).tap(&:validate)
   end
 
   def error_response_for_rp(cookies)
-    response = @api_client.get(ERROR_RESPONSE_FOR_RP_PATH, cookies: select_cookies(cookies, CookieNames.session_cookies))
+    response = @api_client.get(ERROR_RESPONSE_FOR_RP_PATH, cookies: select_cookies(cookies, CookieNames.session_cookies), params: { PARAM_ORIGINATING_IP => originating_ip })
     ResponseForRp.new(response || {}).tap(&:validate)
   end
 
