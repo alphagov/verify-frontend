@@ -1,0 +1,3 @@
+simpleIds: [ "example-idp-two" ]
+rules:
+  - [ "passport", "driving_licence" ]

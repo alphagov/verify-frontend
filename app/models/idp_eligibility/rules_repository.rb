@@ -4,7 +4,7 @@ module IdpEligibility
 
     def initialize(rules_hash)
       @rules = {}
-      rules_hash.each { |simple_id, rules| @rules[simple_id] = symbolize_rules(rules).to_set }
+      rules_hash.each { |simple_id, rules| @rules[simple_id] = symbolize_rules(rules.fetch(:rules)).to_set }
     end
 
   private

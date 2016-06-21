@@ -11,8 +11,9 @@ module IdpEligibility
       it 'should load rules from YAML files' do
         evidence = [%w(passport driving_licence)]
         rules_hash = {
-          'example-idp' => evidence,
-          'example-idp-stub' => evidence
+          'example-idp' => { rules: evidence, send_hints: true },
+          'example-idp-two' => { rules: evidence, send_hints: false },
+          'example-idp-stub' => { rules: evidence, send_hints: true }
         }
         expect(RulesLoader.load(fixtures('good_rules'))).to eql(rules_hash)
       end
