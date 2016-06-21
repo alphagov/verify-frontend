@@ -96,7 +96,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence)
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence: selected_evidence, recommended: true)
 
     click_button 'Continue to IDCorp'
 
@@ -115,7 +115,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence, recommended: false)
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence: selected_evidence)
 
     click_button 'Continue to IDCorp'
 
@@ -166,8 +166,8 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP on Continue' do
-      piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence)
-      stub_piwik_idp_selection_list('IDCorp')
+      piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence: selected_evidence, recommended: true)
+      stub_piwik_idp_registration('IDCorp')
       stub_federation
       given_a_session_with_document_evidence
       visit '/redirect-to-idp-warning'

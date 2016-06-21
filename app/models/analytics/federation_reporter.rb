@@ -13,17 +13,15 @@ module Analytics
       report_action(transaction_simple_id, request, 'The Yes option was selected on the start page')
     end
 
-    def report_idp_selection(idp_names, request)
-      cvar = Analytics::CustomVariable.build(:idp_selection, idp_names.join(','))
-      @analytics_reporter.report_custom_variable(request, 'IDP selection', cvar)
-    end
+    def report_idp_registration(request, idp_name, idp_name_history, evidence, recommended)
+      cvars = Analytics::CustomVariable.build(:register_idp, idp_name).merge(
+        Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(',')))
 
-    def report_idp_registration(request, idp_name, evidence, recommended)
-      cvar = Analytics::CustomVariable.build(:register_idp, idp_name)
       recommended_str = recommended ? '(recommended)' : '(not recommended)'
       list_of_evidence = evidence.sort.join(', ')
       action = "#{idp_name} was chosen for registration #{recommended_str} with evidence #{list_of_evidence}"
-      @analytics_reporter.report_custom_variable(request, action, cvar)
+
+      @analytics_reporter.report_custom_variable(request, action, cvars)
     end
 
     def report_sign_in_idp_selection(request, idp_display_name)

@@ -14,6 +14,8 @@ module Analytics
       report_to_piwik(request, action_name)
     end
 
+  private
+
     def report_to_piwik(request, action_name, custom_variable = nil)
       piwik_params = {
         'rec' => '1',
@@ -35,8 +37,6 @@ module Analytics
       end
       @client.report(piwik_params, headers(request))
     end
-
-  private
 
     def headers(request)
       headers = request.headers

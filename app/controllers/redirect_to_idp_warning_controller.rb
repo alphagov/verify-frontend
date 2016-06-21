@@ -38,17 +38,16 @@ private
   def select_registration(idp)
     SESSION_PROXY.select_idp(cookies, idp.entity_id, true)
     set_journey_hint(idp.entity_id, I18n.locale)
-    FEDERATION_REPORTER.report_idp_registration(request, idp.display_name, selected_evidence_values, recommended?)
-    register_idp_selection(idp.display_name)
+    register_idp_selections(idp.display_name)
   end
 
-  def register_idp_selection(idp_name)
+  def register_idp_selections(idp_name)
     selected_idp_names = session[:selected_idp_names] || []
     if selected_idp_names.size < SELECTED_IDP_HISTORY_LENGTH
       selected_idp_names << idp_name
       session[:selected_idp_names] = selected_idp_names
     end
-    FEDERATION_REPORTER.report_idp_selection(selected_idp_names, request)
+    FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_evidence_values, recommended?)
   end
 
   def recommended?

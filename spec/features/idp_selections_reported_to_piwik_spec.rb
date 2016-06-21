@@ -23,7 +23,7 @@ RSpec.describe 'When the user selects an IDP' do
   end
 
   it 'reports the IDP name to piwik' do
-    piwik_registration_virtual_page = stub_piwik_idp_selection_list('IDCorp')
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp')
 
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
@@ -34,9 +34,8 @@ RSpec.describe 'When the user selects an IDP' do
 
 
   it 'appends the IdP name on subsequent selections' do
-    idcorp_piwik_request = stub_piwik_idp_selection_list('IDCorp')
-    idcorp_and_bobs_piwik_request = stub_piwik_idp_selection_list("IDCorp,Bob’s Identity Service")
-
+    idcorp_piwik_request = stub_piwik_idp_registration('IDCorp')
+    idcorp_and_bobs_piwik_request = stub_piwik_idp_registration('Bob’s Identity Service', idp_list: 'IDCorp,Bob’s Identity Service')
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
     click_button 'Continue to IDCorp'
@@ -52,7 +51,7 @@ RSpec.describe 'When the user selects an IDP' do
 
   it 'truncates IdP names' do
     idps = %w(A B C D E)
-    idcorp_piwik_request = stub_piwik_idp_selection_list(idps.join(','))
+    idcorp_piwik_request = stub_piwik_idp_registration('IDCorp', idp_list: idps.join(','))
     page.set_rack_session(selected_idp_names: idps)
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'

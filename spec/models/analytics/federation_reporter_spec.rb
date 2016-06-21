@@ -11,17 +11,6 @@ module Analytics
     let(:federation_reporter) { FederationReporter.new(federation_translator, analytics_reporter) }
     let(:request) { double(:request) }
 
-    it 'should report custom variable for idp selection' do
-      idp_names = %w(A B C D)
-      expect(analytics_reporter).to receive(:report_custom_variable)
-        .with(
-          request,
-          'IDP selection',
-          5 => %w[IDP_SELECTION A,B,C,D]
-        )
-      federation_reporter.report_idp_selection(idp_names, request)
-    end
-
     describe '#report_sign_in_idp_selection' do
       it 'should build correct report' do
         idp_display_name = 'IDCorp'
@@ -37,37 +26,41 @@ module Analytics
     end
 
     describe '#report_idp_registration' do
+      idp_name = 'IDCorp'
+      idp_history = ['Previous IdP', 'IDCorp']
+      idp_history_str = idp_history.join(',')
+
       it 'should report correctly if IdP was recommended' do
-        idp_name = 'IDCorp'
         expect(analytics_reporter).to receive(:report_custom_variable)
           .with(
             request,
             "#{idp_name} was chosen for registration (recommended) with evidence passport",
-            2 => ['REGISTER_IDP', idp_name]
+            2 => ['REGISTER_IDP', idp_name],
+            5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, %w(passport), true)
+        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), true)
       end
 
       it 'should report correctly if IdP was not recommended' do
-        idp_name = 'IDCorp'
         expect(analytics_reporter).to receive(:report_custom_variable)
           .with(
             request,
             "#{idp_name} was chosen for registration (not recommended) with evidence passport",
-            2 => ['REGISTER_IDP', idp_name]
+            2 => ['REGISTER_IDP', idp_name],
+            5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, %w(passport), false)
+        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), false)
       end
 
       it 'should sort evidence' do
-        idp_name = 'IDCorp'
         expect(analytics_reporter).to receive(:report_custom_variable)
           .with(
             request,
             "#{idp_name} was chosen for registration (recommended) with evidence driving_licence, passport",
-            2 => ['REGISTER_IDP', idp_name]
+            2 => ['REGISTER_IDP', idp_name],
+            5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, %w(passport driving_licence), true)
+        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport driving_licence), true)
       end
     end
 
