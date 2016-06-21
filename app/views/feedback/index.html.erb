@@ -29,7 +29,7 @@
               <% if @form.errors.include?(:what)%>
                   <span class="error-message"><%= @form.errors[:what].first %></span>
               <% end %>
-              <%= f.text_area :what, rows: 10, cols: 80, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
+              <%= f.text_area :what, rows: 10, cols: 80, maxlength: 10000, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
             </div>
           <% end %>
 
@@ -39,7 +39,7 @@
               <% if @form.errors.include?(:details)%>
                   <span class="error-message"><%= @form.errors[:details].first %></span>
               <% end %>
-              <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
+              <%= f.text_area :details, rows: 20, cols: 80, maxlength: 10000, class: 'form-control', required: true, data: { msg: t('hub.feedback.errors.details') } %>
             </div>
           <% end %>
 
@@ -77,7 +77,7 @@
                   <% if @form.errors.include?(:name) %>
                       <span class="error-message"><%= @form.errors[:name].first %></span>
                   <% end %>
-                  <%= f.text_field :name, required: true, class: 'form-control form-control-3-4', data: { 'msg-required': t('hub.feedback.errors.name') } %>
+                  <%= f.text_field :name, required: true, maxlength: 10000, class: 'form-control form-control-3-4', data: { 'msg-required': t('hub.feedback.errors.name') } %>
                 </div>
               <% end %>
 
@@ -90,7 +90,7 @@
                   <% if @form.errors.include?(:email)%>
                       <span class="error-message"><%= @form.errors[:email].first %></span>
                   <% end %>
-                  <%= f.email_field :email, required: true, class: 'form-control form-control-3-4', data: { msg: t('hub.feedback.errors.email') } %>
+                  <%= f.email_field :email, required: true, maxlength: 255, class: 'form-control form-control-3-4', data: { msg: t('hub.feedback.errors.email') } %>
                 </div>
               <% end %>
             </div>
