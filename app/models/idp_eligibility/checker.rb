@@ -12,6 +12,10 @@ module IdpEligibility
       !filter_recommended_idps(evidence, enabled_idps).empty?
     end
 
+    def recommended?(idp, evidence, enabled_idps)
+      filter_recommended_idps(evidence, enabled_idps).include? idp
+    end
+
     def group_by_recommendation(evidence, enabled_idps)
       recommended_idps = filter_recommended_idps(evidence, enabled_idps)
       non_recommended_idps = enabled_idps - recommended_idps

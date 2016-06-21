@@ -10,16 +10,12 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   let(:selected_evidence) { { documents: [:passport, :driving_licence], phone: [:mobile_phone] } }
   let(:given_a_session_with_selected_evidence) {
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
-      selected_idp_was_recommended: true,
       selected_evidence: selected_evidence,
     )
   }
 
   let(:given_a_session_without_selected_evidence) {
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
-      selected_idp_was_recommended: true,
       selected_evidence: {},
     )
   }
@@ -84,6 +80,34 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     expect(page).to have_current_path(redirect_to_idp_warning_path)
     expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one')
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql false
+  end
+
+  it 'records details in session when a recommended IdP is selected' do
+    stub_federation
+    given_a_session_with_selected_evidence
+    visit '/choose-a-certified-company'
+
+    within('#matching-idps') do
+      click_button 'Choose IDCorp'
+    end
+
+    expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
+    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => 'http://idcorp.com', 'simple_id' => 'stub-idp-one')
+  end
+
+  it 'rejects unrecognised simple ids' do
+    stub_federation
+    given_a_session_with_selected_evidence
+    visit '/choose-a-certified-company'
+
+    first('input[value="http://idcorp.com"]', visible: false).set('bob')
+    within('#matching-idps') do
+      click_button 'Choose IDCorp'
+    end
+
+    expect(page).to have_content(I18n.translate('errors.page_not_found.title'))
+    expect(page.get_rack_session['selected_idp']).to be_nil
+    expect(page.get_rack_session['selected_idp_was_recommended']).to be_nil
   end
 
   it 'redirects to the choose a certified company about page when selecting About link' do

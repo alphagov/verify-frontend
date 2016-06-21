@@ -10,15 +10,11 @@ describe('Continue to IDP', function () {
       html = '<div class="js-continue-to-idp" data-location="/foobar">'
            + '<form class="js-idp-form first-form" action="">'
            +   '<button type=submit value="IDCorpDisplayName"></button>'
-           +   '<input class=js-entity-id type="hidden" value="idcorp-entity-id" name="identity_provider[entity_id]">'
-           +   '<input class=js-simple-id type="hidden" value="idcorp-simple-id" name="identity_provider[simple_id]">'
-           +   '<input class=js-display-name type="hidden" value="IDCorp display name" name="identity_provider[display_name]">'
+           +   '<input class=js-entity-id type="hidden" value="idcorp-entity-id" name="company">'
            + '</form>'
            + '<form class="js-idp-form second-form" action="">'
            +   '<button type=submit value="IDCorpZweiDisplayName"></button>'
-           +   '<input class=js-entity-id type="hidden" value="idcorpzwei-entity-id" name="identity_provider[entity_id]">'
-           +   '<input class=js-simple-id type="hidden" value="idcorpzwei-simple-id" name="identity_provider[simple_id]">'
-           +   '<input class=js-display-name type="hidden" value="IDCorp Zwei display name" name="identity_provider[display_name]">'
+           +   '<input class=js-entity-id type="hidden" value="idcorpzwei-entity-id" name="company">'
            + '</form>'
            + '<form id=post-to-idp>'
            +   '<input name=SAMLRequest type=hidden>'
@@ -57,7 +53,7 @@ describe('Continue to IDP', function () {
         })
       });
       expect(jasmine.Ajax.requests.mostRecent().url).toBe(apiPath);
-      expect(jasmine.Ajax.requests.mostRecent().params).toBe('{"entityId":"idcorpzwei-entity-id","displayName":"IDCorp Zwei display name","simpleId":"idcorpzwei-simple-id"}');
+      expect(jasmine.Ajax.requests.mostRecent().params).toBe('{"entityId":"idcorpzwei-entity-id"}');
     });
     it('should populate the SAML request form with the AJAX response and submit it', function () {
       $(document).submit(formSpy);
