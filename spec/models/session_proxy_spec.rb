@@ -14,6 +14,7 @@ describe SessionProxy do
       CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
     }
   }
+  let(:ip_address) { '1.2.3.4' }
   let(:session_proxy) { SessionProxy.new(api_client, originating_ip_store) }
 
   describe('#create_session') do
@@ -27,7 +28,6 @@ describe SessionProxy do
     }
 
     it 'should return cookies when a session is created' do
-      ip_address = '127.0.0.1'
       authn_request_body = {
           SessionProxy::PARAM_SAML_REQUEST => 'my-saml-request',
           SessionProxy::PARAM_RELAY_STATE => 'my-relay-state',
@@ -44,7 +44,6 @@ describe SessionProxy do
     end
 
     it 'should raise an Error if no session values are returned' do
-      ip_address = '127.0.0.1'
       authn_request_body = {
           SessionProxy::PARAM_SAML_REQUEST => 'my-saml-request',
           SessionProxy::PARAM_RELAY_STATE => 'my-relay-state',
@@ -76,7 +75,6 @@ describe SessionProxy do
 
   describe('#select_idp') do
     it 'should select an IDP for the session' do
-      ip_address = '1.1.1.1'
       body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => false }
       expect(api_client).to receive(:put)
         .with(SessionProxy::SELECT_IDP_PATH, body, cookies: cookies)
@@ -85,7 +83,6 @@ describe SessionProxy do
     end
 
     it 'should select an IDP for the session when registering' do
-      ip_address = '1.1.1.1'
       body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => true }
       expect(api_client).to receive(:put)
         .with(SessionProxy::SELECT_IDP_PATH, body, cookies: cookies)
@@ -102,7 +99,6 @@ describe SessionProxy do
           'relayState' => 'relay-state',
           'registration' => false
       }
-      ip_address = '1.1.1.1'
       params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(api_client).to receive(:get)
         .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, cookies: cookies, params: params)
@@ -124,7 +120,6 @@ describe SessionProxy do
           'relayState' => 'relay-state',
           'registration' => false
       }
-      ip_address = '1.1.1.1'
       params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(api_client).to receive(:get)
         .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, cookies: cookies, params: params)
@@ -138,7 +133,6 @@ describe SessionProxy do
 
   describe '#idp_authn_response' do
     it 'should return a confirmation result' do
-      ip_address = '1.2.3.4'
       expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:put)
@@ -158,7 +152,6 @@ describe SessionProxy do
     end
 
     it 'should raise an error when fields are missing from the api response' do
-      ip_address = '1.2.3.4'
       expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:put)
@@ -196,13 +189,17 @@ describe SessionProxy do
   describe '#response_for_rp' do
     it 'should return an rp response' do
       expect(api_client).to receive(:get)
-        .with(SessionProxy::RESPONSE_FOR_RP_PATH, cookies: cookies)
+        .with(SessionProxy::RESPONSE_FOR_RP_PATH,
+              cookies: cookies,
+              params: { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
+             )
         .and_return(
           'postEndpoint' => 'http://www.example.com',
           'samlMessage' => 'a saml message',
           'relayState' => 'a relay state'
         )
 
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
       actual_response = session_proxy.response_for_rp(cookies)
 
       expected_attributes = {
@@ -215,11 +212,53 @@ describe SessionProxy do
 
     it 'should raise an error when the API responds with an unknown value' do
       expect(api_client).to receive(:get)
-        .with(SessionProxy::RESPONSE_FOR_RP_PATH, cookies: cookies)
+        .with(SessionProxy::RESPONSE_FOR_RP_PATH,
+              cookies: cookies,
+              params: { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
+             )
         .and_return('outcome' => 'BANANA')
 
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
         session_proxy.response_for_rp(cookies)
+      }.to raise_error(Api::Response::ModelError, "Location can't be blank, Saml message can't be blank")
+    end
+  end
+  describe '#error_response_for_rp' do
+    it 'should return an rp response' do
+      expect(api_client).to receive(:get)
+        .with(SessionProxy::ERROR_RESPONSE_FOR_RP_PATH,
+              cookies: cookies,
+              params: { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
+             )
+        .and_return(
+          'postEndpoint' => 'http://www.example.com',
+          'samlMessage' => 'a saml message',
+          'relayState' => 'a relay state'
+        )
+
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      actual_response = session_proxy.error_response_for_rp(cookies)
+
+      expected_attributes = {
+        'location' => 'http://www.example.com',
+        'saml_message' => 'a saml message',
+        'relay_state' => 'a relay state'
+      }
+      expect(actual_response).to have_attributes(expected_attributes)
+    end
+
+    it 'should raise an error when the API responds with an unknown value' do
+      expect(api_client).to receive(:get)
+        .with(SessionProxy::ERROR_RESPONSE_FOR_RP_PATH,
+              cookies: cookies,
+              params: { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
+             )
+        .and_return('outcome' => 'BANANA')
+
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect {
+        session_proxy.error_response_for_rp(cookies)
       }.to raise_error(Api::Response::ModelError, "Location can't be blank, Saml message can't be blank")
     end
   end

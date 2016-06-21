@@ -27,7 +27,7 @@ RSpec.describe 'When the user visits the redirect to service page' do
     end
 
     it 'supports the welsh language for error' do
-      visit 'redirect-to-service/error-cy'
+      visit  redirect_to_service_error_cy_path
       expect(page).to have_css 'html[lang=cy]'
     end
 
