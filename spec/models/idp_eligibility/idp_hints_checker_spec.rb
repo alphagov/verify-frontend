@@ -21,5 +21,13 @@ module IdpEligibility
       checker = IdpHintsChecker.new(idp_rules)
       expect(checker.enabled?('example-idp')).to eql false
     end
+
+    it 'IdpHintsChecker.enabled? should return false if the idp id is not found' do
+      idp_rules = {
+        'example-idp' => { rules: [[]] }
+      }
+      checker = IdpHintsChecker.new(idp_rules)
+      expect(checker.enabled?('not-the-example-idp')).to eql false
+    end
   end
 end

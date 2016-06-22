@@ -5,8 +5,7 @@ module IdpEligibility
     end
 
     def enabled?(idp_simple_id)
-      send_hints = @idp_rules[idp_simple_id][:send_hints]
-      send_hints.nil? ? false : send_hints
+      @idp_rules.fetch(idp_simple_id, {}).fetch(:send_hints, false)
     end
   end
 end
