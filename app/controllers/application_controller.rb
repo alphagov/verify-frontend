@@ -57,6 +57,10 @@ class ApplicationController < ActionController::Base
     @selected_answer_store ||= SelectedAnswerStore.new(session)
   end
 
+  def selected_evidence
+    selected_answer_store.selected_evidence
+  end
+
   def set_journey_hint(idp_entity_id, locale)
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: idp_entity_id, locale: locale }.to_json
   end
