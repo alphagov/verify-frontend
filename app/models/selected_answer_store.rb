@@ -4,15 +4,15 @@ class SelectedAnswerStore
   end
 
   def store_selected_answers(stage, answers)
-    stored_selected_answers[stage] = answers
+    selected_answers[stage] = answers
   end
 
-  def stored_selected_answers
+  def selected_answers
     @session[:selected_answers] ||= {}
   end
 
   def selected_evidence
-    answers_hash = stored_selected_answers.values.reduce(:merge)
+    answers_hash = selected_answers.values.reduce(:merge)
     if answers_hash.nil?
       []
     else
@@ -21,7 +21,7 @@ class SelectedAnswerStore
   end
 
   def selected_evidence_for(stage)
-    answers_hash = stored_selected_answers.fetch(stage, {})
+    answers_hash = selected_answers.fetch(stage, {})
     as_evidence_array(answers_hash)
   end
 
