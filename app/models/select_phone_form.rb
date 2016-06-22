@@ -12,16 +12,12 @@ class SelectPhoneForm
     @landline = params[:landline]
   end
 
-  def selected_evidence
-    IdpEligibility::Evidence::PHONE_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
-  end
-
   def selected_answers
     answers = {}
     IdpEligibility::Evidence::PHONE_ATTRIBUTES.each do |attr|
       result = public_send(attr)
       if %w(true false).include?(result)
-        answers[attr] = result
+        answers[attr] = result == 'true'
       end
     end
     answers

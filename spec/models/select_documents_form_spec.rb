@@ -59,30 +59,6 @@ describe SelectDocumentsForm do
     expect(form.errors.full_messages).to eql ['Please check your selection']
   end
 
-  describe '#selected_evidence' do
-    it 'should return a list of the selected evidence' do
-      form = SelectDocumentsForm.new(
-        driving_licence: 'true',
-        passport: 'true',
-        non_uk_id_document: 'false',
-        no_documents: 'false'
-      )
-      evidence = form.selected_evidence
-      expect(evidence).to eql([:passport, :driving_licence])
-    end
-
-    it 'should return a list of the selected evidence when there is an empty value' do
-      form = SelectDocumentsForm.new(
-        driving_licence: 'true',
-        passport: '',
-        non_uk_id_document: 'false',
-        no_documents: 'false'
-      )
-      evidence = form.selected_evidence
-      expect(evidence).to eql([:driving_licence])
-    end
-  end
-
   describe '#selected_answers' do
     it 'should return a hash of the selected answers' do
       form = SelectDocumentsForm.new(
@@ -92,7 +68,7 @@ describe SelectDocumentsForm do
         no_documents: 'false'
       )
       evidence = form.selected_answers
-      expect(evidence).to eql(passport: 'true', driving_licence: 'true', non_uk_id_document: 'false')
+      expect(evidence).to eql(passport: true, driving_licence: true, non_uk_id_document: false)
     end
 
     it 'should not return selected answers when there is no value' do
@@ -101,16 +77,16 @@ describe SelectDocumentsForm do
         non_uk_id_document: '',
         no_documents: 'false'
       )
-      evidence = form.selected_answers
-      expect(evidence).to eql(driving_licence: 'true')
+      answers = form.selected_answers
+      expect(answers).to eql(driving_licence: true)
     end
 
     it 'should return all documents answers as false if no documents is checked' do
       form = SelectDocumentsForm.new(
         no_documents: 'true'
       )
-      evidence = form.selected_answers
-      expect(evidence).to eql(driving_licence: 'false', passport: 'false', non_uk_id_document: 'false')
+      answers = form.selected_answers
+      expect(answers).to eql(driving_licence: false, passport: false, non_uk_id_document: false)
     end
   end
 end

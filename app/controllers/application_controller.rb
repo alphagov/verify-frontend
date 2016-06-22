@@ -53,24 +53,8 @@ class ApplicationController < ActionController::Base
     }
   end
 
-  def store_selected_evidence(stage, evidence)
-    stored_selected_evidence[stage] = evidence
-  end
-
-  def store_selected_answers(stage, answers)
-    stored_selected_answers[stage] = answers
-  end
-
-  def stored_selected_evidence
-    session[:selected_evidence] ||= {}
-  end
-
-  def stored_selected_answers
-    session[:selected_answers] ||= {}
-  end
-
-  def selected_evidence_values
-    stored_selected_evidence.values.flatten.map(&:to_sym)
+  def selected_answer_store
+    @selected_answer_store ||= SelectedAnswerStore.new(session)
   end
 
   def set_journey_hint(idp_entity_id, locale)

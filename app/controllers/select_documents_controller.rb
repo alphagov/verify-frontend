@@ -7,9 +7,8 @@ class SelectDocumentsController < ApplicationController
     @form = SelectDocumentsForm.new(params['select_documents_form'] || {})
     if @form.valid?
       report_to_analytics('Select Documents Next')
-      store_selected_evidence('documents', @form.selected_evidence)
-      store_selected_answers('documents', @form.selected_answers)
-      if documents_eligibility_checker.any?(selected_evidence_values, current_identity_providers)
+      selected_answer_store.store_selected_answers('documents', @form.selected_answers)
+      if documents_eligibility_checker.any?(selected_answer_store.selected_evidence, current_identity_providers)
         redirect_to select_phone_path
       else
         redirect_to unlikely_to_verify_path

@@ -13,18 +13,14 @@ class SelectDocumentsForm
     @no_documents = hash[:no_documents]
   end
 
-  def selected_evidence
-    IdpEligibility::Evidence::DOCUMENT_ATTRIBUTES.select { |attr| public_send(attr) == 'true' }
-  end
-
   def selected_answers
     answers = {}
     IdpEligibility::Evidence::DOCUMENT_ATTRIBUTES.each do |attr|
       result = public_send(attr)
       if no_documents_checked?
-        answers[attr] = 'false'
+        answers[attr] = false
       elsif %w(true false).include?(result)
-        answers[attr] = result
+        answers[attr] = (result == 'true')
       end
     end
     answers

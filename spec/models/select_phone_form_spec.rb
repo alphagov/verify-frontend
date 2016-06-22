@@ -55,8 +55,8 @@ describe SelectPhoneForm do
       form = SelectPhoneForm.new(
         mobile_phone: 'true'
       )
-      evidence = form.selected_answers
-      expect(evidence).to eql(mobile_phone: 'true')
+      answers = form.selected_answers
+      expect(answers).to eql(mobile_phone: true)
     end
 
     it 'should not return selected answers when there is no value' do
@@ -64,8 +64,8 @@ describe SelectPhoneForm do
         mobile_phone: 'false',
         smart_phone: ''
       )
-      evidence = form.selected_answers
-      expect(evidence).to eql(mobile_phone: 'false')
+      answers = form.selected_answers
+      expect(answers).to eql(mobile_phone: false)
     end
   end
 
