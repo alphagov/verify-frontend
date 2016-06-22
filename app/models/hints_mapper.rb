@@ -2,7 +2,7 @@ class HintsMapper
   ANSWER_TO_HINT_MAPPING = {
     'mobile_phone' => 'mobile',
     'smart_phone' => 'apps',
-    'landline' => '???',
+    'landline' => 'landline',
     'passport' => 'ukpassport',
     'driving_licence' => 'ukphotolicense',
     'non_uk_id_document' => 'nonukid'

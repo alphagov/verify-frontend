@@ -10,6 +10,11 @@ class TestSamlController < ApplicationController
     @saml_request = params['SAMLRequest']
     @relay_state = params['RelayState']
     @registration = params['registration']
+
+    # There must be a neater way of getting the `hint` parameters out
+    blah = request.body_stream.read
+    @hints = blah.split('&').select { |x| x.starts_with? 'hint' }.map { |x| x.split('=')[1] }.join(', ')
+
     render 'idp_request'
   end
 end

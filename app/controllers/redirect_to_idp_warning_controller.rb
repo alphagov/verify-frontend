@@ -26,8 +26,10 @@ class RedirectToIdpWarningController < ApplicationController
     idp = decorated_idp
     if idp.viewable?
       select_registration(idp)
-      authn_request_json = SESSION_PROXY.idp_authn_request(cookies)
-      render json: authn_request_json
+      outbound_saml_message = SESSION_PROXY.idp_authn_request(cookies)
+      hints = HintsMapper.map_answers_to_hints(selected_answer_store.selected_answers)
+      idp_request = IdentityProviderRequest.new(outbound_saml_message, hints)
+      render json: idp_request
     else
       render status: :bad_request
     end

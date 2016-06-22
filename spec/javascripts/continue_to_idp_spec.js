@@ -64,7 +64,8 @@ describe('Continue to IDP', function () {
         status: 200,
         responseText: JSON.stringify({
           saml_request: 'a-saml-request',
-          location: 'https://www.example.com'
+          location: 'https://www.example.com',
+          hints: ['has_passport', 'not_nonukid']
         })
       });
       expect(jasmine.Ajax.requests.mostRecent().url).toBe(apiPath);
@@ -72,8 +73,12 @@ describe('Continue to IDP', function () {
 
       expect($samlForm.prop('action')).toBe('https://www.example.com/');
       expect($samlForm.find('input[name=SAMLRequest]').val()).toBe('a-saml-request');
+      expect($samlForm.find('input[name=hint][value=has_passport]').length).toBe(1);
+      expect($samlForm.find('input[name=hint][value=not_nonukid]').length).toBe(1);
       expect(formSpy).toHaveBeenCalled();
     });
+
+
     it('should submit IDP choice if AJAX request fails', function () {
       var selectIdpFormSubmitted = [];
       $(document).submit(function(e) {

@@ -1,5 +1,3 @@
-require "#{Rails.root}/lib/hints_mapper"
-
 class RedirectToIdpController < ApplicationController
   def index
     @saml_message = SESSION_PROXY.idp_authn_request(cookies)

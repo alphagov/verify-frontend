@@ -178,11 +178,11 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
 
       click_button 'Continue to IDCorp'
-
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")
       expect(page).to have_content("registration is 'true'")
+      expect(page).to have_content("hints are 'has_mobile, has_apps, has_ukpassport'")
       expect(select_idp_stub_request).to have_been_made.once
       expect(piwik_registration_virtual_page).to have_been_made.once
       expect(cookie_value('verify-front-journey-hint')).to_not be_nil
