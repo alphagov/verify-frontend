@@ -69,6 +69,29 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(current_url).to eql feedback_sent_url(emailProvided: false, sessionValid: false)
   end
 
+  it 'should report on the what box character limit', js: true do
+    visit feedback_path
+
+    what = 'verify my identity'
+    character_count_message_suffix = I18n.t('hub.feedback.character_count_message', limit_message: I18n.t('hub.feedback.character_limit_message'))
+    expect(page).to have_content(I18n.t('hub.feedback.character_limit_message'))
+    expect(page).to_not have_content(character_count_message_suffix)
+    fill_in 'feedback_form_what', with: what
+    expect(page).to have_content("#{3000 - what.size}#{character_count_message_suffix}")
+  end
+
+  it 'should report on the details box character limit', js: true do
+    visit feedback_path
+
+    details = 'here are some details'
+
+    character_count_message_suffix = I18n.t('hub.feedback.character_count_message', limit_message: I18n.t('hub.feedback.character_limit_message'))
+    expect(page).to have_content(I18n.t('hub.feedback.character_limit_message'))
+    expect(page).to_not have_content(character_count_message_suffix)
+    fill_in 'feedback_form_details', with: details
+    expect(page).to have_content("#{3000 - details.size}#{character_count_message_suffix}")
+  end
+
   it 'should include email provided on feedback sent page when response requested' do
     visit feedback_path
 
