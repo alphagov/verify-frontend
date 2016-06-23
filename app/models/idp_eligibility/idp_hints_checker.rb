@@ -1,11 +1,11 @@
 module IdpEligibility
   class IdpHintsChecker
-    def initialize(idp_rules)
-      @idp_rules = idp_rules
+    def initialize(idps_with_hints_enabled)
+      @idps_with_hints_enabled = idps_with_hints_enabled
     end
 
     def enabled?(idp_simple_id)
-      @idp_rules.fetch(idp_simple_id, {}).fetch(:send_hints, false)
+      @idps_with_hints_enabled.include?(idp_simple_id)
     end
   end
 end
