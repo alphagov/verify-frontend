@@ -18,7 +18,7 @@
   }
 
   var feedback = {
-    toggleReply: function() {
+    toggleReply: function () {
       var requiresReply = feedback.$replyRadios.filter(':checked').val() === 'true';
       if (requiresReply) {
         feedback.$replyFields.removeClass('js-hidden');
@@ -27,22 +27,43 @@
         feedback.validator.resetForm();
       }
     },
-    init: function (){
+    init: function () {
       feedback.$form = $('#feedback');
       feedback.$replyRadios = $('input[name="feedback_form[reply]"]');
       feedback.$replyFields = $('.reply-fields');
 
       if (feedback.$form.length === 1) {
-        feedback.$replyRadios.on('click',feedback.toggleReply);
+        feedback.$replyRadios.on('click', feedback.toggleReply);
         feedback.validator = feedback.$form.validate({
-          errorPlacement: function($error, $element) {
+          errorPlacement: function ($error, $element) {
             $.validator.defaults.errorPlacement($error, $element);
             placeReplyRadioErrorMessage($element, $error);
           }
         });
         feedback.$form.find('#feedback_form_js_disabled').val(false);
         feedback.toggleReply();
+        feedback.initCounters();
       }
+    },
+    initCounters: function () {
+      // TODO Robin thinks this is grim!
+      $('.counted').each(function (index) {
+        this.oninput = function () {
+          this.onkeydown = null;
+          feedback.handleCounter(this);
+        };
+
+        this.onkeydown = function () {
+          feedback.handleCounter(this);
+        };
+      });
+    },
+    handleCounter: function (counted) {
+      // TODO nicer method of locating counter?
+      var counterId = '#' + counted.id + '_counter';
+      var limit = counted.getAttribute('data-rule-maxlength');
+      // TODO localise message - could create the message in a hidden div in the view with the character count in a span, and just show the div and update the span in js
+      $(counterId).html((limit - counted.value.length) + " characters remaining (limit is " + limit + " characters)");
     }
   };
 
