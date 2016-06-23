@@ -46,7 +46,6 @@
       }
     },
     initCounters: function () {
-      // TODO Robin thinks this is grim!
       $('.counted').each(function (index) {
         this.oninput = function () {
           this.onkeydown = null;
@@ -59,7 +58,6 @@
       });
     },
     handleCounter: function (counted) {
-      // TODO nicer method of locating counter?
       var counterId = '#' + counted.id + '_counter';
       var limit = counted.getAttribute('data-rule-maxlength');
       var message = counted.getAttribute('data-msg');
