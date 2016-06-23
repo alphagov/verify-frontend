@@ -1,3 +1,4 @@
 simpleIds: [ "stub-idp-three" ]
-rules:
+recommended_profiles:
   - [ "passport", "driving_licence", "mobile_phone" ]
+non_recommended_profiles: []

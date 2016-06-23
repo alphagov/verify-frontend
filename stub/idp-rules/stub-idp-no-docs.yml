@@ -1,3 +1,4 @@
 simpleIds: [ "stub-idp-no-docs" ]
-rules:
+recommended_profiles:
   - [ ]
+non_recommended_profiles: []

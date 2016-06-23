@@ -7,7 +7,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
   let(:location) { '/test-idp-request-endpoint' }
-  let(:selected_evidence) { { phone: %w(mobile_phone smart_phone), documents: %w(passport) } }
+  let(:selected_answers) { { phone: %w(mobile_phone smart_phone), documents: %w(passport) } }
   let(:selected_answers) { { phone: { mobile_phone: true, smart_phone: true }, documents: { passport: true } } }
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:given_an_idp_with_no_display_data) {
@@ -17,7 +17,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       selected_answers: selected_answers,
     )
   }
-  let(:given_a_session_with_document_evidence) {
+  let(:given_a_session_with_document_answers) {
     page.set_rack_session(
       selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: true,
@@ -31,14 +31,14 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       selected_answers: selected_answers,
     )
   }
-  let(:given_a_session_with_no_document_evidence) {
+  let(:given_a_session_with_no_document_answers) {
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idpnodocs.com', simple_id: 'stub-idp-no-docs' },
       selected_idp_was_recommended: true,
       selected_answers: { phone: { mobile_phone: true, smart_phone: true }, documents: {} },
     )
   }
-  let(:given_a_session_with_non_uk_id_document_evidence) {
+  let(:given_a_session_with_non_uk_id_document_answers) {
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idpwithnonukid.com', simple_id: 'stub-idp-four' },
       selected_idp_was_recommended: true,
@@ -57,7 +57,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   end
 
   it 'includes the appropriate feedback source and page title' do
-    given_a_session_with_document_evidence
+    given_a_session_with_document_answers
     visit '/redirect-to-idp-warning'
 
     expect(page).to have_title "You'll now be redirected - GOV.UK Verify - GOV.UK"
@@ -65,7 +65,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   end
 
   it 'supports the welsh language' do
-    given_a_session_with_document_evidence
+    given_a_session_with_document_answers
     visit '/ailgyfeirio-i-rybudd-idp'
 
     expect(page).to have_title "Byddwch nawr yn cael eich ailgyfeirio - GOV.UK Verify - GOV.UK"
@@ -90,14 +90,14 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   it 'goes to "redirect-to-idp" page on submit' do
     stub_federation
-    given_a_session_with_document_evidence
+    given_a_session_with_document_answers
 
     visit '/redirect-to-idp-warning'
 
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence: selected_evidence, recommended: true)
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true)
 
     click_button 'Continue to IDCorp'
 
@@ -116,7 +116,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence: selected_evidence)
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers)
 
     click_button 'Continue to IDCorp'
 
@@ -127,7 +127,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   end
 
   it 'includes the recommended text when selection is a recommended idp' do
-    given_a_session_with_document_evidence
+    given_a_session_with_document_answers
     visit '/redirect-to-idp-warning'
 
     expect(page).to have_content 'You’ll now verify your identity on IDCorp’s website.'
@@ -147,7 +147,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   it 'includes specific IDP text and link to the other ways when user has no documents' do
     page.set_rack_session(transaction_simple_id: 'test-rp')
-    given_a_session_with_no_document_evidence
+    given_a_session_with_no_document_answers
     visit '/redirect-to-idp-warning'
 
     expect(page).to have_content I18n.t 'hub.redirect_to_idp_warning.recommended.p1', display_name: 'No Docs IDP'
@@ -157,7 +157,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   it 'includes specific IDP text and link to the other ways when user has only foreign id document' do
     page.set_rack_session(transaction_simple_id: 'test-rp')
-    given_a_session_with_non_uk_id_document_evidence
+    given_a_session_with_non_uk_id_document_answers
     visit '/redirect-to-idp-warning'
 
     expect(page).to have_content I18n.t 'hub.redirect_to_idp_warning.recommended.p1', display_name: 'Best ID'
@@ -167,10 +167,10 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP on Continue' do
-      piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_evidence: selected_evidence, recommended: true)
+      piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true)
       stub_piwik_idp_registration('IDCorp')
       stub_federation
-      given_a_session_with_document_evidence
+      given_a_session_with_document_answers
       visit '/redirect-to-idp-warning'
 
       select_idp_stub_request

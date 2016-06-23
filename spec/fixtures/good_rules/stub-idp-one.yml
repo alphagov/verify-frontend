@@ -1,4 +1,0 @@
-simpleIds: [ "example-idp", "example-idp-stub" ]
-sendHints: true
-rules:
-  - [ "passport", "driving_licence" ]

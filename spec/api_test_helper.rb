@@ -32,7 +32,9 @@ end
 def stub_federation_no_docs
   idps = [
     { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' },
-    { 'simpleId' => 'stub-idp-no-docs', 'entityId' => 'http://idcorp.nodoc.com' }
+    { 'simpleId' => 'stub-idp-no-docs', 'entityId' => 'http://idcorp.nodoc.com' },
+    { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id' },
+    { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id' }
   ]
   body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
   stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)

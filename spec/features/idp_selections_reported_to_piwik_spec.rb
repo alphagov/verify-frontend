@@ -3,12 +3,21 @@ require 'api_test_helper'
 require 'piwik_test_helper'
 
 RSpec.describe 'When the user selects an IDP' do
-  let(:selected_answers) { { phone: { mobile_phone: true, smart_phone: true }, documents: { passport: true } } }
+  let(:selected_answers) { { phone: { mobile_phone: true, smart_phone: true }, documents: { driving_licence: true, passport: true } } }
   let(:location) { '/test-idp-request-endpoint' }
   let(:idp_1_entity_id) { 'http://idcorp.com' }
   let(:idp_2_entity_id) { 'other-entity-id' }
   let(:idp_1_simple_id) { 'stub-idp-one' }
   let(:idp_2_simple_id) { 'stub-idp-two' }
+  let(:given_a_session_with_selected_answers) {
+    page.set_rack_session(
+      selected_answers: selected_answers,
+    )
+  }
+
+  let(:idcorp_registration_piwik_request) {
+    stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true)
+  }
 
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
@@ -20,10 +29,11 @@ RSpec.describe 'When the user selects an IDP' do
     stub_session_idp_authn_request(originating_ip, location, false)
     stub_idp_select_request(idp_1_entity_id)
     stub_idp_select_request(idp_2_entity_id)
+    given_a_session_with_selected_answers
   end
 
   it 'reports the IDP name to piwik' do
-    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp')
+    piwik_registration_virtual_page = idcorp_registration_piwik_request
 
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
@@ -34,8 +44,12 @@ RSpec.describe 'When the user selects an IDP' do
 
 
   it 'appends the IdP name on subsequent selections' do
-    idcorp_piwik_request = stub_piwik_idp_registration('IDCorp')
-    idcorp_and_bobs_piwik_request = stub_piwik_idp_registration('Bob’s Identity Service', idp_list: 'IDCorp,Bob’s Identity Service')
+    idcorp_piwik_request = idcorp_registration_piwik_request
+    idcorp_and_bobs_piwik_request = stub_piwik_idp_registration('Bob’s Identity Service',
+                                                                selected_answers: selected_answers,
+                                                                recommended: false,
+                                                                idp_list: 'IDCorp,Bob’s Identity Service'
+                                                               )
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
     click_button 'Continue to IDCorp'
@@ -51,7 +65,7 @@ RSpec.describe 'When the user selects an IDP' do
 
   it 'truncates IdP names' do
     idps = %w(A B C D E)
-    idcorp_piwik_request = stub_piwik_idp_registration('IDCorp', idp_list: idps.join(','))
+    idcorp_piwik_request = stub_piwik_idp_registration('IDCorp', recommended: true, selected_answers: selected_answers, idp_list: idps.join(','))
     page.set_rack_session(selected_idp_names: idps)
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'

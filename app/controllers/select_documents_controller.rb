@@ -8,7 +8,7 @@ class SelectDocumentsController < ApplicationController
     if @form.valid?
       report_to_analytics('Select Documents Next')
       selected_answer_store.store_selected_answers('documents', @form.selected_answers)
-      if documents_eligibility_checker.any?(selected_answer_store.selected_evidence, current_identity_providers)
+      if documents_eligibility_checker.any?(selected_evidence, current_identity_providers)
         redirect_to select_phone_path
       else
         redirect_to unlikely_to_verify_path

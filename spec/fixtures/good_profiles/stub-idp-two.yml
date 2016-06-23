@@ -1,0 +1,4 @@
+simpleIds: [ "example-idp-two" ]
+recommended_profiles:
+  - [ "passport", "driving_licence" ]
+non_recommended_profiles: []
