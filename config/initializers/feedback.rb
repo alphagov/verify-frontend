@@ -2,7 +2,8 @@ require 'zendesk_api'
 
 if Rails.env == 'test'
   require 'feedback/dummy_zendesk_client'
-  ZENDESK_CLIENT = ZendeskClient.new(Feedback::DummyZendeskClient.new, Rails.logger)
+  DUMMY_ZENDESK_CLIENT = Feedback::DummyZendeskClient.new
+  ZENDESK_CLIENT = ZendeskClient.new(DUMMY_ZENDESK_CLIENT, Rails.logger)
 else
   client = ZendeskAPI::Client.new do |config|
     config.url = CONFIG.zendesk_url

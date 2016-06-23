@@ -3,11 +3,13 @@ class FeedbackController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :submit
 
   def index
-    @form = FeedbackForm.new(referer: request.referer, user_agent: request.user_agent)
+    @form = FeedbackForm.new(user_agent: request.user_agent)
+    flash['feedback_referer'] = request.referer
   end
 
   def submit
-    @form = FeedbackForm.new(params['feedback_form'] || old_feedback_form_params || {})
+    @form = FeedbackForm.new(feedback_form_params)
+    flash.keep('feedback_referer')
     if @form.valid?
       session_id = cookies[CookieNames::SESSION_ID_COOKIE_NAME]
       if FEEDBACK_SERVICE.submit!(session_id, @form)
@@ -24,6 +26,12 @@ class FeedbackController < ApplicationController
   end
 
 private
+
+  def feedback_form_params
+    (params['feedback_form'] || old_feedback_form_params || {}).tap { |form|
+      form['referer'] = flash['feedback_referer'] if flash['feedback_referer'].present?
+    }
+  end
 
   def old_feedback_form_params
     {

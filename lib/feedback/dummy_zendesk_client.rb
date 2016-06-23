@@ -10,6 +10,7 @@ module Feedback
 
   class DummyTicketCollection
     attr_reader :options
+    attr_reader :last
 
     def initialize(logger)
       @logger = logger
@@ -21,7 +22,7 @@ module Feedback
         raise ZendeskAPI::Error::RecordInvalid.new(body: { "details" => "sample error message from Zendesk" })
       else
         @logger.info("Zendesk ticket created: #{options.inspect}")
-        DummyTicket.new
+        @last = DummyTicket.new(options)
       end
     end
 
@@ -33,6 +34,14 @@ module Feedback
   end
 
   class DummyTicket
+    def initialize(options)
+      @options = options
+    end
+
+    def comment
+      @options[:comment][:value]
+    end
+
     def id
       4
     end
