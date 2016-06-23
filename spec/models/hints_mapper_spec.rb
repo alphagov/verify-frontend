@@ -10,7 +10,7 @@ describe HintsMapper do
 
     hints = HintsMapper.map_answers_to_hints(answers_hash)
 
-    expect(hints).to eql(%w(has_ukpassport has_ukphotolicense not_nonukid not_apps has_mobile has_landline).to_set)
+    expect(hints).to eql(%w(has_ukpassport has_ukphotolicence not_nonukid not_apps has_mobile has_landline).to_set)
   end
 
   it 'should ignore unknown evidences' do

@@ -4,7 +4,7 @@ class HintsMapper
     'smart_phone' => 'apps',
     'landline' => 'landline',
     'passport' => 'ukpassport',
-    'driving_licence' => 'ukphotolicense',
+    'driving_licence' => 'ukphotolicence',
     'non_uk_id_document' => 'nonukid'
   }.freeze
 
