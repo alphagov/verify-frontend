@@ -62,8 +62,8 @@
       // TODO nicer method of locating counter?
       var counterId = '#' + counted.id + '_counter';
       var limit = counted.getAttribute('data-rule-maxlength');
-      // TODO localise message - could create the message in a hidden div in the view with the character count in a span, and just show the div and update the span in js
-      $(counterId).html((limit - counted.value.length) + " characters remaining (limit is " + limit + " characters)");
+      var message = counted.getAttribute('data-msg');
+      $(counterId).html((limit - counted.value.length) + message);
     }
   };
 

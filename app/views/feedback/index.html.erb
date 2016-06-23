@@ -26,13 +26,16 @@
           <%= content_tag :div, class: @form.errors.include?(:what) ? 'form-group error' : 'form-group' do %>
             <div class="form-group">
               <%= f.label :what, t('hub.feedback.questions.what'), class: 'form-label' %>
-              <% if @form.errors.include?(:what)%>
+              <% if @form.errors.include?(:what) %>
                   <span class="error-message"><%= @form.errors[:what].first %></span>
               <% end %>
-              <%= f.text_area :what, rows: 10, cols: 80, class: 'form-control counted', required: true, data: {
-                  'rule-maxlength': 3000, 'msg-required': t('hub.feedback.errors.details'),
+              <%= f.text_area :what, rows: 10, cols: 80, class: 'form-control counted', required: true,
+                              'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
+                              data: { 'rule-maxlength': 3000, 'msg-required': t('hub.feedback.errors.details'),
                   'msg-maxlength': t('hub.feedback.errors.too_long', max_length: 3000) } %>
-              <p id="feedback_form_what_counter" class="hint" aria-live="polite" aria-atomic="false">(Limit is 3000 characters)</p>
+              <p id="feedback_form_what_counter" class="hint" aria-live="polite" aria-atomic="false">
+                <%= t('hub.feedback.character_limit_message') %>
+              </p>
             </div>
           <% end %>
 
@@ -42,10 +45,13 @@
               <% if @form.errors.include?(:details)%>
                   <span class="error-message"><%= @form.errors[:details].first %></span>
               <% end %>
-              <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control counted', required: true, data: {
-                  'rule-maxlength': 3000, 'msg-required': t('hub.feedback.errors.details'),
+              <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control counted', required: true,
+                              'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
+                              data: { 'rule-maxlength': 3000, 'msg-required': t('hub.feedback.errors.details'),
                   'msg-maxlength': t('hub.feedback.errors.too_long', max_length: 3000) } %>
-              <p id="feedback_form_details_counter" class="hint" aria-live="polite" aria-atomic="false">(Limit is 3000 characters)</p>
+              <p id="feedback_form_details_counter" class="hint" aria-live="polite" aria-atomic="false">
+                <%= t('hub.feedback.character_limit_message') %>
+              </p>
             </div>
           <% end %>
 

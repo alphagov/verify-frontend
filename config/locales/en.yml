@@ -281,6 +281,8 @@ en:
         <p>You can use the form below to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
         <p><strong>Please don’t include any personal or financial information, for example your National Insurance or credit card numbers.</strong></p>
       request_reply: If you’d like GOV.UK Verify to get back to you, please leave your details below.
+      character_count_message: " characters remaining %{limit_message}"
+      character_limit_message: (limit is 3000 characters)
       questions:
         what: What were you trying to do?
         details: Please provide details of your question, problem or feedback

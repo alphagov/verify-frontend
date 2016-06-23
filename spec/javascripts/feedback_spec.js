@@ -8,9 +8,10 @@ describe("Feedback Form", function () {
   var formWithNoErrors =
     '<form id="feedback" novalidate="novalidate" action="/feedback" method="post">' +
       '<label for="feedback_form_what">What were you trying to do?</label>' +
-      '<textarea required="required" data-msg="Please provide details" name="feedback_form[what]" id="feedback_form_what"></textarea>' +
+      '<textarea required="required" data-msg=" characters remaining" data-msg-required="Please provide details" data-rule-maxlength="42" name="feedback_form[what]" id="feedback_form_what" class="counted"></textarea>' +
+      '<span id="feedback_form_what_counter"></span>' +
       '<label for="feedback_form_details">Please provide details of your question, problem or feedback</label>' +
-      '<textarea required="required" data-msg="Please provide details" name="feedback_form[details]" id="feedback_form_details"></textarea>' +
+      '<textarea required="required" data-msg="Please provide details" name="feedback_form[details]" id="feedback_form_details" class="counter"></textarea>' +
       '<fieldset class="form-group">' +
         '<legend>Do you want a reply?</legend>' +
         '<label for="feedback_form_reply_true">' +
@@ -105,6 +106,15 @@ describe("Feedback Form", function () {
     feedbackForm.find('#feedback_form_email').val('john@smith.com');
     submitForm();
     expectNoError();
+  });
+
+  it("should count characters", function () {
+    var textarea = feedbackForm.find('#feedback_form_what');
+    textarea.trigger('input');
+    expect(feedbackForm.find('#feedback_form_what_counter').text()).toBe('42 characters remaining');
+    textarea.val('This text is way more than 42 characters long!');
+    textarea.trigger('input');
+    expect(feedbackForm.find('#feedback_form_what_counter').text()).toBe('-4 characters remaining');
   });
 
   it("should set JS disabled to false", function () {
