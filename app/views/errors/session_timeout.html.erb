@@ -1,4 +1,4 @@
-<%= render partial: 'shared/page_title', locals: {:title_key => 'errors.session_timeout.title'} %>
+<%= render 'shared/page_title', title_key: 'errors.session_timeout.title' %>
 <% content_for :feedback_source, 'EXPIRED_ERROR_PAGE' %>
 <% content_for :piwik_custom_path, '/errors/timeout-error' %>
 
