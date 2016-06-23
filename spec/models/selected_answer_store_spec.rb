@@ -11,6 +11,7 @@ RSpec.describe SelectedAnswerStore do
     store = SelectedAnswerStore.new(session)
     store.store_selected_answers('documents', document_answers)
     expect(session[:selected_answers]).to eql('documents' => document_answers)
+    expect(store.selected_answers).to eql('documents' => document_answers)
   end
 
   it 'should return selected evidence for a given stage' do

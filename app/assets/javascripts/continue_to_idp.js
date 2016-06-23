@@ -32,6 +32,13 @@
           $samlForm.find('input[name=SAMLRequest]').val(response.saml_request);
           $samlForm.find('input[name=RelayState]').val(response.relay_state);
           $samlForm.find('input[name=registration]').val(response.registration);
+
+          if (response.hints) {
+            $.each(response.hints, function (index, hint) {
+              $samlForm.append($('<input name="hint" type="hidden">').val(hint));
+            });
+          }
+
           $samlForm.submit();
         }).fail(function() {
           $container.off('submit');
