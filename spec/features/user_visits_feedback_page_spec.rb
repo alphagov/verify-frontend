@@ -114,11 +114,12 @@ RSpec.feature 'When the user visits the feedback page' do
   it 'should contain referer, user_agent and js_disabled values on page' do
     visit feedback_path
 
-    expect(page).to have_css('#feedback_form_user_agent', visible: false)
     expect(page).to have_css('#feedback_form_js_disabled', visible: false)
   end
 
-  it 'should set the referer' do
+  it 'should set the referer and user agent' do
+    user_agent = 'MY SUPER DUPER USER AGENT'
+    page.driver.browser.header('User-Agent', user_agent)
     set_session_cookies!
     visit start_path
     click_on I18n.t('feedback_link')
@@ -130,7 +131,9 @@ RSpec.feature 'When the user visits the feedback page' do
     click_button I18n.t('hub.feedback.send_message')
 
     expect(DUMMY_ZENDESK_CLIENT.tickets.last.comment).to include 'From page: http://www.example.com/start'
+    expect(DUMMY_ZENDESK_CLIENT.tickets.last.comment).to include "User agent: #{user_agent}"
   end
+
 
   it 'should keep the referer if form submission fails validation' do
     set_session_cookies!

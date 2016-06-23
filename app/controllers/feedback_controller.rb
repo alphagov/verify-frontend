@@ -3,7 +3,7 @@ class FeedbackController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :submit
 
   def index
-    @form = FeedbackForm.new(user_agent: request.user_agent)
+    @form = FeedbackForm.new({})
     flash['feedback_referer'] = request.referer
   end
 
@@ -30,7 +30,7 @@ private
   def feedback_form_params
     (params['feedback_form'] || old_feedback_form_params || {}).tap { |form|
       form['referer'] = flash['feedback_referer'] if flash['feedback_referer'].present?
-    }
+    }.merge(user_agent: request.user_agent)
   end
 
   def old_feedback_form_params
