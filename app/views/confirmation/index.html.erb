@@ -1,4 +1,4 @@
-<%= render partial: 'shared/page_title', locals: {:title_key => 'hub.confirmation.title'} %>
+<%= render 'shared/page_title', title_key: 'hub.confirmation.title' %>
 <% content_for :feedback_source, 'CONFIRMATION_PAGE' %>
 
 <h1 class="heading-large"><%= t 'hub.confirmation.heading', display_name: @idp_name %></h1>
