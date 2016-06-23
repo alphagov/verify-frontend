@@ -44,7 +44,7 @@ module IdpEligibility
     end
 
     def idps_with_hints
-      load_yaml.select { |data| data["sendHints"] }.flat_map { |data| data.fetch('simpleIds') }
+      load_yaml.select { |data| data['send_hints'] }.flat_map { |data| data.fetch('simpleIds') }
     end
 
     def load_yaml

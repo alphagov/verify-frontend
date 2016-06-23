@@ -24,6 +24,13 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       selected_answers: selected_answers,
     )
   }
+  let(:given_a_session_with_a_hints_disabled_idp) {
+    page.set_rack_session(
+      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-two' },
+      selected_idp_was_recommended: true,
+      selected_answers: selected_answers,
+    )
+  }
   let(:given_a_session_with_non_recommended_idp) {
     page.set_rack_session(
       selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
@@ -186,6 +193,21 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       expect(select_idp_stub_request).to have_been_made.once
       expect(piwik_registration_virtual_page).to have_been_made.once
       expect(cookie_value('verify-front-journey-hint')).to_not be_nil
+    end
+
+    it 'will redirect the user to the IDP without sending hints when they are disabled' do
+      stub_piwik_idp_registration('IDCorp')
+      stub_federation
+      given_a_session_with_a_hints_disabled_idp
+      visit '/redirect-to-idp-warning'
+
+      select_idp_stub_request
+      stub_session_idp_authn_request(originating_ip, location, true)
+      expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
+
+      click_button 'Continue to Bob’s Identity Service'
+      expect(page).to have_current_path(location)
+      expect(page).to have_content("hints are ''")
     end
   end
 end
