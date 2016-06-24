@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def page_title(title_key, locale_data = {})
+    content_for :page_title, t(title_key, locale_data)
+    content_for :page_title_in_english, t(title_key, locale_data.merge(locale: :en))
+    content_for :head do
+      tag('meta', name: 'verify|title', content: content_for(:page_title_in_english))
+    end
+  end
+
   def feedback_source
     content_for(:feedback_source) || ""
   end
