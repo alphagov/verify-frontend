@@ -1,6 +1,8 @@
 require 'feature_helper'
 
 RSpec.feature 'When the user visits the feedback page' do
+  let(:long_text_limit) { FeedbackForm::LONG_TEXT_LIMIT }
+
   it 'should show errors for all input fields when missing input', js: true do
     visit feedback_path
     expect(page).to have_title(I18n.t('hub.feedback.title'))
@@ -32,6 +34,19 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.name'))
     expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.email'))
     expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.details'), count: 2)
+  end
+
+  it 'should show errors when input fields values too long' do
+    visit feedback_path
+
+    fill_in 'feedback_form_what', with: 'A' * (long_text_limit + 1)
+    fill_in 'feedback_form_details', with: 'A' * (long_text_limit + 1)
+    choose 'feedback_form_reply_false'
+
+    click_button I18n.t('hub.feedback.send_message')
+
+    expect(page).to have_css('.form-group.error', count: 2)
+    expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.too_long', max_length: long_text_limit), count: 2)
   end
 
   it 'should not show errors for name and email when missing input and user does not want a reply' do
@@ -77,7 +92,7 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_content(I18n.t('hub.feedback.character_limit_message'))
     expect(page).to_not have_content(character_count_message_suffix)
     fill_in 'feedback_form_what', with: what
-    expect(page).to have_content("#{3000 - what.size}#{character_count_message_suffix}")
+    expect(page).to have_content("#{long_text_limit - what.size}#{character_count_message_suffix}")
   end
 
   it 'should report on the details box character limit', js: true do
@@ -89,7 +104,7 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_content(I18n.t('hub.feedback.character_limit_message'))
     expect(page).to_not have_content(character_count_message_suffix)
     fill_in 'feedback_form_details', with: details
-    expect(page).to have_content("#{3000 - details.size}#{character_count_message_suffix}")
+    expect(page).to have_content("#{long_text_limit - details.size}#{character_count_message_suffix}")
   end
 
   it 'should include email provided on feedback sent page when response requested' do
@@ -134,7 +149,7 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_content(I18n.t('hub.feedback.errors.send_failure'))
   end
 
-  it 'should contain referer, user_agent and js_disabled values on page' do
+  it 'should contain js_disabled value on page' do
     visit feedback_path
 
     expect(page).to have_css('#feedback_form_js_disabled', visible: false)

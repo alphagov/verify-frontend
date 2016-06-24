@@ -6,6 +6,11 @@ class FeedbackForm
            :what_should_be_present, :details_should_be_present, :reply_should_be_present,
            :email_format_should_be_valid, :email_should_be_present
 
+  validate :length_of_what, :length_of_details, :length_of_name, :length_of_email
+
+  LONG_TEXT_LIMIT = 3000
+  SHORT_TEXT_LIMIT = 255
+
   def initialize(hash)
     sanitizer = Rails::Html::WhiteListSanitizer.new
 
@@ -29,6 +34,14 @@ class FeedbackForm
 
   def reply_required?
     @reply == 'true'
+  end
+
+  def long_limit
+    LONG_TEXT_LIMIT
+  end
+
+  def short_limit
+    SHORT_TEXT_LIMIT
   end
 
 private
@@ -92,5 +105,29 @@ private
 
   def name_missing?
     @name.blank?
+  end
+
+  def length_of_what
+    if what.present? && what.length > LONG_TEXT_LIMIT
+      errors.set(:what, [I18n.t('hub.feedback.errors.too_long', max_length: LONG_TEXT_LIMIT)])
+    end
+  end
+
+  def length_of_details
+    if details.present? && details.length > LONG_TEXT_LIMIT
+      errors.set(:details, [I18n.t('hub.feedback.errors.too_long', max_length: LONG_TEXT_LIMIT)])
+    end
+  end
+
+  def length_of_name
+    if name.present? && name.length > SHORT_TEXT_LIMIT
+      errors.set(:name, [I18n.t('hub.feedback.errors.too_long', max_length: SHORT_TEXT_LIMIT)])
+    end
+  end
+
+  def length_of_email
+    if email.present? && email.length > SHORT_TEXT_LIMIT
+      errors.set(:email, [I18n.t('hub.feedback.errors.too_long', max_length: SHORT_TEXT_LIMIT)])
+    end
   end
 end

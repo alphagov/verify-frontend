@@ -31,8 +31,8 @@
               <% end %>
               <%= f.text_area :what, rows: 10, cols: 80, class: 'form-control counted', required: true,
                               'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
-                              data: { 'rule-maxlength': 3000, 'msg-required': t('hub.feedback.errors.details'),
-                  'msg-maxlength': t('hub.feedback.errors.too_long', max_length: 3000) } %>
+                              data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
+                  'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit) } %>
               <p id="feedback_form_what_counter" class="hint" aria-live="polite" aria-atomic="false">
                 <%= t('hub.feedback.character_limit_message') %>
               </p>
@@ -47,8 +47,8 @@
               <% end %>
               <%= f.text_area :details, rows: 20, cols: 80, class: 'form-control counted', required: true,
                               'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
-                              data: { 'rule-maxlength': 3000, 'msg-required': t('hub.feedback.errors.details'),
-                  'msg-maxlength': t('hub.feedback.errors.too_long', max_length: 3000) } %>
+                              data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
+                  'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit) } %>
               <p id="feedback_form_details_counter" class="hint" aria-live="polite" aria-atomic="false">
                 <%= t('hub.feedback.character_limit_message') %>
               </p>
@@ -89,7 +89,7 @@
                   <% if @form.errors.include?(:name) %>
                       <span class="error-message"><%= @form.errors[:name].first %></span>
                   <% end %>
-                  <%= f.text_field :name, required: true, maxlength: 255, class: 'form-control form-control-3-4', data: { 'msg-required': t('hub.feedback.errors.name') } %>
+                  <%= f.text_field :name, required: true, maxlength: @form.short_limit, class: 'form-control form-control-3-4', data: { 'msg-required': t('hub.feedback.errors.name') } %>
                 </div>
               <% end %>
 
@@ -102,7 +102,7 @@
                   <% if @form.errors.include?(:email)%>
                       <span class="error-message"><%= @form.errors[:email].first %></span>
                   <% end %>
-                  <%= f.email_field :email, required: true, maxlength: 255, class: 'form-control form-control-3-4', data: { msg: t('hub.feedback.errors.email') } %>
+                  <%= f.email_field :email, required: true, maxlength: @form.short_limit, class: 'form-control form-control-3-4', data: { msg: t('hub.feedback.errors.email') } %>
                 </div>
               <% end %>
             </div>

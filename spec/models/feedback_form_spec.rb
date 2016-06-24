@@ -1,13 +1,20 @@
 require 'rails_helper'
 
 describe FeedbackForm do
+  let(:valid_feedback_form_params) {
+    { what: 'what i was doing', details: 'what happened', reply: 'false' }
+  }
   context 'is not valid when' do
+    short_text_limit = FeedbackForm::SHORT_TEXT_LIMIT
+    long_text_limit = FeedbackForm::LONG_TEXT_LIMIT
     what_error_message = 'What ' + I18n.t('hub.feedback.errors.details')
     details_error_message = 'Details ' + I18n.t('hub.feedback.errors.details')
     name_error_message = 'Name ' + I18n.t('hub.feedback.errors.name')
     no_selection_error_message = I18n.t('hub.feedback.errors.no_selection')
     email_error_message = 'Email ' + I18n.t('hub.feedback.errors.email')
     reply_error_message = 'Reply ' + I18n.t('hub.feedback.errors.reply')
+    long_length_error = I18n.t('hub.feedback.errors.too_long', max_length: long_text_limit)
+    short_length_error = I18n.t('hub.feedback.errors.too_long', max_length: short_text_limit)
 
     it 'no answers given' do
       form = FeedbackForm.new({})
@@ -35,6 +42,46 @@ describe FeedbackForm do
 
       expect(form).to_not be_valid
       expect(form.errors.full_messages).to include details_error_message
+    end
+
+    it 'should set a character limit on what to LONG_TEXT_LIMIT characters' do
+      short_enough_what = 'A' * long_text_limit
+      form_with_short_enough_what = FeedbackForm.new(valid_feedback_form_params.merge(what: short_enough_what))
+      expect(form_with_short_enough_what).to be_valid
+      too_long_what = 'A' * (long_text_limit + 1)
+      form_with_long_what = FeedbackForm.new(valid_feedback_form_params.merge(what: too_long_what))
+      expect(form_with_long_what).to_not be_valid
+      expect(form_with_long_what.errors.full_messages).to include 'What ' + long_length_error
+    end
+
+    it 'should set a character limit on details to LONG_TEXT_LIMIT characters' do
+      short_enough_details = 'A' * long_text_limit
+      form_with_short_enough_details = FeedbackForm.new(valid_feedback_form_params.merge(details: short_enough_details))
+      expect(form_with_short_enough_details).to be_valid
+      too_long_details = 'A' * (long_text_limit + 1)
+      form_with_long_details = FeedbackForm.new(valid_feedback_form_params.merge(details: too_long_details))
+      expect(form_with_long_details).to_not be_valid
+      expect(form_with_long_details.errors.full_messages).to include 'Details ' + long_length_error
+    end
+
+    it 'should set a character limit on name to SHORT_TEXT_LIMIT characters' do
+      short_enough_name = 'A' * short_text_limit
+      form_with_short_enough_name = FeedbackForm.new(valid_feedback_form_params.merge(name: short_enough_name))
+      expect(form_with_short_enough_name).to be_valid
+      too_long_name = 'A' * (short_text_limit + 1)
+      form_with_long_name = FeedbackForm.new(valid_feedback_form_params.merge(name: too_long_name))
+      expect(form_with_long_name).to_not be_valid
+      expect(form_with_long_name.errors.full_messages).to include 'Name ' + short_length_error
+    end
+
+    it 'should set a character limit on email to SHORT_TEXT_LIMIT characters' do
+      short_enough_email = 'A' * (short_text_limit - 2) + '@A'
+      form_with_short_enough_email = FeedbackForm.new(valid_feedback_form_params.merge(email: short_enough_email))
+      expect(form_with_short_enough_email).to be_valid
+      too_long_email = 'A' * (short_text_limit - 1) + '@A'
+      form_with_long_email = FeedbackForm.new(valid_feedback_form_params.merge(email: too_long_email))
+      expect(form_with_long_email).to_not be_valid
+      expect(form_with_long_email.errors.full_messages).to include 'Email ' + short_length_error
     end
 
     it 'name is not provided when reply requested' do
