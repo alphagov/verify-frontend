@@ -48,6 +48,9 @@ describe SelectPhoneForm do
     test_form_valid mobile_phone: 'true', smart_phone: 'true'
     test_form_valid mobile_phone: 'true', smart_phone: 'true', landline: 'false'
     test_form_valid mobile_phone: 'true', smart_phone: 'true', landline: 'true'
+    test_form_valid mobile_phone: 'true', smart_phone: 'do_not_know'
+    test_form_valid mobile_phone: 'true', smart_phone: 'do_not_know', landline: 'false'
+    test_form_valid mobile_phone: 'true', smart_phone: 'do_not_know', landline: 'true'
   end
 
   describe '#selected_answers' do
@@ -66,6 +69,15 @@ describe SelectPhoneForm do
       )
       answers = form.selected_answers
       expect(answers).to eql(mobile_phone: false)
+    end
+
+    it 'should not return smart_phone when the answer is do not know' do
+      form = SelectPhoneForm.new(
+        mobile_phone: 'true',
+        smart_phone: 'do_not_know'
+      )
+      answers = form.selected_answers
+      expect(answers).to eql(mobile_phone: true)
     end
   end
 
