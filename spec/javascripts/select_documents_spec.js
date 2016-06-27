@@ -11,31 +11,37 @@ describe("Select Documents Form", function () {
                                '<fieldset>' +
                                  '<legend>Do you have these documents with you?</legend>' +
                                  '<div class="form-group ">' +
-                                   '<fieldset class="inline"><span>1. UK photocard driving licence (excluding Northern Ireland)</span>' +
+                                   '<fieldset class="inline">' +
+                                     '<legend class="visually-hidden">1. UK photocard driving licence (excluding Northern Ireland)</legend>' +
+                                     '<span aria-hidden="true">1. UK photocard driving licence (excluding Northern Ireland)</span>' +
                                      '<label class="block-label" for="driving_licence_yes" onclick="">' +
-                                       '<input id="driving_licence_yes" name="select_documents_form[driving_licence]" value="true" type="radio"><span><span class="inner"></span></span>Yes</label>' +
+                                       '<input id="driving_licence_yes" name="select_documents_form[driving_licence]" value="true" type="radio"><span><span class="inner">&nbsp;</span></span>Yes</label>' +
                                      '<label class="block-label" for="driving_licence_no" onclick="">' +
-                                       '<input id="driving_licence_no" name="select_documents_form[driving_licence]" value="false" type="radio"><span><span class="inner"></span></span>No</label>' +
+                                       '<input id="driving_licence_no" name="select_documents_form[driving_licence]" value="false" type="radio"><span><span class="inner">&nbsp;</span></span>No</label>' +
                                    '</fieldset>' +
                                  '</div>' +
                                  '<div class="form-group ">' +
-                                   '<fieldset class="inline"><span>2. UK passport</span>' +
+                                   '<fieldset class="inline">' +
+                                     '<legend class="visually-hidden">2. UK passport</legend>' +
+                                     '<span aria-hidden="true">2. UK passport</span>' +
                                      '<label class="block-label" for="passport_yes" onclick="">' +
-                                       '<input id="passport_yes" name="select_documents_form[passport]" value="true" type="radio"><span><span class="inner"></span></span>Yes</label>' +
+                                       '<input id="passport_yes" name="select_documents_form[passport]" value="true" type="radio"><span><span class="inner">&nbsp;</span></span>Yes</label>' +
                                      '<label class="block-label" for="passport_no" onclick="">' +
-                                       '<input id="passport_no" name="select_documents_form[passport]" value="false" type="radio"><span><span class="inner"></span></span>No</label>' +
+                                       '<input id="passport_no" name="select_documents_form[passport]" value="false" type="radio"><span><span class="inner">&nbsp;</span></span>No</label>' +
                                    '</fieldset>' +
                                  '</div>' +'' +
                                  '<div class="form-group ">' +
-                                   '<fieldset class="inline"><span>3. Passport from another country</span>' +
+                                   '<fieldset class="inline">' +
+                                     '<legend class="visually-hidden">3. Passport from another country</legend>' +
+                                     '<span aria-hidden="true">3. Passport from another country</span>' +
                                      '<label class="block-label" for="other_passport_yes" onclick="">' +
-                                       '<input id="other_passport_yes" name="select_documents_form[non_uk_id_document]" value="true" type="radio"><span><span class="inner"></span></span>Yes</label>' +
+                                       '<input id="other_passport_yes" name="select_documents_form[non_uk_id_document]" value="true" type="radio"><span><span class="inner">&nbsp;</span></span>Yes</label>' +
                                      '<label class="block-label" for="other_passport_no" onclick="">' +
-                                       '<input id="other_passport_no" name="select_documents_form[non_uk_id_document]" value="false" type="radio"><span><span class="inner"></span></span>No</label>' +
+                                       '<input id="other_passport_no" name="select_documents_form[non_uk_id_document]" value="false" type="radio"><span><span class="inner">&nbsp;</span></span>No</label>' +
                                    '</fieldset>' +
                                  '</div>' +
                                  '<label class="block-label" for="no-documents" onclick="">' +
-                                   '<input id="no-documents" name="select_documents_form[no_documents]" class="js-no-docs" value="true" type="checkbox"><span><span class="inner"></span></span>I don’t have any of these documents with me</label>' +
+                                   '<input id="no-documents" name="select_documents_form[no_documents]" class="js-no-docs" value="true" type="checkbox"><span><span class="inner">&nbsp;</span></span>I don’t have any of these documents with me</label>' +
                                '</fieldset>' +
                              '</div>' +
                              '<div id="validation-error-message-js"></div>' +

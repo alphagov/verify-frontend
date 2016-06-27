@@ -18,18 +18,19 @@
             <legend><%= t 'hub.select_documents.legend'%></legend>
             <div class="form-group">
               <fieldset class="inline">
-                <span>1. <%= t 'hub.select_documents.question.driving_licence'%></span>
+                <legend class="visually-hidden">1. <%= t 'hub.select_documents.question.driving_licence'%></legend>
+                <span aria-hidden="true">1. <%= t 'hub.select_documents.question.driving_licence'%></span>
                 <%= f.label :driving_licence_true, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :driving_licence, 'true' %>
                   <span>
-                    <span class="inner"></span>
+                    <span class="inner">&nbsp;</span>
                   </span>
                   <%= t 'hub.select_documents.documents_option_yes' %>
                 <% end %>
                 <%= f.label :driving_licence_false, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :driving_licence, 'false' %>
                   <span>
-                    <span class="inner"></span>
+                    <span class="inner">&nbsp;</span>
                   </span>
                   <%= t 'option.no' %>
                 <% end %>
@@ -37,18 +38,19 @@
             </div>
             <div class="form-group">
               <fieldset class="inline">
-                <span>2. <%= t 'hub.select_documents.question.passport'%></span>
+                <legend class="visually-hidden">2. <%= t 'hub.select_documents.question.passport'%></legend>
+                <span aria-hidden="true">2. <%= t 'hub.select_documents.question.passport'%></span>
                 <%= f.label :passport_true, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :passport, 'true' %>
                   <span>
-                    <span class="inner"></span>
+                    <span class="inner">&nbsp;</span>
                   </span>
                   <%= t 'hub.select_documents.documents_option_yes'%>
                 <% end %>
                 <%= f.label :passport_false, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :passport, 'false' %>
                   <span>
-                    <span class="inner"></span>
+                    <span class="inner">&nbsp;</span>
                   </span>
                   <%= t 'option.no' %>
                 <% end %>
@@ -56,18 +58,19 @@
             </div>
             <div class="form-group">
               <fieldset class="inline">
-                <span>3. <%= t 'hub.select_documents.question.non_uk_id_document'%></span>
+                <legend class="visually-hidden">3. <%= t 'hub.select_documents.question.non_uk_id_document'%></legend>
+                <span aria-hidden="true">3. <%= t 'hub.select_documents.question.non_uk_id_document'%></span>
                 <%= f.label :non_uk_id_document_true, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :non_uk_id_document, 'true' %>
                   <span>
-                    <span class="inner"></span>
+                    <span class="inner">&nbsp;</span>
                   </span>
                   <%= t 'hub.select_documents.documents_option_yes'%>
                 <% end %>
                 <%= f.label :non_uk_id_document_false, {class: 'block-label', onclick: ''} do %>
                   <%= f.radio_button :non_uk_id_document, 'false' %>
                   <span>
-                    <span class="inner"></span>
+                    <span class="inner">&nbsp;</span>
                   </span>
                   <%= t 'option.no' %>
                 <% end %>
@@ -76,7 +79,7 @@
             <%= f.label :no_documents, {class: 'block-label'} do %>
               <%= f.check_box :no_documents, {class: 'js-no-docs'}, 'true', 'false' %>
               <span>
-                <span class="inner"></span>
+                <span class="inner">&nbsp;</span>
               </span>
               <%= t 'hub.select_documents.question.no_documents' %>
             <% end %>
