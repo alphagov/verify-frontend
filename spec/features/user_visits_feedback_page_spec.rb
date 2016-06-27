@@ -92,6 +92,7 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_content(I18n.t('hub.feedback.character_limit_message'))
     expect(page).to_not have_content(character_count_message_suffix)
     fill_in 'feedback_form_what', with: what
+    page.execute_script('$("#feedback_form_what").triggerHandler("txtinput")')
     expect(page).to have_content("#{long_text_limit - what.size}#{character_count_message_suffix}")
   end
 
@@ -104,6 +105,7 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_content(I18n.t('hub.feedback.character_limit_message'))
     expect(page).to_not have_content(character_count_message_suffix)
     fill_in 'feedback_form_details', with: details
+    page.execute_script('$("#feedback_form_details").triggerHandler("txtinput")')
     expect(page).to have_content("#{long_text_limit - details.size}#{character_count_message_suffix}")
   end
 
