@@ -6,7 +6,7 @@ class ChooseACertifiedCompanyController < ApplicationController
   end
 
   def select_idp
-    select_viewable_idp(params.fetch('entity_id') { params.fetch('identity_provider').fetch('entity_id') }) do |decorated_idp|
+    select_viewable_idp(params.fetch('entity_id')) do |decorated_idp|
       session[:selected_idp_was_recommended] =
         IDP_RECOMMENDATION_GROUPER.recommended?(decorated_idp.identity_provider, selected_evidence, current_identity_providers)
       redirect_to redirect_to_idp_warning_path
