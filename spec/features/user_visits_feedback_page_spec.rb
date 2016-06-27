@@ -22,6 +22,22 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.email'))
   end
 
+  it 'should show errors for email address when not valid', js: true do
+    visit feedback_path
+    expect(page).to have_title(I18n.t('hub.feedback.title'))
+
+    choose 'feedback_form_reply_true'
+    fill_in 'Email address', with: 'foo@bar'
+    click_button I18n.t('hub.feedback.send_message')
+
+    expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.email'))
+
+    fill_in 'feedback_form_email', with: 'foo@bar.com'
+    click_button I18n.t('hub.feedback.send_message')
+
+    expect(page).to_not have_css('.error-message', text: I18n.t('hub.feedback.errors.email'))
+  end
+
   it 'should show errors for all input fields when missing input and user wants a reply' do
     visit feedback_path
     expect(page).to have_title(I18n.t('hub.feedback.title'))

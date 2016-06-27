@@ -106,12 +106,24 @@ describe FeedbackForm do
                                                 email_error_message]
     end
 
-    it 'invalid email format is not provided when reply requested' do
+    it 'invalid email format is provided when reply requested' do
       form = FeedbackForm.new(what: 'what i was doing',
                               details: 'what happened',
                               reply: 'true',
                               name: 'bob smith',
                               email: 'email')
+
+      expect(form).to_not be_valid
+      expect(form.errors.full_messages).to eql [no_selection_error_message,
+                                                email_error_message]
+    end
+
+    it 'invalid email format with missing TLD when reply requested ' do
+      form = FeedbackForm.new(what: 'what i was doing',
+                              details: 'what happened',
+                              reply: 'true',
+                              name: 'bob smith',
+                              email: 'foo@bar')
 
       expect(form).to_not be_valid
       expect(form.errors.full_messages).to eql [no_selection_error_message,
@@ -127,7 +139,7 @@ describe FeedbackForm do
     end
 
     it 'reply is requested and both name and email are provided' do
-      form = FeedbackForm.new(what: 'what i was doing', details: 'what happened', reply: 'true', name: 'Bob Smith', email: 'bob@smith')
+      form = FeedbackForm.new(what: 'what i was doing', details: 'what happened', reply: 'true', name: 'Bob Smith', email: 'bob@smith.com')
 
       expect(form).to be_valid
     end

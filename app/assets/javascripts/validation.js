@@ -45,6 +45,9 @@
         },
         ignore: '.js-hidden *'
       });
+      $.validator.methods.email = function( value, element ) {
+        return this.optional( element ) || /^.+@.+\..+$/.test( value );
+      }
     },
     attach: function () {
       $('.js-validate').validate(GOVUK.validation.radiosValidation);
