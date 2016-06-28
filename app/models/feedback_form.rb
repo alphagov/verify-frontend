@@ -44,6 +44,10 @@ class FeedbackForm
     SHORT_TEXT_LIMIT
   end
 
+  def js_enabled?
+    js_disabled == 'false'
+  end
+
 private
 
   def mandatory_fields_present

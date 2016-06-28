@@ -9,7 +9,7 @@ describe FeedbackService do
   let(:referer) { 'some-referer' }
   let(:name) { 'Bob' }
   let(:user_agent) { 'some-user-agent' }
-  let(:js_disabled) { 'false' }
+  let(:js_enabled) { true }
   let(:what) { 'some-what' }
   let(:details) { 'some-details' }
   let(:default_email) { 'baz@email.com' }
@@ -24,7 +24,7 @@ From page: #{referer}
 
 User agent: #{user_agent}
 
-Javascript enabled: #{js_disabled}
+Javascript enabled: #{js_enabled}
 
 What were you trying to do?
 #{what}
@@ -46,7 +46,7 @@ From page: #{referer}
 
 User agent: #{user_agent}
 
-Javascript enabled: #{js_disabled}
+Javascript enabled: #{js_enabled}
 
 What were you trying to do?
 #{what}
@@ -64,7 +64,7 @@ With email: #{email}
     expect(form).to receive(:email).and_return(email).twice
     expect(form).to receive(:referer).and_return(referer)
     expect(form).to receive(:user_agent).and_return(user_agent)
-    expect(form).to receive(:js_disabled).and_return(js_disabled)
+    expect(form).to receive(:js_enabled?).and_return(js_enabled)
     expect(form).to receive(:what).and_return(what)
     expect(form).to receive(:details).and_return(details)
     expect(form).to receive(:reply_required?).and_return(true).exactly(5).times
@@ -86,7 +86,7 @@ With email: #{email}
     expect(form).to_not receive(:email)
     expect(form).to receive(:referer).and_return(referer)
     expect(form).to receive(:user_agent).and_return(user_agent)
-    expect(form).to receive(:js_disabled).and_return(js_disabled)
+    expect(form).to receive(:js_enabled?).and_return(js_enabled)
     expect(form).to receive(:what).and_return(what)
     expect(form).to receive(:details).and_return(details)
     expect(form).to receive(:reply_required?).and_return(false).exactly(5).times

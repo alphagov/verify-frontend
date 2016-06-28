@@ -174,4 +174,13 @@ describe FeedbackForm do
       expect(form.js_disabled).to eql 'false'
     end
   end
+
+  context "#js_enabled?" do
+    it 'is true when js disabled is false' do
+      form = FeedbackForm.new(js_disabled: 'true')
+      expect(form.js_enabled?).to eql false
+      form = FeedbackForm.new(js_disabled: 'false')
+      expect(form.js_enabled?).to eql true
+    end
+  end
 end

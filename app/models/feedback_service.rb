@@ -23,7 +23,7 @@ From page: <%= form.referer %>
 
 User agent: <%= form.user_agent %>
 
-Javascript enabled: <%= form.js_disabled %>
+Javascript enabled: <%= form.js_enabled? %>
 
 What were you trying to do?
 <%= form.what %>
