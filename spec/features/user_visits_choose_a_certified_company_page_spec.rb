@@ -9,8 +9,8 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   let(:selected_answers) {
     {
-      documents: { passport: true, driving_licence: true },
-      phone: { mobile_phone: true, landline: true }
+        documents: { passport: true, driving_licence: true },
+        phone: { mobile_phone: true, landline: true }
     }
   }
 
@@ -23,14 +23,14 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   let(:given_a_session_with_selected_answers) {
     page.set_rack_session(
-      current_transaction_simple_id: 'test-rp',
+      transaction_simple_id: 'test-rp',
       selected_answers: selected_answers,
     )
   }
 
   let(:given_a_session_without_selected_answers) {
     page.set_rack_session(
-      current_transaction_simple_id: 'test-rp',
+      transaction_simple_id: 'test-rp',
       selected_answers: {
         documents: { passport: false }
       },
@@ -39,13 +39,22 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   let(:given_a_session_with_one_doc_selected_answers) {
     page.set_rack_session(
-      current_transaction_simple_id: 'test-rp',
+      transaction_simple_id: 'test-rp',
+      selected_answers: one_doc_selected_answers,
+    )
+  }
+
+  let(:given_a_session_with_no_demo_rp) {
+    page.set_rack_session(
+      transaction_simple_id: 'test-rp-no-demo',
       selected_answers: one_doc_selected_answers,
     )
   }
 
   it 'includes the appropriate feedback source' do
     stub_federation
+    given_a_session_with_selected_answers
+
     visit '/choose-a-certified-company'
 
     expect_feedback_source_to_be(page, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE')
@@ -160,19 +169,34 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   it 'displays the page in Welsh' do
     stub_federation
+    given_a_session_with_selected_answers
+
     visit '/dewis-cwmni-ardystiedig'
     expect(page).to have_title 'Dewiswch gwmni ardystiedig - GOV.UK Verify - GOV.UK'
     expect(page).to have_css 'html[lang=cy]'
   end
 
-  it 'will show IDPs in demo periods as recommended when the transaction allows them' do
-    stub_federation
-    given_a_session_with_one_doc_selected_answers
+  context 'when an IDP has no recommended profiles' do
+    it 'will show the IDP in demo periods as recommended when the transaction allows them' do
+      stub_federation
+      given_a_session_with_one_doc_selected_answers
 
-    visit choose_a_certified_company_path
+      visit choose_a_certified_company_path
 
-    within('#matching-idps') do
-      expect(page).to have_content('Choose Demo IDP')
+      within('#matching-idps') do
+        expect(page).to have_content('Choose Demo IDP')
+      end
+    end
+
+    it 'will show IDP in demo periods as non-recommended when the transaction does not allow them' do
+      stub_federation
+      given_a_session_with_no_demo_rp
+
+      visit choose_a_certified_company_path
+
+      within('#non-matching-idps') do
+        expect(page).to have_content('Choose Demo IDP')
+      end
     end
   end
 end

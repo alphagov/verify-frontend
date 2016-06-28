@@ -23,4 +23,5 @@ CONFIG = Configuration.load! do
   option_string 'zendesk_url', 'ZENDESK_URL'
   option_string 'zendesk_username', 'ZENDESK_USERNAME'
   option_string 'zendesk_token', 'ZENDESK_TOKEN'
+  option_string 'rp_config', 'RP_CONFIG'
 end
