@@ -1,3 +1,5 @@
+//= require vendor/jquery.inputevent
+
 (function () {
   "use strict";
   var root = this,
@@ -47,14 +49,9 @@
     },
     initCounters: function () {
       $('.counted').each(function (index) {
-        this.oninput = function () {
-          this.onkeydown = null;
+        $(this).on('txtinput', function () {
           feedback.handleCounter(this);
-        };
-
-        this.onkeydown = function () {
-          feedback.handleCounter(this);
-        };
+        });
       });
     },
     handleCounter: function (counted) {

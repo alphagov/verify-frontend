@@ -110,10 +110,10 @@ describe("Feedback Form", function () {
 
   it("should count characters", function () {
     var textarea = feedbackForm.find('#feedback_form_what');
-    textarea.trigger('input');
+    textarea.triggerHandler('txtinput');
     expect(feedbackForm.find('#feedback_form_what_counter').text()).toBe('42 characters remaining');
     textarea.val('This text is way more than 42 characters long!');
-    textarea.trigger('input');
+    textarea.triggerHandler('txtinput');
     expect(feedbackForm.find('#feedback_form_what_counter').text()).toBe('-4 characters remaining');
   });
 
