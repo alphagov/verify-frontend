@@ -208,4 +208,10 @@ RSpec.feature 'When the user visits the feedback page' do
 
     expect(DUMMY_ZENDESK_CLIENT.tickets.last.comment).to include 'From page: http://www.example.com/start'
   end
+
+  it 'should also be in welsh' do
+    visit feedback_cy_path
+    expect(page).to have_title I18n.t('hub.feedback.title', locale: :cy)
+    expect(page).to have_css 'html[lang=cy]'
+  end
 end

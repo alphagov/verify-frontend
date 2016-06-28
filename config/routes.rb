@@ -58,6 +58,8 @@ Rails.application.routes.draw do
     get 'redirect_to_service_signing_in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
     get 'redirect_to_service_start_again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
     get 'redirect_to_service_error' => 'redirect_to_service#error', as: :redirect_to_service_error
+    get 'feedback', to: 'feedback#index', as: :feedback
+    post 'feedback', to: 'feedback#submit', as: :feedback_submit
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
@@ -65,10 +67,6 @@ Rails.application.routes.draw do
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
 
-  get 'feedback', to: 'feedback#index', as: :feedback
-  get 'feedback-cy', to: 'feedback#index'
-  post 'feedback', to: 'feedback#submit', as: :feedback_submit
-  post 'feedback-cy', to: 'feedback#submit'
 
   if Rails.env == 'development'
     get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
