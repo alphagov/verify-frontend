@@ -14,11 +14,13 @@ module IdpEligibility
     def load
       recommended_profiles = load_profiles("recommended_profiles")
       non_recommended_profiles = load_profiles("non_recommended_profiles")
-      all_profiles = merge_profiles(recommended_profiles, non_recommended_profiles)
+      demo_profiles = load_profiles("demo_profiles") { [] }
+      all_profiles = merge_profiles(merge_profiles(recommended_profiles, non_recommended_profiles), demo_profiles)
       document_profiles = apply_documents_mask(all_profiles)
       LoadedProfileFilters.new(
         ProfileFilter.new(recommended_profiles),
         ProfileFilter.new(non_recommended_profiles),
+        ProfileFilter.new(demo_profiles),
         ProfileFilter.new(all_profiles),
         ProfileFilter.new(document_profiles),
         idps_with_flag_set('send_hints'),
@@ -26,7 +28,7 @@ module IdpEligibility
       )
     end
 
-    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :all_profiles, :document_profiles, :idps_with_hints, :idps_with_language_hint)
+    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :demo_profiles, :all_profiles, :document_profiles, :idps_with_hints, :idps_with_language_hint)
 
   private
 
@@ -34,9 +36,9 @@ module IdpEligibility
       @document_attribute_masker.mask(profiles)
     end
 
-    def load_profiles(type)
+    def load_profiles(type, &blk)
       load_yaml.inject({}) do |profiles, yaml|
-        idp_profiles = yaml.fetch(type)
+        idp_profiles = yaml.fetch(type, &blk)
         yaml.fetch('simpleIds').each do |simple_id|
           profiles[simple_id] = idp_profiles.map { |profile| Profile.new(profile) }
         end

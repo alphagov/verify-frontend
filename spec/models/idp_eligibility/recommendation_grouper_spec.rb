@@ -11,9 +11,11 @@ module IdpEligibility
     let(:singleton_idp) { [idp_one] }
     let(:passport_profile) { Profile.new([:passport]) }
     let(:driving_licence_profile) { Profile.new([:driving_licence]) }
+    let(:mobile_phone_profile) { Profile.new([:mobile_phone]) }
     let(:recommended_profile_filter) { ProfileFilter.new('idp' => [passport_profile]) }
     let(:non_recommended_profile_filter) { ProfileFilter.new('idp' => [driving_licence_profile], 'idp2' => [passport_profile]) }
-    let(:grouper) { RecommendationGrouper.new(recommended_profile_filter, non_recommended_profile_filter) }
+    let(:demo_profile_filter) { ProfileFilter.new('idp' => [mobile_phone_profile]) }
+    let(:grouper) { RecommendationGrouper.new(recommended_profile_filter, non_recommended_profile_filter, demo_profile_filter) }
 
     describe '#recommended?' do
       it 'should return false when idp cannot verify with evidence' do
@@ -27,6 +29,12 @@ module IdpEligibility
         enabled_idps = singleton_idp
         user_docs = [:passport]
 
+        expect(grouper.recommended?(idp_one, user_docs, enabled_idps)).to eql(true)
+      end
+
+      it 'should return true when profile is in IDP demo profiles' do
+        enabled_idps = singleton_idp
+        user_docs = [:mobile_phone]
         expect(grouper.recommended?(idp_one, user_docs, enabled_idps)).to eql(true)
       end
     end
@@ -63,6 +71,15 @@ module IdpEligibility
         grouped_idps = grouper.group_by_recommendation(user_docs, enabled_idps)
         expect(grouped_idps.recommended).to eql([])
         expect(grouped_idps.non_recommended).to eql([])
+      end
+
+      it 'should add demo profiles to recommended' do
+        enabled_idps = singleton_idp
+        user_docs = [:mobile_phone]
+
+        grouped_idps = grouper.group_by_recommendation(user_docs, enabled_idps)
+        expect(grouped_idps.recommended).to eql([idp_one])
+        expect(grouped_idps.non_recommended).to be_empty
       end
     end
   end

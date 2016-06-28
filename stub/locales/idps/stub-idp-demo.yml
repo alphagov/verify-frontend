@@ -1,0 +1,28 @@
+en:
+  idps:
+    stub-idp-demo:
+      name: "Demo IDP"
+      tagline: "a really demo identity provider"
+      about: |
+          <p>Something something.</p>
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence
+      contact_details: |
+        <p>
+          <strong id="stub-idp-one-contact-details">100 DemoCorp Lane</strong>
+          <br/>Telephone: 0123456789
+          <br/>Monday to Friday, 8am to 8pm
+          <br/>Saturday and Sunday, 8am to 5pm
+          <br/>Closed on bank holidays
+        </p>
+cy:
+  idps:
+    stub-idp-demo:
+      name: "Welsh Demo IDP"
+      about: |
+           <p>ID Corp is the premier identity proofing service around.</p>
+           <ul>
+             <li>Identity</li>
+             <li>Verification</li>
+           </ul>

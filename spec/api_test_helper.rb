@@ -23,7 +23,8 @@ def stub_federation(idp_entity_id = 'http://idcorp.com')
   idps = [
     { 'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id },
     { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id' },
-    { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id' }
+    { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id' },
+    { 'simpleId' => 'stub-idp-demo', 'entityId' => 'demo-entity-id' }
   ]
   body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-entity-id' }
   stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)

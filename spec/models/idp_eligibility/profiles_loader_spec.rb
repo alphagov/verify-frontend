@@ -30,12 +30,22 @@ module IdpEligibility
         expect(ProfilesLoader.new(fixtures('good_profiles')).load.non_recommended_profiles).to eq(profiles_repository)
       end
 
+      it 'should load demo profiles from YAML files' do
+        evidence = [Profile.new(%i(non_uk_id_document mobile_phone))]
+        profiles_repository = ProfileFilter.new(
+          'example-idp' => [],
+          'example-idp-stub' => [],
+          'example-idp-two' => evidence,
+        )
+        expect(ProfilesLoader.new(fixtures('good_profiles')).load.demo_profiles).to eq(profiles_repository)
+      end
+
       it 'should load all profiles from YAML files' do
         evidence = [Profile.new(%i{passport driving_licence}), Profile.new(%i(passport mobile_phone))]
         profiles_repository = ProfileFilter.new(
           'example-idp' => evidence,
           'example-idp-stub' => evidence,
-          'example-idp-two' => [Profile.new(%i{passport driving_licence})]
+          'example-idp-two' => [Profile.new(%i{passport driving_licence}), Profile.new(%i(non_uk_id_document mobile_phone))]
         )
         expect(ProfilesLoader.new(fixtures('good_profiles')).load.all_profiles).to eq(profiles_repository)
       end
@@ -45,7 +55,7 @@ module IdpEligibility
         profiles_repository = ProfileFilter.new(
           'example-idp' => evidence,
           'example-idp-stub' => evidence,
-          'example-idp-two' => [Profile.new(%i{passport driving_licence})]
+          'example-idp-two' => [Profile.new(%i{passport driving_licence}), Profile.new(%i(non_uk_id_document))]
         )
         expect(ProfilesLoader.new(fixtures('good_profiles')).load.document_profiles).to eq(profiles_repository)
       end

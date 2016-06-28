@@ -23,12 +23,14 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   let(:given_a_session_with_selected_answers) {
     page.set_rack_session(
+      current_transaction_simple_id: 'test-rp',
       selected_answers: selected_answers,
     )
   }
 
   let(:given_a_session_without_selected_answers) {
     page.set_rack_session(
+      current_transaction_simple_id: 'test-rp',
       selected_answers: {
         documents: { passport: false }
       },
@@ -37,6 +39,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   let(:given_a_session_with_one_doc_selected_answers) {
     page.set_rack_session(
+      current_transaction_simple_id: 'test-rp',
       selected_answers: one_doc_selected_answers,
     )
   }
@@ -54,7 +57,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     visit '/choose-a-certified-company'
 
     expect(page).to have_current_path(choose_a_certified_company_path)
-    expect(page).to have_content('Based on your answers, 2 companies can verify you now:')
+    expect(page).to have_content('Based on your answers, 3 companies can verify you now:')
     within('#matching-idps') do
       expect(page).to have_button('Choose IDCorp')
     end
@@ -160,5 +163,16 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     visit '/dewis-cwmni-ardystiedig'
     expect(page).to have_title 'Dewiswch gwmni ardystiedig - GOV.UK Verify - GOV.UK'
     expect(page).to have_css 'html[lang=cy]'
+  end
+
+  it 'will show IDPs in demo periods as recommended when the transaction allows them' do
+    stub_federation
+    given_a_session_with_one_doc_selected_answers
+
+    visit choose_a_certified_company_path
+
+    within('#matching-idps') do
+      expect(page).to have_content('Choose Demo IDP')
+    end
   end
 end
