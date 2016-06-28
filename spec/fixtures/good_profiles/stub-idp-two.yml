@@ -1,4 +1,5 @@
 simpleIds: [ "example-idp-two" ]
+send_language_hint: true
 recommended_profiles:
   - [ "passport", "driving_licence" ]
 non_recommended_profiles: []

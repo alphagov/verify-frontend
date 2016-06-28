@@ -10,6 +10,7 @@ class TestSamlController < ApplicationController
     @saml_request = params['SAMLRequest']
     @relay_state = params['RelayState']
     @registration = params['registration']
+    @language_hint = params['language']
 
     # There must be a neater way of getting the `hint` parameters out
     blah = request.body_stream.read

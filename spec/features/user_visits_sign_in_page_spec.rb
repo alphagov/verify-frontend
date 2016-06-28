@@ -46,6 +46,14 @@ def then_im_at_the_idp
   expect(a_piwik_request.with(query: hash_including(piwik_request))).to have_been_made.once
 end
 
+def and_the_language_hint_is_set
+  expect(page).to have_content("language hint was 'en'")
+end
+
+def and_the_hints_are_not_set
+  expect(page).to have_content("hints are ''")
+end
+
 def then_im_at_the_interstitial_page(locale = 'en')
   expect(page).to have_current_path("/#{I18n.t('routes.redirect_to_idp', locale: locale)}")
 end
@@ -80,6 +88,8 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
       when_i_select_an_idp
       then_im_at_the_idp
+      and_the_language_hint_is_set
+      and_the_hints_are_not_set
       expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one')
     end
   end

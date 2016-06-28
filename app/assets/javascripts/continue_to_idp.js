@@ -39,6 +39,10 @@
             });
           }
 
+          if (response.language_hint) {
+            $samlForm.append($('<input name="language" type="hidden">').val(response.language_hint));
+          }
+
           $samlForm.submit();
         }).fail(function() {
           $container.off('submit');

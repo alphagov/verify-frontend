@@ -18,8 +18,13 @@ class SignInController < ApplicationController
   def select_idp_ajax
     select_viewable_idp(params.fetch('entityId')) do |decorated_idp|
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      authn_request_json = SESSION_PROXY.idp_authn_request(cookies)
-      render json: authn_request_json
+      outbound_saml_message = SESSION_PROXY.idp_authn_request(cookies)
+      provider_request = IdentityProviderRequest.new(
+        outbound_saml_message,
+        selected_identity_provider.simple_id,
+        selected_answer_store.selected_answers
+      )
+      render json: provider_request
     end
   end
 

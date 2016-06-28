@@ -65,7 +65,8 @@ describe('Continue to IDP', function () {
         responseText: JSON.stringify({
           saml_request: 'a-saml-request',
           location: 'https://www.example.com',
-          hints: ['has_passport', 'not_nonukid']
+          hints: ['has_passport', 'not_nonukid'],
+          language_hint: 'en'
         })
       });
       expect(jasmine.Ajax.requests.mostRecent().url).toBe(apiPath);
@@ -75,6 +76,7 @@ describe('Continue to IDP', function () {
       expect($samlForm.find('input[name=SAMLRequest]').val()).toBe('a-saml-request');
       expect($samlForm.find('input[name=hint][value=has_passport]').length).toBe(1);
       expect($samlForm.find('input[name=hint][value=not_nonukid]').length).toBe(1);
+      expect($samlForm.find('input[name=language]').val()).toBe('en');
       expect(formSpy).toHaveBeenCalled();
     });
 

@@ -32,7 +32,15 @@ RSpec.describe 'When the user visits the redirect to IDP page' do
     expect(page).to have_css('input[name="hint"][value="has_ukpassport"]')
     expect(page).to have_css('input[name="hint"][value="has_mobile"]')
     expect(page).to have_css('input[name="hint"][value="not_apps"]')
+    expect(page).to have_css('input[name="language"][value="en"]')
     expect(page).to_not have_css('input[name="hint"][value="has_nonukid"]')
+  end
+
+  it 'should contain welsh language hint' do
+    given_a_session_with_a_hints_enabled_idp
+    stub_session_idp_authn_request(originating_ip, location, true)
+    visit '/redirect-to-idp-cy'
+    expect(page).to have_css('input[name="language"][value="cy"]')
   end
 
   it 'should not contain hint inputs if hints are disabled for the IDP' do
@@ -40,6 +48,7 @@ RSpec.describe 'When the user visits the redirect to IDP page' do
     stub_session_idp_authn_request(originating_ip, location, true)
     visit redirect_to_idp_path
     expect(page).to_not have_css('input[name="hint"]')
+    expect(page).to_not have_css('input[name="language"]')
   end
 
   it 'should not contain hint input if user is signing in' do

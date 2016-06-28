@@ -6,12 +6,15 @@
       <div class="application-notice info-notice">
         <p><%= t('hub.redirect_to_idp.description')%></p>
       </div>
-      <%= form_tag(@saml_message.location, class: 'js-auto-submit') do %>
-          <%= hidden_field_tag 'SAMLRequest', @saml_message.saml_request %>
-          <%= hidden_field_tag 'RelayState', @saml_message.relay_state %>
-          <%= hidden_field_tag 'registration', @saml_message.registration %>
-          <% @hints.each do |hint| %>
+      <%= form_tag(@request.location, class: 'js-auto-submit') do %>
+          <%= hidden_field_tag 'SAMLRequest', @request.saml_request %>
+          <%= hidden_field_tag 'RelayState', @request.relay_state %>
+          <%= hidden_field_tag 'registration', @request.registration %>
+          <% @request.hints.each do |hint| %>
               <%= hidden_field_tag 'hint', hint, id:nil %>
+          <% end %>
+          <% unless @request.language_hint.nil? %>
+              <%= hidden_field_tag 'language', @request.language_hint %>
           <% end %>
           <%= submit_tag 'Continue', id: 'continue-button', class: 'button' %>
       <% end %>

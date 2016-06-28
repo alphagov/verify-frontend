@@ -21,11 +21,12 @@ module IdpEligibility
         ProfileFilter.new(non_recommended_profiles),
         ProfileFilter.new(all_profiles),
         ProfileFilter.new(document_profiles),
-        idps_with_hints
+        idps_with_flag_set('send_hints'),
+        idps_with_flag_set('send_language_hint')
       )
     end
 
-    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :all_profiles, :document_profiles, :idps_with_hints)
+    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :all_profiles, :document_profiles, :idps_with_hints, :idps_with_language_hint)
 
   private
 
@@ -43,8 +44,8 @@ module IdpEligibility
       end
     end
 
-    def idps_with_hints
-      load_yaml.select { |data| data['send_hints'] }.flat_map { |data| data.fetch('simpleIds') }
+    def idps_with_flag_set(flag)
+      load_yaml.select { |data| data[flag] }.flat_map { |data| data.fetch('simpleIds') }
     end
 
     def load_yaml

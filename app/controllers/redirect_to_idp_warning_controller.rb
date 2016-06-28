@@ -27,12 +27,11 @@ class RedirectToIdpWarningController < ApplicationController
     if idp.viewable?
       select_registration(idp)
       outbound_saml_message = SESSION_PROXY.idp_authn_request(cookies)
-      hints = []
-      if IDP_HINTS_CHECKER.enabled?(selected_identity_provider.simple_id)
-        hints = HintsMapper.map_answers_to_hints(selected_answer_store.selected_answers)
-      end
-      idp_request = IdentityProviderRequest.new(outbound_saml_message, hints)
-      render json: idp_request
+      idp_request = IdentityProviderRequest.new(
+        outbound_saml_message,
+        selected_identity_provider.simple_id,
+        selected_answer_store.selected_answers)
+      render json: idp_request.to_json(methods: :hints)
     else
       render status: :bad_request
     end

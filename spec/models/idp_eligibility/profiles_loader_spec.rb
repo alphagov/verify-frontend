@@ -62,7 +62,9 @@ module IdpEligibility
 
       it 'should return the hints configuration' do
         expected_hints = ['example-idp', 'example-idp-stub']
-        expect(ProfilesLoader.new(fixtures('good_profiles')).load.idps_with_hints).to eql(expected_hints)
+        profile = ProfilesLoader.new(fixtures('good_profiles')).load
+        expect(profile.idps_with_hints).to eql(expected_hints)
+        expect(profile.idps_with_language_hint).to eql(['example-idp-two'])
       end
     end
   end
