@@ -106,32 +106,54 @@ describe FeedbackForm do
                                                 email_error_message]
     end
 
-    it 'invalid email format is provided when reply requested' do
-      form = FeedbackForm.new(what: 'what i was doing',
-                              details: 'what happened',
-                              reply: 'true',
-                              name: 'bob smith',
-                              email: 'email')
+    it 'email contains whitespace' do
+      email = 'foo@bar.co.uk'
+      emails_with_whitespace = (0..email.length).map do |idx|
+        String.new(email).insert(idx, ' ')
+      end
+      emails_with_whitespace.each do |whitespaced_email|
+        form = FeedbackForm.new(what: 'what i was doing',
+                                                    details: 'what happened',
+                                                    reply: 'true',
+                                                    name: 'bob smith',
+                                                    email: whitespaced_email)
 
-      expect(form).to_not be_valid
-      expect(form.errors.full_messages).to eql [no_selection_error_message,
-                                                email_error_message]
+        expect(form).to_not be_valid
+        expect(form.errors.full_messages).to eql [no_selection_error_message,
+                                                  email_error_message]
+      end
     end
 
-    it 'invalid email format with missing TLD when reply requested ' do
-      form = FeedbackForm.new(what: 'what i was doing',
-                              details: 'what happened',
-                              reply: 'true',
-                              name: 'bob smith',
-                              email: 'foo@bar')
+    it 'email not formatted properly' do
+      bad_emails = %w(foo@bar foo foo@.com foo@foo@bar.com foo@bar..com foo@bar. @bar @bar.com)
+      bad_emails.each do |bad_email|
+        form = FeedbackForm.new(what: 'what i was doing',
+                                                    details: 'what happened',
+                                                    reply: 'true',
+                                                    name: 'bob smith',
+                                                    email: bad_email)
 
-      expect(form).to_not be_valid
-      expect(form.errors.full_messages).to eql [no_selection_error_message,
-                                                email_error_message]
+        expect(form).to_not be_valid
+        expect(form.errors.full_messages).to eql [no_selection_error_message,
+                                                  email_error_message]
+      end
     end
   end
 
   context 'is valid when' do
+    it 'email address is valid' do
+      good_emails = %w(foo@bar.com .@bar.com foo+bar@baz.com björn.домати@björnnußbaum5.org)
+      good_emails.each do |good_email|
+        form = FeedbackForm.new(what: 'what i was doing',
+                                details: 'what happened',
+                                reply: 'true',
+                                name: 'bob smith',
+                                email: good_email)
+
+        expect(form).to be_valid
+      end
+    end
+
     it 'what was I doing and details questions answered, and reply is not required' do
       form = FeedbackForm.new(what: 'what i was doing', details: 'what happened', reply: 'false')
 
