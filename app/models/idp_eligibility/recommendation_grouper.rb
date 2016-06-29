@@ -11,34 +11,35 @@ module IdpEligibility
     end
 
     def group_by_recommendation(evidence, enabled_idps, transaction_simple_id)
-      allow_demos = allow_demos?(transaction_simple_id)
-      recommended_idps = recommended_idps(evidence, enabled_idps, allow_demos)
-      non_recommended_idps = non_recommended_idps(enabled_idps, evidence, allow_demos) - recommended_idps
+      demo_profiles_should_be_recommended = demo_profiles_should_be_recommended?(transaction_simple_id)
+      recommended_idps = recommended_idps(evidence, enabled_idps, demo_profiles_should_be_recommended)
+      non_recommended_idps = non_recommended_idps(enabled_idps, evidence, demo_profiles_should_be_recommended) - recommended_idps
       GroupedIdps.new(recommended_idps, non_recommended_idps)
     end
 
     def recommended?(idp, evidence, enabled_idps, transaction_simple_id)
-      recommended_idps(evidence, enabled_idps, allow_demos?(transaction_simple_id)).include?(idp)
+      recommended_idps = recommended_idps(evidence, enabled_idps, demo_profiles_should_be_recommended?(transaction_simple_id))
+      recommended_idps.include?(idp)
     end
 
-    def allow_demos?(transaction_simple_id)
+    def demo_profiles_should_be_recommended?(transaction_simple_id)
       !@transaction_blacklist.include?(transaction_simple_id)
     end
 
   private
 
-    def non_recommended_idps(enabled_idps, evidence, allow_demos)
+    def non_recommended_idps(enabled_idps, evidence, demo_profiles_should_be_recommended)
       idps_with_non_recommended_profiles = @filter.filter_idps(@non_recommended_profile_filter, evidence, enabled_idps)
-      if allow_demos
+      if demo_profiles_should_be_recommended
         idps_with_non_recommended_profiles
       else
         idps_with_non_recommended_profiles + idps_with_demo_profiles(evidence, enabled_idps)
       end
     end
 
-    def recommended_idps(evidence, enabled_idps, allow_demos)
+    def recommended_idps(evidence, enabled_idps, demo_profiles_should_be_recommended)
       idps_with_recommended_profiles = @filter.filter_idps(@recommended_profile_filter, evidence, enabled_idps)
-      if allow_demos
+      if demo_profiles_should_be_recommended
         idps_with_recommended_profiles + idps_with_demo_profiles(evidence, enabled_idps)
       else
         idps_with_recommended_profiles
