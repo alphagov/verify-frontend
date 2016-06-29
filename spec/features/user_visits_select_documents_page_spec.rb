@@ -66,8 +66,8 @@ RSpec.feature 'When the user visits the select documents page' do
   it 'has a matching legend and span for each question for both screenreader and visual users' do
     visit '/select-documents'
 
-    expect(page).to have_css('legend.visually-hidden', text: '1. UK photocard driving licence (excluding Northern Ireland)')
-    expect(page).to have_css('span[aria-hidden]', text: '1. UK photocard driving licence (excluding Northern Ireland)')
+    expect(page).to have_css('legend.visually-hidden', text: '1. UK photocard driving licence, full or provisional (excluding Northern Ireland)')
+    expect(page).to have_css('span[aria-hidden]', text: '1. UK photocard driving licence, full or provisional (excluding Northern Ireland)')
   end
 
   it 'reports to Piwik when form is valid' do
