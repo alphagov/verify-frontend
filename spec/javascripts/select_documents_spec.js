@@ -12,8 +12,8 @@ describe("Select Documents Form", function () {
                                  '<legend>Do you have these documents with you?</legend>' +
                                  '<div class="form-group ">' +
                                    '<fieldset class="inline">' +
-                                     '<legend class="visually-hidden">1. UK photocard driving licence (excluding Northern Ireland)</legend>' +
-                                     '<span aria-hidden="true">1. UK photocard driving licence (excluding Northern Ireland)</span>' +
+                                     '<legend class="visually-hidden">1. UK photocard driving licence, full or provisional (excluding Northern Ireland)</legend>' +
+                                     '<span aria-hidden="true">1. UK photocard driving licence, full or provisional (excluding Northern Ireland)</span>' +
                                      '<label class="block-label" for="driving_licence_yes" onclick="">' +
                                        '<input id="driving_licence_yes" name="select_documents_form[driving_licence]" value="true" type="radio"><span><span class="inner">&nbsp;</span></span>Yes</label>' +
                                      '<label class="block-label" for="driving_licence_no" onclick="">' +

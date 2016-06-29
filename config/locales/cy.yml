@@ -106,7 +106,7 @@ cy:
       legend: Ydy’r dogfennau hyn gyda chi?
       documents_option_yes: Ydy
       question:
-        driving_licence: Trwydded yrru gyda llun y DU (ac eithrio Gogledd Iwerddon)
+        driving_licence: UK photocard driving licence, full or provisional (excluding Northern Ireland)
         passport: Pasport y DU
         non_uk_id_document: Dogfen hunaniaeth o wlad arall (pasport, cerdyn ID neu drwydded yrru)
         no_documents: Nid oes gennyf y dogfennau hyn gyda mi
