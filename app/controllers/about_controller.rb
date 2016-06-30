@@ -13,5 +13,6 @@ class AboutController < ApplicationController
   end
 
   def choosing_a_company
+    @next_path = show_age_question_first? ? will_it_work_for_me_path : select_documents_path
   end
 end

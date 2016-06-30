@@ -17,7 +17,7 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   context 'with javascript disabled' do
-    it 'redirects to the will it work for me page when user has a phone' do
+    it 'redirects to the idp picker page when user has a phone' do
       stub_federation_no_docs
       visit '/select-phone'
 
@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_landline_false'
       click_button 'Continue'
 
-      expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
+      expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true, 'smart_phone' => true, 'landline' => false })
     end
 
@@ -39,7 +39,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_landline_false'
       click_button 'Continue'
 
-      expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
+      expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true, 'landline' => false })
     end
 
@@ -75,7 +75,7 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   context 'with javascript enabled', js: true do
-    it 'redirects to the will it work for me page when user has a phone' do
+    it 'redirects to the idp picker page when user has a phone' do
       stub_federation
       given_a_session_with_document_evidence
 
@@ -85,7 +85,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_smart_phone_true'
       click_button 'Continue'
 
-      expect(page).to have_current_path(will_it_work_for_me_path)
+      expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'phone' => { 'mobile_phone' => true, 'smart_phone' => true },
         'documents' => { 'passport' => true, 'driving_licence' => true })

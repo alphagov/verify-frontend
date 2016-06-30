@@ -18,7 +18,7 @@ RSpec.describe 'When the user visits the will it work for me page' do
     expect(page).to have_css 'html[lang=cy]'
   end
 
-  it 'redirects to the choose-a-company page when user is over 20 and is a uk resident' do
+  it 'redirects to the select documents page when user is over 20 and is a uk resident' do
     stub_federation
     visit '/will-it-work-for-me'
 
@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the will it work for me page' do
     choose 'will_it_work_for_me_form_resident_last_12_months_true'
     click_button 'Continue'
 
-    expect(page).to have_current_path(choose_a_certified_company_path)
+    expect(page).to have_current_path(select_documents_path)
   end
 
   it 'redirects to the why-might-this-not-work-for-me page when user is over 20 and has moved to the uk in the last 12 months' do

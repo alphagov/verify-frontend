@@ -13,14 +13,6 @@ RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
     expect(page).to have_css 'html[lang=cy]'
   end
 
-  context 'with javascript enabled', js: true do
-    it 'contains the choose certified company link with selected evidence params' do
-      visit '/why-might-this-not-work-for-me'
-
-      expect(page).to have_link "I’d like to try to verify my identity online", href: "/choose-a-certified-company"
-    end
-  end
-
   it 'includes other ways text' do
     visit '/why-might-this-not-work-for-me'
 
@@ -33,5 +25,13 @@ RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
     visit '/why-might-this-not-work-for-me'
 
     expect_feedback_source_to_be(page, 'WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE')
+  end
+
+  it 'redirects to select documents page if user clicks try to verify link' do
+    visit why_might_this_not_work_for_me_path
+
+    click_link 'I’d like to try to verify my identity online'
+
+    expect(page).to have_current_path(select_documents_path)
   end
 end
