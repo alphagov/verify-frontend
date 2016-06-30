@@ -248,6 +248,7 @@ cy:
         </ul>
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
       what_to_do_next: "Beth i’w wneud nesaf"
+      problems_verifying_your_identity: Problems verifying your identity
     failed_sign_in:
       title: Methu eich mewngofnodi
       heading: Ni all "%{display_name} eich mewngofnodi"

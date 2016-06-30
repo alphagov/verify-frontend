@@ -1,0 +1,37 @@
+<%= page_title 'hub.failed_registration.title' %>
+<% content_for :feedback_source, 'FAILED_REGISTRATION_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-xlarge"><%= @failed_registration_header %></h1>
+
+    <%= t 'hub.failed_registration.heading', display_name: @idp.display_name %>. <%= @failed_registration_body.html_safe %>.
+
+    <%= link_to t('navigation.continue'), '#' %>
+
+    <h2 class="heading-medium"><%= t 'hub.failed_registration.problems_verifying_your_identity' %></h2>
+
+    <%= t 'hub.failed_registration.reasons_html' %>
+
+    <h2 class="heading-medium">
+      <%= t 'hub.failed_registration.what_to_do_next' %>
+    </h2>
+
+    <p><%= t 'hub.failed_registration.what_to_do_next_intro' %></p>
+
+    <ol class="list list-number">
+      <li>
+        <%= t 'hub.failed_registration.contact_details_intro', display_name: @idp.display_name %>
+        <div>
+          <%= @idp.contact_details.html_safe %>
+        </div>
+      </li>
+      <li>
+        <%= link_to t('hub.failed_registration.try_another_company'), select_documents_path %>
+      </li>
+      <li>
+        <%= link_to t('hub.failed_registration.other_ways_link', transaction_name: @transaction_name), other_ways_to_access_service_path %>
+      </li>
+    </ol>
+  </div>
+</div>

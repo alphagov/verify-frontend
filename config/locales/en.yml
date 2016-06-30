@@ -242,6 +242,7 @@ en:
         </ul>
       what_to_do_next_intro: "You can try the following:"
       what_to_do_next: "What to do next"
+      problems_verifying_your_identity: Problems verifying your identity
     failed_sign_in:
       title: Unable to sign you in
       heading: "%{display_name} couldn’t sign you in"
