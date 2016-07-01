@@ -17,11 +17,13 @@ class WillItWorkForMeController < ApplicationController
   def why_might_this_not_work_for_me
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
+    @next_path = show_age_question_first? ? select_documents_path : choose_a_certified_company_path
   end
 
   def may_not_work_if_you_live_overseas
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
+    @next_path = show_age_question_first? ? select_documents_path : choose_a_certified_company_path
   end
 
   def will_not_work_without_uk_address
@@ -33,7 +35,11 @@ private
 
   def redirect_path
     if @form.resident_last_12_months?
-      @form.above_age_threshold? ? choose_a_certified_company_path : why_might_this_not_work_for_me_path
+      if @form.above_age_threshold?
+        show_age_question_first? ? select_documents_path : choose_a_certified_company_path
+      else
+        why_might_this_not_work_for_me_path
+      end
     elsif @form.address_but_not_resident?
       may_not_work_if_you_live_overseas_path
     elsif @form.no_uk_address?

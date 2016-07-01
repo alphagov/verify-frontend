@@ -22,6 +22,21 @@ RSpec.describe 'When the user visits the about choosing a company page' do
     visit '/about-choosing-a-company'
 
     click_link 'Continue'
-    expect(page).to have_current_path('/select-documents')
+    expect(page).to have_current_path(select_documents_path)
+  end
+
+  context 'for users on the age questions first journey' do
+    before(:each) do
+      page.set_rack_session(
+        show_age_question_first: true
+      )
+    end
+
+    it 'will take user to will-it-work-for-me page when user clicks "Continue"' do
+      visit '/about-choosing-a-company'
+
+      click_link 'Continue'
+      expect(page).to have_current_path(will_it_work_for_me_path)
+    end
   end
 end
