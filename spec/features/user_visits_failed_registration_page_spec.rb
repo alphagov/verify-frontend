@@ -16,7 +16,7 @@ RSpec.describe 'When the user visits the failed registration page' do
 
       expect(page).to have_content 'Continue to apply for Test RP with continue to fail flow'
       expect(page).to have_content 'IDCorp was unable to verify your identity. But you can still submit your application.'
-      expect(page).to have_link('Continue', href: '#')
+      expect(page).to have_link('Continue', href: redirect_to_service_error_path)
       expect(page).to have_content 'Problems verifying your identity'
       expect(page).to have_content 'IDCorp was unable to verify your identity'
       expect(page).to have_content 'There are a few reasons'

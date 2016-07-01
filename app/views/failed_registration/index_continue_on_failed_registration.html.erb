@@ -5,9 +5,9 @@
   <div class="column-two-thirds">
     <h1 class="heading-xlarge"><%= @failed_registration_header %></h1>
 
-    <%= t 'hub.failed_registration.heading', display_name: @idp.display_name %>. <%= @failed_registration_body.html_safe %>.
+    <p><%= t 'hub.failed_registration.heading', display_name: @idp.display_name %>. <%= @failed_registration_body.html_safe %>.</p>
 
-    <%= link_to t('navigation.continue'), '#' %>
+    <%= link_to t('navigation.continue'), redirect_to_service_error_path, class: 'button' %>
 
     <h2 class="heading-medium"><%= t 'hub.failed_registration.problems_verifying_your_identity' %></h2>
 
