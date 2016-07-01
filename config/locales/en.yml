@@ -33,6 +33,7 @@ en:
     redirect_to_service_error: redirect-to-service/error
     feedback: feedback
     feedback_sent: feedback-sent
+    certified_company_unavailable: certified-company-unavailable/:company
   navigation:
     next: Next
     start_now: Start now
@@ -310,6 +311,11 @@ en:
       message_no_email: Your feedback has been received.
       start_again_link: Return to registering for an identity profile
       session_timeout: Sorry, but your session has timed out. To ensure your security, you need to start again.
+    certified_company_unavailable:
+      title: This certified company is unavailable
+      sorry: Sorry, %{display_name} is not available.
+      verify_another_company_html: To access government services, you must %{link}.
+      verify_another_company_link: verify your identity with another certified company
   errors:
     transaction_list:
       title: Find the service you were using to start again

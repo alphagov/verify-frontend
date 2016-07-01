@@ -4,6 +4,10 @@ class SignInController < ApplicationController
       current_identity_providers
     )
 
+    @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
+      unavailable_idps.map { |simple_id| IdentityProvider.new('simple_id' => simple_id, 'entity_id' => simple_id) }
+    )
+
     FEDERATION_REPORTER.report_sign_in(current_transaction_simple_id, request)
     render 'index'
   end
@@ -34,5 +38,10 @@ private
     SESSION_PROXY.select_idp(cookies, entity_id)
     set_journey_hint(entity_id, I18n.locale)
     FEDERATION_REPORTER.report_sign_in_idp_selection(request, display_name)
+  end
+
+  def unavailable_idps
+    api_idp_simple_ids = current_identity_providers.map(&:simple_id)
+    UNAVAILABLE_IDPS.reject { |simple_id| api_idp_simple_ids.include?(simple_id) }
   end
 end

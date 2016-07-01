@@ -33,6 +33,7 @@ cy:
     redirect_to_service_error: redirect-to-service/error-cy
     feedback: feedback-cy
     feedback_sent: feedback-sent-cy
+    certified_company_unavailable: certified-company-unavailable-cy/:company
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -316,6 +317,11 @@ cy:
       message_no_email: Your feedback has been received.
       start_again_link: Return to registering for an identity profile
       session_timeout: Sorry, but your session has timed out. To ensure your security, you need to start again.
+    certified_company_unavailable:
+      title: This certified company is unavailable
+      sorry: Sorry, %{display_name} is not available.
+      verify_another_company_html: To access government services, you must %{link}.
+      verify_another_company_link: verify your identity with another certified company
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

@@ -41,6 +41,17 @@ def stub_federation_no_docs
   stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
 end
 
+def stub_federation_unavailable
+  idps = [
+    { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' },
+    { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id' },
+    { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id' },
+    { 'simpleId' => 'stub-idp-unavailable', 'entityId' => 'unavailable-entity-id' }
+  ]
+  body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
+  stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
+end
+
 def stub_session_select_idp_request(encrypted_entity_id, request_body = {})
   stub = stub_request(:put, api_uri('session/select-idp'))
   if request_body.any?

@@ -1,0 +1,15 @@
+<%= page_title 'hub.certified_company_unavailable.title' %>
+<% content_for :feedback_source, 'CERTIFIED_COMPANY_UNAVAILABLE_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= @idp.display_name %></h1>
+    <p><%= t('hub.certified_company_unavailable.sorry', display_name: @idp.display_name) %></p>
+    <p><%=
+      t('hub.certified_company_unavailable.verify_another_company_html',
+        link: link_to(t('hub.certified_company_unavailable.verify_another_company_link'), about_certified_companies_path)
+      )
+    %></p>
+  </div>
+</div>
+

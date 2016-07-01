@@ -24,4 +24,5 @@ CONFIG = Configuration.load! do
   option_string 'zendesk_username', 'ZENDESK_USERNAME'
   option_string 'zendesk_token', 'ZENDESK_TOKEN'
   option_string 'rp_config', 'RP_CONFIG'
+  option_string 'idp_config', 'IDP_CONFIG'
 end

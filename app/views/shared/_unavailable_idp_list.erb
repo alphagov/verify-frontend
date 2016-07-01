@@ -1,0 +1,15 @@
+  <% unavailable_identity_providers.each_with_index do |identity_provider, idx| %>
+      <div class="column-one-third company-wrapper <%= (idx+offset) % 3 == 0 ? 'clear-left' : nil %>">
+        <div class="company">
+          <div class="company-inner">
+            <div class="company-logo">
+              <div class="company-logo-inner">
+                <%= image_tag identity_provider.logo_path, alt: idp_tagline(identity_provider) %>
+              </div>
+            </div>
+
+            <%= link_to t('hub.signin.select_idp', display_name: identity_provider.display_name), certified_company_unavailable_path(identity_provider.simple_id), class: 'button' %>
+          </div>
+        </div>
+      </div>
+  <% end %>

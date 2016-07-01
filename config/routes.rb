@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     get 'redirect_to_service_error' => 'redirect_to_service#error', as: :redirect_to_service_error
     get 'feedback', to: 'feedback#index', as: :feedback
     post 'feedback', to: 'feedback#submit', as: :feedback_submit
+    get 'certified_company_unavailable', to: 'certified_company_unavailable#index', as: :certified_company_unavailable
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
