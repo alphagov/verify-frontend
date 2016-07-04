@@ -3,9 +3,11 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h1 class="heading-xlarge"><%= @failed_registration_header %></h1>
+    <h1 class="heading-xlarge"><%= t('hub.failed_registration.continue_heading', transaction_name: @transaction_name) %></h1>
 
-    <p><%= t 'hub.failed_registration.heading', display_name: @idp.display_name %>. <%= @failed_registration_body.html_safe %>.</p>
+    <p><%= t 'hub.failed_registration.continue_idp_text', display_name: @idp.display_name %></p>
+
+    <p><%= t 'hub.failed_registration.continue_text', rp_name: @rp_name %></p>
 
     <%= link_to t('navigation.continue'), redirect_to_service_error_path, class: 'button' %>
 

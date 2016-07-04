@@ -250,6 +250,9 @@ cy:
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
       what_to_do_next: "Beth i’w wneud nesaf"
       problems_verifying_your_identity: Problems verifying your identity
+      continue_heading: "Continue to %{transaction_name}"
+      continue_idp_text: "%{display_name} was unable to verify your identity, but you can still submit your application."
+      continue_text: "Continue to the %{rp_name} to find out how."
     failed_sign_in:
       title: Methu eich mewngofnodi
       heading: Ni all "%{display_name} eich mewngofnodi"
