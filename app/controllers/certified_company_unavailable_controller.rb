@@ -6,6 +6,8 @@ class CertifiedCompanyUnavailableController < ApplicationController
       @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(
         IdentityProvider.new('simple_id' => simple_id, 'entity_id' => simple_id)
       )
+      @other_ways_description = current_transaction.other_ways_description
+      @other_ways_text = current_transaction.other_ways_text
       render 'index'
     else
       render 'errors/404', status: 404

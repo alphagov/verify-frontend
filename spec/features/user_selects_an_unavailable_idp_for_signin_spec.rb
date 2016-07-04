@@ -10,6 +10,7 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
 
   def given_im_on_the_sign_in_page
     set_session_cookies!
+    page.set_rack_session(transaction_simple_id: 'test-rp')
     visit sign_in_en_path
   end
 
@@ -48,6 +49,10 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
       click_link(button_text)
       expect(page).to have_title(I18n.t('hub.certified_company_unavailable.title'))
       expect(page).to have_link(I18n.t('hub.certified_company_unavailable.verify_another_company_link'), href: about_certified_companies_path)
+
+      expect(page).to have_content 'Other ways to register for an identity profile'
+      expect(page).to have_content 'If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile'
+      expect(page).to have_link 'here', href: 'http://www.example.com'
     end
 
     it 'the certified company unavailable page will respond with a 404 if an IDP is not set to unavailable' do
