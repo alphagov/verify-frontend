@@ -49,7 +49,6 @@ RSpec.describe 'When the user visits the select phone page' do
         expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
         expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true, 'smart_phone' => true, 'landline' => false })
       end
-
     end
 
     it 'does not include apps if user doesnt know if their phone has apps' do
