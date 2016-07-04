@@ -11,7 +11,18 @@ en:
       special_no_docs_instructions_html: "<p>Additional IDP Instructions</p>"
       no_docs_requirement: "If you do not have a current account"
       contact_details: |
-        <strong id="stub-idp-four-contact-details">4 Head Road</strong>
+      about: Best ID is BEST ID
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence
+      contact_details: |
+        <p>
+          <strong id="stub-idp-four-contact-details">4 Head Road</strong>
+          <br/>Telephone: 0123456789
+          <br/>Monday to Friday, 8am to 8pm
+          <br/>Saturday and Sunday, 8am to 5pm
+          <br/>Closed on bank holidays
+        </p>
 cy:
   idps:
     stub-idp-four:

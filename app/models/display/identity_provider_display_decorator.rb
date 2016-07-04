@@ -1,7 +1,7 @@
 module Display
   class IdentityProviderDisplayDecorator
-    def initialize(translator, logo_directory, white_logo_directory)
-      @translator = translator
+    def initialize(repository, logo_directory, white_logo_directory)
+      @repository = repository
       @logo_directory = logo_directory
       @white_logo_directory = white_logo_directory
     end
@@ -22,41 +22,15 @@ module Display
       simple_id = idp.simple_id
       logo_path = File.join(@logo_directory, "#{simple_id}.png")
       white_logo_path = File.join(@white_logo_directory, "#{simple_id}.png")
-      name = @translator.translate("idps.#{simple_id}.name")
-      tagline = decorate_tagline(simple_id)
-      about = @translator.translate("idps.#{simple_id}.about")
-      requirements = @translator.translate("idps.#{simple_id}.requirements")
-      special_no_docs_instructions = decorate_special_no_docs_instructions(simple_id)
-      no_docs_requirement = decorate_no_docs_requirement(simple_id)
-      contact_details = @translator.translate("idps.#{simple_id}.contact_details")
-      ViewableIdentityProvider.new(idp, name, tagline, logo_path, white_logo_path,
-                                   about, requirements, special_no_docs_instructions,
-                                   no_docs_requirement, contact_details)
-    rescue FederationTranslator::TranslationError => e
+      display_data = @repository.fetch(simple_id)
+      ViewableIdentityProvider.new(idp, display_data, logo_path, white_logo_path)
+    rescue KeyError => e
       Rails.logger.error(e)
       not_viewable(idp)
     end
 
     def not_viewable(idp)
       NotViewableIdentityProvider.new(idp)
-    end
-
-    def decorate_tagline(simple_id)
-      @translator.translate("idps.#{simple_id}.tagline")
-    rescue FederationTranslator::TranslationError
-      nil
-    end
-
-    def decorate_special_no_docs_instructions(simple_id)
-      @translator.translate("idps.#{simple_id}.special_no_docs_instructions_html")
-    rescue FederationTranslator::TranslationError
-      ''
-    end
-
-    def decorate_no_docs_requirement(simple_id)
-      @translator.translate("idps.#{simple_id}.no_docs_requirement")
-    rescue FederationTranslator::TranslationError
-      ''
     end
   end
 end
