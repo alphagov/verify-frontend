@@ -329,6 +329,8 @@ cy:
       title: Enter your %{attribute_name}
       national_insurance_number: National Insurance number
       driving_licence_number: "driving licence number"
+      first_time: "This is the first time you’ve signed in."
+      cycle_three_input_label: "Enter your %{cycle_three_name}"
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
