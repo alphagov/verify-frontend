@@ -22,9 +22,6 @@ RSpec.describe 'When the user visits the failed registration page' do
       expect(page).to have_content 'There are a few reasons'
       expect(page).to have_content 'Contact IDCorp for more information'
       expect(page).to have_css 'strong', text: '100 IDCorp Lane'
-      expect(page).to have_link(
-        'Other ways to access register for an identity profile',
-        href: other_ways_to_access_service_path)
       expect(page).to have_link('Try another certified company', href: select_documents_path)
     end
   end

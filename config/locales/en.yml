@@ -246,7 +246,7 @@ en:
       problems_verifying_your_identity: Problems verifying your identity
       continue_heading: "Continue to %{transaction_name}"
       continue_idp_text: "%{display_name} was unable to verify your identity, but you can still submit your application."
-      continue_text: "Continue to the %{rp_name} to find out how."
+      continue_text: "Continue to %{rp_name} to find out how."
     failed_sign_in:
       title: Unable to sign you in
       heading: "%{display_name} couldn’t sign you in"

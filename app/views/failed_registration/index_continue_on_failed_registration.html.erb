@@ -15,10 +15,6 @@
 
     <%= t 'hub.failed_registration.reasons_html' %>
 
-    <h2 class="heading-medium">
-      <%= t 'hub.failed_registration.what_to_do_next' %>
-    </h2>
-
     <p><%= t 'hub.failed_registration.what_to_do_next_intro' %></p>
 
     <ol class="list list-number">
@@ -30,9 +26,6 @@
       </li>
       <li>
         <%= link_to t('hub.failed_registration.try_another_company'), select_documents_path %>
-      </li>
-      <li>
-        <%= link_to t('hub.failed_registration.other_ways_link', transaction_name: @transaction_name), other_ways_to_access_service_path %>
       </li>
     </ol>
   </div>
