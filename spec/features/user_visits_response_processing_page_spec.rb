@@ -67,6 +67,7 @@ RSpec.describe 'When the user visits the response processing page' do
   end
 
   it 'redirects to further information page when response is GET_C3_DATA' do
+    stub_cycle_three_attribute_request('NationalInsuranceNumber')
     stub_matching_outcome(MatchingOutcomeResponse::GET_C3_DATA)
     stubbed_report_request = stub_matching_report('Cycle3')
     visit '/response-processing'

@@ -270,4 +270,20 @@ describe SessionProxy do
       }.to raise_error(Api::Response::ModelError, "Location can't be blank, Saml message can't be blank")
     end
   end
+
+  describe '#cycle_three_attribute_name' do
+    it 'should return an attribute name' do
+      expect(api_client).to receive(:get)
+        .with(SessionProxy::CYCLE_THREE_ATTRIBUTE_PATH,
+              cookies: cookies,
+        )
+        .and_return(
+          'name' => 'verySpecialNumber'
+        )
+
+      actual_response = session_proxy.cycle_three_attribute_name(cookies)
+
+      expect(actual_response).to eql 'verySpecialNumber'
+    end
+  end
 end

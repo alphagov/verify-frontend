@@ -19,14 +19,14 @@ def stub_transactions_list
   stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
 end
 
-def stub_federation(idp_entity_id = 'http://idcorp.com')
+def stub_federation(idp_entity_id = 'http://idcorp.com', transaction_entity_id = 'some-entity-id')
   idps = [
     { 'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id },
     { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id' },
     { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id' },
     { 'simpleId' => 'stub-idp-demo', 'entityId' => 'demo-entity-id' }
   ]
-  body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-entity-id' }
+  body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => transaction_entity_id }
   stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
 end
 
@@ -113,4 +113,9 @@ def stub_error_response_for_rp
       'relayState' => 'a relay state'
   }
   stub_request(:get, api_uri('session/response-for-rp/error')).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
+end
+
+def stub_cycle_three_attribute_request(name)
+  cycle_three_attribute = { name: name }
+  stub_request(:get, api_uri('session/cycle-3-attribute')).to_return(body: cycle_three_attribute.to_json, status: 200)
 end

@@ -8,6 +8,7 @@ class SessionProxy
   MATCHING_OUTCOME_PATH = "#{PATH}/matching-outcome".freeze
   RESPONSE_FOR_RP_PATH = "#{PATH}/response-for-rp/success".freeze
   ERROR_RESPONSE_FOR_RP_PATH = "#{PATH}/response-for-rp/error".freeze
+  CYCLE_THREE_ATTRIBUTE_PATH = "#{PATH}/cycle-3-attribute".freeze
   PARAM_SAML_REQUEST = 'samlRequest'.freeze
   PARAM_SAML_RESPONSE = 'samlResponse'.freeze
   PARAM_RELAY_STATE = 'relayState'.freeze
@@ -87,6 +88,12 @@ class SessionProxy
                                headers: x_forwarded_for,
                                cookies: select_cookies(cookies, CookieNames.session_cookies))
     ResponseForRp.new(response || {}).tap(&:validate)
+  end
+
+  def cycle_three_attribute_name(cookies)
+    response = @api_client.get(CYCLE_THREE_ATTRIBUTE_PATH,
+                               cookies: select_cookies(cookies, CookieNames.session_cookies))
+    CycleThreeAttributeResponse.new(response || {}).tap(&:validate).name
   end
 
 private

@@ -12,11 +12,15 @@ module Display
       create(directory, Display::RpDisplayData)
     end
 
+    def create_cycle_three_repository(directory)
+      create(directory, Display::CycleThreeDisplayData)
+    end
+
   private
 
     def create(directory, klass)
-      display_data_collection = Dir[File.join(directory, '*.yml').to_s].map do |rp|
-        klass.new(File.basename(rp, '.yml'), @translator)
+      display_data_collection = Dir[File.join(directory, '*.yml').to_s].map do |file|
+        klass.new(File.basename(file, '.yml'), @translator)
       end
       display_data_collection.each(&:validate_content!)
       display_data_collection.inject({}) do |hash, data|

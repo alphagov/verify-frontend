@@ -319,6 +319,10 @@ en:
       sorry: Sorry, %{display_name} is not available.
       verify_another_company_html: To access government services, you must %{link}.
       verify_another_company_link: verify your identity with another certified company
+    further_information:
+      title: Enter your %{attribute_name}
+      national_insurance_number: National Insurance number
+      driving_licence_number: driving licence number
   errors:
     transaction_list:
       title: Find the service you were using to start again
