@@ -1,4 +1,5 @@
-<%= page_title 'hub.further_information.title', attribute_name: @attribute.name %>
+<%= page_title 'hub.further_information.title', cycle_three_name: @attribute.name %>
+<% content_for :feedback_source, 'CYCLE_3_PAGE' %>
 
 <div class="grid-row">
   <div class="column-two-thirds">
@@ -13,8 +14,27 @@
           <% end %>
           <%= f.text_field :cycle_three_data, required: true, class: 'form-control form-control-3-4' %>
         </div>
+        <div class="form-group">
+        <details>
+          <summary>
+            <span class="summary"><%= t 'hub.further_information.help_with_your', cycle_three_name: @attribute.name %></span>
+          </summary>
+          <div class="panel panel-border-narrow">
+            <p><%= @attribute.help_to_find %></p>
+          </div>
+        </details>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit t('navigation.continue'), id: 'continue-button', class: 'button' %>
+        </div>
       </fieldset>
     <% end %>
+    <div class="cancel-process">
+      <%= form_tag(further_information_cancel_path) do %>
+        <%= button_tag t('hub.further_information.cancel', transaction_name: @transaction_name.capitalize), id: 'cancel', class: 'button-link' %>
+      <% end %>
+    </div>
   </div>
 </div>
 

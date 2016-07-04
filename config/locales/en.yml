@@ -320,11 +320,13 @@ en:
       verify_another_company_html: To access government services, you must %{link}.
       verify_another_company_link: verify your identity with another certified company
     further_information:
-      title: Enter your %{attribute_name}
+      title: Enter your %{cycle_three_name}
       national_insurance_number: National Insurance number
       driving_licence_number: driving licence number
-      first_time: "This is the first time you’ve signed in."
-      cycle_three_input_label: "Enter your %{cycle_three_name}"
+      first_time: This is the first time you’ve signed in.
+      cycle_three_input_label: Enter your %{cycle_three_name}
+      help_with_your: Help with your %{cycle_three_name}
+      cancel: Cancel and return to %{transaction_name}
   errors:
     transaction_list:
       title: Find the service you were using to start again

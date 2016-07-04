@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
   get 'further-information', to: 'further_information#index', as: :further_information
   post 'further-information', to: 'further_information#submit', as: :further_information_submit
+  post 'further-information/cancel', to: 'further_information#cancel', as: :further_information_cancel
 
   if Rails.env == 'development'
     get 'feedback/feedback-sent', to: redirect("#{API_HOST}/feedback/feedback-sent"), as: :feedback_sent

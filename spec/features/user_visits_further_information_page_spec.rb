@@ -8,19 +8,25 @@ RSpec.describe 'user visits further information page' do
     set_session_cookies!
   end
 
-  it 'will display title including National Insurance number' do
+  it 'will display page for National Insurance number' do
     stub_cycle_three_attribute_request('NationalInsuranceNumber')
 
     visit further_information_path
 
-    expect(page).to have_content I18n.t('rps.test-rp.name').capitalize
-    expect(page).to have_content I18n.t('hub.further_information.first_time')
-    expect(page).to have_content I18n.t('hub.further_information.cycle_three_input_label', cycle_three_name: 'National Insurance number')
-    expect(page).to have_title 'Enter your National Insurance number - GOV.UK Verify - GOV.UK'
+    attribute_name = I18n.t('cycle3.NationalInsuranceNumber.name')
+    rp_name = I18n.t('rps.test-rp.name').capitalize
+
+    expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: attribute_name)
+    expect(page).to have_css 'h1.heading-xlarge', text: rp_name
+    expect(page).to have_content I18n.t('hub.further_information.cycle_three_input_label', cycle_three_name: attribute_name)
+    expect(page).to have_content I18n.t('cycle3.NationalInsuranceNumber.help_to_find')
+    expect(page).to have_content I18n.t('hub.further_information.help_with_your', cycle_three_name: attribute_name)
+    expect(page).to have_content I18n.t('hub.further_information.cancel', transaction_name: rp_name)
+    expect_feedback_source_to_be(page, 'CYCLE_3_PAGE')
   end
 
   it 'will display title including driving licence number' do
-    stub_cycle_three_attribute_request('drivingLicenseNumber')
+    stub_cycle_three_attribute_request('DrivingLicenceNumber')
 
     visit further_information_path
 

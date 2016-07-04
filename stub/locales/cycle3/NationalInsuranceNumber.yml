@@ -2,3 +2,4 @@ en:
   cycle3:
     NationalInsuranceNumber:
       name: National Insurance number
+      help_to_find: The National Insurance number format is 2 letters, 6 numbers and then 1 letter, eg QQ123456C.
