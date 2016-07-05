@@ -11,7 +11,7 @@ module IdpEligibility
       rules = double(:rules)
       expect(rules).to receive(:idps_for).with(evidence).and_return(['idp_one'])
       filtered_idps = Filter.new.filter_idps(rules, evidence, enabled_idps)
-      expect(filtered_idps).to eql [idp_one]
+      expect(filtered_idps).to eql [idp_one].to_set
     end
   end
 end
