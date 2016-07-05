@@ -16,28 +16,11 @@ RSpec.describe 'When the user visits the may-not-work-if-you-live-overseas page'
     expect(page).to have_link 'here', href: 'http://www.example.com'
   end
 
-  it 'redirects to IdP picker page if user clicks try to verify link' do
-    stub_federation
+  it 'redirects to select documents page if user clicks try to verify link' do
     visit may_not_work_if_you_live_overseas_path
 
     click_link 'I’d like to try to verify my identity online'
 
-    expect(page).to have_current_path(choose_a_certified_company_path)
-  end
-
-  context 'for users on the age questions first journey' do
-    before(:each) do
-      page.set_rack_session(
-        show_age_question_first: true
-      )
-    end
-
-    it 'redirects to select documents page if user clicks try to verify link' do
-      visit may_not_work_if_you_live_overseas_path
-
-      click_link 'I’d like to try to verify my identity online'
-
-      expect(page).to have_current_path(select_documents_path)
-    end
+    expect(page).to have_current_path(select_documents_path)
   end
 end

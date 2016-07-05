@@ -25,16 +25,6 @@ RSpec.describe 'user sends authn requests' do
       expect(cookies.keys.to_set).to eql expected_cookies.to_set
     end
 
-    it 'sets the age question first journey flag' do
-      stub_federation
-      stub_api_saml_endpoint
-
-      visit('/test-saml')
-      click_button 'saml-post'
-
-      expect(page.get_rack_session['show_age_question_first']).to be true
-    end
-
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
       set_journey_hint_cookie('http://idcorp.com')
       stub_federation

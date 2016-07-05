@@ -17,7 +17,7 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   context 'with javascript disabled' do
-    it 'redirects to the age question page when user has a phone' do
+    it 'redirects to the idp picker page when user has a phone' do
       stub_federation_no_docs
       visit '/select-phone'
 
@@ -26,29 +26,8 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_landline_false'
       click_button 'Continue'
 
-      expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
+      expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true, 'smart_phone' => true, 'landline' => false })
-    end
-
-    context 'for users on the age questions first journey' do
-      before(:each) do
-        page.set_rack_session(
-          show_age_question_first: true
-        )
-      end
-
-      it 'redirects to the idp picker page when user has a phone' do
-        stub_federation_no_docs
-        visit '/select-phone'
-
-        choose 'select_phone_form_mobile_phone_true'
-        choose 'select_phone_form_smart_phone_true'
-        choose 'select_phone_form_landline_false'
-        click_button 'Continue'
-
-        expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
-        expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true, 'smart_phone' => true, 'landline' => false })
-      end
     end
 
     it 'does not include apps if user doesnt know if their phone has apps' do
@@ -60,7 +39,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_landline_false'
       click_button 'Continue'
 
-      expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
+      expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true, 'landline' => false })
     end
 
@@ -96,40 +75,20 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   context 'with javascript enabled', js: true do
-    context 'for users on the age questions first journey' do
-      before(:each) do
-        page.set_rack_session(
-          show_age_question_first: true
-        )
-      end
+    it 'redirects to the idp picker page when user has a phone' do
+      stub_federation
+      given_a_session_with_document_evidence
 
-      it 'redirects to the idp picker page when user has a phone' do
-        stub_federation
-        given_a_session_with_document_evidence
-
-        visit '/select-phone'
-
-        choose 'select_phone_form_mobile_phone_true'
-        choose 'select_phone_form_smart_phone_true'
-        click_button 'Continue'
-
-        expect(page).to have_current_path(choose_a_certified_company_path)
-        expect(page.get_rack_session['selected_answers']).to eql(
-          'phone' => { 'mobile_phone' => true, 'smart_phone' => true },
-          'documents' => { 'passport' => true, 'driving_licence' => true })
-      end
-    end
-
-    it 'redirects to the age question page when user has a phone' do
-      stub_federation_no_docs
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_true'
       choose 'select_phone_form_smart_phone_true'
       click_button 'Continue'
 
-      expect(page).to have_current_path(will_it_work_for_me_path, only_path: true)
-      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true, 'smart_phone' => true })
+      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page.get_rack_session['selected_answers']).to eql(
+        'phone' => { 'mobile_phone' => true, 'smart_phone' => true },
+        'documents' => { 'passport' => true, 'driving_licence' => true })
     end
 
     it 'should display a validation message when user does not answer mobile phone question' do

@@ -15,18 +15,10 @@ class AuthnRequestController < ApplicationController
     set_secure_cookie(CookieNames::SECURE_COOKIE_NAME, response.secure_cookie)
     set_current_transaction_simple_id(response.transaction_simple_id)
 
-    show_age_question_first!
-
     if params['journey_hint'].present?
       redirect_to confirm_your_identity_path
     else
       redirect_to start_path
     end
-  end
-
-private
-
-  def show_age_question_first!
-    session[:show_age_question_first] = true
   end
 end

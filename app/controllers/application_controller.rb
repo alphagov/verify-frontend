@@ -73,10 +73,6 @@ class ApplicationController < ActionController::Base
 
 private
 
-  def show_age_question_first?
-    session[:show_age_question_first] == true
-  end
-
   def uri_with_query(path, query_string)
     uri = URI(path)
     uri.query = query_string
