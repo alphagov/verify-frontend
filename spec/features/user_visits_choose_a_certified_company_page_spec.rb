@@ -195,7 +195,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
       visit choose_a_certified_company_path
 
       within('#non-matching-idps') do
-        expect(page).to have_content('Choose Demo IDP')
+        expect(page).to have_content('Choose Demo IDP', count: 1)
       end
     end
   end
