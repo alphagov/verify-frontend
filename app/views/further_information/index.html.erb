@@ -9,7 +9,7 @@
     <%= form_for @form, url: further_information_submit_path do |f| %>
       <fieldset>
         <div class="form-group">
-          <%= f.label :cycle_three_data, class: 'form-label' do %>
+          <%= f.label :cycle_three_data, class: 'form-label-bold' do %>
               <%= t('hub.further_information.cycle_three_input_label', cycle_three_name: @attribute.name) %>
           <% end %>
           <%= f.text_field :cycle_three_data, required: true, class: 'form-control form-control-3-4' %>
