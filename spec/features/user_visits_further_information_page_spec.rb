@@ -1,5 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
+require 'piwik_test_helper'
 
 RSpec.describe 'user visits further information page' do
   before(:each) do
@@ -26,6 +27,7 @@ RSpec.describe 'user visits further information page' do
   end
 
   it 'will submit valid driving license number' do
+    piwik_request = stub_piwik_cycle_three('DrivingLicenceNumber')
     stub_cycle_three_attribute_request('DrivingLicenceNumber')
     stub_request = stub_cycle_three_value_submit('MORGA657054SM9IJ')
 
@@ -38,5 +40,6 @@ RSpec.describe 'user visits further information page' do
 
     expect(page.current_path).to eql(response_processing_path)
     expect(stub_request).to have_been_made
+    expect(piwik_request).to have_been_made
   end
 end

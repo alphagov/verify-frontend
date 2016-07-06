@@ -29,6 +29,11 @@ module Analytics
       @analytics_reporter.report_custom_variable(request, "Sign In - #{idp_display_name}", cvar)
     end
 
+    def report_cycle_three(request, attribute)
+      cvar = Analytics::CustomVariable.build(:cycle_three_attribute, attribute)
+      @analytics_reporter.report_custom_variable(request, 'Cycle3 submitted', cvar)
+    end
+
   private
 
     def report_action(transaction_simple_id, request, action)
