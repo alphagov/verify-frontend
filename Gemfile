@@ -45,7 +45,7 @@ gem 'rack-handlers'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'http', '~> 1.0.0'
+gem 'http', '~> 2.0.0'
 
 gem 'connection_pool'
 
