@@ -99,11 +99,11 @@ class SessionProxy
 
   def submit_cycle_three_value(cookies, value)
     body = {
-      PARAM_CYCLE_THREE_VALUE => value
+      PARAM_CYCLE_THREE_VALUE => value,
+      PARAM_ORIGINATING_IP => originating_ip
     }
     options = {
       cookies: select_cookies(cookies, CookieNames.session_cookies),
-      headers: x_forwarded_for
     }
     @api_client.post(CYCLE_THREE_ATTRIBUTE_PATH, body, options, 200)
   end

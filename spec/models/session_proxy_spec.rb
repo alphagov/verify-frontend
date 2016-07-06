@@ -292,10 +292,9 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:post)
                               .with(SessionProxy::CYCLE_THREE_ATTRIBUTE_PATH,
-                                    { 'value' => 'some value' },
+                                    { 'value' => 'some value', 'originatingIp' => '127.0.0.1' },
                                     {
                                       cookies: cookies,
-                                      headers: { "X-Forwarded-For" => ip_address }
                                     },
                                     200
                               )

@@ -25,7 +25,7 @@ RSpec.describe 'user visits further information page' do
     expect_feedback_source_to_be(page, 'CYCLE_3_PAGE')
   end
 
-  it 'will display title including driving licence number' do
+  it 'will submit valid driving license number' do
     stub_cycle_three_attribute_request('DrivingLicenceNumber')
     stub_request = stub_cycle_three_value_submit('MORGA657054SM9IJ')
 
