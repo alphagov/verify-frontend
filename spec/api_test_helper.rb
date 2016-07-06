@@ -119,3 +119,8 @@ def stub_cycle_three_attribute_request(name)
   cycle_three_attribute = { name: name }
   stub_request(:get, api_uri('session/cycle-3-attribute')).to_return(body: cycle_three_attribute.to_json, status: 200)
 end
+
+def stub_cycle_three_value_submit(value)
+  cycle_three_attribute_value = { value: value }
+  stub_request(:post, api_uri('session/cycle-3-attribute')).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
+end

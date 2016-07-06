@@ -8,4 +8,8 @@ class FurtherInformationService
     attribute_key = @session_proxy.cycle_three_attribute_name(cookies)
     @cycle_three_display_data_repo.fetch(attribute_key)
   end
+
+  def submit(cookies, value)
+    @session_proxy.submit_cycle_three_value(cookies, value)
+  end
 end

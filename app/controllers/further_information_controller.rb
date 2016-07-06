@@ -1,13 +1,13 @@
-require 'ostruct'
-
 class FurtherInformationController < ApplicationController
   def index
-    @attribute = further_information_service.fetch(cookies)
-    @form = CycleThreeForm.new
+    @attribute = FURTHER_INFORMATION_SERVICE.fetch(cookies)
+    @form = CycleThreeForm.new({})
     @transaction_name = current_transaction.name
   end
 
-  def further_information_service
-    FurtherInformationService.new(SESSION_PROXY, CYCLE_THREE_DISPLAY_REPOSITORY)
+  def submit
+    form = CycleThreeForm.new(params['cycle_three_form'])
+    FURTHER_INFORMATION_SERVICE.submit(cookies, form.cycle_three_data)
+    redirect_to response_processing_path
   end
 end

@@ -274,16 +274,33 @@ describe SessionProxy do
   describe '#cycle_three_attribute_name' do
     it 'should return an attribute name' do
       expect(api_client).to receive(:get)
-        .with(SessionProxy::CYCLE_THREE_ATTRIBUTE_PATH,
-              cookies: cookies,
-        )
-        .and_return(
-          'name' => 'verySpecialNumber'
-        )
+                              .with(SessionProxy::CYCLE_THREE_ATTRIBUTE_PATH,
+                                    cookies: cookies,
+                              )
+                              .and_return(
+                                'name' => 'verySpecialNumber'
+                              )
 
       actual_response = session_proxy.cycle_three_attribute_name(cookies)
 
       expect(actual_response).to eql 'verySpecialNumber'
+    end
+  end
+
+  describe '#submit_cycle_three_value' do
+    it 'should post an attribute value' do
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect(api_client).to receive(:post)
+                              .with(SessionProxy::CYCLE_THREE_ATTRIBUTE_PATH,
+                                    { 'value' => 'some value' },
+                                    {
+                                      cookies: cookies,
+                                      headers: { "X-Forwarded-For" => ip_address }
+                                    },
+                                    200
+                              )
+
+      session_proxy.submit_cycle_three_value(cookies, 'some value')
     end
   end
 end

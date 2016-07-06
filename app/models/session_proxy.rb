@@ -15,6 +15,7 @@ class SessionProxy
   PARAM_ORIGINATING_IP = 'originatingIp'.freeze
   PARAM_ENTITY_ID = 'entityId'.freeze
   PARAM_REGISTRATION = 'registration'.freeze
+  PARAM_CYCLE_THREE_VALUE = 'value'.freeze
 
   def initialize(api_client, originating_ip_store)
     @api_client = api_client
@@ -63,9 +64,9 @@ class SessionProxy
 
   def idp_authn_response(cookies, saml_response, relay_state)
     body = {
-        PARAM_RELAY_STATE => relay_state,
-        PARAM_SAML_RESPONSE => saml_response,
-        PARAM_ORIGINATING_IP => originating_ip
+      PARAM_RELAY_STATE => relay_state,
+      PARAM_SAML_RESPONSE => saml_response,
+      PARAM_ORIGINATING_IP => originating_ip
     }
     response = @api_client.put(IDP_AUTHN_RESPONSE_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
     IdpAuthnResponse.new(response || {}).tap(&:validate)
@@ -94,6 +95,17 @@ class SessionProxy
     response = @api_client.get(CYCLE_THREE_ATTRIBUTE_PATH,
                                cookies: select_cookies(cookies, CookieNames.session_cookies))
     CycleThreeAttributeResponse.new(response || {}).tap(&:validate).name
+  end
+
+  def submit_cycle_three_value(cookies, value)
+    body = {
+      PARAM_CYCLE_THREE_VALUE => value
+    }
+    options = {
+      cookies: select_cookies(cookies, CookieNames.session_cookies),
+      headers: x_forwarded_for
+    }
+    @api_client.post(CYCLE_THREE_ATTRIBUTE_PATH, body, options, 200)
   end
 
 private

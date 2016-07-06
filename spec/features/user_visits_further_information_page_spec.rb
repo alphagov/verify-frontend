@@ -27,9 +27,16 @@ RSpec.describe 'user visits further information page' do
 
   it 'will display title including driving licence number' do
     stub_cycle_three_attribute_request('DrivingLicenceNumber')
+    stub_request = stub_cycle_three_value_submit('MORGA657054SM9IJ')
+
+    stub_matching_outcome
 
     visit further_information_path
 
-    expect(page).to have_title 'Enter your driving licence number - GOV.UK Verify - GOV.UK'
+    fill_in 'cycle_three_form_cycle_three_data', with: 'MORGA657054SM9IJ'
+    click_button I18n.t('navigation.continue')
+
+    expect(page.current_path).to eql(response_processing_path)
+    expect(stub_request).to have_been_made
   end
 end

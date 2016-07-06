@@ -27,7 +27,7 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_title(I18n.t('hub.feedback.title'))
 
     choose 'feedback_form_reply_true'
-    fill_in 'Email address', with: 'foo@bar'
+    fill_in 'feedback_form_email', with: 'foo@bar'
     click_button I18n.t('hub.feedback.send_message')
 
     expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.email'))
