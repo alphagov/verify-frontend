@@ -9,6 +9,7 @@ class SessionProxy
   RESPONSE_FOR_RP_PATH = "#{PATH}/response-for-rp/success".freeze
   ERROR_RESPONSE_FOR_RP_PATH = "#{PATH}/response-for-rp/error".freeze
   CYCLE_THREE_ATTRIBUTE_PATH = "#{PATH}/cycle-3-attribute".freeze
+  CYCLE_THREE_CANCEL_PATH = "#{CYCLE_THREE_ATTRIBUTE_PATH}/cancel".freeze
   PARAM_SAML_REQUEST = 'samlRequest'.freeze
   PARAM_SAML_RESPONSE = 'samlResponse'.freeze
   PARAM_RELAY_STATE = 'relayState'.freeze
@@ -106,6 +107,13 @@ class SessionProxy
       cookies: select_cookies(cookies, CookieNames.session_cookies),
     }
     @api_client.post(CYCLE_THREE_ATTRIBUTE_PATH, body, options, 200)
+  end
+
+  def cycle_three_cancel(cookies)
+    options = {
+      cookies: select_cookies(cookies, CookieNames.session_cookies),
+    }
+    @api_client.post(CYCLE_THREE_CANCEL_PATH, nil, options, 200)
   end
 
 private

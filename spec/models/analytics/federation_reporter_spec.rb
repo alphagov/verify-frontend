@@ -64,6 +64,36 @@ module Analytics
       end
     end
 
+    describe '#report_cycle_three' do
+      it 'should report cycle 3 attribute name' do
+        attribute_name = 'anAttribute'
+        expect(analytics_reporter).to receive(:report_custom_variable)
+                                        .with(
+                                          request,
+                                          'Cycle3 submitted',
+                                          4 => ['CYCLE_3', attribute_name]
+                                        )
+        federation_reporter.report_cycle_three(request, attribute_name)
+      end
+    end
+
+    describe '#report_cycle_three_cancel' do
+      it 'should report cycle 3 cancelled' do
+        simple_id = 'id'
+        description = 'description'
+        allow(federation_translator).to receive(:translate)
+                                          .with('rps.id.analytics_description')
+                                          .and_return(description)
+        expect(analytics_reporter).to receive(:report_custom_variable)
+                                        .with(
+                                          request,
+                                          'Matching Outcome - Cancelled Cycle3',
+                                          1 => %w[RP description]
+                                        )
+        federation_reporter.report_cycle_three_cancel(simple_id, request)
+      end
+    end
+
     it 'should report custom variable for sign in' do
       simple_id = 'id'
       description = 'description'

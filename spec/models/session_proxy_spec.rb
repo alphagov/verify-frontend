@@ -302,4 +302,19 @@ describe SessionProxy do
       session_proxy.submit_cycle_three_value(cookies, 'some value')
     end
   end
+
+  describe '#cycle_three_cancel' do
+    it 'should post to cancel api endpoint' do
+      expect(api_client).to receive(:post)
+                              .with(SessionProxy::CYCLE_THREE_CANCEL_PATH,
+                                    nil,
+                                    {
+                                      cookies: cookies,
+                                    },
+                                    200
+                              )
+
+      session_proxy.cycle_three_cancel(cookies)
+    end
+  end
 end

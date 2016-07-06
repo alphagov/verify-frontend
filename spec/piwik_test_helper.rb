@@ -17,3 +17,10 @@ def stub_piwik_cycle_three(attribute_name)
   }
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 end
+
+def stub_piwik_cycle_three_cancel
+  piwik_request = {
+    'action_name' => 'Matching Outcome - Cancelled Cycle3'
+  }
+  stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
+end

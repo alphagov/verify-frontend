@@ -12,4 +12,8 @@ class FurtherInformationService
   def submit(cookies, value)
     @session_proxy.submit_cycle_three_value(cookies, value)
   end
+
+  def cancel(cookies)
+    @session_proxy.cycle_three_cancel(cookies)
+  end
 end

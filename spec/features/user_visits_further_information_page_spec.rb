@@ -42,4 +42,20 @@ RSpec.describe 'user visits further information page' do
     expect(stub_request).to have_been_made
     expect(piwik_request).to have_been_made
   end
+
+  it 'will redirect to start on cancel' do
+    piwik_request = stub_piwik_cycle_three_cancel
+    cancel_request = stub_cycle_three_cancel
+    stub_cycle_three_attribute_request('DrivingLicenceNumber')
+    stub_response_for_rp
+
+    visit further_information_path
+
+    rp_name = I18n.t('rps.test-rp.name').capitalize
+    click_button I18n.t('hub.further_information.cancel', transaction_name: rp_name)
+
+    expect(page.current_path).to eql(redirect_to_service_start_again_path)
+    expect(piwik_request).to have_been_made
+    expect(cancel_request).to have_been_made
+  end
 end

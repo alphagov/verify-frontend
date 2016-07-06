@@ -12,4 +12,10 @@ class FurtherInformationController < ApplicationController
     FEDERATION_REPORTER.report_cycle_three(request, attribute.simple_id)
     redirect_to response_processing_path
   end
+
+  def cancel
+    FURTHER_INFORMATION_SERVICE.cancel(cookies)
+    FEDERATION_REPORTER.report_cycle_three_cancel(current_transaction_simple_id, request)
+    redirect_to redirect_to_service_start_again_path
+  end
 end

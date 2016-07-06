@@ -34,12 +34,16 @@ module Analytics
       @analytics_reporter.report_custom_variable(request, 'Cycle3 submitted', cvar)
     end
 
+    def report_cycle_three_cancel(transaction_simple_id, request)
+      report_action(transaction_simple_id, request, 'Matching Outcome - Cancelled Cycle3')
+    end
+
   private
 
     def report_action(transaction_simple_id, request, action)
       begin
-        transaction_analytics_description =
-          @federation_translator.translate("rps.#{transaction_simple_id}.analytics_description")
+        transaction_analytics_description = @federation_translator.translate(
+          "rps.#{transaction_simple_id}.analytics_description")
         @analytics_reporter.report_custom_variable(
           request,
           action,

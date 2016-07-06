@@ -124,3 +124,7 @@ def stub_cycle_three_value_submit(value)
   cycle_three_attribute_value = { value: value, SessionProxy::PARAM_ORIGINATING_IP => OriginatingIpStore::UNDETERMINED_IP }
   stub_request(:post, api_uri('session/cycle-3-attribute')).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
 end
+
+def stub_cycle_three_cancel
+  stub_request(:post, api_uri('session/cycle-3-attribute/cancel')).to_return(status: 200)
+end

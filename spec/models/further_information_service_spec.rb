@@ -20,4 +20,9 @@ RSpec.describe FurtherInformationService do
     expect(session_proxy).to receive(:submit_cycle_three_value).with(cookies, 'value')
     service.submit(cookies, 'value')
   end
+
+  it 'should submit cycle 3 cancel' do
+    expect(session_proxy).to receive(:cycle_three_cancel).with(cookies)
+    service.cancel(cookies)
+  end
 end
