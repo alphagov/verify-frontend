@@ -108,7 +108,7 @@ describe FeedbackForm do
 
     it 'email contains whitespace' do
       email = 'foo@bar.co.uk'
-      emails_with_whitespace = (0..email.length).map do |idx|
+      emails_with_whitespace = (1...email.length).map do |idx|
         String.new(email).insert(idx, ' ')
       end
       emails_with_whitespace.each do |whitespaced_email|
@@ -142,7 +142,7 @@ describe FeedbackForm do
 
   context 'is valid when' do
     it 'email address is valid' do
-      good_emails = %w(foo@bar.com .@bar.com foo+bar@baz.com björn.домати@björnnußbaum5.org)
+      good_emails = %w(foo@bar.com .@bar.com foo+bar@baz.com björn.домати@björnnußbaum5.org test@digital.cabinet-office.gov.uk)
       good_emails.each do |good_email|
         form = FeedbackForm.new(what: 'what i was doing',
                                 details: 'what happened',

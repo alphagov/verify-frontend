@@ -88,10 +88,8 @@ private
     end
   end
 
-  EMAIL_REGEX = /^[[:word:].!#$%&'*+\/=?^_`{|}~-]+@[[:word:]]+(\.[[:word:]]+)+$/
-
   def email_format_should_be_valid
-    if reply_required? && @email && !@email.match(EMAIL_REGEX)
+    if reply_required? && !EmailValidator.valid?(email)
       errors.set(:base, [I18n.t('hub.feedback.errors.no_selection')])
       errors.set(:email, [I18n.t('hub.feedback.errors.email')])
     end

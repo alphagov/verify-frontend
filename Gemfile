@@ -79,3 +79,4 @@ end
 gem 'logstash-logger'
 gem 'request_store'
 gem 'zendesk_api'
+gem 'email_validator'
