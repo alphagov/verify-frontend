@@ -1,5 +1,5 @@
 //= require jquery
-//= require jquery.validate
+//= require vendor/jquery.validate
 //= require validation
 //= require will_it_work_for_me
 

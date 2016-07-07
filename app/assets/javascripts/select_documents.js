@@ -1,6 +1,3 @@
-//= require jquery
-//= require jquery.validate
-
 (function () {
   "use strict"
   var root = this,

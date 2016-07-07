@@ -6,7 +6,6 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require jquery.validate
 //= require govuk/selection-buttons
 //= require_tree .
 //= require piwik

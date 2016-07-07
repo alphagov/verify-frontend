@@ -1,5 +1,5 @@
 //= require jquery
-//= require jquery.validate
+//= require vendor/jquery.validate
 //= require validation
 //= require select_documents
 
