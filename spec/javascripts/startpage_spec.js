@@ -7,8 +7,8 @@ describe('The start page', function () {
       formSpy,
       html = '<form id="start-page-form" class="js-validate" novalidate>'
            +   '<div class="form-group">'
-           +     '<input name=selection type=radio id=yes required data-msg="Test error message">'
-           +     '<input name=selection type=radio id=no>'
+           +     '<input name=selection type=radio id=start_form_selection_true required data-msg="Test error message">'
+           +     '<input name=selection type=radio id=start_form_selection_false>'
            +     '<input type=submit>'
            +   '</div>'
            +   '<div id="validation-error-message-js"></div>'
@@ -30,7 +30,7 @@ describe('The start page', function () {
 
   describe('when the user selects an option and submits the form', function () {
     it('should submit successfully', function () {
-      $('#yes').prop('checked', true);
+      $('#start_form_selection_true').prop('checked', true);
       $(document).submit(formSpy);
       $('form').submit();
       expect(formSpy).toHaveBeenCalled();
@@ -59,7 +59,7 @@ describe('The start page', function () {
 
     it('should remove the error message and highlights', function () {
       expect($formGroup.hasClass('error')).toBe(true);
-      $('#yes').prop('checked', true).click();
+      $('#start_form_selection_true').prop('checked', true).click();
       expect($formGroup.hasClass('error')).toBe(false);
     });
   });
