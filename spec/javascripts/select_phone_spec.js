@@ -16,7 +16,7 @@ describe("Select Phone form", function () {
       '<div id="smartphone-question" class="form-group js-hidden">' +
         '<input id="smart_phone-yes" name="select_phone_form[smart_phone]" value="true" type="radio">' +
         '<input id="smart_phone-no" name="select_phone_form[smart_phone]" value="false" type="radio">' +
-        '<input id="smart_phone-unknown" name="select_phone_form[smart_phone]" value="false" type="radio">' +
+        '<input id="smart_phone-unknown" name="select_phone_form[smart_phone]" value="do_not_know" type="radio">' +
       '</div>' +
       '<div id="landline-question" class="form-group js-hidden">' +
         '<input id="landline_phone-yes" name="select_phone_form[landline]" value="true" type="radio">' +
