@@ -57,4 +57,11 @@ RSpec.describe 'When the user visits the redirect to IDP page' do
     visit redirect_to_idp_path
     expect(page).to_not have_css('input[name="hint"]')
   end
+
+  it 'should have a correct title' do
+    given_a_session_with_a_hints_enabled_idp
+    stub_session_idp_authn_request(originating_ip, location, false)
+    visit redirect_to_idp_path
+    expect(page).to_not have_title('hub.redirect_to_idp.title')
+  end
 end

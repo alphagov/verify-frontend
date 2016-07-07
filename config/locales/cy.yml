@@ -283,6 +283,7 @@ cy:
       loading: "Loading…"
       please_wait: "This may take a few seconds, please bear with us."
     redirect_to_idp:
+      title: Loading
       heading: Parhau i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
     feedback:

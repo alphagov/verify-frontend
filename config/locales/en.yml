@@ -277,6 +277,7 @@ en:
       please_wait: This may take a few seconds, please bear with us.
       loading: "Loading…"
     redirect_to_idp:
+      title: Loading
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
     feedback:
