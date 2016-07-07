@@ -100,7 +100,7 @@ RSpec.describe 'user encounters error page' do
     set_session_cookies!
     stub_transactions_list
     stub_request(:get, api_federation_endpoint).and_return(status: 403)
-    visit sign_in_en_path
+    visit sign_in_path
     expect(page).to have_content "Sorry, something went wrong"
     expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
