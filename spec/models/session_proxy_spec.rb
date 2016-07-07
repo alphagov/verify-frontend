@@ -274,7 +274,7 @@ describe SessionProxy do
   describe '#cycle_three_attribute_name' do
     it 'should return an attribute name' do
       expect(api_client).to receive(:get)
-                              .with(SessionProxy::CYCLE_THREE_ATTRIBUTE_PATH,
+                              .with(SessionProxy::CYCLE_THREE_PATH,
                                     cookies: cookies,
                               )
                               .and_return(
@@ -291,7 +291,7 @@ describe SessionProxy do
     it 'should post an attribute value' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:post)
-                              .with(SessionProxy::CYCLE_THREE_ATTRIBUTE_PATH,
+                              .with(SessionProxy::CYCLE_THREE_PATH,
                                     { 'value' => 'some value', 'originatingIp' => '127.0.0.1' },
                                     {
                                       cookies: cookies,

@@ -116,15 +116,15 @@ def stub_error_response_for_rp
 end
 
 def stub_cycle_three_attribute_request(name)
-  cycle_three_attribute = { name: name }
-  stub_request(:get, api_uri('session/cycle-3-attribute')).to_return(body: cycle_three_attribute.to_json, status: 200)
+  cycle_three_attribute_name = { name: name }
+  stub_request(:get, api_uri('session/cycle-three')).to_return(body: cycle_three_attribute_name.to_json, status: 200)
 end
 
 def stub_cycle_three_value_submit(value)
   cycle_three_attribute_value = { value: value, SessionProxy::PARAM_ORIGINATING_IP => OriginatingIpStore::UNDETERMINED_IP }
-  stub_request(:post, api_uri('session/cycle-3-attribute')).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
+  stub_request(:post, api_uri('session/cycle-three')).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
 end
 
 def stub_cycle_three_cancel
-  stub_request(:post, api_uri('session/cycle-3-attribute/cancel')).to_return(status: 200)
+  stub_request(:post, api_uri('session/cycle-three/cancel')).to_return(status: 200)
 end

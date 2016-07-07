@@ -8,8 +8,8 @@ class SessionProxy
   MATCHING_OUTCOME_PATH = "#{PATH}/matching-outcome".freeze
   RESPONSE_FOR_RP_PATH = "#{PATH}/response-for-rp/success".freeze
   ERROR_RESPONSE_FOR_RP_PATH = "#{PATH}/response-for-rp/error".freeze
-  CYCLE_THREE_ATTRIBUTE_PATH = "#{PATH}/cycle-3-attribute".freeze
-  CYCLE_THREE_CANCEL_PATH = "#{CYCLE_THREE_ATTRIBUTE_PATH}/cancel".freeze
+  CYCLE_THREE_PATH = "#{PATH}/cycle-three".freeze
+  CYCLE_THREE_CANCEL_PATH = "#{CYCLE_THREE_PATH}/cancel".freeze
   PARAM_SAML_REQUEST = 'samlRequest'.freeze
   PARAM_SAML_RESPONSE = 'samlResponse'.freeze
   PARAM_RELAY_STATE = 'relayState'.freeze
@@ -93,7 +93,7 @@ class SessionProxy
   end
 
   def cycle_three_attribute_name(cookies)
-    response = @api_client.get(CYCLE_THREE_ATTRIBUTE_PATH,
+    response = @api_client.get(CYCLE_THREE_PATH,
                                cookies: select_cookies(cookies, CookieNames.session_cookies))
     CycleThreeAttributeResponse.new(response || {}).tap(&:validate).name
   end
@@ -106,7 +106,7 @@ class SessionProxy
     options = {
       cookies: select_cookies(cookies, CookieNames.session_cookies),
     }
-    @api_client.post(CYCLE_THREE_ATTRIBUTE_PATH, body, options, 200)
+    @api_client.post(CYCLE_THREE_PATH, body, options, 200)
   end
 
   def cycle_three_cancel(cookies)
