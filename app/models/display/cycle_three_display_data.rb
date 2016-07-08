@@ -6,5 +6,6 @@ module Display
 
     content :name
     content :help_to_find
+    content :example
   end
 end

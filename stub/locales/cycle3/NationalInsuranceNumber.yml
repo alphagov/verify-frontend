@@ -2,4 +2,14 @@ en:
   cycle3:
     NationalInsuranceNumber:
       name: National Insurance number
-      help_to_find: The National Insurance number format is 2 letters, 6 numbers and then 1 letter, eg QQ123456C.
+      help_to_find: |
+        <p>Your National Insurance number can be found on</p>
+        <ul>
+            <li>your National Insurance card</li>
+            <li>your payslip</li>
+            <li>P60</li>
+            <li>benefits information</li>
+            <li>tax return</li>
+        </ul>
+
+      example: QQ123456C

@@ -2,4 +2,7 @@ en:
   cycle3:
     DrivingLicenceNumber:
       name: driving licence number
-      help_to_find: 5 on your licence
+      help_to_find: |
+        <p>Your driving licence number can be found in section 5 of your driving licence photocard</p>
+
+      example: MORGA657054SM9IJ

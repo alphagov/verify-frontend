@@ -20,8 +20,9 @@ RSpec.describe 'user visits further information page' do
     expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: attribute_name)
     expect(page).to have_css 'h1.heading-xlarge', text: rp_name
     expect(page).to have_content I18n.t('hub.further_information.cycle_three_input_label', cycle_three_name: attribute_name)
-    expect(page).to have_content I18n.t('cycle3.NationalInsuranceNumber.help_to_find')
+    expect(page).to have_css 'span.form-hint', text: I18n.t('hub.further_information.example_text', example: I18n.t('cycle3.NationalInsuranceNumber.example'))
     expect(page).to have_content I18n.t('hub.further_information.help_with_your', cycle_three_name: attribute_name)
+    expect(page).to have_content 'Your National Insurance number can be found on'
     expect(page).to have_content I18n.t('hub.further_information.cancel', transaction_name: rp_name)
     expect_feedback_source_to_be(page, 'CYCLE_3_PAGE')
   end

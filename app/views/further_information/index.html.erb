@@ -10,7 +10,8 @@
       <fieldset>
         <div class="form-group">
           <%= f.label :cycle_three_data, class: 'form-label-bold' do %>
-              <%= t('hub.further_information.cycle_three_input_label', cycle_three_name: @attribute.name) %>
+            <%= t('hub.further_information.cycle_three_input_label', cycle_three_name: @attribute.name) %>
+            <span class="form-hint"><%= t('hub.further_information.example_text', example: @attribute.example) %></span>
           <% end %>
           <%= f.text_field :cycle_three_data, required: true, class: 'form-control form-control-3-4' %>
         </div>
@@ -19,8 +20,8 @@
           <summary>
             <span class="summary"><%= t 'hub.further_information.help_with_your', cycle_three_name: @attribute.name %></span>
           </summary>
-          <div class="panel panel-border-narrow">
-            <p><%= @attribute.help_to_find %></p>
+          <div class="panel list list-bullet">
+            <%= @attribute.help_to_find.html_safe %>
           </div>
         </details>
         </div>

@@ -332,6 +332,7 @@ cy:
       cycle_three_input_label: Enter your %{cycle_three_name}
       help_with_your: Help with your %{cycle_three_name}
       cancel: Cancel and return to %{transaction_name}
+      example_text: "Example: %{example}"
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
