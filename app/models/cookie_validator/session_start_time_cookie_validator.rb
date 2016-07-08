@@ -4,7 +4,7 @@ class CookieValidator
       @session_duration = session_duration
     end
 
-    def validate(cookies)
+    def validate(cookies, _session)
       start_time_cookie_value = cookies[::CookieNames::SESSION_STARTED_TIME_COOKIE_NAME]
       begin
         session_start_time_s = Integer(start_time_cookie_value) / 1000

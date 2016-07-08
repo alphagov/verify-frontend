@@ -7,6 +7,7 @@ require 'models/cookie_validator/no_cookies_validator'
 require 'models/cookie_validator/validation'
 require 'models/cookie_validator/successful_validation'
 require 'models/cookie_validator/validation_failure'
+require 'models/cookie_validator/transaction_simple_id_presence'
 require 'models/cookie_names'
 require 'active_support/core_ext/hash/except'
 require 'active_support/core_ext/date_time'
@@ -21,26 +22,32 @@ describe CookieValidator do
     }
   }
 
+  let(:session) {
+    {
+      transaction_simple_id: 'simple-id'
+    }
+  }
+
   let(:session_expiry) { 2 }
   let(:cookie_validator) {
     CookieValidator.new(session_expiry)
   }
 
   it "will fail validation if there are no cookies" do
-    validation = cookie_validator.validate({})
+    validation = cookie_validator.validate({}, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :no_cookies
     expect(validation.message).to eql "No session cookies can be found"
   end
 
   it "will pass validation if all cookies are present" do
-    validation = cookie_validator.validate(cookies)
+    validation = cookie_validator.validate(cookies, session)
     expect(validation).to be_ok
   end
 
   it "will fail validation if session start time cookie is missing" do
     filter_cookies = cookies.except(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME)
-    validation = cookie_validator.validate(filter_cookies)
+    validation = cookie_validator.validate(filter_cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "The following cookies are missing: [#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME}]"
@@ -48,7 +55,7 @@ describe CookieValidator do
 
   it "will fail validation if secure cookie is missing" do
     filter_cookies = cookies.except(CookieNames::SECURE_COOKIE_NAME)
-    validation = cookie_validator.validate(filter_cookies)
+    validation = cookie_validator.validate(filter_cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "The following cookies are missing: [#{CookieNames::SECURE_COOKIE_NAME}]"
@@ -56,7 +63,7 @@ describe CookieValidator do
 
   it "will fail validation if session id cookie is missing" do
     filter_cookies = cookies.except(CookieNames::SESSION_ID_COOKIE_NAME)
-    validation = cookie_validator.validate(filter_cookies)
+    validation = cookie_validator.validate(filter_cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "The following cookies are missing: [#{CookieNames::SESSION_ID_COOKIE_NAME}]"
@@ -64,7 +71,7 @@ describe CookieValidator do
 
   it "will fail validation if session id and session start time cookie is missing" do
     filter_cookies = cookies.except(CookieNames::SESSION_ID_COOKIE_NAME).except(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME)
-    validation = cookie_validator.validate(filter_cookies)
+    validation = cookie_validator.validate(filter_cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "The following cookies are missing: [#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME}, #{CookieNames::SESSION_ID_COOKIE_NAME}]"
@@ -72,7 +79,7 @@ describe CookieValidator do
 
   it "will fail validation if session id and secure cookie are missing" do
     filter_cookies = cookies.except(CookieNames::SESSION_ID_COOKIE_NAME).except(CookieNames::SECURE_COOKIE_NAME)
-    validation = cookie_validator.validate(filter_cookies)
+    validation = cookie_validator.validate(filter_cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "The following cookies are missing: [#{CookieNames::SESSION_ID_COOKIE_NAME}, #{CookieNames::SECURE_COOKIE_NAME}]"
@@ -80,7 +87,7 @@ describe CookieValidator do
 
   it "will fail validation if session start time and secure cookie are missing" do
     filter_cookies = cookies.except(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME).except(CookieNames::SECURE_COOKIE_NAME)
-    validation = cookie_validator.validate(filter_cookies)
+    validation = cookie_validator.validate(filter_cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "The following cookies are missing: [#{CookieNames::SESSION_STARTED_TIME_COOKIE_NAME}, #{CookieNames::SECURE_COOKIE_NAME}]"
@@ -88,7 +95,7 @@ describe CookieValidator do
 
   it "will fail validation if session start time cookie can't be parsed" do
     filter_cookies = cookies.merge(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => "unparsable")
-    validation = cookie_validator.validate(filter_cookies)
+    validation = cookie_validator.validate(filter_cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "The session start time cookie, 'unparsable', can't be parsed"
@@ -96,7 +103,7 @@ describe CookieValidator do
 
   it "will fail validation if session start time cookie is expired" do
     filter_cookies = cookies.merge(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => (session_expiry.hours.ago.to_i * 1000).to_s)
-    validation = cookie_validator.validate(filter_cookies)
+    validation = cookie_validator.validate(filter_cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :cookie_expired
     expect(validation.message).to eql 'session_start_time cookie for session "my-session-id" has expired'
@@ -104,9 +111,17 @@ describe CookieValidator do
 
   it "will fail validation if session id cookie is set to 'no-current-session'" do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'no-current-session'
-    validation = cookie_validator.validate(cookies)
+    validation = cookie_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "Secure cookie was set to a deleted session value 'no-current-session', indicating a previously completed session."
+  end
+
+  it 'will fail validation if session is missing current transaction simple id' do
+    session.delete(:transaction_simple_id)
+    validation = cookie_validator.validate(cookies, session)
+    expect(validation).to_not be_ok
+    expect(validation.type).to eql :something_went_wrong
+    expect(validation.message).to eql "Transaction simple ID can not be found in the user's session"
   end
 end

@@ -1,6 +1,6 @@
 class CookieValidator
   class NoCookiesValidator
-    def validate(cookies)
+    def validate(cookies, _session)
       if all_cookies_missing?(cookies)
         ValidationFailure.no_cookies
       else

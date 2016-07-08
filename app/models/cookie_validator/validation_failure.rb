@@ -1,5 +1,5 @@
 class CookieValidator
-  class ValidationFailure
+  class ValidationFailure < Validation
     def self.something_went_wrong(message)
       ValidationFailure.new(:something_went_wrong, :internal_server_error, message)
     end

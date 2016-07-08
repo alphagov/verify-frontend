@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_cookies
-    validation = cookie_validator.validate(cookies)
+    validation = cookie_validator.validate(cookies, session)
     unless validation.ok?
       logger.info(validation.message)
       render_error(validation.type, validation.status)
