@@ -67,7 +67,13 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
-  get 'further-information', to: 'further_information#index', as: :further_information
+
+  if ENV["USE_OLD_CYCLE3_ROUTING"]
+    get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
+  else
+    get 'further-information', to: 'further_information#index', as: :further_information
+  end
+
   post 'further-information', to: 'further_information#submit', as: :further_information_submit
   post 'further-information/cancel', to: 'further_information#cancel', as: :further_information_cancel
 
