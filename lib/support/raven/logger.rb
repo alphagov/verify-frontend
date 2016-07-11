@@ -31,9 +31,13 @@ module Support
 
       class RavenWriter
         def write(msg = nil)
-          unless msg.nil? || msg.is_a?(ActionController::RoutingError) || message_is_raven_log?(msg)
+          unless msg.nil? || message_is_404?(msg) || message_is_raven_log?(msg)
             ::Raven.capture_exception(msg)
           end
+        end
+
+        def message_is_404?(message)
+          message.is_a?(ActionController::RoutingError) || (message.is_a?(String) && message.start_with?("ActionController::RoutingError"))
         end
 
         def message_is_raven_log?(message)

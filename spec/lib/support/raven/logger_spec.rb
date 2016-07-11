@@ -18,6 +18,12 @@ describe Support::Raven::Logger do
       logger.error(error)
     end
 
+    it 'will not send routing messages to sentry' do
+      error = 'ActionController::RoutingError (No route matches [GET] "/favicon.ico")'
+      expect(Raven).to_not receive(:capture_exception).with(error)
+      logger.error(error)
+    end
+
     it 'will send non-exceptions to sentry after inspection' do
       msg = double(:message)
       inspected = double(:inspected)
