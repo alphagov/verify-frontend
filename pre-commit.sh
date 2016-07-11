@@ -25,10 +25,12 @@ success=$((success || $?))
 bundle exec rake spec:javascripts
 success=$((success || $?))
 
-if [ $success -eq 0 ]
-then
-  funky_pass_banner
-else
-  funky_fail_banner
+if [ -t 1 ]; then
+  if [ $success -eq 0 ]
+  then
+    funky_pass_banner
+  else
+    funky_fail_banner
+  fi
 fi
-
+exit $success
