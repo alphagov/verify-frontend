@@ -1,0 +1,2 @@
+name: NationalInsuranceNumber
+pattern: '^(([AEHJLOR-SW-Yaehjlor-sw-y]|([Bb](?![Gg]))|([Cc](?![Rr]))|([Gg](?![Bb]))|([Kk](?![Nn]))|([Mm](?![Ww]))|([Nn](?![CKTckt]))|([Pp](?![PYZpyz]))|([Tt](?![Nn]))|([Zz](?![Zz])))[A-CEGHJ-NPR-TW-Za-ceghj-npr-tw-z][0-9]{6}[ABCDabcd])$'

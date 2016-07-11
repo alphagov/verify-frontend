@@ -26,4 +26,5 @@ CONFIG = Configuration.load! do
   option_string 'zendesk_token', 'ZENDESK_TOKEN'
   option_string 'rp_config', 'RP_CONFIG'
   option_string 'idp_config', 'IDP_CONFIG'
+  option_string 'cycle_three_attributes_directory', 'CYCLE_THREE_ATTRIBUTES_DIRECTORY'
 end

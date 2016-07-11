@@ -6,12 +6,15 @@
     <h1 class="heading-xlarge"><%= @transaction_name.capitalize %></h1>
     <p><%= t('hub.further_information.first_time') %></p>
 
-    <%= form_for @form, url: further_information_submit_path do |f| %>
+    <%= form_for @form, url: further_information_submit_path, html: { novalidate: true } do |f| %>
       <fieldset>
-        <div class="form-group">
+        <div class="form-group <%= 'error' if @form.errors[:cycle_three_data].any? %>">
           <%= f.label :cycle_three_data, class: 'form-label-bold' do %>
             <%= t('hub.further_information.cycle_three_input_label', cycle_three_name: @attribute.name) %>
             <span class="form-hint"><%= t('hub.further_information.example_text', example: @attribute.example) %></span>
+            <% @form.errors[:cycle_three_data].each do |error| %>
+              <span class="error-message"><%= t(error, cycle_three_name: @attribute.name) %></span>
+            <% end %>
           <% end %>
           <%= f.text_field :cycle_three_data, required: true, class: 'form-control form-control-3-4' %>
         </div>

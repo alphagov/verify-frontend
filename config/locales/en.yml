@@ -327,6 +327,7 @@ en:
       help_with_your: Help with your %{cycle_three_name}
       cancel: Cancel and return to %{transaction_name}
       example_text: "Example: %{example}"
+      attribute_validation_message: Please enter a valid %{cycle_three_name}
   errors:
     transaction_list:
       title: Find the service you were using to start again

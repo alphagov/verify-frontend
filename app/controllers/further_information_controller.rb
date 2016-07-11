@@ -1,16 +1,22 @@
 class FurtherInformationController < ApplicationController
   def index
     @attribute = FURTHER_INFORMATION_SERVICE.fetch(cookies)
-    @form = CycleThreeForm.new({})
+    @form = CYCLE_THREE_FORMS.fetch(@attribute.simple_id).new({})
     @transaction_name = current_transaction.name
   end
 
   def submit
-    form = CycleThreeForm.new(params['cycle_three_form'])
-    attribute = FURTHER_INFORMATION_SERVICE.fetch(cookies)
-    FURTHER_INFORMATION_SERVICE.submit(cookies, form.cycle_three_data)
-    FEDERATION_REPORTER.report_cycle_three(request, attribute.simple_id)
-    redirect_to response_processing_path
+    @attribute = FURTHER_INFORMATION_SERVICE.fetch(cookies)
+    form_class = CYCLE_THREE_FORMS.fetch(@attribute.simple_id)
+    @form = form_class.new(params.fetch('cycle_three_form'))
+    if @form.valid?
+      FURTHER_INFORMATION_SERVICE.submit(cookies, @form.cycle_three_data)
+      FEDERATION_REPORTER.report_cycle_three(request, @attribute.simple_id)
+      redirect_to response_processing_path
+    else
+      @transaction_name = current_transaction.name
+      render 'index'
+    end
   end
 
   def cancel
