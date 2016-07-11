@@ -37,7 +37,7 @@ module Support
         end
 
         def message_is_404?(message)
-          message.is_a?(ActionController::RoutingError) || (message.is_a?(String) && message.start_with?("ActionController::RoutingError"))
+          message.is_a?(ActionController::RoutingError) || (message.is_a?(String) && message.start_with?("\nActionController::RoutingError"))
         end
 
         def message_is_raven_log?(message)
