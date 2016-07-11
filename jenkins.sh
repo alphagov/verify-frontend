@@ -3,7 +3,7 @@
 bundle
 export HEADLESS=true
 export DISPLAY=:0
-. ./pre-commit.sh
+./pre-commit.sh
 RAILS_ENV=production dotenv bundle exec rake assets:precompile
 RAILS_ENV=production dotenv bundle exec rake tmp:clear
 
