@@ -66,6 +66,7 @@ end
 def set_session_cookies!
   cookie_hash = create_cookie_hash
   set_cookies!(cookie_hash)
+  page.set_rack_session(transaction_simple_id: 'test-rp')
   cookie_hash
 end
 

@@ -1,6 +1,6 @@
 class CookieValidator
   class MissingCookiesValidator
-    def validate(cookies)
+    def validate(cookies, _session)
       missing_cookies = []
       if start_time_cookie_missing?(cookies)
         missing_cookies << ::CookieNames::SESSION_STARTED_TIME_COOKIE_NAME
