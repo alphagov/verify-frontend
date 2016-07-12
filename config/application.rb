@@ -13,7 +13,6 @@ require "sprockets/railtie"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 
-require "./lib/action_view/helpers/verify_form_builder"
 
 Bundler.require(*Rails.groups)
 
@@ -44,8 +43,5 @@ module VerifyFrontend
     # by default rails wraps invalid inputs with <div class="field_with_errors">
     # we have our own way of styling errors, so we don't need this behaviour:
     config.action_view.field_error_proc = Proc.new { |html_tag| html_tag }
-
-    # add in our custom form builder
-    ActionView::Base.default_form_builder = VerifyFormBuilder::FormBuilder
   end
 end
