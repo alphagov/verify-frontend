@@ -20,24 +20,24 @@
               <fieldset class="inline">
                 <legend class="visually-hidden">1. <%= t 'hub.select_documents.question.driving_licence'%></legend>
                 <span aria-hidden="true">1. <%= t 'hub.select_documents.question.driving_licence'%></span>
-                <%= render 'shared/block_label', form: f, key: :driving_licence, value: true, label: t('hub.select_documents.documents_option_yes') %>
-                <%= render 'shared/block_label', form: f, key: :driving_licence, value: false, label: t('option.no') %>
+                <%= f.block_label :driving_licence, true, t('hub.select_documents.documents_option_yes') %>
+                <%= f.block_label :driving_licence, false, t('option.no') %>
               </fieldset>
             </div>
             <div class="form-group">
               <fieldset class="inline">
                 <legend class="visually-hidden">2. <%= t 'hub.select_documents.question.passport'%></legend>
                 <span aria-hidden="true">2. <%= t 'hub.select_documents.question.passport'%></span>
-                <%= render 'shared/block_label', form: f, key: :passport, value: true, label: t('hub.select_documents.documents_option_yes') %>
-                <%= render 'shared/block_label', form: f, key: :passport, value: false, label: t('option.no') %>
+                <%= f.block_label :passport, true, t('hub.select_documents.documents_option_yes') %>
+                <%= f.block_label :passport, false, t('option.no') %>
               </fieldset>
             </div>
             <div class="form-group">
               <fieldset class="inline">
                 <legend class="visually-hidden">3. <%= t 'hub.select_documents.question.non_uk_id_document'%></legend>
                 <span aria-hidden="true">3. <%= t 'hub.select_documents.question.non_uk_id_document'%></span>
-                <%= render 'shared/block_label', form: f, key: :non_uk_id_document, value: true, label: t('hub.select_documents.documents_option_yes') %>
-                <%= render 'shared/block_label', form: f, key: :non_uk_id_document, value: false, label: t('option.no') %>
+                <%= f.block_label :non_uk_id_document, true, t('hub.select_documents.documents_option_yes') %>
+                <%= f.block_label :non_uk_id_document, false, t('option.no') %>
               </fieldset>
             </div>
             <%= f.label :no_documents, {class: 'block-label'} do %>

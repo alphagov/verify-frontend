@@ -14,8 +14,8 @@
 
   <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
     <fieldset>
-      <%= render 'shared/block_label', form: f, key: :selection, value: true, label: t('hub.start.answer_yes'), attributes: {required: true, data: { msg: t('hub.start.error_message')}} %>
-      <%= render 'shared/block_label', form: f, key: :selection, value: false, label: t('hub.start.answer_no'), attributes: {required: true, data: { msg: t('hub.start.error_message')}} %>
+      <%= f.block_label :selection, true, t('hub.start.answer_yes'), {required: true, data: { msg: t('hub.start.error_message')}} %>
+      <%= f.block_label :selection, false, t('hub.start.answer_no'), {required: true, data: { msg: t('hub.start.error_message')}} %>
     </fieldset>
   <% end %>
 

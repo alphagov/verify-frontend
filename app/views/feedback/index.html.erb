@@ -62,8 +62,8 @@
                 <% if @form.errors.include?(:reply)%>
                   <span class="error-message"><%= @form.errors[:reply].first %></span>
                 <% end %>
-                <%= render 'shared/block_label', form: f, key: :reply, value: true, label: t('hub.feedback.questions.reply_option_yes'), attributes: {required: true, data: { msg: t('hub.feedback.errors.reply')}} %>
-                <%= render 'shared/block_label', form: f, key: :reply, value: false, label: t('option.no'), attributes: {required: true, data: { msg: t('hub.feedback.errors.reply')}} %>
+                <%= f.block_label :reply, true, t('hub.feedback.questions.reply_option_yes'), {required: true, data: { msg: t('hub.feedback.errors.reply')}} %>
+                <%= f.block_label :reply, false, t('option.no'), {required: true, data: { msg: t('hub.feedback.errors.reply')}} %>
               <% end %>
             </fieldset>
 
