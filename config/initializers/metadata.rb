@@ -1,2 +1,0 @@
-SAML_PROXY_HOST = CONFIG.saml_proxy_host
-METADATA_CLIENT = MetadataClient.new(SAML_PROXY_HOST)
