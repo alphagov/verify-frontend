@@ -64,6 +64,18 @@ RSpec.describe 'user encounters error page' do
     expect(page.status_code).to eq(500)
   end
 
+  it 'will present something went wrong when parsable upstream error occurs and not log error' do
+    expect(Raven).to_not receive(:capture_exception)
+    expect(Rails.logger).to_not receive(:error)
+    error_body = { id: '0', type: 'SERVER_ERROR' }
+    stub_request(:post, api_saml_endpoint).and_return(status: 500, body: error_body.to_json)
+    stub_transactions_list
+    visit '/test-saml'
+    click_button "saml-post"
+    expect(page).to have_content "Sorry, something went wrong"
+    expect(page.status_code).to eq(500)
+  end
+
   it 'will present session error page when session error occurs in upstream systems' do
     set_session_cookies!
     error_body = { id: '0', type: 'SESSION_ERROR' }
