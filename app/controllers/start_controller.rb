@@ -6,9 +6,12 @@ class StartController < ApplicationController
   end
 
   def request_post
+    if params['selection'].present?
+      params['start_form'] = { selection: params['selection'] }
+    end
     @form = StartForm.new(params['start_form'] || {})
     if @form.valid?
-      if params[:start_form][:selection] == 'true'
+      if @form.registration?
         redirect_to about_path, status: :see_other
       else
         redirect_to sign_in_path, status: :see_other

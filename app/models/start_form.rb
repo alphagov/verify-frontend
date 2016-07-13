@@ -8,6 +8,10 @@ class StartForm
     @selection = hash[:selection]
   end
 
+  def registration?
+    self.selection == 'true'
+  end
+
 private
 
   def answer_required
