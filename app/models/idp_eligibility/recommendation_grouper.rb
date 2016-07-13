@@ -6,7 +6,6 @@ module IdpEligibility
       @recommended_profile_filter = recommended_profile_filter
       @non_recommended_profile_filter = non_recommended_profile_filter
       @demo_profile_filter = demo_profile_filter
-      @filter = Filter.new
       @transaction_blacklist = transaction_blacklist
     end
 
@@ -29,7 +28,7 @@ module IdpEligibility
   private
 
     def non_recommended_idps(enabled_idps, evidence, demo_profiles_should_be_recommended)
-      idps_with_non_recommended_profiles = @filter.filter_idps(@non_recommended_profile_filter, evidence, enabled_idps)
+      idps_with_non_recommended_profiles = @non_recommended_profile_filter.filter_idps_for(evidence, enabled_idps)
       if demo_profiles_should_be_recommended
         idps_with_non_recommended_profiles
       else
@@ -38,7 +37,7 @@ module IdpEligibility
     end
 
     def recommended_idps(evidence, enabled_idps, demo_profiles_should_be_recommended)
-      idps_with_recommended_profiles = @filter.filter_idps(@recommended_profile_filter, evidence, enabled_idps)
+      idps_with_recommended_profiles = @recommended_profile_filter.filter_idps_for(evidence, enabled_idps)
       if demo_profiles_should_be_recommended
         idps_with_recommended_profiles + idps_with_demo_profiles(evidence, enabled_idps)
       else
@@ -47,7 +46,7 @@ module IdpEligibility
     end
 
     def idps_with_demo_profiles(evidence, enabled_idps)
-      @filter.filter_idps(@demo_profile_filter, evidence, enabled_idps)
+      @demo_profile_filter.filter_idps_for(evidence, enabled_idps)
     end
   end
 end

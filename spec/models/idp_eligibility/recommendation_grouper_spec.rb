@@ -1,6 +1,5 @@
 require 'idp_eligibility/profile_filter'
 require 'idp_eligibility/recommendation_grouper'
-require 'idp_eligibility/filter'
 require 'idp_eligibility/profile'
 require 'set'
 

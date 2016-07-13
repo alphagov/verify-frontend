@@ -4,23 +4,35 @@ require 'idp_eligibility/profile'
 
 module IdpEligibility
   describe ProfileFilter do
-    describe '#idps_for_profile' do
-      it 'should return idps that meet a profile' do
-        rules_hash = { 'example-idp' => [Profile.new(%i(passport driving_licence))] }
-        repository = ProfileFilter.new(rules_hash)
-        expect(repository.idps_for(%i{passport driving_licence})).to eql(['example-idp'])
+    describe "#filter_idps_for" do
+      it 'will returns idps that meet evidence using their simple id' do
+        idp_one = double(:idp_one, simple_id: 'idp_one')
+        idp_two = double(:idp_two, simple_id: 'idp_two')
+        profiles_hash = { 'idp_one' => [Profile.new(%i(driving_licence passport)), Profile.new(%i{mobile_phone})] }
+        enabled_idps = [idp_one, idp_two]
+        evidence = %i{passport driving_licence}
+        filtered_idps = ProfileFilter.new(profiles_hash).filter_idps_for(evidence, enabled_idps)
+        expect(filtered_idps).to eql [idp_one].to_set
       end
 
-      it 'should not return idps don\'t meet a profile' do
-        rules_hash = { 'example-idp' => [Profile.new(%i(driving_licence passport mobile_phone))] }
-        repository = ProfileFilter.new(rules_hash)
-        expect(repository.idps_for(%i{passport driving_licence})).to eql([])
+      it 'will only return an idp once even if it matching profiles multiple times' do
+        idp_one = double(:idp_one, simple_id: 'idp_one')
+        idp_two = double(:idp_two, simple_id: 'idp_two')
+        profiles_hash = { 'idp_one' => [Profile.new(%i(driving_licence passport)), Profile.new(%i{mobile_phone})] }
+        enabled_idps = [idp_one, idp_two]
+        evidence = %i{passport driving_licence mobile_phone}
+        filtered_idps = ProfileFilter.new(profiles_hash).filter_idps_for(evidence, enabled_idps)
+        expect(filtered_idps).to eql [idp_one].to_set
       end
 
-      it 'should return idps that meet a profile that implement many profiles' do
-        rules_hash = { 'example-idp' => [Profile.new(%i(driving_licence passport)), Profile.new(%i{mobile_phone})] }
-        repository = ProfileFilter.new(rules_hash)
-        expect(repository.idps_for(%i{passport driving_licence})).to eql(['example-idp'])
+      it 'will not returns idps that do not meet evidence using their simple id' do
+        idp_one = double(:idp_one, simple_id: 'idp_one')
+        idp_two = double(:idp_two, simple_id: 'idp_two')
+        profiles_hash = { 'idp_one' => [Profile.new(%i(driving_licence passport)), Profile.new(%i{mobile_phone})] }
+        enabled_idps = [idp_one, idp_two]
+        evidence = %i{landline_phone non_uk_id_document}
+        filtered_idps = ProfileFilter.new(profiles_hash).filter_idps_for(evidence, enabled_idps)
+        expect(filtered_idps).to be_empty
       end
     end
   end
