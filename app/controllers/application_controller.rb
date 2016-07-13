@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   rescue_from StandardError, with: :something_went_wrong unless Rails.env == 'development'
   rescue_from Errors::WarningLevelError, with: :something_went_wrong_warn
   rescue_from Api::SessionError, with: :session_error
+  rescue_from Api::UpstreamError, with: :something_went_wrong_warn
   rescue_from Api::SessionTimeoutError, with: :session_timeout
 
   prepend RedirectWithSeeOther

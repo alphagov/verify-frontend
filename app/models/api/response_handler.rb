@@ -13,13 +13,13 @@ module Api
     def handle_error(body, status)
       json = parse_json(body, status) || {}
       error_message = message(status, json)
-      case json.fetch('type', 'NONE')
+      case json.fetch('type') { raise Error, error_message }
       when SessionError::TYPE
         raise SessionError, error_message
       when SessionTimeoutError::TYPE
         raise SessionTimeoutError, error_message
       else
-        raise Error, error_message
+        raise UpstreamError, error_message
       end
     end
 
