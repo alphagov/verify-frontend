@@ -6,6 +6,9 @@ class StartController < ApplicationController
   end
 
   def request_post
+    if params['start_form'].present?
+      params['selection'] = params['start_form']['selection']
+    end
     if params['selection'].blank?
       @error_message = 'hub.start.error_message'
       render 'index'
