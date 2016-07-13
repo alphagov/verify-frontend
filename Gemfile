@@ -3,7 +3,7 @@ ruby '2.3.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.2'
+gem 'rails', '4.2.7'
 gem 'rails-i18n', '~> 4.0'
 gem 'route_translator', '~> 4.2'
 
