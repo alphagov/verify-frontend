@@ -16,7 +16,7 @@ describe YamlLoader do
         { "name" => "Lloyd", "favourite_colour" => "ruby" },
         { "name" => "Tom", "favourite_colour" => "java" }
       ]
-      expect(yaml_loader.load(dir)).to eql(expected)
+      expect(yaml_loader.load(dir)).to match_array(expected)
     }
   end
 end
