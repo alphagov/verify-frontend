@@ -26,6 +26,14 @@ module CycleThree
         path = fixtures('invalid_attributes')
         expect { CycleThreeFormGenerator.new.form_classes_by_name(path) }.to raise_error RegexpError
       end
+
+      it 'should truncate cycle three data if length provided' do
+        path = fixtures('good_attributes')
+        form_classes = CycleThreeFormGenerator.new.form_classes_by_name(path)
+        expect(form_classes['DrivingLicenceNumber'].new(
+          cycle_three_data: '123456789012345678'
+        ).sanitised_cycle_three_data).to eql('1234567890123456')
+      end
     end
   end
 end

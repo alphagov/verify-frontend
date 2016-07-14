@@ -11,7 +11,8 @@ module CycleThree
       begin
         load_yaml(directory_path).map do |attribute|
           pattern = attribute.fetch('pattern')
-          form_classes[attribute.fetch('name')] = class_of(Regexp.new(pattern))
+          length = attribute['length']
+          form_classes[attribute.fetch('name')] = class_of(Regexp.new(pattern), length)
         end
       rescue KeyError => e
         raise MissingDataError, e.message
@@ -21,10 +22,15 @@ module CycleThree
 
   private
 
-    def class_of(regex)
+    def class_of(regex, length)
       Class.new(CycleThreeForm) do
         define_method(:pattern) do
           regex
+        end
+        if length
+          define_method(:sanitised_cycle_three_data) do
+            super()[0, length]
+          end
         end
       end
     end
