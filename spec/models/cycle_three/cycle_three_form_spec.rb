@@ -35,6 +35,14 @@ module CycleThree
 
         expect(form.sanitised_cycle_three_data).to eq('123')
       end
+
+      it 'should uppercase cycle 3 data' do
+        form_class = letters_only_form
+
+        form = form_class.new(cycle_three_data: 'abc')
+
+        expect(form.sanitised_cycle_three_data).to eq('ABC')
+      end
     end
   end
 end
