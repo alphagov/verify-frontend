@@ -19,7 +19,7 @@ module CycleThree
     end
 
     def sanitised_cycle_three_data
-      @cycle_three_data.gsub(/[\s-]/, '').upcase
+      @cycle_three_data.gsub(/[^a-zA-Z0-9]/, '').upcase
     end
 
   private
