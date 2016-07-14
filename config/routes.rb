@@ -72,10 +72,14 @@ Rails.application.routes.draw do
     get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
   else
     get 'further-information', to: 'further_information#index', as: :further_information
+    get 'further-information-cy', to: 'further_information#index', as: :further_information_cy
   end
 
   post 'further-information', to: 'further_information#submit', as: :further_information_submit
+  post 'further-information-cy', to: 'further_information#submit'
   post 'further-information/cancel', to: 'further_information#cancel', as: :further_information_cancel
+  post 'further-information-cy/cancel', to: 'further_information#cancel'
+
 
   if Rails.env == 'development'
     get 'feedback/feedback-sent', to: redirect("#{API_HOST}/feedback/feedback-sent"), as: :feedback_sent

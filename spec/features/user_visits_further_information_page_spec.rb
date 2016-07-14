@@ -9,6 +9,14 @@ RSpec.describe 'user visits further information page' do
     set_session_cookies!
   end
 
+  it 'should also be in welsh' do
+    stub_cycle_three_attribute_request('NationalInsuranceNumber')
+    visit further_information_cy_path
+    expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: 'National Insurance number', locale: :cy)
+    pending 'welsh routes are not localised yet'
+    expect(page).to have_css 'html[lang=cy]'
+  end
+
   it 'will display page for National Insurance number' do
     stub_cycle_three_attribute_request('NationalInsuranceNumber')
 
