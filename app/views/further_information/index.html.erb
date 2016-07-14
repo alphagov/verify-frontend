@@ -23,7 +23,8 @@
           <%= f.text_field :cycle_three_data, required: true, pattern: h(@form.pattern.source),
                            class: 'form-control form-control-3-4',
                            'data-msg': t('hub.further_information.attribute_validation_message',
-                                         cycle_three_name: @attribute.name) %>
+                                         cycle_three_name: @attribute.name),
+                           autocomplete: 'off' %>
         </div>
         <div class="form-group">
         <details>
