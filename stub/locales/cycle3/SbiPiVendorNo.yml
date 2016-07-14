@@ -1,9 +1,0 @@
-en:
-  cycle3:
-    SbiPiVendorNo:
-      name: CAP Identifier
-      help_to_find: |
-        <p>If you've registered with the Rural Payments Agency, you will have received
-        a Single Business Identifier(SBI) number and a Personal Identifier(PI) number for your business.
-        You can find these on letters and emails from Defra.</p>
-      example: "SBI number: 908091917, PI number: 908716809"
