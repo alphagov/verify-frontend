@@ -1,4 +1,4 @@
-require 'yaml'
+require 'yaml_loader'
 require 'idp_eligibility/attribute_masker'
 require 'idp_eligibility/evidence'
 
@@ -51,10 +51,7 @@ module IdpEligibility
     end
 
     def load_yaml
-      profile_files = File.join(@profiles_path, '*.yml')
-      Dir::glob(profile_files).map do |file|
-        YAML::load_file(file)
-      end
+      YamlLoader.new.load(@profiles_path)
     end
 
     def merge_profiles(left_profiles, right_profiles)

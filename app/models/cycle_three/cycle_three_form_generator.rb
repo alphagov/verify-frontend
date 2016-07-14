@@ -1,4 +1,4 @@
-require 'yaml'
+require 'yaml_loader'
 require 'cycle_three/cycle_three_form'
 
 module CycleThree
@@ -36,10 +36,7 @@ module CycleThree
     end
 
     def load_yaml(path)
-      files = File.join(path, '*.yml')
-      Dir::glob(files).map do |file|
-        YAML::load_file(file)
-      end
+      YamlLoader.new.load(path)
     end
   end
 end
