@@ -26,5 +26,15 @@ module CycleThree
       expect(form).to_not be_valid
       expect(form.errors.full_messages).to eql ['Cycle three data hub.further_information.attribute_validation_message']
     end
+
+    describe '#sanitised_cycle_three_data' do
+      it 'should return cycle 3 data with whitespace and dashes removed' do
+        form_class = letters_only_form
+
+        form = form_class.new(cycle_three_data: " 1-2 3  \n ")
+
+        expect(form.sanitised_cycle_three_data).to eq('123')
+      end
+    end
   end
 end

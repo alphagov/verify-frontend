@@ -18,6 +18,10 @@ module CycleThree
       raise NotImplementedError
     end
 
+    def sanitised_cycle_three_data
+      @cycle_three_data.gsub(/[\s-]/, '')
+    end
+
   private
 
     def matches_regex
