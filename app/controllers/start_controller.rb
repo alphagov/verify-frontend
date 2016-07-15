@@ -2,20 +2,23 @@ class StartController < ApplicationController
   layout 'slides'
 
   def index
-    render 'index'
+    @form = StartForm.new({})
   end
 
   def request_post
-    if params['start_form'].present?
-      params['selection'] = params['start_form']['selection']
+    if params['selection'].present?
+      params['start_form'] = { selection: params['selection'] }
     end
-    if params['selection'].blank?
-      @error_message = 'hub.start.error_message'
-      render 'index'
-    elsif params['selection'] == 'true'
-      redirect_to about_path(locale: I18n.locale), status: :see_other
+    @form = StartForm.new(params['start_form'] || {})
+    if @form.valid?
+      if @form.registration?
+        redirect_to about_path, status: :see_other
+      else
+        redirect_to sign_in_path, status: :see_other
+      end
     else
-      redirect_to sign_in_path(locale: I18n.locale), status: :see_other
+      flash.now[:errors] = @form.errors.full_messages.join(', ')
+      render :index
     end
   end
 end

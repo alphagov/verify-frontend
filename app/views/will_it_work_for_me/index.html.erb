@@ -13,65 +13,23 @@
         <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
               <legend><%= t 'hub.will_it_work_for_me.question.above_age_threshold' %></legend>
-              <%= f.label :above_age_threshold_true, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :above_age_threshold, 'true' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'hub.will_it_work_for_me.question.option_yes' %>
-              <% end %>
-              <%= f.label :above_age_threshold_false, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :above_age_threshold, 'false' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'option.no' %>
-              <% end %>
+              <%= f.block_label :above_age_threshold, true, t('hub.will_it_work_for_me.question.option_yes') %>
+              <%= f.block_label :above_age_threshold, false, t('option.no') %>
             </fieldset>
         <% end %>
         <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
               <legend><%= t 'hub.will_it_work_for_me.question.resident_last_12_months' %></legend>
-              <%= f.label :resident_last_12_months_true, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :resident_last_12_months, 'true' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'hub.will_it_work_for_me.question.option_yes' %>
-              <% end %>
-              <%= f.label :resident_last_12_months_false, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :resident_last_12_months, 'false' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'option.no' %>
-              <% end %>
+              <%= f.block_label :resident_last_12_months, true, t('hub.will_it_work_for_me.question.option_yes') %>
+              <%= f.block_label :resident_last_12_months, false, t('option.no') %>
             </fieldset>
         <% end %>
         <%= content_tag :div, id: :not_resident_reason, class: hidden_form_question_class do %>
             <fieldset class="inline">
               <legend><%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %></legend>
-              <%= f.label :not_resident_reason_movedrecently, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :not_resident_reason, 'MovedRecently' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'hub.will_it_work_for_me.question.not_resident_reason.recently' %>
-              <% end %>
-              <%= f.label :not_resident_reason_addressbutnotresident, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :not_resident_reason, 'AddressButNotResident' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'hub.will_it_work_for_me.question.not_resident_reason.not_resident' %>
-              <% end %>
-              <%= f.label :not_resident_reason_noaddress, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :not_resident_reason, 'NoAddress' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'hub.will_it_work_for_me.question.not_resident_reason.no_address' %>
-              <% end %>
+              <%= f.block_label :not_resident_reason, 'MovedRecently', t('hub.will_it_work_for_me.question.option_yes') %>
+              <%= f.block_label :not_resident_reason, 'AddressButNotResident', t('hub.will_it_work_for_me.question.not_resident_reason.not_resident') %>
+              <%= f.block_label :not_resident_reason, 'NoAddress', t('hub.will_it_work_for_me.question.not_resident_reason.no_address') %>
             </fieldset>
         <% end %>
 

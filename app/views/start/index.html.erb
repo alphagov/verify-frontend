@@ -4,33 +4,19 @@
 
 <h1 class="heading-large"><%= t 'hub.start.heading' %></h1>
 
-<%= form_tag start_path, id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate' do %>
-  <div class="form-group <%= @error_message.present? ? 'error' : '' %>">
+<%= form_for @form, url: start_path, html: {id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
+
+  <% if flash[:errors] %>
+    <div id="validation-error-message-no-js" class="validation-message form-group">
+      <p class="error"><%= flash[:errors] %></p>
+    </div>
+  <% end %>
+
+  <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
     <fieldset>
-      <label class="block-label" for="yes" onclick="">
-        <input id="yes"
-               type="radio"
-               name="selection"
-               value="true"
-               required
-               data-msg="<%= h(t 'hub.start.error_message') %>" />
-        <span><span class="inner">&nbsp;</span></span>
-        <%= t 'hub.start.answer_yes' %>
-      </label>
-      <label class="block-label" for="no" onclick="">
-        <input id="no"
-               type="radio"
-               name="selection"
-               value="false"
-               required
-               data-msg="<%= h(t 'hub.start.error_message') %>" />
-        <span><span class="inner">&nbsp;</span></span>
-        <%= t 'hub.start.answer_no' %>
-      </label>
+      <%= f.block_label :selection, true, t('hub.start.answer_yes'), {required: true, data: { msg: t('hub.start.error_message')}} %>
+      <%= f.block_label :selection, false, t('hub.start.answer_no'), {required: true, data: { msg: t('hub.start.error_message')}} %>
     </fieldset>
-  </div>
-  <% if @error_message.present? %>
-    <div class="form-group error validation-message" id="validation-error-message-no-js"><%= t @error_message %></div>
   <% end %>
 
   <div id="validation-error-message-js"></div>

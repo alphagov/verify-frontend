@@ -16,66 +16,24 @@
         <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
               <legend class="visually-hidden"><%= t 'hub.select_phone.question.mobile_phone' %></legend>
-              <%= f.label :mobile_phone_true, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :mobile_phone, 'true' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'hub.select_phone.question.mobile_phone_option_yes' %>
-              <% end %>
-              <%= f.label :mobile_phone_false, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :mobile_phone, 'false' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'option.no' %>
-              <% end %>
+              <%= f.block_label :mobile_phone, true, t('hub.select_phone.question.mobile_phone_option_yes') %>
+              <%= f.block_label :mobile_phone, false, t('option.no') %>
             </fieldset>
         <% end %>
 
         <%= content_tag :div, id: 'smartphone-question', class: hidden_form_question_class do %>
             <fieldset>
               <legend><%= t 'hub.select_phone.question.smart_phone' %></legend>
-              <%= f.label :smart_phone_true, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :smart_phone, 'true' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'hub.select_phone.question.smart_phone_option_yes' %>
-              <% end %>
-              <%= f.label :smart_phone_false, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :smart_phone, 'false' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'option.no' %>
-              <% end %>
-              <%= f.label :smart_phone_unsure, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :smart_phone, 'do_not_know', id: :select_phone_form_smart_phone_unsure %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'option.unknown' %>
-              <% end %>
+              <%= f.block_label :smart_phone, true, t('hub.select_phone.question.smart_phone_option_yes') %>
+              <%= f.block_label :smart_phone, false, t('option.no') %>
+              <%= f.block_label :smart_phone, 'do_not_know', t('option.unknown') %>
             </fieldset>
         <% end %>
         <%= content_tag :div, id: 'landline-question', class: hidden_form_question_class do %>
             <fieldset class="inline">
               <legend><%= t 'hub.select_phone.question.landline' %></legend>
-              <%= f.label :landline_true, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :landline, 'true' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'hub.select_phone.question.landline_option_yes' %>
-              <% end %>
-              <%= f.label :landline_false, {class: 'block-label', onclick: ''} do %>
-                <%= f.radio_button :landline, 'false' %>
-                <span>
-                  <span class="inner">&nbsp;</span>
-                </span>
-                <%= t 'option.no' %>
-              <% end %>
+              <%= f.block_label :landline, true, t('hub.select_phone.question.landline_option_yes') %>
+              <%= f.block_label :landline, false, t('option.no') %>
             </fieldset>
         <% end %>
 

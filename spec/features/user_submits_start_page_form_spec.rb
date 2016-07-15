@@ -13,7 +13,7 @@ RSpec.describe 'when user submits start page form' do
     stub_request(:get, INTERNAL_PIWIK.url)
     set_session_cookies!
     visit '/start'
-    choose('yes')
+    choose('start_form_selection_true')
     click_button('next-button')
     expect(current_path).to eq('/about')
   end
@@ -22,7 +22,7 @@ RSpec.describe 'when user submits start page form' do
     given_api_returns_federation_info
     set_session_cookies!
     visit '/start'
-    choose('no')
+    choose('start_form_selection_false')
     click_button('next-button')
 
     expect(current_path).to eq('/sign-in')
@@ -41,7 +41,7 @@ RSpec.describe 'when user submits start page form' do
     given_api_returns_federation_info
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     visit '/start'
-    choose('no')
+    choose('start_form_selection_false')
     click_button('next-button')
 
     piwik_request = {

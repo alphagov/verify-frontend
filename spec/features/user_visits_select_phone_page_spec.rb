@@ -35,7 +35,7 @@ RSpec.describe 'When the user visits the select phone page' do
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_true'
-      choose 'select_phone_form_smart_phone_unsure'
+      choose 'select_phone_form_smart_phone_do_not_know'
       choose 'select_phone_form_landline_false'
       click_button 'Continue'
 
