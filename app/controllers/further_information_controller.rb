@@ -10,7 +10,7 @@ class FurtherInformationController < ApplicationController
     form_class = CYCLE_THREE_FORMS.fetch(@attribute.simple_id)
     @form = form_class.new(params.fetch('cycle_three_form'))
     if @form.valid?
-      FURTHER_INFORMATION_SERVICE.submit(cookies, @form.cycle_three_data)
+      FURTHER_INFORMATION_SERVICE.submit(cookies, @form.sanitised_cycle_three_data)
       FEDERATION_REPORTER.report_cycle_three(request, @attribute.simple_id)
       redirect_to response_processing_path
     else

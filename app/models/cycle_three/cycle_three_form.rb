@@ -3,12 +3,15 @@ module CycleThree
     include ::ActiveModel::Model
 
     attr_reader :cycle_three_data
+    attr_reader :null_attribute
 
-    validate :matches_regex
+    validate :matches_regex, unless: :null_attribute_set?
 
     def initialize(hash)
       @cycle_three_data = hash[:cycle_three_data]
+      @null_attribute = hash[:null_attribute]
     end
+
 
     def self.model_name
       ActiveModel::Name.new(self, nil, 'cycle_three_form')
@@ -19,7 +22,15 @@ module CycleThree
     end
 
     def sanitised_cycle_three_data
-      @cycle_three_data.gsub(/[^a-zA-Z0-9]/, '').upcase
+      if null_attribute_set?
+        ''
+      else
+        @cycle_three_data.gsub(/[^a-zA-Z0-9]/, '').upcase
+      end
+    end
+
+    def allows_nullable?
+      false
     end
 
   private
@@ -31,6 +42,10 @@ module CycleThree
           'hub.further_information.attribute_validation_message'
         )
       end
+    end
+
+    def null_attribute_set?
+      allows_nullable? && (null_attribute == 'true')
     end
   end
 end

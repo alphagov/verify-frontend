@@ -15,7 +15,8 @@ module CycleThree
         @file_loader.load(directory_path).map do |attribute|
           pattern = attribute.fetch('pattern')
           length = attribute['length']
-          form_classes[attribute.fetch('name')] = class_of(Regexp.new(pattern), length)
+          nullable = attribute['nullable']
+          form_classes[attribute.fetch('name')] = class_of(Regexp.new(pattern), length, nullable)
         end
       rescue KeyError => e
         raise MissingDataError, e.message
@@ -25,7 +26,7 @@ module CycleThree
 
   private
 
-    def class_of(regex, length)
+    def class_of(regex, length, nullable)
       Class.new(CycleThreeForm) do
         define_method(:pattern) do
           regex
@@ -33,6 +34,11 @@ module CycleThree
         if length
           define_method(:sanitised_cycle_three_data) do
             super()[0, length]
+          end
+        end
+        if nullable
+          define_method(:allows_nullable?) do
+            true
           end
         end
       end

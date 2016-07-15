@@ -1,0 +1,3 @@
+name: NullableAttribute
+pattern: "\\d{8,9}"
+nullable: true

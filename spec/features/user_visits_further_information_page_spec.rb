@@ -44,7 +44,7 @@ RSpec.describe 'user visits further information page' do
 
     visit further_information_path
 
-    fill_in 'cycle_three_form_cycle_three_data', with: 'MORGA657054SM9IJ'
+    fill_in 'cycle_three_form_cycle_three_data', with: 'MORGA657054SM9IJ 20'
     click_button I18n.t('navigation.continue')
 
     expect(page.current_path).to eql(response_processing_path)
@@ -66,6 +66,24 @@ RSpec.describe 'user visits further information page' do
     expect(page.current_path).to eql(redirect_to_service_start_again_path)
     expect(piwik_request).to have_been_made
     expect(cancel_request).to have_been_made
+  end
+
+  it 'will allow the user to select no value for configured matching attributes' do
+    piwik_request = stub_piwik_cycle_three('NullableAttribute')
+    stub_cycle_three_attribute_request('NullableAttribute')
+    stub_request = stub_cycle_three_value_submit('')
+    stub_matching_outcome
+
+    visit further_information_path
+    check I18n.t(
+      'hub.further_information.null_attribute',
+      cycle_three_name: I18n.t('cycle3.NullableAttribute.name')
+    )
+    click_button I18n.t('navigation.continue')
+
+    expect(page.current_path).to eql(response_processing_path)
+    expect(stub_request).to have_been_made
+    expect(piwik_request).to have_been_made
   end
 
   context 'with js off' do
