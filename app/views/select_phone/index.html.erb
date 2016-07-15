@@ -23,7 +23,10 @@
 
         <%= content_tag :div, id: 'smartphone-question', class: hidden_form_question_class do %>
             <fieldset>
-              <legend><%= t 'hub.select_phone.question.smart_phone' %></legend>
+              <legend>
+                <%= t 'hub.select_phone.question.smart_phone' %>
+                <span class="form-hint"><%= t 'hub.select_phone.question.smart_phone_subtitle' %></span>
+              </legend>
               <%= f.block_label :smart_phone, true, t('hub.select_phone.question.smart_phone_option_yes') %>
               <%= f.block_label :smart_phone, false, t('option.no') %>
               <%= f.block_label :smart_phone, 'do_not_know', t('option.unknown') %>

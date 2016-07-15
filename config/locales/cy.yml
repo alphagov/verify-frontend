@@ -124,6 +124,7 @@ cy:
         smart_phone_option_yes: Gallaf
         landline: Oes gennych chi linell daear?
         landline_option_yes: Oes
+        smart_phone_subtitle: "Some certified companies ask you to download a free app and use your phone's camera as part of verifying your identity."
       errors:
         no_selection: Dylech ateb pob cwestiwn
         invalid_selection: Dylech edrych dros eich dewis

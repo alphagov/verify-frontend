@@ -121,6 +121,7 @@ en:
         smart_phone_option_yes: 'Yes'
         landline: Do you have a landline?
         landline_option_yes: 'Yes'
+        smart_phone_subtitle: "Some certified companies ask you to download a free app and use your phone's camera as part of verifying your identity."
       errors:
         no_selection: Please answer all the questions
         invalid_selection: Please check your selection
