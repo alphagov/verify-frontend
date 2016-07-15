@@ -8,7 +8,7 @@ class SignInController < ApplicationController
       unavailable_idps.map { |simple_id| IdentityProvider.new('simple_id' => simple_id, 'entity_id' => simple_id) }
     )
 
-    FEDERATION_REPORTER.report_sign_in(current_transaction_simple_id, request)
+    FEDERATION_REPORTER.report_sign_in(current_transaction, request)
     render 'index'
   end
 

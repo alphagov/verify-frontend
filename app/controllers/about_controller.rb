@@ -3,7 +3,7 @@ class AboutController < ApplicationController
 
   def index
     FEDERATION_REPORTER.report_registration(
-      current_transaction_simple_id,
+      current_transaction,
       request
     )
   end
