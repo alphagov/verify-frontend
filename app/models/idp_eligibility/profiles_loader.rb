@@ -6,15 +6,16 @@ module IdpEligibility
   class ProfilesLoader
     attr_reader :recommended_profiles
     attr_reader :non_recommended_profiles
-    def initialize(profiles_path)
-      @profiles_path = profiles_path
+    def initialize(file_loader)
+      @file_loader = file_loader
       @document_attribute_masker = AttributeMasker.new(Evidence::DOCUMENT_ATTRIBUTES)
     end
 
-    def load
-      recommended_profiles = load_profiles("recommended_profiles")
-      non_recommended_profiles = load_profiles("non_recommended_profiles")
-      demo_profiles = load_profiles("demo_profiles") { [] }
+    def load(path)
+      profiles = @file_loader.load(path)
+      recommended_profiles = select_profiles(profiles, "recommended_profiles")
+      non_recommended_profiles = select_profiles(profiles, "non_recommended_profiles")
+      demo_profiles = select_profiles(profiles, "demo_profiles") { [] }
       all_profiles = merge_profiles(merge_profiles(recommended_profiles, non_recommended_profiles), demo_profiles)
       document_profiles = apply_documents_mask(all_profiles)
       LoadedProfileFilters.new(
@@ -23,8 +24,8 @@ module IdpEligibility
         ProfileFilter.new(demo_profiles),
         ProfileFilter.new(all_profiles),
         ProfileFilter.new(document_profiles),
-        idps_with_flag_set('send_hints'),
-        idps_with_flag_set('send_language_hint')
+        idps_with_flag_set(profiles, 'send_hints'),
+        idps_with_flag_set(profiles, 'send_language_hint')
       )
     end
 
@@ -36,22 +37,18 @@ module IdpEligibility
       @document_attribute_masker.mask(profiles)
     end
 
-    def load_profiles(type, &blk)
-      load_yaml.inject({}) do |profiles, yaml|
+    def select_profiles(profiles, type, &blk)
+      profiles.inject({}) do |selected_profiles, yaml|
         idp_profiles = yaml.fetch(type, &blk)
         yaml.fetch('simpleIds').each do |simple_id|
-          profiles[simple_id] = idp_profiles.map { |profile| Profile.new(profile) }
+          selected_profiles[simple_id] = idp_profiles.map { |profile| Profile.new(profile) }
         end
-        profiles
+        selected_profiles
       end
     end
 
-    def idps_with_flag_set(flag)
-      load_yaml.select { |data| data[flag] }.flat_map { |data| data.fetch('simpleIds') }
-    end
-
-    def load_yaml
-      YamlLoader.new.load(@profiles_path)
+    def idps_with_flag_set(profiles, flag)
+      profiles.select { |data| data[flag] }.flat_map { |data| data.fetch('simpleIds') }
     end
 
     def merge_profiles(left_profiles, right_profiles)

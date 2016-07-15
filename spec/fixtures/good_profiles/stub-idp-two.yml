@@ -1,7 +1,0 @@
-simpleIds: [ "example-idp-two" ]
-send_language_hint: true
-recommended_profiles:
-  - [ "passport", "driving_licence" ]
-non_recommended_profiles: []
-demo_profiles:
-  - ["non_uk_id_document", "mobile_phone"]

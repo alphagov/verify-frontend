@@ -5,74 +5,114 @@ require 'idp_eligibility/profile'
 
 module IdpEligibility
   describe ProfilesLoader do
-    def fixtures(data = '')
-      File.join('spec', 'fixtures', data)
-    end
+    let(:file_loader) { double(:file_loader) }
+    let(:profiles_loader) {
+      ProfilesLoader.new(file_loader)
+    }
+    let(:good_profiles) {
+      [
+        {
+          'simpleIds' => %w(example-idp example-idp-stub),
+          'send_hints' => 'true',
+          'recommended_profiles' => [%w(passport driving_licence)],
+          'non_recommended_profiles' => [%w(passport mobile_phone)]
+        },
+        {
+          'simpleIds' => ['example-idp-two'],
+          'send_language_hint' => 'true',
+          'recommended_profiles' => [%w(passport driving_licence)],
+          'non_recommended_profiles' => [],
+          'demo_profiles' => [%w(non_uk_id_document mobile_phone)]
+        }
+      ]
+    }
 
     describe '#load' do
       it 'should load recommended profiles from YAML files' do
+        path = 'good_profiles_path'
+        expect(file_loader).to receive(:load).with(path).and_return(good_profiles)
         evidence = [Profile.new(%i(passport driving_licence))]
         profiles_repository = ProfileFilter.new(
           'example-idp' => evidence,
           'example-idp-two' => evidence,
           'example-idp-stub' => evidence
         )
-        expect(ProfilesLoader.new(fixtures('good_profiles')).load.recommended_profiles).to eq(profiles_repository)
+        expect(profiles_loader.load(path).recommended_profiles).to eq(profiles_repository)
       end
 
       it 'should load non recommended profiles from YAML files' do
+        path = 'good_profiles_path'
+        expect(file_loader).to receive(:load).with(path).and_return(good_profiles)
         evidence = [Profile.new(%i(passport mobile_phone))]
         profiles_repository = ProfileFilter.new(
           'example-idp' => evidence,
           'example-idp-stub' => evidence,
           'example-idp-two' => [],
         )
-        expect(ProfilesLoader.new(fixtures('good_profiles')).load.non_recommended_profiles).to eq(profiles_repository)
+        expect(profiles_loader.load(path).non_recommended_profiles).to eq(profiles_repository)
       end
 
       it 'should load demo profiles from YAML files' do
+        path = 'good_profiles_path'
+        expect(file_loader).to receive(:load).with(path).and_return(good_profiles)
         evidence = [Profile.new(%i(non_uk_id_document mobile_phone))]
         profiles_repository = ProfileFilter.new(
           'example-idp' => [],
           'example-idp-stub' => [],
           'example-idp-two' => evidence,
         )
-        expect(ProfilesLoader.new(fixtures('good_profiles')).load.demo_profiles).to eq(profiles_repository)
+        expect(profiles_loader.load(path).demo_profiles).to eq(profiles_repository)
       end
 
       it 'should load all profiles from YAML files' do
+        path = 'good_profiles_path'
+        expect(file_loader).to receive(:load).with(path).and_return(good_profiles)
         evidence = [Profile.new(%i{passport driving_licence}), Profile.new(%i(passport mobile_phone))]
         profiles_repository = ProfileFilter.new(
           'example-idp' => evidence,
           'example-idp-stub' => evidence,
           'example-idp-two' => [Profile.new(%i{passport driving_licence}), Profile.new(%i(non_uk_id_document mobile_phone))]
         )
-        expect(ProfilesLoader.new(fixtures('good_profiles')).load.all_profiles).to eq(profiles_repository)
+        expect(profiles_loader.load(path).all_profiles).to eq(profiles_repository)
       end
 
       it 'should supply a seperate repository of document profiles' do
+        path = 'good_profiles_path'
+        expect(file_loader).to receive(:load).with(path).and_return(good_profiles)
         evidence = [Profile.new(%i{passport driving_licence}), Profile.new(%i(passport))]
         profiles_repository = ProfileFilter.new(
           'example-idp' => evidence,
           'example-idp-stub' => evidence,
           'example-idp-two' => [Profile.new(%i{passport driving_licence}), Profile.new(%i(non_uk_id_document))]
         )
-        expect(ProfilesLoader.new(fixtures('good_profiles')).load.document_profiles).to eq(profiles_repository)
+        expect(profiles_loader.load(path).document_profiles).to eq(profiles_repository)
       end
 
       it 'should raise an error when expected keys are missing from yaml' do
+        path = 'bad_profiles_path'
+        bad_profiles = [
+          {
+            'simpleIds' => ['example-idp'],
+            'blah' => [%w(passport driving_licence)]
+          }]
+        expect(file_loader).to receive(:load).with(path).and_return(bad_profiles)
+
         expect {
-          ProfilesLoader.new(fixtures('bad_profiles')).load
+          profiles_loader.load(path)
         }.to raise_error KeyError
       end
 
       it 'should return an empty object when no yaml files found' do
-        expect(ProfilesLoader.new(fixtures).load.all_profiles).to eq(ProfileFilter.new({}))
+        path = 'empty_profiles_path'
+        expect(file_loader).to receive(:load).with(path).and_return([])
+        expect(profiles_loader.load(path).all_profiles).to eq(ProfileFilter.new({}))
       end
 
       it 'should return the hints configuration' do
-        expected_hints = ['example-idp', 'example-idp-stub']
-        profile = ProfilesLoader.new(fixtures('good_profiles')).load
+        path = 'good_profiles_path'
+        expect(file_loader).to receive(:load).with(path).and_return(good_profiles)
+        expected_hints = %w(example-idp example-idp-stub)
+        profile = profiles_loader.load(path)
         expect(profile.idps_with_hints).to eql(expected_hints)
         expect(profile.idps_with_language_hint).to eql(['example-idp-two'])
       end
