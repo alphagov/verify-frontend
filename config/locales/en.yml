@@ -323,11 +323,10 @@ en:
     further_information:
       title: Enter your %{cycle_three_name}
       first_time: This is the first time you’ve signed in.
-      cycle_three_input_label: Enter your %{cycle_three_name}
-      help_with_your: Help with your %{cycle_three_name}
+      help_with_your: Where to find your %{cycle_three_name}
       cancel: Cancel and return to %{transaction_name}
       example_text: "Example: %{example}"
-      attribute_validation_message: Please enter a valid %{cycle_three_name}
+      attribute_validation_message: Enter a valid %{cycle_three_name}
   errors:
     transaction_list:
       title: Find the service you were using to start again

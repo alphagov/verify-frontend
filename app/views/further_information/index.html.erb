@@ -12,7 +12,7 @@
       <fieldset>
         <div class="form-group <%= 'error' if @form.errors[:cycle_three_data].any? %>">
           <%= f.label :cycle_three_data, class: 'form-label-bold' do %>
-            <%= t('hub.further_information.cycle_three_input_label', cycle_three_name: @attribute.name) %>
+            <%= @attribute.name.capitalize %>
             <span class="form-hint"><%= t('hub.further_information.example_text', example: @attribute.example) %></span>
             <% if @form.errors.include?(:cycle_three_data) %>
               <span class="error-message">
