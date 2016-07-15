@@ -1,14 +1,12 @@
 require 'spec_helper'
 require 'models/analytics/federation_reporter'
 require 'analytics'
-require 'models/display/federation_translator'
 require 'logger_helper'
 
 module Analytics
   describe FederationReporter do
-    let(:federation_translator) { double(:federation_translator) }
     let(:analytics_reporter) { double(:analytics_reporter) }
-    let(:federation_reporter) { FederationReporter.new(federation_translator, analytics_reporter) }
+    let(:federation_reporter) { FederationReporter.new(analytics_reporter) }
     let(:request) { double(:request) }
 
     describe '#report_sign_in_idp_selection' do
@@ -79,10 +77,9 @@ module Analytics
 
     describe '#report_cycle_three_cancel' do
       it 'should report cycle 3 cancelled' do
-        simple_id = 'id'
+        current_transaction = double("current transaction")
         description = 'description'
-        allow(federation_translator).to receive(:translate)
-                                          .with('rps.id.analytics_description')
+        expect(current_transaction).to receive(:analytics_description)
                                           .and_return(description)
         expect(analytics_reporter).to receive(:report_custom_variable)
                                         .with(
@@ -90,16 +87,14 @@ module Analytics
                                           'Matching Outcome - Cancelled Cycle3',
                                           1 => %w[RP description]
                                         )
-        federation_reporter.report_cycle_three_cancel(simple_id, request)
+        federation_reporter.report_cycle_three_cancel(current_transaction, request)
       end
     end
 
     it 'should report custom variable for sign in' do
-      simple_id = 'id'
+      current_transaction = double("current transaction")
       description = 'description'
-      allow(federation_translator).to receive(:translate)
-        .with('rps.id.analytics_description')
-        .and_return(description)
+      expect(current_transaction).to receive(:analytics_description).and_return(description)
       expect(analytics_reporter).to receive(:report_custom_variable)
         .with(
           request,
@@ -107,15 +102,13 @@ module Analytics
           1 => %w[RP description]
         )
 
-      federation_reporter.report_sign_in(simple_id, request)
+      federation_reporter.report_sign_in(current_transaction, request)
     end
 
     it 'should report custom variable for registration' do
-      simple_id = 'id'
+      current_transaction = double("current transaction")
       description = 'description'
-      allow(federation_translator).to receive(:translate)
-        .with('rps.id.analytics_description')
-        .and_return(description)
+      expect(current_transaction).to receive(:analytics_description).and_return(description)
       expect(analytics_reporter).to receive(:report_custom_variable)
         .with(
           request,
@@ -123,20 +116,7 @@ module Analytics
           1 => %w[RP description]
         )
 
-      federation_reporter.report_registration(simple_id, request)
-    end
-
-    it 'should not report custom variable if transaction analytics description is not available' do
-      translation_error = Display::FederationTranslator::TranslationError.new
-      allow(federation_translator).to receive(:translate)
-        .with('rps.id.analytics_description')
-        .and_raise(translation_error)
-      expect(stub_logger).to receive(:warn).with(translation_error).at_least(:once)
-      allow(analytics_reporter).to receive(:report_custom_variable)
-
-      federation_reporter.report_sign_in('id', request)
-
-      expect(analytics_reporter).to_not have_received(:report_custom_variable)
+      federation_reporter.report_registration(current_transaction, request)
     end
   end
 end

@@ -5,5 +5,6 @@ module Display
     content :name
     content :rp_name
     content :other_ways_text
+    content :analytics_description
   end
 end
