@@ -62,8 +62,8 @@
                 <% if @form.errors.include?(:reply)%>
                   <span class="error-message"><%= @form.errors[:reply].first %></span>
                 <% end %>
-                <%= f.block_label :reply, true, t('hub.feedback.questions.reply_option_yes'), {required: true, data: { msg: t('hub.feedback.errors.reply')}} %>
-                <%= f.block_label :reply, false, t('option.no'), {required: true, data: { msg: t('hub.feedback.errors.reply')}} %>
+                <%= f.custom_radio_button :reply, true, t('hub.feedback.questions.reply_option_yes'), {required: true, data: { msg: t('hub.feedback.errors.reply')}} %>
+                <%= f.custom_radio_button :reply, false, t('option.no'), {required: true, data: { msg: t('hub.feedback.errors.reply')}} %>
               <% end %>
             </fieldset>
 

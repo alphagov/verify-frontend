@@ -16,8 +16,8 @@
         <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
               <legend class="visually-hidden"><%= t 'hub.select_phone.question.mobile_phone' %></legend>
-              <%= f.block_label :mobile_phone, true, t('hub.select_phone.question.mobile_phone_option_yes') %>
-              <%= f.block_label :mobile_phone, false, t('option.no') %>
+              <%= f.custom_radio_button :mobile_phone, true, t('hub.select_phone.question.mobile_phone_option_yes') %>
+              <%= f.custom_radio_button :mobile_phone, false, t('option.no') %>
             </fieldset>
         <% end %>
 
@@ -27,16 +27,16 @@
                 <%= t 'hub.select_phone.question.smart_phone' %>
                 <span class="form-hint"><%= t 'hub.select_phone.question.smart_phone_subtitle' %></span>
               </legend>
-              <%= f.block_label :smart_phone, true, t('hub.select_phone.question.smart_phone_option_yes') %>
-              <%= f.block_label :smart_phone, false, t('option.no') %>
-              <%= f.block_label :smart_phone, 'do_not_know', t('option.unknown') %>
+              <%= f.custom_radio_button :smart_phone, true, t('hub.select_phone.question.smart_phone_option_yes') %>
+              <%= f.custom_radio_button :smart_phone, false, t('option.no') %>
+              <%= f.custom_radio_button :smart_phone, 'do_not_know', t('option.unknown') %>
             </fieldset>
         <% end %>
         <%= content_tag :div, id: 'landline-question', class: hidden_form_question_class do %>
             <fieldset class="inline">
               <legend><%= t 'hub.select_phone.question.landline' %></legend>
-              <%= f.block_label :landline, true, t('hub.select_phone.question.landline_option_yes') %>
-              <%= f.block_label :landline, false, t('option.no') %>
+              <%= f.custom_radio_button :landline, true, t('hub.select_phone.question.landline_option_yes') %>
+              <%= f.custom_radio_button :landline, false, t('option.no') %>
             </fieldset>
         <% end %>
 
