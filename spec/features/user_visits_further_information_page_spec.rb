@@ -68,6 +68,8 @@ RSpec.describe 'user visits further information page' do
     expect(cancel_request).to have_been_made
   end
 
+  nullable_attribute_name = I18n.t('cycle3.NullableAttribute.name')
+
   it 'will allow the user to select no value for configured matching attributes' do
     piwik_request = stub_piwik_cycle_three('NullableAttribute')
     stub_cycle_three_attribute_request('NullableAttribute')
@@ -77,7 +79,7 @@ RSpec.describe 'user visits further information page' do
     visit further_information_path
     check I18n.t(
       'hub.further_information.null_attribute',
-      cycle_three_name: I18n.t('cycle3.NullableAttribute.name')
+      cycle_three_name: nullable_attribute_name
     )
     click_button I18n.t('navigation.continue')
 
@@ -123,6 +125,23 @@ RSpec.describe 'user visits further information page' do
       expect(page).to have_current_path(further_information_path)
       expect(page).to have_css '.error-message', text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: 'National Insurance number')
       expect(page.find('#cycle_three_form_cycle_three_data').value).to eql invalid_input
+    end
+
+    it 'will allow the user to select no value for configured matching attributes' do
+      piwik_request = stub_piwik_cycle_three('NullableAttribute')
+      stub_cycle_three_attribute_request('NullableAttribute')
+      stub_request = stub_cycle_three_value_submit('')
+      stub_matching_outcome
+
+      visit further_information_path
+      click_button I18n.t('navigation.continue')
+      expect(page).to have_css '.error-message', text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: nullable_attribute_name)
+      check I18n.t('hub.further_information.null_attribute', cycle_three_name: nullable_attribute_name)
+      click_button I18n.t('navigation.continue')
+
+      expect(page.current_path).to eql(response_processing_path)
+      expect(stub_request).to have_been_made
+      expect(piwik_request).to have_been_made
     end
   end
 end
