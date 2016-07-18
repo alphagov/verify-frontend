@@ -14,8 +14,8 @@
 
   <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
     <fieldset>
-      <%= f.block_label :selection, true, t('hub.start.answer_yes'), {required: true, data: { msg: t('hub.start.error_message')}} %>
-      <%= f.block_label :selection, false, t('hub.start.answer_no'), {required: true, data: { msg: t('hub.start.error_message')}} %>
+      <%= f.custom_radio_button :selection, true, t('hub.start.answer_yes'), {required: true, data: { msg: t('hub.start.error_message')}} %>
+      <%= f.custom_radio_button :selection, false, t('hub.start.answer_no'), {required: true, data: { msg: t('hub.start.error_message')}} %>
     </fieldset>
   <% end %>
 
