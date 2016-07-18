@@ -15,3 +15,11 @@
     text-decoration: none;
   }
 }
+
+
+// Fields that were hidden by JS but marked
+// as validation errors should always be visible:
+.js-hidden.error {
+  display: block;
+  visibility: visible;
+}
