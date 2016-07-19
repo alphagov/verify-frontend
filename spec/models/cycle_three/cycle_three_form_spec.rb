@@ -35,6 +35,16 @@ module CycleThree
       expect(form.allows_nullable?).to eql false
     end
 
+    describe '#allows_nullable?' do
+      it 'should delegate to its class method called ::allows_nullable?' do
+        form_class = Class.new(CycleThreeForm)
+        form_class_instance = form_class.new({})
+        expected_result_from_class = double('expected')
+        expect(form_class).to receive(:allows_nullable?).and_return(expected_result_from_class)
+        expect(form_class_instance.allows_nullable?).to eq(expected_result_from_class)
+      end
+    end
+
     describe '#sanitised_cycle_three_data' do
       it 'should return cycle 3 data with only letters and numbers' do
         form_class = letters_only_form

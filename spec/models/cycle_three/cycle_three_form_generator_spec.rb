@@ -57,7 +57,27 @@ module CycleThree
           { 'name' => 'DrivingLicenceNumber', 'pattern' => '^abc', 'nullable' => true }
         ])
         form_classes = cycle_three_form_generator.form_classes_by_name(path)
-        expect(form_classes['DrivingLicenceNumber'].new({}).allows_nullable?).to eql true
+        expect(form_classes['DrivingLicenceNumber'].allows_nullable?).to eql true
+      end
+
+      it 'should not allow nullable if not set' do
+        path = 'good_attributes_path'
+        expect(file_loader).to receive(:load).with(path).and_return([
+          { 'name' => 'DrivingLicenceNumber', 'pattern' => '^abc', 'nullable' => false }
+        ])
+        form_classes = cycle_three_form_generator.form_classes_by_name(path)
+        expect(form_classes['DrivingLicenceNumber'].allows_nullable?).to eql false
+      end
+
+      it 'should not override nullable for all generated classes if set for one' do
+        path = 'good_attributes_path'
+        expect(file_loader).to receive(:load).with(path).and_return([
+          { 'name' => 'DrivingLicenceNumber', 'pattern' => '^abc', 'nullable' => true },
+          { 'name' => 'DrivingLicenceNumberTwo', 'pattern' => '^abc', 'nullable' => false }
+        ])
+        form_classes = cycle_three_form_generator.form_classes_by_name(path)
+        expect(form_classes['DrivingLicenceNumberTwo'].allows_nullable?).to eql false
+        expect(form_classes['DrivingLicenceNumber'].allows_nullable?).to eql true
       end
     end
   end

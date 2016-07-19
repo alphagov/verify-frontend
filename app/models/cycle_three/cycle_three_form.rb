@@ -23,8 +23,12 @@ module CycleThree
       @cycle_three_data.gsub(/[^a-zA-Z0-9]/, '').upcase
     end
 
-    def allows_nullable?
+    def self.allows_nullable?
       false
+    end
+
+    def allows_nullable?
+      self.class.allows_nullable?
     end
 
   private

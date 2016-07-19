@@ -36,9 +36,12 @@ module CycleThree
             super()[0, length]
           end
         end
+
         if nullable
-          define_method(:allows_nullable?) do
-            true
+          class << self
+            define_method(:allows_nullable?) do
+              true
+            end
           end
         end
       end

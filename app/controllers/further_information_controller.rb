@@ -29,7 +29,7 @@ class FurtherInformationController < ApplicationController
     attribute = FURTHER_INFORMATION_SERVICE.fetch(cookies)
     form_class = CYCLE_THREE_FORMS.fetch(attribute.simple_id)
 
-    if form_class.new({}).allows_nullable?
+    if form_class.allows_nullable?
       FURTHER_INFORMATION_SERVICE.submit(cookies, '')
       FEDERATION_REPORTER.report_cycle_three(request, attribute.simple_id)
       redirect_to response_processing_path
