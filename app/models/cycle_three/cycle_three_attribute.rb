@@ -1,5 +1,5 @@
 module CycleThree
-  class CycleThreeForm
+  class CycleThreeAttribute
     include ::ActiveModel::Model
 
     attr_reader :cycle_three_data
@@ -12,7 +12,7 @@ module CycleThree
 
 
     def self.model_name
-      ActiveModel::Name.new(self, nil, 'cycle_three_form')
+      ActiveModel::Name.new(self, nil, 'cycle_three_attribute')
     end
 
     def pattern
@@ -30,6 +30,20 @@ module CycleThree
     def allows_nullable?
       self.class.allows_nullable?
     end
+
+    def self.display_data
+      raise NotImplementedError
+    end
+
+    def display_data
+      self.class.display_data
+    end
+
+    def self.simple_id
+      display_data.simple_id
+    end
+
+    delegate :name, :field_name, :help_to_find, :example, :simple_id, to: :display_data
 
   private
 

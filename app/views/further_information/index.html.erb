@@ -1,4 +1,4 @@
-<%= page_title 'hub.further_information.title', cycle_three_name: @attribute.field_name %>
+<%= page_title 'hub.further_information.title', cycle_three_name: @cycle_three_attribute.field_name %>
 <% content_for :feedback_source, 'CYCLE_3_PAGE' %>
 
 <div class="grid-row">
@@ -6,40 +6,40 @@
     <h1 class="heading-xlarge"><%= @transaction_name.capitalize %></h1>
     <p><%= t('hub.further_information.first_time') %></p>
 
-    <%= form_for @form, url: further_information_submit_path,
+    <%= form_for @cycle_three_attribute, url: further_information_submit_path,
                  html: { novalidate: true,
                          id: 'further-information' } do |f| %>
       <fieldset>
-        <div class="form-group <%= 'error' if @form.errors[:cycle_three_data].any? %>">
+        <div class="form-group <%= 'error' if @cycle_three_attribute.errors[:cycle_three_data].any? %>">
           <%= f.label :cycle_three_data, class: 'form-label-bold' do %>
-            <%= @attribute.field_name %>
-            <span class="form-hint"><%= t('hub.further_information.example_text', example: @attribute.example) %></span>
-            <% if @form.errors.include?(:cycle_three_data) %>
+            <%= @cycle_three_attribute.field_name %>
+            <span class="form-hint"><%= t('hub.further_information.example_text', example: @cycle_three_attribute.example) %></span>
+            <% if @cycle_three_attribute.errors.include?(:cycle_three_data) %>
               <span class="error-message">
-                <%= t(@form.errors[:cycle_three_data].first, cycle_three_name: @attribute.name) %>
+                <%= t(@cycle_three_attribute.errors[:cycle_three_data].first, cycle_three_name: @cycle_three_attribute.name) %>
               </span>
             <% end %>
           <% end %>
-          <%= f.text_field :cycle_three_data, required: true, pattern: h(@form.pattern.source),
+          <%= f.text_field :cycle_three_data, required: true, pattern: h(@cycle_three_attribute.pattern.source),
                            class: 'form-control form-control-3-4',
                            'data-msg': t('hub.further_information.attribute_validation_message',
-                                         cycle_three_name: @attribute.name),
+                                         cycle_three_name: @cycle_three_attribute.name),
                            autocomplete: 'off' %>
         </div>
         <div class="form-group">
         <details>
           <summary>
-            <span class="summary"><%= t 'hub.further_information.help_with_your', cycle_three_name: @attribute.name %></span>
+            <span class="summary"><%= t 'hub.further_information.help_with_your', cycle_three_name: @cycle_three_attribute.name %></span>
           </summary>
           <div class="panel help-finding-further-information">
-            <%= @attribute.help_to_find.html_safe %>
+            <%= @cycle_three_attribute.help_to_find.html_safe %>
           </div>
         </details>
         </div>
-        <% if @form.allows_nullable? %>
+        <% if @cycle_three_attribute.allows_nullable? %>
           <div class="form-group">
             <%= form_tag(further_information_null_attribute_submit_path) do %>
-              <%= button_tag t('hub.further_information.null_attribute', cycle_three_name: @attribute.name),
+              <%= button_tag t('hub.further_information.null_attribute', cycle_three_name: @cycle_three_attribute.name),
                              id: 'cycle_three_null_attribute_link', class: 'button-link', role: 'link' %>
             <% end %>
           </div>

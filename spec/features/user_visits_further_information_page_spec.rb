@@ -46,7 +46,7 @@ RSpec.describe 'user visits further information page' do
 
     visit further_information_path
 
-    fill_in 'cycle_three_form_cycle_three_data', with: 'MORGA657054SM9IJ 20'
+    fill_in 'cycle_three_attribute_cycle_three_data', with: 'MORGA657054SM9IJ 20'
     click_button I18n.t('navigation.continue')
 
     expect(page.current_path).to eql(response_processing_path)
@@ -112,7 +112,7 @@ RSpec.describe 'user visits further information page' do
       visit further_information_path
 
       invalid_input = 'not valid'
-      fill_in 'cycle_three_form_cycle_three_data', with: invalid_input
+      fill_in 'cycle_three_attribute_cycle_three_data', with: invalid_input
       click_button I18n.t('navigation.continue')
 
       expect(page.current_path).to eql(further_information_path)
@@ -120,7 +120,7 @@ RSpec.describe 'user visits further information page' do
         '.error-message',
         text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
       )
-      expect(page.find('#cycle_three_form_cycle_three_data').value).to eql invalid_input
+      expect(page.find('#cycle_three_attribute_cycle_three_data').value).to eql invalid_input
     end
   end
 
@@ -133,13 +133,13 @@ RSpec.describe 'user visits further information page' do
       visit further_information_path
 
       invalid_input = 'not valid'
-      fill_in 'cycle_three_form_cycle_three_data', with: invalid_input
+      fill_in 'cycle_three_attribute_cycle_three_data', with: invalid_input
 
       click_button I18n.t('navigation.continue')
 
       expect(page).to have_current_path(further_information_path)
       expect(page).to have_css '.error-message', text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
-      expect(page.find('#cycle_three_form_cycle_three_data').value).to eql invalid_input
+      expect(page.find('#cycle_three_attribute_cycle_three_data').value).to eql invalid_input
     end
   end
 end

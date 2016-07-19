@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 module CycleThree
-  describe CycleThreeForm do
+  describe CycleThreeAttribute do
     let(:letters_only_form) {
-      Class.new(CycleThreeForm) do
+      Class.new(CycleThreeAttribute) do
         define_method(:pattern) do
           Regexp.new('^[a-z]*$')
         end
@@ -37,11 +37,21 @@ module CycleThree
 
     describe '#allows_nullable?' do
       it 'should delegate to its class method called ::allows_nullable?' do
-        form_class = Class.new(CycleThreeForm)
+        form_class = Class.new(CycleThreeAttribute)
         form_class_instance = form_class.new({})
         expected_result_from_class = double('expected')
         expect(form_class).to receive(:allows_nullable?).and_return(expected_result_from_class)
         expect(form_class_instance.allows_nullable?).to eq(expected_result_from_class)
+      end
+    end
+
+    describe '#display_data' do
+      it 'should delegate to its class method called ::display_data' do
+        form_class = Class.new(CycleThreeAttribute)
+        form_class_instance = form_class.new({})
+        expected_result_from_class = double('expected')
+        expect(form_class).to receive(:display_data).and_return(expected_result_from_class)
+        expect(form_class_instance.display_data).to eq(expected_result_from_class)
       end
     end
 

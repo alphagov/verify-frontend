@@ -1,17 +1,15 @@
 class FurtherInformationController < ApplicationController
   def index
-    @attribute = FURTHER_INFORMATION_SERVICE.fetch(cookies)
-    @form = CYCLE_THREE_FORMS.fetch(@attribute.simple_id).new({})
+    @cycle_three_attribute = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(cookies).new({})
     @transaction_name = current_transaction.name
   end
 
   def submit
-    @attribute = FURTHER_INFORMATION_SERVICE.fetch(cookies)
-    form_class = CYCLE_THREE_FORMS.fetch(@attribute.simple_id)
-    @form = form_class.new(params.fetch('cycle_three_form'))
-    if @form.valid?
-      FURTHER_INFORMATION_SERVICE.submit(cookies, @form.sanitised_cycle_three_data)
-      FEDERATION_REPORTER.report_cycle_three(request, @attribute.simple_id)
+    cycle_three_attribute_class = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(cookies)
+    @cycle_three_attribute = cycle_three_attribute_class.new(params.fetch('cycle_three_attribute'))
+    if @cycle_three_attribute.valid?
+      FURTHER_INFORMATION_SERVICE.submit(cookies, @cycle_three_attribute.sanitised_cycle_three_data)
+      FEDERATION_REPORTER.report_cycle_three(request, @cycle_three_attribute.simple_id)
       redirect_to response_processing_path
     else
       @transaction_name = current_transaction.name
@@ -26,12 +24,10 @@ class FurtherInformationController < ApplicationController
   end
 
   def submit_null_attribute
-    attribute = FURTHER_INFORMATION_SERVICE.fetch(cookies)
-    form_class = CYCLE_THREE_FORMS.fetch(attribute.simple_id)
-
-    if form_class.allows_nullable?
+    cycle_three_attribute_class = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(cookies)
+    if cycle_three_attribute_class.allows_nullable?
       FURTHER_INFORMATION_SERVICE.submit(cookies, '')
-      FEDERATION_REPORTER.report_cycle_three(request, attribute.simple_id)
+      FEDERATION_REPORTER.report_cycle_three(request, cycle_three_attribute_class.simple_id)
       redirect_to response_processing_path
     else
       something_went_wrong('Unexpected submission to Cycle3 Null Attribute endpoint', :forbidden)

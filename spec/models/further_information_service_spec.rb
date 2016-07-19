@@ -13,7 +13,7 @@ RSpec.describe FurtherInformationService do
     expected_display_data = double(:expected_display_data)
     expect(session_proxy).to receive(:cycle_three_attribute_name).with(cookies).and_return(attribute_key)
     expect(display_data_repo).to receive(:fetch).with(attribute_key).and_return(expected_display_data)
-    expect(service.fetch(cookies)).to eql(expected_display_data)
+    expect(service.get_attribute_for_session(cookies)).to eql(expected_display_data)
   end
 
   it 'should submit cycle 3 attribute value' do

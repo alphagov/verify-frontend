@@ -9,10 +9,10 @@ describe("Further Information Form", function () {
   var formWithNoErrors =
     '<form id="further-information" novalidate="novalidate">' +
       '<div class="form-group">' +
-        '<label for="cycle_three_form_cycle_three_data">' +
+        '<label for="cycle_three_attribute_cycle_three_data">' +
         'Enter your National Insurance number' +
         '</label>' +
-        '<input required="required" pattern="^pear$" type="text" id="cycle_three_form_cycle_three_data" data-msg="validation message">' +
+        '<input required="required" pattern="^pear$" type="text" id="cycle_three_attribute_cycle_three_data" data-msg="validation message">' +
       '</div>' +
     '</form>';
 
