@@ -38,7 +38,10 @@
         </div>
         <% if @form.allows_nullable? %>
           <div class="form-group">
-            <%= f.custom_check_box :null_attribute, {}, true, false, t('hub.further_information.null_attribute', cycle_three_name: @attribute.name) %>
+            <%= form_tag(further_information_null_attribute_submit_path) do %>
+              <%= button_tag t('hub.further_information.null_attribute', cycle_three_name: @attribute.name),
+                             id: 'cycle_three_null_attribute_link', class: 'button-link', role: 'link' %>
+            <% end %>
           </div>
         <% end %>
         <div class="form-group">
@@ -48,7 +51,8 @@
     <% end %>
     <div class="cancel-process">
       <%= form_tag(further_information_cancel_path) do %>
-        <%= button_tag t('hub.further_information.cancel', transaction_name: @transaction_name.capitalize), id: 'cancel', class: 'button-link' %>
+        <%= button_tag t('hub.further_information.cancel', transaction_name: @transaction_name.capitalize),
+                       id: 'cancel', class: 'button-link', role: 'link' %>
       <% end %>
     </div>
   </div>

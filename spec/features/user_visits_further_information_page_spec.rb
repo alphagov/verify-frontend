@@ -70,22 +70,37 @@ RSpec.describe 'user visits further information page' do
     expect(cancel_request).to have_been_made
   end
 
-  it 'will allow the user to select no value for configured matching attributes' do
+  it 'will submit empty cycle 3 attribute when user clicks the no attribute link' do
     piwik_request = stub_piwik_cycle_three('NullableAttribute')
     stub_cycle_three_attribute_request('NullableAttribute')
     stub_request = stub_cycle_three_value_submit('')
     stub_matching_outcome
 
     visit further_information_path
-    check I18n.t(
-      'hub.further_information.null_attribute',
-      cycle_three_name: I18n.t('cycle3.NullableAttribute.name')
-    )
-    click_button I18n.t('navigation.continue')
+    click_button I18n.t('hub.further_information.null_attribute',
+                        cycle_three_name: I18n.t('cycle3.NullableAttribute.name'))
 
     expect(page.current_path).to eql(response_processing_path)
     expect(stub_request).to have_been_made
     expect(piwik_request).to have_been_made
+  end
+
+  it 'will error if user tries to submit to null attribute end point with non-nullable attribute' do
+    # This test is simulating a situation where someone will craft a submit to the null attribute submit endpoint during
+    # a journey with an rp that does not allow nullable cycle 3 attributes.
+    # We are doing this by hacking the response from  the api to return different cycle 3 attributes on loading the page
+    # so that we generate a link for capybara and submitting where nullable is not allowed.
+    matching_attribute_request = stub_request(:get, api_uri('session/cycle-three'))
+        .to_return(body: { name: 'NullableAttribute' }.to_json)
+        .to_return(body: { name: 'DrivingLicenceNumber' }.to_json)
+    stub_transactions_list
+
+    visit further_information_path
+
+    click_button I18n.t('hub.further_information.null_attribute',
+                        cycle_three_name: I18n.t('cycle3.NullableAttribute.name'))
+    expect(page).to have_content('Sorry, something went wrong')
+    expect(matching_attribute_request).to have_been_made.twice
   end
 
   context 'with js off' do

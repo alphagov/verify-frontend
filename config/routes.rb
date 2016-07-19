@@ -79,6 +79,8 @@ Rails.application.routes.draw do
   post 'further-information-cy', to: 'further_information#submit'
   post 'further-information/cancel', to: 'further_information#cancel', as: :further_information_cancel
   post 'further-information-cy/cancel', to: 'further_information#cancel'
+  post 'further-information/null-attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
+  post 'further-information-cy/null-attribute', to: 'further_information#submit_null_attribute'
 
 
   if Rails.env == 'development'

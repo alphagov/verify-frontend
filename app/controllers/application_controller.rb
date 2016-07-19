@@ -114,9 +114,9 @@ private
     render_error('session_error', :bad_request)
   end
 
-  def something_went_wrong(exception)
+  def something_went_wrong(exception, status = :internal_server_error)
     logger.error(exception)
-    render_error('something_went_wrong', :internal_server_error)
+    render_error('something_went_wrong', status)
   end
 
   def something_went_wrong_warn(exception)
