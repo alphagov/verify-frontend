@@ -8,11 +8,14 @@ RSpec.describe 'user visits further information page' do
     page.set_rack_session(transaction_simple_id: 'test-rp')
     set_session_cookies!
   end
+  attribute_field_name = I18n.t('cycle3.NationalInsuranceNumber.field_name')
+  attribute_name = I18n.t('cycle3.NationalInsuranceNumber.name')
+
 
   it 'should also be in welsh' do
     stub_cycle_three_attribute_request('NationalInsuranceNumber')
     visit further_information_cy_path
-    expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: 'National Insurance number', locale: :cy)
+    expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: attribute_field_name, locale: :cy)
     pending 'welsh routes are not localised yet'
     expect(page).to have_css 'html[lang=cy]'
   end
@@ -22,12 +25,11 @@ RSpec.describe 'user visits further information page' do
 
     visit further_information_path
 
-    attribute_name = I18n.t('cycle3.NationalInsuranceNumber.name')
     rp_name = I18n.t('rps.test-rp.name').capitalize
 
-    expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: attribute_name)
+    expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: attribute_field_name)
     expect(page).to have_css 'h1.heading-xlarge', text: rp_name
-    expect(page).to have_css '.form-label-bold', text: attribute_name.capitalize
+    expect(page).to have_css '.form-label-bold', text: attribute_field_name
     expect(page).to have_css 'span.form-hint', text: I18n.t('hub.further_information.example_text', example: I18n.t('cycle3.NationalInsuranceNumber.example'))
     expect(page).to have_content I18n.t('hub.further_information.help_with_your', cycle_three_name: attribute_name)
     expect(page).to have_content 'Your National Insurance number can be found on'
@@ -103,7 +105,7 @@ RSpec.describe 'user visits further information page' do
       expect(page.current_path).to eql(further_information_path)
       expect(page).to have_css(
         '.error-message',
-        text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: 'National Insurance number')
+        text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
       )
       expect(page.find('#cycle_three_form_cycle_three_data').value).to eql invalid_input
     end
@@ -123,7 +125,7 @@ RSpec.describe 'user visits further information page' do
       click_button I18n.t('navigation.continue')
 
       expect(page).to have_current_path(further_information_path)
-      expect(page).to have_css '.error-message', text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: 'National Insurance number')
+      expect(page).to have_css '.error-message', text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
       expect(page.find('#cycle_three_form_cycle_three_data').value).to eql invalid_input
     end
 

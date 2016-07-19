@@ -2,6 +2,7 @@ en:
   cycle3:
     NullableAttribute:
       name: nullable attribute
+      field_name: Nullable attribute
       help_to_find: |
         <p>Your nullable attribute is always null!</p>
       example: foo bar baz

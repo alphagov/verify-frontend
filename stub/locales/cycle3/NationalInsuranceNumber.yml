@@ -1,7 +1,8 @@
 en:
   cycle3:
     NationalInsuranceNumber:
-      name: National Insurance number
+      name: NINO
+      field_name: National Insurance number(NINO)
       help_to_find: |
         <p>Your National Insurance number can be found on</p>
         <ul>

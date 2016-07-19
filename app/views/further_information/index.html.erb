@@ -1,4 +1,4 @@
-<%= page_title 'hub.further_information.title', cycle_three_name: @attribute.name %>
+<%= page_title 'hub.further_information.title', cycle_three_name: @attribute.field_name %>
 <% content_for :feedback_source, 'CYCLE_3_PAGE' %>
 
 <div class="grid-row">
@@ -12,7 +12,7 @@
       <fieldset>
         <div class="form-group <%= 'error' if @form.errors[:cycle_three_data].any? %>">
           <%= f.label :cycle_three_data, class: 'form-label-bold' do %>
-            <%= @attribute.name.capitalize %>
+            <%= @attribute.field_name %>
             <span class="form-hint"><%= t('hub.further_information.example_text', example: @attribute.example) %></span>
             <% if @form.errors.include?(:cycle_three_data) %>
               <span class="error-message">

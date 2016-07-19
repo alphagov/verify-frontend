@@ -328,7 +328,7 @@ en:
       cancel: Cancel and return to %{transaction_name}
       example_text: "Example: %{example}"
       attribute_validation_message: Enter a valid %{cycle_three_name}
-      null_attribute: I don’t have a %{cycle_three_name}
+      null_attribute: I don’t have an %{cycle_three_name}
   errors:
     transaction_list:
       title: Find the service you were using to start again
