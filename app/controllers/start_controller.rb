@@ -6,9 +6,6 @@ class StartController < ApplicationController
   end
 
   def request_post
-    if params['selection'].present?
-      params['start_form'] = { selection: params['selection'] }
-    end
     @form = StartForm.new(params['start_form'] || {})
     if @form.valid?
       if @form.registration?
