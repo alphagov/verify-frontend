@@ -37,6 +37,13 @@ class StubApi < Sinatra::Base
     }'
   end
 
+  put '/api/session/idp-authn-response' do
+    '{
+      "idpResult":"blah",
+      "isRegistration":false
+    }'
+  end
+
   get '/api/transactions' do
     '{
       "public":[{

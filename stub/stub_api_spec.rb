@@ -10,6 +10,7 @@ require_relative '../app/models/identity_provider'
 require_relative '../app/models/federation_info_response'
 require_relative '../app/models/select_idp_response'
 require_relative '../app/models/outbound_saml_message'
+require_relative '../app/models/idp_authn_response'
 
 describe StubApi do
   include Rack::Test::Methods
@@ -54,6 +55,15 @@ describe StubApi do
       get '/api/session/idp-authn-request'
       expect(last_response).to be_ok
       response = OutboundSamlMessage.new(last_response_json)
+      expect(response).to be_valid
+    end
+  end
+
+  context '#put /api/session/idp-authn-response' do
+    it 'should respond with valid hash' do
+      put '/api/session/idp-authn-response'
+      expect(last_response).to be_ok
+      response = IdpAuthnResponse.new(last_response_json)
       expect(response).to be_valid
     end
   end
