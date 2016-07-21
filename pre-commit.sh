@@ -18,11 +18,20 @@ if [ -t 1 ]; then
   tput sgr0
 fi
 
+# Unit tests
 bundle exec rspec --exclude-pattern "spec/features/*_spec.rb"
 success=$((success || $?))
+
+# Feature tests
 bundle exec rspec --pattern "spec/features/*_spec.rb"
 success=$((success || $?))
+
+# JavaScript tests
 bundle exec rake spec:javascripts
+success=$((success || $?))
+
+# Stub API tests
+bundle exec rspec --pattern stub/**/*_spec.rb
 success=$((success || $?))
 
 if [ -t 1 ]; then
