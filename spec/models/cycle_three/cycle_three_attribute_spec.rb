@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'model_examples'
 
 module CycleThree
   describe CycleThreeAttribute do
@@ -9,6 +10,15 @@ module CycleThree
         end
       end
     }
+
+    [
+      :name,
+      :field_name,
+      :help_to_find,
+      :example,
+    ].each do |field|
+      include_examples "delegates to display_data", field, CycleThreeAttribute
+    end
 
     it 'should be valid when data matches regex' do
       form_class = letters_only_form

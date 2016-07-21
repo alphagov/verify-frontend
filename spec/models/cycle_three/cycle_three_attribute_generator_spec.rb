@@ -111,6 +111,15 @@ module CycleThree
           cycle_three_attribute_generator.attribute_classes_by_name(path)
         }.to raise_error CycleThreeAttributeGenerator::MissingDataError
       end
+
+      it 'should set simple_id' do
+        path = 'good_attributes_path'
+        expect(file_loader).to receive(:load).with(path).and_return([
+          { 'name' => 'DrivingLicenceNumber', 'pattern' => '^abc', 'nullable' => true }
+        ])
+        attribute_classes = cycle_three_attribute_generator.attribute_classes_by_name(path)
+        expect(attribute_classes['DrivingLicenceNumber'].simple_id).to eql 'DrivingLicenceNumber'
+      end
     end
   end
 end

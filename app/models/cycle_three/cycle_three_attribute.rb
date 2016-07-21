@@ -39,11 +39,11 @@ module CycleThree
       self.class.display_data
     end
 
-    def self.simple_id
-      display_data.simple_id
+    def simple_id
+      self.class.simple_id
     end
 
-    delegate :name, :field_name, :help_to_find, :example, :simple_id, to: :display_data
+    delegate :name, :field_name, :help_to_find, :example, to: :display_data
 
   private
 

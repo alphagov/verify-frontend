@@ -19,7 +19,7 @@ module CycleThree
           nullable = attribute['nullable']
           simple_id = attribute.fetch('name')
           display_data = @cycle_display_data_repo.fetch(simple_id)
-          attribute_classes[simple_id] = class_of(Regexp.new(pattern), length, nullable, display_data)
+          attribute_classes[simple_id] = class_of(simple_id, Regexp.new(pattern), length, nullable, display_data)
         end
       rescue KeyError => e
         raise MissingDataError, e.message
@@ -29,8 +29,12 @@ module CycleThree
 
   private
 
-    def class_of(regex, length, nullable, display_data)
+    def class_of(simple_id, regex, length, nullable, display_data)
       Class.new(CycleThreeAttribute) do
+        define_singleton_method(:simple_id) do
+          simple_id
+        end
+
         define_method(:pattern) do
           regex
         end
