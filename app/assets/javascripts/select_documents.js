@@ -1,8 +1,7 @@
-(function () {
+(function(global) {
   "use strict"
-  var root = this,
-      $ = root.jQuery;
-  if(typeof root.GOVUK === 'undefined') { root.GOVUK = {}; }
+  var GOVUK = global.GOVUK || {};
+  var $ = global.jQuery;
 
   var selectDocuments = {
     markAllAsNo: function() {
@@ -66,5 +65,7 @@
     }
   };
 
-  root.GOVUK.selectDocuments = selectDocuments;
-}).call(this);
+  GOVUK.selectDocuments = selectDocuments;
+
+  global.GOVUK = GOVUK;
+})(window);

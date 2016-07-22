@@ -1,8 +1,7 @@
-(function () {
+(function(global) {
   "use strict";
-  var root = this,
-    $ = root.jQuery;
-  if(typeof root.GOVUK === 'undefined') { root.GOVUK = {}; }
+  var GOVUK = global.GOVUK || {};
+  var $ = global.jQuery;
 
   var selectPhone = {
     toggleSecondaryQuestion: function() {
@@ -47,5 +46,7 @@
     }
   };
 
-  root.GOVUK.selectPhone = selectPhone;
-}).call(this);
+  GOVUK.selectPhone = selectPhone;
+
+  global.GOVUK = GOVUK;
+})(window);

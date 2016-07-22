@@ -1,10 +1,9 @@
 //= require vendor/jquery.inputevent
 
-(function () {
+(function(global) {
   "use strict";
-  var root = this,
-    $ = root.jQuery;
-  if(typeof root.GOVUK === 'undefined') { root.GOVUK = {}; }
+  var GOVUK = global.GOVUK || {};
+  var $ = global.jQuery;
 
   /**
    * The reply radios need special treatment because unlike
@@ -62,5 +61,7 @@
     }
   };
 
-  root.GOVUK.feedback = feedback;
-}).call(this);
+  GOVUK.feedback = feedback;
+
+  global.GOVUK = GOVUK;
+})(window);

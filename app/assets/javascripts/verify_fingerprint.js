@@ -1,13 +1,13 @@
 //= require fingerprint2
 
-(function (exports) {
+(function(global) {
    'use strict';
 
     // based on jQuery's param implementation https://github.com/jquery/jquery/blob/master/src/serialize.js
     function serialiseComponents(components) {
         var componentsToExclude = ['webgl'];
         var r = [];
-        jQuery.each(components, function() {
+        global.jQuery.each(components, function() {
             if(componentsToExclude.indexOf(this.key) == -1) {
                 r[r.length] = encodeURIComponent(this.key) + "=" + encodeURIComponent(this.value);
             }
@@ -23,5 +23,5 @@
         });
     }
 
-    exports.reportFingerprint = reportFingerprint;
-})(this);
+    global.reportFingerprint = reportFingerprint;
+})(window);
