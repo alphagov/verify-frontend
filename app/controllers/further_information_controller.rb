@@ -1,4 +1,6 @@
 class FurtherInformationController < ApplicationController
+  protect_from_forgery except: [:submit, :submit_null_attribute]
+
   def index
     @cycle_three_attribute = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(cookies).new({})
     @transaction_name = current_transaction.name
