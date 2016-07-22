@@ -27,7 +27,7 @@ RSpec.describe 'When the user visits the redirect to service page' do
     end
 
     it 'supports the welsh language for error' do
-      visit 'redirect-to-service/error-cy'
+      visit "/#{I18n.t('routes.redirect_to_service_error', locale: 'cy')}"
       expect(page).to have_css 'html[lang=cy]'
     end
 
@@ -60,12 +60,12 @@ RSpec.describe 'When the user visits the redirect to service page' do
     end
 
     it 'supports the welsh language for signing in' do
-      visit 'redirect-to-service/signing-in-cy'
+      visit "/#{I18n.t('routes.redirect_to_service_signing_in', locale: 'cy')}"
       expect(page).to have_css 'html[lang=cy]'
     end
 
     it 'supports the welsh language for start again' do
-      visit 'redirect-to-service/start-again-cy'
+      visit "/#{I18n.t('routes.redirect_to_service_start_again', locale: 'cy')}"
       expect(page).to have_css 'html[lang=cy]'
     end
 

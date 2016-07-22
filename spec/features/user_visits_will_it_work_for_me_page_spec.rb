@@ -13,7 +13,7 @@ RSpec.describe 'When the user visits the will it work for me page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/ni-fydd-yn-gweithio-i-mi'
+    visit "/#{I18n.t('routes.will_it_work_for_me', locale: 'cy')}"
     expect(page).to have_title 'Allai i gael fy nilysu? - GOV.UK Verify - GOV.UK'
     expect(page).to have_css 'html[lang=cy]'
   end

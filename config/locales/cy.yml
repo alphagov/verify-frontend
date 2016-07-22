@@ -8,7 +8,7 @@ cy:
     about_choosing_a_company: am-ddewis-cwmni
     select_documents: dewis-dogfennau
     select_phone: dewis-ffon
-    will_it_work_for_me: ni-fydd-yn-gweithio-i-mi
+    will_it_work_for_me: a-fydd-yn-gweithio-i-mi
     no_mobile_phone: dim-ffon-symudol
     may_not_work_if_you_live_overseas: efallai-na-fydd-yn-gweithio-os-ydych-yn-byw-dramor
     why_might_this_not_work_for_me: pam-efallai-na-fydd-hyn-yn-gweithio-i-mi
@@ -27,13 +27,13 @@ cy:
     other_ways_to_access_service: ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth
     forgot_company: wedi-anghofio-cwmni
     response_processing: prosesu-ymateb
-    redirect_to_idp: redirect-to-idp-cy
-    redirect_to_service_signing_in: redirect-to-service/signing-in-cy
-    redirect_to_service_start_again: redirect-to-service/start-again-cy
-    redirect_to_service_error: redirect-to-service/error-cy
-    feedback: feedback-cy
-    feedback_sent: feedback-sent-cy
-    certified_company_unavailable: certified-company-unavailable-cy/:company
+    redirect_to_idp: ailgyfeirio-i-idp
+    redirect_to_service_signing_in: ailgyfeirio-i-gwasanaeth/mewngofnodi
+    redirect_to_service_start_again: ailgyfeirio-i-gwasanaeth/dechrau-eto
+    redirect_to_service_error: ailgyfeirio-i-gwasanaeth/gwall
+    feedback: adborth
+    feedback_sent: adborth-wedi'i anfon
+    certified_company_unavailable: cwmni-ardystiedig-ddim-ar-gael/:company
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -103,11 +103,11 @@ cy:
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
       explanation: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
-      no_documents_message: Your document choices have been set to ‘no’.
+      no_documents_message: Mae eich dewisiadau dogfennau wedi cael eu gosod i ‘na’.
       legend: Ydy’r dogfennau hyn gyda chi?
       documents_option_yes: Ydy
       question:
-        driving_licence: UK photocard driving licence, full or provisional (excluding Northern Ireland)
+        driving_licence: Trwydded yrru llun y DU, llawn neu dros dro (ac eithrio Gogledd Iwerddon)
         passport: Pasport y DU
         non_uk_id_document: Dogfen hunaniaeth o wlad arall (pasport, cerdyn ID neu drwydded yrru)
         no_documents: Nid oes gennyf y dogfennau hyn gyda mi
@@ -124,7 +124,7 @@ cy:
         smart_phone_option_yes: Gallaf
         landline: Oes gennych chi linell daear?
         landline_option_yes: Oes
-        smart_phone_subtitle: "Some certified companies ask you to download a free app and use your phone's camera as part of verifying your identity."
+        smart_phone_subtitle: "Mae rhai cwmnïau ardystiedig yn gofyn i chi lawrlwytho app am ddim a defnyddio camera eich ffôn fel rhan o ddilysu eich hunaniaeth."
       errors:
         no_selection: Dylech ateb pob cwestiwn
         invalid_selection: Dylech edrych dros eich dewis
@@ -250,10 +250,10 @@ cy:
         </ul>
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
       what_to_do_next: "Beth i’w wneud nesaf"
-      problems_verifying_your_identity: Problems verifying your identity
-      continue_heading: "Continue to %{transaction_name}"
-      continue_idp_text: "%{display_name} was unable to verify your identity, but you can still submit your application."
-      continue_text: "Continue to %{rp_name} to find out how."
+      problems_verifying_your_identity: Problemau gyda dilysu eich hunaniaeth
+      continue_heading: "Mynd ymlaen i %{transaction_name}"
+      continue_idp_text: "Roedd %{display_name} yn methu dilysu eich hunaniaeth, ond gallwch ddal i anfon eich cais."
+      continue_text: "Mynd ymlaen i %{rp_name} i ddarganfod sut."
     failed_sign_in:
       title: Methu eich mewngofnodi
       heading: Ni all "%{display_name} eich mewngofnodi"
@@ -273,68 +273,68 @@ cy:
     forgot_company:
       title: Cyngor ar gyfer cwmni sydd wedi’i anghofio
     redirect_to_service:
-      heading: "Continue to next step"
+      heading: "Mynd ymlaen i'r cam nesaf"
       signing_in:
-        title: "Please wait. Signing you in"
-        transition_heading: "%{rp_name} is processing your details"
+        title: "Arhoswch. Yn eich mewngofnodi"
+        transition_heading: "Mae %{rp_name} yn prosesu eich manylion"
       start_again:
-        title: "Please wait. Starting again."
-        transition_heading: "Starting again"
-      no_javascript: "Because Javascript is not enabled on your browser, you must press the continue button"
-      loading: "Loading…"
-      please_wait: "This may take a few seconds, please bear with us."
+        title: "Arhoswch. Dechrau eto."
+        transition_heading: "Dechrau eto"
+      no_javascript: "Oherwydd nad yw Javascript wedi'i alluogi ar eich porwr, mae'n rhaid i chi bwyso'r botwm parhau"
+      loading: "Llwytho…"
+      please_wait: "Gall hyn gymryd ychydig o eiliadau, arhoswch gyda ni."
     redirect_to_idp:
-      title: Loading
-      heading: Parhau i’r cam nesaf
+      title: Llwytho
+      heading: Mynd ymlaen i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
     feedback:
       title: Adborth
-      heading: Send your feedback to GOV.UK Verify
+      heading: Anfonnwch eich adborth i GOV.UK Verify
       introduction_html: |
-        <p>You can use the form below to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
-        <p><strong>Please don’t include any personal or financial information, for example your National Insurance or credit card numbers.</strong></p>
-      request_reply: If you’d like GOV.UK Verify to get back to you, please leave your details below.
-      character_count_message: " characters remaining %{limit_message}"
-      character_limit_message: (limit is 3000 characters)
+        <p>Gallwch ddefnyddio'r ffurflen isod i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant y gall GOV.UK Verify ei wneud.</p>
+        <p><strong>Peidiwch â chynnwys unrhyw wybodaeth bersonol neu ariannol, er enghraifft eich rhifau Yswiriant Gwladol neu gerdyn credyd.</strong></p>
+      request_reply: Os hoffech i GOV.UK Verify ymateb i chi, rhowch eich manylion isod.
+      character_count_message: " nod yn weddill %{limit_message}"
+      character_limit_message: (y terfyn yw 3000 nod)
       questions:
-        what: What were you trying to do?
-        details: Please provide details of your question, problem or feedback
-        reply: Do you want a reply?
-        reply_option_yes: "Yes"
-        name: Name
-        email: Email address
-        email_hint: We’ll only use this to reply to your message.
+        what: Beth oeddech chi'n ceisio ei wneud?
+        details: Rhowch fanylion eich cwestiwn, problem neu adborth
+        reply: Ydych chi eisiau ateb?
+        reply_option_yes: "Ydw"
+        name: Enw
+        email: Cyfeiriad e-bost
+        email_hint: Byddwn ond yn ei ddefnyddio i ateb eich neges.
       errors:
-        heading: There was a problem submitting the form
-        no_selection: Please answer the questions
-        details: Please provide details
-        too_long: This field can be up to %{max_length} characters  #TODO confirm text
-        name: Please enter a name
-        email: Please enter a valid email address
-        send_failure: Unfortunately, we are unable to record your feedback at the moment. Please try again later.
-        reply: Please select an option
-      send_message: Send message
+        heading: Roedd problem wrth anfon y ffurflen
+        no_selection: Dylech ateb y cwestiynau
+        details: Dylech roi manylion
+        too_long: Gall y maes hwn fod hyd at %{max_length} nod  #TODO confirm text
+        name: Dylech roi enw
+        email: Dylech roi cyfeiriad e-bost dilys
+        send_failure: Yn anffodus rydym yn methu cofnodi eich adborth ar hyn o bryd. Rhowch gynnig arall yn hwyrach ymlaen.
+        reply: Dylech ddewis opsiwn
+      send_message: Anfon neges
     feedback_sent:
-      title: Feedback
-      heading: Your feedback
-      subheading: Thank you
-      message_email: Your message has been sent and the team will get back to you to answer any questions as soon as possible.
-      message_no_email: Your feedback has been received.
-      start_again_link: Return to registering for an identity profile
-      session_timeout: Sorry, but your session has timed out. To ensure your security, you need to start again.
+      title: Adborth
+      heading: Eich adborth
+      subheading: Diolch yn fawr
+      message_email: Mae eich neges wedi'i anfon a bydd y tîm yn ateb unrhyw gwestiynnau cyn gynted â phosibl.
+      message_no_email: Mae eich adborth wedi'i dderbyn.
+      start_again_link: Dychwelwch i gofrestru ar gyfer proffil hunaniaeth
+      session_timeout: Mae'n ddrwg gennym, ond mae eich sesiwn wedi cael ei amseru allan. Er mwyn sicrhau eich diogelwch, mae angen i chi ddechrau eto.
     certified_company_unavailable:
-      title: This certified company is unavailable
-      sorry: Sorry, %{display_name} is not available.
-      verify_another_company_html: To access government services, you must %{link}.
-      verify_another_company_link: verify your identity with another certified company
+      title: Nid yw'r cwmni ardystiedig hwn ar gael
+      sorry: Mae'n ddrwg gennym, nid yw %{display_name} ar gael.
+      verify_another_company_html: Er mwyn cael mynediad i wasanaethau'r llywodraeth, mae'n rhaid i chi %{link}.
+      verify_another_company_link: ddilysu eich hunaniaeth gyda chwmni ardystiedig arall
     further_information:
-      title: Enter your %{cycle_three_name}
-      first_time: This is the first time you’ve signed in.
-      help_with_your: Where to find your %{cycle_three_name}
-      cancel: Cancel and return to %{transaction_name}
-      example_text: "Example: %{example}"
-      attribute_validation_message: Enter a valid %{cycle_three_name}
-      null_attribute: I don’t have an %{cycle_three_name}
+      title: Rhowch eich %{cycle_three_name}
+      first_time: Hwn yw'r tro cyntaf i chi fewngofnodi.
+      help_with_your: Ble i ddod o hyd i'ch %{cycle_three_name}
+      cancel: Dileu a dychwelyd i %{transaction_name}
+      example_text: "Enghraifft: %{example}"
+      attribute_validation_message: Rhowch %{cycle_three_name} dilys
+      null_attribute: Nid oes gennyf %{cycle_three_name}
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
