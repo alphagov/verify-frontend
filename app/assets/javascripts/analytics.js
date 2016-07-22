@@ -1,5 +1,7 @@
-(function () {
-   'use strict';
+(function(global) {
+    'use strict';
+    var GOVUK = global.GOVUK || {};
+    var $ = global.jQuery;
 
     function setPiwikVisitorIdCookie () {
         var visitor_id = this.getVisitorId();
@@ -34,5 +36,5 @@
       piwikAnalyticsQueue.unshift(['setCustomUrl', customUrl]);
     }
 
-    window._paq = piwikAnalyticsQueue;
-})();
+    global._paq = piwikAnalyticsQueue;
+})(window);

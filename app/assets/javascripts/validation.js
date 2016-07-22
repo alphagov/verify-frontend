@@ -1,5 +1,7 @@
-(function () {
+(function(global) {
   "use strict";
+  var GOVUK = global.GOVUK || {};
+  var $ = global.jQuery;
 
   function placeRadioErrorMessages($error, $element) {
     $error.addClass('validation-message form-group');
@@ -13,12 +15,7 @@
     $error.children('a').focus();
   }
 
-  var root = this,
-    $ = root.jQuery;
-
-  if(typeof root.GOVUK === 'undefined') { root.GOVUK = {}; }
-
-  root.GOVUK.validation = {
+  GOVUK.validation = {
     radiosValidation: {
       focusInvalid: false,
       errorElement: 'a',
@@ -54,4 +51,5 @@
     }
   };
 
-}).call(this);
+  global.GOVUK = GOVUK;
+})(window);

@@ -1,14 +1,9 @@
-(function () {
+(function(global) {
   "use strict";
+  var GOVUK = global.GOVUK || {};
+  var $ = global.jQuery;
 
-  var root = this,
-    $ = root.jQuery;
-
-  if(typeof root.GOVUK === 'undefined') { root.GOVUK = {}; }
-
-  root.GOVUK.signin = {
-    init: function () {
-    },
+  GOVUK.signin = {
     attach: function () {
       var $container = $('.js-continue-to-idp');
       $container.on('submit', '.js-idp-form', function (e) {
@@ -53,4 +48,5 @@
     }
   };
 
-}).call(this);
+  global.GOVUK = GOVUK;
+})(window);

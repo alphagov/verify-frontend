@@ -83,7 +83,7 @@ GEM
       govuk_frontend_toolkit (>= 4.12.0)
       rails (>= 4.1.0)
       sass (>= 3.2.0)
-    govuk_frontend_toolkit (4.12.0)
+    govuk_frontend_toolkit (4.14.0)
       rails (>= 3.1.0)
       sass (>= 3.2.0)
     govuk_template (0.18.0)
@@ -103,7 +103,7 @@ GEM
     i18n (0.7.0)
     inflection (1.0.0)
     jasmine-core (2.4.1)
-    jasmine-rails (0.12.3)
+    jasmine-rails (0.12.6)
       jasmine-core (>= 1.3, < 3.0)
       phantomjs (>= 1.9)
       railties (>= 3.2.0)
@@ -237,7 +237,7 @@ GEM
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
     spring (1.6.3)
-    sprockets (3.6.3)
+    sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.1.1)
@@ -323,5 +323,8 @@ DEPENDENCIES
   webmock
   zendesk_api
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.12.5

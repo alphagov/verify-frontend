@@ -1,14 +1,14 @@
-
-(function () {
+(function(global) {
   "use strict";
-  var root = this,
-    $ = root.jQuery;
-  if(typeof root.GOVUK === 'undefined') { root.GOVUK = {}; }
+  var GOVUK = global.GOVUK || {};
+  var $ = global.jQuery;
 
-  root.GOVUK.furtherInformation = {
+  GOVUK.furtherInformation = {
     init: function () {
       this.$form = $('#further-information');
       this.$form.validate();
     }
   };
-}).call(this);
+
+  global.GOVUK = GOVUK;
+})(window);

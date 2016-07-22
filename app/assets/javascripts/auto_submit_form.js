@@ -1,11 +1,13 @@
-//= require 'jquery'
-
-(function () {
+(function(global) {
   'use strict';
-  if(!window.GOVUK) { window.GOVUK = {}; }
-  window.GOVUK.autoSubmitForm = {
+  var GOVUK = global.GOVUK || {};
+  var $ = global.jQuery;
+
+  GOVUK.autoSubmitForm = {
     attach: function () {
       $('form.js-auto-submit').submit();
     }
   };
-})();
+
+  global.GOVUK = GOVUK;
+})(window);

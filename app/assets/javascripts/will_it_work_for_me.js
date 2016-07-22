@@ -1,9 +1,7 @@
-(function () {
+(function(global) {
     "use strict";
-    var root = this, $ = root.jQuery;
-    if (typeof root.GOVUK === 'undefined') {
-        root.GOVUK = {};
-    }
+    var GOVUK = global.GOVUK || {};
+    var $ = global.jQuery;
 
     var willItWorkForMe = {
         init: function () {
@@ -50,5 +48,7 @@
         }
     };
 
-    root.GOVUK.willItWorkForMe = willItWorkForMe;
-}).call(this);
+    GOVUK.willItWorkForMe = willItWorkForMe;
+
+    global.GOVUK = GOVUK;
+})(window);
