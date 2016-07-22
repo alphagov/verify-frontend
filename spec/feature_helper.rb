@@ -4,6 +4,17 @@ require 'webmock/rspec'
 require 'rack_session_access/capybara'
 WebMock.disable_net_connect!(allow_localhost: true)
 
+# The javascript tests are written against firefox browser and depend on the
+# system having firefox installed. Explicitly depend on Firefox in order to
+# avoid tests failing because Selenium chooses another browser when there is
+# no firefox installed in the system.
+begin
+  Selenium::WebDriver.for :firefox
+rescue Selenium::WebDriver::Error::WebDriverError => err
+  puts err.message
+  exit(1)
+end
+
 if ENV['HEADLESS'] == 'true'
   require 'headless'
   headless = Headless.new
