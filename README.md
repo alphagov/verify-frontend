@@ -10,13 +10,16 @@ Once you’ve cloned this then `bundle` will install the requirements.
 
 ## Running the application
 
-`./startup.sh`
+You can start the application without having any of the closed source components installed with:
 
-This will start the server running on http://localhost:50300/ .
+`./startup.sh --stub-api`
 
-Without cookies this won’t do much; for the time being you’ll need to start a journey on the existing system until you get to the old frontend’s start page. This will give you the cookies you need for localhost.
+This will start the frontend server running on http://localhost:50300/ and a stubbed API server on http://localhost:50190.
 
-If you don’t have ida-sample-rp running you can get to the start page on the new frontend by visiting http://localhost:50300/test-saml and clicking on saml-post.
+To start a journey on the front end visit http://localhost:50300/test-saml and click `saml-post`.
+
+If you're on the Verify team and have the rest of the federation running locally you should omit the `--stub-api` argument
+and start your journey from the test-rp.
 
 ## Running the tests
 

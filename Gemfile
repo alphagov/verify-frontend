@@ -65,6 +65,7 @@ group :development do
 end
 
 group :test, :development do
+  gem 'rspec', '~> 3.4.0'
   gem 'rspec-rails', '~> 3.4.0'
   gem 'capybara', '~> 2.6'
   gem 'capybara-puma'
