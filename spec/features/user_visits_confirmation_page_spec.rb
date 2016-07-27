@@ -39,11 +39,6 @@ RSpec.describe 'When user visits the confirmation page' do
     expect(page).to have_css('html[lang=en]')
   end
 
-  it 'displays link button to Continue' do
-    visit '/confirmation'
-    expect(page).to have_link(I18n.t('navigation.continue'), href: response_processing_path)
-  end
-
   it 'sends user to response-processing page when they click the link' do
     stub_matching_outcome
     visit '/confirmation'
