@@ -81,13 +81,9 @@ Rails.application.routes.draw do
   post 'further-information-cy/cancel', to: 'further_information#cancel'
   post 'further-information/null-attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
   post 'further-information-cy/null-attribute', to: 'further_information#submit_null_attribute'
+  get 'feedback/feedback-sent', to: 'feedback_sent#index', as: :feedback_sent
+  get "feedback/adborth-wedi'i-anfon", to: 'feedback_sent#index'
 
-
-  if Rails.env == 'development'
-    get 'feedback/feedback-sent', to: redirect("#{API_HOST}/feedback/feedback-sent"), as: :feedback_sent
-  else
-    get 'feedback/feedback-sent', to: proc { |_| [200, {}, ['OK']] }, as: :feedback_sent
-  end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

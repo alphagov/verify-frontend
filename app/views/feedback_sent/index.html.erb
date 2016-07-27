@@ -1,0 +1,10 @@
+<h1><%= t 'hub.feedback_sent.heading' %></h1>
+
+<h2><%= t 'hub.feedback_sent.subheading' %></h2>
+<% if @email_provided %>
+  <%= t 'hub.feedback_sent.message_email'  %>
+<% else %>
+  <%= t 'hub.feedback_sent.message_no_email' %>
+<% end %>
+
+<%= t 'hub.feedback_sent.session_timeout' %>
