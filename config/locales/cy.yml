@@ -234,7 +234,8 @@ cy:
       need_to_signin_again: Er mwyn %{transaction_name}, mae angen i chi lofnodi i mewn eto gyda’ch cwmni ardystiedig. Nid oes angen i chi gofrestru eto.
     confirmation:
       title: Mae eich hunaniaeth wedi cael ei ddilysu
-      message: Gallwch nawr fewngofnodi ble bynnag rydych yn gweld logo GOV.UK Verify logo
+      message: You can sign in wherever you see the GOV.UK Verify logo.
+      continue_to_rp: "You can now %{transaction_name}."
       heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
     failed_registration:
       title: Methu dilysu eich hunaniaeth
