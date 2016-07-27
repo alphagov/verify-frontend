@@ -69,7 +69,7 @@ RSpec.describe 'user visits further information page' do
     expect(cancel_request).to have_been_made
   end
 
-  it 'will submit empty cycle 3 attribute when user clicks the no attribute link' do
+  it 'will submit empty cycle 3 attribute when user clicks the no attribute link', js: true do
     piwik_request = stub_piwik_cycle_three('NullableAttribute')
     stub_cycle_three_attribute_request('NullableAttribute')
     stub_request = stub_cycle_three_value_submit('')

@@ -36,18 +36,18 @@
           </div>
         </details>
         </div>
-        <% if @cycle_three_attribute.allows_nullable? %>
-          <div class="form-group">
-            <%= form_tag(further_information_null_attribute_submit_path) do %>
-              <%= button_tag t('hub.further_information.null_attribute', cycle_three_name: @cycle_three_attribute.name),
-                             id: 'cycle_three_null_attribute_link', class: 'button-link', role: 'link' %>
-            <% end %>
-          </div>
-        <% end %>
         <div class="form-group">
           <%= f.submit t('navigation.continue'), id: 'continue-button', class: 'button' %>
         </div>
       </fieldset>
+    <% end %>
+    <% if @cycle_three_attribute.allows_nullable? %>
+      <div class="form-group">
+        <%= form_tag(further_information_null_attribute_submit_path) do %>
+          <%= button_tag t('hub.further_information.null_attribute', cycle_three_name: @cycle_three_attribute.name),
+            id: 'cycle_three_null_attribute_link', class: 'button-link', role: 'link' %>
+        <% end %>
+      </div>
     <% end %>
     <div class="cancel-process">
       <%= form_tag(further_information_cancel_path) do %>
