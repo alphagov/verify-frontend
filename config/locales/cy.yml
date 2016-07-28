@@ -317,12 +317,11 @@ cy:
       send_message: Anfon neges
     feedback_sent:
       title: Adborth
-      heading: Eich adborth
-      subheading: Diolch yn fawr
-      message_email: Mae eich neges wedi'i anfon a bydd y tîm yn ateb unrhyw gwestiynnau cyn gynted â phosibl.
-      message_no_email: Mae eich adborth wedi'i dderbyn.
-      start_again_link: Dychwelwch i gofrestru ar gyfer proffil hunaniaeth
-      session_timeout: Mae'n ddrwg gennym, ond mae eich sesiwn wedi cael ei amseru allan. Er mwyn sicrhau eich diogelwch, mae angen i chi ddechrau eto.
+      heading: Thank you for your feedback
+      message_email: We've received your message, and we'll reply as soon as possible.
+      session_valid_link: Return to GOV.UK Verify
+      session_not_valid: Your session has timed out. To ensure your security, you must %{link}.
+      session_not_valid_link: start again
     certified_company_unavailable:
       title: Nid yw'r cwmni ardystiedig hwn ar gael
       sorry: Mae'n ddrwg gennym, nid yw %{display_name} ar gael.
