@@ -15,10 +15,21 @@ class AuthnRequestController < ApplicationController
     set_secure_cookie(CookieNames::SECURE_COOKIE_NAME, response.secure_cookie)
     set_current_transaction_simple_id(response.transaction_simple_id)
 
+    enable_feature_flag_cookie!
+
     if params['journey_hint'].present?
       redirect_to confirm_your_identity_path
     else
       redirect_to start_path
     end
+  end
+
+  def enable_feature_flag_cookie!
+    cookies['x_front_test'] = {
+      value: '1idfoif2d',
+      expires: 2.hour.from_now,
+      httponly: true,
+      secure: Rails.configuration.x.cookies.secure
+    }
   end
 end
