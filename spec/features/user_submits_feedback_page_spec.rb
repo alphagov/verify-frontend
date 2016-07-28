@@ -31,4 +31,21 @@ RSpec.feature 'When the user submits the feedback page' do
     expect(page).to have_content(I18n.t('hub.feedback_sent.message_no_email'))
     expect(page).to have_content(I18n.t('hub.feedback_sent.session_timeout'))
   end
+
+  it 'should tell the user that their message has been sent and link them back to the start page' do
+    set_session_cookies!
+    visit feedback_path
+
+    fill_in 'feedback_form_what', with: 'Using verify'
+    fill_in 'feedback_form_details', with: 'Some details'
+    choose 'feedback_form_reply_false'
+
+
+    click_button I18n.t('hub.feedback.send_message')
+    expect(page).to have_current_path(feedback_sent_path, only_path: true)
+    expect(page).to_not have_content(I18n.t('hub.feedback_sent.message_email'))
+    expect(page).to have_content(I18n.t('hub.feedback_sent.message_no_email'))
+    expect(page).to_not have_content(I18n.t('hub.feedback_sent.session_timeout'))
+    expect(page).to have_css('a', text: I18n.t('hub.feedback_sent.start_again_link'))
+  end
 end

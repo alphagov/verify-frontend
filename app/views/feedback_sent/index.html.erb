@@ -1,10 +1,21 @@
-<h1><%= t 'hub.feedback_sent.heading' %></h1>
+<div class="column-two-thirds">
+  <h1 class="heading-xlarge"><%= t 'hub.feedback_sent.heading' %></h1>
 
-<h2><%= t 'hub.feedback_sent.subheading' %></h2>
-<% if @email_provided %>
-  <%= t 'hub.feedback_sent.message_email'  %>
-<% else %>
-  <%= t 'hub.feedback_sent.message_no_email' %>
-<% end %>
+  <h2 class="heading-medium"><%= t 'hub.feedback_sent.subheading' %></h2>
 
-<%= t 'hub.feedback_sent.session_timeout' %>
+  <p>
+    <% if @email_provided %>
+        <%= t 'hub.feedback_sent.message_email'  %>
+    <% else %>
+        <%= t 'hub.feedback_sent.message_no_email' %>
+    <% end %>
+  </p>
+
+  <p>
+    <% if @session_valid %>
+        <%= link_to t('hub.feedback_sent.start_again_link'), start_path %>
+    <% else %>
+        <%= t 'hub.feedback_sent.session_timeout' %>
+    <% end %>
+  </p>
+</div>
