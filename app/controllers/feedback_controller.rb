@@ -13,6 +13,7 @@ class FeedbackController < ApplicationController
       session_id = cookies[CookieNames::SESSION_ID_COOKIE_NAME]
       if FEEDBACK_SERVICE.submit!(session_id, @form)
         query_params = { "emailProvided" => @form.reply_required?, "sessionValid" => session_id.present? }
+        flash['email_provided'] = @form.reply_required?
         redirect_to feedback_sent_path(query_params)
       else
         @has_email_sending_error = true
