@@ -33,8 +33,7 @@ private
 
   def reset_session_cookies
     reset_session
-    no_current_session_value = 'no-current-session'.freeze
-    cookies[CookieNames::SECURE_COOKIE_NAME] = no_current_session_value
-    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = no_current_session_value
+    cookies[CookieNames::SECURE_COOKIE_NAME] = CookieNames::NO_CURRENT_SESSION_VALUE
+    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = CookieNames::NO_CURRENT_SESSION_VALUE
   end
 end

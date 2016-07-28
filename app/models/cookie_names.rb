@@ -4,6 +4,7 @@ module CookieNames
   SESSION_STARTED_TIME_COOKIE_NAME = 'session_start_time'.freeze
   VERIFY_FRONT_JOURNEY_HINT = 'verify-front-journey-hint'.freeze
   PIWIK_VISITOR_ID = 'PIWIK_VISITOR_ID'.freeze
+  NO_CURRENT_SESSION_VALUE = 'no-current-session'.freeze
 
   def self.session_cookies
     [SECURE_COOKIE_NAME, SESSION_ID_COOKIE_NAME, SESSION_STARTED_TIME_COOKIE_NAME]
