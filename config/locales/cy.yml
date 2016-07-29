@@ -32,7 +32,7 @@ cy:
     redirect_to_service_start_again: ailgyfeirio-i-gwasanaeth/dechrau-eto
     redirect_to_service_error: ailgyfeirio-i-gwasanaeth/gwall
     feedback: adborth
-    feedback_sent: adborth-wedi'i-anfon
+    feedback_sent: adborth/adborth-wedi'i-anfon
     certified_company_unavailable: cwmni-ardystiedig-ddim-ar-gael/:company
     further_information: further-information-cy
     further_information_cancel: further-information-cy/cancel

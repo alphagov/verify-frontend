@@ -66,5 +66,18 @@ RSpec.feature 'When the user submits the feedback page' do
       expect(page).to_not have_content(session_not_valid_link)
       expect(page).to have_link I18n.t('hub.feedback_sent.session_valid_link')
     end
+
+    it 'should show feedback sent in Welsh' do
+      set_session_cookies!
+
+      visit feedback_cy_path
+      fill_in 'feedback_form_what', with: 'Using verify'
+      fill_in 'feedback_form_details', with: 'Some details'
+      choose 'feedback_form_reply_false'
+      click_button I18n.t('hub.feedback.send_message', locale: :cy)
+
+      expect(page).to have_title I18n.t('hub.feedback_sent.title', locale: :cy)
+      expect(page).to have_css 'html[lang=cy]'
+    end
   end
 end
