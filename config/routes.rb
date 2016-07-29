@@ -61,6 +61,9 @@ Rails.application.routes.draw do
     get 'feedback', to: 'feedback#index', as: :feedback
     post 'feedback', to: 'feedback#submit', as: :feedback_submit
     get 'certified_company_unavailable', to: 'certified_company_unavailable#index', as: :certified_company_unavailable
+    post 'further_information', to: 'further_information#submit', as: :further_information_submit
+    post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
+    post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
@@ -75,12 +78,6 @@ Rails.application.routes.draw do
     get 'further-information-cy', to: 'further_information#index', as: :further_information_cy
   end
 
-  post 'further-information', to: 'further_information#submit', as: :further_information_submit
-  post 'further-information-cy', to: 'further_information#submit'
-  post 'further-information/cancel', to: 'further_information#cancel', as: :further_information_cancel
-  post 'further-information-cy/cancel', to: 'further_information#cancel'
-  post 'further-information/null-attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
-  post 'further-information-cy/null-attribute', to: 'further_information#submit_null_attribute'
   get 'feedback/feedback-sent', to: 'feedback_sent#index', as: :feedback_sent
   get "feedback/adborth-wedi'i-anfon", to: 'feedback_sent#index'
 

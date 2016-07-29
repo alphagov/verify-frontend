@@ -34,6 +34,9 @@ en:
     feedback: feedback
     feedback_sent: feedback-sent
     certified_company_unavailable: certified-company-unavailable/:company
+    further_information: further-information
+    further_information_cancel: further-information/cancel
+    further_information_null_attribute: futher-information/null-attribute
   navigation:
     next: Next
     start_now: Start now
