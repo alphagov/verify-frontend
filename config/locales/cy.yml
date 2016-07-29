@@ -34,6 +34,9 @@ cy:
     feedback: adborth
     feedback_sent: adborth-wedi'i-anfon
     certified_company_unavailable: cwmni-ardystiedig-ddim-ar-gael/:company
+    further_information: further-information-cy
+    further_information_cancel: further-information-cy/cancel
+    further_information_null_attribute: futher-information-cy/null-attribute
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
