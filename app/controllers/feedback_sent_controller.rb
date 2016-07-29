@@ -4,8 +4,7 @@ class FeedbackSentController < ApplicationController
   def index
     flash.keep('email_provided')
     @email_provided = flash['email_provided']
-    session_id_cookie = cookies[CookieNames::SESSION_ID_COOKIE_NAME]
-    @session_valid = session_id_cookie && session_id_cookie != CookieNames::NO_CURRENT_SESSION_VALUE
+    @session_valid = COOKIE_VALIDATOR.validate(cookies, session).ok?
     render
   end
 end
