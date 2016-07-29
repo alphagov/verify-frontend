@@ -89,17 +89,6 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_css('.validation-message', text: I18n.t('hub.feedback.errors.no_selection'))
   end
 
-  it 'should pass email not provided to feedback sent page when successful' do
-    visit feedback_path
-
-    fill_in 'feedback_form_what', with: 'Verify my identity'
-    fill_in 'feedback_form_details', with: 'Some details'
-    choose 'feedback_form_reply_false'
-
-    click_button I18n.t('hub.feedback.send_message')
-    expect(current_url).to eql feedback_sent_url(emailProvided: false, sessionValid: false)
-  end
-
   it 'should report on the what box character limit', js: true do
     visit feedback_path
 
@@ -123,33 +112,6 @@ RSpec.feature 'When the user visits the feedback page' do
     fill_in 'feedback_form_details', with: details
     page.execute_script('$("#feedback_form_details").triggerHandler("txtinput")')
     expect(page).to have_content("#{long_text_limit - details.size}#{character_count_message_suffix}")
-  end
-
-  it 'should include email provided on feedback sent page when response requested' do
-    visit feedback_path
-
-    fill_in 'feedback_form_what', with: 'Verify my identity'
-    fill_in 'feedback_form_details', with: 'Some details'
-    choose 'feedback_form_reply_true'
-    fill_in 'feedback_form_name', with: 'Bob Smith'
-    fill_in 'feedback_form_email', with: 'bob@smith.com'
-
-    click_button I18n.t('hub.feedback.send_message')
-    expect(current_url).to eql feedback_sent_url(emailProvided: true, sessionValid: false)
-  end
-
-  context 'with session' do
-    it 'should pass email not provided to feedback sent page when successful' do
-      set_session_cookies!
-      visit feedback_path
-
-      fill_in 'feedback_form_what', with: 'Verify my identity'
-      fill_in 'feedback_form_details', with: 'Some details'
-      choose 'feedback_form_reply_false'
-
-      click_button I18n.t('hub.feedback.send_message')
-      expect(current_url).to eql feedback_sent_url(emailProvided: false, sessionValid: true)
-    end
   end
 
   it 'should not go to feedback sent page when a error with zendesk occurs' do
