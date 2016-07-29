@@ -82,7 +82,7 @@ Rails.application.routes.draw do
   post 'further-information/null-attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
   post 'further-information-cy/null-attribute', to: 'further_information#submit_null_attribute'
   get 'feedback/feedback-sent', to: 'feedback_sent#index', as: :feedback_sent
-  get "feedback/adborth-wedi'i-anfon", to: 'feedback_sent#index'
+  get "adborth/adborth-wedi'i-anfon", to: 'feedback_sent#index'
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
