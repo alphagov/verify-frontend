@@ -1,6 +1,4 @@
 class FurtherInformationController < ApplicationController
-  protect_from_forgery except: [:submit, :submit_null_attribute]
-
   def index
     @cycle_three_attribute = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(cookies).new({})
     @transaction_name = current_transaction.name
@@ -8,7 +6,7 @@ class FurtherInformationController < ApplicationController
 
   def submit
     cycle_three_attribute_class = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(cookies)
-    @cycle_three_attribute = cycle_three_attribute_class.new(params['cycle_three_attribute'] || old_cycle_three_params)
+    @cycle_three_attribute = cycle_three_attribute_class.new(params['cycle_three_attribute'])
     if @cycle_three_attribute.valid?
       FURTHER_INFORMATION_SERVICE.submit(cookies, @cycle_three_attribute.sanitised_cycle_three_data)
       FEDERATION_REPORTER.report_cycle_three(request, @cycle_three_attribute.simple_id)
@@ -34,13 +32,5 @@ class FurtherInformationController < ApplicationController
     else
       something_went_wrong('Unexpected submission to Cycle3 Null Attribute endpoint', :forbidden)
     end
-  end
-
-private
-
-  def old_cycle_three_params
-    {
-        cycle_three_data: params['user-input-data']
-    }
   end
 end
