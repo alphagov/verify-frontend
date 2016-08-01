@@ -12,7 +12,7 @@ RSpec.describe 'user visits further information page' do
   attribute_name = I18n.t('cycle3.NationalInsuranceNumber.name')
 
 
-  it 'should also be in welsh', pending: true do
+  it 'should also be in welsh' do
     stub_cycle_three_attribute_request('NationalInsuranceNumber')
     visit further_information_cy_path
     expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: attribute_field_name, locale: :cy)

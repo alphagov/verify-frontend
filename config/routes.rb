@@ -62,6 +62,7 @@ Rails.application.routes.draw do
     post 'feedback', to: 'feedback#submit', as: :feedback_submit
     get 'feedback_sent', to: 'feedback_sent#index', as: :feedback_sent
     get 'certified_company_unavailable', to: 'certified_company_unavailable#index', as: :certified_company_unavailable
+    get 'further_information', to: 'further_information#index', as: :further_information
     post 'further_information', to: 'further_information#submit', as: :further_information_submit
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
@@ -71,13 +72,6 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
-
-  if ENV["USE_OLD_CYCLE3_ROUTING"]
-    get 'further-information', to: redirect("#{API_HOST}/further-information"), as: :further_information
-  else
-    get 'further-information', to: 'further_information#index', as: :further_information
-    get 'further-information-cy', to: 'further_information#index', as: :further_information_cy
-  end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
