@@ -5,7 +5,7 @@ class AuthnResponseController < ApplicationController
   REGISTERING_STATE = 'REGISTER_WITH_IDP'.freeze
 
   def set_locale
-    I18n.locale = locale_from_journey_hint
+    I18n.locale = cookies.signed[CookieNames::VERIFY_LOCALE] || locale_from_journey_hint
   end
 
   def idp_response
