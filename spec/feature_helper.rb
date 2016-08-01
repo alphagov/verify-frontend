@@ -48,7 +48,7 @@ def cookie_value(cookie_name)
     raise "Could not find cookie with name #{cookie_name.inspect}, cookies were #{all_cookies.inspect}" unless cookie
     cookie[:value]
   else
-    Capybara.current_session.driver.request.cookies[cookie_name]
+    Capybara.current_session.driver.browser.rack_mock_session.cookie_jar[cookie_name]
   end
 end
 

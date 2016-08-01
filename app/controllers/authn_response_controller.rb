@@ -1,12 +1,8 @@
-class AuthnResponseController < ApplicationController
+class AuthnResponseController < SamlController
   protect_from_forgery except: :idp_response
 
   SIGNING_IN_STATE = 'SIGN_IN_WITH_IDP'.freeze
   REGISTERING_STATE = 'REGISTER_WITH_IDP'.freeze
-
-  def set_locale
-    I18n.locale = cookies.signed[CookieNames::VERIFY_LOCALE] || locale_from_journey_hint
-  end
 
   def idp_response
     if params['RelayState'] != cookies[CookieNames::SESSION_ID_COOKIE_NAME]

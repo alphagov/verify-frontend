@@ -1,10 +1,6 @@
-class AuthnRequestController < ApplicationController
+class AuthnRequestController < SamlController
   protect_from_forgery except: :rp_request
   skip_before_action :validate_cookies
-
-  def set_locale
-    I18n.locale = cookies.signed[CookieNames::VERIFY_LOCALE] || locale_from_journey_hint
-  end
 
   def rp_request
     reset_session

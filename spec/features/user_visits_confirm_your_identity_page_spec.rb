@@ -120,7 +120,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
       visit '/confirm-your-identity'
       expect(page).to have_title 'Sign in with a certified company - GOV.UK Verify - GOV.UK'
       expect(page).to have_current_path(sign_in_path)
-      expect(cookie_value(CookieNames::VERIFY_FRONT_JOURNEY_HINT)).to eql(nil)
+      expect(cookie_value(CookieNames::VERIFY_FRONT_JOURNEY_HINT)).to eql("") # rails deletes cookies by setting the value to an empty string
     end
   end
 
