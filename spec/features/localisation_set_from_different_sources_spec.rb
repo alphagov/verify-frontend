@@ -2,23 +2,24 @@ require 'feature_helper'
 require 'api_test_helper'
 
 RSpec.describe 'locale is set based on multiple sources', type: :feature do
+  def set_locale_cookie_to(locale)
+    session_cookies = set_session_cookies!
+    visit public_send("about_#{locale}_path")
+    expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of locale
+    session_cookies
+  end
+
   context "when I visit a page" do
     it 'will set the locale cookie to en if the language is English' do
-      set_session_cookies!
-      visit start_path
-      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of 'en'
+      set_locale_cookie_to('en')
     end
 
     it 'will set the locale cookie to cy if the page language is Welsh' do
-      set_session_cookies!
-      visit about_cy_path
-      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of 'cy'
+      set_locale_cookie_to('cy')
     end
 
     it 'will change the value of the locale cookie when the user changes from English to Welsh' do
-      set_session_cookies!
-      visit start_path
-      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of 'en'
+      set_locale_cookie_to('en')
       click_on 'Cymraeg'
       expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of 'cy'
     end
@@ -27,9 +28,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
   context "when submitting saml" do
     RSpec.shared_examples "submitting SAML" do |locale|
       it "will render the start page in #{locale} after SAML submission when locale cookie set to #{locale}" do
-        set_session_cookies!
-        visit public_send("about_#{locale}_path")
-        expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of locale
+        set_locale_cookie_to(locale)
         stub_federation
         stub_api_saml_endpoint
 
@@ -40,12 +39,10 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
       end
 
       it "will render the response processing page in #{locale} after SAML response when locale cookie set to #{locale}" do
-        session_cookies = set_session_cookies!
-        visit public_send("about_#{locale}_path")
-        expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of locale
+        session_cookies = set_locale_cookie_to(locale)
         stub_matching_outcome
         session_id = session_cookies[CookieNames::SESSION_ID_COOKIE_NAME]
-        stub_api_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => false)
+        stub_api_authn_response(session_id)
 
         visit('/test-saml')
         click_button 'saml-response-post'
@@ -71,9 +68,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
       locale_cookie_message = cookie_locale.nil? ? " is unset" : " set to #{cookie_locale}"
       it "will render the start page in #{form_locale} after SAML submission when locale cookie #{locale_cookie_message} and form param set to #{form_locale}" do
         if cookie_locale
-          set_session_cookies!
-          visit public_send("about_#{cookie_locale}_path")
-          expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of cookie_locale
+          set_locale_cookie_to(cookie_locale)
         else
           expect(cookie_value(CookieNames::VERIFY_LOCALE)).to be_nil
         end
@@ -96,7 +91,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
         end
         stub_matching_outcome
         session_id = session_cookies[CookieNames::SESSION_ID_COOKIE_NAME]
-        stub_api_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => false)
+        stub_api_authn_response(session_id)
 
         visit('/test-saml')
         click_button "saml-response-post-with-#{form_locale}-language"
@@ -111,19 +106,5 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
     include_examples "submitting SAML with form params", 'cy', 'cy'
     include_examples "submitting SAML with form params", 'cy'
     include_examples "submitting SAML with form params", 'en'
-
-    private
-
-    def stub_api_response(relay_state, response)
-      authn_response_body = {
-          SessionProxy::PARAM_SAML_RESPONSE => 'my-saml-response',
-          SessionProxy::PARAM_RELAY_STATE => relay_state,
-          SessionProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
-      }
-
-      stub_request(:put, api_uri('session/idp-authn-response'))
-          .with(body: authn_response_body)
-          .to_return(body: response.to_json, status: 200)
-    end
   end
 end

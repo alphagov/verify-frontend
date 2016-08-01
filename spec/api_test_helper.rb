@@ -128,3 +128,15 @@ end
 def stub_cycle_three_cancel
   stub_request(:post, api_uri('session/cycle-three/cancel')).to_return(status: 200)
 end
+
+def stub_api_authn_response(relay_state, response = { 'idpResult' => 'SUCCESS', 'isRegistration' => false })
+  authn_response_body = {
+      SessionProxy::PARAM_SAML_RESPONSE => 'my-saml-response',
+      SessionProxy::PARAM_RELAY_STATE => relay_state,
+      SessionProxy::PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
+  }
+
+  stub_request(:put, api_uri('session/idp-authn-response'))
+      .with(body: authn_response_body)
+      .to_return(body: response.to_json, status: 200)
+end
