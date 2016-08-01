@@ -16,7 +16,14 @@ class ConfirmYourIdentityController < ApplicationController
     end
   end
 
+
 private
+
+  def journey_hint_value
+    JSON.parse(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] ||= '')
+  rescue JSON::ParserError
+    nil
+  end
 
   def cookie_error(string)
     Rails.logger.warn(string)

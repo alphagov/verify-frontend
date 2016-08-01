@@ -8,7 +8,7 @@ class TestJourneyHintCookieController < ApplicationController
   end
 
   def set_cookie
-    set_journey_hint(params['entity-id'], params['locale'])
+    set_journey_hint(params['entity-id'])
     render nothing: true
   end
 end

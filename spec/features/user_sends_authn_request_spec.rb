@@ -19,10 +19,10 @@ RSpec.describe 'user sends authn requests' do
       expect(page.get_rack_session['transaction_simple_id']).to eql 'test-rp'
       expect(cookie_value(CookieNames::SECURE_COOKIE_NAME)).not_to be_empty
 
-      cookies = Capybara.current_session.driver.request.cookies
-      expected_cookies = CookieNames.session_cookies + ['_verify-frontend_session', CookieNames::VERIFY_FRONT_JOURNEY_HINT, CookieNames::VERIFY_LOCALE]
+      cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
+      expected_cookies = CookieNames.session_cookies + ['_verify-frontend_session', CookieNames::VERIFY_LOCALE]
 
-      expect(cookies.keys.to_set).to eql expected_cookies.to_set
+      expect(cookies.to_hash.keys.to_set).to eql expected_cookies.to_set
     end
 
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
@@ -32,16 +32,6 @@ RSpec.describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post-journey-hint'
       expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
-    end
-
-    it 'will redirect the user to the Welsh /confirm-your-identity when journey hint has a Welsh locale set' do
-      set_journey_hint_cookie('http://idcorp.com', 'cy')
-      stub_federation
-      stub_api_saml_endpoint
-      visit('/test-saml')
-      click_button 'saml-post-journey-hint'
-      expect(page).to have_title 'Cadarnhau eich hunaniaeth - GOV.UK Verify - GOV.UK'
-      expect(page).to have_css 'html[lang=cy]'
     end
   end
 

@@ -31,16 +31,16 @@ class ApplicationController < ActionController::Base
     session[:transaction_simple_id]
   end
 
+  def set_current_transaction_simple_id(simple_id)
+    session[:transaction_simple_id] = simple_id
+  end
+
   def store_locale_in_cookie
     cookies.signed[CookieNames::VERIFY_LOCALE] = {
       value: I18n.locale,
       httponly: true,
       secure: Rails.configuration.x.cookies.secure
     }
-  end
-
-  def set_current_transaction_simple_id(simple_id)
-    session[:transaction_simple_id] = simple_id
   end
 
   def set_locale
@@ -71,14 +71,8 @@ class ApplicationController < ActionController::Base
     selected_answer_store.selected_evidence
   end
 
-  def set_journey_hint(idp_entity_id, locale)
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: idp_entity_id, locale: locale }.to_json
-  end
-
-  def journey_hint_value
-    JSON.parse(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] ||= '')
-  rescue JSON::ParserError
-    nil
+  def set_journey_hint(idp_entity_id)
+    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: idp_entity_id }.to_json
   end
 
 private
@@ -139,10 +133,6 @@ private
 
   def store_originating_ip
     OriginatingIpStore.store(request)
-  end
-
-  def locale_from_journey_hint
-    journey_hint_value.nil? ? I18n.default_locale : journey_hint_value['locale'].to_sym
   end
 
   def selected_identity_provider

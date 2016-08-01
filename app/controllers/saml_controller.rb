@@ -1,6 +1,6 @@
 class SamlController < ApplicationController
   def set_locale
-    I18n.locale = language_from_param || locale_from_locale_cookie || locale_from_journey_hint || I18n.default_locale
+    I18n.locale = language_from_param || locale_from_locale_cookie || I18n.default_locale
   end
 
 private

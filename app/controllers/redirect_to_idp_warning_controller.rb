@@ -41,7 +41,7 @@ private
 
   def select_registration(idp)
     SESSION_PROXY.select_idp(cookies, idp.entity_id, true)
-    set_journey_hint(idp.entity_id, I18n.locale)
+    set_journey_hint(idp.entity_id)
     register_idp_selections(idp.display_name)
   end
 

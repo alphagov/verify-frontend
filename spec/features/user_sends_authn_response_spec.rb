@@ -40,20 +40,6 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
 
-  it 'will redirect the user to a localised start page when they cancel sign in at the IDP' do
-    set_journey_hint_cookie(nil, 'cy')
-    api_request = stub_api_response(session_id, 'idpResult' => 'CANCEL', 'isRegistration' => false)
-
-    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-    visit("/test-saml?session-id=#{session_id}")
-    click_button 'saml-response-post'
-
-    expect(page).to have_current_path '/dechrau'
-    expect(api_request).to have_been_made.once
-    piwik_request = { 'action_name' => 'Cancel - SIGN_IN_WITH_IDP' }
-    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
-  end
-
   it 'will redirect the user to /failed-registration when they cancel at the IDP' do
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
@@ -93,20 +79,6 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     expect(api_request).to have_been_made.once
     piwik_request = { 'action_name' => 'Failure - SIGN_IN_WITH_IDP' }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
-  end
-
-  it 'will redirect the user to a localised /failed-sign-in when they failed sign in on a welsh journey at the IDP' do
-    stub_api_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => false)
-    page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' })
-
-    set_journey_hint_cookie('http://idcorp.com', 'cy')
-
-    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-    visit("/test-saml?session-id=#{session_id}")
-    click_button 'saml-response-post'
-
-    expect(page).to have_current_path failed_sign_in_cy_path
   end
 
   it 'will redirect the user to /response-processing on successful sign in at the IDP' do
