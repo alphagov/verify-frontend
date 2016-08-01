@@ -81,4 +81,19 @@ RSpec.describe 'When the user visits the start page' do
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=EXPIRED_ERROR_PAGE'
     end
   end
+
+  it 'will set ab_test cookie' do
+    set_session_cookies!
+    visit '/start'
+    expect(page.response_headers['Set-Cookie']).to include("ab_test=")
+  end
+
+  it 'will not set ab_test cookie if already set' do
+    set_session_cookies!
+    cookie_hash = create_cookie_hash.merge!(ab_test: 'hello')
+    set_cookies!(cookie_hash)
+    page.set_rack_session(transaction_simple_id: 'test-rp')
+    visit '/start'
+    expect(page.response_headers['Set-Cookie']).not_to include("ab_test=")
+  end
 end

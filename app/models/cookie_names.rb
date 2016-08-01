@@ -5,6 +5,7 @@ module CookieNames
   VERIFY_LOCALE = 'x_verify_locale'.freeze
   PIWIK_VISITOR_ID = 'PIWIK_VISITOR_ID'.freeze
   NO_CURRENT_SESSION_VALUE = 'no-current-session'.freeze
+  AB_TEST = 'ab_test'.freeze
 
   def self.session_cookies
     [SECURE_COOKIE_NAME, SESSION_ID_COOKIE_NAME]

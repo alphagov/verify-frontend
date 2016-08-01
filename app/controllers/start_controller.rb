@@ -3,6 +3,9 @@ class StartController < ApplicationController
 
   def index
     @form = StartForm.new({})
+    unless cookies[:ab_test]
+      cookies[:ab_test] = AB_TEST.get_ab_test_cookie(rand)
+    end
   end
 
   def request_post

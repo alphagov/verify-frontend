@@ -21,7 +21,7 @@ RSpec.describe 'user sends authn requests' do
 
       cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
       expected_cookies = CookieNames.session_cookies + [
-        '_verify-frontend_session', CookieNames::VERIFY_LOCALE
+        '_verify-frontend_session', CookieNames::VERIFY_LOCALE, CookieNames::AB_TEST
       ]
 
       expect(cookies.to_hash.keys.to_set).to eql expected_cookies.to_set
