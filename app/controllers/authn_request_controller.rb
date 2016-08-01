@@ -17,4 +17,10 @@ class AuthnRequestController < SamlController
       redirect_to start_path
     end
   end
+
+private
+
+  def set_current_transaction_simple_id(simple_id)
+    session[:transaction_simple_id] = simple_id
+  end
 end

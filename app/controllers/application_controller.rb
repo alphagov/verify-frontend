@@ -31,10 +31,6 @@ class ApplicationController < ActionController::Base
     session[:transaction_simple_id]
   end
 
-  def set_current_transaction_simple_id(simple_id)
-    session[:transaction_simple_id] = simple_id
-  end
-
   def store_locale_in_cookie
     cookies.signed[CookieNames::VERIFY_LOCALE] = {
       value: I18n.locale,
