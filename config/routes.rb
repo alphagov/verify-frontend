@@ -72,6 +72,8 @@ Rails.application.routes.draw do
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get 'service-status', to: 'service_status#index', as: :service_status
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
+  get '/SAML2/metadata/sp', to: 'metadata#service_providers', as: :service_provider_metadata
+  get '/SAML2/metadata/idp', to: 'metadata#identity_providers', as: :identity_provider_metadata
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
