@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :store_session_id
   before_filter :store_originating_ip
   before_action :validate_cookies
+  after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
   helper_method :transactions_list
   helper_method :public_piwik
 
@@ -28,6 +29,14 @@ class ApplicationController < ActionController::Base
 
   def current_transaction_simple_id
     session[:transaction_simple_id]
+  end
+
+  def store_locale_in_cookie
+    cookies.signed[CookieNames::VERIFY_LOCALE] = {
+      value: I18n.locale,
+      httponly: true,
+      secure: Rails.configuration.x.cookies.secure
+    }
   end
 
   def set_current_transaction_simple_id(simple_id)

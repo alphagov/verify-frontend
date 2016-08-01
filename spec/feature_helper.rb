@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'capybara/rspec'
 require 'webmock/rspec'
 require 'rack_session_access/capybara'
+require 'support/cookie_matchers'
 WebMock.disable_net_connect!(allow_localhost: true)
 
 if ENV['HEADLESS'] == 'true'
