@@ -32,7 +32,7 @@ en:
     redirect_to_service_start_again: redirect-to-service/start-again
     redirect_to_service_error: redirect-to-service/error
     feedback: feedback
-    feedback_sent: feedback-sent
+    feedback_sent: feedback/feedback-sent
     certified_company_unavailable: certified-company-unavailable/:company
     further_information: further-information
     further_information_cancel: further-information/cancel

@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     get 'redirect_to_service_error' => 'redirect_to_service#error', as: :redirect_to_service_error
     get 'feedback', to: 'feedback#index', as: :feedback
     post 'feedback', to: 'feedback#submit', as: :feedback_submit
+    get 'feedback_sent', to: 'feedback_sent#index', as: :feedback_sent
     get 'certified_company_unavailable', to: 'certified_company_unavailable#index', as: :certified_company_unavailable
     post 'further_information', to: 'further_information#submit', as: :further_information_submit
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
@@ -77,10 +78,6 @@ Rails.application.routes.draw do
     get 'further-information', to: 'further_information#index', as: :further_information
     get 'further-information-cy', to: 'further_information#index', as: :further_information_cy
   end
-
-  get 'feedback/feedback-sent', to: 'feedback_sent#index', as: :feedback_sent
-  get "adborth/adborth-wedi'i-anfon", to: 'feedback_sent#index'
-
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
