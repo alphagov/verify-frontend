@@ -1,0 +1,9 @@
+# The first alternative is the default
+logos:
+  alternatives:
+    - name: 'yes'
+      percent: 75
+    - name: 'no'
+      percent: 25
+    - name: 'privacy'
+      percent: 0

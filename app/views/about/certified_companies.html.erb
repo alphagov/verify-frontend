@@ -3,6 +3,7 @@
 
 <p><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
 
+<% if ab_test != 'logos_no' %>
 <ul class="list-companies">
   <% @identity_providers.each do |idp| %>
       <li>
@@ -10,6 +11,7 @@
       </li>
   <% end %>
 </ul>
+<% end %>
 
 <p><%= t 'hub.about_certified_companies.no_charge' %></p>
 

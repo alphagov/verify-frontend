@@ -4,7 +4,7 @@ class StartController < ApplicationController
   def index
     @form = StartForm.new({})
     unless cookies[:ab_test]
-      cookies[:ab_test] = AB_TEST.get_ab_test_cookie(rand)
+      cookies[:ab_test] = AB_TEST.get_ab_test_name(rand)
     end
   end
 
