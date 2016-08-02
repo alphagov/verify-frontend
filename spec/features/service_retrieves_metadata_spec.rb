@@ -4,7 +4,7 @@ require 'api_test_helper'
 describe 'service retrieves metadata' do
   it "successfully gets sp metadata" do
     xml = '<THING></THING>'
-    stub_request(:get, saml_proxy_uri('metadata/sp')).to_return(body: "{\"saml\": \"#{xml}\"}")
+    stub_request(:get, saml_proxy_uri('metadata/idp')).to_return(body: "{\"saml\": \"#{xml}\"}")
     visit service_provider_metadata_path
     expect(page.status_code).to eql 200
 
@@ -12,7 +12,7 @@ describe 'service retrieves metadata' do
   end
 
   it "handles errors getting sp metadata" do
-    stub_request(:get, saml_proxy_uri('metadata/sp')).to_return(status: 500)
+    stub_request(:get, saml_proxy_uri('metadata/idp')).to_return(status: 500)
     stub_transactions_list
     visit service_provider_metadata_path
     expect(page.status_code).to eql 500
@@ -21,7 +21,7 @@ describe 'service retrieves metadata' do
 
   it "successfully gets idp metadata" do
     xml = '<THING></THING>'
-    stub_request(:get, saml_proxy_uri('metadata/idp')).to_return(body: "{\"saml\": \"#{xml}\"}")
+    stub_request(:get, saml_proxy_uri('metadata/sp')).to_return(body: "{\"saml\": \"#{xml}\"}")
     visit identity_provider_metadata_path
     expect(page.status_code).to eql 200
 
@@ -29,7 +29,7 @@ describe 'service retrieves metadata' do
   end
 
   it "handles errors getting idp metadata" do
-    stub_request(:get, saml_proxy_uri('metadata/idp')).to_return(status: 500)
+    stub_request(:get, saml_proxy_uri('metadata/sp')).to_return(status: 500)
     stub_transactions_list
     visit identity_provider_metadata_path
     expect(page.status_code).to eql 500
