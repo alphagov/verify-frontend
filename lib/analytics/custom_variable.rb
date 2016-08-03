@@ -5,7 +5,8 @@ module Analytics
       register_idp: { name: 'REGISTER_IDP', index: 2 },
       rp: { name: 'RP', index: 1 },
       idp_selection: { name: 'IDP_SELECTION', index: 5 },
-      cycle_three_attribute: { name: 'CYCLE_3', index: 4 }
+      cycle_three_attribute: { name: 'CYCLE_3', index: 4 },
+      ab_test: { name: 'AB_TEST', index: 6 }
     }.freeze
 
     def self.build(type, value)

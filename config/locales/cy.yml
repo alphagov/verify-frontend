@@ -83,6 +83,7 @@ cy:
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
+      a_certified_company_will_verify_security: "You choose from a list of companies certified to verify your identity. They’ve all met security standards set by government."
       no_charge: Nid oes tâl am y gwasanaeth hwn.
       summary: Sut y gall cwmnïau wirio hunaniaeth
       details:
