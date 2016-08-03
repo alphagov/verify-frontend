@@ -13,7 +13,8 @@ class MetadataController < ApplicationController
     render xml: METADATA_CLIENT.sp_metadata, content_type: METADATA_CONTENT_TYPE
   end
 
-  private
+private
+
   def do_not_cache
     response.headers['Cache-Control'] = 'no-cache, no-store, no-transform'
   end
