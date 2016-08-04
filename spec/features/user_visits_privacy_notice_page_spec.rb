@@ -12,7 +12,7 @@ RSpec.describe 'When the user visits the privacy notice page' do
 
   it 'displays the page in Welsh' do
     visit '/hysbysiad-preifatrwydd'
-    expect(page).to have_content("Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg.")
+    expect(page).to have_title("Hysbysiad preifatrwydd - GOV.UK Verify - GOV.UK")
   end
 
   it 'includes the appropriate feedback source' do

@@ -17,11 +17,6 @@ RSpec.describe 'When the user visits the cookies page' do
     expect(page).to have_content('ab_test')
   end
 
-  it 'displays the page in Welsh' do
-    visit '/cwcis'
-    expect(page).to have_content("Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg.")
-  end
-
   it 'includes the appropriate feedback source' do
     visit '/cookies'
     expect_feedback_source_to_be(page, 'COOKIES_INFO_PAGE')
