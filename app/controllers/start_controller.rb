@@ -3,7 +3,7 @@ class StartController < ApplicationController
 
   def index
     @form = StartForm.new({})
-    unless cookies[:ab_test]
+    unless cookies[:ab_test] || current_transaction_is_in_early_beta
       cookies[:ab_test] = AB_TEST.get_ab_test_name(rand)
     end
   end
@@ -20,5 +20,11 @@ class StartController < ApplicationController
       flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index
     end
+  end
+
+private
+
+  def current_transaction_is_in_early_beta
+    RP_CONFIG.fetch('demo_period_blacklist').include?(current_transaction_simple_id)
   end
 end

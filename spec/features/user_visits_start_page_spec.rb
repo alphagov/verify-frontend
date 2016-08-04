@@ -96,4 +96,11 @@ RSpec.describe 'When the user visits the start page' do
     visit '/start'
     expect(page.response_headers['Set-Cookie']).not_to include("ab_test=")
   end
+
+  it 'will not set ab_test cookie if RP is in early beta' do
+    set_session_cookies!
+    page.set_rack_session(transaction_simple_id: 'test-rp-no-demo')
+    visit '/start'
+    expect(page.response_headers['Set-Cookie']).to_not include("ab_test=")
+  end
 end
