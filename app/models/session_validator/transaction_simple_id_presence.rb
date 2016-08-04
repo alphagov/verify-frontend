@@ -1,4 +1,4 @@
-class CookieValidator
+class SessionValidator
   class TransactionSimpleIdPresence
     ERROR_MESSAGE = "Transaction simple ID can not be found in the user's session".freeze
     def validate(_cookies, session)

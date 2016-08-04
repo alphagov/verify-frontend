@@ -4,9 +4,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :set_locale
+  before_action :set_start_time_from_old_cookie
   before_filter :store_session_id
   before_filter :store_originating_ip
-  before_action :validate_cookies
+  before_action :validate_session
   after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
   helper_method :transactions_list
   helper_method :public_piwik
@@ -19,8 +20,14 @@ class ApplicationController < ActionController::Base
 
   prepend RedirectWithSeeOther
 
+  def set_start_time_from_old_cookie
+    if cookies.has_key?(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME)
+      session[:start_time] ||= cookies[CookieNames::SESSION_STARTED_TIME_COOKIE_NAME]
+    end
+  end
+
   def transactions_list
-    TRANSACTION_LISTER.list
+    TRANSACTION_LISTER.list(session)
   end
 
   def current_transaction
@@ -43,8 +50,8 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
-  def validate_cookies
-    validation = cookie_validator.validate(cookies, session)
+  def validate_session
+    validation = session_validator.validate(cookies, session)
     unless validation.ok?
       logger.info(validation.message)
       render_error(validation.type, validation.status)
@@ -95,8 +102,8 @@ private
     end
   end
 
-  def cookie_validator
-    COOKIE_VALIDATOR
+  def session_validator
+    SESSION_VALIDATOR
   end
 
   def public_piwik
@@ -136,7 +143,7 @@ private
   end
 
   def current_identity_providers
-    session[:identity_providers] ||= SESSION_PROXY.identity_providers(cookies)
+    session[:identity_providers] ||= SESSION_PROXY.identity_providers(session, cookies)
     @current_identity_providers ||= session[:identity_providers].map { |obj| IdentityProvider.from_session(obj) }
   end
 

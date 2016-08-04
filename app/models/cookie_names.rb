@@ -8,7 +8,7 @@ module CookieNames
   NO_CURRENT_SESSION_VALUE = 'no-current-session'.freeze
 
   def self.session_cookies
-    [SECURE_COOKIE_NAME, SESSION_ID_COOKIE_NAME, SESSION_STARTED_TIME_COOKIE_NAME]
+    [SECURE_COOKIE_NAME, SESSION_ID_COOKIE_NAME]
   end
 
   def self.all_cookies

@@ -1,4 +1,4 @@
-class CookieValidator
+class SessionValidator
   class NoCookiesValidator
     def validate(cookies, _session)
       if all_cookies_missing?(cookies)

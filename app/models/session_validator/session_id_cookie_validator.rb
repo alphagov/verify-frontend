@@ -1,4 +1,4 @@
-class CookieValidator
+class SessionValidator
   class SessionIdCookieValidator
     def validate(cookies, _session)
       session_id = cookies[::CookieNames::SESSION_ID_COOKIE_NAME]

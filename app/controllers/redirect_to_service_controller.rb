@@ -24,7 +24,7 @@ private
 
   def redirect_to_service(title_key, transition_heading_key, is_error: false)
     @title = title_key
-    @response_for_rp = is_error ? SESSION_PROXY.error_response_for_rp(cookies) : SESSION_PROXY.response_for_rp(cookies)
+    @response_for_rp = is_error ? SESSION_PROXY.error_response_for_rp(session, cookies) : SESSION_PROXY.response_for_rp(session, cookies)
     @rp_name = current_transaction.rp_name
     @transition_message = t(transition_heading_key, rp_name: @rp_name)
     reset_session_cookies

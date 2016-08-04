@@ -1,16 +1,16 @@
-class CookieValidator
+class SessionValidator
   class ValidationFailure < Validation
     def self.something_went_wrong(message)
       ValidationFailure.new(:something_went_wrong, :internal_server_error, message)
     end
 
-    def self.session_cookie_expired(session_id)
-      message = "session_start_time cookie for session \"#{session_id}\" has expired"
+    def self.session_expired(session_id)
+      message = "session \"#{session_id}\" has expired"
       ValidationFailure.new(:cookie_expired, :bad_request, message)
     end
 
     def self.no_cookies
-      message = "No session cookies can be found"
+      message = 'No session cookies can be found'
       ValidationFailure.new(:no_cookies, :forbidden, message)
     end
 

@@ -1,5 +1,5 @@
 class ServiceStatusController < ApplicationController
-  skip_before_action :validate_cookies
+  skip_before_action :validate_session
 
   def index
     if ServiceStatus.unavailable?

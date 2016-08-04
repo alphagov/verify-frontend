@@ -1,6 +1,6 @@
 class RedirectToIdpController < ApplicationController
   def index
-    saml_message = SESSION_PROXY.idp_authn_request(cookies)
+    saml_message = SESSION_PROXY.idp_authn_request(session, cookies)
     @request = IdentityProviderRequest.new(
       saml_message,
       selected_identity_provider.simple_id,

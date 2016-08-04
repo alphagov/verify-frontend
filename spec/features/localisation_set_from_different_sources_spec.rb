@@ -54,7 +54,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
     include_examples "submitting SAML", 'en'
     include_examples "submitting SAML", 'cy'
 
-    it "will render the start page in English when no cookie or form parameters are set" do
+    it 'will render the start page in English when no cookie or form parameters are set' do
       stub_federation
       stub_api_saml_endpoint
 

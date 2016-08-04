@@ -1,4 +1,4 @@
-class CookieValidator
+class SessionValidator
   class Validation
     def ok?
       true

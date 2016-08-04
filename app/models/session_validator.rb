@@ -1,11 +1,11 @@
-class CookieValidator
+class SessionValidator
   def initialize(session_duration)
     @validators = [
       NoCookiesValidator.new,
       MissingCookiesValidator.new,
       SessionIdCookieValidator.new,
       TransactionSimpleIdPresence.new,
-      SessionStartTimeCookieValidator.new(session_duration)
+      SessionStartTimeValidator.new(session_duration)
     ]
   end
 

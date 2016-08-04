@@ -38,7 +38,7 @@ RSpec.feature 'When the user submits the feedback page' do
 
     it 'when session has timed out should show invalid session link' do
       set_session_cookies!
-      set_cookies!(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 0)
+      page.set_rack_session(start_time: 0)
 
       visit feedback_path
 

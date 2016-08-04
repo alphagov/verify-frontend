@@ -5,8 +5,8 @@ module Display
         @api_client = api_client
       end
 
-      def transactions
-        @api_client.get("/transactions")
+      def transactions(session)
+        @api_client.get('/transactions', session)
       end
     end
   end
