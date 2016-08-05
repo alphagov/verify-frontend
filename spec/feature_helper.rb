@@ -5,6 +5,8 @@ require 'rack_session_access/capybara'
 require 'support/cookie_matchers'
 WebMock.disable_net_connect!(allow_localhost: true)
 
+RACK_COOKIE_DATE_FORMAT = "%a, %d %b %Y".freeze
+
 if ENV['HEADLESS'] == 'true'
   require 'headless'
   headless = Headless.new
@@ -86,4 +88,9 @@ def set_journey_hint_cookie(entity_id, locale = 'en')
   fill_in 'entity-id', with: entity_id
   fill_in 'locale', with: locale
   click_button 'journey-hint-post'
+end
+
+def cookie_header(cookie_name)
+  set_cookies_headers = page.response_headers['Set-Cookie'].split(/\n/)
+  set_cookies_headers.detect { |header| header.match(/^#{cookie_name}/) }
 end
