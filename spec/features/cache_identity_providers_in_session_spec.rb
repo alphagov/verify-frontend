@@ -1,6 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
-RSpec.feature 'current identity providers are stored in session', type: :feature do
+RSpec.feature 'current identity providers are stored in session' do
   it 'asks for the identity providers only once' do
     set_session_cookies!
     stub_identity_providers_request = stub_federation

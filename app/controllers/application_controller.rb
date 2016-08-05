@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def transactions_list
-    TRANSACTION_LISTER.list(session)
+    TRANSACTION_LISTER.list
   end
 
   def current_transaction

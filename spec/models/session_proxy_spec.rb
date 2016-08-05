@@ -7,6 +7,13 @@ describe SessionProxy do
   let(:api_client) { double(:api_client) }
   let(:originating_ip_store) { double(:originating_ip_store) }
   let(:path) { '/session' }
+  let(:expected_cookies) {
+    {
+      CookieNames::SESSION_STARTED_TIME_COOKIE_NAME => 'my-session-start-time',
+      CookieNames::SESSION_ID_COOKIE_NAME => 'my-session-id-cookie',
+      CookieNames::SECURE_COOKIE_NAME => 'my-secure-cookie',
+    }
+  }
   let(:cookies) {
     {
       CookieNames::SESSION_ID_COOKIE_NAME => 'my-session-id-cookie',
@@ -67,7 +74,7 @@ describe SessionProxy do
       idp = { 'simpleId' => 'idp', 'entityId' => 'something' }
 
       expect(api_client).to receive(:get)
-        .with(SessionProxy::FEDERATION_INFO_PATH, session, cookies: cookies)
+        .with(SessionProxy::FEDERATION_INFO_PATH, cookies: expected_cookies)
         .and_return('idps' => [idp], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id')
 
       result = session_proxy.identity_providers(session, cookies)
@@ -82,7 +89,7 @@ describe SessionProxy do
       ip_address = '1.1.1.1'
       body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => false }
       expect(api_client).to receive(:put)
-        .with(SessionProxy::SELECT_IDP_PATH, body, session, cookies: cookies)
+        .with(SessionProxy::SELECT_IDP_PATH, body, cookies: expected_cookies)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       session_proxy.select_idp(session, cookies, 'an-entity-id')
     end
@@ -91,7 +98,7 @@ describe SessionProxy do
       ip_address = '1.1.1.1'
       body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => true }
       expect(api_client).to receive(:put)
-        .with(SessionProxy::SELECT_IDP_PATH, body, session, cookies: cookies)
+        .with(SessionProxy::SELECT_IDP_PATH, body, cookies: expected_cookies)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       session_proxy.select_idp(session, cookies, 'an-entity-id', true)
     end
@@ -108,7 +115,7 @@ describe SessionProxy do
       ip_address = '1.1.1.1'
       params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(api_client).to receive(:get)
-        .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, session, cookies: cookies, params: params)
+        .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, cookies: expected_cookies, params: params)
         .and_return(authn_request)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       result = session_proxy.idp_authn_request(session, cookies)
@@ -130,7 +137,7 @@ describe SessionProxy do
       ip_address = '1.1.1.1'
       params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(api_client).to receive(:get)
-        .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, session, cookies: cookies, params: params)
+        .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, cookies: expected_cookies, params: params)
         .and_return(authn_request)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
@@ -145,7 +152,7 @@ describe SessionProxy do
       expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:put)
-        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request, session, cookies: cookies)
+        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request, cookies: expected_cookies)
         .and_return(
           'idpResult' => 'some-location',
           'isRegistration' => false,
@@ -165,7 +172,7 @@ describe SessionProxy do
       expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:put)
-        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request, session, cookies: cookies)
+        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request, cookies: expected_cookies)
         .and_return({})
 
       expect {
@@ -177,7 +184,7 @@ describe SessionProxy do
   describe '#matching_outcome' do
     it 'should return a matching outcome' do
       expect(api_client).to receive(:get)
-        .with(SessionProxy::MATCHING_OUTCOME_PATH, session, cookies: cookies)
+        .with(SessionProxy::MATCHING_OUTCOME_PATH, cookies: expected_cookies)
         .and_return('outcome' => 'GOTO_HUB_LANDING_PAGE')
 
       response = session_proxy.matching_outcome(session, cookies)
@@ -187,7 +194,7 @@ describe SessionProxy do
 
     it 'should raise an error when the API responds with an unknown value' do
       expect(api_client).to receive(:get)
-        .with(SessionProxy::MATCHING_OUTCOME_PATH, session, cookies: cookies)
+        .with(SessionProxy::MATCHING_OUTCOME_PATH, cookies: expected_cookies)
         .and_return('outcome' => 'BANANA')
 
       expect {
@@ -201,8 +208,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
         .with(SessionProxy::RESPONSE_FOR_RP_PATH,
-              session,
-              cookies: cookies,
+              cookies: expected_cookies,
               headers: { "X-Forwarded-For" => ip_address }
              )
         .and_return(
@@ -225,8 +231,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
         .with(SessionProxy::RESPONSE_FOR_RP_PATH,
-              session,
-              cookies: cookies,
+              cookies: expected_cookies,
               headers: { "X-Forwarded-For" => ip_address }
              )
         .and_return('outcome' => 'BANANA')
@@ -242,8 +247,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
         .with(SessionProxy::RESPONSE_FOR_RP_PATH,
-              session,
-              cookies: cookies,
+              cookies: expected_cookies,
               headers: { "X-Forwarded-For" => ip_address }
              )
         .and_return(
@@ -266,8 +270,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
         .with(SessionProxy::RESPONSE_FOR_RP_PATH,
-              session,
-              cookies: cookies,
+              cookies: expected_cookies,
               headers: { "X-Forwarded-For" => ip_address }
              )
         .and_return('outcome' => 'BANANA')
@@ -282,8 +285,7 @@ describe SessionProxy do
     it 'should return an attribute name' do
       expect(api_client).to receive(:get)
         .with(SessionProxy::CYCLE_THREE_PATH,
-              session,
-              cookies: cookies,
+              cookies: expected_cookies,
              )
         .and_return('name' => 'verySpecialNumber')
 
@@ -299,8 +301,7 @@ describe SessionProxy do
       expect(api_client).to receive(:post)
         .with(SessionProxy::CYCLE_THREE_PATH,
               { 'value' => 'some value', 'originatingIp' => '127.0.0.1' },
-              session,
-              { cookies: cookies },
+              { cookies: expected_cookies },
               200
              )
 
@@ -313,8 +314,7 @@ describe SessionProxy do
       expect(api_client).to receive(:post)
         .with(SessionProxy::CYCLE_THREE_CANCEL_PATH,
               nil,
-              session,
-              { cookies: cookies },
+              { cookies: expected_cookies },
               200
              )
 

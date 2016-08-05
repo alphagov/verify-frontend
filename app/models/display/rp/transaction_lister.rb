@@ -6,8 +6,8 @@ module Display
         @correlator = correlator
       end
 
-      def list(session)
-        @correlator.correlate(@proxy.transactions(session))
+      def list
+        @correlator.correlate(@proxy.transactions)
       rescue StandardError => e
         Rails.logger.error e
         NoTransactions.new
