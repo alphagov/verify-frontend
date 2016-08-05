@@ -62,7 +62,12 @@ class SessionProxy
 
   def idp_authn_request(session, cookies)
     cookies = map_session_to_cookies(session, cookies)
-    response = @api_client.get(IDP_AUTHN_REQUEST_PATH, cookies: select_cookies(cookies, CookieNames.all_cookies), params: { PARAM_ORIGINATING_IP => originating_ip })
+    response = @api_client.get(
+      IDP_AUTHN_REQUEST_PATH,
+      cookies: select_cookies(cookies, CookieNames.all_cookies),
+      headers: x_forwarded_for,
+      params: { PARAM_ORIGINATING_IP => originating_ip }
+    )
     OutboundSamlMessage.new(response || {}).tap(&:validate)
   end
 

@@ -3,6 +3,8 @@ require 'rails_helper'
 require 'models/session_proxy'
 require 'models/cookie_names'
 
+X_FORWARDED_FOR = 'X-Forwarded-For'.freeze
+
 describe SessionProxy do
   let(:api_client) { double(:api_client) }
   let(:originating_ip_store) { double(:originating_ip_store) }
@@ -115,9 +117,14 @@ describe SessionProxy do
       ip_address = '1.1.1.1'
       params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(api_client).to receive(:get)
-        .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, cookies: expected_cookies, params: params)
+        .with(
+          SessionProxy::IDP_AUTHN_REQUEST_PATH,
+          cookies: expected_cookies,
+          headers: { X_FORWARDED_FOR => ip_address },
+          params: params
+        )
         .and_return(authn_request)
-      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect(originating_ip_store).to receive(:get).at_least(1).times.and_return(ip_address)
       result = session_proxy.idp_authn_request(session, cookies)
       attributes = {
           'location' => 'some-location',
@@ -137,9 +144,14 @@ describe SessionProxy do
       ip_address = '1.1.1.1'
       params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(api_client).to receive(:get)
-        .with(SessionProxy::IDP_AUTHN_REQUEST_PATH, cookies: expected_cookies, params: params)
+        .with(
+          SessionProxy::IDP_AUTHN_REQUEST_PATH,
+          cookies: expected_cookies,
+          headers: { X_FORWARDED_FOR => ip_address },
+          params: params
+        )
         .and_return(authn_request)
-      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect(originating_ip_store).to receive(:get).at_least(1).times.and_return(ip_address)
       expect {
         session_proxy.idp_authn_request(session, cookies)
       }.to raise_error Api::Response::ModelError, "Saml request can't be blank"
@@ -209,7 +221,7 @@ describe SessionProxy do
       expect(api_client).to receive(:get)
         .with(SessionProxy::RESPONSE_FOR_RP_PATH,
               cookies: expected_cookies,
-              headers: { "X-Forwarded-For" => ip_address }
+              headers: { X_FORWARDED_FOR => ip_address }
              )
         .and_return(
           'postEndpoint' => 'http://www.example.com',
