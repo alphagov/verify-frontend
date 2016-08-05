@@ -1,9 +1,9 @@
 # The first alternative is the default
-logos:
+about_companies:
   alternatives:
-    - name: 'yes'
+    - name: 'with_logo'
       percent: 75
-    - name: 'no'
+    - name: 'no_logo'
       percent: 25
-    - name: 'privacy'
+    - name: 'no_logo_privacy'
       percent: 0
