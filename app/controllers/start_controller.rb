@@ -4,8 +4,7 @@ class StartController < ApplicationController
   def index
     @form = StartForm.new({})
     unless cookies[:ab_test] || current_transaction_is_in_early_beta
-      two_weeks_time = Time.now + (2 * 7 * 24 * 60 * 60)
-      cookies[:ab_test] = { value: AB_TEST.get_ab_test_name(rand), expires: two_weeks_time }
+      cookies[:ab_test] = { value: AB_TEST.get_ab_test_name(rand), expires: 2.weeks.from_now }
     end
   end
 

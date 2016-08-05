@@ -86,8 +86,7 @@ RSpec.describe 'When the user visits the start page' do
     set_session_cookies!
     visit '/start'
     header = cookie_header(CookieNames::AB_TEST)
-    two_weeks_time = (Time.now + (2 * 7 * 24 * 60 * 60))
-    expect(header).to match(/expires=#{two_weeks_time.strftime(RACK_COOKIE_DATE_FORMAT)}/)
+    expect(header).to match(/expires=#{2.weeks.from_now.strftime(RACK_COOKIE_DATE_FORMAT)}/)
   end
 
   it 'will not set ab_test cookie if already set' do
