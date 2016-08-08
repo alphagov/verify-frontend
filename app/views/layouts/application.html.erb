@@ -2,7 +2,7 @@
 <% content_for :page_title, ' - GOV.UK Verify - GOV.UK' %>
 
 <% content_for :head do %>
-  <!--[if gt IE 8]><!--><%= stylesheet_link_tag 'style' %><!--<![endif]-->
+  <!--[if gt IE 8]><!--><%= stylesheet_link_tag 'style', integrity: true %><!--<![endif]-->
   <!--[if IE 8]><%= stylesheet_link_tag 'style-ie8' %><![endif]-->
   <%= csrf_meta_tags %>
   <% if content_for?(:meta_refresh) %>
@@ -40,7 +40,7 @@
 
 <% content_for :body_end do %>
 
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'application', integrity: true %>
   <%= render 'shared/fingerprint' %>
 
 <% end %>
