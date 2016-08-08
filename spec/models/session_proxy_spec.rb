@@ -51,7 +51,6 @@ describe SessionProxy do
       response = session_proxy.create_session('my-saml-request', 'my-relay-state')
       expect(response).to be_valid
       expect(response.session_id).to eq 'my-session-id-cookie'
-      expect(response.session_start_time).to eq 'my-session-start-time'
       expect(response.secure_cookie).to eq 'my-secure-cookie'
       expect(response.transaction_simple_id).to eq 'transaction-simple-id'
     end
@@ -67,7 +66,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
         session_proxy.create_session('my-saml-request', 'my-relay-state')
-      }.to raise_error Api::Response::ModelError, "Session can't be blank, Session start time can't be blank, Secure cookie can't be blank, Transaction simple can't be blank"
+      }.to raise_error Api::Response::ModelError, "Session can't be blank, Secure cookie can't be blank, Transaction simple can't be blank"
     end
   end
 
