@@ -72,7 +72,7 @@ end
 def set_session_cookies!
   cookie_hash = create_cookie_hash
   set_cookies!(cookie_hash)
-  page.set_rack_session(transaction_simple_id: 'test-rp', start_time: current_time_in_millis)
+  page.set_rack_session(transaction_simple_id: 'test-rp', start_time: DateTime.now)
   cookie_hash
 end
 

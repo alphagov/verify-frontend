@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :set_locale
-  before_action :set_start_time_from_old_cookie
   before_filter :store_session_id
   before_filter :store_originating_ip
   before_action :validate_session
@@ -19,12 +18,6 @@ class ApplicationController < ActionController::Base
   rescue_from Api::SessionTimeoutError, with: :session_timeout
 
   prepend RedirectWithSeeOther
-
-  def set_start_time_from_old_cookie
-    if cookies.has_key?(CookieNames::SESSION_STARTED_TIME_COOKIE_NAME)
-      session[:start_time] ||= cookies[CookieNames::SESSION_STARTED_TIME_COOKIE_NAME]
-    end
-  end
 
   def transactions_list
     TRANSACTION_LISTER.list
@@ -143,7 +136,7 @@ private
   end
 
   def current_identity_providers
-    session[:identity_providers] ||= SESSION_PROXY.identity_providers(session, cookies)
+    session[:identity_providers] ||= SESSION_PROXY.identity_providers(cookies)
     @current_identity_providers ||= session[:identity_providers].map { |obj| IdentityProvider.from_session(obj) }
   end
 

@@ -3,7 +3,7 @@ class ResponseProcessingController < ApplicationController
 
   def index
     @rp_name = current_transaction.rp_name
-    outcome = SESSION_PROXY.matching_outcome(session, cookies)
+    outcome = SESSION_PROXY.matching_outcome(cookies)
     case outcome
     when MatchingOutcomeResponse::GOTO_HUB_LANDING_PAGE
       report_to_analytics('Matching Outcome - Hub Landing')

@@ -39,8 +39,8 @@ describe SessionValidator do
     expect(validation.message).to eql "No session cookies can be found"
   end
 
-  it "will pass validation if all cookies and session keys are present" do
-    session[:start_time] = DateTime.now.to_i * 1000
+  it 'will pass validation if all cookies and session keys are present' do
+    session[:start_time] = DateTime.now
     validation = session_validator.validate(cookies, session)
     expect(validation).to be_ok
   end
@@ -76,16 +76,8 @@ describe SessionValidator do
     expect(validation.message).to eql 'No session cookies can be found'
   end
 
-  it 'will fail validation if session start time cannot be parsed' do
-    session[:start_time] = 'unparseable'
-    validation = session_validator.validate(cookies, session)
-    expect(validation).to_not be_ok
-    expect(validation.type).to eql :something_went_wrong
-    expect(validation.message).to eql 'The session start time, "unparseable", cannot be parsed'
-  end
-
   it 'will fail validation if session is expired' do
-    session[:start_time] = (session_expiry.hours.ago.to_i * 1000).to_s
+    session[:start_time] = session_expiry.hours.ago
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :cookie_expired

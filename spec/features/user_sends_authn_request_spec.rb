@@ -6,7 +6,7 @@ RSpec.describe 'user sends authn requests' do
   let(:api_saml_endpoint) { api_uri('session') }
 
   context 'and it is received successfully' do
-    let(:session_start_time) { current_time_in_millis }
+    let(:session_start_time) { DateTime.now }
     it 'will redirect the user to /start' do
       stub_federation
       stub_api_saml_endpoint
@@ -21,7 +21,7 @@ RSpec.describe 'user sends authn requests' do
 
       cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
       expected_cookies = CookieNames.session_cookies + [
-        '_verify-frontend_session', CookieNames::VERIFY_LOCALE, CookieNames::SESSION_STARTED_TIME_COOKIE_NAME
+        '_verify-frontend_session', CookieNames::VERIFY_LOCALE
       ]
 
       expect(cookies.to_hash.keys.to_set).to eql expected_cookies.to_set

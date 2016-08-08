@@ -72,7 +72,7 @@ RSpec.describe 'When the user visits the start page' do
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with("session \"#{session_id_cookie}\" has expired").at_least(:once)
       set_session_cookies!
-      expired_start_time = 2.hours.ago.to_i
+      expired_start_time = 2.hours.ago
       page.set_rack_session(start_time: expired_start_time)
       visit '/start'
       expect(page).to have_content 'Find the service you were using to start again'
