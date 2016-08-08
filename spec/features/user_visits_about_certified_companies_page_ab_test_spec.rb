@@ -14,7 +14,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
   end
 
   it 'reports custom variable to piwik for cohort a and shows logos' do
-    set_cookies!(CookieNames::AB_TEST => 'about_companies_with_logo')
+    set_cookies!(CookieNames::AB_TEST => CGI.escape({ 'about_companies' => 'about_companies_with_logo' }.to_json))
     visit '/about-certified-companies'
     expect(page).to have_content I18n.translate('hub.about_certified_companies.a_certified_company_will_verify')
     expect(page).to have_css("img[src*='/white/#{simple_id}']")
@@ -25,7 +25,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
   end
 
   it 'reports custom variable to piwik for cohort b and does not show logos' do
-    set_cookies!(CookieNames::AB_TEST => 'about_companies_no_logo')
+    set_cookies!(CookieNames::AB_TEST => CGI.escape({ 'about_companies' => 'about_companies_no_logo' }.to_json))
     visit '/about-certified-companies'
     expect(page).to have_content I18n.translate('hub.about_certified_companies.a_certified_company_will_verify_security')
     expect(page).to_not have_css("img[src*='/white/#{simple_id}']")
@@ -53,14 +53,26 @@ RSpec.describe 'When the user visits the about certified companies page' do
     expect(WebMock).to have_not_requested(:get, INTERNAL_PIWIK.url)
   end
 
-  it 'reports custom variable to piwki for cohort c, shows new text on about page and does not show logos' do
-    set_cookies!(CookieNames::AB_TEST => 'about_companies_no_logo_privacy')
+  it 'reports custom variable to piwik for cohort c, shows new text on about page and does not show logos' do
+    set_cookies!(CookieNames::AB_TEST => CGI.escape({ 'about_companies' => 'about_companies_no_logo_privacy' }.to_json))
     visit '/about-certified-companies'
     expect(page).to have_content I18n.translate('hub.about_certified_companies.a_certified_company_will_verify_security_start')
     expect(page).to have_content I18n.translate('hub.about_certified_companies.ensure_privacy')
     expect(page).to_not have_css("img[src*='/white/#{simple_id}']")
     piwik_request = {
         '_cvar' => '{"6":["AB_TEST","about_companies_no_logo_privacy"]}'
+    }
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+  end
+
+  it 'should it send only the correct value if there is more than one experiment in the cookie', js: false do
+    set_cookies!(CookieNames::AB_TEST => CGI.escape({ 'about_companies' => 'about_companies_no_logo_privacy', 'another_experiment' => 'another_experiment_cohort_a' }.to_json))
+    visit '/about-certified-companies'
+    expect(page).to have_content I18n.translate('hub.about_certified_companies.a_certified_company_will_verify_security_start')
+    expect(page).to have_content I18n.translate('hub.about_certified_companies.ensure_privacy')
+    expect(page).to_not have_css("img[src*='/white/#{simple_id}']")
+    piwik_request = {
+      '_cvar' => '{"6":["AB_TEST","about_companies_no_logo_privacy"]}'
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end

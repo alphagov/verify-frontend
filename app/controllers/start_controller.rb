@@ -4,7 +4,11 @@ class StartController < ApplicationController
   def index
     @form = StartForm.new({})
     unless cookies[:ab_test] || current_transaction_is_in_early_beta
-      cookies[:ab_test] = { value: AB_TEST.get_ab_test_name(rand), expires: 2.weeks.from_now }
+      cookie_value = AB_TESTS.inject({}) do |hash, (experiment_name, ab_test)|
+        hash[experiment_name] = ab_test.get_ab_test_name(rand)
+        hash
+      end
+      cookies[:ab_test] = { value: cookie_value.to_json, expires: 2.weeks.from_now }
     end
   end
 

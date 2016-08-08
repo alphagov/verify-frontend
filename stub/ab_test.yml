@@ -1,9 +1,37 @@
-# The first alternative is the default
-about_companies:
-  alternatives:
-    - name: 'with_logo'
-      percent: 75
-    - name: 'no_logo'
-      percent: 25
-    - name: 'no_logo_privacy'
-      percent: 0
+# Example config
+# ==============
+#
+# experiments:
+#   - about_companies:
+#       alternatives:
+#         - name: 'with_logo'
+#           percent: 75
+#         - name: 'no_logo'
+#           percent: 25
+#         - name: 'no_logo_privacy'
+#
+# Only the percentages should be changed, and they must be whole numbers, no decimals.
+# The value reported to Piwik will be the experiment name followed by the alternative name, e.g. "about_companies_with_logo"
+# The first alternative will be used as the default for any issues.
+#
+# This file must exist and must contain at least:
+# experiments:
+#
+
+experiments:
+  - about_companies:
+      alternatives:
+        - name: 'with_logo'
+          percent: 100
+        - name: 'no_logo'
+          percent: 0
+        - name: 'no_logo_privacy'
+          percent: 0
+  - not_about_companies:
+      alternatives:
+        - name: 'with_logo'
+          percent: 100
+        - name: 'no_logo'
+          percent: 0
+        - name: 'no_logo_privacy'
+          percent: 0
