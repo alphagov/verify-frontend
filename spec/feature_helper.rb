@@ -16,6 +16,12 @@ if ENV['HEADLESS'] == 'true'
   end
 end
 
+RSpec.configure do |config|
+  config.before(:each, js: true) do
+    page.driver.browser.manage.window.resize_to(1280, 1024)
+  end
+end
+
 def current_time_in_millis
   DateTime.now.to_i * 1000
 end
