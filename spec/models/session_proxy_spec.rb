@@ -117,7 +117,7 @@ describe SessionProxy do
         )
         .and_return(authn_request)
       expect(originating_ip_store).to receive(:get).at_least(1).times.and_return(ip_address)
-      result = session_proxy.idp_authn_request(session, cookies)
+      result = session_proxy.idp_authn_request(cookies)
       attributes = {
           'location' => 'some-location',
           'saml_request' => 'a-saml-request',

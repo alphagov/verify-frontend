@@ -58,8 +58,7 @@ class SessionProxy
     @api_client.put(SELECT_IDP_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
   end
 
-  def idp_authn_request(session, cookies)
-    cookies = map_session_to_cookies(session, cookies)
+  def idp_authn_request(cookies)
     response = @api_client.get(
       IDP_AUTHN_REQUEST_PATH,
       cookies: select_cookies(cookies, CookieNames.all_cookies),
