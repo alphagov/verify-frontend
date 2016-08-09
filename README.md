@@ -14,7 +14,7 @@ You can start the application without having any of the closed source components
 
 `./startup.sh --stub-api`
 
-This will start the frontend server running on http://localhost:50300/ and a stubbed API server on http://localhost:50190.
+This will start the frontend server running on http://localhost:50300/ and a stubbed API server on http://localhost:50191.
 
 To start a journey on the front end visit http://localhost:50300/test-saml and click `saml-post`.
 
