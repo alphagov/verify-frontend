@@ -27,11 +27,9 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - not_about_companies:
+  - idp_ordering:
       alternatives:
-        - name: 'with_logo'
+        - name: 'popularity'
           percent: 100
-        - name: 'no_logo'
-          percent: 0
-        - name: 'no_logo_privacy'
+        - name: 'no'
           percent: 0

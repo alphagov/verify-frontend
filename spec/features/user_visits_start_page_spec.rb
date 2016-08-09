@@ -91,11 +91,24 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'will not set ab_test cookie if already set' do
     set_session_cookies!
-    cookie_hash = create_cookie_hash.merge!(ab_test: 'hello')
+    cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_with_logo', 'idp_ordering' => 'idp_ordering_no' }.to_json))
     set_cookies!(cookie_hash)
     page.set_rack_session(transaction_simple_id: 'test-rp')
     visit '/start'
     expect(page.response_headers['Set-Cookie']).not_to include("ab_test=")
+  end
+
+  it 'will include both tests in the ab_test cookie if only one test in currently in the ab_test cookie' do
+    set_session_cookies!
+    cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_no_logo' }.to_json))
+    set_cookies!(cookie_hash)
+    page.set_rack_session(transaction_simple_id: 'test-rp')
+    visit '/start'
+    header = cookie_header(CookieNames::AB_TEST)
+    expect(header).to match(/about_companies/)
+    expect(header).to match(/about_companies_no_logo/)
+    expect(header).to match(/idp_ordering/)
+    expect(header).to match(/expires=#{2.weeks.from_now.strftime(RACK_COOKIE_DATE_FORMAT)}/)
   end
 
   it 'will not set ab_test cookie if RP is in early beta' do
