@@ -1,7 +1,7 @@
 <%= page_title 'hub.about_certified_companies.title' %>
 <% content_for :feedback_source, 'ABOUT_CERTIFIED_COMPANIES_PAGE' %>
 
-<%= render 'about/' + ab_test('about_companies') %>
+<%= render 'about/' + ab_test('about_companies', 'about_companies_with_logo') %>
 
 <p><%= t 'hub.about_certified_companies.no_charge' %></p>
 

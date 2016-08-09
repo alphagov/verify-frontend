@@ -30,5 +30,15 @@ RSpec.describe AbTestHelper, type: :helper do
       alternative_name = helper.ab_test('about_companies')
       expect(alternative_name).to eq('about_companies_with_logo')
     end
+
+    it 'should return nil if there is no experiment' do
+      alternative_name = helper.ab_test('another_experiment')
+      expect(alternative_name).to eq(nil)
+    end
+
+    it 'should return default if there is no experiment' do
+      alternative_name = helper.ab_test('another_experiment', 'default_value')
+      expect(alternative_name).to eq('default_value')
+    end
   end
 end

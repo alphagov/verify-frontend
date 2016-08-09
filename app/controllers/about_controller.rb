@@ -10,8 +10,8 @@ class AboutController < ApplicationController
 
   def certified_companies
     ab_test_cookie = Cookies.parse_json(cookies[CookieNames::AB_TEST])['about_companies']
-    alternative_name = AB_TESTS['about_companies'].alternative_name(ab_test_cookie)
-    if alternative_name == ab_test_cookie
+    alternative_name = AbTest.alternative_name_for_experiment('about_companies', ab_test_cookie)
+    if alternative_name && alternative_name == ab_test_cookie
       cvar = Analytics::CustomVariable.build(:ab_test, alternative_name)
       ANALYTICS_REPORTER.report_custom_variable(request, "AB test - #{alternative_name}", cvar)
     end
