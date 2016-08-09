@@ -63,7 +63,6 @@ class SessionProxy
       IDP_AUTHN_REQUEST_PATH,
       cookies: select_cookies(cookies, CookieNames.all_cookies),
       headers: x_forwarded_for,
-      params: { PARAM_ORIGINATING_IP => originating_ip }
     )
     OutboundSamlMessage.new(response || {}).tap(&:validate)
   end

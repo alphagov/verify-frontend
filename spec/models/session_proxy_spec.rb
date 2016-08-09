@@ -107,16 +107,14 @@ describe SessionProxy do
           'registration' => false
       }
       ip_address = '1.1.1.1'
-      params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(api_client).to receive(:get)
         .with(
           SessionProxy::IDP_AUTHN_REQUEST_PATH,
           cookies: cookies,
           headers: { X_FORWARDED_FOR => ip_address },
-          params: params
         )
         .and_return(authn_request)
-      expect(originating_ip_store).to receive(:get).at_least(1).times.and_return(ip_address)
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
       result = session_proxy.idp_authn_request(cookies)
       attributes = {
           'location' => 'some-location',
@@ -134,16 +132,14 @@ describe SessionProxy do
           'registration' => false
       }
       ip_address = '1.1.1.1'
-      params = { SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(api_client).to receive(:get)
         .with(
           SessionProxy::IDP_AUTHN_REQUEST_PATH,
           cookies: cookies,
-          headers: { X_FORWARDED_FOR => ip_address },
-          params: params
+          headers: { X_FORWARDED_FOR => ip_address }
         )
         .and_return(authn_request)
-      expect(originating_ip_store).to receive(:get).at_least(1).times.and_return(ip_address)
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
         session_proxy.idp_authn_request(cookies)
       }.to raise_error Api::Response::ModelError, "Saml request can't be blank"

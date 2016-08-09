@@ -62,7 +62,8 @@ end
 
 def stub_session_idp_authn_request(originating_ip, idp_location, registration)
   stub_request(:get, api_uri('session/idp-authn-request'))
-    .with(query: { 'originatingIp' => originating_ip }).to_return(body: an_idp_authn_response(idp_location, registration).to_json)
+    .with(headers: { 'X_FORWARDED_FOR' => originating_ip })
+    .to_return(body: an_idp_authn_response(idp_location, registration).to_json)
 end
 
 def an_idp_authn_response(location, registration)

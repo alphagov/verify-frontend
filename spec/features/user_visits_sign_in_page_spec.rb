@@ -39,7 +39,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     expect(a_request(:put, api_uri('session/select-idp'))
              .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => false })).to have_been_made.once
     expect(a_request(:get, api_uri('session/idp-authn-request'))
-             .with(query: { 'originatingIp' => originating_ip })).to have_been_made.once
+             .with(headers: { 'X_FORWARDED_FOR' => originating_ip })).to have_been_made.once
     piwik_request = {
       '_cvar' => "{\"3\":[\"SIGNIN_IDP\",\"#{idp_display_name}\"]}",
       'action_name' => 'Sign In - ' + idp_display_name,
