@@ -84,6 +84,14 @@ describe SessionValidator do
     expect(validation.message).to eql 'session "my-session-id" has expired'
   end
 
+  it 'will fail validation if session is expired and start time is stored in milliseconds' do
+    session[:start_time] = (session_expiry.hours.ago.to_i * 1000).to_s
+    validation = session_validator.validate(cookies, session)
+    expect(validation).to_not be_ok
+    expect(validation.type).to eql :cookie_expired
+    expect(validation.message).to eql 'session "my-session-id" has expired'
+  end
+
   it "will fail validation if session id cookie is set to 'no-current-session'" do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'no-current-session'
     validation = session_validator.validate(cookies, session)
