@@ -6,10 +6,8 @@ class SessionValidator
 
     def validate(cookies, session)
       begin
-        session_start_time = session.fetch(:start_time)
-        validate_expiry(cookies, session_start_time)
-      rescue ArgumentError
-        session_start_time = Time.at(Integer(session_start_time) / 1000).to_datetime
+        session_start_time_integer = session.fetch(:start_time)
+        session_start_time = Time.at(Integer(session_start_time_integer) / 1000).to_datetime
         validate_expiry(cookies, session_start_time)
       rescue KeyError
         ValidationFailure.something_went_wrong('start_time not in session')

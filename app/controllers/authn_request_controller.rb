@@ -8,7 +8,7 @@ class AuthnRequestController < SamlController
     set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, response.session_id)
     set_secure_cookie(CookieNames::SECURE_COOKIE_NAME, response.secure_cookie)
     set_current_transaction_simple_id(response.transaction_simple_id)
-    set_session_start_time(DateTime.now)
+    set_session_start_time!
 
     if params['journey_hint'].present?
       redirect_to confirm_your_identity_path
@@ -19,8 +19,8 @@ class AuthnRequestController < SamlController
 
 private
 
-  def set_session_start_time(start_time)
-    session[:start_time] = start_time
+  def set_session_start_time!
+    session[:start_time] = DateTime.now.to_i * 1000
   end
 
   def set_current_transaction_simple_id(simple_id)
