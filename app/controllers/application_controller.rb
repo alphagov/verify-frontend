@@ -1,11 +1,11 @@
 require 'redirect_with_see_other'
 class ApplicationController < ActionController::Base
+  before_action :validate_session
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :set_locale
   before_filter :store_originating_ip
-  before_action :validate_session
   after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
   helper_method :transactions_list
   helper_method :public_piwik
