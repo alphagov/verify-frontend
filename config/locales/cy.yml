@@ -83,9 +83,9 @@ cy:
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
-      a_certified_company_will_verify_security: "You choose from a list of companies certified to verify your identity. They’ve all met security standards set by government."
-      a_certified_company_will_verify_security_start: You start by choosing a company to verify your identity. The companies you choose from have met security standards set by government.
-      ensure_privacy: The certified company doesn’t know which government service you’re accessing, and the government department doesn’t know which company verified your identity. This ensures your privacy.
+      a_certified_company_will_verify_security: Rydych yn dewis o restr o gwmnïau ardystiedig i ddilysu eich hunaniaeth. Maent i gyd wedi cwrdd â safonnau diogelwch a osodwyd gan y llywodraeth.
+      a_certified_company_will_verify_security_start: Rydych yn dechrau drwy ddewis cwmni i ddilysu eich hunaniaeth. Mae’r cwmnïau rydych yn dewis ohonnynt wedi cwrdd â safonnau diogelwch a osodwyd gan y llywodraeth.
+      ensure_privacy: Nid yw’r cwmni ardystiedig yn gwybod pa wasanaeth o’r llywodraeth rydych yn ei ddefnyddio ac nid yw’r adran o’r llywodraeth yn gwybod pa gwmni wnaeth ddilysu eich hunaniaeth. Mae hyn yn sicrhau eich preifatrwydd.
       no_charge: Nid oes tâl am y gwasanaeth hwn.
       summary: Sut y gall cwmnïau wirio hunaniaeth
       details:
@@ -323,11 +323,11 @@ cy:
       send_message: Anfon neges
     feedback_sent:
       title: Adborth
-      heading: Thank you for your feedback
-      message_email: We've received your message, and we'll reply as soon as possible.
-      session_valid_link: Return to GOV.UK Verify
-      session_not_valid: Your session has timed out. To ensure your security, you must %{link}.
-      session_not_valid_link: start again
+      heading: Diolch am eich adborth
+      message_email: Rydym wedi derbyn eich neges a byddwn yn ymateb cyn gynted â phosibl.
+      session_valid_link: Dychwelyd i GOV.UK Verify
+      session_not_valid: Mae eich sesiwn wedi’i amseru allan. I sicrhau eich diogelwch, mae’n rhaid i chi %{link}.
+      session_not_valid_link: ddechrau eto
     certified_company_unavailable:
       title: Nid yw'r cwmni ardystiedig hwn ar gael
       sorry: Mae'n ddrwg gennym, nid yw %{display_name} ar gael.
