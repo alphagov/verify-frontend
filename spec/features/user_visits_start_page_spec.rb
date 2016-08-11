@@ -98,7 +98,7 @@ RSpec.describe 'When the user visits the start page' do
     expect(page.response_headers['Set-Cookie']).not_to include("ab_test=")
   end
 
-  it 'will include both tests in the ab_test cookie if only one test in currently in the ab_test cookie' do
+  it 'will include both experiments in the ab_test cookie if only one experiment is currently in the ab_test cookie' do
     set_session_cookies!
     cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_no_logo' }.to_json))
     set_cookies!(cookie_hash)
