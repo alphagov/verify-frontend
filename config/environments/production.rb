@@ -72,5 +72,5 @@ Rails.application.configure do
   #Cookie Configuration
   config.x.cookies.secure = true
 
-  config.assets.prefix = '/new-assets'
+  config.assets.prefix = '/assets'
 end
