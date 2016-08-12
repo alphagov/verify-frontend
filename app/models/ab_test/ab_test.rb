@@ -9,7 +9,8 @@ module AbTest
   end
 
   def self.report(experiment_name, reported_alternative, request)
-    unless ::AB_TESTS[experiment_name].concluded?
+    ab_test = ::AB_TESTS[experiment_name]
+    unless ab_test && ab_test.concluded?
       alternative_name = AbTest.alternative_name_for_experiment(experiment_name, reported_alternative)
       if reported_alternative_matches_an_allowed_alternative(alternative_name, reported_alternative)
         custom_variable = Analytics::CustomVariable.build(:ab_test, alternative_name)

@@ -44,6 +44,13 @@ module AbTest
         expect(analytics_reporter).to_not receive(:report_custom_variable)
         subject.report('logos', 'logos_yes', double(:request))
       end
+
+      it 'should not report to piwik if there is no alternative' do
+        stub_const('AB_TESTS', {})
+        stub_const('ANALYTICS_REPORTER', analytics_reporter)
+        expect(analytics_reporter).to_not receive(:report_custom_variable)
+        subject.report('logos', 'logos_yes', double(:request))
+      end
     end
   end
 end
