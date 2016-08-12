@@ -30,6 +30,10 @@ module AbTest
       alternative_name
     end
 
+    def concluded?
+      @alternatives.keys.length <= 1
+    end
+
   private
 
     def name(experiment_title, alternative)

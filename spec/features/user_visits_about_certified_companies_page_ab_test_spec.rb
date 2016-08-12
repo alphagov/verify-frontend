@@ -19,7 +19,8 @@ RSpec.describe 'When the user visits the about certified companies page' do
     expect(page).to have_content I18n.translate('hub.about_certified_companies.a_certified_company_will_verify')
     expect(page).to have_css("img[src*='/white/#{simple_id}']")
     piwik_request = {
-        '_cvar' => '{"6":["AB_TEST","about_companies_with_logo"]}'
+        '_cvar' => '{"6":["AB_TEST","about_companies_with_logo"]}',
+        'action_name' => 'AB test - about_companies_with_logo'
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
@@ -30,7 +31,8 @@ RSpec.describe 'When the user visits the about certified companies page' do
     expect(page).to have_content I18n.translate('hub.about_certified_companies.a_certified_company_will_verify_security')
     expect(page).to_not have_css("img[src*='/white/#{simple_id}']")
     piwik_request = {
-        '_cvar' => '{"6":["AB_TEST","about_companies_no_logo"]}'
+        '_cvar' => '{"6":["AB_TEST","about_companies_no_logo"]}',
+        'action_name' => 'AB test - about_companies_no_logo'
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
@@ -60,7 +62,8 @@ RSpec.describe 'When the user visits the about certified companies page' do
     expect(page).to have_content I18n.translate('hub.about_certified_companies.ensure_privacy')
     expect(page).to_not have_css("img[src*='/white/#{simple_id}']")
     piwik_request = {
-        '_cvar' => '{"6":["AB_TEST","about_companies_no_logo_privacy"]}'
+        '_cvar' => '{"6":["AB_TEST","about_companies_no_logo_privacy"]}',
+        'action_name' => 'AB test - about_companies_no_logo_privacy'
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
@@ -72,7 +75,8 @@ RSpec.describe 'When the user visits the about certified companies page' do
     expect(page).to have_content I18n.translate('hub.about_certified_companies.ensure_privacy')
     expect(page).to_not have_css("img[src*='/white/#{simple_id}']")
     piwik_request = {
-      '_cvar' => '{"6":["AB_TEST","about_companies_no_logo_privacy"]}'
+      '_cvar' => '{"6":["AB_TEST","about_companies_no_logo_privacy"]}',
+      'action_name' => 'AB test - about_companies_no_logo_privacy'
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end

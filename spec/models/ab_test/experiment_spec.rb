@@ -46,5 +46,17 @@ module AbTest
         expect(Experiment.new(alternatives).alternative_name('logos_no')).to eql('logos_no')
       end
     end
+
+    context '#concluded?' do
+      it 'will be concluded if it has a single alternative' do
+        alternatives = { "logos" => { "alternatives" => [{ "name" => "yes", "percent" => 100 }] } }
+        expect(Experiment.new(alternatives)).to be_concluded
+      end
+
+      it 'will not be concluded if it has more than one alternative' do
+        alternatives = { "logos" => { "alternatives" => [{ "name" => "yes", "percent" => 50 }, { "name" => "no", "percent" => 50 }] } }
+        expect(Experiment.new(alternatives)).to_not be_concluded
+      end
+    end
   end
 end
