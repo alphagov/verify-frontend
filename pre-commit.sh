@@ -31,7 +31,7 @@ bundle exec rake spec:javascripts
 success=$((success || $?))
 
 # Stub API tests
-bundle exec rspec --pattern stub/**/*_spec.rb
+BUNDLE_GEMFILE=stub/api/Gemfile bundle exec rspec --pattern stub/api/**/*_spec.rb
 success=$((success || $?))
 
 if [ -t 1 ]; then

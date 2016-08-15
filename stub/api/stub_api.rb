@@ -33,7 +33,7 @@ class StubApi < Sinatra::Base
 
   get '/api/session/idp-authn-request' do
     '{
-      "location":"http://www.example.com",
+      "location":"http://localhost:50300/test-saml",
       "samlRequest":"blah",
       "relayState":"whatever",
       "registration":false

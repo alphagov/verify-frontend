@@ -72,7 +72,6 @@ group :test, :development do
   gem 'govuk-lint'
   gem 'webmock', require: false
   gem 'rack-test'
-  gem 'sinatra', require: false
   gem 'rack_session_access'
   gem 'headless'
 end
