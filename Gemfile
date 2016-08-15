@@ -3,9 +3,9 @@ ruby '2.3.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
-gem 'rails-i18n', '~> 4.0'
-gem 'route_translator', '~> 4.2'
+gem 'rails', '5.0.0.1'
+gem 'rails-i18n', '~> 5.0'
+gem 'route_translator', '~> 5.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -65,8 +65,8 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec', '~> 3.4.0'
-  gem 'rspec-rails', '~> 3.4.0'
+  gem 'rspec', '~> 3.5.0'
+  gem 'rspec-rails', '~> 3.5.0'
   gem 'capybara', '~> 2.6'
   gem 'capybara-puma'
   gem 'govuk-lint'
