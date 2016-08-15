@@ -76,6 +76,15 @@ RSpec.describe 'When the user visits the start page' do
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=ERROR_PAGE'
     end
 
+    it 'will display the something went wrong page when the session id does not match the cookie value' do
+      set_session_cookies!
+      set_session!(transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: 'a mismatched value')
+      visit '/start'
+      expect(page).to have_content 'Sorry, something went wrong'
+      expect(page).to have_http_status :internal_server_error
+      expect(page).to have_link 'feedback', href: '/feedback?feedback-source=ERROR_PAGE'
+    end
+
     it 'will display the timeout expiration error when the session start cookie is old' do
       session_id_cookie = create_cookie_hash[CookieNames::SESSION_ID_COOKIE_NAME]
       allow(Rails.logger).to receive(:info)
