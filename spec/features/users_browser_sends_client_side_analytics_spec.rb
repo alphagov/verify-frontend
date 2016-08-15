@@ -2,7 +2,6 @@ require 'feature_helper'
 require 'api_test_helper'
 require 'mock_piwik_middleware'
 require 'cookie_names'
-require 'sinatra/base'
 
 RSpec.describe 'When the user visits the start page' do
   let(:request_log) { double(:request_log) }
