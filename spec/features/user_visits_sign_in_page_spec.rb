@@ -18,7 +18,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   end
 
   def given_im_on_the_sign_in_page(locale = 'en')
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit "/#{I18n.t('routes.sign_in', locale: locale)}"
   end
 

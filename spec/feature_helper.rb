@@ -75,11 +75,21 @@ def start_time_in_millis
   DateTime.now.to_i * 1000
 end
 
+def set_session_and_session_cookies!
+  cookie_hash = create_cookie_hash
+  set_cookies!(create_cookie_hash)
+  page.set_rack_session(transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: 'my-session-id-cookie')
+  cookie_hash
+end
+
 def set_session_cookies!
   cookie_hash = create_cookie_hash
-  set_cookies!(cookie_hash)
-  page.set_rack_session(transaction_simple_id: 'test-rp', start_time: start_time_in_millis)
+  set_cookies!(create_cookie_hash)
   cookie_hash
+end
+
+def set_session!(session = { transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: 'my-session-id-cookie' })
+  page.set_rack_session(session)
 end
 
 def query_params

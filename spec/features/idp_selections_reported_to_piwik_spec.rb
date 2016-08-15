@@ -23,7 +23,7 @@ RSpec.describe 'When the user selects an IDP' do
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
 
   before(:each) do
-    set_session_cookies!
+    set_session_and_session_cookies!
     stub_transactions_list
     stub_federation
     stub_session_idp_authn_request(originating_ip, location, false)

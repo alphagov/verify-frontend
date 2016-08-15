@@ -25,7 +25,7 @@ RSpec.describe 'When the user visits the start page' do
     it 'requests the fingerprint asset with the fingerprint in the query params' do
       query_params_hash = nil
       expect(request_log).to receive(:log) { |arg| query_params_hash = arg }
-      set_session_cookies!
+      set_session_and_session_cookies!
 
       visit '/start'
 
@@ -36,7 +36,7 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'includes a reference to the fingerprint asset with the params set to noJS inside a noscript element' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit '/start'
 
     expect(page).to have_css('noscript[style=\'position: absolute;\'] img[src=\'/assets2/fp.gif?hash=noJS\']')

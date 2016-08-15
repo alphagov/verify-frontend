@@ -138,7 +138,7 @@ RSpec.feature 'When the user visits the feedback page' do
   it 'should set the referer and user agent' do
     user_agent = 'MY SUPER DUPER USER AGENT'
     page.driver.browser.header('User-Agent', user_agent)
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit start_path
     click_on I18n.t('feedback_link')
 
@@ -154,7 +154,7 @@ RSpec.feature 'When the user visits the feedback page' do
 
 
   it 'should keep the referer if form submission fails validation' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit start_path
     click_on I18n.t('feedback_link')
 

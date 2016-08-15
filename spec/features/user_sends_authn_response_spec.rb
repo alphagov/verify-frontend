@@ -2,7 +2,7 @@ require 'feature_helper'
 require 'api_test_helper'
 
 RSpec.describe 'User returns from an IDP with an AuthnResponse' do
-  let(:session_cookies) { set_session_cookies! }
+  let(:session_cookies) { set_session_and_session_cookies! }
   let(:session_id) { session_cookies[CookieNames::SESSION_ID_COOKIE_NAME] }
   let(:stub_session) {
     page.set_rack_session(

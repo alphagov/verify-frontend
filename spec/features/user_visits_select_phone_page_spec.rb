@@ -13,7 +13,7 @@ RSpec.describe 'When the user visits the select phone page' do
   }
 
   before(:each) do
-    set_session_cookies!
+    set_session_and_session_cookies!
   end
 
   context 'with javascript disabled' do

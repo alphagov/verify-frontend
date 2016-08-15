@@ -37,7 +37,7 @@ RSpec.feature 'When the user submits the feedback page' do
     end
 
     it 'when session has timed out should show invalid session link' do
-      set_session_cookies!
+      set_session_and_session_cookies!
       expired_start_time = 2.hours.ago.to_i * 1000
       page.set_rack_session(start_time: expired_start_time)
 
@@ -55,7 +55,7 @@ RSpec.feature 'When the user submits the feedback page' do
 
   context 'user session valid' do
     it 'should show user link back to start page' do
-      set_session_cookies!
+      set_session_and_session_cookies!
       visit feedback_path
 
       fill_in 'feedback_form_what', with: 'Using verify'
@@ -69,7 +69,7 @@ RSpec.feature 'When the user submits the feedback page' do
     end
 
     it 'should show feedback sent in Welsh' do
-      set_session_cookies!
+      set_session_and_session_cookies!
 
       visit feedback_cy_path
       fill_in 'feedback_form_what', with: 'Using verify'

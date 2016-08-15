@@ -21,7 +21,7 @@ end
 RSpec.describe 'When the user visits the redirect to service page' do
   context 'with error response' do
     before(:each) do
-      set_session_cookies!
+      set_session_and_session_cookies!
       page.set_rack_session(transaction_simple_id: 'test-rp')
       @api_request = stub_error_response_for_rp
     end
@@ -42,7 +42,7 @@ RSpec.describe 'When the user visits the redirect to service page' do
 
   context 'with success response' do
     before(:each) do
-      set_session_cookies!
+      set_session_and_session_cookies!
       page.set_rack_session(transaction_simple_id: 'test-rp')
       @api_request = stub_response_for_rp
     end

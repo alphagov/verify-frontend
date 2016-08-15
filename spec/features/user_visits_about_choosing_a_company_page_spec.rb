@@ -3,7 +3,7 @@ require 'models/cookie_names'
 
 RSpec.describe 'When the user visits the about choosing a company page' do
   before(:each) do
-    set_session_cookies!
+    set_session_and_session_cookies!
   end
 
   it 'will include the appropriate feedback source' do

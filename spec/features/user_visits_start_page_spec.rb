@@ -4,7 +4,7 @@ require 'models/cookie_names'
 
 RSpec.describe 'When the user visits the start page' do
   it 'will display the start page in English' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit '/start'
     expect(page).to have_content 'Sign in with GOV.UK Verify'
     expect(page).to have_css 'html[lang=en]'
@@ -12,7 +12,7 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'will display the start page in Welsh' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit '/dechrau'
     expect(page).to have_content 'Mewngofnodi gyda GOV.UK Verify'
     expect(page).to have_css 'html[lang=cy]'
@@ -34,7 +34,7 @@ RSpec.describe 'When the user visits the start page' do
     end
 
     it 'will display the generic error when start time is missing from session' do
-      page.set_rack_session(transaction_simple_id: 'test-rp')
+      set_session!(transaction_simple_id: 'test-rp', verify_session_id: 'my-session-id-cookie')
       cookie_hash = create_cookie_hash
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with('start_time not in session').at_least(:once)
@@ -67,11 +67,20 @@ RSpec.describe 'When the user visits the start page' do
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=ERROR_PAGE'
     end
 
+    it 'will display the something went wrong page when the session id is missing' do
+      set_session_cookies!
+      set_session!(transaction_simple_id: 'test-rp', start_time: start_time_in_millis)
+      visit '/start'
+      expect(page).to have_content 'Sorry, something went wrong'
+      expect(page).to have_http_status :internal_server_error
+      expect(page).to have_link 'feedback', href: '/feedback?feedback-source=ERROR_PAGE'
+    end
+
     it 'will display the timeout expiration error when the session start cookie is old' do
       session_id_cookie = create_cookie_hash[CookieNames::SESSION_ID_COOKIE_NAME]
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with("session \"#{session_id_cookie}\" has expired").at_least(:once)
-      set_session_cookies!
+      set_session_and_session_cookies!
       expired_start_time = 2.hours.ago.to_i * 1000
       page.set_rack_session(start_time: expired_start_time)
       visit '/start'
@@ -83,14 +92,14 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'will set ab_test cookie' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit '/start'
     header = cookie_header(CookieNames::AB_TEST)
     expect(header).to match(/expires=#{2.weeks.from_now.strftime(RACK_COOKIE_DATE_FORMAT)}/)
   end
 
   it 'will not set ab_test cookie if already set' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_with_logo', 'idp_ordering' => 'idp_ordering_no' }.to_json))
     set_cookies!(cookie_hash)
     page.set_rack_session(transaction_simple_id: 'test-rp')
@@ -99,7 +108,7 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'will include both experiments in the ab_test cookie if only one experiment is currently in the ab_test cookie' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_no_logo' }.to_json))
     set_cookies!(cookie_hash)
     page.set_rack_session(transaction_simple_id: 'test-rp')
@@ -112,7 +121,7 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'will not set ab_test cookie if RP is in early beta' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     page.set_rack_session(transaction_simple_id: 'test-rp-no-demo')
     visit '/start'
     expect(page.response_headers['Set-Cookie']).to_not include("ab_test=")

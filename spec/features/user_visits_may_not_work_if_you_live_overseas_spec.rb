@@ -3,7 +3,7 @@ require 'api_test_helper'
 
 RSpec.describe 'When the user visits the may-not-work-if-you-live-overseas page' do
   before(:each) do
-    set_session_cookies!
+    set_session_and_session_cookies!
     page.set_rack_session(transaction_simple_id: 'test-rp')
   end
 

@@ -11,7 +11,7 @@ RSpec.describe 'when user submits start page form' do
   it 'will display about page when user chooses yes (registration)' do
     given_api_returns_federation_info
     stub_request(:get, INTERNAL_PIWIK.url)
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit '/start'
     choose('start_form_selection_true')
     click_button('next-button')
@@ -20,7 +20,7 @@ RSpec.describe 'when user submits start page form' do
 
   it 'will display sign in with IDP page when user chooses sign in' do
     given_api_returns_federation_info
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit '/start'
     choose('start_form_selection_false')
     click_button('next-button')
@@ -36,7 +36,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will report user choice to analytics when user chooses no (sign in)' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     page.set_rack_session(transaction_simple_id: 'test-rp')
     given_api_returns_federation_info
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
@@ -53,7 +53,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will prompt for an answer if no answer is given' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit '/start'
     click_button('next-button')
     expect(page).to have_content "Please select an option"

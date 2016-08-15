@@ -3,7 +3,7 @@ class SessionValidator
     @validators = [
       NoCookiesValidator.new,
       MissingCookiesValidator.new,
-      SessionIdCookieValidator.new,
+      SessionIdValidator.new,
       TransactionSimpleIdPresence.new,
       SessionStartTimeValidator.new(session_duration)
     ]

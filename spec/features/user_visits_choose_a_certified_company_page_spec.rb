@@ -4,7 +4,7 @@ require 'i18n'
 
 RSpec.describe 'When the user visits the choose a certified company page' do
   before(:each) do
-    set_session_cookies!
+    set_session_and_session_cookies!
   end
 
   let(:selected_answers) {

@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'models/session_validator'
-require 'models/session_validator/session_id_cookie_validator'
+require 'models/session_validator/session_id_validator'
 require 'models/session_validator/session_start_time_validator'
 require 'models/session_validator/missing_cookies_validator'
 require 'models/session_validator/no_cookies_validator'
@@ -40,12 +40,15 @@ describe SessionValidator do
   end
 
   it 'will pass validation if all cookies and session keys are present' do
+    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
     session[:start_time] = DateTime.now.to_i * 1000
+    session['verify_session_id'] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to be_ok
   end
 
   it 'will fail validation if start time not found in session' do
+    session['verify_session_id'] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
@@ -78,6 +81,7 @@ describe SessionValidator do
 
   it 'will fail validation if session is expired' do
     session[:start_time] = session_expiry.hours.ago.to_i * 1000
+    session['verify_session_id'] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :cookie_expired
@@ -86,14 +90,25 @@ describe SessionValidator do
 
   it "will fail validation if session id cookie is set to 'no-current-session'" do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'no-current-session'
+    session['verify_session_id'] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "Secure cookie was set to a deleted session value 'no-current-session', indicating a previously completed session."
   end
 
+  it 'should return ValidationFailure when session id is not present' do
+    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
+    session = {}
+    validation = session_validator.validate(cookies, session)
+    expect(validation).to_not be_ok
+    expect(validation.type).to eql :something_went_wrong
+    expect(validation.message).to eql 'Session ID in the rails session is missing'
+  end
+
   it 'will fail validation if session is missing current transaction simple id' do
     session.delete(:transaction_simple_id)
+    session['verify_session_id'] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong

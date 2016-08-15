@@ -24,6 +24,11 @@ class SessionValidator
       ValidationFailure.new(:something_went_wrong, :forbidden, DELETED_SESSION_MESSAGE)
     end
 
+    def self.session_id_missing
+      message = 'Session ID in the rails session is missing'
+      ValidationFailure.new(:something_went_wrong, :internal_server_error, message)
+    end
+
     def initialize(type, status, message)
       @type = type
       @status = status

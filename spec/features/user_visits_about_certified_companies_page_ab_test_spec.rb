@@ -10,7 +10,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
     body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idpcorp.com' }], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
     stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
     stub_transactions_list
-    set_session_cookies!
+    set_session_and_session_cookies!
   end
 
   it 'reports custom variable to piwik for cohort a and shows logos' do

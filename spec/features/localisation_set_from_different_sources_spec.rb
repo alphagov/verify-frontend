@@ -3,7 +3,7 @@ require 'api_test_helper'
 
 RSpec.describe 'locale is set based on multiple sources', type: :feature do
   def set_locale_cookie_to(locale)
-    session_cookies = set_session_cookies!
+    session_cookies = set_session_and_session_cookies!
     visit public_send("about_#{locale}_path")
     expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of locale
     session_cookies
@@ -82,7 +82,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
       end
 
       it "will render the response processing page in #{form_locale} after SAML Response submission when locale cookie #{locale_cookie_message} and form param set to #{form_locale}" do
-        session_cookies = set_session_cookies!
+        session_cookies = set_session_and_session_cookies!
         if cookie_locale
           visit public_send("about_#{cookie_locale}_path")
           expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of cookie_locale

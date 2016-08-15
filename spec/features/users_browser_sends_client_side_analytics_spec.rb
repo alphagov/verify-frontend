@@ -31,7 +31,7 @@ RSpec.describe 'When the user visits the start page' do
           'idsite' => '5'
         )
       )
-      set_session_cookies!
+      set_session_and_session_cookies!
       visit '/start'
       expect(page).to have_content 'Sign in with GOV.UK Verify'
     end
@@ -43,7 +43,7 @@ RSpec.describe 'When the user visits the start page' do
           'idsite' => '5'
         )
       )
-      set_session_cookies!
+      set_session_and_session_cookies!
       visit '/dechrau'
     end
 
@@ -63,7 +63,7 @@ RSpec.describe 'When the user visits the start page' do
 
   context 'when JS is disabled' do
     it 'sends a page view to analytics' do
-      set_session_cookies!
+      set_session_and_session_cookies!
       visit '/start'
       expect(page).to have_content 'Sign in with GOV.UK Verify'
       noscript_image = page.find(:id, 'piwik-noscript-tracker')
@@ -78,7 +78,7 @@ RSpec.describe 'When the user visits the start page' do
     end
 
     it 'and in Welsh sends the page title in English to analytics' do
-      set_session_cookies!
+      set_session_and_session_cookies!
       visit '/dechrau'
       noscript_image = page.find(:id, 'piwik-noscript-tracker')
       expect(noscript_image).to_not be_nil

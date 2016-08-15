@@ -13,7 +13,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
   scenario 'user chooses a recommended idp' do
     entity_id = 'my-entity-id'
     stub_federation(entity_id)
-    set_session_cookies!
+    set_session_and_session_cookies!
     given_a_session_with_selected_answers
     visit choose_a_certified_company_about_path('stub-idp-one')
     expect(page).to have_content("ID Corp is the premier identity proofing service around.")
@@ -25,7 +25,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
 
   scenario 'for a non-existent idp' do
     stub_federation
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit choose_a_certified_company_about_path('foobar')
     expect(page).to have_content(I18n.translate("errors.page_not_found.title"))
   end
@@ -36,7 +36,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
     ]
     body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-entity-id' }
     stub_request(:get, api_uri('session/federation')).to_return(body: body.to_json)
-    set_session_cookies!
+    set_session_and_session_cookies!
     visit choose_a_certified_company_about_path('foobar')
     expect(page).to have_content(I18n.translate("errors.page_not_found.title"))
   end
@@ -44,7 +44,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
   scenario 'user clicks back link' do
     entity_id = 'my-entity-id'
     stub_federation(entity_id)
-    set_session_cookies!
+    set_session_and_session_cookies!
     given_a_session_with_selected_answers
     visit choose_a_certified_company_about_path('stub-idp-one')
     click_link 'Back'

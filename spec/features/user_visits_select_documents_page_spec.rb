@@ -4,7 +4,7 @@ require 'i18n'
 
 RSpec.feature 'When the user visits the select documents page' do
   before(:each) do
-    set_session_cookies!
+    set_session_and_session_cookies!
   end
 
   it 'displays the page in Welsh' do

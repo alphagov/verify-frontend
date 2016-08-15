@@ -9,7 +9,7 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
   end
 
   def given_im_on_the_sign_in_page
-    set_session_cookies!
+    set_session_and_session_cookies!
     page.set_rack_session(transaction_simple_id: 'test-rp')
     visit sign_in_en_path
   end

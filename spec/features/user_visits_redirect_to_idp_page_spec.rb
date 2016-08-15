@@ -22,7 +22,7 @@ RSpec.describe 'When the user visits the redirect to IDP page' do
   }
 
   before(:each) do
-    set_session_cookies!
+    set_session_and_session_cookies!
   end
 
   it 'should contain hint inputs if hints are enabled for the IDP' do

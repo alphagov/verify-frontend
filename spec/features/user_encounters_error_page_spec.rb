@@ -77,7 +77,7 @@ RSpec.describe 'user encounters error page' do
   end
 
   it 'will present session error page when session error occurs in upstream systems' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     error_body = { id: '0', type: 'SESSION_ERROR' }
     stub_request(:get, api_federation_endpoint).and_return(status: 400, body: error_body.to_json)
     visit '/sign-in'
@@ -88,7 +88,7 @@ RSpec.describe 'user encounters error page' do
   end
 
   it 'will present a session timeout error page when the API returns session timeout' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     error_body = { id: '0', type: 'SESSION_TIMEOUT' }
     stub_request(:get, api_federation_endpoint).and_return(status: 400, body: error_body.to_json)
     visit '/sign-in'
@@ -100,7 +100,7 @@ RSpec.describe 'user encounters error page' do
   end
 
   it 'will present the something went wrong page in Welsh when secure cookie is invalid' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     stub_transactions_list
     stub_request(:get, api_federation_endpoint).and_return(status: 403)
     visit sign_in_cy_path
@@ -109,7 +109,7 @@ RSpec.describe 'user encounters error page' do
   end
 
   it 'will present the something went wrong page when secure cookie is invalid' do
-    set_session_cookies!
+    set_session_and_session_cookies!
     stub_transactions_list
     stub_request(:get, api_federation_endpoint).and_return(status: 403)
     visit sign_in_path

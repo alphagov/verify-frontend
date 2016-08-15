@@ -4,7 +4,7 @@ require 'api_test_helper'
 RSpec.describe 'When the user visits the failed registration page' do
   describe 'service with continue on fail flow' do
     before(:each) do
-      set_session_cookies!
+      set_session_and_session_cookies!
       page.set_rack_session(
         selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
         transaction_simple_id: 'test-rp-with-continue-on-fail'
@@ -28,7 +28,7 @@ RSpec.describe 'When the user visits the failed registration page' do
 
   describe 'service without continue on fail flow' do
     before(:each) do
-      set_session_cookies!
+      set_session_and_session_cookies!
       page.set_rack_session(
         selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
         transaction_simple_id: 'test-rp'

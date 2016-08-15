@@ -7,7 +7,7 @@ RSpec.describe 'When the user visits the about identity accounts page' do
   let(:idp_entity_id) { 'http://idcorp.com' }
 
   before(:each) do
-    set_session_cookies!
+    set_session_and_session_cookies!
     stub_transactions_list
   end
 
