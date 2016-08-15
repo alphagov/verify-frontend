@@ -6,6 +6,7 @@ class AuthnRequestController < SamlController
     reset_session
     response = SESSION_PROXY.create_session(params['SAMLRequest'], params['RelayState'])
     set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, response.session_id)
+    session['verify_session_id'] = response.session_id
     set_secure_cookie(CookieNames::SECURE_COOKIE_NAME, response.secure_cookie)
     set_current_transaction_simple_id(response.transaction_simple_id)
     set_session_start_time!
