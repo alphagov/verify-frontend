@@ -9,6 +9,6 @@ class TestJourneyHintCookieController < ApplicationController
 
   def set_cookie
     set_journey_hint(params['entity-id'])
-    render nothing: true
+    head :no_content
   end
 end

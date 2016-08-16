@@ -3,9 +3,9 @@ class ServiceStatusController < ApplicationController
 
   def index
     if ServiceStatus.unavailable?
-      render nothing: true, status: 503
+      head 503
     else
-      render nothing: true, status: 200
+      head 200
     end
   end
 end
