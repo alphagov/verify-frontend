@@ -31,21 +31,22 @@ private
 
   def residency_questions_answered
     if resident_last_12_months.blank?
-      set_validation_error
+      no_selection_error
     end
 
     if !resident_last_12_months? && not_resident_reason.blank?
-      set_validation_error
+      no_selection_error
     end
   end
 
   def age_threshold_question_answered
     if above_age_threshold.blank?
-      set_validation_error
+      no_selection_error
     end
   end
 
-  def set_validation_error
-    errors.set(:base, [I18n.t('hub.will_it_work_for_me.question.errors.no_selection')])
+  def no_selection_error
+    errors.add(:base, I18n.t('hub.will_it_work_for_me.question.errors.no_selection'))
+    throw(:abort)
   end
 end
