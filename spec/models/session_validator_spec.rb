@@ -32,7 +32,7 @@ describe SessionValidator do
     {
       transaction_simple_id: 'simple-id',
       start_time: DateTime.now.to_i * 1000,
-      'verify_session_id' => 'session_id',
+      verify_session_id: 'session_id',
     }
   }
 
