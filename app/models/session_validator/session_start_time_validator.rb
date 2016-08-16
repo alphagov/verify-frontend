@@ -4,11 +4,11 @@ class SessionValidator
       @session_duration = session_duration
     end
 
-    def validate(cookies, session)
+    def validate(_cookies, session)
       begin
         session_start_time_integer = session.fetch(:start_time)
         session_start_time = Time.at(Integer(session_start_time_integer) / 1000).to_datetime
-        validate_expiry(cookies, session_start_time)
+        validate_expiry(session, session_start_time)
       rescue KeyError
         ValidationFailure.something_went_wrong('start_time not in session')
       end
@@ -16,9 +16,9 @@ class SessionValidator
 
   private
 
-    def validate_expiry(cookies, session_start_time)
+    def validate_expiry(session, session_start_time)
       if session_start_time <= @session_duration.hours.ago
-        session_id = cookies[::CookieNames::SESSION_ID_COOKIE_NAME]
+        session_id = session['verify_session_id']
         ValidationFailure.session_expired(session_id)
       else
         SuccessfulValidation

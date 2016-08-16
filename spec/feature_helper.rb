@@ -90,6 +90,7 @@ end
 
 def set_session!(session = { transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: 'my-session-id-cookie' })
   page.set_rack_session(session)
+  session
 end
 
 def query_params

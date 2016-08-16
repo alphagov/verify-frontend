@@ -2,8 +2,10 @@ require 'feature_helper'
 require 'api_test_helper'
 
 RSpec.describe 'User returns from an IDP with an AuthnResponse' do
-  let(:session_cookies) { set_session_and_session_cookies! }
-  let(:session_id) { session_cookies[CookieNames::SESSION_ID_COOKIE_NAME] }
+  let(:session_id) do
+    session = set_session!
+    session[:verify_session_id]
+  end
   let(:stub_session) {
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
@@ -11,7 +13,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
       transaction_simple_id: 'test-rp'
     )
   }
-  before(:each) { session_cookies }
+  before(:each) { set_session_and_session_cookies! }
 
   it 'will show the something went wrong page when relay state and session id mismatch' do
     stub_transactions_list

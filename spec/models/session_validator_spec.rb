@@ -28,6 +28,14 @@ describe SessionValidator do
     }
   }
 
+  let(:good_session) {
+    {
+      transaction_simple_id: 'simple-id',
+      start_time: DateTime.now.to_i * 1000,
+      'verify_session_id' => 'session_id',
+    }
+  }
+
   let(:session_expiry) { 2 }
   let(:session_validator) {
     SessionValidator.new(session_expiry)
@@ -129,13 +137,15 @@ describe SessionValidator do
   end
 
   it 'will log an error if the session cookie is getting too large' do
-    logger = double(:logger)
-    rails = double(:rails, logger: logger)
-    stub_const("Rails", rails)
-    session[:start_time] = DateTime.now.to_i * 1000
+    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
+    session = good_session
     session[:foo] = '1' * 3700
+    logger = double(:logger)
+    stub_const("Rails", double(:rails, logger: logger))
     expect(logger).to receive(:error).with(/Session cookie is large/)
+
     validation = session_validator.validate(cookies, session)
+
     expect(validation).to be_ok
   end
 end
