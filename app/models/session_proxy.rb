@@ -41,90 +41,97 @@ class SessionProxy
     SessionResponse.new(response || {}).tap(&:validate)
   end
 
-  def identity_providers(cookies)
-    federation_info_for_session(cookies).idps
+  def identity_providers(session_id, secure_session_id)
+    federation_info_for_session(session_id, secure_session_id).idps
   end
 
   def select_cookies(cookies, allowed_cookie_names)
     cookies.select { |name, _| allowed_cookie_names.include?(name) }.to_h
   end
 
-  def select_idp(cookies, entity_id, registration = false)
+  def select_idp(session_id, secure_session_id, entity_id, registration = false)
     body = {
       PARAM_ENTITY_ID => entity_id,
       PARAM_ORIGINATING_IP => originating_ip,
       PARAM_REGISTRATION => registration
     }
-    @api_client.put(SELECT_IDP_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
+
+    @api_client.put(SELECT_IDP_PATH, body, cookies: session_cookies(session_id, secure_session_id))
   end
 
-  def idp_authn_request(cookies)
+  def idp_authn_request(session_id, secure_session_id)
     response = @api_client.get(
       IDP_AUTHN_REQUEST_PATH,
-      cookies: select_cookies(cookies, CookieNames.all_cookies),
+      cookies: session_cookies(session_id, secure_session_id),
       headers: x_forwarded_for,
     )
     OutboundSamlMessage.new(response || {}).tap(&:validate)
   end
 
-  def idp_authn_response(cookies, saml_response, relay_state)
+  def idp_authn_response(session_id, secure_session_id, saml_response, relay_state)
     body = {
       PARAM_RELAY_STATE => relay_state,
       PARAM_SAML_RESPONSE => saml_response,
       PARAM_ORIGINATING_IP => originating_ip
     }
-    response = @api_client.put(IDP_AUTHN_RESPONSE_PATH, body, cookies: select_cookies(cookies, CookieNames.session_cookies))
+    response = @api_client.put(IDP_AUTHN_RESPONSE_PATH, body, cookies: session_cookies(session_id, secure_session_id))
     IdpAuthnResponse.new(response || {}).tap(&:validate)
   end
 
-  def matching_outcome(cookies)
-    response = @api_client.get(MATCHING_OUTCOME_PATH, cookies: select_cookies(cookies, CookieNames.session_cookies))
+  def matching_outcome(session_id, secure_session_id)
+    response = @api_client.get(MATCHING_OUTCOME_PATH, cookies: session_cookies(session_id, secure_session_id))
     MatchingOutcomeResponse.new(response || {}).tap(&:validate).outcome
   end
 
-  def response_for_rp(cookies)
+  def response_for_rp(session_id, secure_session_id)
     response = @api_client.get(RESPONSE_FOR_RP_PATH,
                                headers: x_forwarded_for,
-                               cookies: select_cookies(cookies, CookieNames.session_cookies))
+                               cookies: session_cookies(session_id, secure_session_id))
     ResponseForRp.new(response || {}).tap(&:validate)
   end
 
-  def error_response_for_rp(cookies)
+  def error_response_for_rp(session_id, secure_session_id)
     response = @api_client.get(ERROR_RESPONSE_FOR_RP_PATH,
                                headers: x_forwarded_for,
-                               cookies: select_cookies(cookies, CookieNames.session_cookies))
+                               cookies: session_cookies(session_id, secure_session_id))
     ResponseForRp.new(response || {}).tap(&:validate)
   end
 
-  def cycle_three_attribute_name(cookies)
+  def cycle_three_attribute_name(session_id, secure_session_id)
     response = @api_client.get(CYCLE_THREE_PATH,
-                               cookies: select_cookies(cookies, CookieNames.session_cookies))
+                               cookies: session_cookies(session_id, secure_session_id))
     CycleThreeAttributeResponse.new(response || {}).tap(&:validate).name
   end
 
-  def submit_cycle_three_value(cookies, value)
+  def submit_cycle_three_value(session_id, secure_session_id, value)
     body = {
       PARAM_CYCLE_THREE_VALUE => value,
       PARAM_ORIGINATING_IP => originating_ip
     }
     options = {
-      cookies: select_cookies(cookies, CookieNames.session_cookies),
+      cookies: session_cookies(session_id, secure_session_id),
     }
     @api_client.post(CYCLE_THREE_PATH, body, options, 200)
   end
 
-  def cycle_three_cancel(cookies)
+  def cycle_three_cancel(session_id, secure_session_id)
     options = {
-      cookies: select_cookies(cookies, CookieNames.session_cookies),
+      cookies: session_cookies(session_id, secure_session_id)
     }
     @api_client.post(CYCLE_THREE_CANCEL_PATH, nil, options, 200)
   end
 
 private
 
-  def federation_info_for_session(cookies)
-    session_cookies = select_cookies(cookies, CookieNames.session_cookies)
-    response = @api_client.get(FEDERATION_INFO_PATH, cookies: session_cookies)
+  def session_cookies(session_id, secure_session_id)
+    {
+      CookieNames::SESSION_ID_COOKIE_NAME => session_id,
+      CookieNames::SECURE_COOKIE_NAME => secure_session_id
+    }
+  end
+
+  def federation_info_for_session(session_id, secure_session_id)
+    response = @api_client.get(FEDERATION_INFO_PATH, cookies: session_cookies(session_id, secure_session_id))
     FederationInfoResponse.new(response || {}).tap(&:validate)
   end
 end
