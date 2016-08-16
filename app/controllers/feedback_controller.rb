@@ -10,7 +10,7 @@ class FeedbackController < ApplicationController
     @form = FeedbackForm.new(feedback_form_params)
     flash.keep('feedback_referer')
     if @form.valid?
-      session_id = session['verify_session_id']
+      session_id = session[:verify_session_id]
       if FEEDBACK_SERVICE.submit!(session_id, @form)
         flash['email_provided'] = @form.reply_required?
         redirect_to feedback_sent_path

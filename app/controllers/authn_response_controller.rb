@@ -5,7 +5,7 @@ class AuthnResponseController < SamlController
   REGISTERING_STATE = 'REGISTER_WITH_IDP'.freeze
 
   def idp_response
-    if params['RelayState'] != session['verify_session_id']
+    if params['RelayState'] != session[:verify_session_id]
       raise Errors::WarningLevelError, "Relay state should match session id. Relay state was #{params['RelayState'].inspect}"
     end
 

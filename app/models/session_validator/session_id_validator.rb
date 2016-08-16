@@ -5,7 +5,7 @@ class SessionValidator
   class SessionIdValidator
     def validate(cookies, session)
       session_id = cookies[::CookieNames::SESSION_ID_COOKIE_NAME]
-      verify_session_id = session['verify_session_id']
+      verify_session_id = session[:verify_session_id]
       unless verify_session_id
         return ValidationFailure.session_id_missing
       end

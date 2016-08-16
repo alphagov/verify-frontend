@@ -51,13 +51,13 @@ describe SessionValidator do
   it 'will pass validation if all cookies and session keys are present' do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
     session[:start_time] = DateTime.now.to_i * 1000
-    session['verify_session_id'] = 'session_id'
+    session[:verify_session_id] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to be_ok
   end
 
   it 'will fail validation if start time not found in session' do
-    session['verify_session_id'] = 'session_id'
+    session[:verify_session_id] = 'session_id'
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
@@ -91,7 +91,7 @@ describe SessionValidator do
 
   it 'will fail validation if session is expired' do
     session[:start_time] = session_expiry.hours.ago.to_i * 1000
-    session['verify_session_id'] = 'my-session-id'
+    session[:verify_session_id] = 'my-session-id'
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'my-session-id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
@@ -101,7 +101,7 @@ describe SessionValidator do
 
   it "will fail validation if session id cookie is set to 'no-current-session'" do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'no-current-session'
-    session['verify_session_id'] = 'session_id'
+    session[:verify_session_id] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
@@ -118,7 +118,7 @@ describe SessionValidator do
 
   it 'should return ValidationFailure when session ids do not match' do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id_a'
-    session['verify_session_id'] = 'session_id_b'
+    session[:verify_session_id] = 'session_id_b'
     session[:start_time] = DateTime.now.to_i * 1000
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
@@ -128,7 +128,7 @@ describe SessionValidator do
 
   it 'will fail validation if session is missing current transaction simple id' do
     session.delete(:transaction_simple_id)
-    session['verify_session_id'] = 'session_id'
+    session[:verify_session_id] = 'session_id'
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
