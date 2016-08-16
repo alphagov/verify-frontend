@@ -5,7 +5,8 @@ class SessionValidator
       MissingCookiesValidator.new,
       SessionIdValidator.new,
       TransactionSimpleIdPresence.new,
-      SessionStartTimeValidator.new(session_duration)
+      SessionStartTimeValidator.new(session_duration),
+      CookieSizeValidator.new
     ]
   end
 
