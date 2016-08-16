@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe AbTestHelper, type: :helper do
   describe '#ab_test' do
+    let(:cookies) {
+      helper.request.cookies
+    }
     it 'should return alternative name when the given cookie value is valid' do
       cookies[CookieNames::AB_TEST] = { 'about_companies' => 'about_companies_with_logo' }.to_json
       alternative_name = helper.ab_test('about_companies')
