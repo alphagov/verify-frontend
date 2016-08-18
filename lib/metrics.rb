@@ -1,5 +1,6 @@
 require 'metrics/api_request_reporter'
 require 'metrics/controller_action_reporter'
+require 'metrics/response_status_reporter'
 require 'metrics/event_subscriber'
 
 module Metrics
