@@ -49,4 +49,10 @@ module ApplicationHelper
   def idp_tagline(identity_provider)
     identity_provider.display_name + (identity_provider.tagline.nil? ? '' : ": #{identity_provider.tagline}")
   end
+
+  def button_link_to text, path, options = {}
+    options[:class] = [options[:class], 'button'].compact.join(' ')
+    options[:role] = 'button'
+    link_to text, path, options
+  end
 end

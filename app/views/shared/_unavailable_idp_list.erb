@@ -8,7 +8,7 @@
               </div>
             </div>
 
-            <%= link_to t('hub.signin.select_idp', display_name: identity_provider.display_name), certified_company_unavailable_path(identity_provider.simple_id), class: 'button', role: 'button' %>
+            <%= button_link_to t('hub.signin.select_idp', display_name: identity_provider.display_name), certified_company_unavailable_path(identity_provider.simple_id) %>
           </div>
         </div>
       </div>
