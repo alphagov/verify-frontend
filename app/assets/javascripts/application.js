@@ -7,8 +7,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require govuk/selection-buttons
+//= require govuk/shim-links-with-button-role
 //= require_tree .
 //= require piwik
+
+window.GOVUK.shimLinksWithButtonRole.init();
 
 window.GOVUK.validation.init();
 window.GOVUK.selectDocuments.init();
