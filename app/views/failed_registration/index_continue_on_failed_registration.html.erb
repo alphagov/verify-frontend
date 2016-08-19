@@ -9,7 +9,7 @@
 
     <p><%= t 'hub.failed_registration.continue_text', rp_name: @rp_name %></p>
 
-    <%= link_to t('navigation.continue'), redirect_to_service_error_path, class: 'button' %>
+    <%= link_to t('navigation.continue'), redirect_to_service_error_path, class: 'button', role: 'button' %>
 
     <h2 class="heading-medium"><%= t 'hub.failed_registration.problems_verifying_your_identity' %></h2>
 
