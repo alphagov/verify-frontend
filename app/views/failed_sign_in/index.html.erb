@@ -6,6 +6,6 @@
     <h1 class="heading-xlarge"><%= t 'hub.failed_sign_in.heading', display_name: @idp.display_name %></h1>
 
     <%= t 'hub.failed_sign_in.reasons_html' %>
-    <%= link_to t('hub.failed_sign_in.start_again'), start_path, class: 'button', role: 'button', id: 'startAgain' %>
+    <%= button_link_to t('hub.failed_sign_in.start_again'), start_path, id: 'startAgain' %>
   </div>
 </div>
