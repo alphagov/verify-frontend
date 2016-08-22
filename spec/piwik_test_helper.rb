@@ -5,7 +5,7 @@ def stub_piwik_idp_registration(idp_name, selected_answers: {}, recommended: fal
   }.sort.join(', ')
   piwik_request = {
     '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"#{idp_name}\"],\"5\":[\"IDP_SELECTION\",\"#{idp_list}\"]}",
-    'action_name' => "#{idp_name} was chosen for registration (#{recommended_str}) with evidence #{evidence}",
+    'action_name' => match(/#{idp_name} was chosen for registration \(#{recommended_str}\) \(index (\d+|-)\) with evidence #{evidence}/),
   }
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 end

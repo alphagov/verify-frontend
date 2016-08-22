@@ -9,6 +9,7 @@ class ChooseACertifiedCompanyController < ApplicationController
     select_viewable_idp(params.fetch('entity_id')) do |decorated_idp|
       session[:selected_idp_was_recommended] =
         IDP_RECOMMENDATION_GROUPER.recommended?(decorated_idp.identity_provider, selected_evidence, current_identity_providers, current_transaction_simple_id)
+      store_selected_idp_index
       redirect_to redirect_to_idp_warning_path
     end
   end
@@ -23,5 +24,12 @@ class ChooseACertifiedCompanyController < ApplicationController
     else
       render 'errors/404', status: 404
     end
+  end
+
+private
+
+  def store_selected_idp_index
+    raw_index = params['selected_idp_index']
+    flash[:selected_idp_index] = raw_index.to_i if raw_index =~ /^\d+$/
   end
 end

@@ -15,8 +15,8 @@
     </div>
   </div>
   <div id="matching-idps">
-    <% @recommended_idps.each do |identity_provider| %>
-      <%= render partial: 'idp_option', locals: {recommended: true, identity_provider: identity_provider} %>
+    <% @recommended_idps.each_with_index do |identity_provider, index| %>
+      <%= render partial: 'idp_option', locals: {recommended: true, identity_provider: identity_provider, index: index} %>
     <% end %>
   </div>
   <% if @non_recommended_idps.any? %>
@@ -34,8 +34,8 @@
           <span class="summary"><%= t 'hub.choose_a_certified_company.show_all_companies' %></span>
         </summary>
         <div class="panel panel-border-narrow">
-          <% @non_recommended_idps.each do |identity_provider| %>
-            <%= render partial: 'idp_option', locals: {recommended: false, identity_provider: identity_provider} %>
+          <% @non_recommended_idps.each_with_index do |identity_provider, index| %>
+            <%= render partial: 'idp_option', locals: {recommended: false, identity_provider: identity_provider, index: index} %>
           <% end %>
         </div>
       </details>
