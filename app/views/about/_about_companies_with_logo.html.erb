@@ -1,9 +1,0 @@
-<p><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
-
-<ul class="list-companies">
-  <% @identity_providers.each do |idp| %>
-      <li>
-        <%= image_tag idp.white_logo_path, alt: idp_tagline(idp) %>
-      </li>
-  <% end %>
-</ul>
