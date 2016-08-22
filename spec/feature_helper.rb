@@ -66,7 +66,7 @@ end
 
 def create_cookie_hash
   {
-      CookieNames::SECURE_COOKIE_NAME => 'my-secure-cookie',
+      CookieNames::SESSION_COOKIE_NAME => 'my-session-cookie',
       CookieNames::SESSION_ID_COOKIE_NAME => 'my-session-id-cookie',
   }
 end

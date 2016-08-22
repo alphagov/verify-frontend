@@ -45,11 +45,11 @@ RSpec.describe 'When the user visits the start page' do
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=ERROR_PAGE'
     end
 
-    it 'will display the generic error when the secure cookie is missing' do
+    it 'will display the generic error when the session cookie is missing' do
       cookie_hash = create_cookie_hash
       allow(Rails.logger).to receive(:info)
-      expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SECURE_COOKIE_NAME}]").at_least(:once)
-      set_cookies!(cookie_hash.except(CookieNames::SECURE_COOKIE_NAME))
+      expect(Rails.logger).to receive(:info).with("The following cookies are missing: [#{CookieNames::SESSION_COOKIE_NAME}]").at_least(:once)
+      set_cookies!(cookie_hash.except(CookieNames::SESSION_COOKIE_NAME))
       visit '/start'
       expect(page).to have_content "Sorry, something went wrong"
       expect(page).to have_http_status :internal_server_error
