@@ -99,9 +99,9 @@ describe SessionValidator do
     expect(validation.message).to eql 'session "my-session-id" has expired'
   end
 
-  it "will fail validation if session id cookie is set to 'no-current-session'" do
-    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'no-current-session'
-    session[:verify_session_id] = 'session_id'
+  it "will fail validation if session id in session is set to 'no-current-session'" do
+    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
+    session[:verify_session_id] = 'no-current-session'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong

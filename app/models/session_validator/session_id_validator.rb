@@ -9,7 +9,7 @@ class SessionValidator
       unless verify_session_id
         return ValidationFailure.session_id_missing
       end
-      if no_session(session_id)
+      if no_session(verify_session_id)
         return ValidationFailure.deleted_session
       end
       if sessions_do_not_match(session_id, verify_session_id)

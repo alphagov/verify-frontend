@@ -1,5 +1,4 @@
 module CookieNames
-  SECURE_COOKIE_NAME = 'x-govuk-secure-cookie'.freeze
   SESSION_COOKIE_NAME = '_verify-frontend_session'.freeze
   SESSION_ID_COOKIE_NAME = 'x_govuk_session_cookie'.freeze
   VERIFY_FRONT_JOURNEY_HINT = 'verify-front-journey-hint'.freeze

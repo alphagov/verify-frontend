@@ -13,9 +13,8 @@ def verify_redirect_to_service(title)
 end
 
 def check_session_reset
-  expect(page.get_rack_session.keys).to eql(['session_id'])
+  expect(page.get_rack_session['verify_session_id']).to eql('no-current-session')
   expect(cookie_value(CookieNames::SESSION_ID_COOKIE_NAME)).to eql 'no-current-session'
-  expect(cookie_value(CookieNames::SECURE_COOKIE_NAME)).to eql 'no-current-session'
 end
 
 RSpec.describe 'When the user visits the redirect to service page' do
