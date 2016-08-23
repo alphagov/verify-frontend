@@ -12,13 +12,13 @@ module Analytics
       report_action(current_transaction, request, 'The Yes option was selected on the start page')
     end
 
-    def report_idp_registration(request, idp_name, idp_name_history, evidence, recommended, index)
+    def report_idp_registration(request, idp_name, idp_name_history, evidence, recommended, index, num_of_idps)
       cvars = Analytics::CustomVariable.build(:register_idp, idp_name).merge(
         Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(',')))
 
       recommended_str = recommended ? '(recommended)' : '(not recommended)'
       list_of_evidence = evidence.sort.join(', ')
-      action = "#{idp_name} was chosen for registration #{recommended_str} (index #{index || '-'}) with evidence #{list_of_evidence}"
+      action = "#{idp_name} was chosen for registration #{recommended_str} (index #{index || '-'} of #{num_of_idps || '-'}) with evidence #{list_of_evidence}"
 
       @analytics_reporter.report_custom_variable(request, action, cvars)
     end

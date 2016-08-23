@@ -51,7 +51,7 @@ private
       selected_idp_names << idp_name
       session[:selected_idp_names] = selected_idp_names
     end
-    FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended?, flash[:selected_idp_index])
+    FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended?, flash[:selected_idp_index], flash[:idp_count])
   end
 
   def recommended?
