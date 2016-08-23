@@ -27,12 +27,10 @@ private
     @response_for_rp = if is_error
                          SESSION_PROXY.error_response_for_rp(
                            session['verify_session_id'],
-                           cookies[CookieNames::SECURE_COOKIE_NAME]
                          )
                        else
                          SESSION_PROXY.response_for_rp(
                            session['verify_session_id'],
-                           cookies[CookieNames::SECURE_COOKIE_NAME]
                          )
                        end
     @rp_name = current_transaction.rp_name
