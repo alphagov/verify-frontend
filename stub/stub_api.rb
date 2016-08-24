@@ -7,7 +7,6 @@ class StubApi < Sinatra::Base
     status 201
     '{
       "sessionId":"blah",
-      "secureCookie":"blah",
       "sessionStartTime":32503680000000,
       "transactionSimpleId":"test-rp"
     }'

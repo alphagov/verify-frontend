@@ -26,7 +26,6 @@ describe SessionProxy do
     let(:api_response) {
       {
           'sessionId' => 'my-session-id-cookie',
-          'secureCookie' => 'my-secure-cookie',
           'sessionStartTime' => 'my-session-start-time',
           'transactionSimpleId' => 'transaction-simple-id'
       }

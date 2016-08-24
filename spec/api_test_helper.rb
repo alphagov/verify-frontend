@@ -79,8 +79,7 @@ def stub_api_saml_endpoint
   session = {
     'transactionSimpleId' => 'test-rp',
     'sessionStartTime' => '32503680000000',
-    'sessionId' => 'session_id',
-    'secureCookie' => 'secure_cookie'
+    'sessionId' => 'session_id'
   }
   authn_request_body = {
     SessionProxy::PARAM_SAML_REQUEST => 'my-saml-request',
