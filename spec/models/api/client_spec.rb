@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'models/api/client'
-require 'models/cookie_names'
+require 'cookie_names'
 require 'webmock/rspec'
 require 'active_support'
 require 'connection_pool'

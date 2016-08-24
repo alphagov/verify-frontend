@@ -1,5 +1,5 @@
 require 'feature_helper'
-require 'models/cookie_names'
+require 'cookie_names'
 
 def given_api_returns_federation_info
   body = { 'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }],

@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'analytics'
-require 'models/cookie_names'
+require 'cookie_names'
 
 module Analytics
   describe Analytics::Reporter do

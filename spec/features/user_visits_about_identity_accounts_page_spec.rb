@@ -1,6 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
-require 'models/cookie_names'
+require 'cookie_names'
 
 RSpec.describe 'When the user visits the about identity accounts page' do
   let(:simple_id) { 'stub-idp-one' }

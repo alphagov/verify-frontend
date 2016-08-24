@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 require 'models/session_proxy'
-require 'models/cookie_names'
+require 'cookie_names'
 
 X_FORWARDED_FOR = 'X-Forwarded-For'.freeze
 

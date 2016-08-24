@@ -1,6 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
-require 'models/cookie_names'
+require 'cookie_names'
 
 RSpec.describe 'When the user visits the start page' do
   it 'will display the start page in English' do
