@@ -89,7 +89,7 @@ RSpec.describe 'user visits further information page' do
     # a journey with an rp that does not allow nullable cycle 3 attributes.
     # We are doing this by hacking the response from  the api to return different cycle 3 attributes on loading the page
     # so that we generate a link for capybara and submitting where nullable is not allowed.
-    matching_attribute_request = stub_request(:get, api_uri('session/cycle-three'))
+    matching_attribute_request = stub_request(:get, session_api_uri(default_session_id, SessionProxy::CYCLE_THREE_SUFFIX))
         .to_return(body: { name: 'NullableAttribute' }.to_json)
         .to_return(body: { name: 'DrivingLicenceNumber' }.to_json)
     stub_transactions_list

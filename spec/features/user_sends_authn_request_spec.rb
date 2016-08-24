@@ -17,7 +17,7 @@ RSpec.describe 'user sends authn requests' do
       expect(page).to have_title 'Start - GOV.UK Verify - GOV.UK'
 
       expect(page.get_rack_session['transaction_simple_id']).to eql 'test-rp'
-      expect(page.get_rack_session['verify_session_id']).to eql 'session_id'
+      expect(page.get_rack_session['verify_session_id']).to eql default_session_id
 
       cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
       expected_cookies = CookieNames.session_cookies + [

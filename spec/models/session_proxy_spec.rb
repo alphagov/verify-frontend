@@ -9,9 +9,10 @@ describe SessionProxy do
   let(:api_client) { double(:api_client) }
   let(:originating_ip_store) { double(:originating_ip_store) }
   let(:path) { '/session' }
+  let(:session_id) { 'my-session-id' }
   let(:cookies) {
     {
-      CookieNames::SESSION_ID_COOKIE_NAME => 'my-session-id-cookie',
+      CookieNames::SESSION_ID_COOKIE_NAME => session_id,
     }
   }
   let(:session) {
@@ -22,10 +23,14 @@ describe SessionProxy do
   let(:session_proxy) { SessionProxy.new(api_client, originating_ip_store) }
   let(:ip_address) { '127.0.0.1' }
 
+  def endpoint(suffix_path)
+    SessionProxy.session_endpoint(session_id, suffix_path)
+  end
+
   describe('#create_session') do
     let(:api_response) {
       {
-          'sessionId' => 'my-session-id-cookie',
+          'sessionId' => session_id,
           'sessionStartTime' => 'my-session-start-time',
           'transactionSimpleId' => 'transaction-simple-id'
       }
@@ -41,7 +46,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       response = session_proxy.create_session('my-saml-request', 'my-relay-state')
       expect(response).to be_valid
-      expect(response.session_id).to eq 'my-session-id-cookie'
+      expect(response.session_id).to eq session_id
       expect(response.transaction_simple_id).to eq 'transaction-simple-id'
     end
 
@@ -65,10 +70,10 @@ describe SessionProxy do
       idp = { 'simpleId' => 'idp', 'entityId' => 'something' }
 
       expect(api_client).to receive(:get)
-        .with(SessionProxy::FEDERATION_INFO_PATH, cookies: cookies)
+        .with(endpoint(SessionProxy::FEDERATION_INFO_SUFFIX))
         .and_return('idps' => [idp], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id')
 
-      result = session_proxy.identity_providers('my-session-id-cookie')
+      result = session_proxy.identity_providers(session_id)
 
       expect(result.size).to eql 1
       expect(result.first.simple_id).to eql 'idp'
@@ -81,18 +86,18 @@ describe SessionProxy do
       ip_address = '1.1.1.1'
       body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => false }
       expect(api_client).to receive(:put)
-        .with(SessionProxy::SELECT_IDP_PATH, body, cookies: cookies)
+        .with(endpoint(SessionProxy::SELECT_IDP_SUFFIX), body)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      session_proxy.select_idp('my-session-id-cookie', 'an-entity-id')
+      session_proxy.select_idp(session_id, 'an-entity-id')
     end
 
     it 'should select an IDP for the session when registering' do
       ip_address = '1.1.1.1'
       body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => true }
       expect(api_client).to receive(:put)
-        .with(SessionProxy::SELECT_IDP_PATH, body, cookies: cookies)
+        .with(endpoint(SessionProxy::SELECT_IDP_SUFFIX), body)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      session_proxy.select_idp('my-session-id-cookie', 'an-entity-id', true)
+      session_proxy.select_idp(session_id, 'an-entity-id', true)
     end
   end
 
@@ -106,14 +111,10 @@ describe SessionProxy do
       }
       ip_address = '1.1.1.1'
       expect(api_client).to receive(:get)
-        .with(
-          SessionProxy::IDP_AUTHN_REQUEST_PATH,
-          cookies: cookies,
-          headers: { X_FORWARDED_FOR => ip_address },
-        )
+        .with(endpoint(SessionProxy::IDP_AUTHN_REQUEST_SUFFIX), headers: { X_FORWARDED_FOR => ip_address })
         .and_return(authn_request)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      result = session_proxy.idp_authn_request('my-session-id-cookie')
+      result = session_proxy.idp_authn_request(session_id)
       attributes = {
           'location' => 'some-location',
           'saml_request' => 'a-saml-request',
@@ -131,15 +132,11 @@ describe SessionProxy do
       }
       ip_address = '1.1.1.1'
       expect(api_client).to receive(:get)
-        .with(
-          SessionProxy::IDP_AUTHN_REQUEST_PATH,
-          cookies: cookies,
-          headers: { X_FORWARDED_FOR => ip_address }
-        )
+        .with(endpoint(SessionProxy::IDP_AUTHN_REQUEST_SUFFIX), headers: { X_FORWARDED_FOR => ip_address })
         .and_return(authn_request)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
-        session_proxy.idp_authn_request('my-session-id-cookie')
+        session_proxy.idp_authn_request(session_id)
       }.to raise_error Api::Response::ModelError, "Saml request can't be blank"
     end
   end
@@ -150,13 +147,13 @@ describe SessionProxy do
       expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:put)
-        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request, cookies: cookies)
+        .with(endpoint(SessionProxy::IDP_AUTHN_RESPONSE_SUFFIX), expected_request)
         .and_return(
           'idpResult' => 'some-location',
           'isRegistration' => false,
         )
 
-      response = session_proxy.idp_authn_response('my-session-id-cookie', 'saml-response', 'relay-state')
+      response = session_proxy.idp_authn_response(session_id, 'saml-response', 'relay-state')
 
       attributes = {
         idp_result: 'some-location',
@@ -170,11 +167,11 @@ describe SessionProxy do
       expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:put)
-        .with(SessionProxy::IDP_AUTHN_RESPONSE_PATH, expected_request, cookies: cookies)
+        .with(endpoint(SessionProxy::IDP_AUTHN_RESPONSE_SUFFIX), expected_request)
         .and_return({})
 
       expect {
-        session_proxy.idp_authn_response('my-session-id-cookie', 'saml-response', 'relay-state')
+        session_proxy.idp_authn_response(session_id, 'saml-response', 'relay-state')
       }.to raise_error Api::Response::ModelError, "Idp result can't be blank, Is registration is not included in the list"
     end
   end
@@ -182,21 +179,21 @@ describe SessionProxy do
   describe '#matching_outcome' do
     it 'should return a matching outcome' do
       expect(api_client).to receive(:get)
-        .with(SessionProxy::MATCHING_OUTCOME_PATH, cookies: cookies)
+        .with(endpoint(SessionProxy::MATCHING_OUTCOME_SUFFIX))
         .and_return('outcome' => 'GOTO_HUB_LANDING_PAGE')
 
-      response = session_proxy.matching_outcome('my-session-id-cookie')
+      response = session_proxy.matching_outcome(session_id)
 
       expect(response).to eql MatchingOutcomeResponse::GOTO_HUB_LANDING_PAGE
     end
 
     it 'should raise an error when the API responds with an unknown value' do
       expect(api_client).to receive(:get)
-        .with(SessionProxy::MATCHING_OUTCOME_PATH, cookies: cookies)
+        .with(endpoint(SessionProxy::MATCHING_OUTCOME_SUFFIX))
         .and_return('outcome' => 'BANANA')
 
       expect {
-        session_proxy.matching_outcome('my-session-id-cookie')
+        session_proxy.matching_outcome(session_id)
       }.to raise_error Api::Response::ModelError, 'Outcome BANANA is not an allowed value for a matching outcome'
     end
   end
@@ -205,17 +202,14 @@ describe SessionProxy do
     it 'should return an rp response' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
-        .with(SessionProxy::RESPONSE_FOR_RP_PATH,
-          cookies: cookies,
-          headers: { "X-Forwarded-For" => ip_address }
-        )
+        .with(endpoint(SessionProxy::RESPONSE_FOR_RP_SUFFIX), headers: { "X-Forwarded-For" => ip_address })
         .and_return(
           'postEndpoint' => 'http://www.example.com',
           'samlMessage' => 'a saml message',
           'relayState' => 'a relay state'
         )
 
-      actual_response = session_proxy.response_for_rp('my-session-id-cookie')
+      actual_response = session_proxy.response_for_rp(session_id)
 
       expected_attributes = {
         'location' => 'http://www.example.com',
@@ -228,14 +222,11 @@ describe SessionProxy do
     it 'should raise an error when the API responds with an unknown value' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
-        .with(SessionProxy::RESPONSE_FOR_RP_PATH,
-          cookies: cookies,
-          headers: { "X-Forwarded-For" => ip_address }
-        )
+        .with(endpoint(SessionProxy::RESPONSE_FOR_RP_SUFFIX), headers: { "X-Forwarded-For" => ip_address })
         .and_return('outcome' => 'BANANA')
 
       expect {
-        session_proxy.response_for_rp('my-session-id-cookie')
+        session_proxy.response_for_rp(session_id)
       }.to raise_error(Api::Response::ModelError, "Location can't be blank, Saml message can't be blank")
     end
   end
@@ -244,17 +235,14 @@ describe SessionProxy do
     it 'should return an rp response' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
-        .with(SessionProxy::ERROR_RESPONSE_FOR_RP_PATH,
-          cookies: cookies,
-          headers: { "X-Forwarded-For" => ip_address }
-        )
+        .with(endpoint(SessionProxy::ERROR_RESPONSE_FOR_RP_SUFFIX), headers: { "X-Forwarded-For" => ip_address })
         .and_return(
           'postEndpoint' => 'http://www.example.com',
           'samlMessage' => 'a saml message',
           'relayState' => 'a relay state'
         )
 
-      actual_response = session_proxy.error_response_for_rp('my-session-id-cookie')
+      actual_response = session_proxy.error_response_for_rp(session_id)
 
       expected_attributes = {
         'location' => 'http://www.example.com',
@@ -267,14 +255,11 @@ describe SessionProxy do
     it 'should raise an error when the API responds with an unknown value' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
-        .with(SessionProxy::ERROR_RESPONSE_FOR_RP_PATH,
-          cookies: cookies,
-          headers: { "X-Forwarded-For" => ip_address }
-        )
+        .with(endpoint(SessionProxy::ERROR_RESPONSE_FOR_RP_SUFFIX), headers: { "X-Forwarded-For" => ip_address })
         .and_return('outcome' => 'BANANA')
 
       expect {
-        session_proxy.error_response_for_rp('my-session-id-cookie')
+        session_proxy.error_response_for_rp(session_id)
       }.to raise_error(Api::Response::ModelError, "Location can't be blank, Saml message can't be blank")
     end
   end
@@ -282,12 +267,10 @@ describe SessionProxy do
   describe '#cycle_three_attribute_name' do
     it 'should return an attribute name' do
       expect(api_client).to receive(:get)
-        .with(SessionProxy::CYCLE_THREE_PATH,
-              cookies: cookies,
-             )
+        .with(endpoint(SessionProxy::CYCLE_THREE_SUFFIX))
         .and_return('name' => 'verySpecialNumber')
 
-      actual_response = session_proxy.cycle_three_attribute_name('my-session-id-cookie')
+      actual_response = session_proxy.cycle_three_attribute_name(session_id)
 
       expect(actual_response).to eql 'verySpecialNumber'
     end
@@ -297,26 +280,26 @@ describe SessionProxy do
     it 'should post an attribute value' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:post)
-        .with(SessionProxy::CYCLE_THREE_PATH,
+        .with(endpoint(SessionProxy::CYCLE_THREE_SUFFIX),
               { 'value' => 'some value', 'originatingIp' => '127.0.0.1' },
-              { cookies: cookies },
+              {},
               200
              )
 
-      session_proxy.submit_cycle_three_value('my-session-id-cookie', 'some value')
+      session_proxy.submit_cycle_three_value(session_id, 'some value')
     end
   end
 
   describe '#cycle_three_cancel' do
     it 'should post to cancel api endpoint' do
       expect(api_client).to receive(:post)
-        .with(SessionProxy::CYCLE_THREE_CANCEL_PATH,
+        .with(endpoint(SessionProxy::CYCLE_THREE_CANCEL_SUFFIX),
               nil,
-              { cookies: cookies },
+              {},
               200
              )
 
-      session_proxy.cycle_three_cancel('my-session-id-cookie')
+      session_proxy.cycle_three_cancel(session_id)
     end
   end
 end

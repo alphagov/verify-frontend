@@ -64,10 +64,14 @@ def expect_cookie(cookie_name, cookie_value)
   expect(cookie_value(cookie_name)).to eql cookie_value
 end
 
+def default_session_id
+  'my-session-id-cookie'
+end
+
 def create_cookie_hash
   {
       CookieNames::SESSION_COOKIE_NAME => 'my-session-cookie',
-      CookieNames::SESSION_ID_COOKIE_NAME => 'my-session-id-cookie',
+      CookieNames::SESSION_ID_COOKIE_NAME => default_session_id,
   }
 end
 
@@ -78,7 +82,7 @@ end
 def set_session_and_session_cookies!
   cookie_hash = create_cookie_hash
   set_cookies!(create_cookie_hash)
-  page.set_rack_session(transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: 'my-session-id-cookie')
+  page.set_rack_session(transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: default_session_id)
   cookie_hash
 end
 
@@ -88,7 +92,7 @@ def set_session_cookies!
   cookie_hash
 end
 
-def set_session!(session = { transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: 'my-session-id-cookie' })
+def set_session!(session = { transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: default_session_id })
   page.set_rack_session(session)
   session
 end

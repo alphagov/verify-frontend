@@ -1,15 +1,18 @@
+require 'pathname'
+
 class SessionProxy
   PATH = '/session'.freeze
-  FEDERATION_INFO_PATH = "#{PATH}/federation".freeze
-  SELECT_IDP_PATH = "#{PATH}/select-idp".freeze
-  IDP_AUTHN_REQUEST_PATH = "#{PATH}/idp-authn-request".freeze
-  IDP_AUTHN_RESPONSE_PATH = "#{PATH}/idp-authn-response".freeze
+  PATH_PREFIX = Pathname(PATH)
+  FEDERATION_INFO_SUFFIX = 'federation'.freeze
+  SELECT_IDP_SUFFIX = 'select-idp'.freeze
+  IDP_AUTHN_REQUEST_SUFFIX = 'idp-authn-request'.freeze
+  IDP_AUTHN_RESPONSE_SUFFIX = 'idp-authn-response'.freeze
   SESSION_STATE_PATH = "#{PATH}/state".freeze
-  MATCHING_OUTCOME_PATH = "#{PATH}/matching-outcome".freeze
-  RESPONSE_FOR_RP_PATH = "#{PATH}/response-for-rp/success".freeze
-  ERROR_RESPONSE_FOR_RP_PATH = "#{PATH}/response-for-rp/error".freeze
-  CYCLE_THREE_PATH = "#{PATH}/cycle-three".freeze
-  CYCLE_THREE_CANCEL_PATH = "#{CYCLE_THREE_PATH}/cancel".freeze
+  MATCHING_OUTCOME_SUFFIX = 'matching-outcome'.freeze
+  RESPONSE_FOR_RP_SUFFIX = 'response-for-rp/success'.freeze
+  ERROR_RESPONSE_FOR_RP_SUFFIX = 'response-for-rp/error'.freeze
+  CYCLE_THREE_SUFFIX = 'cycle-three'.freeze
+  CYCLE_THREE_CANCEL_SUFFIX = "#{CYCLE_THREE_SUFFIX}/cancel".freeze
   PARAM_SAML_REQUEST = 'samlRequest'.freeze
   PARAM_SAML_RESPONSE = 'samlResponse'.freeze
   PARAM_RELAY_STATE = 'relayState'.freeze
@@ -17,6 +20,9 @@ class SessionProxy
   PARAM_ENTITY_ID = 'entityId'.freeze
   PARAM_REGISTRATION = 'registration'.freeze
   PARAM_CYCLE_THREE_VALUE = 'value'.freeze
+  def self.session_endpoint(session_id, suffix)
+    PATH_PREFIX.join(session_id, suffix).to_s
+  end
 
   def initialize(api_client, originating_ip_store)
     @api_client = api_client
@@ -56,13 +62,12 @@ class SessionProxy
       PARAM_REGISTRATION => registration
     }
 
-    @api_client.put(SELECT_IDP_PATH, body, cookies: session_cookie(session_id))
+    @api_client.put(session_endpoint(session_id, SELECT_IDP_SUFFIX), body)
   end
 
   def idp_authn_request(session_id)
     response = @api_client.get(
-      IDP_AUTHN_REQUEST_PATH,
-      cookies: session_cookie(session_id),
+      session_endpoint(session_id, IDP_AUTHN_REQUEST_SUFFIX),
       headers: x_forwarded_for,
     )
     OutboundSamlMessage.new(response || {}).tap(&:validate)
@@ -74,32 +79,29 @@ class SessionProxy
       PARAM_SAML_RESPONSE => saml_response,
       PARAM_ORIGINATING_IP => originating_ip
     }
-    response = @api_client.put(IDP_AUTHN_RESPONSE_PATH, body, cookies: session_cookie(session_id))
+    response = @api_client.put(session_endpoint(session_id, IDP_AUTHN_RESPONSE_SUFFIX), body)
     IdpAuthnResponse.new(response || {}).tap(&:validate)
   end
 
   def matching_outcome(session_id)
-    response = @api_client.get(MATCHING_OUTCOME_PATH, cookies: session_cookie(session_id))
+    response = @api_client.get(session_endpoint(session_id, MATCHING_OUTCOME_SUFFIX))
     MatchingOutcomeResponse.new(response || {}).tap(&:validate).outcome
   end
 
   def response_for_rp(session_id)
-    response = @api_client.get(RESPONSE_FOR_RP_PATH,
-                               headers: x_forwarded_for,
-                               cookies: session_cookie(session_id))
+    response = @api_client.get(session_endpoint(session_id, RESPONSE_FOR_RP_SUFFIX),
+                               headers: x_forwarded_for)
     ResponseForRp.new(response || {}).tap(&:validate)
   end
 
   def error_response_for_rp(session_id)
-    response = @api_client.get(ERROR_RESPONSE_FOR_RP_PATH,
-                               headers: x_forwarded_for,
-                               cookies: session_cookie(session_id))
+    response = @api_client.get(session_endpoint(session_id, ERROR_RESPONSE_FOR_RP_SUFFIX),
+                               headers: x_forwarded_for)
     ResponseForRp.new(response || {}).tap(&:validate)
   end
 
   def cycle_three_attribute_name(session_id)
-    response = @api_client.get(CYCLE_THREE_PATH,
-                               cookies: session_cookie(session_id))
+    response = @api_client.get(session_endpoint(session_id, CYCLE_THREE_SUFFIX))
     CycleThreeAttributeResponse.new(response || {}).tap(&:validate).name
   end
 
@@ -108,29 +110,21 @@ class SessionProxy
       PARAM_CYCLE_THREE_VALUE => value,
       PARAM_ORIGINATING_IP => originating_ip
     }
-    options = {
-      cookies: session_cookie(session_id),
-    }
-    @api_client.post(CYCLE_THREE_PATH, body, options, 200)
+    @api_client.post(session_endpoint(session_id, CYCLE_THREE_SUFFIX), body, {}, 200)
   end
 
   def cycle_three_cancel(session_id)
-    options = {
-      cookies: session_cookie(session_id)
-    }
-    @api_client.post(CYCLE_THREE_CANCEL_PATH, nil, options, 200)
+    @api_client.post(session_endpoint(session_id, CYCLE_THREE_CANCEL_SUFFIX), nil, {}, 200)
   end
 
 private
 
-  def session_cookie(session_id)
-    {
-      CookieNames::SESSION_ID_COOKIE_NAME => session_id,
-    }
+  def federation_info_for_session(session_id)
+    response = @api_client.get(session_endpoint(session_id, FEDERATION_INFO_SUFFIX))
+    FederationInfoResponse.new(response || {}).tap(&:validate)
   end
 
-  def federation_info_for_session(session_id)
-    response = @api_client.get(FEDERATION_INFO_PATH, cookies: session_cookie(session_id))
-    FederationInfoResponse.new(response || {}).tap(&:validate)
+  def session_endpoint(session_id, suffix)
+    SessionProxy.session_endpoint(session_id, suffix)
   end
 end
