@@ -23,8 +23,9 @@ describe SessionProxy do
   let(:session_proxy) { SessionProxy.new(api_client, originating_ip_store) }
   let(:ip_address) { '127.0.0.1' }
 
+  include SessionEndpoints
   def endpoint(suffix_path)
-    SessionProxy.session_endpoint(session_id, suffix_path)
+    session_endpoint(session_id, suffix_path)
   end
 
   describe('#create_session') do
