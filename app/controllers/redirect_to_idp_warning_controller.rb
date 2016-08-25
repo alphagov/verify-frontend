@@ -3,6 +3,9 @@ class RedirectToIdpWarningController < ApplicationController
   helper_method :user_has_no_docs_or_foreign_id_only?, :other_ways_description
 
   def index
+    flash.keep(:selected_idp_index)
+    flash.keep(:idp_count)
+
     @idp = decorated_idp
     if @idp.viewable?
       @recommended = recommended?
