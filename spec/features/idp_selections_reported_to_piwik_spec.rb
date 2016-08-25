@@ -16,7 +16,7 @@ RSpec.describe 'When the user selects an IDP' do
   }
 
   let(:idcorp_registration_piwik_request) {
-    stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true)
+    stub_piwik_idp_registration('IDCorp', 3, selected_answers: selected_answers, recommended: true)
   }
 
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
@@ -46,6 +46,7 @@ RSpec.describe 'When the user selects an IDP' do
   it 'appends the IdP name on subsequent selections' do
     idcorp_piwik_request = idcorp_registration_piwik_request
     idcorp_and_bobs_piwik_request = stub_piwik_idp_registration('Bob’s Identity Service',
+                                                                1,
                                                                 selected_answers: selected_answers,
                                                                 recommended: false,
                                                                 idp_list: 'IDCorp,Bob’s Identity Service'
@@ -65,7 +66,7 @@ RSpec.describe 'When the user selects an IDP' do
 
   it 'truncates IdP names' do
     idps = %w(A B C D E)
-    idcorp_piwik_request = stub_piwik_idp_registration('IDCorp', recommended: true, selected_answers: selected_answers, idp_list: idps.join(','))
+    idcorp_piwik_request = stub_piwik_idp_registration('IDCorp', 3, recommended: true, selected_answers: selected_answers, idp_list: idps.join(','))
     page.set_rack_session(selected_idp_names: idps)
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
