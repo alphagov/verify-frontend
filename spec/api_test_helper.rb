@@ -4,10 +4,6 @@ module ApiTestHelper
     URI.join(API_HOST, File.join('/api/', path))
   end
 
-  def session_api_uri(session_id, suffix)
-    api_uri(session_endpoint(session_id, suffix))
-  end
-
   def api_transactions_endpoint
     api_uri('transactions')
   end
@@ -33,7 +29,7 @@ module ApiTestHelper
         { 'simpleId' => 'stub-idp-demo', 'entityId' => 'demo-entity-id' }
     ]
     body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => transaction_entity_id }
-    stub_request(:get, session_api_uri(default_session_id, FEDERATION_INFO_SUFFIX)).to_return(body: body.to_json)
+    stub_request(:get, api_uri(federation_info_endpoint(default_session_id))).to_return(body: body.to_json)
   end
 
   def stub_federation_no_docs
@@ -44,7 +40,7 @@ module ApiTestHelper
         { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id' }
     ]
     body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
-    stub_request(:get, session_api_uri(default_session_id, FEDERATION_INFO_SUFFIX)).to_return(body: body.to_json)
+    stub_request(:get, api_uri(federation_info_endpoint(default_session_id))).to_return(body: body.to_json)
   end
 
   def stub_federation_unavailable
@@ -55,11 +51,11 @@ module ApiTestHelper
         { 'simpleId' => 'stub-idp-unavailable', 'entityId' => 'unavailable-entity-id' }
     ]
     body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id' }
-    stub_request(:get, session_api_uri(default_session_id, FEDERATION_INFO_SUFFIX)).to_return(body: body.to_json)
+    stub_request(:get, api_uri(federation_info_endpoint(default_session_id))).to_return(body: body.to_json)
   end
 
   def stub_session_select_idp_request(encrypted_entity_id, request_body = {})
-    stub = stub_request(:put, session_api_uri(default_session_id, SELECT_IDP_SUFFIX))
+    stub = stub_request(:put, api_uri(select_idp_endpoint(default_session_id)))
     if request_body.any?
       stub = stub.with(body: request_body)
     end
@@ -67,12 +63,12 @@ module ApiTestHelper
   end
 
   def stub_session_idp_authn_request(originating_ip, idp_location, registration)
-    stub_request(:get, session_api_uri(default_session_id, IDP_AUTHN_REQUEST_SUFFIX))
+    stub_request(:get, api_uri(idp_authn_request_endpoint(default_session_id)))
         .with(headers: { 'X_FORWARDED_FOR' => originating_ip })
-        .to_return(body: an_idp_authn_response(idp_location, registration).to_json)
+        .to_return(body: an_idp_authn_request(idp_location, registration).to_json)
   end
 
-  def an_idp_authn_response(location, registration)
+  def an_idp_authn_request(location, registration)
     {
         'location' => location,
         'samlRequest' => 'a-saml-request',
@@ -96,7 +92,7 @@ module ApiTestHelper
   end
 
   def stub_matching_outcome(outcome = MatchingOutcomeResponse::WAIT)
-    stub_request(:get, session_api_uri(default_session_id, MATCHING_OUTCOME_SUFFIX)).to_return(body: { 'outcome' => outcome }.to_json)
+    stub_request(:get, api_uri(matching_outcome_endpoint(default_session_id))).to_return(body: { 'outcome' => outcome }.to_json)
   end
 
   def x_forwarded_for
@@ -109,7 +105,7 @@ module ApiTestHelper
         'samlMessage' => 'a saml message',
         'relayState' => 'a relay state'
     }
-    stub_request(:get, session_api_uri(default_session_id, RESPONSE_FOR_RP_SUFFIX)).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
+    stub_request(:get, api_uri(response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
   end
 
   def stub_error_response_for_rp
@@ -118,21 +114,21 @@ module ApiTestHelper
         'samlMessage' => 'a saml message',
         'relayState' => 'a relay state'
     }
-    stub_request(:get, session_api_uri(default_session_id, ERROR_RESPONSE_FOR_RP_SUFFIX)).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
+    stub_request(:get, api_uri(error_response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
   end
 
   def stub_cycle_three_attribute_request(name)
     cycle_three_attribute_name = { name: name }
-    stub_request(:get, session_api_uri(default_session_id, CYCLE_THREE_SUFFIX)).to_return(body: cycle_three_attribute_name.to_json, status: 200)
+    stub_request(:get, api_uri(cycle_three_endpoint(default_session_id))).to_return(body: cycle_three_attribute_name.to_json, status: 200)
   end
 
   def stub_cycle_three_value_submit(value)
     cycle_three_attribute_value = { value: value, PARAM_ORIGINATING_IP => OriginatingIpStore::UNDETERMINED_IP }
-    stub_request(:post, session_api_uri(default_session_id, CYCLE_THREE_SUFFIX)).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
+    stub_request(:post, api_uri(cycle_three_endpoint(default_session_id))).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
   end
 
   def stub_cycle_three_cancel
-    stub_request(:post, session_api_uri(default_session_id, CYCLE_THREE_CANCEL_SUFFIX)).to_return(status: 200)
+    stub_request(:post, api_uri(cycle_three_cancel_endpoint(default_session_id))).to_return(status: 200)
   end
 
   def stub_api_authn_response(relay_state, response = { 'idpResult' => 'SUCCESS', 'isRegistration' => false })
@@ -142,7 +138,7 @@ module ApiTestHelper
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
 
-    stub_request(:put, session_api_uri(default_session_id, IDP_AUTHN_RESPONSE_SUFFIX))
+    stub_request(:put, api_uri(idp_authn_response_endpoint(default_session_id)))
         .with(body: authn_response_body)
         .to_return(body: response.to_json, status: 200)
   end

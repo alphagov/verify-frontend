@@ -27,7 +27,8 @@ class SessionProxy
   end
 
   def identity_providers(session_id)
-    federation_info_for_session(session_id).idps
+    response = @api_client.get(federation_info_endpoint(session_id))
+    FederationInfoResponse.validated_response(response).idps
   end
 
   def select_cookies(cookies, allowed_cookie_names)
@@ -58,29 +59,27 @@ class SessionProxy
       PARAM_SAML_RESPONSE => saml_response,
       PARAM_ORIGINATING_IP => originating_ip
     }
-    response = @api_client.put(session_endpoint(session_id, IDP_AUTHN_RESPONSE_SUFFIX), body)
+    response = @api_client.put(idp_authn_response_endpoint(session_id), body)
     IdpAuthnResponse.validated_response(response)
   end
 
   def matching_outcome(session_id)
-    response = @api_client.get(session_endpoint(session_id, MATCHING_OUTCOME_SUFFIX))
+    response = @api_client.get(matching_outcome_endpoint(session_id))
     MatchingOutcomeResponse.validated_response(response).outcome
   end
 
   def response_for_rp(session_id)
-    response = @api_client.get(session_endpoint(session_id, RESPONSE_FOR_RP_SUFFIX),
-                               headers: x_forwarded_for)
+    response = @api_client.get(response_for_rp_endpoint(session_id), headers: x_forwarded_for)
     ResponseForRp.validated_response(response)
   end
 
   def error_response_for_rp(session_id)
-    response = @api_client.get(session_endpoint(session_id, ERROR_RESPONSE_FOR_RP_SUFFIX),
-                               headers: x_forwarded_for)
+    response = @api_client.get(error_response_for_rp_endpoint(session_id), headers: x_forwarded_for)
     ResponseForRp.validated_response(response)
   end
 
   def cycle_three_attribute_name(session_id)
-    response = @api_client.get(session_endpoint(session_id, CYCLE_THREE_SUFFIX))
+    response = @api_client.get(cycle_three_endpoint(session_id))
     CycleThreeAttributeResponse.validated_response(response).name
   end
 
@@ -89,17 +88,10 @@ class SessionProxy
       PARAM_CYCLE_THREE_VALUE => value,
       PARAM_ORIGINATING_IP => originating_ip
     }
-    @api_client.post(session_endpoint(session_id, CYCLE_THREE_SUFFIX), body, {}, 200)
+    @api_client.post(cycle_three_endpoint(session_id), body, {}, 200)
   end
 
   def cycle_three_cancel(session_id)
-    @api_client.post(session_endpoint(session_id, CYCLE_THREE_CANCEL_SUFFIX), nil, {}, 200)
-  end
-
-private
-
-  def federation_info_for_session(session_id)
-    response = @api_client.get(session_endpoint(session_id, FEDERATION_INFO_SUFFIX))
-    FederationInfoResponse.validated_response(response)
+    @api_client.post(cycle_three_cancel_endpoint(session_id), nil, {}, 200)
   end
 end

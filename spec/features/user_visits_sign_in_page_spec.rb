@@ -36,9 +36,9 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     expect(page).to have_content("relay state is 'a-relay-state'")
     expect(page).to have_content("registration is 'false'")
     expect(cookie_value('verify-front-journey-hint')).to_not be_nil
-    expect(a_request(:put, session_api_uri(default_session_id, SessionProxy::SELECT_IDP_SUFFIX))
+    expect(a_request(:put, api_uri(select_idp_endpoint(default_session_id)))
              .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => false })).to have_been_made.once
-    expect(a_request(:get, session_api_uri(default_session_id, SessionProxy::IDP_AUTHN_REQUEST_SUFFIX))
+    expect(a_request(:get, api_uri(idp_authn_request_endpoint(default_session_id)))
              .with(headers: { 'X_FORWARDED_FOR' => originating_ip })).to have_been_made.once
     piwik_request = {
       '_cvar' => "{\"3\":[\"SIGNIN_IDP\",\"#{idp_display_name}\"]}",

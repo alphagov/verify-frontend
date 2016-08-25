@@ -23,11 +23,39 @@ module SessionEndpoints
     PATH_PREFIX.join(session_id, suffix).to_s
   end
 
+  def federation_info_endpoint(session_id)
+    session_endpoint(session_id, FEDERATION_INFO_SUFFIX)
+  end
+
   def select_idp_endpoint(session_id)
     session_endpoint(session_id, SELECT_IDP_SUFFIX)
   end
 
   def idp_authn_request_endpoint(session_id)
     session_endpoint(session_id, IDP_AUTHN_REQUEST_SUFFIX)
+  end
+
+  def idp_authn_response_endpoint(session_id)
+    session_endpoint(session_id, IDP_AUTHN_RESPONSE_SUFFIX)
+  end
+
+  def matching_outcome_endpoint(session_id)
+    session_endpoint(session_id, MATCHING_OUTCOME_SUFFIX)
+  end
+
+  def response_for_rp_endpoint(session_id)
+    session_endpoint(session_id, RESPONSE_FOR_RP_SUFFIX)
+  end
+
+  def error_response_for_rp_endpoint(session_id)
+    session_endpoint(session_id, ERROR_RESPONSE_FOR_RP_SUFFIX)
+  end
+
+  def cycle_three_endpoint(session_id)
+    session_endpoint(session_id, CYCLE_THREE_SUFFIX)
+  end
+
+  def cycle_three_cancel_endpoint(session_id)
+    session_endpoint(session_id, CYCLE_THREE_CANCEL_SUFFIX)
   end
 end

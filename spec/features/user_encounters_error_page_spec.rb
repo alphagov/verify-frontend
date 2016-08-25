@@ -3,7 +3,7 @@ require 'api_test_helper'
 
 RSpec.describe 'user encounters error page' do
   let(:api_saml_endpoint) { api_uri('session') }
-  let(:api_federation_endpoint) { session_api_uri(default_session_id, SessionProxy::FEDERATION_INFO_SUFFIX) }
+  let(:api_federation_endpoint) { api_uri(federation_info_endpoint(default_session_id)) }
 
   it 'will present the user with a list of transactions' do
     stub_transactions_list
