@@ -31,7 +31,7 @@ class ChooseACertifiedCompanyController < ApplicationController
 private
 
   def grouped_identity_providers
-    IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers, current_transaction_simple_id)
+    @grouped_identity_providers ||= IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers, current_transaction_simple_id)
   end
 
   def store_selected_idp_index
