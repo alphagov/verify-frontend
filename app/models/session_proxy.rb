@@ -23,7 +23,7 @@ class SessionProxy
       PARAM_ORIGINATING_IP => originating_ip
     }
     response = @api_client.post(PATH, body)
-    SessionResponse.new(response || {}).tap(&:validate)
+    SessionResponse.validated_response(response)
   end
 
   def identity_providers(session_id)
@@ -41,15 +41,15 @@ class SessionProxy
       PARAM_REGISTRATION => registration
     }
 
-    @api_client.put(session_endpoint(session_id, SELECT_IDP_SUFFIX), body)
+    @api_client.put(select_idp_endpoint(session_id), body)
   end
 
   def idp_authn_request(session_id)
     response = @api_client.get(
-      session_endpoint(session_id, IDP_AUTHN_REQUEST_SUFFIX),
+      idp_authn_request_endpoint(session_id),
       headers: x_forwarded_for,
     )
-    OutboundSamlMessage.new(response || {}).tap(&:validate)
+    OutboundSamlMessage.validated_response(response)
   end
 
   def idp_authn_response(session_id, saml_response, relay_state)
@@ -59,29 +59,29 @@ class SessionProxy
       PARAM_ORIGINATING_IP => originating_ip
     }
     response = @api_client.put(session_endpoint(session_id, IDP_AUTHN_RESPONSE_SUFFIX), body)
-    IdpAuthnResponse.new(response || {}).tap(&:validate)
+    IdpAuthnResponse.validated_response(response)
   end
 
   def matching_outcome(session_id)
     response = @api_client.get(session_endpoint(session_id, MATCHING_OUTCOME_SUFFIX))
-    MatchingOutcomeResponse.new(response || {}).tap(&:validate).outcome
+    MatchingOutcomeResponse.validated_response(response).outcome
   end
 
   def response_for_rp(session_id)
     response = @api_client.get(session_endpoint(session_id, RESPONSE_FOR_RP_SUFFIX),
                                headers: x_forwarded_for)
-    ResponseForRp.new(response || {}).tap(&:validate)
+    ResponseForRp.validated_response(response)
   end
 
   def error_response_for_rp(session_id)
     response = @api_client.get(session_endpoint(session_id, ERROR_RESPONSE_FOR_RP_SUFFIX),
                                headers: x_forwarded_for)
-    ResponseForRp.new(response || {}).tap(&:validate)
+    ResponseForRp.validated_response(response)
   end
 
   def cycle_three_attribute_name(session_id)
     response = @api_client.get(session_endpoint(session_id, CYCLE_THREE_SUFFIX))
-    CycleThreeAttributeResponse.new(response || {}).tap(&:validate).name
+    CycleThreeAttributeResponse.validated_response(response).name
   end
 
   def submit_cycle_three_value(session_id, value)
@@ -100,6 +100,6 @@ private
 
   def federation_info_for_session(session_id)
     response = @api_client.get(session_endpoint(session_id, FEDERATION_INFO_SUFFIX))
-    FederationInfoResponse.new(response || {}).tap(&:validate)
+    FederationInfoResponse.validated_response(response)
   end
 end
