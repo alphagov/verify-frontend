@@ -3,7 +3,7 @@ class RedirectToIdpWarningController < ApplicationController
   helper_method :user_has_no_docs_or_foreign_id_only?, :other_ways_description
 
   def index
-    flash.keep(:selected_idp_index)
+    flash.keep(:selected_idp_position)
     flash.keep(:idp_count)
 
     @idp = decorated_idp
@@ -60,7 +60,7 @@ private
       selected_idp_names,
       selected_answer_store.selected_evidence,
       recommended?,
-      flash[:selected_idp_index],
+      flash[:selected_idp_position],
       flash[:idp_count]
     )
   end

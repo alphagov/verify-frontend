@@ -62,7 +62,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   def stub_registration_piwik_report(selected_answers, recommended)
     # Tests in this file register without picking an IdP on choose-a-certified-company first.
     # This means that the position of the IdP the user clicked is not in flash, so (index - of -) should be reported.
-    stub_piwik_idp_registration('IDCorp', '-', idp_index: '-', selected_answers: selected_answers, recommended: recommended)
+    stub_piwik_idp_registration('IDCorp', '-', idp_position: '-', selected_answers: selected_answers, recommended: recommended)
   end
 
   before(:each) do

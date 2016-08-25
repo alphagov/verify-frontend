@@ -15,6 +15,6 @@
                      value: identity_provider.display_name
       %>
       <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil %>
-      <%= hidden_field_tag 'selected_idp_index', index, id: nil %>
+      <%= hidden_field_tag 'selected_idp_position', index + 1, id: nil %>
   <% end %>
 </div>

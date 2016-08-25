@@ -35,11 +35,11 @@ private
   end
 
   def store_selected_idp_index
-    raw_index = params['selected_idp_index']
+    raw_index = params['selected_idp_position']
     begin
-      flash[:selected_idp_index] = Integer(raw_index)
+      flash[:selected_idp_position] = Integer(raw_index)
     rescue TypeError, ArgumentError
-      Rails.logger.warn('Could not parse selected_idp_index as an Integer.')
+      Rails.logger.warn('Could not parse selected_idp_position as an Integer.')
     end
   end
 

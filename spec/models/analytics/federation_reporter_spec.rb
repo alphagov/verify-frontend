@@ -32,29 +32,29 @@ module Analytics
         expect(analytics_reporter).to receive(:report_custom_variable)
           .with(
             request,
-            "#{idp_name} was chosen for registration (recommended) (index 0 of 5) with evidence passport",
+            "#{idp_name} was chosen for registration (recommended) (position 1 of 5) with evidence passport",
             2 => ['REGISTER_IDP', idp_name],
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), true, 0, 5)
+        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), true, 1, 5)
       end
 
       it 'should report correctly if IdP was not recommended' do
         expect(analytics_reporter).to receive(:report_custom_variable)
           .with(
             request,
-            "#{idp_name} was chosen for registration (not recommended) (index 1 of 4) with evidence passport",
+            "#{idp_name} was chosen for registration (not recommended) (position 2 of 4) with evidence passport",
             2 => ['REGISTER_IDP', idp_name],
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), false, 1, 4)
+        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), false, 2, 4)
       end
 
       it 'should sort evidence and skip nil indices' do
         expect(analytics_reporter).to receive(:report_custom_variable)
           .with(
             request,
-            "#{idp_name} was chosen for registration (recommended) (index - of -) with evidence driving_licence, passport",
+            "#{idp_name} was chosen for registration (recommended) (position - of -) with evidence driving_licence, passport",
             2 => ['REGISTER_IDP', idp_name],
             5 => ['IDP_SELECTION', idp_history_str]
           )

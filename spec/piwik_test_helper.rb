@@ -1,11 +1,11 @@
-def stub_piwik_idp_registration(idp_name, idp_count, idp_index: '\d', selected_answers: {}, recommended: false, idp_list: idp_name)
+def stub_piwik_idp_registration(idp_name, idp_count, idp_position: '\d', selected_answers: {}, recommended: false, idp_list: idp_name)
   recommended_str = recommended ? 'recommended' : 'not recommended'
   evidence = selected_answers.values.flat_map { |answer_set|
     answer_set.select { |_, v| v }.map { |item| item[0] }
   }.sort.join(', ')
   piwik_request = {
     '_cvar' => "{\"2\":[\"REGISTER_IDP\",\"#{idp_name}\"],\"5\":[\"IDP_SELECTION\",\"#{idp_list}\"]}",
-    'action_name' => match(/#{idp_name} was chosen for registration \(#{recommended_str}\) \(index #{idp_index} of #{idp_count}\) with evidence #{evidence}/),
+    'action_name' => match(/#{idp_name} was chosen for registration \(#{recommended_str}\) \(position #{idp_position} of #{idp_count}\) with evidence #{evidence}/),
   }
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 end
