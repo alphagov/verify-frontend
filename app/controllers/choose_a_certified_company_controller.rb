@@ -36,7 +36,11 @@ private
 
   def store_selected_idp_index
     raw_index = params['selected_idp_index']
-    flash[:selected_idp_index] = raw_index.to_i if raw_index =~ /^\d+$/
+    begin
+      flash[:selected_idp_index] = Integer(raw_index)
+    rescue TypeError, ArgumentError
+      Rails.logger.warn('Could not parse selected_idp_index as an Integer.')
+    end
   end
 
   def store_num_of_idps(recommended)
