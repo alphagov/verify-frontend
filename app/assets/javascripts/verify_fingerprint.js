@@ -3,6 +3,9 @@
 (function(global) {
    'use strict';
 
+    // By default Fingerprint2 logs things to the console. This setting disables logging:
+    global.NODEBUG = null;
+
     // based on jQuery's param implementation https://github.com/jquery/jquery/blob/master/src/serialize.js
     function serialiseComponents(components) {
         var componentsToExclude = ['webgl'];
