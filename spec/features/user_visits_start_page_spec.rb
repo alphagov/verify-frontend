@@ -81,7 +81,7 @@ RSpec.describe 'When the user visits the start page' do
       set_session!(transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: 'a mismatched value')
       visit '/start'
       expect(page).to have_content 'Sorry, something went wrong'
-      expect(page).to have_http_status :internal_server_error
+      expect(page).to have_http_status :bad_request
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=ERROR_PAGE'
     end
 

@@ -31,7 +31,7 @@ class SessionValidator
 
     def self.session_id_mismatch
       message = 'Session ID in cookie does not match value in session'
-      ValidationFailure.new(:something_went_wrong, :internal_server_error, message)
+      ValidationFailure.new(:something_went_wrong, :bad_request, message)
     end
 
     def initialize(type, status, message)
