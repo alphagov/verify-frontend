@@ -33,8 +33,10 @@ module VerifyFrontend
 
     config.exceptions_app = self.routes
 
-    #remove default rails headers as they are added by reverse proxy
-    config.action_dispatch.default_headers.clear
+    # Apply a basic lenient Content Security Policy
+    config.action_dispatch.default_headers = {
+      'Content-Security-Policy' => "default-src 'self'; font-src data:; img-src 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    }
     RouteTranslator.config do |config|
       config.hide_locale = true
       config.available_locales = [:en, :cy]
