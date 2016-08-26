@@ -127,6 +127,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
+      then_custom_variable_reported_for_sign_in
 
       first('input[value="http://idcorp.com"]', visible: false).set('bob')
       when_i_select_an_idp
