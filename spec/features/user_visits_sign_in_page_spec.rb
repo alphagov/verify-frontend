@@ -132,7 +132,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       when_i_select_an_idp
 
       expect(page).to have_content(I18n.translate('errors.page_not_found.title'))
-      expect(a_piwik_request).to have_not_been_made
+      expect(a_piwik_request.with(query: hash_including({}))).to have_been_made.once
       expect(page.get_rack_session['selected_idp']).to be_nil
     end
   end
