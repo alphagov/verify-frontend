@@ -34,7 +34,7 @@ describe("Will it work for me form", function () {
         '</fieldset>' +
         '</div>' +
         '<div class="form-group" id="not_resident_reason">' +
-        '<fieldset class="inline">' +
+        '<fieldset>' +
         '<legend>Which of these applies to you?</legend>' +
         '<label class="block-label" onclick="" for="moved-to-uk-in-last-12-months">' +
         '<input id="will_it_work_for_me_form_not_resident_reason_movedrecently" name="will_it_work_for_me_form[not_resident_reason]" type="radio" value="MovedRecently">' +

@@ -25,7 +25,7 @@
             </fieldset>
         <% end %>
         <%= content_tag :div, id: :not_resident_reason, class: hidden_form_question_class do %>
-            <fieldset class="inline">
+            <fieldset>
               <legend><%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %></legend>
               <%= f.custom_radio_button :not_resident_reason, 'MovedRecently', t('hub.will_it_work_for_me.question.not_resident_reason.recently') %>
               <%= f.custom_radio_button :not_resident_reason, 'AddressButNotResident', t('hub.will_it_work_for_me.question.not_resident_reason.not_resident') %>
