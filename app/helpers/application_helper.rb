@@ -42,10 +42,6 @@ module ApplicationHelper
     [form_question_class, 'panel', 'panel-border-narrow', 'js-hidden'].join(' ')
   end
 
-  def fingerprint_path
-    FINGERPRINT_CONFIG
-  end
-
   def idp_tagline(identity_provider)
     identity_provider.display_name + (identity_provider.tagline.nil? ? '' : ": #{identity_provider.tagline}")
   end
