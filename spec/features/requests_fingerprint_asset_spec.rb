@@ -13,8 +13,8 @@ RSpec.describe 'When the user visits the start page' do
     # Add our mock fingerprint endpoint to the capybara server
     capybara_server = Capybara::Server.new(MockFingerprintMiddleware.new(request_log))
     capybara_server.boot
-    server_url = "http://#{[capybara_server.host, capybara_server.port].join(':')}/assets2/fp.gif"
-    expect_any_instance_of(ApplicationHelper).to receive(:fingerprint_path).and_return(server_url)
+    #server_url = "http://#{[capybara_server.host, capybara_server.port].join(':')}/assets2/fp.gif"
+    #expect_any_instance_of(ApplicationHelper).to receive(:fingerprint_path).and_return(server_url)
   end
 
   after(:all) do
