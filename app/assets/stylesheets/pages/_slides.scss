@@ -93,12 +93,6 @@
 
 .hub-start {
 
-  .button {
-    @include media(tablet) {
-      margin-left: $gutter-half;
-    }
-  }
-
   .error,
   .validation-message {
     border-color: $white;
@@ -107,16 +101,6 @@
 
   .block-label {
     @include core-24;
-    background: transparent;
-    border: 0;
-
-    &.selected {
-      background: transparent;
-    }
-
-    &:hover {
-      background-color: $link-hover-colour;
-    }
   }
 
 }

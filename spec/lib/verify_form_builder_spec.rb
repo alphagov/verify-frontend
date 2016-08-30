@@ -12,7 +12,7 @@ describe VerifyFormBuilder do
     foo = double(:foo)
     expect(foo).to receive(:a).and_return 'b'
     form_builder = VerifyFormBuilder.new('foo', foo, template, {})
-    expected_html = '<label class="block-label" onclick="" for="foo_a_b"><input type="radio" value="b" checked="checked" name="foo[a]" id="foo_a_b" /> <span><span class="inner">&nbsp;</span></span> c</label>'
+    expected_html = '<label class="block-label" for="foo_a_b"><input type="radio" value="b" checked="checked" name="foo[a]" id="foo_a_b" /> c</label>'
     expect(form_builder.custom_radio_button(:a, 'b', 'c', {})).to eql expected_html
   end
 
@@ -20,7 +20,7 @@ describe VerifyFormBuilder do
     foo = double(:foo)
     expect(foo).to receive(:a).and_return 'd'
     form_builder = VerifyFormBuilder.new('foo', foo, template, {})
-    expected_html = '<label class="block-label" onclick="" for="foo_a_b"><input type="radio" value="b" name="foo[a]" id="foo_a_b" /> <span><span class="inner">&nbsp;</span></span> c</label>'
+    expected_html = '<label class="block-label" for="foo_a_b"><input type="radio" value="b" name="foo[a]" id="foo_a_b" /> c</label>'
     expect(form_builder.custom_radio_button(:a, 'b', 'c', {})).to eql expected_html
   end
 
@@ -28,7 +28,7 @@ describe VerifyFormBuilder do
     foo = double(:foo)
     expect(foo).to receive(:a).and_return nil
     form_builder = VerifyFormBuilder.new('foo', foo, template, {})
-    expected_html = '<label class="block-label" onclick="" for="foo_a_b"><input required="required" type="radio" value="b" name="foo[a]" id="foo_a_b" /> <span><span class="inner">&nbsp;</span></span> c</label>'
+    expected_html = '<label class="block-label" for="foo_a_b"><input required="required" type="radio" value="b" name="foo[a]" id="foo_a_b" /> c</label>'
     expect(form_builder.custom_radio_button(:a, 'b', 'c', required: true)).to eql expected_html
   end
 
@@ -36,7 +36,7 @@ describe VerifyFormBuilder do
     foo = double(:foo)
     expect(foo).to receive(:a).and_return 'b'
     form_builder = VerifyFormBuilder.new('foo', foo, template, {})
-    expected_html = '<label class="block-label" onclick="" for="foo_a"><input name="foo[a]" type="hidden" value="c" /><input type="checkbox" value="b" checked="checked" name="foo[a]" id="foo_a" /> <span><span class="inner">&nbsp;</span></span> d</label>'
+    expected_html = '<label class="block-label" for="foo_a"><input name="foo[a]" type="hidden" value="c" /><input type="checkbox" value="b" checked="checked" name="foo[a]" id="foo_a" /> d</label>'
     expect(form_builder.custom_check_box(:a, {}, 'b', 'c', 'd')).to eql expected_html
   end
 
@@ -44,7 +44,7 @@ describe VerifyFormBuilder do
     foo = double(:foo)
     expect(foo).to receive(:a).and_return 'd'
     form_builder = VerifyFormBuilder.new('foo', foo, template, {})
-    expected_html = '<label class="block-label" onclick="" for="foo_a"><input name="foo[a]" type="hidden" value="c" /><input type="checkbox" value="b" name="foo[a]" id="foo_a" /> <span><span class="inner">&nbsp;</span></span> d</label>'
+    expected_html = '<label class="block-label" for="foo_a"><input name="foo[a]" type="hidden" value="c" /><input type="checkbox" value="b" name="foo[a]" id="foo_a" /> d</label>'
     expect(form_builder.custom_check_box(:a, {}, 'b', 'c', 'd')).to eql expected_html
   end
 
@@ -52,7 +52,7 @@ describe VerifyFormBuilder do
     foo = double(:foo)
     expect(foo).to receive(:a).and_return nil
     form_builder = VerifyFormBuilder.new('foo', foo, template, {})
-    expected_html = '<label class="block-label" onclick="" for="foo_a"><input name="foo[a]" type="hidden" value="c" /><input required="required" type="checkbox" value="b" name="foo[a]" id="foo_a" /> <span><span class="inner">&nbsp;</span></span> d</label>'
+    expected_html = '<label class="block-label" for="foo_a"><input name="foo[a]" type="hidden" value="c" /><input required="required" type="checkbox" value="b" name="foo[a]" id="foo_a" /> d</label>'
     expect(form_builder.custom_check_box(:a, { required: true }, 'b', 'c', 'd')).to eql expected_html
   end
 end
