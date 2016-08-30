@@ -9,6 +9,7 @@ class AuthnRequestController < SamlController
     session[:verify_session_id] = response.session_id
     set_current_transaction_simple_id(response.transaction_simple_id)
     set_session_start_time!
+    set_identity_providers(response.idps)
 
     if params['journey_hint'].present?
       redirect_to confirm_your_identity_path
@@ -25,5 +26,9 @@ private
 
   def set_current_transaction_simple_id(simple_id)
     session[:transaction_simple_id] = simple_id
+  end
+
+  def set_identity_providers(idps)
+    session[:identity_providers] = idps.map { |idp| IdentityProvider.from_api(idp) }
   end
 end

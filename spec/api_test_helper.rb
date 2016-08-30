@@ -81,7 +81,8 @@ module ApiTestHelper
     session = {
         'transactionSimpleId' => 'test-rp',
         'sessionStartTime' => '32503680000000',
-        'sessionId' => default_session_id
+        'sessionId' => default_session_id,
+        'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }]
     }
     authn_request_body = {
         PARAM_SAML_REQUEST => 'my-saml-request',

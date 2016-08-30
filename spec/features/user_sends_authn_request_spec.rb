@@ -18,6 +18,7 @@ RSpec.describe 'user sends authn requests' do
 
       expect(page.get_rack_session['transaction_simple_id']).to eql 'test-rp'
       expect(page.get_rack_session['verify_session_id']).to eql default_session_id
+      expect(page.get_rack_session['identity_providers']).to eql [{ 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' }]
 
       cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
       expected_cookies = CookieNames.session_cookies + [

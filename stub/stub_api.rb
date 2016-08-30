@@ -8,7 +8,11 @@ class StubApi < Sinatra::Base
     '{
       "sessionId":"blah",
       "sessionStartTime":32503680000000,
-      "transactionSimpleId":"test-rp"
+      "transactionSimpleId":"test-rp",
+      "idps":[{
+        "simpleId":"stub-idp-one",
+        "entityId":"http://example.com/stub-idp-one"
+      }]
     }'
   end
 
