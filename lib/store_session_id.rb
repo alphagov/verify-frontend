@@ -1,4 +1,3 @@
-require 'cookie_names'
 class StoreSessionId
   def initialize(app)
     @app = app
