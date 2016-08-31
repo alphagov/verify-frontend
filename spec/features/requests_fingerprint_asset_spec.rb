@@ -1,27 +1,25 @@
 require 'feature_helper'
-require 'mock_fingerprint_middleware'
-require 'sinatra/base'
 
 RSpec.describe 'When the user visits the start page' do
   let(:request_log) { double(:request_log) }
 
-  before(:all) do
-    WebMock.allow_net_connect!
-  end
-
-  before :each do
-    # Add our mock fingerprint endpoint to the capybara server
-    capybara_server = Capybara::Server.new(MockFingerprintMiddleware.new(request_log))
-    capybara_server.boot
-    server_url = "http://#{[capybara_server.host, capybara_server.port].join(':')}/assets2/fp.gif"
-    expect_any_instance_of(ApplicationHelper).to receive(:fingerprint_path).and_return(server_url)
-  end
-
-  after(:all) do
-    WebMock.disable_net_connect!(allow_localhost: true)
-  end
-
   context 'when JS is enabled', js: true do
+    before :each do
+      # Capture requests to our fingerprint endpoint using a temporary middleware
+      @my_app =  Capybara.app
+      Capybara.app = ->(env) {
+        request = ActionDispatch::Request.new(env)
+        if request.path == '/assets2/fp.gif'
+          request_log.log(request.params)
+        end
+        @my_app.call(env)
+      }
+    end
+
+    after(:each) do
+      Capybara.app = @my_app
+    end
+
     it 'requests the fingerprint asset with the fingerprint in the query params' do
       query_params_hash = nil
       expect(request_log).to receive(:log) { |arg| query_params_hash = arg }
