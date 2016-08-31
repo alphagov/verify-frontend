@@ -77,6 +77,6 @@ group :test, :development do
 end
 
 gem 'logstash-logger'
-gem 'request_store'
+gem 'request_store', '~> 1.3.1'
 gem 'zendesk_api'
 gem 'email_validator'
