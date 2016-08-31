@@ -35,7 +35,7 @@ module VerifyFrontend
 
     # Apply a basic lenient Content Security Policy
     config.action_dispatch.default_headers = {
-      'Content-Security-Policy' => "default-src 'self'; font-src data:; img-src 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+      'Content-Security-Policy' => "default-src 'self'; font-src data:; img-src 'self' data:; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
     }
     RouteTranslator.config do |config|
       config.hide_locale = true
