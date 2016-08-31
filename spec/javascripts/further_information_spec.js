@@ -1,9 +1,3 @@
-//= require jquery
-//= require vendor/jquery.validate
-//= require vendor/jquery.validate.pattern
-//= require validation
-//= require further_information
-
 describe("Further Information Form", function () {
 
   var formWithNoErrors =

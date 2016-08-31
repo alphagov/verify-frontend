@@ -1,8 +1,3 @@
-//= require jquery
-//= require vendor/jquery.validate
-//= require validation
-//= require select_documents
-
 describe("Select Documents Form", function () {
 
     var formWithNoErrors = '<p id="no-documents-message" class="visually-hidden" aria-live="assertive" data-no-documents-message="Your document choices have been set to ‘no’."></p>' +

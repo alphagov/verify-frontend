@@ -6,4 +6,4 @@ require 'fileutils'
 
 Rails.application.load_tasks
 
-task default: [:spec, 'spec:javascripts']
+task default: [:spec, 'jasmine:ci']

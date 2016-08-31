@@ -24,7 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # use jasmine-rails for js tests
 group :test, :development do
-  gem 'jasmine-rails'
+  gem 'jasmine'
+  gem 'thin'
   gem 'selenium-webdriver'
 end
 
