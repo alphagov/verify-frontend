@@ -3,9 +3,6 @@ class RedirectToIdpWarningController < ApplicationController
   helper_method :user_has_no_docs_or_foreign_id_only?, :other_ways_description
 
   def index
-    flash.keep(:selected_idp_position)
-    flash.keep(:idp_count)
-
     @idp = decorated_idp
     if @idp.viewable?
       @recommended = recommended?
@@ -54,15 +51,7 @@ private
       selected_idp_names << idp_name
       session[:selected_idp_names] = selected_idp_names
     end
-    FEDERATION_REPORTER.report_idp_registration(
-      request,
-      idp_name,
-      selected_idp_names,
-      selected_answer_store.selected_evidence,
-      recommended?,
-      flash[:selected_idp_position],
-      flash[:idp_count]
-    )
+    FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended?)
   end
 
   def recommended?
