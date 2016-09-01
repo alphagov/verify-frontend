@@ -1,18 +1,5 @@
 require 'spec_helper'
-require 'models/session_validator'
-require 'models/session_validator/session_id_validator'
-require 'models/session_validator/session_start_time_validator'
-require 'models/session_validator/missing_cookies_validator'
-require 'models/session_validator/cookie_size_validator'
-require 'models/session_validator/no_cookies_validator'
-require 'models/session_validator/validation'
-require 'models/session_validator/successful_validation'
-require 'models/session_validator/validation_failure'
-require 'models/session_validator/transaction_simple_id_presence'
-require 'cookie_names'
-require 'active_support/core_ext/hash/except'
-require 'active_support/core_ext/date_time'
-require 'active_support/core_ext/integer/time'
+require 'rails_helper'
 
 describe SessionValidator do
   let(:cookies) {
@@ -33,6 +20,7 @@ describe SessionValidator do
       transaction_simple_id: 'simple-id',
       start_time: DateTime.now.to_i * 1000,
       verify_session_id: 'session_id',
+      identity_providers: [{ 'simple_id' => 'stub-idp-one' }]
     }
   }
 
@@ -52,17 +40,29 @@ describe SessionValidator do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
     session[:start_time] = DateTime.now.to_i * 1000
     session[:verify_session_id] = 'session_id'
+    session[:identity_providers] = [{ 'simple_id' => 'stub-idp-one' }]
     validation = session_validator.validate(cookies, session)
     expect(validation).to be_ok
   end
 
   it 'will fail validation if start time not found in session' do
     session[:verify_session_id] = 'session_id'
+    session[:identity_providers] = [{ 'simple_id' => 'stub-idp-one' }]
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql 'start_time not in session'
+  end
+
+  it 'will fail validation if idps are not found in session' do
+    session[:verify_session_id] = 'session_id'
+    session[:start_time] = DateTime.now.to_i * 1000
+    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
+    validation = session_validator.validate(cookies, session)
+    expect(validation).to_not be_ok
+    expect(validation.type).to eql :something_went_wrong
+    expect(validation.message).to eql "Idp(s) can not be found in the user's session"
   end
 
   it 'will fail validation if session cookie is missing' do
@@ -92,6 +92,7 @@ describe SessionValidator do
   it 'will fail validation if session is expired' do
     session[:start_time] = session_expiry.hours.ago.to_i * 1000
     session[:verify_session_id] = 'my-session-id'
+    session[:identity_providers] = [{ 'simple_id' => 'stub-idp-one' }]
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'my-session-id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
