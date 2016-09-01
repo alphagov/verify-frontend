@@ -29,7 +29,6 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
 
   it 'will redirect the user to /confirmation when successfully registered' do
     api_request = stub_api_authn_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => true)
-    stub_federation
     stub_session
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 

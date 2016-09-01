@@ -11,7 +11,6 @@ RSpec.describe 'When user visits the confirmation page' do
   }
 
   before(:each) do
-    stub_federation
     stub_session
     set_session_and_session_cookies!
   end

@@ -3,7 +3,6 @@ require 'api_test_helper'
 
 RSpec.describe 'user selects an IDP on the sign in page' do
   def given_api_requests_have_been_mocked!
-    stub_federation
     stub_session_select_idp_request(encrypted_entity_id)
     stub_session_idp_authn_request(originating_ip, location, false)
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))

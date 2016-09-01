@@ -2,7 +2,6 @@ require 'feature_helper'
 require 'api_test_helper'
 
 def stub_api_and_analytics(idp_location)
-  stub_federation
   stub_session_select_idp_request('an-encrypted-entity-id')
   stub_session_idp_authn_request(originating_ip, idp_location, false)
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
@@ -85,13 +84,13 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
         click_link 'sign in with a different certified company'
         new_idp_location = '/another-idp-endpoint'
         stub_api_and_analytics(new_idp_location)
-        click_button 'Select Bob'
+        click_button 'Select Bob’s Identity Service'
         click_button 'Continue'
         expect(page).to have_current_path(new_idp_location)
 
         # The new IDP is displayed for non-repudiation
         visit '/confirm-your-identity'
-        click_button 'Sign in with Bob'
+        click_button 'Sign in with Bob’s Identity Service'
         click_button 'Continue'
         expect(page).to have_current_path(new_idp_location)
       end
@@ -100,7 +99,6 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
   describe 'and the journey hint cookie is invalid in some way' do
     it 'should redirect to sign in page when the journey cookie is not set' do
-      stub_federation
       set_session_and_session_cookies!
       visit '/confirm-your-identity'
       expect(page).to have_title 'Sign in with a certified company - GOV.UK Verify - GOV.UK'
@@ -108,7 +106,6 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
     end
 
     it 'should redirect to sign in page when the journey cookie has a nil value' do
-      stub_federation
       set_session_and_session_cookies!
       visit '/confirm-your-identity'
       expect(page).to have_title 'Sign in with a certified company - GOV.UK Verify - GOV.UK'

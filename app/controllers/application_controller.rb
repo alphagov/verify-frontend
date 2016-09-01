@@ -131,7 +131,6 @@ private
   end
 
   def current_identity_providers
-    session[:identity_providers] ||= SESSION_PROXY.identity_providers(session['verify_session_id'])
     @current_identity_providers ||= session[:identity_providers].map { |obj| IdentityProvider.from_session(obj) }
   end
 

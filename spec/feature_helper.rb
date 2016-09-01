@@ -80,11 +80,45 @@ module FeatureHelper
     DateTime.now.to_i * 1000
   end
 
-  def set_session_and_session_cookies!
+  def set_session_and_session_cookies!(idps = [{ 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
+                                               { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id' },
+                                               { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id' },
+                                               { 'simple_id' => 'stub-idp-demo', 'entity_id' => 'demo-entity-id' }])
     cookie_hash = create_cookie_hash
     set_cookies!(create_cookie_hash)
-    page.set_rack_session(transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: default_session_id)
+    page.set_rack_session(
+      transaction_simple_id: 'test-rp',
+      start_time: start_time_in_millis,
+      verify_session_id: default_session_id,
+      identity_providers: idps)
     cookie_hash
+  end
+
+  def set_stub_federation_in_session(idp_entity_id)
+    idps = [
+        { 'simple_id' => 'stub-idp-one', 'entity_id' => idp_entity_id }
+    ]
+    page.set_rack_session(identity_providers: idps)
+  end
+
+  def set_stub_federation_no_docs_in_session
+    idps = [
+        { 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
+        { 'simple_id' => 'stub-idp-no-docs', 'entity_id' => 'http://idcorp.nodoc.com' },
+        { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id' },
+        { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id' }
+    ]
+    page.set_rack_session(identity_providers: idps)
+  end
+
+  def set_stub_federation_unavailable_in_session
+    idps = [
+        { 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
+        { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id' },
+        { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id' },
+        { 'simple_id' => 'stub-idp-unavailable', 'entity_id' => 'unavailable-entity-id' }
+    ]
+    page.set_rack_session(identity_providers: idps)
   end
 
   def set_session_cookies!

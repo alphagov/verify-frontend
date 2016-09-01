@@ -26,11 +26,6 @@ class SessionProxy
     SessionResponse.validated_response(response)
   end
 
-  def identity_providers(session_id)
-    response = @api_client.get(federation_info_endpoint(session_id))
-    FederationInfoResponse.validated_response(response).idps
-  end
-
   def select_cookies(cookies, allowed_cookie_names)
     cookies.select { |name, _| allowed_cookie_names.include?(name) }.to_h
   end

@@ -18,7 +18,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
   context 'with javascript disabled' do
     it 'redirects to the idp picker page when user has a phone' do
-      stub_federation_no_docs
+      set_stub_federation_no_docs_in_session
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_true'
@@ -31,7 +31,7 @@ RSpec.describe 'When the user visits the select phone page' do
     end
 
     it 'does not include apps if user doesnt know if their phone has apps' do
-      stub_federation_no_docs
+      set_stub_federation_no_docs_in_session
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_true'
@@ -45,7 +45,6 @@ RSpec.describe 'When the user visits the select phone page' do
 
     it 'allows you to overwrite the values of your selected evidence' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
-      stub_federation
       given_a_session_with_document_evidence
 
       visit '/select-phone'
@@ -76,7 +75,6 @@ RSpec.describe 'When the user visits the select phone page' do
 
   context 'with javascript enabled', js: true do
     it 'redirects to the idp picker page when user has a phone' do
-      stub_federation
       given_a_session_with_document_evidence
 
       visit '/select-phone'
@@ -92,7 +90,6 @@ RSpec.describe 'When the user visits the select phone page' do
     end
 
     it 'should display a validation message when user does not answer mobile phone question' do
-      stub_federation
       visit '/select-phone'
 
       click_button 'Continue'
@@ -102,7 +99,6 @@ RSpec.describe 'When the user visits the select phone page' do
     end
 
     it 'redirects to the no mobile phone page when no idps can verify' do
-      stub_federation
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_false'
@@ -131,7 +127,6 @@ RSpec.describe 'When the user visits the select phone page' do
     piwik_request = { 'action_name' => 'Phone Next' }
 
     page.set_rack_session(transaction_simple_id: 'test-rp')
-    stub_federation
     visit '/select-phone'
 
     choose 'select_phone_form_mobile_phone_true'

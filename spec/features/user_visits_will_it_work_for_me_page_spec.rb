@@ -4,7 +4,6 @@ require 'api_test_helper'
 RSpec.describe 'When the user visits the will it work for me page' do
   before(:each) do
     set_session_and_session_cookies!
-    page.set_rack_session(transaction_simple_id: 'test-rp')
   end
 
   it 'includes the appropriate feedback source' do
@@ -95,7 +94,6 @@ RSpec.describe 'When the user visits the will it work for me page' do
   end
 
   it 'reports to Piwik when the form is valid' do
-    stub_federation
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     piwik_request = { 'action_name' => 'Can I be Verified Next' }
 

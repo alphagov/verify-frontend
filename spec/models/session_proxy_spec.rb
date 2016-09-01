@@ -67,22 +67,6 @@ describe SessionProxy do
     end
   end
 
-  describe('#identity_providers') do
-    it 'should return a list of IDPs for the session' do
-      idp = { 'simpleId' => 'idp', 'entityId' => 'something' }
-
-      expect(api_client).to receive(:get)
-        .with(endpoint(SessionProxy::FEDERATION_INFO_SUFFIX))
-        .and_return('idps' => [idp], 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-id')
-
-      result = session_proxy.identity_providers(session_id)
-
-      expect(result.size).to eql 1
-      expect(result.first.simple_id).to eql 'idp'
-      expect(result.first.entity_id).to eql 'something'
-    end
-  end
-
   describe('#select_idp') do
     it 'should select an IDP for the session' do
       ip_address = '1.1.1.1'

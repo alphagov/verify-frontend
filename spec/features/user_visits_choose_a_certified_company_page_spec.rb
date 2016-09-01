@@ -52,7 +52,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   }
 
   it 'includes the appropriate feedback source' do
-    stub_federation
     given_a_session_with_selected_answers
 
     visit '/choose-a-certified-company'
@@ -61,7 +60,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   end
 
   it 'displays recommended IDPs' do
-    stub_federation
     given_a_session_with_selected_answers
     visit '/choose-a-certified-company'
 
@@ -73,7 +71,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   end
 
   it 'displays no IDPs if no recommendations' do
-    stub_federation
     given_a_session_without_selected_answers
     visit '/choose-a-certified-company'
     expect(page).to have_current_path(choose_a_certified_company_path)
@@ -82,7 +79,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   end
 
   it 'recommends some IDPs with a recommended profile, hides non-recommended profiles, and omits non-matching profiles' do
-    stub_federation_no_docs
+    set_stub_federation_no_docs_in_session
     given_a_session_with_one_doc_selected_answers
     visit '/choose-a-certified-company'
 
@@ -103,7 +100,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   it 'redirects to the redirect warning page when selecting a recommended IDP' do
     entity_id = 'http://idcorp.com'
     given_a_session_with_selected_answers
-    stub_federation(entity_id)
+    set_stub_federation_in_session(entity_id)
     visit '/choose-a-certified-company'
 
     within('#matching-idps') do
@@ -117,7 +114,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   it 'redirects to the redirect warning page when selecting a non-recommended IDP' do
     given_a_session_with_one_doc_selected_answers
-    stub_federation_no_docs
+    set_stub_federation_no_docs_in_session
     visit '/choose-a-certified-company'
 
     within('#non-matching-idps') do
@@ -130,7 +127,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   end
 
   it 'records details in session when a recommended IdP is selected' do
-    stub_federation
     given_a_session_with_selected_answers
     visit '/choose-a-certified-company'
 
@@ -143,7 +139,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   end
 
   it 'rejects unrecognised simple ids' do
-    stub_federation
     given_a_session_with_selected_answers
     visit '/choose-a-certified-company'
 
@@ -159,7 +154,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   it 'redirects to the choose a certified company about page when selecting About link' do
     given_a_session_with_selected_answers
-    stub_federation
     visit '/choose-a-certified-company'
 
     click_link 'About IDCorp'
@@ -168,7 +162,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
   end
 
   it 'displays the page in Welsh' do
-    stub_federation
     given_a_session_with_selected_answers
 
     visit '/dewis-cwmni-ardystiedig'
@@ -178,7 +171,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
   context 'when an IDP has no recommended profiles' do
     it 'will show the IDP in demo periods as recommended when the transaction allows them' do
-      stub_federation
       given_a_session_with_one_doc_selected_answers
 
       visit choose_a_certified_company_path
@@ -189,7 +181,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     end
 
     it 'will show IDP in demo periods as non-recommended when the transaction does not allow them' do
-      stub_federation
       given_a_session_with_no_demo_rp
 
       visit choose_a_certified_company_path

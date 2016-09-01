@@ -7,7 +7,6 @@ RSpec.describe 'When the user visits the about certified companies page' do
   let(:idp_entity_id) { 'http://idcorp.com' }
 
   before(:each) do
-    stub_federation
     stub_transactions_list
     set_session_and_session_cookies!
   end

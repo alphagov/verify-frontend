@@ -4,8 +4,6 @@ require 'piwik_test_helper'
 
 RSpec.describe 'user visits further information page' do
   before(:each) do
-    stub_federation
-    page.set_rack_session(transaction_simple_id: 'test-rp')
     set_session_and_session_cookies!
   end
   attribute_field_name = I18n.t('cycle3.NationalInsuranceNumber.field_name')

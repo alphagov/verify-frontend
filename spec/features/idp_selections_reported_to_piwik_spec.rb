@@ -25,7 +25,6 @@ RSpec.describe 'When the user selects an IDP' do
   before(:each) do
     set_session_and_session_cookies!
     stub_transactions_list
-    stub_federation
     stub_session_idp_authn_request(originating_ip, location, false)
     stub_idp_select_request(idp_1_entity_id)
     stub_idp_select_request(idp_2_entity_id)

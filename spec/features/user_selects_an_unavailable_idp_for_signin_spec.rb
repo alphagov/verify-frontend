@@ -9,8 +9,6 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
   end
 
   def given_im_on_the_sign_in_page
-    set_session_and_session_cookies!
-    page.set_rack_session(transaction_simple_id: 'test-rp')
     visit sign_in_en_path
   end
 
@@ -22,7 +20,8 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
 
   context 'the API says the IDP is actually available' do
     before(:each) do
-      stub_federation_unavailable
+      set_session_and_session_cookies!
+      set_stub_federation_unavailable_in_session
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
     end
@@ -40,7 +39,7 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
 
   context 'API does not return IDP as available' do
     before(:each) do
-      stub_federation
+      set_session_and_session_cookies!
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
     end

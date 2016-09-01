@@ -8,7 +8,6 @@ RSpec.describe 'user sends authn requests' do
   context 'and it is received successfully' do
     let(:session_start_time) { DateTime.now }
     it 'will redirect the user to /start' do
-      stub_federation
       stub_api_saml_endpoint
 
       visit('/test-saml')
@@ -30,7 +29,6 @@ RSpec.describe 'user sends authn requests' do
 
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
       set_journey_hint_cookie('http://idcorp.com')
-      stub_federation
       stub_api_saml_endpoint
       visit('/test-saml')
       click_button 'saml-post-journey-hint'
