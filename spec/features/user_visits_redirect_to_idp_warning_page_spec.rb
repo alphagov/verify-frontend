@@ -59,12 +59,6 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     )
   }
 
-  def stub_registration_piwik_report(selected_answers, recommended)
-    # Tests in this file register without picking an IdP on choose-a-certified-company first.
-    # This means that the position of the IdP the user clicked is not in flash, so (index - of -) should be reported.
-    stub_piwik_idp_registration('IDCorp', '-', idp_position: '-', selected_answers: selected_answers, recommended: recommended)
-  end
-
   before(:each) do
     set_session_and_session_cookies!
   end
@@ -110,7 +104,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_registration_virtual_page = stub_registration_piwik_report(selected_answers, true)
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true)
 
     click_button 'Continue to IDCorp'
 
@@ -129,7 +123,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_registration_virtual_page = stub_registration_piwik_report(selected_answers, false)
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers)
 
     click_button 'Continue to IDCorp'
 
@@ -180,7 +174,8 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP on Continue' do
-      piwik_registration_virtual_page = stub_registration_piwik_report(selected_answers, true)
+      piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true)
+      stub_piwik_idp_registration('IDCorp')
       stub_federation
       given_a_session_with_document_answers
       visit '/redirect-to-idp-warning'
@@ -202,6 +197,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     end
 
     it 'will redirect the user to the IDP without sending hints when they are disabled' do
+      stub_piwik_idp_registration('IDCorp')
       stub_federation
       given_a_session_with_a_hints_disabled_idp
       visit '/redirect-to-idp-warning'
