@@ -3,9 +3,9 @@ ruby '2.3.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
-gem 'rails-i18n', '~> 4.0'
-gem 'route_translator', '~> 4.2'
+gem 'rails', '5.0.0.1'
+gem 'rails-i18n', '~> 5.0'
+gem 'route_translator', '~> 5.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -24,7 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # use jasmine-rails for js tests
 group :test, :development do
-  gem 'jasmine-rails'
+  gem 'jasmine'
+  gem 'thin'
   gem 'selenium-webdriver'
 end
 
@@ -65,19 +66,18 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec', '~> 3.4.0'
-  gem 'rspec-rails', '~> 3.4.0'
+  gem 'rspec', '~> 3.5.0'
+  gem 'rspec-rails', '~> 3.5.0'
   gem 'capybara', '~> 2.6'
   gem 'capybara-puma'
   gem 'govuk-lint'
   gem 'webmock', require: false
   gem 'rack-test'
-  gem 'sinatra'
   gem 'rack_session_access'
   gem 'headless'
 end
 
 gem 'logstash-logger'
-gem 'request_store'
+gem 'request_store', '~> 1.3.1'
 gem 'zendesk_api'
 gem 'email_validator'

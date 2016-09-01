@@ -1,6 +1,3 @@
-//= require jquery
-//= require select_phone
-
 describe("Select Phone form", function () {
 
   function check($radioButton) {

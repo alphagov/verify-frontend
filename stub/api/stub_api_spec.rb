@@ -1,16 +1,20 @@
 require 'json'
 require 'rspec'
 require 'rack/test'
-require './stub/stub_api'
+require_relative 'stub_api.rb'
 
 require 'active_model'
-require_relative '../app/models/api/response'
-require_relative '../app/models/session_response'
-require_relative '../app/models/identity_provider'
-require_relative '../app/models/federation_info_response'
-require_relative '../app/models/select_idp_response'
-require_relative '../app/models/outbound_saml_message'
-require_relative '../app/models/idp_authn_response'
+
+APP_HOME = File.join(File.dirname(__FILE__), '../../')
+$LOAD_PATH << File.join(APP_HOME, 'app/models')
+
+require 'api/response'
+require 'session_response'
+require 'identity_provider'
+require 'federation_info_response'
+require 'select_idp_response'
+require 'outbound_saml_message'
+require 'idp_authn_response'
 
 describe StubApi do
   include Rack::Test::Methods

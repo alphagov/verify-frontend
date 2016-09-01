@@ -27,11 +27,11 @@ bundle exec rspec --pattern "spec/features/*_spec.rb"
 success=$((success || $?))
 
 # JavaScript tests
-bundle exec rake spec:javascripts
+bundle exec rake jasmine:ci
 success=$((success || $?))
 
 # Stub API tests
-bundle exec rspec --pattern stub/**/*_spec.rb
+BUNDLE_GEMFILE=stub/api/Gemfile bundle exec rspec --pattern stub/api/**/*_spec.rb
 success=$((success || $?))
 
 if [ -t 1 ]; then

@@ -39,12 +39,12 @@ private
 
   def invalid_selection
     if has_no_mobile_phone? && has_smart_phone?
-      errors.set(:base, [I18n.t('hub.select_phone.errors.invalid_selection')])
+      errors.add(:base, I18n.t('hub.select_phone.errors.invalid_selection'))
     end
   end
 
   def add_no_selection_error
-    errors.set(:base, [I18n.t('hub.select_phone.errors.no_selection')])
+    errors.add(:base, I18n.t('hub.select_phone.errors.no_selection'))
   end
 
   def landline_not_specified?

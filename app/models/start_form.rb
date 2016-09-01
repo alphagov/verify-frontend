@@ -16,7 +16,7 @@ private
 
   def answer_required
     if @selection.blank?
-      errors.set(:base, [I18n.t('hub.start.error_message')])
+      errors.add(:base, [I18n.t('hub.start.error_message')])
     end
   end
 end

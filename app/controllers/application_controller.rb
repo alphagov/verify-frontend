@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :set_locale
-  before_filter :store_originating_ip
+  before_action :store_originating_ip
   after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
   helper_method :transactions_list
   helper_method :public_piwik

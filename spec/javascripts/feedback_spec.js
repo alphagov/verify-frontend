@@ -1,8 +1,3 @@
-//= require jquery
-//= require vendor/jquery.validate
-//= require validation
-//= require feedback
-
 describe("Feedback Form", function () {
 
   var formWithNoErrors =

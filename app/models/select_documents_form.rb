@@ -40,7 +40,7 @@ private
 
   def no_contradictory_inputs
     if no_documents_checked? && any_yes_answers?
-      errors.set(:base, [I18n.t('hub.select_documents.errors.invalid_selection')])
+      errors.add(:base, I18n.t('hub.select_documents.errors.invalid_selection'))
     end
   end
 
@@ -65,7 +65,7 @@ private
   end
 
   def add_documents_error
-    errors.set(:base, [I18n.t('hub.select_documents.errors.no_selection')])
+    errors.add(:base, I18n.t('hub.select_documents.errors.no_selection'))
   end
 
   def field_attributes
