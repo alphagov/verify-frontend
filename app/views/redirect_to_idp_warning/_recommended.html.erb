@@ -2,5 +2,4 @@
     <%= idp.special_no_docs_instructions.html_safe %>
 <% end %>
 
-<p><%= t 'hub.redirect_to_idp_warning.recommended.p1', display_name: idp.display_name %></p>
-<p><%= t 'hub.redirect_to_idp_warning.recommended.p2' %></p>
+<%= t 'hub.redirect_to_idp_warning.recommended_html', display_name: idp.display_name %>
