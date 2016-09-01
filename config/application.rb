@@ -45,5 +45,10 @@ module VerifyFrontend
     # by default rails wraps invalid inputs with <div class="field_with_errors">
     # we have our own way of styling errors, so we don't need this behaviour:
     config.action_view.field_error_proc = Proc.new { |html_tag| html_tag }
+
+    # Rails 5 automatically disables submit buttons after they’ve bee clicked on once.
+    # If you go back on our pages it remembers the disabled state, thus breaking the system.
+    # We can turn this functionality off globally.
+    config.action_view.automatically_disable_submit_tag = false
   end
 end
