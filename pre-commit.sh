@@ -27,7 +27,7 @@ bundle exec rspec --pattern "spec/features/*_spec.rb"
 success=$((success || $?))
 
 # JavaScript tests
-bundle exec rake spec:javascripts
+bundle exec rake jasmine:ci
 success=$((success || $?))
 
 # Stub API tests
