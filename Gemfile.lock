@@ -334,8 +334,5 @@ DEPENDENCIES
   webmock
   zendesk_api
 
-RUBY VERSION
-   ruby 2.3.0p0
-
 BUNDLED WITH
    1.12.5

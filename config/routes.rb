@@ -74,6 +74,7 @@ Rails.application.routes.draw do
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
   get '/SAML2/metadata/sp', to: 'metadata#service_providers', as: :service_provider_metadata
   get '/SAML2/metadata/idp', to: 'metadata#identity_providers', as: :identity_provider_metadata
+  get '/humans.txt', to: 'static#humanstxt'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
