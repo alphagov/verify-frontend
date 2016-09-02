@@ -88,24 +88,25 @@ cy:
       ensure_privacy: Nid yw’r cwmni ardystiedig yn gwybod pa wasanaeth o’r llywodraeth rydych yn ei ddefnyddio ac nid yw’r adran o’r llywodraeth yn gwybod pa gwmni wnaeth ddilysu eich hunaniaeth. Mae hyn yn sicrhau eich preifatrwydd.
       no_charge: Nid oes tâl am y gwasanaeth hwn.
       summary: Sut y gall cwmnïau wirio hunaniaeth
-      details:
-        p1: Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth o basbortau a thrwyddedau gyrru yn gywir.
-        p2: Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.
-        p3: Ni fydd unrhyw effaith ar eich sgôr credyd.
-        p4: Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.
+      details_html: |
+        <p>Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth o basbortau a thrwyddedau gyrru yn gywir.</p>
+        <p>Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
+        <p>Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
+        <p>Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
     about_identity_accounts:
       title: Am gyfrifon hunaniaeth
-      content:
-        p1: Mae dilysu eich hunaniaeth yn cymryd tua 10 munud.
-        p2: Yna bydd gennych gyfrif hunaniaeth gyda’ch cwmni ardystiedig.
-        p3: Gallwch fewngofnodi lle bynnag y byddwch yn gweld logo GOV.UK Verify.
+      content_html: |
+        <p>Mae dilysu eich hunaniaeth yn cymryd tua 10 munud.</p>
+        <p>Yna bydd gennych gyfrif hunaniaeth gyda’ch cwmni ardystiedig.</p>
+        <p>Gallwch fewngofnodi lle bynnag y byddwch yn gweld logo GOV.UK Verify.</p>
       summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
       details: "Mae GOV.UK Verify yn gynllun newydd ac mae gwasanaethau newydd yn ymuno drwy’r amser. Y gwasanaethau presennol yw:"
     about_choosing_a_company:
       title: Am ddewis cwmni
       heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
-      p1: Mae gan gwmnïau ardystiedig ffyrdd gwahanol o wirio hunaniaeth, er enghraifft trwy wirio dogfennau adnabod neu ddarparu ap.
-      p2: Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.
+      content_html: |
+        <p>Mae gan gwmnïau ardystiedig ffyrdd gwahanol o wirio hunaniaeth, er enghraifft trwy wirio dogfennau adnabod neu ddarparu ap.</p>
+        <p>Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.</p>
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
       explanation: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
@@ -150,8 +151,9 @@ cy:
           no_selection: Dylech ateb pob cwestiwn
     no_mobile_phone:
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
-      p1: Rydych angen ffôn neu lechen i ddefnyddio GOV.UK Verify. Os nad oes gennych un o’r rhain, mae ffyrdd eraill y gallwch %{other_ways_description}.
-      p2: Os nad oes gennych basport neu drwydded yrru’r DU byddwch hefyd angen gosod app.
+      content_html: |
+        <p>Rydych angen ffôn neu lechen i ddefnyddio GOV.UK Verify. Os nad oes gennych un o’r rhain, mae ffyrdd eraill y gallwch %{other_ways_description}.</p>
+        <p>Os nad oes gennych basport neu drwydded yrru’r DU byddwch hefyd angen gosod app.</p>
     may_not_work_if_you_live_overseas:
       title: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi’i ddilysu
       heading: Efallai na fyddwch yn gallu cael eich hunaniaeth wedi’i ddilysu
@@ -226,9 +228,9 @@ cy:
     redirect_to_idp_warning:
       title: "Byddwch nawr yn cael eich ailgyfeirio"
       continue_to_idp: Parhau i %{display_name}
-      recommended:
-        p1: Byddwch nawr yn dilysu eich hunaniaeth ar wefan %{display_name}.
-        p2: Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio ble bynnag rydych yn gweld logo GOV.UK Verify.
+      recommended_html: |
+        <p>Byddwch nawr yn dilysu eich hunaniaeth ar wefan %{display_name}.</p>
+        <p>Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio ble bynnag rydych yn gweld logo GOV.UK Verify.</p>
       non_recommended:
         requirements: "I gael eich dilysu gyda %{display_name}, byddwch angen:"
       other_ways_link: "ffyrdd eraill i %{transaction}"

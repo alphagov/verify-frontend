@@ -85,24 +85,25 @@ en:
       ensure_privacy: The certified company doesn’t know which government service you’re accessing, and the government department doesn’t know which company verified your identity. This ensures your privacy.
       no_charge: There’s no charge for this service.
       summary: How companies can verify identities
-      details:
-        p1: These companies can use their own data, and they can access data like credit records. They’re able to check that information from passports and driving licences is correct.
-        p2: Certified companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.
-        p3: There won’t be any effect on your credit score.
-        p4: More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.
+      details_html: |
+        <p>These companies can use their own data, and they can access data like credit records. They’re able to check that information from passports and driving licences is correct.</p>
+        <p>Certified companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
+        <p>There won’t be any effect on your credit score.</p>
+        <p>More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.</p>
     about_identity_accounts:
       title: About identity accounts
-      content:
-        p1: Verifying your identity takes about 10 minutes.
-        p2: You’ll then have an identity account with your certified company.
-        p3: You can sign in wherever you see the GOV.UK Verify logo.
+      content_html: |
+        <p>Verifying your identity takes about 10 minutes.</p>
+        <p>You’ll then have an identity account with your certified company.</p>
+        <p>You can sign in wherever you see the GOV.UK Verify logo.</p>
       summary: Where you can use your identity account
       details: "GOV.UK Verify is a new scheme, and new services are joining all the time. The current services are:"
     about_choosing_a_company:
       title: About choosing a company
       heading: Finding the right company to verify you
-      p1: Certified companies have different ways to verify identities, for example by checking identity documents, or providing an app.
-      p2: We’ll now ask you some questions to check which companies can verify you.
+      content_html: |
+        <p>Certified companies have different ways to verify identities, for example by checking identity documents, or providing an app.</p>
+        <p>We’ll now ask you some questions to check which companies can verify you.</p>
     select_documents:
       title: Select all the documents you have
       explanation: Certified companies use information from different identity documents to verify you.
@@ -147,8 +148,9 @@ en:
           no_selection: Please answer all the questions
     no_mobile_phone:
       heading: GOV.UK Verify won’t work for you
-      p1: You need a phone or tablet to use GOV.UK Verify. If you don’t have either of these, there are other ways you can %{other_ways_description}.
-      p2: If you don’t have a passport or UK driving licence, you will also need to install an app.
+      content_html: |
+        <p>You need a phone or tablet to use GOV.UK Verify. If you don’t have either of these, there are other ways you can %{other_ways_description}.</p>
+        <p>If you don’t have a passport or UK driving licence, you will also need to install an app.</p>
     may_not_work_if_you_live_overseas:
       title: You might not be able to have your identity verified
       heading: You might not be able to have your identity verified
@@ -220,9 +222,9 @@ en:
     redirect_to_idp_warning:
       title: "You'll now be redirected"
       continue_to_idp: Continue to %{display_name}
-      recommended:
-        p1: You’ll now verify your identity on %{display_name}’s website.
-        p2: They’ll give you an identity account you can use wherever you see the GOV.UK Verify logo.
+      recommended_html: |
+        <p>You’ll now verify your identity on %{display_name}’s website.</p>
+        <p>They’ll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
       non_recommended:
         requirements: "To be verified with %{display_name}, you’ll need:"
       other_ways_link: "other ways to %{transaction}"
