@@ -32,11 +32,6 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
   end
 
   scenario 'for an idp that is not viewable' do
-    idps = [
-        { 'simpleId' => 'foobar', 'entityId' => 'foobar' },
-    ]
-    body = { 'idps' => idps, 'transactionSimpleId' => 'test-rp', 'transactionEntityId' => 'some-entity-id' }
-    stub_request(:get, api_uri(federation_info_endpoint(default_session_id))).to_return(body: body.to_json)
     set_session_and_session_cookies!
     visit choose_a_certified_company_about_path('foobar')
     expect(page).to have_content(I18n.translate("errors.page_not_found.title"))
