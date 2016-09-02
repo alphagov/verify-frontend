@@ -18,6 +18,12 @@ RSpec.describe 'When the user visits the start page' do
     expect(page).to have_css 'html[lang=cy]'
   end
 
+  it 'will not automatically disable the continue button on submit' do
+    set_session_and_session_cookies!
+    visit '/start'
+    expect(page).to_not have_css '#next-button[data-disable-with]'
+  end
+
   context 'when there is an error' do
     before(:each) do
       stub_transactions_list
