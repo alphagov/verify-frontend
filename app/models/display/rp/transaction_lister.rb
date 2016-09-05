@@ -14,11 +14,11 @@ module Display
       end
 
       class NoTransactions
-        def public
+        def name_homepage
           []
         end
 
-        def private
+        def name_only
           []
         end
 

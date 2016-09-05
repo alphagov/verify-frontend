@@ -10,17 +10,21 @@ module Display
       let(:homepage) { 'http://transaction-a.com' }
       let(:public_simple_id) { 'test-rp' }
       let(:private_simple_id) { 'some-simple-id' }
-      let(:display_data_correlator) { DisplayDataCorrelator.new(translator) }
+      let(:display_data_correlator) {
+        DisplayDataCorrelator.new(translator, [public_simple_id], [private_simple_id])
+      }
 
       before(:each) do
         allow(translator).to receive(:translate).with('rps.test-rp.name').and_return(transaction_a_name)
         allow(translator).to receive(:translate).with('rps.some-simple-id.name').and_return(transaction_b_name)
       end
 
-      it 'takes a list of transaction data and a translator with knowledge of RPs and return a list of transactions to display' do
+      it 'translates and filters the transactions according to the relying_parties config' do
         transaction_data = {
-            'public' => [{ 'simpleId' => public_simple_id, 'homepage' => homepage }],
-            'private' => [{ 'simpleId' => private_simple_id }]
+          'transactions' => [
+            { 'simpleId' => public_simple_id, 'homepage' => homepage },
+            { 'simpleId' => private_simple_id }
+          ]
         }
         actual_result = display_data_correlator.correlate(transaction_data)
         expected_result = DisplayDataCorrelator::Transactions.new(
@@ -29,36 +33,22 @@ module Display
         expect(actual_result).to eq expected_result
       end
 
-      it 'errors when the public property is absent' do
-        transaction_data = { 'private' => [{ 'simpleId' => private_simple_id }] }
+      it 'errors when the transactions property is absent' do
+        transaction_data = {}
         expect {
           display_data_correlator.correlate(transaction_data)
         }.to raise_error KeyError
       end
 
-      it 'errors when the private property is absent' do
-        transaction_data = { 'public' => [{ 'simpleId' => public_simple_id, 'homepage' => homepage }] }
-        expect {
-          display_data_correlator.correlate(transaction_data)
-        }.to raise_error KeyError
-      end
-
-      it 'errors when public simpleId is missing' do
-        transaction_data = { 'public' => [{ 'homepage' => homepage }], 'private' => [{ 'simpleId' => private_simple_id }] }
-        expect {
-          display_data_correlator.correlate(transaction_data)
-        }.to raise_error KeyError
-      end
-
-      it 'errors when private simpleId is missing' do
-        transaction_data = { 'public' => [{ 'simpleId' => public_simple_id, 'homepage' => homepage }], 'private' => [{}] }
+      it 'errors when simpleId is missing' do
+        transaction_data = { 'transactions' => [{ 'homepage' => homepage }, { 'simpleId' => private_simple_id }] }
         expect {
           display_data_correlator.correlate(transaction_data)
         }.to raise_error KeyError
       end
 
       it 'errors when homepage is missing' do
-        transaction_data = { 'public' => [{ 'simpleId' => public_simple_id }], 'private' => [{ 'simpleId' => private_simple_id }] }
+        transaction_data = { 'transactions' => [{ 'simpleId' => public_simple_id }, { 'simpleId' => private_simple_id }] }
         expect {
           display_data_correlator.correlate(transaction_data)
         }.to raise_error KeyError

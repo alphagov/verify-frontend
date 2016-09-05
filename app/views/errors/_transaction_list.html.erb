@@ -2,10 +2,10 @@
 <% if transactions.any? %>
     <h2 class="heading-medium"><%= t 'errors.transaction_list.title' %></h2>
     <ul class="list-bullet list">
-      <% transactions.public.each do |transaction| -%>
+      <% transactions.name_homepage.each do |transaction| -%>
           <li><%= link_to transaction.name, transaction.homepage %></li>
       <% end %>
-      <% transactions.private.each do |transaction| -%>
+      <% transactions.name_only.each do |transaction| -%>
         <li>
           <%= transaction.name %>
           <p class="form-hint"><%= t 'errors.transaction_list.hint' %></p>

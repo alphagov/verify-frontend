@@ -14,7 +14,7 @@
   <div class="panel panel-border-narrow">
     <p><%= t 'hub.about_identity_accounts.details' %></p>
     <ul class="list-bullet list">
-      <% transactions_list.public.each do |transaction| -%>
+      <% transactions_list.name_homepage.each do |transaction| -%>
           <li><%= transaction.name %></li>
       <% end %>
     </ul>

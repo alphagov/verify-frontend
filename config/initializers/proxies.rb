@@ -6,7 +6,11 @@ Rails.application.config.to_prepare do
   SESSION_PROXY = SessionProxy.new(api_client, OriginatingIpStore)
   TRANSACTION_LISTER = Display::Rp::TransactionLister.new(
     Display::Rp::TransactionsProxy.new(api_client),
-    Display::Rp::DisplayDataCorrelator.new(FEDERATION_TRANSLATOR)
+    Display::Rp::DisplayDataCorrelator.new(
+      FEDERATION_TRANSLATOR,
+      RP_CONFIG['transaction_type']['display_name_and_homepage'] || [],
+      RP_CONFIG['transaction_type']['display_name_only'] || [],
+    )
   )
 end
 

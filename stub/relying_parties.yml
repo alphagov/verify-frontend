@@ -3,3 +3,10 @@ demo_period_blacklist:
 
 allow_continue_on_failed_registration:
   - test-rp-with-continue-on-fail
+
+transaction_type:
+  display_name_only:
+    - test-rp-repudiation
+  display_name_and_homepage:
+    - test-rp
+    - test-rp-noc3
