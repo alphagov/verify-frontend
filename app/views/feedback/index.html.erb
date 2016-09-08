@@ -92,6 +92,10 @@
                   <%= f.email_field :email, required: true, maxlength: @form.short_limit, class: 'form-control form-control-3-4', data: { msg: t('hub.feedback.errors.email') } %>
                 </div>
               <% end %>
+
+              <p>
+                <%= t('hub.feedback.consent_message_html', href: link_to(t('hub.feedback.privacy_notice_link'), privacy_notice_path(anchor:'how-we-use-information'))) %>
+              </p>
             </div>
           </div>
 

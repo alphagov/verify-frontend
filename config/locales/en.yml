@@ -294,9 +294,11 @@ en:
       title: Feedback
       heading: Send your feedback to GOV.UK Verify
       introduction_html: |
-        <p>You can use the form below to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
-        <p><strong>Please don’t include any personal or financial information, for example your National Insurance or credit card numbers.</strong></p>
-      request_reply: If you’d like GOV.UK Verify to get back to you, please leave your details below.
+        <p>Use this form to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
+        <p><strong>Don't include any personal or financial information like your National Insurance number or credit card details.</strong></p>
+      request_reply: Leave your details below if you'd like a response from GOV.UK Verify.
+      consent_message_html: By sending this message, you consent to us using your information as detailed in the %{href}.
+      privacy_notice_link: privacy notice
       character_count_message: " characters remaining %{limit_message}"
       character_limit_message: (limit is 3000 characters)
       questions:

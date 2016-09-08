@@ -300,9 +300,11 @@ cy:
       title: Adborth
       heading: Anfonnwch eich adborth i GOV.UK Verify
       introduction_html: |
-        <p>Gallwch ddefnyddio'r ffurflen isod i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant y gall GOV.UK Verify ei wneud.</p>
-        <p><strong>Peidiwch â chynnwys unrhyw wybodaeth bersonol neu ariannol, er enghraifft eich rhifau Yswiriant Gwladol neu gerdyn credyd.</strong></p>
-      request_reply: Os hoffech i GOV.UK Verify ymateb i chi, rhowch eich manylion isod.
+        <p>Use this form to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
+        <p><strong>Don't include any personal or financial information like your National Insurance number or credit card details.</strong></p>
+      request_reply: Leave your details below if you'd like a response from GOV.UK Verify.
+      consent_message_html: By sending this message, you consent to us using your information as detailed in the %{href}.
+      privacy_notice_link: privacy notice
       character_count_message: " nod yn weddill %{limit_message}"
       character_limit_message: (y terfyn yw 3000 nod)
       questions:
