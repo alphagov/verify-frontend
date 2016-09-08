@@ -142,6 +142,10 @@ private
     @hide_available_languages = true
   end
 
+  def hide_feedback_link
+    @hide_feedback_link = true
+  end
+
   def select_viewable_idp(entity_id)
     for_viewable_idp(entity_id) do |decorated_idp|
       session[:selected_idp] = decorated_idp.identity_provider

@@ -1,4 +1,5 @@
 class ConfirmationController < ApplicationController
+  before_action :hide_feedback_link
   layout 'slides'
 
   def index

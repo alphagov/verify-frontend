@@ -16,7 +16,7 @@
       <%= render 'shared/available_languages' unless @hide_available_languages %>
     </div>
     <%= content_for?(:main) ? yield(:main) : yield %>
-    <%= render 'shared/feedback_link' if feedback_source.present? %>
+    <%= render 'shared/feedback_link' if feedback_source.present? && !@hide_feedback_link %>
   </main>
   <%= render 'shared/piwik' %>
 <% end %>

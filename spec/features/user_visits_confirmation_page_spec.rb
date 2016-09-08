@@ -17,7 +17,8 @@ RSpec.describe 'When user visits the confirmation page' do
 
   it 'includes the appropriate feedback source, title and content' do
     visit '/confirmation'
-    expect_feedback_source_to_be(page, 'CONFIRMATION_PAGE')
+    expect(page).not_to have_link I18n.t('feedback_link.feedback_form')
+    expect(page).to have_link I18n.t('hub.feedback.title'), href: '/feedback?feedback-source=CONFIRMATION_PAGE'
     expect(page).to have_title("#{I18n.t('hub.confirmation.title')} - GOV.UK Verify - GOV.UK")
     expect(page).to have_text(I18n.t('hub.confirmation.message'))
     expect(page).to have_text(I18n.t('hub.confirmation.continue_to_rp', transaction_name: 'register for an identity profile'))
