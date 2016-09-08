@@ -45,7 +45,9 @@ en:
   option:
     "no": "No"
     unknown: I don’t know
-  feedback_link: Your feedback will help us to improve GOV.UK Verify
+  feedback_link:
+    message: Use the %{href} to ask a question, report a problem or suggest an improvement
+    feedback_form: feedback form
   footer:
     support_links: Support links
     help: Help

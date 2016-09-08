@@ -1,3 +1,3 @@
 <div class="meta-data feedback-link">
-  <p><%= link_to t('feedback_link'), feedback_path('feedback-source': feedback_source) %></p>
+  <p><%= t('feedback_link.message', href: link_to(t('feedback_link.feedback_form'), feedback_path('feedback-source': feedback_source))).html_safe %></p>
 </div>

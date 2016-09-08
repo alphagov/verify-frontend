@@ -140,7 +140,7 @@ RSpec.feature 'When the user visits the feedback page' do
     page.driver.browser.header('User-Agent', user_agent)
     set_session_and_session_cookies!
     visit start_path
-    click_on I18n.t('feedback_link')
+    click_on I18n.t('feedback_link.feedback_form')
 
     fill_in 'feedback_form_what', with: 'Verify my identity'
     fill_in 'feedback_form_details', with: 'Some details'
@@ -156,7 +156,7 @@ RSpec.feature 'When the user visits the feedback page' do
   it 'should keep the referer if form submission fails validation' do
     set_session_and_session_cookies!
     visit start_path
-    click_on I18n.t('feedback_link')
+    click_on I18n.t('feedback_link.feedback_form')
 
     fill_in 'feedback_form_what', with: 'Verify my identity'
     fill_in 'feedback_form_details', with: 'Some details'
