@@ -10,6 +10,13 @@
   <% end %>
 <% end %>
 
+<% content_for :cookie_message do %>
+  <p>
+    <%= t 'cookie_message.message' %>
+    <%= link_to t('cookie_message.link'), cookies_path %>
+  </p>
+<% end %>
+
 <% content_for :content do %>
   <main id="content">
     <div class="grid-row">

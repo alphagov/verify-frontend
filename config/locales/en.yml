@@ -45,6 +45,9 @@ en:
   option:
     "no": "No"
     unknown: I don’t know
+  cookie_message:
+    message: GOV.UK Verify uses cookies to make the site simpler.
+    link: Find out more about cookies
   feedback_link:
     message: Use the %{href} to ask a question, report a problem or suggest an improvement
     feedback_form: feedback form
