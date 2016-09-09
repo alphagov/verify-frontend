@@ -7,4 +7,4 @@ export DISPLAY=:0
 RAILS_ENV=production dotenv bundle exec rake assets:precompile
 RAILS_ENV=production dotenv bundle exec rake tmp:clear
 
-pkgr package . --version="${BUILD_NUMBER}" --iteration=1 --name=front
+bundle exec pkgr package . --version="${BUILD_NUMBER}" --iteration=1 --name=front
