@@ -1,3 +1,4 @@
+# coding: utf-8
 require File.expand_path('../boot', __FILE__)
 
 require "rails"
@@ -33,8 +34,11 @@ module VerifyFrontend
 
     config.exceptions_app = self.routes
 
-    # Apply a basic lenient Content Security Policy
+    # Add recommended security headers and apply a basic lenient Content Security Policy
     config.action_dispatch.default_headers = {
+      'X-Frame-Options' => 'DENY',
+      'X-XSS-Protection' => '1; mode=block',
+      'X-Content-Type-Options' => 'nosniff',
       'Content-Security-Policy' => "default-src 'self'; font-src data:; img-src 'self'; object-src 'none'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
     }
     RouteTranslator.config do |config|
