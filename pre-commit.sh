@@ -31,6 +31,7 @@ bundle exec rake jasmine:ci
 success=$((success || $?))
 
 # Stub API tests
+BUNDLE_GEMFILE=stub/api/Gemfile bundle
 BUNDLE_GEMFILE=stub/api/Gemfile bundle exec rspec --pattern stub/api/**/*_spec.rb
 success=$((success || $?))
 
