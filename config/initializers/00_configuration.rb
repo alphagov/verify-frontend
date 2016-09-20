@@ -1,4 +1,5 @@
 require 'configuration'
+
 CONFIG = Configuration.load! do
   option_string 'rp_display_locales', 'RP_DISPLAY_LOCALES'
   option_string 'cycle_3_display_locales', 'CYCLE_3_DISPLAY_LOCALES'
