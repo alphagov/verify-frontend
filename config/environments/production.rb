@@ -22,7 +22,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -72,5 +72,6 @@ Rails.application.configure do
   #Cookie Configuration
   config.x.cookies.secure = true
 
-  config.assets.prefix = '/assets'
+  build_number_file = File.expand_path('../../.build-number', __dir__)
+  config.assets.prefix = "/assets/#{File.read(build_number_file).chomp}"
 end
