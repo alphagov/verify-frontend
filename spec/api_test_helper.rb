@@ -1,7 +1,7 @@
 module ApiTestHelper
   include SessionEndpoints
   def api_uri(path)
-    URI.join(API_HOST, File.join('/api/', path))
+    URI.join(CONFIG.api_host, File.join('/api/', path))
   end
 
   def api_transactions_endpoint
