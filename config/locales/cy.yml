@@ -34,9 +34,9 @@ cy:
     feedback: adborth
     feedback_sent: adborth/adborth-wedi'i-anfon
     certified_company_unavailable: cwmni-ardystiedig-ddim-ar-gael/:company
-    further_information: further-information-cy
-    further_information_cancel: further-information-cy/cancel
-    further_information_null_attribute: futher-information-cy/null-attribute
+    further_information: gwybodaeth-bellach
+    further_information_cancel: gwybodaeth-bellach/dileu
+    further_information_null_attribute: gwybodaeth-bellach/null-attribute
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -46,14 +46,14 @@ cy:
     "no": "Na"
     unknown: Ddim yn gwybod
   cookie_message:
-    message: GOV.UK Verify uses cookies to make the site simpler.
-    link: Find out more about cookies
+    message: Mae GOV.UK Verify yn defnyddio cwcis i wneud y safle'n symlach.
+    link: Darganfyddwch fwy am gwcis
   translation_in_progress_banner:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth
   feedback_link:
-    message: Use the %{href} to ask a question, report a problem or suggest an improvement
-    feedback_form: feedback form
+    message: Defnyddiwch y %{href} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant
+    feedback_form: ffurflen adborth
   footer:
     support_links: Dolenni cymorth
     help: Help
@@ -247,8 +247,8 @@ cy:
       need_to_signin_again: Er mwyn %{transaction_name}, mae angen i chi lofnodi i mewn eto gyda’ch cwmni ardystiedig. Nid oes angen i chi gofrestru eto.
     confirmation:
       title: Mae eich hunaniaeth wedi cael ei ddilysu
-      message: You can sign in wherever you see the GOV.UK Verify logo.
-      continue_to_rp: "You can now %{transaction_name}."
+      message: Gallwch fewngofnodi ble bynnag rydych yn gweld y logo GOV.UK Verify.
+      continue_to_rp: "Gallwch nawr ddefnyddio %{transaction_name}."
       heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
     failed_registration:
       title: Methu dilysu eich hunaniaeth
@@ -305,11 +305,11 @@ cy:
       title: Adborth
       heading: Anfonnwch eich adborth i GOV.UK Verify
       introduction_html: |
-        <p>Use this form to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
-        <p><strong>Don't include any personal or financial information like your National Insurance number or credit card details.</strong></p>
-      request_reply: Leave your details below if you'd like a response from GOV.UK Verify.
-      consent_message_html: By sending this message, you consent to us using your information as detailed in the %{href}.
-      privacy_notice_link: privacy notice
+        <p>Defnyddiwch y ffurflen hon i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant y gall GOV.UK Verify ei wneud.</p>
+        <p><strong>Peidiwch â chynnwys unrhyw wybodaeth bersonol neu ariannol fel eich rhif Yswiriant Gwladol neu fanylion cerdyn credyd.</strong></p>
+      request_reply: Gadewch eich manylion isod os hoffech gael ymateb gan GOV.UK Verify.
+      consent_message_html: Drwy anfon y neges hon rydych yn rhoi caniatâd i ni ddefnyddio eich gwybodaeth fel a fanylir yn yr %{href}.
+      privacy_notice_link: hysbyseb preifatrwydd
       character_count_message: " nod yn weddill %{limit_message}"
       character_limit_message: (y terfyn yw 3000 nod)
       questions:
