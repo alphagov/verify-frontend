@@ -36,36 +36,36 @@ describe StubApi do
     end
   end
 
-  context '#get /api/session/federation' do
+  context '#get /api/session/:session_id/federation' do
     it 'should respond with valid FederationInfoResponse' do
-      get '/api/session/federation'
+      get '/api/session/session_id/federation'
       expect(last_response).to be_ok
       response = FederationInfoResponse.new(last_response_json)
       expect(response).to be_valid
     end
   end
 
-  context '#put /api/session/select-idp' do
+  context '#put /api/session/:session_id/select-idp' do
     it 'should respond with valid SelectIdpResponse' do
-      put '/api/session/select-idp'
+      put '/api/session/session_id/select-idp'
       expect(last_response).to be_ok
       response = SelectIdpResponse.new(last_response_json)
       expect(response).to be_valid
     end
   end
 
-  context '#get /api/session/idp-authn-request' do
+  context '#get /api/session/:session_id/idp-authn-request' do
     it 'should respond with valid OutboundSamlMessage' do
-      get '/api/session/idp-authn-request'
+      get '/api/session/session_id/idp-authn-request'
       expect(last_response).to be_ok
       response = OutboundSamlMessage.new(last_response_json)
       expect(response).to be_valid
     end
   end
 
-  context '#put /api/session/idp-authn-response' do
+  context '#put /api/session/:session_id/idp-authn-response' do
     it 'should respond with valid hash' do
-      put '/api/session/idp-authn-response'
+      put '/api/session/session_id/idp-authn-response'
       expect(last_response).to be_ok
       response = IdpAuthnResponse.new(last_response_json)
       expect(response).to be_valid

@@ -16,7 +16,7 @@ class StubApi < Sinatra::Base
     }'
   end
 
-  get '/api/session/federation' do
+  get '/api/session/:session_id/federation' do
     '{
       "idps":[{
         "simpleId":"stub-idp-one",
@@ -25,13 +25,13 @@ class StubApi < Sinatra::Base
     }'
   end
 
-  put '/api/session/select-idp' do
+  put '/api/session/:session_id/select-idp' do
     '{
       "encryptedEntityId":"not-blank"
     }'
   end
 
-  get '/api/session/idp-authn-request' do
+  get '/api/session/:session_id/idp-authn-request' do
     '{
       "location":"http://localhost:50300/test-saml",
       "samlRequest":"blah",
@@ -40,7 +40,7 @@ class StubApi < Sinatra::Base
     }'
   end
 
-  put '/api/session/idp-authn-response' do
+  put '/api/session/:session_id/idp-authn-response' do
     '{
       "idpResult":"blah",
       "isRegistration":false
