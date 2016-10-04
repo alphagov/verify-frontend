@@ -8,4 +8,4 @@ stdout_redirect 'log/puma.stdout', 'log/puma.stderr', true
 
 bind 'unix://tmp/puma.sock'
 
-workers 2
+workers 2 unless Gem.win_platform?
