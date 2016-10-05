@@ -83,3 +83,9 @@ gem 'logstash-logger'
 gem 'request_store', '~> 1.3.1'
 gem 'zendesk_api'
 gem 'email_validator'
+
+platforms :mswin, :mingw, :x64_mingw do
+  gem 'windows-pr'
+  gem 'win32-process'
+  gem 'tzinfo-data'
+end
