@@ -2,7 +2,7 @@
 
 . scripts/deploy.sh
 
-bundle
+bundle check || bundle install
 bundle exec govuk-lint-ruby app config lib spec
 success=$?
 
