@@ -13,3 +13,6 @@ chown -R deployer:deployer /opt/front/log
 chown -R deployer:deployer /var/log/front
 chown -R deployer:deployer /opt/front/tmp
 chgrp deployer /etc/front
+
+# deployer needs to access to all those files under bundle which are owned by root
+find /opt/front/vendor/bundle \( -type d -exec chmod go+rx {} \; \) , \( -type f -exec chmod go+r {} \;  \)
