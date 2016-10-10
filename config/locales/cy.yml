@@ -119,9 +119,10 @@ cy:
       legend: Ydy’r dogfennau hyn gyda chi?
       documents_option_yes: Ydy
       question:
-        driving_licence: Trwydded yrru llun y DU, llawn neu dros dro (ac eithrio Gogledd Iwerddon)
+        driving_licence: Trwydded yrru Prydain Fawr (GB) gyda llun (llawn neu dros dro)
+        ni_driving_licence: Trwydded yrru Gogledd Iwerddon (NI) gyda llun (llawn neu dros dro)
         passport: Pasport y DU
-        non_uk_id_document: Dogfen hunaniaeth o wlad arall (pasport, cerdyn ID neu drwydded yrru)
+        non_uk_id_document: Dogfen hunaniaeth sydd ddim o'r DU (pasbort, cerdyn ID neu trwydded yrru)
         no_documents: Nid oes gennyf y dogfennau hyn gyda mi
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych

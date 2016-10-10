@@ -41,6 +41,7 @@ describe SelectDocumentsForm do
 
   it 'should be valid if all document answers are false' do
     form = SelectDocumentsForm.new(
+      ni_driving_licence: 'false',
       driving_licence: 'false',
       passport: 'false',
       non_uk_id_document: 'false'
@@ -86,7 +87,7 @@ describe SelectDocumentsForm do
         no_documents: 'true'
       )
       answers = form.selected_answers
-      expect(answers).to eql(driving_licence: false, passport: false, non_uk_id_document: false)
+      expect(answers).to eql(ni_driving_licence: false, driving_licence: false, passport: false, non_uk_id_document: false)
     end
   end
 end

@@ -116,9 +116,10 @@ en:
       legend: Do you have these documents with you?
       documents_option_yes: 'Yes'
       question:
-        driving_licence: UK photocard driving licence, full or provisional (excluding Northern Ireland)
+        driving_licence: Great Britain (GB) photocard driving licence (full or provisional)
+        ni_driving_licence: Northern Ireland (NI) photocard driving licence (full or provisional)
         passport: UK passport
-        non_uk_id_document: Identity document from another country (passport, ID card or driving licence)
+        non_uk_id_document: Non-UK identity document (passport, ID card or driving licence)
         no_documents: I don’t have any of these documents with me
       errors:
         no_selection: Please select the documents you have

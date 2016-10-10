@@ -30,6 +30,17 @@ RSpec.feature 'When the user visits the select documents page' do
     expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'driving_licence' => true, 'passport' => false })
   end
 
+  it 'redirects to the select phone page when user has a NI driving licence' do
+    visit '/select-documents'
+
+    choose 'select_documents_form_ni_driving_licence_true'
+    choose 'select_documents_form_passport_false'
+    click_button 'Continue'
+
+    expect(page).to have_current_path(select_phone_path)
+    expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'ni_driving_licence' => true, 'passport' => false })
+  end
+
   it 'redirects to the select phone page when no docs checked' do
     set_stub_federation_no_docs_in_session
     visit '/select-documents'
@@ -63,8 +74,10 @@ RSpec.feature 'When the user visits the select documents page' do
   it 'has a matching legend and span for each question for both screenreader and visual users' do
     visit '/select-documents'
 
-    expect(page).to have_css('legend.visually-hidden', text: '1. UK photocard driving licence, full or provisional (excluding Northern Ireland)')
-    expect(page).to have_css('span[aria-hidden]', text: '1. UK photocard driving licence, full or provisional (excluding Northern Ireland)')
+    expect(page).to have_css('legend.visually-hidden', text: 'Great Britain (GB) photocard driving licence (full or provisional)')
+    expect(page).to have_css('span[aria-hidden]', text: 'Great Britain (GB) photocard driving licence (full or provisional)')
+    expect(page).to have_css('legend.visually-hidden', text: 'Northern Ireland (NI) photocard driving licence (full or provisional)')
+    expect(page).to have_css('span[aria-hidden]', text: 'Northern Ireland (NI) photocard driving licence (full or provisional)')
   end
 
   it 'reports to Piwik when form is valid' do
