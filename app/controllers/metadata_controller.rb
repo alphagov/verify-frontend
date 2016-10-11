@@ -14,6 +14,10 @@ class MetadataController < ApplicationController
     render xml: metadata_client.sp_metadata, content_type: METADATA_CONTENT_TYPE
   end
 
+  def metadata_client
+    METADATA_CLIENT
+  end
+
 private
 
   def do_not_cache

@@ -98,10 +98,6 @@ private
     SESSION_VALIDATOR
   end
 
-  def metadata_client
-    METADATA_CLIENT
-  end
-
   def public_piwik
     PUBLIC_PIWIK
   end
