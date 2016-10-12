@@ -7,8 +7,8 @@ describe("Select Documents Form", function () {
                                  '<legend>Do you have these documents with you?</legend>' +
                                  '<div class="form-group ">' +
                                    '<fieldset class="inline">' +
-                                     '<legend class="visually-hidden">1. UK photocard driving licence, full or provisional (excluding Northern Ireland)</legend>' +
-                                     '<span aria-hidden="true">1. UK photocard driving licence, full or provisional (excluding Northern Ireland)</span>' +
+                                     '<legend class="visually-hidden">GB photocard driving licence, full or provisional</legend>' +
+                                     '<span aria-hidden="true">GB photocard driving licence, full or provisional</span>' +
                                      '<label class="block-label" for="driving_licence_yes" onclick="">' +
                                        '<input id="driving_licence_yes" name="select_documents_form[driving_licence]" value="true" type="radio"><span><span class="inner">&nbsp;</span></span>Yes</label>' +
                                      '<label class="block-label" for="driving_licence_no" onclick="">' +
@@ -17,8 +17,18 @@ describe("Select Documents Form", function () {
                                  '</div>' +
                                  '<div class="form-group ">' +
                                    '<fieldset class="inline">' +
-                                     '<legend class="visually-hidden">2. UK passport</legend>' +
-                                     '<span aria-hidden="true">2. UK passport</span>' +
+                                     '<legend class="visually-hidden">NI photocard driving licence, full or provisional</legend>' +
+                                     '<span aria-hidden="true">NI photocard driving licence, full or provisional</span>' +
+                                     '<label class="block-label" for="driving_licence_yes" onclick="">' +
+                                       '<input id="driving_licence_yes" name="select_documents_form[ni_driving_licence]" value="true" type="radio"><span><span class="inner">&nbsp;</span></span>Yes</label>' +
+                                     '<label class="block-label" for="driving_licence_no" onclick="">' +
+                                       '<input id="driving_licence_no" name="select_documents_form[ni_driving_licence]" value="false" type="radio"><span><span class="inner">&nbsp;</span></span>No</label>' +
+                                   '</fieldset>' +
+                                 '</div>' +
+                                 '<div class="form-group ">' +
+                                   '<fieldset class="inline">' +
+                                     '<legend class="visually-hidden">UK passport</legend>' +
+                                     '<span aria-hidden="true">UK passport</span>' +
                                      '<label class="block-label" for="passport_yes" onclick="">' +
                                        '<input id="passport_yes" name="select_documents_form[passport]" value="true" type="radio"><span><span class="inner">&nbsp;</span></span>Yes</label>' +
                                      '<label class="block-label" for="passport_no" onclick="">' +
@@ -27,8 +37,8 @@ describe("Select Documents Form", function () {
                                  '</div>' +'' +
                                  '<div class="form-group ">' +
                                    '<fieldset class="inline">' +
-                                     '<legend class="visually-hidden">3. Passport from another country</legend>' +
-                                     '<span aria-hidden="true">3. Passport from another country</span>' +
+                                     '<legend class="visually-hidden">Passport from another country</legend>' +
+                                     '<span aria-hidden="true">Passport from another country</span>' +
                                      '<label class="block-label" for="other_passport_yes" onclick="">' +
                                        '<input id="other_passport_yes" name="select_documents_form[non_uk_id_document]" value="true" type="radio"><span><span class="inner">&nbsp;</span></span>Yes</label>' +
                                      '<label class="block-label" for="other_passport_no" onclick="">' +
@@ -85,6 +95,9 @@ describe("Select Documents Form", function () {
         };
         this.selectNoDrivingLicence = function () {
             answerQuestion('driving_licence', false);
+        };
+        this.selectNoNiDrivingLicence = function () {
+            answerQuestion('ni_driving_licence', false);
         };
         this.selectNoNonUKIdDocument = function () {
             answerQuestion('non_uk_id_document', false);
@@ -145,6 +158,7 @@ describe("Select Documents Form", function () {
     it("should have no errors on submit when all selections imply no evidence", function () {
         this.selectNoPassport();
         this.selectNoDrivingLicence();
+        this.selectNoNiDrivingLicence();
         this.selectNoNonUKIdDocument();
         submitForm();
         expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
@@ -160,7 +174,7 @@ describe("Select Documents Form", function () {
 
     it("should select No for all document questions when no documents checkbox is checked", function () {
         this.noDocumentsCheckbox.trigger('click');
-        expect(selectDocumentsForm.find('input[type=radio][value=false]:checked').length).toBe(3);
+        expect(selectDocumentsForm.find('input[type=radio][value=false]:checked').length).toBe(4);
     });
 
     it("should uncheck the no documents checkbox when a Yes answer is selected", function () {
