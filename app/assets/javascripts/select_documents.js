@@ -36,7 +36,7 @@
         selectDocuments.$form.find('input[type=radio][value=true]').on('click',selectDocuments.unCheckNoDocuments);
 
         $.validator.addMethod('selectDocumentsValidation', function(value, element) {
-          var numberOfDocumentQuestions = 3;
+          var numberOfDocumentQuestions = 4;
           var checkedElements = selectDocuments.$form.find('input[type=radio]').filter(':checked');
           var allDocumentQuestionsAnswered = checkedElements.length === numberOfDocumentQuestions;
           var hasAtLeastOneDocument = checkedElements.filter('[value=true]').length > 0;
@@ -45,6 +45,7 @@
 
         selectDocuments.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
           rules: {
+            'select_documents_form[ni_driving_licence]': 'selectDocumentsValidation',
             'select_documents_form[driving_licence]': 'selectDocumentsValidation',
             'select_documents_form[passport]': 'selectDocumentsValidation',
             'select_documents_form[non_uk_id_document]': 'selectDocumentsValidation',
@@ -52,7 +53,7 @@
           },
           groups: {
             // driving_licence is the first element, error should focus this
-            driving_licence: 'select_documents_form[driving_licence] select_documents_form[passport] select_documents_form[non_uk_id_document] select_documents_form[no_documents]'
+            driving_licence: 'select_documents_form[passport] select_documents_form[driving_licence] select_documents_form[ni_driving_licence] select_documents_form[non_uk_id_document] select_documents_form[no_documents]'
           },
           highlight: function(element, errorClass) {
             selectDocuments.$form.children('.form-group:first').addClass('error');
