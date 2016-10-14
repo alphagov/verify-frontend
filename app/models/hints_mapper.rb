@@ -12,7 +12,7 @@ class HintsMapper
   def self.map_answers_to_hints(answers_hash)
     result = Set.new
     answers = answers_hash.values.reduce(:merge)
-    no_licences = Set.new %w(not_ukphotolicence_gb not_ukphotolicence_ni)
+    no_licences = Set.new %w(not_ukphotolicence_gb)
     unless answers.nil?
       answers.each do |key, value|
         hint = create_hint(key, value)

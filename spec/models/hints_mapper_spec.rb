@@ -23,6 +23,16 @@ describe HintsMapper do
     expect(hints).to eql(%w(not_ukphotolicence_gb not_ukphotolicence_ni not_ukphotolicence).to_set)
   end
 
+  it 'should produce not_ukphotolicense_gb and not_ukphotolicense hints when answers indicate NO GB licence' do
+    answers_hash = {
+        documents: { 'driving_licence' => false }
+    }
+
+    hints = HintsMapper.map_answers_to_hints(answers_hash)
+
+    expect(hints).to eql(%w(not_ukphotolicence_gb not_ukphotolicence).to_set)
+  end
+
   it 'should ignore unknown evidences' do
     answers_hash = { phone: { dummy_evidence: true } }
 
