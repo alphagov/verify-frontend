@@ -19,6 +19,12 @@
 #
 
 experiments:
+  - select_documents:
+      alternatives:
+        - name: 'control'
+          percent: 80
+        - name: 'new_questions_no_profile_change'
+          percent: 20
   - about_companies:
       alternatives:
         - name: 'with_logo'
