@@ -123,6 +123,9 @@ cy:
         ni_driving_licence: Trwydded yrru Gogledd Iwerddon (NI) gyda llun (llawn neu dros dro)
         passport: Pasport y DU
         non_uk_id_document: Dogfen hunaniaeth sydd ddim o'r DU (pasbort, cerdyn ID neu trwydded yrru)
+        uk_bank_account_details: Manylion cyfrif banc y DU
+        debit_card: Cerdyn debyd
+        credit_card: Cerdyn credyd
         no_documents: Nid oes gennyf y dogfennau hyn gyda mi
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych

@@ -48,7 +48,36 @@
                 <%= f.custom_radio_button :non_uk_id_document, false, t('option.no') %>
               </fieldset>
             </div>
-            <%= f.custom_check_box :no_documents, {class: 'js-no-docs'}, true, false, t('hub.select_documents.question.no_documents') %>
+
+            <% if @alternative_name == 'select_documents_new_questions_no_profile_change' %>
+              <div class="form-group">
+                <fieldset class="inline">
+                  <legend class="visually-hidden"><%= t 'hub.select_documents.question.uk_bank_account_details'%></legend>
+                  <span aria-hidden="true"><%= t 'hub.select_documents.question.uk_bank_account_details'%></span>
+                  <%= f.custom_radio_button :non_uk_id_document, true, t('hub.select_documents.documents_option_yes') %>
+                  <%= f.custom_radio_button :non_uk_id_document, false, t('option.no') %>
+                </fieldset>
+              </div>
+              <div class="form-group">
+                <fieldset class="inline">
+                  <legend class="visually-hidden"><%= t 'hub.select_documents.question.debit_card'%></legend>
+                  <span aria-hidden="true"><%= t 'hub.select_documents.question.debit_card'%></span>
+                  <%= f.custom_radio_button :non_uk_id_document, true, t('hub.select_documents.documents_option_yes') %>
+                  <%= f.custom_radio_button :non_uk_id_document, false, t('option.no') %>
+                </fieldset>
+              </div>
+              <div class="form-group">
+                <fieldset class="inline">
+                  <legend class="visually-hidden"><%= t 'hub.select_documents.question.credit_card'%></legend>
+                  <span aria-hidden="true"><%= t 'hub.select_documents.question.credit_card'%></span>
+                  <%= f.custom_radio_button :non_uk_id_document, true, t('hub.select_documents.documents_option_yes') %>
+                  <%= f.custom_radio_button :non_uk_id_document, false, t('option.no') %>
+                </fieldset>
+              </div>
+            <% else %>
+              <%= f.custom_check_box :no_documents, {class: 'js-no-docs'}, true, false, t('hub.select_documents.question.no_documents') %>
+            <% end %>
+
           </fieldset>
         <% end %>
 
