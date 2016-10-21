@@ -37,6 +37,6 @@ describe 'service retrieves metadata', type: :request do
   end
 
   def saml_proxy_uri(path)
-    URI.join(SAML_PROXY_HOST, '/API/', path)
+    URI.join(CONFIG.saml_proxy_host, '/API/', path)
   end
 end

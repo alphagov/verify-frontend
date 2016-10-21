@@ -6,12 +6,16 @@ class MetadataController < ApplicationController
 
   def service_providers
     do_not_cache
-    render xml: METADATA_CLIENT.idp_metadata, content_type: METADATA_CONTENT_TYPE
+    render xml: metadata_client.idp_metadata, content_type: METADATA_CONTENT_TYPE
   end
 
   def identity_providers
     do_not_cache
-    render xml: METADATA_CLIENT.sp_metadata, content_type: METADATA_CONTENT_TYPE
+    render xml: metadata_client.sp_metadata, content_type: METADATA_CONTENT_TYPE
+  end
+
+  def metadata_client
+    METADATA_CLIENT
   end
 
 private

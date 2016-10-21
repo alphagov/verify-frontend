@@ -35,7 +35,7 @@ module Display
     end
 
     def prefix
-      raise NotImplementedError, "no prefix has been defined"
+      raise NotImplementedError, 'no prefix has been defined'
     end
   end
 end
