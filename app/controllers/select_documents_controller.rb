@@ -1,6 +1,8 @@
 class SelectDocumentsController < ApplicationController
   def index
     @form = SelectDocumentsForm.new({})
+    ab_test_cookie = Cookies.parse_json(cookies[CookieNames::AB_TEST])['select_documents']
+    @alternative_name = AB_TESTS['select_documents'].alternative_name(ab_test_cookie)
   end
 
   def select_documents
