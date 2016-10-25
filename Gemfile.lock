@@ -41,7 +41,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     archive-tar-minitar (0.5.2)
-    arel (7.1.2)
+    arel (7.1.4)
     arr-pm (0.0.10)
       cabin (> 0)
     ast (2.2.0)
@@ -103,14 +103,14 @@ GEM
     govuk-lint (1.0.0)
       rubocop (~> 0.39.0)
       scss_lint (~> 0.44.0)
-    govuk_elements_rails (2.0.0)
-      govuk_frontend_toolkit (>= 4.14.1)
+    govuk_elements_rails (2.1.0)
+      govuk_frontend_toolkit (>= 5.0.0)
       rails (>= 4.1.0)
       sass (>= 3.2.0)
-    govuk_frontend_toolkit (4.16.1)
+    govuk_frontend_toolkit (5.0.0)
       rails (>= 3.1.0)
       sass (>= 3.2.0)
-    govuk_template (0.18.2)
+    govuk_template (0.19.0)
       rails (>= 3.1)
     hashdiff (0.3.0)
     hashie (3.4.4)
@@ -163,13 +163,11 @@ GEM
     multipart-post (2.0.0)
     mustache (0.99.8)
     nio4r (1.2.1)
-    nokogiri (1.6.8)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     parser (2.3.1.0)
       ast (~> 2.2)
     phantomjs (2.1.1.0)
-    pkg-config (1.1.7)
     pkgr (1.5.1)
       facter (~> 2.1)
       fpm (~> 1.1)
@@ -383,4 +381,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.2
+   1.13.3
