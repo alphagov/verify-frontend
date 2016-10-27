@@ -1,8 +1,12 @@
 class SelectDocumentsController < ApplicationController
   def index
     @form = SelectDocumentsForm.new({})
+    @alternative_name = show_ab_test_view
+  end
+
+  def show_ab_test_view
     ab_test_cookie = Cookies.parse_json(cookies[CookieNames::AB_TEST])['select_documents']
-    @alternative_name = AB_TESTS['select_documents'] ? AB_TESTS['select_documents'].alternative_name(ab_test_cookie) : 'default'
+    AB_TESTS['select_documents'] ? AB_TESTS['select_documents'].alternative_name(ab_test_cookie) : 'default'
   end
 
   def select_documents
@@ -16,6 +20,7 @@ class SelectDocumentsController < ApplicationController
         redirect_to unlikely_to_verify_path
       end
     else
+      @alternative_name = show_ab_test_view
       flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index
     end
