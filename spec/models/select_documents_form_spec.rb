@@ -44,7 +44,10 @@ describe SelectDocumentsForm do
       ni_driving_licence: 'false',
       driving_licence: 'false',
       passport: 'false',
-      non_uk_id_document: 'false'
+      non_uk_id_document: 'false',
+      uk_bank_account_details: 'false',
+      debit_card: 'false',
+      credit_card: 'false'
     )
     expect(form).to be_valid
   end
@@ -87,7 +90,7 @@ describe SelectDocumentsForm do
         no_documents: 'true'
       )
       answers = form.selected_answers
-      expect(answers).to eql(ni_driving_licence: false, driving_licence: false, passport: false, non_uk_id_document: false)
+      expect(answers).to eql(ni_driving_licence: false, driving_licence: false, passport: false, non_uk_id_document: false, uk_bank_account_details: false, debit_card: false, credit_card: false)
     end
   end
 end

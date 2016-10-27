@@ -1,7 +1,7 @@
 class SelectDocumentsForm
   include ActiveModel::Model
 
-  attr_reader :driving_licence, :ni_driving_licence, :passport, :non_uk_id_document, :no_documents
+  attr_reader :driving_licence, :ni_driving_licence, :passport, :non_uk_id_document, :no_documents, :uk_bank_account_details, :debit_card, :credit_card
   validate :one_must_be_present
   validate :mandatory_fields_present, unless: :all_fields_blank?
   validate :no_contradictory_inputs
@@ -11,6 +11,9 @@ class SelectDocumentsForm
     @driving_licence = hash[:driving_licence]
     @passport = hash[:passport]
     @non_uk_id_document = hash[:non_uk_id_document]
+    @uk_bank_account_details = hash[:uk_bank_account_details]
+    @debit_card = hash[:debit_card]
+    @credit_card = hash[:credit_card]
     @no_documents = hash[:no_documents]
   end
 
@@ -74,6 +77,6 @@ private
   end
 
   def document_attributes
-    [passport, driving_licence, ni_driving_licence, non_uk_id_document]
+    [passport, driving_licence, ni_driving_licence, non_uk_id_document, uk_bank_account_details, debit_card, credit_card]
   end
 end
