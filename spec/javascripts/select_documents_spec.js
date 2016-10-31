@@ -51,7 +51,7 @@ describe("Select Documents Form", function () {
                              '</div>' +
                              '<div id="validation-error-message-js"></div>' +
                              '<p class="valid-note"><strong>Please note:&nbsp;</strong>you cannot use documents that are out of date.</p>' +
-                             '<div class="form-group">' +
+                             '<div class="actions">' +
                                '<input class="button" id="next-button" value="Continue" type="submit">' +
                              '</div>' +
                            '</form>';
