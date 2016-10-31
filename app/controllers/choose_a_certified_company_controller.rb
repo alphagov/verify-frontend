@@ -27,9 +27,7 @@ class ChooseACertifiedCompanyController < ApplicationController
 private
 
   def select_idp_recommendation
-    ab_test_cookie = Cookies.parse_json(cookies[CookieNames::AB_TEST])['select_documents']
-    alternative_name = AB_TESTS['select_documents'] ? AB_TESTS['select_documents'].alternative_name(ab_test_cookie) : 'default'
-    if alternative_name == 'select_documents_new_questions_profile_change'
+    if is_in_b_group?
       return IDP_RECOMMENDATION_GROUPER_B
     else
       return IDP_RECOMMENDATION_GROUPER

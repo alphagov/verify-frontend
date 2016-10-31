@@ -1,6 +1,6 @@
 loaded_profile_filters_b = IdpEligibility::ProfilesLoader.new(YamlLoader.new).load(CONFIG.rules_directory_b)
 
-DOCUMENTS_ELIGIBILITY_CHECKER_B = IdpEligibility::Checker.new(loaded_profile_filters_b.document_profiles)
+DOCUMENTS_ELIGIBILITY_CHECKER_B = IdpEligibility::Checker.new(loaded_profile_filters_b.document_profiles_b)
 
 IDP_ELIGIBILITY_CHECKER_B = IdpEligibility::Checker.new(loaded_profile_filters_b.all_profiles)
 

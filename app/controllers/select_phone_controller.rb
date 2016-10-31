@@ -27,6 +27,10 @@ class SelectPhoneController < ApplicationController
 private
 
   def idp_eligibility_checker
-    IDP_ELIGIBILITY_CHECKER
+    if is_in_b_group?
+      IDP_ELIGIBILITY_CHECKER_B
+    else
+      IDP_ELIGIBILITY_CHECKER
+    end
   end
 end
