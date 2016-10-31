@@ -1,0 +1,7 @@
+simpleIds: [ "stub-idp-demo" ]
+recommended_profiles: []
+demo_profiles:
+  - [ "driving_licence", "mobile_phone" ]
+non_recommended_profiles:
+  - [ "driving_licence", "mobile_phone", "landline" ]
+send_hints: false

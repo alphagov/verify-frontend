@@ -29,10 +29,10 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'reports custom variable to piwik for cohort b and does not show additional questions' do
-    set_cookies!(CookieNames::AB_TEST => CGI.escape({ 'select_documents' => 'select_documents_new_questions_no_profile_change' }.to_json))
+    set_cookies!(CookieNames::AB_TEST => CGI.escape({ 'select_documents' => 'select_documents_new_questions_profile_change' }.to_json))
     visit '/start'
     piwik_request = {
-        '_cvar' => '{"6":["AB_TEST","select_documents_new_questions_no_profile_change"]}'
+        '_cvar' => '{"6":["AB_TEST","select_documents_new_questions_profile_change"]}'
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
 
