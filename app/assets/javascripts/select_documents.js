@@ -36,7 +36,7 @@
         selectDocuments.$form.find('input[type=radio][value=true]').on('click',selectDocuments.unCheckNoDocuments);
 
         $.validator.addMethod('selectDocumentsValidation', function(value, element) {
-          var numberOfDocumentQuestions = selectDocuments.$form.find('.form-group').length - 1;
+          var numberOfDocumentQuestions = selectDocuments.$form.find('.form-field').length;
           var checkedElements = selectDocuments.$form.find('input[type=radio]').filter(':checked');
           var allDocumentQuestionsAnswered = checkedElements.length === numberOfDocumentQuestions;
           var hasAtLeastOneDocument = checkedElements.filter('[value=true]').length > 0;
