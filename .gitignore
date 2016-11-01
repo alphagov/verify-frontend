@@ -16,3 +16,6 @@
 
 .DS_Store
 /spec/pacts
+
+*~
+\#*#
