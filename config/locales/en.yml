@@ -227,7 +227,8 @@ en:
         <p>There’s no effect on your credit score.</p>
     unlikely_to_verify:
       heading: GOV.UK Verify won’t work for you
-      explanation: You need a valid passport, photocard driving licence or national identity card (ID card) to get your identity verified.
+      explanation: Certified companies need at least 1 more document to verify your identity. To continue with GOV.UK Verify, %{add_more_documents_link}.
+      explanation_link_text: add more documents
     redirect_to_idp_warning:
       title: "You'll now be redirected"
       continue_to_idp: Continue to %{display_name}
