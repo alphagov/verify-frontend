@@ -5,7 +5,9 @@ class FeedbackSentController < ApplicationController
 
   def index
     flash.keep('email_provided')
-    @link_back_to_verify = choose_link_back_to_verify(flash[:feedback_referer], flash[:feedback_source])
+    flash.keep('feedback_referer')
+    flash.keep('feedback_source')
+    @link_back_to_verify = choose_link_back_to_verify(flash['feedback_referer'], flash['feedback_source'])
     @email_provided = flash['email_provided']
     @session_valid = session_validator.validate(cookies, session).ok?
     render
