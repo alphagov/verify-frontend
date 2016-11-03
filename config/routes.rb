@@ -17,6 +17,14 @@ Rails.application.routes.draw do
     post 'another-idp-endpoint' => 'test_saml#idp_request'
     get 'test-journey-hint' => 'test_journey_hint_cookie#index', as: :test_journey_hint
     post 'test-journey-hint' => 'test_journey_hint_cookie#set_cookie', as: :test_journey_hint_submit
+    # route analytics through frontend URI, as like prod, to not violate our csp policy
+    get 'analytics', to: 'test_analytics#forward'
+    # fake basic csp reporter so reports can be logged (in development.log)
+    # has to be routed through the frontend as currently Firefox requires the reporter
+    # to be hosted in the same place as the place serving the pages
+    # see: https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives#report-uri
+    # to use, add ';report-uri http://127.0.0.1:50300/csp-reporter' to the end of the CSP header in application.rb
+    post 'csp-reporter', to: 'test_csp_reporter#report'
   end
 
   localized do
