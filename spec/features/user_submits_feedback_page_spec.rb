@@ -1,10 +1,15 @@
 require 'feature_helper'
+require 'api_test_helper'
 
 RSpec.feature 'When the user submits the feedback page' do
   let(:session_not_valid_link) {
     I18n.t('hub.feedback_sent.session_not_valid', link: I18n.t('hub.feedback_sent.session_not_valid_link'))
   }
   context 'user session invalid' do
+    before(:each) do
+      stub_transactions_list
+    end
+
     it 'when user provides email should say message has been received and show invalid session link' do
       visit feedback_path
 
@@ -19,7 +24,7 @@ RSpec.feature 'When the user submits the feedback page' do
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
       expect(page).to have_content(I18n.t('hub.feedback_sent.message_email'))
       expect(page).to have_content(session_not_valid_link)
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_not_valid_link')
+      expect(page).to have_content I18n.t('errors.transaction_list.title')
     end
 
     it 'when user does not provide email should not say message has been sent and show invalid session link' do
@@ -33,7 +38,7 @@ RSpec.feature 'When the user submits the feedback page' do
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
       expect(page).to_not have_content(I18n.t('hub.feedback_sent.message_email'))
       expect(page).to have_content(session_not_valid_link)
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_not_valid_link')
+      expect(page).to have_content I18n.t('errors.transaction_list.title')
     end
 
     it 'when session has timed out should show invalid session link' do
@@ -49,7 +54,7 @@ RSpec.feature 'When the user submits the feedback page' do
 
       click_button I18n.t('hub.feedback.send_message')
       expect(page).to have_content(session_not_valid_link)
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_not_valid_link')
+      expect(page).to have_content I18n.t('errors.transaction_list.title')
     end
   end
 
