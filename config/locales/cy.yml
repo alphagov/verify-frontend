@@ -123,6 +123,9 @@ cy:
         ni_driving_licence: Trwydded yrru Gogledd Iwerddon (NI) gyda llun (llawn neu dros dro)
         passport: Pasport y DU
         non_uk_id_document: Dogfen hunaniaeth sydd ddim o'r DU (pasbort, cerdyn ID neu trwydded yrru)
+        uk_bank_account_details: Manylion cyfrif banc y DU
+        debit_card: Cerdyn debyd
+        credit_card: Cerdyn credyd
         no_documents: Nid oes gennyf y dogfennau hyn gyda mi
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych
@@ -230,7 +233,8 @@ cy:
         <p>Nid oes effaith ar eich sgor credyd.</p>
     unlikely_to_verify:
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
-      explanation: Rydych angen pasport, trwydded yrru llun neu gerdyn adnabod cenedlaethol (cerdyn ID) dilys i gael eich hunaniaeth wedi’i ddilysu.
+      explanation: Certified companies need at least 1 more document to verify your identity. To continue with GOV.UK Verify, %{add_more_documents_link}.
+      explanation_link_text: add more documents
     redirect_to_idp_warning:
       title: "Byddwch nawr yn cael eich ailgyfeirio"
       continue_to_idp: Parhau i %{display_name}

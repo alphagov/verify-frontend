@@ -5,7 +5,7 @@ describe("Select Documents Form", function () {
                              '<div class="form-group ">' +
                                '<fieldset>' +
                                  '<legend>Do you have these documents with you?</legend>' +
-                                 '<div class="form-group ">' +
+                                 '<div class="form-group form-field">' +
                                    '<fieldset class="inline">' +
                                      '<legend class="visually-hidden">GB photocard driving licence, full or provisional</legend>' +
                                      '<span aria-hidden="true">GB photocard driving licence, full or provisional</span>' +
@@ -15,7 +15,7 @@ describe("Select Documents Form", function () {
                                        '<input id="driving_licence_no" name="select_documents_form[driving_licence]" value="false" type="radio"><span><span class="inner">&nbsp;</span></span>No</label>' +
                                    '</fieldset>' +
                                  '</div>' +
-                                 '<div class="form-group ">' +
+                                 '<div class="form-group form-field">' +
                                    '<fieldset class="inline">' +
                                      '<legend class="visually-hidden">NI photocard driving licence, full or provisional</legend>' +
                                      '<span aria-hidden="true">NI photocard driving licence, full or provisional</span>' +
@@ -25,7 +25,7 @@ describe("Select Documents Form", function () {
                                        '<input id="driving_licence_no" name="select_documents_form[ni_driving_licence]" value="false" type="radio"><span><span class="inner">&nbsp;</span></span>No</label>' +
                                    '</fieldset>' +
                                  '</div>' +
-                                 '<div class="form-group ">' +
+                                 '<div class="form-group form-field">' +
                                    '<fieldset class="inline">' +
                                      '<legend class="visually-hidden">UK passport</legend>' +
                                      '<span aria-hidden="true">UK passport</span>' +
@@ -35,7 +35,7 @@ describe("Select Documents Form", function () {
                                        '<input id="passport_no" name="select_documents_form[passport]" value="false" type="radio"><span><span class="inner">&nbsp;</span></span>No</label>' +
                                    '</fieldset>' +
                                  '</div>' +'' +
-                                 '<div class="form-group ">' +
+                                 '<div class="form-group form-field">' +
                                    '<fieldset class="inline">' +
                                      '<legend class="visually-hidden">Passport from another country</legend>' +
                                      '<span aria-hidden="true">Passport from another country</span>' +
@@ -51,7 +51,7 @@ describe("Select Documents Form", function () {
                              '</div>' +
                              '<div id="validation-error-message-js"></div>' +
                              '<p class="valid-note"><strong>Please note:&nbsp;</strong>you cannot use documents that are out of date.</p>' +
-                             '<div class="form-group">' +
+                             '<div class="actions">' +
                                '<input class="button" id="next-button" value="Continue" type="submit">' +
                              '</div>' +
                            '</form>';

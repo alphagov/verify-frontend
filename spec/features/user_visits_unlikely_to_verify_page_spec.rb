@@ -9,13 +9,13 @@ RSpec.describe 'When the user visits the unlikely-to-verify page' do
 
   it 'displays the page in Welsh' do
     visit '/anhebygol-i-ddilysu'
-    expect(page).to have_content('Rydych angen pasport, trwydded yrru llun neu gerdyn adnabod cenedlaethol (cerdyn ID) dilys i gael eich hunaniaeth wedi’i ddilysu.')
+    expect(page).to have_content('Certified companies need at least 1 more document to verify your identity. To continue with GOV.UK Verify, add more documents.')
     expect(page).to have_css 'html[lang=cy]'
   end
 
   it 'displays the page in English' do
     visit '/unlikely-to-verify'
-    expect(page).to have_content('You need a valid passport, photocard driving licence or national identity card (ID card) to get your identity verified.')
+    expect(page).to have_content('Certified companies need at least 1 more document to verify your identity. To continue with GOV.UK Verify, add more documents.')
     expect(page).to have_css 'html[lang=en]'
   end
 
