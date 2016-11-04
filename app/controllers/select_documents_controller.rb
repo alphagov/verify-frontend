@@ -24,7 +24,6 @@ class SelectDocumentsController < ApplicationController
   def unlikely_to_verify
     @selected_evidence = selected_evidence
     @current_identity_providers = current_identity_providers
-    @things = [CONFIG.rules_directory, CONFIG.rules_directory_b]
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
   end
