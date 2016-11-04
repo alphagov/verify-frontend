@@ -340,7 +340,7 @@ cy:
       heading: Diolch am eich adborth
       message_email: Rydym wedi derbyn eich neges a byddwn yn ymateb cyn gynted â phosibl.
       session_valid_link: Dychwelyd i GOV.UK Verify
-      session_not_valid: Mae eich sesiwn wedi’i amseru allan.
+      session_not_valid: Mae eich sesiwn wedi’i amseru allan. I sicrhau eich diogelwch, mae’n rhaid i chi %{link}.
       session_not_valid_link: ddechrau eto
     certified_company_unavailable:
       title: Nid yw'r cwmni ardystiedig hwn ar gael

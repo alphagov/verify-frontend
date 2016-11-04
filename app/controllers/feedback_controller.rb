@@ -4,13 +4,11 @@ class FeedbackController < ApplicationController
   def index
     @form = FeedbackForm.new({})
     flash['feedback_referer'] = request.referer
-    flash['feedback_source'] = params['feedback-source']
   end
 
   def submit
     @form = FeedbackForm.new(feedback_form_params)
     flash.keep('feedback_referer')
-    flash.keep('feedback_source')
     if @form.valid?
       session_id = session[:verify_session_id]
       if FEEDBACK_SERVICE.submit!(session_id, @form)

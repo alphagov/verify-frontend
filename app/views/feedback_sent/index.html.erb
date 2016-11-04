@@ -10,10 +10,13 @@
 
   <p>
     <% if @session_valid %>
-        <%= link_to t('hub.feedback_sent.session_valid_link'), @link_back_to_verify %>
+        <%= link_to t('hub.feedback_sent.session_valid_link'), start_path %>
     <% else %>
-        <%= t('hub.feedback_sent.session_not_valid') %>
-        <%= render partial: 'errors/transaction_list' %>
+        <%= t(
+            'hub.feedback_sent.session_not_valid',
+            link: link_to(t('hub.feedback_sent.session_not_valid_link'), 'https://www.gov.uk')
+          ).html_safe
+        %>
     <% end %>
   </p>
 </div>
