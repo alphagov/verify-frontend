@@ -334,7 +334,7 @@ en:
       heading: Thank you for your feedback
       message_email: We've received your message, and we'll reply as soon as possible.
       session_valid_link: Return to GOV.UK Verify
-      session_not_valid: Your session has timed out. To ensure your security, you must %{link}.
+      session_not_valid: Your session has timed out.
       session_not_valid_link: start again
     certified_company_unavailable:
       title: This certified company is unavailable
