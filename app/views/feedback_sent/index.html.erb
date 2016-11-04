@@ -10,7 +10,7 @@
 
   <p>
     <% if @session_valid %>
-        <%= link_to t('hub.feedback_sent.session_valid_link'), start_path %>
+        <%= link_to t('hub.feedback_sent.session_valid_link'), @link_back_to_verify %>
     <% else %>
         <%= t(
             'hub.feedback_sent.session_not_valid',
