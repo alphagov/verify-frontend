@@ -13,9 +13,6 @@ class StartController < ApplicationController
         update_ab_test_cookie(experiment_selection_hash)
       end
     end
-
-    reported_alternative = Cookies.parse_json(cookies[CookieNames::AB_TEST])['select_documents']
-    AbTest.report('select_documents', reported_alternative, request)
   end
 
   def request_post
