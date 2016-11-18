@@ -15,7 +15,9 @@
 
         <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
-              <legend class="visually-hidden"><%= t 'hub.select_phone.question.mobile_phone' %></legend>
+              <legend class="visually-hidden">
+                <span class="form-label"><%= t 'hub.select_phone.question.mobile_phone' %></span>
+              </legend>
               <%= f.custom_radio_button :mobile_phone, true, t('hub.select_phone.question.mobile_phone_option_yes') %>
               <%= f.custom_radio_button :mobile_phone, false, t('option.no') %>
             </fieldset>
@@ -24,7 +26,7 @@
         <%= content_tag :div, id: 'smartphone-question', class: hidden_form_question_class do %>
             <fieldset>
               <legend>
-                <%= t 'hub.select_phone.question.smart_phone' %>
+                <span class="form-label"><%= t 'hub.select_phone.question.smart_phone' %></span>
               </legend>
               <p class="form-hint"><%= t 'hub.select_phone.question.smart_phone_subtitle' %></p>
               <%= f.custom_radio_button :smart_phone, true, t('hub.select_phone.question.smart_phone_option_yes') %>
@@ -34,7 +36,9 @@
         <% end %>
         <%= content_tag :div, id: 'landline-question', class: hidden_form_question_class do %>
             <fieldset class="inline">
-              <legend><%= t 'hub.select_phone.question.landline' %></legend>
+              <legend>
+                <span class="form-label"><%= t 'hub.select_phone.question.landline' %></span>
+              </legend>
               <%= f.custom_radio_button :landline, true, t('hub.select_phone.question.landline_option_yes') %>
               <%= f.custom_radio_button :landline, false, t('option.no') %>
             </fieldset>

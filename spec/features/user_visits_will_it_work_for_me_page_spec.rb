@@ -20,8 +20,8 @@ RSpec.describe 'When the user visits the will it work for me page' do
   it 'redirects to the select document page when user is over 20 and is a uk resident' do
     visit '/will-it-work-for-me'
 
-    choose 'will_it_work_for_me_form_above_age_threshold_true'
-    choose 'will_it_work_for_me_form_resident_last_12_months_true'
+    choose 'will_it_work_for_me_form_above_age_threshold_true', allow_label_click: true
+    choose 'will_it_work_for_me_form_resident_last_12_months_true', allow_label_click: true
     click_button 'Continue'
 
     expect(page).to have_current_path(select_documents_path)
@@ -29,9 +29,9 @@ RSpec.describe 'When the user visits the will it work for me page' do
 
   it 'redirects to the why-might-this-not-work-for-me page when user is over 20 and has moved to the uk in the last 12 months' do
     visit '/will-it-work-for-me'
-    choose 'will_it_work_for_me_form_above_age_threshold_true'
-    choose 'will_it_work_for_me_form_resident_last_12_months_false'
-    choose 'will_it_work_for_me_form_not_resident_reason_movedrecently'
+    choose 'will_it_work_for_me_form_above_age_threshold_true', allow_label_click: true
+    choose 'will_it_work_for_me_form_resident_last_12_months_false', allow_label_click: true
+    choose 'will_it_work_for_me_form_not_resident_reason_movedrecently', allow_label_click: true
 
     click_button 'Continue'
 
@@ -40,8 +40,8 @@ RSpec.describe 'When the user visits the will it work for me page' do
 
   it 'redirects to the why-might-this-not-work-for-me page when user is under 20' do
     visit '/will-it-work-for-me'
-    choose 'will_it_work_for_me_form_above_age_threshold_false'
-    choose 'will_it_work_for_me_form_resident_last_12_months_true'
+    choose 'will_it_work_for_me_form_above_age_threshold_false', allow_label_click: true
+    choose 'will_it_work_for_me_form_resident_last_12_months_true', allow_label_click: true
 
     click_button 'Continue'
 
@@ -50,9 +50,9 @@ RSpec.describe 'When the user visits the will it work for me page' do
 
   it 'redirects to the may-not-work-if-you-live-overseas page when user is over 20 and has address in the uk but not a resident' do
     visit '/will-it-work-for-me'
-    choose 'will_it_work_for_me_form_above_age_threshold_false'
-    choose 'will_it_work_for_me_form_resident_last_12_months_false'
-    choose 'will_it_work_for_me_form_not_resident_reason_addressbutnotresident'
+    choose 'will_it_work_for_me_form_above_age_threshold_false', allow_label_click: true
+    choose 'will_it_work_for_me_form_resident_last_12_months_false', allow_label_click: true
+    choose 'will_it_work_for_me_form_not_resident_reason_addressbutnotresident', allow_label_click: true
 
     click_button 'Continue'
 
@@ -61,9 +61,9 @@ RSpec.describe 'When the user visits the will it work for me page' do
 
   it 'redirects to the will-not-work-without-uk-address page when user is over 20 and has no address in the uk' do
     visit '/will-it-work-for-me'
-    choose 'will_it_work_for_me_form_above_age_threshold_false'
-    choose 'will_it_work_for_me_form_resident_last_12_months_false'
-    choose 'will_it_work_for_me_form_not_resident_reason_noaddress'
+    choose 'will_it_work_for_me_form_above_age_threshold_false', allow_label_click: true
+    choose 'will_it_work_for_me_form_resident_last_12_months_false', allow_label_click: true
+    choose 'will_it_work_for_me_form_not_resident_reason_noaddress', allow_label_click: true
 
     click_button 'Continue'
 
@@ -82,9 +82,9 @@ RSpec.describe 'When the user visits the will it work for me page' do
 
     it 'when js is on', js: true do
       visit '/will-it-work-for-me'
-      choose 'will_it_work_for_me_form_above_age_threshold_false'
+      choose 'will_it_work_for_me_form_above_age_threshold_false', allow_label_click: true
       expect(page).to_not have_content(I18n.t('hub.will_it_work_for_me.question.not_resident_reason.title'))
-      choose 'will_it_work_for_me_form_resident_last_12_months_false'
+      choose 'will_it_work_for_me_form_resident_last_12_months_false', allow_label_click: true
       expect(page).to have_content(I18n.t('hub.will_it_work_for_me.question.not_resident_reason.title'))
       click_button 'Continue'
 
@@ -98,8 +98,8 @@ RSpec.describe 'When the user visits the will it work for me page' do
     piwik_request = { 'action_name' => 'Can I be Verified Next' }
 
     visit '/will-it-work-for-me'
-    choose 'will_it_work_for_me_form_above_age_threshold_true'
-    choose 'will_it_work_for_me_form_resident_last_12_months_true'
+    choose 'will_it_work_for_me_form_above_age_threshold_true', allow_label_click: true
+    choose 'will_it_work_for_me_form_resident_last_12_months_true', allow_label_click: true
 
     click_button 'Continue'
 

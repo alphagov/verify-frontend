@@ -70,7 +70,7 @@ end
 group :test, :development do
   gem 'rspec', '~> 3.5.0'
   gem 'rspec-rails', '~> 3.5.0'
-  gem 'capybara', '~> 2.6'
+  gem 'capybara', '~> 2.10'
   gem 'capybara-puma'
   gem 'govuk-lint'
   gem 'webmock', require: false
