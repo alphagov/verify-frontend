@@ -63,5 +63,7 @@ module VerifyFrontend
     # If you go back on our pages it remembers the disabled state, thus breaking the system.
     # We can turn this functionality off globally.
     config.action_view.automatically_disable_submit_tag = false
+
+    raise "Missing secret_key_base. Please make sure config/secrets.yml is valid." if Rails.application.secrets.secret_key_base.nil?
   end
 end
