@@ -35,4 +35,22 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(button).not_to include('role="test"')
     end
   end
+
+  describe '#hide_from_search_engine?' do
+    it 'should hide from search engine by default' do
+      expect(helper.hide_from_search_engine?).to be true
+    end
+
+    it 'should not hide from search engine if we have set to show for search engine' do
+      helper.content_for(:show_to_search_engine, true)
+
+      expect(helper.hide_from_search_engine?).to be false
+    end
+
+    it 'should hide from search engine if we have set to hide for search engine' do
+      helper.content_for(:show_to_search_engine, false)
+
+      expect(helper.hide_from_search_engine?).to be true
+    end
+  end
 end

@@ -28,4 +28,9 @@ RSpec.describe 'When the user visits the cookies page' do
     visit '/cookies'
     expect_feedback_source_to_be(page, 'COOKIES_INFO_PAGE')
   end
+
+  it 'will allow robots to index' do
+    visit '/cookies'
+    expect(page).to_not have_css('meta[name="robots"]', visible: false)
+  end
 end

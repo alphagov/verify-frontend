@@ -141,4 +141,10 @@ RSpec.describe 'When the user visits the start page' do
     visit '/start'
     expect(page.response_headers['Set-Cookie']).to_not include("ab_test=")
   end
+
+  it 'will not allow robots to index' do
+    set_session_and_session_cookies!
+    visit '/start'
+    expect(page).to have_css('meta[name="robots"][content="noindex"]', visible: false)
+  end
 end

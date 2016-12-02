@@ -7,6 +7,10 @@ module ApplicationHelper
     end
   end
 
+  def hide_from_search_engine?
+    !content_for(:show_to_search_engine)
+  end
+
   def feedback_source
     content_for(:feedback_source) || ""
   end

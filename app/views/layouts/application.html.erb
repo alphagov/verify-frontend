@@ -8,6 +8,10 @@
   <% if content_for?(:meta_refresh) %>
     <meta http-equiv="refresh" content="<%= yield(:meta_refresh) %>">
   <% end %>
+
+  <% if hide_from_search_engine? %>
+    <meta name="robots" content="noindex" />
+  <% end %>
 <% end %>
 
 <% content_for :cookie_message do %>
