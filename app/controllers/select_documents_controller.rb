@@ -1,7 +1,5 @@
 class SelectDocumentsController < ApplicationController
   def index
-    reported_alternative = Cookies.parse_json(cookies[CookieNames::AB_TEST])['select_documents_v2']
-    AbTest.report('select_documents_v2', reported_alternative, request)
     @form = SelectDocumentsForm.new({}, form_attributes)
     @is_in_b_group = is_in_b_group?
   end

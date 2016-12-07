@@ -22,9 +22,7 @@ experiments:
   - select_documents_v2:
       alternatives:
         - name: 'control'
-          percent: 90
-        - name: 'new_questions_profile_change'
-          percent: 10
+          percent: 100
   - about_companies:
       alternatives:
         - name: 'with_logo'
