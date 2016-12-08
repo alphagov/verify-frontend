@@ -19,6 +19,12 @@
 #
 
 experiments:
+  - idp_ranking:
+      alternatives:
+        - name: 'control'
+          percent: 90
+        - name: 'by_completion'
+          percent: 10
   - select_documents_v2:
       alternatives:
         - name: 'control'

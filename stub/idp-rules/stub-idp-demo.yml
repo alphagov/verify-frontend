@@ -4,4 +4,5 @@ demo_profiles:
   - [ "driving_licence", "mobile_phone" ]
 non_recommended_profiles:
   - [ "driving_licence", "mobile_phone", "landline" ]
+  - [ "ni_driving_licence", "mobile_phone" ]
 send_hints: false

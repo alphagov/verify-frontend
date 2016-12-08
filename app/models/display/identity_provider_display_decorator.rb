@@ -11,6 +11,10 @@ module Display
       idp_list.map { |idp| correlate_display_data(idp) }.select(&:viewable?).shuffle
     end
 
+    def decorate_collection_with_ranking(idp_list, ranking)
+      decorate_collection(idp_list).sort_by { |idp| ranking.rank_idp(idp.simple_id) }
+    end
+
     def decorate(idp)
       correlate_display_data(idp)
     end
