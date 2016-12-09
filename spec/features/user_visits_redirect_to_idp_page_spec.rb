@@ -29,33 +29,33 @@ RSpec.describe 'When the user visits the redirect to IDP page' do
     given_a_session_with_a_hints_enabled_idp
     stub_session_idp_authn_request(originating_ip, location, true)
     visit redirect_to_idp_path
-    expect(page).to have_css('input[name="hint"][value="has_ukpassport"]')
-    expect(page).to have_css('input[name="hint"][value="has_mobile"]')
-    expect(page).to have_css('input[name="hint"][value="not_apps"]')
-    expect(page).to have_css('input[name="language"][value="en"]')
-    expect(page).to_not have_css('input[name="hint"][value="has_nonukid"]')
+    expect(page).to have_css('input[name="hint"][value="has_ukpassport"]', visible: false)
+    expect(page).to have_css('input[name="hint"][value="has_mobile"]', visible: false)
+    expect(page).to have_css('input[name="hint"][value="not_apps"]', visible: false)
+    expect(page).to have_css('input[name="language"][value="en"]', visible: false)
+    expect(page).to_not have_css('input[name="hint"][value="has_nonukid"]', visible: false)
   end
 
   it 'should contain welsh language hint' do
     given_a_session_with_a_hints_enabled_idp
     stub_session_idp_authn_request(originating_ip, location, true)
     visit "/#{I18n.t('routes.redirect_to_idp', locale: 'cy')}"
-    expect(page).to have_css('input[name="language"][value="cy"]')
+    expect(page).to have_css('input[name="language"][value="cy"]', visible: false)
   end
 
   it 'should not contain hint inputs if hints are disabled for the IDP' do
     given_a_session_with_a_hints_disabled_idp
     stub_session_idp_authn_request(originating_ip, location, true)
     visit redirect_to_idp_path
-    expect(page).to_not have_css('input[name="hint"]')
-    expect(page).to_not have_css('input[name="language"]')
+    expect(page).to_not have_css('input[name="hint"]', visible: false)
+    expect(page).to_not have_css('input[name="language"]', visible: false)
   end
 
   it 'should not contain hint input if user is signing in' do
     given_a_session_with_a_hints_enabled_idp
     stub_session_idp_authn_request(originating_ip, location, false)
     visit redirect_to_idp_path
-    expect(page).to_not have_css('input[name="hint"]')
+    expect(page).to_not have_css('input[name="hint"]', visible: false)
   end
 
   it 'should have a correct title' do

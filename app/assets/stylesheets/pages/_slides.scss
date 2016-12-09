@@ -49,6 +49,17 @@
     color: inherit;
   }
 
+  // Override elements radio button colour for start page
+  // This should be tested to work out whether it
+  // performs better with the override or without.
+  .block-label.selection-button-radio {
+    &::before,
+    &::after {
+      background-color: $white;
+      border-color: $text-colour;
+    }
+  }
+
   .actions {
     margin: $gutter 0 $gutter-half;
 
@@ -93,12 +104,6 @@
 
 .hub-start {
 
-  .button {
-    @include media(tablet) {
-      margin-left: $gutter-half;
-    }
-  }
-
   .error,
   .validation-message {
     border-color: $white;
@@ -107,16 +112,6 @@
 
   .block-label {
     @include core-24;
-    background: transparent;
-    border: 0;
-
-    &.selected {
-      background: transparent;
-    }
-
-    &:hover {
-      background-color: $link-hover-colour;
-    }
   }
 
 }

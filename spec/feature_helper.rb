@@ -24,6 +24,10 @@ RSpec.configure do |config|
   end
 end
 
+Capybara.configure do |config|
+  config.server = :puma
+end
+
 module FeatureHelper
   def current_time_in_millis
     DateTime.now.to_i * 1000

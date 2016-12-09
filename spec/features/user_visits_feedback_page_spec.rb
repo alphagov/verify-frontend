@@ -13,7 +13,7 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.reply'))
     expect(page).to have_css('.error-message', text: I18n.t('hub.feedback.errors.details'), count: 2)
 
-    choose 'feedback_form_reply_true'
+    choose 'feedback_form_reply_true', allow_label_click: true
     click_button I18n.t('hub.feedback.send_message')
 
     expect(page).to_not have_css('.error-message', text: I18n.t('hub.feedback.errors.reply'))
@@ -26,7 +26,7 @@ RSpec.feature 'When the user visits the feedback page' do
     visit feedback_path
     expect(page).to have_title(I18n.t('hub.feedback.title'))
 
-    choose 'feedback_form_reply_true'
+    choose 'feedback_form_reply_true', allow_label_click: true
     fill_in 'feedback_form_email', with: 'foo@bar'
     click_button I18n.t('hub.feedback.send_message')
 
@@ -42,7 +42,7 @@ RSpec.feature 'When the user visits the feedback page' do
     visit feedback_path
     expect(page).to have_title(I18n.t('hub.feedback.title'))
 
-    choose 'feedback_form_reply_true'
+    choose 'feedback_form_reply_true', allow_label_click: true
     click_button I18n.t('hub.feedback.send_message')
 
     expect(page).to have_css('.form-group.error', count: 4)
@@ -57,7 +57,7 @@ RSpec.feature 'When the user visits the feedback page' do
 
     fill_in 'feedback_form_what', with: 'A' * (long_text_limit + 1)
     fill_in 'feedback_form_details', with: 'A' * (long_text_limit + 1)
-    choose 'feedback_form_reply_false'
+    choose 'feedback_form_reply_false', allow_label_click: true
 
     click_button I18n.t('hub.feedback.send_message')
 
@@ -69,7 +69,7 @@ RSpec.feature 'When the user visits the feedback page' do
     visit feedback_path
     expect(page).to have_title(I18n.t('hub.feedback.title'))
 
-    choose 'feedback_form_reply_false'
+    choose 'feedback_form_reply_false', allow_label_click: true
     click_button I18n.t('hub.feedback.send_message')
 
     expect(page).to have_css('.form-group.error', count: 2)
@@ -119,7 +119,7 @@ RSpec.feature 'When the user visits the feedback page' do
 
     fill_in 'feedback_form_what', with: 'break_zendesk'
     fill_in 'feedback_form_details', with: 'Some details'
-    choose 'feedback_form_reply_false'
+    choose 'feedback_form_reply_false', allow_label_click: true
     fill_in 'feedback_form_name', with: 'Bob Smith'
     fill_in 'feedback_form_email', with: 'bob@smith.com'
 
@@ -144,7 +144,7 @@ RSpec.feature 'When the user visits the feedback page' do
 
     fill_in 'feedback_form_what', with: 'Verify my identity'
     fill_in 'feedback_form_details', with: 'Some details'
-    choose 'feedback_form_reply_false'
+    choose 'feedback_form_reply_false', allow_label_click: true
 
     click_button I18n.t('hub.feedback.send_message')
 
@@ -160,11 +160,11 @@ RSpec.feature 'When the user visits the feedback page' do
 
     fill_in 'feedback_form_what', with: 'Verify my identity'
     fill_in 'feedback_form_details', with: 'Some details'
-    choose 'feedback_form_reply_true'
+    choose 'feedback_form_reply_true', allow_label_click: true
 
     click_button I18n.t('hub.feedback.send_message')
 
-    choose 'feedback_form_reply_false'
+    choose 'feedback_form_reply_false', allow_label_click: true
 
     click_button I18n.t('hub.feedback.send_message')
 

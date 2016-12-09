@@ -12,21 +12,27 @@
         <% end %>
         <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
-              <legend><%= t 'hub.will_it_work_for_me.question.above_age_threshold' %></legend>
+              <legend>
+                <span class="form-label"><%= t 'hub.will_it_work_for_me.question.above_age_threshold' %></span>
+              </legend>
               <%= f.custom_radio_button :above_age_threshold, true, t('hub.will_it_work_for_me.question.option_yes') %>
               <%= f.custom_radio_button :above_age_threshold, false, t('option.no') %>
             </fieldset>
         <% end %>
         <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
-              <legend><%= t 'hub.will_it_work_for_me.question.resident_last_12_months' %></legend>
+              <legend>
+                <span class="form-label"><%= t 'hub.will_it_work_for_me.question.resident_last_12_months' %></span>
+              </legend>
               <%= f.custom_radio_button :resident_last_12_months, true, t('hub.will_it_work_for_me.question.option_yes') %>
               <%= f.custom_radio_button :resident_last_12_months, false, t('option.no') %>
             </fieldset>
         <% end %>
         <%= content_tag :div, id: :not_resident_reason, class: hidden_form_question_class do %>
-            <fieldset class="inline">
-              <legend><%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %></legend>
+            <fieldset>
+              <legend>
+                <span class="form-label"><%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %></span>
+              </legend>
               <%= f.custom_radio_button :not_resident_reason, 'MovedRecently', t('hub.will_it_work_for_me.question.not_resident_reason.recently') %>
               <%= f.custom_radio_button :not_resident_reason, 'AddressButNotResident', t('hub.will_it_work_for_me.question.not_resident_reason.not_resident') %>
               <%= f.custom_radio_button :not_resident_reason, 'NoAddress', t('hub.will_it_work_for_me.question.not_resident_reason.no_address') %>
