@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'yaml_loader'
 
 Rails.application.config.after_initialize do
@@ -11,6 +12,8 @@ Rails.application.config.after_initialize do
     CONFIG.logo_directory,
     CONFIG.white_logo_directory
   )
+  idp_rankings_config = CONFIG.idp_rankings_config && File.exist?(CONFIG.idp_rankings_config) ? YAML.load_file(CONFIG.idp_rankings_config) : {}
+  IDP_RANKER = Display::IdpRanker.new(idp_rankings_config.fetch('rankings', {}))
 
   # Cycle Three display
   CYCLE_THREE_DISPLAY_REPOSITORY = repository_factory.create_cycle_three_repository(CONFIG.cycle_3_display_locales)
