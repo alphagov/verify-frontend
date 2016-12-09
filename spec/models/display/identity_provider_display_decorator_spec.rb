@@ -79,7 +79,9 @@ module Display
 
         result = decorator.decorate_collection_with_ranking(idp_list, ranking)
 
-        expect(result.map(&:simple_id).first).to eql 'idp_three'
+        idps = result.map(&:simple_id)
+        expect(idps.first).to eql 'idp_three'
+        expect(idps[1..-1]).to include('idp_one', 'idp_two')
       end
 
       it 'returns a decorated IDP collection based on ranking with extra element' do
