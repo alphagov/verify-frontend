@@ -32,6 +32,7 @@ module Display
     it 'should rank idp based on ranking' do
       ranking = IdpRanking.new([:idpA, :idpC, :idpB])
 
+      expect(ranking.has_rank?).to be true
       expect(ranking.rank_idp(:idpA)).to eql 0
       expect(ranking.rank_idp(:idpB)).to eql 2
       expect(ranking.rank_idp(:idpC)).to eql 1
@@ -40,8 +41,14 @@ module Display
     it 'should rank idp last if it doesnt appar in rakings' do
       ranking = IdpRanking.new([:idpA, :idpC, :idpB])
 
+      expect(ranking.has_rank?).to be true
       expect(ranking.rank_idp(:idpX)).to eql 3
       expect(ranking.rank_idp(:idpY)).to eql 3
+    end
+
+    it 'should not have rank if no idps' do
+      ranking = IdpRanking.no_ordering
+      expect(ranking.has_rank?).to be false
     end
   end
 end

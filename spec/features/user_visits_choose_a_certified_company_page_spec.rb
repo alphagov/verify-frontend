@@ -226,7 +226,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
       end
     end
 
-    xit 'will report control group to piwik' do
+    it 'will report control group to piwik if theres a ranking' do
       given_a_session_with_abtest_answers
       given_an_abtest_with_control_group
 
@@ -238,7 +238,20 @@ RSpec.describe 'When the user visits the choose a certified company page' do
       expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
     end
 
-    xit 'will report by completion group to piwik' do
+
+    it 'will not report to piwik if theres is no ranking' do
+      given_a_session_with_selected_answers
+      given_an_abtest_with_control_group
+
+      visit choose_a_certified_company_path
+
+      piwik_request = {
+          '_cvar' => '{"6":["AB_TEST","idp_ranking_control"]}'
+      }
+      expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_not_been_made
+    end
+
+    it 'will report by completion group to piwik if theres a ranking' do
       given_a_session_with_abtest_answers
       given_an_abtest_with_by_completion_group
 

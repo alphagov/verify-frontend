@@ -2,18 +2,16 @@ class ChooseACertifiedCompanyController < ApplicationController
   include AbTestHelper
 
   def index
-    # NOTE: uncomment the reporting below when we are ready to push it to Prod
-    # report_idp_ranking_ab_test
+    rankings = IDP_RANKER.rank(selected_evidence)
+    if rankings.has_rank?
+      report_idp_ranking_ab_test
+    end
 
     grouped_identity_providers = select_idp_recommendation.group_by_recommendation(selected_evidence, current_identity_providers, current_transaction_simple_id)
-    if is_in_idp_ranking_by_completion_group?
-      rankings = IDP_RANKER.rank(selected_evidence)
-      @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection_with_ranking(grouped_identity_providers.recommended, rankings)
-    else
-      @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
-    end
+    @recommended_idps = fetch_recommended_idps(grouped_identity_providers, rankings)
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.non_recommended)
   end
+
 
 
   def select_idp
@@ -36,6 +34,14 @@ class ChooseACertifiedCompanyController < ApplicationController
   end
 
 private
+
+  def fetch_recommended_idps(grouped_identity_providers, rankings)
+    if is_in_idp_ranking_by_completion_group?
+      IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection_with_ranking(grouped_identity_providers.recommended, rankings)
+    else
+      IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
+    end
+  end
 
   def select_idp_recommendation
     if is_in_b_group?

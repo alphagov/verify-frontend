@@ -28,5 +28,9 @@ module Display
     def rank_idp(idp)
       @idps.find_index(idp) || @idps.size
     end
+
+    def has_rank?
+      !idps.empty?
+    end
   end
 end
