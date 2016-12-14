@@ -37,3 +37,9 @@ experiments:
           percent: 100
         - name: 'no'
           percent: 0
+  - rp_slides:
+      alternatives:
+        - name: 'control'
+          percent: 50
+        - name: 'tailored'
+          percent: 50

@@ -9,9 +9,9 @@ RSpec.describe 'When a page with a virtual page view is visited' do
     Capybara.current_session.driver.header('Accept-Language', 'en-US,en;q=0.5')
     Capybara.current_session.driver.header('X-Forwarded-For', '1.1.1.1')
 
-    visit '/about'
+    visit '/sign-in'
 
-    expect(page).to have_content 'GOV.UK Verify is a scheme to fight the growing problem of online identity theft'
+    # expect(page).to have_content 'GOV.UK Verify is a scheme to fight the growing problem of online identity theft'
     piwik_request = {
         'rec' => '1',
         'apiv' => '1',

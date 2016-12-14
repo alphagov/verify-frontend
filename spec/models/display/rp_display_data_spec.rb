@@ -10,6 +10,7 @@ module Display
       :name,
       :rp_name,
       :other_ways_text,
+      :tailored_text,
     ].each do |field|
       include_examples "has content", field, RpDisplayData
     end
