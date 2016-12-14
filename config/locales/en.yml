@@ -85,6 +85,7 @@ en:
     about_certified_companies:
       title: About certified companies
       a_certified_company_will_verify: A certified company will verify your identity. They’ve all met security standards set by government.
+      dont_need_to_be_existing_customer: You don't need to be an exitsing customer with a company as they've built new, secure systems to verify identities.
       a_certified_company_will_verify_security: You choose from a list of companies certified to verify your identity. They’ve all met security standards set by government.
       a_certified_company_will_verify_security_start: You start by choosing a company to verify your identity. The companies you choose from have met security standards set by government.
       ensure_privacy: The certified company doesn’t know which government service you’re accessing, and the government department doesn’t know which company verified your identity. This ensures your privacy.
@@ -101,6 +102,10 @@ en:
         <p>Verifying your identity takes about 10 minutes.</p>
         <p>You’ll then have an identity account with your certified company.</p>
         <p>You can sign in wherever you see the GOV.UK Verify logo.</p>
+      new_content_html: |
+        <p>Verifying your identity takes about 15 minutes to complete, but you only have to do it once.</p>
+        <p>You'll then have an identity account with the certified company.</p>
+        <p>You can then access other government services in less than 1 minute wherever you see the GOV.UK Verify logo.</p>
       summary: Where you can use your identity account
       details: "GOV.UK Verify is a new scheme, and new services are joining all the time. The current services are:"
     about_choosing_a_company:

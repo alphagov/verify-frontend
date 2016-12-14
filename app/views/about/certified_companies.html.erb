@@ -2,6 +2,9 @@
 <% content_for :feedback_source, 'ABOUT_CERTIFIED_COMPANIES_PAGE' %>
 
 <p><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
+<% if @is_in_b_group %>
+  <p><%=  t 'hub.about_certified_companies.dont_need_to_be_existing_customer' %></p>
+<% end %>
 
 <ul class="list-companies">
   <% @identity_providers.each do |idp| %>

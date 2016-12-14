@@ -8,6 +8,8 @@ RSpec.describe 'When the user visits the about identity accounts page' do
 
   before(:each) do
     set_session_and_session_cookies!
+    cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'rp_slides' => 'rp_slides_control' }.to_json))
+    set_cookies!(cookie_hash)
     stub_transactions_list
   end
 
