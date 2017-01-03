@@ -1,5 +1,4 @@
 require 'active_support/core_ext/module/delegation'
-require 'models/display/idp_ranker'
 require 'models/display/identity_provider_display_decorator'
 require 'models/display/viewable_identity_provider'
 require 'models/display/not_viewable_identity_provider'
@@ -45,56 +44,9 @@ module Display
       expect(result).to eql []
     end
 
-    it 'will return a non viewable if provided a nil value' do
+    it "will return a non viewable if provided a nil value" do
       result = decorator.decorate(nil)
       expect(result).to be_a(NotViewableIdentityProvider)
-    end
-
-    describe 'decorated with ranking' do
-      let(:idp_list) { [idp(:idp_one), idp(:idp_two), idp(:idp_three)] }
-
-      before(:each) do
-        display_data = double(:display_data)
-        expect(repository).to receive(:fetch).at_least(:once).and_return display_data
-      end
-
-      it 'returns a decorated IDP collection based on ranking' do
-        ranking = Display::IdpRanking.new(%w(idp_two idp_three idp_one))
-
-        result = decorator.decorate_collection_with_ranking(idp_list, ranking)
-
-        expect(result.map(&:simple_id)).to eql %w(idp_two idp_three idp_one)
-      end
-
-      it 'returns a decorated IDP collection based on ranking with missing rank' do
-        ranking = Display::IdpRanking.new(%w(idp_two idp_one))
-
-        result = decorator.decorate_collection_with_ranking(idp_list, ranking)
-
-        expect(result.map(&:simple_id)).to eql %w(idp_two idp_one idp_three)
-      end
-
-      it 'returns a decorated IDP collection based on ranking only one rank' do
-        ranking = Display::IdpRanking.new(['idp_three'])
-
-        result = decorator.decorate_collection_with_ranking(idp_list, ranking)
-
-        idps = result.map(&:simple_id)
-        expect(idps.first).to eql 'idp_three'
-        expect(idps[1..-1]).to include('idp_one', 'idp_two')
-      end
-
-      it 'returns a decorated IDP collection based on ranking with extra element' do
-        ranking = Display::IdpRanking.new(%w(idp_two idp_three idp_one idp_four))
-
-        result = decorator.decorate_collection_with_ranking(idp_list, ranking)
-
-        expect(result.map(&:simple_id)).to eql %w(idp_two idp_three idp_one)
-      end
-
-      def idp(id)
-        double(id, 'simple_id' => id.to_s, 'entity_id' => id.to_s)
-      end
     end
   end
 end

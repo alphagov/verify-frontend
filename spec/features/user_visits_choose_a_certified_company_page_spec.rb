@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'feature_helper'
 require 'api_test_helper'
 require 'i18n'
@@ -20,20 +19,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
       documents: { driving_licence: true },
       phone: { mobile_phone: true, landline: true }
     }
-  }
-
-  let(:abtest_answers) {
-    {
-      documents: { ni_driving_licence: true },
-      phone: { mobile_phone: true }
-    }
-  }
-
-  let(:given_a_session_with_abtest_answers) {
-    page.set_rack_session(
-      transaction_simple_id: 'test-rp',
-      selected_answers: abtest_answers,
-    )
   }
 
   let(:given_a_session_with_selected_answers) {
@@ -203,64 +188,6 @@ RSpec.describe 'When the user visits the choose a certified company page' do
       within('#non-matching-idps') do
         expect(page).to have_content('Choose Demo IDP', count: 1)
       end
-    end
-  end
-
-  context 'IDP Ranking AB testing' do
-    let(:given_an_abtest_with_control_group) {
-      set_cookies!(CookieNames::AB_TEST => CGI.escape({ 'idp_ranking' => 'idp_ranking_control' }.to_json))
-    }
-    let(:given_an_abtest_with_by_completion_group) {
-      set_cookies!(CookieNames::AB_TEST => CGI.escape({ 'idp_ranking' => 'idp_ranking_by_completion' }.to_json))
-    }
-
-    it 'will show IDPs in ranking order on by_completion path' do
-      given_a_session_with_abtest_answers
-      given_an_abtest_with_by_completion_group
-
-      visit choose_a_certified_company_path
-
-      within('#matching-idps') do
-        ranked_idps = all(:css, '.idp-option/button').map(&:value)
-        expect(ranked_idps).to eq(["Bob’s Identity Service", "Carol’s Secure ID", "IDCorp"])
-      end
-    end
-
-    it 'will report control group to piwik if theres a ranking' do
-      given_a_session_with_abtest_answers
-      given_an_abtest_with_control_group
-
-      visit choose_a_certified_company_path
-
-      piwik_request = {
-        '_cvar' => '{"6":["AB_TEST","idp_ranking_control"]}'
-      }
-      expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
-    end
-
-
-    it 'will not report to piwik if theres is no ranking' do
-      given_a_session_with_selected_answers
-      given_an_abtest_with_control_group
-
-      visit choose_a_certified_company_path
-
-      piwik_request = {
-          '_cvar' => '{"6":["AB_TEST","idp_ranking_control"]}'
-      }
-      expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_not_been_made
-    end
-
-    it 'will report by completion group to piwik if theres a ranking' do
-      given_a_session_with_abtest_answers
-      given_an_abtest_with_by_completion_group
-
-      visit choose_a_certified_company_path
-
-      piwik_request = {
-        '_cvar' => '{"6":["AB_TEST","idp_ranking_by_completion"]}'
-      }
-      expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
     end
   end
 end

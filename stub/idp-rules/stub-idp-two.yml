@@ -1,6 +1,5 @@
 simpleIds: [ "stub-idp-two" ]
-recommended_profiles:
-  - [ "ni_driving_licence", "mobile_phone" ]
+recommended_profiles: []
 non_recommended_profiles:
   - [ "driving_licence", "mobile_phone" ]
 send_hints: false
