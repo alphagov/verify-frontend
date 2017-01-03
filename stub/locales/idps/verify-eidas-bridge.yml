@@ -1,7 +1,7 @@
 en:
   idps:
     verify-eidas-bridge:
-      name: "EUROPE"
+      name: "European eID"
       tagline: "a really european identity provider"
       about: |
           <p>ID Corp is the premier identity proofing service around.</p>
