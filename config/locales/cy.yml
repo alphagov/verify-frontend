@@ -112,6 +112,14 @@ cy:
       content_html: |
         <p>Mae gan gwmnïau ardystiedig ffyrdd gwahanol o wirio hunaniaeth, er enghraifft trwy wirio dogfennau adnabod neu ddarparu ap.</p>
         <p>Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.</p>
+      more_info_html: |
+        <p>Certified companies have built new, secure systems to verify identities. These systems work by checking:</p>
+        <ul class="list-bullet list">
+        <li>your identity documents are valid</li>
+        <li>it’s you providing your details, and not someone pretending to be you</li>
+        </ul>
+        <p>However, each company uses different methods for each of these steps.</p>
+        <p>So we’ll now ask you some questions to check which companies can verify you. We’ll then send you to the website of the company you choose.</p>
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
       explanation: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
