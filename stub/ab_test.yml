@@ -31,3 +31,9 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
+  - right_company:
+      alternatives:
+        - name: 'control'
+          percent: 50
+        - name: 'more_info'
+          percent: 50
