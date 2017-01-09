@@ -1,7 +1,12 @@
 <%= page_title 'hub.about_identity_accounts.title' %>
 <% content_for :feedback_source, 'ABOUT_IDENTITY_ACCOUNTS_PAGE' %>
 
-<%= t 'hub.about_identity_accounts.content_html' %>
+<% if @is_in_b_group %>
+  <%= t 'hub.about_identity_accounts.new_content_html' %>
+<% else %>
+  <%= t 'hub.about_identity_accounts.content_html' %>
+<% end %>
+
 
 <div class="actions">
   <%= button_link_to t('navigation.start_now'), about_choosing_a_company_path, id: 'next-button' %>

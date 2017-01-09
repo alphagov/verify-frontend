@@ -6,5 +6,6 @@ module Display
     content :rp_name
     content :other_ways_text
     content :analytics_description
+    content :tailored_text
   end
 end

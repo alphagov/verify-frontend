@@ -13,3 +13,4 @@ en:
         </ul>
         <p>Include any other relevant details if you have them.</p>
       other_ways_description: register for an identity profile
+      tailored_text: <p>This is tailored text for test-rp-with-continue-on-fail</p>
