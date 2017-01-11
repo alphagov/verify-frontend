@@ -28,7 +28,7 @@ RSpec.describe 'When user visits with rp_slides_tailored ab_test cookie' do
   context 'visits about certified companies page' do
     it 'will show text about not needing to be an existing customer' do
       visit '/about-certified-companies'
-      expect(page).to have_content "You don't need to be an exitsing customer with a company as they've built new, secure systems to verify identities."
+      expect(page).to have_content "You don't need to be an existing customer with a company as they've built new, secure systems to verify identities."
     end
   end
 
