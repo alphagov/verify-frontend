@@ -28,28 +28,37 @@ module AbTest
 
     context '#report' do
       let(:analytics_reporter) { double(:analytics_reporter) }
+      before(:each) { stub_const('RP_CONFIG', 'demo_period_blacklist' => 'RP in early beta') }
 
       it 'should report to piwik if there are multiple alternatives' do
         alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }, { 'name' => 'no', 'percent' => 25 }] } }
         stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
         stub_const('ANALYTICS_REPORTER', analytics_reporter)
         expect(analytics_reporter).to receive(:report_custom_variable)
-        subject.report('logos', 'logos_yes', double(:request))
+        subject.report('logos', 'logos_yes', 'rp', double(:request))
       end
 
-      it 'should not report to piwik if there is a single alternative' do
+      it 'should not report to piwik if the experiment is concluded' do
         alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }] } }
         stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
         stub_const('ANALYTICS_REPORTER', analytics_reporter)
         expect(analytics_reporter).to_not receive(:report_custom_variable)
-        subject.report('logos', 'logos_yes', double(:request))
+        subject.report('logos', 'logos_yes', 'rp', double(:request))
       end
 
       it 'should not report to piwik if there is no alternative' do
         stub_const('AB_TESTS', {})
         stub_const('ANALYTICS_REPORTER', analytics_reporter)
         expect(analytics_reporter).to_not receive(:report_custom_variable)
-        subject.report('logos', 'logos_yes', double(:request))
+        subject.report('logos', 'logos_yes', 'rp', double(:request))
+      end
+
+      it 'should not report to piwik if RP is in early beta' do
+        alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }, { 'name' => 'no', 'percent' => 25 }] } }
+        stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
+        stub_const('ANALYTICS_REPORTER', analytics_reporter)
+        expect(analytics_reporter).to_not receive(:report_custom_variable)
+        subject.report('logos', 'logos_yes', 'RP in early beta', double(:request))
       end
     end
   end

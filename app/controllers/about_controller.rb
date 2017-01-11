@@ -7,7 +7,7 @@ class AboutController < ApplicationController
       current_transaction,
       request
     )
-    AbTest.report('rp_slides', ab_test('rp_slides'), request)
+    AbTest.report('rp_slides', ab_test('rp_slides'), current_transaction_simple_id, request)
     @tailored_text = current_transaction.tailored_text
     @is_in_b_group = is_in_b_group_rp_slides?
   end

@@ -8,9 +8,9 @@ module AbTest
     ab_test ? ab_test.alternative_name(alternative_name) : default
   end
 
-  def self.report(experiment_name, reported_alternative, request)
+  def self.report(experiment_name, reported_alternative, transaction_id, request)
     ab_test = ::AB_TESTS[experiment_name]
-    unless ab_test && ab_test.concluded?
+    if ab_test && !current_transaction_is_in_early_beta(transaction_id) && !ab_test.concluded?
       alternative_name = AbTest.alternative_name_for_experiment(experiment_name, reported_alternative)
       if reported_alternative_matches_an_allowed_alternative(alternative_name, reported_alternative)
         custom_variable = Analytics::CustomVariable.build(:ab_test, alternative_name)
@@ -21,5 +21,9 @@ module AbTest
 
   def self.reported_alternative_matches_an_allowed_alternative(alternative_name, reported_alternative)
     alternative_name && alternative_name == reported_alternative
+  end
+
+  def self.current_transaction_is_in_early_beta(current_transaction_simple_id)
+    RP_CONFIG.fetch('demo_period_blacklist').include?(current_transaction_simple_id)
   end
 end
