@@ -22,7 +22,7 @@ RSpec.describe 'When the user visits the about identity accounts page' do
   it 'displays content in Welsh' do
     visit '/am-gyfrifon-hunaniaeth'
 
-    expect(page).to have_content 'Mae dilysu eich hunaniaeth yn cymryd tua 10 munud.'
+    expect(page).to have_content 'Darganfyddwch fwy am gwcis'
   end
 
   it 'will show "Where you can use your identity account" section listing public transactions' do

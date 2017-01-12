@@ -2,11 +2,7 @@
 <% content_for :feedback_source, 'ABOUT_PAGE' %>
 
 <p><%= t 'hub.about.verify_is_a_scheme' %></p>
-<% if @is_in_b_group %>
-  <%= @tailored_text.html_safe %>
-<% else %>
-  <p><%= t 'hub.about.its_secure' %></p>
-<% end %>
+<%= @tailored_text.html_safe %>
 
 <div class="actions">
   <%= button_link_to t('navigation.next'), about_certified_companies_path, id: 'next-button' %>
