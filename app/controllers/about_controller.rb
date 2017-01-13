@@ -15,7 +15,7 @@ class AboutController < ApplicationController
   end
 
   def choosing_a_company
-    AbTest.report('right_company', ab_test('right_company'), request)
+    AbTest.report('right_company', ab_test('right_company'), current_transaction_simple_id, request)
     @is_in_b_group = is_in_b_group?
   end
 
