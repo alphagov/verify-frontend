@@ -87,7 +87,7 @@ cy:
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
-      dont_need_to_be_existing_customer: You don’t need to be an existing customer with a company as they’ve built new, secure systems to verify identities.
+      dont_need_to_be_existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni oherwydd maent wedi adeiladu systemau newydd, diogel i ddilysu hunaniaeth.
       a_certified_company_will_verify_security: Rydych yn dewis o restr o gwmnïau ardystiedig i ddilysu eich hunaniaeth. Maent i gyd wedi cwrdd â safonnau diogelwch a osodwyd gan y llywodraeth.
       a_certified_company_will_verify_security_start: Rydych yn dechrau drwy ddewis cwmni i ddilysu eich hunaniaeth. Mae’r cwmnïau rydych yn dewis ohonnynt wedi cwrdd â safonnau diogelwch a osodwyd gan y llywodraeth.
       ensure_privacy: Nid yw’r cwmni ardystiedig yn gwybod pa wasanaeth o’r llywodraeth rydych yn ei ddefnyddio ac nid yw’r adran o’r llywodraeth yn gwybod pa gwmni wnaeth ddilysu eich hunaniaeth. Mae hyn yn sicrhau eich preifatrwydd.
@@ -101,9 +101,9 @@ cy:
     about_identity_accounts:
       title: Am gyfrifon hunaniaeth
       content_html: |
-        <p>Verifying your identity takes about 15 minutes to complete, but you only have to do it once.</p>
-        <p>You’ll then have an identity account with the certified company.</p>
-        <p>You can then access other government services in less than 1 minute wherever you see the GOV.UK Verify logo.</p>
+        <p>Mae dilysu eich hunaniaeth yn cymryd tua 15 munud i'w gwblhau, ond dim ond unwaith mae angen i chi ei wneud.</p>
+        <p>Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
+        <p>Yna gallwch gael mynediad i wasanaethau eraill y llywodraeth mewn llai na munud lle bynnag y byddwch yn gweld y logo GOV.UK Verify.</p>
       summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
       details: "Mae GOV.UK Verify yn gynllun newydd ac mae gwasanaethau newydd yn ymuno drwy’r amser. Y gwasanaethau presennol yw:"
     about_choosing_a_company:
@@ -113,13 +113,13 @@ cy:
         <p>Mae gan gwmnïau ardystiedig ffyrdd gwahanol o wirio hunaniaeth, er enghraifft trwy wirio dogfennau adnabod neu ddarparu ap.</p>
         <p>Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.</p>
       more_info_html: |
-        <p>Certified companies have built new, secure systems to verify identities. These systems work by checking:</p>
+        <p>Mae cwmnïau ardystiedig wedi adeiladu systemau newydd, diogel i ddilysu hunaniaeth. Mae'r systemau hyn yn gweithio trwy wirio:</p>
         <ul class="list-bullet list">
-        <li>your identity documents are valid</li>
-        <li>it’s you providing your details, and not someone pretending to be you</li>
+        <li>bod eich dogfennau hunaniaeth yn ddilys</li>
+        <li>mai chi sy'n darparu eich manylion, dim rhywun sy'n honni bod yn chi</li>
         </ul>
-        <p>However, each company uses different methods for each of these steps.</p>
-        <p>So we’ll now ask you some questions to check which companies can verify you. We’ll then send you to the website of the company you choose.</p>
+        <p>Fodd bynnag, mae gan bob cwmni ddulliau gwahanol ar gyfer pob un o'r camau hyn.</p>
+        <p>Felly byddwn nawr yn gofyn rhai cwestiynau i chi wirio pa gwmnïau all eich dilysu. Byddwn wedyn yn eich anfon at wefan y cwmni rydych yn ei ddewis.</p>
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
       explanation: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
@@ -241,8 +241,8 @@ cy:
         <p>Nid oes effaith ar eich sgor credyd.</p>
     unlikely_to_verify:
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
-      explanation: Certified companies need at least 1 more document to verify your identity. To continue with GOV.UK Verify, %{add_more_documents_link}.
-      explanation_link_text: add more documents
+      explanation: Mae gwmnïau ardystiedig angen o leiaf 1 dogfen arall i wirio eich hunaniaeth. I barhau gyda GOV.UK Verify, %{add_more_documents_link}.
+      explanation_link_text: ychwanegwch fwy o ddogfennau
     redirect_to_idp_warning:
       title: "Byddwch nawr yn cael eich ailgyfeirio"
       continue_to_idp: Parhau i %{display_name}
