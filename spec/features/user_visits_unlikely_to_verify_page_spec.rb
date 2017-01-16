@@ -9,7 +9,7 @@ RSpec.describe 'When the user visits the unlikely-to-verify page' do
 
   it 'displays the page in Welsh' do
     visit '/anhebygol-i-ddilysu'
-    expect(page).to have_content('Certified companies need at least 1 more document to verify your identity. To continue with GOV.UK Verify, add more documents.')
+    expect(page).to have_content('Mae gwmnïau ardystiedig angen o leiaf 1 dogfen arall i wirio eich hunaniaeth. I barhau gyda GOV.UK Verify, ychwanegwch fwy o ddogfennau.')
     expect(page).to have_css 'html[lang=cy]'
   end
 
