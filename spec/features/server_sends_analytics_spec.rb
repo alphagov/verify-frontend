@@ -11,7 +11,7 @@ RSpec.describe 'When a page with a virtual page view is visited' do
 
     visit '/sign-in'
 
-    # expect(page).to have_content 'GOV.UK Verify is a scheme to fight the growing problem of online identity theft'
+    # expect(page).to have_content 'GOV.UK Verify is a secure service built to fight the growing problem of online identity theft.'
     piwik_request = {
         'rec' => '1',
         'apiv' => '1',

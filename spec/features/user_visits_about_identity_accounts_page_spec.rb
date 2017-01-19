@@ -29,7 +29,7 @@ RSpec.describe 'When the user visits the about identity accounts page' do
     visit '/about-identity-accounts'
 
     expect(page).to have_content 'Where you can use your identity account'
-    expect(page).to have_content 'GOV.UK Verify is a new scheme, and new services are joining all the time. The current services are:'
+    expect(page).to have_content 'GOV.UK Verify is new, and government services are joining all the time. The current services  using Verify are:'
     expect(page).to have_content 'register for an identity profile'
     expect(page).to have_content 'Register for an identity profile (forceauthn & no cycle3)'
   end
