@@ -107,9 +107,6 @@ en:
       title: About choosing a company
       heading: Finding the right company to verify you
       content_html: |
-        <p>Certified companies have different ways to verify identities, for example by checking identity documents, or providing an app.</p>
-        <p>We’ll now ask you some questions to check which companies can verify you.</p>
-      more_info_html: |
         <p>Certified companies have built new, secure systems to verify identities. These systems work by checking:</p>
         <ul class="list-bullet list">
         <li>your identity documents are valid</li>

@@ -110,9 +110,6 @@ cy:
       title: Am ddewis cwmni
       heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
       content_html: |
-        <p>Mae gan gwmnïau ardystiedig ffyrdd gwahanol o wirio hunaniaeth, er enghraifft trwy wirio dogfennau adnabod neu ddarparu ap.</p>
-        <p>Byddwn nawr yn gofyn ychydig o gwestiynau i chi i edrych pa gwmnïau all eich dilysu.</p>
-      more_info_html: |
         <p>Mae cwmnïau ardystiedig wedi adeiladu systemau newydd, diogel i ddilysu hunaniaeth. Mae'r systemau hyn yn gweithio trwy wirio:</p>
         <ul class="list-bullet list">
         <li>bod eich dogfennau hunaniaeth yn ddilys</li>
