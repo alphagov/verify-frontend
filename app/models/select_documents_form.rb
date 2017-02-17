@@ -1,26 +1,22 @@
 class SelectDocumentsForm
   include ActiveModel::Model
 
-  attr_reader :driving_licence, :ni_driving_licence, :passport, :non_uk_id_document, :no_documents, :uk_bank_account_details, :debit_card, :credit_card
+  attr_reader :driving_licence, :ni_driving_licence, :passport, :non_uk_id_document, :no_documents
   validate :one_must_be_present
   validate :mandatory_fields_present, unless: :all_fields_blank?
   validate :no_contradictory_inputs
 
-  def initialize(hash, form_attributes)
+  def initialize(hash)
     @ni_driving_licence = hash[:ni_driving_licence]
     @driving_licence = hash[:driving_licence]
     @passport = hash[:passport]
     @non_uk_id_document = hash[:non_uk_id_document]
-    @uk_bank_account_details = hash[:uk_bank_account_details]
-    @debit_card = hash[:debit_card]
-    @credit_card = hash[:credit_card]
     @no_documents = hash[:no_documents]
-    @form_attributes = form_attributes
   end
 
   def selected_answers
     answers = {}
-    @form_attributes.each do |attr|
+    IdpEligibility::Evidence::DOCUMENT_ATTRIBUTES.each do |attr|
       result = public_send(attr)
       if no_documents_checked?
         answers[attr] = false
@@ -78,6 +74,6 @@ private
   end
 
   def document_attributes
-    @form_attributes.map { |attr| public_send(attr) }
+    [passport, driving_licence, ni_driving_licence, non_uk_id_document]
   end
 end

@@ -1,11 +1,10 @@
 class SelectDocumentsController < ApplicationController
   def index
-    @form = SelectDocumentsForm.new({}, form_attributes)
-    @is_in_b_group = is_in_b_group?
+    @form = SelectDocumentsForm.new({})
   end
 
   def select_documents
-    @form = SelectDocumentsForm.new(params['select_documents_form'] || {}, form_attributes)
+    @form = SelectDocumentsForm.new(params['select_documents_form'] || {})
     if @form.valid?
       report_to_analytics('Select Documents Next')
       selected_answer_store.store_selected_answers('documents', @form.selected_answers)
@@ -15,7 +14,6 @@ class SelectDocumentsController < ApplicationController
         redirect_to unlikely_to_verify_path
       end
     else
-      @is_in_b_group = is_in_b_group?
       flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index
     end
@@ -29,18 +27,6 @@ class SelectDocumentsController < ApplicationController
   end
 
   def documents_eligibility_checker
-    if is_in_b_group?
-      DOCUMENTS_ELIGIBILITY_CHECKER_B
-    else
-      DOCUMENTS_ELIGIBILITY_CHECKER
-    end
-  end
-
-  def form_attributes
-    if is_in_b_group?
-      [:passport, :driving_licence, :ni_driving_licence, :non_uk_id_document, :uk_bank_account_details, :debit_card, :credit_card]
-    else
-      [:passport, :driving_licence, :ni_driving_licence, :non_uk_id_document]
-    end
+    DOCUMENTS_ELIGIBILITY_CHECKER
   end
 end
