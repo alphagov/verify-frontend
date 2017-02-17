@@ -1,0 +1,30 @@
+require 'feature_helper'
+require 'api_test_helper'
+
+RSpec.feature 'When users visits other documents page' do
+  before(:each) do
+    set_session_and_session_cookies!
+    cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'split_questions' => 'split_questions_variant' }.to_json))
+    set_cookies!(cookie_hash)
+    visit '/other-documents'
+  end
+
+  it 'should show other documents content' do
+    expect(page).to have_content('Other identity documents')
+  end
+
+  it 'should go to select phone path and set selected answers when user has other identity documents' do
+    choose 'select_documents_form_non_uk_id_document_true'
+    click_button 'Continue'
+    expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'non_uk_id_document' => true})
+    expect(page).to have_current_path(select_phone_path)
+  end
+
+  it 'should go to select phone path and set selected answers when user does not have other identity documents' do
+    choose 'select_documents_form_non_uk_id_document_flase'
+    click_button 'Continue'
+    expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'non_uk_id_document' => false})
+    expect(page).to have_current_path(select_phone_path)
+  end
+
+end

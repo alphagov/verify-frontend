@@ -119,10 +119,16 @@ cy:
         <p>Felly byddwn nawr yn gofyn rhai cwestiynau i chi wirio pa gwmnïau all eich dilysu. Byddwn wedyn yn eich anfon at wefan y cwmni rydych yn ei ddewis.</p>
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
+      title_photo_documents: Eich dogfennau hunaniaeth gyda llun
       explanation: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
+      sub_heading: Mae cwmniau ardystiedig yn defnyddio gwybodaeth o ddogfennau hunaniaeth i'ch dilysu.
       no_documents_message: Mae eich dewisiadau dogfennau wedi cael eu gosod i ‘na’.
       legend: Ydy’r dogfennau hyn gyda chi?
+      highlight: Y mwyaf o ddogfennau hunaniaeth y gallwch eu darparu, y mwyaf tebygol yw y bydd y cwmni yn gallu eich dilysu'n llwyddiannus.
       documents_option_yes: Ydy
+      documents_option_yes_expired: Oes, ond mae wedi dod i ben
+      valid_UK_driving_licence: Oes gennych chi drwydded yrru y DU gyda llun, llawn neu dros dro dilys?
+      uk_passport: Oes gennych chi basport y DU?
       question:
         driving_licence: Trwydded yrru Prydain Fawr (GB) gyda llun (llawn neu dros dro)
         ni_driving_licence: Trwydded yrru Gogledd Iwerddon (NI) gyda llun (llawn neu dros dro)
@@ -135,6 +141,11 @@ cy:
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych
         invalid_selection: Edrychwch dros eich dewis
+      neither_documents: Nid yw'r un o'r dogfennau hyn gennyf
+      where_driving_licence_issued: Ble cyhoeddwyd eich trwydded yrru?
+      driving_licence_details:
+        great_britain: Prydain Fawr
+        northern_ireland: Gogledd Iwerddon
     select_phone:
       title: Oes gennych ffôn symudol neu lechen?
       explanation: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.
