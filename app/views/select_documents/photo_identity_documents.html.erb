@@ -15,7 +15,7 @@
     <div class="panel panel-border-narrow">
       <%= t 'hub.select_documents.highlight' %>
     </div>
-    <%= form_for @form, url: select_documents_submit_path, html: {id: 'validate-documents', class: 'select-documents-form', novalidate: 'novalidate', 'data-msg': t('hub.select_documents.errors.no_selection')} do |f| %>
+    <%= form_for @form, url: select_documents_submit_path, html: {id: 'validate-photo-documents', class: 'select-documents-form', novalidate: 'novalidate', 'data-msg': t('hub.select_documents.errors.no_selection')} do |f| %>
         <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
             <h2 class="heading-medium"><%= t 'hub.select_documents.valid_UK_driving_licence' %></h2>
             <div class="form-group form-field">
@@ -24,13 +24,16 @@
                 <%= f.custom_radio_button :any_driving_licence, false, t('option.no') %>
               </fieldset>
             </div>
-            <%= content_tag :div, class: form_question_class do %>
+            <%= content_tag :div, id: 'driving_licence_details', class: hidden_form_question_class do %>
                 <fieldset>
-                  <legend>
-                    <span class="form-label"><%= t 'hub.select_documents.where_driving_licence_issued' %></span>
-                  </legend>
-                  <%= f.custom_radio_button :driving_licence, true, t('hub.select_documents.driving_licence_details.great_britain') %>
-                  <%= f.custom_radio_button :ni_driving_licence, true, t('hub.select_documents.driving_licence_details.northern_ireland') %>
+                  <legend><span class="form-label"><%= t 'hub.select_documents.where_driving_licence_issued' %></span></legend>
+                  <label class="block-label selection-button-checkbox" for="driving_licence">
+                    <%= f.check_box :driving_licence %><%= t('hub.select_documents.driving_licence_details.great_britain') %>
+                  </label>
+                  <label class="block-label selection-button-checkbox" for="ni_driving_licence">
+                    <%= f.check_box :ni_driving_licence %><%= t('hub.select_documents.driving_licence_details.northern_ireland') %>
+                  </label>
+
                 </fieldset>
             <% end %>
 
@@ -48,7 +51,7 @@
 
         <div class="actions">
           <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
-          <%= link_to t('hub.select_documents.neither_documents') %>
+          <%= link_to t('hub.select_documents.neither_documents'), other_identity_documents_path %>
         </div>
     <% end %>
 

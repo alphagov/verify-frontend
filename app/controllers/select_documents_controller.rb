@@ -13,15 +13,23 @@ class SelectDocumentsController < ApplicationController
     if is_in_b_group?
       @form = PhotoDocumentsForm.new(params['photo_documents_form'] || {})
       if @form.valid?
-        # report_to_analytics('Select Documents Next')
+        report_to_analytics('Select Documents Next')
         selected_answer_store.store_selected_answers('documents', @form.selected_answers)
-        redirect_to select_phone_path
+        if @form.further_id_information_required?
+          redirect_to other_identity_documents_path
+        else
+          redirect_to select_phone_path
+        end
+      else
+        flash.now[:errors] = @form.errors.full_messages.join(', ')
+        render :photo_identity_documents
       end
     else
       @form = SelectDocumentsForm.new(params['select_documents_form'] || {})
       if @form.valid?
         report_to_analytics('Select Documents Next')
         selected_answer_store.store_selected_answers('documents', @form.selected_answers)
+
         if documents_eligibility_checker.any?(selected_evidence, current_identity_providers)
           redirect_to select_phone_path
         else
@@ -32,7 +40,6 @@ class SelectDocumentsController < ApplicationController
         render :index
       end
     end
-
   end
 
   def unlikely_to_verify
@@ -47,6 +54,7 @@ class SelectDocumentsController < ApplicationController
   end
 
 private
+
   def alternative_name_split_questions
     ab_test_cookie = Cookies.parse_json(cookies[CookieNames::AB_TEST])['split_questions']
     if AB_TESTS['split_questions']
