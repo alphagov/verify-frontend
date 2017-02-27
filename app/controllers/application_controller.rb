@@ -70,19 +70,6 @@ class ApplicationController < ActionController::Base
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: idp_entity_id }.to_json
   end
 
-  def alternative_name
-    ab_test_cookie = Cookies.parse_json(cookies[CookieNames::AB_TEST])['select_documents_v2']
-    if AB_TESTS['select_documents_v2']
-      AB_TESTS['select_documents_v2'].alternative_name(ab_test_cookie)
-    else
-      'default'
-    end
-  end
-
-  def is_in_b_group?
-    alternative_name == 'select_documents_v2_new_questions_profile_change'
-  end
-
 private
 
   def uri_with_query(path, query_string)
