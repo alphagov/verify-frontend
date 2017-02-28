@@ -12,7 +12,8 @@ class StubApi < Sinatra::Base
       "idps":[{
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one"
-      }]
+      }],
+      "levelsOfAssurance":["LEVEL_2"]
     }'
   end
 
