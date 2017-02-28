@@ -58,7 +58,8 @@ module ApiTestHelper
         'transactionSimpleId' => 'test-rp',
         'sessionStartTime' => '32503680000000',
         'sessionId' => default_session_id,
-        'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }]
+        'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }],
+        'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
     }
   end
 
