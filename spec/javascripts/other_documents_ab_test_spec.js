@@ -48,6 +48,9 @@ describe("Other Documents Form", function () {
         this.selectYesNonUKDoc = function () {
             answerQuestion('non_uk_id_document', true);
         };
+        this.selectNoValidDrivingLicence = function () {
+            answerQuestion('non_uk_id_document', false);
+        };
     });
 
     afterEach(function () {
@@ -68,6 +71,15 @@ describe("Other Documents Form", function () {
         expectErrorMessage('Please select the documents you have');
 
         this.selectYesNonUKDoc()
+
+        expectNoError();
+    });
+
+    it("should clear errors when no valid driving licence selected", function () {
+        submitForm();
+        expectErrorMessage('Please select the documents you have');
+
+        this.selectNoValidDrivingLicence()
 
         expectNoError();
     });
