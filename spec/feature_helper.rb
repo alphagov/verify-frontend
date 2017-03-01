@@ -101,7 +101,9 @@ module FeatureHelper
       transaction_simple_id: 'test-rp',
       start_time: start_time_in_millis,
       verify_session_id: default_session_id,
-      identity_providers: idps)
+      identity_providers: idps,
+      requested_loa: 'LEVEL_2'
+    )
     cookie_hash
   end
 
