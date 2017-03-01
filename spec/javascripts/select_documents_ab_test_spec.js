@@ -20,10 +20,10 @@ describe("Photo Documents Form", function () {
         '<div id="driving_licence_details" class="form-group panel panel-border-narrow js-hidden">' +
         '<fieldset>' +
         '<legend><span class="form-label">Where was your driving licence issued?</span></legend>' +
-        '<label class="block-label selection-button-checkbox" for="driving_licence">' +
+        '<label class="block-label selection-button-checkbox" for="photo_documents_form_driving_licence">' +
         '<input name="photo_documents_form[driving_licence]" type="hidden" value="0" /><input type="checkbox" value="1" name="photo_documents_form[driving_licence]" id="photo_documents_form_driving_licence" />Great Britain' +
         '</label>' +
-        '<label class="block-label selection-button-checkbox" for="ni_driving_licence">' +
+        '<label class="block-label selection-button-checkbox" for="photo_documents_form_ni_driving_licence">' +
         '<input name="photo_documents_form[ni_driving_licence]" type="hidden" value="0" /><input type="checkbox" value="1" name="photo_documents_form[ni_driving_licence]" id="photo_documents_form_ni_driving_licence" />Northern Ireland' +
         '</label>' +
         '</fieldset>' +
@@ -85,7 +85,7 @@ describe("Photo Documents Form", function () {
             answerQuestion('any_driving_licence', false);
         };
         this.selectGBDrivingLicence = function () {
-            photoDocumentsForm.find('input[name="photo_documents_form[driving_licence]"]').trigger('click');
+            photoDocumentsForm.find('input[name="photo_documents_form[driving_licence]"]').prop('checked', true).trigger('click')
         };
     });
 
@@ -146,6 +146,15 @@ describe("Photo Documents Form", function () {
         this.selectNoValidDrivingLicence();
         submitForm();
         expectErrorMessage('Please select the documents you have');
+    });
+
+    it("should clear error when erroneous driving license state is fixed", function() {
+       this.selectYesValidDrivingLicence();
+       this.selectYesPassport();
+       submitForm();
+       expectErrorMessage('Please select the documents you have');
+       this.selectNoValidDrivingLicence();
+       expectNoError();
     });
     
     it("should clear errors when driving licence details are given", function () {
