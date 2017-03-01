@@ -27,10 +27,10 @@
             <%= content_tag :div, id: 'driving_licence_details', class: hidden_form_question_class do %>
                 <fieldset>
                   <legend><span class="form-label"><%= t 'hub.select_documents.where_driving_licence_issued' %></span></legend>
-                  <label class="block-label selection-button-checkbox" for="driving_licence">
+                  <label class="block-label selection-button-checkbox" for="photo_documents_form_driving_licence">
                     <%= f.check_box :driving_licence %><%= t('hub.select_documents.driving_licence_details.great_britain') %>
                   </label>
-                  <label class="block-label selection-button-checkbox" for="ni_driving_licence">
+                  <label class="block-label selection-button-checkbox" for="photo_documents_form_ni_driving_licence">
                     <%= f.check_box :ni_driving_licence %><%= t('hub.select_documents.driving_licence_details.northern_ireland') %>
                   </label>
 
