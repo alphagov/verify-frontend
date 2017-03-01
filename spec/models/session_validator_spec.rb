@@ -11,7 +11,8 @@ describe SessionValidator do
 
   let(:session) {
     {
-      transaction_simple_id: 'simple-id'
+      transaction_simple_id: 'simple-id',
+      requested_loa: 'LEVEL_1'
     }
   }
 
@@ -20,7 +21,8 @@ describe SessionValidator do
       transaction_simple_id: 'simple-id',
       start_time: DateTime.now.to_i * 1000,
       verify_session_id: 'session_id',
-      identity_providers: [{ 'simple_id' => 'stub-idp-one' }]
+      identity_providers: [{ 'simple_id' => 'stub-idp-one' }],
+      requested_loa: 'LEVEL_1'
     }
   }
 
@@ -137,12 +139,23 @@ describe SessionValidator do
     expect(validation.message).to eql "Transaction simple ID can not be found in the user's session"
   end
 
+  it 'will fail validation if session is missing requested level of assurance' do
+    session = good_session
+    session.delete(:requested_loa)
+    session[:verify_session_id] = 'session_id'
+    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
+    validation = session_validator.validate(cookies, session)
+    expect(validation).to_not be_ok
+    expect(validation.type).to eql :something_went_wrong
+    expect(validation.message).to eql "Requested LOA can not be found in the user's session"
+  end
+
   it 'will log an error if the session cookie is getting too large' do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
     session = good_session
     session[:foo] = '1' * 3700
     logger = double(:logger)
-    stub_const("Rails", double(:rails, logger: logger))
+    stub_const('Rails', double(:rails, logger: logger))
     expect(logger).to receive(:error).with(/Session cookie is large/)
 
     validation = session_validator.validate(cookies, session)
