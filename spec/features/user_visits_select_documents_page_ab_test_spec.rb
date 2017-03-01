@@ -9,6 +9,10 @@ RSpec.feature 'When B group user visits document selection page' do
     visit '/select-documents'
   end
 
+  it 'includes the appropriate feedback source' do
+    expect_feedback_source_to_be(page, 'SELECT_DOCUMENTS_PAGE_PHOTO_DOCUMENTS', '/select-documents')
+  end
+
   it 'should have a header about photo identity documents' do
     expect(page).to have_content('Your photo identity document')
   end
