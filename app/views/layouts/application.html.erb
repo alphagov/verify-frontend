@@ -24,6 +24,7 @@
 <% content_for :content do %>
   <main id="content" tabindex="-1">
     <div class="grid-row">
+      <div style="float:left;padding:15px"><strong>Requested LOA:</strong> <%= session[:requested_loa] %></div>
       <%= render 'shared/available_languages' unless @hide_available_languages %>
     </div>
     <%= content_for?(:main) ? yield(:main) : yield %>

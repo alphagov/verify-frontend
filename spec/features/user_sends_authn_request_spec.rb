@@ -1,6 +1,7 @@
 require 'feature_helper'
 require 'api_test_helper'
 require 'models/session_proxy'
+require 'piwik_test_helper'
 
 RSpec.describe 'user sends authn requests' do
   let(:api_saml_endpoint) { api_uri('session') }
@@ -22,7 +23,7 @@ RSpec.describe 'user sends authn requests' do
 
       cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
       expected_cookies = CookieNames.session_cookies + [
-          CookieNames::VERIFY_LOCALE, CookieNames::AB_TEST
+        CookieNames::VERIFY_LOCALE, CookieNames::AB_TEST
       ]
 
       expect(cookies.to_hash.keys.to_set).to eql expected_cookies.to_set
@@ -34,6 +35,14 @@ RSpec.describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post-journey-hint'
       expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
+    end
+
+    it 'will report the LOA of the transaction to Piwik' do
+      stub_api_saml_endpoint
+      visit('/test-saml')
+      click_button 'saml-post'
+      stub_piwik_request = stub_piwik_report_loa_requested('LEVEL_1')
+      expect(stub_piwik_request).to have_been_made.once
     end
   end
 

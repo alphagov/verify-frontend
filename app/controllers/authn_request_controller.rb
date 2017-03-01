@@ -30,7 +30,9 @@ private
   end
 
   def set_requested_loa(levels_of_assurance)
-    session[:requested_loa] = levels_of_assurance.first
+    requested_loa = levels_of_assurance.first
+    session[:requested_loa] = requested_loa
+    FEDERATION_REPORTER.report_loa_requested(request, requested_loa)
   end
 
   def set_identity_providers(idps)

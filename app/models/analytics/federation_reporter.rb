@@ -13,14 +13,18 @@ module Analytics
     end
 
     def report_idp_registration(request, idp_name, idp_name_history, evidence, recommended)
-      cvars = Analytics::CustomVariable.build(:register_idp, idp_name).merge(
-        Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(',')))
+      cvars = Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(','))
 
       recommended_str = recommended ? '(recommended)' : '(not recommended)'
       list_of_evidence = evidence.sort.join(', ')
       action = "#{idp_name} was chosen for registration #{recommended_str} with evidence #{list_of_evidence}"
 
       @analytics_reporter.report_custom_variable(request, action, cvars)
+    end
+
+    def report_loa_requested(request, loa_requested)
+      cvars = Analytics::CustomVariable.build(:loa_requested, loa_requested)
+      @analytics_reporter.report_custom_variable(request, "LOA Requested - #{loa_requested}", cvars)
     end
 
     def report_sign_in_idp_selection(request, idp_display_name)

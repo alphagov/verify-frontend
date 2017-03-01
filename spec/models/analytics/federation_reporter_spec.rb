@@ -23,6 +23,19 @@ module Analytics
       end
     end
 
+    describe '#report_loa_requested' do
+      it 'should report the LOA of the transaction' do
+        requested_loa = 'LEVEL_1'
+        expect(analytics_reporter).to receive(:report_custom_variable)
+        .with(
+          request,
+          "LOA Requested - #{requested_loa}",
+          2 => ['LOA_REQUESTED', requested_loa]
+        )
+        federation_reporter.report_loa_requested(request, requested_loa)
+      end
+    end
+
     describe '#report_idp_registration' do
       idp_name = 'IDCorp'
       idp_history = ['Previous IdP', 'IDCorp']
@@ -30,12 +43,11 @@ module Analytics
 
       it 'should report correctly if IdP was recommended' do
         expect(analytics_reporter).to receive(:report_custom_variable)
-          .with(
-            request,
-            "#{idp_name} was chosen for registration (recommended) with evidence passport",
-            2 => ['REGISTER_IDP', idp_name],
-            5 => ['IDP_SELECTION', idp_history_str]
-          )
+        .with(
+          request,
+          "#{idp_name} was chosen for registration (recommended) with evidence passport",
+          5 => ['IDP_SELECTION', idp_history_str]
+        )
         federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), true)
       end
 
@@ -44,7 +56,6 @@ module Analytics
           .with(
             request,
             "#{idp_name} was chosen for registration (not recommended) with evidence passport",
-            2 => ['REGISTER_IDP', idp_name],
             5 => ['IDP_SELECTION', idp_history_str]
           )
         federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), false)
@@ -55,7 +66,6 @@ module Analytics
           .with(
             request,
             "#{idp_name} was chosen for registration (recommended) with evidence driving_licence, passport",
-            2 => ['REGISTER_IDP', idp_name],
             5 => ['IDP_SELECTION', idp_history_str]
           )
         federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport driving_licence), true)
