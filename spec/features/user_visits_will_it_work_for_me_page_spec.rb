@@ -8,7 +8,7 @@ RSpec.describe 'When the user visits the will it work for me page' do
 
   it 'includes the appropriate feedback source' do
     visit '/will-it-work-for-me'
-    expect_feedback_source_to_be(page, 'WILL_IT_WORK_FOR_ME_PAGE')
+    expect_feedback_source_to_be(page, 'WILL_IT_WORK_FOR_ME_PAGE', '/will-it-work-for-me')
   end
 
   it 'displays the page in Welsh' do

@@ -9,7 +9,7 @@ RSpec.describe 'When the user visits the forgot company page' do
   it 'includes the expected content' do
     visit '/forgot-company'
 
-    expect_feedback_source_to_be(page, 'FORGOT_COMPANY_PAGE')
+    expect_feedback_source_to_be(page, 'FORGOT_COMPANY_PAGE', '/forgot-company')
     expect(page).to have_content 'We can’t tell you which company verified you'
     expect(page).to have_link(I18n.t('navigation.back'))
   end

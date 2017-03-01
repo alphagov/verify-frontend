@@ -31,4 +31,8 @@ RSpec.feature 'When users visits other documents page' do
     expect(page).to have_current_path(select_phone_path)
     expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'non_uk_id_document' => false })
   end
+
+  it 'should show a feedback link' do
+    expect_feedback_source_to_be(page, 'OTHER_IDENTITY_DOCUMENTS_PAGE', '/other-identity-documents')
+  end
 end
