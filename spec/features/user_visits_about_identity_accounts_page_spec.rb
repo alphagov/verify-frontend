@@ -16,7 +16,7 @@ RSpec.describe 'When the user visits the about identity accounts page' do
   it 'includes the appropriate feedback source' do
     visit '/about-identity-accounts'
 
-    expect_feedback_source_to_be(page, 'ABOUT_IDENTITY_ACCOUNTS_PAGE')
+    expect_feedback_source_to_be(page, 'ABOUT_IDENTITY_ACCOUNTS_PAGE', '/about-identity-accounts')
   end
 
   it 'displays content in Welsh' do

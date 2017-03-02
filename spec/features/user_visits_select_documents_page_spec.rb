@@ -16,7 +16,7 @@ RSpec.feature 'When the user visits the select documents page' do
   it 'includes the appropriate feedback source' do
     visit '/select-documents'
 
-    expect_feedback_source_to_be(page, 'SELECT_DOCUMENTS_PAGE')
+    expect_feedback_source_to_be(page, 'SELECT_DOCUMENTS_PAGE', '/select-documents')
   end
 
   it 'redirects to the select phone page when user has a driving licence' do

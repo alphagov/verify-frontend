@@ -15,6 +15,7 @@ module FeedbackSourceMapper
       'REDIRECT_TO_IDP_WARNING_PAGE' => 'redirect_to_idp_warning',
       'MATCHING_ERROR_PAGE' => 'response_processing',
       'SELECT_DOCUMENTS_PAGE' => 'select_documents',
+      'SELECT_DOCUMENTS_PAGE_PHOTO_DOCUMENTS' => 'select_documents',
       'UNLIKELY_TO_VERIFY_PAGE' => 'unlikely_to_verify',
       'SELECT_PHONE_PAGE' => 'select_phone',
       'NO_MOBILE_PHONE' => 'no_mobile_phone',
@@ -27,7 +28,8 @@ module FeedbackSourceMapper
       'WILL_IT_WORK_FOR_ME_PAGE' => 'will_it_work_for_me',
       'MAY_NOT_WORK_IF_YOU_LIVE_OVERSEAS_PAGE' => 'may_not_work_if_you_live_overseas',
       'WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE' => 'why_might_this_not_work_for_me',
-      'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE' => 'will_not_work_without_uk_address'
+      'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE' => 'will_not_work_without_uk_address',
+      'OTHER_IDENTITY_DOCUMENTS_PAGE' => 'other_identity_documents'
   }.freeze
 
   def self.page_from_source(feedback_source, locale)

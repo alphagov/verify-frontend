@@ -11,7 +11,7 @@ RSpec.describe 'When the user visits the failed sign in page' do
   it 'includes expected content' do
     visit '/failed-sign-in'
 
-    expect_feedback_source_to_be(page, 'FAILED_SIGN_IN_PAGE')
+    expect_feedback_source_to_be(page, 'FAILED_SIGN_IN_PAGE', '/failed-sign-in')
     expect(page).to have_title("#{I18n.t('hub.failed_sign_in.title')} - GOV.UK Verify - GOV.UK")
     expect(page).to have_content I18n.t('hub.failed_sign_in.heading', display_name: 'IDCorp')
     expect(page).to have_content 'You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.'

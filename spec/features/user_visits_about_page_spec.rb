@@ -14,7 +14,7 @@ RSpec.describe 'When the user visits the about page' do
       visit '/about'
 
       expect(page).to have_content 'GOV.UK Verify is a secure service built to fight the growing problem of online identity theft.'
-      expect_feedback_source_to_be(page, 'ABOUT_PAGE')
+      expect_feedback_source_to_be(page, 'ABOUT_PAGE', '/about')
 
       expect(page).to have_link('Next', href: '/about-certified-companies')
       piwik_request = {

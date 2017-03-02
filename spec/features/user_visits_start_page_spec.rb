@@ -8,7 +8,7 @@ RSpec.describe 'When the user visits the start page' do
     visit '/start'
     expect(page).to have_content 'Sign in with GOV.UK Verify'
     expect(page).to have_css 'html[lang=en]'
-    expect_feedback_source_to_be(page, 'START_PAGE')
+    expect_feedback_source_to_be(page, 'START_PAGE', '/start')
   end
 
   it 'will display the start page in Welsh' do
@@ -115,7 +115,7 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'will not set ab_test cookie if already set' do
     set_session_and_session_cookies!
-    cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_with_logo', 'idp_ordering' => 'idp_ordering_no', 'select_documents_v2' => 'select_documents_v2_control' }.to_json))
+    cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_with_logo', 'split_questions' => 'split_questions_control', 'select_documents_v2' => 'select_documents_v2_control' }.to_json))
     set_cookies!(cookie_hash)
     page.set_rack_session(transaction_simple_id: 'test-rp')
     visit '/start'

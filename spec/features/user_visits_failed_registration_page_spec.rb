@@ -38,7 +38,7 @@ RSpec.describe 'When the user visits the failed registration page' do
     it 'includes expected content' do
       visit '/failed-registration'
 
-      expect_feedback_source_to_be(page, 'FAILED_REGISTRATION_PAGE')
+      expect_feedback_source_to_be(page, 'FAILED_REGISTRATION_PAGE', '/failed-registration')
       expect(page).to have_content 'IDCorp was unable to verify your identity'
       expect(page).to have_content 'There are a few reasons'
       expect(page).to have_content 'Contact IDCorp for more information'

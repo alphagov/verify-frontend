@@ -67,7 +67,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     visit '/redirect-to-idp-warning'
 
     expect(page).to have_title "You'll now be redirected - GOV.UK Verify - GOV.UK"
-    expect_feedback_source_to_be(page, 'REDIRECT_TO_IDP_WARNING_PAGE')
+    expect_feedback_source_to_be(page, 'REDIRECT_TO_IDP_WARNING_PAGE', '/redirect-to-idp-warning')
   end
 
   it 'supports the welsh language' do

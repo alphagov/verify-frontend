@@ -7,6 +7,7 @@ en:
     about_identity_accounts: about-identity-accounts
     about_choosing_a_company: about-choosing-a-company
     select_documents: select-documents
+    other_identity_documents: other-identity-documents
     select_phone: select-phone
     will_it_work_for_me: will-it-work-for-me
     no_mobile_phone: no-mobile-phone
@@ -116,10 +117,17 @@ en:
         <p>So we’ll now ask you some questions to check which companies can verify you. We’ll then send you to the website of the company you choose.</p>
     select_documents:
       title: Select all the documents you have
+      title_photo_documents: Your photo identity document
       explanation: Certified companies use information from different identity documents to verify you.
+      sub_heading: Certified companies use information from identity documents to verify you.
+      documents_from_other_countries: Some certified companies can use identity documents from other countries to verify you.
       no_documents_message: Your document choices have been set to ‘no’.
       legend: Do you have these documents with you?
+      highlight: The more identity documents you can provide now, the more likely it is that the company can verify you successfully.
       documents_option_yes: 'Yes'
+      documents_option_yes_expired: Yes, but it's expired
+      valid_UK_driving_licence: Do you have a valid UK photocard driving licence, full or provisional?
+      uk_passport: Do you have a UK passport?
       question:
         driving_licence: Great Britain (GB) photocard driving licence (full or provisional)
         ni_driving_licence: Northern Ireland (NI) photocard driving licence (full or provisional)
@@ -132,6 +140,15 @@ en:
       errors:
         no_selection: Please select the documents you have
         invalid_selection: Please check your selection
+        no_driving_licence_selection: Please select the driving licence you have
+      neither_documents: I don't have either of these documents
+      where_driving_licence_issued: Where was your driving licence issued?
+      driving_licence_details:
+        great_britain: Great Britain
+        northern_ireland: Northern Ireland
+    other_documents:
+      title_other_identity_documents: Other identity documents
+      non_uk_id_document: Do you have a non-UK passport, ID card and driving licence?
     select_phone:
       title: Do you have a mobile phone or tablet?
       explanation: Certified companies can send security codes to your mobile.

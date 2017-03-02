@@ -24,7 +24,7 @@ RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
   it 'includes the appropriate feedback source' do
     visit '/why-might-this-not-work-for-me'
 
-    expect_feedback_source_to_be(page, 'WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE')
+    expect_feedback_source_to_be(page, 'WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE', '/why-might-this-not-work-for-me')
   end
 
   it 'redirects to select documents page if user clicks try to verify link' do

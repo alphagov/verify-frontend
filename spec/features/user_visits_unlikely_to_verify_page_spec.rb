@@ -30,6 +30,6 @@ RSpec.describe 'When the user visits the unlikely-to-verify page' do
   it 'includes the appropriate feedback source' do
     visit '/unlikely-to-verify'
 
-    expect_feedback_source_to_be(page, 'UNLIKELY_TO_VERIFY_PAGE')
+    expect_feedback_source_to_be(page, 'UNLIKELY_TO_VERIFY_PAGE', '/unlikely-to-verify')
   end
 end
