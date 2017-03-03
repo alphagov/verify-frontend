@@ -27,14 +27,16 @@ RSpec.describe 'user sends authn requests' do
       ]
 
       expect(cookies.to_hash.keys.to_set).to eql expected_cookies.to_set
+      expect(page.get_rack_session['transaction_supports_eidas']).to eql false
     end
 
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
       set_journey_hint_cookie('http://idcorp.com')
-      stub_api_saml_endpoint
+      stub_api_saml_endpoint(transaction_supports_eidas: true)
       visit('/test-saml')
       click_button 'saml-post-journey-hint'
       expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
+      expect(page.get_rack_session['transaction_supports_eidas']).to eql true
     end
 
     it 'will redirect the user to /choose-a-country for an eidas journey where eidas is enabled' do
@@ -44,6 +46,7 @@ RSpec.describe 'user sends authn requests' do
       click_button 'saml-post-eidas'
 
       expect(page).to have_title 'Choose a country - GOV.UK Verify - GOV.UK'
+      expect(page.get_rack_session['transaction_supports_eidas']).to eql true
     end
 
     it 'will render the something went wrong page for an eidas journey where eidas is disabled' do
@@ -54,6 +57,7 @@ RSpec.describe 'user sends authn requests' do
       click_button 'saml-post-eidas'
 
       expect(page).to have_content 'Sorry, something went wrong'
+      expect(page.get_rack_session['transaction_supports_eidas']).to eql false
     end
   end
 
