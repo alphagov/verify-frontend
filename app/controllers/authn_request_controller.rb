@@ -15,6 +15,7 @@ class AuthnRequestController < SamlController
     if params['journey_hint'].present?
       redirect_to confirm_your_identity_path
     elsif params['eidas_journey'].present?
+      raise StandardError, 'Users session does not support eIDAS journeys' unless response.transaction_supports_eidas
       redirect_to choose_a_country_path
     else
       redirect_to start_path

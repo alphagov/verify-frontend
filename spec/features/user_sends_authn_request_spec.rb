@@ -37,13 +37,23 @@ RSpec.describe 'user sends authn requests' do
       expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
     end
 
-    it 'will redirect the user to /choose-a-country for an eidas journey' do
-      stub_api_saml_endpoint
+    it 'will redirect the user to /choose-a-country for an eidas journey where eidas is enabled' do
+      stub_api_saml_endpoint(transaction_supports_eidas: true)
 
       visit('/test-saml')
       click_button 'saml-post-eidas'
 
       expect(page).to have_title 'Choose a country - GOV.UK Verify - GOV.UK'
+    end
+
+    it 'will render the something went wrong page for an eidas journey where eidas is disabled' do
+      stub_api_saml_endpoint(transaction_supports_eidas: false)
+      stub_transactions_list
+
+      visit('/test-saml')
+      click_button 'saml-post-eidas'
+
+      expect(page).to have_content 'Sorry, something went wrong'
     end
   end
 

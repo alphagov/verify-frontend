@@ -44,22 +44,23 @@ module ApiTestHelper
     }
   end
 
-  def stub_api_saml_endpoint
+  def stub_api_saml_endpoint(options = {})
     authn_request_body = {
         PARAM_SAML_REQUEST => 'my-saml-request',
         PARAM_RELAY_STATE => 'my-relay-state',
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
-    stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: session.to_json, status: 201)
+    stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: session(options).to_json, status: 201)
   end
 
-  def session
+  def session(options = {})
     {
         'transactionSimpleId' => 'test-rp',
         'sessionStartTime' => '32503680000000',
         'sessionId' => default_session_id,
         'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }],
-        'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
+        'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2),
+        'transactionSupportsEidas' => options.fetch(:transaction_supports_eidas, false)
     }
   end
 
