@@ -32,3 +32,11 @@ def stub_piwik_report_loa_requested(loa_requested)
   }
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
 end
+
+def stub_piwik_report_loa_achieved(loa_achieved)
+  piwik_request = {
+    '_cvar' => "{\"3\":[\"LOA_ACHIEVED\",\"#{loa_achieved}\"]}",
+    'action_name' => "LOA Achieved - #{loa_achieved}"
+  }
+  stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))
+end

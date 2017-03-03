@@ -12,11 +12,10 @@ module Analytics
     describe '#report_sign_in_idp_selection' do
       it 'should build correct report' do
         idp_display_name = 'IDCorp'
-        expect(analytics_reporter).to receive(:report_custom_variable)
+        expect(analytics_reporter).to receive(:report)
           .with(
             request,
-            "Sign In - #{idp_display_name}",
-            3 => ['SIGNIN_IDP', idp_display_name]
+            "Sign In - #{idp_display_name}"
           )
 
         federation_reporter.report_sign_in_idp_selection(request, idp_display_name)
@@ -33,6 +32,19 @@ module Analytics
           2 => ['LOA_REQUESTED', requested_loa]
         )
         federation_reporter.report_loa_requested(request, requested_loa)
+      end
+    end
+
+    describe '#report_loa_achieved' do
+      it 'should report the LOA achieved at the IDP' do
+        loa_achieved = 'LEVEL_1'
+        expect(analytics_reporter).to receive(:report_custom_variable)
+        .with(
+          request,
+          "LOA Achieved - #{loa_achieved}",
+          3 => ['LOA_ACHIEVED', loa_achieved]
+        )
+        federation_reporter.report_loa_achieved(request, loa_achieved)
       end
     end
 

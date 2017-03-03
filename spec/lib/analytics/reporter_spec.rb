@@ -36,14 +36,14 @@ module Analytics
       expect(client).to receive(:report).with(
         piwik_hash(
           site_id,
-          '_cvar' => '{"3":["SIGNIN_IDP","http://idcorp.com"]}',
+          '_cvar' => '{"1":["SOME_VAR","a-value"]}',
           'urlref' => 'http://www.example.com',
           'ref' => 'http://www.example.com',
           '_id' => 'VISITOR_ID',
         ),
         piwik_headers
       )
-      reporter.report_custom_variable(request, action_name, '3' => ['SIGNIN_IDP', 'http://idcorp.com'])
+      reporter.report_custom_variable(request, action_name, '1' => ['SOME_VAR', 'a-value'])
     end
 
     it 'should report all mandatory and exclude optional parameters' do

@@ -1,5 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
+require 'piwik_test_helper'
 
 RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   let(:session_id) do
@@ -28,17 +29,19 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   end
 
   it 'will redirect the user to /confirmation when successfully registered' do
-    api_request = stub_api_authn_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => true)
+    api_request = stub_api_authn_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => true, 'loaAchieved' => 'LEVEL_2')
     stub_session
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+    piwik_cvar_request = stub_piwik_report_loa_achieved('LEVEL_2')
 
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/confirmation'
     expect(api_request).to have_been_made.once
-    piwik_request = { 'action_name' => 'Success - REGISTER_WITH_IDP' }
-    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+    expect(a_request(:get, INTERNAL_PIWIK.url)
+      .with(query: hash_including('action_name' => 'Success - REGISTER_WITH_IDP'))).to have_been_made.once
+    expect(piwik_cvar_request).to have_been_made.once
   end
 
   it 'will redirect the user to /failed-registration when they cancel at the IDP' do
@@ -46,7 +49,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
       transaction_simple_id: 'test-rp'
     )
-    api_request = stub_api_authn_response(session_id, 'idpResult' => 'CANCEL', 'isRegistration' => true)
+    api_request = stub_api_authn_response(session_id, 'idpResult' => 'CANCEL', 'isRegistration' => true, 'loaAchieved' => nil)
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
@@ -59,7 +62,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
       transaction_simple_id: 'test-rp'
     )
-    api_request = stub_api_authn_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => true)
+    api_request = stub_api_authn_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => true, 'loaAchieved' => nil)
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
@@ -68,7 +71,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   end
 
   it 'will redirect the user to /failed-sign-in when they failed sign in at the IDP' do
-    api_request = stub_api_authn_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => false)
+    api_request = stub_api_authn_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => false, 'loaAchieved' => nil)
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' })
 
@@ -85,12 +88,14 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   it 'will redirect the user to /response-processing on successful sign in at the IDP' do
     stub_session
     stub_matching_outcome
-    api_request = stub_api_authn_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => false)
+    api_request = stub_api_authn_response(session_id, 'idpResult' => 'SUCCESS', 'isRegistration' => false, 'loaAchieved' => 'LEVEL_2')
+    piwik_cvar_request = stub_piwik_report_loa_achieved('LEVEL_2')
 
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
     expect(page).to have_current_path '/response-processing'
     expect(api_request).to have_been_made.once
+    expect(piwik_cvar_request).to have_been_made.once
   end
 end

@@ -139,6 +139,7 @@ describe SessionProxy do
         .and_return(
           'idpResult' => 'some-location',
           'isRegistration' => false,
+          'loaAchieved' => 'LEVEL_2'
         )
 
       response = session_proxy.idp_authn_response(session_id, 'saml-response', 'relay-state')
@@ -146,6 +147,7 @@ describe SessionProxy do
       attributes = {
         idp_result: 'some-location',
         is_registration: false,
+        loa_achieved: 'LEVEL_2'
       }
       expect(response).to have_attributes(attributes)
     end
@@ -161,6 +163,23 @@ describe SessionProxy do
       expect {
         session_proxy.idp_authn_response(session_id, 'saml-response', 'relay-state')
       }.to raise_error Api::Response::ModelError, "Idp result can't be blank, Is registration is not included in the list"
+    end
+
+    it 'should raise an error when loa_achieved is not an accepted value' do
+      ip_address = '1.2.3.4'
+      expected_request = { 'samlResponse' => 'saml-response', 'relayState' => 'relay-state', SessionProxy::PARAM_ORIGINATING_IP => ip_address }
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect(api_client).to receive(:put)
+        .with(endpoint(SessionProxy::IDP_AUTHN_RESPONSE_SUFFIX), expected_request)
+        .and_return(
+          'idpResult' => 'some-location',
+          'isRegistration' => false,
+          'loaAchieved' => 'something',
+        )
+
+      expect {
+        session_proxy.idp_authn_response(session_id, 'saml-response', 'relay-state')
+      }.to raise_error Api::Response::ModelError, 'Loa achieved is not included in the list'
     end
   end
 

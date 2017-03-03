@@ -15,6 +15,7 @@ class AuthnResponseController < SamlController
     case response.idp_result
     when 'SUCCESS'
       report_to_analytics("Success - #{user_state}")
+      FEDERATION_REPORTER.report_loa_achieved(request, response.loa_achieved)
       redirect_to response.is_registration ? confirmation_path : response_processing_path
     when 'CANCEL'
       report_to_analytics("Cancel - #{user_state}")
