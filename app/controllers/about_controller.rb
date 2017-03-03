@@ -7,6 +7,7 @@ class AboutController < ApplicationController
       current_transaction,
       request
     )
+    FEDERATION_REPORTER.report_loa_requested(request, session[:requested_loa])
     @tailored_text = current_transaction.tailored_text
   end
 

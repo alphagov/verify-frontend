@@ -1,5 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
+require 'piwik_test_helper'
 
 RSpec.describe 'user selects an IDP on the sign in page' do
   def given_api_requests_have_been_mocked!
@@ -8,12 +9,14 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
   end
 
-  def then_custom_variable_reported_for_sign_in
-    piwik_request = {
+  def then_custom_variables_are_reported_to_piwik
+    user_action_piwik_request = {
       '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"]}",
       'action_name' => 'The No option was selected on the introduction page',
     }
-    expect(a_piwik_request.with(query: hash_including(piwik_request))).to have_been_made.once
+    loa_requested_piwik_request = stub_piwik_report_loa_requested('LEVEL_2')
+    expect(a_piwik_request.with(query: hash_including(user_action_piwik_request))).to have_been_made.once
+    expect(loa_requested_piwik_request).to have_been_made.once
   end
 
   def given_im_on_the_sign_in_page(locale = 'en')
@@ -82,7 +85,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
-      then_custom_variable_reported_for_sign_in
+      then_custom_variables_are_reported_to_piwik
       expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
       when_i_select_an_idp
       then_im_at_the_idp
@@ -104,7 +107,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
-      then_custom_variable_reported_for_sign_in
+      then_custom_variables_are_reported_to_piwik
       when_i_select_an_idp
       then_im_at_the_interstitial_page
       when_i_choose_to_continue
@@ -116,7 +119,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page 'cy'
-      then_custom_variable_reported_for_sign_in
+      then_custom_variables_are_reported_to_piwik
       when_i_select_an_idp
       then_im_at_the_interstitial_page 'cy'
     end
@@ -125,7 +128,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
-      then_custom_variable_reported_for_sign_in
+      then_custom_variables_are_reported_to_piwik
 
       first('input[value="http://idcorp.com"]', visible: false).set('bob')
       when_i_select_an_idp

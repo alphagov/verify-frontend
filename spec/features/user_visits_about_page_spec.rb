@@ -1,5 +1,6 @@
 require 'feature_helper'
 require 'cookie_names'
+require 'piwik_test_helper'
 
 RSpec.describe 'When the user visits the about page' do
   before(:each) do
@@ -21,7 +22,9 @@ RSpec.describe 'When the user visits the about page' do
           '_cvar' => '{"1":["RP","analytics description for test-rp"]}',
           'action_name' => 'The Yes option was selected on the start page',
       }
+      loa_requested_piwik_request = stub_piwik_report_loa_requested('LEVEL_2')
       expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+      expect(loa_requested_piwik_request).to have_been_made.once
     end
 
     it 'will display the about page in Welsh' do
