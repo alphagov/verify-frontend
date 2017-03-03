@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
-if [ -a 'tmp/stub-api.pid' ]
+
+if [ -a './tmp/stub_api.pid' ]
 then
-  kill "$(cat tmp/stub-api.pid)"
+  kill "$(< ./tmp/stub_api.pid)"
+  rm ./tmp/stub_api.pid
 fi
 
-if [ -a 'tmp/puma.pid' ]
+if [ -a './tmp/puma.pid' ]
 then
-  kill "$(cat tmp/puma.pid)"
+  kill "$(< ./tmp/puma.pid)"
+  rm ./tmp/puma.pid
 fi
+
