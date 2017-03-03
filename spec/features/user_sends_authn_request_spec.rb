@@ -36,6 +36,15 @@ RSpec.describe 'user sends authn requests' do
       click_button 'saml-post-journey-hint'
       expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
     end
+
+    it 'will redirect the user to /choose-a-country for an eidas journey' do
+      stub_api_saml_endpoint
+
+      visit('/test-saml')
+      click_button 'saml-post-eidas'
+
+      expect(page).to have_title 'Choose a country - GOV.UK Verify - GOV.UK'
+    end
   end
 
   context 'and it is not received successfully' do

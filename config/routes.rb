@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
     get 'cookies', to: 'static#cookies', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
+    get 'choose_a_country', to: 'choose_a_country#choose_a_country', as: :choose_a_country
     get 'confirmation', to: 'confirmation#index', as: :confirmation
     get 'failed_registration', to: 'failed_registration#index', as: :failed_registration
     get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in

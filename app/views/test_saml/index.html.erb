@@ -21,6 +21,12 @@
   <%= hidden_field_tag('journey_hint', 'my-journey-hint') %>
   <div><%= submit_tag 'saml-post-journey-hint' %></div>
 <% end -%>
+<%= form_tag('/SAML2/SSO') do -%>
+    <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
+    <%= hidden_field_tag('RelayState', 'my-relay-state') %>
+    <%= hidden_field_tag('eidas_journey', 'true') %>
+    <div><%= submit_tag 'saml-post-eidas' %></div>
+<% end -%>
 <%= form_tag('/SAML2/SSO/Response/POST') do -%>
     <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
     <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
