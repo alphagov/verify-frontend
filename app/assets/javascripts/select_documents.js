@@ -21,7 +21,6 @@
       // Un check "I don't have documents" if the user selects a document
       var $checkbox = selectDocuments.$form.find('.js-no-docs:checked');
       $checkbox.prop('checked',false);
-      $checkbox.parent('.block-label').removeClass('selected');
     },
     speakWarningMessage: function(){
       // let screenreader users know their choices have changed by reading a notice

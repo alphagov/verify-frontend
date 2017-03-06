@@ -39,7 +39,7 @@
                 // message remains for the section even if it's hidden by the user selecting "Yes" to "Have you lived in the UK for the last 12 months?"
                 willItWorkForMe.validator.element('#will_it_work_for_me_form_not_resident_reason_movedrecently');
                 willItWorkForMe.$notResidentReasonSection.addClass('js-hidden').removeClass('error')
-                    .find('.selected').removeClass('selected').find('input').prop('checked', false);
+                    .find('input').prop('checked', false);
             }
         },
         notLivedInTheUKFor12Months: function () {

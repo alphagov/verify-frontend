@@ -6,7 +6,6 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require govuk/selection-buttons
 //= require govuk/shim-links-with-button-role
 //= require_tree .
 //= require piwik
@@ -22,10 +21,6 @@ window.GOVUK.furtherInformation.init();
 window.GOVUK.interstitialQuestion.init();
 
 $(function () {
-  // Use GOV.UK selection-buttons.js to set selected and focused states for block labels
-  var $blockLabelInput = $(".block-label").find("input[type='radio'],input[type='checkbox']");
-  new GOVUK.SelectionButtons($blockLabelInput);
-
   window.GOVUK.validation.attach();
   window.GOVUK.signin.attach();
   window.GOVUK.autoSubmitForm.attach();

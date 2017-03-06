@@ -9,14 +9,14 @@
       if (mobilePhoneState === undefined) {
         selectPhone.$smartphoneQuestion.add(selectPhone.$landlineQuestion)
           .addClass('js-hidden', true)
-          .find('.selected').removeClass('selected').find('input').prop('checked',false);
+          .find('input').prop('checked',false);
       } else if (mobilePhoneState === 'true') {
         selectPhone.$smartphoneQuestion.removeClass('js-hidden');
         selectPhone.$landlineQuestion.addClass('js-hidden').removeClass('error')
-          .find('.selected').removeClass('selected').find('input').prop('checked',false);
+          .find('input').prop('checked',false);
       } else if (mobilePhoneState === 'false') {
         selectPhone.$smartphoneQuestion.addClass('js-hidden').removeClass('error')
-          .find('.selected').removeClass('selected').find('input').prop('checked',false);
+          .find('input').prop('checked',false);
         selectPhone.$landlineQuestion.removeClass('js-hidden');
       }
       selectPhone.$form.find('.form-group').removeClass('error');
