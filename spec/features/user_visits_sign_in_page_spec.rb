@@ -6,17 +6,16 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   def given_api_requests_have_been_mocked!
     stub_session_select_idp_request(encrypted_entity_id)
     stub_session_idp_authn_request(originating_ip, location, false)
-    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+    @user_action_piwik_request = stub_piwik_request(
+      '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"]}",
+      'action_name' => 'The No option was selected on the introduction page',
+      )
+    @loa_requested_piwik_request = stub_piwik_report_loa_requested('LEVEL_2')
   end
 
   def then_custom_variables_are_reported_to_piwik
-    user_action_piwik_request = {
-      '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"]}",
-      'action_name' => 'The No option was selected on the introduction page',
-    }
-    loa_requested_piwik_request = stub_piwik_report_loa_requested('LEVEL_2')
-    expect(a_piwik_request.with(query: hash_including(user_action_piwik_request))).to have_been_made.once
-    expect(loa_requested_piwik_request).to have_been_made.once
+    expect(@user_action_piwik_request).to have_been_made.once
+    expect(@loa_requested_piwik_request).to have_been_made.once
   end
 
   def given_im_on_the_sign_in_page(locale = 'en')
@@ -26,10 +25,6 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
   def when_i_select_an_idp
     click_button(idp_display_name)
-  end
-
-  def a_piwik_request
-    a_request(:get, INTERNAL_PIWIK.url)
   end
 
   def then_im_at_the_idp
@@ -42,10 +37,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
              .with(body: { 'entityId' => idp_entity_id, 'originatingIp' => originating_ip, 'registration' => false })).to have_been_made.once
     expect(a_request(:get, api_uri(idp_authn_request_endpoint(default_session_id)))
              .with(headers: { 'X_FORWARDED_FOR' => originating_ip })).to have_been_made.once
-    piwik_request = {
-      'action_name' => 'Sign In - ' + idp_display_name,
-    }
-    expect(a_piwik_request.with(query: hash_including(piwik_request))).to have_been_made.once
+    expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name}")).to have_been_made.once
   end
 
   def and_the_language_hint_is_set
@@ -134,7 +126,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       when_i_select_an_idp
 
       expect(page).to have_content(I18n.translate('errors.page_not_found.title'))
-      expect(a_piwik_request.with(query: hash_including({}))).to have_been_made.once
+      expect(stub_piwik_request).to have_been_made.at_least_once
       expect(page.get_rack_session['selected_idp']).to be_nil
     end
   end
