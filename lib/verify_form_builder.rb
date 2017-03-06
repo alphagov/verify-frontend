@@ -1,16 +1,14 @@
 class VerifyFormBuilder < ActionView::Helpers::FormBuilder
   # Our custom radio / checkbox implementation
   def custom_radio_button key, value, text, attributes = {}
-    label "#{key}_#{value.to_s.parameterize}", class: 'block-label selection-button-radio' do
-      input = radio_button key, value, attributes
-      "#{input} #{text}".html_safe
-    end
+    input = radio_button key, value, attributes
+    label = label "#{key}_#{value.to_s.parameterize}", text
+    "<div class=\"multiple-choice\">#{input} #{label}</div>".html_safe
   end
 
   def custom_check_box key, attributes, true_value, false_value, text
-    label key, class: 'block-label selection-button-checkbox' do
-      input = check_box key, attributes, true_value, false_value
-      "#{input} #{text}".html_safe
-    end
+    input = check_box key, attributes, true_value, false_value
+    label = label key, text
+    "<div class=\"multiple-choice\">#{input} #{label}</div>".html_safe
   end
 end
