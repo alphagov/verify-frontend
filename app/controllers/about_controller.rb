@@ -1,4 +1,4 @@
-class AboutController < ApplicationController
+class AboutController < ConfigurableJourneyController
   layout 'slides', except: [:choosing_a_company]
   include AbTestHelper
 
