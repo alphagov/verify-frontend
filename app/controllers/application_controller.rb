@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :store_originating_ip
   after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
-  helper_method :next_page
   helper_method :transactions_list
   helper_method :public_piwik
 
@@ -69,16 +68,6 @@ class ApplicationController < ActionController::Base
 
   def set_journey_hint(idp_entity_id)
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: idp_entity_id }.to_json
-  end
-
-  def next_page
-    journeys = {
-      about_path => about_certified_companies_path,
-      about_certified_companies_path => about_identity_accounts_path,
-      about_identity_accounts_path => about_choosing_a_company_path,
-      about_choosing_a_company_path => will_it_work_for_me_path
-    }
-    journeys[request.path]
   end
 
 private
