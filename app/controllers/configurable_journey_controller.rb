@@ -3,12 +3,10 @@ class ConfigurableJourneyController < ApplicationController
 
   def next_page
     @journeys ||= Journeys.new do
-      {
-        about_path => about_certified_companies_path,
-        about_certified_companies_path => about_identity_accounts_path,
-        about_identity_accounts_path => about_choosing_a_company_path,
-        about_choosing_a_company_path => will_it_work_for_me_path
-      }
+      at about_path, next: about_certified_companies_path
+      at about_certified_companies_path, next: about_identity_accounts_path
+      at about_identity_accounts_path, next: about_choosing_a_company_path
+      at about_choosing_a_company_path, next: will_it_work_for_me_path
     end
     @journeys.get_path(request.path)
   end
