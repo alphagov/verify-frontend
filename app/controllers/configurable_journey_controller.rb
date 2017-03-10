@@ -21,6 +21,12 @@ class ConfigurableJourneyController < ApplicationController
       branch_at select_phone_submit_path,
         [:idps_available] => choose_a_certified_company_path,
         [:no_idps_available] => no_mobile_phone_path
+
+      branch_at select_documents_submit_path,
+        [:idps_available] => select_phone_path,
+        [:no_idps_available] => unlikely_to_verify_path,
+        [:further_documents_needed] => other_identity_documents_path,
+        [:no_further_documents_needed] => select_phone_path
     end
     @journeys.get_path(request.path, conditions)
   end
