@@ -6,11 +6,16 @@ class Journeys
     instance_eval(&blk)
   end
 
-  def get_path(path)
-    @journeys[path] || raise("Path not found: #{path}")
+  def get_path(path, conditions = [])
+    destination = @journeys[path] || raise("Path not found: #{path}")
+    destination[conditions] || raise("No matching conditions on path #{path} for #{conditions}")
   end
 
-  def at(path, params = {})
-    @journeys[path] = params.fetch(:next)
+  def at(path, params)
+    @journeys[path] = { [] => params.fetch(:next) }
+  end
+
+  def branch_at(path, branches)
+    @journeys[path] = branches
   end
 end

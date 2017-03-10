@@ -1,4 +1,4 @@
-class StartController < ApplicationController
+class StartController < ConfigurableJourneyController
   layout 'slides'
 
   def index
@@ -18,11 +18,8 @@ class StartController < ApplicationController
   def request_post
     @form = StartForm.new(params['start_form'] || {})
     if @form.valid?
-      if @form.registration?
-        redirect_to about_path, status: :see_other
-      else
-        redirect_to sign_in_path, status: :see_other
-      end
+      condition = @form.registration? ? :registration : :sign_in
+      redirect_to next_page([condition]), status: :see_other
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index
