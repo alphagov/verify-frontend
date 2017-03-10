@@ -17,6 +17,10 @@ class ConfigurableJourneyController < ApplicationController
         [:uk_address_but_not_resident] => may_not_work_if_you_live_overseas_path,
         [:no_uk_address] => will_not_work_without_uk_address_path,
         [:above_age_threshold_and_resident] => select_documents_path
+
+      branch_at select_phone_submit_path,
+        [:idps_available] => choose_a_certified_company_path,
+        [:no_idps_available] => no_mobile_phone_path
     end
     @journeys.get_path(request.path, conditions)
   end

@@ -1,4 +1,4 @@
-class SelectPhoneController < ApplicationController
+class SelectPhoneController < ConfigurableJourneyController
   def index
     @form = SelectPhoneForm.new({})
   end
@@ -8,11 +8,7 @@ class SelectPhoneController < ApplicationController
     if @form.valid?
       report_to_analytics('Phone Next')
       selected_answer_store.store_selected_answers('phone', @form.selected_answers)
-      if IDP_ELIGIBILITY_CHECKER.any?(selected_evidence, current_identity_providers)
-        redirect_to choose_a_certified_company_path
-      else
-        redirect_to no_mobile_phone_path
-      end
+      redirect_to next_page(IDP_ELIGIBILITY_CHECKER.any?(selected_evidence, current_identity_providers) ? [:idps_available] : [:no_idps_available])
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index
