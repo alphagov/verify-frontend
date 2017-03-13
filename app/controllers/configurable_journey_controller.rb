@@ -18,13 +18,19 @@ class ConfigurableJourneyController < ApplicationController
         [:no_uk_address] => will_not_work_without_uk_address_path,
         [:above_age_threshold_and_resident] => select_documents_path
 
+      branch_at select_documents_submit_path,
+        [:idps_available] => select_phone_path,
+        [:no_idps_available] => unlikely_to_verify_path,
+        [:further_documents_needed] => other_identity_documents_path,
+        [:no_further_documents_needed] => select_phone_path
+
       branch_at select_phone_submit_path,
         [:idps_available] => choose_a_certified_company_path,
         [:no_idps_available] => no_mobile_phone_path
 
-      branch_at select_documents_submit_path,
-        [:idps_available] => select_phone_path,
-        [:no_idps_available] => unlikely_to_verify_path
+      branch_at choose_a_certified_company_submit_path,
+        [] => redirect_to_idp_warning_path,
+        [:one_uk_doc] => redirect_to_idp_question_path
     end
     @journeys.get_path(request.path, conditions)
   end

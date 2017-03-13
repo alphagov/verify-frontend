@@ -25,11 +25,13 @@ module IdpEligibility
         ProfileFilter.new(all_profiles),
         ProfileFilter.new(document_profiles),
         idps_with_flag_set(profiles, 'send_hints'),
-        idps_with_flag_set(profiles, 'send_language_hint')
+        idps_with_flag_set(profiles, 'send_language_hint'),
+        idps_with_flag_set(profiles, 'show_interstitial_question')
       )
     end
 
-    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :demo_profiles, :all_profiles, :document_profiles, :idps_with_hints, :idps_with_language_hint)
+    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :demo_profiles, :all_profiles,
+                                      :document_profiles, :idps_with_hints, :idps_with_language_hint, :idps_with_interstitial_question)
 
   private
 

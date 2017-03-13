@@ -12,6 +12,9 @@ class RedirectToIdpWarningController < ApplicationController
     end
   end
 
+  def question
+  end
+
   def continue
     idp = decorated_idp
     if idp.viewable?

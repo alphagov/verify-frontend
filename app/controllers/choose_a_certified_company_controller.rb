@@ -1,4 +1,4 @@
-class ChooseACertifiedCompanyController < ApplicationController
+class ChooseACertifiedCompanyController < ConfigurableJourneyController
   def index
     grouped_identity_providers = IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
@@ -8,7 +8,7 @@ class ChooseACertifiedCompanyController < ApplicationController
   def select_idp
     select_viewable_idp(params.fetch('entity_id')) do |decorated_idp|
       session[:selected_idp_was_recommended] = IDP_RECOMMENDATION_GROUPER.recommended?(decorated_idp.identity_provider, selected_evidence, current_identity_providers, current_transaction_simple_id)
-      redirect_to redirect_to_idp_warning_path
+      redirect_to next_page(has_one_doc_and_show_interstitial_question(decorated_idp))
     end
   end
 
@@ -21,6 +21,17 @@ class ChooseACertifiedCompanyController < ApplicationController
       render 'about'
     else
       render 'errors/404', status: 404
+    end
+  end
+
+private
+
+  def has_one_doc_and_show_interstitial_question(decorated_idp)
+    uk_docs = [:passport, :driving_licence]
+    if (uk_docs - selected_evidence).size == 1 && IDP_INTERSTITIAL_QUESTION_CHECKER.enabled?(decorated_idp.simple_id)
+      [:one_uk_doc]
+    else
+      []
     end
   end
 end

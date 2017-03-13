@@ -126,6 +126,31 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql false
   end
 
+  it 'redirects to the redirect warning page with an additional question' do
+    given_a_session_with_one_doc_selected_answers
+    set_stub_federation_one_doc_idp_in_session
+    visit '/choose-a-certified-company'
+
+    within('#matching-idps') do
+      click_button 'Choose FancyPants'
+    end
+
+    expect(page).to have_current_path(redirect_to_idp_question_path)
+    expect(page).to have_content('Verifying with FancyPants')
+  end
+
+  it 'redirects to the redirect warning page without additional question for two docs' do
+    given_a_session_with_selected_answers
+    set_stub_federation_one_doc_idp_in_session
+    visit '/choose-a-certified-company'
+
+    within('#matching-idps') do
+      click_button 'Choose FancyPants'
+    end
+
+    expect(page).to have_current_path(redirect_to_idp_warning_path)
+  end
+
   it 'records details in session when a recommended IdP is selected' do
     given_a_session_with_selected_answers
     visit '/choose-a-certified-company'

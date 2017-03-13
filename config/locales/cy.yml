@@ -19,6 +19,7 @@ cy:
     why_companies: pam-cwmniau
     unlikely_to_verify: anhebygol-i-ddilysu
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
+    redirect_to_idp_question: ailgyfeirio-i-gwestiwn-idp
     privacy_notice: hysbysiad-preifatrwydd
     cookies: cwcis
     confirm_your_identity: cadarnhau-eich-hunaniaeth

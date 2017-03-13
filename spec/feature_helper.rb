@@ -123,6 +123,13 @@ module FeatureHelper
     page.set_rack_session(identity_providers: idps)
   end
 
+  def set_stub_federation_one_doc_idp_in_session
+    idps = [
+        { 'simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com' }
+    ]
+    page.set_rack_session(identity_providers: idps)
+  end
+
   def set_stub_federation_unavailable_in_session
     idps = [
         { 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
