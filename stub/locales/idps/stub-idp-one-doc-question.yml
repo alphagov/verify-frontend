@@ -25,6 +25,10 @@ en:
           <br/>Saturday and Sunday, 8am to 5pm
           <br/>Closed on bank holidays
         </p>
+      interstitial_question: |
+        <p>I have a question for you</p>
+        <h2 class="heading-medium">Are you sure you want to continue?</h2>
+        <p>We are mean and will not let you</p>
 cy:
   idps:
     stub-idp-one-doc-question:
@@ -46,3 +50,7 @@ cy:
           <br/>Saturday and Sunday, 8am to 5pm
           <br/>Closed on bank holidays
         </p>
+      interstitial_question: |
+        <p>I have a question for you</p>
+        <h2 class="heading-medium">Are you sure you want to continue?</h2>
+        <p>We are mean and will not let you</p>

@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
     get 'redirect_to_idp_question', to: 'redirect_to_idp_warning#question', as: :redirect_to_idp_question
+    post 'redirect_to_idp_question', to: 'redirect_to_idp_warning#question_continue', as: :redirect_to_idp_question_submit
     get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
     get 'cookies', to: 'static#cookies', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity

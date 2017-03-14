@@ -254,6 +254,9 @@ cy:
         requirements: "I gael eich dilysu gyda %{display_name}, byddwch angen:"
       other_ways_link: "ffyrdd eraill i %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
+    redirect_to_idp_question:
+      heading: Verifying with %{display_name}
+      warning: "%{display_name} may not be able to verify you"
     confirm_your_identity:
       title: Cadarnhau eich hunaniaeth
       use_other_idp: Os nad hwn yw’r cwmni a wnaeth eich dilysu, %{sign_in_link}.

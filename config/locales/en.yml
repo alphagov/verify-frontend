@@ -248,6 +248,9 @@ en:
         requirements: "To be verified with %{display_name}, you’ll need:"
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
+    redirect_to_idp_question:
+      heading: Verifying with %{display_name}
+      warning: "%{display_name} may not be able to verify you"
     confirm_your_identity:
       title: Confirm your identity
       use_other_idp: If this isn’t the company that verified you, %{sign_in_link}.

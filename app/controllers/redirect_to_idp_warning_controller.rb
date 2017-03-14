@@ -13,6 +13,8 @@ class RedirectToIdpWarningController < ApplicationController
   end
 
   def question
+    @idp = decorated_idp
+    @form = InterstitialQuestionForm.new({})
   end
 
   def continue
@@ -23,6 +25,10 @@ class RedirectToIdpWarningController < ApplicationController
     else
       something_went_wrong("Couldn't display IDP with entity id: #{idp.entity_id}")
     end
+  end
+
+  def question_continue
+    continue
   end
 
   def continue_ajax

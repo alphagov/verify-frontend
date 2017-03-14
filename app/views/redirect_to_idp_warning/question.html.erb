@@ -1,28 +1,43 @@
-Verifying with FancyPants
 
 <%= page_title 'hub.redirect_to_idp_warning.title' %>
 <% content_for :feedback_source, 'REDIRECT_TO_IDP_WARNING_PAGE' %>
 
 <div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'redirect_to_idp_warning', action: 'continue_ajax', locale: I18n.locale)  %>">
   <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.redirect_to_idp_warning.continue_to_idp', display_name: @idp.display_name %></h1>
-    <% if @recommended %>
-        <%= render partial: 'recommended', locals: { idp: @idp } %>
-    <% else %>
-        <%= render partial: 'non_recommended', locals: { idp: @idp } %>
-    <% end %>
+    <h1 class="heading-large"><%= t 'hub.redirect_to_idp_question.heading', display_name: @idp.display_name %></h1>
+    <%= @idp.interstitial_question.html_safe %>
 
-    <%= form_tag('', class: 'js-idp-form') do %>
-        <%= button_tag t('hub.redirect_to_idp_warning.continue_to_idp', display_name: @idp.display_name),
-                       class: 'button',
-                       id: 'continue-to-idp-button',
-                       type: 'submit'
-        %>
+    <%= form_for @form, url: '', html: {id: 'interstitial-question-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
+
+        <% if flash[:errors] %>
+            <div id="validation-error-message-no-js" class="validation-message form-group">
+              <p class="error"><%= flash[:errors] %></p>
+            </div>
+        <% end %>
+
+        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+            <fieldset>
+              <%= f.custom_radio_button :extra_info, true, t('hub.select_documents.documents_option_yes'), {required: true, data: { msg: t('hub.start.error_message')}} %>
+              <%= f.custom_radio_button :extra_info, false, t('option.no'), {required: true, data: { msg: t('hub.start.error_message')}} %>
+            </fieldset>
+        <% end %>
+
+        <div id="interstitial_question_details" class="js-hidden">
+              <p class=""><%= t 'hub.redirect_to_idp_question.warning', display_name: @idp.display_name %></p>
+        </div>
+
+        <div id="validation-error-message-js"></div>
     <% end %>
-    <% if user_has_no_docs_or_foreign_id_only? && @recommended %>
-        <%= other_ways(@idp) %>
-    <% end %>
+        <div class="form-group-tight">
+          <%= form_tag('', class: 'js-idp-form') do %>
+            <%= button_tag t('hub.redirect_to_idp_warning.continue_to_idp', display_name: @idp.display_name),
+                           class: 'button',
+                           id: 'continue-to-idp-button',
+                           type: 'submit'
+            %>
+          <% end %>
+        </div>
+
   </div>
   <%= render partial: 'shared/continue_to_idp_form' %>
 </div>
-
