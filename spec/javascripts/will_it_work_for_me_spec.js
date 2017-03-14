@@ -11,43 +11,43 @@ describe("Will it work for me form", function () {
         '<div id="above-age-threshold" class="form-group">' +
         '<fieldset class="inline">' +
         '<legend>Are you 20 or over?</legend>' +
-        '<label class="block-label" onclick="" for="age-yes">' +
+        '<div class="multiple-choice">' +
         '<input id="will_it_work_for_me_form_above_age_threshold_true" name="will_it_work_for_me_form[above_age_threshold]" type="radio" value="true">' +
-        '<span><span class="inner">&nbsp;</span></span>Yes' +
+        '<label for="age-yes">Yes' +
         '</label>' +
-        '<label class="block-label" onclick="" for="age-no">' +
+        '<div class="multiple-choice">' +
         '<input id="will_it_work_for_me_form_above_age_threshold_false" name="will_it_work_for_me_form[above_age_threshold]" type="radio" value="false">' +
-        '<span><span class="inner">&nbsp;</span></span>No' +
-        '</label>' +
+        '<label for="age-no">No</label>' +
+        '</div>' +
         '</fieldset>' +
         '</div>' +
         '<div id="resident_last_12_months" class="form-group">' +
         '<fieldset class="inline"><legend>Have you lived in the UK for the last 12 months?</legend>' +
-        '<label class="block-label" onclick="" for="resident-last-12-months">' +
+        '<div class="multiple-choice">' +
         '<input id="will_it_work_for_me_form_resident_last_12_months_true" name="will_it_work_for_me_form[resident_last_12_months]" type="radio" value="true">' +
-        '<span><span class="inner">&nbsp;</span></span>Yes' +
-        '</label>' +
-        '<label class="block-label" onclick="" for="not-resident-last-12-months">' +
+        '<label for="resident-last-12-months">Yes</label>' +
+        '</div>' +
+        '<div class="multiple-choice">' +
         '<input id="will_it_work_for_me_form_resident_last_12_months_false" name="will_it_work_for_me_form[resident_last_12_months]" type="radio" value="false">' +
-        '<span><span class="inner">&nbsp;</span></span>No' +
-        '</label>' +
+        '<label for="not-resident-last-12-months">No</label>' +
+        '</div>' +
         '</fieldset>' +
         '</div>' +
         '<div class="form-group" id="not_resident_reason">' +
         '<fieldset>' +
         '<legend>Which of these applies to you?</legend>' +
-        '<label class="block-label" onclick="" for="moved-to-uk-in-last-12-months">' +
+        '<div class="multiple-choice">' +
         '<input id="will_it_work_for_me_form_not_resident_reason_movedrecently" name="will_it_work_for_me_form[not_resident_reason]" type="radio" value="MovedRecently">' +
-        '<span><span class="inner">&nbsp;</span></span>I moved to the UK in the last 12 months' +
-        '</label>' +
-        '<label class="block-label" onclick="" for="has-uk-address">' +
+        '<label for="moved-to-uk-in-last-12-months">I moved to the UK in the last 12 months</label>' +
+        '</div>' +
+        '<div class="multiple-choice">' +
         '<input id="will_it_work_for_me_form_not_resident_reason_addressbutnotresident" name="will_it_work_for_me_form[not_resident_reason]" type="radio" value="AddressButNotResident">' +
-        '<span><span class="inner">&nbsp;</span></span>I have an address in the UK but I don&rsquo;t live there' +
-        '</label>' +
-        '<label class="block-label" onclick="" for="no-uk-address">' +
+        '<label for="has-uk-address">I have an address in the UK but I don&rsquo;t live there</label>' +
+        '</div>' +
+        '<div class="multiple-choice">' +
         '<input id="will_it_work_for_me_form_not_resident_reason_noaddress" name="will_it_work_for_me_form[not_resident_reason]" type="radio" value="NoAddress">' +
-        '<span><span class="inner">&nbsp;</span></span>I don&rsquo;t have a UK address' +
-        '</label>' +
+        '<label for="no-uk-address">I don&rsquo;t have a UK address</label>' +
+        '</div>' +
         '</fieldset>' +
         '</div>' +
         '<div id="validation-error-message-js"></div>' +
