@@ -1,4 +1,4 @@
-class SelectDocumentsController < ApplicationController
+class SelectDocumentsController < ConfigurableJourneyController
   def index
     @form = SelectDocumentsForm.new({})
   end
@@ -8,11 +8,8 @@ class SelectDocumentsController < ApplicationController
     if @form.valid?
       report_to_analytics('Select Documents Next')
       selected_answer_store.store_selected_answers('documents', @form.selected_answers)
-      if documents_eligibility_checker.any?(selected_evidence, current_identity_providers)
-        redirect_to select_phone_path
-      else
-        redirect_to unlikely_to_verify_path
-      end
+      idps_available = DOCUMENTS_ELIGIBILITY_CHECKER.any?(selected_evidence, current_identity_providers)
+      redirect_to next_page(idps_available ? [:idps_available] : [:no_idps_available])
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index
