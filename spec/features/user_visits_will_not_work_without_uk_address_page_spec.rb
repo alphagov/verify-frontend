@@ -18,6 +18,6 @@ RSpec.describe 'When the user visits the will-not-work-without-uk-address page' 
   it 'includes the appropriate feedback source' do
     visit '/will-not-work-without-uk-address'
 
-    expect_feedback_source_to_be(page, 'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE', '/will-not-work-without-uk-address')
+    expect_feedback_source_to_be(page, 'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE')
   end
 end

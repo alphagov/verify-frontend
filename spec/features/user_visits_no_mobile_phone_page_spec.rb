@@ -20,7 +20,7 @@ RSpec.describe 'When the user visits the select phone page' do
   it 'includes the appropriate feedback source' do
     visit '/no-mobile-phone'
 
-    expect_feedback_source_to_be(page, 'NO_MOBILE_PHONE', '/no-mobile-phone')
+    expect_feedback_source_to_be(page, 'NO_MOBILE_PHONE')
   end
 
   it 'includes other ways text' do
