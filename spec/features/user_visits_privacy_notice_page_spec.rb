@@ -17,6 +17,6 @@ RSpec.describe 'When the user visits the privacy notice page' do
 
   it 'includes the appropriate feedback source' do
     visit '/privacy-notice'
-    expect_feedback_source_to_be(page, 'PRIVACY_NOTICE_PAGE', '/privacy-notice')
+    expect_feedback_source_to_be(page, 'PRIVACY_NOTICE_PAGE')
   end
 end

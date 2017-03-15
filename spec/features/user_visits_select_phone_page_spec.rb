@@ -113,7 +113,7 @@ RSpec.describe 'When the user visits the select phone page' do
   it 'includes the appropriate feedback source' do
     visit '/select-phone'
 
-    expect_feedback_source_to_be(page, 'SELECT_PHONE_PAGE', '/select-phone')
+    expect_feedback_source_to_be(page, 'SELECT_PHONE_PAGE')
   end
 
   it 'displays the page in Welsh' do

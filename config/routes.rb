@@ -39,8 +39,6 @@ Rails.application.routes.draw do
     get 'select_documents', to: 'select_documents#index', as: :select_documents
     post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
     get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
-    get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
-    post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
     get 'select_phone', to: 'select_phone#index', as: :select_phone
     post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
     get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone

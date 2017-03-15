@@ -37,7 +37,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     it 'includes the appropriate feedback source' do
       visit '/confirm-your-identity'
-      expect_feedback_source_to_be(page, 'CONFIRM_YOUR_IDENTITY', '/confirm-your-identity')
+      expect_feedback_source_to_be(page, 'CONFIRM_YOUR_IDENTITY')
     end
 
     it 'includes rp display name in text' do

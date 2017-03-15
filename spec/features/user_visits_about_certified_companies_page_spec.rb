@@ -14,7 +14,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
   it 'includes the appropriate feedback source' do
     visit '/about-certified-companies'
 
-    expect_feedback_source_to_be(page, 'ABOUT_CERTIFIED_COMPANIES_PAGE', '/about-certified-companies')
+    expect_feedback_source_to_be(page, 'ABOUT_CERTIFIED_COMPANIES_PAGE')
   end
 
   it 'displays content in Welsh' do

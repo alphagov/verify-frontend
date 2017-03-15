@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the cookies page' do
 
   it 'includes the appropriate feedback source' do
     visit '/cookies'
-    expect_feedback_source_to_be(page, 'COOKIES_INFO_PAGE', '/cookies')
+    expect_feedback_source_to_be(page, 'COOKIES_INFO_PAGE')
   end
 
   it 'will allow robots to index' do

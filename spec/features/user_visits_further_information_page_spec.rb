@@ -31,7 +31,7 @@ RSpec.describe 'user visits further information page' do
     expect(page).to have_content I18n.t('hub.further_information.help_with_your', cycle_three_name: attribute_name)
     expect(page).to have_content 'Your National Insurance number can be found on'
     expect(page).to have_content I18n.t('hub.further_information.cancel', transaction_name: rp_name)
-    expect_feedback_source_to_be(page, 'CYCLE_3_PAGE', further_information_path)
+    expect_feedback_source_to_be(page, 'CYCLE_3_PAGE')
   end
 
   it 'will submit valid driving license number' do
