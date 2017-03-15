@@ -255,8 +255,16 @@ cy:
       other_ways_link: "ffyrdd eraill i %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
     redirect_to_idp_question:
-      heading: Verifying with %{display_name}
-      warning: "%{display_name} may not be able to verify you"
+      heading: Dilysu gyda %{display_name}
+      answer_yes: Ydw
+      answer_no: Na
+      warning_html: |
+        <p class="error-message">Efallai na fydd %{display_name} yn gallu eich dilysu</p>
+        <p>Rydym yn argymell eich bod yn %{choose_another_company_link}.</p>
+      choose_another_certified_company_link: dewis cwmni ardystiedig arall
+      identity_documents: Rydych angen eich dogfennau hunaniaeth gyda chi oherwydd bydd yn rhaid i chi ychwanegu eu manylion.
+      or_html: neu %{choose_another_company_link}
+      validation_message: Dylech ateb y cwestiwn
     confirm_your_identity:
       title: Cadarnhau eich hunaniaeth
       use_other_idp: Os nad hwn yw’r cwmni a wnaeth eich dilysu, %{sign_in_link}.

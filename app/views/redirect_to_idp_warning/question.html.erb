@@ -1,4 +1,3 @@
-
 <%= page_title 'hub.redirect_to_idp_warning.title' %>
 <% content_for :feedback_source, 'REDIRECT_TO_IDP_WARNING_PAGE' %>
 
@@ -17,27 +16,35 @@
 
         <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
             <fieldset>
-              <%= f.custom_radio_button :extra_info, true, t('hub.select_documents.documents_option_yes'), {required: true, data: { msg: t('hub.start.error_message')}} %>
-              <%= f.custom_radio_button :extra_info, false, t('option.no'), {required: true, data: { msg: t('hub.start.error_message')}} %>
+              <%= f.custom_radio_button :extra_info, true, t('hub.redirect_to_idp_question.answer_yes'), {required: true, data: { msg: t('hub.start.error_message')}} %>
+              <%= f.custom_radio_button :extra_info, false, t('hub.redirect_to_idp_question.answer_no'), {required: true, data: { msg: t('hub.start.error_message')}} %>
             </fieldset>
         <% end %>
 
-        <div id="interstitial_question_details" class="js-hidden">
-              <p class=""><%= t 'hub.redirect_to_idp_question.warning', display_name: @idp.display_name %></p>
-        </div>
-
-        <div id="validation-error-message-js"></div>
+        <!--<div id="validation-error-message-js"></div>-->
     <% end %>
-        <div class="form-group-tight">
-          <%= form_tag('', class: 'js-idp-form') do %>
-            <%= button_tag t('hub.redirect_to_idp_warning.continue_to_idp', display_name: @idp.display_name),
-                           class: 'button',
-                           id: 'continue-to-idp-button',
-                           type: 'submit'
-            %>
-          <% end %>
-        </div>
 
+
+    <div id="interstitial_question_details" class="js-hidden panel error">
+      <%= t 'hub.redirect_to_idp_question.warning_html', display_name: @idp.display_name, choose_another_company_link: link_to(t('hub.redirect_to_idp_question.choose_another_certified_company_link'), choose_a_certified_company_path)%>
+    </div>
+
+    <div class="panel panel-border-wide">
+      <%= t 'hub.redirect_to_idp_question.identity_documents' %>
+    </div>
+
+    <div class="form-group-tight">
+      <%= form_tag('', class: 'js-idp-form') do %>
+        <%= button_tag t('hub.redirect_to_idp_warning.continue_to_idp', display_name: @idp.display_name),
+                       class: 'button',
+                       id: 'continue-to-idp-button',
+                       type: 'submit'
+        %>
+      <% end %>
+    </div>
+    <div>
+      <%= t 'hub.redirect_to_idp_question.or_html', choose_another_company_link: link_to(t('hub.redirect_to_idp_question.choose_another_certified_company_link'), choose_a_certified_company_path)%>
+    </div>
   </div>
   <%= render partial: 'shared/continue_to_idp_form' %>
 </div>
