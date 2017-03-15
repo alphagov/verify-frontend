@@ -14,6 +14,7 @@ module FeedbackSourceMapper
       'OTHER_WAYS_PAGE' => 'other_ways_to_access_service',
       'REDIRECT_TO_IDP_WARNING_PAGE' => 'redirect_to_idp_warning',
       'MATCHING_ERROR_PAGE' => 'response_processing',
+      'ACCOUNT_CREATION_FAILED_PAGE' => 'response_processing',
       'SELECT_DOCUMENTS_PAGE' => 'select_documents',
       'UNLIKELY_TO_VERIFY_PAGE' => 'unlikely_to_verify',
       'SELECT_PHONE_PAGE' => 'select_phone',

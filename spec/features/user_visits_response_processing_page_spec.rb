@@ -7,16 +7,6 @@ RSpec.describe 'When the user visits the response processing page' do
     page.set_rack_session(transaction_simple_id: 'test-rp')
   end
 
-  def stub_matching_report(outcome)
-    stub_request(:get, INTERNAL_PIWIK.url)
-      .with(query: hash_including('action_name' => "Matching Outcome - #{outcome}"))
-  end
-
-  def stub_unknown_user_report
-    stub_request(:get, INTERNAL_PIWIK.url)
-      .with(query: hash_including('action_name' => 'Unknown User Outcome - Account Created'))
-  end
-
   it 'does not show language links' do
     stub_matching_outcome
     visit '/response-processing'
@@ -59,7 +49,7 @@ RSpec.describe 'When the user visits the response processing page' do
 
   it 'redirects to signing in page when response is SEND_USER_ACCOUNT_CREATED_RESPONSE_TO_TRANSACTION' do
     stub_response_for_rp
-    stubbed_report_request = stub_unknown_user_report
+    stubbed_report_request = stub_unknown_user_report('Account Created')
     stub_matching_outcome(MatchingOutcomeResponse::SEND_USER_ACCOUNT_CREATED_RESPONSE_TO_TRANSACTION)
     visit '/response-processing'
     expect(page).to have_current_path('/redirect-to-service/signing-in')
@@ -79,19 +69,39 @@ RSpec.describe 'When the user visits the response processing page' do
     stub_matching_outcome(MatchingOutcomeResponse::SHOW_MATCHING_ERROR_PAGE)
     stubbed_report_request = stub_matching_report('Error')
     visit '/response-processing'
-    expect(page).to have_current_path('/response-processing')
-    expect(page).to have_content(I18n.t('hub.response_processing.matching_error.problem', rp_name: 'Test RP'))
-    expect(page).to have_link(I18n.t('hub.response_processing.matching_error.start_again_link'), href: redirect_to_service_error_path)
-    expect(page).to have_css('h2',
-      text: I18n.t('hub.other_ways_heading', other_ways_description: I18n.t('rps.test-rp.other_ways_description')))
-    expect_feedback_source_to_be(page, 'MATCHING_ERROR_PAGE')
-    expect(page).to have_title('Something went wrong - GOV.UK Verify - GOV.UK')
-    expect(stubbed_report_request).to have_been_made.once
+    expect_error_page('MATCHING_ERROR_PAGE', stubbed_report_request)
+  end
+
+  it 'shows a matching error on the response processing page when there is a user account creation failure' do
+    stub_matching_outcome(MatchingOutcomeResponse::USER_ACCOUNT_CREATION_FAILED)
+    stubbed_report_request = stub_unknown_user_report('Account Creation Failed')
+    visit '/response-processing'
+    expect_error_page('ACCOUNT_CREATION_FAILED_PAGE', stubbed_report_request)
   end
 
   it 'displays the content in Welsh' do
     stub_matching_outcome
     visit '/prosesu-ymateb'
     expect(page).to have_css 'html[lang=cy]'
+  end
+
+  def stub_matching_report(outcome)
+    stub_request(:get, INTERNAL_PIWIK.url)
+      .with(query: hash_including('action_name' => "Matching Outcome - #{outcome}"))
+  end
+
+  def stub_unknown_user_report(outcome)
+    stub_request(:get, INTERNAL_PIWIK.url)
+      .with(query: hash_including('action_name' => "Unknown User Outcome - #{outcome}"))
+  end
+
+  def expect_error_page(feedback_source, stubbed_report_request)
+    expect(page).to have_current_path('/response-processing')
+    expect(page).to have_content(I18n.t('hub.response_processing.matching_error.problem', rp_name: 'Test RP'))
+    expect(page).to have_link(I18n.t('hub.response_processing.matching_error.start_again_link'), href: redirect_to_service_error_path)
+    expect(page).to have_css('h2', text: I18n.t('hub.other_ways_heading', other_ways_description: I18n.t('rps.test-rp.other_ways_description')))
+    expect_feedback_source_to_be(page, feedback_source)
+    expect(page).to have_title('Something went wrong - GOV.UK Verify - GOV.UK')
+    expect(stubbed_report_request).to have_been_made.once
   end
 end

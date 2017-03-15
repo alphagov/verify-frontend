@@ -24,7 +24,12 @@ class ResponseProcessingController < ApplicationController
       report_to_analytics('Matching Outcome - Error')
       @other_ways_description = current_transaction.other_ways_description
       @other_ways_text = current_transaction.other_ways_text
-      render 'matching_error', status: 500
+      render 'matching_error', status: 500, locals: { error_feedback_source: 'MATCHING_ERROR_PAGE' }
+    when MatchingOutcomeResponse::USER_ACCOUNT_CREATION_FAILED
+      report_to_analytics('Unknown User Outcome - Account Creation Failed')
+      @other_ways_description = current_transaction.other_ways_description
+      @other_ways_text = current_transaction.other_ways_text
+      render 'matching_error', status: 500, locals: { error_feedback_source: 'ACCOUNT_CREATION_FAILED_PAGE' }
     when MatchingOutcomeResponse::WAIT
       render
     else
