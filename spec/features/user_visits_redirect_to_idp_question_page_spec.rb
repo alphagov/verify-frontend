@@ -39,9 +39,11 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
     click_button 'Continue to FancyPants'
 
     expect(page).to have_current_path(redirect_to_idp_path)
+    expect(select_idp_stub_request).to have_been_made.once
+    expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   end
 
-  it 'displays an error message when user does not answer the question' do
+  it 'displays an error message when user does not answer the question when javascript is turned off' do
     click_button 'Continue to FancyPants'
     expect(page).to have_current_path(redirect_to_idp_question_submit_path)
     expect(page).to have_content('Please answer the question')
@@ -56,6 +58,20 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
     it 'should say we may not be able to verify you when user selects no' do
       choose 'interstitial_question_form_extra_info_false', allow_label_click: true
       expect(page).to have_content('may not be able to verify you')
+    end
+  end
+
+  context 'javascript validation', js: true do
+    it 'should display validation message if no selection is made' do
+      click_button 'Continue to FancyPants'
+      expect(page).to have_content('Please answer the question')
+    end
+
+    it 'should remove validation message once selection is made' do
+      click_button 'Continue to FancyPants'
+      expect(page).to have_content('Please answer the question')
+      choose 'interstitial_question_form_extra_info_false', allow_label_click: true
+      expect(page).to_not have_content('Please answer the question')
     end
   end
 end
