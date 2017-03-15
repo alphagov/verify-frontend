@@ -3,6 +3,20 @@ require 'feature_helper'
 RSpec.feature 'When the user visits the feedback page' do
   let(:long_text_limit) { FeedbackForm::LONG_TEXT_LIMIT }
 
+  it 'should link back to the product page when user came from the product page' do
+    visit '/feedback?feedback-source=PRODUCT_PAGE'
+
+    fill_in 'feedback_form_what', with: 'Verify my identity'
+    fill_in 'feedback_form_details', with: 'Some details'
+    choose 'feedback_form_reply_false', allow_label_click: true
+
+    click_button I18n.t('hub.feedback.send_message')
+
+    expect(page).to have_title(I18n.t('hub.feedback_sent.title'))
+
+    expect(page).to have_link 'Return to GOV.UK Verify Product Page', href: 'https://govuk-verify.cloudapps.digital/'
+  end
+
   it 'should show errors for all input fields when missing input', js: true do
     visit feedback_path
     expect(page).to have_title(I18n.t('hub.feedback.title'))

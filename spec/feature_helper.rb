@@ -41,6 +41,7 @@ module FeatureHelper
 
   def expect_feedback_source_to_be(page, source)
     expect(page).to have_link 'feedback', href: "/feedback?feedback-source=#{source}"
+    expect(FEEDBACK_SOURCE_MAPPER.page_from_source(source, :en)).to eql(feedback_source_path)
   end
 
   def is_selenium_driver?
