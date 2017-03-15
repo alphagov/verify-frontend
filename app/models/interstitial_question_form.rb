@@ -16,7 +16,7 @@ private
 
   def answer_required
     if @extra_info.blank?
-      errors.add(:base, [I18n.t('hub.start.error_message')])
+      errors.add(:base, [I18n.t('hub.redirect_to_idp_question.validation_message')])
     end
   end
 end

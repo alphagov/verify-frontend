@@ -28,7 +28,14 @@ class RedirectToIdpWarningController < ApplicationController
   end
 
   def question_continue
-    continue
+    @form = InterstitialQuestionForm.new(params['interstitial_question_form'] || {})
+    if @form.valid?
+      continue
+    else
+      @idp = decorated_idp
+      flash.now[:errors] = @form.errors.full_messages.join(', ')
+      render 'question'
+    end
   end
 
   def continue_ajax
