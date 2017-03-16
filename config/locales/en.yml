@@ -318,6 +318,7 @@ en:
       loading: "Loading…"
     redirect_to_idp:
       title: Loading
+      temp_heading: Continuing to next step...
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
     feedback:
