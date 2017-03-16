@@ -13,10 +13,10 @@
 
         setInterstitialQuestionDetailsVisibility: function () {
             if (interstitialQuestion.hasAnsweredNo()) {
-                interstitialQuestion.interstitialQuestionDetails.removeClass('js-hidden');
+                interstitialQuestion.interstitialQuestionDetails.removeClass('hidden');
                 interstitialQuestion.interstitialQuestionDetails.addClass('error');
             } else {
-                interstitialQuestion.interstitialQuestionDetails.addClass('js-hidden');
+                interstitialQuestion.interstitialQuestionDetails.addClass('hidden');
                 interstitialQuestion.interstitialQuestionDetails.removeClass('error');
             }
         },
