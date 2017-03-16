@@ -8,11 +8,19 @@ class InterstitialQuestionForm
     @extra_info = hash[:extra_info]
   end
 
-  def has_extra_info?
-    self.extra_info == 'true'
+  def selected_answers
+    if has_extra_info?
+      { "interstitial_yes" => true }
+    else
+      { "interstitial_no" => true }
+    end
   end
 
 private
+
+  def has_extra_info?
+    self.extra_info == 'true'
+  end
 
   def answer_required
     if @extra_info.blank?

@@ -1,14 +1,21 @@
 require 'feature_helper'
 require 'api_test_helper'
+require 'piwik_test_helper'
 require 'i18n'
 
 RSpec.describe 'When the user visits the redirect to IDP question page' do
+  let(:selected_answers) {
+    { phone: { mobile_phone: true, smart_phone: true },
+      documents: { passport: true }
+    }
+  }
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
-  let(:location) { '/test-idp-request-endpoint' }
+  let(:idp_location) { '/test-idp-request-endpoint' }
   let(:given_an_idp_with_interstitial_question_needed) {
     page.set_rack_session(
       selected_idp: { entity_id: 'stub-idp-one-doc-question', simple_id: 'stub-idp-one-doc-question' },
       selected_idp_was_recommended: true,
+      selected_answers: selected_answers,
     )
   }
 
@@ -32,13 +39,36 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
 
   it 'goes to "redirect-to-idp" page if the user answers the question' do
     select_idp_stub_request
-    stub_session_idp_authn_request(originating_ip, location, false)
+    stub_session_idp_authn_request(originating_ip, idp_location, false)
 
     choose 'interstitial_question_form_extra_info_false', allow_label_click: true
+
+    expected_answers = selected_answers.update(interstitial: { interstitial_no: true })
+
+    piwik_registration_virtual_page = stub_piwik_idp_registration('FancyPants', selected_answers: expected_answers, recommended: true)
 
     click_button 'Continue to FancyPants'
 
     expect(page).to have_current_path(redirect_to_idp_path)
+    expect(piwik_registration_virtual_page).to have_been_made.once
+    expect(select_idp_stub_request).to have_been_made.once
+    expect(cookie_value('verify-front-journey-hint')).to_not be_nil
+  end
+
+  it 'goes to "redirect-to-idp" page if the user answers the question and javascript is enabled', js: true do
+    select_idp_stub_request
+    stub_session_idp_authn_request(originating_ip, idp_location, false)
+
+    choose 'interstitial_question_form_extra_info_false', allow_label_click: true
+
+    expected_answers = selected_answers.update(interstitial: { interstitial_no: true })
+
+    piwik_registration_virtual_page = stub_piwik_idp_registration('FancyPants', selected_answers: expected_answers, recommended: true)
+
+    click_button 'Continue to FancyPants'
+
+    expect(page).to have_current_path(idp_location)
+    expect(piwik_registration_virtual_page).to have_been_made.once
     expect(select_idp_stub_request).to have_been_made.once
     expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   end
@@ -49,7 +79,7 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
     expect(page).to have_content('Please answer the question')
   end
 
-  context 'user fills more questions form', js: true do
+  context 'react appropriately when user fills in form', js: true do
     it 'should not say we cannot verify you when user selects yes' do
       choose 'interstitial_question_form_extra_info_true', allow_label_click: true
       expect(page).to_not have_content('may not be able to verify you')

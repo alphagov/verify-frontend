@@ -30,6 +30,7 @@ class RedirectToIdpWarningController < ApplicationController
   def question_continue
     @form = InterstitialQuestionForm.new(params['interstitial_question_form'] || {})
     if @form.valid?
+      selected_answer_store.store_selected_answers('interstitial', @form.selected_answers)
       continue
     else
       @idp = decorated_idp

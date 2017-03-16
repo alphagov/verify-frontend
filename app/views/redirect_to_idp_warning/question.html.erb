@@ -6,7 +6,7 @@
     <h1 class="heading-large"><%= t 'hub.redirect_to_idp_question.heading', display_name: @idp.display_name %></h1>
     <%= @idp.interstitial_question.html_safe %>
 
-    <%= form_for @form, url: redirect_to_idp_question_submit_path, html: {id: 'interstitial-question-form', class: 'js-validate  js-idp-form', novalidate: 'novalidate'} do |f| %>
+    <%= form_for @form, url: redirect_to_idp_question_submit_path, html: {id: 'interstitial-question-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
 
         <% if flash[:errors] %>
             <div id="validation-error-message-no-js" class="validation-message form-group">
