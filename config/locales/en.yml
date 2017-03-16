@@ -62,6 +62,7 @@ en:
     other_ways_heading: Other ways to %{other_ways_description}
     choose_country:
       title: Choose a country
+      heading: Which EU country is your eID from?
     start:
       title: Start
       heading: Sign in with GOV.UK Verify

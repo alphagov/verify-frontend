@@ -1,1 +1,23 @@
 <%= page_title 'hub.choose_country.title' %>
+
+<div class="article-container column-two-thirds">
+  <h1 class="heading-xlarge"><%= t('hub.choose_country.heading') %></h1>
+
+  <form class="js-hidden">
+    <select name="country" id="js-disabled-country-picker" class="form-control-2-3 form-control">
+      <option value=""></option>
+      <option value="FR">France</option>
+      <option value="DE">Germany</option>
+    </select>
+    <input class="button" type="submit" value="Select"/>
+  </form>
+  <form class="js-show">
+    <div id="country-picker" class="form-control-2-3"></div>
+
+    <!-- Hack: hidden input to submit the two letter country code (e.g. DE) -->
+    <input type="hidden" name="country">
+    <!-- /Hack -->
+
+    <input class="button" type="submit" value="Select"/>
+  </form>
+</div>

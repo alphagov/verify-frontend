@@ -65,6 +65,7 @@ cy:
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
     choose_country:
       title: Choose a country
+      heading: Which EU country is your eID from?
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify
