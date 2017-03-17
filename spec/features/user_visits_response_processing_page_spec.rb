@@ -100,7 +100,7 @@ RSpec.describe 'When the user visits the response processing page' do
     expect(page).to have_content(I18n.t('hub.response_processing.matching_error.problem', rp_name: 'Test RP'))
     expect(page).to have_link(I18n.t('hub.response_processing.matching_error.start_again_link'), href: redirect_to_service_error_path)
     expect(page).to have_css('h2', text: I18n.t('hub.other_ways_heading', other_ways_description: I18n.t('rps.test-rp.other_ways_description')))
-    expect_feedback_source_to_be(page, feedback_source)
+    expect_feedback_source_to_be(page, feedback_source, '/response-processing')
     expect(page).to have_title('Something went wrong - GOV.UK Verify - GOV.UK')
     expect(stubbed_report_request).to have_been_made.once
   end

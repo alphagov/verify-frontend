@@ -34,16 +34,22 @@ class FeedbackSourceMapper
   }.freeze
   end
 
-  def self.page_from_source(feedback_source, locale)
+  def page_from_source(feedback_source, locale)
     route_name = route_name_from(feedback_source)
-    '/' + I18n.translate('routes.' + route_name, locale: locale)
+    if route_name =~ /https?:.*/
+      route_name
+    else
+      '/' + I18n.translate('routes.' + route_name, locale: locale)
+    end
   end
 
-  private_class_method def self.route_name_from(feedback_source)
+private
+
+  def route_name_from(feedback_source)
     if feedback_source && feedback_source.starts_with?('CHOOSE_A_CERTIFIED_COMPANY_ABOUT_')
       'choose_a_certified_company'
     else
-      PAGE_TO_SOURCE_MAPPINGS.fetch(feedback_source, 'start')
+      @page_to_source_mappings.fetch(feedback_source, 'start')
     end
   end
 end

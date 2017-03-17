@@ -56,7 +56,7 @@ RSpec.describe 'When the user visits the choose a certified company page' do
 
     visit '/choose-a-certified-company'
 
-    expect_feedback_source_to_be(page, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE')
+    expect_feedback_source_to_be(page, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE', '/choose-a-certified-company')
   end
 
   it 'displays recommended IDPs' do
