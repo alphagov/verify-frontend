@@ -19,6 +19,7 @@ cy:
     why_companies: pam-cwmniau
     unlikely_to_verify: anhebygol-i-ddilysu
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
+    redirect_to_idp_question: ailgyfeirio-i-gwestiwn-idp
     privacy_notice: hysbysiad-preifatrwydd
     cookies: cwcis
     confirm_your_identity: cadarnhau-eich-hunaniaeth
@@ -253,6 +254,17 @@ cy:
         requirements: "I gael eich dilysu gyda %{display_name}, byddwch angen:"
       other_ways_link: "ffyrdd eraill i %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
+    redirect_to_idp_question:
+      heading: Dilysu gyda %{display_name}
+      answer_yes: Ydw
+      answer_no: Na
+      warning_html: |
+        <p class="error-message">Efallai na fydd %{display_name} yn gallu eich dilysu</p>
+        <p>Rydym yn argymell eich bod yn %{choose_another_company_link}.</p>
+      choose_another_certified_company_link: dewis cwmni ardystiedig arall
+      identity_documents: Rydych angen eich dogfennau hunaniaeth gyda chi oherwydd bydd yn rhaid i chi ychwanegu eu manylion.
+      or_html: neu %{choose_another_company_link}
+      validation_message: Dylech ateb y cwestiwn
     confirm_your_identity:
       title: Cadarnhau eich hunaniaeth
       use_other_idp: Os nad hwn yw’r cwmni a wnaeth eich dilysu, %{sign_in_link}.
@@ -312,6 +324,7 @@ cy:
       please_wait: "Gall hyn gymryd ychydig o eiliadau, arhoswch gyda ni."
     redirect_to_idp:
       title: Llwytho
+      temp_heading: Continuing to next step... #TODO confirm text and translate
       heading: Mynd ymlaen i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
     feedback:

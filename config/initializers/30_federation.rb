@@ -43,4 +43,5 @@ Rails.application.config.after_initialize do
   )
   IDP_HINTS_CHECKER = IdpEligibility::IdpHintsChecker.new(loaded_profile_filters.idps_with_hints)
   IDP_LANGUAGE_HINT_CHECKER = IdpEligibility::IdpHintsChecker.new(loaded_profile_filters.idps_with_language_hint)
+  IDP_INTERSTITIAL_QUESTION_CHECKER = IdpEligibility::IdpHintsChecker.new(loaded_profile_filters.idps_with_interstitial_question)
 end

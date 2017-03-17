@@ -28,6 +28,11 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     )
   }
 
+
+  let(:given_a_session_with_two_docs_selected_answers) {
+    given_a_session_with_selected_answers
+  }
+
   let(:given_a_session_without_selected_answers) {
     page.set_rack_session(
       transaction_simple_id: 'test-rp',
@@ -124,6 +129,32 @@ RSpec.describe 'When the user visits the choose a certified company page' do
     expect(page).to have_current_path(redirect_to_idp_warning_path)
     expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => 'other-entity-id', 'simple_id' => 'stub-idp-two')
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql false
+  end
+
+  it 'redirects to the interstitial question page with an additional question when having one doc' do
+    given_a_session_with_one_doc_selected_answers
+    set_stub_federation_idp_with_interstitial_question_enabled
+    visit '/choose-a-certified-company'
+
+    within('#matching-idps') do
+      click_button 'Choose FancyPants'
+    end
+
+    expect(page).to have_current_path(redirect_to_idp_question_path)
+    expect(page.get_rack_session_key('selected_idp')).to eql('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com')
+  end
+
+  it 'redirects to the warning page without additional question for two docs' do
+    given_a_session_with_two_docs_selected_answers
+    set_stub_federation_idp_with_interstitial_question_enabled
+    visit '/choose-a-certified-company'
+
+    within('#matching-idps') do
+      click_button 'Choose FancyPants'
+    end
+
+    expect(page).to have_current_path(redirect_to_idp_warning_path)
+    expect(page.get_rack_session_key('selected_idp')).to eql('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com')
   end
 
   it 'records details in session when a recommended IdP is selected' do

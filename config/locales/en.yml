@@ -19,6 +19,7 @@ en:
     why_companies: why-companies
     unlikely_to_verify: unlikely-to-verify
     redirect_to_idp_warning: redirect-to-idp-warning
+    redirect_to_idp_question: redirect-to-idp-question
     privacy_notice: privacy-notice
     cookies: cookies
     confirm_your_identity: confirm-your-identity
@@ -247,6 +248,17 @@ en:
         requirements: "To be verified with %{display_name}, you’ll need:"
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
+    redirect_to_idp_question:
+      heading: Verifying with %{display_name}
+      answer_yes: "Yes"
+      answer_no: "No"
+      warning_html: |
+         <p class="error-message">%{display_name} may not be able to verify you</p>
+         <p>We recommend that you %{choose_another_company_link}.</p>
+      choose_another_certified_company_link: choose another certified company
+      identity_documents: You need your identity documents with you as you'll have to add their details.
+      or_html: or %{choose_another_company_link}
+      validation_message: Please answer the question
     confirm_your_identity:
       title: Confirm your identity
       use_other_idp: If this isn’t the company that verified you, %{sign_in_link}.
@@ -306,6 +318,7 @@ en:
       loading: "Loading…"
     redirect_to_idp:
       title: Loading
+      temp_heading: Continuing to next step...
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
     feedback:

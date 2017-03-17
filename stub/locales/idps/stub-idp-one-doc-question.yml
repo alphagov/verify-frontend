@@ -1,10 +1,10 @@
 en:
   idps:
-    stub-idp-one:
-      name: "IDCorp"
-      tagline: "a really cool identity provider"
+    stub-idp-one-doc-question:
+      name: "FancyPants"
+      tagline: "a really fancy pants identity provider"
       about: |
-          <p>ID Corp is the premier identity proofing service around.</p>
+          <p>FancyPants is the premier identity proofing service around.</p>
           <ul>
             <li>Identity</li>
             <li>Verification</li>
@@ -26,15 +26,15 @@ en:
           <br/>Closed on bank holidays
         </p>
       interstitial_question: |
-        <p>FancyPants can use existing customers data to verify them.</p>
-        <h2 class="heading-medium">Are you a FancyPants customer?</h2>
-        <p>You will need FancyPants stuff</p>
+        <p>I have a question for you in English</p>
+        <h2 class="heading-medium">Are you sure you want to continue?</h2>
+        <p>We are mean and will not let you</p>
 cy:
   idps:
-    stub-idp-one:
-      name: "Welsh IDCorp"
+    stub-idp-one-doc-question:
+      name: "Welsh FancyPants"
       about: |
-           <p>ID Corp is the premier identity proofing service around.</p>
+           <p>FancyPants is the premier identity proofing service around.</p>
            <ul>
              <li>Identity</li>
              <li>Verification</li>
@@ -51,6 +51,6 @@ cy:
           <br/>Closed on bank holidays
         </p>
       interstitial_question: |
-        <p>Gall FancyPants ddefnyddio data cwsmeriaid presennol i'w dilysu.</p>
-        <h2 class="heading-medium">Ydych chi'n gwsmer bancio ar-lein FancyPants?</h2>
-        <p>Mae FancyPants angen i chi ddefnyddio eich darllenydd cerdyn PINsentry, Mobilesentry neu gyfrinair i helpu i ddilysu pwy ydych chi.</p>
+        <p>I have a question for you in Welsh</p>
+        <h2 class="heading-medium">Are you sure you want to continue?</h2>
+        <p>We are mean and will not let you</p>

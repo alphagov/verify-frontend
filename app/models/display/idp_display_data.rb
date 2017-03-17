@@ -11,6 +11,7 @@ module Display
     content :tagline, default: nil
     content :special_no_docs_instructions_html, default: ''
     content :no_docs_requirement, default: ''
+    content :interstitial_question, default: ''
 
     alias_method :about_content, :about
     alias_method :display_name, :name
