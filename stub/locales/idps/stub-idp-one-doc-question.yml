@@ -26,7 +26,7 @@ en:
           <br/>Closed on bank holidays
         </p>
       interstitial_question: |
-        <p>I have a question for you</p>
+        <p>I have a question for you in English</p>
         <h2 class="heading-medium">Are you sure you want to continue?</h2>
         <p>We are mean and will not let you</p>
 cy:
@@ -51,6 +51,6 @@ cy:
           <br/>Closed on bank holidays
         </p>
       interstitial_question: |
-        <p>I have a question for you</p>
+        <p>I have a question for you in Welsh</p>
         <h2 class="heading-medium">Are you sure you want to continue?</h2>
         <p>We are mean and will not let you</p>

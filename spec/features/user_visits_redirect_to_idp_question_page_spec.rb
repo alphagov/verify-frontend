@@ -32,9 +32,17 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
     visit '/redirect-to-idp-question'
   end
 
-  it 'displays a question' do
+  it 'displays interstitial question' do
     expect(page).to have_content('Verifying with FancyPants')
-    expect(page).to have_content('I have a question')
+    expect(page).to have_content('I have a question for you in English')
+  end
+
+  it 'displays interstitial question in Welsh' do
+    visit '/ailgyfeirio-i-gwestiwn-idp'
+
+    expect(page).to have_content('Dilysu gyda Welsh FancyPants')
+    expect(page).to have_content('I have a question for you in Welsh')
+    expect(page).to have_css 'html[lang=cy]'
   end
 
   it 'goes to "redirect-to-idp" page if the user answers the question' do
@@ -59,9 +67,9 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, idp_location, false)
 
-    choose 'interstitial_question_form_extra_info_false', allow_label_click: true
+    choose 'interstitial_question_form_extra_info_true', allow_label_click: true
 
-    expected_answers = selected_answers.update(interstitial: { interstitial_no: true })
+    expected_answers = selected_answers.update(interstitial: { interstitial_yes: true })
 
     piwik_registration_virtual_page = stub_piwik_idp_registration('FancyPants', selected_answers: expected_answers, recommended: true)
 
@@ -75,6 +83,7 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
 
   it 'displays an error message when user does not answer the question when javascript is turned off' do
     click_button 'Continue to FancyPants'
+
     expect(page).to have_current_path(redirect_to_idp_question_submit_path)
     expect(page).to have_content('Please answer the question')
   end
