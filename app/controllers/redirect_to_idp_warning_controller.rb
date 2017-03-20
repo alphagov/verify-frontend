@@ -12,11 +12,6 @@ class RedirectToIdpWarningController < ApplicationController
     end
   end
 
-  def question
-    @idp = decorated_idp
-    @form = InterstitialQuestionForm.new({})
-  end
-
   def continue
     idp = decorated_idp
     if idp.viewable?
@@ -24,18 +19,6 @@ class RedirectToIdpWarningController < ApplicationController
       redirect_to redirect_to_idp_path
     else
       something_went_wrong("Couldn't display IDP with entity id: #{idp.entity_id}")
-    end
-  end
-
-  def question_continue
-    @form = InterstitialQuestionForm.new(params['interstitial_question_form'] || {})
-    if @form.valid?
-      selected_answer_store.store_selected_answers('interstitial', @form.selected_answers)
-      continue
-    else
-      @idp = decorated_idp
-      flash.now[:errors] = @form.errors.full_messages.join(', ')
-      render 'question'
     end
   end
 

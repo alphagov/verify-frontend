@@ -6,8 +6,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
   let(:location) { '/test-idp-request-endpoint' }
-  let(:selected_answers) { { phone: %w(mobile_phone smart_phone), documents: %w(passport) } }
-  let(:selected_answers) { { phone: { mobile_phone: true, smart_phone: true }, documents: { passport: true } } }
+  let(:selected_answers) { { 'phone' => { 'mobile_phone' => true, 'smart_phone' => true }, 'documents' => { 'passport' => true } } }
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:given_an_idp_with_no_display_data) {
     page.set_rack_session(

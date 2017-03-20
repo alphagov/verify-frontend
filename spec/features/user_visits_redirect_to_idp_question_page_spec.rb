@@ -5,8 +5,8 @@ require 'i18n'
 
 RSpec.describe 'When the user visits the redirect to IDP question page' do
   let(:selected_answers) {
-    { phone: { mobile_phone: true, smart_phone: true },
-      documents: { passport: true }
+    { 'phone' => { 'mobile_phone' => true, 'smart_phone' => true },
+      'documents' => { 'passport' => true }
     }
   }
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
@@ -16,13 +16,6 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
       selected_idp: { entity_id: 'stub-idp-one-doc-question', simple_id: 'stub-idp-one-doc-question' },
       selected_idp_was_recommended: true,
       selected_answers: selected_answers,
-    )
-  }
-
-  let(:select_idp_stub_request) {
-    stub_session_select_idp_request(
-      'an-encrypted-entity-id',
-      'entityId' => 'stub-idp-one-doc-question', 'originatingIp' => originating_ip, 'registration' => true
     )
   }
 
@@ -45,44 +38,34 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
     expect(page).to have_css 'html[lang=cy]'
   end
 
-  it 'goes to "redirect-to-idp" page if the user answers the question' do
-    select_idp_stub_request
+  it 'goes to "redirect-to-idp-warning" page if the user answers the question' do
     stub_session_idp_authn_request(originating_ip, idp_location, false)
 
     choose 'interstitial_question_form_extra_info_false', allow_label_click: true
 
-    expected_answers = selected_answers.update(interstitial: { interstitial_no: true })
+    expected_answers = selected_answers.update('interstitial' => { 'interstitial_no' => true })
 
-    piwik_registration_virtual_page = stub_piwik_idp_registration('FancyPants', selected_answers: expected_answers, recommended: true)
+    click_button 'Continue'
 
-    click_button 'Continue to FancyPants'
-
-    expect(page).to have_current_path(redirect_to_idp_path)
-    expect(piwik_registration_virtual_page).to have_been_made.once
-    expect(select_idp_stub_request).to have_been_made.once
-    expect(cookie_value('verify-front-journey-hint')).to_not be_nil
+    expect(page).to have_current_path(redirect_to_idp_warning_path)
+    expect(page.get_rack_session['selected_answers']).to eql(expected_answers)
   end
 
-  it 'goes to "redirect-to-idp" page if the user answers the question and javascript is enabled', js: true do
-    select_idp_stub_request
+  it 'goes to "redirect-to-idp-warning" page if the user answers the question and javascript is enabled', js: true do
     stub_session_idp_authn_request(originating_ip, idp_location, false)
 
     choose 'interstitial_question_form_extra_info_true', allow_label_click: true
 
-    expected_answers = selected_answers.update(interstitial: { interstitial_yes: true })
+    expected_answers = selected_answers.update('interstitial' => { 'interstitial_yes' => true })
 
-    piwik_registration_virtual_page = stub_piwik_idp_registration('FancyPants', selected_answers: expected_answers, recommended: true)
+    click_button 'Continue'
 
-    click_button 'Continue to FancyPants'
-
-    expect(page).to have_current_path(idp_location)
-    expect(piwik_registration_virtual_page).to have_been_made.once
-    expect(select_idp_stub_request).to have_been_made.once
-    expect(cookie_value('verify-front-journey-hint')).to_not be_nil
+    expect(page).to have_current_path(redirect_to_idp_warning_path)
+    expect(page.get_rack_session['selected_answers']).to eql(expected_answers)
   end
 
   it 'displays an error message when user does not answer the question when javascript is turned off' do
-    click_button 'Continue to FancyPants'
+    click_button 'Continue'
 
     expect(page).to have_current_path(redirect_to_idp_question_submit_path)
     expect(page).to have_content('Please answer the question')
@@ -102,12 +85,12 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
 
   context 'javascript validation', js: true do
     it 'should display validation message if no selection is made' do
-      click_button 'Continue to FancyPants'
+      click_button 'Continue'
       expect(page).to have_content('Please answer the question')
     end
 
     it 'should remove validation message once selection is made' do
-      click_button 'Continue to FancyPants'
+      click_button 'Continue'
       expect(page).to have_content('Please answer the question')
       choose 'interstitial_question_form_extra_info_false', allow_label_click: true
       expect(page).to_not have_content('Please answer the question')
