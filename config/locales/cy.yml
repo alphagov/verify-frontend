@@ -324,7 +324,6 @@ cy:
       please_wait: "Gall hyn gymryd ychydig o eiliadau, arhoswch gyda ni."
     redirect_to_idp:
       title: Llwytho
-      temp_heading: Continuing to next step... #TODO confirm text and translate
       heading: Mynd ymlaen i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
     feedback:
