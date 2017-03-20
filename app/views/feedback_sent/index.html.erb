@@ -9,8 +9,10 @@
   </p>
 
   <p>
-    <% if @session_valid %>
-        <%= link_to t('hub.feedback_sent.session_valid_link'), @link_back_to_verify %>
+    <%if @from_product_page%>
+        <%= link_to 'Return to GOV.UK Verify Product Page', @link_back %>
+    <% elsif @session_valid %>
+        <%= link_to t('hub.feedback_sent.session_valid_link'), @link_back %>
     <% else %>
         <%= t('hub.feedback_sent.session_not_valid') %>
         <%= render partial: 'errors/transaction_list' %>

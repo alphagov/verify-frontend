@@ -1,5 +1,6 @@
-module FeedbackSourceMapper
-  PAGE_TO_SOURCE_MAPPINGS = {
+class FeedbackSourceMapper
+  def initialize(product_page_url)
+    @page_to_source_mappings = {
       'ABOUT_CERTIFIED_COMPANIES_PAGE' => 'about_certified_companies',
       'ABOUT_CHOOSING_A_COMPANY_PAGE' => 'about_choosing_a_company',
       'ABOUT_IDENTITY_ACCOUNTS_PAGE' => 'about_identity_accounts',
@@ -28,19 +29,27 @@ module FeedbackSourceMapper
       'WILL_IT_WORK_FOR_ME_PAGE' => 'will_it_work_for_me',
       'MAY_NOT_WORK_IF_YOU_LIVE_OVERSEAS_PAGE' => 'may_not_work_if_you_live_overseas',
       'WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE' => 'why_might_this_not_work_for_me',
-      'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE' => 'will_not_work_without_uk_address'
+      'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE' => 'will_not_work_without_uk_address',
+      'PRODUCT_PAGE' => product_page_url
   }.freeze
-
-  def self.page_from_source(feedback_source, locale)
-    route_name = route_name_from(feedback_source)
-    '/' + I18n.translate('routes.' + route_name, locale: locale)
   end
 
-  private_class_method def self.route_name_from(feedback_source)
+  def page_from_source(feedback_source, locale)
+    route_name = route_name_from(feedback_source)
+    if route_name =~ /https?:.*/
+      route_name
+    else
+      '/' + I18n.translate('routes.' + route_name, locale: locale)
+    end
+  end
+
+private
+
+  def route_name_from(feedback_source)
     if feedback_source && feedback_source.starts_with?('CHOOSE_A_CERTIFIED_COMPANY_ABOUT_')
       'choose_a_certified_company'
     else
-      PAGE_TO_SOURCE_MAPPINGS.fetch(feedback_source, 'start')
+      @page_to_source_mappings.fetch(feedback_source, 'start')
     end
   end
 end

@@ -9,7 +9,7 @@ RSpec.describe 'When the user visits the why companies page' do
   it 'includes the appropriate feedback source' do
     visit '/why-companies'
 
-    expect_feedback_source_to_be(page, 'WHY_COMPANIES_PAGE')
+    expect_feedback_source_to_be(page, 'WHY_COMPANIES_PAGE', '/why-companies')
   end
 
   it 'displays the page in Welsh' do
