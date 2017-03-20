@@ -19,7 +19,8 @@ RSpec.describe IdentityProviderRequest do
     answers_hash = { phone: { mobile_phone: true } }
     hints = ['has_mobile']
 
-    allow(IDP_HINTS_CHECKER).to receive(:enabled?).with('simple-id').and_return(true)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(true)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_language_hint, 'simple-id').and_return(false)
     allow(HintsMapper).to receive(:map_answers_to_hints).with(answers_hash).and_return(hints)
 
     request = IdentityProviderRequest.new(saml_message, 'simple-id', answers_hash)
@@ -30,7 +31,8 @@ RSpec.describe IdentityProviderRequest do
     saml_message = OutboundSamlMessage.new('registration' => true)
     answers_hash = { phone: { mobile_phone: true } }
 
-    allow(IDP_HINTS_CHECKER).to receive(:enabled?).with('simple-id').and_return(false)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(false)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_language_hint, 'simple-id').and_return(false)
 
     request = IdentityProviderRequest.new(saml_message, 'simple-id', answers_hash)
     expect(request.hints).to eql([])
@@ -40,7 +42,8 @@ RSpec.describe IdentityProviderRequest do
     saml_message = OutboundSamlMessage.new('registration' => false)
     answers_hash = { phone: { mobile_phone: true } }
 
-    allow(IDP_HINTS_CHECKER).to receive(:enabled?).with('simple-id').and_return(true)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(true)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_language_hint, 'simple-id').and_return(false)
     allow(HintsMapper).to receive(:map_answers_to_hints).with(answers_hash).and_return(['has_mobile'])
 
     request = IdentityProviderRequest.new(saml_message, 'simple-id', answers_hash)
@@ -51,8 +54,8 @@ RSpec.describe IdentityProviderRequest do
     saml_message = OutboundSamlMessage.new('registration' => true)
 
     allow(I18n).to receive(:locale).and_return('en')
-    allow(IDP_HINTS_CHECKER).to receive(:enabled?).with('simple-id').and_return(false)
-    allow(IDP_LANGUAGE_HINT_CHECKER).to receive(:enabled?).with('simple-id').and_return(true)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(false)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_language_hint, 'simple-id').and_return(true)
 
     request = IdentityProviderRequest.new(saml_message, 'simple-id', {})
 
@@ -62,8 +65,8 @@ RSpec.describe IdentityProviderRequest do
   it 'should not have language hint when idp has language hint disabled' do
     saml_message = OutboundSamlMessage.new('registration' => true)
 
-    allow(IDP_HINTS_CHECKER).to receive(:enabled?).with('simple-id').and_return(false)
-    allow(IDP_LANGUAGE_HINT_CHECKER).to receive(:enabled?).with('simple-id').and_return(false)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(false)
+    allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_language_hint, 'simple-id').and_return(false)
 
     request = IdentityProviderRequest.new(saml_message, 'simple-id', {})
     expect(request.language_hint).to be_nil

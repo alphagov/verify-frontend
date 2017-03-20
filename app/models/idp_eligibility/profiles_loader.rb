@@ -23,15 +23,11 @@ module IdpEligibility
         ProfileFilter.new(non_recommended_profiles),
         ProfileFilter.new(demo_profiles),
         ProfileFilter.new(all_profiles),
-        ProfileFilter.new(document_profiles),
-        idps_with_flag_set(profiles, 'send_hints'),
-        idps_with_flag_set(profiles, 'send_language_hint'),
-        idps_with_flag_set(profiles, 'show_interstitial_question')
+        ProfileFilter.new(document_profiles)
       )
     end
 
-    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :demo_profiles, :all_profiles,
-                                      :document_profiles, :idps_with_hints, :idps_with_language_hint, :idps_with_interstitial_question)
+    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :demo_profiles, :all_profiles, :document_profiles)
 
   private
 
@@ -47,10 +43,6 @@ module IdpEligibility
         end
         selected_profiles
       end
-    end
-
-    def idps_with_flag_set(profiles, flag)
-      profiles.select { |data| data[flag] }.flat_map { |data| data.fetch('simpleIds') }
     end
 
     def merge_profiles(left_profiles, right_profiles)

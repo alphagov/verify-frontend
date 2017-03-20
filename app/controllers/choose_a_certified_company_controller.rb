@@ -27,11 +27,19 @@ class ChooseACertifiedCompanyController < ConfigurableJourneyController
 private
 
   def has_one_doc_and_show_interstitial_question(decorated_idp)
-    uk_docs = [:passport, :driving_licence]
-    if (uk_docs - selected_evidence).size == 1 && IDP_INTERSTITIAL_QUESTION_CHECKER.enabled?(decorated_idp.simple_id)
+    if only_one_uk_doc_selected && interstitial_question_flag_enabled_for(decorated_idp)
       [:one_uk_doc]
     else
       []
     end
+  end
+
+  def only_one_uk_doc_selected
+    uk_docs = [:passport, :driving_licence]
+    (uk_docs - selected_evidence).size == 1
+  end
+
+  def interstitial_question_flag_enabled_for(decorated_idp)
+    IDP_FEATURE_FLAGS_CHECKER.enabled?(:show_interstitial_question, decorated_idp.simple_id)
   end
 end

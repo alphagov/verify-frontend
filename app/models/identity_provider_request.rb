@@ -11,7 +11,7 @@ class IdentityProviderRequest
   end
 
   def get_hints(simple_id, answers, registration)
-    if IDP_HINTS_CHECKER.enabled?(simple_id) && registration
+    if IDP_FEATURE_FLAGS_CHECKER.enabled?(:send_hints, simple_id) && registration
       HintsMapper.map_answers_to_hints(answers)
     else
       []
@@ -19,6 +19,6 @@ class IdentityProviderRequest
   end
 
   def get_language_hint(simple_id)
-    I18n.locale if IDP_LANGUAGE_HINT_CHECKER.enabled?(simple_id)
+    I18n.locale if IDP_FEATURE_FLAGS_CHECKER.enabled?(:send_language_hint, simple_id)
   end
 end

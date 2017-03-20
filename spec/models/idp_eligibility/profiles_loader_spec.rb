@@ -13,13 +13,11 @@ module IdpEligibility
       [
         {
           'simpleIds' => %w(example-idp example-idp-stub),
-          'send_hints' => 'true',
           'recommended_profiles' => [%w(passport driving_licence)],
           'non_recommended_profiles' => [%w(passport mobile_phone)]
         },
         {
           'simpleIds' => ['example-idp-two'],
-          'send_language_hint' => 'true',
           'recommended_profiles' => [%w(passport driving_licence)],
           'non_recommended_profiles' => [],
           'demo_profiles' => [%w(non_uk_id_document mobile_phone)]
@@ -106,15 +104,6 @@ module IdpEligibility
         path = 'empty_profiles_path'
         expect(file_loader).to receive(:load).with(path).and_return([])
         expect(profiles_loader.load(path).all_profiles).to eq(ProfileFilter.new({}))
-      end
-
-      it 'should return the hints configuration' do
-        path = 'good_profiles_path'
-        expect(file_loader).to receive(:load).with(path).and_return(good_profiles)
-        expected_hints = %w(example-idp example-idp-stub)
-        profile = profiles_loader.load(path)
-        expect(profile.idps_with_hints).to eql(expected_hints)
-        expect(profile.idps_with_language_hint).to eql(['example-idp-two'])
       end
     end
   end

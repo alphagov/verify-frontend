@@ -41,7 +41,8 @@ Rails.application.config.after_initialize do
     loaded_profile_filters.demo_profiles,
     RP_CONFIG.fetch('demo_period_blacklist')
   )
-  IDP_HINTS_CHECKER = IdpEligibility::IdpHintsChecker.new(loaded_profile_filters.idps_with_hints)
-  IDP_LANGUAGE_HINT_CHECKER = IdpEligibility::IdpHintsChecker.new(loaded_profile_filters.idps_with_language_hint)
-  IDP_INTERSTITIAL_QUESTION_CHECKER = IdpEligibility::IdpHintsChecker.new(loaded_profile_filters.idps_with_interstitial_question)
+
+  # Feature flags
+  IDP_FEATURE_FLAGS_CHECKER = IdpEligibility::IdpFeatureFlagsLoader.new(YamlLoader.new)
+                                 .load(CONFIG.rules_directory, [:send_hints, :send_language_hint, :show_interstitial_question])
 end
