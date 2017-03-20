@@ -37,7 +37,22 @@ module Support
         end
 
         def message_is_404?(message)
-          message.is_a?(ActionController::RoutingError) || (message.is_a?(String) && message.start_with?("\nActionController::RoutingError"))
+          message.is_a?(ActionController::RoutingError) ||
+            (
+              # 404 messages (and all exceptions) are currently being logged in
+              # DebugExceptions across multiple log messages so we need to do
+              # some filtering here to ignore each message
+              # https://github.com/rails/rails/blob/master/actionpack/lib/action_dispatch/middleware/debug_exceptions.rb#L169
+              message.is_a?(String) &&
+                (
+                   # A message declaring the type of 404 error
+                   message.start_with?("ActionController::RoutingError") ||
+                   # Some whitespace that gets added
+                   message == "  " ||
+                   # The start of the 404 backtrace trace
+                   message.start_with?("lib/store_session_id.rb:11:in `call'")
+                )
+            )
         end
 
         def message_is_raven_log?(message)

@@ -18,8 +18,20 @@ describe Support::Raven::Logger do
       logger.error(error)
     end
 
-    it 'will not send routing messages to sentry' do
-      error = "\nActionController::RoutingError (No route matches [GET] \"/favicon.ico\")"
+    it 'will not send whitespace to sentry' do
+      error = "  "
+      expect(Raven).to_not receive(:capture_exception).with(error)
+      logger.error(error)
+    end
+
+    it 'will not send routing error messages to sentry' do
+      error = "ActionController::RoutingError (No route matches [GET] \"/favicon.ico\")"
+      expect(Raven).to_not receive(:capture_exception).with(error)
+      logger.error(error)
+    end
+
+    it 'will not send routing error stacktrace to sentry' do
+      error = "lib/store_session_id.rb:11:in `call'"
       expect(Raven).to_not receive(:capture_exception).with(error)
       logger.error(error)
     end
