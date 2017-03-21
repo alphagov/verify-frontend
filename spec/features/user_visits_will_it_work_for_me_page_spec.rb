@@ -38,6 +38,17 @@ RSpec.describe 'When the user visits the will it work for me page' do
     expect(page).to have_current_path(why_might_this_not_work_for_me_path)
   end
 
+  it 'redirects to the select-documents page when user is over 20, has lived in the uk for more than 12 months and doesnt have a UK address' do
+    visit '/will-it-work-for-me'
+    choose 'will_it_work_for_me_form_above_age_threshold_true', allow_label_click: true
+    choose 'will_it_work_for_me_form_resident_last_12_months_true', allow_label_click: true
+    choose 'will_it_work_for_me_form_not_resident_reason_noaddress', allow_label_click: true
+
+    click_button 'Continue'
+
+    expect(page).to have_current_path(select_documents_path)
+  end
+
   it 'redirects to the why-might-this-not-work-for-me page when user is under 20' do
     visit '/will-it-work-for-me'
     choose 'will_it_work_for_me_form_above_age_threshold_false', allow_label_click: true

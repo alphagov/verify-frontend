@@ -32,10 +32,9 @@ class WillItWorkForMeController < ConfigurableJourneyController
 private
 
   def conditions
-    {
-      above_age_threshold_and_resident: @form.above_age_threshold? && @form.resident_last_12_months?,
-      uk_address_but_not_resident: @form.address_but_not_resident?,
-      no_uk_address: @form.no_uk_address?,
-    }.select { |_, v| v }.keys
+    return [:above_age_threshold_and_resident] if @form.above_age_threshold? && @form.resident_last_12_months?
+    return [:uk_address_but_not_resident] if @form.address_but_not_resident?
+    return [:no_uk_address] if @form.no_uk_address?
+    []
   end
 end
