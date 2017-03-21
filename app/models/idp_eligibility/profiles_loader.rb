@@ -13,6 +13,10 @@ module IdpEligibility
 
     def load(path)
       profiles = @file_loader.load(path)
+      if profiles.empty?
+        raise "No profiles found at #{path}"
+      end
+
       recommended_profiles = select_profiles(profiles, "recommended_profiles")
       non_recommended_profiles = select_profiles(profiles, "non_recommended_profiles")
       demo_profiles = select_profiles(profiles, "demo_profiles") { [] }

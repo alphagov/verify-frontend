@@ -100,10 +100,11 @@ module IdpEligibility
         }.to raise_error KeyError
       end
 
-      it 'should return an empty object when no yaml files found' do
+      it 'should throw exception when no yaml files found' do
         path = 'empty_profiles_path'
         expect(file_loader).to receive(:load).with(path).and_return([])
-        expect(profiles_loader.load(path).all_profiles).to eq(ProfileFilter.new({}))
+
+        expect { profiles_loader.load(path) }.to raise_error("No profiles found at #{path}")
       end
     end
   end
