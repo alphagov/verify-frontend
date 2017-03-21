@@ -29,6 +29,9 @@ class ConfigurableJourneyController < ApplicationController
       branch_at choose_a_certified_company_submit_path,
         [] => redirect_to_idp_warning_path,
         [:one_uk_doc] => redirect_to_idp_question_path
+
+      at redirect_to_idp_question_path, next: redirect_to_idp_warning_path
+      at redirect_to_idp_warning_path, next: redirect_to_idp_path
     end
     @journeys.get_path(request.path, conditions)
   end
