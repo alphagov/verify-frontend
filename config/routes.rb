@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     get 'cookies', to: 'static#cookies', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'choose_a_country', to: 'choose_a_country#choose_a_country', as: :choose_a_country
+    post 'choose_a_country', to: 'choose_a_country#choose_a_country_submit', as: :choose_a_country_submit
     get 'confirmation', to: 'confirmation#index', as: :confirmation
     get 'failed_registration', to: 'failed_registration#index', as: :failed_registration
     get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
@@ -69,6 +70,7 @@ Rails.application.routes.draw do
     get 'redirect_to_service_signing_in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
     get 'redirect_to_service_start_again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
     get 'redirect_to_service_error' => 'redirect_to_service#error', as: :redirect_to_service_error
+    get 'redirect_to_country' => 'redirect_to_country#index', as: :redirect_to_country
     get 'feedback', to: 'feedback#index', as: :feedback
     post 'feedback', to: 'feedback#submit', as: :feedback_submit
     get 'feedback_sent', to: 'feedback_sent#index', as: :feedback_sent

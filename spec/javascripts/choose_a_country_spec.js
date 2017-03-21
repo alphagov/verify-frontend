@@ -1,7 +1,7 @@
 describe('The choose a country page', function () {
   var $dom;
   var html =
-    '<form class="js-hidden">' +
+    '<form id="form-no-js" class="js-hidden">' +
       '<select name="country" id="js-disabled-country-picker" class="form-control-2-3 form-control">' +
         '<option value=""></option>' +
         '<option value="FR">France</option>' +
@@ -9,11 +9,16 @@ describe('The choose a country page', function () {
       '</select>' +
       '<input class="button" type="submit" value="Select"/>' +
     '</form>' +
-    '<form class="js-show">' +
+    '<form id="form-js" class="js-show">' +
       '<div id="country-picker" class="form-control-2-3"></div>' +
       '<input type="hidden" name="country">' +
       '<input class="button" type="submit" value="Select"/>' +
-    '</form>';
+    '</form>' +
+    '<div id="no-country" style="display: none;">' +
+      '<h2 class="heading-medium">Please select a country from the list</h2>' +
+      '<p><a href="javascript:history.back()">Try another way to sign in.</a>' +
+      '</p>' +
+    '</div>';
 
   beforeEach(function () {
     $dom = $('<div>' + html + '</div>');
@@ -23,6 +28,7 @@ describe('The choose a country page', function () {
 
   afterEach(function () {
     $dom.remove();
+    $(document).off('submit');
   });
 
   it('should suggest Germany when the user enters "Ge"', function (done) {
@@ -30,7 +36,7 @@ describe('The choose a country page', function () {
     typeahead.value = 'Ge';
     typeahead.dispatchEvent(new Event('input'));
 
-    requestAnimationFrame(function () {
+    setTimeout(function () {
       var options = $dom.find('.typeahead__option');
       expect(options.length).toBe(1);
 
@@ -40,7 +46,7 @@ describe('The choose a country page', function () {
       expect(option0.text()).toBe('Germany');
 
       done();
-    });
+    }, 0);
   });
 
   it('should suggest France when the user enters "Fr"', function (done) {
@@ -48,7 +54,7 @@ describe('The choose a country page', function () {
     typeahead.value = 'Fr';
     typeahead.dispatchEvent(new Event('input'));
 
-    requestAnimationFrame(function () {
+    setTimeout(function () {
       var options = $dom.find('.typeahead__option');
       expect(options.length).toBe(1);
 
@@ -58,7 +64,7 @@ describe('The choose a country page', function () {
       expect(option0.text()).toBe('France');
 
       done();
-    });
+    }, 0);
   });
 
   it('should suggest Germany and France when the user enters "an"', function (done) {
@@ -66,7 +72,7 @@ describe('The choose a country page', function () {
     typeahead.value = 'an';
     typeahead.dispatchEvent(new Event('input'));
 
-    requestAnimationFrame(function () {
+    setTimeout(function () {
       var options = $dom.find('.typeahead__option');
       expect(options.length).toBe(2);
 
@@ -79,17 +85,38 @@ describe('The choose a country page', function () {
       expect(option1.text()).toBe('Germany');
 
       done();
+    }, 0);
+  });
+
+  it('should not submit form and show country not found error when the user enters invalid country', function (done) {
+    var typeahead = document.getElementById('typeahead');
+    typeahead.value = 'invalid-country';
+    var $form = $('#form-js');
+
+    // NOTE: Unable to assert the form/document is not submitted using spy because of lack of
+    //       event attachment point (a parent).  Possible solution is to capture the event and
+    //       check it is marked as 'preventDefault'.
+    $form.submit(function () {
+      expect($dom.find('#no-country').is(':visible')).toBe(true);
+      done();
     });
+
+    $form.submit();
   });
 
   it('should submit country=DE when the user selects Germany', function (done) {
     var typeahead = document.getElementById('typeahead');
-    var $form = $('form');
+    var $form = $('#form-js');
+
+    var formSpy = jasmine.createSpy('formSpy');
+    $(document).submit(formSpy);
 
     typeahead.value = 'Germany';
-    $form.submit(function () {
+    $(document).submit(function () {
       expect($dom.find('input[name=country]').val()).toBe('DE');
+      expect(formSpy).toHaveBeenCalled();
       done();
+      return false;
     });
 
     $form.submit();

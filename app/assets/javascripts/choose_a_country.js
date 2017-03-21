@@ -35,14 +35,14 @@
         source: suggest
       });
 
-      $('form').submit(function () {
+      $('form').submit(function (ev) {
         var countryText = $('#typeahead').val();
         var countryVal = countryValueByText[countryText];
         if (!countryVal) {
-          // TODO
-          alert('TODO: some UI for this :)');
-        }
-        else {
+          $('#no-country').show();
+          ev.preventDefault();
+          return false;
+        } else {
           $('input[name="country"]').val(countryVal);
         }
       })

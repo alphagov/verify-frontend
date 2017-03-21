@@ -15,6 +15,7 @@ cy:
     why_might_this_not_work_for_me: pam-efallai-na-fydd-hyn-yn-gweithio-i-mi
     will_not_work_without_uk_address: ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du
     choose_a_country: choose-a-country-cy
+    redirect_to_country: redirect-to-country
     choose_a_certified_company: dewis-cwmni-ardystiedig
     choose_a_certified_company_about: dewis-cwmni-ardystiedig/:company
     why_companies: pam-cwmniau

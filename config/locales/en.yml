@@ -15,6 +15,7 @@ en:
     why_might_this_not_work_for_me: why-might-this-not-work-for-me
     will_not_work_without_uk_address: will-not-work-without-uk-address
     choose_a_country: choose-a-country
+    redirect_to_country: redirect-to-country
     choose_a_certified_company: choose-a-certified-company
     choose_a_certified_company_about: choose-a-certified-company/:company
     why_companies: why-companies
