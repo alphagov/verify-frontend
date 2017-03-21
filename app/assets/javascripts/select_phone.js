@@ -12,14 +12,14 @@
           .find('input').prop('checked',false);
       } else if (mobilePhoneState === 'true') {
         selectPhone.$smartphoneQuestion.removeClass('js-hidden');
-        selectPhone.$landlineQuestion.addClass('js-hidden').removeClass('error')
+        selectPhone.$landlineQuestion.addClass('js-hidden').removeClass('form-group-error')
           .find('input').prop('checked',false);
       } else if (mobilePhoneState === 'false') {
-        selectPhone.$smartphoneQuestion.addClass('js-hidden').removeClass('error')
+        selectPhone.$smartphoneQuestion.addClass('js-hidden').removeClass('form-group-error')
           .find('input').prop('checked',false);
         selectPhone.$landlineQuestion.removeClass('js-hidden');
       }
-      selectPhone.$form.find('.form-group').removeClass('error');
+      selectPhone.$form.find('.form-group').removeClass('form-group-error');
       selectPhone.validator.resetForm();
     },
     init: function (){

@@ -18,6 +18,7 @@
   GOVUK.validation = {
     radiosValidation: {
       focusInvalid: false,
+      errorClass: 'form-group-error',
       errorElement: 'a',
       wrapper: 'div',
       errorPlacement: placeRadioErrorMessages
@@ -33,11 +34,13 @@
           $label.append($error);
         },
         highlight: function(element) {
-          $(element).closest('.form-group').addClass('error');
+          $(element).addClass('form-control-error')
+            .closest('.form-group').addClass('form-group-error');
         },
         unhighlight: function(element) {
           var formGroup = $(element).closest('.form-group');
-          formGroup.removeClass('error');
+          $(element).removeClass('form-control-error');
+          formGroup.removeClass('form-group-error');
           formGroup.find('.error-message').hide();
         },
         ignore: '.js-hidden *'

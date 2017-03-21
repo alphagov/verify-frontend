@@ -34,7 +34,7 @@ describe('The start page', function () {
       $(document).submit(formSpy);
       $('form').submit();
       expect(formSpy).toHaveBeenCalled();
-      expect($('.form-group').hasClass('error')).toBe(false);
+      expect($('.form-group').hasClass('form-group-error')).toBe(false);
     });
   });
 
@@ -43,7 +43,7 @@ describe('The start page', function () {
       $(document).submit(formSpy);
       $('form').submit();
       expect(formSpy).not.toHaveBeenCalled();
-      expect($('.form-group').hasClass('error')).toBe(true);
+      expect($('.form-group').hasClass('form-group-error')).toBe(true);
       expect($('#validation-error-message-js').text()).toBe('Test error message')
     });
   });
@@ -58,9 +58,9 @@ describe('The start page', function () {
     });
 
     it('should remove the error message and highlights', function () {
-      expect($formGroup.hasClass('error')).toBe(true);
+      expect($formGroup.hasClass('form-group-error')).toBe(true);
       $('#start_form_selection_true').prop('checked', true).click();
-      expect($formGroup.hasClass('error')).toBe(false);
+      expect($formGroup.hasClass('form-group-error')).toBe(false);
     });
   });
 });

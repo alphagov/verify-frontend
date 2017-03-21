@@ -14,10 +14,10 @@
         setInterstitialQuestionDetailsVisibility: function () {
             if (interstitialQuestion.hasAnsweredNo()) {
                 interstitialQuestion.interstitialQuestionDetails.removeClass('hidden');
-                interstitialQuestion.interstitialQuestionDetails.addClass('error');
+                interstitialQuestion.interstitialQuestionDetails.addClass('form-group-error');
             } else {
                 interstitialQuestion.interstitialQuestionDetails.addClass('hidden');
-                interstitialQuestion.interstitialQuestionDetails.removeClass('error');
+                interstitialQuestion.interstitialQuestionDetails.removeClass('form-group-error');
             }
         },
         hasAnsweredNo: function () {

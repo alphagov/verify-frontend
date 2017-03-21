@@ -58,7 +58,7 @@ RSpec.feature 'When the user visits the select documents page' do
       click_button 'Continue'
 
       expect(page).to have_css '.validation-message', text: 'Please select the documents you have'
-      expect(page).to have_css '.form-group.error'
+      expect(page).to have_css '.form-group-error'
     end
   end
 
