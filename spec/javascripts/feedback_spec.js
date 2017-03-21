@@ -57,7 +57,7 @@ describe("Feedback Form", function () {
   });
 
   it("should have no errors on initialising the form.", function () {
-    expect(feedbackForm.find('.error').length).toBe(0);
+    expect(feedbackForm.find('.form-group-error').length).toBe(0);
   });
 
   it("should have errors on submit when no details entered.", function () {

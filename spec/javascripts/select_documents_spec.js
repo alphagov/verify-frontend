@@ -71,12 +71,12 @@ describe("Select Documents Form", function () {
     }
 
     function expectErrorMessage(error) {
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
+        expect(selectDocumentsForm.children('.form-group:first').is('.form-group-error')).toBe(true);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe(error);
     }
 
     function expectNoError() {
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
+        expect(selectDocumentsForm.children('.form-group:first').is('.form-group-error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
     }
 
@@ -112,7 +112,7 @@ describe("Select Documents Form", function () {
     });
 
     it("should have no errors on initialising the form.", function () {
-        expect(selectDocumentsForm.find('.error').length).toBe(0);
+        expect(selectDocumentsForm.find('.form-group-error').length).toBe(0);
     });
 
     it("should have errors on submit when no selections made.", function () {
@@ -161,14 +161,14 @@ describe("Select Documents Form", function () {
         this.selectNoNiDrivingLicence();
         this.selectNoNonUKIdDocument();
         submitForm();
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
+        expect(selectDocumentsForm.children('.form-group:first').is('.form-group-error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
     });
 
     it("should have no errors on submit when no documents selected", function () {
         this.noDocumentsCheckbox.trigger('click');
         submitForm();
-        expect(selectDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
+        expect(selectDocumentsForm.children('.form-group:first').is('.form-group-error')).toBe(false);
         expect(selectDocumentsForm.find('#validation-error-message-js').text()).toBe('');
     });
 

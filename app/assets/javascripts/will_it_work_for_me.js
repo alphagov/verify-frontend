@@ -38,7 +38,7 @@
                 // re-validate the "which of these applies to you" section - if we don't do this, the "Please answer all questions"
                 // message remains for the section even if it's hidden by the user selecting "Yes" to "Have you lived in the UK for the last 12 months?"
                 willItWorkForMe.validator.element('#will_it_work_for_me_form_not_resident_reason_movedrecently');
-                willItWorkForMe.$notResidentReasonSection.addClass('js-hidden').removeClass('error')
+                willItWorkForMe.$notResidentReasonSection.addClass('js-hidden').removeClass('form-group-error')
                     .find('input').prop('checked', false);
             }
         },

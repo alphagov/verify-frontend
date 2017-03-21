@@ -96,7 +96,7 @@ describe("Will it work for me form", function () {
     }
 
     function expectNoError() {
-        expect(willItWorkForMeForm.children('.form-group:first').is('.error')).toBe(false);
+        expect(willItWorkForMeForm.children('.form-group:first').is('.form-group-error')).toBe(false);
         expect(willItWorkForMeForm.find('#validation-error-message-js').text()).toBe('');
     }
 

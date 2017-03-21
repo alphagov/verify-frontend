@@ -42,7 +42,7 @@ describe("Select Phone form", function () {
   });
 
   it("should have no errors on initialising the form.", function () {
-    expect(selectPhoneForm.find('.error').length).toBe(0);
+    expect(selectPhoneForm.find('.form-group-error').length).toBe(0);
   });
 
   it("should not initially show smartphone question.", function () {
@@ -55,7 +55,7 @@ describe("Select Phone form", function () {
 
   describe("should have errors on submit when", function () {
     function expectPleaseAnswerTheQuestion() {
-      expect(selectPhoneForm.children('.form-group:first').is('.error')).toBe(true);
+      expect(selectPhoneForm.children('.form-group:first').is('.form-group-error')).toBe(true);
       expect(selectPhoneForm.find('#validation-error-message-js').text()).toBe('Please answer the question');
     }
 
@@ -68,20 +68,20 @@ describe("Select Phone form", function () {
       check(selectPhoneForm.find('#select_phone_form_mobile_phone_false'));
       selectPhoneForm.triggerHandler('submit');
       expect(selectPhoneForm.find('#validation-error-message-js').text()).toBe('Please answer the question');
-      expect(selectPhoneForm.children('#landline-question').is('.error')).toBe(true);
+      expect(selectPhoneForm.children('#landline-question').is('.form-group-error')).toBe(true);
     });
 
     it("mobile answered yes", function () {
       check(selectPhoneForm.find('#select_phone_form_mobile_phone_true'));
       selectPhoneForm.triggerHandler('submit');
       expect(selectPhoneForm.find('#validation-error-message-js').text()).toBe('Please answer the question');
-      expect(selectPhoneForm.children('#smartphone-question').is('.error')).toBe(true);
+      expect(selectPhoneForm.children('#smartphone-question').is('.form-group-error')).toBe(true);
     });
   });
 
   describe("should have no errors on submit when", function () {
     function expectNoErrors() {
-      expect(selectPhoneForm.children('.form-group:first').is('.error')).toBe(false);
+      expect(selectPhoneForm.children('.form-group:first').is('.form-group-error')).toBe(false);
       expect(selectPhoneForm.find('#validation-error-message-js').text()).toBe('');
     }
 
