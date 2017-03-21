@@ -28,7 +28,6 @@ describe('The choose a country page', function () {
 
   afterEach(function () {
     $dom.remove();
-    $(document).off('submit');
   });
 
   it('should suggest Germany when the user enters "Ge"', function (done) {
@@ -91,14 +90,15 @@ describe('The choose a country page', function () {
   it('should not submit form and show country not found error when the user enters invalid country', function (done) {
     var typeahead = document.getElementById('typeahead');
     typeahead.value = 'invalid-country';
-    var $form = $('#form-js');
+    var $form = $dom.find('form.js-show');
 
     // NOTE: Unable to assert the form/document is not submitted using spy because of lack of
     //       event attachment point (a parent).  Possible solution is to capture the event and
     //       check it is marked as 'preventDefault'.
-    $form.submit(function () {
+    $form.on('submit', function () {
       expect($dom.find('#no-country').is(':visible')).toBe(true);
       done();
+      return false;
     });
 
     $form.submit();
@@ -106,13 +106,13 @@ describe('The choose a country page', function () {
 
   it('should submit country=DE when the user selects Germany', function (done) {
     var typeahead = document.getElementById('typeahead');
-    var $form = $('#form-js');
+    var $form = $dom.find('form.js-show');
 
     var formSpy = jasmine.createSpy('formSpy');
-    $(document).submit(formSpy);
+    $dom.on('submit', formSpy);
 
     typeahead.value = 'Germany';
-    $(document).submit(function () {
+    $dom.on('submit', function (event) {
       expect($dom.find('input[name=country]').val()).toBe('DE');
       expect(formSpy).toHaveBeenCalled();
       done();

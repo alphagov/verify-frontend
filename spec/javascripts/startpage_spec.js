@@ -1,7 +1,3 @@
-//= require jquery
-//= require vendor/jquery.validate
-//= require validation
-
 describe('The start page', function () {
   var $dom,
       formSpy,
