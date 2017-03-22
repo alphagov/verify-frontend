@@ -14,7 +14,7 @@ RSpec.feature 'When the user visits the feedback page' do
 
     expect(page).to have_title(I18n.t('hub.feedback_sent.title'))
 
-    expect(page).to have_link 'Return to GOV.UK Verify Product Page', href: 'https://govuk-verify.cloudapps.digital/'
+    expect(page).to have_link 'Return to the GOV.UK Verify product page', href: 'https://govuk-verify.cloudapps.digital/'
   end
 
   it 'should show errors for all input fields when missing input', js: true do
