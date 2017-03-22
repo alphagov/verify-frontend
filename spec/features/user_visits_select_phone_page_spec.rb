@@ -69,7 +69,7 @@ RSpec.describe 'When the user visits the select phone page' do
       click_button 'Continue'
 
       expect(page).to have_css '.validation-message', text: 'Please answer all the questions'
-      expect(page).to have_css '.form-group.error'
+      expect(page).to have_css '.form-group-error'
     end
   end
 

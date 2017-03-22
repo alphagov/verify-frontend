@@ -5,11 +5,7 @@
   <div class="column-two-thirds">
     <h1 class="heading-xlarge"><%= t 'hub.feedback.heading' %></h1>
 
-    <% if flash[:errors] %>
-        <div id="validation-error-message-no-js" class="validation-message form-group">
-          <p class="error"><%= flash[:errors] %></p>
-        </div>
-    <% end %>
+    <%= render 'shared/form-errors', errors: flash[:errors] %>
 
     <%= t 'hub.feedback.introduction_html' %>
 
@@ -24,7 +20,7 @@
 
     <%= form_for @form, url: feedback_submit_path, html: { class: 'feedback-form', id: 'feedback', novalidate: true } do |f| %>
         <fieldset>
-          <%= content_tag :div, class: @form.errors.include?(:what) ? 'form-group error' : 'form-group' do %>
+          <%= content_tag :div, class: @form.errors.include?(:what) ? 'form-group form-group-error' : 'form-group' do %>
             <div class="form-group">
               <%= f.label :what, t('hub.feedback.questions.what'), class: 'form-label' %>
               <% if @form.errors.include?(:what) %>
@@ -40,7 +36,7 @@
             </div>
           <% end %>
 
-          <%= content_tag :div, class: @form.errors.include?(:details) ? 'form-group error' : 'form-group' do %>
+          <%= content_tag :div, class: @form.errors.include?(:details) ? 'form-group form-group-error' : 'form-group' do %>
             <div class="form-group">
               <%= f.label :details, t('hub.feedback.questions.details'), class: 'form-label' %>
               <% if @form.errors.include?(:details)%>
@@ -59,7 +55,7 @@
           <div class="form-section">
             <fieldset>
               <legend class="heading-medium"><%= t 'hub.feedback.questions.reply' %></legend>
-              <%= content_tag :div, class: @form.errors.include?(:reply) ? 'form-group inline error' : 'form-group inline' do %>
+              <%= content_tag :div, class: @form.errors.include?(:reply) ? 'form-group inline form-group-error' : 'form-group inline' do %>
                 <% if @form.errors.include?(:reply)%>
                   <span class="error-message"><%= @form.errors[:reply].first %></span>
                 <% end %>
@@ -71,7 +67,7 @@
             <div class="panel panel-border-narrow reply-fields js-hidden">
               <p><%= t 'hub.feedback.request_reply' %></p>
 
-              <%= content_tag :div, class: @form.errors.include?(:name) ? 'form-group error' : 'form-group' do %>
+              <%= content_tag :div, class: @form.errors.include?(:name) ? 'form-group form-group-error' : 'form-group' do %>
                 <div class="form-group">
                   <%= f.label :name, t('hub.feedback.questions.name'), class: 'form-label' %>
                   <% if @form.errors.include?(:name) %>
@@ -81,7 +77,7 @@
                 </div>
               <% end %>
 
-              <%= content_tag :div, class: @form.errors.include?(:email) ? 'form-group error' : 'form-group' do %>
+              <%= content_tag :div, class: @form.errors.include?(:email) ? 'form-group form-group-error' : 'form-group' do %>
                 <div class="form-group">
                   <%= f.label :email, class: 'form-label' do %>
                     <%= t('hub.feedback.questions.email') %>

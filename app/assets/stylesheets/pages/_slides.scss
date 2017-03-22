@@ -52,7 +52,7 @@
   // Override elements radio button colour for start page
   // This should be tested to work out whether it
   // performs better with the override or without.
-  .block-label.selection-button-radio {
+  .multiple-choice > label {
     &::before,
     &::after {
       background-color: $white;
@@ -104,13 +104,13 @@
 
 .hub-start {
 
-  .error,
+  .form-group-error,
   .validation-message {
     border-color: $white;
     color: inherit;
   }
 
-  .block-label {
+  .multiple-choice {
     @include core-24;
   }
 

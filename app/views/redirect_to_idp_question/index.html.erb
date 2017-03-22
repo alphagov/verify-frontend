@@ -8,13 +8,9 @@
 
     <%= form_for @form, url: redirect_to_idp_question_submit_path, html: {id: 'interstitial-question-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
 
-        <% if flash[:errors] %>
-            <div id="validation-error-message-no-js" class="validation-message form-group">
-              <p class="error"><%= flash[:errors] %></p>
-            </div>
-        <% end %>
+        <%= render 'shared/form-errors', errors: flash[:errors] %>
 
-        <%= content_tag :div, class: flash[:errors] ? "form-group error" : "form-group" do %>
+        <%= content_tag :div, class: form_question_class do %>
             <fieldset>
               <%= f.custom_radio_button :extra_info, true, t('hub.redirect_to_idp_question.answer_yes'), {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}} %>
               <%= f.custom_radio_button :extra_info, false, t('hub.redirect_to_idp_question.answer_no'), {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}} %>

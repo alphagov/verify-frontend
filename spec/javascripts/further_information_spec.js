@@ -34,7 +34,7 @@ describe("Further Information Form", function () {
   });
 
   it("should have no errors on initialising the form.", function () {
-    expect(furtherInformationForm.find('.error').length).toBe(0);
+    expect(furtherInformationForm.find('.form-group-error').length).toBe(0);
   });
 
   it("should have errors on submit when no details entered.", function () {

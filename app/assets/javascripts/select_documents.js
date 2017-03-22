@@ -21,7 +21,6 @@
       // Un check "I don't have documents" if the user selects a document
       var $checkbox = selectDocuments.$form.find('.js-no-docs:checked');
       $checkbox.prop('checked',false);
-      $checkbox.parent('.block-label').removeClass('selected');
     },
     speakWarningMessage: function(){
       // let screenreader users know their choices have changed by reading a notice
@@ -56,10 +55,10 @@
             driving_licence: 'select_documents_form[passport] select_documents_form[driving_licence] select_documents_form[ni_driving_licence] select_documents_form[non_uk_id_document] select_documents_form[no_documents]'
           },
           highlight: function(element, errorClass) {
-            selectDocuments.$form.children('.form-group:first').addClass('error');
+            selectDocuments.$form.children('.form-group:first').addClass('form-group-error');
           },
           unhighlight: function(element, errorClass) {
-            selectDocuments.$form.children('.form-group:first').removeClass('error');
+            selectDocuments.$form.children('.form-group:first').removeClass('form-group-error');
           }
         }));
       }
