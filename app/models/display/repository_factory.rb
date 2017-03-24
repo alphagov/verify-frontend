@@ -8,6 +8,10 @@ module Display
       create(directory, Display::IdpDisplayData)
     end
 
+    def create_country_repository(directory)
+      create(directory, Display::CountryDisplayData)
+    end
+
     def create_rp_repository(directory)
       create(directory, Display::RpDisplayData)
     end

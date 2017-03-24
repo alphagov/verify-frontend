@@ -8,18 +8,30 @@ module ApiTestHelper
     api_uri('transactions')
   end
 
+  def api_countries_endpoint(session_id)
+    api_uri('countries/' + session_id)
+  end
+
   def stub_transactions_list
     transactions = {
       'transactions' => [
-        { 'simpleId' => 'test-rp', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp' },
+        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp'      },
         { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3' },
-        { 'simpleId' => 'headless-rp', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/headless-rp' }
+        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/headless-rp'  }
       ]
     }
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
   end
 
+  def stub_countries_list
+    countries = [
+        { 'entityId' => 'http://netherlandsEnitity.nl', 'simpleId' => 'NL', 'enabled' => true },
+        { 'entityId' => 'http://spainEnitity.es',       'simpleId' => 'ES', 'enabled' => true },
+        { 'entityId' => 'http://swedenEnitity.se',      'simpleId' => 'SE', 'enabled' => false },
+    ]
 
+    stub_request(:get, api_countries_endpoint(default_session_id)).to_return(body: countries.to_json, status: 200)
+  end
 
   def stub_session_select_idp_request(encrypted_entity_id, request_body = {})
     stub = stub_request(:put, api_uri(select_idp_endpoint(default_session_id)))

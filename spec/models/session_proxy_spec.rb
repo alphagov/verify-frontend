@@ -90,6 +90,21 @@ describe SessionProxy do
     end
   end
 
+  describe('#get_countries') do
+    countries_json = [
+      { 'entityId' => 'http://netherlandsEnitity.nl', 'simpleId' => 'NL', 'enabled' => false },
+      { 'entityId' => 'http://spainEnitity.es', 'simpleId' => 'ES', 'enabled' => true }
+    ]
+    let(:api_response) { countries_json }
+
+    it 'should retrieve countries' do
+      expect(api_client).to receive(:get).with('/countries/my-session-id').and_return(api_response)
+
+      response = session_proxy.get_countries(session_id)
+      expect(response).to match_array countries_json
+    end
+  end
+
   describe('#idp_authn_request') do
     it 'should get an IDP authn request' do
       authn_request = {

@@ -10,6 +10,7 @@ $LOAD_PATH << File.join(APP_HOME, 'app/models')
 
 require 'api/response'
 require 'session_response'
+require 'country'
 require 'identity_provider'
 require 'federation_info_response'
 require 'select_idp_response'
@@ -79,6 +80,15 @@ describe StubApi do
       response = last_response_json
       expect(response['public']).to be_an(Array)
       expect(response['private']).to be_an(Array)
+    end
+  end
+
+  context '#get /api/countries/blah' do
+    it 'should respond with valid hash' do
+      get '/api/countries/blah'
+      expect(last_response).to be_ok
+      response = last_response_json
+      expect(response.map { |country| country['simpleId'] }).to eq(['NL', 'ES', 'SE'])
     end
   end
 end

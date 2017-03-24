@@ -17,6 +17,12 @@ module SessionEndpoints
   PARAM_ENTITY_ID = 'entityId'.freeze
   PARAM_REGISTRATION = 'registration'.freeze
   PARAM_CYCLE_THREE_VALUE = 'value'.freeze
+  COUNTRIES_PATH = '/countries'.freeze
+  COUNTRIES_PATH_PREFIX = Pathname(COUNTRIES_PATH)
+
+  def countries_endpoint(session_id)
+    COUNTRIES_PATH_PREFIX.join(session_id).to_s
+  end
 
   def session_endpoint(session_id, suffix)
     PATH_PREFIX.join(session_id, suffix).to_s

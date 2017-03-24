@@ -30,6 +30,10 @@ class SessionProxy
     cookies.select { |name, _| allowed_cookie_names.include?(name) }.to_h
   end
 
+  def get_countries(session_id)
+    @api_client.get(countries_endpoint(session_id))
+  end
+
   def select_idp(session_id, entity_id, registration = false)
     body = {
       PARAM_ENTITY_ID => entity_id,

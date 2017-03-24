@@ -6,8 +6,9 @@
   <%= form_tag choose_a_country_submit_path, class: 'js-hidden' do %>
       <select name="country" id="js-disabled-country-picker" class="form-control-2-3 form-control">
         <option value=""></option>
-        <option value="FR">France</option>
-        <option value="DE">Germany</option>
+        <% @countries.each do |country| %>
+        <option value="<%= country.simple_id %>"><%= country.display_name %></option>
+        <% end %>
       </select>
       <%= submit_tag "Select", class: "button"%>
   <% end %>
