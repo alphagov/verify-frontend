@@ -11,6 +11,10 @@ module ApplicationHelper
     !content_for(:show_to_search_engine)
   end
 
+  def feedback_source_query_param
+    Rack::Utils.parse_nested_query(request.query_string)['feedback-source']
+  end
+
   def feedback_source
     content_for(:feedback_source) || ""
   end
