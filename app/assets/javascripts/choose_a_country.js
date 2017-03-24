@@ -11,6 +11,9 @@
 
   GOVUK.chooseACountry = {
     attach: function () {
+      if ($('#choose-a-country-form').length === 0) {
+          return;
+      }
       var options = $('#js-disabled-country-picker').find('option');
 
       var countryValueByText = {};
@@ -27,7 +30,7 @@
         syncResults(query ? countryTexts.filter(stringContains(query)) : [])
       }
 
-      var countryPickerElement = $('#country-picker').get(0);
+      var countryPickerElement = $('.country-picker').get(0);
       window.AccessibleTypeahead({
         element: countryPickerElement,
         minLength: 2,
@@ -35,7 +38,7 @@
         source: suggest
       });
 
-      $('form').submit(function (ev) {
+      $('#choose-a-country-form').submit(function (ev) {
         var countryText = $('#typeahead').val();
         var countryVal = countryValueByText[countryText];
         if (!countryVal) {

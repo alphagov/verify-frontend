@@ -9,8 +9,8 @@ describe('The choose a country page', function () {
       '</select>' +
       '<input class="button" type="submit" value="Select"/>' +
     '</form>' +
-    '<form id="form-js" class="js-show">' +
-      '<div id="country-picker" class="form-control-2-3"></div>' +
+    '<form id="choose-a-country-form" class="js-show">' +
+      '<div class="form-control-2-3 country-picker"></div>' +
       '<input type="hidden" name="country">' +
       '<input class="button" type="submit" value="Select"/>' +
     '</form>' +

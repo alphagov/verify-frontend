@@ -12,8 +12,8 @@
       <%= submit_tag "Select", class: "button"%>
   <% end %>
 
-  <%= form_tag choose_a_country_submit_path, class: 'js-show' do %>
-    <div id="country-picker" class="form-control-2-3"></div>
+  <%= form_tag choose_a_country_submit_path, id: 'choose-a-country-form', class: 'js-show' do %>
+    <div class="form-control-2-3 country-picker"></div>
 
     <!-- Hack: hidden input to submit the two letter country code (e.g. DE) -->
     <input type="hidden" name="country">
