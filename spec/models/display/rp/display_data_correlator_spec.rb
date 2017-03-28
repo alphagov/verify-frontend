@@ -11,6 +11,9 @@ module Display
       let(:transaction_b_name) { 'Private Transaction B' }
       let(:translator) { double(:translator) }
       let(:homepage) { 'http://transaction-a.com' }
+      let(:homepage_2) { 'http://transaction-2.com' }
+      let(:homepage_3) { 'http://transaction-3.com' }
+      let(:homepage_4) { 'http://transaction-4.com' }
       let(:public_simple_id) { 'test-rp' }
       let(:public_simple_id_2) { 'test-rp-2' }
       let(:public_simple_id_3) { 'test-rp-3' }
@@ -32,19 +35,19 @@ module Display
         transaction_data = {
             'transactions' => [
                 { 'simpleId' => public_simple_id, 'homepage' => homepage },
-                { 'simpleId' => public_simple_id_2, 'homepage' => homepage },
-                { 'simpleId' => public_simple_id_3, 'homepage' => homepage },
-                { 'simpleId' => public_simple_id_4, 'homepage' => homepage },
+                { 'simpleId' => public_simple_id_2, 'homepage' => homepage_2 },
+                { 'simpleId' => public_simple_id_3, 'homepage' => homepage_3 },
+                { 'simpleId' => public_simple_id_4, 'homepage' => homepage_4 },
             ]
         }
         correlator = DisplayDataCorrelator.new(translator, [public_simple_id_4, public_simple_id_2, public_simple_id, public_simple_id_3], [])
         actual_result = correlator.correlate(transaction_data)
         expected_result = DisplayDataCorrelator::Transactions.new(
           [
-            DisplayDataCorrelator::Transaction.new(transaction_4_name, homepage),
-            DisplayDataCorrelator::Transaction.new(transaction_2_name, homepage),
+            DisplayDataCorrelator::Transaction.new(transaction_4_name, homepage_4),
+            DisplayDataCorrelator::Transaction.new(transaction_2_name, homepage_2),
             DisplayDataCorrelator::Transaction.new(transaction_a_name, homepage),
-            DisplayDataCorrelator::Transaction.new(transaction_3_name, homepage)
+            DisplayDataCorrelator::Transaction.new(transaction_3_name, homepage_3)
           ],
           [])
         expect(actual_result).to eq expected_result
