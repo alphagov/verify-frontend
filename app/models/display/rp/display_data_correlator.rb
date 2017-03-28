@@ -34,8 +34,8 @@ module Display
         @translator.translate("rps.#{simple_id}.name")
       end
 
-      def filter_transactions(transactions, filter)
-        transactions.select { |t| filter.include?(t.fetch('simpleId')) }
+      def filter_transactions(transactions, simple_ids)
+        simple_ids.map { |simple_id| transactions.select { |tx| tx['simpleId'] == simple_id } }.flatten
       end
     end
   end
