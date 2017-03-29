@@ -5,14 +5,14 @@
       <% if params[:locale] == 'en' %>
         <span>English</span>
       <% else %>
-        <%= link_to 'English', url_for(locale: 'en', :'feedback-source' => feedback_source_query_param), lang: 'en', hreflang: 'en' %>
+        <%= link_to 'English', url_for(locale: 'en'), lang: 'en', hreflang: 'en' %>
       <% end %>
     </li>
     <li class="translation last">
       <% if params[:locale] == 'cy' %>
         <span>Cymraeg</span>
       <% else %>
-        <%= link_to 'Cymraeg', url_for(locale: 'cy', :'feedback-source' => feedback_source_query_param), lang: 'cy', hreflang: 'cy' %>
+        <%= link_to 'Cymraeg', url_for(locale: 'cy'), lang: 'cy', hreflang: 'cy' %>
       <% end %>
     </li>
   </ul>
