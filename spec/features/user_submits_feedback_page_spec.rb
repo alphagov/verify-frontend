@@ -58,28 +58,6 @@ RSpec.feature 'When the user submits the feedback page' do
     end
   end
 
-  it 'should be able to direct user back to the Verify product page if email could not be sent on first attempt' do
-    visit '/feedback?feedback-source=PRODUCT_PAGE'
-
-    fill_in 'feedback_form_what', with: 'Verify my identity'
-    fill_in 'feedback_form_details', with: 'Some details'
-    choose 'feedback_form_reply_false', allow_label_click: true
-
-    allow_any_instance_of(FeedbackService).to receive(:submit!).and_return(false)
-
-    click_button I18n.t('hub.feedback.send_message')
-
-    expect(page).to have_current_path(feedback_path)
-    expect(page).to have_content 'Verify my identity'
-    expect(page).to have_content 'Some details'
-
-    allow_any_instance_of(FeedbackService).to receive(:submit!).and_return(true)
-
-    click_button I18n.t('hub.feedback.send_message')
-    expect(page).to have_title(I18n.t('hub.feedback_sent.title'))
-    expect(page).to have_link 'Return to the GOV.UK Verify product page', href: 'https://govuk-verify.cloudapps.digital/'
-  end
-
   context 'user session valid' do
     it 'should show user link back to start page' do
       set_session_and_session_cookies!
@@ -154,21 +132,6 @@ RSpec.feature 'When the user submits the feedback page' do
       expect(page).to have_title I18n.t('hub.feedback_sent.title', locale: :cy)
       expect(page).to have_css 'html[lang=cy]'
       expect(page).to have_link I18n.t('hub.feedback_sent.session_valid_link', locale: :cy), href: select_documents_cy_path
-    end
-
-    it 'should be able to direct user back to the relevant page if user switches to Welsh on the feedback page' do
-      set_session_and_session_cookies!
-      visit '/feedback?feedback-source=START_PAGE'
-
-      click_link 'Cymraeg'
-      expect(page).to have_current_path('/adborth')
-
-      fill_in 'feedback_form_what', with: 'Verify my identity'
-      fill_in 'feedback_form_details', with: 'Some details'
-      choose 'feedback_form_reply_false', allow_label_click: true
-
-      click_button I18n.t('hub.feedback.send_message', locale: :cy)
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_valid_link', locale: :cy), href: '/dechrau'
     end
   end
 end

@@ -4,14 +4,7 @@ class FeedbackController < ApplicationController
   def index
     @form = FeedbackForm.new({})
     flash['feedback_referer'] = request.referer
-    feedback_source = params['feedback-source'].nil? ? flash['feedback_source'] : params['feedback-source']
-    if feedback_source.nil?
-      render
-    elsif FEEDBACK_SOURCE_MAPPER.is_feedback_source_valid(feedback_source)
-      flash['feedback_source'] = feedback_source
-    else
-      render 'errors/404', status: 400
-    end
+    flash['feedback_source'] = params['feedback-source']
   end
 
   def submit

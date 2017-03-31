@@ -10,7 +10,7 @@
 
   <p>
     <%if @from_product_page%>
-        <%= link_to t('hub.feedback_sent.product_page'), @link_back %>
+        <%= link_to 'Return to the GOV.UK Verify product page', @link_back %>
     <% elsif @session_valid %>
         <%= link_to t('hub.feedback_sent.session_valid_link'), @link_back %>
     <% else %>

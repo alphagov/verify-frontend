@@ -362,7 +362,6 @@ cy:
       session_valid_link: Dychwelyd i GOV.UK Verify
       session_not_valid: Mae eich sesiwn wedi’i amseru allan.
       session_not_valid_link: ddechrau eto
-      product_page: Dychwelyd i dudalen GOV.UK  Verify
     certified_company_unavailable:
       title: Nid yw'r cwmni ardystiedig hwn ar gael
       sorry: Mae'n ddrwg gennym, nid yw %{display_name} ar gael.

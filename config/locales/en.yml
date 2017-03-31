@@ -356,7 +356,6 @@ en:
       session_valid_link: Return to GOV.UK Verify
       session_not_valid: Your session has timed out.
       session_not_valid_link: start again
-      product_page: Return to the GOV.UK Verify product page
     certified_company_unavailable:
       title: This certified company is unavailable
       sorry: Sorry, %{display_name} is not available.
