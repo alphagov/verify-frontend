@@ -1,7 +1,29 @@
 require 'feature_helper'
+require 'api_test_helper'
 
 RSpec.feature 'When the user visits the feedback page' do
   let(:long_text_limit) { FeedbackForm::LONG_TEXT_LIMIT }
+
+  it 'should go to the session timed out when feedback source is COOKIE_NOT_FOUND_PAGE' do
+    stub_transactions_list
+    visit '/start'
+    expect(page).to have_content 'If you can’t access GOV.UK Verify from a service, enable your cookies.'
+    expect(page).to have_http_status :forbidden
+    expect(page).to have_link 'feedback', href: '/feedback?feedback-source=COOKIE_NOT_FOUND_PAGE'
+
+    click_link 'feedback form'
+
+    expect(page).to have_content('Send your feedback to GOV.UK Verify')
+
+    fill_in 'feedback_form_what', with: 'Verify my identity'
+    fill_in 'feedback_form_details', with: 'Some details'
+    choose 'feedback_form_reply_false', allow_label_click: true
+
+    click_button I18n.t('hub.feedback.send_message')
+
+    expect(page).to have_title(I18n.t('hub.feedback_sent.title'))
+    expect(page).to have_content('Your session has timed out.')
+  end
 
   it 'should link back to the product page when user came from the product page' do
     visit '/feedback?feedback-source=PRODUCT_PAGE'

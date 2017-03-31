@@ -32,11 +32,11 @@ RSpec.describe 'When the user visits the start page' do
     it 'will display the no cookies error when all cookies are missing' do
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with("No session cookies can be found").at_least(:once)
-      visit "/start"
-      expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
+      visit '/start'
+      expect(page).to have_content 'If you can’t access GOV.UK Verify from a service, enable your cookies.'
       expect(page).to have_http_status :forbidden
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=COOKIE_NOT_FOUND_PAGE'
-      expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
+      expect(page).to have_link 'register for an identity profile', href: 'http://localhost:50130/test-rp'
     end
 
     it 'will display the generic error when start time is missing from session' do
