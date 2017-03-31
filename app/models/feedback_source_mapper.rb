@@ -36,7 +36,7 @@ class FeedbackSourceMapper
   end
 
   def is_feedback_source_valid(feedback_source)
-    @page_to_source_mappings[feedback_source].nil? ? false : true
+    @page_to_source_mappings.has_key?(feedback_source)
   end
 
   def page_from_source(feedback_source, locale)
