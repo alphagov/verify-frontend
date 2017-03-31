@@ -17,6 +17,12 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(page).to have_link 'Return to the GOV.UK Verify product page', href: 'https://govuk-verify.cloudapps.digital/'
   end
 
+  it 'should display and something went wrong if the feedback source is not valid' do
+    visit '/feedback?feedback-source=something_not_valid'
+
+    expect(page).to have_content('This page can’t be found')
+  end
+
   it 'should show errors for all input fields when missing input', js: true do
     visit feedback_path
     expect(page).to have_title(I18n.t('hub.feedback.title'))

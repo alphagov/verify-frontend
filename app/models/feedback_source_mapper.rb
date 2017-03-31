@@ -9,6 +9,7 @@ class FeedbackSourceMapper
       'CERTIFIED_COMPANY_UNAVAILABLE_PAGE' => 'choose_a_certified_company',
       'CONFIRM_YOUR_IDENTITY' => 'confirm_your_identity',
       'CONFIRMATION_PAGE' => 'confirmation',
+      'ERROR_PAGE' => 'start',
       'FAILED_REGISTRATION_PAGE' => 'failed_registration',
       'FAILED_SIGN_IN_PAGE' => 'failed_sign_in',
       'CYCLE_3_PAGE' => 'further_information',
@@ -32,6 +33,10 @@ class FeedbackSourceMapper
       'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE' => 'will_not_work_without_uk_address',
       'PRODUCT_PAGE' => product_page_url
   }.freeze
+  end
+
+  def is_feedback_source_valid(feedback_source)
+    @page_to_source_mappings.has_key?(feedback_source)
   end
 
   def page_from_source(feedback_source, locale)
