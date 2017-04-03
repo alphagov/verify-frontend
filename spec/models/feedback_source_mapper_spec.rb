@@ -4,6 +4,22 @@ require 'rails_helper'
 describe FeedbackSourceMapper do
   before(:each) { @feedback_source_mapper = FeedbackSourceMapper.new('http://product_page_url') }
 
+  it 'should map to anywhere if feedback source is COOKIE_NOT_FOUND_PAGE' do
+    expect(@feedback_source_mapper.page_from_source('COOKIE_NOT_FOUND_PAGE', :en)).to be_nil
+  end
+
+  it 'COOKIE_NOT_FOUND_PAGE feedback source should be valid' do
+    expect(@feedback_source_mapper.is_feedback_source_valid('COOKIE_NOT_FOUND_PAGE')).to be true
+  end
+
+  it 'EXPIRED_ERROR_PAGE feedback source should be valid' do
+    expect(@feedback_source_mapper.is_feedback_source_valid('EXPIRED_ERROR_PAGE')).to be true
+  end
+
+  it 'should map to anywhere if feedback source is EXPIRED_ERROR_PAGE' do
+    expect(@feedback_source_mapper.page_from_source('EXPIRED_ERROR_PAGE', :en)).to be_nil
+  end
+
   it 'should map feedback source to product page' do
     expect(@feedback_source_mapper.page_from_source('PRODUCT_PAGE', :en)).to eql('http://product_page_url')
   end

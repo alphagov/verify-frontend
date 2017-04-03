@@ -9,6 +9,9 @@ class FeedbackSourceMapper
       'CERTIFIED_COMPANY_UNAVAILABLE_PAGE' => 'choose_a_certified_company',
       'CONFIRM_YOUR_IDENTITY' => 'confirm_your_identity',
       'CONFIRMATION_PAGE' => 'confirmation',
+      'COOKIE_NOT_FOUND_PAGE' => nil,
+      'ERROR_PAGE' => 'start',
+      'EXPIRED_ERROR_PAGE' => nil,
       'FAILED_REGISTRATION_PAGE' => 'failed_registration',
       'FAILED_SIGN_IN_PAGE' => 'failed_sign_in',
       'CYCLE_3_PAGE' => 'further_information',
@@ -34,10 +37,16 @@ class FeedbackSourceMapper
   }.freeze
   end
 
+  def is_feedback_source_valid(feedback_source)
+    @page_to_source_mappings.has_key?(feedback_source)
+  end
+
   def page_from_source(feedback_source, locale)
     route_name = route_name_from(feedback_source)
     if route_name =~ /https?:.*/
       route_name
+    elsif route_name.nil?
+      nil
     else
       '/' + I18n.translate('routes.' + route_name, locale: locale)
     end
