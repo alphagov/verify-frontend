@@ -41,6 +41,8 @@ RSpec.describe 'user sends authn requests' do
 
     it 'will redirect the user to /choose-a-country for an eidas journey where eidas is enabled' do
       stub_api_saml_endpoint(transaction_supports_eidas: true)
+      stub_transactions_list
+      stub_countries_list
 
       visit('/test-saml')
       click_button 'saml-post-eidas'

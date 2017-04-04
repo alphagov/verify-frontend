@@ -14,6 +14,7 @@ cy:
     why_might_this_not_work_for_me: pam-efallai-na-fydd-hyn-yn-gweithio-i-mi
     will_not_work_without_uk_address: ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du
     choose_a_country: choose-a-country-cy
+    redirect_to_country: redirect-to-country-cy
     choose_a_certified_company: dewis-cwmni-ardystiedig
     choose_a_certified_company_about: dewis-cwmni-ardystiedig/:company
     why_companies: pam-cwmniau
@@ -65,6 +66,9 @@ cy:
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
     choose_country:
       title: Choose a country
+      heading: Which EU country is your eID from?
+    redirect_to_country:
+          title: Redirect to country
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify

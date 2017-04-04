@@ -134,3 +134,4 @@ rack_options:
 #
 # random:
 
+show_console_log: true

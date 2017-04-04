@@ -14,6 +14,7 @@ en:
     why_might_this_not_work_for_me: why-might-this-not-work-for-me
     will_not_work_without_uk_address: will-not-work-without-uk-address
     choose_a_country: choose-a-country
+    redirect_to_country: redirect-to-country
     choose_a_certified_company: choose-a-certified-company
     choose_a_certified_company_about: choose-a-certified-company/:company
     why_companies: why-companies
@@ -62,6 +63,9 @@ en:
     other_ways_heading: Other ways to %{other_ways_description}
     choose_country:
       title: Choose a country
+      heading: Which EU country is your eID from?
+    redirect_to_country:
+      title: Redirect to country
     start:
       title: Start
       heading: Sign in with GOV.UK Verify

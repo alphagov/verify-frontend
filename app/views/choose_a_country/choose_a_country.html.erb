@@ -1,1 +1,29 @@
 <%= page_title 'hub.choose_country.title' %>
+
+<div class="article-container column-two-thirds">
+  <h1 class="heading-xlarge"><%= t('hub.choose_country.heading') %></h1>
+
+  <%= form_tag choose_a_country_submit_path, class: 'js-hidden' do %>
+      <select name="country" id="js-disabled-country-picker" class="form-control-2-3 form-control">
+        <option value=""></option>
+        <% @countries.each do |country| %>
+        <option value="<%= country.simple_id %>"><%= country.display_name %></option>
+        <% end %>
+      </select>
+      <%= submit_tag "Select", class: "button"%>
+  <% end %>
+
+  <%= form_tag choose_a_country_submit_path, id: 'choose-a-country-form', class: 'js-show' do %>
+    <div class="form-control-2-3 country-picker"></div>
+
+    <!-- Hack: hidden input to submit the two letter country code (e.g. DE) -->
+    <input type="hidden" name="country">
+    <!-- /Hack -->
+
+    <input class="button" type="submit" value="Select"/>
+  <% end %>
+  <div id="no-country" style="display: <%= flash[:errors] ? 'block' : 'none' %>;">
+    <h2 class="heading-medium">Please select a country from the list</h2>
+    <p><a href="javascript:history.back()">Try another way to sign in.</a></p>
+  </div>
+</div>

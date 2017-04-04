@@ -59,5 +59,24 @@ class StubApi < Sinatra::Base
       "private":[]
     }'
   end
+
+  get '/api/countries/blah' do
+    '[{
+        "entityId":"http://nl-proxy-node-demo.cloudapps.digital/ServiceMetadata",
+        "simpleId":"NL",
+        "enabled":true
+      },
+      {
+        "entityId":"http://se-eidas.redsara.es/EidasNode/ServiceMetadata",
+        "simpleId":"ES",
+        "enabled":true
+      },
+      {
+        "entityId":"http://eunode.eidastest.se/EidasNode/ServiceMetadata",
+        "simpleId":"SE",
+        "enabled":false
+      }
+     ]'
+  end
 end
 
