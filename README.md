@@ -26,3 +26,14 @@ and start your journey from the test-rp.
 `./pre-commit.sh`
 
 This will [lint the application code](https://github.com/alphagov/govuk-lint) and run the tests.
+
+If you need to run the javascript-enabled tests that require Firefox, you will need to have Firefox 47.0.1 installed.
+No other version of Firefox will do. The Managed Software Centre will constantly try and upgrade Firefox to an incompatible version.
+To get around this:
+
+1. Install [version 47.0.1](https://ftp.mozilla.org/pub/firefox/releases/47.0.1/mac/en-GB/Firefox%2047.0.1.dmg) somewhere (not your Applications directory!).
+2. Export the `FIREFOX_PATH` environment variable somewhere (like your `.bashrc`):
+
+    `export FIREFOX_PATH=/path/to/old/Firefox.app/Contents/MacOS/firefox-bin`
+
+3. Run the tests again. They should use the old version of Firefox and pass.
