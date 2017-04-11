@@ -106,5 +106,39 @@ RSpec.describe 'When the user visits the choose a country page' do
     end
 
     expect(page).to have_current_path('/redirect-to-country')
+    sleep(30)
+
+  end
+
+  #EID-65
+  it 'policy records the country selected by the user', js: true do
+    # Given the User has a list of countries to choose from
+    # And the User has a session that supports eIDAS Journey
+    given_a_session_supporting_eidas
+    stub_select_country_request();
+
+    # When the User makes a selection from the choice of available countries
+    visit '/choose-a-country'
+
+    within '.js-show' do
+      fill_in 'input-typeahead', with: 'Netherlands'
+      click_on 'Select'
+    end
+
+    # Then the User should be redirected to the 'redirect-to-country' page
+    expect(page).to have_current_path('/redirect-to-country')
+
+    # And API is called (and policy records the country selected by the user)
+    expect(a_request(:post, api_uri(select_country_endpoint())).with(body: { :countryCode => 'NL', :sessionId => 'my-session-id-cookie'})).to have_been_made.once
+  end
+
+  def select_country_endpoint()
+    '/countries'
+  end
+
+  def stub_select_country_request()
+    stub_request(:post, api_uri(select_country_endpoint()))
+        .with(body: {"countryCode"=>"NL","sessionId"=>"my-session-id-cookie"})
+        .to_return(body: '')
   end
 end
