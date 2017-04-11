@@ -56,6 +56,12 @@ module ApiTestHelper
     }
   end
 
+  def an_error_response(code)
+    {
+        type: code
+    }
+  end
+
   def stub_api_saml_endpoint(options = {})
     authn_request_body = {
         PARAM_SAML_REQUEST => 'my-saml-request',
@@ -126,6 +132,11 @@ module ApiTestHelper
     stub_request(:put, api_uri(idp_authn_response_endpoint(default_session_id)))
         .with(body: authn_response_body)
         .to_return(body: response.to_json, status: 200)
+  end
+
+  def stub_api_returns_error(code)
+    stub_request(:get, api_uri(idp_authn_request_endpoint(default_session_id)))
+        .to_return(body: an_error_response(code).to_json, status: 500)
   end
 end
 
