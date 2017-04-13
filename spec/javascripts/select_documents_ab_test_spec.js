@@ -147,15 +147,6 @@ describe("Photo Documents Form", function () {
         submitForm();
         expectErrorMessage('Please select the documents you have');
     });
-
-    it("should clear error when erroneous driving license state is fixed", function() {
-       this.selectYesValidDrivingLicence();
-       this.selectYesPassport();
-       submitForm();
-       expectErrorMessage('Please select the documents you have');
-       this.selectNoValidDrivingLicence();
-       expectNoError();
-    });
     
     it("should clear errors when driving licence details are given", function () {
         this.selectYesValidDrivingLicence();

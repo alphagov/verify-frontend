@@ -32,16 +32,33 @@
             }));
 
             photoDocuments.setDrivingLicenceDetailsVisibility();
-            photoDocuments.$form.find('input[name="photo_documents_form[any_driving_licence]"]').on('click', photoDocuments.setDrivingLicenceDetailsVisibility);
+            photoDocuments.$form.find('input[name="photo_documents_form[any_driving_licence]"]')
+                .on('click', photoDocuments.setDrivingLicenceDetailsVisibility)
+
+            // Changing driving license validation to false when there are validation errors
+            // on the driving license detail fields does not cause validation execution on the
+            // erroneous fields. This causes the main error message to remain visible even though
+            // there are no visible errors for the user.
+            //
+            // To work around this, we force the whole form validation on the above mentioned
+            // scenario.
+            photoDocuments.$form.find('#photo_documents_form_any_driving_licence_false')
+                .on('change', function () {
+                    if (!GOVUK.photoDocuments.validator.valid()) {
+                        // the name of the api-function to validate the form is form :/
+                        // https://jqueryvalidation.org/Validator.form
+                        photoDocuments.validator.form()
+                    }
+                })
+
         },
 
         setDrivingLicenceDetailsVisibility: function () {
             if (photoDocuments.hasAnyDrivingLicence()) {
                 photoDocuments.$drivingLicenceDetails.removeClass('js-hidden');
             } else {
-                photoDocuments.$drivingLicenceDetails.removeClass('error')
+                photoDocuments.$drivingLicenceDetails.removeClass('form-group-error')
                     .find('.selected').removeClass('selected').find('input').prop('checked', false);
-                photoDocuments.$drivingLicenceDetails.find('input').trigger('click');
                 photoDocuments.$drivingLicenceDetails.addClass('js-hidden');
             }
         },

@@ -22,7 +22,7 @@ describe PhotoDocumentsForm do
       it 'should be invalid if user only inputs driving licence details' do
         form = PhotoDocumentsForm.new(
           any_driving_licence: 'true',
-          driving_licence: '1'
+          driving_licence: 'true'
         )
         expect(form).to_not be_valid
         expect(form.errors.full_messages).to eql ['Please select the documents you have']
@@ -41,8 +41,8 @@ describe PhotoDocumentsForm do
       it 'should be valid if answers are given to every question' do
         form = PhotoDocumentsForm.new(
           any_driving_licence: 'false',
-          ni_driving_licence: '1',
-          driving_licence: '1',
+          ni_driving_licence: 'true',
+          driving_licence: 'true',
           passport: 'true',
         )
         expect(form).to be_valid
@@ -70,7 +70,7 @@ describe PhotoDocumentsForm do
     it 'should return a hash of driving licence true if GB driving licence selected' do
       form = PhotoDocumentsForm.new(
         any_driving_licence: 'true',
-        driving_licence: '1'
+        driving_licence: 'true'
       )
       evidence = form.selected_answers
       expect(evidence).to eql(driving_licence: true)

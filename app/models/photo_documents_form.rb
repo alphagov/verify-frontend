@@ -16,18 +16,19 @@ class PhotoDocumentsForm
     answers = {}
     IdpEligibility::Evidence::PHOTO_DOCUMENT_ATTRIBUTES.each do |attr|
       result = public_send(attr)
-      if %w(true false 1).include?(result)
-        answers[attr] = (result == 'true' || result == '1')
-      elsif any_driving_licence == 'false'
-        answers[:driving_licence] = false
-        answers[:ni_driving_licence] = false
+      if %w(true false).include?(result)
+        answers[attr] = (result == 'true')
       end
+    end
+    if any_driving_licence == 'false'
+      answers[:driving_licence] = false
+      answers[:ni_driving_licence] = false
     end
     answers
   end
 
   def further_id_information_required?
-    passport == 'false' && (any_driving_licence == 'false' || ni_driving_licence == 'true')
+    passport == 'false' && (any_driving_licence == 'false' || (ni_driving_licence == 'true' && driving_licence != 'true'))
   end
 
 private
@@ -45,7 +46,7 @@ private
   end
 
   def no_driving_licence_details?
-    !(driving_licence == '1' || ni_driving_licence == '1')
+    !(driving_licence == 'true' || ni_driving_licence == 'true')
   end
 
   def all_no_answers?
