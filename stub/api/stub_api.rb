@@ -78,5 +78,9 @@ class StubApi < Sinatra::Base
       }
      ]'
   end
-end
 
+  post '/api/countries/:session_id/:countryCode' do
+    status 200
+    ''
+  end
+end

@@ -18,11 +18,8 @@ class ChooseACountryController < ApplicationController
 
     # Call into Policy to change state
     # POST /api/countries (NL)
-    API_CLIENT.post("/countries",
-    {
-        :countryCode => country,
-        :sessionId => session['verify_session_id']
-    }, {}, 200)
+    API_CLIENT.post("/countries/#{session['verify_session_id']}/#{country}",
+    '', {}, 200)
 
     redirect_to '/redirect-to-country'
   end
