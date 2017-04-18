@@ -30,12 +30,12 @@ describe("Other Documents Form", function () {
     }
 
     function expectErrorMessage(error) {
-        expect(otherDocumentsForm.children('.form-group:first').is('.error')).toBe(true);
+        expect(otherDocumentsForm.children('.form-group:first').is('.form-group-error')).toBe(true);
         expect(otherDocumentsForm.find('#validation-error-message-js').text()).toBe(error);
     }
 
     function expectNoError() {
-        expect(otherDocumentsForm.children('.form-group:first').is('.error')).toBe(false);
+        expect(otherDocumentsForm.children('.form-group:first').is('.form-group-error')).toBe(false);
         expect(otherDocumentsForm.find('#validation-error-message-js').text()).toBe('');
     }
 

@@ -19,10 +19,10 @@
                 },
 
                 highlight: function(element, errorClass) {
-                    otherDocuments.$form.children('.form-group:first').addClass('error');
+                    otherDocuments.$form.children('.form-group:first').addClass('form-group-error');
                 },
                 unhighlight: function(element, errorClass) {
-                    otherDocuments.$form.children('.form-group:first').removeClass('error');
+                    otherDocuments.$form.children('.form-group:first').removeClass('form-group-error');
                 }
             }));
         }

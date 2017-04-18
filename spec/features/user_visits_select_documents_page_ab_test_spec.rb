@@ -35,7 +35,7 @@ RSpec.feature 'When B group user visits document selection page' do
     choose 'photo_documents_form_passport_true'
     click_button 'Continue'
     expect(page).to have_current_path(select_phone_path)
-    expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'passport' => true, 'driving_licence' => true })
+    expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'passport' => true, 'driving_licence' => true, 'ni_driving_licence' => false })
   end
 
   context 'user does not have UK driving license or valid passport' do
