@@ -7,6 +7,14 @@ class SelectedAnswerStore
     selected_answers[stage] = answers
   end
 
+  def update_selected_answers(stage, answers)
+    if selected_answers[stage].nil?
+      selected_answers[stage] = answers
+    else
+      selected_answers[stage].merge!(answers)
+    end
+  end
+
   def selected_answers
     @session[:selected_answers] ||= {}
   end
