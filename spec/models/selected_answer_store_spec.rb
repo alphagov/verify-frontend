@@ -39,4 +39,29 @@ RSpec.describe SelectedAnswerStore do
     store.store_selected_answers('phone', phone_answers)
     expect(store.selected_evidence).to eql [:passport, :mobile_phone]
   end
+
+  it 'should update selected answers at a given stage when there are already selected answers' do
+    session = {}
+    document_answers = {
+        passport: true,
+        driving_licence: false
+    }
+    other_document_answers = {
+        nonukid: true
+    }
+    store = SelectedAnswerStore.new(session)
+    store.store_selected_answers('documents', document_answers)
+    store.update_selected_answers('documents', other_document_answers)
+    expect(store.selected_evidence).to eql [:passport, :nonukid]
+  end
+
+  it 'should update selected answers at a given stage when there no selected answers' do
+    session = {}
+    other_document_answers = {
+        nonukid: true
+    }
+    store = SelectedAnswerStore.new(session)
+    store.update_selected_answers('documents', other_document_answers)
+    expect(store.selected_evidence).to eql [:nonukid]
+  end
 end
