@@ -9,9 +9,19 @@ class AboutController < ConfigurableJourneyController
     )
     FEDERATION_REPORTER.report_loa_requested(request, session[:requested_loa])
     @tailored_text = current_transaction.tailored_text
+    render :about
   end
 
   def certified_companies
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers)
+    render :certified_companies
+  end
+
+  def identify_accounts
+    render :identity_accounts
+  end
+
+  def choosing_a_company
+    render :choosing_a_company
   end
 end

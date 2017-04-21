@@ -171,4 +171,12 @@ private
       render_not_found
     end
   end
+
+  def is_loa1?
+    session['requested_loa'] == 'LEVEL_1'
+  end
+
+  def is_loa2?
+    session['requested_loa'] == 'LEVEL_2'
+  end
 end
