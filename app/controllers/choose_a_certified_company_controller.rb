@@ -3,6 +3,11 @@ class ChooseACertifiedCompanyController < ConfigurableJourneyController
     grouped_identity_providers = IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.non_recommended)
+    if is_loa1?
+      render :choose_a_certified_company_LOA1
+    else
+      render :choose_a_certified_company_LOA2
+    end
   end
 
   def select_idp

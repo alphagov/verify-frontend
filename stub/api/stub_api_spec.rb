@@ -30,7 +30,7 @@ describe StubApi do
 
   context '#post /api/session' do
     it 'should respond with valid SessionResponse' do
-      post '/api/session'
+      post '/api/session', '{"relayState": "some_relay_state"}', {format: 'json'}
       expect(last_response).to be_created
       response = SessionResponse.new(last_response_json)
       expect(response).to be_valid

@@ -104,14 +104,27 @@ en:
         <p>Certified companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
         <p>There won’t be any effect on your credit score.</p>
         <p>More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.</p>
+      loa1_details_html: |
+        <p>These companies can use their own data, and they can access data like credit records.</p>
+        <p>There won’t be any effect on your credit score.</p>
+        <p>Certified companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
+        <p>More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.</p>
     about_identity_accounts:
       title: About identity accounts
       content_html: |
         <p>Verifying your identity takes about 15 minutes to complete, but you only have to do it once.</p>
         <p>You’ll then have an identity account with the certified company.</p>
         <p>You can then access other government services in less than 1 minute wherever you see the GOV.UK Verify logo.</p>
+      content_loa1_html: |
+        <p>Verifying your identity takes about 5 minutes to complete.</p>
+        <p>You’ll then have an identity account with the certified company.</p>
+        <p>You can use this identity account to access other government services wherever you see the GOV.UK Verify logo.</p>
       summary: Where you can use your identity account
+      details_loa1_html: |
+        <p>GOV.UK Verify is new, and government services are joining all the time.</p>
+        <p>You can use your identity account to access:</p>
       details: "GOV.UK Verify is new, and government services are joining all the time. The current services using Verify are:"
+      details_loa1_uplift_list: "The first time you access one of these government services, you'll be asked to add more security to your identity account:"
     about_choosing_a_company:
       title: About choosing a company
       heading: Finding the right company to verify you
@@ -230,6 +243,9 @@ en:
     choose_a_certified_company:
       title: Choose a certified company
       heading: Choose a company
+      heading_loa1: Choose a certified company to verify your identity
+      existing_customer: You don't have to be an existing customer with a company.
+      personal_information: They ask you to provide personal information and then check it's correct using the new, secure systems they built.
       why_companies: Why there’s a choice of companies
       choose_idp: "Choose %{display_name}"
       idp_count_html: "Based on your answers, %{company_count} can verify you now:"
@@ -254,6 +270,12 @@ en:
         <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
         <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
         <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
+        <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p>There’s no effect on your credit score.</p>
+      content_loa1_html: |
+        <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
+        <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
+        <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide.</p>
         <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
         <p>There’s no effect on your credit score.</p>
     unlikely_to_verify:

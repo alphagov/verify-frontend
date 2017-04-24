@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   before_action :store_originating_ip
   after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
   helper_method :transactions_list
+  helper_method :loa1_transactions_list
+  helper_method :loa2_transactions_list
   helper_method :public_piwik
 
   rescue_from StandardError, with: :something_went_wrong unless Rails.env == 'development'
@@ -20,7 +22,15 @@ class ApplicationController < ActionController::Base
   prepend RedirectWithSeeOther
 
   def transactions_list
-    TRANSACTION_LISTER.list
+    DATA_CORRELATOR.correlate(Display::Rp::TransactionsProxy.new(API_CLIENT).transactions)
+  end
+
+  def loa1_transactions_list
+    Display::Rp::TransactionFilter.new.filter_by_loa(transactions_list, 'LEVEL_1')
+  end
+
+  def loa2_transactions_list
+    Display::Rp::TransactionFilter.new.filter_by_loa(transactions_list, 'LEVEL_2')
   end
 
   def current_transaction
