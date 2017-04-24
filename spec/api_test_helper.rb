@@ -15,9 +15,9 @@ module ApiTestHelper
   def stub_transactions_list
     transactions = {
       'transactions' => [
-        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp'      },
-        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3' },
-        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/headless-rp'  }
+        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] }
       ]
     }
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)

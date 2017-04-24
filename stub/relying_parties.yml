@@ -10,3 +10,4 @@ transaction_type:
   display_name_and_homepage:
     - test-rp
     - test-rp-noc3
+    - loa1-test-rp
