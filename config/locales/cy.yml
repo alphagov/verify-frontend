@@ -107,6 +107,11 @@ cy:
         <p>Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
         <p>Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
+      loa1_details_html: |
+        <p>These companies can use their own data, and they can access data like credit records.</p>
+        <p>There won’t be any effect on your credit score.</p>
+        <p>Certified companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
+        <p>More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.</p>
     about_identity_accounts:
       title: Am gyfrifon hunaniaeth
       content_html: |

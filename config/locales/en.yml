@@ -104,6 +104,11 @@ en:
         <p>Certified companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
         <p>There won’t be any effect on your credit score.</p>
         <p>More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.</p>
+      loa1_details_html: |
+        <p>These companies can use their own data, and they can access data like credit records.</p>
+        <p>There won’t be any effect on your credit score.</p>
+        <p>Certified companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
+        <p>More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.</p>
     about_identity_accounts:
       title: About identity accounts
       content_html: |
