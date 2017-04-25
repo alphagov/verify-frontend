@@ -1,7 +1,6 @@
 module Analytics
   module CustomVariable
     CUSTOM_VARIABLES = {
-      loa_achieved: { name: 'LOA_ACHIEVED', index: 3 },
       loa_requested: { name: 'LOA_REQUESTED', index: 2 },
       rp: { name: 'RP', index: 1 },
       idp_selection: { name: 'IDP_SELECTION', index: 5 },

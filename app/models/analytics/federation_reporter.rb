@@ -42,12 +42,6 @@ module Analytics
       report_action(current_transaction, request, 'Matching Outcome - Cancelled Cycle3')
     end
 
-    def report_loa_achieved(request, loa_achieved)
-      @analytics_reporter.report_custom_variable(
-        request, "LOA Achieved - #{loa_achieved}", Analytics::CustomVariable.build(:loa_achieved, loa_achieved)
-      )
-    end
-
   private
 
     def report_action(current_transaction, request, action)
