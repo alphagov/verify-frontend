@@ -10,3 +10,9 @@ transaction_type:
   display_name_and_homepage:
     - test-rp
     - test-rp-noc3
+    - loa1-test-rp
+  level_of_assurance:
+    - test-rp: 2
+    - test-rp-noc3: 2
+    - loa1-test-rp: 1
+

@@ -6,6 +6,7 @@ module Display
         @correlator = correlator
       end
 
+      #correlated_data, property_to_filer
       def list
         @correlator.correlate(@proxy.transactions)
       rescue StandardError => e

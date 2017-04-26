@@ -115,8 +115,16 @@ en:
         <p>Verifying your identity takes about 15 minutes to complete, but you only have to do it once.</p>
         <p>You’ll then have an identity account with the certified company.</p>
         <p>You can then access other government services in less than 1 minute wherever you see the GOV.UK Verify logo.</p>
+      content_loa1_html: |
+        <p>Verifying your identity takes about 5 minutes to complete.</p>
+        <p>You’ll then have an identity account with the certified company.</p>
+        <p>You can use this identity account to access other government services wherever you see the GOV.UK Verify logo.</p>
       summary: Where you can use your identity account
+      details_loa1_html: |
+        <p>GOV.UK Verify is new, and government services are joining all the time.</p>
+        <p>You can use your identity account to access:</p>
       details: "GOV.UK Verify is new, and government services are joining all the time. The current services using Verify are:"
+      details_loa1_uplift_list: "The first time you access one of these government services, you'll be asked to add more security to your identity account:"
     about_choosing_a_company:
       title: About choosing a company
       heading: Finding the right company to verify you

@@ -47,7 +47,18 @@ class StubApi < Sinatra::Base
         "entityId":"http://example.com/test-rp",
         "homepage":"http://example.com/test-rp"
       }],
-      "private":[]
+      "private":[],
+      "transactions":[{
+        "simpleId":"test-rp",
+        "entityId":"http://example.com/test-rp",
+        "homepage":"http://example.com/test-rp"
+        },
+        {
+          "simpleId": "loa1-test-rp",
+          "entityId": "http://example.com/test-rp-loa1",
+          "homepage":"http://example.com/test-rp-loa1"
+        }
+      ]
     }'
   end
 

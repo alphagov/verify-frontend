@@ -21,8 +21,13 @@ class AboutController < ConfigurableJourneyController
     end
   end
 
-  def identify_accounts
-    render :identity_accounts
+  def identity_accounts
+    @foo = TRANSACTION_LISTER.list
+    if is_loa1?
+      render :identity_accounts_LOA1
+    else
+      render :identity_accounts_LOA2
+    end
   end
 
   def choosing_a_company
