@@ -58,11 +58,12 @@ RSpec.describe 'When the user visits the choose a country page' do
 
   it 'should redirect to country page (when JS is disabled)' do
     given_a_session_supporting_eidas
+    stub_select_country_request
 
     visit '/choose-a-country'
 
     within '.js-hidden' do
-      select 'Spain', from: 'country'
+      select 'Netherlands', from: 'country'
       click_on 'Select'
     end
 
@@ -84,19 +85,7 @@ RSpec.describe 'When the user visits the choose a country page' do
 
   it 'should redirect to country page (when JS is enabled)', js: true do
     given_a_session_supporting_eidas
-
-    visit '/choose-a-country'
-
-    within '.js-show' do
-      fill_in 'input-typeahead', with: 'Spain'
-      click_on 'Select'
-    end
-
-    expect(page).to have_current_path('/redirect-to-country')
-  end
-
-  it 'should submit to the API (when JS is enabled)', js: true do
-    given_a_session_supporting_eidas
+    stub_select_country_request
 
     visit '/choose-a-country'
 
@@ -106,5 +95,35 @@ RSpec.describe 'When the user visits the choose a country page' do
     end
 
     expect(page).to have_current_path('/redirect-to-country')
+  end
+
+  it 'policy records the country selected by the user', js: true do
+    # Given the User has a list of countries to choose from
+    # And the User has a session that supports eIDAS Journey
+    given_a_session_supporting_eidas
+    stub_select_country_request
+
+    # When the User makes a selection from the choice of available countries
+    visit '/choose-a-country'
+
+    within '.js-show' do
+      fill_in 'input-typeahead', with: 'Netherlands'
+      click_on 'Select'
+    end
+
+    # Then the User should be redirected to the 'redirect-to-country' page
+    expect(page).to have_current_path('/redirect-to-country')
+
+    # And API is called (and policy records the country selected by the user)
+    expect(a_request(:post, api_uri(select_country_endpoint("my-session-id-cookie", "NL")))).to have_been_made.once
+  end
+
+  def select_country_endpoint(session_id, country_code)
+    '/countries/' + session_id + '/' + country_code
+  end
+
+  def stub_select_country_request
+    stub_request(:post, api_uri(select_country_endpoint("my-session-id-cookie", "NL")))
+        .to_return(body: '')
   end
 end

@@ -15,6 +15,12 @@ class ChooseACountryController < ApplicationController
       render 'choose_a_country'
       return
     end
+
+    # Call into Policy to change state
+    # POST /api/countries (NL)
+    API_CLIENT.post("/countries/#{session['verify_session_id']}/#{country}",
+    '', {}, 200)
+
     redirect_to '/redirect-to-country'
   end
 
