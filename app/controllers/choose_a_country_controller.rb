@@ -7,7 +7,7 @@ class ChooseACountryController < ApplicationController
   end
 
   def choose_a_country_submit
-    setup_countries
+    session_id = setup_countries
 
     country = params[:country]
     if country.empty?
@@ -16,10 +16,7 @@ class ChooseACountryController < ApplicationController
       return
     end
 
-    # Call into Policy to change state
-    # POST /api/countries (NL)
-    API_CLIENT.post("/countries/#{session['verify_session_id']}/#{country}",
-    '', {}, 200)
+    SESSION_PROXY.set_selected_country(session_id, country)
 
     redirect_to '/redirect-to-country'
   end
@@ -31,5 +28,6 @@ private
     response = SESSION_PROXY.get_countries(session_id)
     countries_map = response.map { |country| Country.from_api(country) }
     @countries = COUNTRY_DISPLAY_DECORATOR.decorate_collection(countries_map)
+    session_id
   end
 end

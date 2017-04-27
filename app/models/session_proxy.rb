@@ -34,6 +34,12 @@ class SessionProxy
     @api_client.get(countries_endpoint(session_id))
   end
 
+  def set_selected_country(session_id, country)
+    # Call into Policy to change state
+    # POST /api/countries (NL)
+    @api_client.post("/countries/#{session_id}/#{country}", '', {}, 200)
+  end
+
   def select_idp(session_id, entity_id, registration = false)
     body = {
       PARAM_ENTITY_ID => entity_id,
