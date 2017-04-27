@@ -35,19 +35,6 @@ module Analytics
       end
     end
 
-    describe '#report_loa_achieved' do
-      it 'should report the LOA achieved at the IDP' do
-        loa_achieved = 'LEVEL_1'
-        expect(analytics_reporter).to receive(:report_custom_variable)
-        .with(
-          request,
-          "LOA Achieved - #{loa_achieved}",
-          3 => ['LOA_ACHIEVED', loa_achieved]
-        )
-        federation_reporter.report_loa_achieved(request, loa_achieved)
-      end
-    end
-
     describe '#report_idp_registration' do
       idp_name = 'IDCorp'
       idp_history = ['Previous IdP', 'IDCorp']
