@@ -101,17 +101,31 @@ describe SessionProxy do
       expect(api_client).to receive(:get).with('/countries/my-session-id').and_return(api_response)
 
       response = session_proxy.get_countries(session_id)
-      expect(response).to match_array countries_json
+      expect(response.countries.count).to eq(2)
+      response.countries.each do |country|
+        case country.simple_id
+        when 'ES'
+          expect(country).to have_attributes(simple_id: 'ES',
+                                             entity_id: 'http://spainEnitity.es',
+                                             enabled: true)
+        when 'NL'
+          expect(country).to have_attributes(simple_id: 'NL',
+                                             entity_id: 'http://netherlandsEnitity.nl',
+                                             enabled: false)
+        else
+          fail('Invalid list of countries')
+        end
+      end
     end
   end
 
   describe('#idp_authn_request') do
     it 'should get an IDP authn request' do
       authn_request = {
-          'location' => 'some-location',
-          'samlRequest' => 'a-saml-request',
-          'relayState' => 'relay-state',
-          'registration' => false
+        'location' => 'some-location',
+        'samlRequest' => 'a-saml-request',
+        'relayState' => 'relay-state',
+        'registration' => false
       }
       ip_address = '1.1.1.1'
       expect(api_client).to receive(:get)
