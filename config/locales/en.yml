@@ -242,6 +242,9 @@ en:
     choose_a_certified_company:
       title: Choose a certified company
       heading: Choose a company
+      heading_loa1: Choose a certified company to verify your identity
+      existing_customer: You don't have to be an existing customer with a company.
+      personal_information: They ask you to provide personal information and then check it's correct using the new, secure systems they built.
       why_companies: Why there’s a choice of companies
       choose_idp: "Choose %{display_name}"
       idp_count_html: "Based on your answers, %{company_count} can verify you now:"
@@ -266,6 +269,12 @@ en:
         <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
         <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
         <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
+        <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p>There’s no effect on your credit score.</p>
+      content_loa1_html: |
+        <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
+        <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
+        <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide.</p>
         <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
         <p>There’s no effect on your credit score.</p>
     unlikely_to_verify:
