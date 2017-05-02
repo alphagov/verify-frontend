@@ -7,7 +7,7 @@ module Display
       end
 
       #correlated_data, property_to_filer
-      def list
+      def list()
         @correlator.correlate(@proxy.transactions)
       rescue StandardError => e
         Rails.logger.error e

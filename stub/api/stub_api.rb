@@ -45,18 +45,21 @@ class StubApi < Sinatra::Base
       "public":[{
         "simpleId":"test-rp",
         "entityId":"http://example.com/test-rp",
-        "homepage":"http://example.com/test-rp"
+        "homepage":"http://example.com/test-rp",
+        "loaList":["LEVEL_2"]
       }],
       "private":[],
       "transactions":[{
         "simpleId":"test-rp",
         "entityId":"http://example.com/test-rp",
-        "homepage":"http://example.com/test-rp"
+        "homepage":"http://example.com/test-rp",
+        "loaList":["LEVEL_2"]
         },
         {
           "simpleId": "loa1-test-rp",
           "entityId": "http://example.com/test-rp-loa1",
-          "homepage":"http://example.com/test-rp-loa1"
+          "homepage":"http://example.com/test-rp-loa1",
+          "loaList":["LEVEL_1","LEVEL_2"]
         }
       ]
     }'
