@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   prepend RedirectWithSeeOther
 
   def transactions_list
-    TRANSACTION_LISTER.list
+    TRANSACTION_LISTER.list_all_transactions
   end
 
   def current_transaction

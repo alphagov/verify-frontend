@@ -51,6 +51,7 @@ module Display
         }
         correlator = DisplayDataCorrelator.new(translator, [public_simple_id_4, public_simple_id_2, public_simple_id, public_simple_id_3], [])
         actual_result = correlator.correlate(transaction_data)
+        puts(actual_result)
         expected_result = DisplayDataCorrelator::Transactions.new(
           [
             DisplayDataCorrelator::Transaction.new(transaction_4_name, homepage_4, public_simple_id_4_loa),
