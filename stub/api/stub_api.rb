@@ -13,7 +13,8 @@ class StubApi < Sinatra::Base
     '{
       "idps":[{
         "simpleId":"stub-idp-one",
-        "entityId":"http://example.com/stub-idp-one"
+        "entityId":"http://example.com/stub-idp-one",
+        "levelsOfAssurance": ["LEVEL_2"]
       }]
     }'
   end
@@ -99,7 +100,8 @@ private
       \"transactionSimpleId\":\"test-rp\",
       \"idps\":[{
         \"simpleId\":\"stub-idp-one\",
-        \"entityId\":\"http://example.com/stub-idp-one\"
+        \"entityId\":\"http://example.com/stub-idp-one\",
+        \"levelsOfAssurance\": [\"LEVEL_1\", \"LEVEL_2\"]
       }],
       \"levelsOfAssurance\":[\"#{level_of_assurance}\"],
       \"transactionSupportsEidas\": true
