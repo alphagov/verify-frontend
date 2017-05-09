@@ -10,15 +10,6 @@
       <ul class="list list-bullet">
         <li><%= link_to(t('hub.choose_a_certified_company.why_companies'), why_companies_path) %></li>
       </ul>
-      <p class="large-top">
-        <%= t 'hub.choose_a_certified_company.idp_count_html',
-              company_count: t('hub.choose_a_certified_company.company_html', count: @recommended_idps.length) %>
-      </p>
     </div>
-  </div>
-  <div id="matching-idps">
-    <% @recommended_idps.each do |identity_provider| %>
-        <%= render partial: 'idp_option', locals: {recommended: true, identity_provider: identity_provider} %>
-    <% end %>
   </div>
 </div>

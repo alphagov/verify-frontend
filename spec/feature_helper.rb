@@ -91,10 +91,10 @@ module FeatureHelper
     DateTime.now.to_i * 1000
   end
 
-  def set_session_and_session_cookies!(idps = [{ 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
-                                               { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id' },
-                                               { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id' },
-                                               { 'simple_id' => 'stub-idp-demo', 'entity_id' => 'demo-entity-id' }])
+  def set_session_and_session_cookies!(idps = [{ 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
+                                               { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
+                                               { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
+                                               { 'simple_id' => 'stub-idp-demo', 'entity_id' => 'demo-entity-id', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }])
     cookie_hash = create_cookie_hash
     set_cookies!(create_cookie_hash)
     page.set_rack_session(
@@ -109,34 +109,34 @@ module FeatureHelper
 
   def set_stub_federation_in_session(idp_entity_id)
     idps = [
-        { 'simple_id' => 'stub-idp-one', 'entity_id' => idp_entity_id }
+        { 'simple_id' => 'stub-idp-one', 'entity_id' => idp_entity_id, 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
     ]
     page.set_rack_session(identity_providers: idps)
   end
 
   def set_stub_federation_no_docs_in_session
     idps = [
-        { 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
-        { 'simple_id' => 'stub-idp-no-docs', 'entity_id' => 'http://idcorp.nodoc.com' },
-        { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id' },
-        { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id' }
+        { 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
+        { 'simple_id' => 'stub-idp-no-docs', 'entity_id' => 'http://idcorp.nodoc.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
+        { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
+        { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
     ]
     page.set_rack_session(identity_providers: idps)
   end
 
   def set_stub_federation_idp_with_interstitial_question_enabled
     idps = [
-        { 'simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com' }
+        { 'simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
     ]
     page.set_rack_session(identity_providers: idps)
   end
 
   def set_stub_federation_unavailable_in_session
     idps = [
-        { 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
-        { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id' },
-        { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id' },
-        { 'simple_id' => 'stub-idp-unavailable', 'entity_id' => 'unavailable-entity-id' }
+        { 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
+        { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
+        { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
+        { 'simple_id' => 'stub-idp-unavailable', 'entity_id' => 'unavailable-entity-id', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
     ]
     page.set_rack_session(identity_providers: idps)
   end
