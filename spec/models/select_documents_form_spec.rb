@@ -2,86 +2,123 @@ require 'spec_helper'
 require 'rails_helper'
 
 describe SelectDocumentsForm do
-  let(:form_attributes) { [:passport, :driving_licence, :ni_driving_licence, :non_uk_id_document] }
+  context '#validations' do
+    context '#invalid form' do
+      it 'should be invalid if all inputs are empty' do
+        form = SelectDocumentsForm.new({})
+        expect(form).to_not be_valid
+        expect(form.errors.full_messages).to eql ['Please select the documents you have']
+      end
 
-  it 'should be invalid if all inputs are empty' do
-    form = SelectDocumentsForm.new({})
-    expect(form).to_not be_valid
-    expect(form.errors.full_messages).to eql ['Please select the documents you have']
+      it 'should be invalid if no driving licence details are given' do
+        form = SelectDocumentsForm.new(
+          any_driving_licence: 'true',
+          passport: 'false'
+        )
+        expect(form).to_not be_valid
+        expect(form.errors.full_messages).to eql ['Please select the documents you have']
+      end
+
+      it 'should be invalid if user only inputs driving licence details' do
+        form = SelectDocumentsForm.new(
+          any_driving_licence: 'true',
+          driving_licence: 'true'
+        )
+        expect(form).to_not be_valid
+        expect(form.errors.full_messages).to eql ['Please select the documents you have']
+      end
+
+      it 'should be invalid if user only inputs passport details' do
+        form = SelectDocumentsForm.new(
+          passport: 'true'
+        )
+        expect(form).to_not be_valid
+        expect(form.errors.full_messages).to eql ['Please select the documents you have']
+      end
+    end
+
+    context '#valid form' do
+      it 'should be valid if answers are given to every question' do
+        form = SelectDocumentsForm.new(
+          any_driving_licence: 'false',
+          ni_driving_licence: 'true',
+          driving_licence: 'true',
+          passport: 'true',
+        )
+        expect(form).to be_valid
+      end
+    end
   end
 
-  it 'should be invalid if user selects No for one document and leaves the others blank' do
-    form = SelectDocumentsForm.new(driving_licence: 'false')
-    expect(form).to_not be_valid
-    expect(form.errors.full_messages).to eql ['Please select the documents you have']
-  end
-
-  it 'should be valid if user selects No docs only' do
-    form = SelectDocumentsForm.new(no_documents: 'true')
-    expect(form).to be_valid
-  end
-
-  it 'should be valid if answers are given to every question' do
-    form = SelectDocumentsForm.new(
-      driving_licence: 'false',
-      passport: 'true',
-      non_uk_id_document: 'false'
-    )
-    expect(form).to be_valid
-  end
-
-  it 'should be valid if one Yes is selected' do
-    form = SelectDocumentsForm.new(passport: 'true')
-    expect(form).to be_valid
-  end
-
-  it 'should be valid if all document answers are false' do
-    form = SelectDocumentsForm.new(
-      ni_driving_licence: 'false',
-      driving_licence: 'false',
-      passport: 'false',
-      non_uk_id_document: 'false',
-    )
-    expect(form).to be_valid
-  end
-
-  it 'should be invalid if input is contradictory' do
-    form = SelectDocumentsForm.new(
-      driving_licence: 'true',
-      passport: 'true',
-      non_uk_id_document: 'true',
-      no_documents: 'true'
-    )
-    expect(form).to_not be_valid
-    expect(form.errors.full_messages).to eql ['Please check your selection']
-  end
-
-  describe '#selected_answers' do
+  context '#selected_answers' do
     it 'should return a hash of the selected answers' do
       form = SelectDocumentsForm.new(
-        driving_licence: 'true',
-        passport: 'true',
-        non_uk_id_document: 'false',
-        no_documents: 'false'
+        passport: 'false',
       )
       evidence = form.selected_answers
-      expect(evidence).to eql(passport: true, driving_licence: true, non_uk_id_document: false)
+      expect(evidence).to eql(passport: false)
     end
 
-    it 'should not return selected answers when there is no value' do
+    it 'should return a hash of the no driving licence and no ni driving licence if no selected for any driving licence' do
       form = SelectDocumentsForm.new(
-        driving_licence: 'true',
-        non_uk_id_document: '',
-        no_documents: 'false'
+        any_driving_licence: 'false',
+      )
+      evidence = form.selected_answers
+      expect(evidence).to eql(driving_licence: false, ni_driving_licence: false)
+    end
+
+    it 'should return a hash of driving licence true if GB driving licence selected' do
+      form = SelectDocumentsForm.new(
+        any_driving_licence: 'true',
+        driving_licence: 'true'
+      )
+      evidence = form.selected_answers
+      expect(evidence).to eql(driving_licence: true)
+    end
+
+    it 'should not return selected answers when there it is not an eligible IDP evidence ' do
+      form = SelectDocumentsForm.new(
+        passport: 'true',
+        any_driving_licence: ''
       )
       answers = form.selected_answers
-      expect(answers).to eql(driving_licence: true)
+      expect(answers).to eql(passport: true)
+    end
+  end
+
+  context '#further identity information' do
+    it 'should require further information when user has neither uk passport or driving licence' do
+      form = SelectDocumentsForm.new(
+        any_driving_licence: 'false',
+        passport: 'false'
+      )
+      expect(form).to be_further_id_information_required
     end
 
-    it 'should return all documents answers as false if no documents is checked' do
-      form = SelectDocumentsForm.new(no_documents: 'true')
-      answers = form.selected_answers
-      expect(answers).to eql(ni_driving_licence: false, driving_licence: false, passport: false, non_uk_id_document: false)
+    it 'should require further information when user has a northern ireland driving licence' do
+      form = SelectDocumentsForm.new(
+        any_driving_licence: 'true',
+        ni_driving_licence: 'true',
+        passport: 'false'
+      )
+      expect(form).to be_further_id_information_required
+    end
+
+    it 'should not require further information when user has a GB driving licence' do
+      form = SelectDocumentsForm.new(
+        any_driving_licence: 'true',
+        driving_licence: 'true',
+        passport: 'false'
+      )
+      expect(form).to_not be_further_id_information_required
+    end
+
+    it 'should not require further information when user has a UK passport' do
+      form = SelectDocumentsForm.new(
+        any_driving_licence: 'false',
+        passport: 'true'
+      )
+      expect(form).to_not be_further_id_information_required
     end
   end
 end
