@@ -1,0 +1,25 @@
+<%= page_title 'hub.confirmation.title' %>
+<% content_for :feedback_source, 'CONFIRMATION_PAGE' %>
+
+<h1 class="heading-large"><%= t 'hub.confirmation.heading', display_name: @idp_name %></h1>
+<p><%= t 'hub.confirmation.message', display_name: @idp_name %></p>
+<p><strong><%= t 'hub.confirmation.continue_to_rp', transaction_name: @transaction_name %></strong></p>
+<div class="actions">
+  <%= button_link_to t('navigation.continue'), response_processing_path, id:'next-button' %>
+</div>
+
+<p><%= t 'hub.confirmation.add_security_loa1' %></p>
+
+<details>
+  <summary>
+    <span class="summary"><%= t 'hub.confirmation.extra_security' %></span>
+  </summary>
+
+  <div class="panel panel-border-narrow">
+    <ul class="list-bullet list">
+      <% loa1_transactions_list.each do |transaction| -%>
+          <li><%= transaction.name %></li>
+      <% end %>
+    </ul>
+  </div>
+</details>

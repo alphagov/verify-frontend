@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'controller_helper'
 
-RSpec.describe WhyCompaniesController do
+describe WhyCompaniesController do
   subject { get :index, params: { locale: 'en' } }
 
   it 'renders the certified companies LOA1 template when LEVEL_1 is the requested LOA' do

@@ -310,9 +310,11 @@ en:
       need_to_signin_again: In order to %{transaction_name}, you need to sign in again with your certified company. You don’t need to register again.
     confirmation:
       title: Your identity has been verified
-      message: You can sign in wherever you see the GOV.UK Verify logo.
+      message: "You can sign in wherever you see the GOV.UK Verify logo with your %{display_name} identity account username and password."
       continue_to_rp: "You can now %{transaction_name}."
       heading: "%{display_name} has verified your identity"
+      add_security_loa1: Some government services need you to add extra security to your identity account, but you only need to do this once.
+      extra_security: Government services requiring extra security
     failed_registration:
       title: Unable to verify your identity
       heading: "%{display_name} was unable to verify your identity"

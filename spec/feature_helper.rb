@@ -107,6 +107,12 @@ module FeatureHelper
     cookie_hash
   end
 
+  def set_loa_in_session(loa)
+    page.set_rack_session(
+      requested_loa: loa
+    )
+  end
+
   def set_stub_federation_in_session(idp_entity_id)
     idps = [
         { 'simple_id' => 'stub-idp-one', 'entity_id' => idp_entity_id, 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }

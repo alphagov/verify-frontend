@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'controller_helper'
 
-RSpec.describe AboutController do
+describe AboutController do
   before(:each) do
     stub_request(:get, CONFIG.api_host + '/api/transactions')
   end
