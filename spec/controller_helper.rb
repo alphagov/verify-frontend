@@ -7,3 +7,9 @@ def set_session_and_cookies_with_loa(loa_requested, identity_providers = [{ 'sim
   cookies[CookieNames::SESSION_COOKIE_NAME] = 'my-session-cookie'
   cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'my-session-id-cookie'
 end
+
+def stub_session
+  session[:selected_idp] = { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-loa1', levels_of_assurance: %w(LEVEL_1 LEVEL_2) }
+  session[:selected_idp_was_recommended] = true
+  session[:transaction_simple_id] = 'test-rp'
+end

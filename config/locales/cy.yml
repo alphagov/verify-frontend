@@ -315,9 +315,11 @@ cy:
       need_to_signin_again: Er mwyn %{transaction_name}, mae angen i chi lofnodi i mewn eto gyda’ch cwmni ardystiedig. Nid oes angen i chi gofrestru eto.
     confirmation:
       title: Mae eich hunaniaeth wedi cael ei ddilysu
-      message: Gallwch fewngofnodi ble bynnag rydych yn gweld y logo GOV.UK Verify.
+      message: "You can sign in wherever you see the GOV.UK Verify logo with your %{display_name} identity account username and password."
       continue_to_rp: "Gallwch nawr ddefnyddio %{transaction_name}."
       heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
+      add_security_loa1: Some government services need you to add extra security to your identity account, but you only need to do this once.
+      extra_security: Government services requiring extra security
     failed_registration:
       title: Methu dilysu eich hunaniaeth
       heading: Roedd "%{display_name} yn methu dilysu eich hunaniaeth"
