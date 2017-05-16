@@ -4,8 +4,6 @@ require 'api_test_helper'
 RSpec.feature 'When users visits other documents page' do
   before(:each) do
     set_session_and_session_cookies!
-    cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'split_questions_v2' => 'split_questions_v2_variant' }.to_json))
-    set_cookies!(cookie_hash)
     visit '/other-identity-documents'
   end
 
