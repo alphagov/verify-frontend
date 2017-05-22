@@ -15,9 +15,9 @@ module ApiTestHelper
   def stub_transactions_list
     transactions = {
       'transactions' => [
-        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp'      },
-        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3' },
-        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/headless-rp'  }
+        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] }
       ]
     }
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
@@ -68,15 +68,15 @@ module ApiTestHelper
         PARAM_RELAY_STATE => 'my-relay-state',
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
-    stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: session(options).to_json, status: 201)
+    stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: stub_api_session(options).to_json, status: 201)
   end
 
-  def session(options = {})
+  def stub_api_session(options = {})
     {
         'transactionSimpleId' => 'test-rp',
         'sessionStartTime' => '32503680000000',
         'sessionId' => default_session_id,
-        'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }],
+        'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }],
         'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2),
         'transactionSupportsEidas' => options.fetch(:transaction_supports_eidas, false)
     }
