@@ -29,6 +29,7 @@
               <%= f.custom_radio_button :smart_phone, true, t('hub.select_phone.question.smart_phone_option_yes') %>
               <%= f.custom_radio_button :smart_phone, false, t('option.no') %>
               <%= f.custom_radio_button :smart_phone, 'do_not_know', t('option.unknown') %>
+              <%= f.custom_radio_button :smart_phone, 'yes_ab', t('hub.select_phone.question.smart_phone_option_yes_ab') %>
             </fieldset>
         <% end %>
         <%= content_tag :div, id: 'landline-question', class: hidden_form_question_class do %>
