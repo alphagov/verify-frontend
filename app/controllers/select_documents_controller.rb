@@ -10,19 +10,10 @@ class SelectDocumentsController < ConfigurableJourneyController
       report_to_analytics('Select Documents Next')
       selected_answer_store.store_selected_answers('documents', @form.selected_answers)
       redirect_to next_page(@form.further_id_information_required? ? [:further_documents_needed] : [:no_further_documents_needed])
-      return
+    else
+      flash.now[:errors] = @form.errors.full_messages.join(', ')
+      render :index
     end
-
-    @old_form = OldSelectDocumentsForm.new(params['select_documents_form'] || {})
-    if @old_form.valid?
-      report_to_analytics('Select Documents Next')
-      selected_answer_store.store_selected_answers('documents', @old_form.selected_answers)
-      redirect_to select_phone_path
-      return
-    end
-
-    flash.now[:errors] = @form.errors.full_messages.join(', ')
-    render :index
   end
 
   def unlikely_to_verify
