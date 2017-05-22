@@ -68,10 +68,10 @@ module ApiTestHelper
         PARAM_RELAY_STATE => 'my-relay-state',
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
-    stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: session(options).to_json, status: 201)
+    stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: stub_api_session(options).to_json, status: 201)
   end
 
-  def session(options = {})
+  def stub_api_session(options = {})
     {
         'transactionSimpleId' => 'test-rp',
         'sessionStartTime' => '32503680000000',
