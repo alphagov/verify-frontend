@@ -19,6 +19,9 @@ class AuthnResponseController < SamlController
     when 'CANCEL'
       report_to_analytics("Cancel - #{user_state}")
       redirect_to response.is_registration ? failed_registration_path : start_path
+    when 'FAILED_UPLIFT'
+      report_to_analytics("Failed Uplift - #{user_state}")
+      redirect_to failed_uplift_path
     else
       report_to_analytics("Failure - #{user_state}")
       redirect_to response.is_registration ? failed_registration_path : failed_sign_in_path
