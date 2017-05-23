@@ -6,7 +6,7 @@ module Display
           name_homepage.any? || name_only.any?
         end
       end
-      Transaction = Struct.new(:name, :homepage, :loa_list)
+      Transaction = Struct.new(:name, :homepage)
 
       def initialize(translator, rps_name_homepage, rps_name_only)
         @translator = translator
@@ -18,16 +18,13 @@ module Display
         transactions = data.fetch('transactions')
         transactions_name_homepage = filter_transactions(transactions, @rps_name_homepage).map do |transaction|
           name = translate_name(transaction)
-          Transaction.new(name, transaction.fetch('homepage'), transaction.fetch('loaList'))
+          Transaction.new(name, transaction.fetch('homepage'))
         end
         transactions_name_only = filter_transactions(transactions, @rps_name_only).map do |transaction|
           name = translate_name(transaction)
-          Transaction.new(name, nil, transaction.fetch('loaList'))
+          Transaction.new(name)
         end
         Transactions.new(transactions_name_homepage, transactions_name_only)
-      rescue KeyError => e
-        Rails.logger.error e
-        Transactions.new([], [])
       end
 
     private

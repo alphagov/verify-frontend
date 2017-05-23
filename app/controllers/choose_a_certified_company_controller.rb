@@ -1,16 +1,8 @@
 class ChooseACertifiedCompanyController < ConfigurableJourneyController
   def index
-    if is_loa1?
-      loa1_idps = session['identity_providers'].select { |idp| idp['levels_of_assurance'].min == 'LEVEL_1' }
-      loa1_identity_providers = loa1_idps.map { |loa1_idp| IdentityProvider.new(loa1_idp) }
-      @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(loa1_identity_providers)
-      render :choose_a_certified_company_LOA1
-    else
-      grouped_identity_providers = IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers, current_transaction_simple_id)
-      @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
-      @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.non_recommended)
-      render :choose_a_certified_company_LOA2
-    end
+    grouped_identity_providers = IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers, current_transaction_simple_id)
+    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
+    @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.non_recommended)
   end
 
   def select_idp

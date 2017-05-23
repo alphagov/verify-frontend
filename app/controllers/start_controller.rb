@@ -13,7 +13,6 @@ class StartController < ConfigurableJourneyController
         update_ab_test_cookie(experiment_selection_hash)
       end
     end
-    render :start
   end
 
   def request_post
@@ -23,7 +22,7 @@ class StartController < ConfigurableJourneyController
       redirect_to next_page([condition]), status: :see_other
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
-      render :start
+      render :index
     end
   end
 

@@ -1,20 +1,28 @@
 #!/usr/bin/env ruby
 
 require 'sinatra'
-require 'json'
 
 class StubApi < Sinatra::Base
   post '/api/session' do
     status 201
-    post_to_api(JSON.parse(request.body.read)['relayState'])
+    '{
+      "sessionId":"blah",
+      "sessionStartTime":32503680000000,
+      "transactionSimpleId":"test-rp",
+      "idps":[{
+        "simpleId":"stub-idp-one",
+        "entityId":"http://example.com/stub-idp-one"
+      }],
+      "levelsOfAssurance":["LEVEL_2"],
+      "transactionSupportsEidas": true
+    }'
   end
 
   get '/api/session/:session_id/federation' do
     '{
       "idps":[{
         "simpleId":"stub-idp-one",
-        "entityId":"http://example.com/stub-idp-one",
-        "levelsOfAssurance": ["LEVEL_2"]
+        "entityId":"http://example.com/stub-idp-one"
       }]
     }'
   end
@@ -46,23 +54,9 @@ class StubApi < Sinatra::Base
       "public":[{
         "simpleId":"test-rp",
         "entityId":"http://example.com/test-rp",
-        "homepage":"http://example.com/test-rp",
-        "loaList":["LEVEL_2"]
+        "homepage":"http://example.com/test-rp"
       }],
-      "private":[],
-      "transactions":[{
-        "simpleId":"test-rp",
-        "entityId":"http://example.com/test-rp",
-        "homepage":"http://example.com/test-rp",
-        "loaList":["LEVEL_2"]
-        },
-        {
-          "simpleId": "loa1-test-rp",
-          "entityId": "http://example.com/test-rp-loa1",
-          "homepage":"http://example.com/test-rp-loa1",
-          "loaList":["LEVEL_1","LEVEL_2"]
-        }
-      ]
+      "private":[]
     }'
   end
 
@@ -88,23 +82,5 @@ class StubApi < Sinatra::Base
   post '/api/countries/:session_id/:countryCode' do
     status 200
     ''
-  end
-
-private
-
-  def post_to_api(relay_state)
-    level_of_assurance = relay_state == 'my-loa1-relay-state' ? 'LEVEL_1' : 'LEVEL_2'
-    return "{
-      \"sessionId\":\"blah\",
-      \"sessionStartTime\":32503680000000,
-      \"transactionSimpleId\":\"test-rp\",
-      \"idps\":[{
-        \"simpleId\":\"stub-idp-one\",
-        \"entityId\":\"http://example.com/stub-idp-one\",
-        \"levelsOfAssurance\": [\"LEVEL_1\", \"LEVEL_2\"]
-      }],
-      \"levelsOfAssurance\":[\"#{level_of_assurance}\"],
-      \"transactionSupportsEidas\": true
-    }"
   end
 end

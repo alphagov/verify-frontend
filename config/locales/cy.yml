@@ -108,27 +108,14 @@ cy:
         <p>Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
         <p>Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
-      loa1_details_html: |
-        <p>These companies can use their own data, and they can access data like credit records.</p>
-        <p>There won’t be any effect on your credit score.</p>
-        <p>Certified companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
-        <p>More than one certified company means you choose who verifies your identity, and it means the system overall is stronger.</p>
     about_identity_accounts:
       title: Am gyfrifon hunaniaeth
       content_html: |
         <p>Mae dilysu eich hunaniaeth yn cymryd tua 15 munud i'w gwblhau, ond dim ond unwaith mae angen i chi ei wneud.</p>
         <p>Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
         <p>Yna gallwch gael mynediad i wasanaethau eraill y llywodraeth mewn llai na munud lle bynnag y byddwch yn gweld y logo GOV.UK Verify.</p>
-      content_loa1_html: |
-        <p>Verifying your identity takes about 5 minutes to complete.</p>
-        <p>You’ll then have an identity account with the certified company.</p>
-        <p>You can use this identity account to access other government services wherever you see the GOV.UK Verify logo.</p>
       summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
-      details_loa1_html: |
-        <p>GOV.UK Verify is new, and government services are joining all the time.</p>
-        <p>You can use your identity account to access:</p>
       details: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
-      details_loa1_uplift_list: "The first time you access one of these government services, you'll be asked to add more security to your identity account:"
     about_choosing_a_company:
       title: Am ddewis cwmni
       heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
@@ -246,9 +233,6 @@ cy:
     choose_a_certified_company:
       title: Dewiswch gwmni ardystiedig
       heading: Dewiswch gwmni
-      heading_loa1: Choose a certified company to verify your identity
-      existing_customer: You don't have to be an existing customer with a company.
-      personal_information: They ask you to provide personal information and then check it's correct using the new, secure systems they built.
       why_companies: Pam fod dewis o gwmnïau
       choose_idp: "Dewiswch %{display_name}"
       idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
@@ -278,12 +262,6 @@ cy:
         <p>Wrth ddilysu eich hunaniaeth, gall y cwmnïau hyn ddefnyddio eu cofnodion eu hunain, ac maent wedi cael eu hardystio i gael mynediad i wybodaeth fel cofnodion credyd. Maent yn gwneud hyn i wirio bod y wybodaeth rydych yn ei ddarparu o basbortau a thrwyddedau gyrru yn gywir.</p>
         <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Nid oes effaith ar eich sgor credyd.</p>
-      content_loa1_html: |
-        <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
-        <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
-        <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide.</p>
-        <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
-        <p>There’s no effect on your credit score.</p>
     unlikely_to_verify:
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
       explanation: Mae gwmnïau ardystiedig angen o leiaf 1 dogfen arall i wirio eich hunaniaeth. I barhau gyda GOV.UK Verify, %{add_more_documents_link}.
@@ -316,11 +294,9 @@ cy:
       need_to_signin_again: Er mwyn %{transaction_name}, mae angen i chi lofnodi i mewn eto gyda’ch cwmni ardystiedig. Nid oes angen i chi gofrestru eto.
     confirmation:
       title: Mae eich hunaniaeth wedi cael ei ddilysu
-      message: "You can sign in wherever you see the GOV.UK Verify logo with your %{display_name} identity account username and password."
+      message: Gallwch fewngofnodi ble bynnag rydych yn gweld y logo GOV.UK Verify.
       continue_to_rp: "Gallwch nawr ddefnyddio %{transaction_name}."
       heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
-      add_security_loa1: Some government services need you to add extra security to your identity account, but you only need to do this once.
-      extra_security: Government services requiring extra security
     failed_registration:
       title: Methu dilysu eich hunaniaeth
       heading: Roedd "%{display_name} yn methu dilysu eich hunaniaeth"

@@ -2,7 +2,7 @@ require 'feature_helper'
 require 'api_test_helper'
 require 'i18n'
 
-describe 'When the user visits the choose a certified company page' do
+RSpec.describe 'When the user visits the choose a certified company page' do
   before(:each) do
     set_session_and_session_cookies!
   end
@@ -113,7 +113,7 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     expect(page).to have_current_path(redirect_to_idp_warning_path)
-    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one')
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
   end
 
@@ -127,7 +127,7 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     expect(page).to have_current_path(redirect_to_idp_warning_path)
-    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => 'other-entity-id', 'simple_id' => 'stub-idp-two', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => 'other-entity-id', 'simple_id' => 'stub-idp-two')
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql false
   end
 
@@ -141,7 +141,7 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     expect(page).to have_current_path(redirect_to_idp_question_path)
-    expect(page.get_rack_session_key('selected_idp')).to eql('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_idp')).to eql('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com')
   end
 
   it 'redirects to the warning page without additional question for two docs' do
@@ -154,7 +154,7 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     expect(page).to have_current_path(redirect_to_idp_warning_path)
-    expect(page.get_rack_session_key('selected_idp')).to eql('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_idp')).to eql('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com')
   end
 
   it 'records details in session when a recommended IdP is selected' do
@@ -166,7 +166,7 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
-    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => 'http://idcorp.com', 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => 'http://idcorp.com', 'simple_id' => 'stub-idp-one')
   end
 
   it 'rejects unrecognised simple ids' do

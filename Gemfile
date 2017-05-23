@@ -61,7 +61,6 @@ group :test, :development do
   gem 'webmock', require: false
   gem 'jasmine'
   gem 'selenium-webdriver'
-  gem 'rails-controller-testing'
 
   gem 'rack-test'
   gem 'rack_session_access'
