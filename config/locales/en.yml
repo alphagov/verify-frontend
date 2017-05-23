@@ -171,7 +171,7 @@ en:
     other_documents:
       title: Other identity documents
       title_other_identity_documents: Other identity documents
-      non_uk_id_document: Do you have a non-UK passport, ID card or driving licence?
+      non_uk_id_document: Do you have a non-UK passport, ID card and driving licence?
     select_phone:
       title: Do you have a mobile phone or tablet?
       explanation: Certified companies can send security codes to your mobile.
