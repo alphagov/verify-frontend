@@ -15,7 +15,7 @@ describe ConfirmationController do
   subject { get :index, params: { locale: 'en' } }
 
   before(:each) do
-    session[:selected_idp] = {'entity_id' => entity_id, 'simple_id' => simple_id, 'levels_of_assurance' => levels_of_assurance}
+    session[:selected_idp] = { 'entity_id' => entity_id, 'simple_id' => simple_id, 'levels_of_assurance' => levels_of_assurance }
     session[:transaction_simple_id] = transaction_simple_id
 
     stub_const('IDENTITY_PROVIDER_DISPLAY_DECORATOR', stub_identity_provider_display_decorator(identity_provider_display_decorator, simple_id, entity_id, levels_of_assurance))
