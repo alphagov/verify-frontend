@@ -13,10 +13,10 @@ class AboutController < ConfigurableJourneyController
   end
 
   def certified_companies
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers)
     if is_loa1?
       render :certified_companies_LOA1
     else
-      @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers)
       render :certified_companies_LOA2
     end
   end
