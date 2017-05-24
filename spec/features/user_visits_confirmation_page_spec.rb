@@ -20,7 +20,7 @@ RSpec.describe 'When user visits the confirmation page' do
     expect(page).not_to have_link I18n.t('feedback_link.feedback_form')
     expect(page).to have_link I18n.t('hub.feedback.title'), href: '/feedback?feedback-source=CONFIRMATION_PAGE'
     expect(page).to have_title("#{I18n.t('hub.confirmation.title')} - GOV.UK Verify - GOV.UK")
-    expect(page).to have_text(I18n.t('hub.confirmation.message'))
+    expect(page).to have_text(I18n.t('hub.confirmation.message', display_name: 'IDCorp'))
     expect(page).to have_text(I18n.t('hub.confirmation.continue_to_rp', transaction_name: 'register for an identity profile'))
   end
 
@@ -44,5 +44,19 @@ RSpec.describe 'When user visits the confirmation page' do
     visit '/confirmation'
     click_link I18n.t('navigation.continue')
     expect(page).to have_current_path(response_processing_path)
+  end
+
+  it 'displays government services requiring extra security when LOA is level one' do
+    stub_transactions_list
+    set_loa_in_session('LEVEL_1')
+    visit '/confirmation'
+    expect(page).to have_text(I18n.t('hub.confirmation.extra_security'))
+  end
+
+  it 'does not display government services requiring extra security when LOA is level two' do
+    stub_transactions_list
+    set_loa_in_session('LEVEL_2')
+    visit '/confirmation'
+    expect(page).not_to have_text(I18n.t('hub.confirmation.extra_security'))
   end
 end

@@ -8,18 +8,3 @@
   <%= button_link_to t('navigation.continue'), response_processing_path, id:'next-button' %>
 </div>
 
-<p><%= t 'hub.confirmation.add_security_loa1' %></p>
-
-<details>
-  <summary>
-    <span class="summary"><%= t 'hub.confirmation.extra_security' %></span>
-  </summary>
-
-  <div class="panel panel-border-narrow">
-    <ul class="list-bullet list">
-      <% loa2_transactions_list.each do |transaction| -%>
-          <li><%= transaction.name %></li>
-      <% end %>
-    </ul>
-  </div>
-</details>

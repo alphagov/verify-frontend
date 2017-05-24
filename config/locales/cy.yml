@@ -108,14 +108,27 @@ cy:
         <p>Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
         <p>Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
+      loa1_details_html: |
+        <p>Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd.</p>
+        <p>Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
+        <p>Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
+        <p>Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
     about_identity_accounts:
       title: Am gyfrifon hunaniaeth
       content_html: |
         <p>Mae dilysu eich hunaniaeth yn cymryd tua 15 munud i'w gwblhau, ond dim ond unwaith mae angen i chi ei wneud.</p>
         <p>Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
         <p>Yna gallwch gael mynediad i wasanaethau eraill y llywodraeth mewn llai na munud lle bynnag y byddwch yn gweld y logo GOV.UK Verify.</p>
+      content_loa1_html: |
+        <p>Mae dilysu eich hunaniaeth yn cymryd tua 5 munud i'w gwblhau.</p>
+        <p>Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
+        <p>Gallwch ddefnyddio'r cyfrif hunaniaeth hwn i gael mynediad i wasanaethau eraill y llywodraeth ble bynnag rydych yn gweld y logo GOV.UK Verify.</p>
       summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
+      details_loa1_html: |
+        <p>Mae GOV.UK Verify yn newydd ac mae gwasanaethau'r llywodraeth yn ymuno drwy'r amser.</p>
+        <p>Gallwch ddefnyddio eich cyfrif hunaniaeth i gael mynediad i:</p>
       details: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
+      details_loa1_uplift_list: "Y tro cyntaf y byddwch yn defnyddio un o wasanaethau hyn y llywodraeth, gofynir i chi ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth:"
     about_choosing_a_company:
       title: Am ddewis cwmni
       heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
@@ -233,6 +246,9 @@ cy:
     choose_a_certified_company:
       title: Dewiswch gwmni ardystiedig
       heading: Dewiswch gwmni
+      heading_loa1: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
+      existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
+      personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol ac yna yn gwirio ei fod yn gywir drwy ddefnyddio systemau newydd, diogel maent wedi'u hadeiladu.
       why_companies: Pam fod dewis o gwmnïau
       choose_idp: "Dewiswch %{display_name}"
       idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
@@ -260,6 +276,12 @@ cy:
         <p>Mae mwy nag un cwmni ardystiedig yn golygu system mwy diogel - nid yw gwybodaeth yn cael ei gadw mewn un lle, ond mae’n cael ei rannu mewn nifer o wahannol lefydd, sydd yn ei gwneud yn fwy diogel.</p>
         <p>Eich hawl chi yw dewis pwy ydych chi eisiau delio â hwy o’r cwmnïau hyn. Eich hawl chi yw hefyd newid pa gwmni rydych yn deilo ag ef ar unrhyw adeg.</p>
         <p>Wrth ddilysu eich hunaniaeth, gall y cwmnïau hyn ddefnyddio eu cofnodion eu hunain, ac maent wedi cael eu hardystio i gael mynediad i wybodaeth fel cofnodion credyd. Maent yn gwneud hyn i wirio bod y wybodaeth rydych yn ei ddarparu o basbortau a thrwyddedau gyrru yn gywir.</p>
+        <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
+        <p>Nid oes effaith ar eich sgor credyd.</p>
+      content_loa1_html: |
+        <p>Mae mwy nag un cwmni ardystiedig yn golygu system mwy diogel - nid yw gwybodaeth yn cael ei gadw mewn un lle, ond mae’n cael ei rannu mewn nifer o wahannol lefydd, sydd yn ei gwneud yn fwy diogel.</p>
+        <p>Eich hawl chi yw dewis pwy ydych chi eisiau delio â hwy o’r cwmnïau hyn. Eich hawl chi yw hefyd newid pa gwmni rydych yn deilo ag ef ar unrhyw adeg.</p>
+        <p>Wrth ddilysu eich hunaniaeth, gall y cwmniau hyn ddefnyddio eu cofnodion eu hunain ac maent wedi cael eu hardystio i gael mynediad i wybodaeth fel cofnodion credyd. Maent yn gwneud hyn i wirio gwybodaeth rydych yn ei ddarparu.</p>
         <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Nid oes effaith ar eich sgor credyd.</p>
     unlikely_to_verify:
@@ -294,9 +316,11 @@ cy:
       need_to_signin_again: Er mwyn %{transaction_name}, mae angen i chi lofnodi i mewn eto gyda’ch cwmni ardystiedig. Nid oes angen i chi gofrestru eto.
     confirmation:
       title: Mae eich hunaniaeth wedi cael ei ddilysu
-      message: Gallwch fewngofnodi ble bynnag rydych yn gweld y logo GOV.UK Verify.
+      message: "Gallwch fewngofnodi ble bynnag rydych yn gweld logo GOV.UK Verify gyda'ch enw defnyddiwr a chyfrinair eich cyfrif hunaniaeth %{display_name}"
       continue_to_rp: "Gallwch nawr ddefnyddio %{transaction_name}."
       heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
+      add_security_loa1: Mae rhai o wasanaethau'r llywodraeth angen i chi ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth, ond dim ond unwaith fydd angen i chi wneud hyn.
+      extra_security: Gwasanaethau'r llywodraeth sydd angen diogelwch ychwanegol
     failed_registration:
       title: Methu dilysu eich hunaniaeth
       heading: Roedd "%{display_name} yn methu dilysu eich hunaniaeth"
