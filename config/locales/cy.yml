@@ -347,23 +347,23 @@ cy:
         <p>Gallwch gael eich dilysu gan gwmni arall unrhyw bryd. Ni fyddwch yn colli unrhyw ddata ar wasanaethau GOV.UK rydych wedi’u defnyddio.</p>
       start_again: "Dechrau eto"
     failed_uplift:
-      title: Unable to uplift you
-      heading: "%{display_name} was unable to add the extra security to your identity account"
+      title: Failed to uplift
+      heading: "Roedd %{display_name} yn methu ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth"
       reasons_html: |
-        <p>There are a few reasons why this might happen, including:</p>
+        <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
           <li>your answer to a question doesn't match records</li>
-          <li>you've recently had a change in your circumstances, and they are not up to date online</li>
-          <li>%{idp_name} does not have access to enough information about you</li>
+          <li>rydych yn ddiweddar wedi cael newid yn eich amgylchiadau, ac nid ydynt wedi cael eu diweddaru ar-lein</li>
+          <li>nid oes gan y cwmni ardystiedig fynediad i ddigon o wybodaeth amdanoch</li>
          </ul>
       start_again: Find another company to verify you
-      still_use_heading: "You can still use your %{idp_name} identity account"
-      still_use_text: "These government services don't require the added extra security:"
-      try_another_text: "Other companies use different methods from %{idp_name} and may therefore stand a better chance of verifying your identity."
+      still_use_heading: "Gallwch barhau i ddefnyddiio eich cyfrif hunaniaeth %{idp_name}"
+      still_use_text: "Nid yw gwasanaeth hwn y llywodraeth angen diogelwch ychwanegol:"
+      try_another_text: "Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth."
       try_another_summary: "Try verifying with another certified company"
       what_next_heading: "What to do next"
       other_ways_summary: "View other ways to %{other_ways_description}"
-      contact_summary: "Contact %{idp_name}"
+      contact_summary: "Cysylltwch â %{idp_name}"
     response_processing:
       title: Arhoswch
       heading: Mae "%{rp_name} yn prosesu eich manylion"
