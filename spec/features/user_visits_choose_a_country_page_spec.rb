@@ -97,34 +97,6 @@ RSpec.describe 'When the user visits the choose a country page' do
     expect(page).to have_current_path('/redirect-to-country')
   end
 
-  it 'should show message (no results found) when first two letters of country disabled are typed in', js: true  do
-    given_a_session_supporting_eidas
-    stub_select_country_request
-
-    visit '/choose-a-country'
-
-    within '.js-show' do
-      fill_in 'input-typeahead', with: 'Sw'
-    end
-
-    expect(page).to have_content 'No results found'
-  end
-
-  it 'should error when invalid country is selected (when JS is enabled)', js: true  do
-    given_a_session_supporting_eidas
-    stub_select_country_request
-
-    visit '/choose-a-country'
-
-    within '.js-show' do
-      fill_in 'input-typeahead', with: 'Sweden'
-      click_on 'Select'
-    end
-
-    expect(page).to have_current_path('/choose-a-country')
-    expect(page).to have_content 'Please select a country from the list'
-  end
-
   it 'policy records the country selected by the user', js: true do
     # Given the User has a list of countries to choose from
     # And the User has a session that supports eIDAS Journey
