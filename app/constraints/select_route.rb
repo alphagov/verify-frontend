@@ -1,36 +1,31 @@
 class SelectRoute
-  def initialize(experimentName, route)
-    @experimentName = experimentName
-    @route = route
+  def initialize(experiment_name, route)
+    @experiment_name = experiment_name
+    @experiment_route = "#{@experiment_name}_#{route}"
   end
 
   def matches?(request)
-    reportToPiwik(request)
-    is_in_a_group?(request)
+    report_to_piwik(request)
+    does_request_match_experiment?(request)
   end
 
   private
 
-    def reportToPiwik(request)
-      reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[@experimentName]
+    def report_to_piwik(request)
+      reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[@experiment_name]
       transaction_id = request.session[:transaction_simple_id]
-      AbTest.report(@experimentName, reported_alternative, transaction_id, request)
+      AbTest.report(@experiment_name, reported_alternative, transaction_id, request)
     end
 
-    def is_in_a_group?(request)
-      experimentRoute = "#{@experimentName}_#{@route}"
-      alternative_name = alternative_name_split_questions(request)
+    def does_request_match_experiment?(request)
+      request_experiment_route = extract_experiment_route_from_cookie(request.cookies[CookieNames::AB_TEST])
 
-      experimentRoute == alternative_name
+      @experiment_route == request_experiment_route
     end
 
-    def alternative_name_split_questions(request)
-      ab_test_cookie = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[@experimentName]
+    def extract_experiment_route_from_cookie(ab_test_cookie)
+      experiment_name = Cookies.parse_json(ab_test_cookie)[@experiment_name]
 
-      if AB_TESTS[@experimentName]
-        AB_TESTS[@experimentName].alternative_name(ab_test_cookie)
-      else
-        'default'
-      end
+      AB_TESTS[@experiment_name] ? AB_TESTS[@experiment_name].alternative_name(experiment_name) : 'default'
     end
 end
