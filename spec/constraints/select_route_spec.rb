@@ -1,34 +1,34 @@
 require 'rails_helper'
 require 'spec_helper'
-require 'models/ab_test/ab_test'
 
 describe SelectRoute do
 
   EXPERIMENT_NAME = 'select_phone_v2'
+  ALTERNATIVE_NAME = "#{EXPERIMENT_NAME}_variant"
+  ALTERNATIVE_LOOKUP = "#{EXPERIMENT_NAME}_variant"
 
   experiment_stub = nil
-  ab_test_stub = nil
-
-  # let(:piwik_double) { double(:AbTest) }
+  select_route = nil
+  session = nil
 
   before(:each) do
-    experiment_stub = MockExperiment.new()
-    ab_test_stub = {
-        EXPERIMENT_NAME => experiment_stub
-    }
-    stub_const('AB_TESTS', ab_test_stub)
+    select_route = SelectRoute.new(EXPERIMENT_NAME, 'variant')
   end
 
   context 'experiment tests' do
 
-    it 'determines that experiment and route exist' do
-      expect(experiment_stub).to receive(:alternative_name).with('select_phone_v2_variant').and_return('select_phone_v2_variant')
-
-      select_route = SelectRoute.new(EXPERIMENT_NAME, 'variant')
-
-      session = {
-          'transaction_simple_id' => 'test-rp'
+    before(:each) do
+      session = { }
+      experiment_stub = MockExperiment.new()
+      ab_test_stub = {
+          EXPERIMENT_NAME => experiment_stub
       }
+      stub_const('AB_TESTS', ab_test_stub)
+      allow(AbTest).to receive(:report)
+    end
+
+    it 'evaluates true when experiment and route both match' do
+      expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_LOOKUP).and_return(ALTERNATIVE_NAME)
 
       cookies = create_ab_test_cookie(EXPERIMENT_NAME, "select_phone_v2_variant")
       request = RequestStub.new(session, cookies)
@@ -36,29 +36,17 @@ describe SelectRoute do
       expect(select_route.matches?(request)).to be true
     end
 
-    it 'determines that experiment exist but the route does not' do
+    it 'evaluates false when experiment matches but the route does not' do
       expect(experiment_stub).to receive(:alternative_name).and_return('no_alt_name_found')
 
-      select_route = SelectRoute.new(EXPERIMENT_NAME, 'variant')
-
-      session = {
-          'transaction_simple_id' => 'test-rp'
-      }
-
-      cookies = create_ab_test_cookie(EXPERIMENT_NAME, "some_route")
+      cookies = create_ab_test_cookie(EXPERIMENT_NAME, "non matching route")
       request = RequestStub.new(session, cookies)
 
       expect(select_route.matches?(request)).to be false
     end
 
-    it 'determines that experiment does not exist' do
-      select_route = SelectRoute.new(EXPERIMENT_NAME, 'variant')
-
-      session = {
-          'transaction_simple_id' => 'test-rp'
-      }
-
-      cookies = create_ab_test_cookie("unrelated_experiment", "some_route")
+    it 'evaluates false when experiment does not match' do
+      cookies = create_ab_test_cookie("not matching experiment", nil)
       request = RequestStub.new(session, cookies)
 
       expect(select_route.matches?(request)).to be false
@@ -68,9 +56,8 @@ describe SelectRoute do
   context 'piwik tests' do
 
     it 'reports to piwik' do
-      select_route = SelectRoute.new(EXPERIMENT_NAME, 'variant')
       session = {
-          'transaction_simple_id' => 'test-rp'
+          :transaction_simple_id => 'test-rp'
       }
 
       cookies = create_ab_test_cookie(EXPERIMENT_NAME, "select_phone_v2_variant")
@@ -81,6 +68,8 @@ describe SelectRoute do
       select_route.matches?(request)
     end
   end
+
+  private
 
   class RequestStub
     def initialize(session, cookies)

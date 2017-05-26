@@ -5,7 +5,7 @@ class SelectRoute
   end
 
   def matches?(request)
-    # reportToPiwik(request)
+    reportToPiwik(request)
     is_in_a_group?(request)
   end
 
@@ -18,7 +18,7 @@ class SelectRoute
     end
 
     def is_in_a_group?(request)
-      experimentRoute = @experimentName + '_' + @route
+      experimentRoute = "#{@experimentName}_#{@route}"
       alternative_name = alternative_name_split_questions(request)
 
       experimentRoute == alternative_name
