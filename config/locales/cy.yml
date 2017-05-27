@@ -182,6 +182,7 @@ cy:
         mobile_phone_option_yes: Oes
         smart_phone: Allwch chi osod apps ar eich dyfais?
         smart_phone_option_yes: Gallaf
+        smart_phone_option_yes_ab: Yes, but I'd prefer not to
         landline: Oes gennych chi linell daear?
         landline_option_yes: Oes
         smart_phone_subtitle: "Mae rhai cwmnïau ardystiedig yn gofyn i chi lawrlwytho app am ddim a defnyddio camera eich ffôn fel rhan o ddilysu eich hunaniaeth."

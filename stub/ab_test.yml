@@ -19,6 +19,12 @@
 #
 
 experiments:
+  - reluctant_mob_app:
+      alternatives:
+        - name: 'without_installation_warning'
+          percent: 99
+        - name: 'with_installation_warning'
+          percent: 1
   - select_documents_v2:
       alternatives:
         - name: 'control'

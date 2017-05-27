@@ -1,5 +1,11 @@
 class SelectPhoneController < ConfigurableJourneyController
   def index
+    reported_alternative = Cookies.parse_json(cookies[CookieNames::AB_TEST])['reluctant_mob_app']
+    AbTest.report('reluctant_mob_app',
+                  reported_alternative,
+                  current_transaction_simple_id, request)
+    @is_in_b_group = is_in_b_group?
+
     @form = SelectPhoneForm.new({})
   end
 
@@ -20,4 +26,16 @@ class SelectPhoneController < ConfigurableJourneyController
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
   end
+
+private
+
+  def is_in_b_group?
+    ab_test_cookie = Cookies.parse_json(cookies[CookieNames::AB_TEST])['reluctant_mob_app']
+    if AB_TESTS['reluctant_mob_app']
+      AB_TESTS['reluctant_mob_app'].alternative_name(ab_test_cookie) == 'with_installation_warning'
+    else
+      false
+    end
+  end
+
 end

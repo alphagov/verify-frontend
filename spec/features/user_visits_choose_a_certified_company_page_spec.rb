@@ -75,6 +75,12 @@ describe 'When the user visits the choose a certified company page' do
     end
   end
 
+  it 'displays may require or will require app if user chose reluctant yes on select phone page' do
+  end
+
+  it 'will NOT display may require or will require app if user chose reluctant yes on select phone page' do
+  end
+
   it 'displays no IDPs if no recommendations' do
     given_a_session_without_selected_answers
     visit '/choose-a-certified-company'

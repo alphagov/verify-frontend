@@ -180,6 +180,7 @@ en:
         mobile_phone_option_yes: 'Yes'
         smart_phone: Can you install apps on your device?
         smart_phone_option_yes: 'Yes'
+        smart_phone_option_yes_ab: Yes, but I'd prefer not to
         landline: Do you have a landline?
         landline_option_yes: 'Yes'
         smart_phone_subtitle: "Some certified companies ask you to download a free app and use your phone's camera as part of verifying your identity."
