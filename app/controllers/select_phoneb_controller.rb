@@ -1,4 +1,4 @@
-class SelectPhoneController < ConfigurableJourneyController
+class SelectPhonebController < ConfigurableJourneyController
   def index
     @form = SelectPhoneForm.new({})
   end

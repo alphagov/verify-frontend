@@ -55,7 +55,7 @@ describe SelectRoute do
 
   context 'piwik tests' do
 
-    it 'reports to piwik' do
+    it 'reports to piwik when experiment matches' do
       session = {
           :transaction_simple_id => 'test-rp'
       }
@@ -64,6 +64,19 @@ describe SelectRoute do
       request = RequestStub.new(session, cookies)
 
       allow(AbTest).to receive(:report).with(EXPERIMENT_NAME, "select_phone_v2_variant", "test-rp", request)
+
+      select_route.matches?(request)
+    end
+
+    it 'does not report to piwik when experiment does not match' do
+      session = {
+          :transaction_simple_id => 'test-rp'
+      }
+
+      cookies = create_ab_test_cookie('non matching experiment', nil)
+      request = RequestStub.new(session, cookies)
+
+      allow(AbTest).to receive(:report).never
 
       select_route.matches?(request)
     end
