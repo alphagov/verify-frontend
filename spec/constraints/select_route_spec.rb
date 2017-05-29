@@ -2,10 +2,9 @@ require 'rails_helper'
 require 'spec_helper'
 
 describe SelectRoute do
-
-  EXPERIMENT_NAME = 'select_phone_v2'
-  ALTERNATIVE_NAME = "#{EXPERIMENT_NAME}_variant"
-  ALTERNATIVE_LOOKUP = "#{EXPERIMENT_NAME}_variant"
+  EXPERIMENT_NAME = 'select_phone_v2'.freeze
+  ALTERNATIVE_NAME = "#{EXPERIMENT_NAME}_variant".freeze
+  ALTERNATIVE_LOOKUP = "#{EXPERIMENT_NAME}_variant".freeze
 
   experiment_stub = nil
   select_route = nil
@@ -16,10 +15,9 @@ describe SelectRoute do
   end
 
   context 'experiment tests' do
-
     before(:each) do
-      session = { }
-      experiment_stub = MockExperiment.new()
+      session = {}
+      experiment_stub = MockExperiment.new
       ab_test_stub = {
           EXPERIMENT_NAME => experiment_stub
       }
@@ -54,11 +52,8 @@ describe SelectRoute do
   end
 
   context 'piwik tests' do
-
     it 'reports to piwik when experiment matches' do
-      session = {
-          :transaction_simple_id => 'test-rp'
-      }
+      session = { transaction_simple_id: 'test-rp' }
 
       cookies = create_ab_test_cookie(EXPERIMENT_NAME, "select_phone_v2_variant")
       request = RequestStub.new(session, cookies)
@@ -69,9 +64,7 @@ describe SelectRoute do
     end
 
     it 'does not report to piwik when experiment does not match' do
-      session = {
-          :transaction_simple_id => 'test-rp'
-      }
+      session = { transaction_simple_id: 'test-rp' }
 
       cookies = create_ab_test_cookie('non matching experiment', nil)
       request = RequestStub.new(session, cookies)
@@ -82,20 +75,14 @@ describe SelectRoute do
     end
   end
 
-  private
+private
 
   class RequestStub
+    attr_reader :cookies, :session
+
     def initialize(session, cookies)
       @session = session
       @cookies = cookies
-    end
-
-    def cookies
-      @cookies
-    end
-
-    def session
-      @session
     end
   end
 
@@ -112,5 +99,4 @@ describe SelectRoute do
             "{\"#{experiment_name}\": \"#{alternative_name}\"}"
     }
   end
-
 end

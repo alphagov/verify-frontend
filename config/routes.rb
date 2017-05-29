@@ -90,7 +90,7 @@ Rails.application.routes.draw do
     constraints SelectRoute.new('select_phone_v2', SelectRoute::B_ROUTE) do
       get 'select_phone', to: 'select_phoneb#index', as: :select_phone
     end
-end
+  end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
