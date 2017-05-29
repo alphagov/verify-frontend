@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'spec_helper'
 
 describe SelectRoute do
-  EXPERIMENT_NAME = 'select_phone_v2'.freeze
+  EXPERIMENT_NAME = 'app_transparency'.freeze
   ALTERNATIVE_NAME = "#{EXPERIMENT_NAME}_variant".freeze
   ALTERNATIVE_LOOKUP = "#{EXPERIMENT_NAME}_variant".freeze
 
@@ -28,7 +28,7 @@ describe SelectRoute do
     it 'evaluates true when experiment and route both match' do
       expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_LOOKUP).and_return(ALTERNATIVE_NAME)
 
-      cookies = create_ab_test_cookie(EXPERIMENT_NAME, "select_phone_v2_variant")
+      cookies = create_ab_test_cookie(EXPERIMENT_NAME, ALTERNATIVE_NAME)
       request = RequestStub.new(session, cookies)
 
       expect(select_route.matches?(request)).to be true
@@ -55,10 +55,10 @@ describe SelectRoute do
     it 'reports to piwik when experiment matches' do
       session = { transaction_simple_id: 'test-rp' }
 
-      cookies = create_ab_test_cookie(EXPERIMENT_NAME, "select_phone_v2_variant")
+      cookies = create_ab_test_cookie(EXPERIMENT_NAME, ALTERNATIVE_NAME)
       request = RequestStub.new(session, cookies)
 
-      allow(AbTest).to receive(:report).with(EXPERIMENT_NAME, "select_phone_v2_variant", "test-rp", request)
+      allow(AbTest).to receive(:report).with(EXPERIMENT_NAME, ALTERNATIVE_NAME, "test-rp", request)
 
       select_route.matches?(request)
     end
@@ -90,8 +90,6 @@ private
     def alternative_name(something)
     end
   end
-
-  private
 
   def create_ab_test_cookie(experiment_name, alternative_name)
     {

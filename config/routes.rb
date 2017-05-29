@@ -83,11 +83,11 @@ Rails.application.routes.draw do
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
 
-    constraints SelectRoute.new('select_phone_v2', SelectRoute::A_ROUTE) do
+    constraints SelectRoute.new('app_transparency', SelectRoute::A_ROUTE) do
       get 'select_phone', to: 'select_phone#index', as: :select_phone
     end
 
-    constraints SelectRoute.new('select_phone_v2', SelectRoute::B_ROUTE) do
+    constraints SelectRoute.new('app_transparency', SelectRoute::B_ROUTE) do
       get 'select_phone', to: 'select_phoneb#index', as: :select_phone
     end
   end
