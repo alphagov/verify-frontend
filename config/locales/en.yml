@@ -349,7 +349,7 @@ en:
             <ul class="list list-bullet">
               <li>your answer to a question doesn't match records</li>
               <li>you've recently had a change in your circumstances, and they are not up to date online</li>
-              <li>the certified company doesn’t have access to enough information about you</li>
+              <li>the certified company doesn't have access to enough information about you</li>
              </ul>
           start_again: Find another company to verify you
           still_use_heading: "You can still use your %{idp_name} identity account"

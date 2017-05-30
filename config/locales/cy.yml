@@ -347,22 +347,22 @@ cy:
         <p>Gallwch gael eich dilysu gan gwmni arall unrhyw bryd. Ni fyddwch yn colli unrhyw ddata ar wasanaethau GOV.UK rydych wedi’u defnyddio.</p>
       start_again: "Dechrau eto"
     failed_uplift:
-      title: Failed to uplift
+      title: Methwyd  yr ymgodiad
       heading: "Roedd %{display_name} yn methu ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth"
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
-          <li>your answer to a question doesn't match records</li>
+          <li>nid yw eich ateb i gwestiwn yn cyfateb i’n cofnodion</li>
           <li>rydych yn ddiweddar wedi cael newid yn eich amgylchiadau, ac nid ydynt wedi cael eu diweddaru ar-lein</li>
           <li>nid oes gan y cwmni ardystiedig fynediad i ddigon o wybodaeth amdanoch</li>
          </ul>
-      start_again: Find another company to verify you
+      start_again: Dod o hyd i gwmni arall i’ch gwirio
       still_use_heading: "Gallwch barhau i ddefnyddiio eich cyfrif hunaniaeth %{idp_name}"
       still_use_text: "Nid yw gwasanaeth hwn y llywodraeth angen diogelwch ychwanegol:"
       try_another_text: "Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth."
-      try_another_summary: "Try verifying with another certified company"
-      what_next_heading: "What to do next"
-      other_ways_summary: "View other ways to %{other_ways_description}"
+      try_another_summary: Ceisiwch wirio gyda chwmni ardystiedig arall
+      what_next_heading: Beth i’w wneud nesaf
+      other_ways_summary: "Gweld ffyrdd eraill o %{other_ways_description}"
       contact_summary: "Cysylltwch â %{idp_name}"
     response_processing:
       title: Arhoswch

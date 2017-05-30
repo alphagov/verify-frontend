@@ -11,6 +11,7 @@ class FeedbackSourceMapper
       'CONFIRMATION_PAGE' => 'confirmation',
       'COOKIE_NOT_FOUND_PAGE' => nil,
       'ERROR_PAGE' => 'start',
+      'FAILED_UPLIFT_PAGE' => 'start',
       'EXPIRED_ERROR_PAGE' => nil,
       'FAILED_REGISTRATION_PAGE' => 'failed_registration',
       'FAILED_SIGN_IN_PAGE' => 'failed_sign_in',
