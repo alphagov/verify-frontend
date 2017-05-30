@@ -178,6 +178,7 @@ en:
       question:
         mobile_phone: Do you have a mobile phone or tablet?
         mobile_phone_option_yes: 'Yes'
+        mobile_phone_option_reluctant_yes: "Yes, but I'd prefer not to"
         smart_phone: Can you install apps on your device?
         smart_phone_option_yes: 'Yes'
         landline: Do you have a landline?
