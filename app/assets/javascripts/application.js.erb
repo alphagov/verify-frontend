@@ -14,12 +14,16 @@ window.GOVUK.shimLinksWithButtonRole.init();
 
 window.GOVUK.validation.init();
 window.GOVUK.selectDocuments.init();
-window.GOVUK.selectPhone.init();
+//window.GOVUK.selectPhone.init();
+//window.GOVUK.selectPhoneb.init();
 window.GOVUK.willItWorkForMe.init();
 window.GOVUK.feedback.init();
 window.GOVUK.furtherInformation.init();
 window.GOVUK.interstitialQuestion.init();
 window.GOVUK.otherDocuments.init();
+
+abTest('app_transparency', window.GOVUK.selectPhone, window.GOVUK.selectPhoneb)
+
 
 $(function () {
   window.GOVUK.validation.attach();
@@ -33,3 +37,36 @@ $(function () {
   var fingerprintEpoch = 5;
   reportFingerprint('<%= FINGERPRINT_CONFIG %>', fingerprintEpoch, document.getElementById('fp_img'));
 });
+
+function abTest(experiment, jsElementRouteA, jsElementRouteB) {
+  if (document.cookie.indexOf("ab_test") >= 0) {
+    const abCookie = JSON.parse(getCookie("ab_test"))
+
+    if (abCookie.app_transparency === experiment.concat('_variant')) {
+      jsElementRouteB.init();
+    } else {
+      jsElementRouteA.init();
+    }
+  } else {
+    jsElementRouteA.init();
+  }
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+
+

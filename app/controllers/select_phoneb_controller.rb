@@ -1,10 +1,11 @@
 class SelectPhonebController < ConfigurableJourneyController
   def index
-    @form = SelectPhoneForm.new({})
+    @form = SelectPhonebForm.new({})
   end
 
   def select_phone
-    @form = SelectPhoneForm.new(params['select_phone_form'] || {})
+    @form = SelectPhonebForm.new(params['select_phoneb_form'] || {})
+
     if @form.valid?
       report_to_analytics('Phone Next')
       selected_answer_store.store_selected_answers('phone', @form.selected_answers)
