@@ -22,7 +22,12 @@ window.GOVUK.furtherInformation.init();
 window.GOVUK.interstitialQuestion.init();
 window.GOVUK.otherDocuments.init();
 
-abTest('app_transparency', window.GOVUK.selectPhone, window.GOVUK.selectPhoneb)
+abTest({
+  experiment: 'app_transparency',
+  jsElementRouteA: window.GOVUK.selectPhone,
+  jsElementRouteB: window.GOVUK.selectPhoneb
+
+})
 
 
 $(function () {
@@ -38,17 +43,17 @@ $(function () {
   reportFingerprint('<%= FINGERPRINT_CONFIG %>', fingerprintEpoch, document.getElementById('fp_img'));
 });
 
-function abTest(experiment, jsElementRouteA, jsElementRouteB) {
+function abTest(experimentDetails) {
   if (document.cookie.indexOf("ab_test") >= 0) {
     const abCookie = JSON.parse(getCookie("ab_test"))
 
-    if (abCookie.app_transparency === experiment.concat('_variant')) {
-      jsElementRouteB.init();
+    if (abCookie.app_transparency === experimentDetails.experiment.concat('_variant')) {
+      experimentDetails.jsElementRouteB.init();
     } else {
-      jsElementRouteA.init();
+      experimentDetails.jsElementRouteA.init();
     }
   } else {
-    jsElementRouteA.init();
+    experimentDetails.jsElementRouteA.init();
   }
 }
 
