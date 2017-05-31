@@ -43,10 +43,12 @@ $(function () {
 });
 
 function abTest(experimentDetails) {
+  const routeB = experimentDetails.experiment.concat('_variant')
+
   if (document.cookie.indexOf("ab_test") >= 0) {
     const abCookie = JSON.parse(getCookie("ab_test"))
 
-    if (abCookie.app_transparency === experimentDetails.experiment.concat('_variant')) {
+    if (abCookie.app_transparency === routeB) {
       experimentDetails.routeB.init();
     } else {
       experimentDetails.routeA.init();
