@@ -1,5 +1,7 @@
 class ChooseACertifiedCompanybController < ConfigurableJourneyController
   def index
+    @reluctant_mob_installation = session[:reluctant_mob_installation]
+
     if is_loa1?
       loa1_idps = session['identity_providers'].select { |idp| idp['levels_of_assurance'].min == 'LEVEL_1' }
       loa1_identity_providers = loa1_idps.map { |loa1_idp| IdentityProvider.new(loa1_idp) }

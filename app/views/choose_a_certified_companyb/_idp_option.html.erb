@@ -17,6 +17,8 @@
       <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil %>
   <% end %>
   <div class="company-app-install">
-    <p><%= identity_provider.mobile_app_installation.html_safe %></p>
+    <% if @reluctant_mob_installation %>
+      <p><%= identity_provider.mobile_app_installation.html_safe %></p>
+    <% end %>
   </div>
 </div>

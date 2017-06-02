@@ -6,6 +6,8 @@ class SelectPhonebController < ConfigurableJourneyController
   def select_phone
     @form = SelectPhonebForm.new(params['select_phoneb_form'] || {})
 
+    session[:reluctant_mob_installation] = @form.smart_phone == 'reluctant_yes'
+
     if @form.valid?
       report_to_analytics('Phone Next')
       selected_answer_store.store_selected_answers('phone', @form.selected_answers)
