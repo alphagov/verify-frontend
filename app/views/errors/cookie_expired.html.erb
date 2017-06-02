@@ -5,7 +5,7 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h1 class="heading-xlarge"><%= t 'errors.cookie_expired.title' %></h1>
+    <h1 class="heading-large"><%= t 'errors.cookie_expired.title' %></h1>
     <%= render partial: 'errors/transaction_list' %>
     <p><%= t('errors.cookie_expired.feedback_message', feedback_link: link_to(t('errors.cookie_expired.feedback'), feedback_path('feedback-source': feedback_source))).html_safe %></p>
   </div>

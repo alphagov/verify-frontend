@@ -37,7 +37,6 @@ RSpec.describe 'When the user visits the choose a country page' do
     visit '/choose-a-country'
 
     expect(page).to have_current_path(choose_a_country_path)
-    expect(page).to have_css 'h1.heading-xlarge', text: I18n.translate('hub.choose_country.heading')
   end
 
   it 'should have select when JS is disabled' do

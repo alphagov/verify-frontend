@@ -70,6 +70,10 @@
     }
   }
 
+  .small-details {
+    @include core-19;
+  }
+
   // Figure is used to wrap the logo
   figure {
     max-width: 200px;
