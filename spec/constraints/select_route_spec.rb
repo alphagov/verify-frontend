@@ -2,24 +2,21 @@ require 'rails_helper'
 require 'spec_helper'
 
 describe SelectRoute do
-  EXPERIMENT_NAME = 'app_transparency'.freeze
-  ALTERNATIVE_NAME = "#{EXPERIMENT_NAME}_variant".freeze
-  ALTERNATIVE_LOOKUP = "#{EXPERIMENT_NAME}_variant".freeze
+  EXP_NAME = 'app_transparency'.freeze
+  ALTERNATIVE_NAME = "#{EXP_NAME}_variant".freeze
+  ALTERNATIVE_LOOKUP = "#{EXP_NAME}_variant".freeze
 
   experiment_stub = nil
   select_route = nil
   session = nil
 
-  before(:each) do
-    select_route = SelectRoute.new(EXPERIMENT_NAME, 'variant')
-  end
-
   context 'experiment tests' do
     before(:each) do
+      select_route = SelectRoute.route_b(EXP_NAME)
       session = {}
       experiment_stub = MockExperiment.new
       ab_test_stub = {
-          EXPERIMENT_NAME => experiment_stub
+          EXP_NAME => experiment_stub
       }
       stub_const('AB_TESTS', ab_test_stub)
       allow(AbTest).to receive(:report)
@@ -28,7 +25,7 @@ describe SelectRoute do
     it 'evaluates true when experiment and route both match' do
       expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_LOOKUP).and_return(ALTERNATIVE_NAME)
 
-      cookies = create_ab_test_cookie(EXPERIMENT_NAME, ALTERNATIVE_NAME)
+      cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
       request = RequestStub.new(session, cookies)
 
       expect(select_route.matches?(request)).to be true
@@ -37,7 +34,7 @@ describe SelectRoute do
     it 'evaluates false when experiment matches but the route does not' do
       expect(experiment_stub).to receive(:alternative_name).and_return('no_alt_name_found')
 
-      cookies = create_ab_test_cookie(EXPERIMENT_NAME, "non matching route")
+      cookies = create_ab_test_cookie(EXP_NAME, "non matching route")
       request = RequestStub.new(session, cookies)
 
       expect(select_route.matches?(request)).to be false
@@ -51,27 +48,38 @@ describe SelectRoute do
     end
   end
 
-  context 'piwik tests' do
-    it 'reports to piwik when experiment matches' do
-      session = { transaction_simple_id: 'test-rp' }
+  context 'reporting' do
+    result_string = nil
 
-      cookies = create_ab_test_cookie(EXPERIMENT_NAME, ALTERNATIVE_NAME)
-      request = RequestStub.new(session, cookies)
+    before(:each) do
+      result_string = 'not used'
 
-      allow(AbTest).to receive(:report).with(EXPERIMENT_NAME, ALTERNATIVE_NAME, "test-rp", request)
+      ab_reporter = -> (experiment_name, reported_alternative, transaction_id, request) {
+        result_string = "#{experiment_name},#{reported_alternative},#{transaction_id},#{request.to_str}"
+      }
 
-      select_route.matches?(request)
+      select_route = SelectRoute.route_b(EXP_NAME, ab_reporter)
     end
 
-    it 'does not report to piwik when experiment does not match' do
+    it 'execute ab_reporter when experiment matches' do
+      session = { transaction_simple_id: 'test-rp' }
+
+      cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
+      request = RequestStub.new(session, cookies)
+
+      select_route.matches?(request)
+
+      expect(result_string).to eq("#{EXP_NAME},#{ALTERNATIVE_NAME},test-rp,request example")
+    end
+
+    it 'does not execute ab_reporter when experiment does not match' do
       session = { transaction_simple_id: 'test-rp' }
 
       cookies = create_ab_test_cookie('non matching experiment', nil)
       request = RequestStub.new(session, cookies)
 
-      allow(AbTest).to receive(:report).never
-
       select_route.matches?(request)
+      expect(result_string).to eq('not used')
     end
   end
 
@@ -83,6 +91,10 @@ private
     def initialize(session, cookies)
       @session = session
       @cookies = cookies
+    end
+
+    def to_str
+      'request example'
     end
   end
 

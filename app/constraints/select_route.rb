@@ -1,16 +1,24 @@
 class SelectRoute
-  A_ROUTE = 'control'.freeze
-  B_ROUTE = 'variant'.freeze
   MATCHES = true
   DOES_NOT_MATCH = false
+  A_ROUTE = 'control'.freeze
+  B_ROUTE = 'variant'.freeze
 
-  def initialize(experiment_name, route)
-    @experiment_name = experiment_name
-    @experiment_route = "#{@experiment_name}_#{route}"
+  private_constant :MATCHES
+  private_constant :DOES_NOT_MATCH
+  private_constant :A_ROUTE
+  private_constant :B_ROUTE
+
+  def self.route_a(experiment_name, ab_reporter = -> (exp_name, reported_alternative, transaction_id, request) {})
+    SelectRoute.new(experiment_name, A_ROUTE, ab_reporter)
+  end
+
+  def self.route_b(experiment_name, ab_reporter = -> (exp_name, reported_alternative, transaction_id, request) {})
+    SelectRoute.new(experiment_name, B_ROUTE, ab_reporter)
   end
 
   def matches?(request)
-    if does_request_match_experiment?(request)
+    if request_matches_experiment?(request)
       report_to_piwik(request)
       MATCHES
     else
@@ -20,7 +28,13 @@ class SelectRoute
 
 private
 
-  def does_request_match_experiment?(request)
+  def initialize(experiment_name, route, ab_reporter = -> (exp_name, reported_alternative, transaction_id, request) {})
+    @experiment_name = experiment_name
+    @experiment_route = "#{@experiment_name}_#{route}"
+    @ab_reporter = ab_reporter
+  end
+
+  def request_matches_experiment?(request)
     request_experiment_route = extract_experiment_route_from_cookie(request.cookies[CookieNames::AB_TEST])
 
     @experiment_route == request_experiment_route
@@ -35,6 +49,6 @@ private
   def report_to_piwik(request)
     reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[@experiment_name]
     transaction_id = request.session[:transaction_simple_id]
-    AbTest.report(@experiment_name, reported_alternative, transaction_id, request)
+    @ab_reporter.call(@experiment_name, reported_alternative, transaction_id, request)
   end
 end

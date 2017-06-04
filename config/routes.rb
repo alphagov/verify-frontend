@@ -5,6 +5,17 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  EXPERIMENT_NAME = 'app_transparency'.freeze
+
+  report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
+    AbTest.report(experiment_name, reported_alternative, transaction_id, request)
+  }
+
+  route_a = SelectRoute.route_a(EXPERIMENT_NAME)
+  route_b = SelectRoute.route_b(EXPERIMENT_NAME)
+  route_a_and_report_to_piwik = SelectRoute.route_a(EXPERIMENT_NAME, report_to_piwik)
+  route_b_and_report_to_piwik = SelectRoute.route_b(EXPERIMENT_NAME, report_to_piwik)
+
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   match "/404", to: "errors#page_not_found", via: :all
@@ -50,8 +61,8 @@ Rails.application.routes.draw do
     get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
     get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
     # get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
-    get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
     # post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
+    get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
     get 'why_companies', to: 'why_companies#index', as: :why_companies
     get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
@@ -83,16 +94,22 @@ Rails.application.routes.draw do
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
 
-    constraints SelectRoute.new('app_transparency', SelectRoute::A_ROUTE) do
+    constraints route_a_and_report_to_piwik do
       get 'select_phone', to: 'select_phone#index', as: :select_phone
+    end
+
+    constraints route_b_and_report_to_piwik do
+      get 'select_phone', to: 'select_phoneb#index', as: :select_phone
+    end
+
+    constraints route_a do
       post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
 
       get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
       post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
     end
 
-    constraints SelectRoute.new('app_transparency', SelectRoute::B_ROUTE) do
-      get 'select_phone', to: 'select_phoneb#index', as: :select_phone
+    constraints route_b do
       post 'select_phone', to: 'select_phoneb#select_phone', as: :select_phone_submit
 
       get 'choose_a_certified_company', to: 'choose_a_certified_companyb#index', as: :choose_a_certified_company

@@ -34,6 +34,6 @@ experiments:
   - app_transparency:
         alternatives:
           - name: 'control'
-            percent: 0
+            percent: 80
           - name: 'variant'
-            percent: 100
+            percent: 20
