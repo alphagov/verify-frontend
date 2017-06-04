@@ -1,4 +1,4 @@
-class ChooseACertifiedCompanybController < ConfigurableJourneyController
+class ChooseACertifiedCompanyVariantController < ConfigurableJourneyController
   def index
     @reluctant_mob_installation = session[:reluctant_mob_installation]
 

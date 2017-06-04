@@ -1,10 +1,10 @@
-class SelectPhonebController < ConfigurableJourneyController
+class SelectPhoneVariantController < ConfigurableJourneyController
   def index
-    @form = SelectPhonebForm.new({})
+    @form = SelectPhoneVariantForm.new({})
   end
 
   def select_phone
-    @form = SelectPhonebForm.new(params['select_phoneb_form'] || {})
+    @form = SelectPhoneVariantForm.new(params['select_phone_variant_form'] || {})
 
     session[:reluctant_mob_installation] = @form.smart_phone == 'reluctant_yes'
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 
-describe SelectPhonebForm do
+describe SelectPhoneVariantForm do
   it 'should be invalid when neither mobile nor smartphone answered' do
     test_form_missing_data
     test_form_missing_data landline: 'false'
@@ -65,7 +65,7 @@ describe SelectPhonebForm do
 
   describe '#selected_answers' do
     it 'should return a hash of the selected answers' do
-      form = SelectPhonebForm.new(
+      form = SelectPhoneVariantForm.new(
         mobile_phone: 'true'
       )
       answers = form.selected_answers
@@ -73,7 +73,7 @@ describe SelectPhonebForm do
     end
 
     it 'should not return selected answers when there is no value' do
-      form = SelectPhonebForm.new(
+      form = SelectPhoneVariantForm.new(
         mobile_phone: 'false',
         smart_phone: ''
       )
@@ -82,7 +82,7 @@ describe SelectPhonebForm do
     end
 
     it "should return smartphone when the selected phone option is yes but I'd prefer not to" do
-      form = SelectPhonebForm.new(
+      form = SelectPhoneVariantForm.new(
         mobile_phone: 'true',
         smart_phone: 'reluctant_yes'
       )
@@ -92,19 +92,19 @@ describe SelectPhonebForm do
   end
 
   def test_form_valid(form_fields = {})
-    form = SelectPhonebForm.new(form_fields)
+    form = SelectPhoneVariantForm.new(form_fields)
     expect(form.valid?).to eql true
     expect(form.errors.full_messages).to eql []
   end
 
   def test_form_missing_data(form_fields = {})
-    form = SelectPhonebForm.new(form_fields)
+    form = SelectPhoneVariantForm.new(form_fields)
     expect(form.valid?).to eql false
     expect(form.errors.full_messages).to eql ['Please answer all the questions']
   end
 
   def test_form_inconsistent_data(form_fields = {})
-    form = SelectPhonebForm.new(form_fields)
+    form = SelectPhoneVariantForm.new(form_fields)
     expect(form.valid?).to eql false
     expect(form.errors.full_messages).to eql ['Please check your selection']
   end

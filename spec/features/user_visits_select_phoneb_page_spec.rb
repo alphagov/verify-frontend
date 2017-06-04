@@ -21,9 +21,9 @@ RSpec.describe 'When the user visits the select phone page' do
       set_stub_federation_no_docs_in_session
       visit '/select-phone'
 
-      choose 'select_phoneb_form_mobile_phone_true', allow_label_click: true
-      choose 'select_phoneb_form_smart_phone_true', allow_label_click: true
-      choose 'select_phoneb_form_landline_false', allow_label_click: true
+      choose 'select_phone_variant_form_mobile_phone_true', allow_label_click: true
+      choose 'select_phone_variant_form_smart_phone_true', allow_label_click: true
+      choose 'select_phone_variant_form_landline_false', allow_label_click: true
       click_button 'Continue'
 
       expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
@@ -36,13 +36,13 @@ RSpec.describe 'When the user visits the select phone page' do
 
       visit '/select-phone'
 
-      choose 'select_phoneb_form_mobile_phone_true', allow_label_click: true
-      choose 'select_phoneb_form_smart_phone_true', allow_label_click: true
+      choose 'select_phone_variant_form_mobile_phone_true', allow_label_click: true
+      choose 'select_phone_variant_form_smart_phone_true', allow_label_click: true
       click_button 'Continue'
 
       visit '/select-phone'
-      choose 'select_phoneb_form_mobile_phone_false', allow_label_click: true
-      choose 'select_phoneb_form_landline_false', allow_label_click: true
+      choose 'select_phone_variant_form_mobile_phone_false', allow_label_click: true
+      choose 'select_phone_variant_form_landline_false', allow_label_click: true
       click_button 'Continue'
 
       expect(page).to have_current_path(no_mobile_phone_path)
@@ -66,8 +66,8 @@ RSpec.describe 'When the user visits the select phone page' do
 
       visit '/select-phone'
 
-      choose 'select_phoneb_form_mobile_phone_true', allow_label_click: true
-      choose 'select_phoneb_form_smart_phone_true', allow_label_click: true
+      choose 'select_phone_variant_form_mobile_phone_true', allow_label_click: true
+      choose 'select_phone_variant_form_smart_phone_true', allow_label_click: true
       click_button 'Continue'
 
       expect(page).to have_current_path(choose_a_certified_company_path)
@@ -88,8 +88,8 @@ RSpec.describe 'When the user visits the select phone page' do
     it 'redirects to the no mobile phone page when no idps can verify' do
       visit '/select-phone'
 
-      choose 'select_phoneb_form_mobile_phone_false', allow_label_click: true
-      choose 'select_phoneb_form_landline_false', allow_label_click: true
+      choose 'select_phone_variant_form_mobile_phone_false', allow_label_click: true
+      choose 'select_phone_variant_form_landline_false', allow_label_click: true
       click_button 'Continue'
 
       expect(page).to have_current_path(no_mobile_phone_path)
@@ -116,8 +116,8 @@ RSpec.describe 'When the user visits the select phone page' do
     page.set_rack_session(transaction_simple_id: 'test-rp')
     visit '/select-phone'
 
-    choose 'select_phoneb_form_mobile_phone_true', allow_label_click: true
-    choose 'select_phoneb_form_smart_phone_true', allow_label_click: true
+    choose 'select_phone_variant_form_mobile_phone_true', allow_label_click: true
+    choose 'select_phone_variant_form_smart_phone_true', allow_label_click: true
     click_button 'Continue'
 
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once

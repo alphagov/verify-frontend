@@ -1,4 +1,4 @@
-class SelectPhonebForm
+class SelectPhoneVariantForm
   include ActiveModel::Model
 
   attr_reader :mobile_phone, :smart_phone, :landline

@@ -5,7 +5,7 @@
 
   var selectPhone = {
     toggleSecondaryQuestion: function() {
-      var mobilePhoneState = $('input[name="select_phoneb_form[mobile_phone]"]:checked').val();
+      var mobilePhoneState = $('input[name="select_phone_variant_form[mobile_phone]"]:checked').val();
       if (mobilePhoneState === undefined) {
         selectPhone.$smartphoneQuestion.add(selectPhone.$landlineQuestion)
           .addClass('js-hidden', true)
@@ -30,23 +30,23 @@
       if (selectPhone.$form.length === 1) {
         selectPhone.validator = selectPhone.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
           rules: {
-            'select_phoneb_form[mobile_phone]': 'required',
-            'select_phoneb_form[smart_phone]': 'required',
-            'select_phoneb_form[landline]': 'required'
+            'select_phone_variant_form[mobile_phone]': 'required',
+            'select_phone_variant_form[smart_phone]': 'required',
+            'select_phone_variant_form[landline]': 'required'
           },
           messages: {
-            'select_phoneb_form[mobile_phone]': errorMessage,
-            'select_phoneb_form[smart_phone]': errorMessage,
-            'select_phoneb_form[landline]': errorMessage
+            'select_phone_variant_form[mobile_phone]': errorMessage,
+            'select_phone_variant_form[smart_phone]': errorMessage,
+            'select_phone_variant_form[landline]': errorMessage
           }
         }));
-        selectPhone.$form.find('input[name="select_phoneb_form[mobile_phone]"]').on('click',selectPhone.toggleSecondaryQuestion);
+        selectPhone.$form.find('input[name="select_phone_variant_form[mobile_phone]"]').on('click',selectPhone.toggleSecondaryQuestion);
         selectPhone.toggleSecondaryQuestion();
       }
     }
   };
 
-  GOVUK.selectPhoneb = selectPhone;
+  GOVUK.selectPhoneVariant = selectPhone;
 
   global.GOVUK = GOVUK;
 })(window);

@@ -99,7 +99,7 @@ Rails.application.routes.draw do
     end
 
     constraints route_b_and_report_to_piwik do
-      get 'select_phone', to: 'select_phoneb#index', as: :select_phone
+      get 'select_phone', to: 'select_phone_variant#index', as: :select_phone
     end
 
     constraints route_a do
@@ -110,10 +110,10 @@ Rails.application.routes.draw do
     end
 
     constraints route_b do
-      post 'select_phone', to: 'select_phoneb#select_phone', as: :select_phone_submit
+      post 'select_phone', to: 'select_phone_variant#select_phone', as: :select_phone_submit
 
-      get 'choose_a_certified_company', to: 'choose_a_certified_companyb#index', as: :choose_a_certified_company
-      post 'choose_a_certified_company', to: 'choose_a_certified_companyb#select_idp', as: :choose_a_certified_company_submit
+      get 'choose_a_certified_company', to: 'choose_a_certified_company_variant#index', as: :choose_a_certified_company
+      post 'choose_a_certified_company', to: 'choose_a_certified_company_variant#select_idp', as: :choose_a_certified_company_submit
     end
   end
 
