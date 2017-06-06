@@ -3,7 +3,10 @@ require 'cookie_names'
 require 'api_test_helper'
 
 RSpec.describe 'when user submits start page form' do
-  before(:each) { set_session_and_session_cookies! }
+  before :each do
+    set_session_and_session_cookies!
+    stub_api_idp_list
+  end
 
   it 'will display about page when user chooses yes (registration)' do
     stub_request(:get, INTERNAL_PIWIK.url)

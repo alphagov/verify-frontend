@@ -1,7 +1,7 @@
 module SessionEndpoints
   PATH = '/session'.freeze
-  IDP_LIST = '/idp-list'.freeze
   PATH_PREFIX = Pathname(PATH)
+  IDP_LIST_SUFFIX = 'idp-list'.freeze
   SELECT_IDP_SUFFIX = 'select-idp'.freeze
   IDP_AUTHN_REQUEST_SUFFIX = 'idp-authn-request'.freeze
   IDP_AUTHN_RESPONSE_SUFFIX = 'idp-authn-response'.freeze
@@ -35,7 +35,7 @@ module SessionEndpoints
   end
 
   def idp_list_endpoint(session_id)
-    PATH_PREFIX.join(session_id, IDP_LIST)
+    session_endpoint(session_id, IDP_LIST_SUFFIX)
   end
 
   def select_idp_endpoint(session_id)

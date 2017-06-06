@@ -1,11 +1,13 @@
 require 'rails_helper'
 require 'controller_helper'
+require 'api_test_helper'
 
 describe AboutController do
   let(:identity_provider_display_decorator) { double(:IdentityProviderDisplayDecorator) }
 
   before(:each) do
     stub_request(:get, CONFIG.api_host + '/api/transactions')
+    stub_api_idp_list
   end
 
   context 'GET about#certified_companies' do

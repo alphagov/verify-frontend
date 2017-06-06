@@ -9,8 +9,7 @@ class StubApi < Sinatra::Base
     post_to_api(JSON.parse(request.body.read)['relayState'])
   end
 
-  post '/api/idp-list' do
-    status 201
+  get '/api/session/:session_id/idp-list' do
     '[{
         "simpleId":"stub-idp-unavailable",
         "entityId":"unavailable-entity-id",

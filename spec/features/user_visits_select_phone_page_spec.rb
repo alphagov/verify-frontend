@@ -14,11 +14,12 @@ RSpec.describe 'When the user visits the select phone page' do
 
   before(:each) do
     set_session_and_session_cookies!
+    stub_api_idp_list
   end
 
   context 'with javascript disabled' do
     it 'redirects to the idp picker page when user has a phone' do
-      set_stub_federation_no_docs_in_session
+      stub_api_no_docs_idps
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
@@ -31,7 +32,7 @@ RSpec.describe 'When the user visits the select phone page' do
     end
 
     it 'does not include apps if user doesnt know if their phone has apps' do
-      set_stub_federation_no_docs_in_session
+      stub_api_no_docs_idps
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true

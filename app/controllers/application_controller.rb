@@ -149,7 +149,7 @@ private
   end
 
   def current_identity_providers
-    @current_identity_providers = SESSION_PROXY.get_idp_list(session[:verify_session_id]).idps
+    SESSION_PROXY.get_idp_list(session[:verify_session_id]).idps
   end
 
   def report_to_analytics(action_name)

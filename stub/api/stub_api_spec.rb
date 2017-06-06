@@ -37,10 +37,10 @@ describe StubApi do
     end
   end
 
-  context '#post /api/idp-list' do
+  context '#get /api/session/:session_id/idp-list' do
     it 'should respond with valid IdpListResponse' do
-      post '/api/idp-list'
-      expect(last_response).to be_created
+      get '/api/session/session_id/idp-list'
+      expect(last_response).to be_ok
       response = IdpListResponse.new(last_response_json)
       expect(response).to be_valid
     end

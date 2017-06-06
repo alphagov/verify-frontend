@@ -1,5 +1,6 @@
 module ApiTestHelper
   include SessionEndpoints
+
   def api_uri(path)
     URI.join(CONFIG.api_host, File.join('/api/', path))
   end
@@ -137,6 +138,33 @@ module ApiTestHelper
   def stub_api_returns_error(code)
     stub_request(:get, api_uri(idp_authn_request_endpoint(default_session_id)))
         .to_return(body: an_error_response(code).to_json, status: 500)
+  end
+
+  def stub_api_idp_list(idps = default_idps)
+    stub_request(:get, api_uri(idp_list_endpoint(default_session_id))).to_return(body: idps.to_json)
+  end
+
+  def stub_api_no_docs_idps
+    idps = [
+      { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+      { 'simpleId' => 'stub-idp-no-docs', 'entityId' => 'http://idcorp.nodoc.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+      { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+      { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }
+    ]
+    stub_api_idp_list(idps)
+  end
+
+private
+
+  def default_session_id
+    'my-session-id-cookie'
+  end
+
+  def default_idps
+    [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+     { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+     { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+     { 'simpleId' => 'stub-idp-demo', 'entityId' => 'demo-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }]
   end
 end
 

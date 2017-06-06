@@ -91,28 +91,10 @@ module FeatureHelper
     DateTime.now.to_i * 1000
   end
 
-  def set_session_and_session_cookies!(idps = get_demo_idps, cookie_hash = create_cookie_hash)
+  def set_session_and_session_cookies!(cookie_hash = create_cookie_hash)
     set_cookies!(create_cookie_hash)
-    page.set_rack_session(
-      transaction_simple_id: 'test-rp',
-      start_time: start_time_in_millis,
-      verify_session_id: default_session_id,
-      requested_loa: 'LEVEL_2'
-    )
-    stub_idp_list(idps)
+    set_session!
     cookie_hash
-  end
-
-  def get_demo_idps
-    [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-     { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-     { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-     { 'simpleId' => 'stub-idp-demo', 'entityId' => 'demo-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }]
-  end
-
-  def stub_idp_list(idps)
-    stub_request(:post, 'http://api.com:50190/api/idp-list').
-        to_return(status: 201, body: idps.to_json)
   end
 
   def set_loa_in_session(loa)
@@ -121,47 +103,13 @@ module FeatureHelper
     )
   end
 
-  def set_stub_federation_in_session(idp_entity_id)
-    idps = [
-        { 'simpleId' => 'stub-idp-one', 'entityId' => idp_entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }
-    ]
-    stub_idp_list(idps)
-  end
-
-  def set_stub_federation_no_docs_in_session
-    idps = [
-        { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-        { 'simpleId' => 'stub-idp-no-docs', 'entityId' => 'http://idcorp.nodoc.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-        { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-        { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }
-    ]
-    stub_idp_list(idps)
-  end
-
-  def set_stub_federation_idp_with_interstitial_question_enabled
-    idps = [
-        { 'simpleId' => 'stub-idp-one-doc-question', 'entityId' => 'http://fancypants.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }
-    ]
-    stub_idp_list(idps)
-  end
-
-  def set_stub_federation_unavailable_in_session
-    idps = [
-        { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-        { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-        { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-        { 'simpleId' => 'stub-idp-unavailable', 'entityId' => 'unavailable-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }
-    ]
-    stub_idp_list(idps)
-  end
-
   def set_session_cookies!
     cookie_hash = create_cookie_hash
     set_cookies!(create_cookie_hash)
     cookie_hash
   end
 
-  def set_session!(session = { transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: default_session_id })
+  def set_session!(session = default_session)
     page.set_rack_session(session)
     session
   end
@@ -181,6 +129,16 @@ module FeatureHelper
   def cookie_header(cookie_name)
     set_cookies_headers = page.response_headers['Set-Cookie'].split(/\n/)
     set_cookies_headers.detect { |header| header.match(/^#{cookie_name}/) }
+  end
+
+private
+
+  def default_session
+    { transaction_simple_id: 'test-rp',
+      start_time: start_time_in_millis,
+      verify_session_id: default_session_id,
+      requested_loa: 'LEVEL_2'
+    }
   end
 end
 
