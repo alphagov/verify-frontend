@@ -27,10 +27,7 @@ class SessionProxy
   end
 
   def get_idp_list(session_id)
-    body = {
-        SESSION_ID => session_id
-    }
-    response = @api_client.post(IDP_LIST, body)
+    response = @api_client.get(idp_list_endpoint(session_id))
     IdpListResponse.validated_response(response)
   end
 

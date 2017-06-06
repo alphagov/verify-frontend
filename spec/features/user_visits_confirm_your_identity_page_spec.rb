@@ -9,6 +9,7 @@ end
 
 def set_up_session(idp_entity_id)
   stub_api_and_analytics(idp_location)
+  stub_api_idp_list
   set_session_and_session_cookies!
   set_journey_hint_cookie(idp_entity_id)
   page.set_rack_session(transaction_simple_id: 'test-rp')
@@ -100,6 +101,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
   describe 'and the journey hint cookie is invalid in some way' do
     it 'should redirect to sign in page when the journey cookie is not set' do
       set_session_and_session_cookies!
+      stub_api_idp_list
       visit '/confirm-your-identity'
       expect(page).to have_title 'Sign in with a certified company - GOV.UK Verify - GOV.UK'
       expect(page).to have_current_path(sign_in_path)
@@ -107,6 +109,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     it 'should redirect to sign in page when the journey cookie has a nil value' do
       set_session_and_session_cookies!
+      stub_api_idp_list
       visit '/confirm-your-identity'
       expect(page).to have_title 'Sign in with a certified company - GOV.UK Verify - GOV.UK'
       expect(page).to have_current_path(sign_in_path)

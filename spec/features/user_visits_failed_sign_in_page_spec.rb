@@ -4,6 +4,7 @@ require 'api_test_helper'
 RSpec.describe 'When the user visits the failed sign in page' do
   before(:each) do
     set_session_and_session_cookies!
+    stub_api_idp_list
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' })
   end

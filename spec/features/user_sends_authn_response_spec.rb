@@ -14,7 +14,11 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
       transaction_simple_id: 'test-rp'
     )
   }
-  before(:each) { set_session_and_session_cookies! }
+
+  before :each do
+    set_session_and_session_cookies!
+    stub_api_idp_list
+  end
 
   it 'will show the something went wrong page when relay state and session id mismatch' do
     stub_transactions_list

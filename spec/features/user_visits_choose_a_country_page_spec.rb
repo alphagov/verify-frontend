@@ -5,6 +5,7 @@ require 'i18n'
 RSpec.describe 'When the user visits the choose a country page' do
   before(:each) do
     set_session_and_session_cookies!
+    stub_api_idp_list
     stub_transactions_list
     stub_countries_list
   end
