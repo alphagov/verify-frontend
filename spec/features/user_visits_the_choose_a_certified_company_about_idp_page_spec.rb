@@ -22,7 +22,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
     expect(page).to have_content("ID Corp is the premier identity proofing service around.")
     click_button "Choose IDCorp"
     expect(page).to have_current_path(redirect_to_idp_warning_path)
-    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
   end
 

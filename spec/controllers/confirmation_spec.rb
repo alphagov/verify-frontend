@@ -39,9 +39,9 @@ end
 
 
 def stub_identity_provider_display_decorator(identity_provider_display_decorator, simple_id, entity_id, levels_of_assurance)
-  loa_identity_provider = IdentityProvider.new('simple_id' => simple_id,
-                                               'entity_id' => entity_id,
-                                               'levels_of_assurance' => levels_of_assurance)
+  loa_identity_provider = IdentityProvider.new('simpleId' => simple_id,
+                                               'entityId' => entity_id,
+                                               'levelsOfAssurance' => levels_of_assurance)
 
   viewable_identity_provider_stub = Display::ViewableIdentityProvider.new(loa_identity_provider, display_data, 'idp-logos/barclays.png', 'idp-logos-white/barclays.png')
 
@@ -56,10 +56,10 @@ def stub_identity_provider_display_decorator(identity_provider_display_decorator
 end
 
 def stub_rp_display_repository(transaction_simple_data)
-  current_transaction = ""
+  current_transaction = ''
 
   def current_transaction.name
-    "Test-RP"
+    'Test-RP'
   end
   { transaction_simple_data => current_transaction }
 end

@@ -1,5 +1,6 @@
 module SessionEndpoints
   PATH = '/session'.freeze
+  IDP_LIST = '/idp-list'.freeze
   PATH_PREFIX = Pathname(PATH)
   SELECT_IDP_SUFFIX = 'select-idp'.freeze
   IDP_AUTHN_REQUEST_SUFFIX = 'idp-authn-request'.freeze
@@ -18,6 +19,7 @@ module SessionEndpoints
   PARAM_REGISTRATION = 'registration'.freeze
   PARAM_CYCLE_THREE_VALUE = 'value'.freeze
   COUNTRIES_PATH = '/countries'.freeze
+  SESSION_ID = 'sessionId'.freeze
   COUNTRIES_PATH_PREFIX = Pathname(COUNTRIES_PATH)
 
   def countries_endpoint(session_id)
@@ -30,6 +32,10 @@ module SessionEndpoints
 
   def session_endpoint(session_id, suffix)
     PATH_PREFIX.join(session_id, suffix).to_s
+  end
+
+  def idp_list_endpoint(session_id)
+    PATH_PREFIX.join(session_id, IDP_LIST)
   end
 
   def select_idp_endpoint(session_id)

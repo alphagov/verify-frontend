@@ -1,9 +1,9 @@
-class FederationInfoResponse < Api::Response
+class IdpListResponse < Api::Response
   attr_reader :idps
   validate :consistent_idps
 
   def initialize(hash)
-    @idps = hash['idps'].map { |idp| IdentityProvider.from_api(idp) }
+    @idps = hash.map { |idp| IdentityProvider.new(idp) }
   end
 
   def consistent_idps

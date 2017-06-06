@@ -12,7 +12,7 @@ require 'api/response'
 require 'session_response'
 require 'country'
 require 'identity_provider'
-require 'federation_info_response'
+require 'idp_list_response'
 require 'select_idp_response'
 require 'outbound_saml_message'
 require 'idp_authn_response'
@@ -37,11 +37,11 @@ describe StubApi do
     end
   end
 
-  context '#get /api/session/:session_id/federation' do
-    it 'should respond with valid FederationInfoResponse' do
-      get '/api/session/session_id/federation'
-      expect(last_response).to be_ok
-      response = FederationInfoResponse.new(last_response_json)
+  context '#post /api/idp-list' do
+    it 'should respond with valid IdpListResponse' do
+      post '/api/idp-list'
+      expect(last_response).to be_created
+      response = IdpListResponse.new(last_response_json)
       expect(response).to be_valid
     end
   end

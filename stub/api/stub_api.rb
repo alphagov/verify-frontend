@@ -9,14 +9,13 @@ class StubApi < Sinatra::Base
     post_to_api(JSON.parse(request.body.read)['relayState'])
   end
 
-  get '/api/session/:session_id/federation' do
-    '{
-      "idps":[{
-        "simpleId":"stub-idp-one",
-        "entityId":"http://example.com/stub-idp-one",
-        "levelsOfAssurance": ["LEVEL_2"]
-      }]
-    }'
+  post '/api/idp-list' do
+    status 201
+    '[{
+        "simpleId":"stub-idp-unavailable",
+        "entityId":"unavailable-entity-id",
+        "levelsOfAssurance":["LEVEL_1","LEVEL_2"]
+     }]'
   end
 
   put '/api/session/:session_id/select-idp' do
@@ -98,11 +97,6 @@ private
       \"sessionId\":\"blah\",
       \"sessionStartTime\":32503680000000,
       \"transactionSimpleId\":\"test-rp\",
-      \"idps\":[{
-        \"simpleId\":\"stub-idp-one\",
-        \"entityId\":\"http://example.com/stub-idp-one\",
-        \"levelsOfAssurance\": [\"LEVEL_1\", \"LEVEL_2\"]
-      }],
       \"levelsOfAssurance\":[\"#{level_of_assurance}\"],
       \"transactionSupportsEidas\": true
     }"

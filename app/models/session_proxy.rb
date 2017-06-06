@@ -26,6 +26,14 @@ class SessionProxy
     SessionResponse.validated_response(response)
   end
 
+  def get_idp_list(session_id)
+    body = {
+        SESSION_ID => session_id
+    }
+    response = @api_client.post(IDP_LIST, body)
+    IdpListResponse.validated_response(response)
+  end
+
   def select_cookies(cookies, allowed_cookie_names)
     cookies.select { |name, _| allowed_cookie_names.include?(name) }.to_h
   end

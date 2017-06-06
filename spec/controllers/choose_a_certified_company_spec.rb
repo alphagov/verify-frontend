@@ -11,9 +11,9 @@ describe ChooseACertifiedCompanyController do
   subject { get :index, params: { locale: 'en' } }
 
   it 'renders the certified companies LOA1 template when LEVEL_1 is the requested LOA' do
-    loa_identity_provider = IdentityProvider.new('simple_id' => 'stub-idp-loa1',
-                                                 'entity_id' => 'http://idcorp.com',
-                                                 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    loa_identity_provider = IdentityProvider.new('simpleId' => 'stub-idp-loa1',
+                                                 'entityId' => 'http://idcorp.com',
+                                                 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2))
 
     LoaRecommended = Struct.new(
       :identity_provider,
@@ -39,12 +39,12 @@ describe ChooseACertifiedCompanyController do
     }.and_return([loa_recommended])
     expect(display_data).to receive(:display_name).at_least(1).times.and_return('stub')
 
-    set_session_and_cookies_with_loa('LEVEL_1', [{ 'simple_id' => 'stub-idp-loa1',
-                                                   'entity_id' => 'http://idcorp.com',
-                                                   'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) },
-                                                 { 'simple_id' => 'stub-idp-loa2',
-                                                   'entity_id' => 'http://idcorp.com',
-                                                   'levels_of_assurance' => ['LEVEL_2'] }])
+    set_session_and_cookies_with_loa('LEVEL_1', [{ 'simpleId' => 'stub-idp-loa1',
+                                                   'entityId' => 'http://idcorp.com',
+                                                   'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+                                                 { 'simpleId' => 'stub-idp-loa2',
+                                                   'entityId' => 'http://idcorp.com',
+                                                   'levelsOfAssurance' => ['LEVEL_2'] }])
 
     expect(subject).to render_template(:choose_a_certified_company_LOA1)
     expect(subject).to_not render_template(:choose_a_certified_company_LOA2)

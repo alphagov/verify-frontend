@@ -18,10 +18,6 @@ describe 'user sends authn requests' do
 
       expect(page.get_rack_session['transaction_simple_id']).to eql 'test-rp'
       expect(page.get_rack_session['verify_session_id']).to eql default_session_id
-      expect(page.get_rack_session['identity_providers']).to eql [{
-                                                                      'simple_id' => 'stub-idp-one',
-                                                                      'entity_id' => 'http://idcorp.com',
-                                                                      'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }]
       expect(page.get_rack_session['requested_loa']).to eql 'LEVEL_1'
 
       cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
@@ -34,6 +30,7 @@ describe 'user sends authn requests' do
     end
 
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
+      stub_idp_list(get_demo_idps)
       set_journey_hint_cookie('http://idcorp.com')
       stub_api_saml_endpoint(transaction_supports_eidas: true)
       visit('/test-saml')

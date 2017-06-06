@@ -2,7 +2,6 @@ shared_examples 'idp_authn_response' do |journey_hint, idp_result, piwik_action,
   let(:session_proxy) { double(:session_proxy) }
 
   before(:each) do
-    # stub_request(:get, CONFIG.api_host + '/api/transactions')
     stub_const('SESSION_PROXY', session_proxy)
     set_session_and_cookies_with_loa('LEVEL_1')
   end
