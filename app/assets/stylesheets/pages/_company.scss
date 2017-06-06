@@ -86,7 +86,7 @@
     text-align: center;
 
     img {
-      width: 67.5%;
+        width: 67.5%;
     }
   }
 
@@ -111,6 +111,8 @@
     }
   }
 
+
+
   .idp-option {
     text-align: center;
 
@@ -133,6 +135,10 @@
           width: 260px;
         }
       }
+    }
+    .company-app-install {
+      display: inline-block;
+      margin-top: 40px;
     }
   }
 }
