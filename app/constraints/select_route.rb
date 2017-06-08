@@ -19,7 +19,7 @@ class SelectRoute
 
   def matches?(request)
     if request_matches_experiment?(request)
-      report_to_piwik(request)
+      report_ab_test_details(request)
       MATCHES
     else
       DOES_NOT_MATCH
@@ -46,7 +46,7 @@ private
     AB_TESTS[@experiment_name] ? AB_TESTS[@experiment_name].alternative_name(experiment_name) : 'default'
   end
 
-  def report_to_piwik(request)
+  def report_ab_test_details(request)
     reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[@experiment_name]
     transaction_id = request.session[:transaction_simple_id]
     @ab_reporter.call(@experiment_name, reported_alternative, transaction_id, request)
