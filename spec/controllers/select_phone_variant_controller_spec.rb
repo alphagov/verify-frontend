@@ -3,9 +3,9 @@ require 'controller_helper'
 require 'spec_helper'
 require 'models/display/viewable_identity_provider'
 
-describe SelectPhoneController do
-  VALID_PHONE = { mobile_phone: 'true', smart_phone: 'true', landline: 'true' }.freeze
-  INVALID_PHONE = { mobile_phone: 'false', smart_phone: 'true' }.freeze
+describe SelectPhoneVariantController do
+  VALID_PHONE_OPTION = { mobile_phone: 'true', smart_phone: 'true', landline: 'true' }.freeze
+  INVALID_PHONE_OPTION = { mobile_phone: 'false', smart_phone: 'true' }.freeze
 
   let(:piwik_reporter) { double(:Reporter) }
   let(:eligibility_checker) { double(:Checker) }
@@ -18,7 +18,7 @@ describe SelectPhoneController do
 
   context 'Redirects:' do
     context 'when form is valid' do
-      subject { post :select_phone, params: { locale: 'en', select_phone_form: VALID_PHONE } }
+      subject { post :select_phone, params: { locale: 'en', select_phone_variant_form: VALID_PHONE_OPTION } }
 
       before(:each) do
         expect(piwik_reporter).to receive(:report)
@@ -38,7 +38,7 @@ describe SelectPhoneController do
     end
 
     context 'when form is invalid' do
-      subject { post :select_phone, params: { locale: 'en', select_phone_form: INVALID_PHONE } }
+      subject { post :select_phone, params: { locale: 'en', select_phone_variant_form: INVALID_PHONE_OPTION } }
 
       it 'renders iitself' do
         expect(subject).to render_template(:index)
@@ -47,8 +47,36 @@ describe SelectPhoneController do
   end
 
   context 'Analytics and Session:' do
+    context 'mobile app installation is' do
+      before(:each) do
+        expect(eligibility_checker).to receive(:any?)
+        expect(piwik_reporter).to receive(:report)
+      end
+
+      it 'required in session cookie when smart phone reluctant yes is chosen' do
+        post :select_phone, params: { locale: 'en',
+                                      select_phone_variant_form: { smart_phone: 'reluctant_yes' } }
+
+        expect(session[:reluctant_mob_installation]).to eq(true)
+      end
+
+      it 'not required in session cookie when smart phone yes is chosen' do
+        post :select_phone, params: { locale: 'en',
+                                      select_phone_variant_form: { smart_phone: true } }
+
+        expect(session[:reluctant_mob_installation]).to eq(false)
+      end
+
+      it 'not required in session cookie when smart phone no is chosen' do
+        post :select_phone, params: { locale: 'en',
+                                      select_phone_variant_form: { smart_phone: false } }
+
+        expect(session[:reluctant_mob_installation]).to eq(false)
+      end
+    end
+
     context 'when form is valid' do
-      subject { post :select_phone, params: { locale: 'en', select_phone_form: VALID_PHONE } }
+      subject { post :select_phone, params: { locale: 'en', select_phone_variant_form: VALID_PHONE_OPTION } }
 
       before(:each) do
         expect(eligibility_checker).to receive(:any?)
@@ -77,7 +105,7 @@ describe SelectPhoneController do
     end
 
     context 'when form is invalid' do
-      subject { post :select_phone, params: { locale: 'en', select_phone_form: INVALID_PHONE } }
+      subject { post :select_phone, params: { locale: 'en', select_phone_variant_form: INVALID_PHONE_OPTION } }
 
       it 'does not report to Pwik' do
         expect(piwik_reporter).not_to receive(:report)
