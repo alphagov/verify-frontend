@@ -4,7 +4,8 @@ require 'i18n'
 
 describe 'When the user visits the choose a certified company page' do
   before(:each) do
-    set_session_and_session_cookies!
+    set_session_and_ab_session_cookies!
+    stub_api_idp_list
   end
 
   let(:selected_answers) {
@@ -92,7 +93,7 @@ describe 'When the user visits the choose a certified company page' do
   end
 
   it 'recommends some IDPs with a recommended profile, hides non-recommended profiles, and omits non-matching profiles' do
-    set_stub_federation_no_docs_in_session
+    stub_api_no_docs_idps
     given_a_session_with_one_doc_selected_answers
     visit '/choose-a-certified-company'
 
@@ -113,7 +114,7 @@ describe 'When the user visits the choose a certified company page' do
   it 'redirects to the redirect warning page when selecting a recommended IDP' do
     entity_id = 'http://idcorp.com'
     given_a_session_with_selected_answers
-    set_stub_federation_in_session(entity_id)
+    stub_api_idp_list([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
     visit '/choose-a-certified-company'
 
     within('#matching-idps') do
@@ -121,13 +122,13 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     expect(page).to have_current_path(redirect_to_idp_warning_path)
-    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
   end
 
   it 'redirects to the redirect warning page when selecting a non-recommended IDP' do
     given_a_session_with_one_doc_selected_answers
-    set_stub_federation_no_docs_in_session
+    stub_api_no_docs_idps
     visit '/choose-a-certified-company'
 
     within('#non-matching-idps') do
@@ -139,30 +140,37 @@ describe 'When the user visits the choose a certified company page' do
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql false
   end
 
-  it 'redirects to the interstitial question page with an additional question when having one doc' do
-    given_a_session_with_one_doc_selected_answers
-    set_stub_federation_idp_with_interstitial_question_enabled
-    visit '/choose-a-certified-company'
-
-    within('#matching-idps') do
-      click_button 'Choose FancyPants'
+  context 'choosing an IDP that displays a question for certain evidence' do
+    before :each do
+      stub_api_idp_list([{
+                             'simpleId' => 'stub-idp-one-doc-question',
+                             'entityId' => 'http://fancypants.com',
+                             'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
     end
 
-    expect(page).to have_current_path(redirect_to_idp_question_path)
-    expect(page.get_rack_session_key('selected_idp')).to eql('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
-  end
+    it 'redirects to the interstitial question page with an additional question when having one doc' do
+      given_a_session_with_one_doc_selected_answers
+      visit '/choose-a-certified-company'
 
-  it 'redirects to the warning page without additional question for two docs' do
-    given_a_session_with_two_docs_selected_answers
-    set_stub_federation_idp_with_interstitial_question_enabled
-    visit '/choose-a-certified-company'
+      within('#matching-idps') do
+        click_button 'Choose FancyPants'
+      end
 
-    within('#matching-idps') do
-      click_button 'Choose FancyPants'
+      expect(page).to have_current_path(redirect_to_idp_question_path)
+      expect(page.get_rack_session_key('selected_idp')).to include('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     end
 
-    expect(page).to have_current_path(redirect_to_idp_warning_path)
-    expect(page.get_rack_session_key('selected_idp')).to eql('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    it 'redirects to the warning page without additional question for two docs' do
+      given_a_session_with_two_docs_selected_answers
+      visit '/choose-a-certified-company'
+
+      within('#matching-idps') do
+        click_button 'Choose FancyPants'
+      end
+
+      expect(page).to have_current_path(redirect_to_idp_warning_path)
+      expect(page.get_rack_session_key('selected_idp')).to include('simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    end
   end
 
   it 'records details in session when a recommended IdP is selected' do
@@ -174,7 +182,7 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
-    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => 'http://idcorp.com', 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => 'http://idcorp.com', 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
   end
 
   it 'rejects unrecognised simple ids' do

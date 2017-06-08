@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'controller_helper'
 require 'spec_helper'
 require 'models/display/viewable_identity_provider'
+require 'api_test_helper'
 
 describe SelectPhoneVariantController do
   VALID_PHONE_OPTION = { mobile_phone: 'true', smart_phone: 'true', landline: 'true' }.freeze
@@ -14,6 +15,13 @@ describe SelectPhoneVariantController do
     set_session_and_cookies_with_loa('LEVEL_1')
     stub_const('ANALYTICS_REPORTER', piwik_reporter)
     stub_const('IDP_ELIGIBILITY_CHECKER', eligibility_checker)
+
+    stub_api_idp_list([{ 'simpleId' => 'stub-idp-loa1',
+                         'entityId' => 'http://idcorp.com',
+                         'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+                       { 'simpleId' => 'stub-idp-loa2',
+                         'entityId' => 'http://idcorp.com',
+                         'levelsOfAssurance' => ['LEVEL_2'] }])
   end
 
   context 'Redirects:' do

@@ -97,6 +97,13 @@ module FeatureHelper
     cookie_hash
   end
 
+  def set_session_and_ab_session_cookies!(cookie_hash = create_cookie_hash)
+    cookie_hash[CookieNames::AB_TEST] = { 'app_transparency' => 'app_transparency_variant' }.to_json
+    set_cookies!(cookie_hash)
+    set_session!
+    cookie_hash
+  end
+
   def set_loa_in_session(loa)
     page.set_rack_session(
       requested_loa: loa
