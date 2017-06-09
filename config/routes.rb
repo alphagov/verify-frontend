@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     post 'choose_a_country', to: 'choose_a_country#choose_a_country_submit', as: :choose_a_country_submit
     get 'confirmation', to: 'confirmation#index', as: :confirmation
     get 'failed_registration', to: 'failed_registration#index', as: :failed_registration
+    get 'failed_uplift', to: 'failed_uplift#index', as: :failed_uplift
     get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
     get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
     get 'forgot_company', to: 'static#forgot_company', as: :forgot_company

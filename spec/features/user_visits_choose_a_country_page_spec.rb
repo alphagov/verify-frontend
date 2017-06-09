@@ -7,6 +7,7 @@ RSpec.describe 'When the user visits the choose a country page' do
   let(:location) { 'the-location' }
   before(:each) do
     set_session_and_session_cookies!
+    stub_api_idp_list
     stub_transactions_list
     stub_countries_list
   end
@@ -54,7 +55,6 @@ RSpec.describe 'When the user visits the choose a country page' do
     visit '/choose-a-country'
 
     expect(page).to have_current_path(choose_a_country_path)
-    expect(page).to have_css 'h1.heading-xlarge', text: I18n.translate('hub.choose_country.heading')
   end
 
   it 'should have select when JS is disabled' do
@@ -120,6 +120,21 @@ RSpec.describe 'When the user visits the choose a country page' do
     end
 
     expect(page).to have_current_path('/a-country-page')
+  end
+
+  it 'should error when invalid country is selected (when JS is enabled)', js: true do
+    given_a_session_supporting_eidas
+    stub_select_country_request
+
+    visit '/choose-a-country'
+
+    within '.js-show' do
+      fill_in 'input-typeahead', with: 'Sweden'
+      click_on 'Select'
+    end
+
+    expect(page).to have_current_path('/choose-a-country')
+    expect(page).to have_content 'Please select a country from the list'
   end
 
   it 'policy records the country selected by the user', js: true do

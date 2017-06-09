@@ -91,54 +91,16 @@ module FeatureHelper
     DateTime.now.to_i * 1000
   end
 
-  def set_session_and_session_cookies!(idps = [{ 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
-                                               { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id' },
-                                               { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id' },
-                                               { 'simple_id' => 'stub-idp-demo', 'entity_id' => 'demo-entity-id' }])
-    cookie_hash = create_cookie_hash
+  def set_session_and_session_cookies!(cookie_hash = create_cookie_hash)
     set_cookies!(create_cookie_hash)
-    page.set_rack_session(
-      transaction_simple_id: 'test-rp',
-      start_time: start_time_in_millis,
-      verify_session_id: default_session_id,
-      identity_providers: idps,
-      requested_loa: 'LEVEL_2'
-    )
+    set_session!
     cookie_hash
   end
 
-  def set_stub_federation_in_session(idp_entity_id)
-    idps = [
-        { 'simple_id' => 'stub-idp-one', 'entity_id' => idp_entity_id }
-    ]
-    page.set_rack_session(identity_providers: idps)
-  end
-
-  def set_stub_federation_no_docs_in_session
-    idps = [
-        { 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
-        { 'simple_id' => 'stub-idp-no-docs', 'entity_id' => 'http://idcorp.nodoc.com' },
-        { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id' },
-        { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id' }
-    ]
-    page.set_rack_session(identity_providers: idps)
-  end
-
-  def set_stub_federation_idp_with_interstitial_question_enabled
-    idps = [
-        { 'simple_id' => 'stub-idp-one-doc-question', 'entity_id' => 'http://fancypants.com' }
-    ]
-    page.set_rack_session(identity_providers: idps)
-  end
-
-  def set_stub_federation_unavailable_in_session
-    idps = [
-        { 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' },
-        { 'simple_id' => 'stub-idp-two', 'entity_id' => 'other-entity-id' },
-        { 'simple_id' => 'stub-idp-three', 'entity_id' => 'a-different-entity-id' },
-        { 'simple_id' => 'stub-idp-unavailable', 'entity_id' => 'unavailable-entity-id' }
-    ]
-    page.set_rack_session(identity_providers: idps)
+  def set_loa_in_session(loa)
+    page.set_rack_session(
+      requested_loa: loa
+    )
   end
 
   def set_session_cookies!
@@ -147,7 +109,7 @@ module FeatureHelper
     cookie_hash
   end
 
-  def set_session!(session = { transaction_simple_id: 'test-rp', start_time: start_time_in_millis, verify_session_id: default_session_id })
+  def set_session!(session = default_session)
     page.set_rack_session(session)
     session
   end
@@ -167,6 +129,16 @@ module FeatureHelper
   def cookie_header(cookie_name)
     set_cookies_headers = page.response_headers['Set-Cookie'].split(/\n/)
     set_cookies_headers.detect { |header| header.match(/^#{cookie_name}/) }
+  end
+
+private
+
+  def default_session
+    { transaction_simple_id: 'test-rp',
+      start_time: start_time_in_millis,
+      verify_session_id: default_session_id,
+      requested_loa: 'LEVEL_2'
+    }
   end
 end
 

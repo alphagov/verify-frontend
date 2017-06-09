@@ -3,7 +3,7 @@ require 'api_test_helper'
 require 'models/session_proxy'
 require 'piwik_test_helper'
 
-RSpec.describe 'user sends authn requests' do
+describe 'user sends authn requests' do
   let(:api_saml_endpoint) { api_uri('session') }
 
   context 'and it is received successfully' do
@@ -18,7 +18,6 @@ RSpec.describe 'user sends authn requests' do
 
       expect(page.get_rack_session['transaction_simple_id']).to eql 'test-rp'
       expect(page.get_rack_session['verify_session_id']).to eql default_session_id
-      expect(page.get_rack_session['identity_providers']).to eql [{ 'simple_id' => 'stub-idp-one', 'entity_id' => 'http://idcorp.com' }]
       expect(page.get_rack_session['requested_loa']).to eql 'LEVEL_1'
 
       cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
@@ -31,6 +30,7 @@ RSpec.describe 'user sends authn requests' do
     end
 
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
+      stub_api_idp_list(default_idps)
       set_journey_hint_cookie('http://idcorp.com')
       stub_api_saml_endpoint(transaction_supports_eidas: true)
       visit('/test-saml')

@@ -43,6 +43,8 @@ RSpec.feature 'When the user submits the feedback page' do
 
     it 'when session has timed out should show invalid session link' do
       set_session_and_session_cookies!
+      stub_api_idp_list
+
       expired_start_time = 2.hours.ago.to_i * 1000
       page.set_rack_session(start_time: expired_start_time)
 
@@ -81,8 +83,12 @@ RSpec.feature 'When the user submits the feedback page' do
   end
 
   context 'user session valid' do
-    it 'should show user link back to start page' do
+    before :each do
       set_session_and_session_cookies!
+      stub_api_idp_list
+    end
+
+    it 'should show user link back to start page' do
       visit start_path
       click_link I18n.t('feedback_link.feedback_form')
 
@@ -97,7 +103,6 @@ RSpec.feature 'When the user submits the feedback page' do
     end
 
     it 'should show user link back to page the user came from' do
-      set_session_and_session_cookies!
       visit select_documents_path
       click_link I18n.t('feedback_link.feedback_form')
 
@@ -112,7 +117,6 @@ RSpec.feature 'When the user submits the feedback page' do
     end
 
     it 'should show user link back to start page if the user came from an error page' do
-      set_session_and_session_cookies!
       visit about_path
       visit '/404'
       click_link I18n.t('feedback_link.feedback_form')
@@ -128,7 +132,6 @@ RSpec.feature 'When the user submits the feedback page' do
     end
 
     it 'should show user link back to start page if the user directly visits the feedback page' do
-      set_session_and_session_cookies!
       visit feedback_path
 
       fill_in 'feedback_form_what', with: 'Using verify'
@@ -142,7 +145,6 @@ RSpec.feature 'When the user submits the feedback page' do
     end
 
     it 'should show feedback sent in Welsh and have the appropriate link back to Verify' do
-      set_session_and_session_cookies!
       visit select_documents_cy_path
       click_link I18n.t('feedback_link.feedback_form', locale: :cy)
 
@@ -157,7 +159,6 @@ RSpec.feature 'When the user submits the feedback page' do
     end
 
     it 'should be able to direct user back to the relevant page if user switches to Welsh on the feedback page' do
-      set_session_and_session_cookies!
       visit '/feedback?feedback-source=START_PAGE'
 
       click_link 'Cymraeg'

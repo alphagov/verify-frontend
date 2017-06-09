@@ -1,5 +1,6 @@
 module ApiTestHelper
   include SessionEndpoints
+
   def api_uri(path)
     URI.join(CONFIG.api_host, File.join('/api/', path))
   end
@@ -15,9 +16,9 @@ module ApiTestHelper
   def stub_transactions_list
     transactions = {
       'transactions' => [
-        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp'      },
-        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3' },
-        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/headless-rp'  }
+        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] }
       ]
     }
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
@@ -84,15 +85,15 @@ module ApiTestHelper
         PARAM_RELAY_STATE => 'my-relay-state',
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
-    stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: session(options).to_json, status: 201)
+    stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: stub_api_session(options).to_json, status: 201)
   end
 
-  def session(options = {})
+  def stub_api_session(options = {})
     {
         'transactionSimpleId' => 'test-rp',
         'sessionStartTime' => '32503680000000',
         'sessionId' => default_session_id,
-        'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }],
+        'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }],
         'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2),
         'transactionSupportsEidas' => options.fetch(:transaction_supports_eidas, false)
     }
@@ -153,6 +154,33 @@ module ApiTestHelper
   def stub_api_returns_error(code)
     stub_request(:get, api_uri(idp_authn_request_endpoint(default_session_id)))
         .to_return(body: an_error_response(code).to_json, status: 500)
+  end
+
+  def stub_api_idp_list(idps = default_idps)
+    stub_request(:get, api_uri(idp_list_endpoint(default_session_id))).to_return(body: idps.to_json)
+  end
+
+  def stub_api_no_docs_idps
+    idps = [
+      { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+      { 'simpleId' => 'stub-idp-no-docs', 'entityId' => 'http://idcorp.nodoc.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+      { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+      { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }
+    ]
+    stub_api_idp_list(idps)
+  end
+
+private
+
+  def default_session_id
+    'my-session-id-cookie'
+  end
+
+  def default_idps
+    [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+     { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+     { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+     { 'simpleId' => 'stub-idp-demo', 'entityId' => 'demo-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }]
   end
 end
 

@@ -1,0 +1,37 @@
+<%= page_title 'hub.about_identity_accounts.title' %>
+<% content_for :feedback_source, 'ABOUT_IDENTITY_ACCOUNTS_PAGE' %>
+
+<%= t 'hub.about_identity_accounts.content_loa1_html' %>
+
+<div class="actions">
+  <%= button_link_to t('navigation.start_now'), choose_a_certified_company_path, id: 'next-button' %>
+</div>
+
+<details>
+  <summary>
+    <span class="summary"><%= t 'hub.about_identity_accounts.summary' %></span>
+  </summary>
+
+
+
+  <div class="panel panel-border-narrow">
+    <p><%= t 'hub.about_identity_accounts.details_loa1_html' %></p>
+    <ul class="list-bullet list">
+      <% loa1_transactions_list.each do |transaction| -%>
+          <li><%= transaction.name %></li>
+      <% end %>
+    </ul>
+
+
+
+    <p><%= t 'hub.about_identity_accounts.details_loa1_uplift_list' %></p>
+    <ul class="list-bullet list">
+      <% loa2_transactions_list.each do |transaction| -%>
+          <li><%= transaction.name %></li>
+      <% end %>
+    </ul>
+  </div>
+
+
+
+</details>

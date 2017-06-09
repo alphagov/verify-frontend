@@ -8,6 +8,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
 
   before(:each) do
     stub_transactions_list
+    stub_api_idp_list
     set_session_and_session_cookies!
   end
 

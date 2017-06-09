@@ -5,7 +5,7 @@ class SignInController < ApplicationController
     )
 
     @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      unavailable_idps.map { |simple_id| IdentityProvider.new('simple_id' => simple_id, 'entity_id' => simple_id) }
+      unavailable_idps.map { |simple_id| IdentityProvider.new('simpleId' => simple_id, 'entityId' => simple_id, 'levelsOfAssurance' => []) }
     )
 
     FEDERATION_REPORTER.report_sign_in(current_transaction, request)

@@ -25,7 +25,6 @@ RSpec.describe 'user visits further information page' do
     rp_name = I18n.t('rps.test-rp.name').capitalize
 
     expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: attribute_field_name)
-    expect(page).to have_css 'h1.heading-xlarge', text: rp_name
     expect(page).to have_css '.form-label-bold', text: attribute_field_name
     expect(page).to have_css 'span.form-hint', text: I18n.t('hub.further_information.example_text', example: I18n.t('cycle3.NationalInsuranceNumber.example'))
     expect(page).to have_content I18n.t('hub.further_information.help_with_your', cycle_three_name: attribute_name)

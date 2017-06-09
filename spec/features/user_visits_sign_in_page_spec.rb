@@ -20,6 +20,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
   def given_im_on_the_sign_in_page(locale = 'en')
     set_session_and_session_cookies!
+    stub_api_idp_list
     visit "/#{I18n.t('routes.sign_in', locale: locale)}"
   end
 
@@ -83,7 +84,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       then_im_at_the_idp
       and_the_language_hint_is_set
       and_the_hints_are_not_set
-      expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one')
+      expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     end
   end
 
@@ -104,7 +105,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       then_im_at_the_interstitial_page
       when_i_choose_to_continue
       then_im_at_the_idp
-      expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one')
+      expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     end
 
     it 'will display the interstitial page in welsh' do

@@ -1,60 +1,52 @@
 class SelectDocumentsForm
   include ActiveModel::Model
 
-  attr_reader :driving_licence, :ni_driving_licence, :passport, :non_uk_id_document, :no_documents
-  validate :one_must_be_present
-  validate :mandatory_fields_present, unless: :all_fields_blank?
-  validate :no_contradictory_inputs
+  attr_reader :driving_licence, :ni_driving_licence, :passport, :any_driving_licence
+  validate :any_driving_licence_and_passport_must_be_present
+  validate :driving_licence_details_present
 
   def initialize(hash)
     @ni_driving_licence = hash[:ni_driving_licence]
     @driving_licence = hash[:driving_licence]
     @passport = hash[:passport]
-    @non_uk_id_document = hash[:non_uk_id_document]
-    @no_documents = hash[:no_documents]
+    @any_driving_licence = hash[:any_driving_licence]
   end
 
   def selected_answers
     answers = {}
-    IdpEligibility::Evidence::DOCUMENT_ATTRIBUTES.each do |attr|
+    IdpEligibility::Evidence:: PHOTO_DOCUMENT_ATTRIBUTES.each do |attr|
       result = public_send(attr)
-      if no_documents_checked?
-        answers[attr] = false
-      elsif %w(true false).include?(result)
+      if %w(true false).include?(result)
         answers[attr] = (result == 'true')
       end
+    end
+    if any_driving_licence == 'false'
+      answers[:driving_licence] = false
+      answers[:ni_driving_licence] = false
     end
     answers
   end
 
+  def further_id_information_required?
+    passport == 'false' && (any_driving_licence == 'false' || (ni_driving_licence == 'true' && driving_licence != 'true'))
+  end
+
 private
 
-  def one_must_be_present
-    if all_fields_blank?
+  def any_driving_licence_and_passport_must_be_present
+    unless any_driving_licence && passport
       add_documents_error
     end
   end
 
-  def all_fields_blank?
-    field_attributes.all?(&:blank?)
-  end
-
-  def no_contradictory_inputs
-    if no_documents_checked? && any_yes_answers?
-      errors.add(:base, I18n.t('hub.select_documents.errors.invalid_selection'))
-    end
-  end
-
-  # If the user hasn't selected "yes" as the answer to any of the document questions then
-  # they must answer no for all of the document questions, or select "no docs"
-  def mandatory_fields_present
-    unless any_yes_answers? || all_no_answers? || no_documents_checked?
+  def driving_licence_details_present
+    if any_driving_licence == 'true' && no_driving_licence_details?
       add_documents_error
     end
   end
 
-  def no_documents_checked?
-    no_documents == 'true'
+  def no_driving_licence_details?
+    !(driving_licence == 'true' || ni_driving_licence == 'true')
   end
 
   def all_no_answers?
@@ -69,11 +61,7 @@ private
     errors.add(:base, I18n.t('hub.select_documents.errors.no_selection'))
   end
 
-  def field_attributes
-    document_attributes + [no_documents]
-  end
-
   def document_attributes
-    [passport, driving_licence, ni_driving_licence, non_uk_id_document]
+    [passport, driving_licence, ni_driving_licence, any_driving_licence]
   end
 end

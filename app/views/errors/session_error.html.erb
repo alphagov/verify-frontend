@@ -4,7 +4,7 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h1 class="heading-xlarge"><%= t 'errors.session_error.heading' %></h1>
+    <h1 class="heading-large"><%= t 'errors.session_error.heading' %></h1>
     <p><%= t 'errors.session_error.security' %></p>
     <p><%= link_to t('errors.session_error.start_again'), '/redirect-to-service/error' %></p>
     <p><%= t('errors.session_error.feedback_message', feedback_link: link_to(t('errors.session_error.feedback'), feedback_path('feedback-source' => feedback_source))).html_safe %></p>

@@ -4,6 +4,7 @@ require 'api_test_helper'
 RSpec.describe 'When the user visits the forgot company page' do
   before(:each) do
     set_session_and_session_cookies!
+    stub_api_idp_list
   end
 
   it 'includes the expected content' do

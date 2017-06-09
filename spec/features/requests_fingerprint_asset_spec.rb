@@ -1,4 +1,5 @@
 require 'feature_helper'
+require 'api_test_helper'
 
 RSpec.describe 'When the user visits the start page' do
   let(:request_log) { double(:request_log) }
@@ -24,6 +25,7 @@ RSpec.describe 'When the user visits the start page' do
       query_params_hash = nil
       expect(request_log).to receive(:log) { |arg| query_params_hash = arg }
       set_session_and_session_cookies!
+      stub_api_idp_list
 
       visit '/start'
 
@@ -35,6 +37,8 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'includes a reference to the fingerprint asset with the params set to noJS inside a noscript element' do
     set_session_and_session_cookies!
+    stub_api_idp_list
+
     visit '/start'
 
     expect(page).to have_css('noscript[style=\'position: absolute;\'] img[src=\'/assets2/fp.gif?hash=noJS\']')

@@ -4,6 +4,7 @@ require 'api_test_helper'
 RSpec.feature 'user visits the choose a certified company about idp page', type: :feature do
   before(:each) do
     set_session_and_session_cookies!
+    stub_api_idp_list
   end
 
   let(:selected_answers) { { documents: { passport: true, driving_licence: true }, phone: { mobile_phone: true } } }
@@ -16,13 +17,13 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
   }
   scenario 'user chooses a recommended idp' do
     entity_id = 'my-entity-id'
-    set_stub_federation_in_session(entity_id)
+    stub_api_idp_list([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
     given_a_session_with_selected_answers
     visit choose_a_certified_company_about_path('stub-idp-one')
     expect(page).to have_content("ID Corp is the premier identity proofing service around.")
     click_button "Choose IDCorp"
     expect(page).to have_current_path(redirect_to_idp_warning_path)
-    expect(page.get_rack_session_key('selected_idp')).to eql('entity_id' => entity_id, 'simple_id' => 'stub-idp-one')
+    expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
   end
 
@@ -32,14 +33,13 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
   end
 
   scenario 'for an idp that is not viewable' do
-    set_session_and_session_cookies!
     visit choose_a_certified_company_about_path('foobar')
     expect(page).to have_content(I18n.translate("errors.page_not_found.title"))
   end
 
   scenario 'user clicks back link' do
     entity_id = 'my-entity-id'
-    set_stub_federation_in_session(entity_id)
+    stub_api_idp_list([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
     given_a_session_with_selected_answers
     visit choose_a_certified_company_about_path('stub-idp-one')
     click_link 'Back'
