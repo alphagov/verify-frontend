@@ -115,7 +115,10 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'will not set ab_test cookie if already set' do
     set_session_and_session_cookies!
-    cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_with_logo', 'split_questions_v2' => 'split_questions_v2_control', 'select_documents_v2' => 'select_documents_v2_control' }.to_json))
+    cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_with_logo',
+                                                                  'split_questions_v2' => 'split_questions_v2_control',
+                                                                  'select_documents_v2' => 'select_documents_v2_control',
+                                                                  'app_transparency' => 'app_transparency_control' }.to_json))
     set_cookies!(cookie_hash)
     page.set_rack_session(transaction_simple_id: 'test-rp')
     visit '/start'
