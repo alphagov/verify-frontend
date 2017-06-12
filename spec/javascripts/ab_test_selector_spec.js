@@ -4,11 +4,11 @@ describe('AB Test Selector', function () {
   var EXPERIMENT_NAME = 'app_transparency'
   var VARIANT_EXPERIMENT = EXPERIMENT_NAME + '_variant'
   var CONTROL_EXPERIMENT = EXPERIMENT_NAME + '_control'
-  var VARIANT_COOKIE = "ab_test=%7B%22" + EXPERIMENT_NAME + "%22%3A%22" + VARIANT_EXPERIMENT + "%22%7D";
-  var CONTROL_COOKIE = "ab_test=%7B%22" + EXPERIMENT_NAME + "%22%3A%22" + CONTROL_EXPERIMENT + "%22%7D";
-  var NOT_AB_COOKIE = "random_cookie=%7B%22app_transparency%22%3A%22app_transparency_control%22%7D";
+  var VARIANT_COOKIE = encodeURI("ab_test={\"" + EXPERIMENT_NAME + "\":\""  + VARIANT_EXPERIMENT + "\"}");
+  var CONTROL_COOKIE = encodeURI("ab_test={\"" + EXPERIMENT_NAME + "\":\""  + CONTROL_EXPERIMENT + "\"}");
+  var NOT_AB_COOKIE = encodeURI("random_cookie={\"" + EXPERIMENT_NAME + "\":\""  + CONTROL_EXPERIMENT + "\"}");
   var NO_VALUE_AB_COOKIE = "ab_test=";
-  var CORRUPT_COOKIE = "ab_test=%22app_transparency%22%3A%22app_transparency_variant%22%7D";
+  var CORRUPT_COOKIE = encodeURI("ab_test=$$$$@!£\"" + EXPERIMENT_NAME + "\":\""  + VARIANT_EXPERIMENT + "\"}");
 
   var ROUTE_A = 'route_a'
   var ROUTE_B = 'route_b'
