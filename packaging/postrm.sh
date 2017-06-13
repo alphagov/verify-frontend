@@ -1,5 +1,7 @@
 #!/bin/sh -eu
 
-if [ -e /etc/init/front.conf ]; then
-  rm -f /etc/init/front.conf
+APP_NAME="front"
+
+if [ -e /etc/init/${APP_NAME}.conf ]; then
+  rm -f /etc/init/${APP_NAME}.conf
 fi
