@@ -14,12 +14,19 @@ window.GOVUK.shimLinksWithButtonRole.init();
 
 window.GOVUK.validation.init();
 window.GOVUK.selectDocuments.init();
-window.GOVUK.selectPhone.init();
+//window.GOVUK.selectPhone.init();
 window.GOVUK.willItWorkForMe.init();
 window.GOVUK.feedback.init();
 window.GOVUK.furtherInformation.init();
 window.GOVUK.interstitialQuestion.init();
 window.GOVUK.otherDocuments.init();
+
+abTest({
+  experiment: 'app_transparency',
+  routeA: window.GOVUK.selectPhone,
+  routeB: window.GOVUK.selectPhoneVariant
+})
+
 
 $(function () {
   window.GOVUK.validation.attach();
@@ -33,3 +40,5 @@ $(function () {
   var fingerprintEpoch = 5;
   reportFingerprint('<%= FINGERPRINT_CONFIG %>', fingerprintEpoch, document.getElementById('fp_img'));
 });
+
+

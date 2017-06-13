@@ -1,0 +1,9 @@
+<%= form_for(identity_provider, url: choose_a_certified_company_submit_path) do |f| %>
+    <%= f.button t('hub.choose_a_certified_company.choose_idp', display_name: identity_provider.display_name),
+                 class: 'button',
+                 name: identity_provider.simple_id,
+                 type: 'submit',
+                 value: identity_provider.display_name
+    %>
+    <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil %>
+<% end %>

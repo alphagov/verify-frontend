@@ -180,6 +180,7 @@ cy:
       question:
         mobile_phone: Oes gennych ffôn symudol neu lechen?
         mobile_phone_option_yes: Oes
+        mobile_phone_option_reluctant_yes: "Gallaf, ond mae'n well gennyf beidio"
         smart_phone: Allwch chi osod apps ar eich dyfais?
         smart_phone_option_yes: Gallaf
         landline: Oes gennych chi linell daear?
