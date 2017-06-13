@@ -5,7 +5,7 @@
       <div class="application-notice info-notice">
         <p><%= t('hub.redirect_to_country.description')%></p>
       </div>
-      <%= form_tag(a_country_page_path, class: 'js-auto-submit', authenticity_token: true, enforce_utf8: false) do %>
+      <%= form_tag(@request.location, class: 'js-auto-submit', authenticity_token: true, enforce_utf8: false) do %>
         <%= hidden_field_tag 'SAMLRequest', @request.saml_request %>
         <%= hidden_field_tag 'RelayState', @request.relay_state %>
         <%= hidden_field_tag 'registration', @request.registration %>

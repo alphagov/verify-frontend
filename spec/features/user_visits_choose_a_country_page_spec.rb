@@ -4,7 +4,7 @@ require 'i18n'
 
 RSpec.describe 'When the user visits the choose a country page' do
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
-  let(:location) { 'the-location' }
+  let(:location) { '/a-country-page' }
   before(:each) do
     set_session_and_session_cookies!
     stub_api_idp_list
@@ -90,8 +90,6 @@ RSpec.describe 'When the user visits the choose a country page' do
     then_im_at_the_interstitial_page
     when_i_choose_to_continue
     expect(page).to have_current_path('/a-country-page')
-
-    # assert the page has content/form of input with name="SAMLRequest"
   end
 
   it 'should error when invalid form is submitted (when JS is disabled)' do
