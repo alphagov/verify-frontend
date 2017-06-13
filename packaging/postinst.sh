@@ -1,18 +1,20 @@
 #!/bin/sh -eu
 
+APP_NAME="front"
+
 mkdir -p /ida
-[ ! -L /ida/front ] && ln -s /opt/front /ida/front
+[ ! -L /ida/${APP_NAME} ] && ln -s /opt/${APP_NAME} /ida/${APP_NAME}
 
 # We manage service restarts via the meta package
-ln -fs /opt/front/upstart/front.conf /etc/init/front.conf
+ln -fs /opt/${APP_NAME}/upstart/${APP_NAME}.conf /etc/init/${APP_NAME}.conf
 
 # We want to ensure upstart realizes it's config may have changed.
 /sbin/initctl reload-configuration
 
-chown -R deployer:deployer /opt/front/log
-chown -R deployer:deployer /var/log/front
-chown -R deployer:deployer /opt/front/tmp
-chgrp deployer /etc/front
+chown -R deployer:deployer /opt/${APP_NAME}/log
+chown -R deployer:deployer /var/log/${APP_NAME}
+chown -R deployer:deployer /opt/${APP_NAME}/tmp
+chgrp deployer /etc/${APP_NAME}
 
 # deployer needs to access to all those files under bundle which are owned by root
-find /opt/front/vendor/bundle \( -type d -exec chmod go+rx {} \; \) , \( -type f -exec chmod go+r {} \;  \)
+find /opt/${APP_NAME}/vendor/bundle \( -type d -exec chmod go+rx {} \; \) , \( -type f -exec chmod go+r {} \;  \)
