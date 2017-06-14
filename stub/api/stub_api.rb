@@ -11,9 +11,9 @@ class StubApi < Sinatra::Base
 
   get '/api/session/:session_id/idp-list' do
     '[{
-        "simpleId":"stub-idp-unavailable",
-        "entityId":"unavailable-entity-id",
-        "levelsOfAssurance":["LEVEL_1","LEVEL_2"]
+        "simpleId":"stub-idp-one",
+        "entityId":"http://example.com/stub-idp-one",
+        "levelsOfAssurance": ["LEVEL_2"]
      }]'
   end
 
