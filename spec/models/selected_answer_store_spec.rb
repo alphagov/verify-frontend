@@ -40,28 +40,22 @@ RSpec.describe SelectedAnswerStore do
     expect(store.selected_evidence).to eql [:passport, :mobile_phone]
   end
 
-  it 'should update selected answers at a given stage when there are already selected answers' do
+
+  it 'should overwrite stale answers with new ones' do
     session = {}
-    document_answers = {
+    old_answers = {
         passport: true,
         driving_licence: false
     }
-    other_document_answers = {
-        nonukid: true
+    new_answers = {
+        non_uk_id_document: true
     }
-    store = SelectedAnswerStore.new(session)
-    store.store_selected_answers('documents', document_answers)
-    store.update_selected_answers('documents', other_document_answers)
-    expect(store.selected_evidence).to eql [:passport, :nonukid]
-  end
 
-  it 'should update selected answers at a given stage when there no selected answers' do
-    session = {}
-    other_document_answers = {
-        nonukid: true
-    }
     store = SelectedAnswerStore.new(session)
-    store.update_selected_answers('documents', other_document_answers)
-    expect(store.selected_evidence).to eql [:nonukid]
+    store.store_selected_answers('documents', old_answers)
+    store.store_selected_answers('documents', new_answers)
+
+    expect(session[:selected_answers]).to eql('documents' => new_answers)
+    expect(store.selected_answers).to eql('documents' => new_answers)
   end
 end
