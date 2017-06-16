@@ -18,3 +18,7 @@ chgrp deployer /etc/${APP_NAME}
 
 # deployer needs to access to all those files under bundle which are owned by root
 find /opt/${APP_NAME}/vendor/bundle \( -type d -exec chmod go+rx {} \; \) , \( -type f -exec chmod go+r {} \;  \)
+
+# symlink additional nginx config 
+NGINX_CONF="/opt/${APP_NAME}/nginx/${APP_NAME}.conf"
+test -f "$NGINX_CONF" && ln -sf "$NGINX_CONF" /etc/nginx/conf.d/
