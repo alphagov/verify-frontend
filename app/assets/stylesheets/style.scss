@@ -1,1 +1,13 @@
 @import "application";
+
+$spooky-orange: #FF9900;
+
+body {
+  background-color: $black !important;
+  color: $white !important;
+}
+
+// scss-lint:disable IdSelector
+#global-header-bar {
+  background-color: $spooky-orange !important;
+}

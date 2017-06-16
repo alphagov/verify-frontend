@@ -70,10 +70,10 @@ en:
       title: Redirect to country
     start:
       title: Start
-      heading: Sign in with GOV.UK Verify
-      answer_yes: This is my first time using Verify
-      answer_no: I’ve used Verify before
-      continue: Continue
+      heading: Get spooky with GOV.UK Scarify
+      answer_yes: I'm new to the whole ghost thing
+      answer_no: I’m an experienced spookster
+      continue: WoooOoO
       error_message: Please select an option
     signin:
       title: Sign in with a certified company
