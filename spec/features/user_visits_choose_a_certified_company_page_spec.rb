@@ -29,6 +29,14 @@ describe 'When the user visits the choose a certified company page' do
     )
   }
 
+  let(:given_a_session_for_loa1_service) {
+    page.set_rack_session(
+      transaction_simple_id: 'test-rp',
+      requested_loa: 'LEVEL_1',
+      selected_answers: selected_answers,
+    )
+  }
+
 
   let(:given_a_session_with_two_docs_selected_answers) {
     given_a_session_with_selected_answers
@@ -73,6 +81,17 @@ describe 'When the user visits the choose a certified company page' do
     expect(page).to have_content('Based on your answers, 3 companies can verify you now:')
     within('#matching-idps') do
       expect(page).to have_button('Choose IDCorp')
+    end
+  end
+
+  it 'displays LEVEL 1 recommended IDPs' do
+    given_a_session_for_loa1_service
+    visit '/choose-a-certified-company'
+
+    expect(page).to have_current_path(choose_a_certified_company_path)
+
+    within('#matching-idps') do
+      expect(page).to have_button('Choose LOA1 Corp')
     end
   end
 

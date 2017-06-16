@@ -1,0 +1,18 @@
+en:
+  idps:
+    stub-idp-loa1:
+      name: "LOA1 Corp"
+      about: "<p>Bob’s Identity Service is the premier identity proofing service around. Come get some.</p>"
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence
+      contact_details: |
+        <strong id="stub-idp-two-contact-details">5 Somewhere Avenue</strong>
+cy:
+  idps:
+    stub-idp-loa1:
+      name: "Welsh Bob’s Identity Service"
+      about: "<p>Bob’s Identity Service is the premier identity proofing service around. Come get some.</p>"
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence
