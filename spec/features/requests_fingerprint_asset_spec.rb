@@ -29,7 +29,6 @@ RSpec.describe 'When the user visits the start page' do
 
       visit '/start'
 
-      expect(page).to have_content 'Sign in with GOV.UK Verify'
       expect(query_params_hash).to_not be_nil
       expect(query_params_hash['hash']).to match(/^[0-9]+\-[a-z0-9]+$/)
     end

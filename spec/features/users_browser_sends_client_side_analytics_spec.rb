@@ -32,7 +32,7 @@ RSpec.describe 'When the user visits the start page' do
       )
       set_session_and_session_cookies!
       visit '/start'
-      expect(page).to have_content 'Sign in with GOV.UK Verify'
+      expect(page).to have_content 'Get spooky with GOV.UK Scarify'
     end
 
     it 'and in Welsh sends the page title in English to analytics' do
@@ -64,7 +64,7 @@ RSpec.describe 'When the user visits the start page' do
     it 'sends a page view to analytics' do
       set_session_and_session_cookies!
       visit '/start'
-      expect(page).to have_content 'Sign in with GOV.UK Verify'
+      expect(page).to have_content 'Get spooky with GOV.UK Scarify'
       noscript_image = page.find(:id, 'piwik-noscript-tracker')
       expect(noscript_image).to_not be_nil
       image_src = noscript_image['src']
