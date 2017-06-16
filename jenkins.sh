@@ -3,13 +3,6 @@
 PACKAGE_BASE="front"
 GIT_BRANCH_NAME="${GIT_BRANCH_NAME:-master}"
 
-if test "$GIT_BRANCH_NAME" != "master"; then
-  echo "Building for branch $GIT_BRANCH_NAME"
-  PACKAGE_NAME="${PACKAGE_BASE}-${GIT_BRANCH_NAME}"
-else
-  PACKAGE_NAME="$PACKAGE_BASE"
-fi
-
 bundle
 export HEADLESS=true
 export DISPLAY=:0
@@ -21,6 +14,16 @@ SECRET_KEY_BASE=no-secret RAILS_ENV=production dotenv bundle exec rake tmp:clear
 # We need to copy the manifest file to the root of the public/assets dir due
 # to heroku-buildback hardcoding where the manifest file should be
 cp public/assets/${BUILD_NUMBER}/.*.json public/assets/
+
+# Do additional tasks for branch build
+if test "$GIT_BRANCH_NAME" != "master"; then
+  echo "Building for branch $GIT_BRANCH_NAME"
+  PACKAGE_NAME="${PACKAGE_BASE}-${GIT_BRANCH_NAME}"
+  mkdir -p nginx
+  ./scripts/generate_nginx_conf.sh $GIT_BRANCH_NAME > nginx/${PACKAGE_NAME}.conf
+else
+  PACKAGE_NAME="$PACKAGE_BASE"
+fi
 
 sed -e "s/$PACKAGE_BASE run/$PACKAGE_NAME run/g" \
     -e "s,log/$PACKAGE_BASE/$PACKAGE_BASE,log/$PACKAGE_NAME/$PACKAGE_NAME,g" \
@@ -37,3 +40,6 @@ fpm --name front-assets-${BUILD_NUMBER}\
     -s dir\
     -t deb\
     ${BUILD_NUMBER}/
+
+# Clean up
+rm -r nginx
