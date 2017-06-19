@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 
-APP_NAME="front"
+APP_NAME="${DPKG_MAINTSCRIPT_PACKAGE:-"front"}"
 
 if [ -e /etc/init/${APP_NAME}.conf ]; then
   rm -f /etc/init/${APP_NAME}.conf

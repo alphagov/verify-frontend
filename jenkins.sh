@@ -29,8 +29,6 @@ sed -e "s/$PACKAGE_BASE run/$PACKAGE_NAME run/g" \
     -e "s,log/$PACKAGE_BASE/$PACKAGE_BASE,log/$PACKAGE_NAME/$PACKAGE_NAME,g" \
     -e "s,$PACKAGE_BASE Service,$PACKAGE_NAME Service,g" \
     upstart/front.conf > .tmp; mv .tmp "upstart/${PACKAGE_NAME}.conf"
-sed "s/$PACKAGE_BASE/$PACKAGE_NAME/g" packaging/postinst.sh > .tmp; mv .tmp packaging/postinst.sh
-sed "s/$PACKAGE_BASE/$PACKAGE_NAME/g" packaging/postrm.sh > .tmp; mv .tmp packaging/postrm.sh
 
 bundle exec pkgr package . --buildpack=https://github.com/heroku/heroku-buildpack-ruby --version="${BUILD_NUMBER}" --iteration=1 --name=${PACKAGE_NAME} --dependencies=front-assets-${BUILD_NUMBER} --env STACK=cedar-14
 fpm --name front-assets-${BUILD_NUMBER}\

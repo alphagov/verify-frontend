@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 
-APP_NAME="front"
+APP_NAME="${DPKG_MAINTSCRIPT_PACKAGE:-"front"}"
 
 mkdir -p /ida
 [ ! -L /ida/${APP_NAME} ] && ln -s /opt/${APP_NAME} /ida/${APP_NAME}
@@ -18,6 +18,13 @@ chgrp deployer /etc/${APP_NAME}
 
 # deployer needs to access to all those files under bundle which are owned by root
 find /opt/${APP_NAME}/vendor/bundle \( -type d -exec chmod go+rx {} \; \) , \( -type f -exec chmod go+r {} \;  \)
+
+# symlink master app config to branch packages
+if test "$APP_NAME" != "front"; do
+  CONFIG_SOURCE_DIR="/etc/front/conf.d"
+  CONFIG_TARGET_DIR="/etc/${APP_NAME}/conf.d"
+  find "${CONFIG_SOURCE_DIR}" -mindepth 1 -maxdepth 1 -type f -exec ln -sf "{}" "${CONFIG_TARGET_DIR}/" \;
+done
 
 # symlink additional nginx config 
 NGINX_CONF="/opt/${APP_NAME}/nginx/${APP_NAME}.conf"
