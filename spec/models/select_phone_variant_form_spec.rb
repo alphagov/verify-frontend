@@ -87,7 +87,7 @@ describe SelectPhoneVariantForm do
         smart_phone: 'reluctant_yes'
       )
       answers = form.selected_answers
-      expect(answers).to eql(mobile_phone: true, smart_phone: true)
+      expect(answers).to eql(mobile_phone: true, smart_phone: true, smart_phone_prefer_not_to: true)
     end
   end
 
