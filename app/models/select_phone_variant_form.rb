@@ -20,6 +20,11 @@ class SelectPhoneVariantForm
         answers[attr] = result == 'true' || result == 'reluctant_yes'
       end
     end
+
+    if smart_phone == 'reluctant_yes'
+      answers[:smart_phone_prefer_not_to] = true
+    end
+
     answers
   end
 
