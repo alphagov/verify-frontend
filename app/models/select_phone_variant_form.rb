@@ -21,7 +21,7 @@ class SelectPhoneVariantForm
       end
     end
 
-    if public_send(:smart_phone) == 'reluctant_yes'
+    if smart_phone == 'reluctant_yes'
       answers[:smart_phone_prefer_not_to] = true
     end
 
