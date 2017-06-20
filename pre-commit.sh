@@ -2,6 +2,8 @@
 
 . scripts/deploy.sh
 
+export RAILS_ENV=test
+
 bundle check || bundle install
 bundle exec govuk-lint-ruby app config lib spec
 success=$?
@@ -22,12 +24,8 @@ if [ -t 1 ]; then
   tput sgr0
 fi
 
-# Unit tests
-bundle exec rspec --exclude-pattern "spec/features/*_spec.rb"
-success=$((success || $?))
-
-# Feature tests
-bundle exec rspec --pattern "spec/features/*_spec.rb"
+# Spec tests
+bundle exec rake spec
 success=$((success || $?))
 
 # JavaScript tests
