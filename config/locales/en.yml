@@ -319,10 +319,8 @@ en:
       extra_security: Government services requiring extra security
     failed_registration:
       title: Unable to verify your identity
-      heading: "%{display_name} was unable to verify your identity"
-      contact_details_intro: "Contact %{display_name} for more information"
+      heading: "%{idp_name} was unable to verify your identity"
       try_another_company: Try another certified company
-      other_ways_link: "Other ways to access %{transaction_name}"
       reasons_html: |
         <p>There are a few reasons why this might happen, including:</p>
         <ul class="list list-bullet">
@@ -333,8 +331,13 @@ en:
       what_to_do_next: "What to do next"
       problems_verifying_your_identity: Problems verifying your identity
       continue_heading: "Continue to %{transaction_name}"
-      continue_idp_text: "%{display_name} was unable to verify your identity, but you can still submit your application."
+      continue_idp_text: "%{idp_name} was unable to verify your identity, but you can still submit your application."
       continue_text: "Continue to %{rp_name} to find out how."
+      start_again: Find another company to verify you
+      other_ways_summary: "View other ways to %{other_ways_description}"
+      try_another_text: "Other companies use different methods from %{idp_name} and may therefore stand a better chance of verifying your identity."
+      try_another_summary: Try verifying with another certified company
+      contact_details_intro: "Contact %{idp_name}"
     failed_sign_in:
       title: Unable to sign you in
       heading: "%{display_name} couldn’t sign you in"

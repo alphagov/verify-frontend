@@ -324,10 +324,8 @@ cy:
       extra_security: Gwasanaethau'r llywodraeth sydd angen diogelwch ychwanegol
     failed_registration:
       title: Methu dilysu eich hunaniaeth
-      heading: Roedd "%{display_name} yn methu dilysu eich hunaniaeth"
-      contact_details_intro: "Cysylltwch â %{display_name} am fwy o wybodaeth"
+      heading: Roedd "%{idp_name} yn methu dilysu eich hunaniaeth"
       try_another_company: Rhowch gynnig ar gwmni ardystiedig arall
-      other_ways_link: "Ffyrdd eraill o gael mynediad i %{transaction_name}"
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
@@ -338,8 +336,13 @@ cy:
       what_to_do_next: "Beth i’w wneud nesaf"
       problems_verifying_your_identity: Problemau gyda dilysu eich hunaniaeth
       continue_heading: "Mynd ymlaen i %{transaction_name}"
-      continue_idp_text: "Roedd %{display_name} yn methu dilysu eich hunaniaeth, ond gallwch ddal i anfon eich cais."
+      continue_idp_text: "Roedd %{idp_name} yn methu dilysu eich hunaniaeth, ond gallwch ddal i anfon eich cais."
       continue_text: "Mynd ymlaen i %{rp_name} i ddarganfod sut."
+      start_again: Dod o hyd i gwmni arall i’ch gwirio
+      other_ways_summary: "Gweld ffyrdd eraill o %{other_ways_description}"
+      try_another_text: "Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth."
+      try_another_summary: Ceisiwch wirio gyda chwmni ardystiedig arall
+      contact_details_intro: "Cysylltwch â %{idp_name}"
     failed_sign_in:
       title: Methu eich mewngofnodi
       heading: Ni all "%{display_name} eich mewngofnodi"
