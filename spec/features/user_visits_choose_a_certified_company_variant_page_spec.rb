@@ -29,11 +29,6 @@ describe 'When the user visits the choose a certified company page' do
     )
   }
 
-
-  let(:given_a_session_with_two_docs_selected_answers) {
-    given_a_session_with_selected_answers
-  }
-
   let(:given_a_session_without_selected_answers) {
     page.set_rack_session(
       transaction_simple_id: 'test-rp',
@@ -112,9 +107,7 @@ describe 'When the user visits the choose a certified company page' do
   end
 
   it 'redirects to the redirect warning page when selecting a recommended IDP' do
-    entity_id = 'http://idcorp.com'
     given_a_session_with_selected_answers
-    stub_api_idp_list([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
     visit '/choose-a-certified-company'
 
     within('#matching-idps') do
@@ -122,7 +115,7 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     expect(page).to have_current_path(redirect_to_idp_warning_path)
-    expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => 'http://idcorp.com', 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
   end
 
@@ -161,7 +154,7 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     it 'redirects to the warning page without additional question for two docs' do
-      given_a_session_with_two_docs_selected_answers
+      given_a_session_with_selected_answers
       visit '/choose-a-certified-company'
 
       within('#matching-idps') do
