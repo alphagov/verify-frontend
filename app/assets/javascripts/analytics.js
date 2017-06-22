@@ -20,7 +20,7 @@
 
     siteId = $('#piwik-site-id').text();
     customUrl = $('#piwik-custom-url').text();
-    enTitle = $('meta[name="verify|title"]').attr("content") + " - GOV.UK Verify - GOV.UK";
+    enTitle = $('meta[name="verify|title"]').attr("content");
 
     piwikAnalyticsQueue = [
       ['setDocumentTitle', enTitle ],

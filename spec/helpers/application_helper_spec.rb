@@ -3,6 +3,26 @@ require 'rails_helper'
 RSpec.describe ApplicationHelper, type: :helper do
   Idp = Struct.new(:display_name, :tagline)
 
+  describe '#page_title' do
+    it 'should output English page title by default' do
+      helper.page_title('hub.start.title')
+      expect(helper.content_for(:page_title)).to eql I18n.t('hub.start.title')
+    end
+
+    it 'should output Welsh page title if locale specified' do
+      helper.page_title('hub.start.title', locale: :cy)
+      expect(helper.content_for(:page_title)).to eql I18n.t('hub.start.title', locale: 'cy')
+    end
+
+    it 'should always output English page title and level of assurance for analytics' do
+      title = "#{I18n.t('hub.start.title', locale: 'en')} - GOV.UK Verify - GOV.UK - LEVEL_1"
+      session['requested_loa'] = 'LEVEL_1'
+      helper.page_title('hub.start.title', locale: :cy)
+      expect(helper.content_for(:page_title_in_english)).to eql title
+      expect(helper.content_for(:head)).to eql "<meta name=\"verify|title\" content=\"#{title}\" />"
+    end
+  end
+
   describe '#idp_tagline' do
     it 'should output name and tagline if tagline is present' do
       idp_tagline = helper.idp_tagline(Idp.new('name', 'tag'))
