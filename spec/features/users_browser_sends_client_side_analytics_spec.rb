@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the start page' do
     it 'sends a page view to analytics' do
       expect(request_log).to receive(:log).with(
         hash_including(
-          'action_name' => 'Start - GOV.UK Verify - GOV.UK',
+          'action_name' => 'Start - GOV.UK Verify - GOV.UK - LEVEL_2',
           'idsite' => '5'
         )
       )
@@ -38,7 +38,7 @@ RSpec.describe 'When the user visits the start page' do
     it 'and in Welsh sends the page title in English to analytics' do
       expect(request_log).to receive(:log).with(
         hash_including(
-          'action_name' => 'Start - GOV.UK Verify - GOV.UK',
+          'action_name' => 'Start - GOV.UK Verify - GOV.UK - LEVEL_2',
           'idsite' => '5'
         )
       )
@@ -50,11 +50,10 @@ RSpec.describe 'When the user visits the start page' do
       stub_transactions_list
       expect(request_log).to receive(:log).with(
         hash_including(
-          'action_name' => 'Cookies Missing - GOV.UK Verify - GOV.UK',
+          'action_name' => 'Cookies Missing - GOV.UK Verify - GOV.UK - ',
           'url' => /cookies-not-found/
         )
       )
-
       visit '/start'
       expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
     end
@@ -72,7 +71,7 @@ RSpec.describe 'When the user visits the start page' do
       expect(image_src).to match(/idsite=5/)
       expect(image_src).to match(/rec=1/)
       expect(image_src).to match(/rand=\d+/)
-      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK/)
+      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
       expect(image_src).to_not include('url')
     end
 
@@ -82,7 +81,7 @@ RSpec.describe 'When the user visits the start page' do
       noscript_image = page.find(:id, 'piwik-noscript-tracker')
       expect(noscript_image).to_not be_nil
       image_src = noscript_image['src']
-      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK/)
+      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
     end
 
     it 'sends a page view with a custom url for error pages' do
@@ -96,7 +95,7 @@ RSpec.describe 'When the user visits the start page' do
       expect(image_src).to match(/idsite=5/)
       expect(image_src).to match(/rec=1/)
       expect(image_src).to match(/rand=\d+/)
-      expect(image_src).to match(/action_name=Cookies\+Missing\+-\+GOV\.UK\+Verify\+-\+GOV\.UK/)
+      expect(image_src).to match(/action_name=Cookies\+Missing\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+/)
       expect(image_src).to match(/url=[^&]+cookies-not-found/)
     end
   end
