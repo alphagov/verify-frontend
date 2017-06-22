@@ -14,8 +14,6 @@ Rails.application.routes.draw do
 
   route_a = SelectRoute.new(EXPERIMENT_NAME, 'control')
   route_b = SelectRoute.new(EXPERIMENT_NAME, 'variant')
-  route_a_and_report_to_piwik = SelectRoute.new(EXPERIMENT_NAME, 'control', report_to_piwik)
-  route_b_and_report_to_piwik = SelectRoute.new(EXPERIMENT_NAME, 'variant', report_to_piwik)
 
   post_picker_a = SelectRoute.new(POST_PICKER_EXPERIMENT, 'control')
   post_picker_b = SelectRoute.new(POST_PICKER_EXPERIMENT, 'variant_logos')
@@ -104,15 +102,8 @@ Rails.application.routes.draw do
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
 
-    constraints route_a_and_report_to_piwik do
-      get 'select_phone', to: 'select_phone#index', as: :select_phone
-    end
-
-    constraints route_b_and_report_to_piwik do
-      get 'select_phone', to: 'select_phone_variant#index', as: :select_phone
-    end
-
     constraints route_a do
+      get 'select_phone', to: 'select_phone#index', as: :select_phone
       post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
 
       get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
@@ -120,6 +111,7 @@ Rails.application.routes.draw do
     end
 
     constraints route_b do
+      get 'select_phone', to: 'select_phone_variant#index', as: :select_phone
       post 'select_phone', to: 'select_phone_variant#select_phone', as: :select_phone_submit
 
       get 'choose_a_certified_company', to: 'choose_a_certified_company_variant#index', as: :choose_a_certified_company
@@ -140,12 +132,10 @@ Rails.application.routes.draw do
 
     constraints post_picker_a do
       post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
-      #put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
     end
 
     constraints post_picker_b do
       post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#continue', as: :redirect_to_idp_warning_submit
-      #put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning_variant#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
     end
 
     constraints post_picker_c do
