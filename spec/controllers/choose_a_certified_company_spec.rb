@@ -29,4 +29,13 @@ describe ChooseACertifiedCompanyController do
     end
     expect(subject).to render_template(:choose_a_certified_company_LOA2)
   end
+
+  it 'resets interstitial answer to no value when IDP is selected' do
+    set_session_and_cookies_with_loa('LEVEL_2')
+    session[:selected_answers] = { 'interstitial' => { 'interstitial_yes' => true } }
+
+    post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
+
+    expect(session[:selected_answers]['interstitial']).to eq({})
+  end
 end
