@@ -50,7 +50,7 @@ RSpec.describe 'When the user visits the start page' do
       stub_transactions_list
       expect(request_log).to receive(:log).with(
         hash_including(
-          'action_name' => 'Cookies Missing - GOV.UK Verify - GOV.UK - ',
+          'action_name' => 'Cookies Missing - GOV.UK Verify - GOV.UK',
           'url' => /cookies-not-found/
         )
       )
@@ -95,7 +95,7 @@ RSpec.describe 'When the user visits the start page' do
       expect(image_src).to match(/idsite=5/)
       expect(image_src).to match(/rec=1/)
       expect(image_src).to match(/rand=\d+/)
-      expect(image_src).to match(/action_name=Cookies\+Missing\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+/)
+      expect(image_src).to match(/action_name=Cookies\+Missing\+-\+GOV\.UK\+Verify\+-\+GOV\.UK/)
       expect(image_src).to match(/url=[^&]+cookies-not-found/)
     end
   end
