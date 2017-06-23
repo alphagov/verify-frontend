@@ -1,2 +1,16 @@
 <%= page_title 'hub.redirect_to_country.title' %>
-<p>TODO: The country page HERE</p>
+<div class="content">
+  <div class="grid-row">
+    <div class="column-two-thirds"><h1 class="heading-xlarge"><%= t('hub.redirect_to_country.heading')%></h1>
+      <div class="application-notice info-notice">
+        <p><%= t('hub.redirect_to_country.description')%></p>
+      </div>
+      <%= form_tag(@request.location, class: 'js-auto-submit', authenticity_token: true, enforce_utf8: false) do %>
+        <%= hidden_field_tag 'SAMLRequest', @request.saml_request %>
+        <%= hidden_field_tag 'RelayState', @request.relay_state %>
+        <%= hidden_field_tag 'registration', @request.registration %>
+        <%= submit_tag 'Continue', id: 'continue-button', class: 'button' %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -23,6 +23,15 @@ class StubApi < Sinatra::Base
     }'
   end
 
+  get '/api/session/:session_id/country-authn-request' do
+    '{
+      "location":"http://localhost:50300/test-saml",
+      "samlRequest":"blah",
+      "relayState":"whatever",
+      "registration":false
+    }'
+  end
+
   get '/api/session/:session_id/idp-authn-request' do
     '{
       "location":"http://localhost:50300/test-saml",

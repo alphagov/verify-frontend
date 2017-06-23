@@ -16,6 +16,7 @@ en:
     will_not_work_without_uk_address: will-not-work-without-uk-address
     choose_a_country: choose-a-country
     redirect_to_country: redirect-to-country
+    a_country_page: a-country-page
     choose_a_certified_company: choose-a-certified-company
     choose_a_certified_company_about: choose-a-certified-company/:company
     why_companies: why-companies
@@ -68,6 +69,8 @@ en:
       heading: Which EU country is your eID from?
     redirect_to_country:
       title: Redirect to country
+      heading: Continue to next step
+      description: Because Javascript is not enabled on your browser, you must press the continue button
     start:
       title: Start
       heading: Sign in with GOV.UK Verify

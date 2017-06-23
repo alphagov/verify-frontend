@@ -70,7 +70,9 @@ cy:
       title: Choose a country
       heading: Which EU country is your eID from?
     redirect_to_country:
-          title: Redirect to country
+      title: Redirect to country
+      heading: Mynd ymlaen i’r cam nesaf
+      description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify

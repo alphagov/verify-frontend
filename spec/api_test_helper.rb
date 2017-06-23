@@ -34,6 +34,22 @@ module ApiTestHelper
     stub_request(:get, api_countries_endpoint(default_session_id)).to_return(body: countries.to_json, status: 200)
   end
 
+
+  def stub_session_country_authn_request(originating_ip, country_location, registration)
+    stub_request(:get, api_uri(country_authn_request_endpoint(default_session_id)))
+        .with(headers: { 'X_FORWARDED_FOR' => originating_ip })
+        .to_return(body: a_country_authn_request(country_location, registration).to_json)
+  end
+
+  def a_country_authn_request(location, registration)
+    {
+        'location' => location,
+        'samlRequest' => 'a-saml-request',
+        'relayState' => 'a-relay-state',
+        'registration' => registration
+    }
+  end
+
   def stub_session_select_idp_request(encrypted_entity_id, request_body = {})
     stub = stub_request(:put, api_uri(select_idp_endpoint(default_session_id)))
     if request_body.any?

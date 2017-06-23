@@ -85,6 +85,8 @@ Rails.application.routes.draw do
     get 'redirect_to_service_start_again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
     get 'redirect_to_service_error' => 'redirect_to_service#error', as: :redirect_to_service_error
     get 'redirect_to_country' => 'redirect_to_country#index', as: :redirect_to_country
+    post 'redirect_to_country', to: 'redirect_to_country#submit', as: :redirect_to_country
+    post 'a_country_page' => 'a_country_page#index', as: :a_country_page
     get 'feedback', to: 'feedback#index', as: :feedback
     post 'feedback', to: 'feedback#submit', as: :feedback_submit
     get 'feedback_sent', to: 'feedback_sent#index', as: :feedback_sent
