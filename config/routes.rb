@@ -140,7 +140,6 @@ Rails.application.routes.draw do
 
     constraints post_picker_c do
       post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#continue', as: :redirect_to_idp_warning_submit
-      #put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning_variant#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
     end
   end
 
