@@ -242,10 +242,12 @@ cy:
       mobile_phone_contract: cytundeb ffôn symudol
       registered_to_vote: rydych wedi cofrestru i bleidleisio
       youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru’r DU.
+      if_verify_doesnt_work_there_is_still_a_way: You may try to use GOV.UK Verify may not verify your identity.
     will_not_work_without_uk_address:
       title: Ni fydd GOV.UK Verify yn gweithio i chi
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
       explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi’i ddilysu.
+      verify_wont_work_but_there_is_still_a_way: GOV.UK Verify can't verify your identity because it needs you to have at least a UK address.  %{other_ways_text}
     choose_a_certified_company:
       title: Dewiswch gwmni ardystiedig
       heading: Dewiswch gwmni
@@ -353,7 +355,7 @@ cy:
       what_to_do_next: "Beth i’w wneud nesaf"
       problems_verifying_your_identity: Problemau gyda dilysu eich hunaniaeth
       continue_heading: "Mynd ymlaen i %{transaction_name}"
-      continue_idp_text: "Roedd %{idp_name} yn methu dilysu eich hunaniaeth, ond gallwch ddal i anfon eich cais."
+      continue_idp_text: "Roedd %{idp_name} yn methu dilysu eich hunaniaeth."
       continue_text: "Mynd ymlaen i %{rp_name} i ddarganfod sut."
       start_again: Dod o hyd i gwmni arall i’ch gwirio
       other_ways_summary: "Gweld ffyrdd eraill o %{other_ways_description}"

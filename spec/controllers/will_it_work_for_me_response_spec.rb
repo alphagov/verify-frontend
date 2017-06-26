@@ -40,7 +40,6 @@ describe WillItWorkForMeController do
                      'renders the select documents page when users meet minimum age and are residents',
                      PROCEED_TO_SELECT_DOCUMENT_ANSWERS,
                      :select_documents_path
-
   end
 
   context 'when form is invalid' do
@@ -52,6 +51,4 @@ describe WillItWorkForMeController do
       expect(flash[:errors]).not_to be_empty
     end
   end
-
-
 end

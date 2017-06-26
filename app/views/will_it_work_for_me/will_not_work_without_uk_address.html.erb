@@ -6,7 +6,11 @@
     <h1 class="heading-large"><%= t 'hub.will_not_work_without_uk_address.heading' %></h1>
 
     <p><%= t 'hub.will_not_work_without_uk_address.explanation' %></p>
-
-    <%= render partial: 'shared/other_ways', locals: { other_ways_text: @other_ways_text, other_ways_description: @other_ways_description } %>
+    <h2 class="heading-medium"><%= t 'hub.other_ways_heading', other_ways_description: @other_ways_description %></h2>
+    <div class="other-ways-to-complete-transaction">
+      <p>
+      <%= @other_ways_text.html_safe %>
+      </p>
+    </div>
   </div>
 </div>
