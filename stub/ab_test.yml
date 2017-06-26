@@ -37,11 +37,3 @@ experiments:
             percent: 80
           - name: 'variant'
             percent: 20
-  - post_picker:
-        alternatives:
-          - name: 'control'
-            percent: 1
-          - name: 'variant_logos'
-            percent: 1
-          - name: 'variant_bullets'
-            percent: 1
