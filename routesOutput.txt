@@ -1,0 +1,144 @@
+                                      Prefix Verb URI Pattern                                                   Controller#Action
+                                   SAML2_SSO POST /SAML2/SSO(.:format)                                          authn_request#rp_request
+                     SAML2_SSO_Response_POST POST /SAML2/SSO/Response/POST(.:format)                            authn_response#idp_response
+                                                  /404(.:format)                                                errors#page_not_found
+                                   test_saml GET  /test-saml(.:format)                                          test_saml#index
+                                     test_rp POST /test-rp(.:format)                                            #<Proc:0x007fcdea9e3b70@/Users/nashraf/Clients/GDS/verify-frontend/config/routes.rb:34>
+                   test_idp_request_endpoint POST /test-idp-request-endpoint(.:format)                          test_saml#idp_request
+                        another_idp_endpoint POST /another-idp-endpoint(.:format)                               test_saml#idp_request
+                           test_journey_hint GET  /test-journey-hint(.:format)                                  test_journey_hint_cookie#index
+                    test_journey_hint_submit POST /test-journey-hint(.:format)                                  test_journey_hint_cookie#set_cookie
+                                   analytics GET  /analytics(.:format)                                          test_analytics#forward
+                                csp_reporter POST /csp-reporter(.:format)                                       test_csp_reporter#report
+                                    start_cy GET  /dechrau(.:format)                                            start#index {:locale=>"cy"}
+                                    start_en GET  /start(.:format)                                              start#index {:locale=>"en"}
+                                             POST /dechrau(.:format)                                            start#request_post {:locale=>"cy"}
+                                             POST /start(.:format)                                              start#request_post {:locale=>"en"}
+                                  sign_in_cy GET  /mewngofnodi(.:format)                                        sign_in#index {:locale=>"cy"}
+                                  sign_in_en GET  /sign-in(.:format)                                            sign_in#index {:locale=>"en"}
+                           sign_in_submit_cy POST /mewngofnodi(.:format)                                        sign_in#select_idp {:locale=>"cy"}
+                           sign_in_submit_en POST /sign-in(.:format)                                            sign_in#select_idp {:locale=>"en"}
+                                    about_cy GET  /am(.:format)                                                 about#index {:locale=>"cy"}
+                                    about_en GET  /about(.:format)                                              about#index {:locale=>"en"}
+                about_certified_companies_cy GET  /am-gwmniau-ardystiedig(.:format)                             about#certified_companies {:locale=>"cy"}
+                about_certified_companies_en GET  /about-certified-companies(.:format)                          about#certified_companies {:locale=>"en"}
+                  about_identity_accounts_cy GET  /am-gyfrifon-hunaniaeth(.:format)                             about#identity_accounts {:locale=>"cy"}
+                  about_identity_accounts_en GET  /about-identity-accounts(.:format)                            about#identity_accounts {:locale=>"en"}
+                 about_choosing_a_company_cy GET  /am-ddewis-cwmni(.:format)                                    about#choosing_a_company {:locale=>"cy"}
+                 about_choosing_a_company_en GET  /about-choosing-a-company(.:format)                           about#choosing_a_company {:locale=>"en"}
+                         select_documents_cy GET  /dewis-dogfennau(.:format)                                    select_documents#index {:locale=>"cy"}
+                         select_documents_en GET  /select-documents(.:format)                                   select_documents#index {:locale=>"en"}
+                  select_documents_submit_cy POST /dewis-dogfennau(.:format)                                    select_documents#select_documents {:locale=>"cy"}
+                  select_documents_submit_en POST /select-documents(.:format)                                   select_documents#select_documents {:locale=>"en"}
+                       unlikely_to_verify_cy GET  /anhebygol-i-ddilysu(.:format)                                select_documents#unlikely_to_verify {:locale=>"cy"}
+                       unlikely_to_verify_en GET  /unlikely-to-verify(.:format)                                 select_documents#unlikely_to_verify {:locale=>"en"}
+                 other_identity_documents_cy GET  /dogfennau-hunaniaeth-eraill(.:format)                        other_identity_documents#index {:locale=>"cy"}
+                 other_identity_documents_en GET  /other-identity-documents(.:format)                           other_identity_documents#index {:locale=>"en"}
+          other_identity_documents_submit_cy POST /dogfennau-hunaniaeth-eraill(.:format)                        other_identity_documents#select_other_documents {:locale=>"cy"}
+          other_identity_documents_submit_en POST /other-identity-documents(.:format)                           other_identity_documents#select_other_documents {:locale=>"en"}
+                          no_mobile_phone_cy GET  /dim-ffon-symudol(.:format)                                   select_phone#no_mobile_phone {:locale=>"cy"}
+                          no_mobile_phone_en GET  /no-mobile-phone(.:format)                                    select_phone#no_mobile_phone {:locale=>"en"}
+                      will_it_work_for_me_cy GET  /a-fydd-yn-gweithio-i-mi(.:format)                            will_it_work_for_me#index {:locale=>"cy"}
+                      will_it_work_for_me_en GET  /will-it-work-for-me(.:format)                                will_it_work_for_me#index {:locale=>"en"}
+               will_it_work_for_me_submit_cy POST /a-fydd-yn-gweithio-i-mi(.:format)                            will_it_work_for_me#will_it_work_for_me {:locale=>"cy"}
+               will_it_work_for_me_submit_en POST /will-it-work-for-me(.:format)                                will_it_work_for_me#will_it_work_for_me {:locale=>"en"}
+           why_might_this_not_work_for_me_cy GET  /pam-efallai-na-fydd-hyn-yn-gweithio-i-mi(.:format)           will_it_work_for_me#why_might_this_not_work_for_me {:locale=>"cy"}
+           why_might_this_not_work_for_me_en GET  /why-might-this-not-work-for-me(.:format)                     will_it_work_for_me#why_might_this_not_work_for_me {:locale=>"en"}
+        may_not_work_if_you_live_overseas_cy GET  /efallai-na-fydd-yn-gweithio-os-ydych-yn-byw-dramor(.:format) will_it_work_for_me#may_not_work_if_you_live_overseas {:locale=>"cy"}
+        may_not_work_if_you_live_overseas_en GET  /may-not-work-if-you-live-overseas(.:format)                  will_it_work_for_me#may_not_work_if_you_live_overseas {:locale=>"en"}
+         will_not_work_without_uk_address_cy GET  /ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du(.:format)          will_it_work_for_me#will_not_work_without_uk_address {:locale=>"cy"}
+         will_not_work_without_uk_address_en GET  /will-not-work-without-uk-address(.:format)                   will_it_work_for_me#will_not_work_without_uk_address {:locale=>"en"}
+         choose_a_certified_company_about_cy GET  /dewis-cwmni-ardystiedig/:company(.:format)                   choose_a_certified_company#about {:locale=>"cy"}
+         choose_a_certified_company_about_en GET  /choose-a-certified-company/:company(.:format)                choose_a_certified_company#about {:locale=>"en"}
+                            why_companies_cy GET  /pam-cwmniau(.:format)                                        why_companies#index {:locale=>"cy"}
+                            why_companies_en GET  /why-companies(.:format)                                      why_companies#index {:locale=>"en"}
+                 redirect_to_idp_question_cy GET  /ailgyfeirio-i-gwestiwn-idp(.:format)                         redirect_to_idp_question#index {:locale=>"cy"}
+                 redirect_to_idp_question_en GET  /redirect-to-idp-question(.:format)                           redirect_to_idp_question#index {:locale=>"en"}
+          redirect_to_idp_question_submit_cy POST /ailgyfeirio-i-gwestiwn-idp(.:format)                         redirect_to_idp_question#continue {:locale=>"cy"}
+          redirect_to_idp_question_submit_en POST /redirect-to-idp-question(.:format)                           redirect_to_idp_question#continue {:locale=>"en"}
+                           privacy_notice_cy GET  /hysbysiad-preifatrwydd(.:format)                             static#privacy_notice {:locale=>"cy"}
+                           privacy_notice_en GET  /privacy-notice(.:format)                                     static#privacy_notice {:locale=>"en"}
+                                  cookies_cy GET  /cwcis(.:format)                                              static#cookies {:locale=>"cy"}
+                                  cookies_en GET  /cookies(.:format)                                            static#cookies {:locale=>"en"}
+                    confirm_your_identity_cy GET  /cadarnhau-eich-hunaniaeth(.:format)                          confirm_your_identity#index {:locale=>"cy"}
+                    confirm_your_identity_en GET  /confirm-your-identity(.:format)                              confirm_your_identity#index {:locale=>"en"}
+                         choose_a_country_cy GET  /choose-a-country-cy(.:format)                                choose_a_country#choose_a_country {:locale=>"cy"}
+                         choose_a_country_en GET  /choose-a-country(.:format)                                   choose_a_country#choose_a_country {:locale=>"en"}
+                  choose_a_country_submit_cy POST /choose-a-country-cy(.:format)                                choose_a_country#choose_a_country_submit {:locale=>"cy"}
+                  choose_a_country_submit_en POST /choose-a-country(.:format)                                   choose_a_country#choose_a_country_submit {:locale=>"en"}
+                             confirmation_cy GET  /cadarnhad(.:format)                                          confirmation#index {:locale=>"cy"}
+                             confirmation_en GET  /confirmation(.:format)                                       confirmation#index {:locale=>"en"}
+                      failed_registration_cy GET  /cofrestru-wedi-methu(.:format)                               failed_registration#index {:locale=>"cy"}
+                      failed_registration_en GET  /failed-registration(.:format)                                failed_registration#index {:locale=>"en"}
+                            failed_uplift_cy GET  /failed-uplift-cy(.:format)                                   failed_uplift#index {:locale=>"cy"}
+                            failed_uplift_en GET  /failed-uplift(.:format)                                      failed_uplift#index {:locale=>"en"}
+                           failed_sign_in_cy GET  /mewngofnodi-wedi-methu(.:format)                             failed_sign_in#index {:locale=>"cy"}
+                           failed_sign_in_en GET  /failed-sign-in(.:format)                                     failed_sign_in#index {:locale=>"en"}
+             other_ways_to_access_service_cy GET  /ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth(.:format)       other_ways_to_access_service#index {:locale=>"cy"}
+             other_ways_to_access_service_en GET  /other-ways-to-access-service(.:format)                       other_ways_to_access_service#index {:locale=>"en"}
+                           forgot_company_cy GET  /wedi-anghofio-cwmni(.:format)                                static#forgot_company {:locale=>"cy"}
+                           forgot_company_en GET  /forgot-company(.:format)                                     static#forgot_company {:locale=>"en"}
+                      response_processing_cy GET  /prosesu-ymateb(.:format)                                     response_processing#index {:locale=>"cy"}
+                      response_processing_en GET  /response-processing(.:format)                                response_processing#index {:locale=>"en"}
+                          redirect_to_idp_cy GET  /ailgyfeirio-i-idp(.:format)                                  redirect_to_idp#index {:locale=>"cy"}
+                          redirect_to_idp_en GET  /redirect-to-idp(.:format)                                    redirect_to_idp#index {:locale=>"en"}
+           redirect_to_service_signing_in_cy GET  /ailgyfeirio-i-gwasanaeth/mewngofnodi(.:format)               redirect_to_service#signing_in {:locale=>"cy"}
+           redirect_to_service_signing_in_en GET  /redirect-to-service/signing-in(.:format)                     redirect_to_service#signing_in {:locale=>"en"}
+          redirect_to_service_start_again_cy GET  /ailgyfeirio-i-gwasanaeth/dechrau-eto(.:format)               redirect_to_service#start_again {:locale=>"cy"}
+          redirect_to_service_start_again_en GET  /redirect-to-service/start-again(.:format)                    redirect_to_service#start_again {:locale=>"en"}
+                redirect_to_service_error_cy GET  /ailgyfeirio-i-gwasanaeth/gwall(.:format)                     redirect_to_service#error {:locale=>"cy"}
+                redirect_to_service_error_en GET  /redirect-to-service/error(.:format)                          redirect_to_service#error {:locale=>"en"}
+                      redirect_to_country_cy GET  /redirect-to-country-cy(.:format)                             redirect_to_country#index {:locale=>"cy"}
+                      redirect_to_country_en GET  /redirect-to-country(.:format)                                redirect_to_country#index {:locale=>"en"}
+                                 feedback_cy GET  /adborth(.:format)                                            feedback#index {:locale=>"cy"}
+                                 feedback_en GET  /feedback(.:format)                                           feedback#index {:locale=>"en"}
+                          feedback_submit_cy POST /adborth(.:format)                                            feedback#submit {:locale=>"cy"}
+                          feedback_submit_en POST /feedback(.:format)                                           feedback#submit {:locale=>"en"}
+                            feedback_sent_cy GET  /adborth/adborth-wedi'i-anfon(.:format)                       feedback_sent#index {:locale=>"cy"}
+                            feedback_sent_en GET  /feedback/feedback-sent(.:format)                             feedback_sent#index {:locale=>"en"}
+            certified_company_unavailable_cy GET  /cwmni-ardystiedig-ddim-ar-gael/:company(.:format)            certified_company_unavailable#index {:locale=>"cy"}
+            certified_company_unavailable_en GET  /certified-company-unavailable/:company(.:format)             certified_company_unavailable#index {:locale=>"en"}
+                      further_information_cy GET  /gwybodaeth-bellach(.:format)                                 further_information#index {:locale=>"cy"}
+                      further_information_en GET  /further-information(.:format)                                further_information#index {:locale=>"en"}
+               further_information_submit_cy POST /gwybodaeth-bellach(.:format)                                 further_information#submit {:locale=>"cy"}
+               further_information_submit_en POST /further-information(.:format)                                further_information#submit {:locale=>"en"}
+               further_information_cancel_cy POST /gwybodaeth-bellach/dileu(.:format)                           further_information#cancel {:locale=>"cy"}
+               further_information_cancel_en POST /further-information/cancel(.:format)                         further_information#cancel {:locale=>"en"}
+further_information_null_attribute_submit_cy POST /gwybodaeth-bellach/null-attribute(.:format)                  further_information#submit_null_attribute {:locale=>"cy"}
+further_information_null_attribute_submit_en POST /futher-information/null-attribute(.:format)                  further_information#submit_null_attribute {:locale=>"en"}
+                             select_phone_cy GET  /dewis-ffon(.:format)                                         select_phone#index {:locale=>"cy"}
+                             select_phone_en GET  /select-phone(.:format)                                       select_phone#index {:locale=>"en"}
+                                             GET  /dewis-ffon(.:format)                                         select_phone_variant#index {:locale=>"cy"}
+                                             GET  /select-phone(.:format)                                       select_phone_variant#index {:locale=>"en"}
+                      select_phone_submit_cy POST /dewis-ffon(.:format)                                         select_phone#select_phone {:locale=>"cy"}
+                      select_phone_submit_en POST /select-phone(.:format)                                       select_phone#select_phone {:locale=>"en"}
+               choose_a_certified_company_cy GET  /dewis-cwmni-ardystiedig(.:format)                            choose_a_certified_company#index {:locale=>"cy"}
+               choose_a_certified_company_en GET  /choose-a-certified-company(.:format)                         choose_a_certified_company#index {:locale=>"en"}
+        choose_a_certified_company_submit_cy POST /dewis-cwmni-ardystiedig(.:format)                            choose_a_certified_company#select_idp {:locale=>"cy"}
+        choose_a_certified_company_submit_en POST /choose-a-certified-company(.:format)                         choose_a_certified_company#select_idp {:locale=>"en"}
+                                             POST /dewis-ffon(.:format)                                         select_phone_variant#select_phone {:locale=>"cy"}
+                                             POST /select-phone(.:format)                                       select_phone_variant#select_phone {:locale=>"en"}
+                                             GET  /dewis-cwmni-ardystiedig(.:format)                            choose_a_certified_company_variant#index {:locale=>"cy"}
+                                             GET  /choose-a-certified-company(.:format)                         choose_a_certified_company_variant#index {:locale=>"en"}
+                                             POST /dewis-cwmni-ardystiedig(.:format)                            choose_a_certified_company_variant#select_idp {:locale=>"cy"}
+                                             POST /choose-a-certified-company(.:format)                         choose_a_certified_company_variant#select_idp {:locale=>"en"}
+                  redirect_to_idp_warning_cy GET  /ailgyfeirio-i-rybudd-idp(.:format)                           redirect_to_idp_warning#index {:locale=>"cy"}
+                  redirect_to_idp_warning_en GET  /redirect-to-idp-warning(.:format)                            redirect_to_idp_warning#index {:locale=>"en"}
+                                             GET  /ailgyfeirio-i-rybudd-idp(.:format)                           redirect_to_idp_warning_variant#logos {:locale=>"cy"}
+                                             GET  /redirect-to-idp-warning(.:format)                            redirect_to_idp_warning_variant#logos {:locale=>"en"}
+                                             GET  /ailgyfeirio-i-rybudd-idp(.:format)                           redirect_to_idp_warning_variant#bullets {:locale=>"cy"}
+                                             GET  /redirect-to-idp-warning(.:format)                            redirect_to_idp_warning_variant#bullets {:locale=>"en"}
+           redirect_to_idp_warning_submit_cy POST /ailgyfeirio-i-rybudd-idp(.:format)                           redirect_to_idp_warning#continue {:locale=>"cy"}
+           redirect_to_idp_warning_submit_en POST /redirect-to-idp-warning(.:format)                            redirect_to_idp_warning#continue {:locale=>"en"}
+                                             POST /ailgyfeirio-i-rybudd-idp(.:format)                           redirect_to_idp_warning_variant#continue {:locale=>"cy"}
+                                             POST /redirect-to-idp-warning(.:format)                            redirect_to_idp_warning_variant#continue {:locale=>"en"}
+                                             POST /ailgyfeirio-i-rybudd-idp(.:format)                           redirect_to_idp_warning_variant#continue {:locale=>"cy"}
+                                             POST /redirect-to-idp-warning(.:format)                            redirect_to_idp_warning_variant#continue {:locale=>"en"}
+       redirect_to_idp_warning_submit_ajax_x PUT  /redirect-to-idp-warning(.:format)                            redirect_to_idp_warning#continue_ajax
+       redirect_to_idp_warning_submit_ajax_y PUT  /redirect-to-idp-warning(.:format)                            redirect_to_idp_warning_variant#continue_ajax
+                      select_idp_submit_ajax PUT  /select-idp(.:format)                                         sign_in#select_idp_ajax
+                              service_status GET  /service-status(.:format)                                     service_status#index
+                                             GET  /assets2/fp.gif(.:format)                                     #<Proc:0x007fcdeb4ea6b8@/Users/nashraf/Clients/GDS/verify-frontend/config/routes.rb:171>
+                   service_provider_metadata GET  /SAML2/metadata/sp(.:format)                                  metadata#service_providers
+                  identity_provider_metadata GET  /SAML2/metadata/idp(.:format)                                 metadata#identity_providers
+                                             GET  /humans.txt(.:format)                                         static#humanstxt

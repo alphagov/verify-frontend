@@ -4,7 +4,6 @@ require 'spec_helper'
 describe SelectRoute do
   EXP_NAME = 'app_transparency'.freeze
   ALTERNATIVE_NAME = "#{EXP_NAME}_variant".freeze
-  ALTERNATIVE_LOOKUP = "#{EXP_NAME}_variant".freeze
 
   experiment_stub = nil
   select_route = nil
@@ -12,7 +11,7 @@ describe SelectRoute do
 
   context 'experiment tests' do
     before(:each) do
-      select_route = SelectRoute.route_b(EXP_NAME)
+      select_route = SelectRoute.new(EXP_NAME, 'variant')
       session = {}
       experiment_stub = MockExperiment.new
       ab_test_stub = {
@@ -23,7 +22,7 @@ describe SelectRoute do
     end
 
     it 'evaluates true when experiment and route both match' do
-      expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_LOOKUP).and_return(ALTERNATIVE_NAME)
+      expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_NAME).and_return(ALTERNATIVE_NAME)
 
       cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
       request = RequestStub.new(session, cookies)
@@ -58,7 +57,7 @@ describe SelectRoute do
         result_string = "#{experiment_name},#{reported_alternative},#{transaction_id},#{request.to_str}"
       }
 
-      select_route = SelectRoute.route_b(EXP_NAME, ab_reporter)
+      select_route = SelectRoute.new(EXP_NAME, 'variant', ab_reporter)
     end
 
     it 'execute ab_reporter when experiment matches' do
