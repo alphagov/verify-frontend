@@ -26,7 +26,7 @@ class RedirectToIdpWarningController < ConfigurableJourneyController
     idp = decorated_idp
     if idp.viewable?
       select_registration(idp)
-      outbound_saml_message = SESSION_PROXY.idp_authn_request(session['verify_session_id'])
+      outbound_saml_message = SESSION_PROXY.idp_authn_request(session[:verify_session_id])
       idp_request = IdentityProviderRequest.new(
         outbound_saml_message,
         selected_identity_provider.simple_id,
@@ -40,7 +40,7 @@ class RedirectToIdpWarningController < ConfigurableJourneyController
 private
 
   def select_registration(idp)
-    SESSION_PROXY.select_idp(session['verify_session_id'], idp.entity_id, true)
+    SESSION_PROXY.select_idp(session[:verify_session_id], idp.entity_id, true)
     set_journey_hint(idp.entity_id)
     register_idp_selections(idp.display_name)
   end

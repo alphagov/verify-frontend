@@ -3,11 +3,11 @@ class ChooseACountryController < ApplicationController
   before_action :ensure_session_eidas_supported
 
   def choose_a_country
-    setup_countries(session['verify_session_id'])
+    setup_countries(session[:verify_session_id])
   end
 
   def choose_a_country_submit
-    session_id = session['verify_session_id']
+    session_id = session[:verify_session_id]
     setup_countries(session_id)
 
     country = params[:country]

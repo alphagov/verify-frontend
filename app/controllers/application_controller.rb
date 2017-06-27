@@ -183,10 +183,10 @@ private
   end
 
   def is_loa1?
-    session['requested_loa'] == 'LEVEL_1'
+    session[:requested_loa] == 'LEVEL_1'
   end
 
   def is_loa2?
-    session['requested_loa'] == 'LEVEL_2'
+    session[:requested_loa] == 'LEVEL_2'
   end
 end

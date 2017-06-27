@@ -1,7 +1,7 @@
 module ApplicationHelper
   def page_title(title_key, locale_data = {})
     en_title = [t(title_key, locale_data.merge(locale: :en)), 'GOV.UK Verify', 'GOV.UK']
-    en_title << session['requested_loa'] if session['requested_loa']
+    en_title << session[:requested_loa] if session[:requested_loa]
     content_for :page_title, t(title_key, locale_data)
     content_for :page_title_in_english, en_title.join(' - ')
     content_for :head do

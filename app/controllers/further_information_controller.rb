@@ -1,12 +1,12 @@
 class FurtherInformationController < ApplicationController
   def index
-    session_id = session['verify_session_id']
+    session_id = session[:verify_session_id]
     @cycle_three_attribute = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id).new({})
     @transaction_name = current_transaction.name
   end
 
   def submit
-    session_id = session['verify_session_id']
+    session_id = session[:verify_session_id]
     cycle_three_attribute_class = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id)
     @cycle_three_attribute = cycle_three_attribute_class.new(params['cycle_three_attribute'])
     if @cycle_three_attribute.valid?
@@ -20,14 +20,14 @@ class FurtherInformationController < ApplicationController
   end
 
   def cancel
-    session_id = session['verify_session_id']
+    session_id = session[:verify_session_id]
     FURTHER_INFORMATION_SERVICE.cancel(session_id)
     FEDERATION_REPORTER.report_cycle_three_cancel(current_transaction, request)
     redirect_to redirect_to_service_start_again_path
   end
 
   def submit_null_attribute
-    session_id = session['verify_session_id']
+    session_id = session[:verify_session_id]
     cycle_three_attribute_class = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id)
     if cycle_three_attribute_class.allows_nullable?
       FURTHER_INFORMATION_SERVICE.submit(session_id, '')
