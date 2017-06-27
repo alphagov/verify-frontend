@@ -9,7 +9,7 @@ class AuthnResponseController < SamlController
       raise Errors::WarningLevelError, "Relay state should match session id. Relay state was #{params['RelayState'].inspect}"
     end
 
-    response = SESSION_PROXY.idp_authn_response(session['verify_session_id'], params['SAMLResponse'], params['RelayState'])
+    response = SESSION_PROXY.idp_authn_response(session[:verify_session_id], params['SAMLResponse'], params['RelayState'])
     user_state = response.is_registration ? REGISTERING_STATE : SIGNING_IN_STATE
 
     case response.idp_result
