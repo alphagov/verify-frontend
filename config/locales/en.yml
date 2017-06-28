@@ -44,6 +44,7 @@ en:
     further_information: further-information
     further_information_cancel: further-information/cancel
     further_information_null_attribute: futher-information/null-attribute
+    select_proof_of_address: select-proof-of-address
   navigation:
     next: Next
     start_now: Start now
@@ -449,6 +450,10 @@ en:
       example_text: "Example: %{example}"
       attribute_validation_message: Enter a valid %{cycle_three_name}
       null_attribute: I don’t have an %{cycle_three_name}
+    select_proof_of_address:
+      title: Proof of your address
+      sub_heading: Certified companies need to check your address is correct. They do this by checking with your bank or credit card provider.
+      highlight: This is a free service, and the certified company cannot see any of your financial transactions.
   errors:
     transaction_list:
       title: Find the service you were using to start again

@@ -90,6 +90,7 @@ Rails.application.routes.draw do
     post 'further_information', to: 'further_information#submit', as: :further_information_submit
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
+    get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
