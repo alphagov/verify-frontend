@@ -13,7 +13,7 @@ RSpec.describe 'When the user visits the select phone page' do
   }
 
   before(:each) do
-    set_session_and_ab_session_cookies!
+    set_session_and_ab_session_cookies!('app_transparency' => 'app_transparency_variant')
     stub_api_idp_list
   end
 

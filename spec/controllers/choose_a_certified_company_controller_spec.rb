@@ -53,7 +53,10 @@ describe ChooseACertifiedCompanyController do
     end
 
     it 'checks whether IDP was recommended' do
-      allow(IDP_RECOMMENDATION_GROUPER).to receive(:recommended?).and_return(true)
+      session[:selected_answers] = {
+        'documents' => { 'driving_licence' => true, 'passport' => false },
+        'phone' => { 'mobile_phone' => true }
+      }
       post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
 
       expect(session[:selected_idp_was_recommended]).to eql(true)
