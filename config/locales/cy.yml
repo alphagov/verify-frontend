@@ -42,6 +42,7 @@ cy:
     further_information: gwybodaeth-bellach
     further_information_cancel: gwybodaeth-bellach/dileu
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
+    select_proof_of_address: select-proof-of-address-welsh
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -461,6 +462,10 @@ cy:
       example_text: "Enghraifft: %{example}"
       attribute_validation_message: Rhowch %{cycle_three_name} dilys
       null_attribute: Nid oes gennyf %{cycle_three_name}
+    select_proof_of_address:
+      title: Proof of your address
+      sub_heading: Certified companies need to check your address is correct. They do this by checking with your bank or credit card provider.
+      highlight: This is a free service, and the certified company cannot see any of your financial transactions.
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
