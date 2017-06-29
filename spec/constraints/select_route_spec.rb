@@ -9,16 +9,19 @@ describe SelectRoute do
   select_route = nil
   session = nil
 
+  before(:each) do
+    experiment_stub = MockExperiment.new
+    ab_test_stub = {
+        EXP_NAME => experiment_stub
+    }
+    stub_const('AB_TESTS', ab_test_stub)
+    # allow(AbTest).to receive(:report)
+  end
+
   context 'experiment tests' do
     before(:each) do
       select_route = SelectRoute.new(EXP_NAME, 'variant')
       session = {}
-      experiment_stub = MockExperiment.new
-      ab_test_stub = {
-          EXP_NAME => experiment_stub
-      }
-      stub_const('AB_TESTS', ab_test_stub)
-      allow(AbTest).to receive(:report)
     end
 
     it 'evaluates true when experiment and route both match' do
@@ -61,6 +64,7 @@ describe SelectRoute do
     end
 
     it 'execute ab_reporter when experiment matches' do
+      expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_NAME).and_return(ALTERNATIVE_NAME)
       session = { transaction_simple_id: 'test-rp' }
 
       cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)

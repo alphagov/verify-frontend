@@ -2,7 +2,7 @@ require 'feature_helper'
 require 'api_test_helper'
 require 'uri'
 
-RSpec.describe 'When the user visits the select phone page' do
+RSpec.xdescribe 'When the user visits the select phone page' do
   let(:selected_answers) { { documents: { passport: true, driving_licence: true } } }
   let(:given_a_session_with_document_evidence) {
     page.set_rack_session(

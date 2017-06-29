@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'models/display/viewable_identity_provider'
 require 'api_test_helper'
 
-describe SelectPhoneVariantController do
+xdescribe SelectPhoneVariantController do
   VALID_PHONE_OPTION = { mobile_phone: 'true', smart_phone: 'true', landline: 'true' }.freeze
   INVALID_PHONE_OPTION = { mobile_phone: 'false', smart_phone: 'true' }.freeze
 

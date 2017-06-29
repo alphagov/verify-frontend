@@ -31,12 +31,6 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - app_transparency:
-        alternatives:
-          - name: 'control'
-            percent: 80
-          - name: 'variant'
-            percent: 20
   - post_picker:
         alternatives:
           - name: 'control'
