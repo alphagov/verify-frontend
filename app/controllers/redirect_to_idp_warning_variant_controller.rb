@@ -1,4 +1,4 @@
-class RedirectToIdpWarningVariantController < ConfigurableJourneyController
+class RedirectToIdpWarningVariantController < ApplicationController
   SELECTED_IDP_HISTORY_LENGTH = 5
   helper_method :user_has_no_docs_or_foreign_id_only?, :other_ways_description
 
@@ -27,7 +27,7 @@ class RedirectToIdpWarningVariantController < ConfigurableJourneyController
     idp = decorated_idp
     if idp.viewable?
       select_registration(idp)
-      redirect_to next_page
+      redirect_to redirect_to_idp_path
     else
       something_went_wrong("Couldn't display IDP with entity id: #{idp.entity_id}")
     end

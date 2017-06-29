@@ -1,5 +1,5 @@
 require 'redirect_with_see_other'
-require 'journeys'
+
 class ApplicationController < ActionController::Base
   before_action :validate_session
   # Prevent CSRF attacks by raising an exception.

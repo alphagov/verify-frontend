@@ -1,4 +1,4 @@
-class SelectDocumentsController < ConfigurableJourneyController
+class SelectDocumentsController < ApplicationController
   def index
     @form = SelectDocumentsForm.new({})
     render :index
@@ -9,7 +9,7 @@ class SelectDocumentsController < ConfigurableJourneyController
     if @form.valid?
       report_to_analytics('Select Documents Next')
       selected_answer_store.store_selected_answers('documents', @form.selected_answers)
-      redirect_to next_page(@form.further_id_information_required? ? [:further_documents_needed] : [:no_further_documents_needed])
+      redirect_to @form.further_id_information_required? ? other_identity_documents_path : select_phone_path
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index

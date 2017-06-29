@@ -61,7 +61,7 @@ RSpec.describe 'When the user visits the will it work for me page' do
 
   it 'redirects to the may-not-work-if-you-live-overseas page when user is over 20 and has address in the uk but not a resident' do
     visit '/will-it-work-for-me'
-    choose 'will_it_work_for_me_form_above_age_threshold_false', allow_label_click: true
+    choose 'will_it_work_for_me_form_above_age_threshold_true', allow_label_click: true
     choose 'will_it_work_for_me_form_resident_last_12_months_false', allow_label_click: true
     choose 'will_it_work_for_me_form_not_resident_reason_addressbutnotresident', allow_label_click: true
 
@@ -70,9 +70,9 @@ RSpec.describe 'When the user visits the will it work for me page' do
     expect(page).to have_current_path(may_not_work_if_you_live_overseas_path)
   end
 
-  it 'redirects to the will-not-work-without-uk-address page when user is over 20 and has no address in the uk' do
+  it 'redirects to the will-not-work-without-uk-address page when user is over 20 and is not resident and has no address in the uk' do
     visit '/will-it-work-for-me'
-    choose 'will_it_work_for_me_form_above_age_threshold_false', allow_label_click: true
+    choose 'will_it_work_for_me_form_above_age_threshold_true', allow_label_click: true
     choose 'will_it_work_for_me_form_resident_last_12_months_false', allow_label_click: true
     choose 'will_it_work_for_me_form_not_resident_reason_noaddress', allow_label_click: true
 

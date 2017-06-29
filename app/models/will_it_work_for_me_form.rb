@@ -1,7 +1,7 @@
 class WillItWorkForMeForm
   include ActiveModel::Model
 
-  attr_reader :above_age_threshold, :resident_last_12_months, :not_resident_reason
+  attr_reader :above_age_threshold, :resident_last_12_months
 
   validate :age_threshold_question_answered, :residency_questions_answered
 
@@ -15,16 +15,12 @@ class WillItWorkForMeForm
     resident_last_12_months == 'true'
   end
 
-  def address_but_not_resident?
-    not_resident_reason == 'AddressButNotResident'
-  end
-
-  def no_uk_address?
-    not_resident_reason == 'NoAddress'
-  end
-
   def above_age_threshold?
     above_age_threshold == 'true'
+  end
+
+  def not_resident_reason
+    resident_last_12_months? ? nil : @not_resident_reason
   end
 
 private
