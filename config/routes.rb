@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-
   POST_PICKER_EXPERIMENT = 'post_picker'.freeze
 
   report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
