@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'controller_helper'
 require 'api_test_helper'
 
-describe ChooseACertifiedCompanyVariantController do
+xdescribe ChooseACertifiedCompanyVariantController do
   before :each do
     stub_api_idp_list([{ 'simpleId' => 'stub-idp-loa1',
                          'entityId' => 'http://idcorp-loa1.com',

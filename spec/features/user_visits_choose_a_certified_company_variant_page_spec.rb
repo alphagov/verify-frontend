@@ -2,7 +2,7 @@ require 'feature_helper'
 require 'api_test_helper'
 require 'i18n'
 
-describe 'When the user visits the choose a certified company page' do
+xdescribe 'When the user visits the choose a certified company page' do
   before(:each) do
     set_session_and_ab_session_cookies!('app_transparency' => 'app_transparency_variant')
     stub_api_idp_list
