@@ -9,10 +9,7 @@ RSpec.describe 'When the user visits the will-not-work-without-uk-address page' 
 
   it 'includes other ways text' do
     visit '/will-not-work-without-uk-address'
-
-    expect(page).to have_content('If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile here')
-    expect(page).to have_content('register for an identity profile')
-    expect(page).to have_link 'here', href: 'http://www.example.com'
+    expect(page).to have_content('You need a current UK address to get your identity verified')
   end
 
   it 'includes the appropriate feedback source' do

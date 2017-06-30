@@ -5,7 +5,10 @@
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t('hub.failed_registration.continue_heading', transaction_name: @transaction.name) %></h1>
 
-    <p><%= t 'hub.failed_registration.continue_idp_text', idp_name: @idp.display_name %></p>
+    <p>
+      <%= t 'hub.failed_registration.continue_idp_text', idp_name: @idp.display_name %>
+      <%= @transaction.other_ways_text.html_safe %>
+    </p>
 
     <p><%= t 'hub.failed_registration.continue_text', rp_name: @transaction.rp_name %></p>
 
