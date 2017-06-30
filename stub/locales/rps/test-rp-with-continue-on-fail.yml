@@ -4,6 +4,6 @@ en:
       name: register for an identity profile
       rp_name: Test RP
       analytics_description: analytics description for test-rp
-      other_ways_text: <p>You can still print, sign and return your  <a href="http://www.example.com">declaration</a>.</p>
+      other_ways_text: <p>You can still continue to complete your transaction.</p>
       other_ways_description: sign your declaration
       tailored_text: <p>This is tailored text for test-rp-with-continue-on-fail</p>
