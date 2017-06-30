@@ -16,7 +16,6 @@ class RedirectToIdpWarningVariantController < ApplicationController
     @idp = decorated_idp
     @service_name = current_transaction.name
     if @idp.viewable?
-      @recommended = recommended?
       render 'bullets'
     else
       something_went_wrong("Couldn't display IDP with entity id: #{@idp.entity_id}")
@@ -63,10 +62,6 @@ private
       session[:selected_idp_names] = selected_idp_names
     end
     FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended?)
-  end
-
-  def recommended?
-    session.fetch(:selected_idp_was_recommended)
   end
 
   def decorated_idp
