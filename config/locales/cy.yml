@@ -242,7 +242,6 @@ cy:
       mobile_phone_contract: cytundeb ffôn symudol
       registered_to_vote: rydych wedi cofrestru i bleidleisio
       youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru’r DU.
-      if_verify_doesnt_work_there_is_still_a_way: You may try to use GOV.UK Verify may not verify your identity.
     will_not_work_without_uk_address:
       title: Ni fydd GOV.UK Verify yn gweithio i chi
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
