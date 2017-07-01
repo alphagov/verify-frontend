@@ -466,6 +466,13 @@ cy:
       title: Proof of your address
       sub_heading: Certified companies need to check your address is correct. They do this by checking with your bank or credit card provider.
       highlight: This is a free service, and the certified company cannot see any of your financial transactions.
+      financial_details:
+        heading: Which of these do you have?
+        sub_heading: Select all that apply
+        question:
+          debit_card: Debit card
+          credit_card: Credit card
+          bank_account: UK bank account
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
