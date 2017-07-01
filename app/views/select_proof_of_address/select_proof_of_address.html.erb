@@ -8,5 +8,22 @@
     <div class="panel panel-border-narrow">
       <%= t 'hub.select_proof_of_address.highlight' %>
     </div>
+
+    <%= form_for @form, url: select_proof_of_address_path do |f| %>
+        <h2 class="heading-medium"><%= t 'hub.select_proof_of_address.financial_details.heading' %></h2>
+
+        <%= content_tag :div, id: 'financial_details', class: form_question_class do %>
+            <fieldset>
+              <legend><span class="form-label"><%= t 'hub.select_proof_of_address.financial_details.sub_heading' %></span></legend>
+              <%= f.custom_check_box :bank_account, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.bank_account')  %>
+              <%= f.custom_check_box :debit_card, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.debit_card')  %>
+              <%= f.custom_check_box :credit_card, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.credit_card')  %>
+            </fieldset>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+        </div>
+    <% end %>
   </div>
 </div>
