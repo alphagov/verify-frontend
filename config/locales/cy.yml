@@ -130,7 +130,7 @@ cy:
         <p>Mae GOV.UK Verify yn newydd ac mae gwasanaethau'r llywodraeth yn ymuno drwy'r amser.</p>
         <p>Gallwch ddefnyddio eich cyfrif hunaniaeth i gael mynediad i:</p>
       details: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
-      details_loa1_uplift_list: "Y tro cyntaf y byddwch yn defnyddio un o wasanaethau hyn y llywodraeth, gofynir i chi ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth:"
+      details_loa1_uplift_list: "When you access these government services, you'll be asked to provide more evidence as these services need to be confident someone isn't pretending to be you:"
     about_choosing_a_company:
       title: Am ddewis cwmni
       heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
@@ -252,7 +252,7 @@ cy:
       heading: Dewiswch gwmni
       heading_loa1: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
       existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
-      personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol ac yna yn gwirio ei fod yn gywir drwy ddefnyddio systemau newydd, diogel maent wedi'u hadeiladu.
+      personal_information: They ask you to provide personal information and evidence, and then check it's correct using the new, secure systems they built.
       why_companies: Pam fod dewis o gwmnïau
       choose_idp: "Dewiswch %{display_name}"
       idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
@@ -337,7 +337,7 @@ cy:
       message: "Gallwch fewngofnodi ble bynnag rydych yn gweld logo GOV.UK Verify gyda'ch enw defnyddiwr a chyfrinair eich cyfrif hunaniaeth %{display_name}"
       continue_to_rp: "Gallwch nawr ddefnyddio %{transaction_name}."
       heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
-      add_security_loa1: Mae rhai o wasanaethau'r llywodraeth angen i chi ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth, ond dim ond unwaith fydd angen i chi wneud hyn.
+      add_security_loa1: When you access some government services, you'll be asked to provide more evidence, but you only need to do this once.
       extra_security: Gwasanaethau'r llywodraeth sydd angen diogelwch ychwanegol
     failed_registration:
       title: Methu dilysu eich hunaniaeth

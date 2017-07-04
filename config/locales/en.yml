@@ -128,7 +128,7 @@ en:
         <p>GOV.UK Verify is new, and government services are joining all the time.</p>
         <p>You can use your identity account to access:</p>
       details: "GOV.UK Verify is new, and government services are joining all the time. The current services using Verify are:"
-      details_loa1_uplift_list: "The first time you access one of these government services, you'll be asked to add more security to your identity account:"
+      details_loa1_uplift_list: "When you access these government services, you'll be asked to provide more evidence as these services need to be confident someone isn't pretending to be you:"
     about_choosing_a_company:
       title: About choosing a company
       heading: Finding the right company to verify you
@@ -145,7 +145,7 @@ en:
       title_photo_documents: Your photo identity document
       explanation: Certified companies use information from different identity documents to verify you.
       sub_heading: Certified companies use information from identity documents to verify you.
-      documents_from_other_countries: Some certified companies can use identity documents from other countries to verify you.
+      documents_from_other_countries: Some certified companies can use identity documents frFwwom other countries to verify you.
       no_documents_message: Your document choices have been set to ‘no’.
       legend: Do you have these documents with you?
       highlight: The more identity documents you can provide now, the more likely it is that the company can verify you successfully.
@@ -250,7 +250,7 @@ en:
       heading: Choose a company
       heading_loa1: Choose a certified company to verify your identity
       existing_customer: You don't have to be an existing customer with a company.
-      personal_information: They ask you to provide personal information and then check it's correct using the new, secure systems they built.
+      personal_information: They ask you to provide personal information and evidence, and then check it's correct using the new, secure systems they built.
       why_companies: Why there’s a choice of companies
       choose_idp: "Choose %{display_name}"
       idp_count_html: "Based on your answers, %{company_count} can verify you now:"
@@ -332,7 +332,7 @@ en:
       message: "You can sign in wherever you see the GOV.UK Verify logo with your %{display_name} identity account username and password."
       continue_to_rp: "You can now %{transaction_name}."
       heading: "%{display_name} has verified your identity"
-      add_security_loa1: Some government services need you to add extra security to your identity account, but you only need to do this once.
+      add_security_loa1: When you access some government services, you'll be asked to provide more evidence, but you only need to do this once.
       extra_security: Government services requiring extra security
     failed_registration:
       title: Unable to verify your identity
