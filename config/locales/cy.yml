@@ -308,7 +308,6 @@ cy:
       identity_account_use_html: |
               <p>You'll now verify your identity on the %{display_name} website.</p>
               <p>They'll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
-              <p>You'll then be able to %{service_name}</p>
       service_use: You'll then be able to %{service_name}.
       recommended_html: |
         <p>Byddwch nawr yn dilysu eich hunaniaeth ar wefan %{display_name}.</p>
