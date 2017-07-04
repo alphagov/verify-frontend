@@ -145,7 +145,7 @@ en:
       title_photo_documents: Your photo identity document
       explanation: Certified companies use information from different identity documents to verify you.
       sub_heading: Certified companies use information from identity documents to verify you.
-      documents_from_other_countries: Some certified companies can use identity documents frFwwom other countries to verify you.
+      documents_from_other_countries: Some certified companies can use identity documents from other countries to verify you.
       no_documents_message: Your document choices have been set to ‘no’.
       legend: Do you have these documents with you?
       highlight: The more identity documents you can provide now, the more likely it is that the company can verify you successfully.
