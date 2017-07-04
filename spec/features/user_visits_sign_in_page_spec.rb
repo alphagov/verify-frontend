@@ -87,48 +87,5 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     end
   end
-
-  context 'with JS disabled', js: false do
-    it 'shows the IDP tag line' do
-      given_api_requests_have_been_mocked!
-      given_im_on_the_sign_in_page
-      expect(page).to have_css('img[alt="IDCorp: a really cool identity provider"]')
-      expect(page).to have_css('img[alt="Bob’s Identity Service"]')
-    end
-
-    it 'will display the interstitial page and on submit will redirect the user to IDP' do
-      page.set_rack_session(transaction_simple_id: 'test-rp')
-      given_api_requests_have_been_mocked!
-      given_im_on_the_sign_in_page
-      then_custom_variables_are_reported_to_piwik
-      when_i_select_an_idp
-      then_im_at_the_interstitial_page
-      when_i_choose_to_continue
-      then_im_at_the_idp
-      expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
-    end
-
-    it 'will display the interstitial page in welsh' do
-      page.set_rack_session(transaction_simple_id: 'test-rp')
-      given_api_requests_have_been_mocked!
-      given_im_on_the_sign_in_page 'cy'
-      then_custom_variables_are_reported_to_piwik
-      when_i_select_an_idp
-      then_im_at_the_interstitial_page 'cy'
-    end
-
-    it 'rejects unrecognised entity ids' do
-      page.set_rack_session(transaction_simple_id: 'test-rp')
-      given_api_requests_have_been_mocked!
-      given_im_on_the_sign_in_page
-      then_custom_variables_are_reported_to_piwik
-
-      first('input[value="http://idcorp.com"]', visible: false).set('bob')
-      when_i_select_an_idp
-
-      expect(page).to have_content(I18n.translate('errors.page_not_found.title'))
-      expect(stub_piwik_request).to have_been_made.at_least_once
-      expect(page.get_rack_session['selected_idp']).to be_nil
-    end
-  end
+  
 end

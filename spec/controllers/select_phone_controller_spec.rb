@@ -7,23 +7,24 @@ require 'models/display/viewable_identity_provider'
 
 describe SelectPhoneController do
   valid_phone_evidence = { mobile_phone: 'true', smart_phone: 'true', landline: 'true' }.freeze
-  invalid_phone_evidence = { mobile_phone: 'false', smart_phone: 'true' }.freeze
 
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_1')
     session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true } }
-    stub_piwik_request
   end
 
   context 'when form is valid' do
     subject { post :select_phone, params: { locale: 'en', select_phone_form: valid_phone_evidence } }
+
+    before :each do
+      stub_piwik_request('action_name' => 'Phone Next')
+    end
 
     it 'redirects to choose certified company page when eligible IDPs exist' do
       stub_api_idp_list([{ 'simpleId' => 'stub-idp-one',
                            'entityId' => 'http://idcorp.com',
                            'levelsOfAssurance' => %w(LEVEL_2) }])
 
-      expect(ANALYTICS_REPORTER).to receive(:report).with(anything, 'Phone Next')
       expect(subject).to redirect_to('/choose-a-certified-company')
     end
 
@@ -32,7 +33,6 @@ describe SelectPhoneController do
                            'entityId' => 'http://idcorp.com',
                            'levelsOfAssurance' => %w(LEVEL_2) }])
 
-      expect(ANALYTICS_REPORTER).to receive(:report).with(anything, 'Phone Next')
       expect(subject).to redirect_to('/no-mobile-phone')
     end
 
@@ -44,7 +44,7 @@ describe SelectPhoneController do
   end
 
   context 'when form is invalid' do
-    subject { post :select_phone, params: { locale: 'en', select_phone_form: invalid_phone_evidence } }
+    subject { post :select_phone, params: { locale: 'en' } }
 
     it 'renders itself' do
       expect(subject).to render_template(:index)

@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'controller_helper'
 require 'will_it_work_for_me_examples'
+require 'piwik_test_helper'
 
 describe WillItWorkForMeController do
   PROCEED_TO_SELECT_DOCUMENT_ANSWERS = { above_age_threshold: 'true', resident_last_12_months: 'true', not_resident_reason: 'noAddress' }.freeze
@@ -11,6 +12,10 @@ describe WillItWorkForMeController do
   INVALID_FORM_ANSWERS = { above_age_threshold: 'true' }.freeze
 
   context 'valid form' do
+    before :each do
+      stub_piwik_request('action_name' => 'Can I be Verified Next')
+    end
+
     include_examples 'will_it_work_for_me',
                      'redirects to might not work for you if moved in recently',
                      'when user has moved to the UK in the last year',
