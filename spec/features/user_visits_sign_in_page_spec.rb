@@ -87,5 +87,4 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     end
   end
-  
 end
