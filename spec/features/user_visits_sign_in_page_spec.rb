@@ -87,27 +87,5 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     end
   end
-
-  context 'with JS disabled', js: false do
-    it 'will display the interstitial page and on submit will redirect the user to IDP' do
-      page.set_rack_session(transaction_simple_id: 'test-rp')
-      given_api_requests_have_been_mocked!
-      given_im_on_the_sign_in_page
-      then_custom_variables_are_reported_to_piwik
-      when_i_select_an_idp
-      then_im_at_the_interstitial_page
-      when_i_choose_to_continue
-      then_im_at_the_idp
-      expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
-    end
-
-    it 'will display the interstitial page in welsh' do
-      page.set_rack_session(transaction_simple_id: 'test-rp')
-      given_api_requests_have_been_mocked!
-      given_im_on_the_sign_in_page 'cy'
-      then_custom_variables_are_reported_to_piwik
-      when_i_select_an_idp
-      then_im_at_the_interstitial_page 'cy'
-    end
-  end
+  
 end
