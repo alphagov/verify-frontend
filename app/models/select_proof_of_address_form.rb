@@ -1,10 +1,10 @@
 class SelectProofOfAddressForm
   include ActiveModel::Model
 
-  attr_reader :bank_account, :debit_card, :credit_card
+  attr_reader :uk_bank_account_details, :debit_card, :credit_card
 
   def initialize(params)
-    @bank_account = params[:bank_account]
+    @uk_bank_account_details = params[:uk_bank_account_details]
     @debit_card = params[:debit_card]
     @credit_card = params[:credit_card]
   end

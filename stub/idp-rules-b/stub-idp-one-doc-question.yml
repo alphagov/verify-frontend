@@ -1,0 +1,9 @@
+simpleIds: [ "stub-idp-one-doc-question" ]
+recommended_profiles:
+  - [ "driving_licence", "passport", "mobile_phone" ]
+  - [ "driving_licence", "mobile_phone" ]
+  - [ "passport", "mobile_phone" ]
+non_recommended_profiles: []
+send_hints: true
+send_language_hint: true
+show_interstitial_question: true
