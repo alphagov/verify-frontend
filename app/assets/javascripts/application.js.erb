@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require govuk/shim-links-with-button-role
+//= require fingerprint2
 //= require_tree .
 //= require piwik
 
@@ -33,12 +34,7 @@ $(function () {
   window.GOVUK.signin.attach();
   window.GOVUK.autoSubmitForm.attach();
   window.GOVUK.chooseACountry.attach();
-
-
-  // Ensure that the fingerprint epoch is increased whenever the algorithm is changed
-  // in any way - this will ensure that we compare like with like
-  var fingerprintEpoch = 5;
-  reportFingerprint('<%= FINGERPRINT_CONFIG %>', fingerprintEpoch, document.getElementById('fp_img'));
+  window.GOVUK.fingerprint.attach();
 });
 
 

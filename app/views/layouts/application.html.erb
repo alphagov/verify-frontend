@@ -22,7 +22,7 @@
 <% end %>
 
 <% content_for :content do %>
-  <main id="content" tabindex="-1">
+  <main id="content" tabindex="-1" data-fp-path="<%= FINGERPRINT_CONFIG %>">
     <div class="grid-row">
       <%= render 'shared/available_languages' unless @hide_available_languages %>
     </div>
