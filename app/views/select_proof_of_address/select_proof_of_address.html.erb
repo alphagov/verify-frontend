@@ -16,7 +16,7 @@
             <fieldset>
               <legend><span class="body-text"><%= t 'hub.select_proof_of_address.financial_details.sub_heading' %></span></legend>
               <p></p>
-              <%= f.custom_check_box :bank_account, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.bank_account')  %>
+              <%= f.custom_check_box :uk_bank_account_details, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.bank_account')  %>
               <%= f.custom_check_box :debit_card, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.debit_card')  %>
               <%= f.custom_check_box :credit_card, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.credit_card')  %>
             </fieldset>

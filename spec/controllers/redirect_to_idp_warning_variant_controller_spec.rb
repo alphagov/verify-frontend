@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'controller_helper'
 require 'api_test_helper'
 
-describe RedirectToIdpWarningVariantController do
+xdescribe RedirectToIdpWarningVariantController do
   before :each do
     set_session_and_cookies_with_loa('LEVEL_2')
     session[:selected_idp_was_recommended] = [true, false].sample

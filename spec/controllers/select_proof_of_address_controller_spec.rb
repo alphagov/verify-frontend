@@ -18,12 +18,12 @@ describe SelectProofOfAddressController do
   end
 
   context 'when POST is called' do
-    subject { post :select_proof, params: { locale: 'en', select_proof_of_address_form: { bank_account: true, debit_card: true, credit_card: false } } }
+    subject { post :select_proof, params: { locale: 'en', select_proof_of_address_form: { uk_bank_account_details: true, debit_card: true, credit_card: false } } }
 
     it 'params submitted are stored in session' do
       subject
 
-      expect(session[:selected_answers]['address_proof']).to eq(bank_account: true, debit_card: true, credit_card: false)
+      expect(session[:selected_answers]['address_proof']).to eq(uk_bank_account_details: true, debit_card: true, credit_card: false)
     end
   end
 end
