@@ -16,6 +16,10 @@ class InterstitialQuestionForm
     end
   end
 
+  def is_yes_selected
+    has_extra_info?
+  end
+
 private
 
   def has_extra_info?
