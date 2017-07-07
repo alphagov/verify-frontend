@@ -207,8 +207,9 @@ en:
           no_selection: Please answer all the questions
     idp_wont_work_for_you_one_doc:
       title: Identity Provider will not work for you
-      heading: "%{idp_name} does not have enough evidence for it to know"
-      choose_another_certified_company_link: Choose another certified company
+      heading: "%{idp_name} cannot verify your identity"
+      choose_another_company_text: You have to choose a different certified company to verify your identity.
+      choose_another_certified_company_link: Choose another company
     no_mobile_phone:
       heading: GOV.UK Verify won’t work for you
       content_html: |

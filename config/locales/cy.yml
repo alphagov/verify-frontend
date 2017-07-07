@@ -208,7 +208,8 @@ cy:
           no_selection: Dylech ateb pob cwestiwn
     idp_wont_work_for_you_one_doc:
       title: asdfasdf asdfasdfasdfasdfa sa
-      heading: "%{idp_name} asdoifj asdofijasdfoijsda asdfw"
+      heading: "%{idp_name} cannot verify your identity"
+      choose_another_company_text: You have to choose a different certified company to verify your identity.
       choose_another_certified_company_link: Sdfasd asdfa sdfy
     no_mobile_phone:
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
