@@ -12,6 +12,7 @@ module Display
     content :special_no_docs_instructions_html, default: ''
     content :no_docs_requirement, default: ''
     content :interstitial_question, default: ''
+    content :interstitial_explanation, default: ''
     content :mobile_app_installation, default: ''
 
     alias_method :about_content, :about
