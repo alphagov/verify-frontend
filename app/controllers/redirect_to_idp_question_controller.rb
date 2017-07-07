@@ -11,7 +11,7 @@ class RedirectToIdpQuestionController < ApplicationController
         selected_answer_store.store_selected_answers('interstitial', @form.selected_answers)
         redirect_to redirect_to_idp_warning_path
       else
-        redirect_to choose_a_certified_company_path
+        redirect_to idp_wont_work_for_you_one_doc_path
       end
     else
       @idp = decorated_idp

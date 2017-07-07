@@ -1,0 +1,13 @@
+<%= page_title 'hub.idp_wont_work_for_you_one_doc.title' %>
+<% content_for :feedback_source, 'IDP_WILL_NOT_WORK_FOR_YOU' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.idp_wont_work_for_you_one_doc.heading', idp_name: @idp.display_name %></h1>
+
+        This IDP won't work for you because you don't have enough evidence for them to work with.
+        <div>
+          <%= submit_tag t('hub.idp_wont_work_for_you_one_doc.choose_another_certified_company_link'), id: 'continue-button', class: 'button' %>
+        </div>
+  </div>
+</div>

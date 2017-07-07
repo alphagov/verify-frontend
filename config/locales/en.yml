@@ -23,6 +23,7 @@ en:
     unlikely_to_verify: unlikely-to-verify
     redirect_to_idp_warning: redirect-to-idp-warning
     redirect_to_idp_question: redirect-to-idp-question
+    idp_wont_work_for_you_one_doc: idp-wont-work-for-you-one-doc
     privacy_notice: privacy-notice
     cookies: cookies
     confirm_your_identity: confirm-your-identity
@@ -204,6 +205,10 @@ en:
           no_address: I don’t have a UK address
         errors:
           no_selection: Please answer all the questions
+    idp_wont_work_for_you_one_doc:
+      title: Identity Provider will not work for you
+      heading: "%{idp_name} does not have enough evidence for it to know"
+      choose_another_certified_company_link: Choose another certified company
     no_mobile_phone:
       heading: GOV.UK Verify won’t work for you
       content_html: |
