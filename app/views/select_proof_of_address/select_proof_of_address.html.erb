@@ -10,20 +10,36 @@
     </div>
 
     <%= form_for @form, url: select_proof_of_address_path do |f| %>
+
+        <%= render 'shared/form-errors', errors: flash[:errors] %>
+
         <h2 class="heading-medium"><%= t 'hub.select_proof_of_address.financial_details.heading' %></h2>
 
         <%= content_tag :div, id: 'financial_details', class: form_question_class do %>
-            <fieldset>
-              <legend><span class="body-text"><%= t 'hub.select_proof_of_address.financial_details.sub_heading' %></span></legend>
-              <p></p>
-              <%= f.custom_check_box :uk_bank_account_details, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.bank_account')  %>
-              <%= f.custom_check_box :debit_card, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.debit_card')  %>
-              <%= f.custom_check_box :credit_card, {class: 'form-group form-field'}, "true", "false", t('hub.select_proof_of_address.financial_details.question.credit_card')  %>
+            <fieldset class="inline">
+              <legend><span class="form-label"><strong><%= t 'hub.select_proof_of_address.financial_details.question.bank_account' %></strong></span></legend>
+              <%= f.custom_radio_button :uk_bank_account_details, true, t('hub.select_documents.documents_option_yes')  %>
+              <%= f.custom_radio_button :uk_bank_account_details, false, t('option.no') %>
+            </fieldset>
+        <% end %>
+        <%= content_tag :div, id: 'financial_details', class: form_question_class do %>
+            <fieldset class="inline">
+              <legend><span class="form-label"><strong><%= t 'hub.select_proof_of_address.financial_details.question.debit_card' %></strong></span></legend>
+              <%= f.custom_radio_button :debit_card, true, t('hub.select_documents.documents_option_yes')  %>
+              <%= f.custom_radio_button :debit_card, false, t('option.no') %>
+            </fieldset>
+        <% end %>
+        <%= content_tag :div, id: 'financial_details', class: form_question_class do %>
+            <fieldset class="inline">
+              <legend><span class="form-label"><strong><%= t 'hub.select_proof_of_address.financial_details.question.credit_card' %></strong></span></legend>
+              <%= f.custom_radio_button :credit_card, true, t('hub.select_documents.documents_option_yes')  %>
+              <%= f.custom_radio_button :credit_card, false, t('option.no')  %>
             </fieldset>
         <% end %>
 
         <div class="actions">
           <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+          <%= link_to t('hub.select_proof_of_address.financial_details.none_of_these_documents'), select_phone_path %>
         </div>
     <% end %>
   </div>
