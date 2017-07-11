@@ -1,0 +1,18 @@
+<%= page_title 'hub.no_idps_available.title' %>
+<% content_for :feedback_source, 'NO_IDPS_AVAILABLE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.no_idps_available.heading' %></h1>
+    <p><%= t 'hub.no_idps_available.text' %></p>
+    <p><%= t('hub.no_idps_available.details_html', href: link_to(t('hub.no_idps_available.details_link'), select_documents_path)) %></p>
+    <h2 class="heading-medium"><%= t 'hub.other_ways_heading', other_ways_description: @other_ways_description %></h2>
+
+    <div class="other-ways-to-complete-transaction">
+      <%= @other_ways_text.html_safe %>
+    </div>
+  </div>
+</div>
+
+
+<%= t('hub.feedback.consent_message_html', href: link_to(t('hub.feedback.privacy_notice_link'), privacy_notice_path(anchor:'how-we-use-information'))) %>
