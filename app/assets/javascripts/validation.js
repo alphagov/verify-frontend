@@ -35,10 +35,11 @@
         },
         highlight: function(element) {
           $(element).addClass('form-control-error')
-            .closest('.form-group').addClass('form-group-error');
+            .parents('.form-group').addClass('form-group-error');
         },
         unhighlight: function(element) {
-          var formGroup = $(element).closest('.form-group');
+          var formGroup = $(element).parents('.form-group');
+          console.log(element);
           $(element).removeClass('form-control-error');
           formGroup.removeClass('form-group-error');
           formGroup.find('.error-message').hide();
