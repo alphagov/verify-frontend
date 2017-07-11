@@ -45,6 +45,7 @@ en:
     further_information_cancel: further-information/cancel
     further_information_null_attribute: futher-information/null-attribute
     select_proof_of_address: select-proof-of-address
+    no_idps_available: no-idps-available
   navigation:
     next: Next
     start_now: Start now
@@ -461,6 +462,12 @@ en:
           debit_card: Debit card?
           credit_card: Credit card?
           bank_account: UK bank account?
+    no_idps_available:
+      title: No IDPS available
+      heading: GOV.UK Verify won’t work for you
+      text: Based on your answers, none of the certified companies can verify you.
+      details_html: You can %{href}; the more accurately you answer the questions, the more likely it is that a certified company can verify you.
+      details_link: change your answers to the questions
   errors:
     transaction_list:
       title: Find the service you were using to start again

@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
     get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
     post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
+    get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
 
     constraints proof_of_address_a_and_report_to_piwik do
       get 'select_phone', to: 'select_phone#index', as: :select_phone

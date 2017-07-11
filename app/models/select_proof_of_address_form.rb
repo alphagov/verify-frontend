@@ -11,13 +11,14 @@ class SelectProofOfAddressForm
   end
 
   def selected_answers
-    filter_invalid_attributes = -> (attr) { %w(true false).include?(public_send(attr)) }
-    attribute_to_value = -> (attr) { [attr, public_send(attr) == 'true'] }
-
-    IdpEligibility::Evidence::ADDRESS_DOCUMENT_ATTRIBUTES
-        .select(&filter_invalid_attributes)
-        .map(&attribute_to_value)
-        .to_h
+    answers = {}
+    IdpEligibility::Evidence::ADDRESS_DOCUMENT_ATTRIBUTES.each do |attr|
+      result = public_send(attr)
+      if %w(true false).include?(result)
+        answers[attr] = result == 'true'
+      end
+    end
+    answers
   end
 
   def answered_all_questions

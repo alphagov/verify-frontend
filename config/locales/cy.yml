@@ -44,6 +44,7 @@ cy:
     further_information_cancel: gwybodaeth-bellach/dileu
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
     select_proof_of_address: select-proof-of-address-welsh
+    no_idps_available: no-idps-available-cy
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -466,6 +467,12 @@ cy:
           debit_card: Debit card?
           credit_card: Credit card?
           bank_account: UK bank account?
+    no_idps_available:
+      title: No IDPS available
+      heading: GOV.UK Verify won’t work for you
+      text: Based on your answers, none of the certified companies can verify you.
+      details_html: You can %{href}; the more accurately you answer the questions, the more likely it is that a certified company can verify you.
+      details_link: change your answers to the questions
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

@@ -15,27 +15,29 @@
 
         <h2 class="heading-medium"><%= t 'hub.select_proof_of_address.financial_details.heading' %></h2>
 
-        <%= content_tag :div, id: 'financial_details', class: form_question_class do %>
+        <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
               <legend><span class="form-label"><strong><%= t 'hub.select_proof_of_address.financial_details.question.bank_account' %></strong></span></legend>
               <%= f.custom_radio_button :uk_bank_account_details, true, t('hub.select_documents.documents_option_yes')  %>
               <%= f.custom_radio_button :uk_bank_account_details, false, t('option.no') %>
             </fieldset>
         <% end %>
-        <%= content_tag :div, id: 'financial_details', class: form_question_class do %>
+        <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
               <legend><span class="form-label"><strong><%= t 'hub.select_proof_of_address.financial_details.question.debit_card' %></strong></span></legend>
               <%= f.custom_radio_button :debit_card, true, t('hub.select_documents.documents_option_yes')  %>
               <%= f.custom_radio_button :debit_card, false, t('option.no') %>
             </fieldset>
         <% end %>
-        <%= content_tag :div, id: 'financial_details', class: form_question_class do %>
+        <%= content_tag :div, class: form_question_class do %>
             <fieldset class="inline">
               <legend><span class="form-label"><strong><%= t 'hub.select_proof_of_address.financial_details.question.credit_card' %></strong></span></legend>
               <%= f.custom_radio_button :credit_card, true, t('hub.select_documents.documents_option_yes')  %>
               <%= f.custom_radio_button :credit_card, false, t('option.no')  %>
             </fieldset>
         <% end %>
+
+        <div id="validation-error-message-js"></div>
 
         <div class="actions">
           <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
