@@ -69,7 +69,7 @@ Rails.application.routes.draw do
     # post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
     get 'redirect_to_idp_question', to: 'redirect_to_idp_question#index', as: :redirect_to_idp_question
     post 'redirect_to_idp_question', to: 'redirect_to_idp_question#continue', as: :redirect_to_idp_question_submit
-    get 'idp_wont_work_for_you_one_doc', to: 'idp_wont_work_for_you_one_doc#index', as: :idp_wont_work_for_you_one_doc
+    get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
     get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
     get 'cookies', to: 'static#cookies', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity

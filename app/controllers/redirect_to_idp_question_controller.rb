@@ -20,6 +20,10 @@ class RedirectToIdpQuestionController < ApplicationController
     end
   end
 
+  def idp_wont_work_for_you
+    render 'idp_wont_work_for_you'
+  end
+
 private
 
   def decorated_idp
