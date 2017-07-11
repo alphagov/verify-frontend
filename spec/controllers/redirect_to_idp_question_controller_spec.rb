@@ -4,8 +4,8 @@ require 'redirect_to_idp_question_examples'
 require 'piwik_test_helper'
 
 describe RedirectToIdpQuestionController do
-  INTERSTITIAL_YES_RESPONSE = { extra_info: 'true' }.freeze
-  INTERSTITIAL_NO_RESPONSE = { extra_info: 'false' }.freeze
+  INTERSTITIAL_YES_RESPONSE = { interstitial_question_result: 'true' }.freeze
+  INTERSTITIAL_NO_RESPONSE = { interstitial_question_result: 'false' }.freeze
   INVALID_FORM_ANSWERS = {}.freeze
 
   before(:each) do

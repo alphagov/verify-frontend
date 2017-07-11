@@ -7,7 +7,7 @@ class RedirectToIdpQuestionController < ApplicationController
   def continue
     @form = InterstitialQuestionForm.new(params['interstitial_question_form'] || {})
     if @form.valid?
-      if @form.is_yes_selected
+      if @form.is_yes_selected?
         selected_answer_store.store_selected_answers('interstitial', @form.selected_answers)
         redirect_to redirect_to_idp_warning_path
       else
