@@ -3,50 +3,31 @@
   var GOVUK = global.GOVUK || {};
   var $ = global.jQuery;
 
-  var selectPhone = {
-    toggleSecondaryQuestion: function() {
-      var mobilePhoneState = $('input[name="select_phone_form[mobile_phone]"]:checked').val();
-      if (mobilePhoneState === undefined) {
-        selectPhone.$smartphoneQuestion.add(selectPhone.$landlineQuestion)
-          .addClass('js-hidden', true)
-          .find('input').prop('checked',false);
-      } else if (mobilePhoneState === 'true') {
-        selectPhone.$smartphoneQuestion.removeClass('js-hidden');
-        selectPhone.$landlineQuestion.addClass('js-hidden').removeClass('form-group-error')
-          .find('input').prop('checked',false);
-      } else if (mobilePhoneState === 'false') {
-        selectPhone.$smartphoneQuestion.addClass('js-hidden').removeClass('form-group-error')
-          .find('input').prop('checked',false);
-        selectPhone.$landlineQuestion.removeClass('js-hidden');
-      }
-      selectPhone.$form.find('.form-group').removeClass('form-group-error');
-      selectPhone.validator.resetForm();
-    },
+  var selectProofOfAddress = {
     init: function (){
-      selectPhone.$form = $('#validate-phone');
-      selectPhone.$smartphoneQuestion = $('#smartphone-question');
-      selectPhone.$landlineQuestion = $('#landline-question');
-      var errorMessage = selectPhone.$form.data('msg');
-      if (selectPhone.$form.length === 1) {
-        selectPhone.validator = selectPhone.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
+      selectProofOfAddress.$form = $('#new_select_proof_of_address_form');
+      var errorMessage = selectProofOfAddress.$form.data('msg');
+      if (selectProofOfAddress.$form.length === 1) {
+        selectProofOfAddress.validator = selectProofOfAddress.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
           rules: {
-            'select_phone_form[mobile_phone]': 'required',
-            'select_phone_form[smart_phone]': 'required',
-            'select_phone_form[landline]': 'required'
+            'select_proof_of_address_form[uk_bank_account_details]': 'required',
+            'select_proof_of_address_form[debit_card]': 'required',
+            'select_proof_of_address_form[credit_card]': 'required',
           },
+            groups: {
+                primary: 'select_proof_of_address_form[credit_card] select_proof_of_address_form[debit_card] select_proof_of_address_form[uk_bank_account_details]'
+            },
           messages: {
-            'select_phone_form[mobile_phone]': errorMessage,
-            'select_phone_form[smart_phone]': errorMessage,
-            'select_phone_form[landline]': errorMessage
+            'select_proof_of_address_form[uk_bank_account_details]': errorMessage,
+            'select_proof_of_address_form[debit_card]': errorMessage,
+            'select_proof_of_address_form[credit_card]': errorMessage
           }
         }));
-        selectPhone.$form.find('input[name="select_phone_form[mobile_phone]"]').on('click',selectPhone.toggleSecondaryQuestion);
-        selectPhone.toggleSecondaryQuestion();
       }
     }
   };
 
-  GOVUK.selectPhone = selectPhone;
+  GOVUK.selectProofOfAddress = selectProofOfAddress;
 
   global.GOVUK = GOVUK;
 })(window);
