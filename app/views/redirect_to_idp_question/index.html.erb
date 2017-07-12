@@ -12,8 +12,8 @@
 
         <%= content_tag :div, class: form_question_class do %>
             <fieldset>
-              <%= f.custom_radio_button :extra_info, true, t('hub.redirect_to_idp_question.answer_yes'), {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}} %>
-              <%= f.custom_radio_button :extra_info, false, t('hub.redirect_to_idp_question.answer_no'), {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}} %>
+              <%= f.custom_radio_button :interstitial_question_result, true, t('hub.redirect_to_idp_question.answer_yes'), {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}} %>
+              <%= f.custom_radio_button :interstitial_question_result, false, t('hub.redirect_to_idp_question.answer_no'), {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}} %>
             </fieldset>
         <% end %>
 

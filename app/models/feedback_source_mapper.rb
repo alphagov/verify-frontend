@@ -12,6 +12,7 @@ class FeedbackSourceMapper
       'COOKIE_NOT_FOUND_PAGE' => nil,
       'ERROR_PAGE' => 'start',
       'FAILED_UPLIFT_PAGE' => 'failed_uplift',
+      'IDP_WILL_NOT_WORK_FOR_YOU' => 'idp_wont_work_for_you_one_doc',
       'EXPIRED_ERROR_PAGE' => nil,
       'FAILED_REGISTRATION_PAGE' => 'failed_registration',
       'FAILED_SIGN_IN_PAGE' => 'failed_sign_in',

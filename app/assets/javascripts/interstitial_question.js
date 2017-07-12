@@ -8,7 +8,7 @@
             interstitialQuestion.$form = $('#interstitial-question-form');
             interstitialQuestion.interstitialQuestionDetails = $('#interstitial_question_details');
             interstitialQuestion.setInterstitialQuestionDetailsVisibility();
-            interstitialQuestion.$form.find('input[name="interstitial_question_form[extra_info]"]').on('click', interstitialQuestion.setInterstitialQuestionDetailsVisibility);
+            interstitialQuestion.$form.find('input[name="interstitial_question_form[interstitial_question_result]"]').on('click', interstitialQuestion.setInterstitialQuestionDetailsVisibility);
         },
 
         setInterstitialQuestionDetailsVisibility: function () {
@@ -21,7 +21,7 @@
             }
         },
         hasAnsweredNo: function () {
-            var input = $('input[name="interstitial_question_form[extra_info]"]:checked');
+            var input = $('input[name="interstitial_question_form[interstitial_question_result]"]:checked');
             return input.length === 1 && input.val() === 'false';
         }
     };
