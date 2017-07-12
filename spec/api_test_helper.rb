@@ -160,6 +160,10 @@ module ApiTestHelper
     stub_request(:get, api_uri(idp_list_endpoint(default_session_id))).to_return(body: idps.to_json)
   end
 
+  def stub_api_select_idp
+    stub_request(:put, api_uri(select_idp_endpoint(default_session_id)))
+  end
+
   def stub_api_no_docs_idps
     idps = [
       { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
