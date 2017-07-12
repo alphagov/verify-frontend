@@ -64,6 +64,10 @@ private
     FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended?)
   end
 
+  def recommended?
+    session.fetch(:selected_idp_was_recommended)
+  end
+
   def decorated_idp
     @decorated_idp ||= IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
   end
