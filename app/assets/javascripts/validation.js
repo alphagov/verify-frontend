@@ -35,14 +35,13 @@
         },
         highlight: function(element) {
           $(element).addClass('form-control-error')
-            .parents('.form-group').addClass('form-group-error');
+            .closest('.form-group').addClass('form-group-error');
         },
         unhighlight: function(element) {
-          var formGroup = $(element).parents('.form-group');
-          console.log(element);
-          $(element).removeClass('form-control-error');
-          formGroup.removeClass('form-group-error');
-          formGroup.find('.error-message').hide();
+        var formGroup = $(element).closest('.form-group');
+            $(element).removeClass('form-control-error');
+            formGroup.removeClass('form-group-error');
+            formGroup.find('.error-message').hide();
         },
         ignore: '.js-hidden *'
       });
