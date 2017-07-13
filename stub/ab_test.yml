@@ -31,11 +31,3 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - post_picker:
-        alternatives:
-          - name: 'control'
-            percent: 1
-          - name: 'variant_logos'
-            percent: 1
-          - name: 'variant_bullets'
-            percent: 1

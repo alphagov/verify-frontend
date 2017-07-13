@@ -1,5 +1,0 @@
-<% if user_has_no_docs_or_foreign_id_only? %>
-    <%= idp.special_no_docs_instructions.html_safe %>
-<% end %>
-
-<%= t 'hub.redirect_to_idp_warning.recommended_html', display_name: idp.display_name %>
