@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
     get 'why_companies', to: 'why_companies#index', as: :why_companies
-    get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#logos', as: :redirect_to_idp_warning
+    get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
     get 'redirect_to_idp_question', to: 'redirect_to_idp_question#index', as: :redirect_to_idp_question
     post 'redirect_to_idp_question', to: 'redirect_to_idp_question#continue', as: :redirect_to_idp_question_submit

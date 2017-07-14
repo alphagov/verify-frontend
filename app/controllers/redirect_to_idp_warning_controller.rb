@@ -2,7 +2,7 @@ class RedirectToIdpWarningController < ApplicationController
   SELECTED_IDP_HISTORY_LENGTH = 5
   helper_method :user_has_no_docs_or_foreign_id_only?, :other_ways_description
 
-  def logos
+  def index
     @idp = decorated_idp
     @service_name = current_transaction.name
     if @idp.viewable?

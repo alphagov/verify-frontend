@@ -12,7 +12,7 @@ describe RedirectToIdpWarningController do
   end
 
   context 'renders idp logos' do
-    subject { get :logos, params: { locale: 'en' } }
+    subject { get :index, params: { locale: 'en' } }
 
     it 'warning page when idp selected' do
       session[:selected_idp] = { 'simple_id' => 'stub-idp-two',
