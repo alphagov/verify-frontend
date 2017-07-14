@@ -133,39 +133,8 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     given_a_session_with_document_answers
     visit '/redirect-to-idp-warning'
 
-    expect(page).to have_content 'You’ll now verify your identity on IDCorp’s website.'
-    expect(page).to_not have_content 'Additional IDP instructions'
-  end
-
-  it 'includes the recommended text when selection is a non recommended idp' do
-    given_a_session_with_non_recommended_idp
-    visit '/redirect-to-idp-warning'
-
-    expect(page).to have_content 'To be verified with IDCorp, you’ll need:'
-    within('#requirements') do
-      expect(page).to have_content('a UK passport')
-      expect(page).to have_content('a UK photocard driving licence')
-    end
-  end
-
-  it 'includes specific IDP text and link to the other ways when user has no documents' do
-    page.set_rack_session(transaction_simple_id: 'test-rp')
-    given_a_session_with_no_document_answers
-    visit '/redirect-to-idp-warning'
-
-    expect(page).to have_content 'You’ll now verify your identity on No Docs IDP’s website.'
-    expect(page).to have_content 'Additional IDP Instructions'
-    expect(page).to have_link 'other ways to register for an identity profile', href: other_ways_to_access_service_path
-  end
-
-  it 'includes specific IDP text and link to the other ways when user has only foreign id document' do
-    page.set_rack_session(transaction_simple_id: 'test-rp')
-    given_a_session_with_non_uk_id_document_answers
-    visit '/redirect-to-idp-warning'
-
-    expect(page).to have_content 'You’ll now verify your identity on Best ID’s website.'
-    expect(page).to have_content 'Additional IDP Instructions'
-    expect(page).to have_link 'other ways to register for an identity profile', href: other_ways_to_access_service_path
+    expect(page).to have_content 'Continue to IDCorp'
+    expect(page).to have_content 'You’ll now verify your identity on the IDCorp website'
   end
 
   context 'with JS enabled', js: true do

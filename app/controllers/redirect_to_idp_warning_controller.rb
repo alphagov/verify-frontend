@@ -4,9 +4,9 @@ class RedirectToIdpWarningController < ApplicationController
 
   def index
     @idp = decorated_idp
+    @service_name = current_transaction.name
     if @idp.viewable?
-      @recommended = recommended?
-      render 'index'
+      render 'logos'
     else
       something_went_wrong("Couldn't display IDP with entity id: #{@idp.entity_id}")
     end
@@ -40,7 +40,7 @@ class RedirectToIdpWarningController < ApplicationController
 private
 
   def select_registration(idp)
-    SESSION_PROXY.select_idp(session[:verify_session_id], idp.entity_id, true)
+    SESSION_PROXY.select_idp(session['verify_session_id'], idp.entity_id, true)
     set_journey_hint(idp.entity_id)
     register_idp_selections(idp.display_name)
   end

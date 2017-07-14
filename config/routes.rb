@@ -4,18 +4,11 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  POST_PICKER_EXPERIMENT = 'post_picker'.freeze
+  # POST_PICKER_EXPERIMENT = 'post_picker'.freeze
 
-  report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
-    AbTest.report(experiment_name, reported_alternative, transaction_id, request)
-  }
-
-  post_picker_a = SelectRoute.new(POST_PICKER_EXPERIMENT, 'control')
-  post_picker_b = SelectRoute.new(POST_PICKER_EXPERIMENT, 'variant_logos')
-  post_picker_c = SelectRoute.new(POST_PICKER_EXPERIMENT, 'variant_bullets')
-  post_picker_a_and_report_to_piwik = SelectRoute.new(POST_PICKER_EXPERIMENT, 'control', report_to_piwik)
-  post_picker_b_and_report_to_piwik = SelectRoute.new(POST_PICKER_EXPERIMENT, 'variant_logos', report_to_piwik)
-  post_picker_c_and_report_to_piwik = SelectRoute.new(POST_PICKER_EXPERIMENT, 'variant_bullets', report_to_piwik)
+  # report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
+  #   AbTest.report(experiment_name, reported_alternative, transaction_id, request)
+  # }
 
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
@@ -65,8 +58,8 @@ Rails.application.routes.draw do
     post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
     get 'why_companies', to: 'why_companies#index', as: :why_companies
-    # get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
-    # post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+    get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+    post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
     get 'redirect_to_idp_question', to: 'redirect_to_idp_question#index', as: :redirect_to_idp_question
     post 'redirect_to_idp_question', to: 'redirect_to_idp_question#continue', as: :redirect_to_idp_question_submit
     get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
@@ -97,30 +90,6 @@ Rails.application.routes.draw do
     post 'further_information', to: 'further_information#submit', as: :further_information_submit
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
-
-    constraints post_picker_a_and_report_to_piwik do
-      get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
-    end
-
-    constraints post_picker_b_and_report_to_piwik do
-      get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#logos', as: :redirect_to_idp_warning
-    end
-
-    constraints post_picker_c_and_report_to_piwik do
-      get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#bullets', as: :redirect_to_idp_warning
-    end
-
-    constraints post_picker_a do
-      post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
-    end
-
-    constraints post_picker_b do
-      post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#continue', as: :redirect_to_idp_warning_submit
-    end
-
-    constraints post_picker_c do
-      post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#continue', as: :redirect_to_idp_warning_submit
-    end
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
