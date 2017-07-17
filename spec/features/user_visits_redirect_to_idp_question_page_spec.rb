@@ -26,14 +26,12 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
   end
 
   it 'displays interstitial question' do
-    expect(page).to have_content('Verifying with FancyPants')
     expect(page).to have_content('I have a question for you in English')
   end
 
   it 'displays interstitial question in Welsh' do
     visit '/ailgyfeirio-i-gwestiwn-idp'
 
-    expect(page).to have_content('Dilysu gyda Welsh FancyPants')
     expect(page).to have_content('I have a question for you in Welsh')
     expect(page).to have_css 'html[lang=cy]'
   end
