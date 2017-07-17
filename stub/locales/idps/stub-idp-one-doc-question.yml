@@ -1,25 +1,22 @@
 en:
   idps:
     stub-idp-one-doc-question:
-      name: "FancyPants"
-      tagline: "a really fancy pants identity provider"
+      name: "OneDocIdp"
+      tagline: "shows an interstitial page when the user only has one doc"
       about: |
-          <p>FancyPants is the premier identity proofing service around.</p>
-          <ul>
-            <li>Identity</li>
-            <li>Verification</li>
-          </ul>
-          <ol>
-            <li>Tell us about yourself</li>
-            <li>Create a password</li>
-          </ol>
-          <p>Once you get verified you can transact with online government services.</p>
+          <p>
+            OneDocIdp is a test provider that is able to verify identity
+            based on one piece of document evidence.  Its main purpose is to
+            provide an example of an IDP that has an interstitial question.
+            It will work if you have a mobile phone and have either just a passport
+            or just a driving licence.
+          </p>
       requirements:
         - a UK passport
         - a UK photocard driving licence
       contact_details: |
         <p>
-          <strong id="stub-idp-one-contact-details">100 IDCorp Lane</strong>
+          <strong id="stub-idp-one-contact-details">100 OneDocIdp Street</strong>
           <br/>Telephone: 0123456789
           <br/>Monday to Friday, 8am to 8pm
           <br/>Saturday and Sunday, 8am to 5pm
@@ -28,25 +25,26 @@ en:
       interstitial_question: |
         <p>I have a question for you in English</p>
         <h2 class="heading-medium">Are you sure you want to continue?</h2>
-        <p>We are mean and will not let you</p>
       interstitial_explanation: |
-        <p>FancyPants will not work for you.</p>
+        <p>OneDocIdp will not work for you.</p>
 cy:
   idps:
     stub-idp-one-doc-question:
-      name: "Welsh FancyPants"
+      name: "Welsh OneDocInterstitialIdp"
+      tagline: "shows an interstitial page when the user only has one doc (Welsh)"
       about: |
-           <p>FancyPants is the premier identity proofing service around.</p>
-           <ul>
-             <li>Identity</li>
-             <li>Verification</li>
-           </ul>
+          <p>
+            OneDocIdp is a test provider that is able to verify identity
+            based on one piece of document evidence.  Its main purpose is to
+            provide an example of an IDP that has an interstitial question.
+            It will work if you have a mobile phone and have either just a passport
+            or just a driving licence.
+          </p>
       requirements:
-        - a UK passport
-        - a UK photocard driving licence
+        - must have a mobile phone and either a UK passport or a driving licence
       contact_details: |
         <p>
-          <strong id="stub-idp-one-contact-details">100 IDCorp Lane</strong>
+          <strong id="stub-idp-one-contact-details">100 OneDocIdp Street</strong>
           <br/>Telephone: 0123456789
           <br/>Monday to Friday, 8am to 8pm
           <br/>Saturday and Sunday, 8am to 5pm
@@ -55,6 +53,5 @@ cy:
       interstitial_question: |
         <p>I have a question for you in Welsh</p>
         <h2 class="heading-medium">Are you sure you want to continue?</h2>
-        <p>We are mean and will not let you</p>
       interstitial_explanation: |
-        <p>FancyPants will not work for you in Welsh</p>
+        <p>OneDocIdp will not work for you in Welsh</p>

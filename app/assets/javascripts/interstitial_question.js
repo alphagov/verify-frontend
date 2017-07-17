@@ -12,17 +12,8 @@
         },
 
         setInterstitialQuestionDetailsVisibility: function () {
-            if (interstitialQuestion.hasAnsweredNo()) {
-                interstitialQuestion.interstitialQuestionDetails.removeClass('hidden');
-                interstitialQuestion.interstitialQuestionDetails.addClass('form-group-error');
-            } else {
-                interstitialQuestion.interstitialQuestionDetails.addClass('hidden');
-                interstitialQuestion.interstitialQuestionDetails.removeClass('form-group-error');
-            }
-        },
-        hasAnsweredNo: function () {
-            var input = $('input[name="interstitial_question_form[interstitial_question_result]"]:checked');
-            return input.length === 1 && input.val() === 'false';
+            interstitialQuestion.interstitialQuestionDetails.addClass('hidden');
+            interstitialQuestion.interstitialQuestionDetails.removeClass('form-group-error');
         }
     };
 

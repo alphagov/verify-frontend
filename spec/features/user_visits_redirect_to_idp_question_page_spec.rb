@@ -26,14 +26,12 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
   end
 
   it 'displays interstitial question' do
-    expect(page).to have_content('Verifying with FancyPants')
     expect(page).to have_content('I have a question for you in English')
   end
 
   it 'displays interstitial question in Welsh' do
     visit '/ailgyfeirio-i-gwestiwn-idp'
 
-    expect(page).to have_content('Dilysu gyda Welsh FancyPants')
     expect(page).to have_content('I have a question for you in Welsh')
     expect(page).to have_css 'html[lang=cy]'
   end
@@ -51,6 +49,12 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
     expect(page.get_rack_session['selected_answers']).to eql(expected_answers)
   end
 
+  it 'goes to "idp-wont-work-for-you" page if the user answers no to the interstitial question and javascript is enabled', js: true do
+    choose 'interstitial_question_form_interstitial_question_result_false', allow_label_click: true
+    click_button 'Continue'
+    expect(page).to have_title(I18n.t('hub.idp_wont_work_for_you_one_doc.title'))
+  end
+
   it 'displays an error message when user does not answer the question when javascript is turned off' do
     click_button 'Continue'
 
@@ -58,19 +62,7 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
     expect(page).to have_content('Please answer the question')
   end
 
-  context 'react appropriately when user fills in form', js: true do
-    it 'should not say we cannot verify you when user selects yes' do
-      choose 'interstitial_question_form_interstitial_question_result_true', allow_label_click: true
-      expect(page).to_not have_content('may not be able to verify you')
-    end
-
-    it 'should say we may not be able to verify you when user selects no' do
-      choose 'interstitial_question_form_interstitial_question_result_false', allow_label_click: true
-      expect(page).to have_content('may not be able to verify you')
-    end
-  end
-
-  context 'javascript validation', js: true do
+  context 'when the form is invalid', js: true do
     it 'should display validation message if no selection is made' do
       click_button 'Continue'
       expect(page).to have_content('Please answer the question')
