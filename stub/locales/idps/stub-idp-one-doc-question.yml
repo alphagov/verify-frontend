@@ -25,7 +25,6 @@ en:
       interstitial_question: |
         <p>I have a question for you in English</p>
         <h2 class="heading-medium">Are you sure you want to continue?</h2>
-        <p>We are mean and will not let you</p>
       interstitial_explanation: |
         <p>OneDocIdp will not work for you.</p>
 cy:
@@ -54,6 +53,5 @@ cy:
       interstitial_question: |
         <p>I have a question for you in Welsh</p>
         <h2 class="heading-medium">Are you sure you want to continue?</h2>
-        <p>We are mean and will not let you</p>
       interstitial_explanation: |
         <p>OneDocIdp will not work for you in Welsh</p>
