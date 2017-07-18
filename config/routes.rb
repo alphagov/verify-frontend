@@ -4,13 +4,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-<<<<<<< HEAD
-  # POST_PICKER_EXPERIMENT = 'post_picker'.freeze
 
-  # report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
-  #   AbTest.report(experiment_name, reported_alternative, transaction_id, request)
-  # }
-=======
   PROOF_OF_ADDRESS_EXPERIMENT = 'proof_of_address'.freeze
 
   report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
@@ -21,7 +15,6 @@ Rails.application.routes.draw do
   proof_of_address_b_and_report_to_piwik = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'variant', report_to_piwik)
   proof_of_address_a = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'control')
   proof_of_address_b = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'variant')
->>>>>>> TT-681: Proof of address page is wired into B journey for proof of
 
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
