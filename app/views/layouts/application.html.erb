@@ -28,6 +28,9 @@
     </div>
     <%= content_for?(:main) ? yield(:main) : yield %>
     <%= render 'shared/feedback_link' if feedback_source.present? && !@hide_feedback_link %>
+    <div class="verify-logo-right">
+      <%= image_tag 'govuk-verify-small-black-text-170px.png', alt: 'GOV.UK VERIFY' %>
+    </div>
   </main>
   <%= render 'shared/piwik' %>
 <% end %>

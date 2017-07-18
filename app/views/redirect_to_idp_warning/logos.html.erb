@@ -1,7 +1,7 @@
 <%= page_title 'hub.redirect_to_idp_warning.title' %>
 <% content_for :feedback_source, 'REDIRECT_TO_IDP_WARNING_PAGE' %>
 
-<div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'redirect_to_idp_warning', action: 'continue_ajax', locale: I18n.locale)  %>">
+<div class="grid-row js-continue-to-idp no-right-hand-logo" data-location="<%= url_for(controller: 'redirect_to_idp_warning', action: 'continue_ajax', locale: I18n.locale)  %>">
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'hub.redirect_to_idp_warning.continue_to_idp', display_name: @idp.display_name %></h1>
 
@@ -15,7 +15,7 @@
                        type: 'submit'
         %>
     <% end %>
-    <div class="verify-logo">
+    <div class="logos-container">
       <ul class="list-logos">
         <li class="verify"><%= image_tag @idp.logo_path, alt: '' %></li>
         <li><%= image_tag 'govuk-verify-small-black-text-400X200.png', alt: 'GOV.UK VERIFY' %></li>

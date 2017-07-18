@@ -276,8 +276,8 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    sentry-raven (0.15.6)
-      faraday (>= 0.7.6)
+    sentry-raven (2.6.0)
+      faraday (>= 0.7.6, < 1.0)
     spring (1.6.3)
     sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
@@ -380,4 +380,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.6
+   1.15.1

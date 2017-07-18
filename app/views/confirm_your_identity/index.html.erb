@@ -1,15 +1,13 @@
 <%= page_title 'hub.confirm_your_identity.title' %>
 <% content_for :feedback_source, 'CONFIRM_YOUR_IDENTITY' %>
 
-<div class="verify-logo">
-  <%= image_tag 'govuk-verify-small-black-text.png', alt: 'GOV.UK VERIFY' %>
-</div>
-
-<p><%= t 'hub.confirm_your_identity.need_to_signin_again', transaction_name: @transaction_name %></p>
-
-<div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale)  %>">
-  <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers, non_repudiation: true} %>
-  <%= render partial: 'shared/continue_to_idp_form' %>
+<div class="grid-row js-continue-to-idp confirm-your-identity" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale)  %>">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t('hub.signin.sign_in_idp', display_name: @identity_providers[0].display_name) %></h1>
+    <p><%= t 'hub.confirm_your_identity.need_to_signin_again', transaction_name: @transaction_name %></p>
+    <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers, non_repudiation: true} %>
+    <%= render partial: 'shared/continue_to_idp_form' %>
+  </div>
 </div>
 
 <p>
