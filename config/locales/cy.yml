@@ -29,7 +29,7 @@ cy:
     confirmation: cadarnhad
     failed_registration: cofrestru-wedi-methu
     failed_sign_in: mewngofnodi-wedi-methu
-    failed_uplift: failed-uplift-cy
+    failed_uplift: methwyd-yr-ymgodiad
     other_ways_to_access_service: ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth
     forgot_company: wedi-anghofio-cwmni
     response_processing: prosesu-ymateb
@@ -43,8 +43,8 @@ cy:
     further_information: gwybodaeth-bellach
     further_information_cancel: gwybodaeth-bellach/dileu
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
-    select_proof_of_address: select-proof-of-address-welsh
-    no_idps_available: no-idps-available-cy
+    select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
+    no_idps_available: dim-idps-ar-gael
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -308,7 +308,7 @@ cy:
       identity_account_use_html: |
               <p>You'll now verify your identity on the %{display_name} website.</p>
               <p>They'll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
-      service_use: You'll then be able to %{service_name}.
+      service_use: Yna byddwch yn gallu %{service_name}.
       other_ways_link: "ffyrdd eraill i %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
     redirect_to_idp_question:
@@ -332,7 +332,7 @@ cy:
       message: "Gallwch fewngofnodi ble bynnag rydych yn gweld logo GOV.UK Verify gyda'ch enw defnyddiwr a chyfrinair eich cyfrif hunaniaeth %{display_name}"
       continue_to_rp: "Gallwch nawr ddefnyddio %{transaction_name}."
       heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
-      add_security_loa1: When you access some government services, you'll be asked to provide more evidence, but you only need to do this once.
+      add_security_loa1: Pan fyddwch yn defnyddio rhai o wasanaethau'r llywodraeth, gofynnir i chi ddarparu mwy o dystiolaeth gan fod angen i'r gwasanaethau hyn fod yn hyderus nad yw rhywun arall yn honni i fod yn chi.
       extra_security: Gwasanaethau'r llywodraeth sydd angen diogelwch ychwanegol
     failed_registration:
       title: Methu dilysu eich hunaniaeth
@@ -363,7 +363,7 @@ cy:
         <p>Gallwch gael eich dilysu gan gwmni arall unrhyw bryd. Ni fyddwch yn colli unrhyw ddata ar wasanaethau GOV.UK rydych wedi’u defnyddio.</p>
       start_again: "Dechrau eto"
     failed_uplift:
-      title: Methwyd  yr ymgodiad
+      title: Methwyd yr ymgodiad
       heading: "Roedd %{display_name} yn methu ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth"
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
@@ -457,22 +457,22 @@ cy:
       attribute_validation_message: Rhowch %{cycle_three_name} dilys
       null_attribute: Nid oes gennyf %{cycle_three_name}
     select_proof_of_address:
-      title: Proof of your address
-      sub_heading: Certified companies need to check your address is correct. They do this by checking with your bank or credit card provider.
-      highlight: This is a free service, and the certified company cannot see any of your financial transactions.
+      title: Tystiolaeth o'ch cyfeiriad
+      sub_heading: Mae cwmniau ardystiedig angen gwirio bod eich cyfeiriad yn gywir. Maent yn gwneud hyn drwy wirio gyda'ch banc neu ddarparwr cerdyn credyd.
+      highlight: Mae hwn yn wasanaeth am ddim, ac ni all y cwmniau ardystiedig weld dim o'ch trafodion ariannol.
       financial_details:
-        heading: 'Do you have the following:'
-        none_of_these_documents: I don’t have any of these documents
+        heading: "Oes gennych chi'r canlynol:"
+        none_of_these_documents: Nid oes gennyf y dogfennau hyn
         question:
-          debit_card: Debit card?
-          credit_card: Credit card?
-          bank_account: UK bank account?
+          debit_card: Credyd debyd?
+          credit_card: Credyd credyd?
+          bank_account: Cyfrif banc yn y DU?
     no_idps_available:
-      title: No IDPS available
-      heading: GOV.UK Verify won’t work for you
-      text: Based on your answers, none of the certified companies can verify you.
-      details_html: You can %{href}; the more accurately you answer the questions, the more likely it is that a certified company can verify you.
-      details_link: change your answers to the questions
+      title: Dim IDPS ar gael
+      heading: Ni fydd GOV.UK Verify yn gweithio i chi
+      text: Yn seiliedig ar eich atebion ni all yr un o'r cwmniau ardystiedig eich dilysu.
+      details_html: Gallwch %{href}; y mwyaf cywir y gallwch ateb y cwestiynau y mwyaf tebygol yw hi y bydd cwmni ardystiedig yn gallu eich dilysu.
+      details_link: newid eich atebion i'r cwestiynau
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
