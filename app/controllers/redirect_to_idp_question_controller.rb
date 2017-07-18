@@ -21,6 +21,7 @@ class RedirectToIdpQuestionController < ApplicationController
   end
 
   def idp_wont_work_for_you
+    @idp = decorated_idp
     render 'idp_wont_work_for_you'
   end
 
