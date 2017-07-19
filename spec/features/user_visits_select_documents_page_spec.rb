@@ -32,8 +32,8 @@ RSpec.feature 'When user visits document selection page' do
   context 'user does not have UK driving license or valid passport' do
     it 'should go to other documents page if user clicks I dont have either of these documents link' do
       click_link 'I don\'t have either of these documents'
-      # expect session to not contain
       expect(page).to have_current_path(other_identity_documents_path)
+      expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'passport' => false, 'driving_licence' => false, 'ni_driving_licence' => false })
     end
 
     it 'should go to other documents page if user does not have UK driving licence or UK passport' do

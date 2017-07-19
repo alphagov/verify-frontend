@@ -7,6 +7,7 @@ en:
     about_identity_accounts: about-identity-accounts
     about_choosing_a_company: about-choosing-a-company
     select_documents: select-documents
+    select_documents_none: select-documents-none
     other_identity_documents: other-identity-documents
     select_phone: select-phone
     will_it_work_for_me: will-it-work-for-me
@@ -44,6 +45,9 @@ en:
     further_information: further-information
     further_information_cancel: further-information/cancel
     further_information_null_attribute: futher-information/null-attribute
+    select_proof_of_address: select-proof-of-address
+    select_proof_of_address_none: select-proof-of-address-none
+    no_idps_available: no-idps-available
   navigation:
     next: Next
     start_now: Start now
@@ -449,6 +453,23 @@ en:
       example_text: "Example: %{example}"
       attribute_validation_message: Enter a valid %{cycle_three_name}
       null_attribute: I don’t have an %{cycle_three_name}
+    select_proof_of_address:
+      title: Proof of your address
+      sub_heading: Certified companies need to check your address is correct. They do this by checking with your bank or credit card provider.
+      highlight: This is a free service, and the certified company cannot see any of your financial transactions.
+      financial_details:
+        heading: 'Do you have the following:'
+        none_of_these_documents: I don't have any of these documents
+        question:
+          debit_card: Debit card?
+          credit_card: Credit card?
+          bank_account: UK bank account?
+    no_idps_available:
+      title: No IDPS available
+      heading: GOV.UK Verify won’t work for you
+      text: Based on your answers, none of the certified companies can verify you.
+      details_html: You can %{href}; the more accurately you answer the questions, the more likely it is that a certified company can verify you.
+      details_link: change your answers to the questions
   errors:
     transaction_list:
       title: Find the service you were using to start again
@@ -487,3 +508,4 @@ en:
       reason_pre: "This may be because:"
       reason_one: the link you clicked is broken
       reason_two: you entered an incorrect web address
+    no_selection: Please answer all the questions

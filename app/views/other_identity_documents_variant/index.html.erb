@@ -1,0 +1,41 @@
+<%= page_title 'hub.other_documents.title_other_identity_documents' %>
+<% content_for :feedback_source, 'OTHER_IDENTITY_DOCUMENTS_PAGE' %>
+
+<div id="no-documents-message" class="visually-hidden" aria-live="assertive" data-no-documents-message="<%= h t('hub.select_documents.no_documents_message') %>"></div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.other_documents.title_other_identity_documents' %></h1>
+    <p><%= t 'hub.select_documents.documents_from_other_countries' %></p>
+
+    <div class="panel panel-border-narrow">
+      <%= t 'hub.select_documents.highlight' %>
+    </div>
+
+    <% if flash[:errors] %>
+        <div id="validation-error-message-no-js" class="validation-message form-group">
+          <p class="error"><%= flash[:errors] %></p>
+        </div>
+    <% end %>
+
+    <%= form_for @form, url: other_identity_documents_submit_path, html: {id: 'validate-other-documents', class: 'select-documents-form', novalidate: 'novalidate', 'data-msg': t('hub.select_documents.errors.no_selection')} do |f| %>
+
+            <h2 class="heading-medium"><%= t 'hub.other_documents.non_uk_id_document' %></h2>
+            <%= content_tag :div, class: form_question_class do %>
+              <fieldset>
+                <%= f.custom_radio_button :non_uk_id_document, true, t('hub.select_documents.documents_option_yes') %>
+                <%= f.custom_radio_button :non_uk_id_document, false, t('option.no') %>
+              </fieldset>
+
+        <% end %>
+
+        <div id="validation-error-message-js"></div>
+
+        <div class="actions">
+          <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+        </div>
+    <% end %>
+
+
+  </div>
+</div>

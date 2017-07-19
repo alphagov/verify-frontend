@@ -1,0 +1,48 @@
+<%= page_title 'hub.select_proof_of_address.title' %>
+<% content_for :feedback_source, 'PROOF_OF_ADDRESS' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t('hub.select_proof_of_address.title') %></h1>
+    <p><%= t('hub.select_proof_of_address.sub_heading') %></p>
+    <div class="panel panel-border-narrow">
+      <%= t('hub.select_proof_of_address.highlight') %>
+    </div>
+
+    <%= form_for @form, url: select_proof_of_address_path, html: {'data-msg': t('errors.no_selection')} do |f| %>
+
+        <%= render 'shared/form-errors', errors: flash[:errors] %>
+
+        <h2 class="heading-medium"><%= t('hub.select_proof_of_address.financial_details.heading') %></h2>
+
+        <%= content_tag :div, class: form_question_class do %>
+            <fieldset class="inline">
+              <legend><span class="form-label"><strong><%= t('hub.select_proof_of_address.financial_details.question.bank_account') %></strong></span></legend>
+              <%= f.custom_radio_button :uk_bank_account_details, true, t('hub.select_documents.documents_option_yes'), { :piwik_event_tracking => 'uk_bank_account_details'}  %>
+              <%= f.custom_radio_button :uk_bank_account_details, false, t('option.no'), { :piwik_event_tracking => 'uk_bank_account_details'} %>
+            </fieldset>
+        <% end %>
+        <%= content_tag :div, class: form_question_class do %>
+            <fieldset class="inline">
+              <legend><span class="form-label"><strong><%= t('hub.select_proof_of_address.financial_details.question.debit_card') %></strong></span></legend>
+              <%= f.custom_radio_button :debit_card, true, t('hub.select_documents.documents_option_yes'), { :piwik_event_tracking => 'debit_card'}  %>
+              <%= f.custom_radio_button :debit_card, false, t('option.no'), { :piwik_event_tracking => 'debit_card'} %>
+            </fieldset>
+        <% end %>
+        <%= content_tag :div, class: form_question_class do %>
+            <fieldset class="inline">
+              <legend><span class="form-label"><strong><%= t('hub.select_proof_of_address.financial_details.question.credit_card') %></strong></span></legend>
+              <%= f.custom_radio_button :credit_card, true, t('hub.select_documents.documents_option_yes'), { :piwik_event_tracking => 'credit_card'}  %>
+              <%= f.custom_radio_button :credit_card, false, t('option.no'), { :piwik_event_tracking => 'credit_card'}  %>
+            </fieldset>
+        <% end %>
+
+        <div id="validation-error-message-js"></div>
+
+        <div class="actions">
+          <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+          <%= link_to t('hub.select_proof_of_address.financial_details.none_of_these_documents'), select_proof_of_address_no_documents_path %>
+        </div>
+    <% end %>
+  </div>
+</div>

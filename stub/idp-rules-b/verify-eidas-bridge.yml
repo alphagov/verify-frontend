@@ -1,0 +1,5 @@
+simpleIds: [ "verify-eidas-bridge" ]
+recommended_profiles: []
+non_recommended_profiles: []
+send_hints: false
+send_language_hint: false

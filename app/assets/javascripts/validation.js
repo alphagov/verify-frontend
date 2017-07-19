@@ -38,10 +38,10 @@
             .closest('.form-group').addClass('form-group-error');
         },
         unhighlight: function(element) {
-          var formGroup = $(element).closest('.form-group');
-          $(element).removeClass('form-control-error');
-          formGroup.removeClass('form-group-error');
-          formGroup.find('.error-message').hide();
+        var formGroup = $(element).closest('.form-group');
+            $(element).removeClass('form-control-error');
+            formGroup.removeClass('form-group-error');
+            formGroup.find('.error-message').hide();
         },
         ignore: '.js-hidden *'
       });

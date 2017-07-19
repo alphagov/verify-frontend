@@ -37,7 +37,10 @@ class FeedbackSourceMapper
       'WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE' => 'why_might_this_not_work_for_me',
       'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE' => 'will_not_work_without_uk_address',
       'OTHER_IDENTITY_DOCUMENTS_PAGE' => 'other_identity_documents',
-      'PRODUCT_PAGE' => product_page_url
+      'PRODUCT_PAGE' => product_page_url,
+      'PROOF_OF_ADDRESS' => 'select_proof_of_address',
+      'NO_IDPS_AVAILABLE' => 'no_idps_available'
+
   }.freeze
   end
 
