@@ -82,6 +82,16 @@ class SessionProxy
     IdpAuthnResponse.validated_response(response)
   end
 
+  def country_authn_response(session_id, saml_response, relay_state)
+    body = {
+        PARAM_RELAY_STATE => relay_state,
+        PARAM_SAML_RESPONSE => saml_response,
+        PARAM_ORIGINATING_IP => originating_ip
+    }
+    response = @api_client.put(country_authn_response_endpoint(session_id), body)
+    CountryAuthnResponse.validated_response(response)
+  end
+
   def matching_outcome(session_id)
     response = @api_client.get(matching_outcome_endpoint(session_id))
     MatchingOutcomeResponse.validated_response(response).outcome

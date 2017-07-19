@@ -151,6 +151,18 @@ module ApiTestHelper
         .to_return(body: response.to_json, status: 200)
   end
 
+  def stub_api_country_authn_response(relay_state, response = { 'idpResult' => 'SUCCESS', 'isRegistration' => false })
+    authn_response_body = {
+        PARAM_SAML_RESPONSE => 'my-saml-response',
+        PARAM_RELAY_STATE => relay_state,
+        PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
+    }
+
+    stub_request(:put, api_uri(country_authn_response_endpoint(default_session_id)))
+        .with(body: authn_response_body)
+        .to_return(body: response.to_json, status: 200)
+  end
+
   def stub_api_returns_error(code)
     stub_request(:get, api_uri(idp_authn_request_endpoint(default_session_id)))
         .to_return(body: an_error_response(code).to_json, status: 500)

@@ -100,4 +100,16 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     expect(a_request(:get, INTERNAL_PIWIK.url)
                .with(query: hash_including('action_name' => 'Success - SIGN_IN_WITH_IDP at LOA LEVEL_2'))).to have_been_made.once
   end
+
+  it 'will redirect the user to /response-processing on successful sign in at the Country' do
+    stub_session
+    stub_matching_outcome
+    api_request = stub_api_country_authn_response(session_id, 'countryResult' => 'SUCCESS', 'isRegistration' => false, 'loaAchieved' => 'LEVEL_2')
+
+    visit("/test-saml?session-id=#{session_id}")
+    click_button 'saml-eidas-response-post'
+
+    expect(page).to have_current_path '/response-processing'
+    expect(api_request).to have_been_made.once
+  end
 end

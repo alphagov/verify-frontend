@@ -49,3 +49,20 @@
     <%= hidden_field_tag('language', 'cy') %>
     <div><%= submit_tag 'saml-response-post-with-cy-language' %></div>
 <% end -%>
+<%= form_tag('/SAML2/SSO/EidasResponse/POST') do -%>
+    <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
+    <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
+    <div><%= submit_tag 'saml-eidas-response-post' %></div>
+<% end -%>
+<%= form_tag('/SAML2/SSO/EidasResponse/POST') do -%>
+    <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
+    <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
+    <%= hidden_field_tag('language', 'en') %>
+    <div><%= submit_tag 'saml-eidas-response-post-with-en-language' %></div>
+<% end -%>
+<%= form_tag('/SAML2/SSO/EidasResponse/POST') do -%>
+    <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
+    <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
+    <%= hidden_field_tag('language', 'cy') %>
+    <div><%= submit_tag 'saml-eidas-response-post-with-cy-language' %></div>
+<% end -%>
