@@ -7,6 +7,7 @@ cy:
     about_identity_accounts: am-gyfrifon-hunaniaeth
     about_choosing_a_company: am-ddewis-cwmni
     select_documents: dewis-dogfennau
+    select_documents_none: select-documents-none-cy
     other_identity_documents: dogfennau-hunaniaeth-eraill
     select_phone: dewis-ffon
     will_it_work_for_me: a-fydd-yn-gweithio-i-mi
@@ -44,6 +45,7 @@ cy:
     further_information_cancel: gwybodaeth-bellach/dileu
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
     select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
+    select_proof_of_address_none: select-proof-of-address-none-cy
     no_idps_available: dim-idps-ar-gael
   navigation:
     next: Nesaf
@@ -511,3 +513,4 @@ cy:
       reason_pre: "Gallai hyn fod oherwydd:"
       reason_one: bod y ddolen rydych wedi clicio arni wedi torri
       reason_two: rydych wedi rhoi cyfeiriad gwefan anghywir
+    no_selection: Dylech ateb y cwestiynau

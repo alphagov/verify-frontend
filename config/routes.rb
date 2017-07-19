@@ -97,6 +97,7 @@ Rails.application.routes.draw do
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
     get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
+    get 'select_proof_of_address_none', to: 'select_proof_of_address#no_documents', as: :select_proof_of_address_no_documents
     post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
     get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
 
@@ -110,6 +111,7 @@ Rails.application.routes.draw do
 
     constraints proof_of_address_a do
       get 'select_documents', to: 'select_documents#index', as: :select_documents
+      get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
       post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
       get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
 
@@ -124,7 +126,9 @@ Rails.application.routes.draw do
 
     constraints proof_of_address_b do
       get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
+      get 'select_documents_none', to: 'select_documents_variant#no_documents', as: :select_documents_no_documents
       post 'select_documents', to: 'select_documents_variant#select_documents', as: :select_documents_submit
+
       get 'unlikely_to_verify', to: 'select_documents_variant#unlikely_to_verify', as: :unlikely_to_verify
 
       get 'other_identity_documents', to: 'other_identity_documents_variant#index', as: :other_identity_documents

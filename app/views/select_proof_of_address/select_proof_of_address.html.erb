@@ -9,7 +9,7 @@
       <%= t('hub.select_proof_of_address.highlight') %>
     </div>
 
-    <%= form_for @form, url: select_proof_of_address_path do |f| %>
+    <%= form_for @form, url: select_proof_of_address_path, html: {'data-msg': t('errors.no_selection')} do |f| %>
 
         <%= render 'shared/form-errors', errors: flash[:errors] %>
 
@@ -41,7 +41,7 @@
 
         <div class="actions">
           <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
-          <%= link_to t('hub.select_proof_of_address.financial_details.none_of_these_documents'), select_phone_path %>
+          <%= link_to t('hub.select_proof_of_address.financial_details.none_of_these_documents'), select_proof_of_address_no_documents_path %>
         </div>
     <% end %>
   </div>

@@ -22,4 +22,9 @@ class SelectDocumentsVariantController < ApplicationController
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
   end
+
+  def no_documents
+    selected_answer_store.store_selected_answers('documents', 'passport' => false, 'driving_licence' => false, 'ni_driving_licence' => false)
+    redirect_to other_identity_documents_path
+  end
 end

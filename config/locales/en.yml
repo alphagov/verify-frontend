@@ -7,6 +7,7 @@ en:
     about_identity_accounts: about-identity-accounts
     about_choosing_a_company: about-choosing-a-company
     select_documents: select-documents
+    select_documents_none: select-documents-none
     other_identity_documents: other-identity-documents
     select_phone: select-phone
     will_it_work_for_me: will-it-work-for-me
@@ -45,6 +46,7 @@ en:
     further_information_cancel: further-information/cancel
     further_information_null_attribute: futher-information/null-attribute
     select_proof_of_address: select-proof-of-address
+    select_proof_of_address_none: select-proof-of-address-none
     no_idps_available: no-idps-available
   navigation:
     next: Next
@@ -457,7 +459,7 @@ en:
       highlight: This is a free service, and the certified company cannot see any of your financial transactions.
       financial_details:
         heading: 'Do you have the following:'
-        none_of_these_documents: I don’t have any of these documents
+        none_of_these_documents: I don't have any of these documents
         question:
           debit_card: Debit card?
           credit_card: Credit card?
@@ -506,3 +508,4 @@ en:
       reason_pre: "This may be because:"
       reason_one: the link you clicked is broken
       reason_two: you entered an incorrect web address
+    no_selection: Please answer all the questions
