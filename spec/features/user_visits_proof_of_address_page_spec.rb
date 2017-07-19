@@ -60,7 +60,18 @@ describe 'User journeys with proof of address AB test cookie' do
       expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
     end
 
-    it 'at proof of address with bank account goes to IDP picker page and updates selected answers' do
+    it 'at proof of address with passport and driving licence goes to select phone page' do
+      stub_api_idp_list
+      page.set_rack_session(selected_answers: { documents: { passport: true, driving_licence: true } })
+      visit '/select-proof-of-address'
+      choose 'select_proof_of_address_form_uk_bank_account_details_false'
+      choose 'select_proof_of_address_form_debit_card_false'
+      choose 'select_proof_of_address_form_credit_card_false'
+      click_button 'Continue'
+      expect(page).to have_current_path(select_phone_path)
+    end
+
+    it 'at proof of address with bank account goes to select phone page and updates selected answers' do
       stub_api_idp_list
       visit '/select-proof-of-address'
       choose 'select_proof_of_address_form_uk_bank_account_details_true'
