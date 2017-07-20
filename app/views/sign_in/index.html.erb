@@ -2,8 +2,13 @@
 <% content_for :feedback_source, 'SIGN_IN_PAGE' %>
 
 <%= link_to t('navigation.back'), start_path, class: 'link-back' %>
-<h1 class="heading-large"><%= t 'hub.signin.heading' %></h1>
-<p><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), about_path) %></p>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.signin.heading' %></h1>
+    <p><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), about_path) %></p>
+  </div>
+</div>
 
 <div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale)  %>">
   <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>

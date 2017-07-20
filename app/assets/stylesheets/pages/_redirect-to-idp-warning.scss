@@ -4,9 +4,10 @@
     @include inline-block;
     padding: 0 20px 0 20px;
     width: 50%;
+    box-sizing: border-box;
 
     @include media (tablet) {
-      width: 24%;
+      max-width: 200px;
     }
   }
 
