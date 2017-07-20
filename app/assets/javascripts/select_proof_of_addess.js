@@ -29,7 +29,7 @@
           var target = $(event.target);
           var action = target.val() === 'true' ? 'yes' : 'no';
           var name = target.attr('piwik_event_tracking');
-          _paq.push(['Evidence', action, name]);
+          _paq.push(['trackEvent', 'Evidence', action, name]);
       });
     }
   };
