@@ -1,0 +1,20 @@
+@include media(tablet) {
+  main {
+    position: relative;
+  }
+
+  .verify-logo-right {
+    position: absolute;
+    right: 0;
+    top: 80px;
+    width: 33.333%;
+    text-align: center;
+  }
+}
+
+.slides,
+.no-right-hand-logo {
+  + .feedback-link + .verify-logo-right {
+    display: none;
+  }
+}
