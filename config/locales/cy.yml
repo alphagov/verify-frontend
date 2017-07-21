@@ -213,7 +213,9 @@ cy:
     idp_wont_work_for_you_one_doc:
       title: Identity Provider will not work for you
       heading: "%{idp_name} cannot verify your identity"
-      choose_another_company_text: You have to choose a different certified company to verify your identity.
+      choose_another_company_html: |
+        <p>You need to be a %{idp_name} online banking customer if you do not have both a UK passport and photo card driving licence, as you need to use a %{idp_name} PINsentry card reader or Mobilesentry app.</p>
+        <p>You have to choose a different certified company to verify your identity.</p>
       choose_another_certified_company_link: Choose another company
     no_mobile_phone:
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
