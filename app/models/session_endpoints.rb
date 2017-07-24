@@ -22,6 +22,7 @@ module SessionEndpoints
   SESSION_ID = 'sessionId'.freeze
   COUNTRIES_PATH_PREFIX = Pathname(COUNTRIES_PATH)
   COUNTRY_AUTHN_REQUEST_SUFFIX = 'country-authn-request'.freeze
+  COUNTRY_AUTHN_RESPONSE_SUFFIX = 'country-authn-response'.freeze
 
   def countries_endpoint(session_id)
     COUNTRIES_PATH_PREFIX.join(session_id).to_s
@@ -45,6 +46,10 @@ module SessionEndpoints
 
   def country_authn_request_endpoint(session_id)
     session_endpoint(session_id, COUNTRY_AUTHN_REQUEST_SUFFIX)
+  end
+
+  def country_authn_response_endpoint(session_id)
+    session_endpoint(session_id, COUNTRY_AUTHN_RESPONSE_SUFFIX)
   end
 
   def idp_authn_request_endpoint(session_id)

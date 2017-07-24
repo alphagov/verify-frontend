@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
+  post 'SAML2/SSO/EidasResponse/POST' => 'authn_response#country_response'
   match "/404", to: "errors#page_not_found", via: :all
 
   if %w(test development).include? Rails.env
