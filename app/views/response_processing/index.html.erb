@@ -2,7 +2,9 @@
 <% content_for :meta_refresh, '2' %>
 
 <div class="grid-row response-processing">
-  <h1 class="heading-large"><%= t('hub.response_processing.heading', rp_name: @rp_name) %></h1>
-  <p><%= t('hub.response_processing.bear_with_us') %></p>
-  <%= image_tag 'loading.gif', alt: 'Loading animation', class: 'loading' %>
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t('hub.response_processing.heading', rp_name: @rp_name) %></h1>
+    <p><%= t('hub.response_processing.bear_with_us') %></p>
+    <%= image_tag 'loading.gif', alt: 'Loading animation', class: 'loading' %>
+  </div>
 </div>
