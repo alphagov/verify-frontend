@@ -1,6 +1,9 @@
 demo_period_blacklist:
   - test-rp-no-demo
 
+ab_test_blacklist:
+  - test-rp-no-ab-test
+
 allow_continue_on_failed_registration:
   - test-rp-with-continue-on-fail
 

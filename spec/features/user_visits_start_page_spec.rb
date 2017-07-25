@@ -138,9 +138,9 @@ RSpec.describe 'When the user visits the start page' do
     expect(header).to match(/expires=#{2.weeks.from_now.strftime(RACK_COOKIE_DATE_FORMAT)}/)
   end
 
-  it 'will not set ab_test cookie if RP is in early beta' do
+  it 'will not set ab_test cookie if RP is in AB test blacklist' do
     set_session_and_session_cookies!
-    page.set_rack_session(transaction_simple_id: 'test-rp-no-demo')
+    page.set_rack_session(transaction_simple_id: 'test-rp-no-ab-test')
     visit '/start'
     expect(page.response_headers['Set-Cookie']).to_not include("ab_test=")
   end
