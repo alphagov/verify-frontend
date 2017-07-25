@@ -32,15 +32,23 @@ class WillItWorkForMeController < ApplicationController
 private
 
   def next_page
-    case [@form.above_age_threshold?, @form.resident_last_12_months?, @form.not_resident_reason]
-    when [true, true, nil]
-      select_documents_path
-    when [true, false, 'AddressButNotResident']
-      may_not_work_if_you_live_overseas_path
-    when [true, false, 'NoAddress']
-      will_not_work_without_uk_address_path
+    if @form.resident_last_12_months?
+      if @form.above_age_threshold?
+        select_documents_path
+      else
+        why_might_this_not_work_for_me_path
+      end
     else
-      why_might_this_not_work_for_me_path
+      case @form.not_resident_reason
+      when 'AddressButNotResident'
+        may_not_work_if_you_live_overseas_path
+      when 'NoAddress'
+        will_not_work_without_uk_address_path
+      when 'MovedRecently'
+        why_might_this_not_work_for_me_path
+      else
+        raise ArgumentError.new("Invalid Reason '#{@form.not_resident_reason}' for field 'not_resident_reason'.")
+      end
     end
   end
 end
