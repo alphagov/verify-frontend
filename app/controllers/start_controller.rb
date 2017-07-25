@@ -3,7 +3,7 @@ class StartController < ApplicationController
 
   def index
     @form = StartForm.new({})
-    unless current_transaction_is_in_early_beta
+    unless AbTest.current_transaction_is_excluded_from_ab_test(current_transaction_simple_id)
       ab_test_cookie = cookies[CookieNames::AB_TEST]
       if ab_test_cookie.nil?
         set_ab_test_cookie(experiment_selections)
@@ -31,10 +31,6 @@ private
   def is_missing_experiments?(experiment_selection_hash)
     missing_keys = ::AB_TESTS.keys - experiment_selection_hash.keys
     !missing_keys.empty?
-  end
-
-  def current_transaction_is_in_early_beta
-    RP_CONFIG.fetch('demo_period_blacklist').include?(current_transaction_simple_id)
   end
 
   def set_ab_test_cookie(value)

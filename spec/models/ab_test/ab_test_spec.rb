@@ -28,7 +28,8 @@ module AbTest
 
     context '#report' do
       let(:analytics_reporter) { double(:analytics_reporter) }
-      before(:each) { stub_const('RP_CONFIG', 'demo_period_blacklist' => 'RP in early beta') }
+      let(:excluded_rp_simple_id) { 'RP is excluded from AB test'.freeze }
+      before(:each) { stub_const('RP_CONFIG', 'ab_test_blacklist' => excluded_rp_simple_id) }
 
       it 'should report to piwik if there are multiple alternatives' do
         alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }, { 'name' => 'no', 'percent' => 25 }] } }
@@ -53,12 +54,12 @@ module AbTest
         subject.report('logos', 'logos_yes', 'rp', double(:request))
       end
 
-      it 'should not report to piwik if RP is in early beta' do
+      it 'should not report to piwik if RP is in AB test blacklist' do
         alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }, { 'name' => 'no', 'percent' => 25 }] } }
         stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
         stub_const('ANALYTICS_REPORTER', analytics_reporter)
         expect(analytics_reporter).to_not receive(:report_custom_variable)
-        subject.report('logos', 'logos_yes', 'RP in early beta', double(:request))
+        subject.report('logos', 'logos_yes', excluded_rp_simple_id, double(:request))
       end
     end
   end

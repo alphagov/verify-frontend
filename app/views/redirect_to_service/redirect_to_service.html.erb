@@ -18,8 +18,10 @@
   </div>
 </div>
 
-<div class="response-processing js-show">
-  <h1 class="heading-large"><%= @transition_message %></h1>
-  <p><%= t('hub.redirect_to_service.please_wait') %></p>
-  <%= image_tag 'loading.gif', alt: t('hub.redirect_to_service.loading'), class: 'loading' %>
+<div class="grid-row response-processing js-show">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= @transition_message %></h1>
+    <p><%= t('hub.redirect_to_service.please_wait') %></p>
+    <%= image_tag 'loading.gif', alt: t('hub.redirect_to_service.loading'), class: 'loading' %>
+  </div>
 </div>
