@@ -53,6 +53,6 @@ cy:
           <br/>Closed on bank holidays
         </p>
       interstitial_question: |
-        <p>Gall FancyPants ddefnyddio data cwsmeriaid presennol i'w dilysu.</p>
-        <h2 class="heading-medium">Ydych chi'n gwsmer bancio ar-lein FancyPants?</h2>
-        <p>Mae FancyPants angen i chi ddefnyddio eich darllenydd cerdyn PINsentry, Mobilesentry neu gyfrinair i helpu i ddilysu pwy ydych chi.</p>
+        <p>FancyPants can use existing customers data to verify them.</p>
+        <h2 class="heading-medium">Are you a FancyPants customer?</h2>
+        <p>You will need FancyPants stuff</p>
