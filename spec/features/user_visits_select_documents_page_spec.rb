@@ -43,5 +43,13 @@ RSpec.feature 'When user visits document selection page' do
       expect(page).to have_current_path(other_identity_documents_path)
       expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'passport' => false, 'driving_licence' => false, 'ni_driving_licence' => false })
     end
+
+    it 'should go to other documents page if user does not have UK passport and only has NI driving licence' do
+      choose 'select_documents_form_any_driving_licence_true'
+      check 'select_documents_form_ni_driving_licence'
+      choose 'select_documents_form_passport_false'
+      click_button 'Continue'
+      expect(page).to have_current_path(other_identity_documents_path)
+    end
   end
 end
