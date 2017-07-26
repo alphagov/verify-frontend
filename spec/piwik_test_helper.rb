@@ -55,3 +55,14 @@ def stub_piwik_report_loa_achieved(loa_achieved)
   }
   stub_piwik_request(piwik_request)
 end
+
+def stub_piwik_request_with_rp(extra_parameters = {})
+  cvar = {
+    '_cvar' => "{\"1\":[\"RP\",\"analytics description for test-rp\"]}"
+  }
+  stub_piwik_request(extra_parameters.merge(cvar))
+end
+
+def a_request_to_piwik
+  a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+end

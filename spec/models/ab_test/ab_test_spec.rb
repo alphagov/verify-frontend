@@ -27,38 +27,37 @@ module AbTest
     end
 
     context '#report' do
-      let(:analytics_reporter) { double(:analytics_reporter) }
+      let(:federation_reporter) { double(:federation_reporter) }
       let(:excluded_rp_simple_id) { 'RP is excluded from AB test'.freeze }
-      before(:each) { stub_const('RP_CONFIG', 'ab_test_blacklist' => excluded_rp_simple_id) }
+      before(:each) {
+        stub_const('RP_CONFIG', 'ab_test_blacklist' => excluded_rp_simple_id)
+        stub_const('FEDERATION_REPORTER', federation_reporter)
+      }
 
       it 'should report to piwik if there are multiple alternatives' do
         alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }, { 'name' => 'no', 'percent' => 25 }] } }
         stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
-        stub_const('ANALYTICS_REPORTER', analytics_reporter)
-        expect(analytics_reporter).to receive(:report_custom_variable)
+        expect(federation_reporter).to receive(:report_ab_test)
         subject.report('logos', 'logos_yes', 'rp', double(:request))
       end
 
       it 'should not report to piwik if the experiment is concluded' do
         alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }] } }
         stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
-        stub_const('ANALYTICS_REPORTER', analytics_reporter)
-        expect(analytics_reporter).to_not receive(:report_custom_variable)
+        expect(federation_reporter).to_not receive(:report_ab_test)
         subject.report('logos', 'logos_yes', 'rp', double(:request))
       end
 
       it 'should not report to piwik if there is no alternative' do
         stub_const('AB_TESTS', {})
-        stub_const('ANALYTICS_REPORTER', analytics_reporter)
-        expect(analytics_reporter).to_not receive(:report_custom_variable)
+        expect(federation_reporter).to_not receive(:report_ab_test)
         subject.report('logos', 'logos_yes', 'rp', double(:request))
       end
 
       it 'should not report to piwik if RP is in AB test blacklist' do
         alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }, { 'name' => 'no', 'percent' => 25 }] } }
         stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
-        stub_const('ANALYTICS_REPORTER', analytics_reporter)
-        expect(analytics_reporter).to_not receive(:report_custom_variable)
+        expect(federation_reporter).to_not receive(:report_ab_test)
         subject.report('logos', 'logos_yes', excluded_rp_simple_id, double(:request))
       end
     end

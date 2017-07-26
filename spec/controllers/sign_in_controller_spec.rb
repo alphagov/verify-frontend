@@ -18,6 +18,7 @@ describe SignInController do
 
       get :index, params: { locale: 'en' }
       expect(subject).to render_template(:index)
+      expect(a_request_to_piwik).to have_been_made.twice
     end
   end
 
