@@ -69,17 +69,53 @@ describe ChooseACertifiedCompanyController do
       expect(subject).to redirect_to redirect_to_idp_warning_path
     end
 
-    it 'redirects to IDP question page when user has one doc and IDP flag is enabled' do
-      session[:selected_answers] = { 'documents' => { 'driving_licence' => true } }
-      post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
-
-      expect(subject).to redirect_to redirect_to_idp_question_path
-    end
-
     it 'returns 404 page if IDP is non-existent' do
       post :select_idp, params: { locale: 'en', entity_id: 'http://notanidp.com' }
 
       expect(response).to have_http_status :not_found
+    end
+  end
+
+
+  context 'redirect scenarios for one doc enabled IDP where user has only one document of evidence' do
+    before :each do
+      set_session_and_cookies_with_loa('LEVEL_2')
+    end
+
+    it 'redirects to interstitial question when user has passport but no driving licence' do
+      session[:selected_answers] = {
+          'documents' => { 'passport' => true },
+          'phone' => { 'mobile_phone' => true }
+      }
+      post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
+      expect(subject).to redirect_to redirect_to_idp_question_path
+    end
+
+    it 'redirects to interstitial question when user has GB driving licence but no passport' do
+      session[:selected_answers] = {
+          'documents' => { 'driving_licence' => true },
+          'phone' => { 'mobile_phone' => true }
+      }
+      post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
+      expect(subject).to redirect_to redirect_to_idp_question_path
+    end
+
+    it 'redirects to interstitial question when user has NI driving licence and passport' do
+      session[:selected_answers] = {
+          'documents' => { 'ni_driving_licence' => true, 'passport' => true },
+          'phone' => { 'mobile_phone' => true }
+      }
+      post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
+      expect(subject).to redirect_to redirect_to_idp_question_path
+    end
+
+    it 'redirects to warning page when user has two documents of evidence' do
+      session[:selected_answers] = {
+          'documents' => { 'driving_licence' => true, 'passport' => true },
+          'phone' => { 'mobile_phone' => true }
+      }
+      post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
+      expect(subject).to redirect_to redirect_to_idp_warning_path
     end
   end
 
