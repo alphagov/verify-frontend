@@ -16,11 +16,11 @@ describe 'User journeys with proof of address AB test cookie' do
       expect(page).to have_current_path(select_phone_path)
     end
 
-    it 'at non uk id page the next page goes to select phone' do
+    it 'at non uk id page the next page goes to proof of address' do
       visit '/other-identity-documents'
       choose 'other_identity_documents_form_non_uk_id_document_true'
       click_button 'Continue'
-      expect(page).to have_current_path(select_phone_path)
+      expect(page).to have_current_path(select_proof_of_address_path)
     end
   end
 
