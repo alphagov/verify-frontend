@@ -19,15 +19,4 @@ class TestSamlController < ApplicationController
 
     render 'idp_request'
   end
-
-  def country_request
-    @saml_request = params['SAMLRequest']
-    @relay_state = params['RelayState']
-    @registration = params['registration']
-    @language_hint = params['language']
-
-    @hints = blah.split('&').select { |x| x.starts_with? 'hint' }.map { |x| x.split('=')[1] }.join(', ')
-
-    render 'country_request'
-  end
 end
