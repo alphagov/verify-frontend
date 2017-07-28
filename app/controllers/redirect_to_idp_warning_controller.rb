@@ -6,7 +6,7 @@ class RedirectToIdpWarningController < ApplicationController
     @idp = decorated_idp
     @service_name = current_transaction.name
     if @idp.viewable?
-      render 'logos'
+      render :index
     else
       something_went_wrong("Couldn't display IDP with entity id: #{@idp.entity_id}")
     end
