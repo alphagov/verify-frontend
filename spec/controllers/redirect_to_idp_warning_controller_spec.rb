@@ -11,7 +11,7 @@ describe RedirectToIdpWarningController do
     session[:selected_idp_was_recommended] = [true, false].sample
   end
 
-  context 'index page for the control of TT-805 AB Test' do
+  context 'renders index view' do
     subject { get :index, params: { locale: 'en' } }
 
     it 'warning page when idp selected' do
@@ -29,7 +29,7 @@ describe RedirectToIdpWarningController do
     end
   end
 
-  context 'index page for the variant_heading_account variant of TT-805 AB Test' do
+  context 'renders index view variant_heading_account view' do
     subject { get :index_variant_heading_account, params: { locale: 'en' } }
 
     it 'warning page when idp selected' do
@@ -47,7 +47,7 @@ describe RedirectToIdpWarningController do
     end
   end
 
-  context 'index page for the variant_heading_website variant of TT-805 AB Test' do
+  context 'renders variant_heading_website view' do
     subject { get :index_variant_heading_website, params: { locale: 'en' } }
 
     it 'warning page when idp selected' do
