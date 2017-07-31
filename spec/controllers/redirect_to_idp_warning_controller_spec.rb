@@ -11,7 +11,7 @@ describe RedirectToIdpWarningController do
     session[:selected_idp_was_recommended] = [true, false].sample
   end
 
-  context 'renders idp logos' do
+  context 'index page for the control of TT-805 AB Test' do
     subject { get :index, params: { locale: 'en' } }
 
     it 'warning page when idp selected' do
@@ -20,6 +20,42 @@ describe RedirectToIdpWarningController do
                                  'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
 
       expect(subject).to render_template(:index)
+    end
+
+    it 'error page when no idp selected' do
+      session[:selected_idp] = {}
+
+      expect(subject).to render_template('errors/something_went_wrong')
+    end
+  end
+
+  context 'index page for the variant_heading_account variant of TT-805 AB Test' do
+    subject { get :index_variant_heading_account, params: { locale: 'en' } }
+
+    it 'warning page when idp selected' do
+      session[:selected_idp] = { 'simple_id' => 'stub-idp-two',
+                                 'entity_id' => 'http://idcorp.com',
+                                 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+
+      expect(subject).to render_template(:index_variant_heading_account)
+    end
+
+    it 'error page when no idp selected' do
+      session[:selected_idp] = {}
+
+      expect(subject).to render_template('errors/something_went_wrong')
+    end
+  end
+
+  context 'index page for the variant_heading_website variant of TT-805 AB Test' do
+    subject { get :index_variant_heading_website, params: { locale: 'en' } }
+
+    it 'warning page when idp selected' do
+      session[:selected_idp] = { 'simple_id' => 'stub-idp-two',
+                                 'entity_id' => 'http://idcorp.com',
+                                 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+
+      expect(subject).to render_template(:index_variant_heading_website)
     end
 
     it 'error page when no idp selected' do
