@@ -1,9 +1,9 @@
-(function(global) {
+(function (global) {
     'use strict';
     var GOVUK = global.GOVUK || {};
     var $ = global.jQuery;
 
-    function setPiwikVisitorIdCookie () {
+    function setPiwikVisitorIdCookie() {
         var visitor_id = this.getVisitorId();
         GOVUK.setCookie('PIWIK_VISITOR_ID', visitor_id);
     }
@@ -14,7 +14,7 @@
         piwikAnalyticsQueue,
         enTitle;
 
-    if(!trackerUrl) {
+    if (!trackerUrl) {
         return;
     }
 
@@ -23,17 +23,17 @@
     enTitle = $('meta[name="verify|title"]').attr("content");
 
     piwikAnalyticsQueue = [
-      ['setDocumentTitle', enTitle ],
-      ['trackPageView'],
-      ['enableLinkTracking'],
-      [setPiwikVisitorIdCookie],
-      ['setTrackerUrl', trackerUrl],
-      ['setSiteId', siteId]
+        ['setDocumentTitle', enTitle],
+        ['trackPageView'],
+        ['enableLinkTracking'],
+        [setPiwikVisitorIdCookie],
+        ['setTrackerUrl', trackerUrl],
+        ['setSiteId', siteId]
     ];
 
     if (customUrl) {
-      // customUrl needs to go at the beginning of the piwik array
-      piwikAnalyticsQueue.unshift(['setCustomUrl', customUrl]);
+        // customUrl needs to go at the beginning of the piwik array
+        piwikAnalyticsQueue.unshift(['setCustomUrl', customUrl]);
     }
 
     global._paq = piwikAnalyticsQueue;
