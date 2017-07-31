@@ -10,13 +10,13 @@ describe OtherIdentityDocumentsController do
     stub_piwik_request('action_name' => 'Other Documents Next')
   end
 
-  it 'should go to select phone path and set selected answers when user has other identity documents' do
+  it 'should go to proof of address path after showing other identity documents view' do
     post :select_other_documents, params: {
       locale: 'en',
       other_identity_documents_form: { non_uk_id_document: 'true' }
     }
 
-    expect(subject).to redirect_to(select_phone_path)
+    expect(subject).to redirect_to(select_proof_of_address_path)
     expect(session[:selected_answers]).to eql('documents' => { non_uk_id_document: true })
   end
 
