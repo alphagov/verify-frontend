@@ -13,7 +13,13 @@
 
 .slides,
 .no-right-hand-logo {
-  ~ .verify-logo-right,
+  ~ .verify-logo-right {
+    display: none;
+  }
+}
+
+.slides,
+.no-right-hand-logo {
   // use the "+" selector to support IE6
   + .feedback-link + .verify-logo-right,
   + .verify-logo-right {

@@ -3,6 +3,7 @@ class StartController < ApplicationController
 
   def index
     @form = StartForm.new({})
+    FEDERATION_REPORTER.report_start_page(current_transaction, request)
     unless AbTest.current_transaction_is_excluded_from_ab_test(current_transaction_simple_id)
       ab_test_cookie = cookies[CookieNames::AB_TEST]
       if ab_test_cookie.nil?

@@ -1,6 +1,6 @@
 <%= page_title @title %>
 
-<div class="content-inner js-hidden">
+<div class="content-inner js-hidden no-right-hand-logo">
   <div class="grid-row">
     <div class="column-two-thirds">
       <h1 class="heading-large"><%= t('hub.redirect_to_service.heading') %></h1>
@@ -18,10 +18,8 @@
   </div>
 </div>
 
-<div class="grid-row response-processing js-show">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= @transition_message %></h1>
-    <p><%= t('hub.redirect_to_service.please_wait') %></p>
-    <%= image_tag 'loading.gif', alt: t('hub.redirect_to_service.loading'), class: 'loading' %>
-  </div>
+<div class="grid-row response-processing js-show no-right-hand-logo">
+  <h1 class="heading-large"><%= @transition_message %></h1>
+  <p><%= t('hub.redirect_to_service.please_wait') %></p>
+  <%= image_tag 'loading.gif', alt: t('hub.redirect_to_service.loading'), class: 'loading' %>
 </div>

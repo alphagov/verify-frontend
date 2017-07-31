@@ -1,7 +1,13 @@
 module Analytics
   class FederationReporter
+    AB_TEST_ACTION_NAME = 'AB test - %s'.freeze
+
     def initialize(analytics_reporter)
       @analytics_reporter = analytics_reporter
+    end
+
+    def report_start_page(current_transaction, request)
+      report_action(current_transaction, request, 'The user has reached the start page')
     end
 
     def report_sign_in(current_transaction, request)
@@ -10,6 +16,14 @@ module Analytics
 
     def report_registration(current_transaction, request)
       report_action(current_transaction, request, 'The Yes option was selected on the start page')
+    end
+
+    def report_ab_test(transaction_id, request, alternative_name)
+      current_transaction = RP_DISPLAY_REPOSITORY.fetch(transaction_id)
+      ab_test_custom_var = Analytics::CustomVariable.build(:ab_test, alternative_name)
+
+      report_action(current_transaction, request, AB_TEST_ACTION_NAME % alternative_name,
+                    ab_test_custom_var)
     end
 
     def report_idp_registration(request, idp_name, idp_name_history, evidence, recommended)
@@ -44,12 +58,13 @@ module Analytics
 
   private
 
-    def report_action(current_transaction, request, action)
+    def report_action(current_transaction, request, action, extra_custom_vars = {})
+      rp_custom_var = Analytics::CustomVariable.build(:rp, current_transaction.analytics_description)
       begin
         @analytics_reporter.report_custom_variable(
           request,
           action,
-          Analytics::CustomVariable.build(:rp, current_transaction.analytics_description))
+          rp_custom_var.merge(extra_custom_vars))
       rescue Display::FederationTranslator::TranslationError => e
         Rails.logger.warn e
       end
