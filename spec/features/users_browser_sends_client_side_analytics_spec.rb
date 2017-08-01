@@ -57,6 +57,43 @@ RSpec.describe 'When the user visits the start page' do
       visit '/start'
       expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
     end
+
+    it 'sends requests to Piwik when the user clicks on tracked radio button on start page' do
+      stub_transactions_list
+      set_session_and_session_cookies!
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'action_name' => 'Start - GOV.UK Verify - GOV.UK - LEVEL_2'
+        )
+      )
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'e_c' => 'Journey',
+          'e_n' => 'user_type',
+          'e_a' => 'First Time'
+        )
+      )
+      visit '/start'
+      choose 'start_form_selection_true', allow_label_click: true
+    end
+
+    it 'sends requests to Piwik when the user clicks on tracked radio button on select proof of address page' do
+      set_session_and_session_cookies!
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'action_name' => 'Proof of your address - GOV.UK Verify - GOV.UK - LEVEL_2'
+        )
+      )
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'e_c' => 'Evidence',
+          'e_n' => 'uk_bank_account_details',
+          'e_a' => 'no'
+        )
+      )
+      visit '/select-proof-of-address'
+      choose 'select_proof_of_address_form_uk_bank_account_details_false', allow_label_click: true
+    end
   end
 
   context 'when JS is disabled' do

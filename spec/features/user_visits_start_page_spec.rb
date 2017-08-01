@@ -150,10 +150,4 @@ RSpec.describe 'When the user visits the start page' do
     visit '/start'
     expect(page).to have_css('meta[name="robots"][content="noindex"]', visible: false)
   end
-
-  it 'will post to Piwik when the user clicks on ' do
-    set_session_and_session_cookies!
-    visit '/start'
-    expect(page).to have_css('meta[name="robots"][content="noindex"]', visible: false)
-  end
 end
