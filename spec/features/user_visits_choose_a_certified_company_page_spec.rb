@@ -93,17 +93,16 @@ describe 'When the user visits the choose a certified company page' do
       transaction_simple_id: 'test-rp',
       selected_answers: {
         documents: { driving_licence: true },
-        address_proof: { uk_bank_account_details: true },
-        phone: { mobile_phone: true, landline: true },
+        phone: { mobile_phone: true, landline: true }
       },
     )
 
     visit '/choose-a-certified-company'
 
-    expect(page).to have_content('Based on your answers, 2 companies can verify')
+    expect(page).to have_content('Based on your answers, 2 companies can verify you now:')
     within('#matching-idps') do
-      expect(page).to have_button('Choose IDCorp')
       expect(page).to have_button('Choose No Docs IDP')
+      expect(page).to have_button('Choose IDCorp')
       expect(page).to_not have_button('Bob’s Identity Service')
     end
 

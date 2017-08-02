@@ -1,0 +1,8 @@
+simpleIds: [ "stub-idp-one" ]
+recommended_profiles:
+  - [ "driving_licence", "mobile_phone", "uk_bank_account_details" ]
+  - [ "driving_licence", "mobile_phone", "passport" ]
+  - [ "uk_bank_account_details" ]
+non_recommended_profiles: []
+send_hints: true
+send_language_hint: true

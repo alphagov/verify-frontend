@@ -31,11 +31,9 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - idp_warning_text:
+  - proof_of_address:
       alternatives:
         - name: 'control'
-          percent: 33
-        - name: 'variant_heading_account'
-          percent: 33
-        - name: 'variant_heading_website'
-          percent: 33
+          percent: 50
+        - name: 'variant'
+          percent: 50

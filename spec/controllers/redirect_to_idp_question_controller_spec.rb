@@ -4,9 +4,9 @@ require 'redirect_to_idp_question_examples'
 require 'piwik_test_helper'
 
 describe RedirectToIdpQuestionController do
-  interstitial_yes_response = { interstitial_question_result: 'true' }.freeze
-  interstitial_no_response = { interstitial_question_result: 'false' }.freeze
-  invalid_form_answers = {}.freeze
+  INTERSTITIAL_YES_RESPONSE = { interstitial_question_result: 'true' }.freeze
+  INTERSTITIAL_NO_RESPONSE = { interstitial_question_result: 'false' }.freeze
+  INVALID_FORM_ANSWERS = {}.freeze
 
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_1')
@@ -18,18 +18,18 @@ describe RedirectToIdpQuestionController do
     include_examples 'redirect_to_idp_question',
                      'redirects to idp warning page',
                      'when user answers yes to the interstitial question',
-                     interstitial_yes_response,
+                     INTERSTITIAL_YES_RESPONSE,
                      :redirect_to_idp_warning_path
 
     include_examples 'redirect_to_idp_question',
                      'redirects to idp will not work for you page ',
                      'when user answers no to the interstitial question',
-                     interstitial_no_response,
+                     INTERSTITIAL_NO_RESPONSE,
                      :idp_wont_work_for_you_one_doc_path
   end
 
   context 'when form is invalid' do
-    subject { post :continue, params: { locale: 'en', interstitial_question_form: invalid_form_answers } }
+    subject { post :continue, params: { locale: 'en', interstitial_question_form: INVALID_FORM_ANSWERS } }
 
     it 'stores flash errors' do
       set_session_and_cookies_with_loa('LEVEL_1')

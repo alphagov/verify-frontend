@@ -46,4 +46,18 @@ Rails.application.config.after_initialize do
   # Feature flags
   IDP_FEATURE_FLAGS_CHECKER = IdpEligibility::IdpFeatureFlagsLoader.new(YamlLoader.new)
                                  .load(CONFIG.rules_directory, [:send_hints, :send_language_hint, :show_interstitial_question])
+
+  # IDP Eligibility B
+  loaded_profile_filters_b = IdpEligibility::ProfilesLoader.new(YamlLoader.new).load(CONFIG.rules_directory_b)
+
+  DOCUMENTS_ELIGIBILITY_CHECKER_B = IdpEligibility::Checker.new(loaded_profile_filters_b.document_profiles_b)
+
+  IDP_ELIGIBILITY_CHECKER_B = IdpEligibility::Checker.new(loaded_profile_filters_b.recommended_profiles)
+
+  IDP_RECOMMENDATION_GROUPER_B = IdpEligibility::RecommendationGrouper.new(
+    loaded_profile_filters_b.recommended_profiles,
+    loaded_profile_filters_b.non_recommended_profiles,
+    loaded_profile_filters_b.demo_profiles,
+    RP_CONFIG.fetch('demo_period_blacklist')
+  )
 end

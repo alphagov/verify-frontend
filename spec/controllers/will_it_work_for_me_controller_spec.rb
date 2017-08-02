@@ -4,15 +4,15 @@ require 'will_it_work_for_me_examples'
 require 'piwik_test_helper'
 
 describe WillItWorkForMeController do
-  proceed_to_select_document_answers = { above_age_threshold: 'true', resident_last_12_months: 'true' }.freeze
-  not_old_enough_answers = { above_age_threshold: 'false', resident_last_12_months: 'true' }.freeze
-  not_old_enough_and_no_address_answers = { above_age_threshold: 'false', resident_last_12_months: 'false', not_resident_reason: 'NoAddress' }.freeze
-  not_old_enough_and_not_resident_answers = { above_age_threshold: 'false', resident_last_12_months: 'false', not_resident_reason: 'AddressButNotResident' }.freeze
-  not_old_enough_and_not_resident_moved_recently_answers = { above_age_threshold: 'false', resident_last_12_months: 'false', not_resident_reason: 'MovedRecently' }.freeze
-  moved_to_uk_last_year_answers = { above_age_threshold: 'true', resident_last_12_months: 'false', not_resident_reason: 'MovedRecently' }.freeze
-  non_resident_answers = { above_age_threshold: 'true', resident_last_12_months: 'false', not_resident_reason: 'AddressButNotResident' }.freeze
-  no_uk_address_answers = { above_age_threshold: 'true', resident_last_12_months: 'false', not_resident_reason: 'NoAddress' }.freeze
-  invalid_form_answers = { above_age_threshold: 'true' }.freeze
+  PROCEED_TO_SELECT_DOCUMENT_ANSWERS = { above_age_threshold: 'true', resident_last_12_months: 'true' }.freeze
+  NOT_OLD_ENOUGH_ANSWERS = { above_age_threshold: 'false', resident_last_12_months: 'true' }.freeze
+  NOT_OLD_ENOUGH_AND_NO_ADDRESS_ANSWERS = { above_age_threshold: 'false', resident_last_12_months: 'false', not_resident_reason: 'NoAddress' }.freeze
+  NOT_OLD_ENOUGH_AND_NOT_RESIDENT_ANSWERS = { above_age_threshold: 'false', resident_last_12_months: 'false', not_resident_reason: 'AddressButNotResident' }.freeze
+  NOT_OLD_ENOUGH_AND_NOT_RESIDENT_MOVED_RECENTLY_ANSWERS = { above_age_threshold: 'false', resident_last_12_months: 'false', not_resident_reason: 'MovedRecently' }.freeze
+  MOVED_TO_UK_LAST_YEAR_ANSWERS = { above_age_threshold: 'true', resident_last_12_months: 'false', not_resident_reason: 'MovedRecently' }.freeze
+  NON_RESIDENT_ANSWERS = { above_age_threshold: 'true', resident_last_12_months: 'false', not_resident_reason: 'AddressButNotResident' }.freeze
+  NO_UK_ADDRESS_ANSWERS = { above_age_threshold: 'true', resident_last_12_months: 'false', not_resident_reason: 'NoAddress' }.freeze
+  INVALID_FORM_ANSWERS = { above_age_threshold: 'true' }.freeze
 
   context 'valid form' do
     before :each do
@@ -22,54 +22,54 @@ describe WillItWorkForMeController do
     include_examples 'will_it_work_for_me',
                      'redirects to might not work for you if moved in recently',
                      'user has moved to the UK in the last year',
-                     moved_to_uk_last_year_answers,
+                     MOVED_TO_UK_LAST_YEAR_ANSWERS,
                      :why_might_this_not_work_for_me_path
 
     include_examples 'will_it_work_for_me',
                      'redirects to might not work for you if underage',
                      'user is less than 20 yrs old',
-                     not_old_enough_answers,
+                     NOT_OLD_ENOUGH_ANSWERS,
                      :why_might_this_not_work_for_me_path
 
     include_examples 'will_it_work_for_me',
                      'redirects to will not work without a UK address page',
                      'user is less than 20 years old and does not have a UK address',
-                     not_old_enough_and_no_address_answers,
+                     NOT_OLD_ENOUGH_AND_NO_ADDRESS_ANSWERS,
                      :will_not_work_without_uk_address_path
 
     include_examples 'will_it_work_for_me',
                      'redirects to overseas page if user has UK address but does not live in the UK',
                      'user is less than 20 years old, has a UK Address, but does not live in the UK',
-                     not_old_enough_and_not_resident_answers,
+                     NOT_OLD_ENOUGH_AND_NOT_RESIDENT_ANSWERS,
                      :may_not_work_if_you_live_overseas_path
 
     include_examples 'will_it_work_for_me',
                      'redirects to overseas page if user has UK address but does not live in the UK',
                      'user is less than 20 years old, has a UK Address, but does not live in the UK',
-                     not_old_enough_and_not_resident_moved_recently_answers,
+                     NOT_OLD_ENOUGH_AND_NOT_RESIDENT_MOVED_RECENTLY_ANSWERS,
                      :why_might_this_not_work_for_me_path
 
     include_examples 'will_it_work_for_me',
                      'redirects to the will not work page if user has no UK address',
                      'user is over 20 years old, but does not have a UK address',
-                     no_uk_address_answers,
+                     NO_UK_ADDRESS_ANSWERS,
                      :will_not_work_without_uk_address_path
 
     include_examples 'will_it_work_for_me',
                      'redirects to overseas page if user has UK address but does not live in the UK',
                      'user is over 20 years old, has a UK address, but does not live in the UK',
-                     non_resident_answers,
+                     NON_RESIDENT_ANSWERS,
                      :may_not_work_if_you_live_overseas_path
 
     include_examples 'will_it_work_for_me',
                      'redirects to select documents path if user is over 20 and lives in the UK',
                      'user is over 20 years old, and lives in the UK',
-                     proceed_to_select_document_answers,
+                     PROCEED_TO_SELECT_DOCUMENT_ANSWERS,
                      :select_documents_path
   end
 
   context 'when form is invalid' do
-    subject { post :will_it_work_for_me, params: { locale: 'en', will_it_work_for_me_form: invalid_form_answers } }
+    subject { post :will_it_work_for_me, params: { locale: 'en', will_it_work_for_me_form: INVALID_FORM_ANSWERS } }
 
     it 'stores flash errors' do
       set_session_and_cookies_with_loa('LEVEL_1')

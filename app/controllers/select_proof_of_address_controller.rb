@@ -25,7 +25,7 @@ class SelectProofOfAddressController < ApplicationController
 private
 
   def redirect_based_on_evidence
-    idps_available = IDP_ELIGIBILITY_CHECKER.any?(selected_evidence_assuming_phones, current_identity_providers)
+    idps_available = IDP_ELIGIBILITY_CHECKER_B.any?(selected_evidence_assuming_phones, current_identity_providers)
     redirect_to idps_available ? select_phone_path : no_idps_available_path
   end
 
