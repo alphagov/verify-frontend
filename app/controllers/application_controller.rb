@@ -145,7 +145,12 @@ private
   end
 
   def selected_identity_provider
-    IdentityProvider.from_session(session.fetch(:selected_idp))
+    selected_idp = session[:selected_idp]
+    if selected_idp.nil?
+      raise(Errors::WarningLevelError, 'No selected IDP in session')
+    else
+      IdentityProvider.from_session(selected_idp)
+    end
   end
 
   def current_identity_providers

@@ -3,8 +3,7 @@ class ConfirmationController < ApplicationController
   layout 'slides'
 
   def index
-    selected_idp = session.fetch(:selected_idp)
-    @idp_name = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(IdentityProvider.from_session(selected_idp)).display_name
+    @idp_name = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider).display_name
     @transaction_name = current_transaction.name
 
     if is_loa1?
