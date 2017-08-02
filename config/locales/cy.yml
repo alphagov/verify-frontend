@@ -135,7 +135,7 @@ cy:
         <p>Mae GOV.UK Verify yn newydd ac mae gwasanaethau'r llywodraeth yn ymuno drwy'r amser.</p>
         <p>Gallwch ddefnyddio eich cyfrif hunaniaeth i gael mynediad i:</p>
       details: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
-      details_loa1_uplift_list: "When you access these government services, you'll be asked to provide more evidence as these services need to be confident someone isn't pretending to be you:"
+      details_loa1_uplift_list: "Pan fyddwch yn defnyddio'r gwasanaethau llywodraeth hyn, bydd gofyn i chi ddarparu mwy o dystiolaeth gan fod angen i'r gwasanaethau hyn fod yn hyderus nad yw rhywun arall yn defnyddio eich hunaniaeth: "
     about_choosing_a_company:
       title: Am ddewis cwmni
       heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
@@ -172,7 +172,7 @@ cy:
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych
         invalid_selection: Edrychwch dros eich dewis
-        no_driving_licence_selection: Please select the driving licence you have
+        no_driving_licence_selection: Dewiswch y drwydded yrru sydd gennych
       neither_documents: Nid yw'r un o'r dogfennau hyn gennyf
       where_driving_licence_issued: Ble cyhoeddwyd eich trwydded yrru?
       driving_licence_details:
@@ -211,10 +211,10 @@ cy:
         errors:
           no_selection: Dylech ateb pob cwestiwn
     idp_wont_work_for_you_one_doc:
-      title: Identity Provider will not work for you
-      heading: "%{idp_name} cannot verify your identity"
-      choose_another_company: You have to choose a different certified company to verify your identity.
-      choose_another_certified_company_link: Choose another company
+      title: Ni fydd 'Identity Provider' yn gweithio i chi
+      heading: "Ni all %{idp_name} cadarnhau pwy ydych chi"
+      choose_another_company: Mae'n rhaid i chi ddewis cwmni ardystiedig wahanol i wirio eich hunaniaeth.
+      choose_another_certified_company_link: Dewiswch gwmni arall
     no_mobile_phone:
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
       content_html: |
@@ -256,13 +256,13 @@ cy:
       title: Ni fydd GOV.UK Verify yn gweithio i chi
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
       explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi’i ddilysu.
-      verify_wont_work_but_there_is_still_a_way: GOV.UK Verify can't verify your identity because it needs you to have at least a UK address.  %{other_ways_text}
+      verify_wont_work_but_there_is_still_a_way: Ni all 'GOV.UK Verify' cadarnhau pwy ydych chi oherwydd mai angen o leiaf un cyfeiriad yn y DU arnoch.  %{other_ways_text}
     choose_a_certified_company:
       title: Dewiswch gwmni ardystiedig
       heading: Dewiswch gwmni
       heading_loa1: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
       existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
-      personal_information: They ask you to provide personal information and evidence, and then check it's correct using the new, secure systems they built.
+      personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
       why_companies: Pam fod dewis o gwmnïau
       choose_idp: "Dewiswch %{display_name}"
       idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
@@ -305,11 +305,11 @@ cy:
     redirect_to_idp_warning:
       title: "Byddwch nawr yn cael eich ailgyfeirio"
       continue_to_idp: Parhau i %{display_name}
-      create_account: Create your %{display_name} identity account
-      continue_website: Continue to the %{display_name} website
+      create_account: Crëwch eich cyfrif hunaniaeth %{display_name}
+      continue_website: Parhau i wefan %{display_name}
       identity_account_use_html: |
-              <p>You'll now verify your identity on the %{display_name} website.</p>
-              <p>They'll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
+              <p>Byddwch nawr yn gwirio pwy ydych chi ar wefan %{display_name}</p>
+              <p>Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio lle bynnag gwelwch y logo 'GOV.UK Verify' </p>
       service_use: Yna byddwch yn gallu %{service_name}.
       other_ways_link: "ffyrdd eraill i %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
