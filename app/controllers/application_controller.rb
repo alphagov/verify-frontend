@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   prepend RedirectWithSeeOther
 
   def transactions_list
-    DATA_CORRELATOR.correlate(Display::Rp::TransactionsProxy.new(API_CLIENT).transactions)
+    DATA_CORRELATOR.correlate(Display::Rp::TransactionsProxy.new(CONFIG_API_CLIENT).transactions)
   end
 
   def loa1_transactions_list

@@ -7,7 +7,8 @@ CONFIG = Configuration.load! do
   option_string 'idp_display_locales', 'IDP_DISPLAY_LOCALES'
   option_string 'country_display_locales', 'COUNTRY_DISPLAY_LOCALES'
   option_string 'session_cookie_duration', 'SESSION_COOKIE_DURATION_IN_HOURS', default: 2
-  option_string 'api_host', 'API_HOST'
+  option_string 'ida_frontend_host', 'IDA_FRONTEND_HOST'
+  option_string 'config_api_host', 'CONFIG_API_HOST'
   option_string 'logo_directory', 'LOGO_DIRECTORY'
   option_string 'white_logo_directory', 'WHITE_LOGO_DIRECTORY'
   option_string 'zdd_file', 'ZDD_LATCH'
