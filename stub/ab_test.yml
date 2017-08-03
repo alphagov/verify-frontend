@@ -31,7 +31,7 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - proof_of_address:
+  - proof_of_address_v2:
       alternatives:
         - name: 'control'
           percent: 50

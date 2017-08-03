@@ -4,7 +4,7 @@ require 'api_test_helper'
 describe 'User journeys with proof of address AB test cookie' do
   context 'with control cookie' do
     before(:each) do
-      set_session_and_ab_session_cookies!('proof_of_address' => 'proof_of_address_control')
+      set_session_and_ab_session_cookies!('proof_of_address_v2' => 'proof_of_address_control')
     end
 
     it 'at select documents valid GB licence or UK passport user goes to select phone' do
@@ -26,7 +26,7 @@ describe 'User journeys with proof of address AB test cookie' do
 
   context 'with variant cookie' do
     before(:each) do
-      set_session_and_ab_session_cookies!('proof_of_address' => 'proof_of_address_variant')
+      set_session_and_ab_session_cookies!('proof_of_address_v2' => 'proof_of_address_v2_variant')
     end
 
     it 'at select documents with passport and driving licence goes to proof of address' do
@@ -86,7 +86,7 @@ end
 
 describe 'When user visits select proof of address page' do
   before(:each) do
-    set_session_and_ab_session_cookies!('proof_of_address' => 'proof_of_address_variant')
+    set_session_and_ab_session_cookies!('proof_of_address_v2' => 'proof_of_address_variant')
   end
   context 'with javascript enabled', js: true do
     it 'with javascript on and no options filled in on proof of address page, shows errors' do
