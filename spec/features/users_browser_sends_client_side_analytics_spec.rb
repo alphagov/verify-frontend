@@ -3,7 +3,7 @@ require 'api_test_helper'
 require 'mock_piwik_middleware'
 require 'cookie_names'
 
-RSpec.describe 'When the user visits the start page' do
+RSpec.describe 'When the user visits a page' do
   let(:request_log) { double(:request_log) }
 
   before(:all) do
@@ -56,6 +56,52 @@ RSpec.describe 'When the user visits the start page' do
       )
       visit '/start'
       expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
+    end
+
+    it 'sends an event to Piwik only when the user changes selection, on the start page' do
+      stub_transactions_list
+      set_session_and_session_cookies!
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'action_name' => 'Start - GOV.UK Verify - GOV.UK - LEVEL_2'
+        )
+      )
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'e_c' => 'Journey',
+          'e_n' => 'user_type',
+          'e_a' => 'Change to First Time'
+        )
+      ).exactly(1).times
+      expect(request_log).not_to receive(:log).with(
+        hash_including(
+          'e_c' => 'Journey',
+          'e_n' => 'user_type',
+          'e_a' => 'Change to Sign In'
+        )
+      )
+      visit '/start'
+      choose 'start_form_selection_false', allow_label_click: true
+      choose 'start_form_selection_false', allow_label_click: true
+      choose 'start_form_selection_true', allow_label_click: true
+    end
+
+    it 'sends an event to Piwik when the user clicks on a proof of address radio button' do
+      set_session_and_session_cookies!
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'action_name' => 'Proof of your address - GOV.UK Verify - GOV.UK - LEVEL_2'
+        )
+      )
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'e_c' => 'Evidence',
+          'e_n' => 'uk_bank_account_details',
+          'e_a' => 'no'
+        )
+      )
+      visit '/select-proof-of-address'
+      choose 'select_proof_of_address_form_uk_bank_account_details_false', allow_label_click: true
     end
   end
 

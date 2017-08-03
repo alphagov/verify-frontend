@@ -10,8 +10,8 @@
 
   <%= content_tag :div, class: form_question_class do %>
     <fieldset>
-      <%= f.custom_radio_button :selection, true, t('hub.start.answer_yes'), {required: true, data: { msg: t('hub.start.error_message')}} %>
-      <%= f.custom_radio_button :selection, false, t('hub.start.answer_no'), {required: true, data: { msg: t('hub.start.error_message')}} %>
+      <%= f.custom_radio_button :selection, true, t('hub.start.answer_yes'), {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type'} %>
+      <%= f.custom_radio_button :selection, false, t('hub.start.answer_no'), {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type'} %>
     </fieldset>
   <% end %>
 

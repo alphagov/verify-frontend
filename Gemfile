@@ -60,6 +60,7 @@ group :test, :development do
   gem 'capybara', '~> 2.10'
   gem 'webmock', require: false
   gem 'jasmine'
+  gem 'jasmine-jquery-rails'
   gem 'selenium-webdriver'
   gem 'rails-controller-testing'
 
