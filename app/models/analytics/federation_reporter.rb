@@ -19,11 +19,15 @@ module Analytics
     end
 
     def report_ab_test(transaction_id, request, alternative_name)
-      current_transaction = RP_DISPLAY_REPOSITORY.fetch(transaction_id)
-      ab_test_custom_var = Analytics::CustomVariable.build(:ab_test, alternative_name)
+      if transaction_id.nil?
+        raise(Errors::WarningLevelError, 'No transaction_id in user session')
+      else
+        current_transaction = RP_DISPLAY_REPOSITORY.fetch(transaction_id)
+        ab_test_custom_var = Analytics::CustomVariable.build(:ab_test, alternative_name)
 
-      report_action(current_transaction, request, AB_TEST_ACTION_NAME % alternative_name,
-                    ab_test_custom_var)
+        report_action(current_transaction, request, AB_TEST_ACTION_NAME % alternative_name,
+                      ab_test_custom_var)
+      end
     end
 
     def report_idp_registration(request, idp_name, idp_name_history, evidence, recommended)

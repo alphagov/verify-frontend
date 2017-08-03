@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'models/analytics/federation_reporter'
 require 'analytics'
 require 'logger_helper'
+require 'models/errors/warning_level_error'
 
 module Analytics
   describe FederationReporter do
@@ -19,6 +20,14 @@ module Analytics
           )
 
         federation_reporter.report_sign_in_idp_selection(request, idp_display_name)
+      end
+    end
+
+    describe '#nil_transaction_id' do
+      it 'should not report to piwik and should throw a warning if there is no transaction id' do
+        expect(analytics_reporter).not_to receive(:report)
+        expect { federation_reporter.report_ab_test(nil, nil, nil) }
+          .to raise_error(Errors::WarningLevelError)
       end
     end
 
