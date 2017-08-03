@@ -211,7 +211,7 @@ cy:
         errors:
           no_selection: Dylech ateb pob cwestiwn
     idp_wont_work_for_you_one_doc:
-      title: Ni fydd 'Identity Provider' yn gweithio i chi
+      title: "Ni all %{idp_name} cadarnhau pwy ydych chi"
       heading: "Ni all %{idp_name} cadarnhau pwy ydych chi"
       choose_another_company: Mae'n rhaid i chi ddewis cwmni ardystiedig wahanol i wirio eich hunaniaeth.
       choose_another_certified_company_link: Dewiswch gwmni arall

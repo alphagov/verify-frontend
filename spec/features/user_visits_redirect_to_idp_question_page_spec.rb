@@ -52,7 +52,7 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
   it 'goes to "idp-wont-work-for-you" page if the user answers no to the interstitial question and javascript is enabled', js: true do
     choose 'interstitial_question_form_interstitial_question_result_false', allow_label_click: true
     click_button 'Continue'
-    expect(page).to have_title(I18n.t('hub.idp_wont_work_for_you_one_doc.title'))
+    expect(page).to have_title('OneDocIdp cannot verify your identity')
   end
 
   it 'displays an error message when user does not answer the question when javascript is turned off' do

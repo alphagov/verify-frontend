@@ -210,7 +210,7 @@ en:
         errors:
           no_selection: Please answer all the questions
     idp_wont_work_for_you_one_doc:
-      title: Identity Provider will not work for you
+      title: "%{idp_name} cannot verify your identity"
       heading: "%{idp_name} cannot verify your identity"
       choose_another_company: You have to choose a different certified company to verify your identity.
       choose_another_certified_company_link: Choose another company
