@@ -23,14 +23,6 @@ module Analytics
       end
     end
 
-    describe '#nil_transaction_id' do
-      it 'should not report to piwik and should throw a warning if there is no transaction id' do
-        expect(analytics_reporter).not_to receive(:report)
-        expect { federation_reporter.report_ab_test(nil, nil, nil) }
-          .to raise_error(Errors::WarningLevelError)
-      end
-    end
-
     describe '#report_loa_requested' do
       it 'should report the LOA of the transaction' do
         requested_loa = 'LEVEL_1'

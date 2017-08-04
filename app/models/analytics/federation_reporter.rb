@@ -19,9 +19,7 @@ module Analytics
     end
 
     def report_ab_test(transaction_id, request, alternative_name)
-      if transaction_id.nil?
-        raise(Errors::WarningLevelError, 'No transaction_id in user session')
-      else
+      unless transaction_id.nil?
         current_transaction = RP_DISPLAY_REPOSITORY.fetch(transaction_id)
         ab_test_custom_var = Analytics::CustomVariable.build(:ab_test, alternative_name)
 
