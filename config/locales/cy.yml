@@ -477,8 +477,14 @@ cy:
       details_html: Gallwch %{href}; y mwyaf cywir y gallwch ateb y cwestiynau y mwyaf tebygol yw hi y bydd cwmni ardystiedig yn gallu eich dilysu.
       details_link: newid eich atebion i'r cwestiynau
     cancelled_registration:
-      title: Verify Registration Cancelled Welsh
+      title: Verify Registration Cancelled
       heading: "Your identity verification with %{idp_name} has been cancelled"
+      next: 'What do you want to do next?'
+      options:
+        other_ways_to_verify: 'Find out the other ways to %{service_name}'
+        verify_with_another_company: 'Verify with another certified company'
+        verify_using_other_documents: 'Verify using other documents'
+        contact_verify: 'Contact GOV.UK Verify'
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

@@ -474,6 +474,12 @@ en:
     cancelled_registration:
       title: Verify registration cancelled
       heading: "Your identity verification with %{idp_name} has been cancelled"
+      next: 'What do you want to do next?'
+      options:
+        other_ways_to_verify: 'Find out the other ways to %{service_name}'
+        verify_with_another_company: 'Verify with another certified company'
+        verify_using_other_documents: 'Verify using other documents'
+        contact_verify: 'Contact GOV.UK Verify'
   errors:
     transaction_list:
       title: Find the service you were using to start again
