@@ -6,7 +6,7 @@ module Display
       end
 
       def transactions
-        @api_client.get('/transactions')
+        @api_client.get('/config/transactions/enabled')
       end
     end
   end

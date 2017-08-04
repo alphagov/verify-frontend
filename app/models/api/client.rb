@@ -10,21 +10,21 @@ module Api
 
     def get(path, options = {})
       response = log_request(path, 'get') do
-        client.get(uri(path), options)
+        client.get(path, options)
       end
       @response_handler.handle_response(response.status, 200, response.to_s)
     end
 
     def post(path, body, options = {}, expected_status = 201)
       response = log_request(path, 'post') do
-        client.post(uri(path), body, options)
+        client.post(path, body, options)
       end
       @response_handler.handle_response(response.status, expected_status, response.to_s)
     end
 
     def put(path, body, options = {})
       response = log_request(path, 'put') do
-        client.put(uri(path), body, options)
+        client.put(path, body, options)
       end
       @response_handler.handle_response(response.status, 200, response.to_s)
     end
@@ -37,10 +37,6 @@ module Api
       ActiveSupport::Notifications.instrument('api_request', path: path, method: method) do
         yield
       end
-    end
-
-    def uri(path)
-      '/api' + path
     end
   end
 end
