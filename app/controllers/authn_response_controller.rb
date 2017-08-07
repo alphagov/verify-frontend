@@ -3,29 +3,17 @@ class AuthnResponseController < SamlController
 
   SIGNING_IN_STATE = 'SIGN_IN_WITH_IDP'.freeze
   REGISTERING_STATE = 'REGISTER_WITH_IDP'.freeze
+  SUCCESS = 'SUCCESS'.freeze
+  CANCEL = 'CANCEL'.freeze
+  FAILED = 'FAILED'.freeze
+  FAILED_UPLIFT = 'FAILED_UPLIFT'.freeze
+  OTHER = 'OTHER'.freeze
 
   def idp_response
-    if params['RelayState'] != session[:verify_session_id]
-      raise Errors::WarningLevelError, "Relay state should match session id. Relay state was #{params['RelayState'].inspect}"
-    end
+    raise_error_if_session_mismatch(params['RelayState'], session[:verify_session_id])
 
     response = SESSION_PROXY.idp_authn_response(session[:verify_session_id], params['SAMLResponse'], params['RelayState'])
-    user_state = response.is_registration ? REGISTERING_STATE : SIGNING_IN_STATE
-
-    case response.idp_result
-    when 'SUCCESS'
-      report_to_analytics("Success - #{user_state} at LOA #{response.loa_achieved}")
-      redirect_to response.is_registration ? confirmation_path : response_processing_path
-    when 'CANCEL'
-      report_to_analytics("Cancel - #{user_state}")
-      redirect_to response.is_registration ? failed_registration_path : start_path
-    when 'FAILED_UPLIFT'
-      report_to_analytics("Failed Uplift - #{user_state}")
-      redirect_to failed_uplift_path
-    else
-      report_to_analytics("Failure - #{user_state}")
-      redirect_to response.is_registration ? failed_registration_path : failed_sign_in_path
-    end
+    idp_response_handlers[response.idp_result].call(response)
   end
 
   def country_response
@@ -34,22 +22,64 @@ class AuthnResponseController < SamlController
         params['RelayState'] = session[:verify_session_id]
       end
     end
-
-    if params['RelayState'] != session[:verify_session_id]
-      raise Errors::WarningLevelError, "Relay state should match session id. Relay state was #{params['RelayState'].inspect}"
-    end
+    raise_error_if_session_mismatch(params['RelayState'], session[:verify_session_id])
 
     response = SESSION_PROXY.country_authn_response(session[:verify_session_id], params['SAMLResponse'], params['RelayState'])
+    country_response_handlers[response.country_result].call(response)
+  end
 
-    case response.country_result
-    when 'SUCCESS'
-      redirect_to response.is_registration ? confirmation_path : response_processing_path
-    when 'CANCEL'
-      redirect_to response.is_registration ? failed_registration_path : start_path
-    when 'FAILED_UPLIFT'
-      redirect_to failed_uplift_path
-    else
-      redirect_to response.is_registration ? failed_registration_path : failed_sign_in_path
+private
+
+  def raise_error_if_session_mismatch(relay_state, session_id)
+    if relay_state != session_id
+      raise Errors::WarningLevelError, "Relay state should match session id. Relay state was #{relay_state.inspect}"
     end
+  end
+
+  def idp_response_handlers
+    handlers = {
+        SUCCESS => -> (response) { reporters[SUCCESS].call(response); redirecters[SUCCESS].call(response) },
+        CANCEL => -> (response) { reporters[CANCEL].call(response); redirecters[CANCEL].call(response) },
+        FAILED_UPLIFT => -> (response) { reporters[FAILED_UPLIFT].call(response); redirecters[FAILED_UPLIFT].call(response) }
+    }
+    handlers.default = -> (response) { reporters[OTHER].call(response); redirecters[OTHER].call(response) }
+
+    handlers
+  end
+
+  def country_response_handlers
+    handlers = {
+        SUCCESS => redirecters[SUCCESS],
+        CANCEL => redirecters[FAILED],
+        FAILED_UPLIFT => redirecters[FAILED_UPLIFT]
+    }
+    handlers.default = redirecters[OTHER]
+
+    handlers
+  end
+
+  def reporters
+    user_state = -> (response) { response.is_registration ? REGISTERING_STATE : SIGNING_IN_STATE }
+
+    {
+      SUCCESS => -> (response) { report_to_analytics("Success - #{user_state.call(response)} at LOA #{response.loa_achieved}") },
+      CANCEL  => -> (response) { report_to_analytics("Cancel - #{user_state.call(response)}") },
+      FAILED_UPLIFT => -> (response) { report_to_analytics("Failed Uplift - #{user_state.call(response)}") },
+      OTHER => -> (response) { report_to_analytics("Failure - #{user_state.call(response)}") }
+    }
+  end
+
+  def redirecters
+    redirect_based_on_journey_type = -> (redirect_paths, response) {
+      redirect_to response.is_registration ? redirect_paths[:registration] : redirect_paths[:sign_in]
+    }
+
+    {
+      SUCCESS => redirect_based_on_journey_type.curry.(registration: confirmation_path, sign_in: response_processing_path),
+      CANCEL => redirect_based_on_journey_type.curry.(registration: cancelled_registration_path, sign_in: start_path),
+      FAILED => redirect_based_on_journey_type.curry.(registration: failed_registration_path, sign_in: start_path),
+      FAILED_UPLIFT => -> (_) { redirect_to failed_uplift_path },
+      OTHER => redirect_based_on_journey_type.curry.(registration: failed_registration_path, sign_in: failed_sign_in_path)
+    }
   end
 end
