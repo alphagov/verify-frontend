@@ -6,7 +6,7 @@ describe AboutController do
   let(:identity_provider_display_decorator) { double(:IdentityProviderDisplayDecorator) }
 
   before(:each) do
-    stub_request(:get, CONFIG.api_host + '/api/transactions')
+    stub_request(:get, CONFIG.config_api_host + '/config/transactions/enabled')
     stub_api_idp_list
   end
 

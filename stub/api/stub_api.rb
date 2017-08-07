@@ -48,29 +48,19 @@ class StubApi < Sinatra::Base
     }'
   end
 
-  get '/api/transactions' do
-    '{
-      "public":[{
+   get '/config/transactions/enabled' do
+    '[{
         "simpleId":"test-rp",
         "entityId":"http://example.com/test-rp",
-        "homepage":"http://example.com/test-rp",
+        "serviceHomepage":"http://example.com/test-rp",
         "loaList":["LEVEL_2"]
-      }],
-      "private":[],
-      "transactions":[{
-        "simpleId":"test-rp",
-        "entityId":"http://example.com/test-rp",
-        "homepage":"http://example.com/test-rp",
-        "loaList":["LEVEL_2"]
-        },
-        {
-          "simpleId": "loa1-test-rp",
-          "entityId": "http://example.com/test-rp-loa1",
-          "homepage":"http://example.com/test-rp-loa1",
-          "loaList":["LEVEL_1","LEVEL_2"]
-        }
-      ]
-    }'
+      },
+      {
+        "simpleId": "loa1-test-rp",
+        "entityId": "http://example.com/test-rp-loa1",
+        "serviceHomepage":"http://example.com/test-rp-loa1",
+        "loaList":["LEVEL_1","LEVEL_2"]
+      }]'
   end
 
   get '/api/countries/blah' do

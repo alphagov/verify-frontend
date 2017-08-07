@@ -42,14 +42,12 @@ module Display
       end
 
       it 'returns the transactions with display name and homepage in the order listed in the relying_parties_config' do
-        transaction_data = {
-            'transactions' => [
-                { 'simpleId' => public_simple_id, 'homepage' => homepage, 'loaList' => public_simple_id_loa },
-                { 'simpleId' => public_simple_id_2, 'homepage' => homepage_2, 'loaList' => public_simple_id_2_loa },
-                { 'simpleId' => public_simple_id_3, 'homepage' => homepage_3, 'loaList' => public_simple_id_3_loa },
-                { 'simpleId' => public_simple_id_4, 'homepage' => homepage_4, 'loaList' => public_simple_id_4_loa },
-            ]
-        }
+        transaction_data = [
+              { 'simpleId' => public_simple_id, 'serviceHomepage' => homepage, 'loaList' => public_simple_id_loa },
+              { 'simpleId' => public_simple_id_2, 'serviceHomepage' => homepage_2, 'loaList' => public_simple_id_2_loa },
+              { 'simpleId' => public_simple_id_3, 'serviceHomepage' => homepage_3, 'loaList' => public_simple_id_3_loa },
+              { 'simpleId' => public_simple_id_4, 'serviceHomepage' => homepage_4, 'loaList' => public_simple_id_4_loa },
+        ]
         correlator = DisplayDataCorrelator.new(translator, [public_simple_id_4, public_simple_id_2, public_simple_id, public_simple_id_3], [])
         actual_result = correlator.correlate(transaction_data)
         expected_result = DisplayDataCorrelator::Transactions.new(
@@ -64,12 +62,10 @@ module Display
       end
 
       it 'translates and filters the transactions according to the relying_parties config' do
-        transaction_data = {
-          'transactions' => [
-            { 'simpleId' => public_simple_id, 'homepage' => homepage, 'loaList' => public_simple_id_loa },
-            { 'simpleId' => private_simple_id, 'loaList' => private_simple_id_loa }
-          ]
-        }
+        transaction_data = [
+          { 'simpleId' => public_simple_id, 'serviceHomepage' => homepage, 'loaList' => public_simple_id_loa },
+          { 'simpleId' => private_simple_id, 'loaList' => private_simple_id_loa }
+        ]
 
         actual_result = display_data_correlator.correlate(transaction_data)
         expected_result = DisplayDataCorrelator::Transactions.new(

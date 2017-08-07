@@ -1,26 +1,29 @@
 module ApiTestHelper
   include SessionEndpoints
 
-  def api_uri(path)
-    URI.join(CONFIG.api_host, File.join('/api/', path))
+  def ida_frontend_api_uri(path)
+    URI.join(CONFIG.ida_frontend_host, path)
+  end
+
+  def config_api_uri(path)
+    URI.join(CONFIG.config_api_host, path)
   end
 
   def api_transactions_endpoint
-    api_uri('transactions')
+    config_api_uri('/config/transactions/enabled')
   end
 
   def api_countries_endpoint(session_id)
-    api_uri('countries/' + session_id)
+    ida_frontend_api_uri('/api/countries/' + session_id)
   end
 
   def stub_transactions_list
-    transactions = {
-      'transactions' => [
-        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'homepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] }
-      ]
-    }
+    transactions = [
+        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] }
+    ]
+
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
   end
 
@@ -36,7 +39,7 @@ module ApiTestHelper
 
 
   def stub_session_country_authn_request(originating_ip, country_location, registration)
-    stub_request(:get, api_uri(country_authn_request_endpoint(default_session_id)))
+    stub_request(:get, ida_frontend_api_uri(country_authn_request_endpoint(default_session_id)))
         .with(headers: { 'X_FORWARDED_FOR' => originating_ip })
         .to_return(body: a_country_authn_request(country_location, registration).to_json)
   end
@@ -51,7 +54,7 @@ module ApiTestHelper
   end
 
   def stub_session_select_idp_request(encrypted_entity_id, request_body = {})
-    stub = stub_request(:put, api_uri(select_idp_endpoint(default_session_id)))
+    stub = stub_request(:put, ida_frontend_api_uri(select_idp_endpoint(default_session_id)))
     if request_body.any?
       stub = stub.with(body: request_body)
     end
@@ -59,7 +62,7 @@ module ApiTestHelper
   end
 
   def stub_session_idp_authn_request(originating_ip, idp_location, registration)
-    stub_request(:get, api_uri(idp_authn_request_endpoint(default_session_id)))
+    stub_request(:get, ida_frontend_api_uri(idp_authn_request_endpoint(default_session_id)))
         .with(headers: { 'X_FORWARDED_FOR' => originating_ip })
         .to_return(body: an_idp_authn_request(idp_location, registration).to_json)
   end
@@ -85,7 +88,7 @@ module ApiTestHelper
         PARAM_RELAY_STATE => 'my-relay-state',
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
-    stub_request(:post, api_uri('session')).with(body: authn_request_body).to_return(body: stub_api_session(options).to_json, status: 201)
+    stub_request(:post, ida_frontend_api_uri('/api/session')).with(body: authn_request_body).to_return(body: stub_api_session(options).to_json, status: 201)
   end
 
   def stub_api_session(options = {})
@@ -100,7 +103,7 @@ module ApiTestHelper
   end
 
   def stub_matching_outcome(outcome = MatchingOutcomeResponse::WAIT)
-    stub_request(:get, api_uri(matching_outcome_endpoint(default_session_id))).to_return(body: { 'outcome' => outcome }.to_json)
+    stub_request(:get, ida_frontend_api_uri(matching_outcome_endpoint(default_session_id))).to_return(body: { 'outcome' => outcome }.to_json)
   end
 
   def x_forwarded_for
@@ -113,7 +116,7 @@ module ApiTestHelper
         'samlMessage' => 'a saml message',
         'relayState' => 'a relay state'
     }
-    stub_request(:get, api_uri(response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
+    stub_request(:get, ida_frontend_api_uri(response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
   end
 
   def stub_error_response_for_rp
@@ -122,21 +125,21 @@ module ApiTestHelper
         'samlMessage' => 'a saml message',
         'relayState' => 'a relay state'
     }
-    stub_request(:get, api_uri(error_response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
+    stub_request(:get, ida_frontend_api_uri(error_response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
   end
 
   def stub_cycle_three_attribute_request(name)
     cycle_three_attribute_name = { name: name }
-    stub_request(:get, api_uri(cycle_three_endpoint(default_session_id))).to_return(body: cycle_three_attribute_name.to_json, status: 200)
+    stub_request(:get, ida_frontend_api_uri(cycle_three_endpoint(default_session_id))).to_return(body: cycle_three_attribute_name.to_json, status: 200)
   end
 
   def stub_cycle_three_value_submit(value)
     cycle_three_attribute_value = { value: value, PARAM_ORIGINATING_IP => OriginatingIpStore::UNDETERMINED_IP }
-    stub_request(:post, api_uri(cycle_three_endpoint(default_session_id))).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
+    stub_request(:post, ida_frontend_api_uri(cycle_three_endpoint(default_session_id))).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
   end
 
   def stub_cycle_three_cancel
-    stub_request(:post, api_uri(cycle_three_cancel_endpoint(default_session_id))).to_return(status: 200)
+    stub_request(:post, ida_frontend_api_uri(cycle_three_cancel_endpoint(default_session_id))).to_return(status: 200)
   end
 
   def stub_api_authn_response(relay_state, response = { 'idpResult' => 'SUCCESS', 'isRegistration' => false })
@@ -146,7 +149,7 @@ module ApiTestHelper
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
 
-    stub_request(:put, api_uri(idp_authn_response_endpoint(default_session_id)))
+    stub_request(:put, ida_frontend_api_uri(idp_authn_response_endpoint(default_session_id)))
         .with(body: authn_response_body)
         .to_return(body: response.to_json, status: 200)
   end
@@ -158,22 +161,22 @@ module ApiTestHelper
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
 
-    stub_request(:put, api_uri(country_authn_response_endpoint(default_session_id)))
+    stub_request(:put, ida_frontend_api_uri(country_authn_response_endpoint(default_session_id)))
         .with(body: authn_response_body)
         .to_return(body: response.to_json, status: 200)
   end
 
   def stub_api_returns_error(code)
-    stub_request(:get, api_uri(idp_authn_request_endpoint(default_session_id)))
+    stub_request(:get, ida_frontend_api_uri(idp_authn_request_endpoint(default_session_id)))
         .to_return(body: an_error_response(code).to_json, status: 500)
   end
 
   def stub_api_idp_list(idps = default_idps)
-    stub_request(:get, api_uri(idp_list_endpoint(default_session_id))).to_return(body: idps.to_json)
+    stub_request(:get, ida_frontend_api_uri(idp_list_endpoint(default_session_id))).to_return(body: idps.to_json)
   end
 
   def stub_api_select_idp
-    stub_request(:put, api_uri(select_idp_endpoint(default_session_id)))
+    stub_request(:put, ida_frontend_api_uri(select_idp_endpoint(default_session_id)))
   end
 
   def stub_api_no_docs_idps

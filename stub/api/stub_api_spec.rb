@@ -73,13 +73,12 @@ describe StubApi do
     end
   end
 
-  context '#get /api/transactions' do
+  context '#get /config/transactions/enabled' do
     it 'should respond with valid hash' do
-      get '/api/transactions'
+      get '/config/transactions/enabled'
       expect(last_response).to be_ok
       response = last_response_json
-      expect(response['public']).to be_an(Array)
-      expect(response['private']).to be_an(Array)
+      expect(response).to be_an(Array)
     end
   end
 
