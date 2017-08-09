@@ -11,7 +11,7 @@
       <li><%= link_to t('hub.cancelled_registration.options.other_ways_to_verify', service_name: @service_name), other_ways_to_access_service_path %></li>
       <li><%= link_to t('hub.cancelled_registration.options.verify_with_another_company'), choose_a_certified_company_path %></li>
       <li><%= link_to t('hub.cancelled_registration.options.verify_using_other_documents'), select_documents_path %></li>
-      <li><%= link_to t('hub.cancelled_registration.options.contact_verify'), feedback_path %></li>
+      <li><%= link_to t('hub.cancelled_registration.options.contact_verify'), feedback_path('feedback-source': feedback_source) %></li>
     </ul>
   </div>
 </div>

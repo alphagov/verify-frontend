@@ -11,39 +11,13 @@ RSpec.describe 'When user visits cancelled registration page' do
     )
   end
 
-  it 'will render itself' do
+  it 'the page is rendered with the correct links ' do
     visit('/cancelled-registration')
 
     expect(page).to have_title I18n.t('hub.cancelled_registration.title')
-  end
-
-  it 'will render other ways page when user clicks other ways link' do
-    visit('/cancelled-registration')
-
-    click_link 'Find out the other ways to register for an identity profile'
-    expect(page).to have_current_path(other_ways_to_access_service_path)
-  end
-
-  it 'will render idp picker page when user clicks verify with another company' do
-    stub_api_idp_list
-
-    visit('/cancelled-registration')
-
-    click_link 'Verify with another certified company'
-    expect(page).to have_current_path(choose_a_certified_company_path)
-  end
-
-  it 'will render photo identity documents page when user clicks verify using other documents link' do
-    visit('/cancelled-registration')
-
-    click_link 'Verify using other documents'
-    expect(page).to have_current_path(select_documents_path)
-  end
-
-  it 'will render feedback page when user clicks contact gov uk verify' do
-    visit('/cancelled-registration')
-
-    click_link 'Contact GOV.UK Verify'
-    expect(page).to have_current_path(feedback_path)
+    expect(page).to have_link('Find out the other ways to register for an identity profile', href: other_ways_to_access_service_path)
+    expect(page).to have_link(I18n.t('hub.cancelled_registration.options.verify_with_another_company'), href: choose_a_certified_company_path)
+    expect(page).to have_link(I18n.t('hub.cancelled_registration.options.verify_using_other_documents'), href: select_documents_path)
+    expect(page).to have_link(I18n.t('hub.cancelled_registration.options.contact_verify'), href: "#{feedback_path}?feedback-source=CANCELLED_REGISTRATION")
   end
 end

@@ -39,7 +39,8 @@ class FeedbackSourceMapper
       'OTHER_IDENTITY_DOCUMENTS_PAGE' => 'other_identity_documents',
       'PRODUCT_PAGE' => product_page_url,
       'PROOF_OF_ADDRESS' => 'select_proof_of_address',
-      'NO_IDPS_AVAILABLE' => 'no_idps_available'
+      'NO_IDPS_AVAILABLE' => 'no_idps_available',
+      'CANCELLED_REGISTRATION' => 'cancelled_registration'
 
   }.freeze
   end
