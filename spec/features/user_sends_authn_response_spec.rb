@@ -46,7 +46,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
       .with(query: hash_including('action_name' => 'Success - REGISTER_WITH_IDP at LOA LEVEL_2'))).to have_been_made.once
   end
 
-  it 'will redirect the user to /failed-registration when they cancel at the IDP' do
+  it 'will redirect the user to /cancelled-registration when they cancel at the IDP' do
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
       transaction_simple_id: 'test-rp'
@@ -55,7 +55,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
 
-    expect(page).to have_current_path '/failed-registration'
+    expect(page).to have_current_path '/cancelled-registration'
     expect(api_request).to have_been_made.once
   end
 

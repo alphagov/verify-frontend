@@ -48,6 +48,7 @@ en:
     select_proof_of_address: select-proof-of-address
     select_proof_of_address_none: select-proof-of-address-none
     no_idps_available: no-idps-available
+    cancelled_registration: cancelled-registration
   navigation:
     next: Next
     start_now: Start now
@@ -470,6 +471,15 @@ en:
       text: Based on your answers, none of the certified companies can verify you.
       details_html: You can %{href}; the more accurately you answer the questions, the more likely it is that a certified company can verify you.
       details_link: change your answers to the questions
+    cancelled_registration:
+      title: Verify registration cancelled
+      heading: "Your identity verification with %{idp_name} has been cancelled"
+      next: 'What do you want to do next?'
+      options:
+        other_ways_to_verify: 'Find out the other ways to %{service_name}'
+        verify_with_another_company: 'Verify with another certified company'
+        verify_using_other_documents: 'Verify using other documents'
+        contact_verify: 'Contact GOV.UK Verify'
   errors:
     transaction_list:
       title: Find the service you were using to start again

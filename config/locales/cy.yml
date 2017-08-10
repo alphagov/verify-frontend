@@ -47,6 +47,7 @@ cy:
     select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
     select_proof_of_address_none: select-proof-of-address-none-cy
     no_idps_available: dim-idps-ar-gael
+    cancelled_registration: cancelled-registration-welsh
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -475,6 +476,15 @@ cy:
       text: Yn seiliedig ar eich atebion ni all yr un o'r cwmniau ardystiedig eich dilysu.
       details_html: Gallwch %{href}; y mwyaf cywir y gallwch ateb y cwestiynau y mwyaf tebygol yw hi y bydd cwmni ardystiedig yn gallu eich dilysu.
       details_link: newid eich atebion i'r cwestiynau
+    cancelled_registration:
+      title: Verify Registration Cancelled
+      heading: "Mae dilysu eich hunaniaeth gyda %{idp_name} wedi cael ei ddiddymu"
+      next: 'Beth ydych chi eisiau ei wneud nesaf?'
+      options:
+        other_ways_to_verify: 'Darganfod ffyrdd eraill i %{service_name}'
+        verify_with_another_company: 'Dilysu gyda chwmni ardystiedig arall'
+        verify_using_other_documents: 'Dilysu drwy ddefnyddio dogfennau eraill'
+        contact_verify: 'Cysylltu â GOV.UK Verify'
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

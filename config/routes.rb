@@ -101,6 +101,7 @@ Rails.application.routes.draw do
     get 'select_proof_of_address_none', to: 'select_proof_of_address#no_documents', as: :select_proof_of_address_no_documents
     post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
     get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
+    get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 
     constraints proof_of_address_a_and_report_to_piwik do
       get 'select_phone', to: 'select_phone#index', as: :select_phone
