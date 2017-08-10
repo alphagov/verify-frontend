@@ -260,8 +260,7 @@ cy:
       verify_wont_work_but_there_is_still_a_way: Ni all 'GOV.UK Verify' cadarnhau pwy ydych chi oherwydd mai angen o leiaf un cyfeiriad yn y DU arnoch.  %{other_ways_text}
     choose_a_certified_company:
       title: Dewiswch gwmni ardystiedig
-      heading: Dewiswch gwmni
-      heading_loa1: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
+      heading: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
       existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
       personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
       why_companies: Pam fod dewis o gwmnïau
@@ -336,7 +335,7 @@ cy:
       continue_to_rp: "Gallwch nawr ddefnyddio %{transaction_name}."
       heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
       add_security_loa1: Pan fyddwch yn defnyddio rhai o wasanaethau'r llywodraeth, gofynnir i chi ddarparu mwy o dystiolaeth gan fod angen i'r gwasanaethau hyn fod yn hyderus nad yw rhywun arall yn honni i fod yn chi.
-      extra_security: Gwasanaethau'r llywodraeth sydd angen diogelwch ychwanegol
+      extra_security: Government services requiring extra evidence
     failed_registration:
       title: Methu dilysu eich hunaniaeth
       heading: Roedd "%{idp_name} yn methu dilysu eich hunaniaeth"

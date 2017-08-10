@@ -258,8 +258,7 @@ en:
       explanation: You need a current UK address to get your identity verified.
     choose_a_certified_company:
       title: Choose a certified company
-      heading: Choose a company
-      heading_loa1: Choose a certified company to verify your identity
+      heading: Choose a company to verify your identity
       existing_customer: You don't have to be an existing customer with a company.
       personal_information: They ask you to provide personal information and evidence, and then check it's correct using the new, secure systems they built.
       why_companies: Why there’s a choice of companies
@@ -331,7 +330,7 @@ en:
       continue_to_rp: "You can now %{transaction_name}."
       heading: "%{display_name} has verified your identity"
       add_security_loa1: When you access some government services, you'll be asked to provide more evidence, but you only need to do this once.
-      extra_security: Government services requiring extra security
+      extra_security: Government services requiring extra evidence
     failed_registration:
       title: Unable to verify your identity
       heading: "%{idp_name} was unable to verify your identity"
