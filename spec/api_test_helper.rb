@@ -167,7 +167,7 @@ module ApiTestHelper
   end
 
   def stub_api_bad_request_response_to_country_authn_request
-    stub_request(:get, api_uri(country_authn_request_endpoint(default_session_id)))
+    stub_request(:get, ida_frontend_api_uri(country_authn_request_endpoint(default_session_id)))
         .to_return(body: "", status: 500)
   end
 
