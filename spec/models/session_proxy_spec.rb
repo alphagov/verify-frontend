@@ -8,7 +8,7 @@ X_FORWARDED_FOR = 'X-Forwarded-For'.freeze
 describe SessionProxy do
   let(:api_client) { double(:api_client) }
   let(:originating_ip_store) { double(:originating_ip_store) }
-  let(:path) { '/session' }
+  let(:path) { '/api/session' }
   let(:session_id) { 'my-session-id' }
   let(:cookies) {
     {
@@ -98,7 +98,7 @@ describe SessionProxy do
     let(:api_response) { countries_json }
 
     it 'should retrieve countries' do
-      expect(api_client).to receive(:get).with('/countries/my-session-id').and_return(api_response)
+      expect(api_client).to receive(:get).with('/api/countries/my-session-id').and_return(api_response)
 
       response = session_proxy.get_countries(session_id)
       expect(response.countries.count).to eq(2)

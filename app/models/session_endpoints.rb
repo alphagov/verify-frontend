@@ -1,5 +1,5 @@
 module SessionEndpoints
-  PATH = '/session'.freeze
+  PATH = '/api/session'.freeze
   PATH_PREFIX = Pathname(PATH)
   IDP_LIST_SUFFIX = 'idp-list'.freeze
   SELECT_IDP_SUFFIX = 'select-idp'.freeze
@@ -18,7 +18,7 @@ module SessionEndpoints
   PARAM_ENTITY_ID = 'entityId'.freeze
   PARAM_REGISTRATION = 'registration'.freeze
   PARAM_CYCLE_THREE_VALUE = 'value'.freeze
-  COUNTRIES_PATH = '/countries'.freeze
+  COUNTRIES_PATH = '/api/countries'.freeze
   SESSION_ID = 'sessionId'.freeze
   COUNTRIES_PATH_PREFIX = Pathname(COUNTRIES_PATH)
   COUNTRY_AUTHN_REQUEST_SUFFIX = 'country-authn-request'.freeze

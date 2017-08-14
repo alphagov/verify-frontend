@@ -4,7 +4,7 @@ require 'models/session_proxy'
 require 'piwik_test_helper'
 
 describe 'user sends authn requests' do
-  let(:api_saml_endpoint) { api_uri('session') }
+  let(:api_saml_endpoint) { ida_frontend_api_uri('api/session') }
 
   context 'and it is received successfully' do
     let(:session_start_time) { DateTime.now }

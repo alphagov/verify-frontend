@@ -154,15 +154,15 @@ RSpec.describe 'When the user visits the choose a country page' do
     expect(page).to have_current_path('/a-country-page')
 
     # And API is called (and policy records the country selected by the user)
-    expect(a_request(:post, api_uri(select_country_endpoint("my-session-id-cookie", "NL")))).to have_been_made.once
+    expect(a_request(:post, ida_frontend_api_uri(select_country_endpoint("my-session-id-cookie", "NL")))).to have_been_made.once
   end
 
   def select_country_endpoint(session_id, country_code)
-    '/countries/' + session_id + '/' + country_code
+    '/api/countries/' + session_id + '/' + country_code
   end
 
   def stub_select_country_request
-    stub_request(:post, api_uri(select_country_endpoint("my-session-id-cookie", "NL")))
+    stub_request(:post, ida_frontend_api_uri(select_country_endpoint("my-session-id-cookie", "NL")))
         .to_return(body: '')
   end
 end
