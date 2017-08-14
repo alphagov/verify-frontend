@@ -29,11 +29,10 @@ module Analytics
     end
 
     def report_idp_registration(request, idp_name, idp_name_history, evidence, recommended)
-      recommended_str = recommended ? '(recommended)' : '(not recommended)'
       list_of_evidence = evidence.sort.join(', ')
       @analytics_reporter.report_custom_variable(
         request,
-        "#{idp_name} was chosen for registration #{recommended_str} with evidence #{list_of_evidence}",
+        "#{idp_name} was chosen for registration #{recommended} with evidence #{list_of_evidence}",
         Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(','))
       )
     end

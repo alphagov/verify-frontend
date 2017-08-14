@@ -51,11 +51,19 @@ private
       selected_idp_names << idp_name
       session[:selected_idp_names] = selected_idp_names
     end
-    FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended?)
+    FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended)
   end
 
-  def recommended?
-    session.fetch(:selected_idp_was_recommended)
+  def recommended
+    begin
+      if session.fetch(:selected_idp_was_recommended)
+        '(recommended)'
+      else
+        '(not recommended)'
+      end
+    rescue KeyError
+      '(idp recommendation key not set)'
+    end
   end
 
   def decorated_idp

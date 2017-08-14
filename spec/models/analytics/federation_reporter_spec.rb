@@ -48,7 +48,7 @@ module Analytics
           "#{idp_name} was chosen for registration (recommended) with evidence passport",
           5 => ['IDP_SELECTION', idp_history_str]
         )
-        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), true)
+        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), '(recommended)')
       end
 
       it 'should report correctly if IdP was not recommended' do
@@ -58,7 +58,17 @@ module Analytics
             "#{idp_name} was chosen for registration (not recommended) with evidence passport",
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), false)
+        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), '(not recommended)')
+      end
+
+      it 'should report correctly if IdP recommendation key not found in session' do
+        expect(analytics_reporter).to receive(:report_custom_variable)
+          .with(
+            request,
+            "#{idp_name} was chosen for registration (idp recommendation key not set) with evidence passport",
+            5 => ['IDP_SELECTION', idp_history_str]
+            )
+        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), '(idp recommendation key not set)')
       end
 
       it 'should sort evidence' do
@@ -68,7 +78,7 @@ module Analytics
             "#{idp_name} was chosen for registration (recommended) with evidence driving_licence, passport",
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport driving_licence), true)
+        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport driving_licence), '(recommended)')
       end
     end
 
