@@ -1,22 +1,26 @@
 function abTest(experimentDetails) {
 
-  const routeB = experimentDetails.experiment.concat('_variant')
-
   try {
     if (document.cookie.indexOf("ab_test") >= 0) {
       const abCookie = JSON.parse(getCookie("ab_test"))
 
-      if (abCookie.app_transparency === routeB) {
-        experimentDetails.routeB.init();
+      var routes = { 'control': experimentDetails.control.route}
+
+      experimentDetails.alternatives.forEach(function(alternative){
+        routes[experimentDetails.experiment.concat('_' + alternative.name)] = alternative.route
+      })
+
+      if (routes[[abCookie[experimentDetails.experiment]]]) {
+        routes[abCookie[experimentDetails.experiment]].init();
       } else {
-        experimentDetails.routeA.init();
+        experimentDetails.control.route.init();
       }
     } else {
-      experimentDetails.routeA.init();
+      experimentDetails.control.route.init();
     }
   }
   catch(err) {
-    experimentDetails.routeA.init();
+    experimentDetails.control.route.init();
   }
 }
 

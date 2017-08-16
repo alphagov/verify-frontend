@@ -464,6 +464,8 @@ en:
           debit_card: Debit card?
           credit_card: Credit card?
           bank_account: UK bank account?
+      errors:
+        no_selection: Please answer all the questions
     no_idps_available:
       title: No IDPS available
       heading: GOV.UK Verify won’t work for you

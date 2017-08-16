@@ -1,7 +1,7 @@
 class SelectDocumentsVariantController < ApplicationController
   def index
     @form = SelectDocumentsForm.new({})
-    render :index
+    render 'select_documents/index'
   end
 
   def select_documents
@@ -12,7 +12,7 @@ class SelectDocumentsVariantController < ApplicationController
       redirect_to @form.further_id_information_required? ? other_identity_documents_path : select_proof_of_address_path
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
-      render :index
+      render 'select_documents/index'
     end
   end
 
@@ -21,6 +21,7 @@ class SelectDocumentsVariantController < ApplicationController
     @current_identity_providers = current_identity_providers
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
+    render 'select_documents/unlikely_to_verify'
   end
 
   def no_documents

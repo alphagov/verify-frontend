@@ -87,7 +87,8 @@ RSpec.describe 'When the user visits a page' do
     end
 
     it 'sends an event to Piwik when the user clicks on a proof of address radio button' do
-      set_session_and_session_cookies!
+      # set_session_and_session_cookies!
+      set_session_and_ab_session_cookies!('proof_of_address_v3' => 'proof_of_address_v3_with_bank_account')
       expect(request_log).to receive(:log).with(
         hash_including(
           'action_name' => 'Proof of your address - GOV.UK Verify - GOV.UK - LEVEL_2'

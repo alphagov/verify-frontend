@@ -3,7 +3,7 @@ require 'api_test_helper'
 
 RSpec.feature 'When user visits document selection page' do
   before(:each) do
-    set_session_and_ab_session_cookies!('proof_of_address_v2' => 'proof_of_address_v2_variant')
+    set_session_and_ab_session_cookies!('proof_of_address_v3' => 'proof_of_address_v3_with_bank_account')
     visit '/select-documents'
   end
 

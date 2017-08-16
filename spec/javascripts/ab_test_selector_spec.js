@@ -28,8 +28,12 @@ describe('AB Test Selector', function () {
 
   var experimentDetails = {
     experiment: 'app_transparency',
-    routeA: routeA,
-    routeB: routeB
+    control: {
+      route: routeA
+    },
+    alternatives: [
+      {name: 'variant', route: routeB}
+    ]
   };
 
   function clearCookie() {
