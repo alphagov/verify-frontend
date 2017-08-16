@@ -129,7 +129,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
       set_up_session('stub-idp-one')
       stub_api_saml_endpoint
       visit '/sign-in'
-      click_link 'Cymraeg'
+      first('.available-languages').click_link('Cymraeg')
       expect(page).to have_current_path('/mewngofnodi')
       click_button 'IDCorp'
 
@@ -150,7 +150,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
       visit '/redirect-to-idp-warning'
 
-      click_link 'Cymraeg'
+      first('.available-languages').click_link('Cymraeg')
       expect(page).to have_current_path('/ailgyfeirio-i-rybudd-idp')
       click_button 'IDCorp'
 

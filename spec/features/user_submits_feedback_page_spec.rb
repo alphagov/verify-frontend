@@ -161,7 +161,8 @@ RSpec.feature 'When the user submits the feedback page' do
     it 'should be able to direct user back to the relevant page if user switches to Welsh on the feedback page' do
       visit '/feedback?feedback-source=START_PAGE'
 
-      click_link 'Cymraeg'
+      first('.available-languages').click_link('Cymraeg')
+
       expect(page).to have_current_path('/adborth')
 
       fill_in 'feedback_form_what', with: 'Verify my identity'

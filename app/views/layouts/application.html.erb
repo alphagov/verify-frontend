@@ -23,10 +23,13 @@
 
 <% content_for :content do %>
   <main id="content" tabindex="-1" data-fp-path="<%= FINGERPRINT_CONFIG %>">
-    <div class="grid-row">
+    <div class="grid-row hide-mobile">
       <%= render 'shared/available_languages' unless @hide_available_languages %>
     </div>
     <%= content_for?(:main) ? yield(:main) : yield %>
+    <div class="grid-row show-mobile">
+      <%= render 'shared/available_languages' unless @hide_available_languages %>
+    </div>
     <%= render 'shared/feedback_link' if feedback_source.present? && !@hide_feedback_link %>
     <div class="verify-logo-right">
       <%= image_tag 'govuk-verify-small-black-text-170px.png', alt: 'GOV.UK VERIFY' %>
