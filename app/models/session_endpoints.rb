@@ -36,10 +36,6 @@ module SessionEndpoints
     PATH_PREFIX.join(session_id, suffix).to_s
   end
 
-  def idp_list_endpoint(session_id)
-    session_endpoint(session_id, IDP_LIST_SUFFIX)
-  end
-
   def select_idp_endpoint(session_id)
     session_endpoint(session_id, SELECT_IDP_SUFFIX)
   end
