@@ -48,16 +48,3 @@
     }
   }
 }
-
-.hide-mobile {
-  @include media(mobile) {
-    display: none;
-  }
-}
-
-.show-mobile {
-  @include media(tablet, desktop) {
-    display: none;
-  }
-}
-
