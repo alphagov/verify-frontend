@@ -124,9 +124,13 @@
 .list-companies {
   margin-bottom: $gutter-half;
 
+  @include media(mobile) {
+    text-align: center;
+  }
+
   li {
     @include inline-block;
-    width: 50%;
+    width: 49%;
 
     @include media (tablet) {
       width: 24%;
