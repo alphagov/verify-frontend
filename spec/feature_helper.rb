@@ -104,6 +104,11 @@ module FeatureHelper
     cookie_hash
   end
 
+  def set_cookies_and_ab_test_cookie!(experiment, cookie_hash = create_cookie_hash)
+    cookie_hash[CookieNames::AB_TEST] = experiment.to_json
+    set_cookies!(cookie_hash)
+  end
+
   def set_loa_in_session(loa)
     page.set_rack_session(
       requested_loa: loa
