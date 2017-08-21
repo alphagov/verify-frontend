@@ -15,7 +15,6 @@ class AboutAvailableLogosController < ApplicationController
   def certified_companies
     if is_loa1?
       @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(filter_by_loa(current_identity_providers, 'LEVEL_1'))
-      @current_idps = current_identity_providers
       render :certified_companies_LOA1
     else
       @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers)
@@ -38,6 +37,6 @@ class AboutAvailableLogosController < ApplicationController
 private
 
   def filter_by_loa(identity_providers, level_of_assurance)
-    identity_providers.select { |idp| idp.levels_of_assurance == [level_of_assurance] }
+    identity_providers.select { |idp| idp.levels_of_assurance.min == level_of_assurance }
   end
 end
