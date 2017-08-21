@@ -135,7 +135,7 @@ en:
         <p>You can use your identity account to access:</p>
       details: "GOV.UK Verify is new, and government services are joining all the time. The current services using Verify are:"
       details_loa1_uplift_list: "When you access these government services, you'll be asked to provide more evidence as these services need to be confident someone isn't pretending to be you:"
-      naviagation:
+      navigation:
         start_now: Start now
     about_choosing_a_company:
       title: About choosing a company
