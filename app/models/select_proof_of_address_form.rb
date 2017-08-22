@@ -30,6 +30,6 @@ class SelectProofOfAddressForm
 private
 
   def add_no_selection_error
-    errors.add(:base, I18n.t('hub.select_proof_of_address.errors.no_selection'))
+    errors.add(:base, I18n.t('errors.no_selection'))
   end
 end
