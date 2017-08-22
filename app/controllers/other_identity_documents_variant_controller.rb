@@ -1,6 +1,7 @@
 class OtherIdentityDocumentsVariantController < ApplicationController
   def index
     @form = OtherIdentityDocumentsForm.new({})
+    render 'other_identity_documents/index'
   end
 
   def select_other_documents
@@ -11,7 +12,7 @@ class OtherIdentityDocumentsVariantController < ApplicationController
       redirect_to select_proof_of_address_path
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
-      render :index
+      render 'other_identity_documents/index'
     end
   end
 end

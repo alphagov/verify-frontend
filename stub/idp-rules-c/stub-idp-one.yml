@@ -1,0 +1,8 @@
+simpleIds: [ "stub-idp-one" ]
+recommended_profiles:
+  - [ "driving_licence", "mobile_phone", ]
+  - [ "driving_licence", "mobile_phone", "passport" ]
+  - [ "debit_card" ]
+non_recommended_profiles: []
+send_hints: true
+send_language_hint: true

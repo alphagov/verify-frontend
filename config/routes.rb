@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  PROOF_OF_ADDRESS_EXPERIMENT = 'proof_of_address_v2'.freeze
+  PROOF_OF_ADDRESS_EXPERIMENT = 'proof_of_address_v3'.freeze
 
   LOA1_LOGOS_EXPERIMENT = 'loa1_logos'.freeze
 
@@ -14,9 +14,12 @@ Rails.application.routes.draw do
   }
 
   proof_of_address_a_and_report_to_piwik = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'control', report_to_piwik)
-  proof_of_address_b_and_report_to_piwik = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'variant', report_to_piwik)
+  proof_of_address_b_and_report_to_piwik = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'with_bank_account', report_to_piwik)
+  proof_of_address_c_and_report_to_piwik = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'without_bank_account', report_to_piwik)
+
   proof_of_address_a = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'control')
-  proof_of_address_b = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'variant')
+  proof_of_address_b = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'with_bank_account')
+  proof_of_address_c = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'without_bank_account')
 
   loa1_logos_control_and_report_to_piwik = SelectRoute.new(LOA1_LOGOS_EXPERIMENT, 'control', report_to_piwik)
   loa1_logos_available_and_report_to_piwik = SelectRoute.new(LOA1_LOGOS_EXPERIMENT, 'available', report_to_piwik)
@@ -106,9 +109,9 @@ Rails.application.routes.draw do
     post 'further_information', to: 'further_information#submit', as: :further_information_submit
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
-    get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
+    # get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
     get 'select_proof_of_address_none', to: 'select_proof_of_address#no_documents', as: :select_proof_of_address_no_documents
-    post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
+    # post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
     get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
     get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 
@@ -120,7 +123,14 @@ Rails.application.routes.draw do
       get 'select_phone', to: 'select_phone_variant#index', as: :select_phone
     end
 
+    constraints proof_of_address_c_and_report_to_piwik do
+      get 'select_phone', to: 'select_phone_variant_no_bank_account#index', as: :select_phone
+    end
+
     constraints proof_of_address_a do
+      # get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
+      # post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
+
       get 'select_documents', to: 'select_documents#index', as: :select_documents
       get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
       post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
@@ -136,6 +146,9 @@ Rails.application.routes.draw do
     end
 
     constraints proof_of_address_b do
+      get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
+      post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
+
       get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
       get 'select_documents_none', to: 'select_documents_variant#no_documents', as: :select_documents_no_documents
       post 'select_documents', to: 'select_documents_variant#select_documents', as: :select_documents_submit
@@ -149,6 +162,25 @@ Rails.application.routes.draw do
 
       get 'choose_a_certified_company', to: 'choose_a_certified_company_variant#index', as: :choose_a_certified_company
       post 'choose_a_certified_company', to: 'choose_a_certified_company_variant#select_idp', as: :choose_a_certified_company_submit
+    end
+
+    constraints proof_of_address_c do
+      get 'select_proof_of_address', to: 'select_proof_of_address_no_bank_account#index', as: :select_proof_of_address
+      post 'select_proof_of_address', to: 'select_proof_of_address_no_bank_account#select_proof', as: :select_proof_of_address_submit
+
+      get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
+      get 'select_documents_none', to: 'select_documents_variant#no_documents', as: :select_documents_no_documents
+      post 'select_documents', to: 'select_documents_variant#select_documents', as: :select_documents_submit
+
+      get 'unlikely_to_verify', to: 'select_documents_variant#unlikely_to_verify', as: :unlikely_to_verify
+
+      get 'other_identity_documents', to: 'other_identity_documents_variant#index', as: :other_identity_documents
+      post 'other_identity_documents', to: 'other_identity_documents_variant#select_other_documents', as: :other_identity_documents_submit
+
+      post 'select_phone', to: 'select_phone_variant_no_bank_account#select_phone', as: :select_phone_submit
+
+      get 'choose_a_certified_company', to: 'choose_a_certified_company_variant_no_bank_account#index', as: :choose_a_certified_company
+      post 'choose_a_certified_company', to: 'choose_a_certified_company_variant_no_bank_account#select_idp', as: :choose_a_certified_company_submit
     end
 
     constraints loa1_logos_control_and_report_to_piwik do

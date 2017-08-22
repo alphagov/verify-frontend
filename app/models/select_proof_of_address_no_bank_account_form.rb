@@ -1,18 +1,18 @@
-class SelectProofOfAddressForm
+
+class SelectProofOfAddressNoBankAccountForm
   include ActiveModel::Model
 
-  attr_reader :uk_bank_account_details, :debit_card, :credit_card
+  attr_reader :debit_card, :credit_card
   validate :answered_all_questions
 
   def initialize(params)
-    @uk_bank_account_details = params[:uk_bank_account_details]
     @debit_card = params[:debit_card]
     @credit_card = params[:credit_card]
   end
 
   def selected_answers
     answers = {}
-    IdpEligibility::Evidence::ADDRESS_DOCUMENT_ATTRIBUTES.each do |attr|
+    IdpEligibility::EvidenceVariant::ADDRESS_DOCUMENT_ATTRIBUTES.each do |attr|
       result = public_send(attr)
       if %w(true false).include?(result)
         answers[attr] = result == 'true'
@@ -22,7 +22,7 @@ class SelectProofOfAddressForm
   end
 
   def answered_all_questions
-    if uk_bank_account_details.nil? || debit_card.nil? || credit_card.nil?
+    if debit_card.nil? || credit_card.nil?
       add_no_selection_error
     end
   end

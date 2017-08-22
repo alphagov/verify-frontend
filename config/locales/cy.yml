@@ -137,6 +137,8 @@ cy:
         <p>Gallwch ddefnyddio eich cyfrif hunaniaeth i gael mynediad i:</p>
       details: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
       details_loa1_uplift_list: "Pan fyddwch yn defnyddio'r gwasanaethau llywodraeth hyn, bydd gofyn i chi ddarparu mwy o dystiolaeth gan fod angen i'r gwasanaethau hyn fod yn hyderus nad yw rhywun arall yn defnyddio eich hunaniaeth: "
+      navigation:
+        start_now: Dechrau nawr
     about_choosing_a_company:
       title: Am ddewis cwmni
       heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
@@ -157,7 +159,7 @@ cy:
       no_documents_message: Mae eich dewisiadau dogfennau wedi cael eu gosod i ‘na’.
       legend: Ydy’r dogfennau hyn gyda chi?
       highlight: Y mwyaf o ddogfennau hunaniaeth y gallwch eu darparu, y mwyaf tebygol yw y bydd y cwmni yn gallu eich dilysu'n llwyddiannus.
-      documents_option_yes: Ydy
+      documents_option_yes: Oes
       documents_option_yes_expired: Oes, ond mae wedi dod i ben
       valid_UK_driving_licence: Oes gennych chi drwydded yrru y DU gyda llun, llawn neu dros dro dilys?
       uk_passport: Oes gennych chi basport y DU?

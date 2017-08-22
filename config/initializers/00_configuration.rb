@@ -26,6 +26,7 @@ CONFIG = Configuration.load! do
   option_int 'connect_timeout', 'CONNECT_TIMEOUT', default: 4
   option_string 'rules_directory', 'RULES_DIRECTORY'
   option_string 'rules_directory_b', 'RULES_DIRECTORY_B'
+  option_string 'rules_directory_c', 'RULES_DIRECTORY_C'
   option_string 'zendesk_url', 'ZENDESK_URL'
   option_string 'zendesk_username', 'ZENDESK_USERNAME'
   option_string 'zendesk_token', 'ZENDESK_TOKEN'

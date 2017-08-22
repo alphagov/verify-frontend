@@ -16,7 +16,7 @@
           <% unless @request.language_hint.nil? %>
               <%= hidden_field_tag 'language', @request.language_hint %>
           <% end %>
-          <%= submit_tag 'Continue', id: 'continue-button', class: 'button' %>
+          <%= submit_tag t('navigation.continue'), id: 'continue-button', class: 'button' %>
       <% end %>
     </div>
   </div>

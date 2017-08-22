@@ -10,15 +10,13 @@
       if (selectProofOfAddress.$form.length === 1) {
         selectProofOfAddress.validator = selectProofOfAddress.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
           rules: {
-            'select_proof_of_address_form[uk_bank_account_details]': 'required',
             'select_proof_of_address_form[debit_card]': 'required',
             'select_proof_of_address_form[credit_card]': 'required',
           },
             groups: {
-                primary: 'select_proof_of_address_form[credit_card] select_proof_of_address_form[debit_card] select_proof_of_address_form[uk_bank_account_details]'
+                primary: 'select_proof_of_address_form[credit_card] select_proof_of_address_form[debit_card]'
             },
           messages: {
-            'select_proof_of_address_form[uk_bank_account_details]': errorMessage,
             'select_proof_of_address_form[debit_card]': errorMessage,
             'select_proof_of_address_form[credit_card]': errorMessage
           }
@@ -27,7 +25,7 @@
     }
   };
 
-  GOVUK.selectProofOfAddress = selectProofOfAddress;
+  GOVUK.selectProofOfAddressNoBankAccount = selectProofOfAddress;
 
   global.GOVUK = GOVUK;
 })(window);
