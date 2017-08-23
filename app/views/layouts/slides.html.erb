@@ -2,8 +2,11 @@
   <div class="content-inner slides">
     <div class="grid-row">
       <div class="column-one-third">
-        <figure>
+        <figure class="hide-mobile">
           <%= image_tag 'govuk-verify.png', srcset: "#{asset_path 'govuk-verify.svg'} 1x", alt: 'GOV.UK Verify' %>
+        </figure>
+        <figure class="show-mobile">
+          <%= image_tag 'govuk-verify-horizontal.png', srcset: "#{asset_path 'govuk-verify-horizontal.svg'} 1x", alt: 'GOV.UK Verify' %>
         </figure>
       </div>
       <div class="column-two-thirds">
