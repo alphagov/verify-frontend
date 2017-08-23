@@ -1,5 +1,6 @@
 module ApiTestHelper
   include SessionEndpoints
+  include ConfigEndpoints
 
   def ida_frontend_api_uri(path)
     URI.join(CONFIG.ida_frontend_host, path)
@@ -177,7 +178,7 @@ module ApiTestHelper
   end
 
   def stub_api_idp_list(idps = default_idps)
-    stub_request(:get, ida_frontend_api_uri(idp_list_endpoint(default_session_id))).to_return(body: idps.to_json)
+    stub_request(:get, config_api_uri(idp_list_endpoint(default_transaction_id))).to_return(body: idps.to_json)
   end
 
   def stub_api_select_idp
@@ -198,6 +199,10 @@ private
 
   def default_session_id
     'my-session-id-cookie'
+  end
+
+  def default_transaction_id
+    'test-rp'
   end
 
   def default_idps
