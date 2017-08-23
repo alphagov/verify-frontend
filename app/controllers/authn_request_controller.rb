@@ -9,6 +9,7 @@ class AuthnRequestController < SamlController
     session[:verify_session_id] = response.session_id
     session[:transaction_supports_eidas] = response.transaction_supports_eidas
     set_current_transaction_simple_id(response.transaction_simple_id)
+    set_current_transaction_entity_id(response.transaction_entity_id)
     set_requested_loa(response.levels_of_assurance)
     set_session_start_time!
 
@@ -30,6 +31,10 @@ private
 
   def set_current_transaction_simple_id(simple_id)
     session[:transaction_simple_id] = simple_id
+  end
+
+  def set_current_transaction_entity_id(entity_id)
+    session[:transaction_entity_id] = entity_id
   end
 
   def set_requested_loa(levels_of_assurance)
