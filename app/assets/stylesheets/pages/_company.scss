@@ -111,6 +111,27 @@
     }
   }
 
+  @include media (mobile) {
+    .company-logo {
+      img {
+        width: 140px;
+      }
+      .company-about {
+        width: 45%;
+        margin-top: 30px;
+        margin-left: 10px;
+        float: left;
+      }
+      .company-logo-img-container {
+        width: 50%;
+        float: left;
+      }
+    }
+    button {
+      width: 65%;
+    }
+  }
+
 
 
   .idp-option {
@@ -135,6 +156,9 @@
           width: 260px;
         }
       }
+      @include media (mobile) {
+        margin-top: 5px;
+      }
     }
 
     .company-app-install {
@@ -146,5 +170,6 @@
 
 .large-top {
   margin-top: 2em;
+  margin-bottom: 0;
 }
 
