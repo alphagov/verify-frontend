@@ -9,7 +9,7 @@ class StubApi < Sinatra::Base
     post_to_api(JSON.parse(request.body.read)['relayState'])
   end
 
-  get '/api/session/:session_id/idp-list' do
+  get '/config/idps/idp-list' do
     '[{
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one",
