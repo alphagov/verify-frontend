@@ -6,7 +6,7 @@ class ConfigProxy
   end
 
   def transactions
-    @api_client.get('/config/transactions/enabled')
+    @api_client.get(transactions_endpoint)
   end
 
   def get_idp_list(transaction_id)
