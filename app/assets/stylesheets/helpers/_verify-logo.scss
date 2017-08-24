@@ -11,6 +11,12 @@
   }
 }
 
+.verify-logo-right {
+  img {
+    width: 171px;
+  }
+}
+
 .slides,
 .no-right-hand-logo {
   ~ .verify-logo-right {
