@@ -85,9 +85,11 @@
     padding: 0;
     text-align: center;
 
-    img {
+    input[type="image"] {
+      cursor: pointer;
       width: 67.5%;
     }
+
   }
 
   @include media (tablet) {
@@ -113,20 +115,23 @@
 
   @include media (mobile) {
     .company-logo {
-      img {
+      input[type="image"] {
         width: 140px;
       }
+
       .company-about {
         width: 45%;
         margin-top: 30px;
         margin-left: 10px;
         float: left;
       }
+
       .company-logo-img-container {
         width: 50%;
         float: left;
       }
     }
+
     button {
       width: 65%;
     }
@@ -144,6 +149,7 @@
     .button,
     .button-link {
       margin-top: 30px;
+      text-align: center;
 
       @include media (tablet) {
         min-width: 230px;
@@ -156,6 +162,7 @@
           width: 260px;
         }
       }
+
       @include media (mobile) {
         margin-top: 5px;
       }
