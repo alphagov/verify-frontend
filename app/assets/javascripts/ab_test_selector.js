@@ -2,7 +2,7 @@ function abTest(experimentDetails) {
 
   try {
     if (document.cookie.indexOf("ab_test") >= 0) {
-      const abCookie = JSON.parse(getCookie("ab_test"))
+      var abCookie = JSON.parse(getCookie("ab_test"))
 
       var routes = { 'control': experimentDetails.control.route}
 
