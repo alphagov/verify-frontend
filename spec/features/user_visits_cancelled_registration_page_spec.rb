@@ -11,7 +11,9 @@ RSpec.describe 'When user visits cancelled registration page' do
     )
   end
 
-  it 'the page is rendered with the correct links ' do
+  it 'the page is rendered with the correct links for LOA2 journey' do
+    set_loa_in_session('LEVEL_2')
+
     visit('/cancelled-registration')
 
     expect(page).to have_title I18n.t('hub.cancelled_registration.title')
@@ -19,5 +21,18 @@ RSpec.describe 'When user visits cancelled registration page' do
     expect(page).to have_link(I18n.t('hub.cancelled_registration.options.verify_with_another_company'), href: choose_a_certified_company_path)
     expect(page).to have_link(I18n.t('hub.cancelled_registration.options.verify_using_other_documents'), href: select_documents_path)
     expect(page).to have_link(I18n.t('hub.cancelled_registration.options.contact_verify'), href: "#{feedback_path}?feedback-source=CANCELLED_REGISTRATION")
+  end
+
+  it 'the page is rendered with the correct links for LOA1 journey' do
+    set_loa_in_session('LEVEL_1')
+
+    visit('/cancelled-registration')
+
+    expect(page).to have_title I18n.t('hub.cancelled_registration.title')
+    expect(page).to have_link('Find out the other ways to register for an identity profile', href: other_ways_to_access_service_path)
+    expect(page).to have_link(I18n.t('hub.cancelled_registration.options.verify_with_another_company'), href: choose_a_certified_company_path)
+    expect(page).to have_link(I18n.t('hub.cancelled_registration.options.contact_verify'), href: "#{feedback_path}?feedback-source=CANCELLED_REGISTRATION")
+
+    expect(page).to_not have_link(I18n.t('hub.cancelled_registration.options.verify_using_other_documents'), href: select_documents_path)
   end
 end

@@ -3,6 +3,10 @@ class CancelledRegistrationController < ApplicationController
     @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
     @service_name = current_transaction.name
 
-    render :cancelled_registration
+    if is_loa1?
+      render :cancelled_registration_LOA1
+    else
+      render :cancelled_registration_LOA2
+    end
   end
 end
