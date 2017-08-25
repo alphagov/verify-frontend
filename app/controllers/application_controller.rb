@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   prepend RedirectWithSeeOther
 
   def transactions_list
-    DATA_CORRELATOR.correlate(Display::Rp::TransactionsProxy.new(CONFIG_API_CLIENT).transactions)
+    DATA_CORRELATOR.correlate(CONFIG_PROXY.transactions)
   end
 
   def loa1_transactions_list
@@ -154,7 +154,7 @@ private
   end
 
   def current_identity_providers
-    SESSION_PROXY.get_idp_list(session[:verify_session_id]).idps
+    CONFIG_PROXY.get_idp_list(session[:transaction_entity_id]).idps
   end
 
   def report_to_analytics(action_name)
