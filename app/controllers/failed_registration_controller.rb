@@ -4,9 +4,19 @@ class FailedRegistrationController < ApplicationController
     @transaction = current_transaction
 
     if CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
-      render 'index_continue_on_failed_registration'
+      render_based_on_loa_level(:index_continue_on_failed_registration_LOA1, :index_continue_on_failed_registration_LOA2)
     else
-      render 'index'
+      render_based_on_loa_level(:index_LOA1, :index_LOA2)
+    end
+  end
+
+private
+
+  def render_based_on_loa_level(loa1_template, loa2_template)
+    if is_loa1?
+      render loa1_template
+    else
+      render loa2_template
     end
   end
 end
