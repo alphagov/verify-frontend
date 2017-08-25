@@ -34,7 +34,6 @@ describe SessionProxy do
           'sessionId' => session_id,
           'sessionStartTime' => 'my-session-start-time',
           'transactionSimpleId' => 'transaction-simple-id',
-          'transactionEntityId' => 'http://www.test-rp.gov.uk/SAML2/MD',
           'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com' }],
           'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2),
           'transactionSupportsEidas' => false
@@ -67,7 +66,7 @@ describe SessionProxy do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
         session_proxy.create_session('my-saml-request', 'my-relay-state')
-      }.to raise_error Api::Response::ModelError, "Session can't be blank, Transaction simple can't be blank, Levels of assurance can't be blank, Transaction entity can't be blank, Transaction supports eidas is not included in the list"
+      }.to raise_error Api::Response::ModelError, "Session can't be blank, Transaction simple can't be blank, Levels of assurance can't be blank, Transaction supports eidas is not included in the list"
     end
   end
 
