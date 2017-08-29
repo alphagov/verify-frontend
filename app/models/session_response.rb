@@ -1,6 +1,6 @@
 class SessionResponse < Api::Response
   attr_reader :session_id, :transaction_simple_id, :levels_of_assurance, :transaction_supports_eidas, :transaction_entity_id
-  validates :session_id, :transaction_simple_id, :levels_of_assurance, :transaction_entity_id, presence: true
+  validates :session_id, :transaction_simple_id, :levels_of_assurance, presence: true
   validates :transaction_supports_eidas, inclusion: { in: [true, false] }
 
 
