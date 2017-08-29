@@ -9,7 +9,7 @@ class StubApi < Sinatra::Base
     post_to_api(JSON.parse(request.body.read)['relayState'])
   end
 
-  get '/api/session/:session_id/idp-list' do
+  get '/config/idps/idp-list' do
     '[{
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one",
@@ -95,6 +95,7 @@ private
       \"sessionId\":\"blah\",
       \"sessionStartTime\":32503680000000,
       \"transactionSimpleId\":\"test-rp\",
+      \"transactionEntityId\":\"http://www.test-rp.gov.uk/SAML2/MD\",
       \"levelsOfAssurance\":[\"#{level_of_assurance}\"],
       \"transactionSupportsEidas\": true
     }"

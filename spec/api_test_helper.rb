@@ -1,5 +1,6 @@
 module ApiTestHelper
   include SessionEndpoints
+  include ConfigEndpoints
 
   def ida_frontend_api_uri(path)
     URI.join(CONFIG.ida_frontend_host, path)
@@ -94,6 +95,7 @@ module ApiTestHelper
   def stub_api_session(options = {})
     {
         'transactionSimpleId' => 'test-rp',
+        'transactionEntityId' => 'http://www.test-rp.gov.uk/SAML2/MD',
         'sessionStartTime' => '32503680000000',
         'sessionId' => default_session_id,
         'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }],
@@ -177,7 +179,7 @@ module ApiTestHelper
   end
 
   def stub_api_idp_list(idps = default_idps)
-    stub_request(:get, ida_frontend_api_uri(idp_list_endpoint(default_session_id))).to_return(body: idps.to_json)
+    stub_request(:get, config_api_uri(idp_list_endpoint(default_transaction_entity_id))).to_return(body: idps.to_json)
   end
 
   def stub_api_select_idp
@@ -198,6 +200,14 @@ private
 
   def default_session_id
     'my-session-id-cookie'
+  end
+
+  def default_transaction_id
+    'test-rp'
+  end
+
+  def default_transaction_entity_id
+    'http://www.test-rp.gov.uk/SAML2/MD'
   end
 
   def default_idps
