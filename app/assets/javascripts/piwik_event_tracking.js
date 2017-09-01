@@ -27,9 +27,7 @@
     global.GOVUK.piwikEventsTracking = {
         init: function() {
             var piwikEvents = {
-                evidence_credit_card: getEvidenceEvent('credit_card'),
-                evidence_debit_card: getEvidenceEvent('debit_card'),
-                evidence_uk_bank_account: getEvidenceEvent('uk_bank_account_details'),
+                evidence_example: getEvidenceEvent('example'),
                 journey_user_type: getUserTypeEvent()
             };
 

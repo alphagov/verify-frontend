@@ -16,7 +16,7 @@ describe('Analytics', function () {
         var htmlWithMarkup =
             '<span id="piwik-url">http://www.fakepiwikurl.com</span>' +
             '<input type="checkbox" id="some-other-checkbox" value="false"/>' +
-            '<input type="checkbox" id="tracked-evidence" value="true" piwik_event_tracking="evidence_credit_card"/>' +
+            '<input type="checkbox" id="tracked-evidence" value="true" piwik_event_tracking="evidence_example"/>' +
             '<input type="radio" value="true" piwik_event_tracking="journey_user_type"/>' +
             '<input type="radio" value="false" piwik_event_tracking="journey_user_type"/>';
 
@@ -33,10 +33,10 @@ describe('Analytics', function () {
         });
 
         it('should report to Piwik when evidence is selected', function () {
-            $('input[piwik_event_tracking="evidence_credit_card"]').prop('checked', true).change();
+            $('input[piwik_event_tracking="evidence_example"]').prop('checked', true).change();
 
             expect(_paq.push.calls.count()).toBe(1);
-            expectLatestEntryInPiwikQueueToMatch('Evidence', 'yes', 'credit_card');
+            expectLatestEntryInPiwikQueueToMatch('Evidence', 'yes', 'example');
         });
 
         it('should not report to Piwik when an input without the markup is changed', function () {

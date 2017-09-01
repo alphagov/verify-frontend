@@ -32,17 +32,6 @@ window.GOVUK.piwikEventsTracking.init();
 //  routeB: window.GOVUK.selectPhoneVariant
 //})
 
-abTest({
-  experiment: 'proof_of_address_v3',
-  control: {
-    route: window.GOVUK.selectProofOfAddress
-  },
-  alternatives: [
-    {name: 'with_bank_account', route: window.GOVUK.selectProofOfAddress},
-    {name: 'without_bank_account', route: window.GOVUK.selectProofOfAddress}
-  ]
-})
-
 $(function () {
   window.GOVUK.validation.attach();
   window.GOVUK.signin.attach();

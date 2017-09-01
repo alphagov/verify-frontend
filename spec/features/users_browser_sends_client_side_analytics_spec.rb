@@ -85,25 +85,6 @@ RSpec.describe 'When the user visits a page' do
       choose 'start_form_selection_false', allow_label_click: true
       choose 'start_form_selection_true', allow_label_click: true
     end
-
-    it 'sends an event to Piwik when the user clicks on a proof of address radio button' do
-      # set_session_and_session_cookies!
-      set_session_and_ab_session_cookies!('proof_of_address_v3' => 'proof_of_address_v3_with_bank_account')
-      expect(request_log).to receive(:log).with(
-        hash_including(
-          'action_name' => 'Proof of your address - GOV.UK Verify - GOV.UK - LEVEL_2'
-        )
-      )
-      expect(request_log).to receive(:log).with(
-        hash_including(
-          'e_c' => 'Evidence',
-          'e_n' => 'uk_bank_account_details',
-          'e_a' => 'no'
-        )
-      )
-      visit '/select-proof-of-address'
-      choose 'select_proof_of_address_form_uk_bank_account_details_false', allow_label_click: true
-    end
   end
 
   context 'when JS is disabled' do
