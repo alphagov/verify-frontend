@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  # report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
-  #   AbTest.report(experiment_name, reported_alternative, transaction_id, request)
-  # }
+  report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
+    AbTest.report(experiment_name, reported_alternative, transaction_id, request)
+  }
 
   IDP_WARNING_EXPERIMENT = 'idp_warning'.freeze
 
