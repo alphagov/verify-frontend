@@ -5,14 +5,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  PROOF_OF_ADDRESS_EXPERIMENT = 'proof_of_address_v3'.freeze
-
   # report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
   #   AbTest.report(experiment_name, reported_alternative, transaction_id, request)
   # }
-
-  proof_of_address_b = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'with_bank_account')
-  proof_of_address_c = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'without_bank_account')
 
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
@@ -98,18 +93,6 @@ Rails.application.routes.draw do
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
     get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
     get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
-
-    get 'select_proof_of_address_none', to: 'select_proof_of_address#no_documents', as: :select_proof_of_address_no_documents
-
-    constraints proof_of_address_b do
-      get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
-      post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
-    end
-
-    constraints proof_of_address_c do
-      get 'select_proof_of_address', to: 'select_proof_of_address_no_bank_account#index', as: :select_proof_of_address
-      post 'select_proof_of_address', to: 'select_proof_of_address_no_bank_account#select_proof', as: :select_proof_of_address_submit
-    end
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax

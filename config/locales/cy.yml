@@ -44,8 +44,6 @@ cy:
     further_information: gwybodaeth-bellach
     further_information_cancel: gwybodaeth-bellach/dileu
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
-    select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
-    select_proof_of_address_none: select-proof-of-address-none-cy
     no_idps_available: dim-idps-ar-gael
     cancelled_registration: cancelled-registration-welsh
   navigation:
@@ -460,17 +458,6 @@ cy:
       example_text: "Enghraifft: %{example}"
       attribute_validation_message: Rhowch %{cycle_three_name} dilys
       null_attribute: Nid oes gennyf %{cycle_three_name}
-    select_proof_of_address:
-      title: Tystiolaeth o'ch cyfeiriad
-      sub_heading: Mae cwmniau ardystiedig angen gwirio bod eich cyfeiriad yn gywir. Maent yn gwneud hyn drwy wirio gyda'ch banc neu ddarparwr cerdyn credyd.
-      highlight: Mae hwn yn wasanaeth am ddim, ac ni all y cwmniau ardystiedig weld dim o'ch trafodion ariannol.
-      financial_details:
-        heading: "Oes gennych chi'r canlynol:"
-        none_of_these_documents: Nid oes gennyf y dogfennau hyn
-        question:
-          debit_card: Credyd debyd?
-          credit_card: Credyd credyd?
-          bank_account: Cyfrif banc yn y DU?
     no_idps_available:
       title: Dim IDPS ar gael
       heading: Ni fydd GOV.UK Verify yn gweithio i chi

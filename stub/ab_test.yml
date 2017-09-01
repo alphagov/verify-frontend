@@ -31,11 +31,3 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - proof_of_address_v3:
-      alternatives:
-        - name: 'control'
-          percent: 33
-        - name: 'with_bank_account'
-          percent: 33
-        - name: 'without_bank_account'
-          percent: 33

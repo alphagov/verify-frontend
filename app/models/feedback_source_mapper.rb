@@ -38,7 +38,6 @@ class FeedbackSourceMapper
       'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE' => 'will_not_work_without_uk_address',
       'OTHER_IDENTITY_DOCUMENTS_PAGE' => 'other_identity_documents',
       'PRODUCT_PAGE' => product_page_url,
-      'PROOF_OF_ADDRESS' => 'select_proof_of_address',
       'NO_IDPS_AVAILABLE' => 'no_idps_available',
       'CANCELLED_REGISTRATION' => 'cancelled_registration'
 
