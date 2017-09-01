@@ -13,11 +13,6 @@ Rails.application.routes.draw do
     AbTest.report(experiment_name, reported_alternative, transaction_id, request)
   }
 
-  proof_of_address_a_and_report_to_piwik = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'control', report_to_piwik)
-  proof_of_address_b_and_report_to_piwik = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'with_bank_account', report_to_piwik)
-  proof_of_address_c_and_report_to_piwik = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'without_bank_account', report_to_piwik)
-
-  proof_of_address_a = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'control')
   proof_of_address_b = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'with_bank_account')
   proof_of_address_c = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'without_bank_account')
 
@@ -60,21 +55,22 @@ Rails.application.routes.draw do
     # get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
     # get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
     # get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
-    # get 'select_documents', to: 'select_documents#index', as: :select_documents
-    # post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
-    # get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
-    # get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
-    # post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-    # get 'select_phone', to: 'select_phone#index', as: :select_phone
-    # post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
+    get 'select_documents', to: 'select_documents#index', as: :select_documents
+    get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
+    post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
+    get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
+    get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
+    post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
+    get 'select_phone', to: 'select_phone#index', as: :select_phone
+    post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
     get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
     get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
     post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
     get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
     get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
     get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
-    # get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
-    # post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
+    get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
+    post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
     get 'why_companies', to: 'why_companies#index', as: :why_companies
     get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
@@ -109,78 +105,19 @@ Rails.application.routes.draw do
     post 'further_information', to: 'further_information#submit', as: :further_information_submit
     post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
-    # get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
-    get 'select_proof_of_address_none', to: 'select_proof_of_address#no_documents', as: :select_proof_of_address_no_documents
-    # post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
     get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
     get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 
-    constraints proof_of_address_a_and_report_to_piwik do
-      get 'select_phone', to: 'select_phone#index', as: :select_phone
-    end
-
-    constraints proof_of_address_b_and_report_to_piwik do
-      get 'select_phone', to: 'select_phone_variant#index', as: :select_phone
-    end
-
-    constraints proof_of_address_c_and_report_to_piwik do
-      get 'select_phone', to: 'select_phone_variant_no_bank_account#index', as: :select_phone
-    end
-
-    constraints proof_of_address_a do
-      # get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
-      # post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
-
-      get 'select_documents', to: 'select_documents#index', as: :select_documents
-      get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
-      post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
-      get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
-
-      get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
-      post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-
-      post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
-
-      get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
-      post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
-    end
+    get 'select_proof_of_address_none', to: 'select_proof_of_address#no_documents', as: :select_proof_of_address_no_documents
 
     constraints proof_of_address_b do
       get 'select_proof_of_address', to: 'select_proof_of_address#index', as: :select_proof_of_address
       post 'select_proof_of_address', to: 'select_proof_of_address#select_proof', as: :select_proof_of_address_submit
-
-      get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
-      get 'select_documents_none', to: 'select_documents_variant#no_documents', as: :select_documents_no_documents
-      post 'select_documents', to: 'select_documents_variant#select_documents', as: :select_documents_submit
-
-      get 'unlikely_to_verify', to: 'select_documents_variant#unlikely_to_verify', as: :unlikely_to_verify
-
-      get 'other_identity_documents', to: 'other_identity_documents_variant#index', as: :other_identity_documents
-      post 'other_identity_documents', to: 'other_identity_documents_variant#select_other_documents', as: :other_identity_documents_submit
-
-      post 'select_phone', to: 'select_phone_variant#select_phone', as: :select_phone_submit
-
-      get 'choose_a_certified_company', to: 'choose_a_certified_company_variant#index', as: :choose_a_certified_company
-      post 'choose_a_certified_company', to: 'choose_a_certified_company_variant#select_idp', as: :choose_a_certified_company_submit
     end
 
     constraints proof_of_address_c do
       get 'select_proof_of_address', to: 'select_proof_of_address_no_bank_account#index', as: :select_proof_of_address
       post 'select_proof_of_address', to: 'select_proof_of_address_no_bank_account#select_proof', as: :select_proof_of_address_submit
-
-      get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
-      get 'select_documents_none', to: 'select_documents_variant#no_documents', as: :select_documents_no_documents
-      post 'select_documents', to: 'select_documents_variant#select_documents', as: :select_documents_submit
-
-      get 'unlikely_to_verify', to: 'select_documents_variant#unlikely_to_verify', as: :unlikely_to_verify
-
-      get 'other_identity_documents', to: 'other_identity_documents_variant#index', as: :other_identity_documents
-      post 'other_identity_documents', to: 'other_identity_documents_variant#select_other_documents', as: :other_identity_documents_submit
-
-      post 'select_phone', to: 'select_phone_variant_no_bank_account#select_phone', as: :select_phone_submit
-
-      get 'choose_a_certified_company', to: 'choose_a_certified_company_variant_no_bank_account#index', as: :choose_a_certified_company
-      post 'choose_a_certified_company', to: 'choose_a_certified_company_variant_no_bank_account#select_idp', as: :choose_a_certified_company_submit
     end
 
     constraints loa1_logos_control_and_report_to_piwik do
