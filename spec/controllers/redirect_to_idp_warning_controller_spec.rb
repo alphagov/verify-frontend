@@ -19,7 +19,7 @@ describe RedirectToIdpWarningController do
                                  'entity_id' => 'http://idcorp.com',
                                  'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
 
-      expect(subject).to render_template(:logos)
+      expect(subject).to render_template(:redirect_to_idp_warning)
     end
 
     it 'error page when no idp selected' do

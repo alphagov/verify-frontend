@@ -9,6 +9,16 @@ Rails.application.routes.draw do
   #   AbTest.report(experiment_name, reported_alternative, transaction_id, request)
   # }
 
+  IDP_WARNING_EXPERIMENT = 'idp_warning'.freeze
+
+  idp_warning_control_piwik = SelectRoute.new(IDP_WARNING_EXPERIMENT, 'control', report_to_piwik)
+  idp_warning_variant_heading_account_piwik = SelectRoute.new(IDP_WARNING_EXPERIMENT, 'variant_heading_account', report_to_piwik)
+  idp_warning_variant_heading_website_piwik = SelectRoute.new(IDP_WARNING_EXPERIMENT, 'variant_heading_website', report_to_piwik)
+
+  idp_warning_control = SelectRoute.new(IDP_WARNING_EXPERIMENT, 'control')
+  idp_warning_variant_heading_account = SelectRoute.new(IDP_WARNING_EXPERIMENT, 'variant_heading_account')
+  idp_warning_variant_heading_website = SelectRoute.new(IDP_WARNING_EXPERIMENT, 'variant_heading_website')
+
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   post 'SAML2/SSO/EidasResponse/POST' => 'authn_response#country_response'
@@ -59,8 +69,8 @@ Rails.application.routes.draw do
     post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
     get 'why_companies', to: 'why_companies#index', as: :why_companies
-    get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
-    post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+    # get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+    # post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
     get 'redirect_to_idp_question', to: 'redirect_to_idp_question#index', as: :redirect_to_idp_question
     post 'redirect_to_idp_question', to: 'redirect_to_idp_question#continue', as: :redirect_to_idp_question_submit
     get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
@@ -93,6 +103,30 @@ Rails.application.routes.draw do
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
     get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
     get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
+
+    constraints idp_warning_control_piwik do
+      get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+    end
+
+    constraints idp_warning_control do
+      post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+    end
+
+    constraints idp_warning_variant_heading_account_piwik do
+      get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant_heading_account#index', as: :redirect_to_idp_warning
+    end
+
+    constraints idp_warning_variant_heading_account do
+      post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant_heading_account#continue', as: :redirect_to_idp_warning_submit
+    end
+
+    constraints idp_warning_variant_heading_website_piwik do
+      get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant_heading_website#index', as: :redirect_to_idp_warning
+    end
+
+    constraints idp_warning_variant_heading_website do
+      post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant_heading_website#continue', as: :redirect_to_idp_warning_submit
+    end
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
