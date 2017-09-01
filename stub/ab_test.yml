@@ -39,12 +39,3 @@ experiments:
           percent: 33
         - name: 'without_bank_account'
           percent: 33
-  - loa1_logos:
-      alternatives:
-        - name: 'control'
-          percent: 1
-        - name: 'available'
-          percent: 1
-        - name: 'all'
-          percent: 1
-

@@ -7,21 +7,12 @@ Rails.application.routes.draw do
 
   PROOF_OF_ADDRESS_EXPERIMENT = 'proof_of_address_v3'.freeze
 
-  LOA1_LOGOS_EXPERIMENT = 'loa1_logos'.freeze
-
-  report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
-    AbTest.report(experiment_name, reported_alternative, transaction_id, request)
-  }
+  # report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
+  #   AbTest.report(experiment_name, reported_alternative, transaction_id, request)
+  # }
 
   proof_of_address_b = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'with_bank_account')
   proof_of_address_c = SelectRoute.new(PROOF_OF_ADDRESS_EXPERIMENT, 'without_bank_account')
-
-  loa1_logos_control_and_report_to_piwik = SelectRoute.new(LOA1_LOGOS_EXPERIMENT, 'control', report_to_piwik)
-  loa1_logos_available_and_report_to_piwik = SelectRoute.new(LOA1_LOGOS_EXPERIMENT, 'available', report_to_piwik)
-  loa1_logos_all_and_report_to_piwik = SelectRoute.new(LOA1_LOGOS_EXPERIMENT, 'all', report_to_piwik)
-  loa1_logos_control = SelectRoute.new(LOA1_LOGOS_EXPERIMENT, 'control')
-  loa1_logos_available = SelectRoute.new(LOA1_LOGOS_EXPERIMENT, 'available')
-  loa1_logos_all = SelectRoute.new(LOA1_LOGOS_EXPERIMENT, 'all')
 
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
@@ -51,10 +42,10 @@ Rails.application.routes.draw do
     post 'start', to: 'start#request_post', as: :start
     get 'sign_in', to: 'sign_in#index', as: :sign_in
     post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
-    # get 'about', to: 'about#index', as: :about
-    # get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
-    # get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
-    # get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
+    get 'about', to: 'about#index', as: :about
+    get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
+    get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
+    get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
     get 'select_documents', to: 'select_documents#index', as: :select_documents
     get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
     post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
@@ -118,36 +109,6 @@ Rails.application.routes.draw do
     constraints proof_of_address_c do
       get 'select_proof_of_address', to: 'select_proof_of_address_no_bank_account#index', as: :select_proof_of_address
       post 'select_proof_of_address', to: 'select_proof_of_address_no_bank_account#select_proof', as: :select_proof_of_address_submit
-    end
-
-    constraints loa1_logos_control_and_report_to_piwik do
-      get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
-    end
-
-    constraints loa1_logos_control do
-      get 'about', to: 'about#index', as: :about
-      get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
-      get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
-    end
-
-    constraints loa1_logos_available_and_report_to_piwik do
-      get 'about_certified_companies', to: 'about_available_logos#certified_companies', as: :about_certified_companies
-    end
-
-    constraints loa1_logos_available do
-      get 'about', to: 'about_available_logos#index', as: :about
-      get 'about_identity_accounts', to: 'about_available_logos#identity_accounts', as: :about_identity_accounts
-      get 'about_choosing_a_company', to: 'about_available_logos#choosing_a_company', as: :about_choosing_a_company
-    end
-
-    constraints loa1_logos_all_and_report_to_piwik do
-      get 'about_certified_companies', to: 'about_all_logos#certified_companies', as: :about_certified_companies
-    end
-
-    constraints loa1_logos_all do
-      get 'about', to: 'about_all_logos#index', as: :about
-      get 'about_identity_accounts', to: 'about_all_logos#identity_accounts', as: :about_identity_accounts
-      get 'about_choosing_a_company', to: 'about_all_logos#choosing_a_company', as: :about_choosing_a_company
     end
   end
 
