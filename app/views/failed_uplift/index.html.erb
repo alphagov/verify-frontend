@@ -26,7 +26,8 @@
       <summary><span class="summary"><%= t 'hub.failed_uplift.try_another_summary' %></span></summary>
       <div class="panel panel-border-narrow">
         <p><%= t 'hub.failed_uplift.try_another_text', idp_name: @idp.display_name %></p>
-        <p><%= link_to t('hub.failed_uplift.start_again'), start_path, id: 'startAgain' %></p>
+        <p><%= link_to t('hub.failed_uplift.start_again'), about_choosing_a_company_path, id: 'startAgain' %></p>
+        
       </div>
     </details>
 
