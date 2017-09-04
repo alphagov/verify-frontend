@@ -4,7 +4,7 @@
           <div class="company-inner">
             <div class="company-logo">
               <div class="company-logo-inner">
-                <%= image_tag identity_provider.logo_path, alt: idp_tagline(identity_provider) %>
+                <%= link_to image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)), certified_company_unavailable_path(identity_provider.simple_id) %>
               </div>
             </div>
 

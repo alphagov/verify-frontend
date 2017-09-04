@@ -1,14 +1,14 @@
   <% identity_providers.each_with_index do |identity_provider, idx| %>
+    <%= form_for(identity_provider, url: sign_in_submit_path, html: {class: 'idp-option js-idp-form', id: nil}) do |f| %>
+      <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil, class: 'js-entity-id' %>
       <div class="column-one-third company-wrapper <%= idx % 3 == 0 ? 'clear-left' : nil %>">
         <div class="company">
           <div class="company-inner">
             <div class="company-logo">
               <div class="company-logo-inner">
-                <%= image_tag identity_provider.logo_path, alt: idp_tagline(identity_provider) %>
+                <%= image_submit_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)) %>
               </div>
             </div>
-
-            <%= form_for(identity_provider, url: sign_in_submit_path, html: {class: 'idp-option js-idp-form', id: nil}) do |f| %>
                 <% button_text = local_assigns.fetch(:non_repudiation, false) ? 'hub.signin.sign_in_idp' : 'hub.signin.select_idp' %>
                 <%= f.button t(button_text, display_name: identity_provider.display_name),
                              class: 'button',
@@ -17,9 +17,8 @@
                              type: 'submit',
                              value: identity_provider.display_name
                 %>
-                <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil, class: 'js-entity-id' %>
-            <% end %>
           </div>
         </div>
       </div>
+    <% end %>
   <% end %>
