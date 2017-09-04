@@ -131,7 +131,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
       visit '/sign-in'
       first('.available-languages').click_link('Cymraeg')
       expect(page).to have_current_path('/mewngofnodi')
-      click_button 'IDCorp'
+      click_button 'Ddewis Welsh IDCorp'
 
       visit '/test-saml'
       click_button 'saml-post-journey-hint'

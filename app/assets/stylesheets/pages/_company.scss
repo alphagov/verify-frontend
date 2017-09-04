@@ -58,12 +58,19 @@
   left: 0;
 }
 
-.company-logo-inner img {
-  max-width: 100%;
+.company-logo-inner {
+  img,
+  input[type="image"] {
+    max-width: 100%;
+  }
 }
 
 .company .button {
   margin: 0 0 20px;
+
+  @include media (mobile) {
+    width: 65%;
+  }
 }
 
 .company dialog .button {

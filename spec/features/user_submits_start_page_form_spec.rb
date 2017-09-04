@@ -24,7 +24,7 @@ RSpec.describe 'when user submits start page form' do
     expect(current_path).to eq('/sign-in')
     expect(page).to have_content 'Who do you have an identity account with?'
     expect(page).to have_content 'IDCorp'
-    expect(page).to have_css('img[src="/stub-logos/stub-idp-one.png"]')
+    expect(page).to have_css('.company-logo input[src="/stub-logos/stub-idp-one.png"]')
     expect(page).to have_link 'Back', href: '/start'
     expect_feedback_source_to_be(page, 'SIGN_IN_PAGE', '/sign-in')
     expect(page).to have_link 'start now', href: '/about'
