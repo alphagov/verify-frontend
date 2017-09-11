@@ -1,4 +1,4 @@
-APP_TRANSPARENCY_EXPERIMENT = 'app_transparency'.freeze
+APP_TRANSPARENCY_EXPERIMENT = 'app_transparency_v2'.freeze
 
 app_transparency_control_piwik = SelectRoute.new(APP_TRANSPARENCY_EXPERIMENT, 'control', RoutesHelper::ReportToPiwik)
 app_transparency_variant_piwik = SelectRoute.new(APP_TRANSPARENCY_EXPERIMENT, 'variant', RoutesHelper::ReportToPiwik)

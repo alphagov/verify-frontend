@@ -114,7 +114,7 @@ describe 'When the user visits the choose a certified company page' do
   end
 
   it 'displays mobile application installation message when user selects a reluctant yes for smart phone' do
-    set_session_and_ab_session_cookies!('app_transparency' => 'app_transparency_variant')
+    set_session_and_ab_session_cookies!('app_transparency_v2' => 'app_transparency_v2_variant')
     page.set_rack_session(
       transaction_simple_id: 'test-rp',
       reluctant_mob_installation: true,
