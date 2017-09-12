@@ -1,5 +1,8 @@
 <%= page_title 'hub.choose_a_certified_company.title' %>
 <% content_for :feedback_source, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE' %>
+<% content_for :additional_javascript do %>
+    <%= javascript_include_tag 'piwik_idp_picker_tracking' %>
+<% end %>
 
 <div class="content-inner">
   <div class="grid-row">

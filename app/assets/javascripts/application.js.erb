@@ -11,6 +11,12 @@
 //= require_tree .
 //= require piwik
 
+/*
+    ignoring the piwik script from the bundle
+    https://stackoverflow.com/questions/7602393/rails-3-1-sprockets-require-directives-is-there-a-way-to-exclude-particular-fi
+*/
+//= stub "piwik_idp_picker_tracking"
+
 window.GOVUK.shimLinksWithButtonRole.init();
 
 window.GOVUK.validation.init();
