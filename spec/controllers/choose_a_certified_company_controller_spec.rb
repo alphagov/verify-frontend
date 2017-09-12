@@ -1,15 +1,23 @@
 require 'rails_helper'
 require 'controller_helper'
 require 'api_test_helper'
+require 'piwik_test_helper'
 
 describe ChooseACertifiedCompanyController do
   before :each do
-    stub_api_idp_list([{ 'simpleId' => 'stub-idp-loa1',
-                         'entityId' => 'http://idcorp-loa1.com',
-                         'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
-                       { 'simpleId' => 'stub-idp-one-doc-question',
-                         'entityId' => 'http://idcorp.com',
-                         'levelsOfAssurance' => ['LEVEL_2'] }])
+    stub_api_idp_list([
+            {
+                'simpleId' => 'stub-idp-loa1',
+                'entityId' => 'http://idcorp-loa1.com',
+                'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
+            },
+            {
+                'simpleId' => 'stub-idp-one-doc-question',
+                'entityId' => 'http://idcorp.com',
+                'levelsOfAssurance' => ['LEVEL_2']
+            }
+        ]
+    )
   end
 
   context '#index' do
@@ -17,20 +25,26 @@ describe ChooseACertifiedCompanyController do
 
     it 'renders the certified companies LOA1 template with LOA1 IDPs when LEVEL_1 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_1')
+      stub_piwik_report_number_of_recommended_ipds(1)
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection) do |idps|
         idps.each { |idp| expect(idp.levels_of_assurance).to include 'LEVEL_1' }
       end
       expect(subject).to render_template(:choose_a_certified_company_LOA1)
+      expect(a_request_to_piwik).to have_been_made
     end
 
     it 'renders the certified companies LOA2 template when LEVEL_2 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_2')
+      session[:selected_answers] = { documents: { driving_licence: true, mobile_phone: true } }
+
+      stub_piwik_report_number_of_recommended_ipds(1)
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).twice do |idps|
         idps.each { |idp| expect(idp.levels_of_assurance).to include 'LEVEL_2' }
       end
       expect(subject).to render_template(:choose_a_certified_company_LOA2)
+      expect(a_request_to_piwik).to have_been_made
     end
   end
 

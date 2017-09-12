@@ -57,6 +57,10 @@ module Analytics
       report_action(current_transaction, request, 'Matching Outcome - Cancelled Cycle3')
     end
 
+    def report_number_of_idps_recommended(request, number_of_idps_recommended)
+      @analytics_reporter.report_event(request, 'Engagement', 'IDPs Recommended', number_of_idps_recommended)
+    end
+
   private
 
     def report_action(current_transaction, request, action, extra_custom_vars = {})
