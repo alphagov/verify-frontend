@@ -18,5 +18,11 @@
 
     _paq.push(['trackEvent', 'Engagement', 'IDP visibility', eventName, numberOfVisibleButtons]);
 
+
+    $(window).scroll(function() {
+        _paq.push(['trackEvent', 'Engagement', 'Picker scroll', 'scrolled' ]);
+        $(window).off('scroll');
+    })
+    
 })(window);
 
