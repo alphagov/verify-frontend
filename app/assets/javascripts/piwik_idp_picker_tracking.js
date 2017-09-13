@@ -14,15 +14,25 @@
         };
     });
 
-    var eventName = allButtons.length === numberOfVisibleButtons ? 'All' : 'Some';
+    if(numberOfVisibleButtons > 0){
+        if(allButtons.length === numberOfVisibleButtons){
+            var eventName = 'All';
+        }
+        else{
+            var eventName = 'Some';
+        }
+    }
+    else{
+        var eventName = 'None';
+    }
 
     _paq.push(['trackEvent', 'Engagement', 'IDP visibility', eventName, numberOfVisibleButtons]);
 
 
     $(window).scroll(function() {
-        _paq.push(['trackEvent', 'Engagement', 'Picker scroll', 'scrolled' ]);
+        _paq.push(['trackEvent', 'Engagement', 'Picker scroll', 'scrolled']);
         $(window).off('scroll');
     })
-    
+
 })(window);
 
