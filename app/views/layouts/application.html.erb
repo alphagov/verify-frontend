@@ -58,6 +58,8 @@
 <% content_for :body_end do %>
 
   <%= javascript_include_tag 'application', integrity: true %>
+  <%= content_for :additional_javascript %>
+
   <%= render 'shared/fingerprint' %>
 
 <% end %>

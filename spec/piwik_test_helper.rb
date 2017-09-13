@@ -63,6 +63,16 @@ def stub_piwik_request_with_rp(extra_parameters = {})
   stub_piwik_request(extra_parameters.merge(cvar))
 end
 
+def stub_piwik_report_number_of_recommended_ipds(number_of_recommended_idps)
+  piwik_request = {
+      e_c: 'Engagement',
+      action_name: 'trackEvent',
+      e_n: 'IDPs Recommended',
+      e_a: number_of_recommended_idps.to_s
+  }
+  stub_piwik_request(piwik_request)
+end
+
 def a_request_to_piwik
   a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 end

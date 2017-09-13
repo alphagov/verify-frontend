@@ -7,7 +7,16 @@ module Analytics
     end
 
     def report_custom_variable(request, action_name, custom_variable)
-      report_to_piwik(request, action_name, custom_variable)
+      report_to_piwik(request, action_name, '_cvar' => custom_variable.to_json)
+    end
+
+    def report_event(request, event_category, event_name, event_action)
+      event = {
+          e_c: event_category,
+          e_n: event_name,
+          e_a: event_action.to_s,
+      }
+      report_to_piwik(request, 'trackEvent', event)
     end
 
     def report(request, action_name)
@@ -16,7 +25,7 @@ module Analytics
 
   private
 
-    def report_to_piwik(request, action_name, custom_variable = nil)
+    def report_to_piwik(request, action_name, additional_params = {})
       piwik_params = {
         'rec' => '1',
         'apiv' => '1',
@@ -25,11 +34,10 @@ module Analytics
         'url' => request.url,
         'cdt' => Time.now.strftime('%Y-%m-%d %H:%M:%S'),
         'cookie' => 'false',
-      }
+      }.merge(additional_params)
 
       cookies = request.cookies
       piwik_params['_id'] = cookies[CookieNames::PIWIK_VISITOR_ID] if cookies.has_key? CookieNames::PIWIK_VISITOR_ID
-      piwik_params['_cvar'] = custom_variable.to_json unless custom_variable.nil?
       referer = request.referer
       unless referer.nil?
         piwik_params['urlref'] = referer
