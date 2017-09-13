@@ -67,8 +67,8 @@ def stub_piwik_report_number_of_recommended_ipds(number_of_recommended_idps)
   piwik_request = {
       e_c: 'Engagement',
       action_name: 'trackEvent',
-      e_a: 'IDPs Recommended',
-      e_v: number_of_recommended_idps.to_s
+      e_n: 'IDPs Recommended',
+      e_a: number_of_recommended_idps.to_s
   }
   stub_piwik_request(piwik_request)
 end

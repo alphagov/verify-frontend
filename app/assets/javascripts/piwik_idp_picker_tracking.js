@@ -8,25 +8,19 @@
         return viewportHeight > elementPosition;
     };
 
-    allButtons.each(function(){
-        if(isVisible(this)){
+    var canSeeAllButtons = function() {
+        return numberOfVisibleButtons === allButtons.length
+    }
+
+    allButtons.each(function() {
+        if(isVisible(this)) {
             numberOfVisibleButtons++;
         };
     });
 
-    if(numberOfVisibleButtons > 0){
-        if(allButtons.length === numberOfVisibleButtons){
-            var eventName = 'All';
-        }
-        else{
-            var eventName = 'Some';
-        }
-    }
-    else{
-        var eventName = 'None';
-    }
+    var eventAction = canSeeAllButtons() ? 'All' : numberOfVisibleButtons.toString();
 
-    _paq.push(['trackEvent', 'Engagement', 'IDP visibility', eventName, numberOfVisibleButtons]);
+    _paq.push(['trackEvent', 'Engagement', eventAction, 'IDP visibility']);
 
 
     $(window).scroll(function() {

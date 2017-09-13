@@ -10,12 +10,11 @@ module Analytics
       report_to_piwik(request, action_name, '_cvar' => custom_variable.to_json)
     end
 
-    def report_event(request, event_category, event_action, event_value = nil)
+    def report_event(request, event_category, event_name, event_action)
       event = {
           e_c: event_category,
-          e_a: event_action,
-          e_v: event_value
-
+          e_n: event_name,
+          e_a: event_action.to_s,
       }
       report_to_piwik(request, 'trackEvent', event)
     end
