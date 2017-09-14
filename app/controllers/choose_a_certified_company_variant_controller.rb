@@ -3,12 +3,14 @@ class ChooseACertifiedCompanyVariantController < ApplicationController
     if is_loa1?
       loa1_idps = current_identity_providers.select { |idp| idp.levels_of_assurance.min == 'LEVEL_1' }
       @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(loa1_idps)
+      FEDERATION_REPORTER.report_number_of_idps_recommended(request, @recommended_idps.length)
       render :choose_a_certified_company_LOA1
     else
       @reluctant_mob_installation = session[:reluctant_mob_installation]
       grouped_identity_providers = IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers, current_transaction_simple_id)
       @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
       @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.non_recommended)
+      FEDERATION_REPORTER.report_number_of_idps_recommended(request, @recommended_idps.length)
       render :choose_a_certified_company_LOA2
     end
   end
