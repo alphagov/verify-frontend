@@ -62,4 +62,36 @@ describe('Analytics', function () {
             expectLatestEntryInPiwikQueueToMatch('Journey', 'Change to First Time', 'user_type');
         });
     });
+    describe('on smart phone page', function() {
+      var htmlWithMarkup =
+        '<span id="piwik-url">http://www.fakepiwikurl.com</span>' +
+        '<input type="radio" value="true" piwik_event_tracking="app_transparency"/>' +
+        '<input type="radio" value="reluctant_yes" piwik_event_tracking="app_transparency"/>' +
+        '<input type="radio" value="false" piwik_event_tracking="app_transparency"/>';
+
+      beforeEach(function () {
+        setUp(htmlWithMarkup)
+      });
+
+      it('should report yes action to Piwik when the user selects yes to smart phone app installation', function () {
+        $('input[piwik_event_tracking="app_transparency"][value="true"]').prop('checked', true).change();
+
+        expect(_paq.push.calls.count()).toBe(1);
+        expectLatestEntryInPiwikQueueToMatch('Evidence', 'yes', 'App');
+      });
+
+      it('should report no action to Piwik when the user selects no to smart phone app installation', function () {
+        $('input[piwik_event_tracking="app_transparency"][value="false"]').prop('checked', true).change();
+
+        expect(_paq.push.calls.count()).toBe(1);
+        expectLatestEntryInPiwikQueueToMatch('Evidence', 'no', 'App');
+      });
+
+      it('should report prefer_not_to action to Piwik when the user selects prefer_not_to to smart phone app installation', function () {
+        $('input[piwik_event_tracking="app_transparency"][value="reluctant_yes"]').prop('checked', true).change();
+
+        expect(_paq.push.calls.count()).toBe(1);
+        expectLatestEntryInPiwikQueueToMatch('Evidence', 'prefer_not_to', 'App');
+      });
+    });
 });

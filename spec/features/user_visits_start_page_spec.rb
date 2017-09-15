@@ -118,7 +118,8 @@ RSpec.describe 'When the user visits the start page' do
     cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_with_logo',
                                                                   'split_questions_v2' => 'split_questions_v2_control',
                                                                   'select_documents_v2' => 'select_documents_v2_control',
-                                                                  'idp_warning' => 'idp_warning_control'
+                                                                  'idp_warning' => 'idp_warning_control',
+                                                                  'app_transparency_v2' => 'app_transparency_v2_control'
                                                                 }.to_json))
     set_cookies!(cookie_hash)
     page.set_rack_session(transaction_simple_id: 'test-rp')

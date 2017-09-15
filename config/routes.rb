@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  # report_to_piwik = -> (experiment_name, reported_alternative, transaction_id, request) {
-  #   AbTest.report(experiment_name, reported_alternative, transaction_id, request)
-  # }
+  def add_routes(routes_name)
+    instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
+  end
 
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
@@ -47,16 +47,16 @@ Rails.application.routes.draw do
     get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
     get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
     post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-    get 'select_phone', to: 'select_phone#index', as: :select_phone
-    post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
+    # get 'select_phone', to: 'select_phone#index', as: :select_phone
+    # post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
     get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
     get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
     post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
     get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
     get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
     get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
-    get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
-    post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
+    # get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
+    # post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
     get 'why_companies', to: 'why_companies#index', as: :why_companies
     get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
@@ -93,6 +93,8 @@ Rails.application.routes.draw do
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
     get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
     get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
+
+    add_routes :app_transparency_ab_test_routes
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax

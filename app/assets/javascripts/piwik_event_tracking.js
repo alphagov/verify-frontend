@@ -15,7 +15,6 @@
             category: 'Journey',
             name: 'user_type',
             getAction: function (value) {
-                var result;
                 if(hasPreviousValue) {
                     return value === 'true' ? 'Change to First Time' : 'Change to Sign In';
                 }
@@ -24,11 +23,26 @@
         };
     }
 
+    function getAppTransparencyEvent() {
+      return {
+        category: 'Evidence',
+        name: 'App',
+        getAction: function (value) {
+          if (value === 'reluctant_yes'){
+            return 'prefer_not_to'
+          } else {
+            return value === 'true' ? 'yes' : 'no'
+          }
+        }
+      };
+    }
+
     global.GOVUK.piwikEventsTracking = {
         init: function() {
             var piwikEvents = {
                 evidence_example: getEvidenceEvent('example'),
-                journey_user_type: getUserTypeEvent()
+                journey_user_type: getUserTypeEvent(),
+                app_transparency: getAppTransparencyEvent()
             };
 
             $('input[piwik_event_tracking]').change(function (changeEvent) {

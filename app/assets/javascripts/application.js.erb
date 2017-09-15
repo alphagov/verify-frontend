@@ -32,10 +32,15 @@ window.GOVUK.piwikEventsTracking.init();
 /*
  Example of how to add JavaScript A/B code
  */
+
 //abTest({
 //  experiment: 'app_transparency',
-//  routeA: window.GOVUK.selectPhone,
-//  routeB: window.GOVUK.selectPhoneVariant
+//  control: {
+//    route: window.GOVUK.selectPhone
+//  },
+//  alternatives: [
+//    {name: 'variant', route: window.GOVUK.selectPhoneVariant}
+//  ]
 //})
 
 $(function () {
