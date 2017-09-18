@@ -18,14 +18,20 @@
         };
     });
 
-    var eventAction = canSeeAllButtons() ? 'All' : numberOfVisibleButtons.toString();
+    if(canSeeAllButtons()){
+        var eventAction = 'All';
+    }
+    else if (numberOfVisibleButtons === 0) {
+        var eventAction = 'None';
+    } 
+    else {
+        var eventAction = numberOfVisibleButtons.toString();
+    }
 
     _paq.push(['trackEvent', 'Engagement', eventAction, 'IDP visibility']);
 
-
-    $(window).scroll(function() {
+    $(window).one('scroll', function() {
         _paq.push(['trackEvent', 'Engagement', 'Picker scroll', 'scrolled']);
-        $(window).off('scroll');
     })
 
 })(window);
