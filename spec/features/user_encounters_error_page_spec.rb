@@ -3,7 +3,7 @@ require 'api_test_helper'
 
 RSpec.describe 'user encounters error page' do
   let(:api_saml_endpoint) { ida_frontend_api_uri('api/session') }
-  let(:api_select_idp_endpoint) { ida_frontend_api_uri(select_idp_endpoint(default_session_id)) }
+  let(:api_select_idp_endpoint) { policy_api_uri(select_idp_endpoint(default_session_id)) }
 
   it 'will present the user with a list of transactions' do
     stub_transactions_list

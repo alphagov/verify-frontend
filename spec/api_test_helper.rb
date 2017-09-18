@@ -2,6 +2,7 @@ module ApiTestHelper
   include SessionEndpoints
   include ConfigEndpoints
   include SamlProxyEndpoints
+  include PolicyEndpoints
 
   def ida_frontend_api_uri(path)
     URI.join(CONFIG.ida_frontend_host, path)
@@ -13,6 +14,10 @@ module ApiTestHelper
 
   def config_api_uri(path)
     URI.join(CONFIG.config_api_host, path)
+  end
+
+  def policy_api_uri(path)
+    URI.join(CONFIG.policy_host, path)
   end
 
   def api_transactions_endpoint
@@ -60,7 +65,7 @@ module ApiTestHelper
   end
 
   def stub_session_select_idp_request(encrypted_entity_id, request_body = {})
-    stub = stub_request(:put, ida_frontend_api_uri(select_idp_endpoint(default_session_id)))
+    stub = stub_request(:put, policy_api_uri(select_idp_endpoint(default_session_id)))
     if request_body.any?
       stub = stub.with(body: request_body)
     end
@@ -188,7 +193,7 @@ module ApiTestHelper
   end
 
   def stub_api_select_idp
-    stub_request(:put, ida_frontend_api_uri(select_idp_endpoint(default_session_id)))
+    stub_request(:put, policy_api_uri(select_idp_endpoint(default_session_id)))
   end
 
   def stub_api_no_docs_idps

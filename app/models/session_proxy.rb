@@ -41,16 +41,6 @@ class SessionProxy
     @api_client.post(select_a_country_endpoint(session_id, country), '', {})
   end
 
-  def select_idp(session_id, entity_id, registration = false)
-    body = {
-      PARAM_ENTITY_ID => entity_id,
-      PARAM_ORIGINATING_IP => originating_ip,
-      PARAM_REGISTRATION => registration
-    }
-
-    @api_client.put(select_idp_endpoint(session_id), body)
-  end
-
   def country_authn_request(session_id)
     response = @api_client.get(
       country_authn_request_endpoint(session_id),

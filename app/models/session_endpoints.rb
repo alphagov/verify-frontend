@@ -36,10 +36,6 @@ module SessionEndpoints
     PATH_PREFIX.join(session_id, suffix).to_s
   end
 
-  def select_idp_endpoint(session_id)
-    session_endpoint(session_id, SELECT_IDP_SUFFIX)
-  end
-
   def country_authn_request_endpoint(session_id)
     session_endpoint(session_id, COUNTRY_AUTHN_REQUEST_SUFFIX)
   end

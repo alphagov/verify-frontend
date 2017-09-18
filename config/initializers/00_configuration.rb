@@ -9,6 +9,7 @@ CONFIG = Configuration.load! do
   option_string 'session_cookie_duration', 'SESSION_COOKIE_DURATION_IN_HOURS', default: 2
   option_string 'ida_frontend_host', 'IDA_FRONTEND_HOST'
   option_string 'config_api_host', 'CONFIG_API_HOST'
+  option_string 'policy_host', 'POLICY_HOST'
   option_string 'logo_directory', 'LOGO_DIRECTORY'
   option_string 'white_logo_directory', 'WHITE_LOGO_DIRECTORY'
   option_string 'zdd_file', 'ZDD_LATCH'

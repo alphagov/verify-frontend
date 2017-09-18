@@ -71,26 +71,6 @@ describe SessionProxy do
     end
   end
 
-  describe('#select_idp') do
-    it 'should select an IDP for the session' do
-      ip_address = '1.1.1.1'
-      body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => false }
-      expect(api_client).to receive(:put)
-        .with(endpoint(SessionProxy::SELECT_IDP_SUFFIX), body)
-      expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      session_proxy.select_idp(session_id, 'an-entity-id')
-    end
-
-    it 'should select an IDP for the session when registering' do
-      ip_address = '1.1.1.1'
-      body = { 'entityId' => 'an-entity-id', 'originatingIp' => ip_address, 'registration' => true }
-      expect(api_client).to receive(:put)
-        .with(endpoint(SessionProxy::SELECT_IDP_SUFFIX), body)
-      expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      session_proxy.select_idp(session_id, 'an-entity-id', true)
-    end
-  end
-
   describe('#get_countries') do
     countries_json = [
       { 'entityId' => 'http://netherlandsEnitity.nl', 'simpleId' => 'NL', 'enabled' => false },
