@@ -107,7 +107,7 @@ RSpec.describe 'user encounters error page' do
     end
 
     it 'will present the something went wrong page in Welsh when secure cookie is invalid' do
-      stub_request(:put, api_select_idp_endpoint).and_return(status: 403)
+      stub_request(:post, api_select_idp_endpoint).and_return(status: 403)
       visit sign_in_cy_path
       click_button 'Welsh IDCorp'
       expect(page).to have_content I18n.translate('errors.something_went_wrong.heading', locale: :cy)
@@ -115,7 +115,7 @@ RSpec.describe 'user encounters error page' do
     end
 
     it 'will present the something went wrong page when secure cookie is invalid' do
-      stub_request(:put, api_select_idp_endpoint).and_return(status: 403)
+      stub_request(:post, api_select_idp_endpoint).and_return(status: 403)
       visit sign_in_path
       click_button 'IDCorp'
       expect(page).to have_content "Sorry, something went wrong"

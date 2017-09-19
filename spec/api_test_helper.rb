@@ -65,11 +65,11 @@ module ApiTestHelper
   end
 
   def stub_session_select_idp_request(encrypted_entity_id, request_body = {})
-    stub = stub_request(:put, policy_api_uri(select_idp_endpoint(default_session_id)))
+    stub = stub_request(:post, policy_api_uri(select_idp_endpoint(default_session_id)))
     if request_body.any?
       stub = stub.with(body: request_body)
     end
-    stub.to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json)
+    stub.to_return(body: { 'encryptedEntityId' => encrypted_entity_id }.to_json, status: 201)
   end
 
   def stub_session_idp_authn_request(originating_ip, idp_location, registration)
@@ -193,7 +193,7 @@ module ApiTestHelper
   end
 
   def stub_api_select_idp
-    stub_request(:put, policy_api_uri(select_idp_endpoint(default_session_id)))
+    stub_request(:post, policy_api_uri(select_idp_endpoint(default_session_id))).to_return(status: 201)
   end
 
   def stub_api_no_docs_idps

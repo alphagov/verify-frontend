@@ -12,11 +12,11 @@ class PolicyProxy
 
   def select_idp(session_id, entity_id, registration = false)
     body = {
-        PARAM_ENTITY_ID => entity_id,
-        PARAM_ORIGINATING_IP => originating_ip,
+        PARAM_SELECTED_ENTITY_ID => entity_id,
+        PARAM_PRINCIPAL_IP => originating_ip,
         PARAM_REGISTRATION => registration
     }
 
-    @api_client.put(select_idp_endpoint(session_id), body)
+    @api_client.post(select_idp_endpoint(session_id), body, {}, 201)
   end
 end

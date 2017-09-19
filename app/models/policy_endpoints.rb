@@ -1,9 +1,9 @@
 module PolicyEndpoints
-  PATH = '/policy'.freeze
+  PATH = '/policy/received-authn-request'.freeze
   PATH_PREFIX = Pathname(PATH)
   SELECT_IDP_SUFFIX = 'select-identity-provider'.freeze
-  PARAM_ORIGINATING_IP = 'originatingIp'.freeze
-  PARAM_ENTITY_ID = 'entityId'.freeze
+  PARAM_PRINCIPAL_IP = 'principalIpAddress'.freeze
+  PARAM_SELECTED_ENTITY_ID = 'selectedIdpEntityId'.freeze
   PARAM_REGISTRATION = 'registration'.freeze
 
   def policy_endpoint(session_id, suffix)
