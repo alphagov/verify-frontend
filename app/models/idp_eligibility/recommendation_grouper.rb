@@ -41,7 +41,7 @@ module IdpEligibility
       if demo_profiles_should_be_recommended
         idps_with_recommended_profiles + idps_with_demo_profiles(evidence, enabled_idps)
       else
-        idps_with_recommended_profiles
+        idps_with_recommended_profiles - idps_with_demo_profiles(evidence, enabled_idps)
       end
     end
 
