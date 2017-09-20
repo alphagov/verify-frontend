@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :store_originating_ip
   after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
+  helper_method :transaction_taxon_list
   helper_method :transactions_list
   helper_method :loa1_transactions_list
   helper_method :loa2_transactions_list
@@ -20,6 +21,10 @@ class ApplicationController < ActionController::Base
   rescue_from Api::SessionTimeoutError, with: :session_timeout
 
   prepend RedirectWithSeeOther
+
+  def transaction_taxon_list
+    TRANSACTION_TAXON_CORRELATOR.correlate(CONFIG_PROXY.transactions)
+  end
 
   def transactions_list
     DATA_CORRELATOR.correlate(CONFIG_PROXY.transactions)

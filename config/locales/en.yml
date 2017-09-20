@@ -472,6 +472,7 @@ en:
     transaction_list:
       title: Find the service you were using to start again
       hint: Follow the instructions you received.
+      other_services: Other services
     cookie_expired:
       title: Your session has timed out
       feedback_message: Use the %{feedback_link} to ask a question, report a problem or suggest an improvement.

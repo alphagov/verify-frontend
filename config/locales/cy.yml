@@ -477,6 +477,7 @@ cy:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
+      other_services: Other services
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan
       feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.

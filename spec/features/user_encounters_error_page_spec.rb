@@ -18,10 +18,10 @@ RSpec.describe 'user encounters error page' do
   it 'will present the user with no list of transactions if we cant read the errors' do
     allow(Rails.logger).to receive(:error)
     expect(Rails.logger).to receive(:error).with(kind_of(KeyError)).at_least(:once)
-    bad_transactions_json = {
+    bad_transactions_json = [
         'public' => [{ 'homepage' => 'http://localhost:50130/test-rp' }],
         'private' => []
-    }
+    ]
     stub_request(:post, api_saml_endpoint).to_return(status: 500)
     stub_request(:get, api_transactions_endpoint).to_return(body: bad_transactions_json.to_json, status: 200)
     visit '/test-saml'

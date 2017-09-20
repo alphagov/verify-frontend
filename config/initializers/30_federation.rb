@@ -27,6 +27,7 @@ Rails.application.config.after_initialize do
   rps_name_and_homepage = RP_CONFIG['transaction_type']['display_name_and_homepage'] || []
   rps_name_only = RP_CONFIG['transaction_type']['display_name_only'] || []
   DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(federation_translator, rps_name_and_homepage, rps_name_only)
+  TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(federation_translator)
 
   # IDP Config
   IDP_CONFIG = YAML.load_file(CONFIG.idp_config)
