@@ -33,7 +33,7 @@ module Display
 
         allow(translator).to receive(:translate).with('errors.transaction_list.other_services').and_return(taxon_other_services)
 
-        @correlator = TransactionTaxonCorrelator.new(translator)
+        @correlator = TransactionTaxonCorrelator.new(translator, [simple_id_1, simple_id_2, simple_id_a, simple_id_b], [])
       end
 
       it 'should return an empty list when there are no transactions' do
@@ -194,6 +194,37 @@ module Display
             )
         ]
 
+        expect(actual_result).to eq expected_results
+      end
+
+      it 'should not show transactions which are not listed in the enabled list' do
+        allow(translator).to receive(:translate).with('rps.test-rp-1.taxon_name').and_return(taxon_benefits)
+        allow(translator).to receive(:translate).with('rps.test-rp-2.taxon_name').and_return(taxon_benefits)
+        allow(translator).to receive(:translate).with('rps.test-rp-a.taxon_name').and_return(taxon_benefits)
+
+        transaction_data = [
+            { 'simpleId' => simple_id_1, 'serviceHomepage' => homepage, 'loaList' => loa_list },
+            { 'simpleId' => simple_id_2, 'serviceHomepage' => homepage, 'loaList' => loa_list },
+            { 'simpleId' => simple_id_a, 'serviceHomepage' => homepage, 'loaList' => loa_list }
+        ]
+
+        test_correlator = TransactionTaxonCorrelator.new(translator, [simple_id_1], [simple_id_2])
+        actual_result = test_correlator.correlate(transaction_data)
+
+        expected_results = [
+            TransactionTaxonCorrelator::Taxon.new(
+              taxon_benefits,
+              [
+                  TransactionTaxonCorrelator::Transaction.new(transaction_1_name, taxon_benefits, homepage, loa_list)
+              ]
+            ),
+            TransactionTaxonCorrelator::Taxon.new(
+              taxon_other_services,
+              [
+                  TransactionTaxonCorrelator::Transaction.new(transaction_2_name, taxon_other_services, nil, loa_list)
+              ]
+            )
+        ]
         expect(actual_result).to eq expected_results
       end
     end
