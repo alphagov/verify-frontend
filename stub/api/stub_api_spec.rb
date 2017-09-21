@@ -16,6 +16,7 @@ require 'idp_list_response'
 require 'select_idp_response'
 require 'outbound_saml_message'
 require 'idp_authn_response'
+require 'country_authn_response'
 
 describe StubApi do
   include Rack::Test::Methods
@@ -60,6 +61,15 @@ describe StubApi do
       get '/api/session/session_id/idp-authn-request'
       expect(last_response).to be_ok
       response = OutboundSamlMessage.new(last_response_json)
+      expect(response).to be_valid
+    end
+  end
+
+  context '#post /SAML2/SSO/API/RECEIVER/EidasResponse/POST' do
+    it 'should respond with valid hash' do
+      post '/SAML2/SSO/API/RECEIVER/EidasResponse/POST'
+      expect(last_response).to be_ok
+      response = CountryAuthnResponse.new(last_response_json)
       expect(response).to be_valid
     end
   end
