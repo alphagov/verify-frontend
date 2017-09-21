@@ -3,5 +3,5 @@ module SamlProxyEndpoints
 
   PARAM_SAML_REQUEST = 'samlRequest'.freeze
   PARAM_RELAY_STATE = 'relayState'.freeze
-  PARAM_ORIGINATING_IP = 'originatingIp'.freeze
+  PARAM_IP_SEEN_BY_FRONTEND = 'principalIpAsSeenByFrontend'.freeze
 end

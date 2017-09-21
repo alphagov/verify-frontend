@@ -161,11 +161,11 @@ module ApiTestHelper
         .to_return(body: response.to_json, status: 200)
   end
 
-  def stub_api_country_authn_response(relay_state, response = { 'idpResult' => 'SUCCESS', 'isRegistration' => false })
+  def stub_api_country_authn_response(relay_state, response = { 'result' => 'SUCCESS', 'isRegistration' => false })
     authn_response_body = {
         PARAM_SAML_REQUEST => 'my-saml-response',
         PARAM_RELAY_STATE => relay_state,
-        PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
+        PARAM_IP_SEEN_BY_FRONTEND => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
 
     stub_request(:post, saml_proxy_api_uri(COUNTRY_AUTHN_RESPONSE_ENDPOINT))
