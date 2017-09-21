@@ -52,6 +52,12 @@ en:
     start_now: Start now
     continue: Continue
     back: Back
+  navigation_ab_test:
+    next: Next
+    start_now: Start now
+    continue: Continue
+    back: Back
+    loa1_get_set_up_with_gov_uk_verify: Get set up with GOV.UK Verify
   option:
     "no": "No"
     unknown: I don’t know
@@ -82,6 +88,17 @@ en:
       answer_no: I’ve used Verify before
       continue: Continue
       error_message: Please select an option
+    start_ab_test:
+      title: Start
+      heading: Sign in with GOV.UK Verify
+      answer_yes: This is my first time using Verify
+      answer_no: I’ve used Verify before
+      continue: Continue
+      error_message: Please select an option
+      loa1_verify_is_a_service: GOV.UK Verify is a secure service built to help fight the growing problem of online identity theft.
+      loa1_or: or
+      loa1_sign_in_with_existing: sign in with an existing identity account
+      loa1_sign_in: sign in
     signin:
       title: Sign in with a certified company
       heading: Who do you have an identity account with?
@@ -278,6 +295,36 @@ en:
         title: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
+    choose_a_certified_company_ab_test:
+      title: Choose a certified company
+      loa1_heading: How GOV.UK Verify works
+      existing_customer: You don't have to be an existing customer with a company.
+      personal_information: They ask you to provide personal information and evidence, and then check it's correct using the new, secure systems they built.
+      why_companies: Why there’s a choice of companies
+      choose_idp: "Choose %{display_name}"
+      idp_count_html: "Based on your answers, %{company_count} can verify you now:"
+      company_html:
+        zero: no&nbsp;companies
+        one: 1&nbsp;company
+        other: "%{count}&nbsp;companies"
+      show_all_companies: Companies that are unlikely to verify you
+      filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
+      about_idp: About %{display_name}
+      dialog:
+        information_provided_by: Information provided by %{display_name}
+        close: close
+      about:
+        title: About %{display_name}
+        information_provided_by: Information provided by %{display_name}
+        close: close
+      loa1_content_html: |
+        <p>Companies certified for government check you are who you say you are.<p>
+        <p></p>
+        <p>The company you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passports Office or DVLA.<p>
+        <p></p>
+        <p>Using certified companies means data is not stored in one place by government.<p>
+        <p></p>
+        <p>Verifying your identity takes about 5 minutes to complete, and there’s no charge for this service.<p>
     why_companies:
       title: Why there’s a choice of companies
       choose_a_company: Choose a company
@@ -292,6 +339,25 @@ en:
         <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
         <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide.</p>
         <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p>There’s no effect on your credit score.</p>
+    why_companies_ab_test:
+      title: Why there’s a choice of companies
+      choose_a_company: Choose a company
+      content_html: |
+        <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
+        <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
+        <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
+        <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p>There’s no effect on your credit score.</p>
+      loa1_content_loa1_html: |
+        <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
+        <p></p>
+        <p>It’s your right to choose who you want to deal with from these companies, and you don’t need to be an existing customer with a company as they’ve built new, secure systems to verify identities. It’s also your right to change which company you deal with at any time.</p>
+        <p></p>
+        <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide.</p>
+        <p></p>
+        <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p></p>
         <p>There’s no effect on your credit score.</p>
     unlikely_to_verify:
       heading: GOV.UK Verify won’t work for you

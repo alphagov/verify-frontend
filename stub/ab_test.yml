@@ -31,3 +31,11 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
+  - loa1_shortened_journey:
+      alternatives:
+        - name: 'control'
+          percent: 50
+        - name: 'variant_extra_text_button'
+          percent: 25
+        - name: 'variant_continue_button'
+          percent: 25
