@@ -16,6 +16,9 @@ end
 constraints loa1_shortened_control do
   post 'start', to: 'start#request_post', as: :start
 
+  get 'sign_in', to: 'sign_in#index', as: :sign_in
+  post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
+
   get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
 
@@ -29,6 +32,9 @@ end
 constraints loa1_shortened_variant_extra_text_button do
   post 'start', to: 'start_variant_extra_text_button#request_post', as: :start_loa1
 
+  get 'sign_in', to: 'sign_in_variant_extra_text_button#index', as: :sign_in
+  post 'sign_in', to: 'sign_in_variant_extra_text_button#select_idp', as: :sign_in_submit
+
   get 'choose_a_certified_company', to: 'company_picker_variant_extra_text_button#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'company_picker_variant_extra_text_button#select_idp', as: :choose_a_certified_company_submit
 
@@ -41,6 +47,9 @@ end
 
 constraints loa1_shortened_variant_continue_button do
   post 'start', to: 'start_variant_continue_button#request_post', as: :start_loa1
+
+  get 'sign_in', to: 'sign_in_variant_continue_button#index', as: :sign_in
+  post 'sign_in', to: 'sign_in_variant_continue_button#select_idp', as: :sign_in_submit
 
   get 'choose_a_certified_company', to: 'company_picker_variant_continue_button#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'company_picker_variant_continue_button#select_idp', as: :choose_a_certified_company_submit
