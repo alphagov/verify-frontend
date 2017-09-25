@@ -17,7 +17,7 @@ module Api
     context '#get' do
       it 'sets cookies if provided them' do
         stub_request(:get, "#{host}#{path}").with(headers: { cookie: /COOKIE_NAME=some-val/ }).and_return(status: 200, body: '{}')
-        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], '{}').and_return(response_body)
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
         response = api_client.get(path, cookies: { 'COOKIE_NAME' => 'some-val' })
         expect(a_request(:get, "#{host}#{path}").with(headers: { cookie: /COOKIE_NAME=some-val/ })).to have_been_made.once
         expect(response).to eql response_body
@@ -25,7 +25,7 @@ module Api
 
       it 'set params if provided them' do
         stub_request(:get, "#{host}#{path}").with(query: { 'param1' => 'value1' }).and_return(status: 200, body: '{}')
-        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], '{}').and_return(response_body)
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
         response = api_client.get(path, params: { 'param1' => 'value1' })
         expect(a_request(:get, "#{host}#{path}").with(query: { 'param1' => 'value1' })).to have_been_made.once
         expect(response).to eql response_body
@@ -33,7 +33,7 @@ module Api
 
       it 'returns a JSON result when successful' do
         stub_request(:get, "#{host}#{path}").and_return(status: 200, body: '{}')
-        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], '{}').and_return(response_body)
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
         response = api_client.get(path)
         expect(a_request(:get, "#{host}#{path}")).to have_been_made.once
         expect(response).to eql response_body
@@ -45,8 +45,8 @@ module Api
 
       context 'successful post' do
         it 'takes a hash and posts it as JSON and returns json result' do
-          receive_request.and_return(status: 200, body: '{}')
-          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], '{}').and_return(response_body)
+          receive_request.and_return(status: 201, body: '{}')
+          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body)
           response = api_client.post(path, request_body)
           expect(a_request(:post, "#{host}#{path}").with(body: request_body)).to have_been_made.once
           expect(response).to eq response_body
@@ -54,8 +54,8 @@ module Api
       end
 
       it 'uses the correct user agent when acting as a client' do
-        receive_request.and_return(status: 200, body: '{}')
-        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], '{}').and_return(response_body).exactly(4).times
+        receive_request.and_return(status: 201, body: '{}')
+        expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body).exactly(4).times
         api_client.post(path, request_body)
         api_client.post(path, request_body)
         api_client.post(path, request_body)
@@ -71,7 +71,7 @@ module Api
       context 'successful put' do
         it 'takes a hash and puts it as JSON and returns json result' do
           receive_request.and_return(status: 200, body: '{}')
-          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], '{}').and_return(response_body)
+          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
           response = api_client.put(path, request_body)
           expect(a_request(:put, "#{host}#{path}").with(body: request_body)).to have_been_made.once
           expect(response).to eq response_body
@@ -93,7 +93,7 @@ module Api
 
         it 'logs API gets' do
           stub_request(:get, "#{host}#{path}").and_return(status: 200, body: '{}')
-          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], '{}').and_return(response_body)
+          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
 
           payload = notification_payload_for { api_client.get(path) }
 
@@ -102,7 +102,7 @@ module Api
 
         it 'logs API puts' do
           stub_request(:put, "#{host}#{path}").with(body: request_body).and_return(status: 200, body: '{}')
-          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], '{}').and_return(response_body)
+          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], 200, '{}').and_return(response_body)
 
           payload = notification_payload_for { api_client.put(path, request_body) }
 
@@ -110,8 +110,8 @@ module Api
         end
 
         it 'logs API posts' do
-          stub_request(:post, "#{host}#{path}").with(body: request_body).and_return(status: 200, body: '{}')
-          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], '{}').and_return(response_body)
+          stub_request(:post, "#{host}#{path}").with(body: request_body).and_return(status: 201, body: '{}')
+          expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[201], 201, '{}').and_return(response_body)
 
           payload = notification_payload_for { api_client.post(path, request_body) }
 

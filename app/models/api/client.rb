@@ -12,21 +12,21 @@ module Api
       response = log_request(path, 'get') do
         client.get(path, options)
       end
-      @response_handler.handle_response(response.status, response.to_s)
+      @response_handler.handle_response(response.status, 200, response.to_s)
     end
 
-    def post(path, body, options = {})
+    def post(path, body, options = {}, expected_status = 201)
       response = log_request(path, 'post') do
         client.post(path, body, options)
       end
-      @response_handler.handle_response(response.status, response.to_s)
+      @response_handler.handle_response(response.status, expected_status, response.to_s)
     end
 
     def put(path, body, options = {})
       response = log_request(path, 'put') do
         client.put(path, body, options)
       end
-      @response_handler.handle_response(response.status, response.to_s)
+      @response_handler.handle_response(response.status, 200, response.to_s)
     end
 
   private

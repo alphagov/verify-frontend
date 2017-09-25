@@ -5,7 +5,7 @@ class CountryAuthnResponse < Api::Response
   validates_inclusion_of :is_registration, in: [true, false]
 
   def initialize(hash)
-    @country_result = hash['result']
+    @country_result = hash['countryResult']
     @is_registration = hash['isRegistration']
     @loa_achieved = hash['loaAchieved']
   end

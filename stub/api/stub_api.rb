@@ -41,14 +41,6 @@ class StubApi < Sinatra::Base
     }'
   end
 
-  post '/SAML2/SSO/API/RECEIVER/EidasResponse/POST' do
-    '{
-      "result":"blah",
-      "isRegistration":false,
-      "loaAchieved":"LEVEL_2"
-    }'
-  end
-
   put '/api/session/:session_id/idp-authn-response' do
     '{
       "idpResult":"blah",

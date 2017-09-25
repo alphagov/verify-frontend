@@ -1,10 +1,10 @@
 module Api
   class ResponseHandler
-    def handle_response(response_status, response_body)
-      if response_status.success?
-        parse_json(response_body, response_status.code)
+    def handle_response(received_status, expected_status, body)
+      if received_status == expected_status
+        parse_json(body, received_status)
       else
-        handle_error(response_body, response_status.code)
+        handle_error(body, received_status)
       end
     end
 

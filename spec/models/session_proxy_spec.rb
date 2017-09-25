@@ -320,7 +320,8 @@ describe SessionProxy do
       expect(api_client).to receive(:post)
         .with(endpoint(SessionProxy::CYCLE_THREE_SUFFIX),
               { 'value' => 'some value', 'originatingIp' => '127.0.0.1' },
-              {}
+              {},
+              200
              )
 
       session_proxy.submit_cycle_three_value(session_id, 'some value')
@@ -332,7 +333,8 @@ describe SessionProxy do
       expect(api_client).to receive(:post)
         .with(endpoint(SessionProxy::CYCLE_THREE_CANCEL_SUFFIX),
               nil,
-              {}
+              {},
+              200
              )
 
       session_proxy.cycle_three_cancel(session_id)

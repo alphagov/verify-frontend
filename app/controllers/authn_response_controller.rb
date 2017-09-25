@@ -24,7 +24,7 @@ class AuthnResponseController < SamlController
     end
     raise_error_if_session_mismatch(params['RelayState'], session[:verify_session_id])
 
-    response = SAML_PROXY_API.forward_country_authn_response(params['RelayState'], params['SAMLResponse'])
+    response = SESSION_PROXY.country_authn_response(session[:verify_session_id], params['SAMLResponse'], params['RelayState'])
     country_response_handlers[response.country_result].call(response)
   end
 

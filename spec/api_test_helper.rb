@@ -1,14 +1,9 @@
 module ApiTestHelper
   include SessionEndpoints
   include ConfigEndpoints
-  include SamlProxyEndpoints
 
   def ida_frontend_api_uri(path)
     URI.join(CONFIG.ida_frontend_host, path)
-  end
-
-  def saml_proxy_api_uri(path)
-    URI.join(CONFIG.saml_proxy_host, path)
   end
 
   def config_api_uri(path)
@@ -163,12 +158,12 @@ module ApiTestHelper
 
   def stub_api_country_authn_response(relay_state, response = { 'idpResult' => 'SUCCESS', 'isRegistration' => false })
     authn_response_body = {
-        PARAM_SAML_REQUEST => 'my-saml-response',
+        PARAM_SAML_RESPONSE => 'my-saml-response',
         PARAM_RELAY_STATE => relay_state,
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
 
-    stub_request(:post, saml_proxy_api_uri(COUNTRY_AUTHN_RESPONSE_ENDPOINT))
+    stub_request(:put, ida_frontend_api_uri(country_authn_response_endpoint(default_session_id)))
         .with(body: authn_response_body)
         .to_return(body: response.to_json, status: 200)
   end
