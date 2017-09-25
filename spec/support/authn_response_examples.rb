@@ -15,15 +15,15 @@ shared_examples 'idp_authn_response' do |journey_hint, idp_result, piwik_action,
 end
 
 shared_examples 'country_authn_response' do |journey_hint, country_result, redirect_path|
-  let(:session_proxy) { double(:session_proxy) }
+  let(:saml_proxy_api) { double(:saml_proxy_api) }
 
   before(:each) do
-    stub_const('SESSION_PROXY', session_proxy)
+    stub_const('SAML_PROXY_API', saml_proxy_api)
     set_session_and_cookies_with_loa('LEVEL_1')
   end
 
   it "should redirect to #{redirect_path} on #{country_result}" do
-    allow(session_proxy).to receive(:country_authn_response).and_return(CountryAuthnResponse.new('countryResult' => country_result, 'isRegistration' => (journey_hint == 'registration'), 'loaAchieved' => 'LEVEL_1'))
+    allow(saml_proxy_api).to receive(:forward_country_authn_response).and_return(CountryAuthnResponse.new('result' => country_result, 'isRegistration' => (journey_hint == 'registration'), 'loaAchieved' => 'LEVEL_1'))
     post :country_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
     expect(subject).to redirect_to(send(redirect_path))
   end

@@ -38,7 +38,7 @@ class SessionProxy
   def select_a_country(session_id, country)
     # Call into Policy to change state
     # POST /api/countries (NL)
-    @api_client.post(select_a_country_endpoint(session_id, country), '', {}, 200)
+    @api_client.post(select_a_country_endpoint(session_id, country), '', {})
   end
 
   def select_idp(session_id, entity_id, registration = false)
@@ -77,16 +77,6 @@ class SessionProxy
     IdpAuthnResponse.validated_response(response)
   end
 
-  def country_authn_response(session_id, saml_response, relay_state)
-    body = {
-        PARAM_RELAY_STATE => relay_state,
-        PARAM_SAML_RESPONSE => saml_response,
-        PARAM_ORIGINATING_IP => originating_ip
-    }
-    response = @api_client.put(country_authn_response_endpoint(session_id), body)
-    CountryAuthnResponse.validated_response(response)
-  end
-
   def matching_outcome(session_id)
     response = @api_client.get(matching_outcome_endpoint(session_id))
     MatchingOutcomeResponse.validated_response(response).outcome
@@ -112,10 +102,10 @@ class SessionProxy
       PARAM_CYCLE_THREE_VALUE => value,
       PARAM_ORIGINATING_IP => originating_ip
     }
-    @api_client.post(cycle_three_endpoint(session_id), body, {}, 200)
+    @api_client.post(cycle_three_endpoint(session_id), body, {})
   end
 
   def cycle_three_cancel(session_id)
-    @api_client.post(cycle_three_cancel_endpoint(session_id), nil, {}, 200)
+    @api_client.post(cycle_three_cancel_endpoint(session_id), nil, {})
   end
 end

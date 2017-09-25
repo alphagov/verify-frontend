@@ -44,10 +44,6 @@ module SessionEndpoints
     session_endpoint(session_id, COUNTRY_AUTHN_REQUEST_SUFFIX)
   end
 
-  def country_authn_response_endpoint(session_id)
-    session_endpoint(session_id, COUNTRY_AUTHN_RESPONSE_SUFFIX)
-  end
-
   def idp_authn_request_endpoint(session_id)
     session_endpoint(session_id, IDP_AUTHN_REQUEST_SUFFIX)
   end
