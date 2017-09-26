@@ -3,7 +3,7 @@ require 'controller_helper'
 require 'api_test_helper'
 require 'piwik_test_helper'
 
-describe StartVariantExtraTextButtonController do
+describe StartVariantGetSetupController do
   before(:each) do
     stub_piwik_request_with_rp('action_name' => 'The user has reached the start page')
   end

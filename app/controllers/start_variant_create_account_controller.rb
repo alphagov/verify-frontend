@@ -1,4 +1,4 @@
-class StartVariantExtraTextButtonController < ApplicationController
+class StartVariantCreateAccountController < ApplicationController
   layout 'slides'
 
   def index

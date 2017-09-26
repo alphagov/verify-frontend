@@ -1,4 +1,4 @@
-class StartVariantContinueButtonController < ApplicationController
+class StartVariantGetSetupController < ApplicationController
   layout 'slides'
 
   def index

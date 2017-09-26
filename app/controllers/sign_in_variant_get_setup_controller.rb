@@ -1,4 +1,4 @@
-class SignInVariantContinueButtonController < ApplicationController
+class SignInVariantGetSetupController < ApplicationController
   def index
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
       current_identity_providers

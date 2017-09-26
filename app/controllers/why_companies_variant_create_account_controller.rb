@@ -1,4 +1,4 @@
-class WhyCompaniesVariantExtraTextButtonController < ApplicationController
+class WhyCompaniesVariantCreateAccountController < ApplicationController
   def index
     if is_loa1?
       render :why_companies_LOA1

@@ -1,4 +1,4 @@
-class CompanyPickerVariantExtraTextButtonController < ApplicationController
+class ChooseACertifiedCompanyVariantGetSetupController < ApplicationController
   def index
     if is_loa1?
       loa1_idps = current_identity_providers.select { |idp| idp.levels_of_assurance.min == 'LEVEL_1' }
