@@ -1,0 +1,15 @@
+<%= page_title 'hub.start.title' %>
+<% content_for :body_classes, 'hub-start' %>
+<% content_for :feedback_source, 'START_PAGE' %>
+
+<p><%= t 'hub.start_ab_test.loa1_verify_is_a_service' %></p>
+<%= @tailored_text.html_safe %>
+
+<div class="actions">
+  <%= button_link_to t('navigation_ab_test.loa1_create_an_id_account'), choose_a_certified_company_path, id: 'next-button' %>
+  <div>
+    <%= t 'hub.start_ab_test.loa1_or' %>
+    <%= link_to t('hub.start_ab_test.loa1_sign_in'), sign_in_path %>
+  </div>
+</div>
+
