@@ -38,7 +38,7 @@ module Display
       end
 
       def filter_for_allowed_transactions(data)
-        all_allowed_rps = @rps_with_homepage_link.concat @rps_with_name_only
+        all_allowed_rps = @rps_with_homepage_link + @rps_with_name_only
         data.keep_if { |transaction| all_allowed_rps.include? transaction.fetch('simpleId') }
       end
 
