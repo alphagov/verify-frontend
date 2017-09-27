@@ -1,3 +1,5 @@
+require 'cookies/cookies'
+
 class SelectRoute
   MATCHES = true
   DOES_NOT_MATCH = false

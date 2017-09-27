@@ -1,4 +1,5 @@
 require 'redirect_with_see_other'
+require 'cookies/cookies'
 
 class ApplicationController < ActionController::Base
   before_action :validate_session
