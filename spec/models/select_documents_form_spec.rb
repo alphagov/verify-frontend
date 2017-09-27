@@ -95,13 +95,13 @@ describe SelectDocumentsForm do
       expect(form).to be_further_id_information_required
     end
 
-    it 'should require further information when user has a northern ireland driving licence' do
+    it 'should not require further information when user has a northern ireland driving licence' do
       form = SelectDocumentsForm.new(
         any_driving_licence: 'true',
         ni_driving_licence: 'true',
         passport: 'false'
       )
-      expect(form).to be_further_id_information_required
+      expect(form).to_not be_further_id_information_required
     end
 
     it 'should not require further information when user has a GB driving licence' do
