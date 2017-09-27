@@ -28,7 +28,7 @@ class SelectDocumentsForm
   end
 
   def further_id_information_required?
-    passport == 'false' && (any_driving_licence == 'false' || (ni_driving_licence == 'true' && driving_licence != 'true'))
+    passport == 'false' && any_driving_licence == 'false'
   end
 
 private

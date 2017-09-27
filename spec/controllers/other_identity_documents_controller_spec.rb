@@ -17,7 +17,7 @@ describe OtherIdentityDocumentsController do
     }
 
     expect(subject).to redirect_to(select_phone_path)
-    expect(session[:selected_answers]).to eql('documents' => { non_uk_id_document: true })
+    expect(session[:selected_answers]).to eql('other_documents' => { non_uk_id_document: true })
   end
 
   it 'should not advance if form is invalid' do
@@ -29,7 +29,7 @@ describe OtherIdentityDocumentsController do
     expect(subject).to render_template('index')
   end
 
-  it 'will only contain has non-uk id document and will ignore any stale form values for passport and licence' do
+  it 'will not replace form values for passport and licence' do
     session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true } }
 
     post :select_other_documents, params: {
@@ -37,6 +37,6 @@ describe OtherIdentityDocumentsController do
       other_identity_documents_form: { non_uk_id_document: 'true' }
     }
 
-    expect(session[:selected_answers]).to eql('documents' => { non_uk_id_document: true })
+    expect(session[:selected_answers]).to eql('other_documents' => { non_uk_id_document: true }, 'documents' => { passport: true, driving_licence: true })
   end
 end
