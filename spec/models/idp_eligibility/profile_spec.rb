@@ -13,9 +13,14 @@ module IdpEligibility
       end
     end
     describe '#applies_to' do
-      it 'should return true if the profile is a subset of the supplied evidence' do
+      it 'should return true if the evidence is a permutation match of the profile' do
         profile = Profile.new([:passport, :mobile_phone])
-        expect(profile.applies_to?([:passport, :mobile_phone, :driving_licence])).to eq true
+        expect(profile.applies_to?([:mobile_phone, :passport])).to eq true
+      end
+
+      it 'should return false if the evidence contains more information than the profile' do
+        profile = Profile.new([:passport, :mobile_phone])
+        expect(profile.applies_to?([:passport, :mobile_phone, :driving_licence])).to eq false
       end
 
       it 'should return false if the profile is not a subset of the supplied evidence' do
@@ -23,9 +28,9 @@ module IdpEligibility
         expect(profile.applies_to?([:passport, :driving_licence])).to eq false
       end
 
-      it 'should return true if the profile is empty' do
+      it 'should return false if the profile is empty' do
         profile = Profile.new([])
-        expect(profile.applies_to?([:passport])).to eq true
+        expect(profile.applies_to?([:passport])).to eq false
       end
     end
 

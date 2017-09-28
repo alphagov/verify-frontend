@@ -12,9 +12,10 @@ module IdpEligibility
     let(:blacklisted_transaction_simple_id) { 'blacklisted-transaction' }
     let(:passport_profile) { Profile.new([:passport]) }
     let(:driving_licence_profile) { Profile.new([:driving_licence]) }
+    let(:passport_and_driving_licence_profile) { Profile.new([:driving_licence, :passport]) }
     let(:demo_profile) { Profile.new([:mobile_phone, :driving_licence]) }
-    let(:recommended_profile_filter) { ProfileFilter.new('idp' => [passport_profile]) }
-    let(:non_recommended_profile_filter) { ProfileFilter.new('idp' => [driving_licence_profile], 'idp2' => [passport_profile]) }
+    let(:recommended_profile_filter) { ProfileFilter.new('idp' => [passport_profile, passport_and_driving_licence_profile]) }
+    let(:non_recommended_profile_filter) { ProfileFilter.new('idp' => [driving_licence_profile], 'idp2' => [passport_profile, passport_and_driving_licence_profile]) }
     let(:demo_profile_filter) { ProfileFilter.new('idp' => [demo_profile]) }
     let(:transaction_blacklist) { [blacklisted_transaction_simple_id] }
     let(:grouper) { RecommendationGrouper.new(recommended_profile_filter, non_recommended_profile_filter, demo_profile_filter, transaction_blacklist) }
