@@ -34,8 +34,8 @@ experiments:
   - loa1_shortened_journey:
       alternatives:
         - name: 'control'
-          percent: 50
+          percent: 100
         - name: 'variant_get_setup'
-          percent: 25
+          percent: 0
         - name: 'variant_create_account'
-          percent: 25
+          percent: 0
