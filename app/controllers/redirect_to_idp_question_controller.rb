@@ -2,6 +2,7 @@ class RedirectToIdpQuestionController < ApplicationController
   def index
     @idp = decorated_idp
     @form = InterstitialQuestionForm.new({})
+    @is_loa2 = is_loa2?
   end
 
   def continue

@@ -23,9 +23,11 @@
           <%= t 'hub.redirect_to_idp_question.warning_html', display_name: @idp.display_name, choose_another_company_link: link_to(t('hub.redirect_to_idp_question.choose_another_certified_company_link'), choose_a_certified_company_path)%>
         </div>
 
+        <% if @is_loa2 %>
         <div class="panel panel-border-wide">
           <%= t 'hub.redirect_to_idp_question.identity_documents' %>
         </div>
+        <% end %>
 
         <div class="form-group-tight">
             <%= button_tag t('navigation.continue'),

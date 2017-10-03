@@ -29,6 +29,16 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
     expect(page).to have_content('I have a question for you in English')
   end
 
+  it 'displays document warning text on LOA2' do
+    expect(page).to have_content('You need your identity documents with you')
+  end
+
+  it 'does not display document warning text on LOA1' do
+    set_loa_in_session('LEVEL_1')
+    visit '/redirect-to-idp-question'
+    expect(page).to_not have_content('You need your identity documents with you')
+  end
+
   it 'displays interstitial question in Welsh' do
     visit '/ailgyfeirio-i-gwestiwn-idp'
 

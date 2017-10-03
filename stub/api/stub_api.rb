@@ -14,7 +14,12 @@ class StubApi < Sinatra::Base
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one",
         "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     }]'
+     },
+     {
+        "simpleId":"stub-idp-loa1",
+        "entityId":"http://stub-idp-loa1.com",
+        "levelsOfAssurance": ["LEVEL_1"]
+      }]'
   end
 
   put '/api/session/:session_id/select-idp' do
