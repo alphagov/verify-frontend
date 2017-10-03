@@ -1,34 +1,32 @@
 require 'cookies/cookies'
 
 class SelectRoute
-  MATCHES = true
-  DOES_NOT_MATCH = false
-
-  private_constant :MATCHES
-  private_constant :DOES_NOT_MATCH
-
-  def initialize(experiment_name, route, ab_reporter = -> (exp_name, reported_alternative, transaction_id, request) {})
+  def initialize(experiment_name, route, ab_reporter = nil, experiment_loa = nil)
     @experiment_name = experiment_name
     @experiment_route = "#{@experiment_name}_#{route}"
+    @experiment_loa = experiment_loa
     @ab_reporter = ab_reporter
   end
 
   def matches?(request)
     if request_matches_experiment?(request)
-      report_ab_test_details(request)
-      MATCHES
+      report_ab_test_details(request) if loa_matches_experiment?(request) && !@ab_reporter.nil?
+      true
     else
-      DOES_NOT_MATCH
+      false
     end
   end
 
 private
 
-
   def request_matches_experiment?(request)
     request_experiment_route = extract_experiment_route_from_cookie(request.cookies[CookieNames::AB_TEST])
 
     @experiment_route == request_experiment_route
+  end
+
+  def loa_matches_experiment?(request)
+    @experiment_loa.nil? || request.session[:requested_loa] == @experiment_loa
   end
 
   def extract_experiment_route_from_cookie(ab_test_cookie)

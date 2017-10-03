@@ -12,7 +12,7 @@ describe SelectRoute do
   before(:each) do
     experiment_stub = MockExperiment.new
     ab_test_stub = {
-        EXP_NAME => experiment_stub
+      EXP_NAME => experiment_stub
     }
     stub_const('AB_TESTS', ab_test_stub)
     # allow(AbTest).to receive(:report)
@@ -36,36 +36,36 @@ describe SelectRoute do
     it 'evaluates false when experiment matches but the route does not' do
       expect(experiment_stub).to receive(:alternative_name).and_return('no_alt_name_found')
 
-      cookies = create_ab_test_cookie(EXP_NAME, "non matching route")
+      cookies = create_ab_test_cookie(EXP_NAME, 'non matching route')
       request = RequestStub.new(session, cookies)
 
       expect(select_route.matches?(request)).to be false
     end
 
     it 'evaluates false when experiment does not match' do
-      cookies = create_ab_test_cookie("not matching experiment", nil)
+      cookies = create_ab_test_cookie('not matching experiment', nil)
       request = RequestStub.new(session, cookies)
 
       expect(select_route.matches?(request)).to be false
     end
   end
 
-  context 'reporting' do
+  context 'reporting for any LOA' do
     result_string = nil
 
     before(:each) do
       result_string = 'not used'
 
-      ab_reporter = -> (experiment_name, reported_alternative, transaction_id, request) {
+      ab_reporter = lambda do |experiment_name, reported_alternative, transaction_id, request|
         result_string = "#{experiment_name},#{reported_alternative},#{transaction_id},#{request.to_str}"
-      }
+      end
 
       select_route = SelectRoute.new(EXP_NAME, 'variant', ab_reporter)
     end
 
-    it 'execute ab_reporter when experiment matches' do
+    it 'executes ab_reporter when experiment matches' do
       expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_NAME).and_return(ALTERNATIVE_NAME)
-      session = { transaction_simple_id: 'test-rp' }
+      session = { transaction_simple_id: 'test-rp', requested_loa: 'anything' }
 
       cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
       request = RequestStub.new(session, cookies)
@@ -76,12 +76,48 @@ describe SelectRoute do
     end
 
     it 'does not execute ab_reporter when experiment does not match' do
-      session = { transaction_simple_id: 'test-rp' }
+      session = { transaction_simple_id: 'test-rp', requested_loa: 'anything' }
 
       cookies = create_ab_test_cookie('non matching experiment', nil)
       request = RequestStub.new(session, cookies)
 
       select_route.matches?(request)
+      expect(result_string).to eq('not used')
+    end
+  end
+
+  context 'reporting for a specific LOA' do
+    result_string = nil
+    cookies = nil
+
+    before(:each) do
+      expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_NAME).and_return(ALTERNATIVE_NAME)
+
+      result_string = 'not used'
+      cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
+
+      ab_reporter = lambda do |experiment_name, reported_alternative, transaction_id, request|
+        result_string = "#{experiment_name},#{reported_alternative},#{transaction_id},#{request.to_str}"
+      end
+
+      select_route = SelectRoute.new(EXP_NAME, 'variant', ab_reporter, 'LEVEL_1')
+    end
+
+    it 'executes ab_reporter when LOA matches' do
+      session = { transaction_simple_id: 'test-rp', requested_loa: 'LEVEL_1' }
+      request = RequestStub.new(session, cookies)
+
+      select_route.matches?(request)
+
+      expect(result_string).to eq("#{EXP_NAME},#{ALTERNATIVE_NAME},test-rp,request example")
+    end
+
+    it 'does not execute ab_reporter when experiment does not match' do
+      session = { transaction_simple_id: 'test-rp', requested_loa: 'LEVEL_2' }
+      request = RequestStub.new(session, cookies)
+
+      select_route.matches?(request)
+
       expect(result_string).to eq('not used')
     end
   end
@@ -108,8 +144,8 @@ private
 
   def create_ab_test_cookie(experiment_name, alternative_name)
     {
-        'ab_test' =>
-            "{\"#{experiment_name}\": \"#{alternative_name}\"}"
+      'ab_test' =>
+          "{\"#{experiment_name}\": \"#{alternative_name}\"}"
     }
   end
 end
