@@ -65,7 +65,7 @@ describe RedirectToIdpWarningController do
       subject
     end
 
-    it 'reports idp registration and doesn\t error out if idp_was_recommended key not present' do
+    it 'reports idp registration and doesn\'t error out if idp_was_recommended key not present' do
       bobs_identity_service_idp_name = "Bob’s Identity Service"
       idp_was_recommended = '(idp recommendation key not set)'
       evidence = { driving_licence: true, passport: true }

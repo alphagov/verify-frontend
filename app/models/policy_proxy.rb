@@ -17,6 +17,6 @@ class PolicyProxy
         PARAM_REGISTRATION => registration
     }
 
-    @api_client.post(select_idp_endpoint(session_id), body, {}, 201)
+    @api_client.post(select_idp_endpoint(session_id), body, {})
   end
 end
