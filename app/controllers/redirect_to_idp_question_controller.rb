@@ -2,7 +2,7 @@ class RedirectToIdpQuestionController < ApplicationController
   def index
     @idp = decorated_idp
     @form = InterstitialQuestionForm.new({})
-    @is_loa2 = is_loa2?
+    render is_loa1? ? 'redirect_to_idp_question_LOA1' : 'redirect_to_idp_question_LOA2'
   end
 
   def continue
@@ -17,7 +17,7 @@ class RedirectToIdpQuestionController < ApplicationController
     else
       @idp = decorated_idp
       flash.now[:errors] = @form.errors.full_messages.join(', ')
-      render 'index'
+      render is_loa1? ? 'redirect_to_idp_question_LOA1' : 'redirect_to_idp_question_LOA2'
     end
   end
 

@@ -28,12 +28,32 @@ describe RedirectToIdpQuestionController do
                      :idp_wont_work_for_you_one_doc_path
   end
 
+  context 'starts on correct view for loa' do
+    it 'displays correct view for loa1' do
+      set_session_and_cookies_with_loa('LEVEL_1')
+      get :index, params: { locale: 'en' }
+      expect(subject).to render_template(:redirect_to_idp_question_LOA1)
+    end
+
+    it 'displays correct view for loa2' do
+      set_session_and_cookies_with_loa('LEVEL_2')
+      get :index, params: { locale: 'en' }
+      expect(subject).to render_template(:redirect_to_idp_question_LOA2)
+    end
+  end
+
   context 'when form is invalid' do
     subject { post :continue, params: { locale: 'en', interstitial_question_form: invalid_form_answers } }
 
-    it 'stores flash errors' do
+    it 'stores flash errors and redirects to loa1' do
       set_session_and_cookies_with_loa('LEVEL_1')
-      expect(subject).to render_template(:index)
+      expect(subject).to render_template(:redirect_to_idp_question_LOA1)
+      expect(flash[:errors]).not_to be_empty
+    end
+
+    it 'stores flash errors and redirects to loa2' do
+      set_session_and_cookies_with_loa('LEVEL_2')
+      expect(subject).to render_template(:redirect_to_idp_question_LOA2)
       expect(flash[:errors]).not_to be_empty
     end
   end
