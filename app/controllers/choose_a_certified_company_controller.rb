@@ -39,6 +39,8 @@ private
   def warning_or_question_page(decorated_idp)
     if only_one_uk_doc_selected && interstitial_question_flag_enabled_for(decorated_idp)
       redirect_to_idp_question_path
+    elsif is_loa1? && interstitial_question_flag_enabled_for(decorated_idp)
+      redirect_to_idp_question_path
     else
       redirect_to_idp_warning_path
     end
@@ -49,6 +51,10 @@ private
   end
 
   def interstitial_question_flag_enabled_for(decorated_idp)
-    IDP_FEATURE_FLAGS_CHECKER.enabled?(:show_interstitial_question, decorated_idp.simple_id)
+    if is_loa1?
+      IDP_FEATURE_FLAGS_CHECKER.enabled?(:show_interstitial_question_loa1, decorated_idp.simple_id)
+    else
+      IDP_FEATURE_FLAGS_CHECKER.enabled?(:show_interstitial_question, decorated_idp.simple_id)
+    end
   end
 end
