@@ -206,12 +206,12 @@ cy:
       question:
         mobile_phone: Oes gennych ffôn symudol neu lechen?
         mobile_phone_option_yes: Oes
-        mobile_phone_option_reluctant_yes: "Gallaf, ond mae'n well gennyf beidio"
+        mobile_phone_option_reluctant_yes: Gallaf, ond mae'n well gennyf beidio
         smart_phone: Allwch chi osod apps ar eich dyfais?
         smart_phone_option_yes: Gallaf
         landline: Oes gennych chi linell daear?
         landline_option_yes: Oes
-        smart_phone_subtitle: "Mae rhai cwmnïau ardystiedig yn gofyn i chi lawrlwytho app am ddim a defnyddio camera eich ffôn fel rhan o ddilysu eich hunaniaeth."
+        smart_phone_subtitle: Mae rhai cwmnïau ardystiedig yn gofyn i chi lawrlwytho app am ddim a defnyddio camera eich ffôn fel rhan o ddilysu eich hunaniaeth.
       errors:
         no_selection: Dylech ateb pob cwestiwn
         invalid_selection: Dylech edrych dros eich dewis
@@ -230,8 +230,8 @@ cy:
         errors:
           no_selection: Dylech ateb pob cwestiwn
     idp_wont_work_for_you_one_doc:
-      title: "Ni all %{idp_name} cadarnhau pwy ydych chi"
-      heading: "Ni all %{idp_name} cadarnhau pwy ydych chi"
+      title: Ni all %{idp_name} cadarnhau pwy ydych chi
+      heading: Ni all %{idp_name} cadarnhau pwy ydych chi
       choose_another_company: Mae'n rhaid i chi ddewis cwmni ardystiedig wahanol i wirio eich hunaniaeth.
       choose_another_certified_company_link: Dewiswch gwmni arall
     no_mobile_phone:
@@ -282,7 +282,7 @@ cy:
       existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
       personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
       why_companies: Pam fod dewis o gwmnïau
-      choose_idp: "Dewiswch %{display_name}"
+      choose_idp: Dewiswch %{display_name}
       idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
       company_html:
         zero: no&nbsp;cwmni
@@ -292,7 +292,7 @@ cy:
         many: "%{count}&nbsp;o gwmnïau"
         other: "%{count}&nbsp;o gwmnïau"
       show_all_companies: Cwmniau sy’n annhebygol o’ch dilysu chi
-      filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
+      filtered_idps_message_html: Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion.
       about_idp: Am %{display_name}
       dialog:
         information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
@@ -307,7 +307,7 @@ cy:
       existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
       personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
       why_companies: Pam fod dewis o gwmnïau
-      choose_idp: "Dewiswch %{display_name}"
+      choose_idp: Dewiswch %{display_name}
       idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
       company_html:
         zero: no&nbsp;cwmni
@@ -317,7 +317,7 @@ cy:
         many: "%{count}&nbsp;o gwmnïau"
         other: "%{count}&nbsp;o gwmnïau"
       show_all_companies: Cwmniau sy’n annhebygol o’ch dilysu chi
-      filtered_idps_message_html: "Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion."
+      filtered_idps_message_html: Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion.
       about_idp: Am %{display_name}
       dialog:
         information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
@@ -373,7 +373,7 @@ cy:
       explanation: Mae gwmnïau ardystiedig angen o leiaf 1 dogfen arall i wirio eich hunaniaeth. I barhau gyda GOV.UK Verify, %{add_more_documents_link}.
       explanation_link_text: ychwanegwch fwy o ddogfennau.
     redirect_to_idp_warning:
-      title: "Byddwch nawr yn cael eich ailgyfeirio"
+      title: Byddwch nawr yn cael eich ailgyfeirio
       continue_to_idp: Parhau i %{display_name}
       create_account: Crëwch eich cyfrif hunaniaeth %{display_name}
       continue_website: Parhau i wefan %{display_name}
@@ -381,7 +381,7 @@ cy:
               <p>Byddwch nawr yn gwirio pwy ydych chi ar wefan %{display_name}</p>
               <p>Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio lle bynnag gwelwch y logo 'GOV.UK Verify' </p>
       service_use: Yna byddwch yn gallu %{service_name}.
-      other_ways_link: "ffyrdd eraill i %{transaction}"
+      other_ways_link: ffyrdd eraill i %{transaction}
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
     redirect_to_idp_question:
       heading: Dilysu gyda %{display_name}
@@ -402,14 +402,14 @@ cy:
       need_to_signin_again: Er mwyn %{transaction_name}, mae angen i chi lofnodi i mewn eto gyda’ch cwmni ardystiedig. Nid oes angen i chi gofrestru eto.
     confirmation:
       title: Mae eich hunaniaeth wedi cael ei ddilysu
-      message: "Gallwch fewngofnodi ble bynnag rydych yn gweld logo GOV.UK Verify gyda'ch enw defnyddiwr a chyfrinair eich cyfrif hunaniaeth %{display_name}"
-      continue_to_rp: "Gallwch nawr ddefnyddio %{transaction_name}."
-      heading: Mae "%{display_name} wedi dilysu eich hunaniaeth"
+      message: Gallwch fewngofnodi ble bynnag rydych yn gweld logo GOV.UK Verify gyda'ch enw defnyddiwr a chyfrinair eich cyfrif hunaniaeth %{display_name}
+      continue_to_rp: Gallwch nawr ddefnyddio %{transaction_name}.
+      heading: Mae %{display_name} wedi dilysu eich hunaniaeth
       add_security_loa1: Pan fyddwch yn defnyddio rhai o wasanaethau'r llywodraeth, gofynnir i chi ddarparu mwy o dystiolaeth gan fod angen i'r gwasanaethau hyn fod yn hyderus nad yw rhywun arall yn honni i fod yn chi.
       extra_security: Government services requiring extra evidence
     failed_registration:
       title: Methu dilysu eich hunaniaeth
-      heading: Roedd "%{idp_name} yn methu dilysu eich hunaniaeth"
+      heading: Roedd %{idp_name} yn methu dilysu eich hunaniaeth
       try_another_company: Rhowch gynnig ar gwmni ardystiedig arall
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
@@ -418,26 +418,26 @@ cy:
           <li>nid oes gan y cwmni ardystiedig fynediad i ddigon o wybodaeth amdanoch</li>
         </ul>
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
-      what_to_do_next: "Beth i’w wneud nesaf"
+      what_to_do_next: Beth i’w wneud nesaf
       problems_verifying_your_identity: Problemau gyda dilysu eich hunaniaeth
-      continue_heading: "Mynd ymlaen i %{transaction_name}"
-      continue_idp_text: "Roedd %{idp_name} yn methu dilysu eich hunaniaeth."
-      continue_text: "Mynd ymlaen i %{rp_name} i ddarganfod sut."
+      continue_heading: Mynd ymlaen i %{transaction_name}
+      continue_idp_text: Roedd %{idp_name} yn methu dilysu eich hunaniaeth.
+      continue_text: Mynd ymlaen i %{rp_name} i ddarganfod sut.
       start_again: Dod o hyd i gwmni arall i’ch gwirio
-      other_ways_summary: "Gweld ffyrdd eraill o %{other_ways_description}"
-      try_another_text: "Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth."
+      other_ways_summary: Gweld ffyrdd eraill o %{other_ways_description}
+      try_another_text: Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth.
       try_another_summary: Ceisiwch wirio gyda chwmni ardystiedig arall
-      contact_details_intro: "Cysylltwch â %{idp_name}"
+      contact_details_intro: Cysylltwch â %{idp_name}
     failed_sign_in:
       title: Methu eich mewngofnodi
-      heading: Ni all "%{display_name} eich mewngofnodi"
+      heading: Ni all %{display_name} eich mewngofnodi
       reasons_html: |
         <p>Efallai eich bod wedi dewis y cwmni anghywir. Edrychwch ar eich e-byst a negeseuon testun am gadarnhad o bwy wnaeth eich dilysu.</p>
         <p>Gallwch gael eich dilysu gan gwmni arall unrhyw bryd. Ni fyddwch yn colli unrhyw ddata ar wasanaethau GOV.UK rydych wedi’u defnyddio.</p>
-      start_again: "Dechrau eto"
+      start_again: Dechrau eto
     failed_uplift:
       title: Methwyd yr ymgodiad
-      heading: "Roedd %{display_name} yn methu ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth"
+      heading: Roedd %{display_name} yn methu ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
@@ -446,35 +446,35 @@ cy:
           <li>nid oes gan y cwmni ardystiedig fynediad i ddigon o wybodaeth amdanoch</li>
          </ul>
       start_again: Dod o hyd i gwmni arall i’ch gwirio
-      still_use_heading: "Gallwch barhau i ddefnyddiio eich cyfrif hunaniaeth %{idp_name}"
+      still_use_heading: Gallwch barhau i ddefnyddiio eich cyfrif hunaniaeth %{idp_name}
       still_use_text: "Nid yw gwasanaeth hwn y llywodraeth angen diogelwch ychwanegol:"
-      try_another_text: "Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth."
+      try_another_text: Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth.
       try_another_summary: Ceisiwch wirio gyda chwmni ardystiedig arall
       what_next_heading: Beth i’w wneud nesaf
-      other_ways_summary: "Gweld ffyrdd eraill o %{other_ways_description}"
-      contact_summary: "Cysylltwch â %{idp_name}"
+      other_ways_summary: Gweld ffyrdd eraill o %{other_ways_description}
+      contact_summary: Cysylltwch â %{idp_name}
     response_processing:
       title: Arhoswch
-      heading: Mae "%{rp_name} yn prosesu eich manylion"
-      bear_with_us: "Gallai hyn gymryd ychydig o eiliadau, diolch am eich amynedd."
+      heading: Mae %{rp_name} yn prosesu eich manylion
+      bear_with_us: Gallai hyn gymryd ychydig o eiliadau, diolch am eich amynedd.
       matching_error:
-        problem: "Mae’n ddrwg gennym, mae %{rp_name} yn cael problemau technegol."
+        problem: Mae’n ddrwg gennym, mae %{rp_name} yn cael problemau technegol.
         start_again_link: dechrau eto
-        start_again_message_html: "Dylech %{start_again_link} mewn ychydig o funudau drwy fewngofnodi gyda’ch cwmni ardystiedig."
-        other_ways: "Os byddwch yn parhau i gael problemau, mae ffyrdd eraill i %{other_ways_description}."
+        start_again_message_html: Dylech %{start_again_link} mewn ychydig o funudau drwy fewngofnodi gyda’ch cwmni ardystiedig.
+        other_ways: Os byddwch yn parhau i gael problemau, mae ffyrdd eraill i %{other_ways_description}.
     forgot_company:
       title: Cyngor ar gyfer cwmni sydd wedi’i anghofio
     redirect_to_service:
-      heading: "Mynd ymlaen i'r cam nesaf"
+      heading: Mynd ymlaen i'r cam nesaf
       signing_in:
-        title: "Arhoswch. Yn eich mewngofnodi"
-        transition_heading: "Mae %{rp_name} yn prosesu eich manylion"
+        title: Arhoswch. Yn eich mewngofnodi
+        transition_heading: Mae %{rp_name} yn prosesu eich manylion
       start_again:
-        title: "Arhoswch. Dechrau eto."
-        transition_heading: "Dechrau eto"
-      no_javascript: "Oherwydd nad yw Javascript wedi'i alluogi ar eich porwr, mae'n rhaid i chi bwyso'r botwm parhau"
-      loading: "Llwytho…"
-      please_wait: "Gall hyn gymryd ychydig o eiliadau, arhoswch gyda ni."
+        title: Arhoswch. Dechrau eto.
+        transition_heading: Dechrau eto
+      no_javascript: Oherwydd nad yw Javascript wedi'i alluogi ar eich porwr, mae'n rhaid i chi bwyso'r botwm parhau
+      loading: Llwytho…
+      please_wait: Gall hyn gymryd ychydig o eiliadau, arhoswch gyda ni.
     redirect_to_idp:
       title: Llwytho
       heading: Mynd ymlaen i’r cam nesaf
@@ -494,7 +494,7 @@ cy:
         what: Beth oeddech chi'n ceisio ei wneud?
         details: Rhowch fanylion eich cwestiwn, problem neu adborth
         reply: Ydych chi eisiau ateb?
-        reply_option_yes: "Ydw"
+        reply_option_yes: Ydw
         name: Enw
         email: Cyfeiriad e-bost
         email_hint: Byddwn ond yn ei ddefnyddio i ateb eich neges.
@@ -536,19 +536,19 @@ cy:
       details_html: Gallwch %{href}; y mwyaf cywir y gallwch ateb y cwestiynau y mwyaf tebygol yw hi y bydd cwmni ardystiedig yn gallu eich dilysu.
       details_link: newid eich atebion i'r cwestiynau
     cancelled_registration:
-      title: Verify Registration Cancelled
-      heading: "Mae dilysu eich hunaniaeth gyda %{idp_name} wedi cael ei ddiddymu"
-      next: 'Beth ydych chi eisiau ei wneud nesaf?'
+      title: Cofrestriad Verify Wedi'i Ganslo
+      heading: Mae dilysu eich hunaniaeth gyda %{idp_name} wedi cael ei ddiddymu
+      next: Beth ydych chi eisiau ei wneud nesaf?
       options:
-        other_ways_to_verify: 'Darganfod ffyrdd eraill i %{service_name}'
-        verify_with_another_company: 'Dilysu gyda chwmni ardystiedig arall'
-        verify_using_other_documents: 'Dilysu drwy ddefnyddio dogfennau eraill'
-        contact_verify: 'Cysylltu â GOV.UK Verify'
+        other_ways_to_verify: Darganfod ffyrdd eraill i %{service_name}
+        verify_with_another_company: Dilysu gyda chwmni ardystiedig arall
+        verify_using_other_documents: Dilysu drwy ddefnyddio dogfennau eraill
+        contact_verify: Cysylltu â GOV.UK Verify
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
-      other_services: Other services
+      other_services: Gwasanaethau eraill
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan
       feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
