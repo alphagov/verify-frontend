@@ -299,6 +299,7 @@ en:
     choose_a_certified_company_ab_test:
       title: Choose a certified company
       loa1_heading: How GOV.UK Verify works
+      loa1_heading_medium: Choose a certified company to verify your identity
       existing_customer: You don't have to be an existing customer with a company.
       personal_information: They ask you to provide personal information and evidence, and then check it's correct using the new, secure systems they built.
       why_companies: Why there’s a choice of companies

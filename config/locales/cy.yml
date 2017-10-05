@@ -303,6 +303,7 @@ cy:
         close: cau
     choose_a_certified_company_ab_test:
       title: Dewiswch gwmni ardystiedig
+      loa1_heading_medium: Choose a certified company to verify your identity
       loa1_heading: How GOV.UK Verify works
       existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
       personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
