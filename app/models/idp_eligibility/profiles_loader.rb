@@ -22,20 +22,16 @@ module IdpEligibility
       demo_profiles = select_profiles(profiles, "demo_profiles") { [] }
       all_profiles = merge_profiles(merge_profiles(recommended_profiles, non_recommended_profiles), demo_profiles)
       document_profiles = apply_documents_mask(all_profiles)
-      document_profiles_b = apply_documents_mask(recommended_profiles)
-      document_profiles_c = apply_documents_mask(recommended_profiles)
       LoadedProfileFilters.new(
         ProfileFilter.new(recommended_profiles),
         ProfileFilter.new(non_recommended_profiles),
         ProfileFilter.new(demo_profiles),
         ProfileFilter.new(all_profiles),
-        ProfileFilter.new(document_profiles),
-        ProfileFilter.new(document_profiles_b),
-        ProfileFilter.new(document_profiles_c)
+        ProfileFilter.new(document_profiles)
       )
     end
 
-    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :demo_profiles, :all_profiles, :document_profiles, :document_profiles_b, :document_profiles_c)
+    LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :demo_profiles, :all_profiles, :document_profiles)
 
   private
 
