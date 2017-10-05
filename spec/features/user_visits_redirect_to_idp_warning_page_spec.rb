@@ -134,7 +134,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     visit '/redirect-to-idp-warning'
 
     expect(page).to have_content 'Continue to IDCorp'
-    expect(page).to have_content 'You’ll now verify your identity on the IDCorp website'
+    expect(page).to have_content "You'll now verify your identity on the IDCorp website"
   end
 
   context 'with JS enabled', js: true do

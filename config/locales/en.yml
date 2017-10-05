@@ -370,13 +370,14 @@ en:
       create_account: Create your %{display_name} identity account
       continue_website: Continue to the %{display_name} website
       identity_account_use_html: |
-        <p>You’ll now verify your identity on the %{display_name} website.</p>
+        <p>You'll now verify your identity on the %{display_name} website.</p>
         <p>They'll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
       service_use: You'll then be able to %{service_name}.
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
     redirect_to_idp_question:
       heading: Verifying with %{display_name}
+      loa1_heading: Setting up a %{display_name} account
       answer_yes: "Yes"
       answer_no: "No"
       warning_html: |

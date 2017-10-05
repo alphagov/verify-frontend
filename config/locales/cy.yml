@@ -385,6 +385,7 @@ cy:
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
     redirect_to_idp_question:
       heading: Dilysu gyda %{display_name}
+      loa1_heading: Setting up a %{display_name} account
       answer_yes: Ydw
       answer_no: Na
       warning_html: |
