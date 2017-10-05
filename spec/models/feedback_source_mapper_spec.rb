@@ -16,6 +16,10 @@ describe FeedbackSourceMapper do
     expect(@feedback_source_mapper.is_feedback_source_valid('EXPIRED_ERROR_PAGE')).to be true
   end
 
+  it 'feedback source should be valid if it is from any about company page' do
+    expect(@feedback_source_mapper.is_feedback_source_valid('CHOOSE_A_CERTIFIED_COMPANY_ABOUT_SOME_IDP_PAGE')).to be true
+  end
+
   it 'should map to anywhere if feedback source is EXPIRED_ERROR_PAGE' do
     expect(@feedback_source_mapper.page_from_source('EXPIRED_ERROR_PAGE', :en)).to be_nil
   end
