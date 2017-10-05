@@ -538,7 +538,7 @@ cy:
     cancelled_registration:
       title: Cofrestriad Verify Wedi'i Ganslo
       heading: Mae dilysu eich hunaniaeth gyda %{idp_name} wedi cael ei ddiddymu
-      next: 'Beth ydych chi eisiau ei wneud nesaf?'
+      next: Beth ydych chi eisiau ei wneud nesaf?
       options:
         other_ways_to_verify: Darganfod ffyrdd eraill i %{service_name}
         verify_with_another_company: Dilysu gyda chwmni ardystiedig arall
