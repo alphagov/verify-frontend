@@ -45,6 +45,7 @@ class FeedbackSourceMapper
   end
 
   def is_feedback_source_valid(feedback_source)
+    return true if feedback_source.starts_with?('CHOOSE_A_CERTIFIED_COMPANY_ABOUT_')
     @page_to_source_mappings.has_key?(feedback_source)
   end
 
