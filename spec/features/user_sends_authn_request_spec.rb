@@ -77,7 +77,7 @@ describe 'user sends authn requests' do
                                'split_questions_v2' => 'split_questions_v2_control',
                                'select_documents_v2' => 'select_documents_v2_control',
                                'idp_warning' => 'idp_warning_control',
-                               'loa1_shortened_journey' => 'loa1_shortened_journey_control'
+                               'loa1_shortened_journey_v2' => 'loa1_shortened_journey_v2_control'
                              }.to_json
       cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape(ab_test_cookie_value))
       set_cookies!(cookie_hash)

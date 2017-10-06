@@ -17,7 +17,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will display sign in with IDP page when user chooses sign in' do
-    set_session_and_ab_session_cookies!('loa1_shortened_journey' => 'loa1_shortened_journey_control')
+    set_session_and_ab_session_cookies!('loa1_shortened_journey_v2' => 'loa1_shortened_journey_v2_control')
     visit '/start'
     choose('start_form_selection_false')
     click_button('next-button')

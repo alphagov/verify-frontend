@@ -1,4 +1,4 @@
-LOA1_SHORTENED_JOURNEY_EXPERIMENT = 'loa1_shortened_journey'.freeze
+LOA1_SHORTENED_JOURNEY_EXPERIMENT = 'loa1_shortened_journey_v2'.freeze
 
 loa1_shortened_control_piwik = SelectRoute.new(LOA1_SHORTENED_JOURNEY_EXPERIMENT, 'control', RoutesHelper::ReportToPiwik, 'LEVEL_1')
 loa1_shortened_variant_get_setup_piwik = SelectRoute.new(LOA1_SHORTENED_JOURNEY_EXPERIMENT, 'variant_get_setup', RoutesHelper::ReportToPiwik, 'LEVEL_1')
