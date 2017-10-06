@@ -16,13 +16,6 @@ module AbTest
       end
     end
 
-    def creates_alternatives(config, experiment_title)
-      alternatives = {}
-      list_of_alternatives = config.values.first['alternatives']
-      list_of_alternatives.each { |alternative| alternatives[name(experiment_title, alternative)] = alternative['percent'] }
-      alternatives
-    end
-
     def alternative_name(alternative_name)
       unless @alternatives[alternative_name]
         return @default
@@ -35,6 +28,13 @@ module AbTest
     end
 
   private
+
+    def creates_alternatives(config, experiment_title)
+      alternatives = {}
+      list_of_alternatives = config.values.first['alternatives']
+      list_of_alternatives.each { |alternative| alternatives[name(experiment_title, alternative)] = alternative['percent'] }
+      alternatives
+    end
 
     def name(experiment_title, alternative)
       "#{experiment_title}_#{alternative['name']}"

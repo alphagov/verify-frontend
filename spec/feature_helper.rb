@@ -65,8 +65,7 @@ module FeatureHelper
     if is_selenium_driver?
       all_cookies = Capybara.current_session.driver.browser.manage.all_cookies
       cookie = all_cookies.detect { |c| c[:name] == cookie_name }
-      raise "Could not find cookie with name #{cookie_name.inspect}, cookies were #{all_cookies.inspect}" unless cookie
-      cookie[:value]
+      cookie ? cookie[:value] : nil
     else
       Capybara.current_session.driver.browser.rack_mock_session.cookie_jar[cookie_name]
     end
