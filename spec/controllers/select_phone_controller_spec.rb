@@ -11,14 +11,11 @@ describe SelectPhoneController do
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_1')
     session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true } }
+    stub_piwik_request('action_name' => 'Phone Next')
   end
 
   context 'when form is valid' do
     subject { post :select_phone, params: { locale: 'en', select_phone_form: valid_phone_evidence } }
-
-    before :each do
-      stub_piwik_request('action_name' => 'Phone Next')
-    end
 
     it 'redirects to choose certified company page when eligible IDPs exist' do
       stub_api_idp_list([{ 'simpleId' => 'stub-idp-one',

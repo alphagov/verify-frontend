@@ -18,9 +18,9 @@ module IdpEligibility
       it 'will only return an idp once even if it matching profiles multiple times' do
         idp_one = double(:idp_one, simple_id: 'idp_one')
         idp_two = double(:idp_two, simple_id: 'idp_two')
-        profiles_hash = { 'idp_one' => [Profile.new(%i(driving_licence passport)), Profile.new(%i{mobile_phone})] }
+        profiles_hash = { 'idp_one' => [Profile.new(%i(driving_licence passport)), Profile.new(%i(driving_licence passport))] }
         enabled_idps = [idp_one, idp_two]
-        evidence = %i{passport driving_licence mobile_phone}
+        evidence = %i{passport driving_licence}
         filtered_idps = ProfileFilter.new(profiles_hash).filter_idps_for(evidence, enabled_idps)
         expect(filtered_idps).to eql [idp_one].to_set
       end

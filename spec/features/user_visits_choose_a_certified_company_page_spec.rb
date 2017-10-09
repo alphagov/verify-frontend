@@ -9,13 +9,14 @@ describe 'When the user visits the choose a certified company page' do
   end
 
   context 'user has two docs and a mobile' do
+    selected_answers = {
+        documents: { passport: true, driving_licence: true },
+        phone: { mobile_phone: true, landline: true }
+    }
     before :each do
       page.set_rack_session(
         transaction_simple_id: 'test-rp',
-        selected_answers: {
-          documents: { passport: true, driving_licence: true },
-          phone: { mobile_phone: true, landline: true }
-        },
+        selected_answers: selected_answers,
       )
     end
 
@@ -32,6 +33,24 @@ describe 'When the user visits the choose a certified company page' do
       expect(page).to have_content('Based on your answers, 3 companies can verify you now:')
       within('#matching-idps') do
         expect(page).to have_button('Choose IDCorp')
+      end
+    end
+
+    it 'does not show an IDP if the IPD profile has a subset of the user evidence, but not an exact match' do
+      additional_documents = selected_answers[:documents].clone
+      additional_documents[:ni_driving_licence] = true
+      page.set_rack_session(
+        transaction_simple_id: 'test-rp',
+        selected_answers: {
+          selected_answers: additional_documents,
+          phone: selected_answers[:phone]
+        }
+      )
+
+      visit '/choose-a-certified-company'
+
+      within('#matching-idps') do
+        expect(page).to_not have_button('Choose IDCorp')
       end
     end
 
@@ -111,5 +130,42 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     expect(page).to_not have_button('Choose Carol’s Secure ID')
+  end
+
+  context 'IDP profile is in a demo period' do
+    selected_answers = {
+      documents: { passport: true, driving_licence: true },
+      phone: { mobile_phone: true }
+    }
+
+    it 'shows the IDP if the RP is not in the demo blacklist' do
+      page.set_rack_session(
+        transaction_simple_id: 'test-rp',
+        selected_answers: selected_answers
+      )
+
+      visit '/choose-a-certified-company'
+
+      within('#matching-idps') do
+        expect(page).to have_button('Choose Demo IDP')
+      end
+    end
+
+    it 'shows the IDP as unlikely if the RP is in the demo blacklist' do
+      page.set_rack_session(
+        transaction_simple_id: 'test-rp-no-demo',
+        selected_answers: selected_answers
+      )
+
+      visit '/choose-a-certified-company'
+
+      within('#matching-idps') do
+        expect(page).to_not have_button('Choose Demo IDP')
+      end
+
+      within('#non-matching-idps') do
+        expect(page).to have_button('Choose Demo IDP')
+      end
+    end
   end
 end

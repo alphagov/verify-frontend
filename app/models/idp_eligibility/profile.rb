@@ -12,8 +12,8 @@ module IdpEligibility
       Profile.new(@rule & rule_mask)
     end
 
-    def applies_to?(evidence_set)
-      @rule.subset?(evidence_set.to_set)
+    def applies_to?(evidence)
+      @rule == evidence.to_set
     end
 
     def ==(other)

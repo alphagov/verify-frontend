@@ -1,0 +1,11 @@
+---
+en:
+  rps:
+    test-rp-no-demo:
+      name: register for an identity profile
+      rp_name: Test RP No Demo
+      analytics_description: TEST RP NO DEMO
+      other_ways_description: access TestRP No Demo
+      other_ways_text:  |
+                                   <p> Specific text to be provided by the RP. </p>
+      tailored_text: <p>This is tailored text for TEST RP NO DEMO</p>
