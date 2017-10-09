@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'rails_helper'
-require 'models/policy_proxy'
+require 'policy_proxy'
 
 describe PolicyProxy do
   let(:api_client) { double(:api_client) }
@@ -10,6 +10,7 @@ describe PolicyProxy do
   let(:policy_proxy) { PolicyProxy.new(api_client, originating_ip_store) }
   let(:ip_address) { '127.0.0.1' }
 
+  include PolicyEndpoints
   def endpoint(suffix_path)
     policy_endpoint(session_id, suffix_path)
   end
@@ -31,6 +32,28 @@ describe PolicyProxy do
                                 .with(endpoint(PolicyProxy::SELECT_IDP_SUFFIX), body, {})
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       policy_proxy.select_idp(session_id, 'an-entity-id', true)
+    end
+  end
+
+  describe '#matching_outcome' do
+    it 'should return a matching outcome' do
+      expect(api_client).to receive(:get)
+                                .with(endpoint(PolicyProxy::MATCHING_OUTCOME_SUFFIX))
+                                .and_return('responseProcessingStatus' => 'GOTO_HUB_LANDING_PAGE')
+
+      response = policy_proxy.matching_outcome(session_id)
+
+      expect(response).to eql MatchingOutcomeResponse::GOTO_HUB_LANDING_PAGE
+    end
+
+    it 'should raise an error when the API responds with an unknown value' do
+      expect(api_client).to receive(:get)
+                                .with(endpoint(PolicyProxy::MATCHING_OUTCOME_SUFFIX))
+                                .and_return('responseProcessingStatus' => 'BANANA')
+
+      expect {
+        policy_proxy.matching_outcome(session_id)
+      }.to raise_error Api::Response::ModelError, 'Outcome BANANA is not an allowed value for a matching outcome'
     end
   end
 end

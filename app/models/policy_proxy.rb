@@ -19,4 +19,9 @@ class PolicyProxy
 
     @api_client.post(select_idp_endpoint(session_id), body, {})
   end
+
+  def matching_outcome(session_id)
+    response = @api_client.get(matching_outcome_endpoint(session_id))
+    MatchingOutcomeResponse.validated_response(response).outcome
+  end
 end

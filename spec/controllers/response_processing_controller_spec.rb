@@ -27,7 +27,7 @@ describe ResponseProcessingController do
 
   it 'raises error exception' do
     set_session_and_cookies_with_loa('LEVEL_1')
-    allow(SESSION_PROXY).to receive(:matching_outcome).with(anything).and_return('SOMETHING')
+    allow(POLICY_PROXY).to receive(:matching_outcome).with(anything).and_return('SOMETHING')
     expect(subject).to receive(:something_went_wrong).with('Unknown matching response "SOMETHING"')
     get :index, params: { locale: 'en' }
   end

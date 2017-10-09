@@ -194,28 +194,6 @@ describe SessionProxy do
     end
   end
 
-  describe '#matching_outcome' do
-    it 'should return a matching outcome' do
-      expect(api_client).to receive(:get)
-        .with(endpoint(SessionProxy::MATCHING_OUTCOME_SUFFIX))
-        .and_return('outcome' => 'GOTO_HUB_LANDING_PAGE')
-
-      response = session_proxy.matching_outcome(session_id)
-
-      expect(response).to eql MatchingOutcomeResponse::GOTO_HUB_LANDING_PAGE
-    end
-
-    it 'should raise an error when the API responds with an unknown value' do
-      expect(api_client).to receive(:get)
-        .with(endpoint(SessionProxy::MATCHING_OUTCOME_SUFFIX))
-        .and_return('outcome' => 'BANANA')
-
-      expect {
-        session_proxy.matching_outcome(session_id)
-      }.to raise_error Api::Response::ModelError, 'Outcome BANANA is not an allowed value for a matching outcome'
-    end
-  end
-
   describe '#response_for_rp' do
     it 'should return an rp response' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)

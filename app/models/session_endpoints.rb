@@ -6,7 +6,6 @@ module SessionEndpoints
   IDP_AUTHN_REQUEST_SUFFIX = 'idp-authn-request'.freeze
   IDP_AUTHN_RESPONSE_SUFFIX = 'idp-authn-response'.freeze
   SESSION_STATE_PATH = "#{PATH}/state".freeze
-  MATCHING_OUTCOME_SUFFIX = 'matching-outcome'.freeze
   RESPONSE_FOR_RP_SUFFIX = 'response-for-rp/success'.freeze
   ERROR_RESPONSE_FOR_RP_SUFFIX = 'response-for-rp/error'.freeze
   CYCLE_THREE_SUFFIX = 'cycle-three'.freeze
@@ -46,10 +45,6 @@ module SessionEndpoints
 
   def idp_authn_response_endpoint(session_id)
     session_endpoint(session_id, IDP_AUTHN_RESPONSE_SUFFIX)
-  end
-
-  def matching_outcome_endpoint(session_id)
-    session_endpoint(session_id, MATCHING_OUTCOME_SUFFIX)
   end
 
   def response_for_rp_endpoint(session_id)

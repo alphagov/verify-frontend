@@ -116,7 +116,7 @@ module ApiTestHelper
   end
 
   def stub_matching_outcome(outcome = MatchingOutcomeResponse::WAIT)
-    stub_request(:get, ida_frontend_api_uri(matching_outcome_endpoint(default_session_id))).to_return(body: { 'outcome' => outcome }.to_json)
+    stub_request(:get, policy_api_uri(matching_outcome_endpoint(default_session_id))).to_return(body: { 'responseProcessingStatus' => outcome }.to_json)
   end
 
   def x_forwarded_for

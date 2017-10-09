@@ -23,6 +23,6 @@ class MatchingOutcomeResponse < Api::Response
   validates_inclusion_of :outcome, in: ALLOWED_OUTCOMES, message: '%{value} is not an allowed value for a matching outcome'
 
   def initialize(hash)
-    @outcome = hash['outcome']
+    @outcome = hash['responseProcessingStatus']
   end
 end

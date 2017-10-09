@@ -67,11 +67,6 @@ class SessionProxy
     IdpAuthnResponse.validated_response(response)
   end
 
-  def matching_outcome(session_id)
-    response = @api_client.get(matching_outcome_endpoint(session_id))
-    MatchingOutcomeResponse.validated_response(response).outcome
-  end
-
   def response_for_rp(session_id)
     response = @api_client.get(response_for_rp_endpoint(session_id), headers: x_forwarded_for)
     ResponseForRp.validated_response(response)
