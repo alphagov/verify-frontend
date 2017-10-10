@@ -36,7 +36,7 @@ class SignInVariantGetSetupController < ApplicationController
 private
 
   def sign_in(entity_id, display_name)
-    SESSION_PROXY.select_idp(session[:verify_session_id], entity_id)
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id)
     set_journey_hint(entity_id)
     FEDERATION_REPORTER.report_sign_in_idp_selection(request, display_name)
   end
