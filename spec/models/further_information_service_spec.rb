@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require 'further_information_service'
 require 'session_proxy'
 

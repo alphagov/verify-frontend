@@ -129,7 +129,7 @@ module ApiTestHelper
         'samlMessage' => 'a saml message',
         'relayState' => 'a relay state'
     }
-    stub_request(:get, ida_frontend_api_uri(response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
+    stub_request(:get, saml_proxy_api_uri(response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
   end
 
   def stub_error_response_for_rp
@@ -138,7 +138,7 @@ module ApiTestHelper
         'samlMessage' => 'a saml message',
         'relayState' => 'a relay state'
     }
-    stub_request(:get, ida_frontend_api_uri(error_response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
+    stub_request(:get, saml_proxy_api_uri(error_response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
   end
 
   def stub_cycle_three_attribute_request(name)
