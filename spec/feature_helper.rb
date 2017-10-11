@@ -145,7 +145,8 @@ module FeatureHelper
 private
 
   def default_session
-    { transaction_simple_id: 'test-rp',
+    {
+      transaction_simple_id: 'test-rp',
       start_time: start_time_in_millis,
       verify_session_id: default_session_id,
       requested_loa: 'LEVEL_2',

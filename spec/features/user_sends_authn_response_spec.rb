@@ -75,7 +75,8 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   it 'will redirect the user to /failed-sign-in when they failed sign in at the IDP' do
     api_request = stub_api_authn_response(session_id, 'idpResult' => 'OTHER', 'isRegistration' => false, 'loaAchieved' => nil)
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' })
+      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' }
+    )
 
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     visit("/test-saml?session-id=#{session_id}")

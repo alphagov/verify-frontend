@@ -6,7 +6,8 @@ RSpec.describe IdentityProviderRequest do
       'location' => 'some_location',
       'samlRequest' => 'some_request',
       'relayState' => 'some_state',
-      'registration' => 'some_reg')
+      'registration' => 'some_reg'
+    )
     request = IdentityProviderRequest.new(saml_message, 'simple-id', {})
     expect(request.location).to eql('some_location')
     expect(request.saml_request).to eql('some_request')

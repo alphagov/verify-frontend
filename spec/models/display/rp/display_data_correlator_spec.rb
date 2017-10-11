@@ -24,7 +24,7 @@ module Display
 
       let(:public_simple_id_loa) { ['LEVEL_1'] }
       let(:public_simple_id_2_loa) { ['LEVEL_1'] }
-      let(:public_simple_id_3_loa) { %w(LEVEL_1, LEVEL_2) }
+      let(:public_simple_id_3_loa) { %w(LEVEL_1 LEVEL_2) }
       let(:public_simple_id_4_loa) { ['LEVEL_2'] }
       let(:private_simple_id_loa) { ['LEVEL_2'] }
 
@@ -57,7 +57,8 @@ module Display
             DisplayDataCorrelator::Transaction.new(transaction_a_name, homepage, public_simple_id_loa),
             DisplayDataCorrelator::Transaction.new(transaction_3_name, homepage_3, public_simple_id_3_loa)
           ],
-          [])
+          []
+        )
         expect(actual_result).to eq expected_result
       end
 
@@ -70,7 +71,8 @@ module Display
         actual_result = display_data_correlator.correlate(transaction_data)
         expected_result = DisplayDataCorrelator::Transactions.new(
           [DisplayDataCorrelator::Transaction.new(transaction_a_name, homepage, public_simple_id_loa)],
-          [DisplayDataCorrelator::Transaction.new(transaction_b_name, nil, private_simple_id_loa)])
+          [DisplayDataCorrelator::Transaction.new(transaction_b_name, nil, private_simple_id_loa)]
+        )
         expect(actual_result).to eq expected_result
       end
 

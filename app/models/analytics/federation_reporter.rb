@@ -69,7 +69,8 @@ module Analytics
         @analytics_reporter.report_custom_variable(
           request,
           action,
-          rp_custom_var.merge(extra_custom_vars))
+          rp_custom_var.merge(extra_custom_vars)
+        )
       rescue Display::FederationTranslator::TranslationError => e
         Rails.logger.warn e
       end

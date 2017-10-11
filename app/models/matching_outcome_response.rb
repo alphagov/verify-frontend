@@ -20,7 +20,7 @@ class MatchingOutcomeResponse < Api::Response
   ].freeze
 
   attr_reader :outcome
-  validates_inclusion_of :outcome, in: ALLOWED_OUTCOMES, message: '%{value} is not an allowed value for a matching outcome'
+  validates_inclusion_of :outcome, in: ALLOWED_OUTCOMES, message: '%<value>s is not an allowed value for a matching outcome'
 
   def initialize(hash)
     @outcome = hash['responseProcessingStatus']

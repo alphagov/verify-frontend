@@ -48,7 +48,6 @@ module ApiTestHelper
     stub_request(:get, api_countries_endpoint(default_session_id)).to_return(body: countries.to_json, status: 200)
   end
 
-
   def stub_session_country_authn_request(originating_ip, country_location, registration)
     stub_request(:get, ida_frontend_api_uri(country_authn_request_endpoint(default_session_id)))
         .with(headers: { 'X_FORWARDED_FOR' => originating_ip })
@@ -222,11 +221,12 @@ private
   end
 
   def default_idps
-    [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_2) },
-     { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_2) },
-     { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_2) },
-     { 'simpleId' => 'stub-idp-demo', 'entityId' => 'demo-entity-id', 'levelsOfAssurance' => %w(LEVEL_2) },
-     { 'simpleId' => 'stub-idp-loa1', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
+    [
+      { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_2) },
+      { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_2) },
+      { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_2) },
+      { 'simpleId' => 'stub-idp-demo', 'entityId' => 'demo-entity-id', 'levelsOfAssurance' => %w(LEVEL_2) },
+      { 'simpleId' => 'stub-idp-loa1', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
     ]
   end
 end

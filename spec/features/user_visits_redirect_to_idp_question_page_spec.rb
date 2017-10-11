@@ -5,7 +5,8 @@ require 'i18n'
 
 RSpec.describe 'When the user visits the redirect to IDP question page' do
   let(:selected_answers) {
-    { 'phone' => { 'mobile_phone' => true, 'smart_phone' => true },
+    {
+      'phone' => { 'mobile_phone' => true, 'smart_phone' => true },
       'documents' => { 'passport' => true }
     }
   }
