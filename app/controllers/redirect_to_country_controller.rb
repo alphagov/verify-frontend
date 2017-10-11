@@ -7,6 +7,5 @@ class RedirectToCountryController < ApplicationController
     @request = CountryRequest.new(saml_message)
   end
 
-  def submit
-  end
+  def submit; end
 end

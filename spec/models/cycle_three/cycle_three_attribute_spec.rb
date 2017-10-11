@@ -11,11 +11,11 @@ module CycleThree
       end
     }
 
-    [
-      :name,
-      :field_name,
-      :help_to_find,
-      :example,
+    %i[
+      name
+      field_name
+      help_to_find
+      example
     ].each do |field|
       include_examples "delegates to display_data", field, CycleThreeAttribute
     end

@@ -12,8 +12,8 @@ module IdpEligibility
     let(:blacklisted_transaction_simple_id) { 'blacklisted-transaction' }
     let(:passport_profile) { Profile.new([:passport]) }
     let(:driving_licence_profile) { Profile.new([:driving_licence]) }
-    let(:passport_and_driving_licence_profile) { Profile.new([:driving_licence, :passport]) }
-    let(:demo_profile) { Profile.new([:mobile_phone, :driving_licence]) }
+    let(:passport_and_driving_licence_profile) { Profile.new(%i[driving_licence passport]) }
+    let(:demo_profile) { Profile.new(%i[mobile_phone driving_licence]) }
     let(:recommended_profile_filter) { ProfileFilter.new('idp' => [passport_profile, passport_and_driving_licence_profile]) }
     let(:non_recommended_profile_filter) { ProfileFilter.new('idp' => [driving_licence_profile], 'idp2' => [passport_profile, passport_and_driving_licence_profile]) }
     let(:demo_profile_filter) { ProfileFilter.new('idp' => [demo_profile]) }
@@ -37,13 +37,13 @@ module IdpEligibility
 
       it 'should return true when profile is in IDP demo profiles' do
         enabled_idps = singleton_idp
-        user_docs = [:mobile_phone, :driving_licence]
+        user_docs = %i[mobile_phone driving_licence]
         expect(grouper.recommended?(idp_one, user_docs, enabled_idps, transaction_simple_id)).to eql(true)
       end
 
       it 'should return false when profile is in IdP demo profiles but the transaction does not allow demos' do
         enabled_idps = singleton_idp
-        user_docs = [:mobile_phone, :driving_licence]
+        user_docs = %i[mobile_phone driving_licence]
         expect(grouper.recommended?(idp_one, user_docs, enabled_idps, blacklisted_transaction_simple_id)).to eql(false)
       end
     end
@@ -68,7 +68,7 @@ module IdpEligibility
 
       it 'should return recommended and non-recommended idps' do
         enabled_idps = multiple_idps
-        user_docs = [:passport, :driving_licence]
+        user_docs = %i[passport driving_licence]
         grouped_idps = grouper.group_by_recommendation(user_docs, enabled_idps, transaction_simple_id)
         expect(grouped_idps.recommended).to eql([idp_one].to_set)
         expect(grouped_idps.non_recommended).to eql([idp_two].to_set)
@@ -84,7 +84,7 @@ module IdpEligibility
 
       it 'should add demo profiles to recommended' do
         enabled_idps = singleton_idp
-        user_docs = [:driving_licence, :mobile_phone]
+        user_docs = %i[driving_licence mobile_phone]
         grouped_idps = grouper.group_by_recommendation(user_docs, enabled_idps, transaction_simple_id)
         expect(grouped_idps.recommended).to eql([idp_one].to_set)
         expect(grouped_idps.non_recommended).to be_empty
@@ -92,7 +92,7 @@ module IdpEligibility
 
       it 'should not add demo profiles to recommended when rp is blacklisted' do
         enabled_idps = singleton_idp
-        user_docs = [:driving_licence, :mobile_phone]
+        user_docs = %i[driving_licence mobile_phone]
         grouped_idps = grouper.group_by_recommendation(user_docs, enabled_idps, blacklisted_transaction_simple_id)
         expect(grouped_idps.non_recommended).to eql([idp_one].to_set)
         expect(grouped_idps.recommended).to be_empty

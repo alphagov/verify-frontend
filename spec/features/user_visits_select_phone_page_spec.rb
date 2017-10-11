@@ -62,7 +62,8 @@ RSpec.describe 'When the user visits the select phone page' do
       expect(page).to have_current_path(no_mobile_phone_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'phone' => { 'mobile_phone' => false, 'landline' => false },
-        'documents' => { 'passport' => true, 'driving_licence' => true })
+        'documents' => { 'passport' => true, 'driving_licence' => true }
+      )
     end
 
     it 'shows an error message when no selections are made' do
@@ -87,7 +88,8 @@ RSpec.describe 'When the user visits the select phone page' do
       expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'phone' => { 'mobile_phone' => true, 'smart_phone' => true },
-        'documents' => { 'passport' => true, 'driving_licence' => true })
+        'documents' => { 'passport' => true, 'driving_licence' => true }
+      )
     end
 
     it 'should display a validation message when user does not answer mobile phone question' do

@@ -4,7 +4,7 @@ require 'models/display/federation_translator'
 module Display
   describe FederationTranslator do
     before(:all) {
-      I18n.available_locales = [:en, :cy]
+      I18n.available_locales = %i[en cy]
       @current_locale = I18n.locale
     }
     after(:all) { I18n.locale = @current_locale }

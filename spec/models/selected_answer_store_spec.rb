@@ -37,7 +37,7 @@ RSpec.describe SelectedAnswerStore do
     store = SelectedAnswerStore.new(session)
     store.store_selected_answers('documents', document_answers)
     store.store_selected_answers('phone', phone_answers)
-    expect(store.selected_evidence).to eql [:passport, :mobile_phone]
+    expect(store.selected_evidence).to eql %i[passport mobile_phone]
   end
 
 

@@ -120,8 +120,7 @@ private
   end
 
   class MockExperiment
-    def alternative_name(something)
-    end
+    def alternative_name(something); end
   end
 
   def create_ab_test_cookie(experiment_name, alternative_name)

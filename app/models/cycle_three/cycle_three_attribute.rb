@@ -10,7 +10,6 @@ module CycleThree
       @cycle_three_data = hash[:cycle_three_data]
     end
 
-
     def self.model_name
       ActiveModel::Name.new(self, nil, 'cycle_three_attribute')
     end

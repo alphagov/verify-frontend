@@ -47,7 +47,7 @@ private
   end
 
   def only_one_uk_doc_selected
-    ([:passport, :driving_licence] & selected_evidence).size == 1
+    (%i[passport driving_licence] & selected_evidence).size == 1
   end
 
   def interstitial_question_flag_enabled_for(decorated_idp)

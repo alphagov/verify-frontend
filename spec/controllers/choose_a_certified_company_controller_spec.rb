@@ -5,18 +5,19 @@ require 'piwik_test_helper'
 
 describe ChooseACertifiedCompanyController do
   before :each do
-    stub_api_idp_list([
-            {
-                'simpleId' => 'stub-idp-loa1',
-                'entityId' => 'http://idcorp-loa1.com',
-                'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
-            },
-            {
-                'simpleId' => 'stub-idp-one-doc-question',
-                'entityId' => 'http://idcorp.com',
-                'levelsOfAssurance' => ['LEVEL_2']
-            }
-        ]
+    stub_api_idp_list(
+      [
+        {
+          'simpleId' => 'stub-idp-loa1',
+          'entityId' => 'http://idcorp-loa1.com',
+          'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
+        },
+        {
+          'simpleId' => 'stub-idp-one-doc-question',
+          'entityId' => 'http://idcorp.com',
+          'levelsOfAssurance' => ['LEVEL_2']
+        }
+      ]
     )
   end
 

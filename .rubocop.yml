@@ -1,0 +1,6 @@
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - 'config/initializers/**/*.rb'
