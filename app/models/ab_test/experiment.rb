@@ -9,9 +9,9 @@ module AbTest
     end
 
     def get_ab_test_name(random)
-      random = (random * @total).round
+      random = random * @total
       @alternatives.each do |name, weight|
-        return name.to_s if random < weight
+        return name.to_s if random <= weight
         random -= weight
       end
     end

@@ -22,9 +22,9 @@ module AbTest
         expect(Experiment.new(alternatives).get_ab_test_name(random_number)).to eql('logos_yes')
       end
 
-      it 'will return logos_maybe given an input of 0.99' do
+      it 'will return logos_maybe given an input of 1.0' do
         alternatives = { "logos" => { "alternatives" => [{ "name" => "yes", "percent" => 33 }, { "name" => "no", "percent" => 33 }, { "name" => "maybe", "percent" => 33 }] } }
-        random_number = 0.99
+        random_number = 1.0
         expect(Experiment.new(alternatives).get_ab_test_name(random_number)).to eql('logos_maybe')
       end
 
