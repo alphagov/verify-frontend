@@ -3,7 +3,10 @@ class StartController < ApplicationController
 
   def index
     @form = StartForm.new({})
-    FEDERATION_REPORTER.report_start_page(current_transaction, request)
+
+    # When tearing down the loa1_shortened_journey_v2, remove the unless condition
+    FEDERATION_REPORTER.report_start_page(current_transaction, request) unless is_loa1?
+
     render :start
   end
 
