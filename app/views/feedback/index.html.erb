@@ -10,7 +10,7 @@
     <%= t 'hub.feedback.introduction_html' %>
 
     <% if @has_email_sending_error %>
-      <div class="error-summary" aria-labelledby="error-summary-heading" role="group" tabindex="-1">
+      <div class="error-summary" aria-labelledby="error-summary-heading" role="alert" tabindex="-1">
         <h2 class="heading-medium error-summary-heading" id="error-summary-heading"><%= t 'hub.feedback.errors.heading' %></h2>
         <ul class="error-summary-list">
           <li><%= t 'hub.feedback.errors.send_failure' %></li>
