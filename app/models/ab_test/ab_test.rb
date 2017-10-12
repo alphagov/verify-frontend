@@ -7,16 +7,6 @@ module AbTest
     ab_test ? ab_test.alternative_name(alternative_name) : default
   end
 
-  def self.report(experiment_name, reported_alternative, transaction_id, request)
-    ab_test = ::AB_TESTS[experiment_name]
-    if ab_test && !current_transaction_is_excluded_from_ab_test(transaction_id) && !ab_test.concluded?
-      alternative_name = AbTest.alternative_name_for_experiment(experiment_name, reported_alternative)
-      if reported_alternative_matches_an_allowed_alternative(alternative_name, reported_alternative)
-        FEDERATION_REPORTER.report_ab_test(transaction_id, request, alternative_name)
-      end
-    end
-  end
-
   def self.reported_alternative_matches_an_allowed_alternative(alternative_name, reported_alternative)
     alternative_name && alternative_name == reported_alternative
   end
@@ -57,5 +47,18 @@ module AbTest
   def self.update_ab_test_cookie(cookies_hash, cookies)
     new_selections = experiment_selections.merge(cookies_hash)
     set_ab_test_cookie(new_selections, cookies)
+  end
+
+  def self.report_ab_test_details(request, experiment_name)
+    reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[experiment_name]
+    transaction_id = request.session[:transaction_simple_id]
+
+    ab_test = ::AB_TESTS[experiment_name]
+    if ab_test && !current_transaction_is_excluded_from_ab_test(transaction_id) && !ab_test.concluded?
+      alternative_name = AbTest.alternative_name_for_experiment(experiment_name, reported_alternative)
+      if reported_alternative_matches_an_allowed_alternative(alternative_name, reported_alternative)
+        FEDERATION_REPORTER.report_ab_test(transaction_id, request, alternative_name)
+      end
+    end
   end
 end

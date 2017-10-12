@@ -1,16 +1,16 @@
 require 'cookies/cookies'
 
 class SelectRoute
-  def initialize(experiment_name, route, ab_reporter = nil, experiment_loa = nil)
+  def initialize(experiment_name, route, is_start_of_test = false, experiment_loa = nil)
     @experiment_name = experiment_name
     @experiment_route = "#{@experiment_name}_#{route}"
     @experiment_loa = experiment_loa
-    @ab_reporter = ab_reporter
+    @is_start_of_test = is_start_of_test
   end
 
   def matches?(request)
-    if request_matches_experiment?(request)
-      report_ab_test_details(request) if loa_matches_experiment?(request) && !@ab_reporter.nil?
+    if cookie_matches_experiment?(request)
+      AbTest.report_ab_test_details(request, @experiment_name) if @is_start_of_test && loa_matches_experiment?(request)
       true
     else
       false
@@ -19,7 +19,7 @@ class SelectRoute
 
 private
 
-  def request_matches_experiment?(request)
+  def cookie_matches_experiment?(request)
     request_experiment_route = extract_experiment_route_from_cookie(request.cookies[CookieNames::AB_TEST])
 
     @experiment_route == request_experiment_route
@@ -33,11 +33,5 @@ private
     experiment_name = Cookies.parse_json(ab_test_cookie)[@experiment_name]
 
     AB_TESTS[@experiment_name] ? AB_TESTS[@experiment_name].alternative_name(experiment_name) : 'default'
-  end
-
-  def report_ab_test_details(request)
-    reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[@experiment_name]
-    transaction_id = request.session[:transaction_simple_id]
-    @ab_reporter.call(@experiment_name, reported_alternative, transaction_id, request)
   end
 end

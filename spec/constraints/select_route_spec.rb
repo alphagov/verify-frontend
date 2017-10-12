@@ -15,7 +15,6 @@ describe SelectRoute do
       EXP_NAME => experiment_stub
     }
     stub_const('AB_TESTS', ab_test_stub)
-    # allow(AbTest).to receive(:report)
   end
 
   context 'experiment tests' do
@@ -51,16 +50,8 @@ describe SelectRoute do
   end
 
   context 'reporting for any LOA' do
-    result_string = nil
-
     before(:each) do
-      result_string = 'not used'
-
-      ab_reporter = lambda do |experiment_name, reported_alternative, transaction_id, request|
-        result_string = "#{experiment_name},#{reported_alternative},#{transaction_id},#{request.to_str}"
-      end
-
-      select_route = SelectRoute.new(EXP_NAME, 'variant', ab_reporter)
+      select_route = SelectRoute.new(EXP_NAME, 'variant', true)
     end
 
     it 'executes ab_reporter when experiment matches' do
@@ -69,10 +60,9 @@ describe SelectRoute do
 
       cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
       request = RequestStub.new(session, cookies)
+      expect(AbTest).to receive(:report_ab_test_details).with(request, EXP_NAME)
 
       select_route.matches?(request)
-
-      expect(result_string).to eq("#{EXP_NAME},#{ALTERNATIVE_NAME},test-rp,request example")
     end
 
     it 'does not execute ab_reporter when experiment does not match' do
@@ -82,43 +72,35 @@ describe SelectRoute do
       request = RequestStub.new(session, cookies)
 
       select_route.matches?(request)
-      expect(result_string).to eq('not used')
+      expect(AbTest).not_to receive(:report_ab_test_details)
     end
   end
 
   context 'reporting for a specific LOA' do
-    result_string = nil
     cookies = nil
 
     before(:each) do
       expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_NAME).and_return(ALTERNATIVE_NAME)
 
-      result_string = 'not used'
       cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
 
-      ab_reporter = lambda do |experiment_name, reported_alternative, transaction_id, request|
-        result_string = "#{experiment_name},#{reported_alternative},#{transaction_id},#{request.to_str}"
-      end
-
-      select_route = SelectRoute.new(EXP_NAME, 'variant', ab_reporter, 'LEVEL_1')
+      select_route = SelectRoute.new(EXP_NAME, 'variant', true, 'LEVEL_1')
     end
 
     it 'executes ab_reporter when LOA matches' do
       session = { transaction_simple_id: 'test-rp', requested_loa: 'LEVEL_1' }
       request = RequestStub.new(session, cookies)
+      expect(AbTest).to receive(:report_ab_test_details).with(request, EXP_NAME)
 
       select_route.matches?(request)
-
-      expect(result_string).to eq("#{EXP_NAME},#{ALTERNATIVE_NAME},test-rp,request example")
     end
 
     it 'does not execute ab_reporter when experiment does not match' do
+      expect(AbTest).not_to receive(:report_ab_test_details)
       session = { transaction_simple_id: 'test-rp', requested_loa: 'LEVEL_2' }
       request = RequestStub.new(session, cookies)
 
       select_route.matches?(request)
-
-      expect(result_string).to eq('not used')
     end
   end
 
