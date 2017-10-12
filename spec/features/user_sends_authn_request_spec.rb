@@ -22,7 +22,7 @@ describe 'user sends authn requests' do
 
       cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
       expected_cookies = CookieNames.session_cookies + [
-        CookieNames::VERIFY_LOCALE, CookieNames::AB_TEST
+        CookieNames::VERIFY_LOCALE, CookieNames::AB_TEST, CookieNames::PIWIK_VISITOR_ID
       ]
 
       expect(cookies.to_hash.keys.to_set).to eql expected_cookies.to_set

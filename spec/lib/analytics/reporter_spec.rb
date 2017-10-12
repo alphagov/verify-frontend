@@ -39,7 +39,7 @@ module Analytics
           '_cvar' => '{"1":["SOME_VAR","a-value"]}',
           'urlref' => 'http://www.example.com',
           'ref' => 'http://www.example.com',
-          '_id' => 'VISITOR_ID',
+          'uid' => 'VISITOR_ID',
         ),
         piwik_headers
       )

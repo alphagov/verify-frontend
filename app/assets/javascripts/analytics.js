@@ -23,17 +23,23 @@
     enTitle = $('meta[name="verify|title"]').attr("content");
 
     piwikAnalyticsQueue = [
-      ['setDocumentTitle', enTitle ],
-      ['trackPageView'],
-      ['enableLinkTracking'],
-      [setPiwikVisitorIdCookie],
-      ['setTrackerUrl', trackerUrl],
-      ['setSiteId', siteId]
+        ['setDocumentTitle', enTitle ],
+        ['trackPageView'],
+        ['enableLinkTracking'],
+        ['setTrackerUrl', trackerUrl],
+        ['setSiteId', siteId]
     ];
 
+    var piwikVisitorId = GOVUK.getCookie('PIWIK_VISITOR_ID');
+    if (piwikVisitorId) {
+        piwikAnalyticsQueue.push(['setUserId', piwikVisitorId])
+    } else {
+        piwikAnalyticsQueue.push([setPiwikVisitorIdCookie])
+    }
+
     if (customUrl) {
-      // customUrl needs to go at the beginning of the piwik array
-      piwikAnalyticsQueue.unshift(['setCustomUrl', customUrl]);
+        // customUrl needs to go at the beginning of the piwik array
+        piwikAnalyticsQueue.unshift(['setCustomUrl', customUrl]);
     }
 
     global._paq = piwikAnalyticsQueue;

@@ -37,7 +37,7 @@ module Analytics
       }.merge(additional_params)
 
       cookies = request.cookies
-      piwik_params['_id'] = cookies[CookieNames::PIWIK_VISITOR_ID] if cookies.has_key? CookieNames::PIWIK_VISITOR_ID
+      piwik_params['uid'] = cookies[CookieNames::PIWIK_VISITOR_ID] if cookies.has_key? CookieNames::PIWIK_VISITOR_ID
       referer = request.referer
       unless referer.nil?
         piwik_params['urlref'] = referer

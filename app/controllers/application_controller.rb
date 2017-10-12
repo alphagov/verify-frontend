@@ -3,6 +3,7 @@ require 'cookies/cookies'
 
 class ApplicationController < ActionController::Base
   before_action :validate_session
+  before_action :set_cookies
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -65,6 +66,11 @@ class ApplicationController < ActionController::Base
       logger.info(validation.message)
       render_error(validation.type, validation.status)
     end
+  end
+
+  def set_cookies
+    AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
+    cookies[CookieNames::PIWIK_VISITOR_ID] = SecureRandom.hex(8) unless cookies.has_key? CookieNames::PIWIK_VISITOR_ID
   end
 
   def ensure_session_eidas_supported

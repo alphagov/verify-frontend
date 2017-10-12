@@ -13,8 +13,6 @@ class AuthnRequestController < SamlController
     set_requested_loa(response.levels_of_assurance)
     set_session_start_time!
 
-    AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
-
     if params['journey_hint'].present?
       redirect_to confirm_your_identity_path
     elsif params['eidas_journey'].present?
