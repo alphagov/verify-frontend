@@ -438,7 +438,7 @@ cy:
       start_again: Dechrau eto
     failed_uplift:
       title: Methwyd yr ymgodiad
-      heading: Roedd %{display_name} yn methu ychwanegu mwy o ddiogelwch i'ch cyfrif hunaniaeth
+      heading: "%{display_name} was not able to validate the evidence you provided"
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
@@ -447,8 +447,7 @@ cy:
           <li>nid oes gan y cwmni ardystiedig fynediad i ddigon o wybodaeth amdanoch</li>
          </ul>
       start_again: Dod o hyd i gwmni arall i’ch gwirio
-      still_use_heading: Gallwch barhau i ddefnyddiio eich cyfrif hunaniaeth %{idp_name}
-      still_use_text: "Nid yw gwasanaeth hwn y llywodraeth angen diogelwch ychwanegol:"
+      still_use_heading: "You can still access these government services with your %{idp_name} identity account"
       try_another_text: Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth.
       try_another_summary: Ceisiwch wirio gyda chwmni ardystiedig arall
       what_next_heading: Beth i’w wneud nesaf

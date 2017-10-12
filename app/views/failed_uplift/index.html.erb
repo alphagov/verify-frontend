@@ -31,7 +31,6 @@
     </details>
 
     <h2 class="heading-medium"><%= t 'hub.failed_uplift.still_use_heading', idp_name: @idp.display_name %></h2>
-    <p><%= t 'hub.failed_uplift.still_use_text' %></p>
     <ul class="list-bullet list">
       <% loa1_transactions_list.each do |transaction| -%>
           <li><%= link_to transaction.name, transaction.homepage %></li>

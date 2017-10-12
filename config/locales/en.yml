@@ -430,7 +430,7 @@ en:
       start_again: "Start again"
     failed_uplift:
           title: Failed to uplift
-          heading: "%{display_name} was unable to add the extra security to your identity account"
+          heading: "%{display_name} was not able to validate the evidence you provided"
           reasons_html: |
             <p>There are a few reasons why this might happen, including:</p>
             <ul class="list list-bullet">
@@ -439,8 +439,7 @@ en:
               <li>the certified company doesn't have access to enough information about you</li>
              </ul>
           start_again: Find another company to verify you
-          still_use_heading: "You can still use your %{idp_name} identity account"
-          still_use_text: "These government services don't require the added extra security:"
+          still_use_heading: "You can still access these government services with your %{idp_name} identity account"
           try_another_text: "Other companies use different methods from %{idp_name} and may therefore stand a better chance of verifying your identity."
           try_another_summary: "Try verifying with another certified company"
           what_next_heading: "What to do next"
