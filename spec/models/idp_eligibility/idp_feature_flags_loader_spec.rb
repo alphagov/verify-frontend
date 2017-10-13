@@ -24,7 +24,7 @@ module IdpEligibility
       path = 'good_profiles_path'
       expect(file_loader).to receive(:load).with(path).and_return(good_profiles)
 
-      loader.load(path, [:flag_a, :flag_b])
+      loader.load(path, %i[flag_a flag_b])
     }
 
     it 'should return the feature flag checker from configuration' do

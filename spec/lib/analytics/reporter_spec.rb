@@ -61,7 +61,8 @@ module Analytics
         'Accept-Language' => 'en-US,en;q=0.5',
         'User-Agent' => 'my user agent',
       )
-      expect(client).to receive(:report).with(piwik_hash(site_id),
+      expect(client).to receive(:report).with(
+        piwik_hash(site_id),
         'Accept-Language' => 'en-US,en;q=0.5',
         'X-Forwarded-For' => nil,
         'User-Agent' => 'my user agent',

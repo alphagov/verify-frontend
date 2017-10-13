@@ -30,7 +30,8 @@ class RedirectToIdpWarningController < ApplicationController
       idp_request = IdentityProviderRequest.new(
         outbound_saml_message,
         selected_identity_provider.simple_id,
-        selected_answer_store.selected_answers)
+        selected_answer_store.selected_answers
+      )
       render json: idp_request.to_json(methods: :hints)
     else
       render status: :bad_request

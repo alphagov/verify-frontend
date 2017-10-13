@@ -46,5 +46,5 @@ Rails.application.config.after_initialize do
 
   # Feature flags
   IDP_FEATURE_FLAGS_CHECKER = IdpEligibility::IdpFeatureFlagsLoader.new(YamlLoader.new)
-                                 .load(CONFIG.rules_directory, [:send_hints, :send_language_hint, :show_interstitial_question, :show_interstitial_question_loa1])
+                                 .load(CONFIG.rules_directory, %i[send_hints send_language_hint show_interstitial_question show_interstitial_question_loa1])
 end

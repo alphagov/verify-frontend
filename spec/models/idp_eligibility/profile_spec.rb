@@ -4,28 +4,28 @@ module IdpEligibility
   describe Profile do
     describe '#&' do
       it 'should mask the profile given an array of attributes' do
-        masked_profile = Profile.new([:passport, :mobile_phone]) & [:passport]
+        masked_profile = Profile.new(%i[passport mobile_phone]) & [:passport]
         expect(masked_profile).to eq(Profile.new([:passport]))
       end
       it 'should return an empty profile if mask only contains attributes not in the profile' do
-        masked_profile = Profile.new([:passport, :mobile_phone]) & [:driving_licence]
+        masked_profile = Profile.new(%i[passport mobile_phone]) & [:driving_licence]
         expect(masked_profile).to eq(Profile.new([]))
       end
     end
     describe '#applies_to' do
       it 'should return true if the evidence is a permutation match of the profile' do
-        profile = Profile.new([:passport, :mobile_phone])
-        expect(profile.applies_to?([:mobile_phone, :passport])).to eq true
+        profile = Profile.new(%i[passport mobile_phone])
+        expect(profile.applies_to?(%i[mobile_phone passport])).to eq true
       end
 
       it 'should return false if the evidence contains more information than the profile' do
-        profile = Profile.new([:passport, :mobile_phone])
-        expect(profile.applies_to?([:passport, :mobile_phone, :driving_licence])).to eq false
+        profile = Profile.new(%i[passport mobile_phone])
+        expect(profile.applies_to?(%i[passport mobile_phone driving_licence])).to eq false
       end
 
       it 'should return false if the profile is not a subset of the supplied evidence' do
-        profile = Profile.new([:passport, :mobile_phone])
-        expect(profile.applies_to?([:passport, :driving_licence])).to eq false
+        profile = Profile.new(%i[passport mobile_phone])
+        expect(profile.applies_to?(%i[passport driving_licence])).to eq false
       end
 
       it 'should return false if the profile is empty' do

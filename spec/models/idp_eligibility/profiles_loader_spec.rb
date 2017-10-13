@@ -92,7 +92,8 @@ module IdpEligibility
           {
             'simpleIds' => ['example-idp'],
             'blah' => [%w(passport driving_licence)]
-          }]
+          }
+        ]
         expect(file_loader).to receive(:load).with(path).and_return(bad_profiles)
 
         expect {

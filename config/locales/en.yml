@@ -47,6 +47,8 @@ en:
     further_information_null_attribute: futher-information/null-attribute
     no_idps_available: no-idps-available
     cancelled_registration: cancelled-registration
+  title:
+    error: Error
   navigation:
     next: Next
     start_now: Start now

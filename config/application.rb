@@ -1,4 +1,5 @@
 # coding: utf-8
+
 require File.expand_path('../boot', __FILE__)
 
 require "rails"
@@ -52,7 +53,7 @@ module VerifyFrontend
     }
     RouteTranslator.config do |config|
       config.hide_locale = true
-      config.available_locales = [:en, :cy]
+      config.available_locales = %i[en cy]
     end
 
     # by default rails wraps invalid inputs with <div class="field_with_errors">

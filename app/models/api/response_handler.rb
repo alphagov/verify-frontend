@@ -30,7 +30,6 @@ module Api
       "Received #{status} with error message: [#{errors}], type: '#{type}' and id: '#{id}'"
     end
 
-
     def parse_json(body, status)
       return nil if body.empty?
       begin
