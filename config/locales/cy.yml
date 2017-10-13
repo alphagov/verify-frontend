@@ -46,6 +46,8 @@ cy:
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
     no_idps_available: dim-idps-ar-gael
     cancelled_registration: cancelled-registration-welsh
+  title:
+    error: Error
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
