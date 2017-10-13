@@ -5,7 +5,8 @@
   color: $red;
   font-weight: bold;
 
-  .form-group-error {
+  .form-group-error,
+  .form-group-error:focus {
     display: block;
     padding: 15px;
     margin: 15px 0;
