@@ -30,7 +30,7 @@ module Analytics
     end
 
     it 'should report all parameters to piwik' do
-      expect(request).to receive(:cookies).and_return(CookieNames::PIWIK_VISITOR_ID => 'VISITOR_ID')
+      expect(request).to receive(:cookies).and_return(CookieNames::PIWIK_USER_ID => 'VISITOR_ID')
       allow(request).to receive(:referer).and_return('http://www.example.com')
       expect(request).to receive(:headers).and_return(request_headers)
       expect(client).to receive(:report).with(

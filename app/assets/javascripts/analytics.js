@@ -3,9 +3,17 @@
     var GOVUK = global.GOVUK || {};
     var $ = global.jQuery;
 
-    function setPiwikVisitorIdCookie () {
-        var visitor_id = this.getVisitorId();
-        GOVUK.setCookie('PIWIK_VISITOR_ID', visitor_id);
+    function generateEightHexadecimalDigits() {
+        return Math.random().toString(16).substr(2, 8);
+    }
+
+    function getPiwikVisitorIdCookie() {
+        var userId = GOVUK.getCookie('PIWIK_USER_ID');
+        if (!userId) {
+            userId = generateEightHexadecimalDigits() + generateEightHexadecimalDigits();
+            GOVUK.setCookie('PIWIK_USER_ID', userId);
+        }
+        return userId;
     }
 
     var trackerUrl = $('#piwik-url').text(),
@@ -23,19 +31,13 @@
     enTitle = $('meta[name="verify|title"]').attr("content");
 
     piwikAnalyticsQueue = [
+        ['setUserId', getPiwikVisitorIdCookie()],
         ['setDocumentTitle', enTitle ],
         ['trackPageView'],
         ['enableLinkTracking'],
         ['setTrackerUrl', trackerUrl],
         ['setSiteId', siteId]
     ];
-
-    var piwikVisitorId = GOVUK.getCookie('PIWIK_VISITOR_ID');
-    if (piwikVisitorId) {
-        piwikAnalyticsQueue.push(['setUserId', piwikVisitorId])
-    } else {
-        piwikAnalyticsQueue.push([setPiwikVisitorIdCookie])
-    }
 
     if (customUrl) {
         // customUrl needs to go at the beginning of the piwik array

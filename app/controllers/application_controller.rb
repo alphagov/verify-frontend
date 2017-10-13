@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_visitor_cookie
-    cookies[CookieNames::PIWIK_VISITOR_ID] = SecureRandom.hex(8) unless cookies.has_key? CookieNames::PIWIK_VISITOR_ID
+    cookies[CookieNames::PIWIK_USER_ID] = SecureRandom.hex(8) unless cookies.has_key? CookieNames::PIWIK_USER_ID
   end
 
   def ensure_session_eidas_supported

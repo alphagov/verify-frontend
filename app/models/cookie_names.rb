@@ -3,7 +3,7 @@ module CookieNames
   SESSION_ID_COOKIE_NAME = 'x_govuk_session_cookie'.freeze
   VERIFY_FRONT_JOURNEY_HINT = 'verify-front-journey-hint'.freeze
   VERIFY_LOCALE = 'x_verify_locale'.freeze
-  PIWIK_VISITOR_ID = 'PIWIK_VISITOR_ID'.freeze
+  PIWIK_USER_ID = 'PIWIK_USER_ID'.freeze
   NO_CURRENT_SESSION_VALUE = 'no-current-session'.freeze
   AB_TEST = 'ab_test'.freeze
 
