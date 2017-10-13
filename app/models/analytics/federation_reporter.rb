@@ -23,7 +23,9 @@ module Analytics
         current_transaction = RP_DISPLAY_REPOSITORY.fetch(transaction_id)
         ab_test_custom_var = Analytics::CustomVariable.build(:ab_test, alternative_name)
 
-        report_action(current_transaction, request, AB_TEST_ACTION_NAME % alternative_name,
+        report_action(current_transaction,
+                      request,
+                      AB_TEST_ACTION_NAME % alternative_name,
                       ab_test_custom_var)
       end
     end
@@ -34,12 +36,6 @@ module Analytics
         request,
         "#{idp_name} was chosen for registration #{recommended} with evidence #{list_of_evidence}",
         Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(','))
-      )
-    end
-
-    def report_loa_requested(request, loa_requested)
-      @analytics_reporter.report_custom_variable(
-        request, "LOA Requested - #{loa_requested}", Analytics::CustomVariable.build(:loa_requested, loa_requested)
       )
     end
 
@@ -65,11 +61,12 @@ module Analytics
 
     def report_action(current_transaction, request, action, extra_custom_vars = {})
       rp_custom_var = Analytics::CustomVariable.build(:rp, current_transaction.analytics_description)
+      loa_custom_var = Analytics::CustomVariable.build(:loa_requested, request.session[:requested_loa])
       begin
         @analytics_reporter.report_custom_variable(
           request,
           action,
-          rp_custom_var.merge(extra_custom_vars))
+          rp_custom_var.merge(loa_custom_var).merge(extra_custom_vars))
       rescue Display::FederationTranslator::TranslationError => e
         Rails.logger.warn e
       end

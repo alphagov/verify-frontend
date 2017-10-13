@@ -7,15 +7,13 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     stub_session_select_idp_request(encrypted_entity_id)
     stub_session_idp_authn_request(originating_ip, location, false)
     @user_action_piwik_request = stub_piwik_request(
-      '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"]}",
+      '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"],\"2\":[\"LOA_REQUESTED\",\"LEVEL_2\"]}",
       'action_name' => 'The No option was selected on the introduction page',
       )
-    @loa_requested_piwik_request = stub_piwik_report_loa_requested('LEVEL_2')
   end
 
   def then_custom_variables_are_reported_to_piwik
     expect(@user_action_piwik_request).to have_been_made.once
-    expect(@loa_requested_piwik_request).to have_been_made.once
   end
 
   def given_im_on_the_sign_in_page(locale = 'en')

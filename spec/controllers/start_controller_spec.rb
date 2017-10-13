@@ -5,7 +5,7 @@ require 'piwik_test_helper'
 
 describe StartController do
   before(:each) do
-    stub_piwik_request_with_rp('action_name' => 'The user has reached the start page')
+    stub_piwik_request_with_rp_and_loa('action_name' => 'The user has reached the start page')
     set_session_and_cookies_with_loa('LEVEL_2')
   end
 

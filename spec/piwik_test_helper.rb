@@ -40,25 +40,9 @@ def stub_piwik_cycle_three_cancel
   stub_piwik_request(piwik_request)
 end
 
-def stub_piwik_report_loa_requested(loa_requested)
-  piwik_request = {
-    '_cvar' => "{\"2\":[\"LOA_REQUESTED\",\"#{loa_requested}\"]}",
-    'action_name' => "LOA Requested - #{loa_requested}"
-  }
-  stub_piwik_request(piwik_request)
-end
-
-def stub_piwik_report_loa_achieved(loa_achieved)
-  piwik_request = {
-    '_cvar' => "{\"3\":[\"LOA_ACHIEVED\",\"#{loa_achieved}\"]}",
-    'action_name' => "LOA Achieved - #{loa_achieved}"
-  }
-  stub_piwik_request(piwik_request)
-end
-
-def stub_piwik_request_with_rp(extra_parameters = {})
+def stub_piwik_request_with_rp_and_loa(extra_parameters = {}, loa = 'LEVEL_2')
   cvar = {
-    '_cvar' => "{\"1\":[\"RP\",\"analytics description for test-rp\"]}"
+    '_cvar' => "{\"1\":[\"RP\",\"analytics description for test-rp\"],\"2\":[\"LOA_REQUESTED\",\"#{loa}\"]}"
   }
   stub_piwik_request(extra_parameters.merge(cvar))
 end

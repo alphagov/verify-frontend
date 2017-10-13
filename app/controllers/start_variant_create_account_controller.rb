@@ -5,7 +5,6 @@ class StartVariantCreateAccountController < ApplicationController
     @form = StartForm.new({})
     FEDERATION_REPORTER.report_start_page(current_transaction, request)
     if is_loa1?
-      FEDERATION_REPORTER.report_loa_requested(request, session[:requested_loa])
       @tailored_text = current_transaction.tailored_text
       render :start_loa1
     else

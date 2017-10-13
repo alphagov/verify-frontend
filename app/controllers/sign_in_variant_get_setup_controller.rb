@@ -9,7 +9,6 @@ class SignInVariantGetSetupController < ApplicationController
     )
 
     FEDERATION_REPORTER.report_sign_in(current_transaction, request)
-    FEDERATION_REPORTER.report_loa_requested(request, session[:requested_loa])
     render 'index'
   end
 

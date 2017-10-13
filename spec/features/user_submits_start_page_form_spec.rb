@@ -31,7 +31,7 @@ RSpec.describe 'when user submits start page form' do
     expect(page).to have_link "I can’t remember which company verified me", href: '/forgot-company'
   end
 
-  it 'will report user choice to analytics when user chooses no (sign in)' do
+  it 'will report user choice to analytics when user chooses to sign in' do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     visit '/start'
     choose('start_form_selection_false')
@@ -40,7 +40,7 @@ RSpec.describe 'when user submits start page form' do
     piwik_request = {
         'rec' => '1',
         'apiv' => '1',
-        '_cvar' => '{"1":["RP","analytics description for test-rp"]}',
+        '_cvar' => '{"1":["RP","analytics description for test-rp"],"2":["LOA_REQUESTED","LEVEL_2"]}',
         'action_name' => 'The No option was selected on the introduction page'
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
