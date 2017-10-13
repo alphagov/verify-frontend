@@ -34,7 +34,7 @@ module AbTest
       before(:each) {
         stub_const('RP_CONFIG', 'ab_test_blacklist' => excluded_rp_simple_id)
         stub_const('FEDERATION_REPORTER', federation_reporter)
-        allow(request).to receive(:cookies).and_return(CookieNames::AB_TEST => {logos: 'logos_yes'}.to_json)
+        allow(request).to receive(:cookies).and_return(CookieNames::AB_TEST => { logos: 'logos_yes' }.to_json)
         allow(request).to receive(:session).and_return(transaction_simple_id: 'rp')
       }
 
