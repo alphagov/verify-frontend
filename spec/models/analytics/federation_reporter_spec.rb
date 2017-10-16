@@ -112,7 +112,8 @@ module Analytics
           request,
           'The No option was selected on the introduction page',
           1 => %w(RP description),
-          2 => %w(LOA_REQUESTED LEVEL_2)
+          2 => %w(LOA_REQUESTED LEVEL_2),
+          3 => %w(JOURNEY_TYPE SIGN_IN)
         )
 
       federation_reporter.report_sign_in(current_transaction, request)
@@ -127,7 +128,8 @@ module Analytics
           request,
           'The Yes option was selected on the start page',
           1 => %w(RP description),
-          2 => %w(LOA_REQUESTED LEVEL_2)
+          2 => %w(LOA_REQUESTED LEVEL_2),
+          3 => %w(JOURNEY_TYPE REGISTRATION)
         )
 
       federation_reporter.report_registration(current_transaction, request)

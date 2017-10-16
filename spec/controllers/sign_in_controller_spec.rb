@@ -12,12 +12,9 @@ describe SignInController do
   end
 
   context '#index' do
-    it 'will report to piwik when the user has selected the No option on the introduction page' do
-      stub_piwik_request('action_name' => 'The No option was selected on the introduction page')
-
+    it 'will render the index page' do
       get :index, params: { locale: 'en' }
-      expect(subject).to render_template(:index)
-      expect(a_request_to_piwik).to have_been_made
+      expect(subject).to render_template(:sign_in_loa1)
     end
   end
 

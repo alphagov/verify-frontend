@@ -11,11 +11,17 @@ module Analytics
     end
 
     def report_sign_in(current_transaction, request)
-      report_action(current_transaction, request, 'The No option was selected on the introduction page')
+      report_action(current_transaction,
+                    request,
+                    'The No option was selected on the introduction page',
+                    Analytics::CustomVariable.build(:journey_type, 'SIGN_IN'))
     end
 
     def report_registration(current_transaction, request)
-      report_action(current_transaction, request, 'The Yes option was selected on the start page')
+      report_action(current_transaction,
+                    request,
+                    'The Yes option was selected on the start page',
+                    Analytics::CustomVariable.build(:journey_type, 'REGISTRATION'))
     end
 
     def report_ab_test(transaction_id, request, alternative_name)

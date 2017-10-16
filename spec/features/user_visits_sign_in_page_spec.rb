@@ -6,14 +6,6 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   def given_api_requests_have_been_mocked!
     stub_session_select_idp_request(encrypted_entity_id)
     stub_session_idp_authn_request(originating_ip, location, false)
-    @user_action_piwik_request = stub_piwik_request(
-      '_cvar' => "{\"1\":[\"RP\",\"#{transaction_analytics_description}\"],\"2\":[\"LOA_REQUESTED\",\"LEVEL_2\"]}",
-      'action_name' => 'The No option was selected on the introduction page',
-      )
-  end
-
-  def then_custom_variables_are_reported_to_piwik
-    expect(@user_action_piwik_request).to have_been_made.once
   end
 
   def given_im_on_the_sign_in_page(locale = 'en')
@@ -76,7 +68,6 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
-      then_custom_variables_are_reported_to_piwik
       expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
       when_i_select_an_idp
       then_im_at_the_idp

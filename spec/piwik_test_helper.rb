@@ -60,3 +60,15 @@ end
 def a_request_to_piwik
   a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 end
+
+def stub_piwik_journey_type_request(custom_variable_value, action_name, loa)
+  rp_custom_variable = "\"1\":[\"RP\",\"analytics description for test-rp\"]"
+  loa_custom_variable = "\"2\":[\"LOA_REQUESTED\",\"#{loa}\"]"
+  journey_custom_variable = "\"3\":[\"JOURNEY_TYPE\",\"#{custom_variable_value}\"]"
+
+  piwik_request = {
+      '_cvar' => "{#{rp_custom_variable},#{loa_custom_variable},#{journey_custom_variable}}",
+      'action_name' => action_name
+  }
+  stub_piwik_request(piwik_request)
+end

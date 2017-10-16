@@ -1,4 +1,4 @@
-<%= page_title 'hub.choose_a_certified_company.title' %>
+<%= page_title 'hub.choose_a_certified_company_loa2.title' %>
 <% content_for :feedback_source, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE' %>
 <% content_for :additional_javascript do %>
     <%= javascript_include_tag 'piwik_idp_picker_tracking' %>
@@ -7,15 +7,15 @@
 <div class="content-inner">
   <div class="grid-row">
     <div class="column-two-thirds">
-      <h1 class="heading-large"><%= t 'hub.choose_a_certified_company.heading' %></h1>
-      <p><%= t 'hub.choose_a_certified_company.existing_customer' %></p>
-      <p><%= t 'hub.choose_a_certified_company.personal_information' %></p>
+      <h1 class="heading-large"><%= t 'hub.choose_a_certified_company_loa2.heading' %></h1>
+      <p><%= t 'hub.choose_a_certified_company_loa2.existing_customer' %></p>
+      <p><%= t 'hub.choose_a_certified_company_loa2.personal_information' %></p>
       <ul class="list list-bullet">
-        <li><%= link_to(t('hub.choose_a_certified_company.why_companies'), why_companies_path) %></li>
+        <li><%= link_to(t('hub.choose_a_certified_company_loa2.why_companies'), why_companies_path) %></li>
       </ul>
       <p class="large-top">
-        <%= t 'hub.choose_a_certified_company.idp_count_html',
-              company_count: t('hub.choose_a_certified_company.company_html', count: @recommended_idps.length) %>
+        <%= t 'hub.choose_a_certified_company_loa2.idp_count_html',
+              company_count: t('hub.choose_a_certified_company_loa2.company_html', count: @recommended_idps.length) %>
       </p>
     </div>
   </div>
@@ -29,14 +29,14 @@
       <div class="grid-row">
         <div class="column-two-thirds">
           <p class="large-top">
-            <%= t 'hub.choose_a_certified_company.filtered_idps_message_html',
-                  company_count: t('hub.choose_a_certified_company.company_html', count: @non_recommended_idps.length) %>
+            <%= t 'hub.choose_a_certified_company_loa2.filtered_idps_message_html',
+                  company_count: t('hub.choose_a_certified_company_loa2.company_html', count: @non_recommended_idps.length) %>
           </p>
         </div>
       </div>
       <details>
         <summary>
-          <span class="summary"><%= t 'hub.choose_a_certified_company.show_all_companies' %></span>
+          <span class="summary"><%= t 'hub.choose_a_certified_company_loa2.show_all_companies' %></span>
         </summary>
         <div class="panel panel-border-narrow">
           <% @non_recommended_idps.each do |identity_provider| %>

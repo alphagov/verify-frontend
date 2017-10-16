@@ -1,5 +1,6 @@
 require 'feature_helper'
 require 'piwik_test_helper'
+require 'api_test_helper'
 
 RSpec.describe 'When a page with a virtual page view is visited' do
   it 'sends a virtual page view to analytics' do
@@ -10,13 +11,14 @@ RSpec.describe 'When a page with a virtual page view is visited' do
     Capybara.current_session.driver.header('Accept-Language', 'en-US,en;q=0.5')
     Capybara.current_session.driver.header('X-Forwarded-For', '1.1.1.1')
 
-    visit '/sign-in'
+    visit '/begin-sign-in'
 
     piwik_request = {
         'rec' => '1',
         'apiv' => '1',
         'idsite' => INTERNAL_PIWIK.site_id.to_s,
         'cookie' => 'false',
+        'action_name' => 'The No option was selected on the introduction page'
     }
     piwik_headers = {
         'X-Forwarded-For' => '1.1.1.1',

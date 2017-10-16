@@ -3,29 +3,17 @@ class AboutController < ApplicationController
   include AbTestHelper
 
   def index
-    FEDERATION_REPORTER.report_registration(
-      current_transaction,
-      request
-    )
     @tailored_text = current_transaction.tailored_text
     render :about
   end
 
   def certified_companies
-    if is_loa1?
-      render :certified_companies_LOA1
-    else
-      @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers)
-      render :certified_companies_LOA2
-    end
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers)
+    render :certified_companies
   end
 
   def identity_accounts
-    if is_loa1?
-      render :identity_accounts_LOA1
-    else
-      render :identity_accounts_LOA2
-    end
+    render :identity_accounts
   end
 
   def choosing_a_company
