@@ -9,6 +9,13 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(helper.content_for(:page_title)).to eql I18n.t('hub.start.title')
     end
 
+    it 'should start with "Error:" when there are page errors' do
+      flash[:errors] = ['some error']
+      expected_title = "Error: #{I18n.t('hub.start.title', locale: 'en')}"
+      helper.page_title('hub.start.title', locale: :en)
+      expect(helper.content_for(:page_title)).to eql expected_title
+    end
+
     it 'should output Welsh page title if locale specified' do
       helper.page_title('hub.start.title', locale: :cy)
       expect(helper.content_for(:page_title)).to eql I18n.t('hub.start.title', locale: 'cy')
