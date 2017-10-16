@@ -67,16 +67,6 @@ class SessionProxy
     IdpAuthnResponse.validated_response(response)
   end
 
-  def response_for_rp(session_id)
-    response = @api_client.get(response_for_rp_endpoint(session_id), headers: x_forwarded_for)
-    ResponseForRp.validated_response(response)
-  end
-
-  def error_response_for_rp(session_id)
-    response = @api_client.get(error_response_for_rp_endpoint(session_id), headers: x_forwarded_for)
-    ResponseForRp.validated_response(response)
-  end
-
   def cycle_three_attribute_name(session_id)
     response = @api_client.get(cycle_three_endpoint(session_id))
     CycleThreeAttributeResponse.validated_response(response).name
