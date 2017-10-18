@@ -36,4 +36,12 @@ RSpec.describe 'When the user visits the about identity accounts page' do
 
     expect(page).to have_current_path('/about-choosing-a-company')
   end
+
+  it 'will go to choose a certified company page when start now is clicked if user on LOA1 journey' do
+    page.set_rack_session(requested_loa: 'LEVEL_1')
+    visit '/about-identity-accounts'
+    click_link('Start now')
+
+    expect(page).to have_current_path('/choose-a-certified-company')
+  end
 end

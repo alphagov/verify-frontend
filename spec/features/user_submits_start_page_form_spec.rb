@@ -26,7 +26,7 @@ RSpec.describe 'when user submits start page form' do
     expect(page).to have_css('.company-logo input[src="/stub-logos/stub-idp-one.png"]')
     expect(page).to have_link 'Back', href: '/start'
     expect_feedback_source_to_be(page, 'SIGN_IN_PAGE', '/sign-in')
-    expect(page).to have_link 'start now', href: '/about'
+    expect(page).to have_link 'start now', href: '/begin-registration'
     expect(page).to have_link "I can’t remember which company verified me", href: '/forgot-company'
   end
 

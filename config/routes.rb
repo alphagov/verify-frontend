@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   localized do
     get 'start', to: 'start#index', as: :start
     post 'start', to: 'start#request_post', as: :start
-    get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
     get 'begin_registration', to: 'start#register', as: :begin_registration
     get 'sign_in', to: 'sign_in#index', as: :sign_in
     post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit

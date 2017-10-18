@@ -14,7 +14,7 @@ describe SignInController do
   context '#index' do
     it 'will render the index page' do
       get :index, params: { locale: 'en' }
-      expect(subject).to render_template(:sign_in_loa1)
+      expect(subject).to render_template(:index)
     end
   end
 

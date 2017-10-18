@@ -8,7 +8,7 @@ class SignInController < ApplicationController
       unavailable_idps.map { |simple_id| IdentityProvider.new('simpleId' => simple_id, 'entityId' => simple_id, 'levelsOfAssurance' => []) }
     )
 
-    render is_loa1? ? :sign_in_loa1 : :sign_in_loa2
+    render :index
   end
 
   def select_idp

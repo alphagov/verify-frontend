@@ -1,8 +1,7 @@
 cy:
   routes:
     start: dechrau
-    begin_sign_in: begin-sign-in-welsh
-    begin_registration: begin-registration-welsh
+    begin_registration: begin-registration-cy
     about: am
     sign_in: mewngofnodi
     about_certified_companies: am-gwmniau-ardystiedig
@@ -55,11 +54,6 @@ cy:
     start_now: Dechreuwch nawr
     continue: Parhau
     back: Yn ôl
-  navigation_ab_test:
-    next: Nesaf
-    start_now: Dechreuwch nawr
-    continue: Parhau
-    back: Yn ôl
   option:
     "no": "Na"
     unknown: Ddim yn gwybod
@@ -86,19 +80,13 @@ cy:
       title: Redirect to country
       heading: Mynd ymlaen i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
-    start_loa2:
+    start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify
       answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
       continue: Parhau
       error_message: Dewiswch opsiwn
-    start_loa1:
-      title: Dechrau
-      verify_is_a_service: GOV.UK Verify is a secure service built to help fight the growing problem of online identity theft.
-      or: or
-      sign_in_with_existing: sign in with an existing identity account
-      get_set_up_with_gov_uk_verify: Get set up with GOV.UK Verify
     signin:
       title: Mewngofnodi gyda chwmni ardystiedig
       heading: Gyda phwy mae gennych gyfrif hunaniaeth?
@@ -274,21 +262,12 @@ cy:
       explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi’i ddilysu.
       verify_wont_work_but_there_is_still_a_way: Ni all 'GOV.UK Verify' cadarnhau pwy ydych chi oherwydd mai angen o leiaf un cyfeiriad yn y DU arnoch.  %{other_ways_text}
     choose_a_certified_company:
-      choose_idp: Dewiswch %{display_name}
-      about_idp: Am %{display_name}
-      dialog:
-        information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
-        close: cau
-      about:
-        title: Am %{display_name}
-        information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
-        close: cau
-    choose_a_certified_company_loa2:
       title: Dewiswch gwmni ardystiedig
       heading: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
       existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
       personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
       why_companies: Pam fod dewis o gwmnïau
+      choose_idp: Dewiswch %{display_name}
       idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
       company_html:
         zero: no&nbsp;cwmni
@@ -299,19 +278,14 @@ cy:
         other: "%{count}&nbsp;o gwmnïau"
       show_all_companies: Cwmniau sy’n annhebygol o’ch dilysu chi
       filtered_idps_message_html: Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion.
-    choose_a_certified_company_loa1:
-      title: Dewiswch gwmni ardystiedig
-      heading_medium: Choose a certified company to verify your identity
-      heading: How GOV.UK Verify works
-      why_companies: Pam fod dewis o gwmnïau
-      content_html: |
-        <p>Companies certified for government check you are who you say you are.<p>
-        <p></p>
-        <p>The company you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passports Office or DVLA.<p>
-        <p></p>
-        <p>Using certified companies means data is not stored in one place by government.<p>
-        <p></p>
-        <p>Verifying your identity takes about 5 minutes to complete, and there’s no charge for this service.<p>
+      about_idp: Am %{display_name}
+      dialog:
+        information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
+        close: cau
+      about:
+        title: Am %{display_name}
+        information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
+        close: cau
     why_companies:
       title: Pam fod dewis o gwmnïau
       choose_a_company: Dewiswch gwmni
@@ -322,11 +296,11 @@ cy:
         <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Nid oes effaith ar eich sgor credyd.</p>
       content_loa1_html: |
-        <p>More certified companies means a more secure system - information is not stored in one place, but is split up in lots of different places, making it safer.</p>
-        <p>It’s your right to choose who you want to deal with from these companies, and you don’t need to be an existing customer with a company as they’ve built new, secure systems to verify identities. It’s also your right to change which company you deal with at any time.</p>
-        <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide.</p>
-        <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
-        <p>There’s no effect on your credit score.</p>
+        <p>Mae mwy nag un cwmni ardystiedig yn golygu system mwy diogel - nid yw gwybodaeth yn cael ei gadw mewn un lle, ond mae’n cael ei rannu mewn nifer o wahannol lefydd, sydd yn ei gwneud yn fwy diogel.</p>
+        <p>Eich hawl chi yw dewis pwy ydych chi eisiau delio â hwy o’r cwmnïau hyn. Eich hawl chi yw hefyd newid pa gwmni rydych yn deilo ag ef ar unrhyw adeg.</p>
+        <p>Wrth ddilysu eich hunaniaeth, gall y cwmniau hyn ddefnyddio eu cofnodion eu hunain ac maent wedi cael eu hardystio i gael mynediad i wybodaeth fel cofnodion credyd. Maent yn gwneud hyn i wirio gwybodaeth rydych yn ei ddarparu.</p>
+        <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
+        <p>Nid oes effaith ar eich sgor credyd.</p>
     unlikely_to_verify:
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
       explanation: Mae gwmnïau ardystiedig angen o leiaf 1 dogfen arall i wirio eich hunaniaeth. I barhau gyda GOV.UK Verify, %{add_more_documents_link}.

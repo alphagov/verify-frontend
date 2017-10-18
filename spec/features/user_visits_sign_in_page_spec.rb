@@ -8,6 +8,10 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     stub_session_idp_authn_request(originating_ip, location, false)
   end
 
+  def given_the_piwik_request_has_been_stubbed
+    @stub_piwik_journey_request = stub_piwik_journey_type_request('REGISTRATION', 'The Yes option was selected on the start page', 'LEVEL_2')
+  end
+
   def given_im_on_the_sign_in_page(locale = 'en')
     set_session_and_session_cookies!
     stub_api_idp_list
@@ -16,6 +20,10 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
   def when_i_select_an_idp
     click_button(idp_display_name)
+  end
+
+  def when_i_click_start_now
+    click_link('begin-registration-route')
   end
 
   def then_im_at_the_idp
@@ -47,6 +55,10 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     click_button('Continue')
   end
 
+  def expect_to_have_updated_the_piwik_journey_type_variable
+    expect(@stub_piwik_journey_request).to have_been_made.once
+  end
+
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:idp_display_name) { 'IDCorp' }
   let(:transaction_analytics_description) { 'analytics description for test-rp' }
@@ -74,6 +86,16 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       and_the_language_hint_is_set
       and_the_hints_are_not_set
       expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
+    end
+
+    it 'will redirect the user to the about page of the registration journey and update the Piwik Custom Variables' do
+      page.set_rack_session(transaction_simple_id: 'test-rp', requested_loa: 'LEVEL_2')
+      given_api_requests_have_been_mocked!
+      given_the_piwik_request_has_been_stubbed
+      given_im_on_the_sign_in_page
+      when_i_click_start_now
+      expect(page).to have_title('About - GOV.UK Verify - GOV.UK')
+      expect_to_have_updated_the_piwik_journey_type_variable
     end
   end
 end
