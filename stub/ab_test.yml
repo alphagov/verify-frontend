@@ -31,11 +31,3 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - loa1_shortened_journey_v2:
-      alternatives:
-        - name: 'control'
-          percent: 100
-        - name: 'variant_get_setup'
-          percent: 0
-        - name: 'variant_create_account'
-          percent: 0
