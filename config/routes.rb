@@ -99,6 +99,7 @@ Rails.application.routes.draw do
       get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
 
       # get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
+      get 'failed_registration', to: 'failed_registration_loa1#index', as: :failed_registration
     end
 
     constraints IsLoa2 do
@@ -107,6 +108,7 @@ Rails.application.routes.draw do
       get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
 
       get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
+      get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
     end
 
     get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
@@ -120,7 +122,6 @@ Rails.application.routes.draw do
     get 'choose_a_country', to: 'choose_a_country#choose_a_country', as: :choose_a_country
     post 'choose_a_country', to: 'choose_a_country#choose_a_country_submit', as: :choose_a_country_submit
     get 'confirmation', to: 'confirmation#index', as: :confirmation
-    get 'failed_registration', to: 'failed_registration#index', as: :failed_registration
     get 'failed_uplift', to: 'failed_uplift#index', as: :failed_uplift
     get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
     get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
