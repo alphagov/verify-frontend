@@ -100,6 +100,7 @@ Rails.application.routes.draw do
 
       # get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
       get 'failed_registration', to: 'failed_registration_loa1#index', as: :failed_registration
+      get 'cancelled_registration', to: 'cancelled_registration_loa1#index', as: :cancelled_registration
     end
 
     constraints IsLoa2 do
@@ -109,6 +110,7 @@ Rails.application.routes.draw do
 
       get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
       get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
+      get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
     end
 
     get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
