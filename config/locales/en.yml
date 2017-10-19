@@ -368,8 +368,9 @@ en:
       reasons_html: |
         <p>There are a few reasons why this might happen, including:</p>
         <ul class="list list-bullet">
-          <li>you’ve recently had a change in your circumstances, and they aren’t updated online</li>
-          <li>the certified company doesn’t have access to enough information about you</li>
+          <li>your answer to a question doesn't match online records</li>
+          <li>you've recently had a change in your circumstances, and they aren't up to date online</li>
+          <li>%{idp_name} doesn't have access to enough information about you</li>
         </ul>
       what_to_do_next_intro: "You can try the following:"
       what_to_do_next: "What to do next"
@@ -390,22 +391,22 @@ en:
         <p>You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
       start_again: "Start again"
     failed_uplift:
-          title: Failed to uplift
-          heading: "%{display_name} was not able to validate the evidence you provided"
-          reasons_html: |
-            <p>There are a few reasons why this might happen, including:</p>
-            <ul class="list list-bullet">
-              <li>your answer to a question doesn't match records</li>
-              <li>you've recently had a change in your circumstances, and they are not up to date online</li>
-              <li>the certified company doesn't have access to enough information about you</li>
-             </ul>
-          start_again: Find another company to verify you
-          still_use_heading: "You can still access these government services with your %{idp_name} identity account"
-          try_another_text: "Other companies use different methods from %{idp_name} and may therefore stand a better chance of verifying your identity."
-          try_another_summary: "Try verifying with another certified company"
-          what_next_heading: "What to do next"
-          other_ways_summary: "View other ways to %{other_ways_description}"
-          contact_summary: "Contact %{idp_name}"
+      title: Failed to uplift
+      heading: "%{display_name} was not able to validate the evidence you provided"
+      reasons_html: |
+        <p>There are a few reasons why this might happen, including:</p>
+        <ul class="list list-bullet">
+          <li>your answer to a question doesn't match online records</li>
+          <li>you've recently had a change in your circumstances, and they aren't up to date online</li>
+          <li>%{idp_name} doesn't have access to enough information about you</li>
+        </ul>
+      start_again: Find another company to verify you
+      still_use_heading: "You can still access these government services with your %{idp_name} identity account"
+      try_another_text: "Other companies use different methods from %{idp_name} and may therefore stand a better chance of verifying your identity."
+      try_another_summary: "Try verifying with another certified company"
+      what_next_heading: "What to do next"
+      other_ways_summary: "View other ways to %{other_ways_description}"
+      contact_summary: "Contact %{idp_name}"
     response_processing:
       title: Please wait
       heading: "%{rp_name} is processing your details"
