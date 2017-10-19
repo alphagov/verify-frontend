@@ -1,4 +1,6 @@
 class ChooseACertifiedCompanyLoa1Controller < ApplicationController
+  include ChooseACertifiedCompanyAbout
+
   def index
     loa1_idps = current_identity_providers.select { |idp| idp.levels_of_assurance.min == 'LEVEL_1' }
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(loa1_idps)
@@ -11,18 +13,6 @@ class ChooseACertifiedCompanyLoa1Controller < ApplicationController
     select_viewable_idp(params.fetch('entity_id')) do |decorated_idp|
       session[:selected_idp_was_recommended] = IDP_RECOMMENDATION_GROUPER.recommended?(decorated_idp.identity_provider, selected_evidence, current_identity_providers, current_transaction_simple_id)
       redirect_to warning_or_question_page(decorated_idp)
-    end
-  end
-
-  def about
-    simple_id = params[:company]
-    matching_idp = current_identity_providers.detect { |idp| idp.simple_id == simple_id }
-    @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
-    if @idp.viewable?
-      @recommended = IDP_RECOMMENDATION_GROUPER.recommended?(@idp, selected_evidence, current_identity_providers, current_transaction_simple_id)
-      render 'choose_a_certified_company/about'
-    else
-      render 'errors/404', status: 404
     end
   end
 
