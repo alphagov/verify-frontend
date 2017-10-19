@@ -88,10 +88,25 @@ Rails.application.routes.draw do
     get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
     get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
     get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
-    get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
-    post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
-    get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
-    get 'why_companies', to: 'why_companies#index', as: :why_companies
+    # constraints -> (request) { request.session['requested_loa'] == 'LEVEL_1'} do
+    #   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+    #   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
+    # end
+
+    constraints ->(request) { request.session['requested_loa'] == 'LEVEL_1' } do
+      get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
+    end
+
+    constraints ->(request) { request.session['requested_loa'] == 'LEVEL_2' } do
+      get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+      post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+    end
+
+    constraints ->(request) { request.session['requested_loa'] == 'LEVEL_2' } do
+      get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
+    end
+
+    # get 'why_companies', to: 'why_companies#index', as: :why_companies
     get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
     get 'redirect_to_idp_question', to: 'redirect_to_idp_question#index', as: :redirect_to_idp_question
