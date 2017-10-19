@@ -1,6 +1,6 @@
 module Analytics
   class FederationReporter
-    AB_TEST_ACTION_NAME = 'AB test - %s'.freeze
+    AB_TEST_ACTION_NAME = 'The user has started an AB test'.freeze
 
     def initialize(analytics_reporter)
       @analytics_reporter = analytics_reporter
@@ -13,14 +13,14 @@ module Analytics
     def report_sign_in(current_transaction, request)
       report_action(current_transaction,
                     request,
-                    'The No option was selected on the introduction page',
+                    'The user started a sign-in journey',
                     Analytics::CustomVariable.build(:journey_type, 'SIGN_IN'))
     end
 
     def report_registration(current_transaction, request)
       report_action(current_transaction,
                     request,
-                    'The Yes option was selected on the start page',
+                    'The user started a registration journey',
                     Analytics::CustomVariable.build(:journey_type, 'REGISTRATION'))
     end
 
@@ -31,7 +31,7 @@ module Analytics
 
         report_action(current_transaction,
                       request,
-                      AB_TEST_ACTION_NAME % alternative_name,
+                      AB_TEST_ACTION_NAME,
                       ab_test_custom_var)
       end
     end
