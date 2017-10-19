@@ -377,7 +377,6 @@ cy:
       explanation_link_text: ychwanegwch fwy o ddogfennau.
     redirect_to_idp_warning:
       title: Byddwch nawr yn cael eich ailgyfeirio
-      continue_to_idp: Parhau i %{display_name}
       create_account: Crëwch eich cyfrif hunaniaeth %{display_name}
       continue_website: Parhau i wefan %{display_name}
       identity_account_use_html: |

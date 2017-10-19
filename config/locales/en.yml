@@ -369,7 +369,6 @@ en:
       explanation_link_text: add more documents
     redirect_to_idp_warning:
       title: "You'll now be redirected"
-      continue_to_idp: Continue to %{display_name}
       create_account: Create your %{display_name} identity account
       continue_website: Continue to the %{display_name} website
       identity_account_use_html: |
