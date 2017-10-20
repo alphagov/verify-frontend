@@ -101,6 +101,9 @@ Rails.application.routes.draw do
       # get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
       get 'failed_registration', to: 'failed_registration_loa1#index', as: :failed_registration
       get 'cancelled_registration', to: 'cancelled_registration_loa1#index', as: :cancelled_registration
+      get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa1#index', as: :redirect_to_idp_question
+      post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa1#continue', as: :redirect_to_idp_question_submit
+      get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa1#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
     end
 
     constraints IsLoa2 do
@@ -111,13 +114,14 @@ Rails.application.routes.draw do
       get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
       get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
       get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
+      get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#index', as: :redirect_to_idp_question
+      post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
+      get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
     end
 
-    get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
-    get 'redirect_to_idp_question', to: 'redirect_to_idp_question#index', as: :redirect_to_idp_question
-    post 'redirect_to_idp_question', to: 'redirect_to_idp_question#continue', as: :redirect_to_idp_question_submit
-    get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
+    get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+
     get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
     get 'cookies', to: 'static#cookies', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
