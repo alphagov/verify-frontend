@@ -97,26 +97,26 @@ Rails.application.routes.draw do
       #   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
       #   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
       get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
-
       # get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
       get 'failed_registration', to: 'failed_registration_loa1#index', as: :failed_registration
       get 'cancelled_registration', to: 'cancelled_registration_loa1#index', as: :cancelled_registration
       get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa1#index', as: :redirect_to_idp_question
       post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa1#continue', as: :redirect_to_idp_question_submit
       get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa1#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
+      get 'confirmation', to: 'confirmation_loa1#index', as: :confirmation
     end
 
     constraints IsLoa2 do
       get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
       post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
       get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
-
       get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
       get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
       get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
       get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#index', as: :redirect_to_idp_question
       post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
       get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
+      get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
     end
 
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
@@ -127,7 +127,6 @@ Rails.application.routes.draw do
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'choose_a_country', to: 'choose_a_country#choose_a_country', as: :choose_a_country
     post 'choose_a_country', to: 'choose_a_country#choose_a_country_submit', as: :choose_a_country_submit
-    get 'confirmation', to: 'confirmation#index', as: :confirmation
     get 'failed_uplift', to: 'failed_uplift#index', as: :failed_uplift
     get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
     get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
