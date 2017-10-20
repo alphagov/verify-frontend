@@ -372,8 +372,9 @@ cy:
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
+          <li>your answer to a question doesn't match online records</li>
           <li>rydych yn ddiweddar wedi cael newid yn eich amgylchiadau, ac nid ydynt wedi cael eu diweddaru ar-lein</li>
-          <li>nid oes gan y cwmni ardystiedig fynediad i ddigon o wybodaeth amdanoch</li>
+          <li>%{idp_name} doesn't have access to enough information about you</li>
         </ul>
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
       what_to_do_next: Beth i’w wneud nesaf
@@ -399,10 +400,10 @@ cy:
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
-          <li>nid yw eich ateb i gwestiwn yn cyfateb i’n cofnodion</li>
+          <li>your answer to a question doesn't match online records</li>
           <li>rydych yn ddiweddar wedi cael newid yn eich amgylchiadau, ac nid ydynt wedi cael eu diweddaru ar-lein</li>
-          <li>nid oes gan y cwmni ardystiedig fynediad i ddigon o wybodaeth amdanoch</li>
-         </ul>
+          <li>%{idp_name} doesn't have access to enough information about you</li>
+        </ul>
       start_again: Dod o hyd i gwmni arall i’ch gwirio
       still_use_heading: "You can still access these government services with your %{idp_name} identity account"
       try_another_text: Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth.
