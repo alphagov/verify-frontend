@@ -103,7 +103,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
     piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true)
 
-    click_button 'Continue to IDCorp'
+    click_button 'Continue to the IDCorp website'
 
     expect(page).to have_current_path(redirect_to_idp_path)
     expect(select_idp_stub_request).to have_been_made.once
@@ -121,7 +121,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
     piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers)
 
-    click_button 'Continue to IDCorp'
+    click_button 'Continue to the IDCorp website'
 
     expect(page).to have_current_path(redirect_to_idp_path)
     expect(select_idp_stub_request).to have_been_made.once
@@ -133,7 +133,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     given_a_session_with_document_answers
     visit '/redirect-to-idp-warning'
 
-    expect(page).to have_content 'Continue to IDCorp'
+    expect(page).to have_content 'Continue to the IDCorp website'
     expect(page).to have_content "You'll now verify your identity on the IDCorp website"
   end
 
@@ -148,7 +148,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       stub_session_idp_authn_request(originating_ip, location, true)
       expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
 
-      click_button 'Continue to IDCorp'
+      click_button 'Continue to the IDCorp website'
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")
@@ -169,7 +169,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       stub_session_idp_authn_request(originating_ip, location, true)
       expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
 
-      click_button 'Continue to Bob’s Identity Service'
+      click_button 'Continue to the Bob’s Identity Service website'
       expect(page).to have_current_path(location)
       expect(page).to have_content("hints are ''")
       expect(page).to have_content("language hint was ''")

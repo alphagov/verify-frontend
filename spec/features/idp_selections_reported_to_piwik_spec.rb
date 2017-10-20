@@ -37,7 +37,7 @@ RSpec.describe 'When the user selects an IDP' do
 
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
-    click_button 'Continue to IDCorp'
+    click_button 'Continue to the IDCorp website'
 
     expect(piwik_registration_virtual_page).to have_been_made.once
   end
@@ -53,13 +53,13 @@ RSpec.describe 'When the user selects an IDP' do
     )
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
-    click_button 'Continue to IDCorp'
+    click_button 'Continue to the IDCorp website'
 
     expect(idcorp_piwik_request).to have_been_made.once
 
     visit '/choose-a-certified-company'
     click_button 'Choose Bob’s Identity Service'
-    click_button 'Continue to Bob’s Identity Service'
+    click_button 'Continue to the Bob’s Identity Service website'
 
     expect(idcorp_and_bobs_piwik_request).to have_been_made.once
   end
@@ -70,7 +70,7 @@ RSpec.describe 'When the user selects an IDP' do
     page.set_rack_session(selected_idp_names: idps)
     visit '/choose-a-certified-company'
     click_button 'Choose IDCorp'
-    click_button 'Continue to IDCorp'
+    click_button 'Continue to the IDCorp website'
 
     expect(idcorp_piwik_request).to have_been_made.once
   end
