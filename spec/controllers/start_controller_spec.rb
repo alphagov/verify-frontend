@@ -19,7 +19,7 @@ describe StartController do
     it 'will redirect to sign in page when selection is false' do
       stub_piwik_request = stub_piwik_journey_type_request(
         'SIGN_IN',
-        'The No option was selected on the introduction page',
+        'The user started a sign-in journey',
         'LEVEL_2'
       )
       post :request_post, params: { locale: 'en', start_form: { selection: false } }
@@ -30,7 +30,7 @@ describe StartController do
     it 'will redirect to about page when selection is true' do
       stub_piwik_request = stub_piwik_journey_type_request(
         'REGISTRATION',
-        'The Yes option was selected on the start page',
+        'The user started a registration journey',
         'LEVEL_2'
       )
       post :request_post, params: { locale: 'en', start_form: { selection: true } }
@@ -50,7 +50,7 @@ describe StartController do
   it 'will redirect to about page when selection is registration' do
     stub_piwik_request = stub_piwik_journey_type_request(
       'REGISTRATION',
-      'The Yes option was selected on the start page',
+      'The user started a registration journey',
       'LEVEL_2'
     )
     get :register, params: { locale: 'en' }

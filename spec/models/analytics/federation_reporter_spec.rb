@@ -73,6 +73,28 @@ module Analytics
       end
     end
 
+    describe '#report_ab_test' do
+      before(:each) do
+        RP_DISPLAY_REPOSITORY = double
+        transaction = double
+        allow(transaction).to receive(:analytics_description).and_return('description')
+        allow(RP_DISPLAY_REPOSITORY).to receive(:fetch).with('test-rp').and_return(transaction)
+      end
+
+      it 'should report an ab test custom variable' do
+        alternative_name = 'alternative_name'
+        expect(analytics_reporter).to receive(:report_custom_variable)
+          .with(
+            request,
+            'The user has started an AB test',
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
+            6 => ['AB_TEST', alternative_name]
+          )
+        federation_reporter.report_ab_test('test-rp', request, alternative_name)
+      end
+    end
+
     describe '#report_cycle_three' do
       it 'should report cycle 3 attribute name' do
         attribute_name = 'anAttribute'
@@ -110,7 +132,7 @@ module Analytics
       expect(analytics_reporter).to receive(:report_custom_variable)
         .with(
           request,
-          'The No option was selected on the introduction page',
+          'The user started a sign-in journey',
           1 => %w(RP description),
           2 => %w(LOA_REQUESTED LEVEL_2),
           3 => %w(JOURNEY_TYPE SIGN_IN)
@@ -126,7 +148,7 @@ module Analytics
       expect(analytics_reporter).to receive(:report_custom_variable)
         .with(
           request,
-          'The Yes option was selected on the start page',
+          'The user started a registration journey',
           1 => %w(RP description),
           2 => %w(LOA_REQUESTED LEVEL_2),
           3 => %w(JOURNEY_TYPE REGISTRATION)

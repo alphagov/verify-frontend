@@ -9,7 +9,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   end
 
   def given_the_piwik_request_has_been_stubbed
-    @stub_piwik_journey_request = stub_piwik_journey_type_request('REGISTRATION', 'The Yes option was selected on the start page', 'LEVEL_2')
+    @stub_piwik_journey_request = stub_piwik_journey_type_request('REGISTRATION', 'The user started a registration journey', 'LEVEL_2')
   end
 
   def given_im_on_the_sign_in_page(locale = 'en')

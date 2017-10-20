@@ -40,7 +40,7 @@ RSpec.describe 'when user submits start page form' do
         'rec' => '1',
         'apiv' => '1',
         '_cvar' => '{"1":["RP","analytics description for test-rp"],"2":["LOA_REQUESTED","LEVEL_2"],"3":["JOURNEY_TYPE","SIGN_IN"]}',
-        'action_name' => 'The No option was selected on the introduction page'
+        'action_name' => 'The user started a sign-in journey'
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
