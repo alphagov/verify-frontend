@@ -1,5 +1,7 @@
 module Api
   class ResponseHandler
+    ERROR_MESSAGE_PATTERN = "Received %s with error message: %s, type: '%s' and id: '%s'".freeze
+
     def handle_response(response_status, response_body)
       if response_status.success?
         parse_json(response_body, response_status.code)
@@ -27,7 +29,7 @@ module Api
       id = json.fetch('id', 'NONE')
       type = json.fetch('type', 'NONE')
       errors = json.fetch('errors', []).join(', ')
-      "Received #{status} with error message: [#{errors}], type: '#{type}' and id: '#{id}'"
+      ERROR_MESSAGE_PATTERN % [status, "[#{errors}]", type, id]
     end
 
     def parse_json(body, status)
