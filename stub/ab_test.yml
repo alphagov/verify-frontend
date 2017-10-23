@@ -31,3 +31,11 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
+  - dummy_ab_test:
+      alternatives:
+        - name: 'control'
+          percent: 100
+        - name: 'variant_b'
+          percent: 0
+        - name: 'variant_c'
+          percent: 0
