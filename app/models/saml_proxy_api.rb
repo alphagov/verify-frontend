@@ -33,4 +33,14 @@ class SamlProxyApi
     response = @api_client.get(error_response_for_rp_endpoint(session_id), headers: x_forwarded_for)
     ResponseForRp.validated_response(response)
   end
+
+  def idp_authn_response(session_id, saml_response, relay_state)
+    body = {
+        PARAM_RELAY_STATE => relay_state,
+        PARAM_SAML_RESPONSE => saml_response,
+        PARAM_ORIGINATING_IP => originating_ip
+    }
+    response = @api_client.put(idp_authn_response_endpoint(session_id), body)
+    IdpAuthnResponse.validated_response(response)
+  end
 end

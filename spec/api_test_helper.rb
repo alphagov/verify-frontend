@@ -161,7 +161,7 @@ module ApiTestHelper
         PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
 
-    stub_request(:put, ida_frontend_api_uri(idp_authn_response_endpoint(default_session_id)))
+    stub_request(:put, saml_proxy_api_uri(idp_authn_response_endpoint(default_session_id)))
         .with(body: authn_response_body)
         .to_return(body: response.to_json, status: 200)
   end

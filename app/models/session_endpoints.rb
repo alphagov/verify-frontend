@@ -4,7 +4,6 @@ module SessionEndpoints
   IDP_LIST_SUFFIX = 'idp-list'.freeze
   SELECT_IDP_SUFFIX = 'select-idp'.freeze
   IDP_AUTHN_REQUEST_SUFFIX = 'idp-authn-request'.freeze
-  IDP_AUTHN_RESPONSE_SUFFIX = 'idp-authn-response'.freeze
   SESSION_STATE_PATH = "#{PATH}/state".freeze
   CYCLE_THREE_SUFFIX = 'cycle-three'.freeze
   CYCLE_THREE_CANCEL_SUFFIX = "#{CYCLE_THREE_SUFFIX}/cancel".freeze
@@ -39,10 +38,6 @@ module SessionEndpoints
 
   def idp_authn_request_endpoint(session_id)
     session_endpoint(session_id, IDP_AUTHN_REQUEST_SUFFIX)
-  end
-
-  def idp_authn_response_endpoint(session_id)
-    session_endpoint(session_id, IDP_AUTHN_RESPONSE_SUFFIX)
   end
 
   def cycle_three_endpoint(session_id)

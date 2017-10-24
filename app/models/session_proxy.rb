@@ -57,16 +57,6 @@ class SessionProxy
     OutboundSamlMessage.validated_response(response)
   end
 
-  def idp_authn_response(session_id, saml_response, relay_state)
-    body = {
-      PARAM_RELAY_STATE => relay_state,
-      PARAM_SAML_RESPONSE => saml_response,
-      PARAM_ORIGINATING_IP => originating_ip
-    }
-    response = @api_client.put(idp_authn_response_endpoint(session_id), body)
-    IdpAuthnResponse.validated_response(response)
-  end
-
   def cycle_three_attribute_name(session_id)
     response = @api_client.get(cycle_three_endpoint(session_id))
     CycleThreeAttributeResponse.validated_response(response).name
