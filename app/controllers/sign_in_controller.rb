@@ -13,23 +13,25 @@ class SignInController < ApplicationController
 
   def select_idp
     select_viewable_idp(params.fetch('entity_id')) do |decorated_idp|
-      sign_in(decorated_idp.display_name)
+      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
+      #FEDERATION_REPORTER.report_sign_in_idp_selection(request, decorated_idp.display_name)
       redirect_to redirect_to_idp_path
     end
   end
 
   def select_idp_ajax
     select_viewable_idp(params.fetch('entityId')) do |decorated_idp|
-      sign_in(decorated_idp.entity_id)
-      ajax_idp_redirection_sign_in_request(decorated_idp.display_name)
+      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
+      ajax_idp_redirection_sign_in_request
     end
   end
 
 private
 
-  def sign_in(entity_id)
+  def sign_in(entity_id, idp_name)
     POLICY_PROXY.select_idp(session[:verify_session_id], entity_id)
     set_journey_hint(entity_id)
+    session[:selected_idp_name] = idp_name
   end
 
   def unavailable_idps
