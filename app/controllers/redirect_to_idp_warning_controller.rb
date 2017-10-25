@@ -16,7 +16,8 @@ class RedirectToIdpWarningController < ApplicationController
     idp = decorated_idp
     if idp.viewable?
       select_registration(idp)
-      redirect_to redirect_to_idp_path(:param1 => 1)
+      FEDERATION_REPORTER.report_idp_registration(request, idp.display_name, session[:selected_idp_names], selected_answer_store.selected_evidence, recommended)
+      redirect_to redirect_to_idp_path
     else
       something_went_wrong("Couldn't display IDP with entity id: #{idp.entity_id}")
     end
@@ -26,8 +27,7 @@ class RedirectToIdpWarningController < ApplicationController
     idp = decorated_idp
     if idp.viewable?
       select_registration(idp)
-
-      ajax_idp_redirection_registration_request(idp.display_name, recommended)
+      ajax_idp_redirection_registration_request(recommended)
 
       # outbound_saml_message = SESSION_PROXY.idp_authn_request(session[:verify_session_id])
       # idp_request = IdentityProviderRequest.new(
@@ -50,12 +50,12 @@ private
   end
 
   def register_idp_selections(idp_name)
+    session[:selected_idp_name] = idp_name
     selected_idp_names = session[:selected_idp_names] || []
     if selected_idp_names.size < SELECTED_IDP_HISTORY_LENGTH
       selected_idp_names << idp_name
       session[:selected_idp_names] = selected_idp_names
     end
-    #FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended)
   end
 
   def recommended

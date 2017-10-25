@@ -1,10 +1,5 @@
 class RedirectToIdpController < ApplicationController
   def index
-    Rails.logger.error(request)
-    FEDERATION_REPORTER.report_idp_registration(request, idp_name, selected_idp_names, selected_answer_store.selected_evidence, recommended)
-    
-    FEDERATION_REPORTER.report_sign_in_idp_selection(request, idp_name)
-    
     saml_message = SESSION_PROXY.idp_authn_request(session[:verify_session_id])
     @request = IdentityProviderRequest.new(
       saml_message,
