@@ -16,7 +16,7 @@ describe 'service retrieves metadata', type: :request do
     stub_transactions_list
     status = get(service_provider_metadata_path)
     expect(status).to eql 500
-    #Todo - this error returns html. Gross.
+    # TODO TT-1462: this error returns html. Gross.
   end
 
   it 'successfully gets idp metadata' do
@@ -33,7 +33,7 @@ describe 'service retrieves metadata', type: :request do
     stub_transactions_list
     status = get(identity_provider_metadata_path)
     expect(status).to eql 500
-    #Todo - this error returns html. Gross.
+    # TODO TT-1462: this error returns html. Gross.
   end
 
   def saml_proxy_uri(path)
