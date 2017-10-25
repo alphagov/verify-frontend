@@ -36,7 +36,7 @@ private
   def sign_in(entity_id, display_name)
     POLICY_PROXY.select_idp(session[:verify_session_id], entity_id)
     set_journey_hint(entity_id)
-    FEDERATION_REPORTER.report_sign_in_idp_selection(request, display_name)
+    FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, display_name)
   end
 
   def unavailable_idps

@@ -16,21 +16,17 @@
         return userId;
     }
 
-    var trackerUrl = $('#piwik-url').text(),
-        siteId,
-        customUrl,
-        piwikAnalyticsQueue,
-        enTitle;
+    var trackerUrl = $('#piwik-url').text();
 
     if(!trackerUrl) {
         return;
     }
 
-    siteId = $('#piwik-site-id').text();
-    customUrl = $('#piwik-custom-url').text();
-    enTitle = $('meta[name="verify|title"]').attr("content");
+    var siteId = $('#piwik-site-id').text();
+    var customUrl = $('#piwik-custom-url').text();
+    var enTitle = $('meta[name="verify|title"]').attr("content");
 
-    piwikAnalyticsQueue = [
+    var piwikAnalyticsQueue = [
         ['setUserId', getPiwikVisitorIdCookie()],
         ['setDocumentTitle', enTitle ],
         ['trackPageView'],
@@ -38,6 +34,20 @@
         ['setTrackerUrl', trackerUrl],
         ['setSiteId', siteId]
     ];
+
+    var customVariablesString = $('#piwik-custom-variables').text();
+    if (customVariablesString) {
+        var customVariables = JSON.parse(customVariablesString);
+        customVariables.forEach(function(customVariable) {
+            piwikAnalyticsQueue.unshift([
+                'setCustomVariable',
+                customVariable.index,
+                customVariable.name,
+                customVariable.value,
+                customVariable.scope
+            ])
+        })
+    }
 
     if (customUrl) {
         // customUrl needs to go at the beginning of the piwik array

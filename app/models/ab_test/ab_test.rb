@@ -2,15 +2,6 @@ require 'analytics/custom_variable'
 require 'cookies/cookies'
 
 module AbTest
-  def self.alternative_name_for_experiment(experiment_name, alternative_name, default = nil)
-    ab_test = ::AB_TESTS[experiment_name]
-    ab_test ? ab_test.alternative_name(alternative_name) : default
-  end
-
-  def self.reported_alternative_matches_an_allowed_alternative(alternative_name, reported_alternative)
-    alternative_name && alternative_name == reported_alternative
-  end
-
   def self.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
     unless current_transaction_is_excluded_from_ab_test(current_transaction_simple_id)
       ab_test_cookie = cookies[CookieNames::AB_TEST]
@@ -50,15 +41,22 @@ module AbTest
   end
 
   def self.report_ab_test_details(request, experiment_name)
-    reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[experiment_name]
     transaction_id = request.session[:transaction_simple_id]
 
-    ab_test = ::AB_TESTS[experiment_name]
-    if ab_test && !current_transaction_is_excluded_from_ab_test(transaction_id) && !ab_test.concluded?
-      alternative_name = AbTest.alternative_name_for_experiment(experiment_name, reported_alternative)
-      if reported_alternative_matches_an_allowed_alternative(alternative_name, reported_alternative)
-        FEDERATION_REPORTER.report_ab_test(transaction_id, request, alternative_name)
-      end
+    alternative_name = self.get_alternative_name(request, experiment_name, transaction_id)
+    unless alternative_name.nil?
+      FEDERATION_REPORTER.report_ab_test(transaction_id, request, alternative_name)
     end
+  end
+
+  def self.get_alternative_name(request, experiment_name, transaction_id)
+    ab_test = ::AB_TESTS[experiment_name]
+    alternative_name = nil
+
+    if ab_test && !current_transaction_is_excluded_from_ab_test(transaction_id) && !ab_test.concluded?
+      reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[experiment_name]
+      alternative_name = ab_test.alternative_name(reported_alternative)
+    end
+    alternative_name
   end
 end

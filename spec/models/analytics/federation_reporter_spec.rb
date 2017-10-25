@@ -9,21 +9,26 @@ module Analytics
     let(:analytics_reporter) { double(:analytics_reporter) }
     let(:federation_reporter) { FederationReporter.new(analytics_reporter) }
     let(:request) { double(:request) }
+    let(:current_transaction) { double('current transaction') }
+    let(:transaction_description) { 'description' }
 
     before(:each) do
       allow(request).to receive(:session).and_return(requested_loa: 'LEVEL_2')
+      allow(current_transaction).to receive(:analytics_description).and_return(transaction_description)
     end
 
     describe '#report_sign_in_idp_selection' do
       it 'should build correct report' do
         idp_display_name = 'IDCorp'
-        expect(analytics_reporter).to receive(:report)
+        expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "Sign In - #{idp_display_name}"
+            "Sign In - #{idp_display_name}",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
           )
 
-        federation_reporter.report_sign_in_idp_selection(request, idp_display_name)
+        federation_reporter.report_sign_in_idp_selection(current_transaction, request, idp_display_name)
       end
     end
 
@@ -33,43 +38,51 @@ module Analytics
       idp_history_str = idp_history.join(',')
 
       it 'should report correctly if IdP was recommended' do
-        expect(analytics_reporter).to receive(:report_custom_variable)
+        expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
             "#{idp_name} was chosen for registration (recommended) with evidence passport",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), '(recommended)')
+        federation_reporter.report_idp_registration(current_transaction, request, idp_name, idp_history, %w(passport), '(recommended)')
       end
 
       it 'should report correctly if IdP was not recommended' do
-        expect(analytics_reporter).to receive(:report_custom_variable)
+        expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
             "#{idp_name} was chosen for registration (not recommended) with evidence passport",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), '(not recommended)')
+        federation_reporter.report_idp_registration(current_transaction, request, idp_name, idp_history, %w(passport), '(not recommended)')
       end
 
       it 'should report correctly if IdP recommendation key not found in session' do
-        expect(analytics_reporter).to receive(:report_custom_variable)
+        expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
             "#{idp_name} was chosen for registration (idp recommendation key not set) with evidence passport",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport), '(idp recommendation key not set)')
+        federation_reporter.report_idp_registration(current_transaction, request, idp_name, idp_history, %w(passport), '(idp recommendation key not set)')
       end
 
       it 'should sort evidence' do
-        expect(analytics_reporter).to receive(:report_custom_variable)
+        expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
             "#{idp_name} was chosen for registration (recommended) with evidence driving_licence, passport",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(request, idp_name, idp_history, %w(passport driving_licence), '(recommended)')
+        federation_reporter.report_idp_registration(current_transaction, request, idp_name, idp_history, %w(passport driving_licence), '(recommended)')
       end
     end
 
@@ -83,7 +96,7 @@ module Analytics
 
       it 'should report an ab test custom variable' do
         alternative_name = 'alternative_name'
-        expect(analytics_reporter).to receive(:report_custom_variable)
+        expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
             'The user has started an AB test',
@@ -98,63 +111,77 @@ module Analytics
     describe '#report_cycle_three' do
       it 'should report cycle 3 attribute name' do
         attribute_name = 'anAttribute'
-        expect(analytics_reporter).to receive(:report_custom_variable)
+        expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
             'Cycle3 submitted',
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
             4 => ['CYCLE_3', attribute_name]
           )
-        federation_reporter.report_cycle_three(request, attribute_name)
+        federation_reporter.report_cycle_three(current_transaction, request, attribute_name)
       end
     end
 
     describe '#report_cycle_three_cancel' do
       it 'should report cycle 3 cancelled' do
-        current_transaction = double('current transaction')
-        description = 'description'
-        expect(current_transaction).to receive(:analytics_description)
-          .and_return(description)
-        expect(analytics_reporter).to receive(:report_custom_variable)
+        expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
             'Matching Outcome - Cancelled Cycle3',
             1 => %w(RP description),
-            2 => %w(LOA_REQUESTED LEVEL_2)
+            2 => %w(LOA_REQUESTED LEVEL_2),
           )
         federation_reporter.report_cycle_three_cancel(current_transaction, request)
       end
     end
 
-    it 'should report custom variable for sign in' do
-      current_transaction = double('current transaction')
-      description = 'description'
-      expect(current_transaction).to receive(:analytics_description).and_return(description)
-      expect(analytics_reporter).to receive(:report_custom_variable)
-        .with(
-          request,
-          'The user started a sign-in journey',
-          1 => %w(RP description),
-          2 => %w(LOA_REQUESTED LEVEL_2),
-          3 => %w(JOURNEY_TYPE SIGN_IN)
-        )
+    describe '#report_sign_in' do
+      it 'should report sign in journey' do
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            'The user started a sign-in journey',
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
+            3 => %w(JOURNEY_TYPE SIGN_IN)
+          )
 
-      federation_reporter.report_sign_in(current_transaction, request)
+        federation_reporter.report_sign_in(current_transaction, request)
+      end
     end
 
-    it 'should report custom variable for registration' do
-      current_transaction = double('current transaction')
-      description = 'description'
-      expect(current_transaction).to receive(:analytics_description).and_return(description)
-      expect(analytics_reporter).to receive(:report_custom_variable)
-        .with(
-          request,
-          'The user started a registration journey',
-          1 => %w(RP description),
-          2 => %w(LOA_REQUESTED LEVEL_2),
-          3 => %w(JOURNEY_TYPE REGISTRATION)
-        )
+    describe '#report_registration' do
+      it 'should report registration journey' do
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            'The user started a registration journey',
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
+            3 => %w(JOURNEY_TYPE REGISTRATION)
+          )
 
-      federation_reporter.report_registration(current_transaction, request)
+        federation_reporter.report_registration(current_transaction, request)
+      end
+    end
+
+    describe '#report_number_of_idps_recommended' do
+      it 'should report the number of IDPs that were recommended' do
+        expect(analytics_reporter).to receive(:report_event)
+          .with(
+            request,
+            {
+              1 => %w(RP description),
+              2 => %w(LOA_REQUESTED LEVEL_2)
+            },
+            'Engagement',
+            'IDPs Recommended',
+            5
+          )
+
+        federation_reporter.report_number_of_idps_recommended(current_transaction, request, 5)
+      end
     end
   end
 end

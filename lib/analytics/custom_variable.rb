@@ -13,5 +13,14 @@ module Analytics
       name, index = CUSTOM_VARIABLES[type].values_at(:name, :index)
       { index => [name, value] }
     end
+
+    def self.build_for_js_client(type, value)
+      {
+          'index': CUSTOM_VARIABLES[type][:index],
+          'name': CUSTOM_VARIABLES[type][:name],
+          'value': value,
+          'scope': 'visit'
+      }
+    end
   end
 end

@@ -11,7 +11,7 @@ shared_examples 'will_it_work_for_me' do |test_context, form_answer_description,
   context test_context do
     subject { post :will_it_work_for_me, params: { locale: 'en', will_it_work_for_me_form: form_variables } }
     it "should redirect to #{redirect_path} on #{form_answer_description}" do
-      expect(ANALYTICS_REPORTER).to receive(:report).with(any_args)
+      expect(ANALYTICS_REPORTER).to receive(:report_action).with(any_args)
       expect(subject).to redirect_to(send(redirect_path))
     end
   end

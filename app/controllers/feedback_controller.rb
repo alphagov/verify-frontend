@@ -1,5 +1,6 @@
 class FeedbackController < ApplicationController
   skip_before_action :validate_session
+  skip_before_action :set_piwik_custom_variables
 
   def index
     @form = FeedbackForm.new({})

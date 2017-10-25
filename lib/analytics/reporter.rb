@@ -6,26 +6,16 @@ module Analytics
       @site_id = site_id
     end
 
-    def report_custom_variable(request, action_name, custom_variable)
-      report_to_piwik(request, action_name, '_cvar' => custom_variable.to_json)
-    end
-
-    def report_event(request, event_category, event_name, event_action)
+    def report_event(request, custom_variables, event_category, event_name, event_action)
       event = {
-          e_c: event_category,
-          e_n: event_name,
-          e_a: event_action.to_s,
+          'e_c' => event_category,
+          'e_n' => event_name,
+          'e_a' => event_action.to_s,
       }
-      report_to_piwik(request, 'trackEvent', event)
+      report_action(request, 'trackEvent', custom_variables, event)
     end
 
-    def report(request, action_name)
-      report_to_piwik(request, action_name)
-    end
-
-  private
-
-    def report_to_piwik(request, action_name, additional_params = {})
+    def report_action(request, action_name, custom_variables, event_params = {})
       piwik_params = {
         'rec' => '1',
         'apiv' => '1',
@@ -34,7 +24,8 @@ module Analytics
         'url' => request.url,
         'cdt' => Time.now.strftime('%Y-%m-%d %H:%M:%S'),
         'cookie' => 'false',
-      }.merge(additional_params)
+        '_cvar' => custom_variables.to_json
+      }.merge(event_params)
 
       cookies = request.cookies
       piwik_params['uid'] = cookies[CookieNames::PIWIK_USER_ID] if cookies.has_key? CookieNames::PIWIK_USER_ID
@@ -45,6 +36,8 @@ module Analytics
       end
       @client.report(piwik_params, headers(request))
     end
+
+  private
 
     def headers(request)
       headers = request.headers

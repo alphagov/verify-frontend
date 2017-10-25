@@ -56,7 +56,8 @@ describe RedirectToIdpWarningController do
       session[:selected_idp_was_recommended] = idp_was_recommended
 
       expect(FEDERATION_REPORTER).to receive(:report_idp_registration)
-                                 .with(a_kind_of(ActionDispatch::Request),
+                                 .with(a_kind_of(Display::RpDisplayData),
+                                       a_kind_of(ActionDispatch::Request),
                                        bobs_identity_service_idp_name,
                                        [bobs_identity_service_idp_name],
                                        evidence.keys,
@@ -75,7 +76,8 @@ describe RedirectToIdpWarningController do
       session.delete(:selected_idp_was_recommended)
 
       expect(FEDERATION_REPORTER).to receive(:report_idp_registration)
-                                         .with(a_kind_of(ActionDispatch::Request),
+                                         .with(a_kind_of(Display::RpDisplayData),
+                                               a_kind_of(ActionDispatch::Request),
                                                bobs_identity_service_idp_name,
                                                [bobs_identity_service_idp_name],
                                                evidence.keys,

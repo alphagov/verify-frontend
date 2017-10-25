@@ -55,7 +55,7 @@ describe SelectDocumentsController do
     end
 
     it 'does not report to Piwik' do
-      expect(ANALYTICS_REPORTER).not_to receive(:report)
+      expect(ANALYTICS_REPORTER).not_to receive(:report_action)
     end
   end
 end
