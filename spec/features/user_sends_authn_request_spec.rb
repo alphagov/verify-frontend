@@ -77,7 +77,8 @@ describe 'user sends authn requests' do
         'about_companies' => 'about_companies_with_logo',
         'split_questions_v2' => 'split_questions_v2_control',
         'select_documents_v2' => 'select_documents_v2_control',
-        'idp_warning' => 'idp_warning_control'
+        'idp_warning' => 'idp_warning_control',
+        'dummy_ab_test' => 'dummy_ab_test_control'
       }.to_json
       cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape(ab_test_cookie_value))
       set_cookies!(cookie_hash)

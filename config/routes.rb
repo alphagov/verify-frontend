@@ -9,6 +9,16 @@ Rails.application.routes.draw do
     instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
   end
 
+  AB_TEST_EXPERIMENT_NAME = 'dummy_ab_test'.freeze
+
+  ab_test_control_piwik = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'control', true, 'LEVEL_1')
+  ab_test_variant_b_piwik = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'variant_b', true, 'LEVEL_1')
+  ab_test_variant_c_piwik = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'variant_c', true, 'LEVEL_1')
+
+  ab_test_control = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'control')
+  ab_test_variant_b = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'variant_b')
+  ab_test_variant_c = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'variant_c')
+
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   post 'SAML2/SSO/EidasResponse/POST' => 'authn_response#country_response'
@@ -33,9 +43,31 @@ Rails.application.routes.draw do
   end
 
   localized do
-    get 'start', to: 'start#index', as: :start
-    post 'start', to: 'start#request_post', as: :start
-    get 'begin_registration', to: 'start#register', as: :begin_registration
+    constraints ab_test_control_piwik do
+      get 'start', to: 'start#index', as: :start
+    end
+    constraints ab_test_variant_b_piwik do
+      get 'start', to: 'start_variant_b#index', as: :start
+    end
+    constraints ab_test_variant_c_piwik do
+      get 'start', to: 'start_variant_c#index', as: :start
+    end
+    constraints ab_test_control do
+      post 'start', to: 'start#request_post', as: :start
+      get 'begin_registration', to: 'start#register', as: :begin_registration
+    end
+    constraints ab_test_variant_b do
+      post 'start', to: 'start_variant_b#request_post', as: :start
+      get 'begin_registration', to: 'start_variant_b#register', as: :begin_registration
+    end
+    constraints ab_test_variant_c do
+      post 'start', to: 'start_variant_c#request_post', as: :start
+      get 'begin_registration', to: 'start_variant_c#register', as: :begin_registration
+    end
+
+    # get 'start', to: 'start#index', as: :start
+    # post 'start', to: 'start#request_post', as: :start
+    # get 'begin_registration', to: 'start#register', as: :begin_registration
     get 'sign_in', to: 'sign_in#index', as: :sign_in
     post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
     get 'about', to: 'about#index', as: :about
