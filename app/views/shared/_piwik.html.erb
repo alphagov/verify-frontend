@@ -1,10 +1,13 @@
 <% if public_piwik.enabled? %>
-  <span class="hidden" id="piwik-url"><%= public_piwik.url %></span>
-  <span class="hidden" id="piwik-site-id"><%= public_piwik.site_id %></span>
-  <% if piwik_custom_url? %>
-    <span class="hidden" id="piwik-custom-url"><%= piwik_custom_url %></span>
-  <% end %>
-  <noscript>
-    <%= image_tag("#{public_piwik.url}?#{piwik_noscript_query_string}", style: 'border: 0', width: 0, height: 0, alt: '', id: 'piwik-noscript-tracker') %>
-  </noscript>
+    <span class="hidden" id="piwik-url"><%= public_piwik.url %></span>
+    <span class="hidden" id="piwik-site-id"><%= public_piwik.site_id %></span>
+    <% if piwik_custom_url? %>
+        <span class="hidden" id="piwik-custom-url"><%= piwik_custom_url %></span>
+    <% end %>
+    <% if defined?(@piwik_custom_variables) %>
+        <span class="hidden" id="piwik-custom-variables"><%= @piwik_custom_variables.to_json %></span>
+    <% end %>
+    <noscript>
+      <%= image_tag("#{public_piwik.url}?#{piwik_noscript_query_string}", style: 'border: 0', width: 0, height: 0, alt: '', id: 'piwik-noscript-tracker') %>
+    </noscript>
 <% end %>

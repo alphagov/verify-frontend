@@ -1,6 +1,9 @@
+require 'ab_test/ab_test'
+
 class AuthnRequestController < SamlController
   protect_from_forgery except: :rp_request
   skip_before_action :validate_session
+  skip_before_action :set_piwik_custom_variables
 
   def rp_request
     reset_session

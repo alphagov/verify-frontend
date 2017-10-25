@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
   before_action :store_originating_ip
+  before_action :set_piwik_custom_variables
   after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
   helper_method :transaction_taxon_list
   helper_method :transactions_list
@@ -169,7 +170,7 @@ private
   end
 
   def report_to_analytics(action_name)
-    ANALYTICS_REPORTER.report(request, action_name)
+    FEDERATION_REPORTER.report_action(current_transaction, request, action_name)
   end
 
   def hide_available_languages
@@ -204,5 +205,12 @@ private
 
   def is_loa2?
     session[:requested_loa] == 'LEVEL_2'
+  end
+
+  def set_piwik_custom_variables
+    @piwik_custom_variables = [
+        Analytics::CustomVariable.build_for_js_client(:rp, current_transaction.analytics_description),
+        Analytics::CustomVariable.build_for_js_client(:loa_requested, session[:requested_loa])
+    ]
   end
 end

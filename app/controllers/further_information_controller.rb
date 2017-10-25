@@ -11,7 +11,7 @@ class FurtherInformationController < ApplicationController
     @cycle_three_attribute = cycle_three_attribute_class.new(params['cycle_three_attribute'])
     if @cycle_three_attribute.valid?
       FURTHER_INFORMATION_SERVICE.submit(session_id, @cycle_three_attribute.sanitised_cycle_three_data)
-      FEDERATION_REPORTER.report_cycle_three(request, @cycle_three_attribute.simple_id)
+      FEDERATION_REPORTER.report_cycle_three(current_transaction, request, @cycle_three_attribute.simple_id)
       redirect_to response_processing_path
     else
       @transaction_name = current_transaction.name
@@ -31,7 +31,7 @@ class FurtherInformationController < ApplicationController
     cycle_three_attribute_class = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id)
     if cycle_three_attribute_class.allows_nullable?
       FURTHER_INFORMATION_SERVICE.submit(session_id, '')
-      FEDERATION_REPORTER.report_cycle_three(request, cycle_three_attribute_class.simple_id)
+      FEDERATION_REPORTER.report_cycle_three(current_transaction, request, cycle_three_attribute_class.simple_id)
       redirect_to response_processing_path
     else
       something_went_wrong('Unexpected submission to Cycle3 Null Attribute endpoint', :forbidden)

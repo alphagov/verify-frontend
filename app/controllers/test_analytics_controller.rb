@@ -2,6 +2,7 @@ require 'uri'
 
 class TestAnalyticsController < ApplicationController
   skip_before_action :validate_session
+  skip_before_action :set_piwik_custom_variables
 
   def forward
     if PUBLIC_PIWIK.enabled? && INTERNAL_PIWIK.enabled?
