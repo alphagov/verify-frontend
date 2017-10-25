@@ -94,10 +94,10 @@ Rails.application.routes.draw do
     get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
 
     constraints IsLoa1 do
-      #   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
-      #   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
+      get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+      post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
       get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
-      # get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
+      get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
       get 'failed_registration', to: 'failed_registration_loa1#index', as: :failed_registration
       get 'cancelled_registration', to: 'cancelled_registration_loa1#index', as: :cancelled_registration
       get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa1#index', as: :redirect_to_idp_question
