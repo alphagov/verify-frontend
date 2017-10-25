@@ -74,10 +74,7 @@ Rails.application.routes.draw do
     # get 'begin_registration', to: 'start#register', as: :begin_registration
     get 'sign_in', to: 'sign_in#index', as: :sign_in
     post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
-    get 'about', to: 'about#index', as: :about
-    get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
-    get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
-    get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
+
     get 'select_documents', to: 'select_documents#index', as: :select_documents
     get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
     post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
@@ -104,6 +101,10 @@ Rails.application.routes.draw do
       post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa1#continue', as: :redirect_to_idp_question_submit
       get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa1#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
       get 'confirmation', to: 'confirmation_loa1#index', as: :confirmation
+      get 'about', to: 'about_loa1#index', as: :about
+      get 'about_certified_companies', to: 'about_loa1#certified_companies', as: :about_certified_companies
+      get 'about_identity_accounts', to: 'about_loa1#identity_accounts', as: :about_identity_accounts
+      get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
     end
 
     constraints IsLoa2 do
@@ -117,6 +118,10 @@ Rails.application.routes.draw do
       post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
       get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
       get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
+      get 'about', to: 'about_loa2#index', as: :about
+      get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
+      get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
+      get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
     end
 
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
