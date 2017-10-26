@@ -35,7 +35,8 @@ cy:
     other_ways_to_access_service: ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth
     forgot_company: wedi-anghofio-cwmni
     response_processing: prosesu-ymateb
-    redirect_to_idp: ailgyfeirio-i-idp
+    redirect_to_idp_sign_in: ailgyfeirio-i-idp
+    redirect_to_idp_register: ailgyfeirio-i-idp
     redirect_to_service_signing_in: ailgyfeirio-i-gwasanaeth/mewngofnodi
     redirect_to_service_start_again: ailgyfeirio-i-gwasanaeth/dechrau-eto
     redirect_to_service_error: ailgyfeirio-i-gwasanaeth/gwall
