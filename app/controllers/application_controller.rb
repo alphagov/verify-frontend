@@ -202,11 +202,7 @@ private
     FEDERATION_REPORTER.report_sign_in_idp_selection(request, session[:selected_idp_name])
 
     outbound_saml_message = SESSION_PROXY.idp_authn_request(session[:verify_session_id])
-    idp_request = IdentityProviderRequest.new(
-      outbound_saml_message,
-      selected_identity_provider.simple_id,
-      selected_answer_store.selected_answers
-    )
+    idp_request = idp_request_initilization(outbound_saml_message)
     render json: idp_request
   end
 
@@ -214,12 +210,16 @@ private
     FEDERATION_REPORTER.report_idp_registration(request, session[:selected_idp_name], session[:selected_idp_names], selected_answer_store.selected_evidence, recommended)
 
     outbound_saml_message = SESSION_PROXY.idp_authn_request(session[:verify_session_id])
-    idp_request = IdentityProviderRequest.new(
+    idp_request = idp_request_initilization(outbound_saml_message)
+    render json: idp_request.to_json(methods: :hints)
+  end
+
+  def idp_request_initilization(outbound_saml_message)
+    IdentityProviderRequest.new(
       outbound_saml_message,
       selected_identity_provider.simple_id,
       selected_answer_store.selected_answers
     )
-    render json: idp_request.to_json(methods: :hints)
   end
 
   def is_loa1?
