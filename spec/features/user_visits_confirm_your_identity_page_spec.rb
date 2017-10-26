@@ -65,7 +65,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
       it 'should display the interstitial page' do
         visit '/confirm-your-identity'
         click_button 'Sign in with IDCorp'
-        expect(page).to have_current_path('/redirect-to-idp')
+        expect(page).to have_current_path('/redirect-to-idp/sign-in')
         click_button 'Continue'
         expect(page).to have_current_path(idp_location)
       end
