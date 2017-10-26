@@ -434,7 +434,7 @@ cy:
         heading: Roedd problem wrth anfon y ffurflen
         no_selection: Dylech ateb y cwestiynau
         details: Dylech roi manylion
-        too_long: Gall y maes hwn fod hyd at %{max_length} nod  #TODO confirm text
+        too_long: Gall y maes hwn fod hyd at %{max_length} nod  #TODO TT-1461: confirm text
         name: Dylech roi enw
         email: Dylech roi cyfeiriad e-bost dilys
         send_failure: Yn anffodus rydym yn methu cofnodi eich adborth ar hyn o bryd. Rhowch gynnig arall yn hwyrach ymlaen.
