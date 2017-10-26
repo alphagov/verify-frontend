@@ -43,20 +43,20 @@ module AbTest
   def self.report_ab_test_details(request, experiment_name)
     transaction_id = request.session[:transaction_simple_id]
 
-    alternative_name = self.get_alternative_name(request, experiment_name, transaction_id)
-    unless alternative_name.nil?
+    if experiment_is_valid(transaction_id, experiment_name)
+      alternative_name = self.get_alternative_name(request, experiment_name)
       FEDERATION_REPORTER.report_ab_test(transaction_id, request, alternative_name)
     end
   end
 
-  def self.get_alternative_name(request, experiment_name, transaction_id)
+  def self.get_alternative_name(request, experiment_name)
     ab_test = ::AB_TESTS[experiment_name]
-    alternative_name = nil
+    reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[experiment_name]
+    ab_test.alternative_name(reported_alternative)
+  end
 
-    if ab_test && !current_transaction_is_excluded_from_ab_test(transaction_id) && !ab_test.concluded?
-      reported_alternative = Cookies.parse_json(request.cookies[CookieNames::AB_TEST])[experiment_name]
-      alternative_name = ab_test.alternative_name(reported_alternative)
-    end
-    alternative_name
+  def self.experiment_is_valid(transaction_id, experiment_name)
+    ab_test = ::AB_TESTS[experiment_name]
+    ab_test && !current_transaction_is_excluded_from_ab_test(transaction_id) && !ab_test.concluded?
   end
 end
