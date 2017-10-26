@@ -14,8 +14,7 @@ class SignInController < ApplicationController
   def select_idp
     select_viewable_idp(params.fetch('entity_id')) do |decorated_idp|
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      #FEDERATION_REPORTER.report_sign_in_idp_selection(request, decorated_idp.display_name)
-      redirect_to redirect_to_idp_path
+      redirect_to redirect_to_idp_sign_in_path
     end
   end
 

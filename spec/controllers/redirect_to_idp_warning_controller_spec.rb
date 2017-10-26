@@ -43,7 +43,7 @@ describe RedirectToIdpWarningController do
     it 'redirects to idp website' do
       session[:selected_idp] = bobs_identity_service
 
-      expect(subject).to redirect_to redirect_to_idp_path
+      expect(subject).to redirect_to redirect_to_idp_register_path
     end
 
     it 'reports idp registration details to piwik' do

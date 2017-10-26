@@ -33,7 +33,7 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
 
     it 'will allow the user to choose the IDP as usual' do
       click_button(button_text)
-      expect(page).to have_current_path(redirect_to_idp_path)
+      expect(page).to have_current_path(redirect_to_idp_sign_in_path)
     end
 
     it 'will respond with a 404 if the user visits the certified company unavailable page for that IDP' do

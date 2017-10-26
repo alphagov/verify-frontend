@@ -16,8 +16,8 @@ class RedirectToIdpWarningController < ApplicationController
     idp = decorated_idp
     if idp.viewable?
       select_registration(idp)
-      FEDERATION_REPORTER.report_idp_registration(request, idp.display_name, session[:selected_idp_names], selected_answer_store.selected_evidence, recommended)
-      redirect_to redirect_to_idp_path
+      #FEDERATION_REPORTER.report_idp_registration(request, session[:selected_idp_name], session[:selected_idp_names], selected_answer_store.selected_evidence, recommended)
+      redirect_to redirect_to_idp_register_path
     else
       something_went_wrong("Couldn't display IDP with entity id: #{idp.entity_id}")
     end

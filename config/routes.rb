@@ -109,7 +109,8 @@ Rails.application.routes.draw do
     get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
     get 'forgot_company', to: 'static#forgot_company', as: :forgot_company
     get 'response_processing', to: 'response_processing#index', as: :response_processing
-    get 'redirect_to_idp', to: 'redirect_to_idp#index', as: :redirect_to_idp
+    get 'redirect_to_idp_register', to: 'redirect_to_idp#register', as: :redirect_to_idp_register
+    get 'redirect_to_idp_sign_in', to: 'redirect_to_idp#sign_in', as: :redirect_to_idp_sign_in
     get 'redirect_to_service_signing_in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
     get 'redirect_to_service_start_again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
     get 'redirect_to_service_error' => 'redirect_to_service#error', as: :redirect_to_service_error
