@@ -48,7 +48,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   end
 
   def then_im_at_the_interstitial_page(locale = 'en')
-    expect(page).to have_current_path("/#{I18n.t('routes.redirect_to_idp', locale: locale)}")
+    expect(page).to have_current_path("/#{I18n.t('routes.redirect_to_idp_sign_in', locale: locale)}")
   end
 
   def when_i_choose_to_continue

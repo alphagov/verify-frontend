@@ -1,13 +1,13 @@
 class RedirectToIdpController < ApplicationController
   def register
     request_form
-    FEDERATION_REPORTER.report_idp_registration(request, session[:selected_idp_name], session[:selected_idp_names], selected_answer_store.selected_evidence, recommended)
+    FEDERATION_REPORTER.report_idp_registration(current_transaction, request, session[:selected_idp_name], session[:selected_idp_names], selected_answer_store.selected_evidence, recommended)
     render :redirect_to_idp
   end
 
   def sign_in
     request_form
-    FEDERATION_REPORTER.report_sign_in_idp_selection(request, session[:selected_idp_name])
+    FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name])
     render :redirect_to_idp
   end
 
