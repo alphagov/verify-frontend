@@ -46,6 +46,8 @@ GEM
     arr-pm (0.0.10)
       cabin (> 0)
     ast (2.3.0)
+    autoprefixer-rails (7.1.6)
+      execjs
     backports (3.6.8)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -343,6 +345,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   byebug
   capybara (~> 2.10)
   connection_pool
