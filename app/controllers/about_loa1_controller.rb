@@ -1,6 +1,5 @@
 class AboutLoa1Controller < ApplicationController
   layout 'slides', except: [:choosing_a_company]
-  include AbTestHelper
 
   def index
     @tailored_text = current_transaction.tailored_text
