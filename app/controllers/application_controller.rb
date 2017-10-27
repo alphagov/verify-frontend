@@ -199,6 +199,30 @@ private
     end
   end
 
+  def ajax_idp_redirection_sign_in_request
+    FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name])
+
+    outbound_saml_message = SESSION_PROXY.idp_authn_request(session[:verify_session_id])
+    idp_request = idp_request_initilization(outbound_saml_message)
+    render json: idp_request
+  end
+
+  def ajax_idp_redirection_registration_request(recommended)
+    FEDERATION_REPORTER.report_idp_registration(current_transaction, request, session[:selected_idp_name], session[:selected_idp_names], selected_answer_store.selected_evidence, recommended)
+
+    outbound_saml_message = SESSION_PROXY.idp_authn_request(session[:verify_session_id])
+    idp_request = idp_request_initilization(outbound_saml_message)
+    render json: idp_request.to_json(methods: :hints)
+  end
+
+  def idp_request_initilization(outbound_saml_message)
+    IdentityProviderRequest.new(
+      outbound_saml_message,
+      selected_identity_provider.simple_id,
+      selected_answer_store.selected_answers
+    )
+  end
+
   def is_loa1?
     session[:requested_loa] == 'LEVEL_1'
   end

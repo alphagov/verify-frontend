@@ -14,29 +14,23 @@ class SignInController < ApplicationController
   def select_idp
     select_viewable_idp(params.fetch('entity_id')) do |decorated_idp|
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      redirect_to redirect_to_idp_path
+      redirect_to redirect_to_idp_sign_in_path
     end
   end
 
   def select_idp_ajax
     select_viewable_idp(params.fetch('entityId')) do |decorated_idp|
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      outbound_saml_message = SESSION_PROXY.idp_authn_request(session[:verify_session_id])
-      provider_request = IdentityProviderRequest.new(
-        outbound_saml_message,
-        selected_identity_provider.simple_id,
-        selected_answer_store.selected_answers
-      )
-      render json: provider_request
+      ajax_idp_redirection_sign_in_request
     end
   end
 
 private
 
-  def sign_in(entity_id, display_name)
+  def sign_in(entity_id, idp_name)
     POLICY_PROXY.select_idp(session[:verify_session_id], entity_id)
     set_journey_hint(entity_id)
-    FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, display_name)
+    session[:selected_idp_name] = idp_name
   end
 
   def unavailable_idps

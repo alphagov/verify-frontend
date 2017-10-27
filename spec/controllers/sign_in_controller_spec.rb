@@ -25,7 +25,7 @@ describe SignInController do
 
       post :select_idp, params: { locale: 'en', 'entity_id' => 'http://idcorp.com' }
       expect(session[:selected_idp].simple_id).to eq('stub-idp-one')
-      expect(subject).to redirect_to(redirect_to_idp_path)
+      expect(subject).to redirect_to(redirect_to_idp_sign_in_path)
     end
 
     it 'will redirect to an error page when the idp is unrecognised' do

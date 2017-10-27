@@ -9,7 +9,7 @@ RSpec.describe 'When the user visits a page that triggers an API call when the s
 
   it 'should render the soft session timeout page when SESSION_TIMEOUT received from the API' do
     stub_api_returns_error('SESSION_TIMEOUT')
-    visit redirect_to_idp_path
+    visit redirect_to_idp_register_path
     expect(page).to have_link(href: '/redirect-to-service/error', class: 'button')
   end
 end
