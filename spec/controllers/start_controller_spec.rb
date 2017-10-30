@@ -5,13 +5,13 @@ require 'piwik_test_helper'
 
 describe StartController do
   before(:each) do
-    stub_piwik_request_with_rp_and_loa('action_name' => 'The user has reached the start page')
     set_session_and_cookies_with_loa('LEVEL_2')
   end
 
   it 'renders LOA2 start page if service is level 2' do
+    stub_piwik_request = stub_piwik_request_with_rp_and_loa('action_name' => 'The user has reached the start page')
     get :index, params: { locale: 'en' }
-    expect(a_request_to_piwik).to have_been_made
+    expect(stub_piwik_request).to have_been_made.once
     expect(subject).to render_template(:start)
   end
 

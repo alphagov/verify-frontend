@@ -32,6 +32,7 @@ Rails.application.config.after_initialize do
   # IDP Config
   IDP_CONFIG = YAML.load_file(CONFIG.idp_config)
   UNAVAILABLE_IDPS = IDP_CONFIG.fetch('show_unavailable', [])
+  LOA1_ONBOARDING_IDPS = IDP_CONFIG.fetch('loa1_onboarding_idps', [])
 
   # IDP Eligibility
   loaded_profile_filters = IdpEligibility::ProfilesLoader.new(YamlLoader.new).load(CONFIG.rules_directory)

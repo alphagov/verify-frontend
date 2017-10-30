@@ -19,6 +19,11 @@ class StubApi < Sinatra::Base
         "simpleId":"stub-idp-loa1",
         "entityId":"http://stub-idp-loa1.com",
         "levelsOfAssurance": ["LEVEL_1"]
+      },
+     {
+        "simpleId":"stub-idp-loa1-onboarding",
+        "entityId":"http://stub-idp-loa1-onboarding.com",
+        "levelsOfAssurance": ["LEVEL_1"]
       }]'
   end
 

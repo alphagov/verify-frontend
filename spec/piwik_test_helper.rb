@@ -1,10 +1,14 @@
-def stub_piwik_request(extra_parameters = {}, extra_headers = {}, loa = 'LEVEL_2', extra_custom_variables = [])
+def stub_piwik_request(extra_parameters = {},
+                       extra_headers = {},
+                       loa = 'LEVEL_2',
+                       extra_custom_variables = [],
+                       transaction_analytics_description = 'analytics description for test-rp')
   piwik_request = {
     'rec' => '1',
     'apiv' => '1',
     'idsite' => INTERNAL_PIWIK.site_id.to_s,
     'cookie' => 'false',
-    '_cvar' => create_custom_variable_param(loa, extra_custom_variables)
+    '_cvar' => create_custom_variable_param(loa, extra_custom_variables, transaction_analytics_description)
   }
   piwik_headers = {
     'Connection' => 'Keep-Alive',
@@ -14,8 +18,8 @@ def stub_piwik_request(extra_parameters = {}, extra_headers = {}, loa = 'LEVEL_2
     .with(headers: piwik_headers.update(extra_headers), query: hash_including(piwik_request.update(extra_parameters)))
 end
 
-def create_custom_variable_param(loa, extra_custom_variables)
-  rp_custom_variable = "\"1\":[\"RP\",\"analytics description for test-rp\"]"
+def create_custom_variable_param(loa, extra_custom_variables, transaction_analytics_description)
+  rp_custom_variable = "\"1\":[\"RP\",\"#{transaction_analytics_description}\"]"
   loa_custom_variable = "\"2\":[\"LOA_REQUESTED\",\"#{loa}\"]"
 
   param = "{#{rp_custom_variable},#{loa_custom_variable}"
@@ -59,18 +63,14 @@ def stub_piwik_request_with_rp_and_loa(extra_parameters = {}, loa = 'LEVEL_2')
   stub_piwik_request(extra_parameters, {}, loa)
 end
 
-def stub_piwik_report_number_of_recommended_ipds(number_of_recommended_idps)
+def stub_piwik_report_number_of_recommended_ipds(number_of_recommended_idps, loa, transaction_analytics_description)
   piwik_request = {
       e_c: 'Engagement',
       action_name: 'trackEvent',
       e_n: 'IDPs Recommended',
       e_a: number_of_recommended_idps.to_s
   }
-  stub_piwik_request(piwik_request)
-end
-
-def a_request_to_piwik
-  a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+  stub_piwik_request(piwik_request, {}, loa, [], transaction_analytics_description)
 end
 
 def stub_piwik_journey_type_request(journey_type, action_name, loa)

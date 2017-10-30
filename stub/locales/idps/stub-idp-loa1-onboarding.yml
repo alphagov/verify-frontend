@@ -1,0 +1,14 @@
+en:
+  idps:
+    stub-idp-loa1-onboarding:
+      name: "LOA1 Onboarding Corp"
+      about: "<p>Bob’s Onboarding Identity Service is the second best identity proofing service around. Come get some.</p>"
+      requirements: []
+      contact_details: |
+        <strong id="stub-idp-two-contact-details">5 Somewhere Avenue</strong>
+cy:
+  idps:
+    stub-idp-loa1-onboarding:
+      name: "Welsh Bob’s Onboarding Identity Service"
+      about: "<p>Bob’s Onboarding Identity Service is the second best identity proofing service around. Come get some.</p>"
+      requirements: []
