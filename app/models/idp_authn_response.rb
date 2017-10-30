@@ -5,7 +5,7 @@ class IdpAuthnResponse < Api::Response
   validates_inclusion_of :is_registration, in: [true, false]
 
   def initialize(hash)
-    @idp_result = hash['idpResult']
+    @idp_result = hash['result']
     @is_registration = hash['isRegistration']
     @loa_achieved = hash['loaAchieved']
   end
