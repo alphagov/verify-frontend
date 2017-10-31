@@ -74,9 +74,9 @@ describe StubApi do
     end
   end
 
-  context '#put /api/session/:session_id/idp-authn-response' do
+  context '#post /SAML2/SSO/API/RECEIVER/Response/POST' do
     it 'should respond with valid hash' do
-      put '/api/session/session_id/idp-authn-response'
+      post '/SAML2/SSO/API/RECEIVER/Response/POST'
       expect(last_response).to be_ok
       response = IdpAuthnResponse.new(last_response_json)
       expect(response).to be_valid

@@ -12,7 +12,7 @@ class AuthnResponseController < SamlController
   def idp_response
     raise_error_if_session_mismatch(params['RelayState'], session[:verify_session_id])
 
-    response = SESSION_PROXY.idp_authn_response(session[:verify_session_id], params['SAMLResponse'], params['RelayState'])
+    response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params['SAMLResponse'])
     idp_response_handlers[response.idp_result].call(response)
   end
 

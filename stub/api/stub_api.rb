@@ -59,10 +59,11 @@ class StubApi < Sinatra::Base
     }'
   end
 
-  put '/api/session/:session_id/idp-authn-response' do
+  post '/SAML2/SSO/API/RECEIVER/Response/POST' do
     '{
-      "idpResult":"blah",
-      "isRegistration":false
+       "result":"blah",
+      "isRegistration":false,
+      "loaAchieved":"LEVEL_2"
     }'
   end
 
