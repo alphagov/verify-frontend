@@ -16,18 +16,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
       'levelsOfAssurance' => ['LEVEL_2']
   }.freeze
 
-  STUB_IDP_LOA1_ONBOARDING = {
-      'simpleId' => 'stub-idp-loa1-onboarding',
-      'entityId' => 'http://idcorp-loa1-onboarding.com',
-      'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
-  }.freeze
-
   context '#index' do
-    before :each do
-      stub_const('LOA1_ONBOARDING_IDPS', ['stub-idp-loa1-onboarding'])
-      stub_api_idp_list([STUB_IDP_LOA1, STUB_IDP_ONE_DOC, STUB_IDP_LOA1_ONBOARDING])
-    end
-
     it 'renders the certified companies LOA2 template when LEVEL_2 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_2')
       stub_api_idp_list([STUB_IDP_LOA1, STUB_IDP_ONE_DOC])
