@@ -223,14 +223,6 @@ private
     )
   end
 
-  def is_loa1?
-    session[:requested_loa] == 'LEVEL_1'
-  end
-
-  def is_loa2?
-    session[:requested_loa] == 'LEVEL_2'
-  end
-
   def set_piwik_custom_variables
     @piwik_custom_variables = [
         Analytics::CustomVariable.build_for_js_client(:rp, current_transaction.analytics_description),

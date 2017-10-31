@@ -58,4 +58,8 @@ private
     alternative_name = Cookies.parse_json(ab_test_cookie)[AB_EXPERIMENT_NAME]
     AB_TESTS[AB_EXPERIMENT_NAME] ? AB_TESTS[AB_EXPERIMENT_NAME].alternative_name(alternative_name) : 'default'
   end
+
+  def is_loa1?
+    session[:requested_loa] == 'LEVEL_1'
+  end
 end

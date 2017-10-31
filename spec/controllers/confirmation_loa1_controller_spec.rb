@@ -3,7 +3,7 @@ require 'controller_helper'
 require 'spec_helper'
 require 'models/display/viewable_identity_provider'
 
-describe ConfirmationController do
+describe ConfirmationLoa1Controller do
   subject { get :index, params: { locale: 'en' } }
 
   context 'user has selected an idp' do
@@ -15,16 +15,11 @@ describe ConfirmationController do
       set_session_and_cookies_with_loa('LEVEL_1')
       expect(subject).to render_template(:confirmation_LOA1)
     end
-
-    it 'renders the confirmation LOA2 template when LEVEL_2 is the requested LOA' do
-      set_session_and_cookies_with_loa('LEVEL_2')
-      expect(subject).to render_template(:confirmation_LOA2)
-    end
   end
 
   context 'user has no selected IDP in session' do
     it 'should raise a WarningLevelError' do
-      set_session_and_cookies_with_loa('LEVEL_2')
+      set_session_and_cookies_with_loa('LEVEL_1')
       expect(Rails.logger).to receive(:warn).with(kind_of(Errors::WarningLevelError)).once
       get :index, params: { locale: 'en' }
       expect(response).to have_http_status(500)

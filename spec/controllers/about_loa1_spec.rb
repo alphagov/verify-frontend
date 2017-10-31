@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'controller_helper'
 require 'api_test_helper'
 
-describe AboutController do
+describe AboutLoa1Controller do
   let(:identity_provider_display_decorator) { double(:IdentityProviderDisplayDecorator) }
 
   before(:each) do
@@ -20,14 +20,6 @@ describe AboutController do
     it 'renders the certified companies LOA1 template when LEVEL_1 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_1')
       expect(subject).to render_template(:certified_companies_LOA1)
-      expect(subject).to_not render_template(:certified_companies_LOA2)
-    end
-
-    it 'renders the certified companies LOA2 template when LEVEL_2 is the requested LOA' do
-      set_session_and_cookies_with_loa('LEVEL_2')
-      expect(identity_provider_display_decorator).to receive(:decorate_collection).and_return([])
-      expect(subject).to render_template(:certified_companies_LOA2)
-      expect(subject).to_not render_template(:certified_companies_LOA1)
     end
   end
 
@@ -37,13 +29,6 @@ describe AboutController do
     it 'renders the identity accounts LOA1 template when LEVEL_1 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_1')
       expect(subject).to render_template(:identity_accounts_LOA1)
-      expect(subject).to_not render_template(:identity_accounts_LOA2)
-    end
-
-    it 'renders the identity accounts LOA2 template when LEVEL_2 is the requested LOA' do
-      set_session_and_cookies_with_loa('LEVEL_2')
-      expect(subject).to render_template(:identity_accounts_LOA2)
-      expect(subject).to_not render_template(:identity_accounts_LOA1)
     end
   end
 end

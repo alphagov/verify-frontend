@@ -1,3 +1,7 @@
+# require 'loa_match'
+
+include LoaMatch
+
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -70,10 +74,7 @@ Rails.application.routes.draw do
     # get 'begin_registration', to: 'start#register', as: :begin_registration
     get 'sign_in', to: 'sign_in#index', as: :sign_in
     post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
-    get 'about', to: 'about#index', as: :about
-    get 'about_certified_companies', to: 'about#certified_companies', as: :about_certified_companies
-    get 'about_identity_accounts', to: 'about#identity_accounts', as: :about_identity_accounts
-    get 'about_choosing_a_company', to: 'about#choosing_a_company', as: :about_choosing_a_company
+
     get 'select_documents', to: 'select_documents#index', as: :select_documents
     get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
     post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
@@ -88,22 +89,49 @@ Rails.application.routes.draw do
     get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
     get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
     get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
-    get 'choose_a_certified_company', to: 'choose_a_certified_company#index', as: :choose_a_certified_company
-    post 'choose_a_certified_company', to: 'choose_a_certified_company#select_idp', as: :choose_a_certified_company_submit
-    get 'choose_a_certified_company_about', to: 'choose_a_certified_company#about', as: :choose_a_certified_company_about
-    get 'why_companies', to: 'why_companies#index', as: :why_companies
-    get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+
+    constraints IsLoa1 do
+      get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+      post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
+      get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
+      get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
+      get 'failed_registration', to: 'failed_registration_loa1#index', as: :failed_registration
+      get 'cancelled_registration', to: 'cancelled_registration_loa1#index', as: :cancelled_registration
+      get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa1#index', as: :redirect_to_idp_question
+      post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa1#continue', as: :redirect_to_idp_question_submit
+      get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa1#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
+      get 'confirmation', to: 'confirmation_loa1#index', as: :confirmation
+      get 'about', to: 'about_loa1#index', as: :about
+      get 'about_certified_companies', to: 'about_loa1#certified_companies', as: :about_certified_companies
+      get 'about_identity_accounts', to: 'about_loa1#identity_accounts', as: :about_identity_accounts
+      get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
+    end
+
+    constraints IsLoa2 do
+      get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+      post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+      get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
+      get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
+      get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
+      get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
+      get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#index', as: :redirect_to_idp_question
+      post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
+      get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
+      get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
+      get 'about', to: 'about_loa2#index', as: :about
+      get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
+      get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
+      get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+    end
+
     post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
-    get 'redirect_to_idp_question', to: 'redirect_to_idp_question#index', as: :redirect_to_idp_question
-    post 'redirect_to_idp_question', to: 'redirect_to_idp_question#continue', as: :redirect_to_idp_question_submit
-    get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
+    get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+
     get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
     get 'cookies', to: 'static#cookies', as: :cookies
     get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
     get 'choose_a_country', to: 'choose_a_country#choose_a_country', as: :choose_a_country
     post 'choose_a_country', to: 'choose_a_country#choose_a_country_submit', as: :choose_a_country_submit
-    get 'confirmation', to: 'confirmation#index', as: :confirmation
-    get 'failed_registration', to: 'failed_registration#index', as: :failed_registration
     get 'failed_uplift', to: 'failed_uplift#index', as: :failed_uplift
     get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
     get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
