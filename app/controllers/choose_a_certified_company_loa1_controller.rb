@@ -2,7 +2,9 @@ class ChooseACertifiedCompanyLoa1Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
 
   def index
-    loa1_idps = current_identity_providers.select { |idp| idp.levels_of_assurance.min == 'LEVEL_1' }
+    loa1_idps = current_identity_providers
+                    .select { |idp| idp.levels_of_assurance.min == 'LEVEL_1' }
+                    .select { |idp| !is_onboarding?(idp) || is_test_rp? }
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(loa1_idps)
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
     render 'choose_a_certified_company/choose_a_certified_company_LOA1'
@@ -32,5 +34,13 @@ private
 
   def interstitial_question_flag_enabled_for(decorated_idp)
     IDP_FEATURE_FLAGS_CHECKER.enabled?(:show_interstitial_question_loa1, decorated_idp.simple_id)
+  end
+
+  def is_onboarding?(idp)
+    LOA1_ONBOARDING_IDPS.include?(idp.simple_id)
+  end
+
+  def is_test_rp?
+    current_transaction.simple_id == 'test-rp'
   end
 end
