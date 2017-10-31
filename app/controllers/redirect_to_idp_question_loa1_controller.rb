@@ -15,7 +15,7 @@ class RedirectToIdpQuestionLoa1Controller < ApplicationController
     idp_wont_work_for_you_one_doc_path
   end
 
-  def invalid_interstial_path
+  def invalid_interstitial_path
     'redirect_to_idp_question/redirect_to_idp_question_LOA1'
   end
 end

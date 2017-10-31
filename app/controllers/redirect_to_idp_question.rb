@@ -16,7 +16,7 @@ module RedirectToIdpQuestion
     else
       @idp = decorated_idp
       flash.now[:errors] = @form.errors.full_messages.join(', ')
-      render invalid_interstial_path
+      render invalid_interstitial_path
     end
   end
 

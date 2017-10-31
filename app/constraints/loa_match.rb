@@ -4,5 +4,5 @@ module LoaMatch
   }
 
   IsLoa1 = is_loa.curry.('LEVEL_1')
-  IsLoa2 = is_loa.curry.('LEVEL_2')
+  IsLoa2 = !IsLoa1
 end

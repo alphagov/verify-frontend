@@ -31,7 +31,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
     it 'renders the certified companies LOA1 template with LOA1 IDPs when LEVEL_1 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_1')
-      stub_piwik_report_number_of_recommended_ipds(2)
+      stub_piwik_report_number_of_recommended_ipds(2, 'LEVEL_1')
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection) do |idps|
         idps.each { |idp| expect(idp.levels_of_assurance).to include 'LEVEL_1' }
@@ -62,7 +62,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
     it 'checks whether IDP was recommended' do
       post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp-loa1.com' }
 
-      expect(session[:selected_idp_was_recommended]).to eql(false)
+      expect(session[:selected_idp_was_recommended]).to eql(true)
     end
 
     it 'redirects to IDP warning page by default' do
