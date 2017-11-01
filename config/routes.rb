@@ -13,16 +13,6 @@ Rails.application.routes.draw do
     instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
   end
 
-  AB_TEST_EXPERIMENT_NAME = 'dummy_ab_test'.freeze
-
-  ab_test_control_piwik = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'control', true, 'LEVEL_1')
-  ab_test_variant_b_piwik = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'variant_b', true, 'LEVEL_1')
-  ab_test_variant_c_piwik = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'variant_c', true, 'LEVEL_1')
-
-  ab_test_control = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'control')
-  ab_test_variant_b = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'variant_b')
-  ab_test_variant_c = SelectRoute.new(AB_TEST_EXPERIMENT_NAME, 'variant_c')
-
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   post 'SAML2/SSO/EidasResponse/POST' => 'authn_response#country_response'
@@ -47,31 +37,9 @@ Rails.application.routes.draw do
   end
 
   localized do
-    constraints ab_test_control_piwik do
-      get 'start', to: 'start#index', as: :start
-    end
-    constraints ab_test_variant_b_piwik do
-      get 'start', to: 'start_variant_b#index', as: :start
-    end
-    constraints ab_test_variant_c_piwik do
-      get 'start', to: 'start_variant_c#index', as: :start
-    end
-    constraints ab_test_control do
-      post 'start', to: 'start#request_post', as: :start
-      get 'begin_registration', to: 'start#register', as: :begin_registration
-    end
-    constraints ab_test_variant_b do
-      post 'start', to: 'start_variant_b#request_post', as: :start
-      get 'begin_registration', to: 'start_variant_b#register', as: :begin_registration
-    end
-    constraints ab_test_variant_c do
-      post 'start', to: 'start_variant_c#request_post', as: :start
-      get 'begin_registration', to: 'start_variant_c#register', as: :begin_registration
-    end
-
-    # get 'start', to: 'start#index', as: :start
-    # post 'start', to: 'start#request_post', as: :start
-    # get 'begin_registration', to: 'start#register', as: :begin_registration
+    get 'start', to: 'start#index', as: :start
+    post 'start', to: 'start#request_post', as: :start
+    get 'begin_registration', to: 'start#register', as: :begin_registration
     get 'sign_in', to: 'sign_in#index', as: :sign_in
     post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 
@@ -81,8 +49,8 @@ Rails.application.routes.draw do
     get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
     get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
     post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-    get 'select_phone', to: 'select_phone#index', as: :select_phone
-    post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
+    # get 'select_phone', to: 'select_phone#index', as: :select_phone
+    # post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
     get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
     get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
     post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
@@ -108,9 +76,9 @@ Rails.application.routes.draw do
     end
 
     constraints IsLoa2 do
-      get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
-      post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
-      get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
+      # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+      # post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+      # get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
       get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
       get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
       get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
@@ -155,6 +123,8 @@ Rails.application.routes.draw do
     post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
     get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
     get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
+
+    add_routes :threshold_policy_ab_test_routes
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
