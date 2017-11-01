@@ -4,34 +4,42 @@ require 'api_test_helper'
 require 'piwik_test_helper'
 
 describe ChooseACertifiedCompanyLoa1Controller do
-  STUB_IDP_LOA1 = {
-      'simpleId' => 'stub-idp-loa1',
-      'entityId' => 'http://idcorp-loa1.com',
-      'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
-  }.freeze
+  let(:stub_idp_loa1) {
+    {
+        'simpleId' => 'stub-idp-loa1',
+        'entityId' => 'http://idcorp-loa1.com',
+        'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
+    }.freeze
+  }
 
-  STUB_IDP_ONE_DOC = {
-      'simpleId' => 'stub-idp-one-doc-question',
-      'entityId' => 'http://idcorp.com',
-      'levelsOfAssurance' => ['LEVEL_2']
-  }.freeze
+  let(:stub_idp_one_doc) {
+    {
+        'simpleId' => 'stub-idp-one-doc-question',
+        'entityId' => 'http://idcorp.com',
+        'levelsOfAssurance' => ['LEVEL_2']
+    }.freeze
+  }
 
-  STUB_IDP_LOA1_ONBOARDING = {
-      'simpleId' => 'stub-idp-loa1-onboarding',
-      'entityId' => 'http://idcorp-loa1-onboarding.com',
-      'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
-  }.freeze
+  let(:stub_idp_loa1_onboarding) {
+    {
+        'simpleId' => 'stub-idp-loa1-onboarding',
+        'entityId' => 'http://idcorp-loa1-onboarding.com',
+        'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
+    }.freeze
+  }
 
-  STUB_IDP_NO_INTERSTITIAL = {
-      'simpleId' => 'stub-idp-two',
-      'entityId' => 'http://idcorp-two.com',
-      'levelsOfAssurance' => ['LEVEL_1']
-  }.freeze
+  let(:stub_idp_no_interstitial) {
+    {
+        'simpleId' => 'stub-idp-two',
+        'entityId' => 'http://idcorp-two.com',
+        'levelsOfAssurance' => ['LEVEL_1']
+    }.freeze
+  }
 
   context '#index' do
     before :each do
       stub_const('LOA1_ONBOARDING_IDPS', ['stub-idp-loa1-onboarding'])
-      stub_api_idp_list([STUB_IDP_LOA1, STUB_IDP_ONE_DOC, STUB_IDP_LOA1_ONBOARDING])
+      stub_api_idp_list([stub_idp_loa1, stub_idp_one_doc, stub_idp_loa1_onboarding])
     end
 
     it 'renders IDPs including onboarding IDPs when the RP is test-rp' do
@@ -66,7 +74,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
   context '#select_idp' do
     before :each do
       set_session_and_cookies_with_loa('LEVEL_1')
-      stub_api_idp_list([STUB_IDP_LOA1, STUB_IDP_ONE_DOC])
+      stub_api_idp_list([stub_idp_loa1, stub_idp_one_doc])
     end
 
     it 'resets interstitial answer to no value when IDP is selected' do
@@ -89,7 +97,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
     end
 
     it 'redirects to IDP warning page by default' do
-      stub_api_idp_list([STUB_IDP_NO_INTERSTITIAL])
+      stub_api_idp_list([stub_idp_no_interstitial])
       post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp-two.com' }
 
       expect(subject).to redirect_to redirect_to_idp_warning_path
@@ -110,8 +118,8 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
   context '#about' do
     it 'returns 404 page if no display data exists for IDP' do
-      set_session_and_cookies_with_loa('LEVEL_2')
-      stub_api_idp_list([STUB_IDP_LOA1, STUB_IDP_ONE_DOC])
+      set_session_and_cookies_with_loa('LEVEL_1')
+      stub_api_idp_list([stub_idp_loa1, stub_idp_one_doc])
 
       get :about, params: { locale: 'en', company: 'unknown-idp' }
 

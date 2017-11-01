@@ -3,9 +3,8 @@ require 'rails_helper'
 require 'models/saml_proxy_api'
 require 'cookie_names'
 
-X_FORWARDED_FOR = 'X-Forwarded-For'.freeze
-
 describe SamlProxyApi do
+  let(:x_forwarded_for) { 'X-Forwarded-For'.freeze }
   let(:api_client) { double(:api_client) }
   let(:originating_ip_store) { double(:originating_ip_store) }
   let(:path) { '/api/session' }
@@ -29,7 +28,7 @@ describe SamlProxyApi do
     it 'should return an rp response' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
-        .with(response_for_rp_endpoint(session_id), headers: { "X-Forwarded-For" => ip_address })
+        .with(response_for_rp_endpoint(session_id), headers: { x_forwarded_for => ip_address })
         .and_return('postEndpoint' => 'http://www.example.com',
                     'samlMessage' => 'a saml message',
                     'relayState' => 'a relay state')
@@ -47,7 +46,7 @@ describe SamlProxyApi do
     it 'should raise an error when the API responds with an unknown value' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
-        .with(response_for_rp_endpoint(session_id), headers: { "X-Forwarded-For" => ip_address })
+        .with(response_for_rp_endpoint(session_id), headers: { x_forwarded_for => ip_address })
         .and_return('outcome' => 'BANANA')
 
       expect {
@@ -60,7 +59,7 @@ describe SamlProxyApi do
     it 'should return an rp response' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
-        .with(error_response_for_rp_endpoint(session_id), headers: { "X-Forwarded-For" => ip_address })
+        .with(error_response_for_rp_endpoint(session_id), headers: { x_forwarded_for => ip_address })
         .and_return('postEndpoint' => 'http://www.example.com',
                     'samlMessage' => 'a saml message',
                     'relayState' => 'a relay state')
@@ -78,7 +77,7 @@ describe SamlProxyApi do
     it 'should raise an error when the API responds with an unknown value' do
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:get)
-        .with(error_response_for_rp_endpoint(session_id), headers: { "X-Forwarded-For" => ip_address })
+        .with(error_response_for_rp_endpoint(session_id), headers: { x_forwarded_for => ip_address })
         .and_return('outcome' => 'BANANA')
 
       expect {

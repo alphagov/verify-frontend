@@ -4,22 +4,26 @@ require 'api_test_helper'
 require 'piwik_test_helper'
 
 describe ChooseACertifiedCompanyLoa2Controller do
-  STUB_IDP_LOA1 = {
-      'simpleId' => 'stub-idp-loa1',
-      'entityId' => 'http://idcorp-loa1.com',
-      'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
-  }.freeze
+  let(:stub_idp_loa1) {
+    {
+        'simpleId' => 'stub-idp-loa1',
+        'entityId' => 'http://idcorp-loa1.com',
+        'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
+    }.freeze
+  }
 
-  STUB_IDP_ONE_DOC = {
-      'simpleId' => 'stub-idp-one-doc-question',
-      'entityId' => 'http://idcorp.com',
-      'levelsOfAssurance' => ['LEVEL_2']
-  }.freeze
+  let(:stub_idp_one_doc) {
+    {
+        'simpleId' => 'stub-idp-one-doc-question',
+        'entityId' => 'http://idcorp.com',
+        'levelsOfAssurance' => ['LEVEL_2']
+    }.freeze
+  }
 
   context '#index' do
     it 'renders the certified companies LOA2 template when LEVEL_2 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_2')
-      stub_api_idp_list([STUB_IDP_LOA1, STUB_IDP_ONE_DOC])
+      stub_api_idp_list([stub_idp_loa1, stub_idp_one_doc])
       session[:selected_answers] = { documents: { driving_licence: true, mobile_phone: true } }
       stub_piwik_request = stub_piwik_report_number_of_recommended_ipds(1, 'LEVEL_2', 'analytics description for test-rp')
 
@@ -37,7 +41,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
   context '#select_idp' do
     before :each do
       set_session_and_cookies_with_loa('LEVEL_2')
-      stub_api_idp_list([STUB_IDP_LOA1, STUB_IDP_ONE_DOC])
+      stub_api_idp_list([stub_idp_loa1, stub_idp_one_doc])
     end
 
     it 'resets interstitial answer to no value when IDP is selected' do
@@ -87,7 +91,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
   context '#about' do
     it 'returns 404 page if no display data exists for IDP' do
       set_session_and_cookies_with_loa('LEVEL_2')
-      stub_api_idp_list([STUB_IDP_LOA1, STUB_IDP_ONE_DOC])
+      stub_api_idp_list([stub_idp_loa1, stub_idp_one_doc])
 
       get :about, params: { locale: 'en', company: 'unknown-idp' }
 

@@ -3,9 +3,8 @@ require 'rails_helper'
 require 'models/session_proxy'
 require 'cookie_names'
 
-X_FORWARDED_FOR = 'X-Forwarded-For'.freeze
-
 describe SessionProxy do
+  let(:x_forwarded_for) { 'X-Forwarded-For'.freeze }
   let(:api_client) { double(:api_client) }
   let(:originating_ip_store) { double(:originating_ip_store) }
   let(:path) { '/api/session' }
@@ -110,7 +109,7 @@ describe SessionProxy do
       }
       ip_address = '1.1.1.1'
       expect(api_client).to receive(:get)
-        .with(endpoint(SessionProxy::IDP_AUTHN_REQUEST_SUFFIX), headers: { X_FORWARDED_FOR => ip_address })
+        .with(endpoint(SessionProxy::IDP_AUTHN_REQUEST_SUFFIX), headers: { x_forwarded_for => ip_address })
         .and_return(authn_request)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       result = session_proxy.idp_authn_request(session_id)
@@ -131,7 +130,7 @@ describe SessionProxy do
       }
       ip_address = '1.1.1.1'
       expect(api_client).to receive(:get)
-        .with(endpoint(SessionProxy::IDP_AUTHN_REQUEST_SUFFIX), headers: { X_FORWARDED_FOR => ip_address })
+        .with(endpoint(SessionProxy::IDP_AUTHN_REQUEST_SUFFIX), headers: { x_forwarded_for => ip_address })
         .and_return(authn_request)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect {
