@@ -1,8 +1,9 @@
 module LoaMatch
-  is_loa = ->(level, _, request) {
-    request.session['requested_loa'] == level
+  IsLoa1 = ->(request) {
+    request.session[:requested_loa] == 'LEVEL_1'
   }
 
-  IsLoa1 = is_loa.curry.('LEVEL_1')
-  IsLoa2 = !IsLoa1
+  IsLoa2 = ->(request) {
+    !IsLoa1.call(request)
+  }
 end
