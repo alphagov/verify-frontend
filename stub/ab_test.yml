@@ -31,11 +31,9 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - dummy_ab_test:
+  - threshold_policy_experiment:
       alternatives:
         - name: 'control'
-          percent: 100
-        - name: 'variant_b'
-          percent: 0
-        - name: 'variant_c'
-          percent: 0
+          percent: 50
+        - name: 'variant'
+          percent: 50
