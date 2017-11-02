@@ -49,10 +49,10 @@ Rails.application.config.after_initialize do
   loaded_profile_filters_variant = IdpEligibility::ProfilesLoader.new(YamlLoader.new).load(CONFIG.rules_directory_variant)
   IDP_ELIGIBILITY_CHECKER_VARIANT = IdpEligibility::Checker.new(loaded_profile_filters_variant.all_profiles)
   IDP_RECOMMENDATION_GROUPER_VARIANT = IdpEligibility::RecommendationGrouper.new(
-      loaded_profile_filters_variant.recommended_profiles,
-      loaded_profile_filters_variant.non_recommended_profiles,
-      loaded_profile_filters_variant.demo_profiles,
-      RP_CONFIG.fetch('demo_period_blacklist')
+    loaded_profile_filters_variant.recommended_profiles,
+    loaded_profile_filters_variant.non_recommended_profiles,
+    loaded_profile_filters_variant.demo_profiles,
+    RP_CONFIG.fetch('demo_period_blacklist')
   )
 
   # Feature flags

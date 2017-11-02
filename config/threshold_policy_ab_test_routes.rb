@@ -1,10 +1,10 @@
 THRESHOLD_POLICY_EXPERIMENT = 'threshold_policy_experiment'.freeze
 
 threshold_policy_control_piwik = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'control', true)
-threshold_policy_variant_piwik = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'variant_old', true)
+threshold_policy_variant_piwik = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'variant', true)
 
 threshold_policy_control = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'control')
-threshold_policy_variant = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'variant_old')
+threshold_policy_variant = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'variant')
 
 constraints threshold_policy_control_piwik do
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
@@ -33,5 +33,3 @@ constraints threshold_policy_variant do
     get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2_variant#about', as: :choose_a_certified_company_about
   end
 end
-
-

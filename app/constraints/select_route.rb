@@ -1,4 +1,5 @@
 require 'cookies/cookies'
+require 'ab_test/ab_test'
 
 class SelectRoute
   def initialize(experiment_name, route, is_start_of_test = false, experiment_loa = nil)

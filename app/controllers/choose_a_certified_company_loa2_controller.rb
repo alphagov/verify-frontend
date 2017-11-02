@@ -1,5 +1,5 @@
 class ChooseACertifiedCompanyLoa2Controller < ApplicationController
-  include ChooseACertifiedCompanyAboutVariant
+  include ChooseACertifiedCompanyAbout
 
   def index
     grouped_identity_providers = IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers, current_transaction_simple_id)
