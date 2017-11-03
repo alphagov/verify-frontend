@@ -1,3 +1,5 @@
+require 'ab_test/ab_test'
+
 class StartController < ApplicationController
   layout 'slides'
 
