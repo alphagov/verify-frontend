@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe IdentityProviderRequest do
   it 'should wrap a saml request' do
-    saml_message = OutboundSamlMessage.new(
+    saml_message = FrontendApiOutboundSamlMessage.new(
       'location' => 'some_location',
       'samlRequest' => 'some_request',
       'relayState' => 'some_state',
@@ -16,7 +16,7 @@ RSpec.describe IdentityProviderRequest do
   end
 
   it 'should have hints when idp has hints is enabled' do
-    saml_message = OutboundSamlMessage.new('registration' => true)
+    saml_message = FrontendApiOutboundSamlMessage.new('registration' => true)
     answers_hash = { phone: { mobile_phone: true } }
     hints = ['has_mobile']
 
@@ -29,7 +29,7 @@ RSpec.describe IdentityProviderRequest do
   end
 
   it 'should not have hints when idp has hints disabled' do
-    saml_message = OutboundSamlMessage.new('registration' => true)
+    saml_message = FrontendApiOutboundSamlMessage.new('registration' => true)
     answers_hash = { phone: { mobile_phone: true } }
 
     allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(false)
@@ -40,7 +40,7 @@ RSpec.describe IdentityProviderRequest do
   end
 
   it 'should not have hints when on the sign in flow' do
-    saml_message = OutboundSamlMessage.new('registration' => false)
+    saml_message = FrontendApiOutboundSamlMessage.new('registration' => false)
     answers_hash = { phone: { mobile_phone: true } }
 
     allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(true)
@@ -52,7 +52,7 @@ RSpec.describe IdentityProviderRequest do
   end
 
   it 'should have language hint when idp has language hint enabled' do
-    saml_message = OutboundSamlMessage.new('registration' => true)
+    saml_message = FrontendApiOutboundSamlMessage.new('registration' => true)
 
     allow(I18n).to receive(:locale).and_return('en')
     allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(false)
@@ -64,7 +64,7 @@ RSpec.describe IdentityProviderRequest do
   end
 
   it 'should not have language hint when idp has language hint disabled' do
-    saml_message = OutboundSamlMessage.new('registration' => true)
+    saml_message = FrontendApiOutboundSamlMessage.new('registration' => true)
 
     allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(false)
     allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_language_hint, 'simple-id').and_return(false)

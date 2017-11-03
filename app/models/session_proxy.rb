@@ -46,7 +46,7 @@ class SessionProxy
       idp_authn_request_endpoint(session_id),
       headers: x_forwarded_for,
     )
-    OutboundSamlMessage.validated_response(response)
+    FrontendApiOutboundSamlMessage.validated_response(response)
   end
 
   def cycle_three_attribute_name(session_id)

@@ -47,8 +47,8 @@ class SamlProxyApi
 
   def authn_request(session_id)
     response = @api_client.get(
-        authn_request_endpoint(session_id),
-        headers: x_forwarded_for,
+      authn_request_endpoint(session_id),
+      headers: x_forwarded_for,
     )
     OutboundSamlMessage.validated_response(response)
   end
