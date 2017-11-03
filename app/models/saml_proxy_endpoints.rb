@@ -7,15 +7,23 @@ module SamlProxyEndpoints
   PARAM_SAML_RESPONSE = 'samlResponse'.freeze
   PARAM_IP_SEEN_BY_FRONTEND = 'principalIpAsSeenByFrontend'.freeze
   RESPONSE_FOR_RP_PATH = '/SAML2/SSO/API/SENDER/RESPONSE'.freeze
+  AUTHN_REQUEST_PATH = '/SAML2/SSO/API/SENDER/AUTHN_REQ'.freeze
   ERROR_RESPONSE_FOR_RP_PATH = '/SAML2/SSO/API/SENDER/ERROR_RESPONSE'.freeze
 
   def response_for_rp_endpoint(session_id)
-    session_id_query_parameter = { sessionId: session_id }.to_query
-    RESPONSE_FOR_RP_PATH + "?#{session_id_query_parameter}"
+    endpoint_with_session_id(RESPONSE_FOR_RP_PATH, session_id)
   end
 
   def error_response_for_rp_endpoint(session_id)
+    endpoint_with_session_id(ERROR_RESPONSE_FOR_RP_PATH, session_id)
+  end
+
+  def authn_request_endpoint(session_id)
+    endpoint_with_session_id(AUTHN_REQUEST_PATH, session_id)
+  end
+
+  def endpoint_with_session_id(path, session_id)
     session_id_query_parameter = { sessionId: session_id }.to_query
-    ERROR_RESPONSE_FOR_RP_PATH + "?#{session_id_query_parameter}"
+    path + "?#{session_id_query_parameter}"
   end
 end
