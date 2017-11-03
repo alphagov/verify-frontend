@@ -37,3 +37,14 @@ To get around this:
     `export FIREFOX_PATH=/path/to/old/Firefox.app/Contents/MacOS/firefox-bin`
 
 3. Run the tests again. They should use the old version of Firefox and pass.
+
+## Editing .travis.yml
+
+If you plan to edit this file please enable the pre-commit check which lints it, preventing mistakes.
+To do so, first install [pre-commit](http://pre-commit.com) and then run `pre-commit install`.
+On an OSX system this amounts to:
+
+```bash
+brew install pre-commit
+pre-commit install
+```
