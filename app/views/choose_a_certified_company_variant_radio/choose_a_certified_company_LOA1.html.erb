@@ -1,7 +1,7 @@
 <%= page_title 'hub.choose_a_certified_company.title' %>
 <% content_for :feedback_source, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE' %>
 <% content_for :additional_javascript do %>
-    <%= javascript_include_tag 'piwik_idp_picker_tracking' %>
+    <%= javascript_include_tag 'piwik_idp_picker_tracking_radio_variant' %>
 <% end %>
 
 <div class="content-inner">
@@ -24,7 +24,7 @@
             <%= collection_radio_buttons(nil, nil, @recommended_idps, :entity_id, :display_name) do |b| %>
               <div class="multiple-choice">
                 <%=  
-                  b.radio_button({name: 'entity_id', id: b.object.simple_id}) +  
+                  b.radio_button({name: 'entity_id', data: {name: b.object.display_name} }) +  
                   b.label { b.text } +
                   image_tag(b.object.logo_path, {alt: b.object.display_name})
                 %>
