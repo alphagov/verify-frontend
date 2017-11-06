@@ -282,6 +282,9 @@ en:
         title: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
+      ab_test_radio_variant_question: With which company do you want to set up an identity account?
+      ab_test_radio_variant_button: Set up your identity account
+      ab_test_radio_variant_validation_error: Select a company to verify you
     why_companies:
       title: Why there’s a choice of companies
       choose_a_company: Choose a company

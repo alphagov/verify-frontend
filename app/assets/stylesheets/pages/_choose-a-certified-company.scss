@@ -21,3 +21,11 @@
 .subtitle {
   color: $secondary-text-colour;
 }
+
+.idp-radios {
+  .multiple-choice > img {
+    position: absolute;
+    left: 230px;
+    height: 40px;
+  }
+}

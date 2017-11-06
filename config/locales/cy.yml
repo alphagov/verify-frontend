@@ -287,6 +287,9 @@ cy:
         title: Am %{display_name}
         information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
         close: cau
+      ab_test_radio_variant_question: With which company do you want to set up an identity account?
+      ab_test_radio_variant_button: Set up your identity account
+      ab_test_radio_variant_validation_error: Select a company to verify you
     why_companies:
       title: Pam fod dewis o gwmnïau
       choose_a_company: Dewiswch gwmni
