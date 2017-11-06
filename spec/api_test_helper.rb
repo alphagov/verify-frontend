@@ -51,10 +51,10 @@ module ApiTestHelper
   def stub_session_country_authn_request(originating_ip, country_location, registration)
     stub_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
         .with(headers: { 'X_FORWARDED_FOR' => originating_ip })
-        .to_return(body: a_country_authn_request(country_location, registration).to_json)
+        .to_return(body: an_authn_request(country_location, registration).to_json)
   end
 
-  def a_country_authn_request(location, registration)
+  def an_authn_request(location, registration)
     {
         'postEndpoint' => location,
         'samlMessage' => 'a-saml-request',
@@ -72,23 +72,14 @@ module ApiTestHelper
   end
 
   def stub_session_idp_authn_request(originating_ip, idp_location, registration)
-    stub_request(:get, ida_frontend_api_uri(idp_authn_request_endpoint(default_session_id)))
+    stub_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
         .with(headers: { 'X_FORWARDED_FOR' => originating_ip })
-        .to_return(body: an_idp_authn_request(idp_location, registration).to_json)
-  end
-
-  def an_idp_authn_request(location, registration)
-    {
-        'location' => location,
-        'samlRequest' => 'a-saml-request',
-        'relayState' => 'a-relay-state',
-        'registration' => registration
-    }
+        .to_return(body: an_authn_request(idp_location, registration).to_json)
   end
 
   def an_error_response(code)
     {
-        type: code
+        exceptionType: code
     }
   end
 
@@ -184,7 +175,7 @@ module ApiTestHelper
   end
 
   def stub_api_returns_error(code)
-    stub_request(:get, ida_frontend_api_uri(idp_authn_request_endpoint(default_session_id)))
+    stub_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
         .to_return(body: an_error_response(code).to_json, status: 500)
   end
 

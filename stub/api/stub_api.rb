@@ -33,19 +33,10 @@ class StubApi < Sinatra::Base
     }'
   end
 
-  get '/api/session/:session_id/country-authn-request' do
+  get '/SAML2/SSO/API/SENDER/AUTHN_REQ' do
     '{
-      "location":"http://localhost:50300/test-saml",
-      "samlRequest":"blah",
-      "relayState":"whatever",
-      "registration":false
-    }'
-  end
-
-  get '/api/session/:session_id/idp-authn-request' do
-    '{
-      "location":"http://localhost:50300/test-saml",
-      "samlRequest":"blah",
+      "postEndpoint":"http://localhost:50300/test-saml",
+      "samlMessage":"blah",
       "relayState":"whatever",
       "registration":false
     }'
