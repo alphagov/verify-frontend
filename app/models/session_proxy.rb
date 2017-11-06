@@ -41,20 +41,12 @@ class SessionProxy
     @api_client.post(select_a_country_endpoint(session_id, country), '', {})
   end
 
-  def country_authn_request(session_id)
-    response = @api_client.get(
-      country_authn_request_endpoint(session_id),
-      headers: x_forwarded_for,
-    )
-    OutboundSamlMessage.validated_response(response)
-  end
-
   def idp_authn_request(session_id)
     response = @api_client.get(
       idp_authn_request_endpoint(session_id),
       headers: x_forwarded_for,
     )
-    OutboundSamlMessage.validated_response(response)
+    FrontendApiOutboundSamlMessage.validated_response(response)
   end
 
   def cycle_three_attribute_name(session_id)

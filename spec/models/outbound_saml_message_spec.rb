@@ -16,8 +16,8 @@ describe OutboundSamlMessage do
 
   it 'is valid when all attributes are present' do
     hash = {
-        'location' => 'some-location',
-        'samlRequest' => 'a-saml-request',
+        'postEndpoint' => 'some-location',
+        'samlMessage' => 'a-saml-request',
         'relayState' => 'relay-state',
         'registration' => false
     }
@@ -27,8 +27,8 @@ describe OutboundSamlMessage do
 
   it 'needs to convert to correct JSON' do
     hash = {
-        'location' => 'some-location',
-        'samlRequest' => 'a-saml-request',
+        'postEndpoint' => 'some-location',
+        'samlMessage' => 'a-saml-request',
         'relayState' => 'relay-state',
         'registration' => false
     }

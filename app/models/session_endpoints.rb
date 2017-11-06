@@ -15,10 +15,7 @@ module SessionEndpoints
   PARAM_REGISTRATION = 'registration'.freeze
   PARAM_CYCLE_THREE_VALUE = 'value'.freeze
   COUNTRIES_PATH = '/api/countries'.freeze
-  SESSION_ID = 'sessionId'.freeze
   COUNTRIES_PATH_PREFIX = Pathname(COUNTRIES_PATH)
-  COUNTRY_AUTHN_REQUEST_SUFFIX = 'country-authn-request'.freeze
-  COUNTRY_AUTHN_RESPONSE_SUFFIX = 'country-authn-response'.freeze
 
   def countries_endpoint(session_id)
     COUNTRIES_PATH_PREFIX.join(session_id).to_s
@@ -30,10 +27,6 @@ module SessionEndpoints
 
   def session_endpoint(session_id, suffix)
     PATH_PREFIX.join(session_id, suffix).to_s
-  end
-
-  def country_authn_request_endpoint(session_id)
-    session_endpoint(session_id, COUNTRY_AUTHN_REQUEST_SUFFIX)
   end
 
   def idp_authn_request_endpoint(session_id)
