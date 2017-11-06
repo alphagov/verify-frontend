@@ -3,7 +3,6 @@ module SessionEndpoints
   PATH_PREFIX = Pathname(PATH)
   IDP_LIST_SUFFIX = 'idp-list'.freeze
   SELECT_IDP_SUFFIX = 'select-idp'.freeze
-  IDP_AUTHN_REQUEST_SUFFIX = 'idp-authn-request'.freeze
   SESSION_STATE_PATH = "#{PATH}/state".freeze
   CYCLE_THREE_SUFFIX = 'cycle-three'.freeze
   CYCLE_THREE_CANCEL_SUFFIX = "#{CYCLE_THREE_SUFFIX}/cancel".freeze
@@ -27,10 +26,6 @@ module SessionEndpoints
 
   def session_endpoint(session_id, suffix)
     PATH_PREFIX.join(session_id, suffix).to_s
-  end
-
-  def idp_authn_request_endpoint(session_id)
-    session_endpoint(session_id, IDP_AUTHN_REQUEST_SUFFIX)
   end
 
   def cycle_three_endpoint(session_id)

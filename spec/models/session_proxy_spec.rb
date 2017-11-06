@@ -99,45 +99,7 @@ describe SessionProxy do
     end
   end
 
-  describe('#idp_authn_request') do
-    it 'should get an IDP authn request' do
-      authn_request = {
-        'location' => 'some-location',
-        'samlRequest' => 'a-saml-request',
-        'relayState' => 'relay-state',
-        'registration' => false
-      }
-      ip_address = '1.1.1.1'
-      expect(api_client).to receive(:get)
-        .with(endpoint(SessionProxy::IDP_AUTHN_REQUEST_SUFFIX), headers: { x_forwarded_for => ip_address })
-        .and_return(authn_request)
-      expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      result = session_proxy.idp_authn_request(session_id)
-      attributes = {
-          'location' => 'some-location',
-          'saml_request' => 'a-saml-request',
-          'relay_state' => 'relay-state',
-          'registration' => false
-      }
-      expect(result).to have_attributes(attributes)
-    end
 
-    it 'should fail to get an IDP authn request when fields are missing from response' do
-      authn_request = {
-          'location' => 'some-location',
-          'relayState' => 'relay-state',
-          'registration' => false
-      }
-      ip_address = '1.1.1.1'
-      expect(api_client).to receive(:get)
-        .with(endpoint(SessionProxy::IDP_AUTHN_REQUEST_SUFFIX), headers: { x_forwarded_for => ip_address })
-        .and_return(authn_request)
-      expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      expect {
-        session_proxy.idp_authn_request(session_id)
-      }.to raise_error Api::Response::ModelError, "Saml request can't be blank"
-    end
-  end
 
   describe '#cycle_three_attribute_name' do
     it 'should return an attribute name' do

@@ -139,4 +139,44 @@ describe SamlProxyApi do
       }.to raise_error Api::Response::ModelError, 'Loa achieved is not included in the list'
     end
   end
+
+  describe('#authn_request') do
+    it 'should get an authn request' do
+      authn_request = {
+          'postEndpoint' => 'some-location',
+          'samlMessage' => 'a-saml-request',
+          'relayState' => 'relay-state',
+          'registration' => false
+      }
+      ip_address = '1.1.1.1'
+      expect(api_client).to receive(:get)
+                                .with(authn_request_endpoint(session_id), headers: { x_forwarded_for => ip_address })
+                                .and_return(authn_request)
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      result = saml_proxy_api.authn_request(session_id)
+      attributes = {
+          'location' => 'some-location',
+          'saml_request' => 'a-saml-request',
+          'relay_state' => 'relay-state',
+          'registration' => false
+      }
+      expect(result).to have_attributes(attributes)
+    end
+
+    it 'should fail to get an IDP authn request when fields are missing from response' do
+      authn_request = {
+          'postEndpoint' => 'some-location',
+          'relayState' => 'relay-state',
+          'registration' => false
+      }
+      ip_address = '1.1.1.1'
+      expect(api_client).to receive(:get)
+                                .with(authn_request_endpoint(session_id), headers: { x_forwarded_for => ip_address })
+                                .and_return(authn_request)
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect {
+        saml_proxy_api.authn_request(session_id)
+      }.to raise_error Api::Response::ModelError, "Saml request can't be blank"
+    end
+  end
 end

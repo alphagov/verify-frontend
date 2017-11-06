@@ -14,7 +14,7 @@ class RedirectToIdpController < ApplicationController
 private
 
   def request_form
-    saml_message = SESSION_PROXY.idp_authn_request(session[:verify_session_id])
+    saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
     @request = idp_request_initilization(saml_message)
   end
 

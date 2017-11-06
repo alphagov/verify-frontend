@@ -15,7 +15,6 @@ require 'identity_provider'
 require 'idp_list_response'
 require 'select_idp_response'
 require 'outbound_saml_message'
-require 'frontend_api_outbound_saml_message'
 require 'idp_authn_response'
 require 'country_authn_response'
 
@@ -57,11 +56,11 @@ describe StubApi do
     end
   end
 
-  context '#get /api/session/:session_id/idp-authn-request' do
+  context '#get /SAML2/SSO/API/SENDER/AUTHN_REQ' do
     it 'should respond with valid OutboundSamlMessage' do
-      get '/api/session/session_id/idp-authn-request'
+      get '/SAML2/SSO/API/SENDER/AUTHN_REQ'
       expect(last_response).to be_ok
-      response = FrontendApiOutboundSamlMessage.new(last_response_json)
+      response = OutboundSamlMessage.new(last_response_json)
       expect(response).to be_valid
     end
   end
