@@ -24,7 +24,7 @@
             <%= collection_radio_buttons(nil, nil, @recommended_idps, :entity_id, :display_name) do |b| %>
               <div class="multiple-choice">
                 <%=  
-                  b.radio_button({name: 'entity_id'}) +  
+                  b.radio_button({name: 'entity_id', id: b.object.simple_id}) +  
                   b.label { b.text } +
                   image_tag(b.object.logo_path, {alt: b.object.display_name})
                 %>
