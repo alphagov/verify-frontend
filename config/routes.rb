@@ -73,7 +73,7 @@ Rails.application.routes.draw do
       get 'about_certified_companies', to: 'about_loa1#certified_companies', as: :about_certified_companies
       get 'about_identity_accounts', to: 'about_loa1#identity_accounts', as: :about_identity_accounts
       get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
-      
+
       add_routes :loa1_radio_picker_ab_test_routes
     end
 
@@ -129,7 +129,7 @@ Rails.application.routes.draw do
     add_routes :threshold_policy_ab_test_routes
   end
 
-  put 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant_radio#select_idp_ajax', as: :choose_a_certified_company_submit_ajax  
+  put 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant_radio#select_idp_ajax', as: :choose_a_certified_company_submit_ajax
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get 'service-status', to: 'service_status#index', as: :service_status

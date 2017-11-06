@@ -28,10 +28,12 @@
     left: 230px;
     height: 40px;
   }
+
   @media (max-width: 640px) {
     .multiple-choice label {
-      display: inline-block
+      display: inline-block;
     }
+
     .multiple-choice > img {
       left: auto;
       right: 10px;
