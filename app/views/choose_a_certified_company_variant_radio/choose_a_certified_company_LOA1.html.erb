@@ -14,8 +14,6 @@
         <li><%= link_to(t('hub.choose_a_certified_company.why_companies'), why_companies_path) %></li>
       </ul>
 
-      <h2 class="heading-medium"><%= t 'hub.choose_a_certified_company.ab_test_radio_variant_question' %></h2>
-
       <%= form_tag('', id: 'choose-a-certified-company-form', class: 'idp-radios js-idp-form-radio', 'data-msg': t('hub.choose_a_certified_company.ab_test_radio_variant_validation_error')) do %>
         <%= render 'shared/form-errors', errors: flash[:errors] %>
 
