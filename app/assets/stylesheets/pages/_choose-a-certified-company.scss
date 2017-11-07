@@ -29,7 +29,7 @@
     height: 40px;
   }
 
-  @media (max-width: 640px) {
+  @include media (mobile) {
     .multiple-choice label {
       display: inline-block;
     }
