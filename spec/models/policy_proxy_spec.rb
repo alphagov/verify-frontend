@@ -56,4 +56,40 @@ describe PolicyProxy do
       }.to raise_error Api::Response::ModelError, 'Outcome BANANA is not an allowed value for a matching outcome'
     end
   end
+
+
+  describe '#cycle_three_attribute_name' do
+    it 'should return an attribute name' do
+      expect(api_client).to receive(:get)
+                                .with(endpoint(PolicyProxy::CYCLE_THREE_SUFFIX))
+                                .and_return('attributeName' => 'verySpecialNumber')
+
+      actual_response = policy_proxy.cycle_three_attribute_name(session_id)
+
+      expect(actual_response).to eql 'verySpecialNumber'
+    end
+  end
+
+  describe '#submit_cycle_three_value' do
+    it 'should post an attribute value' do
+      expect(originating_ip_store).to receive(:get).and_return(ip_address)
+      expect(api_client).to receive(:post)
+                                .with(endpoint(PolicyProxy::CYCLE_THREE_SUBMIT_SUFFIX),
+                                      { 'cycle3Input' => 'some value', 'principalIpAddress' => '127.0.0.1' },
+                                      {})
+
+      policy_proxy.submit_cycle_three_value(session_id, 'some value')
+    end
+  end
+
+  describe '#cycle_three_cancel' do
+    it 'should post to cancel api endpoint' do
+      expect(api_client).to receive(:post)
+                                .with(endpoint(PolicyProxy::CYCLE_THREE_CANCEL_SUFFIX),
+                                      nil,
+                                      {})
+
+      policy_proxy.cycle_three_cancel(session_id)
+    end
+  end
 end

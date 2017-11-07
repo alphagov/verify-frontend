@@ -19,7 +19,7 @@ Rails.application.config.after_initialize do
   # Cycle Three display
   CYCLE_THREE_DISPLAY_REPOSITORY = repository_factory.create_cycle_three_repository(CONFIG.cycle_3_display_locales)
   CYCLE_THREE_FORMS = CycleThree::CycleThreeAttributeGenerator.new(YamlLoader.new, CYCLE_THREE_DISPLAY_REPOSITORY).attribute_classes_by_name(CONFIG.cycle_three_attributes_directory)
-  FURTHER_INFORMATION_SERVICE = FurtherInformationService.new(SESSION_PROXY, CYCLE_THREE_FORMS)
+  FURTHER_INFORMATION_SERVICE = FurtherInformationService.new(POLICY_PROXY, CYCLE_THREE_FORMS)
 
   # RP/transactions config
   RP_CONFIG = YAML.load_file(CONFIG.rp_config)

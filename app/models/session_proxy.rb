@@ -40,21 +40,4 @@ class SessionProxy
     # POST /api/countries (NL)
     @api_client.post(select_a_country_endpoint(session_id, country), '', {})
   end
-
-  def cycle_three_attribute_name(session_id)
-    response = @api_client.get(cycle_three_endpoint(session_id))
-    CycleThreeAttributeResponse.validated_response(response).name
-  end
-
-  def submit_cycle_three_value(session_id, value)
-    body = {
-      PARAM_CYCLE_THREE_VALUE => value,
-      PARAM_ORIGINATING_IP => originating_ip
-    }
-    @api_client.post(cycle_three_endpoint(session_id), body, {})
-  end
-
-  def cycle_three_cancel(session_id)
-    @api_client.post(cycle_three_cancel_endpoint(session_id), nil, {})
-  end
 end

@@ -132,17 +132,17 @@ module ApiTestHelper
   end
 
   def stub_cycle_three_attribute_request(name)
-    cycle_three_attribute_name = { name: name }
-    stub_request(:get, ida_frontend_api_uri(cycle_three_endpoint(default_session_id))).to_return(body: cycle_three_attribute_name.to_json, status: 200)
+    cycle_three_attribute_name = { attributeName: name }
+    stub_request(:get, policy_api_uri(cycle_three_endpoint(default_session_id))).to_return(body: cycle_three_attribute_name.to_json, status: 200)
   end
 
   def stub_cycle_three_value_submit(value)
-    cycle_three_attribute_value = { value: value, PARAM_ORIGINATING_IP => OriginatingIpStore::UNDETERMINED_IP }
-    stub_request(:post, ida_frontend_api_uri(cycle_three_endpoint(default_session_id))).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
+    cycle_three_attribute_value = { PARAM_CYCLE_3_INPUT => value, PARAM_PRINCIPAL_IP => OriginatingIpStore::UNDETERMINED_IP }
+    stub_request(:post, policy_api_uri(cycle_three_submit_endpoint(default_session_id))).with(body: cycle_three_attribute_value.to_json).to_return(status: 200)
   end
 
   def stub_cycle_three_cancel
-    stub_request(:post, ida_frontend_api_uri(cycle_three_cancel_endpoint(default_session_id))).to_return(status: 200)
+    stub_request(:post, policy_api_uri(cycle_three_cancel_endpoint(default_session_id))).to_return(status: 200)
   end
 
   def stub_api_authn_response(relay_state, response = { 'result' => 'SUCCESS', 'isRegistration' => false })

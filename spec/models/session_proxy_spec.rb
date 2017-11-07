@@ -98,41 +98,4 @@ describe SessionProxy do
       end
     end
   end
-
-
-
-  describe '#cycle_three_attribute_name' do
-    it 'should return an attribute name' do
-      expect(api_client).to receive(:get)
-        .with(endpoint(SessionProxy::CYCLE_THREE_SUFFIX))
-        .and_return('name' => 'verySpecialNumber')
-
-      actual_response = session_proxy.cycle_three_attribute_name(session_id)
-
-      expect(actual_response).to eql 'verySpecialNumber'
-    end
-  end
-
-  describe '#submit_cycle_three_value' do
-    it 'should post an attribute value' do
-      expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      expect(api_client).to receive(:post)
-        .with(endpoint(SessionProxy::CYCLE_THREE_SUFFIX),
-              { 'value' => 'some value', 'originatingIp' => '127.0.0.1' },
-              {})
-
-      session_proxy.submit_cycle_three_value(session_id, 'some value')
-    end
-  end
-
-  describe '#cycle_three_cancel' do
-    it 'should post to cancel api endpoint' do
-      expect(api_client).to receive(:post)
-        .with(endpoint(SessionProxy::CYCLE_THREE_CANCEL_SUFFIX),
-              nil,
-              {})
-
-      session_proxy.cycle_three_cancel(session_id)
-    end
-  end
 end

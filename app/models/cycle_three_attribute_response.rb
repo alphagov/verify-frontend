@@ -3,6 +3,6 @@ class CycleThreeAttributeResponse < Api::Response
   validates_presence_of :name
 
   def initialize(hash)
-    @name = hash['name']
+    @name = hash['attributeName']
   end
 end
