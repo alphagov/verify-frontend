@@ -1,5 +1,5 @@
 (function (global) {
-    var allRadioButtons = $('#choose-a-certified-company-form .multiple-choice'); // for radio RadioButtons, we're checking the input tags
+    var allRadioButtons = $('#choose-a-certified-company-form .multiple-choice');
     var numberOfVisibleRadioButtons = 0;
 
     var isVisible = function(element) {
