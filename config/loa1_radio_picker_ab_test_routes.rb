@@ -24,5 +24,6 @@ end
 constraints loa1_radio_picker_variant do
   constraints IsLoa1 do
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant_radio#select_idp', as: :choose_a_certified_company_submit
+    put 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant_radio#select_idp_ajax', as: :choose_a_certified_company_submit_ajax    
   end
 end
