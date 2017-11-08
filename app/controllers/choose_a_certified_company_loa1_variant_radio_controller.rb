@@ -100,6 +100,6 @@ private
   end
 
   def decorated_idp
-    @decorated_idp ||= IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
+    %w(headless-rp loa1-test-rp test-rp test-rp-with-continue-on-fail).include? current_transaction.simple_id
   end
 end
