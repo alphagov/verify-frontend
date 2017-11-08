@@ -69,7 +69,7 @@ private
   end
 
   def is_test_rp?
-    current_transaction.simple_id == 'test-rp'
+    %w(headless-rp loa1-test-rp test-rp test-rp-with-continue-on-fail).include? current_transaction.simple_id
   end
 
   def select_registration(idp)
@@ -97,9 +97,5 @@ private
     rescue KeyError
       '(idp recommendation key not set)'
     end
-  end
-
-  def decorated_idp
-    %w(headless-rp loa1-test-rp test-rp test-rp-with-continue-on-fail).include? current_transaction.simple_id
   end
 end
