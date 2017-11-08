@@ -34,14 +34,14 @@
         _paq.push(['trackEvent', 'Engagement', 'Picker scroll', 'scrolled']);
     })
 
-    var alreadySelected = false;
+    var alreadySelected = !!$('.multiple-choice input:checked').length;
     $('#choose-a-certified-company-form input[name=entity_id]').on('change', function(event) { 
         if(alreadySelected){
             _paq.push(['trackEvent', 'Engagement', 'IDP changed', event.currentTarget.dataset.name]);
         }
         else {
-            _paq.push(['trackEvent', 'Engagement', 'IDP selected', event.currentTarget.dataset.name]);
             alreadySelected = true;
+            _paq.push(['trackEvent', 'Engagement', 'IDP selected', event.currentTarget.dataset.name]);
         }
         event.stopImmediatePropagation();
     });
