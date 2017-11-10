@@ -2,6 +2,7 @@ en:
   routes:
     start: start
     begin_registration: begin-registration
+    begin_sign_in: begin-sign-in
     about: about
     sign_in: sign-in
     about_certified_companies: about-certified-companies
@@ -86,6 +87,10 @@ en:
       answer_no: I’ve used Verify before
       continue: Continue
       error_message: Please select an option
+      ab_test_loa1_shortened_description: GOV.UK Verify is a secure service built to help fight the growing problem of online identity theft.
+      ab_test_loa1_shortened_button: Create an identity account
+      ab_test_loa1_shortened_or: or
+      ab_test_loa1_shortened_signin: sign in
     signin:
       title: Sign in with a certified company
       heading: Who do you have an identity account with?

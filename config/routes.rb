@@ -37,9 +37,6 @@ Rails.application.routes.draw do
   end
 
   localized do
-    get 'start', to: 'start#index', as: :start
-    post 'start', to: 'start#request_post', as: :start
-    get 'begin_registration', to: 'start#register', as: :begin_registration
     get 'sign_in', to: 'sign_in#index', as: :sign_in
     post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 
@@ -59,6 +56,9 @@ Rails.application.routes.draw do
     get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
 
     constraints IsLoa1 do
+      # get 'start', to: 'start#index', as: :start
+      # post 'start', to: 'start#request_post', as: :start
+      # get 'begin_registration', to: 'start#register', as: :begin_registration
       # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
       # post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
       # get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
@@ -75,9 +75,14 @@ Rails.application.routes.draw do
       get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
 
       add_routes :loa1_radio_picker_ab_test_routes
+
+      add_routes :loa1_shortened_journey_ab_test_routes
     end
 
     constraints IsLoa2 do
+      get 'start', to: 'start#index', as: :start
+      post 'start', to: 'start#request_post', as: :start
+      get 'begin_registration', to: 'start#register', as: :begin_registration
       # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
       # post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
       # get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about

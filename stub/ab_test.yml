@@ -43,3 +43,9 @@ experiments:
           percent: 100
         - name: 'variant'
           percent: 0
+  - loa1_shortened_journey_v3:
+      alternatives:
+        - name: 'control'
+          percent: 0
+        - name: 'variant'
+          percent: 100
