@@ -125,6 +125,10 @@
   .validation-message {
     border-color: $white;
     color: inherit;
+
+    .form-group-error:focus {
+      color: inherit;
+    }
   }
 
   .multiple-choice {
