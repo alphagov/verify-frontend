@@ -14,6 +14,7 @@
     https://stackoverflow.com/questions/7602393/rails-3-1-sprockets-require-directives-is-there-a-way-to-exclude-particular-fi
 */
 //= stub "piwik_idp_picker_tracking"
+//= stub "piwik_idp_picker_tracking_radio_variant"
 
 window.GOVUK.shimLinksWithButtonRole.init();
 
@@ -39,6 +40,7 @@ window.GOVUK.piwikEventsTracking.init();
 $(function () {
   window.GOVUK.validation.attach();
   window.GOVUK.signin.attach();
+  window.GOVUK.signinRadio.attach();
   window.GOVUK.autoSubmitForm.attach();
   window.GOVUK.chooseACountry.attach();
   window.GOVUK.fingerprint.attach();

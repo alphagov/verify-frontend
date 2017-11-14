@@ -21,3 +21,22 @@
 .subtitle {
   color: $secondary-text-colour;
 }
+
+.idp-radios {
+  .multiple-choice > img {
+    position: absolute;
+    left: 230px;
+    height: 40px;
+  }
+
+  @include media (mobile) {
+    .multiple-choice label {
+      display: inline-block;
+    }
+
+    .multiple-choice > img {
+      left: auto;
+      right: 10px;
+    }
+  }
+}

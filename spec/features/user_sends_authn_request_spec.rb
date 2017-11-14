@@ -76,7 +76,8 @@ describe 'user sends authn requests' do
       ab_test_cookie_value = {
         'about_companies' => 'about_companies_with_logo',
         'select_documents_v2' => 'select_documents_v2_control',
-        'threshold_policy_experiment' => 'threshold_policy_experiment_control'
+        'threshold_policy_experiment' => 'threshold_policy_experiment_control',
+        'loa1_radio_picker' => 'loa1_radio_picker_control'
       }.to_json
       cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape(ab_test_cookie_value))
       set_cookies!(cookie_hash)

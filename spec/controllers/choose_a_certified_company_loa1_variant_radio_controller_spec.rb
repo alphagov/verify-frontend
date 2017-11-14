@@ -3,7 +3,7 @@ require 'controller_helper'
 require 'api_test_helper'
 require 'piwik_test_helper'
 
-describe ChooseACertifiedCompanyLoa1Controller do
+describe ChooseACertifiedCompanyLoa1VariantRadioController do
   let(:stub_idp_loa1) {
     {
         'simpleId' => 'stub-idp-loa1',
@@ -83,13 +83,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
     before :each do
       set_session_and_cookies_with_loa('LEVEL_1')
       stub_api_idp_list([stub_idp_loa1, stub_idp_loa1_with_interstitial, stub_idp_one_doc])
-    end
-
-    it 'resets interstitial answer to no value when IDP is selected' do
-      session[:selected_answers] = { 'interstitial' => { 'interstitial_yes' => true } }
-      post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
-
-      expect(session[:selected_answers]['interstitial']).to be_empty
+      stub_api_select_idp
     end
 
     it 'sets selected IDP in user session' do
@@ -104,11 +98,11 @@ describe ChooseACertifiedCompanyLoa1Controller do
       expect(session[:selected_idp_was_recommended]).to eql(true)
     end
 
-    it 'redirects to IDP warning page by default' do
+    it 'redirects to IDP by default' do
       stub_api_idp_list([stub_idp_no_interstitial])
       post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp-two.com' }
 
-      expect(subject).to redirect_to redirect_to_idp_warning_path
+      expect(subject).to redirect_to redirect_to_idp_register_path
     end
 
     it 'redirects to IDP question page for LOA1 users when IDP flag is enabled' do
@@ -122,17 +116,12 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
       expect(response).to have_http_status :not_found
     end
-  end
 
-  context '#about' do
-    it 'returns 404 page if no display data exists for IDP' do
-      set_session_and_cookies_with_loa('LEVEL_1')
-      stub_api_idp_list([stub_idp_loa1, stub_idp_one_doc])
+    it 'displays validation error when no IDP selected' do
+      post :select_idp, params: { locale: 'en', entity_id: '' }
 
-      get :about, params: { locale: 'en', company: 'unknown-idp' }
-
-      expect(subject).to render_template 'errors/404'
-      expect(response).to have_http_status :not_found
+      expect(subject).to render_template('choose_a_certified_company_variant_radio/choose_a_certified_company_LOA1')
+      expect(flash[:errors]).not_to be_empty
     end
   end
 end
