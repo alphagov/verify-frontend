@@ -9,16 +9,6 @@ module SessionEndpoints
   PARAM_RELAY_STATE = 'relayState'.freeze
   PARAM_ORIGINATING_IP = 'originatingIp'.freeze
   PARAM_ENTITY_ID = 'entityId'.freeze
-  COUNTRIES_PATH = '/api/countries'.freeze
-  COUNTRIES_PATH_PREFIX = Pathname(COUNTRIES_PATH)
-
-  def countries_endpoint(session_id)
-    COUNTRIES_PATH_PREFIX.join(session_id).to_s
-  end
-
-  def select_a_country_endpoint(session_id, suffix)
-    COUNTRIES_PATH_PREFIX.join(session_id, suffix).to_s
-  end
 
   def session_endpoint(session_id, suffix)
     PATH_PREFIX.join(session_id, suffix).to_s

@@ -29,15 +29,4 @@ class SessionProxy
   def select_cookies(cookies, allowed_cookie_names)
     cookies.select { |name, _| allowed_cookie_names.include?(name) }.to_h
   end
-
-  def get_countries(session_id)
-    response = @api_client.get(countries_endpoint(session_id))
-    CountryResponse.validated_response(response)
-  end
-
-  def select_a_country(session_id, country)
-    # Call into Policy to change state
-    # POST /api/countries (NL)
-    @api_client.post(select_a_country_endpoint(session_id, country), '', {})
-  end
 end

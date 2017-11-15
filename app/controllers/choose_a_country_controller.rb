@@ -17,7 +17,7 @@ class ChooseACountryController < ApplicationController
       return
     end
 
-    SESSION_PROXY.select_a_country(session_id, country)
+    POLICY_PROXY.select_a_country(session_id, country)
 
     redirect_to '/redirect-to-country'
   end
@@ -25,7 +25,7 @@ class ChooseACountryController < ApplicationController
 private
 
   def setup_countries(session_id)
-    countries_map = SESSION_PROXY.get_countries(session_id)
+    countries_map = POLICY_PROXY.get_countries(session_id)
     @countries = COUNTRY_DISPLAY_DECORATOR.decorate_collection(countries_map.countries)
   end
 end
