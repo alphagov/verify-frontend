@@ -25,7 +25,7 @@ module ApiTestHelper
   end
 
   def api_countries_endpoint(session_id)
-    ida_frontend_api_uri('/api/countries/' + session_id)
+    policy_api_uri('/policy/countries/' + session_id)
   end
 
   def stub_transactions_list
