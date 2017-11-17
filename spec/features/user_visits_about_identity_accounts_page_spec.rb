@@ -6,7 +6,7 @@ RSpec.describe 'When the user visits the about identity accounts page' do
   before(:each) do
     set_session_and_session_cookies!
     stub_transactions_list
-    stub_api_idp_list
+    stub_api_idp_list(default_idps, 'LEVEL_1')
   end
 
   it 'includes the appropriate feedback source' do

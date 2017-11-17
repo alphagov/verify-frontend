@@ -30,7 +30,7 @@ describe 'user sends authn requests' do
     end
 
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
-      stub_api_idp_list(default_idps)
+      stub_api_idp_list(default_idps, 'LEVEL_1')
       set_journey_hint_cookie('http://idcorp.com')
       stub_api_saml_endpoint(transactionSupportsEidas: true)
       visit('/test-saml')

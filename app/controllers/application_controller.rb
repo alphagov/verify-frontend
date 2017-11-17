@@ -166,7 +166,7 @@ private
   end
 
   def current_identity_providers
-    CONFIG_PROXY.get_idp_list(session[:transaction_entity_id]).idps
+    CONFIG_PROXY.get_idp_list(session[:transaction_entity_id], session[:requested_loa]).idps
   end
 
   def report_to_analytics(action_name)
