@@ -268,7 +268,7 @@ GEM
     ruby-xz (0.2.3)
       ffi (~> 1.9)
       io-like (~> 0.3)
-    rubyzip (1.2.0)
+    rubyzip (1.2.1)
     safe_yaml (1.0.4)
     sass (3.4.25)
     sass-rails (5.0.6)
@@ -393,4 +393,4 @@ RUBY VERSION
    ruby 2.3.5p376
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
