@@ -59,9 +59,9 @@ Rails.application.routes.draw do
     get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
 
     constraints IsLoa1 do
-      # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
-      # post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
-      # get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
+      get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+      post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
+      get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
       get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
       get 'failed_registration', to: 'failed_registration_loa1#index', as: :failed_registration
       get 'cancelled_registration', to: 'cancelled_registration_loa1#index', as: :cancelled_registration
@@ -73,8 +73,6 @@ Rails.application.routes.draw do
       get 'about_certified_companies', to: 'about_loa1#certified_companies', as: :about_certified_companies
       get 'about_identity_accounts', to: 'about_loa1#identity_accounts', as: :about_identity_accounts
       get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
-
-      add_routes :loa1_radio_picker_ab_test_routes
     end
 
     constraints IsLoa2 do
@@ -129,7 +127,6 @@ Rails.application.routes.draw do
     add_routes :threshold_policy_ab_test_routes
   end
 
-  put 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant_radio#select_idp_ajax', as: :choose_a_certified_company_submit_ajax
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get 'service-status', to: 'service_status#index', as: :service_status

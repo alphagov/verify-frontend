@@ -37,9 +37,3 @@ experiments:
           percent: 50
         - name: 'variant'
           percent: 50
-  - loa1_radio_picker:
-      alternatives:
-        - name: 'control'
-          percent: 100
-        - name: 'variant'
-          percent: 0
