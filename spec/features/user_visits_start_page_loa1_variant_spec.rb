@@ -25,7 +25,7 @@ RSpec.describe 'When the user visits the start page with a variant cookie' do
       expect_feedback_source_to_be(page, 'START_PAGE', '/start')
     end
 
-    it 'will redirect to IPD picker when selecting Create an identity account' do
+    it 'will redirect to IDP picker when selecting Create an identity account' do
       stub_api_idp_list
       visit '/start'
       expect(page).to have_content 'Create an identity account'
