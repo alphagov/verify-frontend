@@ -282,8 +282,6 @@ en:
         title: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
-      ab_test_radio_variant_button: Continue to the company website
-      ab_test_radio_variant_validation_error: Select a company
     why_companies:
       title: Why there’s a choice of companies
       choose_a_company: Choose a company
