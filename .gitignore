@@ -13,6 +13,7 @@
 /tmp
 .idea
 *.swp
+*.iml
 
 .DS_Store
 /spec/pacts
