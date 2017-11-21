@@ -53,6 +53,7 @@ en:
     about_choosing_an_identity_provider: about-choosing-an-identity-provider
     select_proof_of_address: select-proof-of-address
     confirming_it_is_you: confirming-it-is-you
+    paused_registration: paused
   title:
     error: Error
   navigation:
@@ -487,6 +488,16 @@ en:
       answer_yes: 'Yes'
       answer_no: 'No'
       thank_you: Thanks for your feedback.
+    paused_registration:
+      with_session:
+        title: Verification Paused
+        heading: "%{idp_name} has saved your information"
+        restart_instructions_html: "When you're ready to carry on verifying your identity, go back to <a href=\"%{rp_start_page}\">%{rp_name}</a>."
+        username_and_password_instructions: You'll need the username and password you created to sign in to %{idp_name}.
+      without_session:
+        title: Verification Paused
+        heading: The certified company has saved your information
+        restart_instructions: When you're ready to carry on verifying your identity, you need to go back to the government service and sign in to your certified company with the username and password you created.
   errors:
     transaction_list:
       title: Find the service you were using to start again

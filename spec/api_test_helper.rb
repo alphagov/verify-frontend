@@ -116,6 +116,7 @@ module ApiTestHelper
   def transaction_details_stub_response(options)
     defaults = {
         'simpleId' => 'test-rp',
+        'serviceHomepage' => 'www.example.com',
         'loaList' => %w(LEVEL_1 LEVEL_2)
     }
     defaults.merge(options)

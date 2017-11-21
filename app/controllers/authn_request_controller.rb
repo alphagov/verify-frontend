@@ -34,6 +34,7 @@ private
     transaction_data = CONFIG_PROXY.get_transaction_details(sign_in_process_details.transaction_entity_id)
     set_transaction_simple_id(transaction_data.simple_id)
     set_requested_loa(transaction_data.levels_of_assurance)
+    set_transaction_homepage(transaction_data.transaction_homepage)
 
     set_session_start_time!
   end
@@ -61,5 +62,9 @@ private
   def set_requested_loa(levels_of_assurance)
     requested_loa = levels_of_assurance.first
     session[:requested_loa] = requested_loa
+  end
+
+  def set_transaction_homepage(transaction_homepage)
+    session[:transaction_homepage] = transaction_homepage
   end
 end

@@ -49,6 +49,14 @@ class ApplicationController < ActionController::Base
     session[:transaction_simple_id]
   end
 
+  def current_transaction_entity_id
+    session[:transaction_entity_id]
+  end
+
+  def current_transaction_homepage
+    session[:transaction_homepage]
+  end
+
   def store_locale_in_cookie
     cookies.signed[CookieNames::VERIFY_LOCALE] = {
       value: I18n.locale,
@@ -166,7 +174,7 @@ private
   end
 
   def current_identity_providers
-    CONFIG_PROXY.get_idp_list(session[:transaction_entity_id]).idps
+    CONFIG_PROXY.get_idp_list(current_transaction_entity_id).idps
   end
 
   def report_to_analytics(action_name)

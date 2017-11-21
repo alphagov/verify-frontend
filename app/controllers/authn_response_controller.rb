@@ -7,6 +7,7 @@ class AuthnResponseController < SamlController
   CANCEL = 'CANCEL'.freeze
   FAILED = 'FAILED'.freeze
   FAILED_UPLIFT = 'FAILED_UPLIFT'.freeze
+  PENDING = 'PENDING'.freeze
   OTHER = 'OTHER'.freeze
 
   def idp_response
@@ -40,7 +41,8 @@ private
     handlers = {
         SUCCESS => ->(response) { reporters[SUCCESS].call(response); redirecters[SUCCESS].call(response) },
         CANCEL => ->(response) { reporters[CANCEL].call(response); redirecters[CANCEL].call(response) },
-        FAILED_UPLIFT => ->(response) { reporters[FAILED_UPLIFT].call(response); redirecters[FAILED_UPLIFT].call(response) }
+        FAILED_UPLIFT => ->(response) { reporters[FAILED_UPLIFT].call(response); redirecters[FAILED_UPLIFT].call(response) },
+        PENDING => ->(response) { reporters[PENDING].call(response); redirecters[PENDING].call(response) }
     }
     handlers.default = ->(response) { reporters[OTHER].call(response); redirecters[OTHER].call(response) }
 
@@ -65,6 +67,7 @@ private
       SUCCESS => ->(response) { report_to_analytics("Success - #{user_state.call(response)} at LOA #{response.loa_achieved}") },
       CANCEL  => ->(response) { report_to_analytics("Cancel - #{user_state.call(response)}") },
       FAILED_UPLIFT => ->(response) { report_to_analytics("Failed Uplift - #{user_state.call(response)}") },
+      PENDING => ->(response) { report_to_analytics("Paused - #{user_state.call(response)}") },
       OTHER => ->(response) { report_to_analytics("Failure - #{user_state.call(response)}") }
     }
   end
@@ -78,6 +81,7 @@ private
       SUCCESS => redirect_based_on_journey_type.curry.(registration: confirmation_path, sign_in: response_processing_path),
       CANCEL => redirect_based_on_journey_type.curry.(registration: cancelled_registration_path, sign_in: start_path),
       FAILED => redirect_based_on_journey_type.curry.(registration: failed_registration_path, sign_in: start_path),
+      PENDING => redirect_based_on_journey_type.curry.(registration: paused_registration_path, sign_in: paused_registration_path),
       FAILED_UPLIFT => ->(_) { redirect_to failed_uplift_path },
       OTHER => redirect_based_on_journey_type.curry.(registration: failed_registration_path, sign_in: failed_sign_in_path)
     }
