@@ -4,7 +4,6 @@ class StartVariantController < ApplicationController
   layout 'slides'
 
   def index
-    FEDERATION_REPORTER.report_start_page(current_transaction, request)
     @tailored_text = current_transaction.tailored_text
     render :start
   end

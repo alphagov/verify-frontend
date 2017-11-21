@@ -1,4 +1,5 @@
 require 'ab_test/ab_test'
+include LoaMatch
 
 class StartController < ApplicationController
   layout 'slides'
@@ -6,7 +7,7 @@ class StartController < ApplicationController
   def index
     @form = StartForm.new({})
 
-    FEDERATION_REPORTER.report_start_page(current_transaction, request)
+    FEDERATION_REPORTER.report_start_page(current_transaction, request) unless session[:requested_loa] == 'LEVEL_1' # ab test variant hack, remove with teardown
     render :start
   end
 
