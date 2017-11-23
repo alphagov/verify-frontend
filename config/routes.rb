@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   CLEVER_QUESTIONS = 'clever_questions'.freeze
 
-  clever_questions_control = SelectRoute.new(CLEVER_QUESTIONS, 'control')
+  # Toggle on when clever questions AB test goes live
+  # clever_questions_control = SelectRoute.new(CLEVER_QUESTIONS, 'control')
   clever_questions_variant = SelectRoute.new(CLEVER_QUESTIONS, 'variant')
 
   def add_routes(routes_name)
@@ -41,13 +42,16 @@ Rails.application.routes.draw do
     post 'csp-reporter', to: 'test_csp_reporter#report'
   end
 
-  constraints clever_questions_control do
-    add_routes :main_routes
-  end
+  # Toggle on when clever questions AB test goes live
+  # constraints clever_questions_control do
+  #   add_routes :main_routes
+  # end
 
   constraints clever_questions_variant do
     add_routes :clever_questions_ab_test_routes
   end
+
+  add_routes :main_routes
 
   put 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant_radio#select_idp_ajax', as: :choose_a_certified_company_submit_ajax
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
