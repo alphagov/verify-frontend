@@ -1,0 +1,15 @@
+<% start_page = 'clever_questions.hub.start'%>
+<%= page_title "#{start_page}.title" %>
+<% content_for :body_classes, 'hub-start' %>
+<% content_for :feedback_source, 'START_PAGE' %>
+
+<h1 class="heading-large"><%= t "#{start_page}.heading" %></h1>
+
+<p><%= t "#{start_page}.secure_service" %></p>
+<p><%= t "#{start_page}.prevent_viewing" %></p>
+
+<div class="actions">
+  <%= button_link_to t("#{start_page}.create_account"), start_path(:start_form => {:selection => true}), :method => :post %>
+  <p> or <%= link_to t("#{start_page}.sign_in"), start_path(:start_form => {:selection => false}), :method => :post %></p>
+</div>
+

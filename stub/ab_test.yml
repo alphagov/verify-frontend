@@ -43,3 +43,9 @@ experiments:
           percent: 100
         - name: 'variant'
           percent: 0
+  - clever_questions:
+      alternatives:
+        - name: 'control'
+          percent: 100
+        - name: 'variant'
+          percent: 0
