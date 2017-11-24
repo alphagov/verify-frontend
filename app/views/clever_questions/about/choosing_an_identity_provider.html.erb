@@ -1,0 +1,27 @@
+<% about_choosing_idp_page = 'clever_questions.hub.about_choosing_an_identity_provider'%>
+<%= page_title "#{about_choosing_idp_page}.title" %>
+<% content_for :feedback_source, 'ABOUT_CHOOSING_AN_IDENTITY_PROVIDER_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t "#{about_choosing_idp_page}.heading" %></h1>
+      <%= t "#{about_choosing_idp_page}.content_html" %>
+  </div>
+</div>
+<div class="actions">
+  <%= button_link_to t('navigation.continue'), select_documents_path, id: 'next-button' %>
+</div>
+
+<details>
+  <summary>
+    <span class="summary"><%= t "#{about_choosing_idp_page}.summary" %></span>
+  </summary>
+  <div class="panel panel-border-narrow">
+    <%= t "#{about_choosing_idp_page}.details_html" %>
+    <ul class="list-bullet list">
+      <% transactions_list.name_homepage.each do |transaction| -%>
+          <li><%= transaction.name %></li>
+      <% end %>
+    </ul>
+  </div>
+</details>

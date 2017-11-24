@@ -16,7 +16,6 @@ localized do
   post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
   get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
-  post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
   get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
   get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
   get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
@@ -45,6 +44,7 @@ localized do
     get 'start', to: 'clever_questions/start#index', as: :start
     post 'start', to: 'clever_questions/start#request_post', as: :start
     get 'begin_registration', to: 'clever_questions/start#register', as: :begin_registration
+    post 'will_it_work_for_me', to: 'clever_questions/will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
@@ -56,9 +56,8 @@ localized do
     get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
     get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
     get 'about', to: 'about_loa2#index', as: :about
-    get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
-    get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
-    get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+    get 'about_identity_providers', to: 'clever_questions/about_loa2#identity_providers', as: :about_identity_providers
+    get 'about_choosing_an_identity_provider', to: 'clever_questions/about_loa2#choosing_an_identity_provider', as: :about_choosing_an_identity_provider
   end
 
   post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
