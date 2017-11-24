@@ -10,6 +10,11 @@ class PolicyProxy
     @originating_ip_store.get
   end
 
+  def get_sign_in_process_details(session_id)
+    response = @api_client.get(sign_in_process_details_endpoint(session_id))
+    SignInProcessDetailsResponse.validated_response(response)
+  end
+
   def select_idp(session_id, entity_id, registration = false)
     body = {
       PARAM_SELECTED_ENTITY_ID => entity_id,
@@ -17,7 +22,7 @@ class PolicyProxy
       PARAM_REGISTRATION => registration
     }
 
-    @api_client.post(select_idp_endpoint(session_id), body, {})
+    @api_client.post(select_idp_endpoint(session_id), body)
   end
 
   def matching_outcome(session_id)
@@ -35,11 +40,11 @@ class PolicyProxy
       PARAM_CYCLE_3_INPUT => value,
       PARAM_PRINCIPAL_IP => originating_ip
     }
-    @api_client.post(cycle_three_submit_endpoint(session_id), body, {})
+    @api_client.post(cycle_three_submit_endpoint(session_id), body)
   end
 
   def cycle_three_cancel(session_id)
-    @api_client.post(cycle_three_cancel_endpoint(session_id), nil, {})
+    @api_client.post(cycle_three_cancel_endpoint(session_id), nil)
   end
 
   def get_countries(session_id)
@@ -48,6 +53,6 @@ class PolicyProxy
   end
 
   def select_a_country(session_id, country)
-    @api_client.post(select_a_country_endpoint(session_id, country), '', {})
+    @api_client.post(select_a_country_endpoint(session_id, country), '')
   end
 end

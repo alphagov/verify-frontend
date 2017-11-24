@@ -6,22 +6,14 @@ class AuthnRequestController < SamlController
   skip_before_action :set_piwik_custom_variables
 
   def rp_request
-    reset_session
-    response = SESSION_PROXY.create_session(params['SAMLRequest'], params['RelayState'])
-    set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, response.session_id)
-    session[:verify_session_id] = response.session_id
-    session[:transaction_supports_eidas] = response.transaction_supports_eidas
-    set_current_transaction_simple_id(response.transaction_simple_id)
-    set_current_transaction_entity_id(response.transaction_entity_id)
-    set_requested_loa(response.levels_of_assurance)
-    set_session_start_time!
+    create_session
 
     AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
 
     if params['journey_hint'].present?
       redirect_to confirm_your_identity_path
     elsif params['eidas_journey'].present?
-      raise StandardError, 'Users session does not support eIDAS journeys' unless response.transaction_supports_eidas
+      raise StandardError, 'Users session does not support eIDAS journeys' unless session[:transaction_supports_eidas]
       redirect_to choose_a_country_path
     else
       redirect_to start_path
@@ -30,15 +22,39 @@ class AuthnRequestController < SamlController
 
 private
 
+  def create_session
+    reset_session
+
+    session_id = SAML_PROXY_API.create_session(params['SAMLRequest'], params['RelayState']).session_id
+    set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, session_id)
+    set_session_id(session_id)
+    sign_in_process_details = POLICY_PROXY.get_sign_in_process_details(session_id)
+    set_transaction_supports_eidas(sign_in_process_details.transaction_supports_eidas)
+    set_transaction_entity_id(sign_in_process_details.transaction_entity_id)
+    transaction_data = CONFIG_PROXY.get_transaction_details(sign_in_process_details.transaction_entity_id)
+    set_transaction_simple_id(transaction_data.simple_id)
+    set_requested_loa(transaction_data.levels_of_assurance)
+
+    set_session_start_time!
+  end
+
   def set_session_start_time!
     session[:start_time] = DateTime.now.to_i * 1000
   end
 
-  def set_current_transaction_simple_id(simple_id)
+  def set_session_id(session_id)
+    session[:verify_session_id] = session_id
+  end
+
+  def set_transaction_supports_eidas(transaction_supports_eidas)
+    session[:transaction_supports_eidas] = transaction_supports_eidas
+  end
+
+  def set_transaction_simple_id(simple_id)
     session[:transaction_simple_id] = simple_id
   end
 
-  def set_current_transaction_entity_id(entity_id)
+  def set_transaction_entity_id(entity_id)
     session[:transaction_entity_id] = entity_id
   end
 

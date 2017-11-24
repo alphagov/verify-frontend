@@ -131,7 +131,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
   describe 'when the user changes language' do
     it 'will preserve the language from sign-in' do
       set_up_session('stub-idp-one')
-      stub_api_saml_endpoint
+      stub_session_creation
       visit '/sign-in'
       first('.available-languages').click_link('Cymraeg')
       expect(page).to have_current_path('/mewngofnodi')
@@ -158,7 +158,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
       expect(page).to have_current_path('/ailgyfeirio-i-rybudd-idp')
       click_button 'IDCorp'
 
-      stub_api_saml_endpoint
+      stub_session_creation
       visit '/test-saml'
       click_button 'saml-post-journey-hint'
 

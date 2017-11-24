@@ -4,12 +4,10 @@ require 'models/session_proxy'
 require 'piwik_test_helper'
 
 describe 'user sends authn requests' do
-  let(:api_saml_endpoint) { ida_frontend_api_uri('api/session') }
-
   context 'and it is received successfully' do
     let(:session_start_time) { DateTime.now }
     it 'will redirect the user to /start' do
-      stub_api_saml_endpoint
+      stub_session_creation
 
       visit('/test-saml')
       click_button 'saml-post'
@@ -32,7 +30,7 @@ describe 'user sends authn requests' do
     it 'will redirect the user to /confirm-your-identity when journey hint is set' do
       stub_api_idp_list(default_idps)
       set_journey_hint_cookie('http://idcorp.com')
-      stub_api_saml_endpoint(transactionSupportsEidas: true)
+      stub_session_creation('transactionSupportsEidas' => true)
       visit('/test-saml')
       click_button 'saml-post-journey-hint'
       expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
@@ -40,7 +38,7 @@ describe 'user sends authn requests' do
     end
 
     it 'will redirect the user to /choose-a-country for an eidas journey where eidas is enabled' do
-      stub_api_saml_endpoint(transactionSupportsEidas: true)
+      stub_session_creation('transactionSupportsEidas' => true)
       stub_transactions_list
       stub_countries_list
 
@@ -52,7 +50,7 @@ describe 'user sends authn requests' do
     end
 
     it 'will render the something went wrong page for an eidas journey where eidas is disabled' do
-      stub_api_saml_endpoint(transactionSupportsEidas: false)
+      stub_session_creation('transactionSupportsEidas' => false)
       stub_transactions_list
 
       visit('/test-saml')
@@ -63,7 +61,7 @@ describe 'user sends authn requests' do
     end
 
     it 'will set ab_test cookie' do
-      stub_api_saml_endpoint
+      stub_session_creation
 
       visit('/test-saml')
       click_button 'saml-post'
@@ -72,7 +70,7 @@ describe 'user sends authn requests' do
     end
 
     it 'will not set ab_test cookie if already set' do
-      stub_api_saml_endpoint
+      stub_session_creation
       ab_test_cookie_value = {
         'about_companies' => 'about_companies_with_logo',
         'select_documents_v2' => 'select_documents_v2_control',
@@ -90,7 +88,7 @@ describe 'user sends authn requests' do
     end
 
     it 'will include both experiments in the ab_test cookie if only one experiment is currently in the ab_test cookie' do
-      stub_api_saml_endpoint
+      stub_session_creation
       cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_no_logo' }.to_json))
       set_cookies!(cookie_hash)
 
@@ -101,7 +99,7 @@ describe 'user sends authn requests' do
     end
 
     it 'will not set ab_test cookie if RP is in AB test blacklist' do
-      stub_api_saml_endpoint('transactionSimpleId' => 'test-rp-no-ab-test')
+      stub_session_creation('simpleId' => 'test-rp-no-ab-test')
 
       visit('/test-saml')
       click_button 'saml-post'
@@ -114,7 +112,7 @@ describe 'user sends authn requests' do
     it 'will render the something went wrong page' do
       allow(Rails.logger).to receive(:error)
       expect(Rails.logger).to receive(:error).with(kind_of(Api::Error)).at_least(:once)
-      stub_request(:post, api_saml_endpoint).to_return(body: '{"message": "error"}', status: 500)
+      stub_session_creation_error
       stub_transactions_list
       visit('/test-saml')
       click_button 'saml-post'

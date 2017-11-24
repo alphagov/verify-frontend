@@ -34,7 +34,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
     RSpec.shared_examples "submitting SAML" do |locale|
       it "will render the start page in #{locale} after SAML submission when locale cookie set to #{locale}" do
         set_locale_cookie_to(locale)
-        stub_api_saml_endpoint
+        stub_session_creation
 
         visit('/test-saml')
         click_button 'saml-post'
@@ -59,7 +59,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
     include_examples "submitting SAML", 'cy'
 
     it 'will render the start page in English when no cookie or form parameters are set' do
-      stub_api_saml_endpoint
+      stub_session_creation
 
       visit('/test-saml')
       click_button 'saml-post'
@@ -76,7 +76,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
         else
           expect(cookie_value(CookieNames::VERIFY_LOCALE)).to be_nil
         end
-        stub_api_saml_endpoint
+        stub_session_creation
 
         visit('/test-saml')
         click_button "saml-post-with-#{form_locale}-language"
