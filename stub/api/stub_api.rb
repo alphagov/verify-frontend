@@ -4,12 +4,13 @@ require 'sinatra'
 require 'json'
 
 class StubApi < Sinatra::Base
+  set :protection, :except => :path_traversal
   post '/api/session' do
     status 201
     post_to_api(JSON.parse(request.body.read)['relayState'])
   end
 
-  get '/config/idps/idp-list' do
+  get '/config/idps/idp-list/:transaction_id/:level_of_assurance' do
     '[{
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one",

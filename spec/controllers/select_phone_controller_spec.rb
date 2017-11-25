@@ -9,7 +9,7 @@ describe SelectPhoneController do
   valid_phone_evidence = { mobile_phone: 'true', smart_phone: 'true', landline: 'true' }.freeze
 
   before(:each) do
-    set_session_and_cookies_with_loa('LEVEL_1')
+    set_session_and_cookies_with_loa('LEVEL_2')
     session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true } }
     stub_piwik_request('action_name' => 'Phone Next')
   end
@@ -34,7 +34,7 @@ describe SelectPhoneController do
     end
 
     it 'captures form values in session cookie' do
-      stub_api_idp_list
+      stub_api_idp_list(default_idps)
       expect(subject).to redirect_to('/choose-a-certified-company')
       expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true, landline: true)
     end
