@@ -20,7 +20,7 @@ constraints threshold_policy_control do
 
   constraints IsLoa2 do
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
-    get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
+    get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
   end
 end
 
@@ -30,6 +30,6 @@ constraints threshold_policy_variant do
 
   constraints IsLoa2 do
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#select_idp', as: :choose_a_certified_company_submit
-    get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2_variant#about', as: :choose_a_certified_company_about
+    get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2_variant#about', as: :choose_a_certified_company_about
   end
 end

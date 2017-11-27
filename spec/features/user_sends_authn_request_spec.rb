@@ -1,11 +1,10 @@
 require 'feature_helper'
 require 'api_test_helper'
-require 'models/session_proxy'
 require 'piwik_test_helper'
 
 describe 'user sends authn requests' do
   context 'and it is received successfully' do
-    let(:session_start_time) { DateTime.now }
+    let(:session_start_time) { Time.now }
     it 'will redirect the user to /start' do
       stub_session_creation
 

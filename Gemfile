@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.5'
+ruby '2.4.2'
 
 gem 'rails', '5.0.1'
 gem 'rails-i18n', '~> 5.0'
@@ -13,15 +13,15 @@ gem 'connection_pool'
 
 # Assets
 gem 'sass-rails', '~> 5.0'
-gem 'autoprefixer-rails'
-gem 'uglifier', '>= 1.3.0'
+gem 'autoprefixer-rails', '~> 7.1.6'
+gem 'uglifier', '>= 3.2.0'
 gem 'jquery-rails'
 
 gem 'govuk_template'
 gem 'govuk_frontend_toolkit'
 gem 'govuk_elements_rails'
 
-gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', '~> 0.12.3', platforms: :ruby
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -58,7 +58,7 @@ group :test, :development do
   # Automated testing
   gem 'rspec', '~> 3.5.0'
   gem 'rspec-rails', '~> 3.5.0'
-  gem 'capybara', '~> 2.10'
+  gem 'capybara'
   gem 'webmock', require: false
   gem 'jasmine'
   gem 'jasmine-jquery-rails'

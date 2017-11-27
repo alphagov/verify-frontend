@@ -4,7 +4,6 @@ module SamlProxyEndpoints
   NEW_SESSION_ENDPOINT = '/SAML2/SSO/API/RECEIVER'.freeze
   PARAM_SAML_REQUEST = 'samlRequest'.freeze
   PARAM_RELAY_STATE = 'relayState'.freeze
-  PARAM_SAML_RESPONSE = 'samlResponse'.freeze
   PARAM_IP_SEEN_BY_FRONTEND = 'principalIpAsSeenByFrontend'.freeze
   RESPONSE_FOR_RP_PATH = '/SAML2/SSO/API/SENDER/RESPONSE'.freeze
   AUTHN_REQUEST_PATH = '/SAML2/SSO/API/SENDER/AUTHN_REQ'.freeze

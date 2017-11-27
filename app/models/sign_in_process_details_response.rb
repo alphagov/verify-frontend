@@ -4,7 +4,7 @@ class SignInProcessDetailsResponse < Api::Response
   validates :transaction_supports_eidas, inclusion: { in: [true, false] }
 
   def initialize(hash)
-    @transaction_entity_id = hash['transactionEntityId']
+    @transaction_entity_id = hash['requestIssuerId']
     @transaction_supports_eidas = hash['transactionSupportsEidas']
   end
 end

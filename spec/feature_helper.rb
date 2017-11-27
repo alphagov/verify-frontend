@@ -36,7 +36,7 @@ end
 
 module FeatureHelper
   def current_time_in_millis
-    DateTime.now.to_i * 1000
+    Time.now.to_i * 1000
   end
 
   def expect_feedback_source_to_be(page, source, feedback_source_path)
@@ -87,7 +87,7 @@ module FeatureHelper
   end
 
   def start_time_in_millis
-    DateTime.now.to_i * 1000
+    Time.now.to_i * 1000
   end
 
   def set_session_and_session_cookies!(cookie_hash = create_cookie_hash)

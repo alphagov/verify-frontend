@@ -59,7 +59,6 @@ class SamlProxyApi
         PARAM_RELAY_STATE => relay_state,
         PARAM_IP_SEEN_BY_FRONTEND => originating_ip
     }
-    response = @api_client.post(NEW_SESSION_ENDPOINT, body)
-    SessionResponse.validated_response(response)
+    @api_client.post(NEW_SESSION_ENDPOINT, body)
   end
 end

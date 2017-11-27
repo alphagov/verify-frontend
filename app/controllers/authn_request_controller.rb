@@ -25,7 +25,7 @@ private
   def create_session
     reset_session
 
-    session_id = SAML_PROXY_API.create_session(params['SAMLRequest'], params['RelayState']).session_id
+    session_id = SAML_PROXY_API.create_session(params['SAMLRequest'], params['RelayState'])
     set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, session_id)
     set_session_id(session_id)
     sign_in_process_details = POLICY_PROXY.get_sign_in_process_details(session_id)
@@ -39,7 +39,7 @@ private
   end
 
   def set_session_start_time!
-    session[:start_time] = DateTime.now.to_i * 1000
+    session[:start_time] = Time.now.to_i * 1000
   end
 
   def set_session_id(session_id)

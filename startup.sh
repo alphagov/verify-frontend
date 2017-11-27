@@ -7,6 +7,7 @@ then
   export IDA_FRONTEND_HOST=http://localhost:50199
   export CONFIG_API_HOST=http://localhost:50199
   export POLICY_HOST=http://localhost:50199
+  export SAML_PROXY_HOST=http://localhost:50199
   (
   export BUNDLE_GEMFILE=stub/api/Gemfile
   bundle check || bundle install

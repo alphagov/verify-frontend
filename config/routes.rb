@@ -1,5 +1,3 @@
-# require 'loa_match'
-
 include LoaMatch
 
 Rails.application.routes.draw do

@@ -53,10 +53,10 @@ class FeedbackSourceMapper
 
   def page_from_source(feedback_source, locale)
     route_name = route_name_from(feedback_source)
-    if route_name =~ /https?:.*/
-      route_name
-    elsif route_name.nil?
+    if route_name.nil?
       nil
+    elsif route_name.match?(/https?:.*/)
+      route_name
     else
       '/' + I18n.translate('routes.' + route_name, locale: locale)
     end

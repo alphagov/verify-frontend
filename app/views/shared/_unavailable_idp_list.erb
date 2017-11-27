@@ -4,11 +4,11 @@
           <div class="company-inner">
             <div class="company-logo">
               <div class="company-logo-inner">
-                <%= link_to image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)), certified_company_unavailable_path(identity_provider.simple_id) %>
+                <%= link_to image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)), certified_company_unavailable_path(:company => identity_provider.simple_id) %>
               </div>
             </div>
 
-            <%= button_link_to t('hub.signin.select_idp', display_name: identity_provider.display_name), certified_company_unavailable_path(identity_provider.simple_id) %>
+            <%= button_link_to t('hub.signin.select_idp', display_name: identity_provider.display_name), certified_company_unavailable_path(:company => identity_provider.simple_id) %>
           </div>
         </div>
       </div>

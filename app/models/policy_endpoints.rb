@@ -1,7 +1,7 @@
 module PolicyEndpoints
   PATH = '/policy/received-authn-request'.freeze
   PATH_PREFIX = Pathname(PATH)
-  SIGN_IN_PROCESS_DETAILS_SUFFIX = '/sign-in-process-details'.freeze
+  SIGN_IN_PROCESS_DETAILS_SUFFIX = 'sign-in-process-details'.freeze
   SELECT_IDP_SUFFIX = 'select-identity-provider'.freeze
   MATCHING_OUTCOME_SUFFIX = 'response-from-idp/response-processing-details'.freeze
   PARAM_PRINCIPAL_IP = 'principalIpAddress'.freeze

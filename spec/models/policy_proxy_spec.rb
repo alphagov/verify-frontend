@@ -5,7 +5,6 @@ require 'policy_proxy'
 describe PolicyProxy do
   let(:api_client) { double(:api_client) }
   let(:originating_ip_store) { double(:originating_ip_store) }
-  let(:path) { '/api/session' }
   let(:session_id) { 'my-session-id' }
   let(:policy_proxy) { PolicyProxy.new(api_client, originating_ip_store) }
   let(:ip_address) { '127.0.0.1' }

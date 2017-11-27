@@ -94,7 +94,7 @@ module ApiTestHelper
         PARAM_RELAY_STATE => 'my-relay-state',
         PARAM_IP_SEEN_BY_FRONTEND => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
-    stub_request(:post, saml_proxy_api_uri(NEW_SESSION_ENDPOINT)).with(body: authn_request_body).to_return(body: { 'sessionId' => default_session_id }.to_json, status: 200)
+    stub_request(:post, saml_proxy_api_uri(NEW_SESSION_ENDPOINT)).with(body: authn_request_body).to_return(body: default_session_id.to_json, status: 200)
   end
 
   def stub_policy_sign_in_process_details(options)
@@ -103,7 +103,7 @@ module ApiTestHelper
 
   def sign_in_process_details_stub_response(options)
     defaults = {
-      'transactionEntityId' => default_transaction_entity_id,
+      'requestIssuerId' => default_transaction_entity_id,
       'transactionSupportsEidas' => false
     }
     defaults.merge(options)
