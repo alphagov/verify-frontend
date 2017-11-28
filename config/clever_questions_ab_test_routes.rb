@@ -12,8 +12,6 @@ localized do
   get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
   get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
   post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-  get 'select_phone', to: 'select_phone#index', as: :select_phone
-  post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
   get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
   get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
@@ -45,6 +43,8 @@ localized do
     post 'start', to: 'clever_questions/start#request_post', as: :start
     get 'begin_registration', to: 'clever_questions/start#register', as: :begin_registration
     post 'will_it_work_for_me', to: 'clever_questions/will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+    get 'select_phone', to: 'clever_questions/select_phone#index', as: :select_phone
+    post 'select_phone', to: 'clever_questions/select_phone#select_phone', as: :select_phone_submit
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about

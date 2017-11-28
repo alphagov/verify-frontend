@@ -1,0 +1,50 @@
+<% select_phone_page = 'clever_questions.hub.select_phone'%>
+<%= page_title "#{select_phone_page}.title" %>
+<% content_for :feedback_source, 'SELECT_PHONE_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t "#{select_phone_page}.title" %></h1>
+    <p><%= t "#{select_phone_page}.explanation" %></p>
+    <div class="panel panel-border-narrow">
+      <%= t "#{select_phone_page}.highlight" %>
+    </div>
+
+    <%= form_for @form, :as => 'select_phone_form', url: select_phone_path, html: { id: 'validate-phone', class: 'select-phone-form', novalidate: 'novalidate', 'data-msg': t('hub.select_phone.errors.no_selection')} do |f| %>
+
+        <%= render 'shared/form-errors', errors: flash[:errors] %>
+
+        <h2 class="heading-medium"><%= t "#{select_phone_page}.question.mobile_phone" %></h2>
+
+        <%= content_tag :div, class: form_question_class do %>
+            <fieldset class="inline">
+              <legend class="visually-hidden">
+                <span class="form-label"><%= t "#{select_phone_page}.question.mobile_phone" %></span>
+              </legend>
+              <%= f.custom_radio_button :mobile_phone, true, t('hub.select_phone.question.mobile_phone_option_yes') %>
+              <%= f.custom_radio_button :mobile_phone, false, t('option.no') %>
+            </fieldset>
+        <% end %>
+
+        <div id="validation-error-message-js"></div>
+
+        <div class="actions">
+          <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+        </div>
+    <% end %>
+
+    <details>
+      <summary>
+        <span class="summary"><%= t "clever_questions.hub.about_choosing_an_identity_provider.summary" %></span>
+      </summary>
+      <div class="panel panel-border-narrow">
+        <%= t "clever_questions.hub.about_choosing_an_identity_provider.details_html" %>
+        <ul class="list-bullet list">
+          <% transactions_list.name_homepage.each do |transaction| -%>
+              <li><%= transaction.name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </details>
+  </div>
+</div>

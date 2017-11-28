@@ -554,3 +554,10 @@ cy:
           content_bottom_html: |
             <p>These 7 companies applied to be part of Verify, and have been certified to verify identities as they’ve met government security and privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
             <p>There's no charge for this service.</p>
+        select_phone:
+          title: Receiving security codes
+          heading: Receiving security codes
+          explanation: For an extra layer of security, identity providers send you security codes to your mobile phone when you’re signing in to your identity account to access government services.
+          highlight: Identity providers won't call you on your mobile. They won’t share or sell your phone number for any reason without your consent.
+          question:
+            mobile_phone: Can you receive text messages now?
