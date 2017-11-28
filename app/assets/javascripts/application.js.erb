@@ -19,13 +19,23 @@ window.GOVUK.shimLinksWithButtonRole.init();
 
 window.GOVUK.validation.init();
 window.GOVUK.selectDocuments.init();
-window.GOVUK.selectPhone.init();
+//window.GOVUK.selectPhone.init();
 window.GOVUK.willItWorkForMe.init();
 window.GOVUK.feedback.init();
 window.GOVUK.furtherInformation.init();
 window.GOVUK.interstitialQuestion.init();
 window.GOVUK.otherDocuments.init();
 window.GOVUK.piwikEventsTracking.init();
+
+abTest({
+  experiment: 'clever_questions',
+  control: {
+    route: window.GOVUK.selectPhone
+  },
+  alternatives: [
+    {name: 'variant', route: window.GOVUK.selectPhoneCleverQuestions}
+  ]
+})
 
 /*
  Example of how to add JavaScript A/B code
