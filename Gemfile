@@ -13,7 +13,7 @@ gem 'connection_pool'
 
 # Assets
 gem 'sass-rails', '~> 5.0'
-gem 'autoprefixer-rails', '~> 7.1.6'
+gem 'autoprefixer-rails'
 gem 'uglifier', '>= 3.2.0'
 gem 'jquery-rails'
 
@@ -22,9 +22,6 @@ gem 'govuk_frontend_toolkit'
 gem 'govuk_elements_rails'
 
 gem 'therubyracer', '~> 0.12.3', platforms: :ruby
-
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use statsd-ruby to talk collect and send metrics to graphite
 gem 'statsd-ruby', '~> 1.3.0'
@@ -38,6 +35,9 @@ gem 'request_store', '~> 1.3.1'
 gem 'zendesk_api'
 gem 'email_validator'
 
+# Use multi_json because pkgr forces the json gem to < 2.0, which is an old specification of JSON (doesn't allow top level strings)
+gem 'multi_json'
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -48,6 +48,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  # Used by jenkins.sh to package the frontend
   gem 'pkgr', '~> 1.5.1'
 end
 
@@ -58,7 +59,7 @@ group :test, :development do
   # Automated testing
   gem 'rspec', '~> 3.5.0'
   gem 'rspec-rails', '~> 3.5.0'
-  gem 'capybara'
+  gem 'capybara', '~> 2.10'
   gem 'webmock', require: false
   gem 'jasmine'
   gem 'jasmine-jquery-rails'

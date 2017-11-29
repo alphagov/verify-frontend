@@ -19,7 +19,7 @@ describe MetadataClient do
 
   it 'should error with malformed JSON' do
     stub_request(:get, "#{host}/API/metadata/sp").and_return(status: 200, body: '<not-json/>')
-    expect { api_client.sp_metadata }.to raise_error JSON::ParserError
+    expect { api_client.sp_metadata }.to raise_error MultiJson::ParseError
   end
 
   it 'should return metadata for identity providers' do

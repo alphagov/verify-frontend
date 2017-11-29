@@ -3,7 +3,7 @@ require 'json'
 require 'http/response'
 
 module Api
-  describe ResponseHandler do
+  describe HubResponseHandler do
     let(:response_handler) { HubResponseHandler.new }
     context 'on an unsuccessful response' do
       it 'raises an error with message, id and type from the Hub response' do
