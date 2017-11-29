@@ -1,10 +1,6 @@
 class CleverQuestions::SelectDocumentsForm
   include ActiveModel::Model
 
-  DAY = 'day'.freeze
-  MONTH = 'month'.freeze
-  YEAR = 'year'.freeze
-
   attr_reader :driving_licence, :ni_driving_licence, :passport, :any_driving_licence, :passport_expiry
   validate :any_driving_licence_and_passport_must_be_present
   validate :driving_licence_details_present
