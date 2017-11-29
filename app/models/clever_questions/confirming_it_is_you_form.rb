@@ -1,0 +1,26 @@
+class CleverQuestions::ConfirmingItIsYouForm
+  include ActiveModel::Model
+
+  attr_reader :smart_phone, :questions
+
+  def initialize(params)
+    @smart_phone = params[:smart_phone]
+  end
+
+  def selected_answers
+    answers = {}
+    IdpEligibility::Evidence::SMARTPHONE_ONLY_ATTRIBUTES.each do |attr|
+      result = public_send(attr)
+      if %w(true false).include?(result)
+        answers[attr] = result == 'true'
+      end
+    end
+    answers
+  end
+
+private
+
+  def add_no_selection_error
+    errors.add(:base, I18n.t('hub.select_phone.errors.no_selection'))
+  end
+end

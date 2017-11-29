@@ -46,6 +46,8 @@ localized do
     post 'will_it_work_for_me', to: 'clever_questions/will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
     get 'select_phone', to: 'clever_questions/select_phone#index', as: :select_phone
     post 'select_phone', to: 'clever_questions/select_phone#select_phone', as: :select_phone_submit
+    get 'confirming_it_is_you', to: 'clever_questions/confirming_it_is_you#index', as: :confirming_it_is_you
+    post 'confirming_it_is_you', to: 'clever_questions/confirming_it_is_you#select_answer', as: :confirming_it_is_you_submit
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about

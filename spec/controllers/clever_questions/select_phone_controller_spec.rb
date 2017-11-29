@@ -38,6 +38,20 @@ describe CleverQuestions::SelectPhoneController do
       expect(subject).to redirect_to('/choose-a-certified-company')
       expect(session[:selected_answers]['phone']).to eq(mobile_phone: true)
     end
+
+    it 'append form values in session cookie if some already exist' do
+      stub_api_idp_list
+      session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true }, 'phone' => {smart_phone: true} }
+      expect(subject).to redirect_to('/choose-a-certified-company')
+      expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true)
+    end
+
+    it 'overwrites stored values in session cookie if they exist' do
+      stub_api_idp_list
+      session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true }, 'phone' => {mobile_phone: false, smart_phone: true} }
+      expect(subject).to redirect_to('/choose-a-certified-company')
+      expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true)
+    end
   end
 
   context 'when form is invalid' do

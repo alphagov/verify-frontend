@@ -7,7 +7,12 @@ class CleverQuestions::SelectPhoneController < ApplicationController
     @form = CleverQuestions::SelectPhoneForm.new(params['select_phone_form'] || {})
     if @form.valid?
       report_to_analytics('Phone Next')
-      selected_answer_store.store_selected_answers('phone', @form.selected_answers)
+      current_answers = selected_answer_store.selected_answers['phone'] || {}
+      if current_answers.length
+        selected_answer_store.store_selected_answers('phone', current_answers.merge(@form.selected_answers))
+      else
+        selected_answer_store.store_selected_answers('phone', @form.selected_answers)
+      end
       idps_available = IDP_ELIGIBILITY_CHECKER.any?(selected_evidence, current_identity_providers)
       redirect_to idps_available ? choose_a_certified_company_path : no_mobile_phone_path
     else
