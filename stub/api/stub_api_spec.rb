@@ -9,7 +9,6 @@ APP_HOME = File.join(File.dirname(__FILE__), '../../')
 $LOAD_PATH << File.join(APP_HOME, 'app/models')
 
 require 'api/response'
-require 'session_response'
 require 'country'
 require 'identity_provider'
 require 'idp_list_response'
@@ -29,29 +28,11 @@ describe StubApi do
    JSON.parse(last_response.body)
   end
 
-  context '#post /api/session' do
-    it 'should respond with valid SessionResponse' do
-      post '/api/session', '{"relayState": "some_relay_state"}', {format: 'json'}
-      expect(last_response).to be_created
-      response = SessionResponse.new(last_response_json)
-      expect(response).to be_valid
-    end
-  end
-
-  context '#get /api/session/:session_id/idp-list' do
+  context '#get /config/idps/idp-list' do
     it 'should respond with valid IdpListResponse' do
       get '/config/idps/idp-list'
       expect(last_response).to be_ok
       response = IdpListResponse.new(last_response_json)
-      expect(response).to be_valid
-    end
-  end
-
-  context '#put /api/session/:session_id/select-idp' do
-    it 'should respond with valid SelectIdpResponse' do
-      put '/api/session/session_id/select-idp'
-      expect(last_response).to be_ok
-      response = SelectIdpResponse.new(last_response_json)
       expect(response).to be_valid
     end
   end

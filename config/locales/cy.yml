@@ -20,7 +20,6 @@ cy:
     choose_a_country: choose-a-country-cy
     redirect_to_country: redirect-to-country-cy
     choose_a_certified_company: dewis-cwmni-ardystiedig
-    choose_a_certified_company_about: dewis-cwmni-ardystiedig/:company
     why_companies: pam-cwmniau
     unlikely_to_verify: anhebygol-i-ddilysu
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
@@ -43,7 +42,7 @@ cy:
     redirect_to_service_error: ailgyfeirio-i-gwasanaeth/gwall
     feedback: adborth
     feedback_sent: adborth/adborth-wedi'i-anfon
-    certified_company_unavailable: cwmni-ardystiedig-ddim-ar-gael/:company
+    certified_company_unavailable: cwmni-ardystiedig-ddim-ar-gael
     further_information: gwybodaeth-bellach
     further_information_cancel: gwybodaeth-bellach/dileu
     further_information_null_attribute: gwybodaeth-bellach/null-attribute

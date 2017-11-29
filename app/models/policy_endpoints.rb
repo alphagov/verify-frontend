@@ -1,6 +1,7 @@
 module PolicyEndpoints
   PATH = '/policy/received-authn-request'.freeze
   PATH_PREFIX = Pathname(PATH)
+  SIGN_IN_PROCESS_DETAILS_SUFFIX = 'sign-in-process-details'.freeze
   SELECT_IDP_SUFFIX = 'select-identity-provider'.freeze
   MATCHING_OUTCOME_SUFFIX = 'response-from-idp/response-processing-details'.freeze
   PARAM_PRINCIPAL_IP = 'principalIpAddress'.freeze
@@ -15,6 +16,10 @@ module PolicyEndpoints
 
   def policy_endpoint(session_id, suffix)
     PATH_PREFIX.join(session_id, suffix).to_s
+  end
+
+  def sign_in_process_details_endpoint(session_id)
+    policy_endpoint(session_id, SIGN_IN_PROCESS_DETAILS_SUFFIX)
   end
 
   def select_idp_endpoint(session_id)

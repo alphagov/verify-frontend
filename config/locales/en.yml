@@ -21,7 +21,6 @@ en:
     redirect_to_country: redirect-to-country
     a_country_page: a-country-page
     choose_a_certified_company: choose-a-certified-company
-    choose_a_certified_company_about: choose-a-certified-company/:company
     why_companies: why-companies
     unlikely_to_verify: unlikely-to-verify
     redirect_to_idp_warning: redirect-to-idp-warning
@@ -44,7 +43,7 @@ en:
     redirect_to_service_error: redirect-to-service/error
     feedback: feedback
     feedback_sent: feedback/feedback-sent
-    certified_company_unavailable: certified-company-unavailable/:company
+    certified_company_unavailable: certified-company-unavailable
     further_information: further-information
     further_information_cancel: further-information/cancel
     further_information_null_attribute: futher-information/null-attribute

@@ -7,7 +7,6 @@ describe SamlProxyApi do
   let(:x_forwarded_for) { 'X-Forwarded-For'.freeze }
   let(:api_client) { double(:api_client) }
   let(:originating_ip_store) { double(:originating_ip_store) }
-  let(:path) { '/api/session' }
   let(:session_id) { 'my-session-id' }
   let(:cookies) {
     {

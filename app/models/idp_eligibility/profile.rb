@@ -8,8 +8,8 @@ module IdpEligibility
       @rule = rule.map(&:to_sym).to_set
     end
 
-    def &(rule_mask)
-      Profile.new(@rule & rule_mask)
+    def &(other)
+      Profile.new(@rule & other)
     end
 
     def applies_to?(evidence)

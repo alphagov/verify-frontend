@@ -1,12 +1,7 @@
 module ApiTestHelper
-  include SessionEndpoints
   include ConfigEndpoints
   include SamlProxyEndpoints
   include PolicyEndpoints
-
-  def ida_frontend_api_uri(path)
-    URI.join(CONFIG.ida_frontend_host, path)
-  end
 
   def saml_proxy_api_uri(path)
     URI.join(CONFIG.saml_proxy_host, path)
@@ -83,24 +78,45 @@ module ApiTestHelper
     }
   end
 
-  def stub_api_saml_endpoint(options = {})
+  def stub_session_creation(options = {})
+    stub_saml_proxy_authn_request_endpoint
+    stub_policy_sign_in_process_details(options)
+    stub_transaction_details(options)
+  end
+
+  def stub_session_creation_error
+    stub_request(:post, saml_proxy_api_uri(NEW_SESSION_ENDPOINT)).to_return(body: { 'not_a_real_exception_response' => 'something went really wrong' }.to_json, status: 500)
+  end
+
+  def stub_saml_proxy_authn_request_endpoint
     authn_request_body = {
         PARAM_SAML_REQUEST => 'my-saml-request',
         PARAM_RELAY_STATE => 'my-relay-state',
-        PARAM_ORIGINATING_IP => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
+        PARAM_IP_SEEN_BY_FRONTEND => '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'
     }
-    stub_request(:post, ida_frontend_api_uri('/api/session')).with(body: authn_request_body).to_return(body: stub_api_session(options).to_json, status: 201)
+    stub_request(:post, saml_proxy_api_uri(NEW_SESSION_ENDPOINT)).with(body: authn_request_body).to_return(body: default_session_id.to_json, status: 200)
   end
 
-  def stub_api_session(options = {})
+  def stub_policy_sign_in_process_details(options)
+    stub_request(:get, policy_api_uri(sign_in_process_details_endpoint(default_session_id))).to_return(body: sign_in_process_details_stub_response(options).to_json, status: 200)
+  end
+
+  def sign_in_process_details_stub_response(options)
     defaults = {
-        'transactionSimpleId' => 'test-rp',
-        'transactionEntityId' => 'http://www.test-rp.gov.uk/SAML2/MD',
-        'sessionStartTime' => '32503680000000',
-        'sessionId' => default_session_id,
-        'idps' => [{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }],
-        'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2),
-        'transactionSupportsEidas' => false
+      'requestIssuerId' => default_transaction_entity_id,
+      'transactionSupportsEidas' => false
+    }
+    defaults.merge(options)
+  end
+
+  def stub_transaction_details(options)
+    stub_request(:get, config_api_uri(transaction_display_data_endpoint(default_transaction_entity_id))).to_return(body: transaction_details_stub_response(options).to_json, status: 200)
+  end
+
+  def transaction_details_stub_response(options)
+    defaults = {
+        'simpleId' => 'test-rp',
+        'loaList' => %w(LEVEL_1 LEVEL_2)
     }
     defaults.merge(options)
   end

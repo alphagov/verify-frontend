@@ -4,9 +4,29 @@ require 'sinatra'
 require 'json'
 
 class StubApi < Sinatra::Base
-  post '/api/session' do
-    status 201
-    post_to_api(JSON.parse(request.body.read)['relayState'])
+  set :protection, :except => :path_traversal
+
+  post '/SAML2/SSO/API/RECEIVER' do
+    status 200
+    "\"#{JSON.parse(request.body.read)['relayState']}\"" #return session id
+  end
+
+  get '/policy/received-authn-request/:session_id/sign-in-process-details' do
+    entity_id = params['session_id'] == 'my-loa1-relay-state' ? 'http://www.test-rp-loa1.gov.uk/SAML2/MD' : 'http://www.test-rp.gov.uk/SAML2/MD'
+    status 200
+    "{
+      \"requestIssuerId\":\"#{entity_id}\",
+      \"transactionSupportsEidas\":true
+    }"
+  end
+
+  get '/config/transactions/:entity_id/display-data' do
+    level_of_assurance = params['entity_id'] == 'http://www.test-rp-loa1.gov.uk/SAML2/MD' ? 'LEVEL_1' : 'LEVEL_2'
+    status 200
+    "{
+      \"simpleId\":\"test-rp\",
+      \"loaList\":[\"#{level_of_assurance}\"]
+    }"
   end
 
   get '/config/idps/idp-list' do
@@ -30,12 +50,6 @@ class StubApi < Sinatra::Base
         "entityId":"http://stub-idp-loa1-onboarding.com",
         "levelsOfAssurance": ["LEVEL_1"]
       }]'
-  end
-
-  put '/api/session/:session_id/select-idp' do
-    '{
-      "encryptedEntityId":"not-blank"
-    }'
   end
 
   get '/SAML2/SSO/API/SENDER/AUTHN_REQ' do
@@ -100,19 +114,5 @@ class StubApi < Sinatra::Base
   post '/api/countries/:session_id/:countryCode' do
     status 200
     ''
-  end
-
-private
-
-  def post_to_api(relay_state)
-    level_of_assurance = relay_state == 'my-loa1-relay-state' ? 'LEVEL_1' : 'LEVEL_2'
-    return "{
-      \"sessionId\":\"blah\",
-      \"sessionStartTime\":32503680000000,
-      \"transactionSimpleId\":\"test-rp\",
-      \"transactionEntityId\":\"http://www.test-rp.gov.uk/SAML2/MD\",
-      \"levelsOfAssurance\":[\"#{level_of_assurance}\"],
-      \"transactionSupportsEidas\": true
-    }"
   end
 end

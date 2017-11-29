@@ -20,8 +20,8 @@ class ConfirmYourIdentityController < ApplicationController
 private
 
   def journey_hint_value
-    JSON.parse(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] ||= '')
-  rescue JSON::ParserError
+    MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] ||= '')
+  rescue MultiJson::ParseError
     nil
   end
 

@@ -19,7 +19,7 @@ describe SessionValidator do
   let(:good_session) {
     {
       transaction_simple_id: 'simple-id',
-      start_time: DateTime.now.to_i * 1000,
+      start_time: Time.now.to_i * 1000,
       verify_session_id: 'session_id',
       identity_providers: [{ 'simple_id' => 'stub-idp-one' }],
       requested_loa: 'LEVEL_1'
@@ -40,7 +40,7 @@ describe SessionValidator do
 
   it 'will pass validation if all cookies and session keys are present' do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
-    session[:start_time] = DateTime.now.to_i * 1000
+    session[:start_time] = Time.now.to_i * 1000
     session[:verify_session_id] = 'session_id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to be_ok
@@ -109,7 +109,7 @@ describe SessionValidator do
   it 'should return ValidationFailure when session ids do not match' do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id_a'
     session[:verify_session_id] = 'session_id_b'
-    session[:start_time] = DateTime.now.to_i * 1000
+    session[:start_time] = Time.now.to_i * 1000
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong

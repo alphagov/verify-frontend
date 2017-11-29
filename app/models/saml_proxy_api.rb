@@ -52,4 +52,13 @@ class SamlProxyApi
     )
     OutboundSamlMessage.validated_response(response)
   end
+
+  def create_session(saml_request, relay_state)
+    body = {
+        PARAM_SAML_REQUEST => saml_request,
+        PARAM_RELAY_STATE => relay_state,
+        PARAM_IP_SEEN_BY_FRONTEND => originating_ip
+    }
+    @api_client.post(NEW_SESSION_ENDPOINT, body)
+  end
 end

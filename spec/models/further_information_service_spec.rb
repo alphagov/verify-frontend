@@ -1,6 +1,5 @@
 require 'rails_helper'
 require 'further_information_service'
-require 'session_proxy'
 
 RSpec.describe FurtherInformationService do
   let(:display_data_repo) { double(:display_data_repo) }

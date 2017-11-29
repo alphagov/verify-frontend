@@ -25,7 +25,7 @@ localized do
     get 'begin_registration', to: 'start#register', as: :begin_registration
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
-    get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
+    get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
     get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
     get 'failed_registration', to: 'failed_registration_loa1#index', as: :failed_registration
     get 'cancelled_registration', to: 'cancelled_registration_loa1#index', as: :cancelled_registration
@@ -48,7 +48,7 @@ localized do
     post 'select_phone', to: 'clever_questions/select_phone#select_phone', as: :select_phone_submit
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
-    get 'choose_a_certified_company_about', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
+    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
     get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
     get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
     get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
@@ -85,7 +85,7 @@ localized do
   get 'feedback', to: 'feedback#index', as: :feedback
   post 'feedback', to: 'feedback#submit', as: :feedback_submit
   get 'feedback_sent', to: 'feedback_sent#index', as: :feedback_sent
-  get 'certified_company_unavailable', to: 'certified_company_unavailable#index', as: :certified_company_unavailable
+  get 'certified_company_unavailable/:company', to: 'certified_company_unavailable#index', as: :certified_company_unavailable
   get 'further_information', to: 'further_information#index', as: :further_information
   post 'further_information', to: 'further_information#submit', as: :further_information_submit
   post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
