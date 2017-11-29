@@ -6,17 +6,18 @@ localized do
   get 'sign_in', to: 'sign_in#index', as: :sign_in
   post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 
-  get 'select_documents', to: 'select_documents#index', as: :select_documents
-  get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
-  post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
+  get 'select_documents', to: 'clever_questions/select_documents#index', as: :select_documents
+  get 'select_documents_none', to: 'clever_questions/select_documents#no_documents', as: :select_documents_no_documents
+  post 'select_documents', to: 'clever_questions/select_documents#select_documents', as: :select_documents_submit
   get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
   get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
   post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
   get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
-  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
-  get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
-  get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
-  get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
+
+  get 'will_it_work_for_me', to: 'clever_questions/will_it_work_for_me#index', as: :will_it_work_for_me
+  get 'why_might_this_not_work_for_me', to: 'clever_questions/will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
+  get 'may_not_work_if_you_live_overseas', to: 'clever_questions/will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
+  get 'will_not_work_without_uk_address', to: 'clever_questions/will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
 
   constraints IsLoa1 do
     get 'start', to: 'start#index', as: :start

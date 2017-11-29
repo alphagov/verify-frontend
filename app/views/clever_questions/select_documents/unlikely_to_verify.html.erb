@@ -1,0 +1,12 @@
+<%= page_title 'hub.other_ways_title' %>
+<% content_for :feedback_source, 'UNLIKELY_TO_VERIFY_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.unlikely_to_verify.heading' %></h1>
+
+    <p><%= t('hub.unlikely_to_verify.explanation', add_more_documents_link: link_to(t('hub.unlikely_to_verify.explanation_link_text'), select_documents_path)).html_safe %></p>
+    <%= render partial: 'shared/other_ways', locals: {other_ways_text: @other_ways_text, other_ways_description: @other_ways_description} %>
+  </div>
+</div>
+

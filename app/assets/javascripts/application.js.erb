@@ -18,7 +18,7 @@
 window.GOVUK.shimLinksWithButtonRole.init();
 
 window.GOVUK.validation.init();
-window.GOVUK.selectDocuments.init();
+//window.GOVUK.selectDocuments.init();
 //window.GOVUK.selectPhone.init();
 window.GOVUK.willItWorkForMe.init();
 window.GOVUK.feedback.init();
@@ -37,9 +37,20 @@ abTest({
   ]
 })
 
+abTest({
+  experiment: 'clever_questions',
+  control: {
+    route: window.GOVUK.selectDocuments
+  },
+  alternatives: [
+    {name: 'variant', route: window.GOVUK.selectDocumentsCleverQuestions}
+  ]
+})
+
 /*
  Example of how to add JavaScript A/B code
  */
+
 //abTest({
 //  experiment: 'app_transparency',
 //  routeA: window.GOVUK.selectPhone,

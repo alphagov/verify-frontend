@@ -520,39 +520,79 @@ en:
       reason_two: you entered an incorrect web address
     no_selection: Please answer all the questions
   clever_questions:
-      hub:
-        start:
-          title: Start
-          heading: GOV.UK Verify
-          secure_service: GOV.UK Verify is a secure service built to help fight the growing problem of online identity theft.
-          prevent_viewing: HMRC uses Verify to help prevent other people viewing your personal pension information as it stops someone from pretending to be you.
-          create_account: Create a new identity account
-          sign_in: sign in with your identity account
-          error_message: Please select an option
-        about_choosing_an_identity_provider:
-          title: About choosing an identity provider
-          heading: Finding the right identity provider for you
-          content_html: |
-            <p>Each identity provider uses different methods to verify identities. We’ll now ask you some questions so we can filter out the companies that won’t work for you. We’ll then send you to the website of the identity provider you choose.</p>
-            <p>It takes about 15 minutes to complete, but you only have to do it once and you’ll have an identity account with the identity provider. You can use your account to sign in to government services wherever you see the GOV.UK Verify logo with your username and password in less than 1 minute.</p>
-          summary: What other government services use GOV.UK Verify
-          details_html: |
-            <p>GOV.UK Verify is new, and government services are joining all the time.</p>
-            <p>The current services using Verify are:</p>
-        about_identity_providers:
-          title: About identity providers
-          heading: Identity providers
-          content_html: |
-            <p>An identity provider will verify your identity.</p>
-            <p>GOV.UK Verify uses identity providers so that all your personal information isn’t held in one government database.</p>
-            <p>You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities. The identity provider you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passports Office or DVLA.</p>
-          content_bottom_html: |
-            <p>These 7 companies applied to be part of Verify, and have been certified to verify identities as they’ve met government security and privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
-            <p>There's no charge for this service.</p>
-        select_phone:
-          title: Receiving security codes
-          heading: Receiving security codes
-          explanation: For an extra layer of security, identity providers send you security codes to your mobile phone when you’re signing in to your identity account to access government services.
-          highlight: Identity providers won't call you on your mobile. They won’t share or sell your phone number for any reason without your consent.
-          question:
-            mobile_phone: Can you receive text messages now?
+    hub:
+      start:
+        title: Start
+        heading: GOV.UK Verify
+        secure_service: GOV.UK Verify is a secure service built to help fight the growing problem of online identity theft.
+        prevent_viewing: HMRC uses Verify to help prevent other people viewing your personal pension information as it stops someone from pretending to be you.
+        create_account: Create a new identity account
+        sign_in: sign in with your identity account
+        error_message: Please select an option
+      about_choosing_an_identity_provider:
+        title: About choosing an identity provider
+        heading: Finding the right identity provider for you
+        content_html: |
+          <p>Each identity provider uses different methods to verify identities. We’ll now ask you some questions so we can filter out the companies that won’t work for you. We’ll then send you to the website of the identity provider you choose.</p>
+          <p>It takes about 15 minutes to complete, but you only have to do it once and you’ll have an identity account with the identity provider. You can use your account to sign in to government services wherever you see the GOV.UK Verify logo with your username and password in less than 1 minute.</p>
+        summary: What other government services use GOV.UK Verify
+        details_html: |
+          <p>GOV.UK Verify is new, and government services are joining all the time.</p>
+          <p>The current services using Verify are:</p>
+      about_identity_providers:
+        title: About identity providers
+        heading: Identity providers
+        content_html: |
+          <p>An identity provider will verify your identity.</p>
+          <p>GOV.UK Verify uses identity providers so that all your personal information isn’t held in one government database.</p>
+          <p>You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities. The identity provider you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passports Office or DVLA.</p>
+        content_bottom_html: |
+          <p>These 7 companies applied to be part of Verify, and have been certified to verify identities as they’ve met government security and privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
+          <p>There's no charge for this service.</p>
+      select_documents:
+        title: Select all the documents you have
+        title_photo_documents: Your photo identity document
+        explanation: Certified companies use information from different identity documents to verify you.
+        sub_heading: Certified companies use information from identity documents to verify you.
+        documents_from_other_countries: Some certified companies can use identity documents from other countries to verify you.
+        no_documents_message: Your document choices have been set to ‘no’.
+        legend: Do you have these documents with you?
+        highlight: The more identity documents you can provide now, the more likely it is that the company can verify you successfully.
+        documents_option_yes: 'Yes'
+        documents_option_yes_expired: Yes, but it's expired
+        valid_UK_driving_licence: Do you have a valid UK photocard driving licence, full or provisional?
+        passport:
+          uk_passport: Do you have a UK passport?
+          expires:
+            depending_when_expired: Depending on when your passport expired, you may still be able to use it.
+            when_expired: When did your passport expire?
+            when_expired_example: For example, 31 3 2016
+            day: Day
+            month: Month
+            year: Year
+        question:
+          driving_licence: Great Britain (GB) photocard driving licence (full or provisional)
+          ni_driving_licence: Northern Ireland (NI) photocard driving licence (full or provisional)
+          passport: UK passport
+          non_uk_id_document: Non-UK identity document (passport, ID card or driving licence)
+          uk_bank_account_details: UK bank account details
+          debit_card: Debit card
+          credit_card: Credit card
+          no_documents: I don’t have any of these documents with me
+        errors:
+          no_selection: Please select the documents you have
+          invalid_selection: Please check your selection
+          no_driving_licence_selection: Please select the driving licence you have
+          invalid_date: Please enter valid passport expiry date
+        neither_documents: I don't have either of these documents
+        where_driving_licence_issued: Where was your driving licence issued?
+        driving_licence_details:
+          great_britain: Great Britain
+          northern_ireland: Northern Ireland
+      select_phone:
+        title: Receiving security codes
+        heading: Receiving security codes
+        explanation: For an extra layer of security, identity providers send you security codes to your mobile phone when you’re signing in to your identity account to access government services.
+        highlight: Identity providers won't call you on your mobile. They won’t share or sell your phone number for any reason without your consent.
+        question:
+          mobile_phone: Can you receive text messages now?
