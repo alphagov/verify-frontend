@@ -21,16 +21,16 @@ RSpec.feature 'When user visits document selection page' do
     expect(page).to have_content('Eich dogfennau hunaniaeth gyda llun')
   end
 
-  it 'should go to select phone page when user has a valid GB licence and UK passport' do
+  it 'should go to select proof of address page when user has a valid GB licence and UK passport' do
     choose 'select_documents_form_any_driving_licence_true'
     check 'select_documents_form_driving_licence'
     choose 'select_documents_form_passport_true'
     click_button 'Continue'
-    expect(page).to have_current_path(select_phone_path)
+    expect(page).to have_current_path(select_proof_of_address_path)
     expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'passport' => true, 'driving_licence' => true, 'ni_driving_licence' => false })
   end
 
-  it 'should go to select phone page when user has a GB licence and an expired UK passport under six months' do
+  it 'should go to select proof of address page when user has a GB licence and an expired UK passport under six months' do
     choose 'select_documents_form_any_driving_licence_true'
     check 'select_documents_form_driving_licence'
     choose 'select_documents_form_passport_yes_expired'
@@ -40,11 +40,11 @@ RSpec.feature 'When user visits document selection page' do
     fill_in 'select_documents_form_passport_expiry_year', with: Date.today.year
 
     click_button 'Continue'
-    expect(page).to have_current_path(select_phone_path)
+    expect(page).to have_current_path(select_proof_of_address_path)
     expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'passport' => true, 'driving_licence' => true, 'ni_driving_licence' => false })
   end
 
-  it 'should go to select phone page when user has a GB licence and an expired UK passport over six months' do
+  it 'should go to select proof of address page when user has a GB licence and an expired UK passport over six months' do
     choose 'select_documents_form_any_driving_licence_true'
     check 'select_documents_form_driving_licence'
     choose 'select_documents_form_passport_yes_expired'
@@ -54,7 +54,7 @@ RSpec.feature 'When user visits document selection page' do
     fill_in 'select_documents_form_passport_expiry_year', with: Date.today.year
 
     click_button 'Continue'
-    expect(page).to have_current_path(select_phone_path)
+    expect(page).to have_current_path(select_proof_of_address_path)
     expect(page.get_rack_session['selected_answers']).to eql('documents' => { 'passport' => false, 'driving_licence' => true, 'ni_driving_licence' => false })
   end
 

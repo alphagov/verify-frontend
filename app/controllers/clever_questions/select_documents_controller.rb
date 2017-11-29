@@ -9,9 +9,8 @@ class CleverQuestions::SelectDocumentsController < ApplicationController
     if @form.valid?
       report_to_analytics('Select Documents Next')
       selected_answer_store.store_selected_answers('documents', @form.selected_answers)
-      redirect_to @form.further_id_information_required? ? other_identity_documents_path : select_phone_path
+      redirect_to @form.further_id_information_required? ? other_identity_documents_path : select_proof_of_address_path
     else
-      puts "Errors: #{@form.errors.inspect}"
       flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index
     end
