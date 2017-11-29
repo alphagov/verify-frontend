@@ -80,7 +80,7 @@ GEM
       activemodel
     erubis (2.7.0)
     eventmachine (1.2.5)
-    execjs (2.7.0)
+    execjs (2.6.0)
     facter (2.5.1)
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
@@ -313,8 +313,9 @@ GEM
     tilt (2.0.8)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    uglifier (3.2.0)
-      execjs (>= 0.3.0, < 3)
+    uglifier (2.7.2)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
@@ -382,7 +383,7 @@ DEPENDENCIES
   therubyracer (~> 0.12.3)
   thin
   tzinfo-data
-  uglifier (>= 3.2.0)
+  uglifier (~> 2.7.0)
   web-console (~> 2.0)
   webmock
   win32-process

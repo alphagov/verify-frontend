@@ -14,7 +14,7 @@ gem 'connection_pool'
 # Assets
 gem 'sass-rails', '~> 5.0'
 gem 'autoprefixer-rails'
-gem 'uglifier', '>= 3.2.0'
+gem 'uglifier', '~> 2.7.0'
 gem 'jquery-rails'
 
 gem 'govuk_template'
