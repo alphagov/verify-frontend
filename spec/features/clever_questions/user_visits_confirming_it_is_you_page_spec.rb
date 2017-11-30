@@ -23,11 +23,11 @@ RSpec.describe 'When the user visits the confirming it is you page' do
       stub_api_no_docs_idps
       visit '/confirming-it-is-you'
 
-      check 'confirming_it_is_you_form_smart_phone', allow_label_click: true
+      check 'confirming_it_is_you_form_no_smart_phone', allow_label_click: true
       click_button 'Continue'
 
       expect(page).to have_current_path(select_phone_path, only_path: true)
-      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'smart_phone' => true })
+      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'smart_phone' => false })
     end
 
     it 'allows you to overwrite the values of your selected evidence' do
@@ -36,7 +36,7 @@ RSpec.describe 'When the user visits the confirming it is you page' do
 
       visit '/confirming-it-is-you'
 
-      check 'confirming_it_is_you_form_smart_phone', allow_label_click: true
+      check 'confirming_it_is_you_form_no_smart_phone', allow_label_click: true
       click_button 'Continue'
 
       visit '/confirming-it-is-you'
@@ -44,7 +44,7 @@ RSpec.describe 'When the user visits the confirming it is you page' do
 
       expect(page).to have_current_path(select_phone_path)
       expect(page.get_rack_session['selected_answers']).to eql(
-        'phone' => { 'smart_phone' => false },
+        'phone' => { 'smart_phone' => true },
         'documents' => { 'passport' => true, 'driving_licence' => true }
       )
     end
@@ -69,7 +69,7 @@ RSpec.describe 'When the user visits the confirming it is you page' do
     page.set_rack_session(transaction_simple_id: 'test-rp')
     visit '/confirming-it-is-you'
 
-    check 'confirming_it_is_you_form_smart_phone', allow_label_click: true
+    check 'confirming_it_is_you_form_no_smart_phone', allow_label_click: true
     click_button 'Continue'
 
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once

@@ -5,8 +5,8 @@ require 'api_test_helper'
 require 'piwik_test_helper'
 
 describe CleverQuestions::ConfirmingItIsYouController do
-  yes_smart_phone_evidence = { smart_phone: 'true' }.freeze
-  no_smart_phone_evidence = { smart_phone: 'false' }.freeze
+  yes_smart_phone_evidence = { no_smart_phone: 'true' }.freeze
+  no_smart_phone_evidence = { no_smart_phone: 'false' }.freeze
 
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_2')
@@ -23,13 +23,13 @@ describe CleverQuestions::ConfirmingItIsYouController do
 
     it 'captures form values in session cookie' do
       expect(subject).to redirect_to('/select-phone')
-      expect(session[:selected_answers]['phone']).to eq(smart_phone: true)
+      expect(session[:selected_answers]['phone']).to eq(smart_phone: false)
     end
 
     it 'does not overwrite evidence for phone already stored in session cookie' do
       session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true }, 'phone' => { mobile_phone: true } }
       expect(subject).to redirect_to('/select-phone')
-      expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true)
+      expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: false)
     end
   end
 
@@ -40,10 +40,10 @@ describe CleverQuestions::ConfirmingItIsYouController do
       expect(subject).to redirect_to('/select-phone')
     end
 
-    it 'smart_phone evidence defaults to false' do
+    it 'smart_phone evidence defaults to true' do
       stub_api_idp_list
       expect(subject).to redirect_to('/select-phone')
-      expect(session[:selected_answers]['phone']).to eq(smart_phone: false)
+      expect(session[:selected_answers]['phone']).to eq(smart_phone: true)
     end
   end
 end

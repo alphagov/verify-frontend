@@ -1,20 +1,19 @@
 class CleverQuestions::ConfirmingItIsYouForm
   include ActiveModel::Model
 
-  attr_reader :smart_phone
+  attr_reader :no_smart_phone
 
   def initialize(params)
-    @smart_phone = params[:smart_phone]
+    @no_smart_phone = params[:no_smart_phone]
   end
 
   def selected_answers
-    answers = {}
-    IdpEligibility::Evidence::SMARTPHONE_ONLY_ATTRIBUTES.each do |attr|
-      result = public_send(attr)
-      if %w(true false).include?(result)
-        answers[attr] = result == 'true'
-      end
-    end
-    answers
+    { smart_phone: has_smart_phone }
+  end
+
+private
+
+  def has_smart_phone
+    @no_smart_phone == 'true' ? false : true
   end
 end
