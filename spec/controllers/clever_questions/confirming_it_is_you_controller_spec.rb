@@ -31,7 +31,6 @@ describe CleverQuestions::ConfirmingItIsYouController do
       expect(subject).to redirect_to('/proof-of-address')
       expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true)
     end
-
   end
 
   context 'when form is submitted without anything' do

@@ -74,5 +74,4 @@ RSpec.describe 'When the user visits the confirming it is you page' do
 
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
-
 end
