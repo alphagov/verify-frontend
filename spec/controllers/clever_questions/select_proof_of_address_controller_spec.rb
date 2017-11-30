@@ -14,12 +14,12 @@ describe CleverQuestions::SelectProofOfAddressController do
     expect(subject).to render_template(:select_proof_of_address)
   end
 
-  it 'redirects to select phone page' do
+  it 'redirects to confirming it is you page' do
     stub_piwik_request('action_name' => 'Proof of Address Next')
 
     post :select_proof, params: { locale: 'en', select_proof_of_address_form: { uk_bank_account_details: true, debit_card: true, credit_card: false } }
 
-    expect(subject).to redirect_to('/select-phone')
+    expect(subject).to redirect_to('/confirming-it-is-you')
   end
 
   it 're-renders itself ' do

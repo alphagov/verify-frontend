@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the confirming it is you page' do
       check 'confirming_it_is_you_form_smart_phone', allow_label_click: true
       click_button 'Continue'
 
-      expect(page).to have_current_path(select_proof_of_address_path, only_path: true)
+      expect(page).to have_current_path(select_phone_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'smart_phone' => true })
     end
 
@@ -42,9 +42,9 @@ RSpec.describe 'When the user visits the confirming it is you page' do
       visit '/confirming-it-is-you'
       click_button 'Continue'
 
-      expect(page).to have_current_path(select_proof_of_address_path)
+      expect(page).to have_current_path(select_phone_path)
       expect(page.get_rack_session['selected_answers']).to eql(
-        'phone' => { 'mobile_phone' => false },
+        'phone' => { 'smart_phone' => false },
         'documents' => { 'passport' => true, 'driving_licence' => true }
       )
     end

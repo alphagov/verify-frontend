@@ -51,11 +51,8 @@ en:
     cancelled_registration: cancelled-registration
     about_identity_providers: about-identity-providers
     about_choosing_an_identity_provider: about-choosing-an-identity-provider
-<<<<<<< afef892e3b380f8d8070e0eba626b8465d6400cd
     select_proof_of_address: select-proof-of-address
-=======
     confirming_it_is_you: confirming-it-is-you
->>>>>>> TT-1606: Added the 'Confirming it's you' page for app question
   title:
     error: Error
   navigation:

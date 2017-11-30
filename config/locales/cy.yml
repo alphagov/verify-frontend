@@ -50,11 +50,8 @@ cy:
     cancelled_registration: cancelled-registration-welsh
     about_identity_providers: about-identity-providers-cy
     about_choosing_an_identity_provider: about-choosing-an-identity-provider-cy
-<<<<<<< afef892e3b380f8d8070e0eba626b8465d6400cd
     select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
-=======
     confirming_it_is_you: confirming-it-is-you-cy
->>>>>>> TT-1606: Added the 'Confirming it's you' page for app question
   title:
     error: Error
   navigation:
