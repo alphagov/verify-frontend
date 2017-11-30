@@ -1,7 +1,7 @@
 class CleverQuestions::ConfirmingItIsYouForm
   include ActiveModel::Model
 
-  attr_reader :smart_phone, :questions
+  attr_reader :smart_phone
 
   def initialize(params)
     @smart_phone = params[:smart_phone]
@@ -16,11 +16,5 @@ class CleverQuestions::ConfirmingItIsYouForm
       end
     end
     answers
-  end
-
-private
-
-  def add_no_selection_error
-    errors.add(:base, I18n.t('hub.select_phone.errors.no_selection'))
   end
 end
