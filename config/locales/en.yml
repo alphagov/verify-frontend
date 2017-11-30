@@ -51,6 +51,7 @@ en:
     cancelled_registration: cancelled-registration
     about_identity_providers: about-identity-providers
     about_choosing_an_identity_provider: about-choosing-an-identity-provider
+    select_proof_of_address: select-proof-of-address
   title:
     error: Error
   navigation:
@@ -60,6 +61,7 @@ en:
     back: Back
   option:
     "no": "No"
+    "yes": "Yes"
     unknown: I don’t know
   cookie_message:
     message: GOV.UK Verify uses cookies to make the site simpler.
@@ -595,3 +597,15 @@ en:
         highlight: Identity providers won't call you on your mobile. They won’t share or sell your phone number for any reason without your consent.
         question:
           mobile_phone: Can you receive text messages now?
+      select_proof_of_address:
+        title: Proof of your address
+        sub_heading: Identity providers need to check your address is correct. They do this by checking with your bank or credit card provider.
+        highlight: This is a free service, and the identity provider cannot see any of your financial transactions.
+        financial_details:
+          heading: 'Do you have the following:'
+          question:
+            debit_card: Debit card?
+            credit_card: Credit card?
+            bank_account: UK bank account?
+        errors:
+          no_selection: Please answer all the questions

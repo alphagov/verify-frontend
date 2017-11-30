@@ -59,6 +59,8 @@ localized do
     get 'about', to: 'about_loa2#index', as: :about
     get 'about_identity_providers', to: 'clever_questions/about_loa2#identity_providers', as: :about_identity_providers
     get 'about_choosing_an_identity_provider', to: 'clever_questions/about_loa2#choosing_an_identity_provider', as: :about_choosing_an_identity_provider
+    get 'select_proof_of_address', to: 'clever_questions/select_proof_of_address#index', as: :select_proof_of_address
+    post 'select_proof_of_address', to: 'clever_questions/select_proof_of_address#select_proof', as: :select_proof_of_address_submit
   end
 
   post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit

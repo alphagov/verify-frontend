@@ -50,6 +50,7 @@ cy:
     cancelled_registration: cancelled-registration-welsh
     about_identity_providers: about-identity-providers-cy
     about_choosing_an_identity_provider: about-choosing-an-identity-provider-cy
+    select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
   title:
     error: Error
   navigation:
@@ -59,6 +60,7 @@ cy:
     back: Yn ôl
   option:
     "no": "Na"
+    "yes": "Oes"
     unknown: Ddim yn gwybod
   cookie_message:
     message: Mae GOV.UK Verify yn defnyddio cwcis i wneud y safle'n symlach.
@@ -600,3 +602,15 @@ cy:
         highlight: Identity providers won't call you on your mobile. They won’t share or sell your phone number for any reason without your consent.
         question:
           mobile_phone: Can you receive text messages now?
+      select_proof_of_address:
+        title: Tystiolaeth o'ch cyfeiriad
+        sub_heading: Mae cwmniau ardystiedig angen gwirio bod eich cyfeiriad yn gywir. Maent yn gwneud hyn drwy wirio gyda'ch banc neu ddarparwr cerdyn credyd.
+        highlight: Mae hwn yn wasanaeth am ddim, ac ni all y cwmniau ardystiedig weld dim o'ch trafodion ariannol.
+        financial_details:
+          heading: "Oes gennych chi'r canlynol:"
+          question:
+            debit_card: Credyd debyd?
+            credit_card: Credyd credyd?
+            bank_account: Cyfrif banc yn y DU?
+        errors:
+          no_selection: Please answer all the questions
