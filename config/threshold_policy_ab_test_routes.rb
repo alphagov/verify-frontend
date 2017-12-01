@@ -1,7 +1,7 @@
 THRESHOLD_POLICY_EXPERIMENT = 'threshold_policy_experiment'.freeze
 
-threshold_policy_control_piwik = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'control', true)
-threshold_policy_variant_piwik = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'variant', true)
+threshold_policy_control_piwik = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'control', is_start_of_test: true)
+threshold_policy_variant_piwik = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'variant', is_start_of_test: true)
 
 threshold_policy_control = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'control')
 threshold_policy_variant = SelectRoute.new(THRESHOLD_POLICY_EXPERIMENT, 'variant')

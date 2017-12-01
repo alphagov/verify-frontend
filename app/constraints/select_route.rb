@@ -2,11 +2,14 @@ require 'cookies/cookies'
 require 'ab_test/ab_test'
 
 class SelectRoute
-  def initialize(experiment_name, route, is_start_of_test = false, experiment_loa = nil)
+  def initialize(experiment_name, route, config = { is_start_of_test: false,
+                                                    experiment_loa: nil,
+                                                    trial_enabled: false })
     @experiment_name = experiment_name
     @experiment_route = "#{@experiment_name}_#{route}"
-    @experiment_loa = experiment_loa
-    @is_start_of_test = is_start_of_test
+    @experiment_loa = config[:experiment_loa]
+    @is_start_of_test = config[:is_start_of_test]
+    @trial_enabled = config[:trial_enabled]
   end
 
   def matches?(request)
@@ -22,8 +25,11 @@ private
 
   def cookie_matches_experiment?(request)
     request_experiment_route = extract_experiment_route_from_cookie(request.cookies[CookieNames::AB_TEST])
-
-    @experiment_route == request_experiment_route
+    if @trial_enabled && request.cookies[CookieNames::AB_TEST_TRIAL] == @experiment_name
+      true
+    else
+      @experiment_route == request_experiment_route
+    end
   end
 
   def loa_matches_experiment?(request)
