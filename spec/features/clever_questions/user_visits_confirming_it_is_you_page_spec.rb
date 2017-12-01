@@ -19,7 +19,7 @@ RSpec.describe 'When the user visits the confirming it is you page' do
   end
 
   context 'with javascript disabled' do
-    it 'redirects to the proof of address page on selection of smartphone and submit' do
+    it 'redirects to the select phone page on selection of no smartphone and submit' do
       stub_api_no_docs_idps
       visit '/confirming-it-is-you'
 
