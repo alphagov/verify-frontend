@@ -481,6 +481,12 @@ en:
         verify_with_another_company: 'Verify with another certified company'
         verify_using_other_documents: 'Verify using other documents'
         contact_verify: 'Contact GOV.UK Verify'
+    supported_verification_survey:
+      title: Survey
+      question: If available, would you come in for help with Verify from staff?
+      answer_yes: 'Yes'
+      answer_no: 'No'
+      thank_you: Thanks for your feedback.
   errors:
     transaction_list:
       title: Find the service you were using to start again

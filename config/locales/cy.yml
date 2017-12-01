@@ -486,6 +486,12 @@ cy:
         verify_with_another_company: Dilysu gyda chwmni ardystiedig arall
         verify_using_other_documents: Dilysu drwy ddefnyddio dogfennau eraill
         contact_verify: Cysylltu â GOV.UK Verify
+    supported_verification_survey:
+      title: Survey
+      question: If available, would you come in for help with Verify from staff?
+      yes: Yes
+      no: No
+      thank_you: Thanks for your feedback.
   errors:
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto

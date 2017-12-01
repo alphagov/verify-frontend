@@ -1,0 +1,17 @@
+.supported-verification-survey {
+  background-color: $grey-3;
+  padding: 20px;
+  margin-top: 20px;
+
+  .thank-you-message {
+    display: none;
+  }
+
+  .heading-small {
+    margin-right: 5px;
+  }
+
+  p {
+    margin: 0;
+  }
+}
