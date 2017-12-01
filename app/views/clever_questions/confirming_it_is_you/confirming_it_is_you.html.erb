@@ -1,0 +1,40 @@
+<% confirming_it_is_you_page = 'clever_questions.hub.confirming_it_is_you'%>
+<%= page_title "#{confirming_it_is_you_page}.title" %>
+<% content_for :feedback_source, 'CONFIRMING_IT_IS_YOU_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t "#{confirming_it_is_you_page}.heading" %></h1>
+    <%= t "#{confirming_it_is_you_page}.content_html" %>
+    <%= t "#{confirming_it_is_you_page}.questions_content_html" %>
+    <div class="panel panel-border-narrow">
+      <%= t "#{confirming_it_is_you_page}.highlight" %>
+    </div>
+
+    <details>
+      <summary>
+        <span class="summary"><%= t "#{confirming_it_is_you_page}.summary" %></span>
+      </summary>
+      <div class="panel panel-border-narrow">
+        <%= t "#{confirming_it_is_you_page}.details_html" %>
+      </div>
+    </details>
+
+    <%= form_for @form, :as => 'confirming_it_is_you_form', url: confirming_it_is_you_path, html: { novalidate: 'novalidate', 'data-msg': t('hub.select_phone.errors.no_selection')} do |f| %>
+      
+      <%= t "#{confirming_it_is_you_page}.smartphone_content_html" %>
+
+      <%= content_tag :div, class: form_question_class do %>
+        <fieldset>
+            <%= f.custom_check_box :no_smart_phone, {class: 'form-group form-field'}, "true", "false", t("#{confirming_it_is_you_page}.smartphone_checkbox")  %>
+        </fieldset>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
