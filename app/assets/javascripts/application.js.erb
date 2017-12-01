@@ -33,7 +33,8 @@ abTest({
   },
   alternatives: [
     {name: 'variant', route: window.GOVUK.selectPhoneCleverQuestions}
-  ]
+  ],
+  trial_enabled: true
 })
 
 abTest({
@@ -43,7 +44,8 @@ abTest({
   },
   alternatives: [
     {name: 'variant', route: window.GOVUK.selectDocumentsCleverQuestions}
-  ]
+  ],
+  trial_enabled: true
 })
 
 window.GOVUK.selectProofOfAddress.init();
