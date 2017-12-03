@@ -5,7 +5,7 @@ require 'i18n'
 describe 'When the user visits the choose a certified company page' do
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list
+    stub_api_idp_list(default_idps)
   end
 
   context 'user has two docs and a mobile' do
@@ -72,6 +72,7 @@ describe 'When the user visits the choose a certified company page' do
 
   context 'user is from an LOA1 service' do
     it 'only LEVEL_1 recommended IDPs are displayed' do
+      stub_api_idp_list(default_idps, 'LEVEL_1')
       page.set_rack_session(
         transaction_simple_id: 'test-rp',
         requested_loa: 'LEVEL_1',

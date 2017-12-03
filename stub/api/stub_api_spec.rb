@@ -28,9 +28,9 @@ describe StubApi do
    JSON.parse(last_response.body)
   end
 
-  context '#get /config/idps/idp-list' do
+  context '#get /config/idps/idp-list/http%3A%2F%2Fwww.test-rp.gov.uk%2FSAML2%2FMD/LEVEL_1' do
     it 'should respond with valid IdpListResponse' do
-      get '/config/idps/idp-list'
+      get '/config/idps/idp-list/http%3A%2F%2Fwww.test-rp.gov.uk%2FSAML2%2FMD/LEVEL_1'
       expect(last_response).to be_ok
       response = IdpListResponse.new(last_response_json)
       expect(response).to be_valid

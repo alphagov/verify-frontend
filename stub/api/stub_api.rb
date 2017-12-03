@@ -29,7 +29,7 @@ class StubApi < Sinatra::Base
     }"
   end
 
-  get '/config/idps/idp-list' do
+  get '/config/idps/idp-list/:transaction_id/:level_of_assurance' do
     '[{
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one",

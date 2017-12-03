@@ -195,8 +195,8 @@ module ApiTestHelper
         .to_return(body: an_error_response(code).to_json, status: 500)
   end
 
-  def stub_api_idp_list(idps = default_idps)
-    stub_request(:get, config_api_uri(idp_list_endpoint(default_transaction_entity_id))).to_return(body: idps.to_json)
+  def stub_api_idp_list(idps = default_idps, loa = 'LEVEL_2')
+    stub_request(:get, config_api_uri(idp_list_endpoint(default_transaction_entity_id, loa))).to_return(body: idps.to_json)
   end
 
   def stub_api_select_idp
