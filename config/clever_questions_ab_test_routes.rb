@@ -38,7 +38,7 @@ localized do
   end
 
   constraints IsLoa2 do
-    get 'start', to: 'clever_questions/start#index', as: :start
+    # get 'start', to: 'clever_questions/start#index', as: :start
     post 'start', to: 'clever_questions/start#request_post', as: :start
     get 'begin_registration', to: 'clever_questions/start#register', as: :begin_registration
     post 'will_it_work_for_me', to: 'clever_questions/will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
