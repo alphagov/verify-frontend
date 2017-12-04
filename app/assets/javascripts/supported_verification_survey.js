@@ -5,7 +5,7 @@
 
     GOVUK.supportedVerificationSurvey = {
         init: function() {
-            var supportedVerificationSurvey = $('#supported-verification-survey');
+            var supportedVerificationSurvey = $('.supported-verification-survey');
 
             function recordResponse(response) {
                 global._paq.push(['trackEvent', 'Micro Survey', response, 'F2F Support']);
