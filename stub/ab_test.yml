@@ -37,12 +37,6 @@ experiments:
           percent: 50
         - name: 'variant'
           percent: 50
-  - loa1_shortened_journey_v3:
-      alternatives:
-        - name: 'control'
-          percent: 100
-        - name: 'variant'
-          percent: 0
   - clever_questions:
       alternatives:
         - name: 'control'

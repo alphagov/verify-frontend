@@ -22,9 +22,9 @@ localized do
   get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
 
   constraints IsLoa1 do
-    # get 'start', to: 'start#index', as: :start
-    # post 'start', to: 'start#request_post', as: :start
-    # get 'begin_registration', to: 'start#register', as: :begin_registration
+    get 'start', to: 'start#index', as: :start
+    post 'start', to: 'start#request_post', as: :start
+    get 'begin_registration', to: 'start#register', as: :begin_registration
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
@@ -39,8 +39,6 @@ localized do
     get 'about_certified_companies', to: 'about_loa1#certified_companies', as: :about_certified_companies
     get 'about_identity_accounts', to: 'about_loa1#identity_accounts', as: :about_identity_accounts
     get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
-
-    add_routes :loa1_shortened_journey_ab_test_routes
   end
 
   constraints IsLoa2 do
