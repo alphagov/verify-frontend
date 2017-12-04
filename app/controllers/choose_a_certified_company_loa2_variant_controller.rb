@@ -11,7 +11,7 @@ class ChooseACertifiedCompanyLoa2VariantController < ApplicationController
 
   def select_idp
     selected_answer_store.store_selected_answers('interstitial', {})
-    select_viewable_idp(params.fetch('entity_id')) do |decorated_idp|
+    select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
       session[:selected_idp_was_recommended] = IDP_RECOMMENDATION_GROUPER_VARIANT.recommended?(decorated_idp.identity_provider, selected_evidence, current_identity_providers_for_loa, current_transaction_simple_id)
       redirect_to warning_or_question_page(decorated_idp)
     end

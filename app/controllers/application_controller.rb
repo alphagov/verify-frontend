@@ -186,32 +186,21 @@ private
   end
 
   def select_viewable_idp_for_sign_in(entity_id)
-    for_viewable_idp_for_sign_in(entity_id) do |decorated_idp|
+    for_viewable_idp(entity_id, current_identity_providers_for_sign_in) do |decorated_idp|
       session[:selected_idp] = decorated_idp.identity_provider
       yield decorated_idp
     end
   end
 
-  def for_viewable_idp_for_sign_in(entity_id)
-    matching_idp = current_identity_providers_for_sign_in.detect { |idp| idp.entity_id == entity_id }
-    idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
-    if idp.viewable?
-      yield idp
-    else
-      logger.error 'Unrecognised IdP simple id'
-      render_not_found
-    end
-  end
-
-  def select_viewable_idp(entity_id)
-    for_viewable_idp(entity_id) do |decorated_idp|
+  def select_viewable_idp_for_loa(entity_id)
+    for_viewable_idp(entity_id, current_identity_providers_for_loa) do |decorated_idp|
       session[:selected_idp] = decorated_idp.identity_provider
       yield decorated_idp
     end
   end
 
-  def for_viewable_idp(entity_id)
-    matching_idp = current_identity_providers_for_loa.detect { |idp| idp.entity_id == entity_id }
+  def for_viewable_idp(entity_id, identity_provider_list)
+    matching_idp = identity_provider_list.detect { |idp| idp.entity_id == entity_id }
     idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
     if idp.viewable?
       yield idp
