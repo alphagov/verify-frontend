@@ -8,7 +8,7 @@ class CleverQuestions::SelectPhoneController < ApplicationController
     if @form.valid?
       report_to_analytics('Phone Next')
       selected_answer_store.store_selected_answers('phone', @form.selected_answers)
-      idps_available = IDP_ELIGIBILITY_CHECKER.any?(selected_evidence, current_identity_providers)
+      idps_available = IDP_ELIGIBILITY_CHECKER.any?(selected_evidence, current_identity_providers_for_loa)
       redirect_to idps_available ? choose_a_certified_company_path : no_mobile_phone_path
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')

@@ -165,8 +165,8 @@ private
     end
   end
 
-  def current_identity_providers
-    CONFIG_PROXY.get_idp_list(session[:transaction_entity_id], session[:requested_loa]).idps
+  def current_identity_providers_for_loa
+    CONFIG_PROXY.get_idp_list_for_loa(session[:transaction_entity_id], session[:requested_loa]).idps
   end
 
   def current_identity_providers_for_sign_in
@@ -211,7 +211,7 @@ private
   end
 
   def for_viewable_idp(entity_id)
-    matching_idp = current_identity_providers.detect { |idp| idp.entity_id == entity_id }
+    matching_idp = current_identity_providers_for_loa.detect { |idp| idp.entity_id == entity_id }
     idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
     if idp.viewable?
       yield idp
