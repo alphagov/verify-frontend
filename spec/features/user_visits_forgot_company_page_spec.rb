@@ -16,6 +16,7 @@ RSpec.describe 'When the user visits the forgot company page' do
   end
 
   it 'takes us back to the sign-in page when the Back link is clicked' do
+    stub_api_idp_list_for_sign_in
     visit '/forgot-company'
     click_link I18n.t('navigation.back')
 

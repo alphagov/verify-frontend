@@ -169,6 +169,10 @@ private
     CONFIG_PROXY.get_idp_list(session[:transaction_entity_id], session[:requested_loa]).idps
   end
 
+  def current_identity_providers_for_sign_in
+    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps
+  end
+
   def report_to_analytics(action_name)
     FEDERATION_REPORTER.report_action(current_transaction, request, action_name)
   end
@@ -179,6 +183,24 @@ private
 
   def hide_feedback_link
     @hide_feedback_link = true
+  end
+
+  def select_viewable_idp_for_sign_in(entity_id)
+    for_viewable_idp_for_sign_in(entity_id) do |decorated_idp|
+      session[:selected_idp] = decorated_idp.identity_provider
+      yield decorated_idp
+    end
+  end
+
+  def for_viewable_idp_for_sign_in(entity_id)
+    matching_idp = current_identity_providers_for_sign_in.detect { |idp| idp.entity_id == entity_id }
+    idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
+    if idp.viewable?
+      yield idp
+    else
+      logger.error 'Unrecognised IdP simple id'
+      render_not_found
+    end
   end
 
   def select_viewable_idp(entity_id)

@@ -79,7 +79,7 @@ RSpec.describe 'user encounters error page' do
   context 'user session exists' do
     before :each do
       set_session_and_session_cookies!
-      stub_api_idp_list
+      stub_api_idp_list_for_sign_in
       stub_transactions_list
     end
 

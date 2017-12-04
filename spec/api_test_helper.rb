@@ -199,6 +199,10 @@ module ApiTestHelper
     stub_request(:get, config_api_uri(idp_list_endpoint(default_transaction_entity_id, loa))).to_return(body: idps.to_json)
   end
 
+  def stub_api_idp_list_for_sign_in(idps = default_idps)
+    stub_request(:get, config_api_uri(idp_list_for_sign_in_endpoint(default_transaction_entity_id))).to_return(body: idps.to_json)
+  end
+
   def stub_api_select_idp
     stub_request(:post, policy_api_uri(select_idp_endpoint(default_session_id))).to_return(status: 201)
   end

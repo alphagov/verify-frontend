@@ -18,4 +18,9 @@ class ConfigProxy
     response = @api_client.get(idp_list_endpoint(transaction_id, loa))
     IdpListResponse.validated_response(response)
   end
+
+  def get_idp_list_for_sign_in(transaction_id)
+    response = @api_client.get(idp_list_for_sign_in_endpoint(transaction_id))
+    IdpListResponse.validated_response(response)
+  end
 end

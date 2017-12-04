@@ -5,10 +5,10 @@ require 'api_test_helper'
 RSpec.describe 'when user submits start page form' do
   before :each do
     set_session_and_session_cookies!
-    stub_api_idp_list
   end
 
   it 'will display about page when user chooses yes (registration)' do
+    stub_api_idp_list
     stub_request(:get, INTERNAL_PIWIK.url)
     visit '/start'
     choose('start_form_selection_true')
@@ -17,6 +17,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will display sign in with IDP page when user chooses sign in' do
+    stub_api_idp_list_for_sign_in
     visit '/start'
     choose('start_form_selection_false')
     click_button('next-button')
@@ -31,6 +32,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will report user choice to analytics when user chooses to sign in' do
+    stub_api_idp_list_for_sign_in
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     visit '/start'
     choose('start_form_selection_false')
@@ -46,6 +48,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will prompt for an answer if no answer is given' do
+    stub_api_idp_list
     visit '/start'
     click_button('next-button')
     expect(page).to have_content "Please select an option"
