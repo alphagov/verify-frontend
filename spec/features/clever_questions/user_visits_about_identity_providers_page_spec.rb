@@ -26,7 +26,7 @@ RSpec.describe 'When the user visits the about identity providers page' do
   it 'displays IdPs that are enabled' do
     visit '/about-identity-providers'
 
-    expect(page).to have_css("img[src*='/white/#{simple_id}']")
+    expect(page).to have_css("img[src*='/#{simple_id}']")
   end
 
   it 'will go to about choosing a identity provider page when Continue is clicked if user on LOA2 journey' do
