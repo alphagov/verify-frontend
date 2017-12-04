@@ -46,6 +46,8 @@ localized do
     post 'will_it_work_for_me', to: 'clever_questions/will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
     get 'select_phone', to: 'clever_questions/select_phone#index', as: :select_phone
     post 'select_phone', to: 'clever_questions/select_phone#select_phone', as: :select_phone_submit
+    get 'confirming_it_is_you', to: 'clever_questions/confirming_it_is_you#index', as: :confirming_it_is_you
+    post 'confirming_it_is_you', to: 'clever_questions/confirming_it_is_you#select_answer', as: :confirming_it_is_you_submit
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
@@ -59,6 +61,8 @@ localized do
     get 'about', to: 'about_loa2#index', as: :about
     get 'about_identity_providers', to: 'clever_questions/about_loa2#identity_providers', as: :about_identity_providers
     get 'about_choosing_an_identity_provider', to: 'clever_questions/about_loa2#choosing_an_identity_provider', as: :about_choosing_an_identity_provider
+    get 'select_proof_of_address', to: 'clever_questions/select_proof_of_address#index', as: :select_proof_of_address
+    post 'select_proof_of_address', to: 'clever_questions/select_proof_of_address#select_proof', as: :select_proof_of_address_submit
   end
 
   post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit

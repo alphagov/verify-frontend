@@ -268,12 +268,13 @@ describe CleverQuestions::SelectDocumentsForm do
     end
 
     it 'has passport if expired under 6 months' do
+      date_in_past = Date.today - 2.months
       form = CleverQuestions::SelectDocumentsForm.new(
         passport: 'yes_expired',
         passport_expiry: {
-          day: Date.today.day.to_s,
-          month: (Date.today.month - 2).to_s,
-          year: Date.today.year.to_s
+          day: date_in_past.day.to_s,
+          month: date_in_past.month.to_s,
+          year: date_in_past.year.to_s
         }
       )
       evidence = form.selected_answers
@@ -281,12 +282,13 @@ describe CleverQuestions::SelectDocumentsForm do
     end
 
     it 'has passport if expired exactly 6 months' do
+      date_in_past = Date.today - 6.months
       form = CleverQuestions::SelectDocumentsForm.new(
         passport: 'yes_expired',
         passport_expiry: {
-            day: Date.today.day.to_s,
-            month: (Date.today.month - 6).to_s,
-            year: Date.today.year.to_s
+          day: date_in_past.day.to_s,
+          month: date_in_past.month.to_s,
+          year: date_in_past.year.to_s
         }
       )
       evidence = form.selected_answers
@@ -294,12 +296,13 @@ describe CleverQuestions::SelectDocumentsForm do
     end
 
     it 'has no passport if expired over 6 months' do
+      date_in_past = Date.today - 7.months
       form = CleverQuestions::SelectDocumentsForm.new(
         passport: 'yes_expired',
         passport_expiry: {
-            day: Date.today.day.to_s,
-            month: (Date.today.month - 7).to_s,
-            year: Date.today.year.to_s
+          day: date_in_past.day.to_s,
+          month: date_in_past.month.to_s,
+          year: date_in_past.year.to_s
         }
       )
       evidence = form.selected_answers
@@ -307,12 +310,13 @@ describe CleverQuestions::SelectDocumentsForm do
     end
 
     it 'has no passport if expired 6 months and 1 day' do
+      date_in_past = Date.today - 6.months - 1.day
       form = CleverQuestions::SelectDocumentsForm.new(
         passport: 'yes_expired',
         passport_expiry: {
-            day: (Date.today.day - 1).to_s,
-            month: (Date.today.month - 6).to_s,
-            year: Date.today.year.to_s
+          day: date_in_past.day.to_s,
+          month: date_in_past.month.to_s,
+          year: date_in_past.year.to_s
         }
       )
       evidence = form.selected_answers

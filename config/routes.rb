@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   # Toggle on when clever questions AB test goes live
   # clever_questions_control = SelectRoute.new(CLEVER_QUESTIONS, 'control')
-  clever_questions_variant = SelectRoute.new(CLEVER_QUESTIONS, 'variant')
+  clever_questions_variant = SelectRoute.new(CLEVER_QUESTIONS, 'variant', trial_enabled: true)
 
   def add_routes(routes_name)
     instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))

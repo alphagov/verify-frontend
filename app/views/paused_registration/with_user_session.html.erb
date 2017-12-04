@@ -1,0 +1,12 @@
+<%= page_title 'hub.paused_registration.with_session.title' %>
+<% content_for :feedback_source, 'PAUSED_REGISTRATION_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.paused_registration.with_session.heading', idp_name: @idp_name %></h1>
+
+    <p><%= t 'hub.paused_registration.with_session.restart_instructions_html', rp_name: @transaction[:name], rp_start_page: @transaction[:homepage] %></p>
+    <p><%= t 'hub.paused_registration.with_session.username_and_password_instructions', idp_name: @idp_name %></p>
+  </div>
+</div>
+

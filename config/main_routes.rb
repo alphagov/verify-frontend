@@ -94,6 +94,7 @@ localized do
   post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit
   get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
   get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
+  get 'paused_registration', to: 'paused_registration#index', as: :paused_registration
 
   add_routes :threshold_policy_ab_test_routes
 end

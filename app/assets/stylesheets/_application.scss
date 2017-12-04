@@ -7,6 +7,7 @@
 @import "helpers/meta-data";
 @import "helpers/feedback-link";
 @import "helpers/verify-logo";
+@import "helpers/js-show";
 @import "vendor/accessible_typeahead-0.3.1";
 
 // Specific pages
@@ -21,7 +22,7 @@
 @import "pages/privacy-notice";
 @import "pages/response-processing";
 @import "pages/feedback";
-@import "pages/redirect-to-service";
 @import "pages/choose-a-country";
+@import "pages/supported-verification-survey";
 @import "pages/failed-uplift";
 @import "pages/redirect-to-idp-warning";

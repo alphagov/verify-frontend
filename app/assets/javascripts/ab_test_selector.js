@@ -1,17 +1,25 @@
-function abTest(experimentDetails) {
-
+function abTest (experimentDetails) {
   try {
+    if (document.cookie.indexOf("ab_test_trial") >= 0) {
+      var abTrialCookie = getCookie("ab_test_trial")
+
+      if (experimentDetails.trial_enabled && experimentDetails.experiment == abTrialCookie) {
+        experimentDetails.alternatives[ 0 ].route.init()
+        return
+      }
+    }
+
     if (document.cookie.indexOf("ab_test") >= 0) {
       var abCookie = JSON.parse(getCookie("ab_test"))
 
-      var routes = { 'control': experimentDetails.control.route}
+      var routes = { 'control': experimentDetails.control.route }
 
-      experimentDetails.alternatives.forEach(function(alternative){
-        routes[experimentDetails.experiment.concat('_' + alternative.name)] = alternative.route
+      experimentDetails.alternatives.forEach(function (alternative) {
+        routes[ experimentDetails.experiment.concat('_' + alternative.name) ] = alternative.route
       })
 
-      if (routes[[abCookie[experimentDetails.experiment]]]) {
-        routes[abCookie[experimentDetails.experiment]].init();
+      if (routes[ [ abCookie[ experimentDetails.experiment ] ] ]) {
+        routes[ abCookie[ experimentDetails.experiment ] ].init();
       } else {
         experimentDetails.control.route.init();
       }
@@ -19,17 +27,17 @@ function abTest(experimentDetails) {
       experimentDetails.control.route.init();
     }
   }
-  catch(err) {
+  catch (err) {
     experimentDetails.control.route.init();
   }
 }
 
-function getCookie(cname) {
+function getCookie (cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[ i ];
     while (c.charAt(0) == ' ') {
       c = c.substring(1);
     }

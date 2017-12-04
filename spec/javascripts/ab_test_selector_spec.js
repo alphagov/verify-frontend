@@ -58,38 +58,140 @@ describe('AB Test Selector', function () {
     testResult = ''
   });
 
-  it('should initialise routeA function when ab test cookie is control', function() {
-    whenCookieIsSetTo(CONTROL_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+  describe('selects correct route based on AB test cookie', function() {
+    it('should initialise routeA function when ab test cookie is control', function () {
+      whenCookieIsSetTo(CONTROL_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+    })
+
+    it('should initialise routeB function when ab test cookie is variant', function () {
+      whenCookieIsSetTo(VARIANT_COOKIE).abTestSelectorShouldInitialise(ROUTE_B)
+    })
+
+    it('should initialise routeA function when multiple cookies exist including an ab control cookie', function () {
+      whenCookieIsSetTo(CONTROL_COOKIE, "another_cookie=something_else").abTestSelectorShouldInitialise(ROUTE_A)
+    })
+
+    it('should initialise routeB function when multiple cookies exist including an ab variant cookie', function () {
+      whenCookieIsSetTo(VARIANT_COOKIE, "another_cookie=something_else").abTestSelectorShouldInitialise(ROUTE_B)
+    })
+
+    it('should initialise routeA function when ab test cookie is not present', function () {
+      whenCookieIsSetTo(NOT_AB_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+    })
+
+    it('should initialise routeA function when no cookies present', function () {
+      abTest(experimentDetails)
+
+      expect(testResult).toBe(ROUTE_A);
+    })
+
+    it('should initialise routeA function when ab test cookie has no value', function () {
+      whenCookieIsSetTo(NO_VALUE_AB_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+    })
+
+    it('should initialise routeA function when ab test cookie has a corrupt value', function () {
+      whenCookieIsSetTo(CORRUPT_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+    })
   })
 
+  describe('selects correct route based on AB test trial cookie', function () {
+    it('should initialise variant route when trial cookie value is equal to the experiment name', function() {
+      experimentDetails = {
+        experiment: 'app_transparency',
+        control: {
+          route: routeA
+        },
+        alternatives: [
+          {name: 'variant', route: routeB}
+        ],
+        trial_enabled: true
+      };
 
-  it('should initialise routeB function when ab test cookie is variant', function() {
-    whenCookieIsSetTo(VARIANT_COOKIE).abTestSelectorShouldInitialise(ROUTE_B)
-  })
+      var ab_test_trial_cookie = encodeURI("ab_test_trial=app_transparency");
 
-  it('should initialise routeA function when multiple cookies exist including an ab control cookie', function() {
-    whenCookieIsSetTo(CONTROL_COOKIE, "another_cookie=something_else").abTestSelectorShouldInitialise(ROUTE_A)
-  })
+      whenCookieIsSetTo(ab_test_trial_cookie).abTestSelectorShouldInitialise(ROUTE_B)
+    })
 
-  it('should initialise routeB function when multiple cookies exist including an ab variant cookie', function() {
-    whenCookieIsSetTo(VARIANT_COOKIE, "another_cookie=something_else").abTestSelectorShouldInitialise(ROUTE_B)
-  })
+    it('should initialise control route when trial cookie value is not equal to the experiment name', function() {
+      experimentDetails = {
+        experiment: 'app_transparency',
+        control: {
+          route: routeA
+        },
+        alternatives: [
+          {name: 'variant', route: routeB}
+        ],
+        trial_enabled: true
+      };
 
-  it('should initialise routeA function when ab test cookie is not present', function() {
-    whenCookieIsSetTo(NOT_AB_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
-  })
+      var ab_test_trial_cookie = encodeURI("ab_test_trial=wrong_one");
 
-  it('should initialise routeA function when no cookies present', function() {
-    abTest(experimentDetails)
+      whenCookieIsSetTo(ab_test_trial_cookie, CONTROL_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+    })
 
-    expect(testResult).toBe(ROUTE_A);
-  })
+    it('should initialise control route when trial is not enabled for this experiment', function() {
+      experimentDetails = {
+        experiment: 'app_transparency',
+        control: {
+          route: routeA
+        },
+        alternatives: [
+          {name: 'variant', route: routeB}
+        ],
+        trial_enabled: false
+      };
 
-  it('should initialise routeA function when ab test cookie has no value', function() {
-    whenCookieIsSetTo(NO_VALUE_AB_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
-  })
+      var ab_test_trial_cookie = encodeURI("ab_test_trial=app_transparency");
 
-  it('should initialise routeA function when ab test cookie has a corrupt value', function() {
-    whenCookieIsSetTo(CORRUPT_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+      whenCookieIsSetTo(ab_test_trial_cookie, CONTROL_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+    })
+
+    it('should initialise control route when experiment is enabled for trial but trial cookie does not exist', function() {
+      experimentDetails = {
+        experiment: 'app_transparency',
+        control: {
+          route: routeA
+        },
+        alternatives: [
+          {name: 'variant', route: routeB}
+        ],
+        trial_enabled: true
+      };
+
+      whenCookieIsSetTo(CONTROL_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+    })
+
+    it('should initialise routeA function when no cookies present but trial enabled for experiment', function () {
+      experimentDetails = {
+        experiment: 'app_transparency',
+        control: {
+          route: routeA
+        },
+        alternatives: [
+          {name: 'variant', route: routeB}
+        ],
+        trial_enabled: true
+      };
+
+      abTest(experimentDetails)
+
+      expect(testResult).toBe(ROUTE_A);
+    })
+
+    it('should initialise control route when trial enabled is not set for this experiment but the ab test trial cookie is present', function() {
+      experimentDetails = {
+        experiment: 'app_transparency',
+        control: {
+          route: routeA
+        },
+        alternatives: [
+          {name: 'variant', route: routeB}
+        ]
+      };
+
+      var ab_test_trial_cookie = encodeURI("ab_test_trial=app_transparency");
+
+      whenCookieIsSetTo(ab_test_trial_cookie, CONTROL_COOKIE).abTestSelectorShouldInitialise(ROUTE_A)
+    })
   })
 })

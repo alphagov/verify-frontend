@@ -6,6 +6,7 @@ module CookieNames
   PIWIK_USER_ID = 'PIWIK_USER_ID'.freeze
   NO_CURRENT_SESSION_VALUE = 'no-current-session'.freeze
   AB_TEST = 'ab_test'.freeze
+  AB_TEST_TRIAL = 'ab_test_trial'.freeze
 
   def self.session_cookies
     [SESSION_ID_COOKIE_NAME, SESSION_COOKIE_NAME]

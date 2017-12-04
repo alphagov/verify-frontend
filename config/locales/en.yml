@@ -51,6 +51,9 @@ en:
     cancelled_registration: cancelled-registration
     about_identity_providers: about-identity-providers
     about_choosing_an_identity_provider: about-choosing-an-identity-provider
+    select_proof_of_address: select-proof-of-address
+    confirming_it_is_you: confirming-it-is-you
+    paused_registration: paused
   title:
     error: Error
   navigation:
@@ -60,6 +63,7 @@ en:
     back: Back
   option:
     "no": "No"
+    "yes": "Yes"
     unknown: I don’t know
   cookie_message:
     message: GOV.UK Verify uses cookies to make the site simpler.
@@ -478,6 +482,22 @@ en:
         verify_with_another_company: 'Verify with another certified company'
         verify_using_other_documents: 'Verify using other documents'
         contact_verify: 'Contact GOV.UK Verify'
+    supported_verification_survey:
+      title: Survey
+      question: If available, would you come in for help with Verify from staff?
+      answer_yes: 'Yes'
+      answer_no: 'No'
+      thank_you: Thanks for your feedback.
+    paused_registration:
+      with_session:
+        title: Verification Paused
+        heading: "%{idp_name} has saved your information"
+        restart_instructions_html: "When you're ready to carry on verifying your identity, go back to <a href=\"%{rp_start_page}\">%{rp_name}</a>."
+        username_and_password_instructions: You'll need the username and password you created to sign in to %{idp_name}.
+      without_session:
+        title: Verification Paused
+        heading: The certified company has saved your information
+        restart_instructions: When you're ready to carry on verifying your identity, you need to go back to the government service and sign in to your certified company with the username and password you created.
   errors:
     transaction_list:
       title: Find the service you were using to start again
@@ -595,3 +615,32 @@ en:
         highlight: Identity providers won't call you on your mobile. They won’t share or sell your phone number for any reason without your consent.
         question:
           mobile_phone: Can you receive text messages now?
+      select_proof_of_address:
+        title: Proof of your address
+        sub_heading: Identity providers need to check your address is correct. They do this by checking with your bank or credit card provider.
+        highlight: This is a free service, and the identity provider cannot see any of your financial transactions.
+        financial_details:
+          heading: 'Do you have the following:'
+          question:
+            debit_card: Debit card?
+            credit_card: Credit card?
+            bank_account: UK bank account?
+        errors:
+          no_selection: Please answer all the questions
+      confirming_it_is_you:
+        title: Confirming it's you
+        heading: Confirming it's actually you providing your details
+        content_html: |
+          <p>Identity providers need to make sure someone isn't pretending to be you by using your personal details and a copy of your passport or driving licence.</p>
+        smartphone_content_html: |
+          <h3 class="heading-small">Download a free app to your smartphone or tablet</h3>
+          <p>Some identity providers have an app you can download to your smartphone or tablet that allows you to scan your identity documents and send them to the identity provider. You'll also have to take some photos of your face so they can check the document is yours.</p>
+        smartphone_checkbox: I can't download apps
+        questions_content_html: |
+          <h3 class="heading-small">Answer multiple choice questions </h3>
+          <p>You'll be asked some multiple choice questions based on your credit record that the identity provider has access to. Because the questions are based on information on your credit record, you won't be providing the identity provider any new details about yourself, you'll just be confirming what's correct.</p>
+        questions_checkbox: I can't answer multiple choice questions
+        highlight: There won't be any effect on your credit score.
+        summary: What will the questions be?
+        details_html: |
+          Because everyone's situation is different, we can't tell you now what these questions will be, but they might be something like ‘You signed a new mobile phone contract in May 2014, who was the provider?’ or ‘What was your last payment on your student loan?’

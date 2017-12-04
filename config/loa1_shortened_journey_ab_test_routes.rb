@@ -1,7 +1,7 @@
 LOA1_SHORTENED_JOURNEY_EXPERIMENT = 'loa1_shortened_journey_v3'.freeze
 
-loa1_shortened_journey_control_piwik = SelectRoute.new(LOA1_SHORTENED_JOURNEY_EXPERIMENT, 'control', true, 'LEVEL_1')
-loa1_shortened_journey_variant_piwik = SelectRoute.new(LOA1_SHORTENED_JOURNEY_EXPERIMENT, 'variant', true, 'LEVEL_1')
+loa1_shortened_journey_control_piwik = SelectRoute.new(LOA1_SHORTENED_JOURNEY_EXPERIMENT, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_1')
+loa1_shortened_journey_variant_piwik = SelectRoute.new(LOA1_SHORTENED_JOURNEY_EXPERIMENT, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_1')
 
 loa1_shortened_journey_control = SelectRoute.new(LOA1_SHORTENED_JOURNEY_EXPERIMENT, 'control')
 loa1_shortened_journey_variant = SelectRoute.new(LOA1_SHORTENED_JOURNEY_EXPERIMENT, 'variant')

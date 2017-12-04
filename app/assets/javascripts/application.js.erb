@@ -26,6 +26,7 @@ window.GOVUK.furtherInformation.init();
 window.GOVUK.interstitialQuestion.init();
 window.GOVUK.otherDocuments.init();
 window.GOVUK.piwikEventsTracking.init();
+window.GOVUK.supportedVerificationSurvey.init();
 
 abTest({
   experiment: 'clever_questions',
@@ -34,7 +35,8 @@ abTest({
   },
   alternatives: [
     {name: 'variant', route: window.GOVUK.selectPhoneCleverQuestions}
-  ]
+  ],
+  trial_enabled: true
 })
 
 abTest({
@@ -44,8 +46,12 @@ abTest({
   },
   alternatives: [
     {name: 'variant', route: window.GOVUK.selectDocumentsCleverQuestions}
-  ]
+  ],
+  trial_enabled: true
 })
+
+window.GOVUK.selectProofOfAddress.init();
+
 
 /*
  Example of how to add JavaScript A/B code

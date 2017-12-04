@@ -1,6 +1,4 @@
 describe("Will it work for me form", function () {
-    //$('html').addClass('js-enabled');
-
     var formWithNoErrors =
         '<form method="POST" action="" id="validate-will-it-work-for-me" data-msg="Please answer all the questions">' +
         '<div id="above-age-threshold" class="form-group">' +

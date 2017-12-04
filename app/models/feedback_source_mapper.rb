@@ -41,7 +41,9 @@ class FeedbackSourceMapper
       'NO_IDPS_AVAILABLE' => 'no_idps_available',
       'CANCELLED_REGISTRATION' => 'cancelled_registration',
       'ABOUT_IDENTITY_PROVIDERS_PAGE' => 'about_identity_providers',
-      'ABOUT_CHOOSING_AN_IDENTITY_PROVIDER_PAGE' => 'about_choosing_an_identity_provider'
+      'ABOUT_CHOOSING_AN_IDENTITY_PROVIDER_PAGE' => 'about_choosing_an_identity_provider',
+      'PROOF_OF_ADDRESS' => 'select_proof_of_address',
+      'CONFIRMING_IT_IS_YOU_PAGE' => 'confirming_it_is_you'
 
   }.freeze
   end
