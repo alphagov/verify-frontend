@@ -43,7 +43,6 @@ localized do
     get 'start', to: 'clever_questions/start#index', as: :start
     post 'start', to: 'clever_questions/start#request_post', as: :start
     get 'begin_registration', to: 'clever_questions/start#register', as: :begin_registration
-    get 'begin_sign_in', to: 'clever_questions/start#sign_in', as: :begin_sign_in
     post 'will_it_work_for_me', to: 'clever_questions/will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
     get 'select_phone', to: 'clever_questions/select_phone#index', as: :select_phone
     post 'select_phone', to: 'clever_questions/select_phone#select_phone', as: :select_phone_submit

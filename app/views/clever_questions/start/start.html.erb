@@ -5,11 +5,25 @@
 
 <h1 class="heading-large"><%= t "#{start_page}.heading" %></h1>
 
-<p><%= t "#{start_page}.secure_service" %></p>
-<p><%= t "#{start_page}.prevent_viewing" %></p>
+<%= form_for @form, :as => 'start_form', url: start_path, html: {id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
 
-<div class="actions">
-  <%= button_link_to t("#{start_page}.create_account"), begin_registration_path %>
-  <p> or <%= link_to t("#{start_page}.sign_in"), begin_sign_in_path %></p>
-</div>
+  <%= render 'shared/form-errors', errors: flash[:errors] %>
 
+  <p><%= t "#{start_page}.secure_service" %></p>
+  <p><%= t "#{start_page}.prevent_viewing" %></p>
+
+  <%= content_tag :div, class: form_question_class do %>
+    <fieldset>
+      <%= f.custom_radio_button :selection, true, t('hub.start.answer_yes'), {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type'} %>
+      <%= f.custom_radio_button :selection, false, t('hub.start.answer_no'), {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type'} %>
+    </fieldset>
+  <% end %>
+
+  <div id="validation-error-message-js"></div>
+
+  <div class="form-group-tight">
+    <div class="actions">
+      <%= f.submit t('hub.start.continue'), class: 'button', id: 'next-button' %>
+    </div>
+  </div>
+<% end %>

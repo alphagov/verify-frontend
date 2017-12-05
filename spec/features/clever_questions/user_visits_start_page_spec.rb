@@ -24,6 +24,23 @@ RSpec.describe 'When the user visits the start page' do
     expect(page).to_not have_css '#next-button[data-disable-with]'
   end
 
+  it 'will redirect users to will it work for me page when selecting registration' do
+    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    visit '/start'
+    choose 'start_form_selection_true', allow_label_click: true
+    click_button 'Continue'
+    expect(page).to have_current_path(will_it_work_for_me_path)
+  end
+
+  it 'will redirect users to sign-in page when selecting sign-in' do
+    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    stub_api_idp_list
+    visit '/start'
+    choose 'start_form_selection_false', allow_label_click: true
+    click_button 'Continue'
+    expect(page).to have_current_path(sign_in_path)
+  end
+
   context 'when there is an error' do
     before(:each) do
       stub_transactions_list
