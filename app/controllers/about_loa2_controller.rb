@@ -7,7 +7,7 @@ class AboutLoa2Controller < ApplicationController
   end
 
   def certified_companies
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers)
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_loa)
     render 'about/certified_companies_LOA2'
   end
 

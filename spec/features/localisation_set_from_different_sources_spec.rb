@@ -4,7 +4,7 @@ require 'api_test_helper'
 RSpec.describe 'locale is set based on multiple sources', type: :feature do
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
   end
 
   def set_locale_cookie_to(locale)

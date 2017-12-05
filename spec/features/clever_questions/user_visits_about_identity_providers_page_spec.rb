@@ -8,7 +8,7 @@ RSpec.describe 'When the user visits the about identity providers page' do
   before(:each) do
     set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
     stub_transactions_list
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
   end
 
   it 'includes the appropriate feedback source' do

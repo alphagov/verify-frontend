@@ -41,7 +41,7 @@ describe CleverQuestions::ConfirmingItIsYouController do
     end
 
     it 'smart_phone evidence defaults to true' do
-      stub_api_idp_list
+      stub_api_idp_list_for_loa
       expect(subject).to redirect_to('/select-phone')
       expect(session[:selected_answers]['phone']).to eq(smart_phone: true)
     end

@@ -14,7 +14,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
   end
 
   context 'with javascript disabled' do

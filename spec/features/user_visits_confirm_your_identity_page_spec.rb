@@ -9,13 +9,14 @@ end
 
 def set_up_session(idp_entity_id)
   stub_api_and_analytics(idp_location)
-  stub_api_idp_list
+  stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
   set_session_and_session_cookies!
   set_journey_hint_cookie(idp_entity_id)
   page.set_rack_session(
     transaction_simple_id: 'test-rp',
     selected_idp_name: 'Demo IDP',
-    selected_idp_names: []
+    selected_idp_names: [],
+    requested_loa: 'LEVEL_1'
     )
 end
 
@@ -51,6 +52,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
     end
 
     it 'should include a link to sign-in in case listed idp is incorrect' do
+      stub_api_idp_list_for_sign_in
       visit '/confirm-your-identity'
       expect(page).to have_link 'sign in with a different certified company', href: '/sign-in'
     end
@@ -63,6 +65,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     describe 'and js is disabled' do
       it 'should display the interstitial page' do
+        stub_api_idp_list_for_sign_in
         visit '/confirm-your-identity'
         click_button 'Sign in with IDCorp'
         expect(page).to have_current_path('/redirect-to-idp/sign-in')
@@ -73,6 +76,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     describe 'and js is enabled', js: true do
       it 'should redirect to the IDP sign in page' do
+        stub_api_idp_list_for_sign_in
         visit '/confirm-your-identity'
         click_button 'Sign in with IDCorp'
         expect(page).to have_current_path(idp_location)
@@ -81,6 +85,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     describe 'and the user wants to select a new IDP' do
       it 'should update the cookie' do
+        stub_api_idp_list_for_sign_in
         # User has previously chosen IDCorp
         visit '/confirm-your-identity'
         expect(page).to have_button('Sign in with IDCorp')
@@ -105,7 +110,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
   describe 'and the journey hint cookie is invalid in some way' do
     it 'should redirect to sign in page when the journey cookie is not set' do
       set_session_and_session_cookies!
-      stub_api_idp_list
+      stub_api_idp_list_for_sign_in
       visit '/confirm-your-identity'
       expect(page).to have_title 'Sign in with a certified company - GOV.UK Verify - GOV.UK'
       expect(page).to have_current_path(sign_in_path)
@@ -113,7 +118,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     it 'should redirect to sign in page when the journey cookie has a nil value' do
       set_session_and_session_cookies!
-      stub_api_idp_list
+      stub_api_idp_list_for_sign_in
       visit '/confirm-your-identity'
       expect(page).to have_title 'Sign in with a certified company - GOV.UK Verify - GOV.UK'
       expect(page).to have_current_path(sign_in_path)
@@ -121,6 +126,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     it 'should redirect to sign in page when the journey cookie has an invalid entity ID' do
       set_up_session('bad-entity-id')
+      stub_api_idp_list_for_sign_in
       visit '/confirm-your-identity'
       expect(page).to have_title 'Sign in with a certified company - GOV.UK Verify - GOV.UK'
       expect(page).to have_current_path(sign_in_path)
@@ -131,6 +137,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
   describe 'when the user changes language' do
     it 'will preserve the language from sign-in' do
       set_up_session('stub-idp-one')
+      stub_api_idp_list_for_sign_in
       stub_session_creation
       visit '/sign-in'
       first('.available-languages').click_link('Cymraeg')

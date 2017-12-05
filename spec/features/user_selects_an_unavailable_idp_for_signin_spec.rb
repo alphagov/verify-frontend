@@ -21,7 +21,7 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
   context 'the API says the IDP is actually available' do
     before(:each) do
       set_session_and_session_cookies!
-      stub_api_idp_list([
+      stub_api_idp_list_for_sign_in([
               { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
               { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
               { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
@@ -45,7 +45,7 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
   context 'API does not return IDP as available' do
     before(:each) do
       set_session_and_session_cookies!
-      stub_api_idp_list
+      stub_api_idp_list_for_sign_in
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
     end

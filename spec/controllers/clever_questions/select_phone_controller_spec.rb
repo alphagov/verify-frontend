@@ -18,36 +18,36 @@ describe CleverQuestions::SelectPhoneController do
     subject { post :select_phone, params: { locale: 'en', select_phone_form: valid_phone_evidence } }
 
     it 'redirects to choose certified company page when eligible IDPs exist' do
-      stub_api_idp_list([{ 'simpleId' => 'stub-idp-one',
-                           'entityId' => 'http://idcorp.com',
-                           'levelsOfAssurance' => %w(LEVEL_2) }])
+      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one',
+                                  'entityId' => 'http://idcorp.com',
+                                  'levelsOfAssurance' => %w(LEVEL_2) }])
 
       expect(subject).to redirect_to('/choose-a-certified-company')
     end
 
     it 'redirects to no mobile phone page when no eligible IDPs' do
-      stub_api_idp_list([{ 'simpleId' => 'stub-idp-four',
-                           'entityId' => 'http://idcorp.com',
-                           'levelsOfAssurance' => %w(LEVEL_2) }])
+      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-four',
+                                  'entityId' => 'http://idcorp.com',
+                                  'levelsOfAssurance' => %w(LEVEL_2) }])
 
       expect(subject).to redirect_to('/no-mobile-phone')
     end
 
     it 'captures form values in session cookie' do
-      stub_api_idp_list
+      stub_api_idp_list_for_loa
       expect(subject).to redirect_to('/choose-a-certified-company')
       expect(session[:selected_answers]['phone']).to eq(mobile_phone: true)
     end
 
     it 'append form values in session cookie if some already exist' do
-      stub_api_idp_list
+      stub_api_idp_list_for_loa
       session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true }, 'phone' => { smart_phone: true } }
       expect(subject).to redirect_to('/choose-a-certified-company')
       expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true)
     end
 
     it 'overwrites stored values in session cookie if they exist' do
-      stub_api_idp_list
+      stub_api_idp_list_for_loa
       session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true }, 'phone' => { mobile_phone: false, smart_phone: true } }
       expect(subject).to redirect_to('/choose-a-certified-company')
       expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true)

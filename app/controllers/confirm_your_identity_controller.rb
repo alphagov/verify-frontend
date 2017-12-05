@@ -32,8 +32,6 @@ private
   end
 
   def retrieve_last_used_idp(entity_id)
-    IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      current_identity_providers.select { |idp| idp.entity_id == entity_id }
-    )
+    IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_loa.select { |idp| idp.entity_id == entity_id })
   end
 end

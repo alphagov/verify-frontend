@@ -9,7 +9,7 @@ RSpec.describe 'When user visits the confirmation page' do
       transaction_simple_id: 'test-rp'
     )
     set_session_and_session_cookies!
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
   end
 
   it 'includes the appropriate feedback source, title and content' do
