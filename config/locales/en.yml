@@ -550,7 +550,7 @@ en:
         heading: Check if Verify works for you
       about_choosing_a_company:
         title: About choosing a certified company
-        heading: Finding the right certified company for you
+        heading: Finding the right company to verify you
         content_html: |
           <p>Each certified company uses different methods to verify identities. We’ll now ask you some questions so we can filter out the companies that won’t work for you. We’ll then send you to the website of the certified company you choose.</p>
           <p>It takes about 15 minutes to complete, but you only have to do it once and you’ll have an identity account with the certified company. You can use your account to sign in to government services wherever you see the GOV.UK Verify logo with your username and password in less than 1 minute.</p>
