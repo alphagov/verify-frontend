@@ -9,7 +9,7 @@
 <p><%= t "#{start_page}.prevent_viewing" %></p>
 
 <div class="actions">
-  <%= button_link_to t("#{start_page}.create_account"), start_path(:start_form => {:selection => true}), :method => :post %>
-  <p> or <%= link_to t("#{start_page}.sign_in"), start_path(:start_form => {:selection => false}), :method => :post %></p>
+  <%= button_link_to t("#{start_page}.create_account"), begin_registration_path %>
+  <p> or <%= link_to t("#{start_page}.sign_in"), begin_sign_in_path %></p>
 </div>
 
