@@ -28,14 +28,6 @@ describe ChooseACertifiedCompanyLoa1Controller do
     }.freeze
   }
 
-  let(:stub_idp_loa1_onboarding) {
-    {
-        'simpleId' => 'stub-idp-loa1-onboarding',
-        'entityId' => 'http://idcorp-loa1-onboarding.com',
-        'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2)
-    }.freeze
-  }
-
   let(:stub_idp_no_interstitial) {
     {
         'simpleId' => 'stub-idp-two',
@@ -46,12 +38,12 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
   context '#index' do
     before :each do
-      stub_api_idp_list([stub_idp_loa1, stub_idp_loa1_with_interstitial, stub_idp_one_doc, stub_idp_loa1_onboarding], 'LEVEL_1')
+      stub_api_idp_list([stub_idp_loa1, stub_idp_loa1_with_interstitial, stub_idp_one_doc], 'LEVEL_1')
     end
 
     it 'renders IDP list' do
       set_session_and_cookies_with_loa('LEVEL_1', 'test-rp')
-      stub_piwik_request = stub_piwik_report_number_of_recommended_ipds(3, 'LEVEL_1', 'analytics description for test-rp')
+      stub_piwik_request = stub_piwik_report_number_of_recommended_ipds(2, 'LEVEL_1', 'analytics description for test-rp')
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).once do |idps|
         idps.each { |idp| expect(idp.levels_of_assurance).to include 'LEVEL_1' }

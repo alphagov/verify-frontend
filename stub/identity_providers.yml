@@ -1,3 +1,2 @@
 show_unavailable:
     - stub-idp-unavailable
-loa1_onboarding_idps: ['stub-idp-loa1-onboarding']

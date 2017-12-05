@@ -45,12 +45,30 @@ class StubApi < Sinatra::Base
         "simpleId":"stub-idp-loa1-with-interstitial",
         "entityId":"http://stub-idp-loa1-with-interstitial.com",
         "levelsOfAssurance": ["LEVEL_1"]
+     }]'
+  end
+
+  get '/config/idps/idp-list-for-sign-in/:transaction_id' do
+    '[{
+        "simpleId":"stub-idp-one",
+        "entityId":"http://example.com/stub-idp-one",
+        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
      },
      {
-        "simpleId":"stub-idp-loa1-onboarding",
-        "entityId":"http://stub-idp-loa1-onboarding.com",
+        "simpleId":"stub-idp-loa1",
+        "entityId":"http://stub-idp-loa1.com",
         "levelsOfAssurance": ["LEVEL_1"]
-      }]'
+     },
+     {
+        "simpleId":"stub-idp-loa1-with-interstitial",
+        "entityId":"http://stub-idp-loa1-with-interstitial.com",
+        "levelsOfAssurance": ["LEVEL_1"]
+     },
+     {
+        "simpleId":"stub-idp-two",
+        "entityId":"http://example.com/stub-idp-two",
+        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
+    }]'
   end
 
   get '/SAML2/SSO/API/SENDER/AUTHN_REQ' do
