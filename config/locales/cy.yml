@@ -489,7 +489,7 @@ cy:
         contact_verify: Cysylltu â GOV.UK Verify
     supported_verification_survey:
       title: Survey
-      question: If available, would you come in for help with Verify from staff?
+      question: If available, would you come in for help using Verify from staff?
       yes: Yes
       no: No
       thank_you: Thanks for your feedback.
