@@ -7,7 +7,7 @@ RSpec.describe 'When the user visits the failed registration page and' do
 
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' }
     )

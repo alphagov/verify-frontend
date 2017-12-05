@@ -18,7 +18,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
 
   before :each do
     set_session_and_session_cookies!
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
   end
 
   it 'will show the something went wrong page when relay state and session id mismatch' do

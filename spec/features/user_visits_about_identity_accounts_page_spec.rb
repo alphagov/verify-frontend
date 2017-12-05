@@ -6,7 +6,7 @@ RSpec.describe 'When the user visits the about identity accounts page' do
   before(:each) do
     set_session_and_session_cookies!
     stub_transactions_list
-    stub_api_idp_list(default_idps)
+    stub_api_idp_list_for_loa(default_idps)
   end
 
   it 'includes the appropriate feedback source' do
@@ -38,7 +38,7 @@ RSpec.describe 'When the user visits the about identity accounts page' do
   end
 
   it 'will go to choose a certified company page when start now is clicked if user on LOA1 journey' do
-    stub_api_idp_list(default_idps, 'LEVEL_1')
+    stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
     page.set_rack_session(requested_loa: 'LEVEL_1')
     visit '/about-identity-accounts'
     click_link('Start now')

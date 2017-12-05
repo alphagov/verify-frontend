@@ -25,7 +25,7 @@ RSpec.describe 'When the user visits the start page' do
       query_params_hash = nil
       expect(request_log).to receive(:log) { |arg| query_params_hash = arg }
       set_session_and_session_cookies!
-      stub_api_idp_list
+      stub_api_idp_list_for_loa
 
       visit '/start'
 
@@ -37,7 +37,7 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'includes a reference to the fingerprint asset with the params set to noJS inside a noscript element' do
     set_session_and_session_cookies!
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
 
     visit '/start'
 

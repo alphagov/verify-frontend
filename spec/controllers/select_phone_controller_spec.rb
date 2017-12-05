@@ -18,23 +18,23 @@ describe SelectPhoneController do
     subject { post :select_phone, params: { locale: 'en', select_phone_form: valid_phone_evidence } }
 
     it 'redirects to choose certified company page when eligible IDPs exist' do
-      stub_api_idp_list([{ 'simpleId' => 'stub-idp-one',
-                           'entityId' => 'http://idcorp.com',
-                           'levelsOfAssurance' => %w(LEVEL_2) }], 'LEVEL_1')
+      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one',
+                                  'entityId' => 'http://idcorp.com',
+                                  'levelsOfAssurance' => %w(LEVEL_2) }], 'LEVEL_1')
 
       expect(subject).to redirect_to('/choose-a-certified-company')
     end
 
     it 'redirects to no mobile phone page when no eligible IDPs' do
-      stub_api_idp_list([{ 'simpleId' => 'stub-idp-four',
-                           'entityId' => 'http://idcorp.com',
-                           'levelsOfAssurance' => %w(LEVEL_2) }], 'LEVEL_1')
+      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-four',
+                                  'entityId' => 'http://idcorp.com',
+                                  'levelsOfAssurance' => %w(LEVEL_2) }], 'LEVEL_1')
 
       expect(subject).to redirect_to('/no-mobile-phone')
     end
 
     it 'captures form values in session cookie' do
-      stub_api_idp_list(default_idps, 'LEVEL_1')
+      stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
       expect(subject).to redirect_to('/choose-a-certified-company')
       expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true, landline: true)
     end

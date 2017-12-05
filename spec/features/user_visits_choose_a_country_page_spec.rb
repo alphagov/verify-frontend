@@ -7,7 +7,7 @@ RSpec.describe 'When the user visits the choose a country page' do
   let(:location) { '/a-country-page' }
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
     stub_transactions_list
     stub_countries_list
   end

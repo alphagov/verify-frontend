@@ -8,7 +8,7 @@ describe 'When user visits select proof of address page' do
 
   context 'with javascript enabled', js: true do
     it 'redirects to confirming it is you page when all questions are answered' do
-      stub_api_idp_list
+      stub_api_idp_list_for_loa
       stub_transactions_list
       visit '/select-proof-of-address'
       choose 'select_proof_of_address_form_uk_bank_account_details_true', allow_label_click: true

@@ -7,7 +7,7 @@ describe CleverQuestions::AboutLoa2Controller do
 
   before(:each) do
     stub_request(:get, CONFIG.config_api_host + '/config/transactions/enabled')
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
   end
 
   context 'GET about#identity_providers' do

@@ -8,7 +8,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will display about page when user chooses yes (registration)' do
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
     stub_request(:get, INTERNAL_PIWIK.url)
     visit '/start'
     choose('start_form_selection_true')
@@ -48,7 +48,7 @@ RSpec.describe 'when user submits start page form' do
   end
 
   it 'will prompt for an answer if no answer is given' do
-    stub_api_idp_list
+    stub_api_idp_list_for_loa
     visit '/start'
     click_button('next-button')
     expect(page).to have_content "Please select an option"
