@@ -34,7 +34,7 @@ private
   def next_page
     if @form.resident_last_12_months?
       if @form.above_age_threshold?
-        about_identity_providers_path
+        about_certified_companies_path
       else
         why_might_this_not_work_for_me_path
       end

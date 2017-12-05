@@ -59,8 +59,8 @@ localized do
     get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
     get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
     get 'about', to: 'about_loa2#index', as: :about
-    get 'about_identity_providers', to: 'clever_questions/about_loa2#identity_providers', as: :about_identity_providers
-    get 'about_choosing_an_identity_provider', to: 'clever_questions/about_loa2#choosing_an_identity_provider', as: :about_choosing_an_identity_provider
+    get 'about_certified_companies', to: 'clever_questions/about_loa2#certified_companies', as: :about_certified_companies
+    get 'about_choosing_a_company', to: 'clever_questions/about_loa2#choosing_a_company', as: :about_choosing_a_company
     get 'select_proof_of_address', to: 'clever_questions/select_proof_of_address#index', as: :select_proof_of_address
     post 'select_proof_of_address', to: 'clever_questions/select_proof_of_address#select_proof', as: :select_proof_of_address_submit
   end

@@ -48,8 +48,6 @@ cy:
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
     no_idps_available: dim-idps-ar-gael
     cancelled_registration: cancelled-registration-welsh
-    about_identity_providers: about-identity-providers-cy
-    about_choosing_an_identity_provider: about-choosing-an-identity-provider-cy
     select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
     confirming_it_is_you: confirming-it-is-you-cy
     paused_registration: paused-cy
@@ -553,23 +551,25 @@ cy:
         create_account: Create a new identity account
         sign_in: sign in with your identity account
         error_message: Please select an option
-      about_choosing_an_identity_provider:
-        title: About choosing an identity provider
-        heading: Finding the right identity provider for you
+      will_it_work_for_me:
+        heading: Check if Verify works for you
+      about_choosing_a_company:
+        title: About choosing a certified company
+        heading: Finding the right certified company for you
         content_html: |
-          <p>Each identity provider uses different methods to verify identities. We’ll now ask you some questions so we can filter out the companies that won’t work for you. We’ll then send you to the website of the identity provider you choose.</p>
-          <p>It takes about 15 minutes to complete, but you only have to do it once and you’ll have an identity account with the identity provider. You can use your account to sign in to government services wherever you see the GOV.UK Verify logo with your username and password in less than 1 minute.</p>
-        summary: What other government services use GOV.UK Verify
+          <p>Each certified company uses different methods to verify identities. We’ll now ask you some questions so we can filter out the companies that won’t work for you. We’ll then send you to the website of the certified company you choose.</p>
+          <p>It takes about 15 minutes to complete, but you only have to do it once and you’ll have an identity account with the certified company. You can use your account to sign in to government services wherever you see the GOV.UK Verify logo with your username and password in less than 1 minute.</p>
+        summary: What government services use GOV.UK Verify
         details_html: |
           <p>GOV.UK Verify is new, and government services are joining all the time.</p>
           <p>The current services using Verify are:</p>
-      about_identity_providers:
-        title: About identity providers
-        heading: Identity providers
+      about_certified_companies:
+        title: About certified companies
+        heading: Certified companies
         content_html: |
-          <p>An identity provider will verify your identity.</p>
-          <p>GOV.UK Verify uses identity providers so that all your personal information isn’t held in one government database.</p>
-          <p>You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities. The identity provider you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passports Office or DVLA.</p>
+          <p>A certified company will verify your identity.</p>
+          <p>GOV.UK Verify uses certified companies so that all your personal information isn’t held in one government database.</p>
+          <p>You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities. The certified company you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passports Office or DVLA.</p>
         content_bottom_html: |
           <p>These 7 companies applied to be part of Verify, and have been certified to verify identities as they’ve met government security and privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
           <p>There's no charge for this service.</p>
@@ -616,8 +616,8 @@ cy:
       select_phone:
         title: Receiving security codes
         heading: Receiving security codes
-        explanation: For an extra layer of security, identity providers send you security codes to your mobile phone when you’re signing in to your identity account to access government services.
-        highlight: Identity providers won't call you on your mobile. They won’t share or sell your phone number for any reason without your consent.
+        explanation: For an extra layer of security, certified companies send you security codes to your mobile phone when you’re signing in to your identity account to access government services.
+        highlight: Certified companies won't call you on your mobile. They won’t share or sell your phone number for any reason without your consent.
         question:
           mobile_phone: Can you receive text messages now?
       select_proof_of_address:
@@ -636,14 +636,14 @@ cy:
         title: Confirming it's you
         heading: Confirming it's actually you providing your details
         content_html: |
-          <p>Identity providers need to make sure someone isn't pretending to be you by using your personal details and a copy of your passport or driving licence.</p>
+          <p>Certified companies need to make sure someone isn't pretending to be you by using your personal details and a copy of your passport or driving licence.</p>
         smartphone_content_html: |
           <h3 class="heading-small">Download a free app to your smartphone or tablet</h3>
-          <p>Some identity providers have an app you can download to your smartphone or tablet that allows you to scan your identity documents and send them to the identity provider. You'll also have to take some photos of your face so they can check the document is yours.</p>
+          <p>Some certified companies have an app you can download to your smartphone or tablet that allows you to scan your identity documents and send them to the certified company. You'll also have to take some photos of your face so they can check the document is yours.</p>
         smartphone_checkbox: I can't download apps
         questions_content_html: |
           <h3 class="heading-small">Answer multiple choice questions </h3>
-          <p>You'll be asked some multiple choice questions based on your credit record that the identity provider has access to. Because the questions are based on information on your credit record, you won't be providing the identity provider any new details about yourself, you'll just be confirming what's correct.</p>
+          <p>You'll be asked some multiple choice questions based on your credit record that the certified company has access to. Because the questions are based on information on your credit record, you won't be providing the certified company any new details about yourself, you'll just be confirming what's correct.</p>
         questions_checkbox: I can't answer multiple choice questions
         highlight: There won't be any effect on your credit score.
         summary: What will the questions be?

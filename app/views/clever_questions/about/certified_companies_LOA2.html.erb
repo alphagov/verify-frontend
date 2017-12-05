@@ -1,6 +1,6 @@
-<% identity_providers_page = 'clever_questions.hub.about_identity_providers'%>
+<% identity_providers_page = 'clever_questions.hub.about_certified_companies'%>
 <%= page_title "#{identity_providers_page}.title" %>
-<% content_for :feedback_source, 'ABOUT_IDENTITY_PROVIDERS_PAGE' %>
+<% content_for :feedback_source, 'ABOUT_CERTIFIED_COMPANIES_PAGE' %>
 
 <div class="grid-row">
   <div class="column-two-thirds">
@@ -19,5 +19,5 @@
   </div>
 </div>
 <div class="actions">
-  <%= button_link_to t('navigation.continue'), about_choosing_an_identity_provider_path, id: 'next-button' %>
+  <%= button_link_to t('navigation.continue'), about_choosing_a_company_path, id: 'next-button' %>
 </div>
