@@ -34,7 +34,7 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'will redirect users to sign-in page when selecting sign-in' do
     set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
-    stub_api_idp_list
+    stub_api_idp_list_for_sign_in
     visit '/start'
     choose 'start_form_selection_false', allow_label_click: true
     click_button 'Continue'
