@@ -6,8 +6,8 @@ require 'piwik_test_helper'
 describe SignInController do
   before(:each) do
     stub_api_idp_list_for_sign_in([{ 'simpleId' => 'stub-idp-one',
-                         'entityId' => 'http://idcorp.com',
-                         'levelsOfAssurance' => %w(LEVEL_1) }])
+                                     'entityId' => 'http://idcorp.com',
+                                     'levelsOfAssurance' => %w(LEVEL_1) }])
     set_session_and_cookies_with_loa('LEVEL_1')
   end
 
