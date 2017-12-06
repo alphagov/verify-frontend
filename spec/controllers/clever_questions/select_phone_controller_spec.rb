@@ -10,8 +10,11 @@ describe CleverQuestions::SelectPhoneController do
 
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_2')
-    session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true } }
-    stub_piwik_request('action_name' => 'Phone Next')
+    session[:selected_answers] = {
+      'documents' => { driving_licence: true, passport: true },
+      'device_type' => { device_type_other: true }
+    }
+    stub_piwik_request({ 'action_name' => 'Phone Next' }, {}, 'LEVEL_2')
   end
 
   context 'when form is valid' do
@@ -41,14 +44,22 @@ describe CleverQuestions::SelectPhoneController do
 
     it 'append form values in session cookie if some already exist' do
       stub_api_idp_list_for_loa
-      session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true }, 'phone' => { smart_phone: true } }
+      session[:selected_answers] = {
+          'device_type' => { device_type_other: true },
+          'documents' => { driving_licence: true, passport: true },
+          'phone' => { smart_phone: true }
+      }
       expect(subject).to redirect_to('/choose-a-certified-company')
       expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true)
     end
 
     it 'overwrites stored values in session cookie if they exist' do
       stub_api_idp_list_for_loa
-      session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true }, 'phone' => { mobile_phone: false, smart_phone: true } }
+      session[:selected_answers] = {
+          'device_type' => { device_type_other: true },
+          'documents' => { driving_licence: true, passport: true },
+          'phone' => { mobile_phone: false, smart_phone: true }
+      }
       expect(subject).to redirect_to('/choose-a-certified-company')
       expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true)
     end

@@ -35,7 +35,6 @@ Rails.application.config.after_initialize do
 
   # IDP Eligibility
   loaded_profile_filters = IdpEligibility::ProfilesLoader.new(YamlLoader.new).load(CONFIG.rules_directory)
-  DOCUMENTS_ELIGIBILITY_CHECKER = IdpEligibility::Checker.new(loaded_profile_filters.document_profiles)
   IDP_ELIGIBILITY_CHECKER = IdpEligibility::Checker.new(loaded_profile_filters.all_profiles)
   IDP_RECOMMENDATION_GROUPER = IdpEligibility::RecommendationGrouper.new(
     loaded_profile_filters.recommended_profiles,

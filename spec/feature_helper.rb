@@ -150,7 +150,8 @@ private
       start_time: start_time_in_millis,
       verify_session_id: default_session_id,
       requested_loa: 'LEVEL_2',
-      transaction_entity_id: 'http://www.test-rp.gov.uk/SAML2/MD'
+      transaction_entity_id: 'http://www.test-rp.gov.uk/SAML2/MD',
+      selected_answers: { device_type: { device_type_other: true } },
     }
   end
 end

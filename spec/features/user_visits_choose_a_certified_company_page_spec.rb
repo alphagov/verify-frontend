@@ -10,6 +10,7 @@ describe 'When the user visits the choose a certified company page' do
 
   context 'user has two docs and a mobile' do
     selected_answers = {
+        device_type: { device_type_other: true },
         documents: { passport: true, driving_licence: true },
         phone: { mobile_phone: true, landline: true }
     }
@@ -77,6 +78,7 @@ describe 'When the user visits the choose a certified company page' do
         transaction_simple_id: 'test-rp',
         requested_loa: 'LEVEL_1',
         selected_answers: {
+          device_type: { device_type_other: true },
           documents: { passport: true, driving_licence: true },
           phone: { mobile_phone: true, landline: true }
         },
@@ -96,6 +98,7 @@ describe 'When the user visits the choose a certified company page' do
     page.set_rack_session(
       transaction_simple_id: 'test-rp',
       selected_answers: {
+        device_type: { device_type_other: true },
         documents: { passport: false }
       },
     )
@@ -112,6 +115,7 @@ describe 'When the user visits the choose a certified company page' do
     page.set_rack_session(
       transaction_simple_id: 'test-rp',
       selected_answers: {
+        device_type: { device_type_other: true },
         documents: { driving_licence: true },
         phone: { mobile_phone: true, landline: true }
       },
@@ -135,6 +139,7 @@ describe 'When the user visits the choose a certified company page' do
 
   context 'IDP profile is in a demo period' do
     selected_answers = {
+      device_type: { device_type_other: true },
       documents: { passport: true, driving_licence: true },
       phone: { mobile_phone: true }
     }

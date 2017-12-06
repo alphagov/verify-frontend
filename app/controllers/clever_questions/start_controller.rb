@@ -1,7 +1,9 @@
 require 'ab_test/ab_test'
+require 'idp_eligibility/device_type'
 
 class CleverQuestions::StartController < ApplicationController
   layout 'slides'
+  before_action :set_device_type_evidence
 
   def index
     @form = CleverQuestions::StartForm.new({})

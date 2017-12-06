@@ -7,7 +7,13 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
     stub_api_idp_list_for_loa
   end
 
-  let(:selected_answers) { { documents: { passport: true, driving_licence: true }, phone: { mobile_phone: true } } }
+  let(:selected_answers) {
+    {
+      device_type: { device_type_other: true },
+      documents: { passport: true, driving_licence: true },
+      phone: { mobile_phone: true }
+    }
+  }
   let(:given_a_session_with_selected_answers) {
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },

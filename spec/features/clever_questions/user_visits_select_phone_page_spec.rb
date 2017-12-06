@@ -3,7 +3,12 @@ require 'api_test_helper'
 require 'uri'
 
 RSpec.describe 'When the user visits the select phone page' do
-  let(:selected_answers) { { documents: { passport: true, driving_licence: true } } }
+  let(:selected_answers) {
+    {
+      device_type: { device_type_other: true },
+      documents: { passport: true, driving_licence: true }
+    }
+  }
   let(:given_a_session_with_document_evidence) {
     page.set_rack_session(
       selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
@@ -27,7 +32,10 @@ RSpec.describe 'When the user visits the select phone page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
-      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true })
+      expect(page.get_rack_session['selected_answers']).to eql(
+        'device_type' => { 'device_type_other' => true },
+        'phone' => { 'mobile_phone' => true }
+      )
     end
 
     it 'allows you to overwrite the values of your selected evidence' do
@@ -45,6 +53,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
       expect(page).to have_current_path(no_mobile_phone_path)
       expect(page.get_rack_session['selected_answers']).to eql(
+        'device_type' => { 'device_type_other' => true },
         'phone' => { 'mobile_phone' => false },
         'documents' => { 'passport' => true, 'driving_licence' => true }
       )
@@ -52,7 +61,10 @@ RSpec.describe 'When the user visits the select phone page' do
 
     it 'allows you to append to an existing phone evidence ' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
-      page.set_rack_session(selected_answers: { documents: { passport: true, driving_licence: true }, phone: { smart_phone: true } })
+      page.set_rack_session(selected_answers: {
+        device_type: { device_type_other: true },
+        documents: { passport: true, driving_licence: true }, phone: { smart_phone: true }
+      })
 
       visit '/select-phone'
 
@@ -61,6 +73,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
       expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page.get_rack_session['selected_answers']).to eql(
+        'device_type' => { 'device_type_other' => true },
         'phone' => { 'smart_phone' => true, 'mobile_phone' => true },
         'documents' => { 'passport' => true, 'driving_licence' => true }
       )
@@ -86,6 +99,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
       expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page.get_rack_session['selected_answers']).to eql(
+        'device_type' => { 'device_type_other' => true },
         'phone' => { 'mobile_phone' => true },
         'documents' => { 'passport' => true, 'driving_licence' => true }
       )
@@ -107,7 +121,10 @@ RSpec.describe 'When the user visits the select phone page' do
       click_button 'Continue'
 
       expect(page).to have_current_path(no_mobile_phone_path)
-      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => false })
+      expect(page.get_rack_session['selected_answers']).to eql(
+        'device_type' => { 'device_type_other' => true },
+        'phone' => { 'mobile_phone' => false }
+      )
     end
   end
 

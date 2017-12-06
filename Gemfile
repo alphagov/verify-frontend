@@ -38,6 +38,8 @@ gem 'email_validator'
 # Use multi_json because pkgr forces the json gem to < 2.0, which is an old specification of JSON (doesn't allow top level strings)
 gem 'multi_json'
 
+gem 'browser'
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

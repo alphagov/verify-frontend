@@ -2,6 +2,7 @@ require 'ab_test/ab_test'
 
 class StartController < ApplicationController
   layout 'slides'
+  before_action :set_device_type_evidence
 
   # TODO TT-1615: Remove after tearing down AB Test.
   AB_EXPERIMENT_NAME = 'loa1_shortened_journey_v3'.freeze

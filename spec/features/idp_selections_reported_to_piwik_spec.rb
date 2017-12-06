@@ -3,7 +3,13 @@ require 'api_test_helper'
 require 'piwik_test_helper'
 
 RSpec.describe 'When the user selects an IDP' do
-  let(:selected_answers) { { phone: { mobile_phone: true, smart_phone: true }, documents: { driving_licence: true, passport: true } } }
+  let(:selected_answers) {
+    {
+      device_type: { device_type_other: true },
+      phone: { mobile_phone: true, smart_phone: true },
+      documents: { driving_licence: true, passport: true }
+    }
+  }
   let(:location) { '/test-idp-request-endpoint' }
   let(:idp_1_entity_id) { 'http://idcorp.com' }
   let(:idp_2_entity_id) { 'other-entity-id' }

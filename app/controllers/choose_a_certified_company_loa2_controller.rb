@@ -1,6 +1,9 @@
 class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
 
+  # TODO TT-1718: This before action can be removed after the release. Added here to ensure zero down time.
+  before_action :set_device_type_evidence
+
   def index
     grouped_identity_providers = IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers_for_loa, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)

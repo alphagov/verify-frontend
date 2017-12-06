@@ -25,8 +25,8 @@ class StubApi < Sinatra::Base
     status 200
     "{
       \"simpleId\":\"test-rp\",
-      \"loaList\":[\"#{level_of_assurance}\"],
-      \"serviceHomepage\":\"www.example.com\"
+      \"serviceHomepage\":\"www.example.com\",
+      \"loaList\":[\"#{level_of_assurance}\"]
     }"
   end
 

@@ -24,7 +24,10 @@ describe ChooseACertifiedCompanyLoa2Controller do
     it 'renders the certified companies LOA2 template when LEVEL_2 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_2')
       stub_api_idp_list_for_loa([stub_idp_loa1, stub_idp_one_doc])
-      session[:selected_answers] = { documents: { driving_licence: true, mobile_phone: true } }
+      session[:selected_answers] = {
+        documents: { driving_licence: true, mobile_phone: true },
+        device_type: { device_type_other: true }
+      }
       stub_piwik_request = stub_piwik_report_number_of_recommended_ipds(1, 'LEVEL_2', 'analytics description for test-rp')
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).twice do |idps|
@@ -60,7 +63,8 @@ describe ChooseACertifiedCompanyLoa2Controller do
     it 'checks whether IDP was recommended' do
       session[:selected_answers] = {
         'documents' => { 'driving_licence' => true, 'passport' => false },
-        'phone' => { 'mobile_phone' => true }
+        'phone' => { 'mobile_phone' => true },
+        'device_type' => { 'device_type_other' => true }
       }
       post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
 
