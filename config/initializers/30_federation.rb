@@ -1,4 +1,7 @@
 require 'yaml_loader'
+require 'idp_recommendations/idp_profiles_loader'
+require 'idp_recommendations/segment_matcher'
+require 'idp_recommendations/recommendations_engine'
 
 Rails.application.config.after_initialize do
   # Federation localisation and display
@@ -33,17 +36,16 @@ Rails.application.config.after_initialize do
   IDP_CONFIG = YAML.load_file(CONFIG.idp_config)
   UNAVAILABLE_IDPS = IDP_CONFIG.fetch('show_unavailable', [])
 
-  # IDP Eligibility
-  loaded_profile_filters = IdpEligibility::ProfilesLoader.new(YamlLoader.new).load(CONFIG.rules_directory)
-  IDP_ELIGIBILITY_CHECKER = IdpEligibility::Checker.new(loaded_profile_filters.all_profiles)
-  IDP_RECOMMENDATION_GROUPER = IdpEligibility::RecommendationGrouper.new(
-    loaded_profile_filters.recommended_profiles,
-    loaded_profile_filters.non_recommended_profiles,
-    loaded_profile_filters.demo_profiles,
-    RP_CONFIG.fetch('demo_period_blacklist')
-  )
+  # IDP Recommendations
+  yaml_loader = YamlLoader.new
+  idp_rules_loader = IdpProfilesLoader.new(yaml_loader)
+  idp_rules = idp_rules_loader.parse_config_files(CONFIG.rules_directory)
+  segment_config = YAML.load_file(CONFIG.segment_definitions)
+  segment_matcher = SegmentMatcher.new(segment_config)
+  transaction_grouper = TransactionGroups::TransactionGrouper.new(RP_CONFIG)
+  IDP_RECOMMENDATION_ENGINE = RecommendationsEngine.new(idp_rules, segment_matcher, transaction_grouper)
 
   # Feature flags
-  IDP_FEATURE_FLAGS_CHECKER = IdpEligibility::IdpFeatureFlagsLoader.new(YamlLoader.new)
+  IDP_FEATURE_FLAGS_CHECKER = IdpConfiguration::IdpFeatureFlagsLoader.new(YamlLoader.new)
                                  .load(CONFIG.rules_directory, %i[send_hints send_language_hint show_interstitial_question show_interstitial_question_loa1])
 end

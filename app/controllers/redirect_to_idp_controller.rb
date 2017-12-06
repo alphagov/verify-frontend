@@ -1,7 +1,7 @@
 class RedirectToIdpController < ApplicationController
   def register
     request_form
-    FEDERATION_REPORTER.report_idp_registration(current_transaction, request, session[:selected_idp_name], session[:selected_idp_names], selected_answer_store.selected_evidence, recommended)
+    report_idp_registration_to_piwik(recommended)
     render :redirect_to_idp
   end
 

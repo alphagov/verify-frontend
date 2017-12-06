@@ -43,7 +43,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
     it 'renders IDP list' do
       set_session_and_cookies_with_loa('LEVEL_1', 'test-rp')
-      stub_piwik_request = stub_piwik_report_number_of_recommended_ipds(2, 'LEVEL_1', 'analytics description for test-rp')
+      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(2, 'LEVEL_1', 'analytics description for test-rp')
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).once do |idps|
         idps.each { |idp| expect(idp.levels_of_assurance).to include 'LEVEL_1' }

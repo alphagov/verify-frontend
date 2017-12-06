@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'models/idp_eligibility/idp_feature_flags_checker'
+require 'idp_configuration/idp_feature_flags_checker'
 
-module IdpEligibility
+module IdpConfiguration
   RSpec.describe IdpFeatureFlagsChecker do
     let(:feature_flags) {
       {

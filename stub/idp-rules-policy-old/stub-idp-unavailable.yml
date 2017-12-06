@@ -3,3 +3,11 @@ recommended_profiles: []
 demo_profiles: []
 non_recommended_profiles: []
 send_hints: false
+
+segments:
+  protected:
+    recommended: []
+    unlikely: []
+  non_protected:
+    recommended: []
+    unlikely: []

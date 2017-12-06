@@ -13,7 +13,7 @@ class SelectDocumentsForm
 
   def selected_answers
     answers = {}
-    IdpEligibility::Evidence:: PHOTO_DOCUMENT_ATTRIBUTES.each do |attr|
+    Evidence:: PHOTO_DOCUMENT_ATTRIBUTES.each do |attr|
       result = public_send(attr)
       if %w(true false).include?(result)
         answers[attr] = (result == 'true')

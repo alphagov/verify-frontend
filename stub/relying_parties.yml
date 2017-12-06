@@ -1,5 +1,5 @@
-demo_period_blacklist:
-  - test-rp-no-demo
+protected_transactions:
+ - test-rp-no-demo
 
 ab_test_blacklist:
   - test-rp-no-ab-test

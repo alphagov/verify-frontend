@@ -46,12 +46,12 @@ module Analytics
       end
     end
 
-    def report_idp_registration(current_transaction, request, idp_name, idp_name_history, evidence, recommended)
+    def report_idp_registration(current_transaction:, request:, idp_name:, idp_name_history:, evidence:, recommended:, user_segment:)
       list_of_evidence = evidence.sort.join(', ')
       report_action(
         current_transaction,
         request,
-        "#{idp_name} was chosen for registration #{recommended} with evidence #{list_of_evidence}",
+        "#{idp_name} was chosen for registration #{recommended} with segment #{user_segment} and evidence #{list_of_evidence}",
         Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(','))
       )
     end

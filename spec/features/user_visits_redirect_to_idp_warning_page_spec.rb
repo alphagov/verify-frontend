@@ -58,7 +58,8 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   }
 
   before(:each) do
-    set_session_and_session_cookies!
+    session = default_session.merge(user_segment: 'test-segment')
+    set_session_and_session_cookies!(session: session)
   end
 
   it 'includes the appropriate feedback source and page title' do
@@ -101,7 +102,12 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true)
+    piwik_registration_virtual_page = stub_piwik_idp_registration(
+      'IDCorp',
+      selected_answers: selected_answers,
+      recommended: true,
+      segment: 'test-segment',
+    )
 
     click_button 'Continue to the IDCorp website'
 
@@ -119,7 +125,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     select_idp_stub_request
     stub_session_idp_authn_request(originating_ip, location, false)
 
-    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers)
+    piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, segment: 'test-segment')
 
     click_button 'Continue to the IDCorp website'
 
@@ -139,7 +145,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
   context 'with JS enabled', js: true do
     it 'will redirect the user to the IDP on Continue' do
-      piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true)
+      piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, recommended: true, segment: 'test-segment')
       stub_piwik_idp_registration('IDCorp')
       given_a_session_with_document_answers
       visit '/redirect-to-idp-warning'

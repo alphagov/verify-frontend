@@ -9,7 +9,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
 
   let(:selected_answers) {
     {
-      device_type: { device_type_other: true },
+      device_type: { device_type_mobile: true },
       documents: { passport: true, driving_licence: true },
       phone: { mobile_phone: true }
     }

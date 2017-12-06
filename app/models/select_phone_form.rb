@@ -13,7 +13,7 @@ class SelectPhoneForm
 
   def selected_answers
     answers = {}
-    IdpEligibility::Evidence::PHONE_ATTRIBUTES.each do |attr|
+    Evidence::PHONE_ATTRIBUTES.each do |attr|
       result = public_send(attr)
       if %w(true false).include?(result)
         answers[attr] = result == 'true'

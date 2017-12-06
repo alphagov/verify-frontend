@@ -1,5 +1,4 @@
 require 'ab_test/ab_test'
-require 'idp_eligibility/device_type'
 
 class CleverQuestions::StartController < ApplicationController
   layout 'slides'

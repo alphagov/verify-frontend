@@ -1,3 +1,12 @@
 simpleIds: [ "stub-idp-loa1" ]
-recommended_profiles: []
-non_recommended_profiles: []
+
+segments:
+  protected:
+    recommended: []
+    unlikely: []
+  non_protected:
+    recommended: ["other"]
+    unlikely: []
+
+capabilities:
+  - []
