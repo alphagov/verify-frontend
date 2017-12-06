@@ -34,5 +34,6 @@ CONFIG = Configuration.load! do
   option_string 'idp_config', 'IDP_CONFIG'
   option_string 'cycle_three_attributes_directory', 'CYCLE_THREE_ATTRIBUTES_DIRECTORY'
   option_string 'ab_test_file', 'AB_TEST_FILE', allow_missing: true
+  option_string 'segment_definitions', 'SEGMENT_DEFINITIONS'
   option_string 'saml_proxy_host', 'SAML_PROXY_HOST'
 end

@@ -44,7 +44,8 @@ describe 'When the user visits the choose a certified company page' do
         transaction_simple_id: 'test-rp',
         selected_answers: {
           selected_answers: additional_documents,
-          phone: selected_answers[:phone]
+          phone: selected_answers[:phone],
+          device_type: { device_type_other: true }
         }
       )
 
@@ -144,7 +145,7 @@ describe 'When the user visits the choose a certified company page' do
       phone: { mobile_phone: true }
     }
 
-    it 'shows the IDP if the RP is not in the demo blacklist' do
+    it 'shows the IDP if the RP is not protected' do
       page.set_rack_session(
         transaction_simple_id: 'test-rp',
         selected_answers: selected_answers
@@ -153,11 +154,11 @@ describe 'When the user visits the choose a certified company page' do
       visit '/choose-a-certified-company'
 
       within('#matching-idps') do
-        expect(page).to have_button('Choose Demo IDP')
+        expect(page).to have_button('Choose Bob’s Identity Service')
       end
     end
 
-    it 'shows the IDP as unlikely if the RP is in the demo blacklist' do
+    it 'shows the IDP as unlikely if the RP is protected' do
       page.set_rack_session(
         transaction_simple_id: 'test-rp-no-demo',
         selected_answers: selected_answers
@@ -166,11 +167,11 @@ describe 'When the user visits the choose a certified company page' do
       visit '/choose-a-certified-company'
 
       within('#matching-idps') do
-        expect(page).to_not have_button('Choose Demo IDP')
+        expect(page).to_not have_button('Choose Bob’s Identity Service')
       end
 
       within('#non-matching-idps') do
-        expect(page).to have_button('Choose Demo IDP')
+        expect(page).to have_button('Choose Bob’s Identity Service')
       end
     end
   end

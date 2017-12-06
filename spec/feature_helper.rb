@@ -90,9 +90,9 @@ module FeatureHelper
     Time.now.to_i * 1000
   end
 
-  def set_session_and_session_cookies!(cookie_hash = create_cookie_hash)
+  def set_session_and_session_cookies!(cookie_hash: create_cookie_hash, session: default_session)
     set_cookies!(create_cookie_hash)
-    set_session!
+    set_session!(session)
     cookie_hash
   end
 

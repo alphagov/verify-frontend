@@ -1,4 +1,4 @@
-module IdpEligibility
+module IdpConfiguration
   class IdpFeatureFlagsChecker
     def initialize(feature_flags_for_idps)
       @feature_flags_for_idps = feature_flags_for_idps

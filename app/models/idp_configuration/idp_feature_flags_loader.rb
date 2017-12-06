@@ -1,6 +1,6 @@
-require 'idp_eligibility/idp_feature_flags_checker'
+require 'idp_configuration/idp_feature_flags_checker'
 
-module IdpEligibility
+module IdpConfiguration
   class IdpFeatureFlagsLoader
     def initialize(file_loader)
       @file_loader = file_loader
@@ -13,7 +13,7 @@ module IdpEligibility
         [flag, idps_with_flag_set(profiles, flag.to_s)]
       end
 
-      IdpEligibility::IdpFeatureFlagsChecker.new(feature_flags_for_idps.to_h)
+      IdpConfiguration::IdpFeatureFlagsChecker.new(feature_flags_for_idps.to_h)
     end
 
   private

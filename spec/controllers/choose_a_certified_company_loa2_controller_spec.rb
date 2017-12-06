@@ -28,7 +28,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
         documents: { driving_licence: true, mobile_phone: true },
         device_type: { device_type_other: true }
       }
-      stub_piwik_request = stub_piwik_report_number_of_recommended_ipds(1, 'LEVEL_2', 'analytics description for test-rp')
+      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(1, 'LEVEL_2', 'analytics description for test-rp')
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).twice do |idps|
         idps.each { |idp| expect(idp.levels_of_assurance).to include 'LEVEL_2' }

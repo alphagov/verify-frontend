@@ -41,48 +41,80 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "#{idp_name} was chosen for registration (recommended) with evidence passport",
+            "#{idp_name} was chosen for registration (recommended) with segment(s) segment1 and evidence passport",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(current_transaction, request, idp_name, idp_history, %w(passport), '(recommended)')
+        federation_reporter.report_idp_registration(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          idp_name_history: idp_history,
+          evidence: %w(passport),
+          recommended: '(recommended)',
+          user_segments: %w(segment1)
+        )
       end
 
       it 'should report correctly if IdP was not recommended' do
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "#{idp_name} was chosen for registration (not recommended) with evidence passport",
+            "#{idp_name} was chosen for registration (not recommended) with segment(s) segment1 and evidence passport",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(current_transaction, request, idp_name, idp_history, %w(passport), '(not recommended)')
+        federation_reporter.report_idp_registration(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          idp_name_history: idp_history,
+          evidence: %w(passport),
+          recommended: '(not recommended)',
+          user_segments: %w(segment1)
+        )
       end
 
       it 'should report correctly if IdP recommendation key not found in session' do
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "#{idp_name} was chosen for registration (idp recommendation key not set) with evidence passport",
+            "#{idp_name} was chosen for registration (idp recommendation key not set) with segment(s) segment1 and evidence passport",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(current_transaction, request, idp_name, idp_history, %w(passport), '(idp recommendation key not set)')
+        federation_reporter.report_idp_registration(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          idp_name_history: idp_history,
+          evidence: %w(passport),
+          recommended: '(idp recommendation key not set)',
+          user_segments: %w(segment1)
+        )
       end
 
       it 'should sort evidence' do
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "#{idp_name} was chosen for registration (recommended) with evidence driving_licence, passport",
+            "#{idp_name} was chosen for registration (recommended) with segment(s) segment1, segment2 and evidence driving_licence, passport",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
           )
-        federation_reporter.report_idp_registration(current_transaction, request, idp_name, idp_history, %w(passport driving_licence), '(recommended)')
+        federation_reporter.report_idp_registration(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          idp_name_history: idp_history,
+          evidence: %w(passport driving_licence),
+          recommended: '(recommended)',
+          user_segments: %w(segment1 segment2)
+        )
       end
     end
 

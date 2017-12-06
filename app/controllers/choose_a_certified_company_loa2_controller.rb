@@ -5,9 +5,10 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   before_action :set_device_type_evidence
 
   def index
-    grouped_identity_providers = IDP_RECOMMENDATION_GROUPER.group_by_recommendation(selected_evidence, current_identity_providers_for_loa, current_transaction_simple_id)
-    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.recommended)
-    @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(grouped_identity_providers.non_recommended)
+    suggestions = IDP_RECOMMENDATION_ENGINE.get_suggested_idps(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
+    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
+    @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
+    session[:user_segments] = suggestions[:user_segments]
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
     render 'choose_a_certified_company/choose_a_certified_company_LOA2'
   end
@@ -15,7 +16,7 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   def select_idp
     selected_answer_store.store_selected_answers('interstitial', {})
     select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
-      session[:selected_idp_was_recommended] = IDP_RECOMMENDATION_GROUPER.recommended?(decorated_idp.identity_provider, selected_evidence, current_identity_providers_for_loa, current_transaction_simple_id)
+      session[:selected_idp_was_recommended] = IDP_RECOMMENDATION_ENGINE.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
       redirect_to warning_or_question_page(decorated_idp)
     end
   end

@@ -1,6 +1,5 @@
 require 'redirect_with_see_other'
 require 'cookies/cookies'
-require 'idp_eligibility/device_type'
 
 class ApplicationController < ActionController::Base
   include DeviceType
@@ -230,11 +229,22 @@ private
   end
 
   def ajax_idp_redirection_registration_request(recommended)
-    FEDERATION_REPORTER.report_idp_registration(current_transaction, request, session[:selected_idp_name], session[:selected_idp_names], selected_answer_store.selected_evidence, recommended)
-
+    report_idp_registration_to_piwik(recommended)
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
     idp_request = idp_request_initilization(outbound_saml_message)
     render json: idp_request.to_json(methods: :hints)
+  end
+
+  def report_idp_registration_to_piwik(recommended)
+    FEDERATION_REPORTER.report_idp_registration(
+      current_transaction: current_transaction,
+      request: request,
+      idp_name: session[:selected_idp_name],
+      idp_name_history: session[:selected_idp_names],
+      evidence: selected_answer_store.selected_evidence,
+      recommended: recommended,
+      user_segments: session[:user_segments]
+    )
   end
 
   def idp_request_initilization(outbound_saml_message)

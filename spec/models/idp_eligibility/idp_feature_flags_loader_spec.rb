@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'idp_eligibility/idp_feature_flags_loader'
+require 'idp_configuration/idp_feature_flags_loader'
 
-module IdpEligibility
+module IdpConfiguration
   describe IdpFeatureFlagsLoader do
     let(:file_loader) { double(:file_loader) }
     let(:loader) {

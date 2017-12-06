@@ -2,7 +2,7 @@ en:
   idps:
     stub-idp-loa1:
       name: "LOA1 Corp"
-      about: "<p>Bob’s Identity Service is the premier identity proofing service around. Come get some.</p>"
+      about: "<p>LOA1 Corp is the premier identity proofing service around. Come get some.</p>"
       requirements:
         - a UK passport
         - a UK photocard driving licence
@@ -16,8 +16,8 @@ en:
 cy:
   idps:
     stub-idp-loa1:
-      name: "Welsh Bob’s Identity Service"
-      about: "<p>Bob’s Identity Service is the premier identity proofing service around. Come get some.</p>"
+      name: "Welsh LOA1 Corp"
+      about: "<p>Welsh LOA1 Corp is the premier identity proofing service around. Come get some.</p>"
       requirements:
         - a UK passport
         - a UK photocard driving licence
