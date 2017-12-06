@@ -6,6 +6,7 @@ RSpec.describe 'When the user visits the confirming it is you page' do
   let(:selected_answers) {
     {
       documents: { passport: true, driving_licence: true },
+      phone: { mobile_phone: true },
       device_type: { device_type_other: true }
     }
   }
@@ -24,17 +25,36 @@ RSpec.describe 'When the user visits the confirming it is you page' do
   end
 
   context 'with javascript disabled' do
-    it 'redirects to the select phone page on selection of no smartphone and submit' do
+    it 'redirects to the idp picker page when IDPs are available' do
       stub_api_no_docs_idps
+      given_a_session_with_document_evidence
       visit '/confirming-it-is-you'
 
-      check 'confirming_it_is_you_form_no_smart_phone', allow_label_click: true
       click_button 'Continue'
 
-      expect(page).to have_current_path(select_phone_path, only_path: true)
+      expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
+    end
+
+    it 'set mobile phone evidence to true if user said no mobile phone but said yes to smart phone' do
+      stub_api_no_docs_idps
+      page.set_rack_session(selected_answers: { phone: { mobile_phone: false } })
+      visit '/confirming-it-is-you'
+
+      click_button 'Continue'
+
+      expect(page.get_rack_session['selected_answers']).to eql('phone' => { 'mobile_phone' => true, 'smart_phone' => true },
+                                                               'device_type' => { 'device_type_other' => true })
+    end
+
+    it 'redirects to the no mobile phone page when there are no IDPs available' do
+      visit '/confirming-it-is-you'
+
+      click_button 'Continue'
+
+      expect(page).to have_current_path(no_mobile_phone_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
-        'phone' => { 'smart_phone' => false }
+        'phone' => { 'smart_phone' => true }
       )
     end
 
@@ -50,10 +70,10 @@ RSpec.describe 'When the user visits the confirming it is you page' do
       visit '/confirming-it-is-you'
       click_button 'Continue'
 
-      expect(page).to have_current_path(select_phone_path)
+      expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
-        'phone' => { 'smart_phone' => true },
+        'phone' => { 'mobile_phone' => true, 'smart_phone' => true },
         'documents' => { 'passport' => true, 'driving_licence' => true }
       )
     end

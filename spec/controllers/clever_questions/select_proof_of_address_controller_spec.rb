@@ -19,7 +19,7 @@ describe CleverQuestions::SelectProofOfAddressController do
 
     post :select_proof, params: { locale: 'en', select_proof_of_address_form: { uk_bank_account_details: true, debit_card: true, credit_card: false } }
 
-    expect(subject).to redirect_to('/confirming-it-is-you')
+    expect(subject).to redirect_to('/select-phone')
   end
 
   it 're-renders itself ' do

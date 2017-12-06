@@ -24,14 +24,14 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   context 'with javascript disabled' do
-    it 'redirects to the idp picker page when user has a phone' do
+    it 'redirects to the confirming it is you page when user has a phone' do
       stub_api_no_docs_idps
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
       click_button 'Continue'
 
-      expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
+      expect(page).to have_current_path(confirming_it_is_you_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
         'phone' => { 'mobile_phone' => true }
@@ -51,7 +51,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_mobile_phone_false', allow_label_click: true
       click_button 'Continue'
 
-      expect(page).to have_current_path(no_mobile_phone_path)
+      expect(page).to have_current_path(confirming_it_is_you_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
         'phone' => { 'mobile_phone' => false },
@@ -71,7 +71,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
       click_button 'Continue'
 
-      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_current_path(confirming_it_is_you_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
         'phone' => { 'smart_phone' => true, 'mobile_phone' => true },
@@ -89,7 +89,7 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   context 'with javascript enabled', js: true do
-    it 'redirects to the idp picker page when user has a phone' do
+    it 'redirects to the confirming it is yoy page when user has a phone' do
       given_a_session_with_document_evidence
 
       visit '/select-phone'
@@ -97,7 +97,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
       click_button 'Continue'
 
-      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_current_path(confirming_it_is_you_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
         'phone' => { 'mobile_phone' => true },
@@ -112,19 +112,6 @@ RSpec.describe 'When the user visits the select phone page' do
 
       expect(page).to have_current_path(select_phone_path)
       expect(page).to have_css '#validation-error-message-js', text: 'Please answer all the questions'
-    end
-
-    it 'redirects to the no mobile phone page when no idps can verify' do
-      visit '/select-phone'
-
-      choose 'select_phone_form_mobile_phone_false', allow_label_click: true
-      click_button 'Continue'
-
-      expect(page).to have_current_path(no_mobile_phone_path)
-      expect(page.get_rack_session['selected_answers']).to eql(
-        'device_type' => { 'device_type_other' => true },
-        'phone' => { 'mobile_phone' => false }
-      )
     end
   end
 

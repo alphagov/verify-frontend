@@ -7,7 +7,7 @@ describe 'When user visits select proof of address page' do
   end
 
   context 'with javascript enabled', js: true do
-    it 'redirects to confirming it is you page when all questions are answered' do
+    it 'redirects to select phone page when all questions are answered' do
       stub_api_idp_list_for_loa
       stub_transactions_list
       visit '/select-proof-of-address'
@@ -16,7 +16,7 @@ describe 'When user visits select proof of address page' do
       choose 'select_proof_of_address_form_credit_card_false', allow_label_click: true
       click_button 'Continue'
 
-      expect(page).to have_current_path(confirming_it_is_you_path)
+      expect(page).to have_current_path(select_phone_path)
     end
 
     it 'the page shows errors when no options filled in' do
