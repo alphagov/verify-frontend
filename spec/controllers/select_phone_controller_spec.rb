@@ -10,8 +10,11 @@ describe SelectPhoneController do
 
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_2')
-    session[:selected_answers] = { 'documents' => { driving_licence: true, passport: true } }
-    stub_piwik_request('action_name' => 'Phone Next')
+    session[:selected_answers] = {
+      'documents' => { driving_licence: true, passport: true },
+      'device_type' => { device_type_other: true }
+    }
+    stub_piwik_request({ 'action_name' => 'Phone Next' }, {}, 'LEVEL_2')
   end
 
   context 'when form is valid' do

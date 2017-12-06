@@ -49,6 +49,7 @@ GEM
     backports (3.10.3)
     binding_of_caller (0.7.3)
       debug_inspector (>= 0.0.1)
+    browser (2.5.2)
     builder (3.2.3)
     byebug (9.1.0)
     cabin (0.9.0)
@@ -347,6 +348,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  browser
   byebug
   capybara (~> 2.10)
   connection_pool

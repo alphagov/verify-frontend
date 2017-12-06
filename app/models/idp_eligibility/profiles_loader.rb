@@ -21,23 +21,17 @@ module IdpEligibility
       non_recommended_profiles = select_profiles(profiles, "non_recommended_profiles")
       demo_profiles = select_profiles(profiles, "demo_profiles") { [] }
       all_profiles = merge_profiles(merge_profiles(recommended_profiles, non_recommended_profiles), demo_profiles)
-      document_profiles = apply_documents_mask(all_profiles)
       LoadedProfileFilters.new(
         ProfileFilter.new(recommended_profiles),
         ProfileFilter.new(non_recommended_profiles),
         ProfileFilter.new(demo_profiles),
         ProfileFilter.new(all_profiles),
-        ProfileFilter.new(document_profiles)
       )
     end
 
     LoadedProfileFilters = Struct.new(:recommended_profiles, :non_recommended_profiles, :demo_profiles, :all_profiles, :document_profiles)
 
   private
-
-    def apply_documents_mask(profiles)
-      @document_attribute_masker.mask(profiles)
-    end
 
     def select_profiles(profiles, type, &blk)
       profiles.inject({}) do |selected_profiles, yaml|

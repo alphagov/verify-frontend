@@ -1,7 +1,10 @@
 require 'ab_test/ab_test'
+require 'idp_eligibility/device_type'
 
 class StartController < ApplicationController
   layout 'slides'
+  include DeviceType
+  before_action :set_device_type_evidence
 
   # TODO TT-1615: Remove after tearing down AB Test.
   AB_EXPERIMENT_NAME = 'loa1_shortened_journey_v3'.freeze
@@ -58,5 +61,9 @@ private
   def extract_experiment_route_from_cookie(ab_test_cookie)
     alternative_name = Cookies.parse_json(ab_test_cookie)[AB_EXPERIMENT_NAME]
     AB_TESTS[AB_EXPERIMENT_NAME] ? AB_TESTS[AB_EXPERIMENT_NAME].alternative_name(alternative_name) : 'default'
+  end
+
+  def set_device_type_evidence
+    selected_answer_store.store_selected_answers('device_type', device_type)
   end
 end

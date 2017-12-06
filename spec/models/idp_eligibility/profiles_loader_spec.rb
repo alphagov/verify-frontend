@@ -74,18 +74,6 @@ module IdpEligibility
         expect(profiles_loader.load(path).all_profiles).to eq(profiles_repository)
       end
 
-      it 'should supply a seperate repository of document profiles' do
-        path = 'good_profiles_path'
-        expect(file_loader).to receive(:load).with(path).and_return(good_profiles)
-        evidence = [Profile.new(%i{passport driving_licence}), Profile.new(%i(passport))]
-        profiles_repository = ProfileFilter.new(
-          'example-idp' => evidence,
-          'example-idp-stub' => evidence,
-          'example-idp-two' => [Profile.new(%i{passport driving_licence}), Profile.new(%i(non_uk_id_document))]
-        )
-        expect(profiles_loader.load(path).document_profiles).to eq(profiles_repository)
-      end
-
       it 'should raise an error when expected keys are missing from yaml' do
         path = 'bad_profiles_path'
         bad_profiles = [
