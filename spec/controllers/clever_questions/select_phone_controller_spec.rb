@@ -15,6 +15,7 @@ describe CleverQuestions::SelectPhoneController do
       'device_type' => { device_type_other: true }
     }
     stub_piwik_request({ 'action_name' => 'Phone Next' }, {}, 'LEVEL_2')
+    stub_piwik_request('action_name' => 'trackEvent')
   end
 
   context 'when form is valid' do

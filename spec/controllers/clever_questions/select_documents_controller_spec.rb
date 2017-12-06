@@ -17,6 +17,7 @@ describe CleverQuestions::SelectDocumentsController do
 
     it 'redirects to other identity documents page when further documents are required' do
       further_documents_evidence = { passport: 'false', any_driving_licence: 'false' }.freeze
+      stub_piwik_request('action_name' => 'trackEvent')
       post :select_documents, params: { locale: 'en', select_documents_form: further_documents_evidence }
 
       expect(subject).to redirect_to other_identity_documents_path
@@ -24,6 +25,7 @@ describe CleverQuestions::SelectDocumentsController do
 
     it 'redirects to select phone page when no further documents are required' do
       no_further_documents_evidence = { passport: 'true', any_driving_licence: 'false' }.freeze
+      stub_piwik_request('action_name' => 'trackEvent')
       post :select_documents, params: { locale: 'en', select_documents_form: no_further_documents_evidence }
 
       expect(subject).to redirect_to select_proof_of_address_path
@@ -34,6 +36,7 @@ describe CleverQuestions::SelectDocumentsController do
                              any_driving_licence: 'true',
                              driving_licence: 'true',
                              ni_driving_licence: 'true' }.freeze
+      stub_piwik_request('action_name' => 'trackEvent')
       post :select_documents, params: { locale: 'en', select_documents_form: documents_evidence }
 
       subject

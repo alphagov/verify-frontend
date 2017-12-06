@@ -8,6 +8,7 @@ class CleverQuestions::SelectDocumentsController < ApplicationController
     @form = CleverQuestions::SelectDocumentsForm.new(params['select_documents_form'] || {})
     if @form.valid?
       report_to_analytics('Select Documents Next')
+      FEDERATION_REPORTER.report_event(current_transaction, request, "Evidence", "Passport", @form.passport)
       selected_answer_store.store_selected_answers('documents', @form.selected_answers)
       redirect_to @form.further_id_information_required? ? other_identity_documents_path : select_proof_of_address_path
     else

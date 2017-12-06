@@ -10,6 +10,7 @@ class CleverQuestions::SelectPhoneController < ApplicationController
     @form = CleverQuestions::SelectPhoneForm.new(params['select_phone_form'] || {})
     if @form.valid?
       report_to_analytics('Phone Next')
+      FEDERATION_REPORTER.report_event(current_transaction, request, "Evidence", "Mobile phone", @form.mobile_phone)
       current_answers = selected_answer_store.selected_answers['phone'] || {}
       selected_answer_store.store_selected_answers('phone', current_answers.symbolize_keys.merge(@form.selected_answers))
       redirect_to confirming_it_is_you_path
