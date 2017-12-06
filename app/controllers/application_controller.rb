@@ -1,7 +1,10 @@
 require 'redirect_with_see_other'
 require 'cookies/cookies'
+require 'idp_eligibility/device_type'
 
 class ApplicationController < ActionController::Base
+  include DeviceType
+
   before_action :validate_session
   before_action :set_visitor_cookie
   # Prevent CSRF attacks by raising an exception.
@@ -247,5 +250,9 @@ private
         Analytics::CustomVariable.build_for_js_client(:rp, current_transaction.analytics_description),
         Analytics::CustomVariable.build_for_js_client(:loa_requested, session[:requested_loa])
     ]
+  end
+
+  def set_device_type_evidence
+    selected_answer_store.store_selected_answers('device_type', device_type)
   end
 end

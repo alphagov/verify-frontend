@@ -1,4 +1,7 @@
 class CleverQuestions::SelectPhoneController < ApplicationController
+  # TODO TT-1718: This before action can be removed after the release. Added here to ensure zero down time.
+  before_action :set_device_type_evidence
+
   def index
     @form = CleverQuestions::SelectPhoneForm.new({})
   end
