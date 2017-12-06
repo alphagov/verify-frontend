@@ -569,7 +569,7 @@ cy:
         content_html: |
           <p>A certified company will verify your identity.</p>
           <p>GOV.UK Verify uses certified companies so that all your personal information isn’t held in one government database.</p>
-          <p>You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities. The certified company you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passports Office or DVLA.</p>
+          <p>You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities. The certified company you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passport Office or DVLA.</p>
         content_bottom_html: |
           <p>These 7 companies applied to be part of Verify, and have been certified to verify identities as they’ve met government security and privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
           <p>There's no charge for this service.</p>
@@ -634,7 +634,7 @@ cy:
           no_selection: Please answer all the questions
       confirming_it_is_you:
         title: Confirming it's you
-        heading: Confirming it's actually you providing your details
+        heading: How companies confirm it's actually you providing your details
         content_html: |
           <p>Certified companies need to make sure someone isn't pretending to be you by using your personal details and a copy of your passport or driving licence.</p>
         smartphone_content_html: |

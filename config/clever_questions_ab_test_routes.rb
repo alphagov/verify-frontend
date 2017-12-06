@@ -10,8 +10,6 @@ localized do
   get 'select_documents_none', to: 'clever_questions/select_documents#no_documents', as: :select_documents_no_documents
   post 'select_documents', to: 'clever_questions/select_documents#select_documents', as: :select_documents_submit
   get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
-  get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
-  post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
   get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
 
   get 'will_it_work_for_me', to: 'clever_questions/will_it_work_for_me#index', as: :will_it_work_for_me
@@ -63,6 +61,8 @@ localized do
     get 'about_choosing_a_company', to: 'clever_questions/about_loa2#choosing_a_company', as: :about_choosing_a_company
     get 'select_proof_of_address', to: 'clever_questions/select_proof_of_address#index', as: :select_proof_of_address
     post 'select_proof_of_address', to: 'clever_questions/select_proof_of_address#select_proof', as: :select_proof_of_address_submit
+    get 'other_identity_documents', to: 'clever_questions/other_identity_documents#index', as: :other_identity_documents
+    post 'other_identity_documents', to: 'clever_questions/other_identity_documents#select_other_documents', as: :other_identity_documents_submit
   end
 
   post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit

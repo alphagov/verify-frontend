@@ -564,13 +564,13 @@ en:
         content_html: |
           <p>A certified company will verify your identity.</p>
           <p>GOV.UK Verify uses certified companies so that all your personal information isn’t held in one government database.</p>
-          <p>You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities. The certified company you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passports Office or DVLA.</p>
+          <p>You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities. The certified company you choose asks you for some personal details and checks them against records held by mobile phone providers, credit agencies, HM Passport Office or DVLA.</p>
         content_bottom_html: |
           <p>These 7 companies applied to be part of Verify, and have been certified to verify identities as they’ve met government security and privacy standards, so you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.</p>
           <p>There's no charge for this service.</p>
       select_documents:
         title: Select all the documents you have
-        title_photo_documents: Your photo identity document
+        title_photo_documents: Your photo identity documents
         explanation: Certified companies use information from different identity documents to verify you.
         sub_heading: Certified companies need proof of who you are. You’ll be asked to provide the details from the identity documents you have so they can double check them with DVLA, DVA and HM Passport Office.
         documents_from_other_countries: Some certified companies can use identity documents from other countries to verify you.
@@ -620,7 +620,7 @@ en:
         sub_heading: Certified companies need to check your address is correct. They do this by checking with your bank or credit card provider.
         highlight: This is a free service, and the certified company cannot see any of your financial transactions.
         financial_details:
-          heading: 'Do you have the following:'
+          heading: 'Do you have a:'
           question:
             debit_card: Debit card?
             credit_card: Credit card?
@@ -629,7 +629,7 @@ en:
           no_selection: Please answer all the questions
       confirming_it_is_you:
         title: Confirming it's you
-        heading: Confirming it's actually you providing your details
+        heading: How companies confirm it's actually you providing your details
         content_html: |
           <p>Certified companies need to make sure someone isn't pretending to be you by using your personal details and a copy of your passport or driving licence.</p>
         smartphone_content_html: |
