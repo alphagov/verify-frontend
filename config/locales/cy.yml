@@ -485,12 +485,6 @@ cy:
         verify_with_another_company: Dilysu gyda chwmni ardystiedig arall
         verify_using_other_documents: Dilysu drwy ddefnyddio dogfennau eraill
         contact_verify: Cysylltu â GOV.UK Verify
-    supported_verification_survey:
-      title: Survey
-      question: If available, would you come in for help using Verify from staff?
-      yes: Yes
-      no: No
-      thank_you: Thanks for your feedback.
     paused_registration:
       with_session:
         title: Verification Paused
