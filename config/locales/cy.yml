@@ -92,10 +92,6 @@ cy:
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
       continue: Parhau
       error_message: Dewiswch opsiwn
-      ab_test_loa1_shortened_description: GOV.UK Verify is a secure service built to help fight the growing problem of online identity theft.
-      ab_test_loa1_shortened_button: Create an identity account
-      ab_test_loa1_shortened_or: or
-      ab_test_loa1_shortened_signin: sign in
     signin:
       title: Mewngofnodi gyda chwmni ardystiedig
       heading: Gyda phwy mae gennych gyfrif hunaniaeth?

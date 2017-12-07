@@ -9,9 +9,10 @@ Rails.application.routes.draw do
 
   CLEVER_QUESTIONS = 'clever_questions'.freeze
 
-  # Toggle on when clever questions AB test goes live
-  # clever_questions_control = SelectRoute.new(CLEVER_QUESTIONS, 'control')
-  clever_questions_variant = SelectRoute.new(CLEVER_QUESTIONS, 'variant', trial_enabled: true)
+  clever_questions_control_piwik = SelectRoute.new(CLEVER_QUESTIONS, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+  clever_questions_variant_piwik = SelectRoute.new(CLEVER_QUESTIONS, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+  clever_questions_control = SelectRoute.new(CLEVER_QUESTIONS, 'control')
+  clever_questions_variant = SelectRoute.new(CLEVER_QUESTIONS, 'variant')
 
   def add_routes(routes_name)
     instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
@@ -40,16 +41,29 @@ Rails.application.routes.draw do
     post 'csp-reporter', to: 'test_csp_reporter#report'
   end
 
-  # Toggle on when clever questions AB test goes live
-  # constraints clever_questions_control do
-  #   add_routes :main_routes
-  # end
+  localized do
+    constraints IsLoa1 do
+      add_routes :main_routes
+    end
 
-  constraints clever_questions_variant do
-    add_routes :clever_questions_ab_test_routes
+    constraints IsLoa2 do
+      constraints clever_questions_control_piwik do
+        get 'start', to: 'start#index', as: :start
+      end
+
+      constraints clever_questions_variant_piwik do
+        get 'start', to: 'clever_questions/start#index', as: :start
+      end
+
+      constraints clever_questions_control do
+        add_routes :main_routes
+      end
+
+      constraints clever_questions_variant do
+        add_routes :clever_questions_ab_test_routes
+      end
+    end
   end
-
-  add_routes :main_routes
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
