@@ -40,7 +40,7 @@ class CleverQuestions::SelectDocumentsForm
   end
 
   def further_id_information_required?
-    passport == 'false' && any_driving_licence == 'false'
+    (passport == 'false' || (passport == 'yes_expired' && !has_passport_expired_less_than_six_months)) && any_driving_licence == 'false'
   end
 
 private

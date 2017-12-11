@@ -333,6 +333,20 @@ describe CleverQuestions::SelectDocumentsForm do
       expect(form).to be_further_id_information_required
     end
 
+    it 'should require further information when user has a uk passport with expiry date greater than six months' do
+      date_in_past = Date.today - 6.months - 1.day
+      form = CleverQuestions::SelectDocumentsForm.new(
+        any_driving_licence: 'false',
+        passport: 'yes_expired',
+        passport_expiry: {
+          day: date_in_past.day.to_s,
+          month: date_in_past.month.to_s,
+          year: date_in_past.year.to_s
+        }
+      )
+      expect(form).to be_further_id_information_required
+    end
+
     it 'should not require further information when user has a northern ireland driving licence' do
       form = CleverQuestions::SelectDocumentsForm.new(
         any_driving_licence: 'true',
