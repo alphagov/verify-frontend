@@ -536,8 +536,6 @@ cy:
       start:
         title: Start
         heading: GOV.UK Verify
-        secure_service: GOV.UK Verify is a secure service built to help fight the growing problem of online identity theft.
-        prevent_viewing: HMRC uses Verify to help prevent other people viewing your personal pension information as it stops someone from pretending to be you.
         create_account: Create a new identity account
         sign_in: sign in with your identity account
         error_message: Please select an option

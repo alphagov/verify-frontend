@@ -9,6 +9,7 @@ class CleverQuestions::StartController < ApplicationController
   AB_EXPERIMENT_NAME = 'clever_questions'.freeze
 
   def index
+    @tailored_text = current_transaction.tailored_text
     @form = CleverQuestions::StartForm.new({})
 
     FEDERATION_REPORTER.report_start_page(current_transaction, request) unless session[:requested_loa] == 'LEVEL_2' # ab test variant hack, remove with teardown of TT-1606

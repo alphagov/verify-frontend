@@ -7,6 +7,7 @@ RSpec.describe 'When the user visits the start page' do
     set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
     visit '/start'
     expect(page).to have_content 'GOV.UK Verify'
+    expect(page).to have_content 'This is tailored text for test-rp'
     expect(page).to have_css 'html[lang=en]'
     expect_feedback_source_to_be(page, 'START_PAGE', '/start')
   end
