@@ -16,7 +16,7 @@ segment_definitions:
     - ["device_type_other"]
     - ["device_type_other", "driving_licence", "mobile_phone", "passport", "landline", "ni_driving_licence"]
   non-protected-segment-2:
-    - ["device_type_other", "passport", "driving_licence", "mobile_phone"]
+    - ["device_type_mobile", "passport", "driving_licence", "mobile_phone"]
   non-protected-segment-3:
     - ["device_type_other", "driving_licence", "mobile_phone"]
     - ["device_type_other", "driving_licence", "mobile_phone", "landline"]
