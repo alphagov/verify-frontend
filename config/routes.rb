@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  CLEVER_QUESTIONS = 'clever_questions'.freeze
+  CLEVER_QUESTIONS = 'clever_questions_v2'.freeze
 
   clever_questions_control_piwik = SelectRoute.new(CLEVER_QUESTIONS, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
   clever_questions_variant_piwik = SelectRoute.new(CLEVER_QUESTIONS, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')

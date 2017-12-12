@@ -3,7 +3,7 @@ require 'api_test_helper'
 
 RSpec.feature 'When users visits other documents page' do
   before(:each) do
-    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    set_session_and_ab_session_cookies!('clever_questions_v2' => 'clever_questions_v2_variant')
   end
 
   it 'redirects user to proof of address page if selects yes' do

@@ -3,7 +3,7 @@ require 'api_test_helper'
 
 describe 'When user visits select proof of address page' do
   before(:each) do
-    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    set_session_and_ab_session_cookies!('clever_questions_v2' => 'clever_questions_v2_variant')
   end
 
   context 'with javascript enabled', js: true do

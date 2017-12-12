@@ -4,7 +4,7 @@ require 'cookie_names'
 
 RSpec.describe 'When the user visits the start page' do
   it 'will display the start page in English' do
-    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    set_session_and_ab_session_cookies!('clever_questions_v2' => 'clever_questions_v2_variant')
     visit '/start'
     expect(page).to have_content 'GOV.UK Verify'
     expect(page).to have_content 'This is tailored text for test-rp'
@@ -13,20 +13,20 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'will display the start page in Welsh' do
-    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    set_session_and_ab_session_cookies!('clever_questions_v2' => 'clever_questions_v2_variant')
     visit '/dechrau'
     expect(page).to have_content 'GOV.UK Verify'
     expect(page).to have_css 'html[lang=cy]'
   end
 
   it 'will not automatically disable the continue button on submit' do
-    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    set_session_and_ab_session_cookies!('clever_questions_v2' => 'clever_questions_v2_variant')
     visit '/start'
     expect(page).to_not have_css '#next-button[data-disable-with]'
   end
 
   it 'will redirect users to will it work for me page when selecting registration' do
-    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    set_session_and_ab_session_cookies!('clever_questions_v2' => 'clever_questions_v2_variant')
     visit '/start'
     choose 'start_form_selection_true', allow_label_click: true
     click_button 'Continue'
@@ -34,7 +34,7 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'will redirect users to sign-in page when selecting sign-in' do
-    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    set_session_and_ab_session_cookies!('clever_questions_v2' => 'clever_questions_v2_variant')
     stub_api_idp_list_for_sign_in
     visit '/start'
     choose 'start_form_selection_false', allow_label_click: true
@@ -125,7 +125,7 @@ RSpec.describe 'When the user visits the start page' do
   end
 
   it 'will not allow robots to index' do
-    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    set_session_and_ab_session_cookies!('clever_questions_v2' => 'clever_questions_v2_variant')
     visit '/start'
     expect(page).to have_css('meta[name="robots"][content="noindex"]', visible: false)
   end

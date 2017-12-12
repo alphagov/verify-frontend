@@ -3,7 +3,7 @@ require 'api_test_helper'
 
 RSpec.feature 'When user visits document selection page' do
   before(:each) do
-    set_session_and_ab_session_cookies!('clever_questions' => 'clever_questions_variant')
+    set_session_and_ab_session_cookies!('clever_questions_v2' => 'clever_questions_v2_variant')
     stub_transactions_list
     visit '/select-documents'
   end
