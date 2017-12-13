@@ -41,7 +41,6 @@ describe SelectDocumentsForm do
       it 'should be valid if answers are given to every question' do
         form = SelectDocumentsForm.new(
           any_driving_licence: 'false',
-          driving_licence: 'great_britain',
           passport: 'true',
         )
         expect(form).to be_valid

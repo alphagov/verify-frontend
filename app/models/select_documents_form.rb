@@ -49,7 +49,7 @@ private
   end
 
   def no_driving_licence_details?
-    !(driving_licence == 'great_britain' || ni_driving_licence == 'northern_ireland')
+    !(driving_licence == 'great_britain' || driving_licence == 'northern_ireland')
   end
 
   def add_documents_error

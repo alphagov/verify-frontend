@@ -40,8 +40,6 @@ describe CleverQuestions::SelectDocumentsForm do
         it 'should be invalid if passport expiry date not present when passport has expired' do
           form = CleverQuestions::SelectDocumentsForm.new(
             any_driving_licence: 'false',
-            ni_driving_licence: 'true',
-            driving_licence: 'true',
             passport: 'yes_expired'
           )
 
@@ -198,7 +196,6 @@ describe CleverQuestions::SelectDocumentsForm do
       it 'should be valid if answers are given to every question if passpport not expired' do
         form = CleverQuestions::SelectDocumentsForm.new(
           any_driving_licence: 'false',
-          driving_licence: 'great_britain',
           passport: 'true',
         )
         expect(form).to be_valid
@@ -207,7 +204,6 @@ describe CleverQuestions::SelectDocumentsForm do
       it 'should set passport expiry details to empty if not supplied' do
         form = CleverQuestions::SelectDocumentsForm.new(
           any_driving_licence: 'false',
-          driving_licence: 'great_britain',
           passport: 'true',
         )
         expect(form.passport_expiry).to eql(day: '', month: '', year: '')
@@ -216,7 +212,6 @@ describe CleverQuestions::SelectDocumentsForm do
       it 'should be valid if answers are given to every question if passport expired' do
         form = CleverQuestions::SelectDocumentsForm.new(
           any_driving_licence: 'false',
-          driving_licence: 'great_britain',
           passport: 'yes_expired',
           passport_expiry: {
             day: Date.today.day.to_s,
@@ -376,7 +371,6 @@ private
   def select_documents_form_with_passport_expiry(passport_expiry)
     CleverQuestions::SelectDocumentsForm.new(
       any_driving_licence: 'false',
-      driving_licence: 'great_britain',
       passport: 'yes_expired',
       passport_expiry: passport_expiry
     )
