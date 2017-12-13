@@ -100,7 +100,7 @@ describe("Select Documents Form", function () {
             answerQuestion('passport', false);
         };
         this.selectPassportExpired = function () {
-          answerQuestion('passport', 'yes_expired');
+            answerQuestion('passport', 'yes_expired');
         };
         this.selectYesPassport = function () {
             answerQuestion('passport', true);
