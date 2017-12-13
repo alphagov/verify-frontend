@@ -29,8 +29,8 @@
 
                 <fieldset>
                   <legend><span class="form-label"><%= t 'hub.select_documents.where_driving_licence_issued' %></span></legend>
-                    <%= f.custom_check_box :driving_licence, {class: 'form-group form-field'}, "true", "false", t('hub.select_documents.driving_licence_details.great_britain')  %>
-                    <%= f.custom_check_box :ni_driving_licence, {class: 'form-group form-field'}, "true", "false", t('hub.select_documents.driving_licence_details.northern_ireland')  %>
+                    <%= f.custom_radio_button :driving_licence, 'great_britain', t('hub.select_documents.driving_licence_details.great_britain')  %>
+                    <%= f.custom_radio_button :driving_licence, 'northern_ireland', t('hub.select_documents.driving_licence_details.northern_ireland')  %>
                 </fieldset>
 
             <% end %>

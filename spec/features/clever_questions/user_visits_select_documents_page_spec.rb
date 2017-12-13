@@ -23,7 +23,7 @@ RSpec.feature 'When user visits document selection page' do
 
   it 'should go to select proof of address page when user has a valid GB licence and UK passport' do
     choose 'select_documents_form_any_driving_licence_true'
-    check 'select_documents_form_driving_licence'
+    choose 'select_documents_form_driving_licence_great_britain'
     choose 'select_documents_form_passport_true'
     click_button 'Continue'
     expect(page).to have_current_path(select_proof_of_address_path)
@@ -35,7 +35,7 @@ RSpec.feature 'When user visits document selection page' do
 
   it 'should go to select proof of address page when user has a GB licence and an expired UK passport under six months' do
     choose 'select_documents_form_any_driving_licence_true'
-    check 'select_documents_form_driving_licence'
+    choose 'select_documents_form_driving_licence_great_britain'
     choose 'select_documents_form_passport_yes_expired'
 
     fill_in 'select_documents_form_passport_expiry_day', with: Date.today.day
@@ -52,7 +52,7 @@ RSpec.feature 'When user visits document selection page' do
 
   it 'should go to select proof of address page when user has a GB licence and an expired UK passport over six months' do
     choose 'select_documents_form_any_driving_licence_true'
-    check 'select_documents_form_driving_licence'
+    choose 'select_documents_form_driving_licence_great_britain'
     choose 'select_documents_form_passport_yes_expired'
 
     fill_in 'select_documents_form_passport_expiry_day', with: Date.today.day

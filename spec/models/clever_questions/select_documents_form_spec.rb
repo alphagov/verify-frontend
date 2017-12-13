@@ -22,7 +22,7 @@ describe CleverQuestions::SelectDocumentsForm do
       it 'should be invalid if user only inputs driving licence details' do
         form = CleverQuestions::SelectDocumentsForm.new(
           any_driving_licence: 'true',
-          driving_licence: 'true'
+          driving_licence: 'great_britain'
         )
         expect(form).to_not be_valid
         expect(form.errors.full_messages).to eql ['Please select the documents you have']
@@ -198,8 +198,7 @@ describe CleverQuestions::SelectDocumentsForm do
       it 'should be valid if answers are given to every question if passpport not expired' do
         form = CleverQuestions::SelectDocumentsForm.new(
           any_driving_licence: 'false',
-          ni_driving_licence: 'true',
-          driving_licence: 'true',
+          driving_licence: 'great_britain',
           passport: 'true',
         )
         expect(form).to be_valid
@@ -208,8 +207,7 @@ describe CleverQuestions::SelectDocumentsForm do
       it 'should set passport expiry details to empty if not supplied' do
         form = CleverQuestions::SelectDocumentsForm.new(
           any_driving_licence: 'false',
-          ni_driving_licence: 'true',
-          driving_licence: 'true',
+          driving_licence: 'great_britain',
           passport: 'true',
         )
         expect(form.passport_expiry).to eql(day: '', month: '', year: '')
@@ -218,8 +216,7 @@ describe CleverQuestions::SelectDocumentsForm do
       it 'should be valid if answers are given to every question if passport expired' do
         form = CleverQuestions::SelectDocumentsForm.new(
           any_driving_licence: 'false',
-          ni_driving_licence: 'true',
-          driving_licence: 'true',
+          driving_licence: 'great_britain',
           passport: 'yes_expired',
           passport_expiry: {
             day: Date.today.day.to_s,
@@ -252,10 +249,10 @@ describe CleverQuestions::SelectDocumentsForm do
     it 'should return a hash of driving licence true if GB driving licence selected' do
       form = CleverQuestions::SelectDocumentsForm.new(
         any_driving_licence: 'true',
-        driving_licence: 'true'
+        driving_licence: 'great_britain'
       )
       evidence = form.selected_answers
-      expect(evidence).to eql(driving_licence: true)
+      expect(evidence).to eql(driving_licence: true, ni_driving_licence: false)
     end
 
     it 'should not return selected answers when there it is not an eligible IDP evidence ' do
@@ -350,7 +347,7 @@ describe CleverQuestions::SelectDocumentsForm do
     it 'should not require further information when user has a northern ireland driving licence' do
       form = CleverQuestions::SelectDocumentsForm.new(
         any_driving_licence: 'true',
-        ni_driving_licence: 'true',
+        driving_licence: 'northern_ireland',
         passport: 'false'
       )
       expect(form).to_not be_further_id_information_required
@@ -359,7 +356,7 @@ describe CleverQuestions::SelectDocumentsForm do
     it 'should not require further information when user has a GB driving licence' do
       form = CleverQuestions::SelectDocumentsForm.new(
         any_driving_licence: 'true',
-        driving_licence: 'true',
+        driving_licence: 'great_britain',
         passport: 'false'
       )
       expect(form).to_not be_further_id_information_required
@@ -379,8 +376,7 @@ private
   def select_documents_form_with_passport_expiry(passport_expiry)
     CleverQuestions::SelectDocumentsForm.new(
       any_driving_licence: 'false',
-      ni_driving_licence: 'true',
-      driving_licence: 'true',
+      driving_licence: 'great_britain',
       passport: 'yes_expired',
       passport_expiry: passport_expiry
     )

@@ -22,7 +22,7 @@ describe SelectDocumentsForm do
       it 'should be invalid if user only inputs driving licence details' do
         form = SelectDocumentsForm.new(
           any_driving_licence: 'true',
-          driving_licence: 'true'
+          driving_licence: 'great_britain'
         )
         expect(form).to_not be_valid
         expect(form.errors.full_messages).to eql ['Please select the documents you have']
@@ -41,8 +41,7 @@ describe SelectDocumentsForm do
       it 'should be valid if answers are given to every question' do
         form = SelectDocumentsForm.new(
           any_driving_licence: 'false',
-          ni_driving_licence: 'true',
-          driving_licence: 'true',
+          driving_licence: 'great_britain',
           passport: 'true',
         )
         expect(form).to be_valid
@@ -70,10 +69,10 @@ describe SelectDocumentsForm do
     it 'should return a hash of driving licence true if GB driving licence selected' do
       form = SelectDocumentsForm.new(
         any_driving_licence: 'true',
-        driving_licence: 'true'
+        driving_licence: 'great_britain'
       )
       evidence = form.selected_answers
-      expect(evidence).to eql(driving_licence: true)
+      expect(evidence).to eql(driving_licence: true, ni_driving_licence: false)
     end
 
     it 'should not return selected answers when there it is not an eligible IDP evidence ' do
@@ -98,7 +97,7 @@ describe SelectDocumentsForm do
     it 'should not require further information when user has a northern ireland driving licence' do
       form = SelectDocumentsForm.new(
         any_driving_licence: 'true',
-        ni_driving_licence: 'true',
+        driving_licence: 'northern_ireland',
         passport: 'false'
       )
       expect(form).to_not be_further_id_information_required
@@ -107,7 +106,7 @@ describe SelectDocumentsForm do
     it 'should not require further information when user has a GB driving licence' do
       form = SelectDocumentsForm.new(
         any_driving_licence: 'true',
-        driving_licence: 'true',
+        driving_licence: 'great_britain',
         passport: 'false'
       )
       expect(form).to_not be_further_id_information_required

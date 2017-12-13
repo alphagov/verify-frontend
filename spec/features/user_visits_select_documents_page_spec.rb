@@ -22,7 +22,7 @@ RSpec.feature 'When user visits document selection page' do
 
   it 'should go to select phone page when user has a valid GB licence or UK passport' do
     choose 'select_documents_form_any_driving_licence_true'
-    check 'select_documents_form_driving_licence'
+    choose 'select_documents_form_driving_licence_great_britain'
     choose 'select_documents_form_passport_true'
     click_button 'Continue'
     expect(page).to have_current_path(select_phone_path)
