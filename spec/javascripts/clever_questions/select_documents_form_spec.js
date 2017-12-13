@@ -10,22 +10,18 @@ describe("Select Documents Form", function () {
         '</div>' +
         '<form id="validate-select-documents" class="select-documents-form" novalidate="novalidate" data-msg="Please select the documents you have" action="/select-documents" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="2Vb46CN8Bljm/f6lHNxqu3PGWMVAsVdjIe6uJrnzoxbUic0vi8jU/Ea8UrmOWBtwan860qN2uvdFNW8DoFNVuQ==" />' +
         '<div class="form-group">' +
-        '<h2 class="heading-medium">Do you have a valid UK selectcard driving licence, full or provisional?</h2>' +
+        '<h2 class="heading-medium">Do you have a valid UK photocard driving licence, full or provisional?</h2>' +
         '<div class="form-group form-field">' +
         '<fieldset>' +
         '<label class="block-label selection-button-radio" for="select_documents_form_any_driving_licence_true"><input type="radio" value="true" name="select_documents_form[any_driving_licence]" id="select_documents_form_any_driving_licence_true" /> Yes</label>' +
         '<label class="block-label selection-button-radio" for="select_documents_form_any_driving_licence_false"><input type="radio" value="false" name="select_documents_form[any_driving_licence]" id="select_documents_form_any_driving_licence_false" /> No</label>' +
         '</fieldset>' +
         '</div>' +
-        '<div id="driving_licence_details" class="form-group panel panel-border-narrow js-hidden">' +
+        '<div id="driving_licence_details" class="form-group panel panel-border-narrow">' +
         '<fieldset>' +
         '<legend><span class="form-label">Where was your driving licence issued?</span></legend>' +
-        '<label class="block-label selection-button-checkbox" for="select_documents_form_driving_licence">' +
-        '<input name="select_documents_form[driving_licence]" type="hidden" value="0" /><input type="checkbox" value="1" name="select_documents_form[driving_licence]" id="select_documents_form_driving_licence" />Great Britain' +
-        '</label>' +
-        '<label class="block-label selection-button-checkbox" for="select_documents_form_ni_driving_licence">' +
-        '<input name="select_documents_form[ni_driving_licence]" type="hidden" value="0" /><input type="checkbox" value="1" name="select_documents_form[ni_driving_licence]" id="select_documents_form_ni_driving_licence" />Northern Ireland' +
-        '</label>' +
+        '<div class="multiple-choice"><input value="great_britain" name="select_documents_form[driving_licence]" id="select_documents_form_driving_licence_great_britain" type="radio"> <label for="select_documents_form_driving_licence_great_britain">Great Britain</label></div>' +
+        '<div class="multiple-choice"><input value="northern_ireland" name="select_documents_form[driving_licence]" id="select_documents_form_driving_licence_northern_ireland" type="radio"> <label for="select_documents_form_driving_licence_northern_ireland">Northern Ireland</label></div>' +
         '</fieldset>' +
         '</div>' +
         '<h2 class="heading-medium">Do you have a UK passport?</h2>' +
@@ -104,7 +100,7 @@ describe("Select Documents Form", function () {
             answerQuestion('passport', false);
         };
         this.selectPassportExpired = function () {
-          answerQuestion('passport', 'yes_expired');
+            answerQuestion('passport', 'yes_expired');
         };
         this.selectYesPassport = function () {
             answerQuestion('passport', true);
@@ -116,7 +112,7 @@ describe("Select Documents Form", function () {
             answerQuestion('any_driving_licence', false);
         };
         this.selectGBDrivingLicence = function () {
-            selectDocumentsForm.find('input[name="select_documents_form[driving_licence]"]').prop('checked', true).trigger('click')
+            answerQuestion('driving_licence', 'great_britain');
         };
         this.enterValidPassportExpiryDate = function (day, month, year) {
           selectDocumentsForm.find('#select_documents_form_passport_expiry_day').val(day).trigger('blur');

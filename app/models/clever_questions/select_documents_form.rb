@@ -7,7 +7,6 @@ class CleverQuestions::SelectDocumentsForm
   validate :expiry_date_present_when_passport_expired
 
   def initialize(select_documents_form)
-    @ni_driving_licence = select_documents_form[:ni_driving_licence]
     @driving_licence = select_documents_form[:driving_licence]
     @passport = select_documents_form[:passport]
     @any_driving_licence = select_documents_form[:any_driving_licence]
@@ -27,6 +26,10 @@ class CleverQuestions::SelectDocumentsForm
       answers[:passport] = has_passport_expired_less_than_six_months
     end
 
+    if any_driving_licence == 'true'
+      answers[:driving_licence] = (driving_licence == 'great_britain')
+      answers[:ni_driving_licence] = (driving_licence == 'northern_ireland')
+    end
     if any_driving_licence == 'false'
       answers[:driving_licence] = false
       answers[:ni_driving_licence] = false
@@ -58,7 +61,7 @@ private
   end
 
   def no_driving_licence_details?
-    !(driving_licence == 'true' || ni_driving_licence == 'true')
+    !(driving_licence == 'great_britain' || driving_licence == 'northern_ireland')
   end
 
   def expiry_date_present_when_passport_expired
@@ -73,24 +76,12 @@ private
     !expiry_day.between?(1, 31) || !expiry_month.between?(1, 12) || !expiry_year.between?(1, Date.today.year)
   end
 
-  def all_no_answers?
-    document_attributes.all? { |doc| doc == 'false' }
-  end
-
-  def any_yes_answers?
-    document_attributes.any? { |doc| doc == 'true' }
-  end
-
   def add_documents_error
     errors.add(:base, I18n.t('hub.select_documents.errors.no_selection'))
   end
 
   def add_date_error
     errors.add(:base, I18n.t('clever_questions.hub.select_documents.errors.invalid_date'))
-  end
-
-  def document_attributes
-    [passport, driving_licence, ni_driving_licence, any_driving_licence]
   end
 
   def expiry_day

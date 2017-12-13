@@ -10,24 +10,24 @@
             var errorMessage = selectDocuments.$form.data('msg');
             $.validator.addMethod('drivingLicenceDetailsValidation', function(value, element) {
                 return $('#select_documents_form_any_driving_licence_false').is(':checked') ||
-                    ($('#select_documents_form_any_driving_licence_true').is(':checked') && ($('#select_documents_form_driving_licence').is(':checked') || $('#select_documents_form_ni_driving_licence').is(':checked')))
+                ($('#select_documents_form_any_driving_licence_true').is(':checked') 
+                && ($('#select_documents_form_driving_licence_great_britain').is(':checked') 
+                || $('#select_documents_form_driving_licence_northern_ireland').is(':checked')))
             }, $.validator.format(selectDocuments.$form.data('msg')));
 
             selectDocuments.validator = selectDocuments.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
                 rules: {
                     'select_documents_form[any_driving_licence]': 'required',
                     'select_documents_form[passport]': 'required',
-                    'select_documents_form[driving_licence]': 'drivingLicenceDetailsValidation',
-                    'select_documents_form[ni_driving_licence]': 'drivingLicenceDetailsValidation',
+                    'select_documents_form[driving_licence]': 'drivingLicenceDetailsValidation'
                 },
                 groups: {
-                    primary: 'select_documents_form[any_driving_licence] select_documents_form[passport] select_documents_form[driving_licence] select_documents_form[ni_driving_licence]'
+                    primary: 'select_documents_form[any_driving_licence] select_documents_form[passport] select_documents_form[driving_licence]'
                 },
                 messages: {
                     'select_documents_form[any_driving_licence]': errorMessage,
                     'select_documents_form[passport]': errorMessage,
-                    'select_documents_form[driving_licence]': errorMessage,
-                    'select_documents_form[ni_driving_licence]': errorMessage
+                    'select_documents_form[driving_licence]': errorMessage
                 }
             }));
 

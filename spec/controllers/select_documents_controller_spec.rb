@@ -32,14 +32,13 @@ describe SelectDocumentsController do
     it 'captures form values in session cookie' do
       documents_evidence = { passport: 'true',
                              any_driving_licence: 'true',
-                             driving_licence: 'true',
-                             ni_driving_licence: 'true' }.freeze
+                             driving_licence: 'great_britain' }.freeze
       post :select_documents, params: { locale: 'en', select_documents_form: documents_evidence }
 
       subject
       expect(session[:selected_answers]['documents']).to eq(passport: true,
                                                             driving_licence: true,
-                                                            ni_driving_licence: true)
+                                                            ni_driving_licence: false)
     end
   end
 
