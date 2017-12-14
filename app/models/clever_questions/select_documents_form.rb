@@ -66,7 +66,7 @@ private
 
   def expiry_date_present_when_passport_expired
     if passport == 'yes_expired'
-      if passport_expiry == nil || expiry_date_not_valid
+      if passport_expiry == nil || expiry_date_not_valid || expiry_date_not_a_possible_calendar_date
         add_date_error
       end
     end
@@ -74,6 +74,10 @@ private
 
   def expiry_date_not_valid
     !expiry_day.between?(1, 31) || !expiry_month.between?(1, 12) || !expiry_year.between?(1, Date.today.year)
+  end
+
+  def expiry_date_not_a_possible_calendar_date
+    !Date.valid_date?(expiry_year, expiry_month, expiry_day)
   end
 
   def add_documents_error
