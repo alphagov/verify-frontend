@@ -15,10 +15,6 @@ describe("Select Phone form", function () {
         '<input id="smart_phone-no" name="select_phone_form[smart_phone]" value="false" type="radio">' +
         '<input id="smart_phone-unknown" name="select_phone_form[smart_phone]" value="do_not_know" type="radio">' +
       '</div>' +
-      '<div id="landline-question" class="form-group js-hidden">' +
-        '<input id="landline_phone-yes" name="select_phone_form[landline]" value="true" type="radio">' +
-        '<input id="landline_phone-no" name="select_phone_form[landline]" value="false" type="radio">' +
-      '</div>' +
       '<div id="validation-error-message-js"></div>' +
       '<div class="form-group">' +
         '<input class="button" id="next-button" value="Continue" type="submit">' +
@@ -49,10 +45,6 @@ describe("Select Phone form", function () {
     expect(selectPhoneForm.find('#smartphone-question').attr("class")).toContain("js-hidden");
   });
 
-  it("should not initially show landline question.", function () {
-    expect(selectPhoneForm.find('#landline-question').attr("class")).toContain("js-hidden");
-  });
-
   describe("should have errors on submit when", function () {
     function expectPleaseAnswerTheQuestion() {
       expect(selectPhoneForm.children('.form-group:first').is('.form-group-error')).toBe(true);
@@ -62,13 +54,6 @@ describe("Select Phone form", function () {
     it("no answer given", function () {
       selectPhoneForm.triggerHandler('submit');
       expectPleaseAnswerTheQuestion();
-    });
-
-    it("mobile answered no", function () {
-      check(selectPhoneForm.find('#select_phone_form_mobile_phone_false'));
-      selectPhoneForm.triggerHandler('submit');
-      expect(selectPhoneForm.find('#validation-error-message-js').text()).toBe('Please answer the question');
-      expect(selectPhoneForm.children('#landline-question').is('.form-group-error')).toBe(true);
     });
 
     it("mobile answered yes", function () {
@@ -102,20 +87,6 @@ describe("Select Phone form", function () {
     it("mobile answered yes and smartphone answered yes", function () {
       check(selectPhoneForm.find('#select_phone_form_mobile_phone_true'));
       check(selectPhoneForm.find('#smart_phone-yes'));
-      selectPhoneForm.triggerHandler('submit');
-      expectNoErrors();
-    });
-
-    it("mobile answered no and landline answered yes", function () {
-      check(selectPhoneForm.find('#select_phone_form_mobile_phone_false'));
-      check(selectPhoneForm.find('#landline_phone-yes'));
-      selectPhoneForm.triggerHandler('submit');
-      expectNoErrors();
-    });
-
-    it("answered no to mobile phone and landline questions", function () {
-      check(selectPhoneForm.find('#select_phone_form_mobile_phone_false'));
-      check(selectPhoneForm.find('#landline_phone-no'));
       selectPhoneForm.triggerHandler('submit');
       expectNoErrors();
     });

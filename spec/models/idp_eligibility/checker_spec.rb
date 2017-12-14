@@ -21,7 +21,7 @@ module IdpEligibility
 
       it 'should return false when user does not have evidence accepted by any idp' do
         rules_repository = ProfileFilter.new('idp' => [Profile.new([:mobile_phone])])
-        user_evidence = [:landline]
+        user_evidence = [:smart_phone]
         expect(Checker.new(rules_repository).any?(user_evidence, singleton_idp)).to be_falsey
       end
     end
