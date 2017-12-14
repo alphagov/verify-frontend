@@ -189,6 +189,17 @@ describe CleverQuestions::SelectDocumentsForm do
           expect(form).to_not be_valid
           expect(form.errors.full_messages).to eql ['Please enter valid passport expiry date']
         end
+
+        it 'should be invalid if passport expiry date is not a possible date' do
+          form = select_documents_form_with_passport_expiry(
+            day: '31',
+            month: '11',
+            year: '2017'
+          )
+
+          expect(form).to_not be_valid
+          expect(form.errors.full_messages).to eql ['Please enter valid passport expiry date']
+        end
       end
     end
 
