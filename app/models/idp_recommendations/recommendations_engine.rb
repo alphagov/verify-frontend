@@ -11,12 +11,12 @@ class RecommendationsEngine
   def get_suggested_idps(idps, user_profile, transaction_simple_id)
     capable_idps = idps.select { |idp| is_capable?(idp, user_profile) }
     transaction_group = @transaction_grouper.get_transaction_group(transaction_simple_id)
-    user_segment = @segment_matcher.find_matching_segment(user_profile, transaction_group)
+    user_segments = @segment_matcher.find_matching_segments(user_profile)
 
-    recommended_idps = capable_idps.select { |idp| is_recommended_for_segment(idp, user_segment, transaction_group) }
-    unlikely_idps = capable_idps.select { |idp| is_unlikely_for_segment(idp, user_segment, transaction_group) }
+    recommended_idps = capable_idps.select { |idp| is_recommended_for_segment(idp, user_segments, transaction_group) }
+    unlikely_idps = capable_idps.select { |idp| is_unlikely_for_segment(idp, user_segments, transaction_group) }
 
-    { recommended: recommended_idps, unlikely: unlikely_idps, user_segment: user_segment }
+    { recommended: recommended_idps, unlikely: unlikely_idps, user_segments: user_segments }
   end
 
   def recommended?(idp, enabled_idps, user_profile, transaction_simple_id)
@@ -44,13 +44,13 @@ private
     capabilities.all? { |characteristic| user_profile.include? characteristic.to_sym }
   end
 
-  def is_recommended_for_segment(idp, user_segment, transaction_group)
+  def is_recommended_for_segment(idp, user_segments, transaction_group)
     segments_for_idp = @idp_rules[idp.simple_id].recommended_segments(transaction_group)
-    segments_for_idp.include? user_segment
+    !(segments_for_idp & user_segments).empty?
   end
 
-  def is_unlikely_for_segment(idp, user_segment, transaction_group)
+  def is_unlikely_for_segment(idp, user_segments, transaction_group)
     segments_for_idp = @idp_rules[idp.simple_id].unlikely_segments(transaction_group)
-    segments_for_idp.include? user_segment
+    !(segments_for_idp & user_segments).empty?
   end
 end

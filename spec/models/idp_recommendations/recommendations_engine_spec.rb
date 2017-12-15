@@ -11,10 +11,10 @@ describe 'recommendations engine' do
   let(:user_profile) { %i(driving_licence passport) }
   let(:idp_rules) {
     {
-        'idp' => generate_idp_rules(capabilities: ['passport'], protected_recommended_segments: ['SEGMENT_1']),
-        'idp2' => generate_idp_rules(capabilities: ['passport'], protected_unlikely_segments: ['SEGMENT_1']),
+        'idp' => generate_idp_rules(capabilities: ['passport'], protected_recommended_segments: %w(SEGMENT_1)),
+        'idp2' => generate_idp_rules(capabilities: ['passport'], protected_unlikely_segments: %w(SEGMENT_1 SEGMENT_2)),
         'idp3' => generate_idp_rules(capabilities: ['passport']),
-        'less_capable_idp' => generate_idp_rules(capabilities: %w(passport smart_phone), protected_recommended_segments: ['SEGMENT_1']),
+        'less_capable_idp' => generate_idp_rules(capabilities: %w(passport smart_phone), protected_recommended_segments: %w(SEGMENT_1)),
     }
   }
   let(:segment_matcher) { double('segment_matcher') }
@@ -25,18 +25,18 @@ describe 'recommendations engine' do
   end
 
   it 'should return recommendations given a user profile' do
-    allow(segment_matcher).to receive(:find_matching_segment).with(user_profile, 'protected').and_return('SEGMENT_1')
+    allow(segment_matcher).to receive(:find_matching_segments).with(user_profile).and_return(%w(SEGMENT_1))
     allow(transaction_grouper).to receive(:get_transaction_group).with('test-rp').and_return(TransactionGroups::PROTECTED)
 
     recommended_idps = @recommendations_engine.get_suggested_idps(idps, user_profile, 'test-rp')
 
-    expected_suggestions = { recommended: [idp_one], unlikely: [idp_two], user_segment: 'SEGMENT_1' }
+    expected_suggestions = { recommended: [idp_one], unlikely: [idp_two], user_segments: %w(SEGMENT_1) }
     expect(recommended_idps).to eql expected_suggestions
   end
 
   describe 'recommended?' do
     before(:each) do
-      allow(segment_matcher).to receive(:find_matching_segment).with(user_profile, 'protected').and_return('SEGMENT_1')
+      allow(segment_matcher).to receive(:find_matching_segments).with(user_profile).and_return(%w(SEGMENT_1))
       allow(transaction_grouper).to receive(:get_transaction_group).with('test-rp').and_return(TransactionGroups::PROTECTED)
     end
 
@@ -58,7 +58,7 @@ describe 'recommendations engine' do
 
   describe 'any?' do
     before(:each) do
-      allow(segment_matcher).to receive(:find_matching_segment).with(user_profile, 'protected').and_return('SEGMENT_1')
+      allow(segment_matcher).to receive(:find_matching_segments).with(user_profile).and_return(%w(SEGMENT_1))
       allow(transaction_grouper).to receive(:get_transaction_group).with('test-rp').and_return(TransactionGroups::PROTECTED)
     end
 

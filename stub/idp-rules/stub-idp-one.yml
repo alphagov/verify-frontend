@@ -7,7 +7,7 @@ segments:
     recommended: ["other"]
     unlikely: []
   non_protected:
-    recommended: ["other", "non-protected-segment-3", "non-protected-segment-4"]
+    recommended: ["protected-segment-1", "other", "non-protected-segment-3", "non-protected-segment-4"]
     unlikely: ["non-protected-segment-2"]
 
 capabilities:

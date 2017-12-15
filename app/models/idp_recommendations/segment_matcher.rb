@@ -1,17 +1,15 @@
 class SegmentMatcher
   def initialize(segment_config)
-    @segment_groups = segment_config['segments']
+    @segments = segment_config['segments']
     @segment_definitions = segment_config['segment_definitions']
   end
 
-  def find_matching_segment(user_profile, transaction_group)
+  def find_matching_segments(user_profile)
     user_profile_as_array_of_strings = user_profile.map(&:to_s)
-    segments = @segment_groups[transaction_group]
-    matching_segment = segments
+    matching_segments = @segments
                            .select { |segment_name| segment_matches_profile(segment_name, user_profile_as_array_of_strings) }
-                           .first
 
-    matching_segment.nil? ? 'other' : matching_segment
+    matching_segments.empty? ? ['other'] : matching_segments
   end
 
   def segment_matches_profile(segment_name, user_profile)

@@ -8,7 +8,7 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
     suggestions = IDP_RECOMMENDATION_ENGINE.get_suggested_idps(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
-    session[:user_segment] = suggestions[:user_segment]
+    session[:user_segments] = suggestions[:user_segments]
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
     render 'choose_a_certified_company/choose_a_certified_company_LOA2'
   end

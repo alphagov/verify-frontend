@@ -41,7 +41,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "#{idp_name} was chosen for registration (recommended) with segment segment 1 and evidence passport",
+            "#{idp_name} was chosen for registration (recommended) with segment(s) segment1 and evidence passport",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
@@ -53,7 +53,7 @@ module Analytics
           idp_name_history: idp_history,
           evidence: %w(passport),
           recommended: '(recommended)',
-          user_segment: 'segment 1'
+          user_segments: %w(segment1)
         )
       end
 
@@ -61,7 +61,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "#{idp_name} was chosen for registration (not recommended) with segment segment 1 and evidence passport",
+            "#{idp_name} was chosen for registration (not recommended) with segment(s) segment1 and evidence passport",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
@@ -73,7 +73,7 @@ module Analytics
           idp_name_history: idp_history,
           evidence: %w(passport),
           recommended: '(not recommended)',
-          user_segment: 'segment 1'
+          user_segments: %w(segment1)
         )
       end
 
@@ -81,7 +81,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "#{idp_name} was chosen for registration (idp recommendation key not set) with segment segment 1 and evidence passport",
+            "#{idp_name} was chosen for registration (idp recommendation key not set) with segment(s) segment1 and evidence passport",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
@@ -93,7 +93,7 @@ module Analytics
           idp_name_history: idp_history,
           evidence: %w(passport),
           recommended: '(idp recommendation key not set)',
-          user_segment: 'segment 1'
+          user_segments: %w(segment1)
         )
       end
 
@@ -101,7 +101,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "#{idp_name} was chosen for registration (recommended) with segment segment 1 and evidence driving_licence, passport",
+            "#{idp_name} was chosen for registration (recommended) with segment(s) segment1, segment2 and evidence driving_licence, passport",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2),
             5 => ['IDP_SELECTION', idp_history_str]
@@ -113,7 +113,7 @@ module Analytics
           idp_name_history: idp_history,
           evidence: %w(passport driving_licence),
           recommended: '(recommended)',
-          user_segment: 'segment 1'
+          user_segments: %w(segment1 segment2)
         )
       end
     end

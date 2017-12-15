@@ -1,12 +1,10 @@
 segments:
-  protected:
-    - "protected-segment-1"
-  non_protected:
-    - "non-protected-segment-1"
-    - "non-protected-segment-2"
-    - "non-protected-segment-3"
-    - "non-protected-segment-4"
-    - "non-protected-segment-5"
+  - "protected-segment-1"
+  - "non-protected-segment-1"
+  - "non-protected-segment-2"
+  - "non-protected-segment-3"
+  - "non-protected-segment-4"
+  - "non-protected-segment-5"
 
 segment_definitions:
   protected-segment-1:

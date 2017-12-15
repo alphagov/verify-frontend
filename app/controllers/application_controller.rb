@@ -243,7 +243,7 @@ private
       idp_name_history: session[:selected_idp_names],
       evidence: selected_answer_store.selected_evidence,
       recommended: recommended,
-      user_segment: session[:user_segment]
+      user_segments: session[:user_segments]
     )
   end
 

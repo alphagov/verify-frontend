@@ -32,14 +32,15 @@ def create_custom_variable_param(loa, extra_custom_variables, transaction_analyt
   param
 end
 
-def stub_piwik_idp_registration(idp_name, selected_answers: {}, recommended: false, idp_list: idp_name, loa: 'LEVEL_2', segment: 'other')
+def stub_piwik_idp_registration(idp_name, selected_answers: {}, recommended: false, idp_list: idp_name, loa: 'LEVEL_2', segments: ['other'])
   recommended_str = recommended ? 'recommended' : 'not recommended'
   evidence = selected_answers.values.flat_map { |answer_set|
     answer_set.select { |_, v| v }.map { |item| item[0] }
   }.sort.join(', ')
+  segments = segments.sort.join(', ')
   idp_selection_custom_variable = "\"5\":[\"IDP_SELECTION\",\"#{idp_list}\"]"
   piwik_request = {
-    'action_name' => "#{idp_name} was chosen for registration (#{recommended_str}) with segment #{segment} and evidence #{evidence}",
+    'action_name' => "#{idp_name} was chosen for registration (#{recommended_str}) with segment(s) #{segments} and evidence #{evidence}",
   }
   stub_piwik_request(piwik_request, {}, loa, [idp_selection_custom_variable])
 end
