@@ -6,7 +6,7 @@ require 'piwik_test_helper'
 require 'models/display/viewable_identity_provider'
 
 describe SelectPhoneController do
-  valid_phone_evidence = { mobile_phone: 'true', smart_phone: 'true', landline: 'true' }.freeze
+  valid_phone_evidence = { mobile_phone: 'true', smart_phone: 'true' }.freeze
 
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_2')
@@ -39,7 +39,7 @@ describe SelectPhoneController do
     it 'captures form values in session cookie' do
       stub_api_idp_list_for_loa(default_idps, 'LEVEL_2')
       expect(subject).to redirect_to('/choose-a-certified-company')
-      expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true, landline: true)
+      expect(session[:selected_answers]['phone']).to eq(mobile_phone: true, smart_phone: true)
     end
   end
 

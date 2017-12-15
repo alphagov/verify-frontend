@@ -198,8 +198,6 @@ en:
         mobile_phone_option_reluctant_yes: "Yes, but I'd prefer not to"
         smart_phone: Can you install apps on your device?
         smart_phone_option_yes: 'Yes'
-        landline: Do you have a landline?
-        landline_option_yes: 'Yes'
         smart_phone_subtitle: "Some certified companies ask you to download a free app and use your phone's camera as part of verifying your identity."
       errors:
         no_selection: Please answer all the questions

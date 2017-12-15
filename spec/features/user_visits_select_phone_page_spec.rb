@@ -29,13 +29,12 @@ RSpec.describe 'When the user visits the select phone page' do
 
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
       choose 'select_phone_form_smart_phone_true', allow_label_click: true
-      choose 'select_phone_form_landline_false', allow_label_click: true
       click_button 'Continue'
 
       expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
-        'phone' => { 'mobile_phone' => true, 'smart_phone' => true, 'landline' => false }
+        'phone' => { 'mobile_phone' => true, 'smart_phone' => true }
       )
     end
 
@@ -45,13 +44,12 @@ RSpec.describe 'When the user visits the select phone page' do
 
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
       choose 'select_phone_form_smart_phone_do_not_know', allow_label_click: true
-      choose 'select_phone_form_landline_false', allow_label_click: true
       click_button 'Continue'
 
       expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
-        'phone' => { 'mobile_phone' => true, 'landline' => false }
+        'phone' => { 'mobile_phone' => true }
       )
     end
 
@@ -67,13 +65,12 @@ RSpec.describe 'When the user visits the select phone page' do
 
       visit '/select-phone'
       choose 'select_phone_form_mobile_phone_false', allow_label_click: true
-      choose 'select_phone_form_landline_false', allow_label_click: true
       click_button 'Continue'
 
-      expect(page).to have_current_path(no_mobile_phone_path)
+      expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
-        'phone' => { 'mobile_phone' => false, 'landline' => false },
+        'phone' => { 'mobile_phone' => false },
         'documents' => { 'passport' => true, 'driving_licence' => true },
       )
     end
@@ -118,13 +115,12 @@ RSpec.describe 'When the user visits the select phone page' do
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_false', allow_label_click: true
-      choose 'select_phone_form_landline_false', allow_label_click: true
       click_button 'Continue'
 
       expect(page).to have_current_path(no_mobile_phone_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
-        'phone' => { 'mobile_phone' => false, 'landline' => false }
+        'phone' => { 'mobile_phone' => false }
       )
     end
   end

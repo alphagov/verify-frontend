@@ -31,15 +31,6 @@
               <%= f.custom_radio_button :smart_phone, 'do_not_know', t('option.unknown') %>
             </fieldset>
         <% end %>
-        <%= content_tag :div, id: 'landline-question', class: hidden_form_question_class do %>
-            <fieldset class="inline">
-              <legend>
-                <span class="form-label"><%= t 'hub.select_phone.question.landline' %></span>
-              </legend>
-              <%= f.custom_radio_button :landline, true, t('hub.select_phone.question.landline_option_yes') %>
-              <%= f.custom_radio_button :landline, false, t('option.no') %>
-            </fieldset>
-        <% end %>
 
         <div id="validation-error-message-js"></div>
 

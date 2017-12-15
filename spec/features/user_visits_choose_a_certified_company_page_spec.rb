@@ -12,7 +12,7 @@ describe 'When the user visits the choose a certified company page' do
     selected_answers = {
         device_type: { device_type_other: true },
         documents: { passport: true, driving_licence: true },
-        phone: { mobile_phone: true, landline: true }
+        phone: { mobile_phone: true }
     }
     before :each do
       page.set_rack_session(
@@ -37,9 +37,9 @@ describe 'When the user visits the choose a certified company page' do
       end
     end
 
-    it 'does not show an IDP if the IPD profile has a subset of the user evidence, but not an exact match' do
+    it 'does not show an IDP if the IDP profile has a subset of the user evidence, but not an exact match' do
       additional_documents = selected_answers[:documents].clone
-      additional_documents[:ni_driving_licence] = true
+      additional_documents[:driving_licence] = false
       page.set_rack_session(
         transaction_simple_id: 'test-rp',
         selected_answers: {
@@ -80,7 +80,7 @@ describe 'When the user visits the choose a certified company page' do
         selected_answers: {
           device_type: { device_type_other: true },
           documents: { passport: true, driving_licence: true },
-          phone: { mobile_phone: true, landline: true }
+          phone: { mobile_phone: true }
         },
       )
 
@@ -117,7 +117,7 @@ describe 'When the user visits the choose a certified company page' do
       selected_answers: {
         device_type: { device_type_other: true },
         documents: { driving_licence: true },
-        phone: { mobile_phone: true, landline: true }
+        phone: { mobile_phone: true }
       },
     )
 

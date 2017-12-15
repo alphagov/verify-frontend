@@ -30,7 +30,7 @@ module IdpEligibility
         idp_two = double(:idp_two, simple_id: 'idp_two')
         profiles_hash = { 'idp_one' => [Profile.new(%i(driving_licence passport)), Profile.new(%i{mobile_phone})] }
         enabled_idps = [idp_one, idp_two]
-        evidence = %i{landline_phone non_uk_id_document}
+        evidence = %i{non_uk_id_document}
         filtered_idps = ProfileFilter.new(profiles_hash).filter_idps_for(evidence, enabled_idps)
         expect(filtered_idps).to be_empty
       end
