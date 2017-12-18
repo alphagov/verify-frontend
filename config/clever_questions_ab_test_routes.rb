@@ -48,7 +48,7 @@ localized do
     post 'confirming_it_is_you', to: 'clever_questions/confirming_it_is_you#select_answer', as: :confirming_it_is_you_submit
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
     post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
-    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
+    get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
     get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
     get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
     get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
