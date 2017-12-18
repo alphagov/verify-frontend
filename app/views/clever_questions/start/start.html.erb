@@ -10,7 +10,7 @@
   <%= render 'shared/form-errors', errors: flash[:errors] %>
 
   <p><%= t 'hub.about.verify_is_a_service' %></p>
-  <%= @tailored_text.html_safe %>
+  <%= raw @tailored_text %>
 
   <%= content_tag :div, class: form_question_class do %>
     <fieldset>
