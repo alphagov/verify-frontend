@@ -31,7 +31,7 @@ module Display
         allow(translator).to receive(:translate).with('rps.test-rp-a.name').and_return(transaction_a_name)
         allow(translator).to receive(:translate).with('rps.test-rp-b.name').and_return(transaction_b_name)
 
-        allow(translator).to receive(:translate).with('errors.transaction_list.other_services').and_return(taxon_other_services)
+        allow(translator).to receive(:translate).with('hub.transaction_list.other_services').and_return(taxon_other_services)
 
         @correlator = TransactionTaxonCorrelator.new(translator, [simple_id_1, simple_id_2, simple_id_a, simple_id_b], [])
       end

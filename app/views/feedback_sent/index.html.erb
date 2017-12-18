@@ -15,7 +15,7 @@
         <%= link_to t('hub.feedback_sent.session_valid_link'), @link_back %>
     <% else %>
         <%= t('hub.feedback_sent.session_not_valid') %>
-        <%= render partial: 'errors/transaction_list' %>
+        <%= render partial: 'shared/transaction_list' %>
     <% end %>
   </p>
 </div>

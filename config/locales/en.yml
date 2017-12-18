@@ -108,6 +108,10 @@ en:
       title: Verify services
       heading: GOV.UK Verify
       message: "GOV.UK Verify is new, and government services are joining all the time. The current services using Verify are:"
+    transaction_list:
+      title: Find the service you were using to start again
+      hint: Follow the instructions you received.
+      other_services: Other services
     about:
       title: About
       verify_is_a_service: GOV.UK Verify is a secure service built to fight the growing problem of online identity theft.
@@ -490,10 +494,6 @@ en:
         heading: The certified company has saved your information
         restart_instructions: When you're ready to carry on verifying your identity, you need to go back to the government service and sign in to your certified company with the username and password you created.
   errors:
-    transaction_list:
-      title: Find the service you were using to start again
-      hint: Follow the instructions you received.
-      other_services: Other services
     cookie_expired:
       title: Your session has timed out
       feedback_message: Use the %{feedback_link} to ask a question, report a problem or suggest an improvement.
