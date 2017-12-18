@@ -6,6 +6,7 @@
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'errors.cookie_expired.title' %></h1>
+    <h2 class="heading-medium"><%= t 'hub.transaction_list.title' %></h2>
     <%= render partial: 'shared/transaction_list' %>
     <p><%= t('errors.cookie_expired.feedback_message', feedback_link: link_to(t('errors.cookie_expired.feedback'), feedback_path('feedback-source': feedback_source))).html_safe %></p>
   </div>

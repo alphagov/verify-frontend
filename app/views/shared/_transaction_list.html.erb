@@ -1,6 +1,5 @@
 <% taxons = transaction_taxon_list %>
 <% if taxons.any? %>
-  <h2 class="heading-medium"><%= t 'hub.transaction_list.title' %></h2>
   <% taxons.each do |taxon| %>
     <h3 class="heading-small"><%= taxon.name %></h3>
     <ul class="list">
