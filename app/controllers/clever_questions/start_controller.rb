@@ -1,6 +1,7 @@
 require 'ab_test/ab_test'
+require 'idp_eligibility/device_type'
 
-class StartController < ApplicationController
+class CleverQuestions::StartController < ApplicationController
   layout 'slides'
   before_action :set_device_type_evidence
 
@@ -8,14 +9,15 @@ class StartController < ApplicationController
   AB_EXPERIMENT_NAME = 'clever_questions'.freeze
 
   def index
-    @form = StartForm.new({})
+    @tailored_text = current_transaction.tailored_text
+    @form = CleverQuestions::StartForm.new({})
 
     FEDERATION_REPORTER.report_start_page(current_transaction, request) unless session[:requested_loa] == 'LEVEL_2' # ab test variant hack, remove with teardown of TT-1606
     render :start
   end
 
   def request_post
-    @form = StartForm.new(params['start_form'] || {})
+    @form = CleverQuestions::StartForm.new(params['start_form'] || {})
     if @form.valid?
       if @form.registration?
         register
@@ -31,7 +33,7 @@ class StartController < ApplicationController
 
   def register
     FEDERATION_REPORTER.report_registration(current_transaction, request)
-    redirect_to about_path
+    redirect_to will_it_work_for_me_path
   end
 
   # TODO TT-1606 Remove this method when tearing down the AB Test variant.
