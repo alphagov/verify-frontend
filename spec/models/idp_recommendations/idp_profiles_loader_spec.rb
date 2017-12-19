@@ -22,7 +22,7 @@ describe 'Idp Profiles Loader' do
   }
   let(:idp_two) {
     {
-        'simpleIds' => ['idp_two'],
+        'simpleIds' => %w(idp_two idp_two_alternative_name),
         'segments' => {
             'protected' => {
                 'recommended' => ['SEGMENT 1', 'SEGMENT 4'],
@@ -60,5 +60,11 @@ describe 'Idp Profiles Loader' do
     expect(idp_rules['idp_two'].unlikely_segments(TransactionGroups::PROTECTED)).to eql(['SEGMENT 5'])
     expect(idp_rules['idp_two'].unlikely_segments(TransactionGroups::NON_PROTECTED)).to eql([])
     expect(idp_rules['idp_two'].capabilities).to eql([%w(passport driving_licence)])
+
+    expect(idp_rules['idp_two_alternative_name'].recommended_segments(TransactionGroups::PROTECTED)).to eql(['SEGMENT 1', 'SEGMENT 4'])
+    expect(idp_rules['idp_two_alternative_name'].recommended_segments(TransactionGroups::NON_PROTECTED)).to eql(['SEGMENT 7'])
+    expect(idp_rules['idp_two_alternative_name'].unlikely_segments(TransactionGroups::PROTECTED)).to eql(['SEGMENT 5'])
+    expect(idp_rules['idp_two_alternative_name'].unlikely_segments(TransactionGroups::NON_PROTECTED)).to eql([])
+    expect(idp_rules['idp_two_alternative_name'].capabilities).to eql([%w(passport driving_licence)])
   end
 end
