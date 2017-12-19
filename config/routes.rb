@@ -7,13 +7,6 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  CLEVER_QUESTIONS = 'clever_questions_v2'.freeze
-
-  clever_questions_control_piwik = SelectRoute.new(CLEVER_QUESTIONS, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
-  clever_questions_variant_piwik = SelectRoute.new(CLEVER_QUESTIONS, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')
-  clever_questions_control = SelectRoute.new(CLEVER_QUESTIONS, 'control')
-  clever_questions_variant = SelectRoute.new(CLEVER_QUESTIONS, 'variant')
-
   def add_routes(routes_name)
     instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
   end
@@ -42,27 +35,7 @@ Rails.application.routes.draw do
   end
 
   localized do
-    constraints IsLoa1 do
-      add_routes :main_routes
-    end
-
-    constraints IsLoa2 do
-      constraints clever_questions_control_piwik do
-        get 'start', to: 'start#index', as: :start
-      end
-
-      constraints clever_questions_variant_piwik do
-        get 'start', to: 'clever_questions/start#index', as: :start
-      end
-
-      constraints clever_questions_control do
-        add_routes :main_routes
-      end
-
-      constraints clever_questions_variant do
-        add_routes :clever_questions_ab_test_routes
-      end
-    end
+    add_routes :main_routes
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
