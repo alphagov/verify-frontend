@@ -38,15 +38,15 @@
     var customVariablesString = $('#piwik-custom-variables').text();
     if (customVariablesString) {
         var customVariables = JSON.parse(customVariablesString);
-        customVariables.forEach(function(customVariable) {
+        $.each(customVariables, function(index) {
             piwikAnalyticsQueue.unshift([
                 'setCustomVariable',
-                customVariable.index,
-                customVariable.name,
-                customVariable.value,
-                customVariable.scope
+                customVariables[index].index,
+                customVariables[index].name,
+                customVariables[index].value,
+                customVariables[index].scope
             ])
-        })
+        });
     }
 
     if (customUrl) {
