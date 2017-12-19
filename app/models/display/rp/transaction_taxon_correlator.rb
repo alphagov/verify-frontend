@@ -8,7 +8,7 @@ module Display
         @translator = translator
         @rps_with_homepage_link = rps_with_homepage_link
         @rps_with_name_only = rps_with_name_only
-        @other_services_translation = @translator.translate('errors.transaction_list.other_services')
+        @other_services_translation = @translator.translate('hub.transaction_list.other_services')
       end
 
       def correlate(data)

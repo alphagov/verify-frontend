@@ -24,7 +24,7 @@ RSpec.feature 'When the user submits the feedback page' do
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
       expect(page).to have_content(I18n.t('hub.feedback_sent.message_email'))
       expect(page).to have_content(session_not_valid_link)
-      expect(page).to have_content I18n.t('errors.transaction_list.title')
+      expect(page).to have_content I18n.t('hub.transaction_list.title')
     end
 
     it 'when user does not provide email should not say message has been sent and show invalid session link' do
@@ -38,7 +38,7 @@ RSpec.feature 'When the user submits the feedback page' do
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
       expect(page).to_not have_content(I18n.t('hub.feedback_sent.message_email'))
       expect(page).to have_content(session_not_valid_link)
-      expect(page).to have_content I18n.t('errors.transaction_list.title')
+      expect(page).to have_content I18n.t('hub.transaction_list.title')
     end
 
     it 'when session has timed out should show invalid session link' do
@@ -56,7 +56,7 @@ RSpec.feature 'When the user submits the feedback page' do
 
       click_button I18n.t('hub.feedback.send_message')
       expect(page).to have_content(session_not_valid_link)
-      expect(page).to have_content I18n.t('errors.transaction_list.title')
+      expect(page).to have_content I18n.t('hub.transaction_list.title')
     end
   end
 

@@ -1,0 +1,11 @@
+<%= page_title 'hub.verify_services.title' %>
+
+<% content_for :feedback_source, 'VERIFY_SERVICES_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.verify_services.heading' %></h1>
+    <p><%= t 'hub.verify_services.message' %></p>
+    <%= render partial: 'shared/transaction_list' %>
+  </div>
+</div>

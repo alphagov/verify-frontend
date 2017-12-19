@@ -64,6 +64,7 @@ post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :red
 get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
 
 get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
+get 'verify_services', to: 'static#verify_services', as: :verify_services
 get 'cookies', to: 'static#cookies', as: :cookies
 get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
 get 'choose_a_country', to: 'choose_a_country#choose_a_country', as: :choose_a_country

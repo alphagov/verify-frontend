@@ -26,6 +26,7 @@ cy:
     redirect_to_idp_question: ailgyfeirio-i-gwestiwn-idp
     idp_wont_work_for_you_one_doc: idp-wont-work-for-you-one-doc-welsh
     privacy_notice: hysbysiad-preifatrwydd
+    verify_services: verify-services-cy     # TODO: Get cy translation
     cookies: cwcis
     confirm_your_identity: cadarnhau-eich-hunaniaeth
     confirmation: cadarnhad
@@ -105,6 +106,14 @@ cy:
       title: Cwcis
     privacy_notice:
       title: Hysbysiad preifatrwydd
+    verify_services:    # TODO: Get cy translation
+      title: Verify services
+      heading: GOV.UK Verify
+      message: "GOV.UK Verify is new, and government services are joining all the time. The current services using Verify are:"
+    transaction_list:
+      title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
+      hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
+      other_services: Gwasanaethau eraill
     about:
       title: Am
       verify_is_a_service: Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
@@ -490,10 +499,6 @@ cy:
         heading: Your certified company has saved your information
         restart_instructions: When you're ready to carry on verifying your identity, you need to go back to the government service and sign in to your certified company with the username and password you created.
   errors:
-    transaction_list:
-      title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
-      hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
-      other_services: Gwasanaethau eraill
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan
       feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
