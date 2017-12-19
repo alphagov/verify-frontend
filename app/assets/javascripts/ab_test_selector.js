@@ -1,22 +1,23 @@
 function abTest (experimentDetails) {
   try {
     if (document.cookie.indexOf("ab_test_trial") >= 0) {
-      var abTrialCookie = getCookie("ab_test_trial")
+      var abTrialCookie = getCookie("ab_test_trial");
 
       if (experimentDetails.trial_enabled && experimentDetails.experiment == abTrialCookie) {
-        experimentDetails.alternatives[ 0 ].route.init()
+        experimentDetails.alternatives[ 0 ].route.init();
         return
       }
     }
 
     if (document.cookie.indexOf("ab_test") >= 0) {
-      var abCookie = JSON.parse(getCookie("ab_test"))
+      var abCookie = JSON.parse(getCookie("ab_test"));
 
-      var routes = { 'control': experimentDetails.control.route }
+      var routes = { 'control': experimentDetails.control.route };
 
-      experimentDetails.alternatives.forEach(function (alternative) {
-        routes[ experimentDetails.experiment.concat('_' + alternative.name) ] = alternative.route
-      })
+      for(var i = 0; i < experimentDetails.alternatives.length; i++) {
+          var alternative = experimentDetails.alternatives[i];
+          routes[ experimentDetails.experiment.concat('_' + alternative.name) ] = alternative.route;
+      }
 
       if (routes[ [ abCookie[ experimentDetails.experiment ] ] ]) {
         routes[ abCookie[ experimentDetails.experiment ] ].init();
