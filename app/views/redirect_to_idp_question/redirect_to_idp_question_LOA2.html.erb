@@ -4,7 +4,7 @@
 <div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'redirect_to_idp_warning', action: 'continue_ajax', locale: I18n.locale)  %>">
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'hub.redirect_to_idp_question.heading', display_name: @idp.display_name %></h1>
-    <%= @idp.interstitial_question.html_safe %>
+    <%= raw @idp.interstitial_question %>
 
     <%= form_for @form, url: redirect_to_idp_question_submit_path, html: {id: 'interstitial-question-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
 

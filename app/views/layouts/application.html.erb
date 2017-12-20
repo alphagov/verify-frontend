@@ -46,7 +46,7 @@
     <li><%= link_to(t('hub.privacy_notice.title'), privacy_notice_path) %></li>
     <li>
     <% if feedback_source.present? %>
-        <%= link_to(t('hub.feedback.title'), feedback_path('feedback-source' => feedback_source)).html_safe %>
+        <%= raw link_to(t('hub.feedback.title'), feedback_path('feedback-source' => feedback_source)) %>
     <% else %>
         <%= link_to(t('hub.feedback.title'), feedback_path) %>
     <% end %>
