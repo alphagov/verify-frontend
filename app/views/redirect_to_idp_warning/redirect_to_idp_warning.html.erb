@@ -15,13 +15,7 @@
                        type: 'submit'
         %>
     <% end %>
-    <div class="logos-container">
-      <ul class="list-logos">
-        <li class="verify"><%= image_tag @idp.logo_path, alt: '' %></li><!--
-     --><li><%= image_tag 'govuk-verify-small-black-text-400X200.png', alt: 'GOV.UK VERIFY' %></li>
-      </ul>
-    </div>
-
+    <%= render 'shared/logos_container' %>
   </div>
   <%= render partial: 'shared/continue_to_idp_form' %>
 </div>
