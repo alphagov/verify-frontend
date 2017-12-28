@@ -7,12 +7,10 @@ module ConfigEndpoints
   TRANSACTIONS_SUFFIX = 'transactions/enabled'.freeze
 
   def idp_list_for_loa_endpoint(transaction_id, loa)
-    # PATH_PREFIX.join(IDP_LIST_SUFFIX % [CGI.escape(transaction_id), CGI.escape(loa)]).to_s
     PATH_PREFIX.join(IDP_LIST_SUFFIX % { transaction_name: CGI.escape(transaction_id), loa: CGI.escape(loa) }).to_s
   end
 
   def idp_list_for_sign_in_endpoint(transaction_id)
-    # PATH_PREFIX.join(IDP_LIST_SIGN_IN_SUFFIX % [CGI.escape(transaction_id)]).to_s
     PATH_PREFIX.join(IDP_LIST_SIGN_IN_SUFFIX % { transaction_name: CGI.escape(transaction_id) }).to_s
   end
 
