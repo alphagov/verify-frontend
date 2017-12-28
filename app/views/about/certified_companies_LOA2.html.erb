@@ -2,13 +2,13 @@
 <% content_for :feedback_source, 'ABOUT_CERTIFIED_COMPANIES_PAGE' %>
 
 <p><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
-<p><%=  t 'hub.about_certified_companies.dont_need_to_be_existing_customer' %></p>
+<p><%= t 'hub.about_certified_companies.dont_need_to_be_existing_customer' %></p>
 
 <ul class="list-companies">
   <% @identity_providers.each do |idp| %>
-      <li>
-        <%= image_tag idp.white_logo_path, alt: idp_tagline(idp) %>
-      </li>
+    <li>
+      <%= image_tag idp.white_logo_path, alt: idp_tagline(idp) %>
+    </li>
   <% end %>
 </ul>
 
