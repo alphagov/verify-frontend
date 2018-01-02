@@ -48,10 +48,10 @@ cy:
     further_information_cancel: gwybodaeth-bellach/dileu
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
     no_idps_available: dim-idps-ar-gael
-    cancelled_registration: cancelled-registration-welsh
+    cancelled_registration: cofrestru-wedi-ganslo
     select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
     confirming_it_is_you: confirming-it-is-you-cy
-    paused_registration: paused-cy
+    paused_registration: wedi-oedi
   title:
     error: Error
   navigation:
@@ -350,7 +350,7 @@ cy:
       continue_to_rp: Gallwch nawr ddefnyddio %{transaction_name}.
       heading: Mae %{display_name} wedi dilysu eich hunaniaeth
       add_security_loa1: Pan fyddwch yn defnyddio rhai o wasanaethau'r llywodraeth, gofynnir i chi ddarparu mwy o dystiolaeth gan fod angen i'r gwasanaethau hyn fod yn hyderus nad yw rhywun arall yn honni i fod yn chi.
-      extra_security: Government services requiring extra evidence
+      extra_security: Gwasanaethau'r llywodraeth sydd angen tystiolaeth ychwanegol
     failed_registration:
       title: Methu dilysu eich hunaniaeth
       heading: Roedd %{idp_name} yn methu dilysu eich hunaniaeth
@@ -358,9 +358,9 @@ cy:
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
-          <li>your answer to a question doesn't match online records</li>
+          <li>nid yw eich ateb i gwestiwn yn cyd fynd a chofnodion ar-lein</li>
           <li>rydych yn ddiweddar wedi cael newid yn eich amgylchiadau, ac nid ydynt wedi cael eu diweddaru ar-lein</li>
-          <li>%{idp_name} doesn't have access to enough information about you</li>
+          <li>Nid oes gan %{idp_name} fynediad i ddigon o wybodaeth amdanoch chi</li>
         </ul>
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
       what_to_do_next: Beth i’w wneud nesaf
@@ -382,16 +382,16 @@ cy:
       start_again: Dechrau eto
     failed_uplift:
       title: Methwyd yr ymgodiad
-      heading: "%{display_name} was not able to validate the evidence you provided"
+      heading: "Nid oedd %{display_name} yn gallu dilysu'r dystiolaeth a ddarparwyd gennych"
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
         <ul class="list list-bullet">
-          <li>your answer to a question doesn't match online records</li>
+          <li>nid yw eich ateb i gwestiwn yn cyd fynd a chofnodion ar-lein</li>
           <li>rydych yn ddiweddar wedi cael newid yn eich amgylchiadau, ac nid ydynt wedi cael eu diweddaru ar-lein</li>
-          <li>%{idp_name} doesn't have access to enough information about you</li>
+          <li>Nid oes gan %{idp_name} fynediad i ddigon o wybodaeth amdanoch chi</li>
         </ul>
       start_again: Dod o hyd i gwmni arall i’ch gwirio
-      still_use_heading: "You can still access these government services with your %{idp_name} identity account"
+      still_use_heading: "Gallwch barhau i ddefnyddio'r gwasanaethau'r llywodraeth hyn gyda'ch cyfrif hunaniaeth %{idp_name}"
       try_another_text: Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth.
       try_another_summary: Ceisiwch wirio gyda chwmni ardystiedig arall
       what_next_heading: Beth i’w wneud nesaf
@@ -490,14 +490,14 @@ cy:
         contact_verify: Cysylltu â GOV.UK Verify
     paused_registration:
       with_session:
-        title: Verification Paused
-        heading: "%{idp_name} has saved your information"
-        restart_instructions_html: "When you're ready to carry on verifying your identity, go back to <a href=\"%{rp_start_page}\">%{rp_name}</a>."
-        username_and_password_instructions: You'll need the username and password you created to sign in to %{idp_name}.
+        title: Dilysu Wedi'i Oedi
+        heading: "Mae %{idp_name} wedi arbed eich gwybodaeth"
+        restart_instructions_html: "Pan rydych yn barod i barhau i ddilysu pwy ydych chi, ewch yn ôl i <a href=\"%{rp_start_page}\">%{rp_name}</a>."
+        username_and_password_instructions: Byddwch angen yr enw defnyddiwr a chyfrinair y gwnaethoch eu creu i fewngofnodi i %{idp_name}.
       without_session:
-        title: Verification Paused
-        heading: Your certified company has saved your information
-        restart_instructions: When you're ready to carry on verifying your identity, you need to go back to the government service and sign in to your certified company with the username and password you created.
+        title: Dilysu Wedi'i Oedi
+        heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.
+        restart_instructions: Pan rydych yn barod i barhau i ddilysu pwy ydych chi, mae angen i chi fynd yn ôl i wasanaeth y llywodraeth a mewngofnodi i'ch cwmni ardystiedig a mewngofnodi gyda'r enw defnyddiwr a chyfrinair y gwnaethoch eu creu.
   errors:
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan
