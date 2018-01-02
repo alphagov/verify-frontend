@@ -1,4 +1,8 @@
+require 'partials/viewable_idp_partial_controller'
+
 class SelectDocumentsController < ApplicationController
+  include ViewableIdpPartialController
+
   def index
     @form = SelectDocumentsForm.new({})
     render :index

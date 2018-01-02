@@ -1,5 +1,8 @@
+require 'partials/viewable_idp_partial_controller'
+
 class ChooseACertifiedCompanyLoa1Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
+  include ViewableIdpPartialController
 
   def index
     loa1_idps = current_identity_providers_for_loa

@@ -1,4 +1,8 @@
+require 'partials/viewable_idp_partial_controller'
+
 class CertifiedCompanyUnavailableController < ApplicationController
+  include ViewableIdpPartialController
+
   def index
     simple_id = params[:company]
 
