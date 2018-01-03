@@ -109,7 +109,7 @@ cy:
     verify_services:    # TODO: Get cy translation
       title: Verify services
       heading: GOV.UK Verify
-      message: "GOV.UK Verify is new, and government services are joining all the time. The current services using Verify are:"
+      message: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
     transaction_list:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
