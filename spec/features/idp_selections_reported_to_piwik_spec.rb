@@ -64,7 +64,7 @@ RSpec.describe 'When the user selects an IDP' do
     expect(idcorp_piwik_request).to have_been_made.once
 
     visit '/choose-a-certified-company'
-    click_button 'Choose Bob’s Identity Service'
+    click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-two.name'))
     click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-two.name'))
 
     expect(idcorp_and_bobs_piwik_request).to have_been_made.once
