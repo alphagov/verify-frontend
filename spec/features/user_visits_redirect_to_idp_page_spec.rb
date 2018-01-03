@@ -43,7 +43,7 @@ RSpec.describe 'When the user visits the redirect to IDP page' do
   it 'should contain welsh language hint' do
     given_a_session_with_a_hints_enabled_idp
     stub_session_idp_authn_request(originating_ip, location, true)
-    visit "/#{I18n.t('routes.redirect_to_idp_register', locale: 'cy')}"
+    visit "/#{t('routes.redirect_to_idp_register', locale: 'cy')}"
     expect(page).to have_css('input[name="language"][value="cy"]', visible: false)
   end
 
@@ -66,6 +66,6 @@ RSpec.describe 'When the user visits the redirect to IDP page' do
     given_a_session_with_a_hints_enabled_idp
     stub_session_idp_authn_request(originating_ip, location, false)
     visit redirect_to_idp_register_path
-    expect(page).to_not have_title('hub.redirect_to_idp.title')
+    expect(page).to have_title t('hub.redirect_to_idp.title')
   end
 end

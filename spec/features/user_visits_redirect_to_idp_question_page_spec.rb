@@ -1,7 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
 require 'piwik_test_helper'
-require 'i18n'
 
 RSpec.describe 'When the user visits the redirect to IDP question page' do
   let(:selected_answers) {
@@ -27,23 +26,23 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
   end
 
   it 'displays interstitial question' do
-    expect(page).to have_content('I have a question for you in English')
+    expect(page.body).to include t('idps.stub-idp-one-doc-question.interstitial_question')
   end
 
   it 'displays document warning text on LOA2' do
-    expect(page).to have_content('You need your identity documents with you')
+    expect(page).to have_content t('hub.redirect_to_idp_question.identity_documents')
   end
 
   it 'does not display document warning text on LOA1' do
     set_loa_in_session('LEVEL_1')
     visit '/redirect-to-idp-question'
-    expect(page).to_not have_content('You need your identity documents with you')
+    expect(page).to_not have_content t('hub.redirect_to_idp_question.identity_documents')
   end
 
   it 'displays interstitial question in Welsh' do
     visit '/ailgyfeirio-i-gwestiwn-idp'
 
-    expect(page).to have_content('I have a question for you in Welsh')
+    expect(page.body).to include t('idps.stub-idp-one-doc-question.interstitial_question', locale: :cy)
     expect(page).to have_css 'html[lang=cy]'
   end
 
@@ -54,7 +53,7 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
 
     expected_answers = selected_answers.update('interstitial' => { 'interstitial_yes' => true })
 
-    click_button 'Continue'
+    click_button t('navigation.continue')
 
     expect(page).to have_current_path(redirect_to_idp_warning_path)
     expect(page.get_rack_session['selected_answers']).to eql(expected_answers)
@@ -62,28 +61,28 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
 
   it 'goes to "idp-wont-work-for-you" page if the user answers no to the interstitial question and javascript is enabled', js: true do
     choose 'interstitial_question_form_interstitial_question_result_false', allow_label_click: true
-    click_button 'Continue'
-    expect(page).to have_title('OneDocIdp cannot verify your identity')
+    click_button t('navigation.continue')
+    expect(page).to have_title t('hub.idp_wont_work_for_you_one_doc.title', idp_name: t('idps.stub-idp-one-doc-question.name'))
   end
 
   it 'displays an error message when user does not answer the question when javascript is turned off' do
-    click_button 'Continue'
+    click_button t('navigation.continue')
 
     expect(page).to have_current_path(redirect_to_idp_question_submit_path)
-    expect(page).to have_content('Please answer the question')
+    expect(page).to have_content t('hub.redirect_to_idp_question.validation_message')
   end
 
   context 'when the form is invalid', js: true do
     it 'should display validation message if no selection is made' do
-      click_button 'Continue'
-      expect(page).to have_content('Please answer the question')
+      click_button t('navigation.continue')
+      expect(page).to have_content t('hub.redirect_to_idp_question.validation_message')
     end
 
     it 'should remove validation message once selection is made' do
-      click_button 'Continue'
-      expect(page).to have_content('Please answer the question')
+      click_button t('navigation.continue')
+      expect(page).to have_content t('hub.redirect_to_idp_question.validation_message')
       choose 'interstitial_question_form_interstitial_question_result_false', allow_label_click: true
-      expect(page).to_not have_content('Please answer the question')
+      expect(page).to_not have_content t('hub.redirect_to_idp_question.validation_message')
     end
   end
 end

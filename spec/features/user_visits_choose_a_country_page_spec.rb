@@ -1,6 +1,5 @@
 require 'feature_helper'
 require 'api_test_helper'
-require 'i18n'
 
 RSpec.describe 'When the user visits the choose a country page' do
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
@@ -28,25 +27,25 @@ RSpec.describe 'When the user visits the choose a country page' do
   end
 
   def then_im_at_the_interstitial_page(locale = 'en')
-    expect(page).to have_current_path("/#{I18n.t('routes.redirect_to_country', locale: locale)}")
-    expect(page).to have_title('Redirect to country')
-    expect(page).to have_content('Continue to next step')
-    expect(page).to have_content('Because Javascript is not enabled on your browser, you must press the continue button')
+    expect(page).to have_current_path("/#{t('routes.redirect_to_country', locale: locale)}")
+    expect(page).to have_title t('hub.redirect_to_country.title')
+    expect(page).to have_content t('hub.redirect_to_country.heading')
+    expect(page).to have_content t('hub.redirect_to_country.description')
     expect(page).to have_css("input[id=SAMLRequest]", visible: false)
     expect(find("input[id=SAMLRequest]", visible: false).value).to_not be_empty
 
-    expect(page).to have_button('Continue')
+    expect(page).to have_button t('navigation.continue')
   end
 
   def when_i_choose_to_continue
-    click_button('Continue')
+    click_button t('navigation.continue')
   end
 
   it 'should show something went wrong when visiting choose a country page directly with session not supporting eidas' do
     given_a_session_not_supporting_eidas
 
     visit '/choose-a-country'
-    expect(page).to have_content 'Sorry, something went wrong'
+    expect(page).to have_content t('errors.something_went_wrong.heading')
   end
 
   it 'should have a heading' do

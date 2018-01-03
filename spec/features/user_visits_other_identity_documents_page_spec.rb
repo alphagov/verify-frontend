@@ -9,7 +9,7 @@ RSpec.feature 'When users visits other documents page' do
   it 'redirects user to proof of address page if selects yes' do
     visit '/other-identity-documents'
     choose 'other_identity_documents_form_non_uk_id_document_true', allow_label_click: true
-    click_button 'Continue'
+    click_button t('navigation.continue')
 
     expect(page).to have_current_path(select_phone_path, only_path: true)
   end
@@ -17,7 +17,7 @@ RSpec.feature 'When users visits other documents page' do
   it 'redirects user to proof of address page if selects no' do
     visit '/other-identity-documents'
     choose 'other_identity_documents_form_non_uk_id_document_false', allow_label_click: true
-    click_button 'Continue'
+    click_button t('navigation.continue')
 
     expect(page).to have_current_path(select_phone_path, only_path: true)
   end

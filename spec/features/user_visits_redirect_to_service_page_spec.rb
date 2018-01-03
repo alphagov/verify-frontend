@@ -26,15 +26,15 @@ RSpec.describe 'When the user visits the redirect to service page' do
     end
 
     it 'supports the welsh language for error' do
-      visit "/#{I18n.t('routes.redirect_to_service_error', locale: 'cy')}"
+      visit "/#{t('routes.redirect_to_service_error', locale: 'cy')}"
       expect(page).to have_css 'html[lang=cy]'
     end
 
     it 'should redirect to service when path is error' do
       visit redirect_to_service_error_path
-      verify_redirect_to_service(I18n.t('hub.redirect_to_service.start_again.title'))
+      verify_redirect_to_service t('hub.redirect_to_service.start_again.title')
 
-      click_button I18n.t('navigation.continue')
+      click_button t('navigation.continue')
       expect(page).to have_current_path('/test-rp')
     end
   end
@@ -59,28 +59,28 @@ RSpec.describe 'When the user visits the redirect to service page' do
     end
 
     it 'supports the welsh language for signing in' do
-      visit "/#{I18n.t('routes.redirect_to_service_signing_in', locale: 'cy')}"
+      visit "/#{t('routes.redirect_to_service_signing_in', locale: 'cy')}"
       expect(page).to have_css 'html[lang=cy]'
     end
 
     it 'supports the welsh language for start again' do
-      visit "/#{I18n.t('routes.redirect_to_service_start_again', locale: 'cy')}"
+      visit "/#{t('routes.redirect_to_service_start_again', locale: 'cy')}"
       expect(page).to have_css 'html[lang=cy]'
     end
 
     it 'should redirect to service when path is signing-in' do
       visit redirect_to_service_signing_in_path
-      verify_redirect_to_service(I18n.t('hub.redirect_to_service.signing_in.title'))
+      verify_redirect_to_service t('hub.redirect_to_service.signing_in.title')
 
-      click_button I18n.t('navigation.continue')
+      click_button t('navigation.continue')
       expect(page).to have_current_path('/test-rp')
     end
 
     it 'should redirect to service when path is start-again' do
       visit redirect_to_service_start_again_path
-      verify_redirect_to_service(I18n.t('hub.redirect_to_service.start_again.title'))
+      verify_redirect_to_service t('hub.redirect_to_service.start_again.title')
 
-      click_button I18n.t('navigation.continue')
+      click_button t('navigation.continue')
       expect(page).to have_current_path('/test-rp')
     end
 

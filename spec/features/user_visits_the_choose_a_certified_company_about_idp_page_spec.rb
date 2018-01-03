@@ -26,8 +26,8 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
     stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
     given_a_session_with_selected_answers
     visit choose_a_certified_company_about_path('stub-idp-one')
-    expect(page).to have_content("ID Corp is the premier identity proofing service around.")
-    click_button "Choose IDCorp"
+    expect(page).to have_content('ID Corp is the premier identity proofing service around.')
+    click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
     expect(page).to have_current_path(redirect_to_idp_warning_path)
     expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
@@ -35,12 +35,12 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
 
   scenario 'for a non-existent idp' do
     visit choose_a_certified_company_about_path('foobar')
-    expect(page).to have_content(I18n.translate("errors.page_not_found.title"))
+    expect(page).to have_content t('errors.page_not_found.title')
   end
 
   scenario 'for an idp that is not viewable' do
     visit choose_a_certified_company_about_path('foobar')
-    expect(page).to have_content(I18n.translate("errors.page_not_found.title"))
+    expect(page).to have_content t('errors.page_not_found.title')
   end
 
   scenario 'user clicks back link' do
@@ -48,7 +48,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
     stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
     given_a_session_with_selected_answers
     visit choose_a_certified_company_about_path('stub-idp-one')
-    click_link 'Back'
+    click_link t('navigation.back')
     expect(page).to have_current_path(choose_a_certified_company_path)
   end
 end

@@ -6,14 +6,14 @@ RSpec.describe 'user visits further information page' do
   before(:each) do
     set_session_and_session_cookies!
   end
-  attribute_field_name = I18n.t('cycle3.NationalInsuranceNumber.field_name')
-  attribute_name = I18n.t('cycle3.NationalInsuranceNumber.name')
+  let(:attribute_field_name) { t('cycle3.NationalInsuranceNumber.field_name') }
+  let(:attribute_name) { t('cycle3.NationalInsuranceNumber.name') }
 
 
   it 'should also be in welsh' do
     stub_cycle_three_attribute_request('NationalInsuranceNumber')
     visit further_information_cy_path
-    expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: attribute_field_name, locale: :cy)
+    expect(page).to have_title t('hub.further_information.title', cycle_three_name: attribute_field_name, locale: :cy)
     expect(page).to have_css 'html[lang=cy]'
   end
 
@@ -22,14 +22,14 @@ RSpec.describe 'user visits further information page' do
 
     visit further_information_path
 
-    rp_name = I18n.t('rps.test-rp.name').capitalize
+    rp_name = t('rps.test-rp.name').capitalize
 
-    expect(page).to have_title I18n.t('hub.further_information.title', cycle_three_name: attribute_field_name)
+    expect(page).to have_title t('hub.further_information.title', cycle_three_name: attribute_field_name)
     expect(page).to have_css '.form-label-bold', text: attribute_field_name
-    expect(page).to have_css 'span.form-hint', text: I18n.t('hub.further_information.example_text', example: I18n.t('cycle3.NationalInsuranceNumber.example'))
-    expect(page).to have_content I18n.t('hub.further_information.help_with_your', cycle_three_name: attribute_name)
+    expect(page).to have_css 'span.form-hint', text: t('hub.further_information.example_text', example: t('cycle3.NationalInsuranceNumber.example'))
+    expect(page).to have_content t('hub.further_information.help_with_your', cycle_three_name: attribute_name)
     expect(page).to have_content 'Your National Insurance number can be found on'
-    expect(page).to have_content I18n.t('hub.further_information.cancel', transaction_name: rp_name)
+    expect(page).to have_content t('hub.further_information.cancel', transaction_name: rp_name)
     expect_feedback_source_to_be(page, 'CYCLE_3_PAGE', further_information_path)
   end
 
@@ -43,7 +43,7 @@ RSpec.describe 'user visits further information page' do
     visit further_information_path
 
     fill_in 'cycle_three_attribute_cycle_three_data', with: 'MORGA657054SM9IJ 20'
-    click_button I18n.t('navigation.continue')
+    click_button t('navigation.continue')
 
     expect(page.current_path).to eql(response_processing_path)
     expect(stub_request).to have_been_made
@@ -58,8 +58,8 @@ RSpec.describe 'user visits further information page' do
 
     visit further_information_path
 
-    rp_name = I18n.t('rps.test-rp.name').capitalize
-    click_button I18n.t('hub.further_information.cancel', transaction_name: rp_name)
+    rp_name = t('rps.test-rp.name').capitalize
+    click_button t('hub.further_information.cancel', transaction_name: rp_name)
 
     expect(page.current_path).to eql(redirect_to_service_start_again_path)
     expect(piwik_request).to have_been_made
@@ -73,8 +73,8 @@ RSpec.describe 'user visits further information page' do
     stub_matching_outcome
 
     visit further_information_path
-    click_button I18n.t('hub.further_information.null_attribute',
-                        cycle_three_name: I18n.t('cycle3.NullableAttribute.name'))
+    click_button t('hub.further_information.null_attribute',
+                        cycle_three_name: t('cycle3.NullableAttribute.name'))
 
     expect(page.current_path).to eql(response_processing_path)
     expect(stub_request).to have_been_made
@@ -92,9 +92,9 @@ RSpec.describe 'user visits further information page' do
 
     visit further_information_path
 
-    click_button I18n.t('hub.further_information.null_attribute',
-                        cycle_three_name: I18n.t('cycle3.NullableAttribute.name'))
-    expect(page).to have_content('Sorry, something went wrong')
+    click_button t('hub.further_information.null_attribute',
+                        cycle_three_name: t('cycle3.NullableAttribute.name'))
+    expect(page).to have_content t('errors.something_went_wrong.heading')
     expect(matching_attribute_request).to have_been_made.twice
   end
 
@@ -108,12 +108,12 @@ RSpec.describe 'user visits further information page' do
 
       invalid_input = 'not valid'
       fill_in 'cycle_three_attribute_cycle_three_data', with: invalid_input
-      click_button I18n.t('navigation.continue')
+      click_button t('navigation.continue')
 
       expect(page.current_path).to eql(further_information_path)
       expect(page).to have_css(
         '.error-message',
-        text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
+        text: t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
       )
       expect(page.find('#cycle_three_attribute_cycle_three_data').value).to eql invalid_input
     end
@@ -130,10 +130,10 @@ RSpec.describe 'user visits further information page' do
       invalid_input = 'not valid'
       fill_in 'cycle_three_attribute_cycle_three_data', with: invalid_input
 
-      click_button I18n.t('navigation.continue')
+      click_button t('navigation.continue')
 
       expect(page).to have_current_path(further_information_path)
-      expect(page).to have_css '.error-message', text: I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
+      expect(page).to have_css '.error-message', text: t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
       expect(page.find('#cycle_three_attribute_cycle_three_data').value).to eql invalid_input
     end
   end

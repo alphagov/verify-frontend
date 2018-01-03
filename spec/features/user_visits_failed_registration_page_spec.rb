@@ -23,9 +23,9 @@ RSpec.describe 'When the user visits the failed registration page and' do
       visit '/failed-registration'
 
       expect_page_to_have_main_content
-      expect(page).to have_content I18n.t('hub.failed_registration.continue_text', rp_name: 'Test RP')
-      expect(page).to have_link(I18n.t('navigation.continue'), href: redirect_to_service_error_path)
-      expect(page).to have_link(I18n.t('hub.failed_registration.try_another_company'), href: select_documents_path)
+      expect(page).to have_content t('hub.failed_registration.continue_text', rp_name: 'Test RP')
+      expect(page).to have_link t('navigation.continue'), href: redirect_to_service_error_path
+      expect(page).to have_link t('hub.failed_registration.try_another_company'), href: select_documents_path
     end
 
     it 'includes expected content for LOA1 journey' do
@@ -33,9 +33,9 @@ RSpec.describe 'When the user visits the failed registration page and' do
       visit '/failed-registration'
 
       expect_page_to_have_main_content
-      expect(page).to have_content I18n.t('hub.failed_registration.continue_text', rp_name: 'Test RP')
-      expect(page).to have_link(I18n.t('navigation.continue'), href: redirect_to_service_error_path)
-      expect(page).to have_link(I18n.t('hub.failed_registration.try_another_company'), href: choose_a_certified_company_path)
+      expect(page).to have_content t('hub.failed_registration.continue_text', rp_name: 'Test RP')
+      expect(page).to have_link t('navigation.continue'), href: redirect_to_service_error_path
+      expect(page).to have_link t('hub.failed_registration.try_another_company'), href: choose_a_certified_company_path
     end
   end
 
@@ -49,9 +49,9 @@ RSpec.describe 'When the user visits the failed registration page and' do
       visit '/failed-registration'
 
       expect_page_to_have_main_content
-      expect(page).to have_content I18n.t('hub.failed_registration.other_ways_summary',
+      expect(page).to have_content t('hub.failed_registration.other_ways_summary',
                                           other_ways_description: 'register for an identity profile')
-      expect(page).to have_link(I18n.t('hub.failed_registration.start_again'), href: select_documents_path)
+      expect(page).to have_link t('hub.failed_registration.start_again'), href: select_documents_path
     end
 
     it 'includes expected content when LOA1 journey' do
@@ -59,16 +59,16 @@ RSpec.describe 'When the user visits the failed registration page and' do
       visit '/failed-registration'
 
       expect_page_to_have_main_content
-      expect(page).to have_content I18n.t('hub.failed_registration.other_ways_summary',
+      expect(page).to have_content t('hub.failed_registration.other_ways_summary',
                                           other_ways_description: 'register for an identity profile')
-      expect(page).to have_link(I18n.t('hub.failed_registration.start_again'), href: choose_a_certified_company_path)
+      expect(page).to have_link t('hub.failed_registration.start_again'), href: choose_a_certified_company_path
     end
   end
 
   def expect_page_to_have_main_content
     expect_feedback_source_to_be(page, 'FAILED_REGISTRATION_PAGE', '/failed-registration')
-    expect(page).to have_title("#{I18n.t('hub.failed_registration.title')} - GOV.UK Verify - GOV.UK")
-    expect(page).to have_content I18n.t('hub.failed_registration.heading', idp_name: 'IDCorp')
-    expect(page).to have_content I18n.t('hub.failed_registration.contact_details_intro', idp_name: 'IDCorp')
+    expect(page).to have_title t('hub.failed_registration.title')
+    expect(page).to have_content t('hub.failed_registration.heading', idp_name: 'IDCorp')
+    expect(page).to have_content t('hub.failed_registration.contact_details_intro', idp_name: 'IDCorp')
   end
 end

@@ -22,6 +22,7 @@ RSpec.configure do |config|
   config.before(:each, js: true) do
     page.driver.browser.manage.window.resize_to(1280, 1024)
   end
+  config.include AbstractController::Translation
 end
 
 Capybara.configure do |config|

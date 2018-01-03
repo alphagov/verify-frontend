@@ -15,7 +15,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   def given_im_on_the_sign_in_page(locale = 'en')
     set_session_and_session_cookies!
     stub_api_idp_list_for_sign_in
-    visit "/#{I18n.t('routes.sign_in', locale: locale)}"
+    visit "/#{t('routes.sign_in', locale: locale)}"
   end
 
   def when_i_select_an_idp
@@ -48,11 +48,11 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   end
 
   def then_im_at_the_interstitial_page(locale = 'en')
-    expect(page).to have_current_path("/#{I18n.t('routes.redirect_to_idp_sign_in', locale: locale)}")
+    expect(page).to have_current_path("/#{t('routes.redirect_to_idp_sign_in', locale: locale)}")
   end
 
   def when_i_choose_to_continue
-    click_button('Continue')
+    click_button t('navigation.continue')
   end
 
   def expect_to_have_updated_the_piwik_journey_type_variable
@@ -94,7 +94,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       given_the_piwik_request_has_been_stubbed
       given_im_on_the_sign_in_page
       when_i_click_start_now
-      expect(page).to have_title('About - GOV.UK Verify - GOV.UK')
+      expect(page).to have_title t('hub.about.title')
       expect_to_have_updated_the_piwik_journey_type_variable
     end
   end

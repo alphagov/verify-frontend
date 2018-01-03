@@ -10,7 +10,7 @@ RSpec.describe 'user encounters error page' do
     stub_session_creation_error
     visit '/test-saml'
     click_button "saml-post"
-    expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to have_content t('errors.something_went_wrong.heading')
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
   end
@@ -26,8 +26,8 @@ RSpec.describe 'user encounters error page' do
     stub_request(:get, api_transactions_endpoint).to_return(body: bad_transactions_json.to_json, status: 200)
     visit '/test-saml'
     click_button "saml-post"
-    expect(page).to have_content "Sorry, something went wrong"
-    expect(page).to_not have_content "Find the service you were using to start again"
+    expect(page).to have_content t('errors.something_went_wrong.heading')
+    expect(page).to_not have_content t('hub.transaction_list.title')
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page.status_code).to eq(500)
   end
@@ -37,7 +37,7 @@ RSpec.describe 'user encounters error page' do
     stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
-    expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to have_content t('errors.something_went_wrong.heading')
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page.status_code).to eq(500)
   end
@@ -48,7 +48,7 @@ RSpec.describe 'user encounters error page' do
     stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
-    expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to have_content t('errors.something_went_wrong.heading')
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page.status_code).to eq(500)
   end
@@ -60,7 +60,7 @@ RSpec.describe 'user encounters error page' do
     stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
-    expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to have_content t('errors.something_went_wrong.heading')
     expect(page.status_code).to eq(500)
   end
 
@@ -72,7 +72,7 @@ RSpec.describe 'user encounters error page' do
     stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
-    expect(page).to have_content "Sorry, something went wrong"
+    expect(page).to have_content t('errors.something_went_wrong.heading')
     expect(page.status_code).to eq(500)
   end
 
@@ -88,8 +88,8 @@ RSpec.describe 'user encounters error page' do
       stub_request(:post, api_saml_endpoint).to_return(body: error_body.to_json, status: 400)
       visit('/test-saml')
       click_button 'saml-post'
-      expect(page).to have_content "You need to start again"
-      expect(page).to have_content "For security reasons"
+      expect(page).to have_content t('errors.session_error.heading')
+      expect(page).to have_content t('errors.session_error.security')
       expect(page).to have_css "#piwik-custom-url", text: "errors/session-error"
       expect(page.status_code).to eq(400)
     end
@@ -99,8 +99,8 @@ RSpec.describe 'user encounters error page' do
       stub_request(:post, api_saml_endpoint).to_return(body: error_body.to_json, status: 400)
       visit('/test-saml')
       click_button 'saml-post'
-      expect(page).to have_content "Your session has timed out"
-      expect(page).to have_content "Please go back to your service"
+      expect(page).to have_content t('errors.session_timeout.title')
+      expect(page).to have_content t('errors.session_timeout.return_to_service')
       expect(page).to have_css "#piwik-custom-url", text: "errors/timeout-error"
       expect(page).to have_css "a[href*=EXPIRED_ERROR_PAGE]"
       expect(page.status_code).to eq(403)
@@ -110,7 +110,7 @@ RSpec.describe 'user encounters error page' do
       stub_request(:post, api_select_idp_endpoint).and_return(status: 403)
       visit sign_in_cy_path
       click_button 'Welsh IDCorp'
-      expect(page).to have_content I18n.translate('errors.something_went_wrong.heading', locale: :cy)
+      expect(page).to have_content t('errors.something_went_wrong.heading', locale: :cy)
       expect(page.status_code).to eq(500)
     end
 
@@ -118,7 +118,7 @@ RSpec.describe 'user encounters error page' do
       stub_request(:post, api_select_idp_endpoint).and_return(status: 403)
       visit sign_in_path
       click_button 'IDCorp'
-      expect(page).to have_content "Sorry, something went wrong"
+      expect(page).to have_content t('errors.something_went_wrong.heading')
       expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
       expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
       expect(page.status_code).to eq(500)

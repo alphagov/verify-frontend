@@ -12,13 +12,13 @@ RSpec.describe 'When the user visits the forgot company page' do
 
     expect_feedback_source_to_be(page, 'FORGOT_COMPANY_PAGE', '/forgot-company')
     expect(page).to have_content 'We can’t tell you which company verified you'
-    expect(page).to have_link(I18n.t('navigation.back'))
+    expect(page).to have_link t('navigation.back')
   end
 
   it 'takes us back to the sign-in page when the Back link is clicked' do
     stub_api_idp_list_for_sign_in
     visit '/forgot-company'
-    click_link I18n.t('navigation.back')
+    click_link t('navigation.back')
 
     expect(page).to have_current_path('/sign-in')
   end
