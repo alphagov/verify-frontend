@@ -24,7 +24,7 @@ RSpec.feature 'When user visits document selection page' do
     choose 'select_documents_form_any_driving_licence_true'
     choose 'select_documents_form_driving_licence_great_britain'
     choose 'select_documents_form_passport_true'
-    click_button 'Continue'
+    click_button t('navigation.continue')
     expect(page).to have_current_path(select_phone_path)
     expect(page.get_rack_session['selected_answers']).to eql(
       'device_type' => { 'device_type_other' => true },
@@ -45,7 +45,7 @@ RSpec.feature 'When user visits document selection page' do
     it 'should go to other documents page if user does not have UK driving licence or UK passport' do
       choose 'select_documents_form_any_driving_licence_false'
       choose 'select_documents_form_passport_false'
-      click_button 'Continue'
+      click_button t('navigation.continue')
       expect(page).to have_current_path(other_identity_documents_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },

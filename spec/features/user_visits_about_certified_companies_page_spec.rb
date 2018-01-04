@@ -23,8 +23,8 @@ RSpec.describe 'When the user visits the about certified companies page' do
     it 'displays content in Welsh' do
       visit '/am-gwmniau-ardystiedig'
 
-      expect(page).to have_content 'Sut y gall cwmnïau wirio hunaniaeth'
-      expect(page).to have_content 'Gall y cwmnïau hyn ddefnyddio eu data eu hunain'
+      expect(page).to have_content t('hub.about_certified_companies.summary', locale: :cy)
+      expect(page.body).to include t('hub.about_certified_companies.details_html', locale: :cy)
     end
 
     it 'displays IdPs that are enabled' do
@@ -36,8 +36,8 @@ RSpec.describe 'When the user visits the about certified companies page' do
     it 'will show "How companies can verify identities" section' do
       visit '/about-certified-companies'
 
-      expect(page).to have_content 'How companies can verify identities'
-      expect(page).to have_content 'These companies can use their own data'
+      expect(page).to have_content t('hub.about_certified_companies.summary')
+      expect(page.body).to include t('hub.about_certified_companies.details_html')
     end
 
     it 'will go to about identity accounts page when next is clicked' do
@@ -65,8 +65,8 @@ RSpec.describe 'When the user visits the about certified companies page' do
     it 'displays content in Welsh' do
       visit '/am-gwmniau-ardystiedig'
 
-      expect(page).to have_content 'Sut y gall cwmnïau wirio hunaniaeth'
-      expect(page).to have_content 'Gall y cwmnïau hyn ddefnyddio eu data eu hunain'
+      expect(page).to have_content t('hub.about_certified_companies.summary', locale: :cy)
+      expect(page.body).to include t('hub.about_certified_companies.loa1_details_html', locale: :cy)
     end
 
     it 'displays IdPs that are enabled' do
@@ -78,8 +78,8 @@ RSpec.describe 'When the user visits the about certified companies page' do
     it 'will show "How companies can verify identities" section' do
       visit '/about-certified-companies'
 
-      expect(page).to have_content 'How companies can verify identities'
-      expect(page).to have_content 'These companies can use their own data'
+      expect(page).to have_content t('hub.about_certified_companies.summary')
+      expect(page.body).to include t('hub.about_certified_companies.loa1_details_html')
     end
 
     it 'will go to about identity accounts page when next is clicked' do

@@ -14,16 +14,16 @@ RSpec.describe 'When user visits the confirmation page' do
 
   it 'includes the appropriate feedback source, title and content' do
     visit '/confirmation'
-    expect(page).not_to have_link I18n.t('feedback_link.feedback_form')
-    expect(page).to have_link I18n.t('hub.feedback.title'), href: '/feedback?feedback-source=CONFIRMATION_PAGE'
-    expect(page).to have_title("#{I18n.t('hub.confirmation.title')} - GOV.UK Verify - GOV.UK")
-    expect(page).to have_text(I18n.t('hub.confirmation.message', display_name: 'IDCorp'))
-    expect(page).to have_text(I18n.t('hub.confirmation.continue_to_rp', transaction_name: 'register for an identity profile'))
+    expect(page).not_to have_link t('feedback_link.feedback_form')
+    expect(page).to have_link t('hub.feedback.title'), href: '/feedback?feedback-source=CONFIRMATION_PAGE'
+    expect(page).to have_title t('hub.confirmation.title')
+    expect(page).to have_text t('hub.confirmation.message', display_name: 'IDCorp')
+    expect(page).to have_text t('hub.confirmation.continue_to_rp', transaction_name: 'register for an identity profile')
   end
 
   it 'displays the IDP name' do
     visit '/confirmation'
-    expect(page).to have_text(I18n.t('hub.confirmation.heading', display_name: 'IDCorp'))
+    expect(page).to have_text t('hub.confirmation.heading', display_name: 'IDCorp')
   end
 
   it 'displays the page in Welsh' do
@@ -39,7 +39,7 @@ RSpec.describe 'When user visits the confirmation page' do
   it 'sends user to response-processing page when they click the link' do
     stub_matching_outcome
     visit '/confirmation'
-    click_link I18n.t('navigation.continue')
+    click_link t('navigation.continue')
     expect(page).to have_current_path(response_processing_path)
   end
 
@@ -47,13 +47,13 @@ RSpec.describe 'When user visits the confirmation page' do
     stub_transactions_list
     set_loa_in_session('LEVEL_1')
     visit '/confirmation'
-    expect(page).to have_text(I18n.t('hub.confirmation.extra_security'))
+    expect(page).to have_text t('hub.confirmation.extra_security')
   end
 
   it 'does not display government services requiring extra security when LOA is level two' do
     stub_transactions_list
     set_loa_in_session('LEVEL_2')
     visit '/confirmation'
-    expect(page).not_to have_text(I18n.t('hub.confirmation.extra_security'))
+    expect(page).not_to have_text t('hub.confirmation.extra_security')
   end
 end

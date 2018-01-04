@@ -32,7 +32,7 @@ RSpec.describe 'When the user visits a page' do
       )
       set_session_and_session_cookies!
       visit '/start'
-      expect(page).to have_content 'Sign in with GOV.UK Verify'
+      expect(page).to have_content t('hub.start.heading')
     end
 
     it 'and in Welsh sends the page title in English to analytics' do
@@ -55,7 +55,7 @@ RSpec.describe 'When the user visits a page' do
         )
       )
       visit '/start'
-      expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
+      expect(page).to have_content t('errors.no_cookies.enable_cookies')
     end
 
     it 'sends an event to Piwik only when the user changes selection, on the start page' do
@@ -91,7 +91,7 @@ RSpec.describe 'When the user visits a page' do
     it 'sends a page view to analytics' do
       set_session_and_session_cookies!
       visit '/start'
-      expect(page).to have_content 'Sign in with GOV.UK Verify'
+      expect(page).to have_content t('hub.start.heading')
       noscript_image = page.find(:id, 'piwik-noscript-tracker')
       expect(noscript_image).to_not be_nil
       image_src = noscript_image['src']
@@ -115,7 +115,7 @@ RSpec.describe 'When the user visits a page' do
     it 'sends a page view with a custom url for error pages' do
       stub_transactions_list
       visit '/start'
-      expect(page).to have_content "If you can’t access GOV.UK Verify from a service, enable your cookies."
+      expect(page).to have_content t('errors.no_cookies.enable_cookies')
       noscript_image = page.find(:id, 'piwik-noscript-tracker')
       expect(noscript_image).to_not be_nil
       image_src = noscript_image['src']

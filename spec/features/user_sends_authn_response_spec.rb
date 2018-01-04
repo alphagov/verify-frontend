@@ -30,7 +30,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     visit('/test-saml?session-id=junk')
     click_button 'saml-response-post'
 
-    expect(page).to have_content 'something went wrong'
+    expect(page).to have_content t('errors.something_went_wrong.heading')
   end
 
   it 'will redirect the user to /confirmation when successfully registered' do

@@ -29,7 +29,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
       choose 'select_phone_form_smart_phone_true', allow_label_click: true
-      click_button 'Continue'
+      click_button t('navigation.continue')
 
       expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql(
@@ -44,7 +44,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
       choose 'select_phone_form_smart_phone_do_not_know', allow_label_click: true
-      click_button 'Continue'
+      click_button t('navigation.continue')
 
       expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
       expect(page.get_rack_session['selected_answers']).to eql(
@@ -61,11 +61,11 @@ RSpec.describe 'When the user visits the select phone page' do
 
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
       choose 'select_phone_form_smart_phone_true', allow_label_click: true
-      click_button 'Continue'
+      click_button t('navigation.continue')
 
       visit '/select-phone'
       choose 'select_phone_form_mobile_phone_false', allow_label_click: true
-      click_button 'Continue'
+      click_button t('navigation.continue')
 
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
@@ -76,7 +76,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
     it 'shows an error message when no selections are made' do
       visit '/select-phone'
-      click_button 'Continue'
+      click_button t('navigation.continue')
 
       expect(page).to have_css '.validation-message', text: 'Please answer all the questions'
       expect(page).to have_css '.form-group-error'
@@ -91,7 +91,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
       choose 'select_phone_form_mobile_phone_true', allow_label_click: true
       choose 'select_phone_form_smart_phone_true', allow_label_click: true
-      click_button 'Continue'
+      click_button t('navigation.continue')
 
       expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page.get_rack_session['selected_answers']).to eql(
@@ -104,7 +104,7 @@ RSpec.describe 'When the user visits the select phone page' do
     it 'should display a validation message when user does not answer mobile phone question' do
       visit '/select-phone'
 
-      click_button 'Continue'
+      click_button t('navigation.continue')
 
       expect(page).to have_current_path(select_phone_path)
       expect(page).to have_css '#validation-error-message-js', text: 'Please answer all the questions'
@@ -114,7 +114,7 @@ RSpec.describe 'When the user visits the select phone page' do
       visit '/select-phone'
 
       choose 'select_phone_form_mobile_phone_false', allow_label_click: true
-      click_button 'Continue'
+      click_button t('navigation.continue')
 
       expect(page).to have_current_path(no_mobile_phone_path)
       expect(page.get_rack_session['selected_answers']).to eql(
@@ -132,7 +132,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
   it 'displays the page in Welsh' do
     visit 'dewis-ffon'
-    expect(page).to have_title 'Oes gennych ffôn symudol neu lechen?'
+    expect(page).to have_title t('hub.select_phone.title', locale: :cy)
     expect(page).to have_css 'html[lang=cy]'
   end
 
@@ -145,7 +145,7 @@ RSpec.describe 'When the user visits the select phone page' do
 
     choose 'select_phone_form_mobile_phone_true', allow_label_click: true
     choose 'select_phone_form_smart_phone_true', allow_label_click: true
-    click_button 'Continue'
+    click_button t('navigation.continue')
 
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
@@ -155,7 +155,7 @@ RSpec.describe 'When the user visits the select phone page' do
     piwik_request = { 'action_name' => 'Phone Next' }
     visit '/select-phone'
 
-    click_button 'Continue'
+    click_button t('navigation.continue')
 
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to_not have_been_made
   end

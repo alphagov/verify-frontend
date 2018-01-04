@@ -5,13 +5,13 @@ RSpec.describe 'When the user visits the Verify services picker page' do
   it 'should display the page in English ' do
     stub_transactions_list
     visit '/verify-services'
-    expect(page).to have_content('GOV.UK Verify is new, and government services are joining all the time. The current services using Verify are:')
+    expect(page).to have_content t('hub.verify_services.message')
   end
 
   it 'should display the page in Welsh' do
     stub_transactions_list
     visit '/verify-services-cy'
-    expect(page).to have_content('GOV.UK Verify is new, and government services are joining all the time. The current services using Verify are:')
+    expect(page).to have_content t('hub.verify_services.message', locale: :cy)
   end
 
   it 'should include the appropriate feedback source' do

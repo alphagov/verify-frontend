@@ -1,6 +1,5 @@
 require 'feature_helper'
 require 'api_test_helper'
-require 'i18n'
 
 describe 'When the user visits the choose a certified company page' do
   before(:each) do
@@ -31,7 +30,7 @@ describe 'When the user visits the choose a certified company page' do
       visit '/choose-a-certified-company'
 
       expect(page).to have_current_path(choose_a_certified_company_path)
-      expect(page).to have_content('Based on your answers, 3 companies can verify you now:')
+      expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '3 companies')
       within('#matching-idps') do
         expect(page).to have_button('Choose IDCorp')
       end
@@ -67,7 +66,7 @@ describe 'When the user visits the choose a certified company page' do
     it 'displays the page in Welsh' do
       visit '/dewis-cwmni-ardystiedig'
 
-      expect(page).to have_title 'Dewiswch gwmni ardystiedig - GOV.UK Verify - GOV.UK'
+      expect(page).to have_title t('hub.choose_a_certified_company.title', locale: :cy)
       expect(page).to have_css 'html[lang=cy]'
     end
   end
@@ -108,7 +107,7 @@ describe 'When the user visits the choose a certified company page' do
 
     expect(page).to have_current_path(choose_a_certified_company_path)
     expect(page).to_not have_css('#non-matching-idps')
-    expect(page).to have_content('Based on your answers, no companies can verify you now:')
+    expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: 'no companies')
   end
 
   it 'recommends some IDPs with a recommended profile, hides non-recommended profiles, and omits non-matching profiles' do
@@ -124,7 +123,7 @@ describe 'When the user visits the choose a certified company page' do
 
     visit '/choose-a-certified-company'
 
-    expect(page).to have_content('Based on your answers, 2 companies can verify you now:')
+    expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '2 companies')
     within('#matching-idps') do
       expect(page).to have_button('Choose No Docs IDP')
       expect(page).to have_button('Choose IDCorp')

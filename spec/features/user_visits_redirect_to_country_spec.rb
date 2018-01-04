@@ -1,6 +1,5 @@
 require 'feature_helper'
 require 'api_test_helper'
-require 'i18n'
 
 RSpec.describe 'When the user visits the redirect to country page' do
   before(:each) do
@@ -28,7 +27,7 @@ RSpec.describe 'When the user visits the redirect to country page' do
 
     visit '/redirect-to-country'
 
-    expect(page).to have_content 'Sorry, something went wrong'
+    expect(page).to have_content t('errors.something_went_wrong.heading')
   end
 
   it 'should show something went wrong when visiting redirect to country directly without choosing a country' do
@@ -38,6 +37,6 @@ RSpec.describe 'When the user visits the redirect to country page' do
 
     visit '/redirect-to-country'
 
-    expect(page).to have_content 'Sorry, something went wrong'
+    expect(page).to have_content t('errors.something_went_wrong.heading')
   end
 end

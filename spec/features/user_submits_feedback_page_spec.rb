@@ -2,8 +2,10 @@ require 'feature_helper'
 require 'api_test_helper'
 
 RSpec.feature 'When the user submits the feedback page' do
+  let(:what_text_field) { 'Using verify' }
+  let(:details_text_field) { 'Some details' }
   let(:session_not_valid_link) {
-    I18n.t('hub.feedback_sent.session_not_valid', link: I18n.t('hub.feedback_sent.session_not_valid_link'))
+    t('hub.feedback_sent.session_not_valid', link: t('hub.feedback_sent.session_not_valid_link'))
   }
   context 'user session invalid' do
     before(:each) do
@@ -13,32 +15,32 @@ RSpec.feature 'When the user submits the feedback page' do
     it 'when user provides email should say message has been received and show invalid session link' do
       visit feedback_path
 
-      fill_in 'feedback_form_what', with: 'Using verify'
-      fill_in 'feedback_form_details', with: 'Some details'
+      fill_in 'feedback_form_what', with: what_text_field
+      fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_true'
       fill_in 'feedback_form_name', with: 'Bob Smith'
       fill_in 'feedback_form_email', with: 'bob@smith.com'
 
-      click_button I18n.t('hub.feedback.send_message')
-      expect(page).to have_title(I18n.t('hub.feedback_sent.title'))
+      click_button t('hub.feedback.send_message')
+      expect(page).to have_title t('hub.feedback_sent.title')
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
-      expect(page).to have_content(I18n.t('hub.feedback_sent.message_email'))
-      expect(page).to have_content(session_not_valid_link)
-      expect(page).to have_content I18n.t('hub.transaction_list.title')
+      expect(page).to have_content t('hub.feedback_sent.message_email')
+      expect(page).to have_content session_not_valid_link
+      expect(page).to have_content t('hub.transaction_list.title')
     end
 
     it 'when user does not provide email should not say message has been sent and show invalid session link' do
       visit feedback_path
 
-      fill_in 'feedback_form_what', with: 'Using verify'
-      fill_in 'feedback_form_details', with: 'Some details'
+      fill_in 'feedback_form_what', with: what_text_field
+      fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false'
 
-      click_button I18n.t('hub.feedback.send_message')
+      click_button t('hub.feedback.send_message')
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
-      expect(page).to_not have_content(I18n.t('hub.feedback_sent.message_email'))
-      expect(page).to have_content(session_not_valid_link)
-      expect(page).to have_content I18n.t('hub.transaction_list.title')
+      expect(page).to_not have_content t('hub.feedback_sent.message_email')
+      expect(page).to have_content session_not_valid_link
+      expect(page).to have_content t('hub.transaction_list.title')
     end
 
     it 'when session has timed out should show invalid session link' do
@@ -50,36 +52,36 @@ RSpec.feature 'When the user submits the feedback page' do
 
       visit feedback_path
 
-      fill_in 'feedback_form_what', with: 'Using verify'
-      fill_in 'feedback_form_details', with: 'Some details'
+      fill_in 'feedback_form_what', with: what_text_field
+      fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false'
 
-      click_button I18n.t('hub.feedback.send_message')
-      expect(page).to have_content(session_not_valid_link)
-      expect(page).to have_content I18n.t('hub.transaction_list.title')
+      click_button t('hub.feedback.send_message')
+      expect(page).to have_content session_not_valid_link
+      expect(page).to have_content t('hub.transaction_list.title')
     end
   end
 
   it 'should be able to direct user back to the Verify product page if email could not be sent on first attempt' do
     visit '/feedback?feedback-source=PRODUCT_PAGE'
 
-    fill_in 'feedback_form_what', with: 'Verify my identity'
-    fill_in 'feedback_form_details', with: 'Some details'
+    fill_in 'feedback_form_what', with: what_text_field
+    fill_in 'feedback_form_details', with: details_text_field
     choose 'feedback_form_reply_false', allow_label_click: true
 
     allow_any_instance_of(FeedbackService).to receive(:submit!).and_return(false)
 
-    click_button I18n.t('hub.feedback.send_message')
+    click_button t('hub.feedback.send_message')
 
     expect(page).to have_current_path(feedback_path)
-    expect(page).to have_content 'Verify my identity'
-    expect(page).to have_content 'Some details'
+    expect(page).to have_content what_text_field
+    expect(page).to have_content details_text_field
 
     allow_any_instance_of(FeedbackService).to receive(:submit!).and_return(true)
 
-    click_button I18n.t('hub.feedback.send_message')
-    expect(page).to have_title(I18n.t('hub.feedback_sent.title'))
-    expect(page).to have_link 'Return to the GOV.UK Verify product page', href: 'https://govuk-verify.cloudapps.digital/'
+    click_button t('hub.feedback.send_message')
+    expect(page).to have_title t('hub.feedback_sent.title')
+    expect(page).to have_link t('hub.feedback_sent.product_page'), href: 'https://govuk-verify.cloudapps.digital/'
   end
 
   context 'user session valid' do
@@ -90,72 +92,72 @@ RSpec.feature 'When the user submits the feedback page' do
 
     it 'should show user link back to start page' do
       visit start_path
-      click_link I18n.t('feedback_link.feedback_form')
+      click_link t('feedback_link.feedback_form')
 
-      fill_in 'feedback_form_what', with: 'Using verify'
-      fill_in 'feedback_form_details', with: 'Some details'
+      fill_in 'feedback_form_what', with: what_text_field
+      fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false'
 
-      click_button I18n.t('hub.feedback.send_message')
+      click_button t('hub.feedback.send_message')
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
-      expect(page).to_not have_content(session_not_valid_link)
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_valid_link'), href: start_path
+      expect(page).to_not have_content session_not_valid_link
+      expect(page).to have_link t('hub.feedback_sent.session_valid_link'), href: start_path
     end
 
     it 'should show user link back to page the user came from' do
       visit select_documents_path
-      click_link I18n.t('feedback_link.feedback_form')
+      click_link t('feedback_link.feedback_form')
 
-      fill_in 'feedback_form_what', with: 'Using verify'
-      fill_in 'feedback_form_details', with: 'Some details'
+      fill_in 'feedback_form_what', with: what_text_field
+      fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false'
 
-      click_button I18n.t('hub.feedback.send_message')
+      click_button t('hub.feedback.send_message')
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
-      expect(page).to_not have_content(session_not_valid_link)
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_valid_link'), href: select_documents_path
+      expect(page).to_not have_content session_not_valid_link
+      expect(page).to have_link t('hub.feedback_sent.session_valid_link'), href: select_documents_path
     end
 
     it 'should show user link back to start page if the user came from an error page' do
       visit about_path
       visit '/404'
-      click_link I18n.t('feedback_link.feedback_form')
+      click_link t('feedback_link.feedback_form')
 
-      fill_in 'feedback_form_what', with: 'Using verify'
-      fill_in 'feedback_form_details', with: 'Some details'
+      fill_in 'feedback_form_what', with: what_text_field
+      fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false'
 
-      click_button I18n.t('hub.feedback.send_message')
+      click_button t('hub.feedback.send_message')
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
-      expect(page).to_not have_content(session_not_valid_link)
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_valid_link'), href: start_path
+      expect(page).to_not have_content session_not_valid_link
+      expect(page).to have_link t('hub.feedback_sent.session_valid_link'), href: start_path
     end
 
     it 'should show user link back to start page if the user directly visits the feedback page' do
       visit feedback_path
 
-      fill_in 'feedback_form_what', with: 'Using verify'
-      fill_in 'feedback_form_details', with: 'Some details'
+      fill_in 'feedback_form_what', with: what_text_field
+      fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false'
 
-      click_button I18n.t('hub.feedback.send_message')
+      click_button t('hub.feedback.send_message')
       expect(page).to have_current_path(feedback_sent_path, only_path: true)
-      expect(page).to_not have_content(session_not_valid_link)
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_valid_link'), href: start_path
+      expect(page).to_not have_content session_not_valid_link
+      expect(page).to have_link t('hub.feedback_sent.session_valid_link'), href: start_path
     end
 
     it 'should show feedback sent in Welsh and have the appropriate link back to Verify' do
       visit select_documents_cy_path
-      click_link I18n.t('feedback_link.feedback_form', locale: :cy)
+      click_link t('feedback_link.feedback_form', locale: :cy)
 
-      fill_in 'feedback_form_what', with: 'Using verify'
-      fill_in 'feedback_form_details', with: 'Some details'
+      fill_in 'feedback_form_what', with: what_text_field
+      fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false'
-      click_button I18n.t('hub.feedback.send_message', locale: :cy)
+      click_button t('hub.feedback.send_message', locale: :cy)
 
-      expect(page).to have_title I18n.t('hub.feedback_sent.title', locale: :cy)
+      expect(page).to have_title t('hub.feedback_sent.title', locale: :cy)
       expect(page).to have_css 'html[lang=cy]'
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_valid_link', locale: :cy), href: select_documents_cy_path
+      expect(page).to have_link t('hub.feedback_sent.session_valid_link', locale: :cy), href: select_documents_cy_path
     end
 
     it 'should be able to direct user back to the relevant page if user switches to Welsh on the feedback page' do
@@ -165,12 +167,12 @@ RSpec.feature 'When the user submits the feedback page' do
 
       expect(page).to have_current_path('/adborth')
 
-      fill_in 'feedback_form_what', with: 'Verify my identity'
-      fill_in 'feedback_form_details', with: 'Some details'
+      fill_in 'feedback_form_what', with: what_text_field
+      fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false', allow_label_click: true
 
-      click_button I18n.t('hub.feedback.send_message', locale: :cy)
-      expect(page).to have_link I18n.t('hub.feedback_sent.session_valid_link', locale: :cy), href: '/dechrau'
+      click_button t('hub.feedback.send_message', locale: :cy)
+      expect(page).to have_link t('hub.feedback_sent.session_valid_link', locale: :cy), href: '/dechrau'
     end
   end
 end

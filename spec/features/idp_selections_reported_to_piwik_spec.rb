@@ -42,8 +42,8 @@ RSpec.describe 'When the user selects an IDP' do
     piwik_registration_virtual_page = idcorp_registration_piwik_request
 
     visit '/choose-a-certified-company'
-    click_button 'Choose IDCorp'
-    click_button 'Continue to the IDCorp website'
+    click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
+    click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
     expect(piwik_registration_virtual_page).to have_been_made.once
   end
@@ -58,14 +58,14 @@ RSpec.describe 'When the user selects an IDP' do
       segments: ['non-protected-segment-3'],
     )
     visit '/choose-a-certified-company'
-    click_button 'Choose IDCorp'
-    click_button 'Continue to the IDCorp website'
+    click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
+    click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
     expect(idcorp_piwik_request).to have_been_made.once
 
     visit '/choose-a-certified-company'
-    click_button 'Choose Bob’s Identity Service'
-    click_button 'Continue to the Bob’s Identity Service website'
+    click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-two.name'))
+    click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-two.name'))
 
     expect(idcorp_and_bobs_piwik_request).to have_been_made.once
   end
@@ -81,8 +81,8 @@ RSpec.describe 'When the user selects an IDP' do
     )
     page.set_rack_session(selected_idp_names: idps)
     visit '/choose-a-certified-company'
-    click_button 'Choose IDCorp'
-    click_button 'Continue to the IDCorp website'
+    click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
+    click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
     expect(idcorp_piwik_request).to have_been_made.once
   end

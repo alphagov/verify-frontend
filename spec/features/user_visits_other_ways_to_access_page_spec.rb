@@ -9,9 +9,9 @@ RSpec.describe 'When the user visits the other ways to access page' do
   it 'includes expected content' do
     visit '/other-ways-to-access-service'
 
-    expect(page).to have_title 'Other ways to access the service - GOV.UK Verify - GOV.UK'
-    expect(page).to have_content 'Other ways to register for an identity profile'
-    expect(page).to have_content 'If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile'
+    expect(page).to have_title t('hub.other_ways_title')
+    expect(page).to have_content t('hub.other_ways_heading', other_ways_description: t('rps.test-rp.name'))
+    expect(page.body).to include t('rps.test-rp.other_ways_text')
     expect(page).to have_link 'here', href: 'http://www.example.com'
     expect_feedback_source_to_be(page, 'OTHER_WAYS_PAGE', '/other-ways-to-access-service')
   end
@@ -19,8 +19,9 @@ RSpec.describe 'When the user visits the other ways to access page' do
   it 'includes expected content in welsh' do
     visit "/ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth"
 
-    expect(page).to have_title 'Ffyrdd eraill i gael mynediad i’r gwasanaeth - GOV.UK Verify - GOV.UK'
-    expect(page).to have_content 'Ffyrdd eraill i register for an identity profile'
-    expect(page).to have_content 'If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile'
+    expect(page).to have_title t('hub.other_ways_title', locale: :cy)
+    expect(page).to have_content t('hub.other_ways_heading', locale: :cy, other_ways_description: t('rps.test-rp.name'))
+
+    expect(page.body).to include t('rps.test-rp.other_ways_text')
   end
 end

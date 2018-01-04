@@ -14,13 +14,13 @@ RSpec.describe 'When the user visits the why companies page' do
 
   it 'displays the page in Welsh' do
     visit '/pam-cwmniau'
-    expect(page).to have_title 'Pam fod dewis o gwmnïau - GOV.UK Verify - GOV.UK'
+    expect(page).to have_title t('hub.why_companies.title', locale: :cy)
     expect(page).to have_css 'html[lang=cy]'
   end
 
   it 'includes links to choose-a-certified-company page' do
     visit '/why-companies'
-    expect(page).to have_title('Why there’s a choice of companies - GOV.UK Verify - GOV.UK')
+    expect(page).to have_title t('hub.why_companies.title')
     expect(page).to have_link 'Back', href: '/choose-a-certified-company'
     expect(page).to have_link 'Choose a company', href: '/choose-a-certified-company'
   end

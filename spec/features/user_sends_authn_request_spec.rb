@@ -11,7 +11,7 @@ describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post'
 
-      expect(page).to have_title 'Start - GOV.UK Verify - GOV.UK'
+      expect(page).to have_title t('hub.start.title')
 
       expect(page.get_rack_session['transaction_simple_id']).to eql 'test-rp'
       expect(page.get_rack_session['verify_session_id']).to eql default_session_id
@@ -33,7 +33,7 @@ describe 'user sends authn requests' do
       stub_session_creation('transactionSupportsEidas' => true)
       visit('/test-saml')
       click_button 'saml-post-journey-hint'
-      expect(page).to have_title 'Confirm your identity - GOV.UK Verify - GOV.UK'
+      expect(page).to have_title t('hub.confirm_your_identity.title')
       expect(page.get_rack_session['transaction_supports_eidas']).to eql true
     end
 
@@ -45,7 +45,7 @@ describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post-eidas'
 
-      expect(page).to have_title 'Choose a country - GOV.UK Verify - GOV.UK'
+      expect(page).to have_title t('hub.choose_country.title')
       expect(page.get_rack_session['transaction_supports_eidas']).to eql true
     end
 
@@ -56,7 +56,7 @@ describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post-eidas'
 
-      expect(page).to have_content 'Sorry, something went wrong'
+      expect(page).to have_content t('errors.something_went_wrong.heading')
       expect(page.get_rack_session['transaction_supports_eidas']).to eql false
     end
 
@@ -113,7 +113,7 @@ describe 'user sends authn requests' do
       stub_transactions_list
       visit('/test-saml')
       click_button 'saml-post'
-      expect(page).to have_content 'Sorry, something went wrong'
+      expect(page).to have_content t('errors.something_went_wrong.heading')
     end
   end
 end

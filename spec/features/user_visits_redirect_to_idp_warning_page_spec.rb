@@ -66,7 +66,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     given_a_session_with_document_answers
     visit '/redirect-to-idp-warning'
 
-    expect(page).to have_title "You'll now be redirected - GOV.UK Verify - GOV.UK"
+    expect(page).to have_title t('hub.redirect_to_idp_warning.title')
     expect_feedback_source_to_be(page, 'REDIRECT_TO_IDP_WARNING_PAGE', '/redirect-to-idp-warning')
   end
 
@@ -74,7 +74,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     given_a_session_with_document_answers
     visit '/ailgyfeirio-i-rybudd-idp'
 
-    expect(page).to have_title "Byddwch nawr yn cael eich ailgyfeirio - GOV.UK Verify - GOV.UK"
+    expect(page).to have_title t('hub.redirect_to_idp_warning.title', locale: :cy)
     expect(page).to have_css 'html[lang=cy]'
   end
 
@@ -82,7 +82,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     stub_transactions_list
     visit '/redirect-to-idp-warning'
 
-    expect(page).to have_content 'something went wrong'
+    expect(page).to have_content t('errors.something_went_wrong.heading')
   end
 
   it 'will render the error page given a session with an IDP that has no display data' do
@@ -91,7 +91,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
     visit '/redirect-to-idp-warning'
 
-    expect(page).to have_content('Sorry, something went wrong')
+    expect(page).to have_content t('errors.something_went_wrong.heading')
   end
 
   it 'goes to "redirect-to-idp" page on submit' do
@@ -109,7 +109,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       segments: ['test-segment'],
     )
 
-    click_button 'Continue to the IDCorp website'
+    click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
     expect(page).to have_current_path(redirect_to_idp_register_path)
     expect(select_idp_stub_request).to have_been_made.once
@@ -127,7 +127,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
     piwik_registration_virtual_page = stub_piwik_idp_registration('IDCorp', selected_answers: selected_answers, segments: ['test-segment'])
 
-    click_button 'Continue to the IDCorp website'
+    click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
     expect(page).to have_current_path(redirect_to_idp_register_path)
     expect(select_idp_stub_request).to have_been_made.once
@@ -139,8 +139,8 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     given_a_session_with_document_answers
     visit '/redirect-to-idp-warning'
 
-    expect(page).to have_content 'Continue to the IDCorp website'
-    expect(page).to have_content "You'll now verify your identity on the IDCorp website"
+    expect(page.body).to have_content t('hub.redirect_to_idp_warning.continue_website', display_name: 'IDCorp')
+    expect(page.body).to include t('hub.redirect_to_idp_warning.identity_account_use_html', display_name: 'IDCorp')
   end
 
   context 'with JS enabled', js: true do
@@ -154,7 +154,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       stub_session_idp_authn_request(originating_ip, location, true)
       expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
 
-      click_button 'Continue to the IDCorp website'
+      click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")
@@ -175,7 +175,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       stub_session_idp_authn_request(originating_ip, location, true)
       expect_any_instance_of(RedirectToIdpWarningController).to receive(:continue_ajax).and_call_original
 
-      click_button 'Continue to the Bob’s Identity Service website'
+      click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-two.name'))
       expect(page).to have_current_path(location)
       expect(page).to have_content("hints are ''")
       expect(page).to have_content("language hint was ''")
