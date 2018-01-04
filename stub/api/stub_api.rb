@@ -31,6 +31,7 @@ class StubApi < Sinatra::Base
   end
 
   get '/config/idps/idp-list/:transaction_id/:level_of_assurance' do
+    if params['level_of_assurance'] == 'LEVEL_1'
     '[{
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one",
@@ -46,6 +47,13 @@ class StubApi < Sinatra::Base
         "entityId":"http://stub-idp-loa1-with-interstitial.com",
         "levelsOfAssurance": ["LEVEL_1"]
      }]'
+    else
+      '[{
+        "simpleId":"stub-idp-one",
+        "entityId":"http://example.com/stub-idp-one",
+        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
+     }]'
+    end
   end
 
   get '/config/idps/idp-list-for-sign-in/:transaction_id' do
