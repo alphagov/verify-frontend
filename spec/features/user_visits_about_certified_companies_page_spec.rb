@@ -66,7 +66,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
       visit '/am-gwmniau-ardystiedig'
 
       expect(page).to have_content t('hub.about_certified_companies.summary', locale: :cy)
-      expect(page.body).to include t('hub.about_certified_companies.details_html', locale: :cy)
+      expect(page.body).to include t('hub.about_certified_companies.loa1_details_html', locale: :cy)
     end
 
     it 'displays IdPs that are enabled' do
@@ -79,7 +79,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
       visit '/about-certified-companies'
 
       expect(page).to have_content t('hub.about_certified_companies.summary')
-      expect(page.body).to include t('hub.about_certified_companies.details_html')
+      expect(page.body).to include t('hub.about_certified_companies.loa1_details_html')
     end
 
     it 'will go to about identity accounts page when next is clicked' do
