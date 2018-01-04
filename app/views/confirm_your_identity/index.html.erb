@@ -11,5 +11,5 @@
 </div>
 
 <p>
-  <%= t('hub.confirm_your_identity.use_other_idp', sign_in_link: link_to(t('hub.confirm_your_identity.sign_in_link_message'), sign_in_path)).html_safe %>
+  <%= raw t('hub.confirm_your_identity.use_other_idp', sign_in_link: link_to(t('hub.confirm_your_identity.sign_in_link_message'), sign_in_path)) %>
 </p>

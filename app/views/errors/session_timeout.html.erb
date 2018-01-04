@@ -7,6 +7,6 @@
     <h1 class="heading-large"><%= t 'errors.session_timeout.title' %></h1>
     <h2 class="heading-medium"><%= t 'errors.session_timeout.return_to_service' %></h2>
     <p><%= link_to t('errors.session_timeout.start_again'), '/redirect-to-service/error', class: 'button' %></p>
-    <p><%= t('errors.session_timeout.feedback_message', feedback_link: link_to(t('errors.session_timeout.feedback'), feedback_path('feedback-source': feedback_source))).html_safe %></p>
+    <p><%= raw t('errors.session_timeout.feedback_message', feedback_link: link_to(t('errors.session_timeout.feedback'), feedback_path('feedback-source': feedback_source))) %></p>
   </div>
 </div>
