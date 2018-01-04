@@ -7,7 +7,7 @@
       <h1 class="heading-large"><%= @idp.display_name %></h1>
       <div class="about-idp-content">
         <p class="subtitle"><%= t 'hub.choose_a_certified_company.about.information_provided_by', display_name: @idp.display_name %></p>
-        <%= @idp.about_content.html_safe %>
+        <%= raw @idp.about_content %>
       </div>
       <%= render partial: 'choose_a_certified_company/select_idp_form', locals: {recommended: @recommended, identity_provider: @idp} %>
     </div>

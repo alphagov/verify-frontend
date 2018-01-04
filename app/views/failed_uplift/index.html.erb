@@ -11,14 +11,14 @@
     <details class="next-actions">
       <summary><span class="summary"><%= t 'hub.failed_uplift.other_ways_summary', other_ways_description: @transaction.other_ways_description %></span></summary>
       <div class="panel panel-border-narrow">
-        <%= @transaction.other_ways_text.html_safe %>
+        <%= raw @transaction.other_ways_text %>
       </div>
     </details>
 
     <details class="next-actions">
       <summary><span class="summary"><%= t 'hub.failed_uplift.contact_summary', idp_name: @idp.display_name %></span></summary>
       <div class="panel panel-border-narrow">
-        <%= @idp.contact_details.html_safe %>
+        <%= raw @idp.contact_details %>
       </div>
     </details>
 

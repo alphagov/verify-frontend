@@ -32,7 +32,7 @@
             <span class="summary"><%= t 'hub.further_information.help_with_your', cycle_three_name: @cycle_three_attribute.name %></span>
           </summary>
           <div class="panel help-finding-further-information">
-            <%= @cycle_three_attribute.help_to_find.html_safe %>
+            <%= raw @cycle_three_attribute.help_to_find %>
           </div>
         </details>
         </div>

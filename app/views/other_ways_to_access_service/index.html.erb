@@ -5,7 +5,7 @@
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'hub.other_ways_heading', other_ways_description: @other_ways_description %></h1>
     <div class="other-ways-to-complete-transaction">
-      <%= @other_ways_text.html_safe %>
+      <%= raw @other_ways_text %>
     </div>
   </div>
 </div>
