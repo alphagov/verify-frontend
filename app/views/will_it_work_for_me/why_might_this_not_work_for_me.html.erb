@@ -26,7 +26,7 @@
     <p><%= link_to t('hub.why_might_this_not_work_for_me.try_to_verify'), select_documents_path, id: 'verify-identity-online' %></p>
     <h2 class="heading-medium"><%= t 'hub.other_ways_heading', other_ways_description: @other_ways_description %></h2>
     <div class="other-ways-to-complete-transaction">
-      <%= @other_ways_text.html_safe %>
+      <%= raw @other_ways_text %>
     </div>
 
 

@@ -1,4 +1,10 @@
+require 'partials/idp_selection_partial_controller'
+require 'partials/viewable_idp_partial_controller'
+
 class SignInController < ApplicationController
+  include IdpSelectionPartialController
+  include ViewableIdpPartialController
+
   def index
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_sign_in)
 

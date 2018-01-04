@@ -1,4 +1,8 @@
+require 'partials/viewable_idp_partial_controller'
+
 class AboutLoa2Controller < ApplicationController
+  include ViewableIdpPartialController
+
   layout 'slides', except: [:choosing_a_company]
 
   def index

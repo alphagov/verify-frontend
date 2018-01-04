@@ -1,4 +1,4 @@
-module UserErrors
+module UserErrorsPartialController
   def render_error(partial, status)
     set_locale
     respond_to do |format|

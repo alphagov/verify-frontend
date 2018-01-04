@@ -1,5 +1,5 @@
 class ResponseProcessingController < ApplicationController
-  before_action :hide_available_languages
+  before_action { @hide_available_languages = true }
 
   def index
     @rp_name = current_transaction.rp_name

@@ -1,4 +1,8 @@
+require 'partials/viewable_idp_partial_controller'
+
 class ConfirmYourIdentityController < ApplicationController
+  include ViewableIdpPartialController
+
   def index
     journey_hint = journey_hint_value
 

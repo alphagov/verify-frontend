@@ -1,4 +1,8 @@
+require 'partials/viewable_idp_partial_controller'
+
 module ChooseACertifiedCompanyAbout
+  include ViewableIdpPartialController
+
   def about
     simple_id = params[:company]
     matching_idp = current_identity_providers_for_loa.detect { |idp| idp.simple_id == simple_id }

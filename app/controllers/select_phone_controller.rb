@@ -1,4 +1,8 @@
+require 'partials/viewable_idp_partial_controller'
+
 class SelectPhoneController < ApplicationController
+  include ViewableIdpPartialController
+
   def index
     @form = SelectPhoneForm.new({})
   end

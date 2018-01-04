@@ -4,7 +4,7 @@
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'hub.idp_wont_work_for_you_one_doc.heading', idp_name: @idp.display_name %></h1>
-        <%= @idp.interstitial_explanation.html_safe %>
+        <%= raw @idp.interstitial_explanation %>
 
     <div>
       <p>
