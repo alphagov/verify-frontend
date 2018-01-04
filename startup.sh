@@ -4,7 +4,6 @@
 if [ "$1" == '--stub-api' ]
 then
   echo "Starting stub-api server on port 50199"
-  export IDA_FRONTEND_HOST=http://localhost:50199
   export CONFIG_API_HOST=http://localhost:50199
   export POLICY_HOST=http://localhost:50199
   export SAML_PROXY_HOST=http://localhost:50199

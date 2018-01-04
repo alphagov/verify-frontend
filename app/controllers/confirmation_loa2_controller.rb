@@ -1,5 +1,5 @@
 class ConfirmationLoa2Controller < ApplicationController
-  before_action :hide_feedback_link
+  before_action { @hide_feedback_link = true }
   layout 'slides'
 
   def index

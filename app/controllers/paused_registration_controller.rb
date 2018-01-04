@@ -5,7 +5,7 @@ class PausedRegistrationController < ApplicationController
 
   def index
     if session_is_valid
-      @idp_name = idp_name
+      @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
       @transaction = {
           name: current_transaction.rp_name,
           homepage: current_transaction_homepage
@@ -20,9 +20,5 @@ private
 
   def session_is_valid
     session_validator.validate(cookies, session).ok? && session.key?(:selected_idp)
-  end
-
-  def idp_name
-    IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider).display_name
   end
 end

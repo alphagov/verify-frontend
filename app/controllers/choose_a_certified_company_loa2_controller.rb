@@ -1,8 +1,8 @@
+require 'partials/viewable_idp_partial_controller'
+
 class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
-
-  # TODO TT-1718: This before action can be removed after the release. Added here to ensure zero down time.
-  before_action :set_device_type_evidence
+  include ViewableIdpPartialController
 
   def index
     suggestions = IDP_RECOMMENDATION_ENGINE.get_suggested_idps(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)

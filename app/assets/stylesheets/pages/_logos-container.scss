@@ -1,0 +1,27 @@
+.logos-container {
+  margin-top: em(20, 16);
+
+  .list-logos {
+
+    li {
+      @include inline-block;
+      padding: 0 20px 0 20px;
+      width: 50%;
+      box-sizing: border-box;
+
+      @include media (tablet) {
+        max-width: 200px;
+      }
+
+      &.verify {
+        border-right-style: solid;
+        border-right-width: 1px;
+        border-right-color: $border-colour;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

@@ -1,4 +1,8 @@
+require 'partials/idp_selection_partial_controller'
+
 class RedirectToIdpController < ApplicationController
+  include IdpSelectionPartialController
+
   def register
     request_form
     report_idp_registration_to_piwik(recommended)

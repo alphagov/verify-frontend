@@ -1,5 +1,5 @@
 class RedirectToServiceController < ApplicationController
-  before_action :hide_available_languages
+  before_action { @hide_available_languages = true }
 
   def signing_in
     redirect_to_service(

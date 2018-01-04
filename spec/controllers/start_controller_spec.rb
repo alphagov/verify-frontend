@@ -9,10 +9,9 @@ describe StartController do
   end
 
   it 'renders LOA2 start page if service is level 2' do
-    # TODO uncomment when tearing down TT-1606
-    # stub_piwik_request = stub_piwik_request_with_rp_and_loa('action_name' => 'The user has reached the start page')
+    stub_piwik_request = stub_piwik_request_with_rp_and_loa('action_name' => 'The user has reached the start page')
     get :index, params: { locale: 'en' }
-    # expect(stub_piwik_request).to have_been_made.once
+    expect(stub_piwik_request).to have_been_made.once
     expect(subject).to render_template(:start)
   end
 
