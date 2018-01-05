@@ -31,15 +31,16 @@
       }
 
       var countryPickerElement = $('.country-picker').get(0);
-      window.AccessibleTypeahead({
+      window.accessibleAutocomplete({
         element: countryPickerElement,
         minLength: 2,
         autoselect: true,
-        source: suggest
+        source: suggest,
+        id: 'autocomplete'
       });
 
       $('#choose-a-country-form').submit(function (ev) {
-        var countryText = $('#typeahead').val();
+        var countryText = $('#autocomplete').val();
         var countryVal = countryValueByText[countryText];
         if (!countryVal) {
           $('#no-country').show();

@@ -65,12 +65,12 @@ RSpec.describe 'When the user visits the choose a country page' do
     expect(page).to have_select 'js-disabled-country-picker'
   end
 
-  it 'should have a typeahead when JS is enabled', js: true do
+  it 'should have a autocomplete when JS is enabled', js: true do
     given_a_session_supporting_eidas
 
     visit '/choose-a-country'
 
-    expect(page).to have_css '.typeahead__wrapper'
+    expect(page).to have_css '.autocomplete__wrapper'
   end
 
   it 'should redirect to country page (when JS is disabled)' do
@@ -113,7 +113,7 @@ RSpec.describe 'When the user visits the choose a country page' do
     visit '/choose-a-country'
 
     within '.js-show' do
-      fill_in 'input-typeahead', with: 'Netherlands'
+      fill_in 'input-autocomplete', with: 'Netherlands'
       click_on 'Select'
     end
 
@@ -127,7 +127,7 @@ RSpec.describe 'When the user visits the choose a country page' do
     visit '/choose-a-country'
 
     within '.js-show' do
-      fill_in 'input-typeahead', with: 'Sweden'
+      fill_in 'input-autocomplete', with: 'Sweden'
       click_on 'Select'
     end
 
@@ -146,7 +146,7 @@ RSpec.describe 'When the user visits the choose a country page' do
     visit '/choose-a-country'
 
     within '.js-show' do
-      fill_in 'input-typeahead', with: 'Netherlands'
+      fill_in 'input-autocomplete', with: 'Netherlands'
       click_on 'Select'
     end
 
