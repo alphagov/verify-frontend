@@ -8,6 +8,7 @@ module PolicyEndpoints
   PARAM_CYCLE_3_INPUT = 'cycle3Input'.freeze
   PARAM_SELECTED_ENTITY_ID = 'selectedIdpEntityId'.freeze
   PARAM_REGISTRATION = 'registration'.freeze
+  PARAM_REQUESTED_LOA = 'requestedLoa'.freeze
   CYCLE_THREE_SUFFIX = 'cycle-3-attribute'.freeze
   CYCLE_THREE_SUBMIT_SUFFIX = "#{CYCLE_THREE_SUFFIX}/submit".freeze
   CYCLE_THREE_CANCEL_SUFFIX = "#{CYCLE_THREE_SUFFIX}/cancel".freeze

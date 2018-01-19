@@ -39,7 +39,7 @@ class RedirectToIdpWarningController < ApplicationController
 private
 
   def select_registration(idp)
-    POLICY_PROXY.select_idp(session['verify_session_id'], idp.entity_id, true)
+    POLICY_PROXY.select_idp(session['verify_session_id'], idp.entity_id, session['requested_loa'], true)
     set_journey_hint(idp.entity_id)
     register_idp_selections(idp.display_name)
   end
