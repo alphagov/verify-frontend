@@ -93,6 +93,16 @@ cy:
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
       continue: Parhau
       error_message: Dewiswch opsiwn
+      ab_test_idp_focused_heading: Sign in with your identity account
+      ab_test_idp_focused_or: or 
+      ab_test_idp_focused_button: Set up an identity account
+      ab_test_idp_focused_description: UK government trusts these certified companies as they are part of GOV.UK Verify. Set up an identity account with a certified company so you can securely sign in to %{other_ways_description}.
+      ab_test_idp_focused_badge_text: These companies are certified to safely sign you in to online government services.
+      ab_test_idp_focused_summary: What is GOV.UK Verify?
+      ab_test_idp_focused_details_html: |
+        <p>GOV.UK Verify is designed by the UK government to fight the growing problem of online identity theft.</p>
+        <p>Companies apply to be part of GOV.UK Verify. They are certified when they meet security and privacy standards set by government so you can trust them with your personal information.</p>
+        <p>When a government service uses GOV.UK Verify, you can access the service with the identity account you set up with the certified company.</p>
     signin:
       title: Mewngofnodi gyda chwmni ardystiedig
       heading: Gyda phwy mae gennych gyfrif hunaniaeth?
