@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     add_routes :main_routes
   end
 
+  # HUB-2 delete if tearing the AB test down:
+  put 'start-select-idp', to: 'start_idp_focused_variant#select_idp_ajax', as: :start_select_idp_submit_ajax
+
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get 'service-status', to: 'service_status#index', as: :service_status

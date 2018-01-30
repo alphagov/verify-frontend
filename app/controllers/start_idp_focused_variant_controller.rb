@@ -1,32 +1,35 @@
 require 'ab_test/ab_test'
+require 'partials/viewable_idp_partial_controller'
+require 'partials/idp_selection_partial_controller'
+require 'partials/analytics_partial_controller'
 
-class StartController < ApplicationController
-  layout 'slides'
+class StartIdpFocusedVariantController < ApplicationController
+  layout 'single_idp_focused_variant'
   before_action :set_device_type_evidence
+  include ViewableIdpPartialController
+  include IdpSelectionPartialController
+  include AnalyticsPartialController
 
   AB_EXPERIMENT_NAME = 'idp_focused'.freeze
 
+
   def index
-    @form = StartForm.new({})
-
-    # HUB-2: deactivating the start page reporting for the AB test to avoid race condition
-    # FEDERATION_REPORTER.report_start_page(current_transaction, request)
-
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_sign_in)
+    @other_ways_description = current_transaction.other_ways_description
     render :start
   end
 
-  def request_post
-    @form = StartForm.new(params['start_form'] || {})
-    if @form.valid?
-      if @form.registration?
-        register
-      else
-        FEDERATION_REPORTER.report_sign_in(current_transaction, request)
-        redirect_to sign_in_path
-      end
-    else
-      flash.now[:errors] = @form.errors.full_messages.join(', ')
-      render :start
+  def select_idp
+    select_viewable_idp_for_sign_in(params.fetch('entity_id')) do |decorated_idp|
+      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
+      redirect_to redirect_to_idp_sign_in_path
+    end
+  end
+
+  def select_idp_ajax
+    select_viewable_idp_for_sign_in(params.fetch('entityId')) do |decorated_idp|
+      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
+      ajax_idp_redirection_sign_in_request
     end
   end
 
@@ -60,5 +63,12 @@ private
   def extract_experiment_route_from_cookie(ab_test_cookie)
     alternative_name = Cookies.parse_json(ab_test_cookie)[AB_EXPERIMENT_NAME]
     AB_TESTS[AB_EXPERIMENT_NAME] ? AB_TESTS[AB_EXPERIMENT_NAME].alternative_name(alternative_name) : 'default'
+  end
+
+  def sign_in(entity_id, idp_name)
+    FEDERATION_REPORTER.report_sign_in(current_transaction, request)
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'])
+    set_journey_hint(entity_id)
+    session[:selected_idp_name] = idp_name
   end
 end

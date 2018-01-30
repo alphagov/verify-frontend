@@ -20,6 +20,7 @@ module Display
         display_data,
         '/stub-logos/test-simple-id.png',
         '/stub-logos/white/test-simple-id.png',
+        '/stub-logos/small-idp-focused-variant/test-simple-id.png'
         )
       expect(result).to eql expected_result
     end

@@ -20,9 +20,30 @@ get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_no
 get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
 get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
 
-constraints IsLoa1 do
+IDP_FOCUSED = 'idp_focused'.freeze
+
+idp_focused_control_piwik = SelectRoute.new(IDP_FOCUSED, 'control', is_start_of_test: true)
+idp_focused_control = SelectRoute.new(IDP_FOCUSED, 'control', is_start_of_test: false)
+idp_focused_variant_piwik = SelectRoute.new(IDP_FOCUSED, 'variant', is_start_of_test: true)
+idp_focused_variant = SelectRoute.new(IDP_FOCUSED, 'variant', is_start_of_test: false)
+
+constraints idp_focused_control_piwik do
   get 'start', to: 'start#index', as: :start
+end
+constraints idp_focused_control do
   post 'start', to: 'start#request_post', as: :start
+end
+
+constraints idp_focused_variant_piwik do
+  get 'start', to: 'start_idp_focused_variant#index', as: :start
+end
+constraints idp_focused_variant do
+  post 'start', to: 'start_idp_focused_variant#select_idp', as: :start_submit
+end
+
+constraints IsLoa1 do
+  #get 'start', to: 'start#index', as: :start
+  #post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
@@ -41,8 +62,8 @@ constraints IsLoa1 do
 end
 
 constraints IsLoa2 do
-  get 'start', to: 'start#index', as: :start
-  post 'start', to: 'start#request_post', as: :start
+  #get 'start', to: 'start#index', as: :start
+  #post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit

@@ -1,0 +1,109 @@
+.sign-in-container {
+  max-width: 495px;
+  text-align: center;
+  border: 5px solid $panel-colour;
+  margin-top: 10px;
+  padding: 10px;
+  padding-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  .idp-list {
+    width: 205px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .idp-container {
+    height: 45px;
+    border-bottom: 1px solid $panel-colour;
+    padding-top: 10px;
+
+    .logo {
+      float: left;
+      width: 40px;
+
+      input {
+        max-height: 35px;
+        max-width: 40px;
+        cursor: pointer;
+      }
+    }
+
+    .link {
+      text-align: left;
+      padding-top: 5px;
+      white-space: nowrap;
+
+      .button-text {
+        background: none;
+        border: none;
+        font-size: inherit;
+        cursor: pointer;
+        text-decoration: underline;
+        color: $link-colour;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .verify-badge {
+    max-width: 340px;
+    height: 80px;
+    border: 3px solid $black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+
+    .logo {
+      float: left;
+      margin-right: 5px;
+
+      img {
+        height: 60px;
+        margin: 8px;
+        margin-top: 10px;
+      }
+    }
+
+    .divider {
+      width: 2px;
+      height: 60px;
+      float: left;
+      border-right: 2px solid $black;
+      margin-top: 10px;
+    }
+
+    .text {
+      padding: 10px;
+      text-align: left;
+      display: inline-block;
+      max-width: 209px;
+
+      @include media (mobile) {
+        max-width: 168px;
+      }
+    }
+  }
+
+  p {
+    text-align: left;
+
+    &.center {
+      text-align: center;
+    }
+  }
+
+  a .button {
+    margin-right: 0;
+  }
+}
+
+.single {
+  + div + .feedback-link {
+    max-width: 495px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
