@@ -4,7 +4,7 @@ class StartController < ApplicationController
   layout 'slides'
   before_action :set_device_type_evidence
 
-  AB_EXPERIMENT_NAME = 'idp_focused'.freeze
+  AB_EXPERIMENT_NAME = 'idp_focused_v2'.freeze
 
   def index
     @form = StartForm.new({})

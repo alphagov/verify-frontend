@@ -41,6 +41,27 @@ constraints idp_focused_variant do
   post 'start', to: 'start_idp_focused_variant#select_idp', as: :start_submit
 end
 
+IDP_FOCUSED_v2 = 'idp_focused_v2'.freeze
+
+idp_focused_v2_control_piwik = SelectRoute.new(IDP_FOCUSED_v2, 'control', is_start_of_test: true)
+idp_focused_v2_control = SelectRoute.new(IDP_FOCUSED_v2, 'control', is_start_of_test: false)
+idp_focused_v2_variant_piwik = SelectRoute.new(IDP_FOCUSED_v2, 'variant', is_start_of_test: true)
+idp_focused_v2_variant = SelectRoute.new(IDP_FOCUSED_v2, 'variant', is_start_of_test: false)
+
+constraints idp_focused_v2_control_piwik do
+  get 'start', to: 'start#index', as: :start
+end
+constraints idp_focused_v2_control do
+  post 'start', to: 'start#request_post', as: :start
+end
+
+constraints idp_focused_v2_variant_piwik do
+  get 'start', to: 'start_idp_focused_variant#index', as: :start
+end
+constraints idp_focused_v2_variant do
+  post 'start', to: 'start_idp_focused_variant#select_idp', as: :start_submit
+end
+
 constraints IsLoa1 do
   #get 'start', to: 'start#index', as: :start
   #post 'start', to: 'start#request_post', as: :start

@@ -12,6 +12,7 @@
     width: 205px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
   }
 
   .idp-container {
@@ -94,8 +95,13 @@
     }
   }
 
-  a .button {
+  .button {
     margin-right: 0;
+  }
+
+  .padding {
+    padding-right: 15px;
+    padding-left: 15px;
   }
 }
 

@@ -7,7 +7,16 @@
 
 
 <div class="sign-in-container js-continue-to-idp" data-location="<%= url_for(controller: 'start_idp_focused_variant', action: 'select_idp_ajax', locale: I18n.locale)  %>">
-  <h1 class="heading-large"> <%=t 'hub.start.ab_test_idp_focused_heading' %> </h1>
+  <h1 class="heading-large"> <%=t 'hub.start.ab_test_idp_focused_heading' %> </h1>   
+
+  <p class="center padding"><%=t('hub.start.ab_test_idp_focused_welcome', other_ways_description: @other_ways_description)%></p>
+
+  <%= button_link_to t('hub.start.ab_test_idp_focused_button'), begin_registration_path, id: 'begin-registration-path' %>
+
+  <p class="center padding"><%=t('hub.start.ab_test_idp_focused_or')%></p>
+
+  <p class="center padding"><%=t('hub.start.ab_test_idp_focused_reuse')%></p>
+
   <div class="idp-list">
     <% @identity_providers.each_with_index do |identity_provider, idx| %>
       <%= form_for(identity_provider, url: start_submit_path, html: {class: 'js-idp-form', id: nil}) do |f| %>
@@ -29,12 +38,8 @@
       <% end %>
     <% end %>   
   </div>
-    
-  <p class="center"><%=t('hub.start.ab_test_idp_focused_or')%></p>
 
-  <%= button_link_to t('hub.start.ab_test_idp_focused_button'), begin_registration_path, id: 'begin-registration-path' %>
-
-  <p><%=t('hub.start.ab_test_idp_focused_description', other_ways_description: @other_ways_description)%></p>
+  <p><%=t('hub.start.ab_test_idp_focused_description')%></p>
   <div class="verify-badge">
     <div class="logo">
       <%= image_tag 'govuk-verify-black.png', srcset: "#{asset_path 'govuk-verify-black.svg'} 1x", alt: 'GOV.UK Verify' %>
