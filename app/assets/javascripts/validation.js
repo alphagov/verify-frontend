@@ -46,7 +46,8 @@
         ignore: '.js-hidden *'
       });
       $.validator.methods.email = function( value, element ) {
-        return this.optional( element ) || /^.+@.+\..+$/.test( value );
+        // This should be equivalent to the validation done by email_validator.rb (in strict mode) in the backend.
+        return this.optional( element ) || /^\s*([-+._\w]{1,64})@((?:[-\w]+\.)+[a-zA-Z]{2,})\s*$/.test( value );
       }
     },
     attach: function () {
