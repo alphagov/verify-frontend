@@ -1,4 +1,10 @@
 .country-picker {
   display: inline-block;
   margin-bottom: 6px;
+
+  .autocomplete__input,
+  .autocomplete__option,
+  .autocomplete__hint {
+    line-height: 1.5;
+  }
 }

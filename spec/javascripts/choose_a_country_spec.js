@@ -31,15 +31,15 @@ describe('The choose a country page', function () {
   });
 
   it('should suggest Germany when the user enters "Ge"', function (done) {
-    var typeahead = document.getElementById('typeahead');
-    typeahead.value = 'Ge';
-    typeahead.dispatchEvent(new Event('input'));
+    var autocomplete = document.getElementById('autocomplete');
+    autocomplete.value = 'Ge';
+    autocomplete.dispatchEvent(new Event('input'));
 
     setTimeout(function () {
-      var options = $dom.find('.typeahead__option');
+      var options = $dom.find('.autocomplete__option');
       expect(options.length).toBe(1);
 
-      var option0 = $dom.find('#typeahead__option--0');
+      var option0 = $dom.find('#autocomplete__option--0');
 
       expect(option0.length).toBe(1);
       expect(option0.text()).toBe('Germany');
@@ -49,15 +49,15 @@ describe('The choose a country page', function () {
   });
 
   it('should suggest France when the user enters "Fr"', function (done) {
-    var typeahead = document.getElementById('typeahead');
-    typeahead.value = 'Fr';
-    typeahead.dispatchEvent(new Event('input'));
+    var autocomplete = document.getElementById('autocomplete');
+    autocomplete.value = 'Fr';
+    autocomplete.dispatchEvent(new Event('input'));
 
     setTimeout(function () {
-      var options = $dom.find('.typeahead__option');
+      var options = $dom.find('.autocomplete__option');
       expect(options.length).toBe(1);
 
-      var option0 = $dom.find('#typeahead__option--0');
+      var option0 = $dom.find('#autocomplete__option--0');
 
       expect(option0.length).toBe(1);
       expect(option0.text()).toBe('France');
@@ -67,16 +67,16 @@ describe('The choose a country page', function () {
   });
 
   it('should suggest Germany and France when the user enters "an"', function (done) {
-    var typeahead = document.getElementById('typeahead');
-    typeahead.value = 'an';
-    typeahead.dispatchEvent(new Event('input'));
+    var autocomplete = document.getElementById('autocomplete');
+    autocomplete.value = 'an';
+    autocomplete.dispatchEvent(new Event('input'));
 
     setTimeout(function () {
-      var options = $dom.find('.typeahead__option');
+      var options = $dom.find('.autocomplete__option');
       expect(options.length).toBe(2);
 
-      var option0 = $dom.find('#typeahead__option--0');
-      var option1 = $dom.find('#typeahead__option--1');
+      var option0 = $dom.find('#autocomplete__option--0');
+      var option1 = $dom.find('#autocomplete__option--1');
 
       expect(option0.length).toBe(1);
       expect(option0.text()).toBe('France');
@@ -88,8 +88,8 @@ describe('The choose a country page', function () {
   });
 
   it('should not submit form and show country not found error when the user enters invalid country', function (done) {
-    var typeahead = document.getElementById('typeahead');
-    typeahead.value = 'invalid-country';
+    var autocomplete = document.getElementById('autocomplete');
+    autocomplete.value = 'invalid-country';
     var $form = $dom.find('form.js-show');
 
     // NOTE: Unable to assert the form/document is not submitted using spy because of lack of
@@ -105,13 +105,13 @@ describe('The choose a country page', function () {
   });
 
   it('should submit country=DE when the user selects Germany', function (done) {
-    var typeahead = document.getElementById('typeahead');
+    var autocomplete = document.getElementById('autocomplete');
     var $form = $dom.find('form.js-show');
 
     var formSpy = jasmine.createSpy('formSpy');
     $dom.on('submit', formSpy);
 
-    typeahead.value = 'Germany';
+    autocomplete.value = 'Germany';
     $dom.on('submit', function (event) {
       expect($dom.find('input[name=country]').val()).toBe('DE');
       expect(formSpy).toHaveBeenCalled();
