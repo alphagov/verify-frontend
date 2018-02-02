@@ -82,7 +82,7 @@ private
   end
 
   def email_format_should_be_valid
-    if reply_required? && (email_missing? || !EmailValidator.valid?(email))
+    if reply_required? && (email_missing? || !EmailValidator.valid?(email, strict_mode: true))
       errors.add(:base, I18n.t('hub.feedback.errors.no_selection'))
       errors.add(:email, I18n.t('hub.feedback.errors.email'))
     end

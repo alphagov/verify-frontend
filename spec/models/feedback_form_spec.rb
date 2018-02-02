@@ -138,6 +138,20 @@ describe FeedbackForm do
                                                   email_error_message]
       end
     end
+
+    it 'email contains a comma' do
+      bad_email = 'foo,bar@example.com'
+      form = FeedbackForm.new(
+        what: 'what i was doing',
+        details: 'what happened',
+        reply: 'true',
+        name: 'Bob Smith',
+        email: bad_email
+      )
+
+      expect(form).to_not be_valid
+      expect(form.errors.full_messages).to eql [no_selection_error_message, email_error_message]
+    end
   end
 
   context 'is valid when' do
