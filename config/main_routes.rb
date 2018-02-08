@@ -20,7 +20,7 @@ get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_no
 get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
 get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
 
-IDP_FOCUSED = 'idp_focused'.freeze
+IDP_FOCUSED = 'idp_focused_v2'.freeze
 
 idp_focused_control_piwik = SelectRoute.new(IDP_FOCUSED, 'control', is_start_of_test: true)
 idp_focused_control = SelectRoute.new(IDP_FOCUSED, 'control', is_start_of_test: false)
@@ -41,24 +41,24 @@ constraints idp_focused_variant do
   post 'start', to: 'start_idp_focused_variant#select_idp', as: :start_submit
 end
 
-IDP_FOCUSED_v2 = 'idp_focused_v2'.freeze
+IDP_FOCUSED_v3 = 'idp_focused_v3'.freeze
 
-idp_focused_v2_control_piwik = SelectRoute.new(IDP_FOCUSED_v2, 'control', is_start_of_test: true)
-idp_focused_v2_control = SelectRoute.new(IDP_FOCUSED_v2, 'control', is_start_of_test: false)
-idp_focused_v2_variant_piwik = SelectRoute.new(IDP_FOCUSED_v2, 'variant', is_start_of_test: true)
-idp_focused_v2_variant = SelectRoute.new(IDP_FOCUSED_v2, 'variant', is_start_of_test: false)
+idp_focused_v3_control_piwik = SelectRoute.new(IDP_FOCUSED_v3, 'control', is_start_of_test: true)
+idp_focused_v3_control = SelectRoute.new(IDP_FOCUSED_v3, 'control', is_start_of_test: false)
+idp_focused_v3_variant_piwik = SelectRoute.new(IDP_FOCUSED_v3, 'variant', is_start_of_test: true)
+idp_focused_v3_variant = SelectRoute.new(IDP_FOCUSED_v3, 'variant', is_start_of_test: false)
 
-constraints idp_focused_v2_control_piwik do
+constraints idp_focused_v3_control_piwik do
   get 'start', to: 'start#index', as: :start
 end
-constraints idp_focused_v2_control do
+constraints idp_focused_v3_control do
   post 'start', to: 'start#request_post', as: :start
 end
 
-constraints idp_focused_v2_variant_piwik do
+constraints idp_focused_v3_variant_piwik do
   get 'start', to: 'start_idp_focused_variant#index', as: :start
 end
-constraints idp_focused_v2_variant do
+constraints idp_focused_v3_variant do
   post 'start', to: 'start_idp_focused_variant#select_idp', as: :start_submit
 end
 

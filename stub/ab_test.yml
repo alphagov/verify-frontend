@@ -31,7 +31,7 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - idp_focused_v2:
+  - idp_focused_v3:
       alternatives:
         - name: 'control'
           percent: 100

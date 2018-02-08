@@ -10,7 +10,7 @@ class StartIdpFocusedVariantController < ApplicationController
   include IdpSelectionPartialController
   include AnalyticsPartialController
 
-  AB_EXPERIMENT_NAME = 'idp_focused_v2'.freeze
+  AB_EXPERIMENT_NAME = 'idp_focused_v3'.freeze
 
 
   def index
