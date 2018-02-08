@@ -1,17 +1,9 @@
 .sign-in-container {
-  max-width: 495px;
-  text-align: center;
-  border: 5px solid $panel-colour;
   margin-top: 10px;
   padding: 10px;
   padding-top: 0;
-  margin-left: auto;
-  margin-right: auto;
 
   .idp-list {
-    width: 205px;
-    margin-left: auto;
-    margin-right: auto;
     margin-bottom: 20px;
   }
 
@@ -52,8 +44,6 @@
     max-width: 340px;
     height: 80px;
     border: 3px solid $black;
-    margin-left: auto;
-    margin-right: auto;
     margin-bottom: 15px;
 
     .logo {
@@ -102,14 +92,5 @@
   .padding {
     padding-right: 15px;
     padding-left: 15px;
-  }
-}
-
-.single {
-  + div + .feedback-link {
-    max-width: 495px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
