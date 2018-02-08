@@ -10,7 +10,7 @@ RSpec.describe 'When a page with a virtual page view is visited' do
 
 
     # HUB-2: testing AB test reporting as the start page reporting is deactivated
-    set_cookies_and_ab_test_cookie!('idp_focused_v2' => 'idp_focused_v2_control')
+    set_cookies_and_ab_test_cookie!('idp_focused_v3' => 'idp_focused_v3_control')
 
 
     Capybara.current_session.driver.header('User-Agent', 'my user agent')
@@ -36,7 +36,7 @@ RSpec.describe 'When a page with a virtual page view is visited' do
     }
     # HUB-2: testing AB test reporting as the start page reporting is deactivated
     # stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers)
-    stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers, 'LEVEL_2', ["\"6\":[\"AB_TEST\",\"idp_focused_v2_control\"]"])
+    stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers, 'LEVEL_2', ["\"6\":[\"AB_TEST\",\"idp_focused_v3_control\"]"])
 
     expect(stubbed_piwik_request).to have_been_made.at_least_once
   end

@@ -94,7 +94,7 @@ en:
       ab_test_idp_focused_heading: Set up or sign in with your identity account
       ab_test_idp_focused_heading_sign_in: Set up an identity account
       ab_test_idp_focused_heading_register: Sign in with your identity account
-      ab_test_idp_focused_welcome: Set up an identity account with a certified company so you can securely sign in to %{other_ways_description}
+      ab_test_idp_focused_welcome: Set up an identity account with a certified company so you can securely sign in to %{other_ways_description}.
       ab_test_idp_focused_button: Set up an identity account
       ab_test_idp_focused_reuse: Sign in with an identity account that you set up with a certified company in the past.
       ab_test_idp_focused_description: UK government trusts these certified companies as they are part of GOV.UK Verify.
