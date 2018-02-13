@@ -4,7 +4,6 @@ module Display
     :display_data,
     :logo_path,
     :white_logo_path,
-    :small_logo_path,
   ) do
     delegate :entity_id, to: :identity_provider
     delegate :simple_id, to: :identity_provider

@@ -2,7 +2,6 @@ Metrics/BlockLength:
   Exclude:
     - 'config/routes.rb'
     - 'config/main_routes.rb'
-    - 'config/clever_questions_ab_test_routes.rb'
     - '**/*.rake'
     - 'spec/**/*.rb'
     - 'config/initializers/**/*.rb'

@@ -91,19 +91,6 @@ en:
       answer_no: I’ve used Verify before
       continue: Continue
       error_message: Please select an option
-      ab_test_idp_focused_heading: Set up or sign in with your identity account
-      ab_test_idp_focused_heading_sign_in: Set up an identity account
-      ab_test_idp_focused_heading_register: Sign in with your identity account
-      ab_test_idp_focused_welcome: Set up an identity account with a certified company so you can securely sign in to %{other_ways_description}.
-      ab_test_idp_focused_button: Set up an identity account
-      ab_test_idp_focused_reuse: Sign in with an identity account that you set up with a certified company in the past.
-      ab_test_idp_focused_description: UK government trusts these certified companies as they are part of GOV.UK Verify.
-      ab_test_idp_focused_badge_text: These companies are certified to safely sign you in to online government services.
-      ab_test_idp_focused_summary: What is GOV.UK Verify?
-      ab_test_idp_focused_details_html: |
-        <p>GOV.UK Verify is designed by the UK government to fight the growing problem of online identity theft.</p>
-        <p>Companies apply to be part of GOV.UK Verify. They are certified when they meet security and privacy standards set by government so you can trust them with your personal information.</p>
-        <p>When a government service uses GOV.UK Verify, you can access the service with the identity account you set up with the certified company.</p>
     signin:
       title: Sign in with a certified company
       heading: Who do you have an identity account with?
