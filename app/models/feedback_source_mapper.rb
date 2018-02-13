@@ -42,10 +42,7 @@ class FeedbackSourceMapper
       'NO_IDPS_AVAILABLE' => 'no_idps_available',
       'CANCELLED_REGISTRATION' => 'cancelled_registration',
       'PROOF_OF_ADDRESS' => 'select_proof_of_address',
-      'CONFIRMING_IT_IS_YOU_PAGE' => 'confirming_it_is_you',
-
-      'START_PAGE_IDP_FOCUSED_VARIANT' => 'start'
-
+      'CONFIRMING_IT_IS_YOU_PAGE' => 'confirming_it_is_you'
   }.freeze
   end
 
