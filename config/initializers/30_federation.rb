@@ -45,6 +45,9 @@ Rails.application.config.after_initialize do
   transaction_grouper = TransactionGroups::TransactionGrouper.new(RP_CONFIG)
   IDP_RECOMMENDATION_ENGINE = RecommendationsEngine.new(idp_rules, segment_matcher, transaction_grouper)
 
+  idp_rules_no_perf_management = idp_rules_loader.parse_config_files(CONFIG.rules_directory_no_perf_management)
+  IDP_RECOMMENDATION_ENGINE_NO_PERF_MANAGEMENT = RecommendationsEngine.new(idp_rules_no_perf_management, segment_matcher, transaction_grouper)
+
   # Feature flags
   IDP_FEATURE_FLAGS_CHECKER = IdpConfiguration::IdpFeatureFlagsLoader.new(YamlLoader.new)
                                  .load(CONFIG.rules_directory, %i[send_hints send_language_hint show_interstitial_question show_interstitial_question_loa1])
