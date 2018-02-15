@@ -25,8 +25,8 @@ describe ChooseACertifiedCompanyLoa2Controller do
       set_session_and_cookies_with_loa('LEVEL_2')
       stub_api_idp_list_for_loa([stub_idp_loa1, stub_idp_one_doc])
       session[:selected_answers] = {
-        documents: { driving_licence: true, mobile_phone: true },
-        device_type: { device_type_other: true }
+        'documents' => { 'driving_licence' => true, 'mobile_phone' => true },
+        'device_type' => { 'device_type_other' => true }
       }
       stub_piwik_request = stub_piwik_report_number_of_recommended_idps(1, 'LEVEL_2', 'analytics description for test-rp')
 
@@ -44,9 +44,9 @@ describe ChooseACertifiedCompanyLoa2Controller do
       set_session_and_cookies_with_loa('LEVEL_2')
       stub_api_idp_list_for_loa([stub_idp_loa1, stub_idp_one_doc])
       session[:selected_answers] = {
-        documents: { driving_licence: true, mobile_phone: true },
-        device_type: { device_type_other: true },
-        interstitial: { interstitial_yes: true }
+        'documents' => { 'driving_licence' => true, 'mobile_phone' => true },
+        'device_type' => { 'device_type_other' => true },
+        'interstitial' => { 'interstitial_yes' => true }
       }
       stub_piwik_report_number_of_recommended_idps(1, 'LEVEL_2', 'analytics description for test-rp')
 
