@@ -5,6 +5,7 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   include ViewableIdpPartialController
 
   def index
+    session[:selected_answers].delete(:interstitial)
     suggestions = IDP_RECOMMENDATION_ENGINE.get_suggested_idps(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
@@ -14,7 +15,6 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   end
 
   def select_idp
-    selected_answer_store.store_selected_answers('interstitial', {})
     select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
       session[:selected_idp_was_recommended] = IDP_RECOMMENDATION_ENGINE.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
       redirect_to warning_or_question_page(decorated_idp)
