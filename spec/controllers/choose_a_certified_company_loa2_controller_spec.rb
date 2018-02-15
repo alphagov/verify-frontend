@@ -39,19 +39,27 @@ describe ChooseACertifiedCompanyLoa2Controller do
       expect(subject).to render_template(:choose_a_certified_company_LOA2)
       expect(stub_piwik_request).to have_been_made.once
     end
+
+    it 'removes interstitial answer when IDP picker page is rendered' do
+      set_session_and_cookies_with_loa('LEVEL_2')
+      stub_api_idp_list_for_loa([stub_idp_loa1, stub_idp_one_doc])
+      session[:selected_answers] = {
+        documents: { driving_licence: true, mobile_phone: true },
+        device_type: { device_type_other: true },
+        interstitial: { interstitial_yes: true }
+      }
+      stub_piwik_report_number_of_recommended_idps(1, 'LEVEL_2', 'analytics description for test-rp')
+
+      get :index, params: { locale: 'en' }
+
+      expect(session[:selected_answers]['interstitial']).to be_nil
+    end
   end
 
   context '#select_idp' do
     before :each do
       set_session_and_cookies_with_loa('LEVEL_2')
       stub_api_idp_list_for_loa([stub_idp_loa1, stub_idp_one_doc])
-    end
-
-    it 'resets interstitial answer to no value when IDP is selected' do
-      session[:selected_answers] = { 'interstitial' => { 'interstitial_yes' => true } }
-      post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
-
-      expect(session[:selected_answers]['interstitial']).to be_empty
     end
 
     it 'sets selected IDP in user session' do
