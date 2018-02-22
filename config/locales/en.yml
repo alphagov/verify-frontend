@@ -95,8 +95,10 @@ en:
       title: Sign in with a certified company
       heading: Who do you have an identity account with?
       back: Back
-      about_link: start now
+      about_link: set one up now
       registration_message_html: If you don’t have an identity account, you can %{href}.
+      last_certified: The last certified company used on this device was %{company_name}.
+      any_certified_company: "You can use an identity account you set up with any certified company in the past:"
       select_idp: Select %{display_name}
       sign_in_idp: Sign in with %{display_name}
       forgot_company: I can’t remember which company verified me

@@ -1,11 +1,20 @@
 require 'partials/idp_selection_partial_controller'
 require 'partials/viewable_idp_partial_controller'
+require 'partials/journey_hinting_partial_controller'
 
 class SignInController < ApplicationController
   include IdpSelectionPartialController
   include ViewableIdpPartialController
+  include JourneyHintingPartialController
 
   def index
+    journey_hint = journey_hint_value
+
+    unless journey_hint.nil?
+      entity_id = journey_hint['entity_id']
+      @suggested_idp = entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, entity_id)
+    end
+
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_sign_in)
 
     @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(

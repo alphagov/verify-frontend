@@ -15,6 +15,14 @@ describe SignInController do
     it 'will render the index page' do
       get :index, params: { locale: 'en' }
       expect(subject).to render_template(:index)
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'will render the index page with invalid cookie' do
+      cookies[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = 'some-nonsense-idp-entity-id'
+      get :index, params: { locale: 'en' }
+      expect(subject).to render_template(:index)
+      expect(response).to have_http_status(:ok)
     end
   end
 

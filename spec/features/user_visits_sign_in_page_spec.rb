@@ -18,6 +18,13 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     visit "/#{t('routes.sign_in', locale: locale)}"
   end
 
+  def given_the_journey_hint_cookie_is_set_with_value(entity_id, locale = 'en')
+    visit '/test-journey-hint'
+    fill_in 'entity-id', with: entity_id
+    fill_in 'locale', with: locale
+    click_button 'journey-hint-post'
+  end
+
   def when_i_select_an_idp
     click_button(idp_display_name)
   end
@@ -97,6 +104,45 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       when_i_click_start_now
       expect(page).to have_title t('hub.about.title')
       expect_to_have_updated_the_piwik_journey_type_variable
+    end
+
+    it 'will not render a suggested IDP' do
+      page.set_rack_session(transaction_simple_id: 'test-rp')
+      given_api_requests_have_been_mocked!
+      given_im_on_the_sign_in_page
+      expect(page).not_to have_text 'The last certified company used on this device was'
+      expect(page).not_to have_text 'You can use an identity account you set up with any certified company in the past:'
+
+      # TODO HUB-11 test that the box with the idp logo is NOT shown?
+    end
+
+    context 'with an invalid idp-hint cookie' do
+      before :each do
+        given_the_journey_hint_cookie_is_set_with_value('http://not-a-valid-idp.com')
+      end
+
+      it 'will not render a suggested IDP' do
+        page.set_rack_session(transaction_simple_id: 'test-rp')
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page
+        expect(page).not_to have_text 'The last certified company used on this device was'
+        expect(page).not_to have_text 'You can use an identity account you set up with any certified company in the past:'
+      end
+    end
+
+    context 'with a valid idp-hint cookie' do
+      before :each do
+        given_the_journey_hint_cookie_is_set_with_value('http://idcorp.com')
+      end
+
+      it 'will render a suggested IDP' do
+        page.set_rack_session(transaction_simple_id: 'test-rp')
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page
+        expect(page).to have_text 'You can use an identity account you set up with any certified company in the past:'
+        expect(page).to have_text 'The last certified company used on this device was IDCorp.'
+        expect(page).to have_button('Select IDCorp', count: 2)
+      end
     end
   end
 end
