@@ -1,0 +1,15 @@
+simpleIds: [ "stub-idp-one-doc-question" ]
+send_hints: true
+send_language_hint: true
+show_interstitial_question: true
+
+segments:
+  protected:
+    recommended: ["other"]
+    unlikely: []
+  non_protected:
+    recommended: ["other", "non-protected-segment-3"]
+    unlikely: []
+
+capabilities:
+  - []

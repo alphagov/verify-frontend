@@ -73,7 +73,8 @@ describe 'user sends authn requests' do
       stub_session_creation
       ab_test_cookie_value = {
         'about_companies' => 'about_companies_with_logo',
-        'select_documents_v2' => 'select_documents_v2_control'
+        'select_documents_v2' => 'select_documents_v2_control',
+        'mobile_segments' => 'mobile_segments_control'
       }.to_json
       cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape(ab_test_cookie_value))
       set_cookies!(cookie_hash)
