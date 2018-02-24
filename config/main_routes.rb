@@ -22,10 +22,10 @@ get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_w
 
 MOBILE_SEGMENTS = 'mobile_segments'.freeze
 
-mobile_segments_control_piwik = SelectRoute.new(MOBILE_SEGMENTS, 'control', is_start_of_test: true)
-mobile_segments_control = SelectRoute.new(MOBILE_SEGMENTS, 'control', is_start_of_test: false)
-mobile_segments_variant_piwik = SelectRoute.new(MOBILE_SEGMENTS, 'variant', is_start_of_test: true)
-mobile_segments_variant = SelectRoute.new(MOBILE_SEGMENTS, 'variant', is_start_of_test: false)
+mobile_segments_control_piwik = SelectRoute.new(MOBILE_SEGMENTS, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+mobile_segments_control = SelectRoute.new(MOBILE_SEGMENTS, 'control', is_start_of_test: false, experiment_loa: 'LEVEL_2')
+mobile_segments_variant_piwik = SelectRoute.new(MOBILE_SEGMENTS, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+mobile_segments_variant = SelectRoute.new(MOBILE_SEGMENTS, 'variant', is_start_of_test: false, experiment_loa: 'LEVEL_2')
 
 constraints IsLoa1 do
   get 'start', to: 'start#index', as: :start
