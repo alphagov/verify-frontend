@@ -112,8 +112,6 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       given_im_on_the_sign_in_page
       expect(page).not_to have_text 'The last certified company used on this device was'
       expect(page).not_to have_text 'You can use an identity account you set up with any certified company in the past:'
-
-      # TODO HUB-11 test that the box with the idp logo is NOT shown?
     end
 
     context 'with an invalid idp-hint cookie' do
