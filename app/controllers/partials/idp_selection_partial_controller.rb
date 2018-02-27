@@ -1,6 +1,6 @@
 module IdpSelectionPartialController
-  def ajax_idp_redirection_sign_in_request
-    FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name])
+  def ajax_idp_redirection_sign_in_request(hinted)
+    FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name], hinted)
 
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
     idp_request = idp_request_initilization(outbound_saml_message)

@@ -8,12 +8,10 @@ class SignInController < ApplicationController
   include JourneyHintingPartialController
 
   def index
-    journey_hint = journey_hint_value
+    entity_id = entity_id_of_journey_hint
+    @suggested_idp = entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, entity_id)
 
-    unless journey_hint.nil?
-      entity_id = journey_hint['entity_id']
-      @suggested_idp = entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, entity_id)
-    end
+    # TODO HUB-11 report hint shown event to piwik if hint exists
 
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_sign_in)
 
@@ -33,8 +31,9 @@ class SignInController < ApplicationController
 
   def select_idp_ajax
     select_viewable_idp_for_sign_in(params.fetch('entityId')) do |decorated_idp|
+      hinted = entity_id_of_journey_hint == decorated_idp.entity_id
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      ajax_idp_redirection_sign_in_request
+      ajax_idp_redirection_sign_in_request(hinted)
     end
   end
 

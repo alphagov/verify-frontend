@@ -26,7 +26,8 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   end
 
   def when_i_select_an_idp
-    click_button(idp_display_name)
+    # click_button(idp_display_name, maximum: 2)
+    all(:button, idp_display_name)[0].click
   end
 
   def when_i_click_start_now
@@ -44,7 +45,14 @@ RSpec.describe 'user selects an IDP on the sign in page' do
                            PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => 'LEVEL_2' })).to have_been_made.once
     expect(a_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
              .with(headers: { 'X_FORWARDED_FOR' => originating_ip })).to have_been_made.once
+  end
+
+  def and_piwik_was_sent_a_signin_event
     expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name}")).to have_been_made.once
+  end
+
+  def and_piwik_was_sent_a_signin_hinted_event
+    expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Hinted")).to have_been_made.once
   end
 
   def and_the_language_hint_is_set
@@ -91,6 +99,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
       when_i_select_an_idp
       then_im_at_the_idp
+      and_piwik_was_sent_a_signin_event
       and_the_language_hint_is_set
       and_the_hints_are_not_set
       expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
@@ -140,6 +149,19 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         expect(page).to have_text 'You can use an identity account you set up with any certified company in the past:'
         expect(page).to have_text 'The last certified company used on this device was IDCorp.'
         expect(page).to have_button('Select IDCorp', count: 2)
+      end
+
+      it 'will redirect the user to the hinted IDP' do
+        page.set_rack_session(transaction_simple_id: 'test-rp')
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page
+        expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
+        when_i_select_an_idp
+        then_im_at_the_idp
+        and_piwik_was_sent_a_signin_hinted_event
+        and_the_language_hint_is_set
+        and_the_hints_are_not_set
+        expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
       end
     end
   end

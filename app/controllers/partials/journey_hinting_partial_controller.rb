@@ -6,6 +6,11 @@ module JourneyHintingPartialController
     nil
   end
 
+  def entity_id_of_journey_hint
+    journey_hint = journey_hint_value
+    journey_hint.nil? ? nil : journey_hint['entity_id']
+  end
+
   def retrieve_decorated_singleton_idp_array_by_entity_id(providers, entity_id)
     IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(providers.select { |idp| idp.entity_id == entity_id })
   end

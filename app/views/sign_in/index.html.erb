@@ -16,7 +16,7 @@
       <p><%= t 'hub.signin.last_certified', company_name: @suggested_idp[0].display_name %></p>
     </div>
   </div>
-  <div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
+  <div class="grid-row js-continue-to-idp journey-hint" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
     <%= render partial: 'shared/idp_list', locals: {identity_providers: @suggested_idp} %>
   </div>
   <div class="grid-row">

@@ -57,11 +57,11 @@ module Analytics
       )
     end
 
-    def report_sign_in_idp_selection(current_transaction, request, idp_display_name)
+    def report_sign_in_idp_selection(current_transaction, request, idp_display_name, hinted = false)
       report_action(
         current_transaction,
         request,
-        "Sign In - #{idp_display_name}"
+        "Sign In - #{idp_display_name}" + (hinted ? " - Hinted" : "")
       )
     end
 
