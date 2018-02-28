@@ -56,6 +56,10 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Hinted")).to have_been_made.once
   end
 
+  def then_piwik_was_sent_a_journey_hint_shown_event
+    expect(stub_piwik_request('action_name' => "Sign In Journey Hint Shown - #{idp_display_name}")).to have_been_made.once
+  end
+
   def and_the_language_hint_is_set
     expect(page).to have_content("language hint was 'en'")
   end
@@ -150,12 +154,14 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         expect(page).to have_text 'You can use an identity account you set up with any certified company in the past:'
         expect(page).to have_text 'The last certified company used on this device was IDCorp.'
         expect(page).to have_button('Select IDCorp', count: 2)
+        then_piwik_was_sent_a_journey_hint_shown_event
       end
 
       it 'will redirect the user to the hinted IDP' do
         page.set_rack_session(transaction_simple_id: 'test-rp')
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
+        then_piwik_was_sent_a_journey_hint_shown_event
         expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
         when_i_select_an_idp
         then_im_at_the_idp

@@ -10,8 +10,9 @@ class SignInController < ApplicationController
   def index
     entity_id = entity_id_of_journey_hint
     @suggested_idp = entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, entity_id)
-
-    # TODO HUB-11 report hint shown event to piwik if hint exists
+    unless @suggested_idp.empty?
+      FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp[0].display_name)
+    end
 
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_sign_in)
 
