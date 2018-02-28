@@ -90,8 +90,7 @@ describe RedirectToIdpController do
       expect(FEDERATION_REPORTER).to receive(:report_sign_in_idp_selection)
                                          .with(a_kind_of(Display::RpDisplayData),
                                                a_kind_of(ActionDispatch::Request),
-                                               bobs_identity_service_idp_name,
-                                               false)
+                                               bobs_identity_service_idp_name)
 
       subject
     end
@@ -102,11 +101,27 @@ describe RedirectToIdpController do
       end
 
       it 'reports idp selection details to piwik' do
-        expect(FEDERATION_REPORTER).to receive(:report_sign_in_idp_selection)
+        expect(FEDERATION_REPORTER).to receive(:report_sign_in_idp_selection_after_journey_hint)
                                            .with(a_kind_of(Display::RpDisplayData),
                                                  a_kind_of(ActionDispatch::Request),
                                                  bobs_identity_service_idp_name,
                                                  true)
+
+        subject
+      end
+    end
+
+    context 'and with the journey hint session param suggesting hint ignored' do
+      before :each do
+        session[:user_followed_journey_hint] = false
+      end
+
+      it 'reports idp selection details to piwik' do
+        expect(FEDERATION_REPORTER).to receive(:report_sign_in_idp_selection_after_journey_hint)
+                                           .with(a_kind_of(Display::RpDisplayData),
+                                                 a_kind_of(ActionDispatch::Request),
+                                                 bobs_identity_service_idp_name,
+                                                 false)
 
         subject
       end

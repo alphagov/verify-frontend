@@ -7,6 +7,9 @@ describe SignInController do
   before(:each) do
     stub_api_idp_list_for_sign_in([{ 'simpleId' => 'stub-idp-one',
                                      'entityId' => 'http://idcorp.com',
+                                     'levelsOfAssurance' => %w(LEVEL_1) },
+                                   { 'simpleId' => 'stub-idp-two',
+                                     'entityId' => 'http://idcorp-two.com',
                                      'levelsOfAssurance' => %w(LEVEL_1) }])
     set_session_and_cookies_with_loa('LEVEL_1')
   end
@@ -43,6 +46,14 @@ describe SignInController do
       expect(response).to have_http_status(:not_found)
     end
 
+    it 'will leave the session param nil if no journey hint was shown' do
+      stub_session_select_idp_request('http://idcorp.com')
+      stub_piwik_request('action_name' => 'Sign In - IDCorp')
+
+      post :select_idp, params: { locale: 'en', 'entity_id' => 'http://idcorp.com' }
+      expect(session[:user_followed_journey_hint]).to be_nil
+    end
+
     context 'with idp journey hint cookie' do
       before :each do
         cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: 'http://idcorp.com' }.to_json
@@ -53,15 +64,16 @@ describe SignInController do
         stub_piwik_request('action_name' => 'Sign In - IDCorp')
 
         post :select_idp, params: { locale: 'en', 'entity_id' => 'http://idcorp.com' }
-        expect(session[:user_followed_journey_hint]).to be_truthy
+        expect(session[:user_followed_journey_hint]).to be true
       end
 
-      it 'will not set the session param true if user ignored the journey hint' do
-        stub_session_select_idp_request('http://another-idcorp.com')
+      it 'will set the session param false if user ignored the journey hint' do
+        other_entity_id = 'http://idcorp-two.com'
+        stub_session_select_idp_request(other_entity_id)
         stub_piwik_request('action_name' => 'Sign In - IDCorp')
 
-        post :select_idp, params: { locale: 'en', 'entity_id' => 'http://another-idcorp.com' }
-        expect(session[:user_followed_journey_hint]).to be_falsey
+        post :select_idp, params: { locale: 'en', 'entity_id' => other_entity_id }
+        expect(session[:user_followed_journey_hint]).to be false
       end
     end
   end

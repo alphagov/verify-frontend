@@ -25,7 +25,9 @@ class SignInController < ApplicationController
 
   def select_idp
     select_viewable_idp_for_sign_in(params.fetch('entity_id')) do |decorated_idp|
-      session[:user_followed_journey_hint] = user_followed_journey_hint(decorated_idp.entity_id)
+      unless entity_id_of_journey_hint.nil?
+        session[:user_followed_journey_hint] = user_followed_journey_hint(decorated_idp.entity_id)
+      end
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       redirect_to redirect_to_idp_sign_in_path
     end
@@ -33,9 +35,10 @@ class SignInController < ApplicationController
 
   def select_idp_ajax
     select_viewable_idp_for_sign_in(params.fetch('entityId')) do |decorated_idp|
-      hinted = user_followed_journey_hint(decorated_idp.entity_id)
+      hint_shown = !entity_id_of_journey_hint.nil?
+      hint_followed = user_followed_journey_hint(decorated_idp.entity_id)
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      ajax_idp_redirection_sign_in_request(hinted)
+      ajax_idp_redirection_sign_in_request(hint_shown, hint_followed)
     end
   end
 

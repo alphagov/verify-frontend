@@ -52,12 +52,16 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name}")).to have_been_made.once
   end
 
-  def and_piwik_was_sent_a_signin_hinted_event
-    expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Hinted")).to have_been_made.once
+  def and_piwik_was_sent_a_signin_hint_followed_event
+    expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Hint Followed")).to have_been_made.once
   end
 
-  def then_piwik_was_sent_a_journey_hint_shown_event
-    expect(stub_piwik_request('action_name' => "Sign In Journey Hint Shown - #{idp_display_name}")).to have_been_made.once
+  def and_piwik_was_sent_a_signin_hint_ignored_event
+    expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Hint Ignored")).to have_been_made.once
+  end
+
+  def then_piwik_was_sent_a_journey_hint_shown_event_for(idp_name)
+    expect(stub_piwik_request('action_name' => "Sign In Journey Hint Shown - #{idp_name}")).to have_been_made.once
   end
 
   def and_the_language_hint_is_set
@@ -152,20 +156,46 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
         expect(page).to have_text 'You can use an identity account you set up with any certified company in the past:'
-        expect(page).to have_text 'The last certified company used on this device was IDCorp.'
-        expect(page).to have_button('Select IDCorp', count: 2)
-        then_piwik_was_sent_a_journey_hint_shown_event
+        expect(page).to have_text "The last certified company used on this device was #{idp_display_name}."
+        expect(page).to have_button("Select #{idp_display_name}", count: 2)
+        then_piwik_was_sent_a_journey_hint_shown_event_for(idp_display_name)
       end
 
       it 'will redirect the user to the hinted IDP' do
         page.set_rack_session(transaction_simple_id: 'test-rp')
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
-        then_piwik_was_sent_a_journey_hint_shown_event
+        then_piwik_was_sent_a_journey_hint_shown_event_for(idp_display_name)
         expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
         when_i_select_an_idp
         then_im_at_the_idp
-        and_piwik_was_sent_a_signin_hinted_event
+        and_piwik_was_sent_a_signin_hint_followed_event
+        and_the_language_hint_is_set
+        and_the_hints_are_not_set
+        expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
+      end
+    end
+
+    context 'with a different valid idp-hint cookie' do
+      before :each do
+        given_the_journey_hint_cookie_is_set_with_value('other-entity-id')
+      end
+
+      hinted_idp_name = "Bob’s Identity Service"
+
+      it 'will redirect the user to a non-hinted IDP if hint ignored' do
+        page.set_rack_session(transaction_simple_id: 'test-rp')
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page
+        then_piwik_was_sent_a_journey_hint_shown_event_for(hinted_idp_name)
+        expect(page).to have_text 'You can use an identity account you set up with any certified company in the past:'
+        expect(page).to have_text "The last certified company used on this device was #{hinted_idp_name}."
+        expect(page).to have_button("Select #{hinted_idp_name}", count: 2)
+
+        expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
+        when_i_select_an_idp
+        then_im_at_the_idp
+        and_piwik_was_sent_a_signin_hint_ignored_event
         and_the_language_hint_is_set
         and_the_hints_are_not_set
         expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
