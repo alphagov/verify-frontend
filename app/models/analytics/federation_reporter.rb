@@ -46,6 +46,14 @@ module Analytics
       end
     end
 
+    def report_sign_in_journey_hint_shown(current_transaction, request, idp_display_name)
+      report_action(
+        current_transaction,
+        request,
+        "Sign In Journey Hint Shown - #{idp_display_name}"
+      )
+    end
+
     def report_idp_registration(current_transaction:, request:, idp_name:, idp_name_history:, evidence:, recommended:, user_segments:)
       list_of_evidence = evidence.sort.join(', ')
       list_of_segments = user_segments.nil? ? nil : user_segments.sort.join(', ')
@@ -62,6 +70,14 @@ module Analytics
         current_transaction,
         request,
         "Sign In - #{idp_display_name}"
+      )
+    end
+
+    def report_sign_in_idp_selection_after_journey_hint(current_transaction, request, idp_display_name, hint_followed)
+      report_action(
+        current_transaction,
+        request,
+        "Sign In - #{idp_display_name} - Hint #{hint_followed ? 'Followed' : 'Ignored'}"
       )
     end
 
