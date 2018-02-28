@@ -11,7 +11,8 @@ class RedirectToIdpController < ApplicationController
 
   def sign_in
     request_form
-    FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name])
+    hinted = session[:user_followed_journey_hint] ||= false
+    FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name], hinted)
     render :redirect_to_idp
   end
 

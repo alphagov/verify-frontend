@@ -26,7 +26,8 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   end
 
   def when_i_select_an_idp
-    # click_button(idp_display_name, maximum: 2)
+    # There may be multiple identical buttons due to the journey hint
+    # so we can't use 'click_button'
     all(:button, idp_display_name)[0].click
   end
 

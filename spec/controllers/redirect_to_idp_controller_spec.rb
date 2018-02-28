@@ -74,26 +74,42 @@ describe RedirectToIdpController do
     bobs_identity_service = { 'simple_id' => 'stub-idp-two',
                               'entity_id' => 'http://idcorp.com',
                               'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+    bobs_identity_service_idp_name = 'Bob’s Identity Service'
 
     before :each do
       stub_session_idp_authn_request('<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>', 'idp-location', true)
       stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+
+      session[:selected_idp] = bobs_identity_service
+      session[:selected_idp_name] = bobs_identity_service_idp_name
     end
 
     subject { get :sign_in, params: { locale: 'en' } }
 
     it 'reports idp selection details to piwik' do
-      bobs_identity_service_idp_name = "Bob’s Identity Service"
-
-      session[:selected_idp] = bobs_identity_service
-      session[:selected_idp_name] = bobs_identity_service_idp_name
-
       expect(FEDERATION_REPORTER).to receive(:report_sign_in_idp_selection)
                                          .with(a_kind_of(Display::RpDisplayData),
                                                a_kind_of(ActionDispatch::Request),
-                                               bobs_identity_service_idp_name)
+                                               bobs_identity_service_idp_name,
+                                               false)
 
       subject
+    end
+
+    context 'and with the journey hint session param' do
+      before :each do
+        session[:user_followed_journey_hint] = true
+      end
+
+      it 'reports idp selection details to piwik' do
+        expect(FEDERATION_REPORTER).to receive(:report_sign_in_idp_selection)
+                                           .with(a_kind_of(Display::RpDisplayData),
+                                                 a_kind_of(ActionDispatch::Request),
+                                                 bobs_identity_service_idp_name,
+                                                 true)
+
+        subject
+      end
     end
   end
 end
