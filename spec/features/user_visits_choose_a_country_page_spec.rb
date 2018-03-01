@@ -61,28 +61,26 @@ RSpec.describe 'When the user visits the choose a country page' do
 
     visit '/choose-a-country'
 
-    expect(page).to have_select 'js-disabled-country-picker'
+    expect(page).to have_select 'country-picker'
   end
 
-  it 'should have a typeahead when JS is enabled', js: true do
+  it 'should have select when JS is enabled', js: true do
     given_a_session_supporting_eidas
 
     visit '/choose-a-country'
 
-    expect(page).to have_css '.typeahead__wrapper'
+    expect(page).to have_select 'country-picker'
   end
 
-  it 'should redirect to country page (when JS is disabled)' do
+  it 'should redirect to country page' do
     given_a_session_supporting_eidas
     stub_select_country_request
     stub_session_country_authn_request(originating_ip, location, false)
 
     visit '/choose-a-country'
 
-    within '.js-hidden' do
-      select 'Netherlands', from: 'country'
-      click_on 'Select'
-    end
+    select 'Netherlands', from: 'country'
+    click_on 'Select'
 
     expect(page).to have_current_path('/redirect-to-country')
 
@@ -91,69 +89,15 @@ RSpec.describe 'When the user visits the choose a country page' do
     expect(page).to have_current_path('/a-country-page')
   end
 
-  it 'should error when invalid form is submitted (when JS is disabled)' do
+  it 'should error when invalid form is submitted' do
     given_a_session_supporting_eidas
 
     visit '/choose-a-country'
 
-    within '.js-hidden' do
-      click_on 'Select'
-    end
+    click_on 'Select'
 
     expect(page).to have_current_path('/choose-a-country')
     expect(page).to have_content 'Please select a country from the list'
-  end
-
-  it 'should redirect to country page (when JS is enabled)', js: true do
-    given_a_session_supporting_eidas
-    stub_select_country_request
-    stub_session_country_authn_request(originating_ip, location, false)
-
-    visit '/choose-a-country'
-
-    within '.js-show' do
-      fill_in 'input-typeahead', with: 'Netherlands'
-      click_on 'Select'
-    end
-
-    expect(page).to have_current_path('/a-country-page')
-  end
-
-  it 'should error when invalid country is selected (when JS is enabled)', js: true do
-    given_a_session_supporting_eidas
-    stub_select_country_request
-
-    visit '/choose-a-country'
-
-    within '.js-show' do
-      fill_in 'input-typeahead', with: 'Sweden'
-      click_on 'Select'
-    end
-
-    expect(page).to have_current_path('/choose-a-country')
-    expect(page).to have_content 'Please select a country from the list'
-  end
-
-  it 'policy records the country selected by the user', js: true do
-    # Given the User has a list of countries to choose from
-    # And the User has a session that supports eIDAS Journey
-    given_a_session_supporting_eidas
-    stub_select_country_request
-    stub_session_country_authn_request(originating_ip, location, false)
-
-    # When the User makes a selection from the choice of available countries
-    visit '/choose-a-country'
-
-    within '.js-show' do
-      fill_in 'input-typeahead', with: 'Netherlands'
-      click_on 'Select'
-    end
-
-    # Then the User should be redirected to the 'redirect-to-country' page
-    expect(page).to have_current_path('/a-country-page')
-
-    # And API is called (and policy records the country selected by the user)
-    expect(a_request(:post, policy_api_uri(select_country_endpoint("my-session-id-cookie", "NL")))).to have_been_made.once
   end
 
   def select_country_endpoint(session_id, country_code)
