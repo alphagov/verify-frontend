@@ -69,7 +69,7 @@ constraints IsLoa2 do
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
-  # HUB-30 Put back when tearing down the mobile_segments AB test
+  # HUB-52 Put back when tearing down the no_perf_management AB test
   # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   # post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
   # get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
