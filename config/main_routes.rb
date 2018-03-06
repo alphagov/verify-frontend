@@ -20,6 +20,14 @@ get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_no
 get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
 get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
 
+NO_QUESTIONS = 'no_questions'.freeze
+
+no_questions_control_piwik = SelectRoute.new(NO_QUESTIONS, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+no_questions_control = SelectRoute.new(NO_QUESTIONS, 'control', is_start_of_test: false, experiment_loa: 'LEVEL_2')
+no_questions_variant_piwik = SelectRoute.new(NO_QUESTIONS, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+no_questions_variant = SelectRoute.new(NO_QUESTIONS, 'variant', is_start_of_test: false, experiment_loa: 'LEVEL_2')
+
+
 constraints IsLoa1 do
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
@@ -40,24 +48,43 @@ constraints IsLoa1 do
   get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
 end
 
+constraints no_questions_control_piwik do
+  get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+end
+
+constraints no_questions_control do
+  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+end
+
+constraints no_questions_variant_piwik do
+  get 'about_choosing_a_company', to: 'about_loa2_variant#choosing_a_company', as: :about_choosing_a_company
+end
+
+constraints no_questions_variant do
+  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#index', as: :choose_a_certified_company
+  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#select_idp', as: :choose_a_certified_company_submit
+end
+
 constraints IsLoa2 do
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
-  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
   get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
   get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
   get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
-  get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#index', as: :redirect_to_idp_question
-  post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
-  get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
   get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
   get 'about', to: 'about_loa2#index', as: :about
   get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
-  get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+  get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#index', as: :redirect_to_idp_question
+  post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
+  get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
+  # Add back in after AB test HUB-71
+  # get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+  # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+  # post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
 end
 
 post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
