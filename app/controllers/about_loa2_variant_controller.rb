@@ -10,15 +10,6 @@ class AboutLoa2VariantController < ApplicationController
     render 'about/about'
   end
 
-  def certified_companies
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_loa)
-    render 'about/certified_companies_LOA2'
-  end
-
-  def identity_accounts
-    render 'about/identity_accounts_LOA2'
-  end
-
   def choosing_a_company
     render 'about/choosing_a_company_variant'
   end
