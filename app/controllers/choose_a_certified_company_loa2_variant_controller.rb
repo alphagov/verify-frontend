@@ -11,8 +11,9 @@ class ChooseACertifiedCompanyLoa2VariantController < ApplicationController
   end
 
   def select_idp
-    select_viewable_idp_for_loa(params.fetch('entity_id'))
-    redirect_to warning_page
+    select_viewable_idp_for_loa(params.fetch('entity_id')) do
+      redirect_to warning_page
+    end
   end
 
 private
