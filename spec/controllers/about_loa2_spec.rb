@@ -32,4 +32,13 @@ describe AboutLoa2Controller do
       expect(subject).to render_template(:identity_accounts_LOA2)
     end
   end
+
+  context 'GET about#choosing_a_company' do
+    subject { get :choosing_a_company, params: { locale: 'en' } }
+
+    it 'renders the choosing a company LOA2 template when LEVEL_2 is the requested LOA' do
+      set_session_and_cookies_with_loa('LEVEL_2')
+      expect(subject).to render_template(:choosing_a_company)
+    end
+  end
 end
