@@ -1,5 +1,6 @@
 require 'feature_helper'
 require 'cookie_names'
+require 'api_test_helper'
 
 RSpec.describe 'When the user visits the about choosing a company page' do
   before(:each) do

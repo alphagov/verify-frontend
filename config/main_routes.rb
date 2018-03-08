@@ -5,21 +5,6 @@ end
 get 'sign_in', to: 'sign_in#index', as: :sign_in
 post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 
-get 'select_documents', to: 'select_documents#index', as: :select_documents
-get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
-post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
-get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
-get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
-post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-get 'select_phone', to: 'select_phone#index', as: :select_phone
-post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
-get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
-get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
-post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
-get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
-get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
-get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
-
 NO_QUESTIONS = 'no_questions'.freeze
 
 no_questions_control_piwik = SelectRoute.new(NO_QUESTIONS, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
@@ -53,6 +38,21 @@ constraints no_questions_control_piwik do
 end
 
 constraints no_questions_control do
+  get 'select_documents', to: 'select_documents#index', as: :select_documents
+  get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
+  post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
+  get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
+  get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
+  post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
+  get 'select_phone', to: 'select_phone#index', as: :select_phone
+  post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
+  get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
+  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
+  post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+  get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
+  get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
+  get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
+
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
 end
