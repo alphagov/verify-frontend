@@ -183,14 +183,14 @@ describe 'When the user visits the choose a certified company page' do
 
     context 'user has two docs and a mobile' do
       selected_answers = {
-          device_type: { device_type_other: true },
-          documents: { passport: true, driving_licence: true },
-          phone: { mobile_phone: true }
+        device_type: { device_type_other: true },
+        documents: { passport: true, driving_licence: true },
+        phone: { mobile_phone: true }
       }
       before :each do
         page.set_rack_session(
-            transaction_simple_id: 'test-rp',
-            selected_answers: selected_answers,
+          transaction_simple_id: 'test-rp',
+          selected_answers: selected_answers,
         )
       end
 
@@ -214,12 +214,12 @@ describe 'When the user visits the choose a certified company page' do
         additional_documents = selected_answers[:documents].clone
         additional_documents[:driving_licence] = false
         page.set_rack_session(
-            transaction_simple_id: 'test-rp',
-            selected_answers: {
-                selected_answers: additional_documents,
-                phone: selected_answers[:phone],
-                device_type: { device_type_other: true }
-            }
+          transaction_simple_id: 'test-rp',
+          selected_answers: {
+            selected_answers: additional_documents,
+            phone: selected_answers[:phone],
+            device_type: { device_type_other: true }
+          }
         )
 
         visit '/choose-a-certified-company'
@@ -249,13 +249,13 @@ describe 'When the user visits the choose a certified company page' do
       it 'only LEVEL_1 recommended IDPs are displayed' do
         stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
         page.set_rack_session(
-            transaction_simple_id: 'test-rp',
-            requested_loa: 'LEVEL_1',
-            selected_answers: {
-                device_type: { device_type_other: true },
-                documents: { passport: true, driving_licence: true },
-                phone: { mobile_phone: true }
-            },
+          transaction_simple_id: 'test-rp',
+          requested_loa: 'LEVEL_1',
+          selected_answers: {
+            device_type: { device_type_other: true },
+            documents: { passport: true, driving_licence: true },
+            phone: { mobile_phone: true }
+          },
         )
 
         visit '/choose-a-certified-company'
@@ -270,11 +270,11 @@ describe 'When the user visits the choose a certified company page' do
 
     it 'displays all IDPs even if no recommendations' do
       page.set_rack_session(
-          transaction_simple_id: 'test-rp',
-          selected_answers: {
-              device_type: { device_type_other: true },
-              documents: { passport: false }
-          },
+        transaction_simple_id: 'test-rp',
+        selected_answers: {
+            device_type: { device_type_other: true },
+            documents: { passport: false }
+        },
       )
 
       visit '/choose-a-certified-company'
@@ -286,12 +286,12 @@ describe 'When the user visits the choose a certified company page' do
     it 'shows all IDPs regardless of profiles' do
       stub_api_no_docs_idps
       page.set_rack_session(
-          transaction_simple_id: 'test-rp',
-          selected_answers: {
-              device_type: { device_type_other: true },
-              documents: { driving_licence: true },
-              phone: { mobile_phone: true }
-          },
+        transaction_simple_id: 'test-rp',
+        selected_answers: {
+            device_type: { device_type_other: true },
+            documents: { driving_licence: true },
+            phone: { mobile_phone: true }
+        },
       )
 
       visit '/choose-a-certified-company'
@@ -308,15 +308,15 @@ describe 'When the user visits the choose a certified company page' do
 
     context 'IDP profile is in a demo period' do
       selected_answers = {
-          device_type: { device_type_other: true },
-          documents: { passport: true, driving_licence: true },
-          phone: { mobile_phone: true }
+        device_type: { device_type_other: true },
+        documents: { passport: true, driving_licence: true },
+        phone: { mobile_phone: true }
       }
 
       it 'shows the IDP if the RP is not protected' do
         page.set_rack_session(
-            transaction_simple_id: 'test-rp',
-            selected_answers: selected_answers
+          transaction_simple_id: 'test-rp',
+          selected_answers: selected_answers
         )
 
         visit '/choose-a-certified-company'
@@ -328,8 +328,8 @@ describe 'When the user visits the choose a certified company page' do
 
       it 'shows the IDP if the RP is protected' do
         page.set_rack_session(
-            transaction_simple_id: 'test-rp-no-demo',
-            selected_answers: selected_answers
+          transaction_simple_id: 'test-rp-no-demo',
+          selected_answers: selected_answers
         )
 
         visit '/choose-a-certified-company'
