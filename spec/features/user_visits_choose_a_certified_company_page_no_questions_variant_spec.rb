@@ -1,17 +1,18 @@
 require 'feature_helper'
 require 'api_test_helper'
 
-describe 'When the user visits the choose a certified company page' do
+# HUB-71 Delete with test teardown
+describe 'When a user in the no_questions test variant visits the choose a certified company page' do
   before(:each) do
-    set_session_and_session_cookies!
+    set_session_and_ab_session_cookies!('no_questions' => 'no_questions_variant')
     stub_api_idp_list_for_loa(default_idps)
   end
 
   context 'user has two docs and a mobile' do
     selected_answers = {
-        device_type: { device_type_other: true },
-        documents: { passport: true, driving_licence: true },
-        phone: { mobile_phone: true }
+      device_type: { device_type_other: true },
+      documents: { passport: true, driving_licence: true },
+      phone: { mobile_phone: true }
     }
     before :each do
       page.set_rack_session(
@@ -30,13 +31,13 @@ describe 'When the user visits the choose a certified company page' do
       visit '/choose-a-certified-company'
 
       expect(page).to have_current_path(choose_a_certified_company_path)
-      expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '3 companies')
+      expect(page).not_to have_content 'Based on your answers'
       within('#matching-idps') do
         expect(page).to have_button('Choose IDCorp')
       end
     end
 
-    it 'does not show an IDP if the IDP profile has a subset of the user evidence, but not an exact match' do
+    it 'does show an IDP if the IDP profile has a subset of the user evidence, but not an exact match' do
       additional_documents = selected_answers[:documents].clone
       additional_documents[:driving_licence] = false
       page.set_rack_session(
@@ -51,7 +52,7 @@ describe 'When the user visits the choose a certified company page' do
       visit '/choose-a-certified-company'
 
       within('#matching-idps') do
-        expect(page).to_not have_button('Choose IDCorp')
+        expect(page).to have_button('Choose IDCorp')
       end
     end
 
@@ -71,70 +72,42 @@ describe 'When the user visits the choose a certified company page' do
     end
   end
 
-  context 'user is from an LOA1 service' do
-    it 'only LEVEL_1 recommended IDPs are displayed' do
-      stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
-      page.set_rack_session(
-        transaction_simple_id: 'test-rp',
-        requested_loa: 'LEVEL_1',
-        selected_answers: {
-          device_type: { device_type_other: true },
-          documents: { passport: true, driving_licence: true },
-          phone: { mobile_phone: true }
-        },
-      )
-
-      visit '/choose-a-certified-company'
-
-      expect(page).to have_current_path(choose_a_certified_company_path)
-
-      within('#matching-idps') do
-        expect(page).to have_button('Choose LOA1 Corp')
-      end
-    end
-  end
-
-  it 'displays no IDPs if no recommendations' do
+  it 'displays all IDPs even if no recommendations' do
     page.set_rack_session(
       transaction_simple_id: 'test-rp',
       selected_answers: {
-        device_type: { device_type_other: true },
-        documents: { passport: false }
+          device_type: { device_type_other: true },
+          documents: { passport: false }
       },
     )
 
     visit '/choose-a-certified-company'
 
     expect(page).to have_current_path(choose_a_certified_company_path)
-    expect(page).to_not have_css('#non-matching-idps')
-    expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: 'no companies')
+    expect(page).not_to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: 'no companies')
   end
 
-  it 'recommends some IDPs with a recommended profile, hides non-recommended profiles, and omits non-matching profiles' do
+  it 'shows all IDPs regardless of profiles' do
     stub_api_no_docs_idps
     page.set_rack_session(
       transaction_simple_id: 'test-rp',
       selected_answers: {
-        device_type: { device_type_other: true },
-        documents: { driving_licence: true },
-        phone: { mobile_phone: true }
+          device_type: { device_type_other: true },
+          documents: { driving_licence: true },
+          phone: { mobile_phone: true }
       },
     )
 
     visit '/choose-a-certified-company'
 
-    expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '2 companies')
+    expect(page).not_to have_content 'Based on your answers'
+
     within('#matching-idps') do
       expect(page).to have_button('Choose No Docs IDP')
       expect(page).to have_button('Choose IDCorp')
-      expect(page).to_not have_button('Bob’s Identity Service')
-    end
-
-    within('#non-matching-idps') do
       expect(page).to have_button('Bob’s Identity Service')
+      expect(page).to have_button('Choose Carol’s Secure ID')
     end
-
-    expect(page).to_not have_button('Choose Carol’s Secure ID')
   end
 
   context 'IDP profile is in a demo period' do
@@ -157,7 +130,7 @@ describe 'When the user visits the choose a certified company page' do
       end
     end
 
-    it 'shows the IDP as unlikely if the RP is protected' do
+    it 'shows the IDP if the RP is protected' do
       page.set_rack_session(
         transaction_simple_id: 'test-rp-no-demo',
         selected_answers: selected_answers
@@ -166,10 +139,6 @@ describe 'When the user visits the choose a certified company page' do
       visit '/choose-a-certified-company'
 
       within('#matching-idps') do
-        expect(page).to_not have_button('Choose Bob’s Identity Service')
-      end
-
-      within('#non-matching-idps') do
         expect(page).to have_button('Choose Bob’s Identity Service')
       end
     end
