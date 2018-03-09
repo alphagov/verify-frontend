@@ -55,6 +55,8 @@ constraints no_questions_control do
 
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+
+  get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
 end
 
 constraints no_questions_variant_piwik do
@@ -64,6 +66,8 @@ end
 constraints no_questions_variant do
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#select_idp', as: :choose_a_certified_company_submit
+
+  get 'failed_registration', to: 'failed_registration_loa2_variant#index', as: :failed_registration
 end
 
 constraints IsLoa2 do
@@ -75,7 +79,7 @@ constraints IsLoa2 do
   # post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
   get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
-  get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
+  # get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
   get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
   get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#index', as: :redirect_to_idp_question
   post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit

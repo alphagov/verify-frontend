@@ -1,0 +1,8 @@
+<%= page_title 'hub.failed_registration.title' %>
+<% content_for :feedback_source, 'FAILED_REGISTRATION_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render partial: 'failed_registration/non_continue_rp', locals: {idp: @idp, transaction: @transaction, start_again_path: choose_a_certified_company_path} %>
+  </div>
+</div>
