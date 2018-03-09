@@ -1,0 +1,31 @@
+<h1 class="heading-large"><%= t('hub.failed_registration.continue_heading', transaction_name: transaction.name) %></h1>
+
+<p>
+  <%= t 'hub.failed_registration.continue_idp_text', idp_name: idp.display_name %>
+  <%= raw transaction.other_ways_text %>
+</p>
+
+<p><%= t 'hub.failed_registration.continue_text', rp_name: transaction.rp_name %></p>
+
+<%= button_link_to t('navigation.continue'), redirect_to_service_error_path %>
+
+<h2 class="heading-medium"><%= t 'hub.failed_registration.problems_verifying_your_identity' %></h2>
+
+<%= t 'hub.failed_registration.reasons_html', idp_name: idp.display_name %>
+
+<p><%= t 'hub.failed_registration.what_to_do_next_intro' %></p>
+
+<details class="next-actions">
+  <summary><span class="summary"><%= t 'hub.failed_registration.contact_details_intro', idp_name: idp.display_name %></span></summary>
+  <div class="panel panel-border-narrow">
+    <%= raw idp.contact_details %>
+  </div>
+</details>
+
+<details class="next-actions">
+  <summary><span class="summary"><%= t 'hub.failed_registration.try_another_summary' %></span></summary>
+  <div class="panel panel-border-narrow">
+    <p><%= t 'hub.failed_registration.try_another_text', idp_name: @idp.display_name %></p>
+    <%= link_to t('hub.failed_registration.try_another_company'), try_another_company_path %>
+  </div>
+</details>
