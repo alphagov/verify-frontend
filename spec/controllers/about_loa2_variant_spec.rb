@@ -15,7 +15,16 @@ describe AboutLoa2VariantController do
 
     it 'renders the choosing a company LOA2 variant template when LEVEL_2 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_2')
-      expect(subject).to render_template(:choosing_a_company_variant)
+      expect(subject).to render_template(:choosing_a_company)
+    end
+  end
+
+  context 'GET about#identity_accounts' do
+    subject { get :identity_accounts, params: { locale: 'en' } }
+
+    it 'renders the identity accounts LOA2 variant template when LEVEL_2 is the requested LOA' do
+      set_session_and_cookies_with_loa('LEVEL_2')
+      expect(subject).to render_template(:identity_accounts_LOA2_variant)
     end
   end
 end

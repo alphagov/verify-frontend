@@ -4,7 +4,7 @@ require 'api_test_helper'
 # HUB-71 Delete with test teardown
 describe 'When a user in the no_questions test variant visits the choose a certified company page' do
   before(:each) do
-    set_session_and_ab_session_cookies!('no_questions' => 'no_questions_variant')
+    set_session_and_ab_session_cookies!('no_questions_v2' => 'no_questions_v2_variant')
     stub_api_idp_list_for_loa(default_idps)
   end
 

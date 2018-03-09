@@ -11,6 +11,10 @@ class AboutLoa2VariantController < ApplicationController
   end
 
   def choosing_a_company
-    render 'about/choosing_a_company_variant'
+    render 'about/choosing_a_company'
+  end
+
+  def identity_accounts
+    render 'about/identity_accounts_LOA2_variant'
   end
 end
