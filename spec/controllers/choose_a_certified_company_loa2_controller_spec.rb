@@ -93,6 +93,13 @@ describe ChooseACertifiedCompanyLoa2Controller do
       expect(subject).to redirect_to redirect_to_idp_question_path
     end
 
+    it 'redirects to IDP question page when user has zero docs and IDP flag is enabled' do
+      session[:selected_answers] = { 'documents' => { 'driving_licence' => false } }
+      post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp.com' }
+
+      expect(subject).to redirect_to redirect_to_idp_question_path
+    end
+
     it 'returns 404 page if IDP is non-existent' do
       post :select_idp, params: { locale: 'en', entity_id: 'http://notanidp.com' }
 

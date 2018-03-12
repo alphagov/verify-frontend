@@ -24,15 +24,15 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
 private
 
   def warning_or_question_page(decorated_idp)
-    if only_one_uk_doc_selected && interstitial_question_flag_enabled_for(decorated_idp)
+    if not_more_than_one_uk_doc_selected && interstitial_question_flag_enabled_for(decorated_idp)
       redirect_to_idp_question_path
     else
       redirect_to_idp_warning_path
     end
   end
 
-  def only_one_uk_doc_selected
-    (%i[passport driving_licence] & selected_evidence).size == 1
+  def not_more_than_one_uk_doc_selected
+    (%i[passport driving_licence] & selected_evidence).size <= 1
   end
 
   def interstitial_question_flag_enabled_for(decorated_idp)
