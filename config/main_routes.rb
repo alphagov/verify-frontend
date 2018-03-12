@@ -51,9 +51,9 @@ constraints IsLoa2 do
   # post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
   # get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
   # post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-  get 'select_phone', to: 'select_phone#index', as: :select_phone
-  post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
-  get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
+  # get 'select_phone', to: 'select_phone#index', as: :select_phone
+  # post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
+  # get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
@@ -64,7 +64,7 @@ constraints IsLoa2 do
   post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
   get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
   get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
-  get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
+  # get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
 end
 
 post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
@@ -124,6 +124,10 @@ constraints questions_light_control do
 
   get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
   post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
+
+  get 'select_phone', to: 'select_phone#index', as: :select_phone
+  post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
+  get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
 end
 
 constraints questions_light_variant do

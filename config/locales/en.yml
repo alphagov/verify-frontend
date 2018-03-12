@@ -200,6 +200,9 @@ en:
       title: Other identity documents
       title_other_identity_documents: Other identity documents
       non_uk_id_document: Do you have a non-UK passport, ID card or driving licence?
+      ab_test:
+        smart_phone_question: Do you have a smartphone or tablet that can download apps?
+        smart_phone_subtitle: You will need to download a free app and use your device's camera to take a photo of your identity document and a selfie.
     select_phone:
       title: Do you have a mobile phone or tablet?
       explanation: Certified companies can send security codes to your mobile.

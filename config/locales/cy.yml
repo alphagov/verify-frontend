@@ -201,6 +201,9 @@ cy:
     other_documents:
       title_other_identity_documents: Dogfennau hunaniaeth eraill
       non_uk_id_document: Oes gennych chi pasbort sydd ddim yn un o'r DU, cerdyn ID neu drwydded yrru?
+      ab_test:
+        smart_phone_question: Do you have a smartphone or tablet that can download apps?
+        smart_phone_subtitle: You will need to download a free app and use your device's camera to take a photo of your identity document and a selfie.
     select_phone:
       title: Oes gennych ffôn symudol neu lechen?
       explanation: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.
