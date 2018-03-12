@@ -5,13 +5,6 @@ end
 get 'sign_in', to: 'sign_in#index', as: :sign_in
 post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 
-NO_QUESTIONS = 'no_questions'.freeze
-
-no_questions_control_piwik = SelectRoute.new(NO_QUESTIONS, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
-no_questions_control = SelectRoute.new(NO_QUESTIONS, 'control', is_start_of_test: false, experiment_loa: 'LEVEL_2')
-no_questions_variant_piwik = SelectRoute.new(NO_QUESTIONS, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')
-no_questions_variant = SelectRoute.new(NO_QUESTIONS, 'variant', is_start_of_test: false, experiment_loa: 'LEVEL_2')
-
 NO_QUESTIONS_V2 = 'no_questions_v2'.freeze
 
 no_questions_v2_control_piwik = SelectRoute.new(NO_QUESTIONS_V2, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
@@ -39,44 +32,12 @@ constraints IsLoa1 do
   get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
 end
 
-# AB test 6 ("no questions") - keeping the old routes for ZDD purposes
-
-constraints no_questions_control do
-  get 'select_documents', to: 'select_documents#index', as: :select_documents
-  get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
-  post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
-  get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
-  get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
-  post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-  get 'select_phone', to: 'select_phone#index', as: :select_phone
-  post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
-  get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
-  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
-  post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
-  get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
-  get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
-  get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
-
+constraints no_questions_v2_control_piwik do
   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
-  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
-
-  get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
 end
 
-constraints no_questions_variant_piwik do
-  get 'about_choosing_a_company', to: 'about_loa2_variant#choosing_a_company', as: :about_choosing_a_company
-end
-
-constraints no_questions_variant do
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#index', as: :choose_a_certified_company
-  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#select_idp', as: :choose_a_certified_company_submit
-
-  get 'failed_registration', to: 'failed_registration_loa2_variant#index', as: :failed_registration
-end
-
-constraints no_questions_control_piwik do
-  get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+constraints no_questions_v2_variant_piwik do
+  get 'about_identity_accounts', to: 'about_loa2_variant#identity_accounts', as: :about_identity_accounts
 end
 
 constraints no_questions_v2_control do
@@ -94,29 +55,21 @@ constraints no_questions_v2_control do
   get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
   get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
   get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
+  get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
 
-  get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
 
   get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
 end
 
-constraints no_questions_v2_control_piwik do
-  get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
-end
-
 constraints no_questions_v2_variant do
-  get 'about_identity_accounts', to: 'about_loa2_variant#identity_accounts', as: :about_identity_accounts
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#select_idp', as: :choose_a_certified_company_submit
 
   get 'failed_registration', to: 'failed_registration_loa2_variant#index', as: :failed_registration
 end
 
-constraints no_questions_v2_variant_piwik do
-  get 'about_choosing_a_company', to: 'about_loa2_variant#choosing_a_company', as: :about_choosing_a_company
-end
 
 constraints IsLoa2 do
   get 'start', to: 'start#index', as: :start
@@ -135,9 +88,6 @@ constraints IsLoa2 do
   get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
   get 'about', to: 'about_loa2#index', as: :about
   get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
-  # Add back in after AB test HUB-71
-  # get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
-  # get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
 end
 
 post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
