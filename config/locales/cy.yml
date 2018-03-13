@@ -167,13 +167,6 @@ cy:
         </ul>
         <p>Fodd bynnag, mae gan bob cwmni ddulliau gwahanol ar gyfer pob un o'r camau hyn.</p>
         <p>Felly byddwn nawr yn gofyn rhai cwestiynau i chi wirio pa gwmnïau all eich dilysu. Byddwn wedyn yn eich anfon at wefan y cwmni rydych yn ei ddewis.</p>
-      content_variant_html: |
-        <p>Mae cwmnïau ardystiedig wedi adeiladu systemau newydd, diogel i ddilysu hunaniaeth. Mae'r systemau hyn yn gweithio trwy wirio:</p>
-        <ul class="list-bullet list">
-        <li>bod eich dogfennau hunaniaeth yn ddilys</li>
-        <li>mai chi sy'n darparu eich manylion, dim rhywun sy'n honni bod yn chi</li>
-        </ul>
-        <p>Fodd bynnag, mae gan bob cwmni ddulliau gwahanol ar gyfer pob un o'r camau hyn.</p>
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
       title_photo_documents: Eich dogfennau hunaniaeth gyda llun
