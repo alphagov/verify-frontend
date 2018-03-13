@@ -36,14 +36,14 @@ constraints IsLoa2 do
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
-  get 'about', to: 'about_loa2#index', as: :about
-  get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
-  get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   # HUB-64: Questions "Light" AB test - add commented out routes to tear down
+  # get 'about', to: 'about_loa2#index', as: :about
+  # get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
+  # get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   # get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
   # get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
   # post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
-  # get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
+  get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
   # get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
   # get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
   # get 'select_documents', to: 'select_documents#index', as: :select_documents
@@ -103,17 +103,20 @@ get 'paused_registration', to: 'paused_registration#index', as: :paused_registra
 
 # HUB-64: Questions "Light" AB test - remove below constraints to tear down
 constraints questions_light_control_piwik do
-  get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+  get 'about', to: 'about_loa2#index', as: :about
 end
 
 constraints questions_light_variant_piwik do
-  get 'about_choosing_a_company', to: 'about_loa2_variant#choosing_a_company', as: :about_choosing_a_company
+  get 'about', to: 'about_loa2_variant#index', as: :about
 end
 
 constraints questions_light_control do
+  get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
+  get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
+  get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+
   get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
   post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
-  get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
   get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
   get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
 
@@ -135,6 +138,10 @@ constraints questions_light_control do
 end
 
 constraints questions_light_variant do
+  get 'about_certified_companies', to: 'about_loa2_variant#certified_companies', as: :about_certified_companies
+  get 'about_identity_accounts', to: 'about_loa2_variant#identity_accounts', as: :about_identity_accounts
+  get 'about_choosing_a_company', to: 'about_loa2_variant#choosing_a_company', as: :about_choosing_a_company
+
   get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
   get 'select_documents_none', to: 'select_documents_variant#no_documents', as: :select_documents_no_documents
   post 'select_documents', to: 'select_documents_variant#select_documents', as: :select_documents_submit

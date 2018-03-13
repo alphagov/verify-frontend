@@ -7,7 +7,8 @@ class AboutLoa2VariantController < ApplicationController
 
   def index
     @tailored_text = current_transaction.tailored_text
-    render 'about/about'
+    @other_ways_description = current_transaction.other_ways_description
+    render 'about/about_variant'
   end
 
   def certified_companies

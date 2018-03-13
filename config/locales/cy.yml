@@ -119,6 +119,14 @@ cy:
     about:
       title: Am
       verify_is_a_service: Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
+      ab_test:
+        eligibility_info_html: |
+          <p>To use Verify, you need to:</p>
+          <ul class="list-bullet list">
+          <li>be over 18 years old</li>
+          <li>have a UK address</li>
+          </ul>
+        other_ways_link: "Other ways to %{other_ways_description}"
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
