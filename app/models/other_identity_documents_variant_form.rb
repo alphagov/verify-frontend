@@ -20,7 +20,7 @@ class OtherIdentityDocumentsVariantForm
 private
 
   def documents_not_specified
-    if !documents_specified?
+    if !documents_specified? || !%w(true false).include?(@non_uk_id_document)
       add_no_selection_error
     end
   end
@@ -44,6 +44,6 @@ private
   end
 
   def smartphone_not_specified?
-    smart_phone.nil?
+    smart_phone.nil? || !%w(true false).include?(@smart_phone)
   end
 end
