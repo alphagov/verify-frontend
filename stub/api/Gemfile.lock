@@ -13,9 +13,9 @@ GEM
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     minitest (5.10.3)
-    mustermann (1.0.1)
+    mustermann (1.0.2)
     rack (2.0.3)
-    rack-protection (2.0.0)
+    rack-protection (2.0.1)
       rack
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
@@ -32,10 +32,10 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.0)
-    sinatra (2.0.0)
+    sinatra (2.0.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.0)
+      rack-protection (= 2.0.1)
       tilt (~> 2.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -49,7 +49,7 @@ DEPENDENCIES
   activemodel
   rack-test
   rspec
-  sinatra (~> 2.0.0)
+  sinatra (~> 2.0.1)
 
 RUBY VERSION
    ruby 2.4.2p198
