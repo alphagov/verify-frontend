@@ -32,7 +32,10 @@ class ApplicationController < ActionController::Base
   helper_method :loa2_transactions_list
   helper_method :public_piwik
 
-  rescue_from StandardError, with: :something_went_wrong unless Rails.env == 'development'
+  unless Rails.env == 'development'
+    rescue_from Exception, with: :something_went_wrong
+    rescue_from StandardError, with: :something_went_wrong
+  end
   rescue_from Errors::WarningLevelError, with: :something_went_wrong_warn
   rescue_from Api::SessionError, with: :session_error
   rescue_from Api::UpstreamError, with: :something_went_wrong_warn
