@@ -1,0 +1,14 @@
+simpleIds: [ "stub-idp-two" ]
+send_hints: false
+send_language_hint: false
+
+segments:
+  protected:
+    recommended: []
+    unlikely: ["protected-segment-1"]
+  non_protected:
+    recommended: ["protected-segment-1", "other", "non-protected-segment-4", "non-protected-segment-2"]
+    unlikely: ["non-protected-segment-3"]
+
+capabilities:
+  - []

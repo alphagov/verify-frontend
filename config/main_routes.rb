@@ -54,9 +54,9 @@ constraints IsLoa2 do
   # get 'select_phone', to: 'select_phone#index', as: :select_phone
   # post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
   # get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
-  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
-  get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
+  # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+  # post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+  # get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
   get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
   get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
   get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
@@ -128,6 +128,10 @@ constraints questions_light_control do
   get 'select_phone', to: 'select_phone#index', as: :select_phone
   post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
+
+  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+  get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
 end
 
 constraints questions_light_variant do
@@ -138,4 +142,8 @@ constraints questions_light_variant do
 
   get 'other_identity_documents', to: 'other_identity_documents_variant#index', as: :other_identity_documents
   post 'other_identity_documents', to: 'other_identity_documents_variant#select_other_documents', as: :other_identity_documents_submit
+
+  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#index', as: :choose_a_certified_company
+  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#select_idp', as: :choose_a_certified_company_submit
+  get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2_variant#about', as: :choose_a_certified_company_about
 end
