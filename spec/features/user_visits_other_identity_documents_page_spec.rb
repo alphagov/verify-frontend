@@ -6,7 +6,7 @@ RSpec.feature 'When users visits other documents page' do
     set_session_and_session_cookies!
   end
 
-  it 'redirects user to proof of address page if selects yes' do
+  it 'redirects user to select-phone page if selects yes' do
     visit '/other-identity-documents'
     choose 'other_identity_documents_form_non_uk_id_document_true', allow_label_click: true
     click_button t('navigation.continue')
@@ -14,7 +14,7 @@ RSpec.feature 'When users visits other documents page' do
     expect(page).to have_current_path(select_phone_path, only_path: true)
   end
 
-  it 'redirects user to proof of address page if selects no' do
+  it 'redirects user to select-phone page if selects no' do
     visit '/other-identity-documents'
     choose 'other_identity_documents_form_non_uk_id_document_false', allow_label_click: true
     click_button t('navigation.continue')

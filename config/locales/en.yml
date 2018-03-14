@@ -117,6 +117,14 @@ en:
     about:
       title: About
       verify_is_a_service: GOV.UK Verify is a secure service built to fight the growing problem of online identity theft.
+      ab_test:
+        eligibility_info_html: |
+          <p>To use Verify, you need to:</p>
+          <ul class="list-bullet list">
+          <li>be over 18 years old</li>
+          <li>have a UK address</li>
+          </ul>
+        other_ways_link: "Other ways to %{other_ways_description}"
     about_certified_companies:
       title: About certified companies
       a_certified_company_will_verify: A certified company will verify your identity. They’ve all met security standards set by government.
@@ -200,6 +208,9 @@ en:
       title: Other identity documents
       title_other_identity_documents: Other identity documents
       non_uk_id_document: Do you have a non-UK passport, ID card or driving licence?
+      ab_test:
+        smart_phone_question: Do you have a smartphone or tablet that can download apps?
+        smart_phone_subtitle: You will need to download a free app and use your device's camera to take a photo of your identity document and a selfie.
     select_phone:
       title: Do you have a mobile phone or tablet?
       explanation: Certified companies can send security codes to your mobile.
