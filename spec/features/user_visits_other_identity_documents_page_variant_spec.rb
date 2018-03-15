@@ -3,7 +3,7 @@ require 'api_test_helper'
 
 RSpec.feature 'When users visits other documents page' do
   before(:each) do
-    set_session_and_ab_session_cookies!('questions_light' => 'questions_light_variant')
+    set_session_and_ab_session_cookies!('short_questions' => 'short_questions_variant')
   end
 
   it 'redirects user to choose-a-certified-company page if selects yes and has smartphone' do

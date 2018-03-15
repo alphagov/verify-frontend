@@ -2,12 +2,12 @@ def add_routes(routes_name)
   instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
 end
 
-QUESTIONS_LIGHT = "questions_light".freeze
+SHORT_QUESTIONS = "short_questions".freeze
 
-questions_light_control_piwik = SelectRoute.new(QUESTIONS_LIGHT, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
-questions_light_control = SelectRoute.new(QUESTIONS_LIGHT, 'control', is_start_of_test: false, experiment_loa: 'LEVEL_2')
-questions_light_variant_piwik = SelectRoute.new(QUESTIONS_LIGHT, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')
-questions_light_variant = SelectRoute.new(QUESTIONS_LIGHT, 'variant', is_start_of_test: false, experiment_loa: 'LEVEL_2')
+short_questions_control_piwik = SelectRoute.new(SHORT_QUESTIONS, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+short_questions_control = SelectRoute.new(SHORT_QUESTIONS, 'control', is_start_of_test: false, experiment_loa: 'LEVEL_2')
+short_questions_variant_piwik = SelectRoute.new(SHORT_QUESTIONS, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+short_questions_variant = SelectRoute.new(SHORT_QUESTIONS, 'variant', is_start_of_test: false, experiment_loa: 'LEVEL_2')
 
 get 'sign_in', to: 'sign_in#index', as: :sign_in
 post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
@@ -33,10 +33,10 @@ constraints IsLoa1 do
 end
 
 constraints IsLoa2 do
-  get 'start', to: 'start#index', as: :start
-  post 'start', to: 'start#request_post', as: :start
-  get 'begin_registration', to: 'start#register', as: :begin_registration
-  # HUB-64: Questions "Light" AB test - add commented out routes to tear down
+  # get 'start', to: 'start#index', as: :start
+  # post 'start', to: 'start#request_post', as: :start
+  # get 'begin_registration', to: 'start#register', as: :begin_registration
+  # HUB-82: Short Questions AB test - add commented out routes to tear down
   # get 'about', to: 'about_loa2#index', as: :about
   # get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   # get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
@@ -101,16 +101,19 @@ get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
 get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 get 'paused_registration', to: 'paused_registration#index', as: :paused_registration
 
-# HUB-64: Questions "Light" AB test - remove below constraints to tear down
-constraints questions_light_control_piwik do
+# HUB-82: Short Questions AB test - remove below constraints to tear down
+constraints short_questions_control_piwik do
+  get 'start', to: 'start#index', as: :start
+end
+
+constraints short_questions_variant_piwik do
+  get 'start', to: 'start_variant#index', as: :start
+end
+
+constraints short_questions_control do
+  post 'start', to: 'start#request_post', as: :start
+  get 'begin_registration', to: 'start#register', as: :begin_registration
   get 'about', to: 'about_loa2#index', as: :about
-end
-
-constraints questions_light_variant_piwik do
-  get 'about', to: 'about_loa2_variant#index', as: :about
-end
-
-constraints questions_light_control do
   get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
@@ -137,11 +140,9 @@ constraints questions_light_control do
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
 end
 
-constraints questions_light_variant do
-  get 'about_certified_companies', to: 'about_loa2_variant#certified_companies', as: :about_certified_companies
-  get 'about_identity_accounts', to: 'about_loa2_variant#identity_accounts', as: :about_identity_accounts
-  get 'about_choosing_a_company', to: 'about_loa2_variant#choosing_a_company', as: :about_choosing_a_company
-
+constraints short_questions_variant do
+  post 'start', to: 'start_variant#request_post', as: :start
+  get 'begin_registration', to: 'start_variant#register', as: :begin_registration
   get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
   get 'select_documents_none', to: 'select_documents_variant#no_documents', as: :select_documents_no_documents
   post 'select_documents', to: 'select_documents_variant#select_documents', as: :select_documents_submit

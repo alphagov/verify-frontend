@@ -176,8 +176,14 @@ en:
     select_documents:
       title: Select all the documents you have
       title_photo_documents: Your photo identity document
+      title_photo_documents_variant: Setting up an online identity
       explanation: Certified companies use information from different identity documents to verify you.
       sub_heading: Certified companies use information from identity documents to verify you.
+      sub_heading_variant_html: |
+        <p>To set up an online identity, you need to select your prefered identity provider. Each provider uses different methods to verify identities. We’ll ask you some questions so we can filter out the providers that won’t work for you.</p>
+
+        <p>Identity providers need proof of who you are. One of the ways they do this is by asking you to provide details from your identity documents, and then double checking them with DVLA, DVA and HM Passport office.
+        </p>
       documents_from_other_countries: Some certified companies can use identity documents from other countries to verify you.
       no_documents_message: Your document choices have been set to ‘no’.
       legend: Do you have these documents with you?

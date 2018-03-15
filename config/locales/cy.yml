@@ -178,8 +178,14 @@ cy:
     select_documents:
       title: Dewiswch yr holl ddogfennau sydd gennych
       title_photo_documents: Eich dogfennau hunaniaeth gyda llun
+      title_photo_documents_variant: Setting up an online identity
       explanation: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
       sub_heading: Mae cwmniau ardystiedig yn defnyddio gwybodaeth o ddogfennau hunaniaeth i'ch dilysu.
+      sub_heading_variant_html: |
+              <p>To set up an online identity, you need to select your prefered identity provider. Each provider uses different methods to verify identities. We’ll ask you some questions so we can filter out the providers that won’t work for you.</p>
+
+              <p>Identity providers need proof of who you are. One of the ways they do this is by asking you to provide details from your identity documents, and then double checking them with DVLA, DVA and HM Passport office.
+              </p>
       documents_from_other_countries: Mae rhai cwmniau ardystiedig yn gallu defnyddio dogfennau hunaniaeth o wledydd eraill i'ch dilysu
       no_documents_message: Mae eich dewisiadau dogfennau wedi cael eu gosod i ‘na’.
       legend: Ydy’r dogfennau hyn gyda chi?

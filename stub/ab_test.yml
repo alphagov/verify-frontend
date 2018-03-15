@@ -31,7 +31,7 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
-  - questions_light:
+  - short_questions:
       alternatives:
         - name: 'control'
           percent: 100
