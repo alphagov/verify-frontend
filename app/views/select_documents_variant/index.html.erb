@@ -1,12 +1,12 @@
-<%= page_title 'hub.select_documents.title_photo_documents' %>
+<%= page_title 'hub.select_documents.ab_test_short_questions_title_photo_documents' %>
 <% content_for :feedback_source, 'SELECT_DOCUMENTS_PAGE' %>
 
 <div id="no-documents-message" class="visually-hidden" aria-live="assertive" data-no-documents-message="<%= h t('hub.select_documents.no_documents_message') %>"></div>
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.select_documents.title_photo_documents_variant' %></h1>
-    <p><%= t 'hub.select_documents.sub_heading_variant_html' %></p>
+    <h1 class="heading-large"><%= t 'hub.select_documents.ab_test_short_questions_title_photo_documents' %></h1>
+    <p><%= t 'hub.select_documents.ab_test_short_questions_sub_heading_html' %></p>
     <% if flash[:errors] %>
         <div id="validation-error-message-no-js" class="validation-message form-group">
           <p class="error"><%= flash[:errors] %></p>

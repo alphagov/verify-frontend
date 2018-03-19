@@ -33,10 +33,10 @@ constraints IsLoa1 do
 end
 
 constraints IsLoa2 do
+  # HUB-82: Short Questions AB test - add commented out routes to tear down
   # get 'start', to: 'start#index', as: :start
   # post 'start', to: 'start#request_post', as: :start
   # get 'begin_registration', to: 'start#register', as: :begin_registration
-  # HUB-82: Short Questions AB test - add commented out routes to tear down
   # get 'about', to: 'about_loa2#index', as: :about
   # get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   # get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
@@ -141,7 +141,7 @@ constraints short_questions_control do
 end
 
 constraints short_questions_variant do
-  post 'start', to: 'start_variant#request_post', as: :start
+  post 'start', to: 'start_variant#select_idp', as: :start_submit
   get 'begin_registration', to: 'start_variant#register', as: :begin_registration
   get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
   get 'select_documents_none', to: 'select_documents_variant#no_documents', as: :select_documents_no_documents
