@@ -7,15 +7,19 @@
 </div>
 
 <div class="column-one-half">
-  <h3 class="heading-medium"> <%=t 'hub.start.ab_test_short_questions_heading_sign_in' %> </h3>  
+  <h3 class="heading-medium"> <%=t 'hub.start.ab_test_short_questions_heading_register' %> </h3>  
 
   <p class="center padding"><%=t('hub.start.ab_test_short_questions_welcome', other_ways_description: @other_ways_description)%></p> 
 
+  <%=t('hub.start.ab_test_short_questions_welcome_more_html')%>
+
   <%= button_link_to t('hub.start.ab_test_short_questions_button'), begin_registration_path, id: 'begin-registration-path' %>
+
+  <p><%=t('hub.start.ab_test_short_questions_or')%> <%= link_to t('hub.start.ab_test_short_questions_alternative'), other_ways_to_access_service_path %></p>
 </div>
 
 <div class="column-one-half">
-  <h3 class="heading-medium"> <%=t 'hub.start.ab_test_short_questions_heading_register' %> </h3> 
+  <h3 class="heading-medium"> <%=t 'hub.start.ab_test_short_questions_heading_sign_in' %> </h3> 
 
   <p class="center padding"><%=t('hub.start.ab_test_short_questions_reuse')%></p> 
   <div class="sign-in-container js-continue-to-idp" data-location="<%= url_for(controller: 'start_variant', action: 'select_idp_ajax', locale: I18n.locale)  %>">  
