@@ -5,13 +5,18 @@ class ChooseACertifiedCompanyLoa2VariantController < ApplicationController
   include ViewableIdpPartialController
 
   def index
+    @driving_licence = driving_licence
+    @passport = passport
+    @smart_phone = smart_phone unless driving_licence || passport
+    @non_uk_id_document = non_uk_id_document unless driving_licence || passport
+    @any_docs = @driving_licence || @passport || @smart_phone
     session[:selected_answers].delete('interstitial')
     suggestions = IDP_RECOMMENDATION_ENGINE_VARIANT.get_suggested_idps(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
     session[:user_segments] = suggestions[:user_segments]
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
-    render 'choose_a_certified_company/choose_a_certified_company_LOA2'
+    render 'choose_a_certified_company/choose_a_certified_company_LOA2_variant'
   end
 
   def select_idp
@@ -37,5 +42,21 @@ private
 
   def interstitial_question_flag_enabled_for(decorated_idp)
     IDP_FEATURE_FLAGS_CHECKER.enabled?(:show_interstitial_question, decorated_idp.simple_id)
+  end
+
+  def driving_licence
+    session[:selected_answers]["documents"]["driving_licence"] || session[:selected_answers]["documents"]["ni_driving_licence"]
+  end
+
+  def passport
+    session[:selected_answers]["documents"]["passport"]
+  end
+
+  def smart_phone
+    session[:selected_answers]["other_documents"]["smart_phone"]
+  end
+
+  def non_uk_id_document
+    session[:selected_answers]["other_documents"]["non_uk_id_document"]
   end
 end

@@ -314,6 +314,14 @@ en:
       title: Choose a certified company
       heading: Choose a company to verify your identity
       existing_customer: You don't have to be an existing customer with a company.
+      existing_customer_variant: You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities - you’ll be asked for some personal details that will be checked against records held by HM Passport Office, DVLA, mobile phone providers, banks or credit agencies.
+      list_text_variant: "You can set up any of these digital identities because you have:"
+      driving_licence_variant: a driving licence
+      non_uk_id_document_variant: a non-UK document
+      smart_phone_variant: a smart phone or tablet
+      passport_variant: a passport
+      no_charge_information_variant: There's no charge for setting up an identity account.
+      trusted_companies_variant: These certified companies are trusted by DVLA and other government departments as they are part of the GOV.UK Verify scheme. This means you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.
       personal_information: They ask you to provide personal information and evidence, and then check it's correct using the new, secure systems they built.
       why_companies: Why there’s a choice of companies
       choose_idp: "Choose %{display_name}"
