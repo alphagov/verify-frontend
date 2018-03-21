@@ -315,7 +315,7 @@ en:
       heading: Choose a company to verify your identity
       existing_customer: You don't have to be an existing customer with a company.
       existing_customer_variant: You don't have to be an existing customer as they've all built new, secure systems in order to verify identities. You’ll be asked for some personal details that will be checked against records held by HM Passport Office, DVLA, mobile phone providers, banks or credit agencies.
-      list_text_variant: "You can set up any of these digital identities because you have:"
+      list_text_variant: "You can choose any of these certified companies because you have:"
       driving_licence_variant: a driving licence
       non_uk_id_document_variant: a non-UK document
       smart_phone_variant: a smart phone or tablet

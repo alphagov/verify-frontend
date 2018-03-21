@@ -36,7 +36,7 @@ describe ChooseACertifiedCompanyLoa2VariantController do
 
       get :index, params: { locale: 'en' }
 
-      expect(subject).to render_template(:choose_a_certified_company_LOA2)
+      expect(subject).to render_template(:choose_a_certified_company_LOA2_variant)
       expect(stub_piwik_request).to have_been_made.once
     end
 
