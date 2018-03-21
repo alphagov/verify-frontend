@@ -230,8 +230,8 @@ cy:
         northern_ireland: Gogledd Iwerddon
       ab_test_short_questions_title_photo_documents: Setting up an online identity
       ab_test_short_questions_sub_heading_html: |
-        <p>To set up an identity account, you need to select your prefered certified company. Each company uses different methods to verify identities. We’ll ask you some questions so we can filter out the companies that won’t work for you.</p>
-        <p>Certified companies need proof of who you are. One of the ways they do this is by asking you to provide details from your identity documents, and then double checking them with DVLA, DVA and HM Passport office.</p>
+        <p>To set up an identity account, you need to select your preferred certified company. Each company uses different methods to verify identities. We'll ask you some questions so we can filter out the companies that won't work for you.</p>
+        <p>Certified companies need proof of who you are. One of the ways they do this is by asking you to provide details from your identity documents, and then double checking them with DVLA, DVA or HM Passport office.</p>
     other_documents:
       title_other_identity_documents: Dogfennau hunaniaeth eraill
       non_uk_id_document: Oes gennych chi pasbort sydd ddim yn un o'r DU, cerdyn ID neu drwydded yrru?

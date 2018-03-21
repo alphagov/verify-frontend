@@ -13,14 +13,16 @@
       <p class="large-top">
       <% if @any_docs %>
         <p><%= t 'hub.choose_a_certified_company.list_text_variant' %></p>
-          <% if @driving_licence %> <li><%= t 'hub.choose_a_certified_company.driving_licence_variant' %></li>   <% end %>
-          <% if @non_uk_id_document %> <li><%= t 'hub.choose_a_certified_company.non_uk_id_document_variant' %></li>   <% end %>
-          <% if @smart_phone %> <li><%= t 'hub.choose_a_certified_company.smart_phone_variant' %></li>   <% end %>
-          <% if @passport %> <li><%= t 'hub.choose_a_certified_company.passport_variant' %></li>   <% end %>
+          <ul class="list-bullet list">
+            <% if @driving_licence %> <li><%= t 'hub.choose_a_certified_company.driving_licence_variant' %></li> <% end %>
+            <% if @non_uk_id_document %> <li><%= t 'hub.choose_a_certified_company.non_uk_id_document_variant' %></li> <% end %>
+            <% if @smart_phone %> <li><%= t 'hub.choose_a_certified_company.smart_phone_variant' %></li> <% end %>
+            <% if @passport %> <li><%= t 'hub.choose_a_certified_company.passport_variant' %></li> <% end %>
+          </ul>
         </p>
-          <% else %>
-          <%= t 'hub.choose_a_certified_company.idp_count_html',
-                  company_count: t('hub.choose_a_certified_company.company_html', count: @recommended_idps.length) %>
+        <% else %>
+        <%= t 'hub.choose_a_certified_company.idp_count_html',
+                company_count: t('hub.choose_a_certified_company.company_html', count: @recommended_idps.length) %>
       <% end %>
     </div>
   </div>
@@ -51,5 +53,9 @@
       </details>
     </div>
   <% end %>
-  <div><%= t 'hub.choose_a_certified_company.trusted_companies_variant' %></div>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <p><%= t 'hub.choose_a_certified_company.trusted_companies_variant' %></p>
+    </div>
+  </div>
 </div>
