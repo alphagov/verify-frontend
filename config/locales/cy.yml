@@ -320,7 +320,7 @@ cy:
       list_text_variant: "You can choose any of these certified companies because you have:"
       driving_licence_variant: a driving licence
       non_uk_id_document_variant: a non-UK document
-      smart_phone_variant: a smart phone or tablet
+      smart_phone_variant: a smartphone or tablet
       passport_variant: a passport
       no_charge_information_variant: There's no charge for setting up an identity account.
       trusted_companies_variant: These certified companies are trusted by DVLA and other government departments as they are part of the GOV.UK Verify scheme. This means you can trust them with your personal information. They won't share or sell your data for any other purposes without your consent.
