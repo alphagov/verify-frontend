@@ -60,6 +60,8 @@ constraints IsLoa2 do
   get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
   get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
   get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
+  # post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+  # get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
   get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#index', as: :redirect_to_idp_question
   post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
   get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
@@ -67,8 +69,6 @@ constraints IsLoa2 do
   # get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
 end
 
-post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
-get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
 
 get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
 get 'verify_services', to: 'static#verify_services', as: :verify_services
@@ -138,6 +138,9 @@ constraints short_questions_control do
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
+
+  post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+  get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
 end
 
 constraints short_questions_variant do
@@ -154,4 +157,7 @@ constraints short_questions_variant do
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#select_idp', as: :choose_a_certified_company_submit
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2_variant#about', as: :choose_a_certified_company_about
+
+  post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#continue', as: :redirect_to_idp_warning_submit
+  get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#index', as: :redirect_to_idp_warning
 end

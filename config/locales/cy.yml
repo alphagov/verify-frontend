@@ -367,6 +367,7 @@ cy:
     redirect_to_idp_warning:
       title: Byddwch nawr yn cael eich ailgyfeirio
       create_account: Crëwch eich cyfrif hunaniaeth %{display_name}
+      create_account_variant: Set up your %{display_name} identity account
       continue_website: Parhau i wefan %{display_name}
       identity_account_use_html: |
               <p>Byddwch nawr yn gwirio pwy ydych chi ar wefan %{display_name}</p>
