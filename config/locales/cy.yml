@@ -94,8 +94,8 @@ cy:
       continue: Parhau
       error_message: Dewiswch opsiwn
       ab_test_short_questions_heading: Set up or sign in with an identity account
-      ab_test_short_questions_heading_sign_in: Set up an identity account
-      ab_test_short_questions_heading_register: Sign in with your identity account
+      ab_test_short_questions_heading_sign_in: Sign in with your identity account
+      ab_test_short_questions_heading_register: Set up an identity account
       ab_test_short_questions_welcome: Set up an identity account with a certified company so you can securely sign in to %{other_ways_description}.
       ab_test_short_questions_welcome_more_html: |
         <p>If you don’t have an identity account, you can set one up here. You need to:</p>
@@ -104,10 +104,10 @@ cy:
           <li>have a UK address</li>
         </ul>
       ab_test_short_questions_or: or
-      ab_test_short_questions_alternative: view other ways to access the service
+      ab_test_short_questions_alternative: view other ways to %{other_ways_description}
       ab_test_short_questions_button: Set up an identity account
       ab_test_short_questions_reuse: Sign in with an identity account that you set up with a certified company in the past.
-      ab_test_short_questions_description: UK government trusts these certified companies as they are part of GOV.UK Verify.
+      ab_test_short_questions_description: The UK government trusts these certified companies as they are part of GOV.UK Verify.
       ab_test_short_questions_badge_text: These companies are certified to safely sign you in to online government services.
       ab_test_short_questions_summary: What is GOV.UK Verify?
       ab_test_short_questions_details_html: |
@@ -316,14 +316,14 @@ cy:
       title: Dewiswch gwmni ardystiedig
       heading: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
       existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
-      existing_customer_variant: You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities - you’ll be asked for some personal details that will be checked against records held by HM Passport Office, DVLA, mobile phone providers, banks or credit agencies.
+      existing_customer_variant: You don't have to be an existing customer as they've all built new, secure systems in order to verify identities. You'll be asked for some personal details that will be checked against records held by HM Passport Office, DVLA, mobile phone providers, banks or credit agencies.
       list_text_variant: "You can set up any of these digital identities because you have:"
       driving_licence_variant: a driving licence
       non_uk_id_document_variant: a non-UK document
       smart_phone_variant: a smart phone or tablet
       passport_variant: a passport
       no_charge_information_variant: There's no charge for setting up an identity account.
-      trusted_companies_variant: These certified companies are trusted by DVLA and other government departments as they are part of the GOV.UK Verify scheme. This means you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.
+      trusted_companies_variant: These certified companies are trusted by DVLA and other government departments as they are part of the GOV.UK Verify scheme. This means you can trust them with your personal information. They won't share or sell your data for any other purposes without your consent.
       personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
       why_companies: Pam fod dewis o gwmnïau
       choose_idp: Dewiswch %{display_name}

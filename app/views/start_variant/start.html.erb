@@ -15,7 +15,7 @@
 
   <%= button_link_to t('hub.start.ab_test_short_questions_button'), begin_registration_path, id: 'begin-registration-path' %>
 
-  <p><%=t('hub.start.ab_test_short_questions_or')%> <%= link_to t('hub.start.ab_test_short_questions_alternative'), other_ways_to_access_service_path %></p>
+  <p><%=t('hub.start.ab_test_short_questions_or')%> <%= link_to t('hub.start.ab_test_short_questions_alternative', other_ways_description: @other_ways_description), other_ways_to_access_service_path %></p>
 </div>
 
 <div class="column-one-half">

@@ -102,10 +102,10 @@ en:
           <li>have a UK address</li>
         </ul>
       ab_test_short_questions_or: or
-      ab_test_short_questions_alternative: view other ways to access the service
+      ab_test_short_questions_alternative: view other ways to %{other_ways_description}
       ab_test_short_questions_button: Set up an identity account
       ab_test_short_questions_reuse: Sign in with an identity account that you set up with a certified company in the past.
-      ab_test_short_questions_description: UK government trusts these certified companies as they are part of GOV.UK Verify.
+      ab_test_short_questions_description: The UK government trusts these certified companies as they are part of GOV.UK Verify.
       ab_test_short_questions_badge_text: These companies are certified to safely sign you in to online government services.
       ab_test_short_questions_summary: What is GOV.UK Verify?
       ab_test_short_questions_details_html: |
@@ -314,7 +314,7 @@ en:
       title: Choose a certified company
       heading: Choose a company to verify your identity
       existing_customer: You don't have to be an existing customer with a company.
-      existing_customer_variant: You don’t have to be an existing customer as they’ve all built new, secure systems in order to verify identities - you’ll be asked for some personal details that will be checked against records held by HM Passport Office, DVLA, mobile phone providers, banks or credit agencies.
+      existing_customer_variant: You don't have to be an existing customer as they've all built new, secure systems in order to verify identities. You’ll be asked for some personal details that will be checked against records held by HM Passport Office, DVLA, mobile phone providers, banks or credit agencies.
       list_text_variant: "You can set up any of these digital identities because you have:"
       driving_licence_variant: a driving licence
       non_uk_id_document_variant: a non-UK document
