@@ -355,10 +355,6 @@ en:
         <p>When verifying your identity, these companies can use their own records, and they’re certified to access information like credit records. They do this to check information you provide.</p>
         <p>Certified companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
         <p>There’s no effect on your credit score.</p>
-    unlikely_to_verify:
-      heading: GOV.UK Verify won’t work for you
-      explanation: Certified companies need at least 1 more document to verify your identity. To continue with GOV.UK Verify, %{add_more_documents_link}.
-      explanation_link_text: add more documents
     redirect_to_idp_warning:
       title: "You'll now be redirected"
       create_account: Create your %{display_name} identity account

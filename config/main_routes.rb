@@ -66,7 +66,6 @@ constraints IsLoa2 do
   post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
   get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
   get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
-  # get 'unlikely_to_verify', to: 'select_documents#unlikely_to_verify', as: :unlikely_to_verify
 end
 
 
