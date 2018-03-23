@@ -326,10 +326,6 @@ cy:
         <p>Wrth ddilysu eich hunaniaeth, gall y cwmniau hyn ddefnyddio eu cofnodion eu hunain ac maent wedi cael eu hardystio i gael mynediad i wybodaeth fel cofnodion credyd. Maent yn gwneud hyn i wirio gwybodaeth rydych yn ei ddarparu.</p>
         <p>Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
         <p>Nid oes effaith ar eich sgor credyd.</p>
-    unlikely_to_verify:
-      heading: Ni fydd GOV.UK Verify yn gweithio i chi
-      explanation: Mae gwmnïau ardystiedig angen o leiaf 1 dogfen arall i wirio eich hunaniaeth. I barhau gyda GOV.UK Verify, %{add_more_documents_link}.
-      explanation_link_text: ychwanegwch fwy o ddogfennau.
     redirect_to_idp_warning:
       title: Byddwch nawr yn cael eich ailgyfeirio
       create_account: Crëwch eich cyfrif hunaniaeth %{display_name}
