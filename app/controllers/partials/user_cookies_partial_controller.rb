@@ -20,6 +20,7 @@ module UserCookiesPartialController
   end
 
   def set_journey_hint(idp_entity_id)
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: idp_entity_id }.to_json
+    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: { entity_id: idp_entity_id }.to_json,
+                                                                  expires: 18.months.from_now }
   end
 end
