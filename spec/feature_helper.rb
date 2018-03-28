@@ -100,7 +100,7 @@ module FeatureHelper
   def set_session_and_ab_session_cookies!(experiment, cookie_hash = create_cookie_hash)
     cookie_hash[CookieNames::AB_TEST] = experiment.to_json
     set_cookies!(cookie_hash)
-    set_session!
+    set_session!(variant_session)
     cookie_hash
   end
 
@@ -153,6 +153,17 @@ private
       requested_loa: 'LEVEL_2',
       transaction_entity_id: 'http://www.test-rp.gov.uk/SAML2/MD',
       selected_answers: { device_type: { device_type_other: true } },
+    }
+  end
+
+  def variant_session
+    {
+        transaction_simple_id: 'test-rp',
+        start_time: start_time_in_millis,
+        verify_session_id: default_session_id,
+        requested_loa: 'LEVEL_2',
+        transaction_entity_id: 'http://www.test-rp.gov.uk/SAML2/MD',
+        selected_answers: { documents: { driving_licence: false }, device_type: { device_type_other: true } },
     }
   end
 end

@@ -1,37 +1,41 @@
 require 'ab_test/ab_test'
+require 'partials/viewable_idp_partial_controller'
+require 'partials/idp_selection_partial_controller'
+require 'partials/analytics_partial_controller'
 
-class StartController < ApplicationController
-  layout 'slides'
+class StartVariantController < ApplicationController
+  layout 'single_short_questions_variant'
   before_action :set_device_type_evidence
+  include ViewableIdpPartialController
+  include IdpSelectionPartialController
+  include AnalyticsPartialController
 
   AB_EXPERIMENT_NAME = 'short_questions'.freeze
 
+
   def index
-    @form = StartForm.new({})
-
-    FEDERATION_REPORTER.report_start_page(current_transaction, request) unless session[:requested_loa] == 'LEVEL_2' # ab test variant hack, remove 'unless' with teardown of HUB-72
-
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_sign_in)
+    @other_ways_description = current_transaction.other_ways_description
     render :start
   end
 
-  def request_post
-    @form = StartForm.new(params['start_form'] || {})
-    if @form.valid?
-      if @form.registration?
-        register
-      else
-        FEDERATION_REPORTER.report_sign_in(current_transaction, request)
-        redirect_to sign_in_path
-      end
-    else
-      flash.now[:errors] = @form.errors.full_messages.join(', ')
-      render :start
+  def select_idp
+    select_viewable_idp_for_sign_in(params.fetch('entity_id')) do |decorated_idp|
+      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
+      redirect_to redirect_to_idp_sign_in_path
+    end
+  end
+
+  def select_idp_ajax
+    select_viewable_idp_for_sign_in(params.fetch('entityId')) do |decorated_idp|
+      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
+      ajax_idp_redirection_sign_in_without_hint_request
     end
   end
 
   def register
     FEDERATION_REPORTER.report_registration(current_transaction, request)
-    redirect_to about_path
+    redirect_to select_documents_path
   end
 
   # TODO HUB-83 Remove this method when tearing down the AB Test variant.

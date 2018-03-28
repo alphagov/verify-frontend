@@ -22,8 +22,9 @@ module Display
       simple_id = idp.simple_id
       logo_path = File.join(@logo_directory, "#{simple_id}.png")
       white_logo_path = File.join(@white_logo_directory, "#{simple_id}.png")
+      small_logo_directory = File.join(@logo_directory, "small-short-questions-variant/#{simple_id}.png")
       display_data = @repository.fetch(simple_id)
-      ViewableIdentityProvider.new(idp, display_data, logo_path, white_logo_path)
+      ViewableIdentityProvider.new(idp, display_data, logo_path, white_logo_path, small_logo_directory)
     rescue KeyError => e
       Rails.logger.error(e)
       not_viewable(idp)

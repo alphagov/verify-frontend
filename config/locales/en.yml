@@ -91,6 +91,28 @@ en:
       answer_no: I’ve used Verify before
       continue: Continue
       error_message: Please select an option
+      ab_test_short_questions_heading: Set up or sign in with an identity account
+      ab_test_short_questions_heading_register: Set up an identity account
+      ab_test_short_questions_heading_sign_in: Sign in with your identity account
+      ab_test_short_questions_welcome: Set up an identity account with a certified company so you can securely sign in to %{other_ways_description}.
+      ab_test_short_questions_welcome_more_html: |
+        <p>If you don’t have an identity account, you can set one up here. You need to:</p>
+        <ul class="list-bullet list">
+          <li>be over 18 years old</li>
+          <li>have a UK address</li>
+        </ul>
+      ab_test_short_questions_or: or
+      ab_test_short_questions_alternative: view other ways to %{other_ways_description}
+      ab_test_short_questions_button: Set up an identity account
+      ab_test_short_questions_reuse: Sign in with an identity account that you set up with a certified company in the past.
+      ab_test_short_questions_description: The UK government trusts these certified companies as they are part of GOV.UK Verify.
+      ab_test_short_questions_badge_text: These companies are certified to safely sign you in to online government services.
+      ab_test_short_questions_summary: What is GOV.UK Verify?
+      ab_test_short_questions_details_html: |
+        <p>GOV.UK Verify is designed by the UK government to fight the growing problem of online identity theft.</p>
+        <p>Companies apply to be part of GOV.UK Verify. They are certified when they meet security and privacy standards set by government so you can trust them with your personal information.</p>
+        <p>When a government service uses GOV.UK Verify, you can access the service with the identity account you set up with the certified company.</p>
+
     signin:
       title: Sign in with a certified company
       heading: Who do you have an identity account with?
@@ -195,6 +217,10 @@ en:
         debit_card: Debit card
         credit_card: Credit card
         no_documents: I don’t have any of these documents with me
+      ab_test_short_questions_title_photo_documents: Setting up an online identity
+      ab_test_short_questions_sub_heading_html: |
+        <p>To set up an identity account, you need to select your preferred certified company. Each company uses different methods to verify identities. We'll ask you some questions so we can filter out the companies that won't work for you.</p>
+        <p>Certified companies need proof of who you are. One of the ways they do this is by asking you to provide details from your identity documents, and then double checking them with DVLA, DVA or HM Passport office.</p>
       errors:
         no_selection: Please select the documents you have
         invalid_selection: Please check your selection
@@ -288,6 +314,14 @@ en:
       title: Choose a certified company
       heading: Choose a company to verify your identity
       existing_customer: You don't have to be an existing customer with a company.
+      existing_customer_variant: You don't have to be an existing customer as they've all built new, secure systems in order to verify identities. You’ll be asked for some personal details that will be checked against records held by HM Passport Office, DVLA, mobile phone providers, banks or credit agencies.
+      list_text_variant: "You can choose any of these certified companies because you have:"
+      driving_licence_variant: a driving licence
+      non_uk_id_document_variant: a non-UK document
+      smart_phone_variant: a smartphone or tablet
+      passport_variant: a passport
+      no_charge_information_variant: There's no charge for setting up an identity account.
+      trusted_companies_variant: These certified companies are trusted by DVLA and other government departments as they are part of the GOV.UK Verify scheme. This means you can trust them with your personal information. They won’t share or sell your data for any other purposes without your consent.
       personal_information: They ask you to provide personal information and evidence, and then check it's correct using the new, secure systems they built.
       why_companies: Why there’s a choice of companies
       choose_idp: "Choose %{display_name}"
@@ -324,6 +358,7 @@ en:
     redirect_to_idp_warning:
       title: "You'll now be redirected"
       create_account: Create your %{display_name} identity account
+      create_account_variant: Set up your %{display_name} identity account
       continue_website: Continue to the %{display_name} website
       identity_account_use_html: |
         <p>You'll now verify your identity on the %{display_name} website.</p>

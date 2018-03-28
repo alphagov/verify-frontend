@@ -45,4 +45,7 @@ Rails.application.routes.draw do
   get '/SAML2/metadata/sp', to: 'metadata#service_providers', as: :service_provider_metadata
   get '/SAML2/metadata/idp', to: 'metadata#identity_providers', as: :identity_provider_metadata
   get '/humans.txt', to: 'static#humanstxt'
+
+  # HUB-82 delete if tearing the AB test down:
+  put 'start-select-idp', to: 'start_variant#select_idp_ajax', as: :start_select_idp_submit_ajax
 end
