@@ -10,7 +10,7 @@ class StartVariantController < ApplicationController
   include IdpSelectionPartialController
   include AnalyticsPartialController
 
-  AB_EXPERIMENT_NAME = 'short_questions'.freeze
+  AB_EXPERIMENT_NAME = 'short_questions_v2'.freeze
 
 
   def index

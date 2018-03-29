@@ -2,7 +2,7 @@ def add_routes(routes_name)
   instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
 end
 
-SHORT_QUESTIONS = "short_questions".freeze
+SHORT_QUESTIONS = "short_questions_v2".freeze
 
 short_questions_control_piwik = SelectRoute.new(SHORT_QUESTIONS, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
 short_questions_control = SelectRoute.new(SHORT_QUESTIONS, 'control', is_start_of_test: false, experiment_loa: 'LEVEL_2')
