@@ -15,7 +15,7 @@ RSpec.describe 'When the user visits the start page on short questions variant' 
   end
 
   def given_im_on_the_start_variant_page(locale = 'en')
-    set_cookies_and_ab_test_cookie!('short_questions' => 'short_questions_variant')
+    set_cookies_and_ab_test_cookie!('short_questions_v2' => 'short_questions_v2_variant')
     set_session_and_session_cookies!
     stub_api_idp_list_for_sign_in
     visit "/#{t('routes.start', locale: locale)}"
@@ -86,7 +86,7 @@ RSpec.describe 'When the user visits the start page on short questions variant' 
   context 'when there is no error' do
     before(:each) do
       set_session_and_session_cookies!
-      set_cookies_and_ab_test_cookie!('short_questions' => 'short_questions_variant')
+      set_cookies_and_ab_test_cookie!('short_questions_v2' => 'short_questions_v2_variant')
       stub_api_idp_list_for_sign_in
     end
 
