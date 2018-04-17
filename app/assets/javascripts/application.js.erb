@@ -41,16 +41,6 @@ window.GOVUK.details.init();
 //  ]
 //})
 
-abTest({
- experiment: 'short_questions_v2',
- control: {
-   route: window.GOVUK.otherDocuments
- },
- alternatives: [
-   {name: 'variant', route: window.GOVUK.otherDocumentsVariant}
- ]
-})
-
 $(function () {
   window.GOVUK.validation.attach();
   window.GOVUK.signin.attach();

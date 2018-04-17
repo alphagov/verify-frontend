@@ -35,7 +35,4 @@ CONFIG = Configuration.load! do
   option_string 'ab_test_file', 'AB_TEST_FILE', allow_missing: true
   option_string 'segment_definitions', 'SEGMENT_DEFINITIONS'
   option_string 'saml_proxy_host', 'SAML_PROXY_HOST'
-  # HUB-82 Variant config
-  option_string 'rules_directory_variant', 'RULES_DIRECTORY_VARIANT'
-  option_string 'segment_definitions_variant', 'SEGMENT_DEFINITIONS_VARIANT'
 end
