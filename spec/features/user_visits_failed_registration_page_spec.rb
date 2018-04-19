@@ -4,6 +4,7 @@ require 'api_test_helper'
 RSpec.describe 'When the user visits the failed registration page and' do
   CONTINUE_ON_FAILED_REGISTRATION_RP = 'test-rp-with-continue-on-fail'.freeze
   DONT_CONTINUE_ON_FAILED_REGISTRATION_RP = 'test-rp'.freeze
+  CUSTOM_FAIL_PAGE_RP = 'test-rp-no-demo'.freeze
 
   before(:each) do
     set_session_and_session_cookies!
@@ -64,6 +65,29 @@ RSpec.describe 'When the user visits the failed registration page and' do
       expect(page).to have_link t('hub.failed_registration.start_again'), href: choose_a_certified_company_path
     end
   end
+
+  context 'relying party is not allowed to continue on fail and is custom fail rp' do
+    before(:each) do
+      page.set_rack_session(transaction_simple_id: CUSTOM_FAIL_PAGE_RP)
+    end
+
+    it 'includes expected content when custom fail LOA2 journey in welsh' do
+      set_loa_in_session('LEVEL_2')
+      visit '/cofrestru-wedi-methu'
+      expect(page).to have_content "This is a custom fail page in welsh."
+      expect(page).to have_content "Custom text to be provided by RP."
+      expect(page).to have_link t('hub.failed_registration.start_again', locale: :cy), href: select_documents_cy_path
+    end
+
+    it 'includes expected content when custom fail LOA2 journey' do
+      set_loa_in_session('LEVEL_2')
+      visit '/failed-registration'
+      expect(page).to have_content "This is a custom fail page."
+      expect(page).to have_content "Custom text to be provided by RP."
+      expect(page).to have_link t('hub.failed_registration.start_again'), href: select_documents_path
+    end
+  end
+
 
   def expect_page_to_have_main_content
     expect_feedback_source_to_be(page, 'FAILED_REGISTRATION_PAGE', '/failed-registration')
