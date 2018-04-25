@@ -1,3 +1,5 @@
+require 'partials/user_cookies_partial_controller'
+
 class AuthnResponseController < SamlController
   protect_from_forgery except: %i[idp_response country_response]
 
@@ -39,12 +41,32 @@ private
 
   def idp_response_handlers
     handlers = {
-        SUCCESS => ->(response) { reporters[SUCCESS].call(response); redirecters[SUCCESS].call(response) },
-        CANCEL => ->(response) { reporters[CANCEL].call(response); redirecters[CANCEL].call(response) },
-        FAILED_UPLIFT => ->(response) { reporters[FAILED_UPLIFT].call(response); redirecters[FAILED_UPLIFT].call(response) },
-        PENDING => ->(response) { reporters[PENDING].call(response); redirecters[PENDING].call(response) }
+        SUCCESS => ->(response) {
+          analytics_reporters[SUCCESS].call(response);
+          idp_selection_reporters[SUCCESS].call;
+          redirecters[SUCCESS].call(response)
+        },
+        CANCEL => ->(response) {
+          analytics_reporters[CANCEL].call(response);
+          idp_selection_reporters[CANCEL].call;
+          redirecters[CANCEL].call(response)
+        },
+        FAILED_UPLIFT => ->(response) {
+          analytics_reporters[FAILED_UPLIFT].call(response);
+          idp_selection_reporters[FAILED_UPLIFT].call;
+          redirecters[FAILED_UPLIFT].call(response)
+        },
+        PENDING => ->(response) {
+          analytics_reporters[PENDING].call(response);
+          idp_selection_reporters[PENDING].call;
+          redirecters[PENDING].call(response)
+        }
     }
-    handlers.default = ->(response) { reporters[OTHER].call(response); redirecters[OTHER].call(response) }
+    handlers.default = ->(response) {
+      analytics_reporters[OTHER].call(response);
+      idp_selection_reporters[FAILED].call;
+      redirecters[OTHER].call(response)
+    }
 
     handlers
   end
@@ -60,7 +82,7 @@ private
     handlers
   end
 
-  def reporters
+  def analytics_reporters
     user_state = ->(response) { response.is_registration ? REGISTERING_STATE : SIGNING_IN_STATE }
 
     {
@@ -69,6 +91,18 @@ private
       FAILED_UPLIFT => ->(response) { report_to_analytics("Failed Uplift - #{user_state.call(response)}") },
       PENDING => ->(response) { report_to_analytics("Paused - #{user_state.call(response)}") },
       OTHER => ->(response) { report_to_analytics("Failure - #{user_state.call(response)}") }
+    }
+  end
+
+  def idp_selection_reporters
+    selected_idp = session[:selected_idp].nil? ? nil : session[:selected_idp].fetch("entity_id", nil)
+
+    {
+      SUCCESS => ->() { set_journey_hint_by_status(selected_idp, SUCCESS) },
+      CANCEL  => ->() { set_journey_hint_by_status(selected_idp, CANCEL) },
+      FAILED_UPLIFT => ->() { set_journey_hint_by_status(selected_idp, FAILED_UPLIFT) },
+      PENDING => ->() { set_journey_hint_by_status(selected_idp, PENDING) },
+      FAILED => ->() { set_journey_hint_by_status(selected_idp, FAILED) }
     }
   end
 
