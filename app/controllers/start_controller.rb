@@ -40,8 +40,8 @@ class StartController < ApplicationController
     super
 
     if cookie_matches_experiment?(request)
-      if AbTest::experiment_is_valid(current_transaction_simple_id, AB_EXPERIMENT_NAME)
-        ab_test_alternative_name = AbTest::get_alternative_name(request, AB_EXPERIMENT_NAME)
+      if AbTest.experiment_is_valid(current_transaction_simple_id, AB_EXPERIMENT_NAME)
+        ab_test_alternative_name = AbTest.get_alternative_name(request, AB_EXPERIMENT_NAME)
         @piwik_custom_variables.push(
           Analytics::CustomVariable.build_for_js_client(:ab_test, ab_test_alternative_name)
         )
