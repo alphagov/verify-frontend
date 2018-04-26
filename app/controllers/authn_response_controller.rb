@@ -41,41 +41,21 @@ private
 
   def idp_response_handlers
     handlers = {
-        SUCCESS => ->(response) {
-          analytics_reporters[SUCCESS].call(response);
-          idp_selection_reporters[SUCCESS].call;
-          redirecters[SUCCESS].call(response)
-        },
-        CANCEL => ->(response) {
-          analytics_reporters[CANCEL].call(response);
-          idp_selection_reporters[CANCEL].call;
-          redirecters[CANCEL].call(response)
-        },
-        FAILED_UPLIFT => ->(response) {
-          analytics_reporters[FAILED_UPLIFT].call(response);
-          idp_selection_reporters[FAILED_UPLIFT].call;
-          redirecters[FAILED_UPLIFT].call(response)
-        },
-        PENDING => ->(response) {
-          analytics_reporters[PENDING].call(response);
-          idp_selection_reporters[PENDING].call;
-          redirecters[PENDING].call(response)
-        }
+      SUCCESS => ->(response) { analytics_reporters[SUCCESS].call(response); idp_selection_reporters[SUCCESS].call; redirecters[SUCCESS].call(response) },
+      CANCEL => ->(response) { analytics_reporters[CANCEL].call(response); idp_selection_reporters[CANCEL].call; redirecters[CANCEL].call(response) },
+      FAILED_UPLIFT => ->(response) { analytics_reporters[FAILED_UPLIFT].call(response); idp_selection_reporters[FAILED_UPLIFT].call; redirecters[FAILED_UPLIFT].call(response) },
+      PENDING => ->(response) { analytics_reporters[PENDING].call(response); idp_selection_reporters[PENDING].call; redirecters[PENDING].call(response) }
     }
-    handlers.default = ->(response) {
-      analytics_reporters[OTHER].call(response);
-      idp_selection_reporters[FAILED].call;
-      redirecters[OTHER].call(response)
-    }
+    handlers.default = ->(response) { analytics_reporters[OTHER].call(response); idp_selection_reporters[FAILED].call; redirecters[OTHER].call(response) }
 
     handlers
   end
 
   def country_response_handlers
     handlers = {
-        SUCCESS => redirecters[SUCCESS],
-        CANCEL => redirecters[FAILED],
-        FAILED_UPLIFT => redirecters[FAILED_UPLIFT]
+      SUCCESS => redirecters[SUCCESS],
+      CANCEL => redirecters[FAILED],
+      FAILED_UPLIFT => redirecters[FAILED_UPLIFT]
     }
     handlers.default = redirecters[OTHER]
 
@@ -95,7 +75,7 @@ private
   end
 
   def idp_selection_reporters
-    selected_idp = session[:selected_idp].nil? ? nil : session[:selected_idp].fetch("entity_id", nil)
+    selected_idp = session[:selected_idp].nil? ? nil : session[:selected_idp].fetch('entity_id', nil)
 
     {
       SUCCESS => ->() { set_journey_hint_by_status(selected_idp, SUCCESS) },
