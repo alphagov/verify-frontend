@@ -57,4 +57,107 @@ describe AuthnResponseController do
       expect(subject).to render_template(:something_went_wrong)
     end
   end
+
+  context 'idp_cookie_tracking' do
+    let(:saml_proxy_api) { double(:saml_proxy_api) }
+
+    before(:each) do
+      stub_const('SAML_PROXY_API', saml_proxy_api)
+      set_session_and_cookies_with_loa('LEVEL_1')
+    end
+
+    def stub_saml_proxy_and_analytics(status, analytics_status)
+      allow(saml_proxy_api).to receive(:idp_authn_response).and_return(IdpAuthnResponse.new('result' => status,
+                                                                                            'isRegistration' => 'registration',
+                                                                                            'loaAchieved' => 'LEVEL_1'))
+      allow(subject).to receive(:report_to_analytics).with(analytics_status)
+    end
+
+    it 'should not set a cookie status if selected_idp is not in the session' do
+      stub_saml_proxy_and_analytics('SUCCESS', 'Success - REGISTER_WITH_IDP at LOA LEVEL_1')
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+      expect(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]).to be_nil
+    end
+
+    it 'should add new success status to value of journey hint cookie when response is SUCCESS' do
+      expected_cookie = { 'SUCCESS' => 'http://idcorp.com' }.to_json
+
+      session[:selected_idp] = { 'entity_id' => 'http://idcorp.com',
+                                 'simple_id' => 'stub-idp-one',
+                                 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+
+      stub_saml_proxy_and_analytics('SUCCESS', 'Success - REGISTER_WITH_IDP at LOA LEVEL_1')
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+      expect(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]).to eq(expected_cookie)
+    end
+
+    it 'should not delete/overwrite the entity_id of the existing journey hint cookie when adding a new status' do
+      expected_cookie = { 'entity_id' => 'http://idcorp.com',
+                          'simple_id' => 'stub-idp-one',
+                          'levels_of_assurance' => %w(LEVEL_1 LEVEL_2),
+                          'SUCCESS' => 'http://idcorp.com' }.to_json
+
+      session[:selected_idp] = { 'entity_id' => 'http://idcorp.com',
+                                 'simple_id' => 'stub-idp-one',
+                                 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { 'entity_id' => 'http://idcorp.com',
+                                                                    'simple_id' => 'stub-idp-one',
+                                                                    'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }.to_json
+
+      stub_saml_proxy_and_analytics('SUCCESS', 'Success - REGISTER_WITH_IDP at LOA LEVEL_1')
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+      expect(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]).to eq(expected_cookie)
+    end
+
+    it 'should update the existing status with a new entity id' do
+      expected_cookie = { 'entity_id' => 'http://idcorp.com',
+                          'simple_id' => 'stub-idp-one',
+                          'levels_of_assurance' => %w(LEVEL_1 LEVEL_2),
+                          'SUCCESS' => 'http://idcorp.com' }.to_json
+
+      session[:selected_idp] = { 'entity_id' => 'http://idcorp.com',
+                                 'simple_id' => 'stub-idp-one',
+                                 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { 'entity_id' => 'http://idcorp.com',
+                                                                    'simple_id' => 'stub-idp-one',
+                                                                    'levels_of_assurance' => %w(LEVEL_1 LEVEL_2),
+                                                                    'SUCCESS' => 'http://old-idcorp.com' }.to_json
+
+      stub_saml_proxy_and_analytics('SUCCESS', 'Success - REGISTER_WITH_IDP at LOA LEVEL_1')
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+      expect(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]).to eq(expected_cookie)
+    end
+
+    it 'should add a new status with a new entity id to the existing statuses' do
+      expected_cookie =  { 'entity_id' => 'http://idcorp.com',
+                           'simple_id' => 'stub-idp-one',
+                           'levels_of_assurance' => %w(LEVEL_1 LEVEL_2),
+                           'SUCCESS' => 'http://success-idcorp.com',
+                           'PENDING' => 'http://idcorp.com' }.to_json
+
+      session[:selected_idp] = { 'entity_id' => 'http://idcorp.com',
+                                 'simple_id' => 'stub-idp-one',
+                                 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { 'entity_id' => 'http://idcorp.com',
+                                                                    'simple_id' => 'stub-idp-one',
+                                                                    'levels_of_assurance' => %w(LEVEL_1 LEVEL_2),
+                                                                    'SUCCESS' => 'http://success-idcorp.com' }.to_json
+
+      stub_saml_proxy_and_analytics('PENDING', 'Paused - REGISTER_WITH_IDP')
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+      expect(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]).to eq(expected_cookie)
+    end
+
+    it 'should add a new failure status with idp entity id as a value to the journey hint cookie when the response is OTHER' do
+      expected_cookie = { 'FAILED' => 'http://idcorp.com' }.to_json
+
+      session[:selected_idp] = { 'entity_id' => 'http://idcorp.com',
+                                 'simple_id' => 'stub-idp-one',
+                                 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+
+      stub_saml_proxy_and_analytics('FAILED', 'Failure - REGISTER_WITH_IDP')
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+      expect(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]).to eq(expected_cookie)
+    end
+  end
 end
