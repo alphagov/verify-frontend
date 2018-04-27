@@ -31,3 +31,9 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
+  - aa_test:
+      alternatives:
+        - name: 'control'
+          percent: 100
+        - name: 'variant'
+          percent: 0
