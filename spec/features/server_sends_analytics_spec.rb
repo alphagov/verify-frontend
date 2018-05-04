@@ -20,9 +20,7 @@ RSpec.describe 'When a page with a virtual page view is visited' do
         'apiv' => '1',
         'idsite' => INTERNAL_PIWIK.site_id.to_s,
         'cookie' => 'false',
-        # TODO HUB-120: Start page reporting deactived during the test, changing this to test AA test virtual pageview
-        # 'action_name' => 'The user has reached the start page'
-        'action_name' => 'The user has started an AB test'
+        'action_name' => 'The user has reached the start page'
     }
     piwik_headers = {
         'X-Forwarded-For' => '1.1.1.1',
@@ -31,10 +29,7 @@ RSpec.describe 'When a page with a virtual page view is visited' do
         'User-Agent' => 'my user agent',
         'Accept-Language' => 'en-US,en;q=0.5',
     }
-    # HUB-120: testing AS test reporting as the start page reporting is deactivated
-    # stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers)
-    stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers, 'LEVEL_2', ["\"6\":[\"AB_TEST\",\"aa_test_control\"]"])
-
+    stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers)
 
     expect(stubbed_piwik_request).to have_been_made.at_least_once
   end
