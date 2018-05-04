@@ -5,13 +5,8 @@ end
 get 'sign_in', to: 'sign_in#index', as: :sign_in
 post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 
-AA_TEST = "aa_test".freeze
-
-aa_test_control_piwik = SelectRoute.new(AA_TEST, 'control', is_start_of_test: true)
-aa_test_variant_piwik = SelectRoute.new(AA_TEST, 'variant', is_start_of_test: true)
-
 constraints IsLoa1 do
-  # get 'start', to: 'start#index', as: :start
+  get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
@@ -33,7 +28,7 @@ constraints IsLoa1 do
 end
 
 constraints IsLoa2 do
-  # get 'start', to: 'start#index', as: :start
+  get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
   get 'about', to: 'about_loa2#index', as: :about
@@ -98,12 +93,3 @@ post 'further_information_null_attribute', to: 'further_information#submit_null_
 get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
 get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 get 'paused_registration', to: 'paused_registration#index', as: :paused_registration
-
-# HUB-120 AA test
-constraints aa_test_control_piwik do
-  get 'start', to: 'start#index', as: :start
-end
-
-constraints aa_test_variant_piwik do
-  get 'start', to: 'start#index', as: :start
-end
