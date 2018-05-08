@@ -35,6 +35,9 @@ module VerifyFrontend
 
     config.exceptions_app = self.routes
 
+    # Disable the ip_spoofing_check as we only store/read X_FORWARDED_FOR, not CLIENT_IP
+    config.action_dispatch.ip_spoofing_check = false
+
     # Add recommended security headers and apply a basic lenient Content Security Policy
     config.action_dispatch.default_headers = {
       'X-Frame-Options' => 'DENY',
