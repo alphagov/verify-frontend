@@ -1,0 +1,12 @@
+simpleIds: ["stub-idp-demo"]
+
+segments:
+  protected:
+    recommended: []
+    unlikely: []
+  non_protected:
+    recommended: ["non-protected-segment-1", "other"]
+    unlikely: []
+
+capabilities:
+  - []
