@@ -11,8 +11,13 @@ module JourneyHintingPartialController
     journey_hint.nil? ? nil : journey_hint['entity_id']
   end
 
-  def user_followed_journey_hint(entity_id_followed_by_user)
-    hinted_id = entity_id_of_journey_hint
+  def entity_id_of_journey_hint_for(status)
+    journey_hint = journey_hint_value
+    journey_hint.nil? ? nil : journey_hint[status]
+  end
+
+  def user_followed_journey_hint(entity_id_followed_by_user, status)
+    hinted_id = entity_id_of_journey_hint_for(status)
     !hinted_id.nil? && hinted_id == entity_id_followed_by_user
   end
 

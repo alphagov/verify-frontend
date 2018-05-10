@@ -18,13 +18,6 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     visit "/#{t('routes.sign_in', locale: locale)}"
   end
 
-  def given_the_journey_hint_cookie_is_set_with_value(entity_id, locale = 'en')
-    visit '/test-journey-hint'
-    fill_in 'entity-id', with: entity_id
-    fill_in 'locale', with: locale
-    click_button 'journey-hint-post'
-  end
-
   def when_i_select_an_idp
     # There may be multiple identical buttons due to the journey hint
     # so we can't use 'click_button'
@@ -134,7 +127,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
     context 'with an invalid idp-hint cookie' do
       before :each do
-        given_the_journey_hint_cookie_is_set_with_value('http://not-a-valid-idp.com')
+        set_journey_hint_cookie('http://not-a-valid-idp.com', 'SUCCESS')
       end
 
       it 'will not render a suggested IDP' do
@@ -148,7 +141,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
     context 'with a valid idp-hint cookie' do
       before :each do
-        given_the_journey_hint_cookie_is_set_with_value('http://idcorp.com')
+        set_journey_hint_cookie('http://idcorp.com', 'SUCCESS')
       end
 
       it 'will render a suggested IDP' do
@@ -178,7 +171,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
     context 'with a different valid idp-hint cookie' do
       before :each do
-        given_the_journey_hint_cookie_is_set_with_value('other-entity-id')
+        set_journey_hint_cookie('other-entity-id', 'SUCCESS')
       end
 
       hinted_idp_name = "Bob’s Identity Service"

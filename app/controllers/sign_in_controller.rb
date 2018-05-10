@@ -8,7 +8,7 @@ class SignInController < ApplicationController
   include JourneyHintingPartialController
 
   def index
-    entity_id = entity_id_of_journey_hint
+    entity_id = entity_id_of_journey_hint_for('SUCCESS')
     @suggested_idp = entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, entity_id)
     unless @suggested_idp.empty?
       FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp[0].display_name)
@@ -25,8 +25,8 @@ class SignInController < ApplicationController
 
   def select_idp
     select_viewable_idp_for_sign_in(params.fetch('entity_id')) do |decorated_idp|
-      unless entity_id_of_journey_hint.nil?
-        session[:user_followed_journey_hint] = user_followed_journey_hint(decorated_idp.entity_id)
+      unless entity_id_of_journey_hint_for('SUCCESS').nil?
+        session[:user_followed_journey_hint] = user_followed_journey_hint(decorated_idp.entity_id, 'SUCCESS')
       end
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       redirect_to redirect_to_idp_sign_in_path
@@ -35,8 +35,8 @@ class SignInController < ApplicationController
 
   def select_idp_ajax
     select_viewable_idp_for_sign_in(params.fetch('entityId')) do |decorated_idp|
-      hint_shown = !entity_id_of_journey_hint.nil?
-      hint_followed = user_followed_journey_hint(decorated_idp.entity_id)
+      hint_shown = !entity_id_of_journey_hint_for('SUCCESS').nil?
+      hint_followed = user_followed_journey_hint(decorated_idp.entity_id, 'SUCCESS')
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       ajax_idp_redirection_sign_in_request(hint_shown, hint_followed)
     end
