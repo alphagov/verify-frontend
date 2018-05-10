@@ -56,7 +56,7 @@ describe SignInController do
 
     context 'with idp journey hint cookie' do
       before :each do
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: 'http://idcorp.com' }.to_json
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: 'http://idcorp.com', SUCCESS: 'http://idcorp.com' }.to_json
       end
 
       it 'will set the session param true if user followed the journey hint' do
