@@ -38,7 +38,7 @@ end
 constraints IsLoa2 do
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
-  # get 'begin_registration', to: 'start#register', as: :begin_registration
+  get 'begin_registration', to: 'start#register', as: :begin_registration
   # get 'about', to: 'about_loa2#index', as: :about
   # get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   # get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
@@ -104,11 +104,11 @@ get 'paused_registration', to: 'paused_registration#index', as: :paused_registra
 
 # HUB-109 Short HUB A/B test
 constraints short_hub_control_piwik do
-  get 'begin_registration', to: 'start#register', as: :begin_registration
+  get 'about', to: 'about_loa2#index', as: :about
 end
 
 constraints short_hub_variant_piwik do
-  get 'begin_registration', to: 'start#register', as: :begin_registration
+  get 'about', to: 'about_loa2_variant#index', as: :about
 end
 
 constraints short_hub_control do
