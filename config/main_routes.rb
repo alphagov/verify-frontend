@@ -112,7 +112,6 @@ constraints short_hub_variant_piwik do
 end
 
 constraints short_hub_control do
-  get 'about', to: 'about_loa2#index', as: :about
   get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
@@ -143,8 +142,6 @@ constraints short_hub_control do
 end
 
 constraints short_hub_variant do
-  get 'about', to: 'about_loa2_variant#index', as: :about
-
   get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
   post 'select_documents', to: 'select_documents_variant#select_documents', as: :select_documents_submit
 
