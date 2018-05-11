@@ -15,10 +15,6 @@ describe WillItWorkForMeController do
   invalid_form_answers = { above_age_threshold: 'true' }.freeze
 
   context 'valid form' do
-    before :each do
-      stub_piwik_request('action_name' => 'Can I be Verified Next')
-    end
-
     include_examples 'will_it_work_for_me',
                      'redirects to might not work for you if moved in recently',
                      'user has moved to the UK in the last year',

@@ -14,7 +14,6 @@ describe SelectPhoneController do
       'documents' => { driving_licence: true, passport: true },
       'device_type' => { device_type_other: true }
     }
-    stub_piwik_request({ 'action_name' => 'Phone Next' }, {}, 'LEVEL_2')
   end
 
   context 'when form is valid' do

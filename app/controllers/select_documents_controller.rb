@@ -11,7 +11,6 @@ class SelectDocumentsController < ApplicationController
   def select_documents
     @form = SelectDocumentsForm.new(params['select_documents_form'] || {})
     if @form.valid?
-      report_to_analytics('Select Documents Next')
       selected_answer_store.store_selected_answers('documents', @form.selected_answers)
       redirect_to @form.further_id_information_required? ? other_identity_documents_path : select_phone_path
     else
