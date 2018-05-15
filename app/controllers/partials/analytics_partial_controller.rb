@@ -13,4 +13,10 @@ module AnalyticsPartialController
       Analytics::CustomVariable.build_for_js_client(:loa_requested, session[:requested_loa])
     ]
   end
+
+  def delete_new_visit_flag
+    http_redirect = 302
+    http_see_other = 303
+    session.delete(:new_visit) unless [http_redirect, http_see_other].include?(self.status)
+  end
 end

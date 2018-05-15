@@ -85,6 +85,63 @@ RSpec.describe 'When the user visits a page' do
       choose 'start_form_selection_false', allow_label_click: true
       choose 'start_form_selection_true', allow_label_click: true
     end
+
+    it 'sends a page view with a new_visit parameter if new session' do
+      set_session_and_session_cookies!
+      page.set_rack_session(new_visit: 'true')
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'action_name' => 'Start - GOV.UK Verify - GOV.UK - LEVEL_2',
+          'url' => /start/,
+          'new_visit' => '1'
+        )
+      )
+      visit '/start'
+    end
+
+    it 'sends a page view with a new_visit parameter if new session and on refresh the parameter is not present' do
+      set_session_and_session_cookies!
+      page.set_rack_session(new_visit: 'true')
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'action_name' => 'Start - GOV.UK Verify - GOV.UK - LEVEL_2',
+          'url' => /start/,
+          'new_visit' => '1'
+        )
+      )
+      visit '/start'
+
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'action_name' => 'Start - GOV.UK Verify - GOV.UK - LEVEL_2',
+          'url' => /start/,
+          'new_visit' => '0'
+        )
+      )
+      visit '/start'
+    end
+
+    it 'sends a page view with a new_visit parameter if new session and on next page the parameter is not present' do
+      set_session_and_session_cookies!
+      page.set_rack_session(new_visit: 'true')
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'action_name' => 'Start - GOV.UK Verify - GOV.UK - LEVEL_2',
+          'url' => /start/,
+          'new_visit' => '1'
+        )
+      )
+      visit '/start'
+
+      expect(request_log).to receive(:log).with(
+        hash_including(
+          'action_name' => 'About - GOV.UK Verify - GOV.UK - LEVEL_2',
+          'url' => /about/,
+          'new_visit' => '0'
+        )
+      )
+      visit '/about'
+    end
   end
 
   context 'when JS is disabled' do
@@ -125,6 +182,39 @@ RSpec.describe 'When the user visits a page' do
       expect(image_src).to match(/rand=\d+/)
       expect(image_src).to match(/action_name=Cookies\+Missing\+-\+GOV\.UK\+Verify\+-\+GOV\.UK/)
       expect(image_src).to match(/url=[^&]+cookies-not-found/)
+    end
+
+    it 'sends a page view with a new_visit parameter when new visit' do
+      set_session_and_session_cookies!
+      page.set_rack_session(new_visit: 'true')
+      visit '/start'
+      noscript_image = page.find(:id, 'piwik-noscript-tracker')
+      expect(noscript_image).to_not be_nil
+      image_src = noscript_image['src']
+      expect(image_src).to match(/piwik.php\?/)
+      expect(image_src).to match(/idsite=5/)
+      expect(image_src).to match(/rec=1/)
+      expect(image_src).to match(/new_visit=1/)
+      expect(image_src).to match(/rand=\d+/)
+      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
+    end
+
+    it 'sends a page view with a new_visit parameter when new visit but not on the following refresh' do
+      set_session_and_session_cookies!
+      page.set_rack_session(new_visit: 'true')
+      visit '/start'
+      noscript_image = page.find(:id, 'piwik-noscript-tracker')
+      expect(noscript_image).to_not be_nil
+      image_src = noscript_image['src']
+      expect(image_src).to match(/new_visit=1/)
+      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
+
+      visit '/start'
+      noscript_image = page.find(:id, 'piwik-noscript-tracker')
+      expect(noscript_image).to_not be_nil
+      image_src = noscript_image['src']
+      expect(image_src).to match(/new_visit=0/)
+      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
     end
   end
 end
