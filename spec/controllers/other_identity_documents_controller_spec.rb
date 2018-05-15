@@ -7,7 +7,6 @@ describe OtherIdentityDocumentsController do
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_1')
     stub_api_idp_list_for_loa
-    stub_piwik_request('action_name' => 'Other Documents Next')
   end
 
   it 'should go to select phone path and set selected answers when user has other identity documents' do

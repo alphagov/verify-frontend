@@ -136,20 +136,6 @@ RSpec.describe 'When the user visits the select phone page' do
     expect(page).to have_css 'html[lang=cy]'
   end
 
-  it 'reports to Piwik when form is valid' do
-    stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-    piwik_request = { 'action_name' => 'Phone Next' }
-
-    page.set_rack_session(transaction_simple_id: 'test-rp')
-    visit '/select-phone'
-
-    choose 'select_phone_form_mobile_phone_true', allow_label_click: true
-    choose 'select_phone_form_smart_phone_true', allow_label_click: true
-    click_button t('navigation.continue')
-
-    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
-  end
-
   it 'does not report to Piwik when form is invalid' do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     piwik_request = { 'action_name' => 'Phone Next' }

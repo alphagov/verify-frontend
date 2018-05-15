@@ -10,7 +10,6 @@ class SelectPhoneController < ApplicationController
   def select_phone
     @form = SelectPhoneForm.new(params['select_phone_form'] || {})
     if @form.valid?
-      report_to_analytics('Phone Next')
       selected_answer_store.store_selected_answers('phone', @form.selected_answers)
       idps_available = IDP_RECOMMENDATION_ENGINE.any?(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
       redirect_to idps_available ? choose_a_certified_company_path : no_mobile_phone_path

@@ -11,10 +11,6 @@ describe SelectDocumentsController do
   end
 
   context 'when form is valid' do
-    before :each do
-      stub_piwik_request('action_name' => 'Select Documents Next')
-    end
-
     it 'redirects to other identity documents page when further documents are required' do
       further_documents_evidence = { passport: 'false', any_driving_licence: 'false' }.freeze
       post :select_documents, params: { locale: 'en', select_documents_form: further_documents_evidence }
