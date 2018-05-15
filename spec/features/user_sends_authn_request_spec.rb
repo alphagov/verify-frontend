@@ -60,6 +60,27 @@ describe 'user sends authn requests' do
       expect(page.get_rack_session['transaction_supports_eidas']).to eql false
     end
 
+    it 'will redirect the user to /begin_registration when journey hint is set to registration' do
+      stub_session_creation
+
+      visit('/test-saml')
+      click_button 'saml-post-registration'
+
+      expect(page).to have_title t('hub.about.title')
+      expect(page.get_rack_session['transaction_supports_eidas']).to eql false
+    end
+
+    it 'will redirect the user to /sign_in when journey hint is set to sign_in' do
+      stub_api_idp_list_for_sign_in(default_idps)
+      stub_session_creation
+
+      visit('/test-saml')
+      click_button 'saml-post-sign-in'
+
+      expect(page).to have_title t('hub.signin.title')
+      expect(page.get_rack_session['transaction_supports_eidas']).to eql false
+    end
+
     it 'will set ab_test cookie' do
       stub_session_creation
 
