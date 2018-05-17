@@ -25,7 +25,6 @@ CONFIG = Configuration.load! do
   option_int 'read_timeout', 'READ_TIMEOUT', default: 60
   option_int 'connect_timeout', 'CONNECT_TIMEOUT', default: 4
   option_string 'rules_directory', 'RULES_DIRECTORY'
-  option_string 'rules_directory_variant', 'RULES_DIRECTORY_VARIANT'
   option_string 'zendesk_url', 'ZENDESK_URL'
   option_string 'zendesk_username', 'ZENDESK_USERNAME'
   option_string 'zendesk_token', 'ZENDESK_TOKEN'
@@ -35,6 +34,5 @@ CONFIG = Configuration.load! do
   option_string 'cycle_three_attributes_directory', 'CYCLE_THREE_ATTRIBUTES_DIRECTORY'
   option_string 'ab_test_file', 'AB_TEST_FILE', allow_missing: true
   option_string 'segment_definitions', 'SEGMENT_DEFINITIONS'
-  option_string 'segment_definitions_variant', 'SEGMENT_DEFINITIONS_VARIANT'
   option_string 'saml_proxy_host', 'SAML_PROXY_HOST'
 end
