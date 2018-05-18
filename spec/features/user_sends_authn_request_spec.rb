@@ -27,7 +27,7 @@ describe 'user sends authn requests' do
       expect(page.get_rack_session['transaction_supports_eidas']).to eql false
     end
 
-    it 'will redirect the user to /confirm-your-identity when journey hint is set' do
+    it 'will redirect user to /confirm-your-identity when journey hint is set (not to registration or sign_in)' do
       stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
       set_journey_hint_cookie('http://idcorp.com')
       stub_session_creation('transactionSupportsEidas' => true)
@@ -58,6 +58,35 @@ describe 'user sends authn requests' do
 
       expect(page).to have_content t('errors.something_went_wrong.heading')
       expect(page.get_rack_session['transaction_supports_eidas']).to eql false
+    end
+
+    it 'will redirect the user to /about when journey hint is set to registration' do
+      stub_session_creation
+      stub_piwik_request = stub_piwik_journey_type_request(
+        'REGISTRATION',
+        'The user started a registration journey',
+        'LEVEL_1'
+      )
+      visit('/test-saml')
+      click_button 'saml-post-journey-hint-registration'
+
+      expect(page).to have_title t('hub.about.title')
+      expect(stub_piwik_request).to have_been_made.once
+    end
+
+    it 'will redirect the user to /sign-in when journey hint is set to sign_in' do
+      stub_api_idp_list_for_sign_in(default_idps)
+      stub_session_creation
+      stub_piwik_request = stub_piwik_journey_type_request(
+        'SIGN_IN',
+        'The user started a sign-in journey',
+        'LEVEL_1'
+      )
+      visit('/test-saml')
+      click_button 'saml-post-journey-hint-sign-in'
+
+      expect(page).to have_title t('hub.signin.title')
+      expect(stub_piwik_request).to have_been_made.once
     end
 
     it 'will set ab_test cookie' do

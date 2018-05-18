@@ -4,6 +4,7 @@ end
 
 get 'sign_in', to: 'sign_in#index', as: :sign_in
 post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
+get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
 
 constraints IsLoa1 do
   get 'start', to: 'start#index', as: :start
