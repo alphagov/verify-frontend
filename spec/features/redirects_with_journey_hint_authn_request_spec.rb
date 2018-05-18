@@ -8,6 +8,12 @@ describe 'pages redirect with journey hint parameter', type: :request do
     expect(response).to redirect_to begin_registration_path
   end
 
+  it 'will redirect the user to registration path when journey hint parameter is set to registration and is case insensitive' do
+    stub_session_creation
+    post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state', 'journey_hint' => 'RegiStraTion' }
+    expect(response).to redirect_to begin_registration_path
+  end
+
   it 'will redirect the user to sign-in path when journey hint parameter is set to sign_in' do
     stub_session_creation
     post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state', 'journey_hint' => 'sign_in' }
