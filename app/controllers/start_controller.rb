@@ -16,8 +16,7 @@ class StartController < ApplicationController
       if @form.registration?
         register
       else
-        FEDERATION_REPORTER.report_sign_in(current_transaction, request)
-        redirect_to sign_in_path
+        sign_in
       end
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
@@ -30,12 +29,8 @@ class StartController < ApplicationController
     redirect_to about_path
   end
 
-private
-
-  def sign_in(entity_id, idp_name)
+  def sign_in
     FEDERATION_REPORTER.report_sign_in(current_transaction, request)
-    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'])
-    set_journey_hint(entity_id)
-    session[:selected_idp_name] = idp_name
+    redirect_to sign_in_path
   end
 end

@@ -72,7 +72,7 @@ private
     if check_journey_hint('registration')
       redirect_to begin_registration_path
     elsif check_journey_hint('sign_in')
-      redirect_to sign_in_path
+      redirect_to begin_sign_in_path
     else
       redirect_to confirm_your_identity_path
     end
