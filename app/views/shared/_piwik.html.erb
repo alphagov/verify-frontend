@@ -4,6 +4,9 @@
     <% if piwik_custom_url? %>
         <span class="hidden" id="piwik-custom-url"><%= piwik_custom_url %></span>
     <% end %>
+    <% if session[:new_visit] %>
+        <input class="hidden" id="piwik-new-visit" />
+    <% end %>
     <% if defined?(@piwik_custom_variables) %>
         <span class="hidden" id="piwik-custom-variables"><%= @piwik_custom_variables.to_json %></span>
     <% end %>

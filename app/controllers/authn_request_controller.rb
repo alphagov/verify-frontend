@@ -7,6 +7,7 @@ class AuthnRequestController < SamlController
 
   def rp_request
     create_session
+    session[:new_visit] = true
 
     AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
 

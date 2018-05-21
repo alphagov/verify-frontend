@@ -34,6 +34,7 @@ module ApplicationHelper
         rec: 1,
         rand: Random.rand(2**32 - 1),
         action_name: content_for(:page_title_in_english),
+        new_visit: session[:new_visit] ? 1 : 0
     }
     hash[:url] = piwik_custom_url if piwik_custom_url?
     hash.to_query

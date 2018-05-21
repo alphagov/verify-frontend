@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
   before_action :store_originating_ip
   before_action :set_piwik_custom_variables
   after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
+  after_action :delete_new_visit_flag
 
   helper_method :transaction_taxon_list
   helper_method :transactions_list

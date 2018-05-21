@@ -5,8 +5,6 @@ class StartController < ApplicationController
   def index
     @form = StartForm.new({})
 
-    FEDERATION_REPORTER.report_start_page(current_transaction, request)
-
     render :start
   end
 

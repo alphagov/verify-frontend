@@ -13,14 +13,14 @@ RSpec.describe 'When a page with a virtual page view is visited' do
     Capybara.current_session.driver.header('Accept-Language', 'en-US,en;q=0.5')
     Capybara.current_session.driver.header('X-Forwarded-For', '1.1.1.1')
 
-    visit '/start'
+    visit '/begin-registration'
 
     piwik_request = {
         'rec' => '1',
         'apiv' => '1',
         'idsite' => INTERNAL_PIWIK.site_id.to_s,
         'cookie' => 'false',
-        'action_name' => 'The user has reached the start page'
+        'action_name' => 'The user started a registration journey'
     }
     piwik_headers = {
         'X-Forwarded-For' => '1.1.1.1',
@@ -29,7 +29,7 @@ RSpec.describe 'When a page with a virtual page view is visited' do
         'User-Agent' => 'my user agent',
         'Accept-Language' => 'en-US,en;q=0.5',
     }
-    stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers)
+    stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers, 'LEVEL_2', ["\"3\":[\"JOURNEY_TYPE\",\"REGISTRATION\"]"])
 
     expect(stubbed_piwik_request).to have_been_made.at_least_once
   end
