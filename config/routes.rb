@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     # see: https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives#report-uri
     # to use, add ';report-uri http://127.0.0.1:50300/csp-reporter' to the end of the CSP header in application.rb
     post 'csp-reporter', to: 'test_csp_reporter#report'
+    get 'hint', to: 'hint#index'
   end
 
   localized do
