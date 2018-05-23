@@ -31,6 +31,29 @@ class StubApi < Sinatra::Base
     }"
   end
 
+  get '/config/transactions/:entity_id/translation-data' do
+    '{
+      "en": {
+        "name":"register for an identity profile",
+        "rpName":"EN: Test RP",
+        "analyticsDescription":"analytics description for test-rp",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"register for an identity profile",
+        "tailoredText":"External data source: EN: This is tailored text for test-rp",
+        "taxonName":"Benefits"
+      },
+      "cy": {
+        "name":"register for an identity profile",
+        "rpName":"CY: Test RP",
+        "analyticsDescription":"analytics description for test-rp",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"register for an identity profile",
+        "tailoredText":"External data source: CY: This is tailored text for test-rp",
+        "taxonName":"Benefits"
+      }
+    }'
+  end
+
   get '/config/idps/idp-list/:transaction_id/:level_of_assurance' do
     if params['level_of_assurance'] == 'LEVEL_1'
     '[{

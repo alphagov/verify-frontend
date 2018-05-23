@@ -2,7 +2,6 @@ require 'configuration'
 
 CONFIG = Configuration.load! do
   option_string 'product_page_url', 'VERIFY_PRODUCT_PAGE', default: 'https://govuk-verify.cloudapps.digital/'
-  option_string 'rp_display_locales', 'RP_DISPLAY_LOCALES'
   option_string 'cycle_3_display_locales', 'CYCLE_3_DISPLAY_LOCALES'
   option_string 'idp_display_locales', 'IDP_DISPLAY_LOCALES'
   option_string 'country_display_locales', 'COUNTRY_DISPLAY_LOCALES'
