@@ -7,9 +7,10 @@ Rails.application.config.after_initialize do
   # Federation localisation and display
   yaml_loader = YamlLoader.new
   federation_translator = Display::FederationTranslator.new
+  RP_TRANSLATION_SERVICE = RpTranslationService.new(federation_translator)
   repository_factory = Display::RepositoryFactory.new(federation_translator, yaml_loader)
   IDP_DISPLAY_REPOSITORY = repository_factory.create_idp_repository(CONFIG.idp_display_locales)
-  RP_DISPLAY_REPOSITORY = repository_factory.create_rp_repository(CONFIG.rp_display_locales)
+  RP_DISPLAY_REPOSITORY = repository_factory.create_rp_repository
   COUNTRY_DISPLAY_REPOSITORY = repository_factory.create_country_repository(CONFIG.country_display_locales)
   EIDAS_SCHEME_REPOSITORY = repository_factory.create_eidas_scheme_repository(CONFIG.eidas_schemes_directory)
   IDENTITY_PROVIDER_DISPLAY_DECORATOR = Display::IdentityProviderDisplayDecorator.new(

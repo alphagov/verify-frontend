@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.4.2'
 
 gem 'rails', '5.0.2'
-gem 'rails-i18n', '~> 5.0'
+gem 'rails-i18n', '~> 5.1'
 gem 'route_translator', '~> 5.0'
 
 # Server
