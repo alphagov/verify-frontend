@@ -9,7 +9,7 @@ end %>
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1 class="heading-large">Privacy notice</h1>
-    <p>Revised on: May 2018</p>
+    <p>Revised on: 24 May 2018</p>
     <h2 class="heading-medium" id="who-we-are">Who we are</h2>
     <p>GOV.UK Verify is built and run by the Government Digital Service (GDS). GOV.UK Verify allows you to prove your identity when using digital government services like the service you used to <a href="https://www.gov.uk/log-in-file-self-assessment-tax-return">sign in and file your Self Assessment tax return</a>. This privacy notice explains what information we might collect, how it’s used and how it’s protected.
     <h2 class="heading-medium" id="how-we-use-info">How we use information</h2>
@@ -22,11 +22,15 @@ end %>
       <li><h4 class="heading-small" id="comp-send-info-to-hub">Certified companies sending information to the hub</h4>
       The certified company you choose will send the verified data about you (your name, address and date of birth along with your gender if you choose to provide it) to the hub, and the hub will send it to the government service that you want to access. The certified company you use won’t know which government service has requested this information, and the government service won’t know which certified company you have chosen.
     </li>
-      <li><h4 class="heading-small" id="document-checking-service">Document Checking Service</h4>
-        <p>We provide a Document Checking Service (DCS) API to certified companies so they can check the validity of your UK passport or driving licence with HM Passport Office (HMPO) and the Driver and Vehicle Licensing Agency (DVLA).
+      <li><h4 class="heading-small" id="document-checking-service">Document checking</h4>
+        <p>We also provide a document checking service to certified companies so they can validate some of your data with other areas of government such as:
         </p>
-        <p>The data that HMPO and DVLA hold about you is not shared with the certified companies by DCS. The certified companies provide DCS with the information you have given about your driving licence or passport and receive a simple 'yes/no' answer to confirm whether that document is valid or not.
-        </p>
+        <ul class="list-bullet list">
+          <li>HM Passport Office (HMPO)</li>
+          <li>Driver and Vehicle Licensing Agency (DVLA)</li>
+          <li>Driver and Vehicle Agency (DVA) in Northern Ireland</li>
+        </ul>
+        <p>This is done via an API and cannot be accessed by GOV.UK Verify.</p>
       </li>
       <li><h4 class="heading-small" id="user-support">User support</h4>
         When you contact the GOV.UK Verify user support team for help, we might:
@@ -40,56 +44,42 @@ end %>
         We monitor and report on GOV.UK Verify so we can review and improve the service that we provide to government organisations.
       </li>
       <li><h4 class="heading-small" id="identity-standards-and-fraud">Identity standards and fraud</h4>
-        We help to prevent fraud in government services by maintaining the government’s identity standards and detecting identity fraud when verifying identities.
+        We process some personal data to help to prevent fraud in government services. We do this to maintain the government's identity standards and detecting fraud when verifying identities.
       </li>
     </ol>
     <h2 class="heading-medium" id="what-information-we-process">What information we process</h2>
-    <p>We process information about you when you use GOV.UK Verify. This may include any of the following 5 things.</p>
-    <ol class="list-number list">
-      <li><h4 class="heading-small" id="answers-specific-questions">Answers you give to specific questions</h4>
-      We process the answers you provide in the GOV.UK Verify hub to help you select a certified company, for example whether you’re over a certain age or which documents you have. We do not attempt to identify you from your answers.
-    </li>
-      <li><h4 class="heading-small" id="personal-data ">Personal data</h4>
-        <p>To verify your identity, we will pass the personal data that you give to your chosen certified company to the government service that you want to access. Your verified identity will then be matched to a record in a government database.
-        </p>
-        <p>The personal data that you give to the certified company (known as the ‘matching data set’), contains verified information about you including name, address, date of birth and gender (if you provide it). You can also to choose provide your previous name, address, date of birth and gender. This matching data set is not stored in the GOV.UK Verify hub after it has been passed to the government service, and it isn’t monitored.
-        </p>
-      </li>
-      <li><h4 class="heading-small" id="user-support-questions-and-feedback">User support questions and feedback</h4>
+    <p>We process information about you when you use GOV.UK Verify. This may include:</p>
+      <h4 class="heading-small" id="personal-data ">Personal data</h4>
+        <p>We process the answers you provide in the GOV.UK Verify hub to help you select a certified company.</p>
+        <p>After you’ve been verified by the certified company we then pass your personal data to the government service that you want to access. Your verified identity will then be matched to a record in a government database.</p>
+        <p>This data includes:</p>
+        <ul class="list-bullet list">
+          <li>name (including previous names)</li>
+          <li>address (which may include previous addresses)</li>
+          <li>date of birth</li>
+          <li>age (range)</li>
+          <li>gender (optional)</li>
+          <li>IP address</li>
+          <li>personal identifier (PID)</li>
+        </ul>
+        <p>In some situations we may also ask for some additional information such as:
+        <ul class="list-bullet list">
+          <li>driving licence number</li>
+          <li>Land Registry borrowers number</li>
+          <li>HM Revenue and Customs unique taxpayer reference</li>
+          <li>Rural Payments Agency Single Business Identifier</li>
+        </ul>
+      <h4 class="heading-small" id="user-support-questions-and-feedback">User support questions and feedback</h4>
         We process questions or feedback you send to user support, including your name and email address, details of your query, and actions we have taken to help.
-      </li>
-      <li><h4 class="heading-small" id="technical-information">Technical information</h4>
-        <p>When you connect to GOV.UK Verify, we may also collect some other information including personal and general information. This data is used for monitoring, reporting and fraud prevention purposes, and we do not try to identify you from it.
-        </p>
-          <p class="bold-small" id="personal-information">
-            Personal information
-            <ul class="list-bullet list">
-              <li>the IP address of the device you’re using to connect</li>
-              <li>the ‘device fingerprint’, which is information collected about a remote computing device for device identification</li>
-            </ul>
-          </p>
-        <p class="bold-small" id="general-information">
-          General information
-        <ul class="list-bullet list">
-          <li>details of what device you’re using to connect </li>
-          <li>which version of web browser you’re using to connect </li>
-        </ul>
-        </p>
-      </li>
-      <li><h4 class="heading-small" id="anonymous-data">Anonymous data</h4>
-        We may collect anonymous data about:
-        <ul class="list-bullet list">
-          <li>what government service needed you to verify</li>
-          <li>the certified company chosen</li>
-          <li>whether the certified company was able to verify you</li>
-          <li>whether ‘matching’ was successful at the government service</li>
-          <li>what pages you visited in the GOV.UK Verify hub</li>
-        </ul>
-        We do not try to identify you from this data, except when you give your contact details to user support.
-      </li>
-    </ol>
+      <h4 class="heading-small" id="technical-information">Technical information</h4>
+        <p>When you connect to GOV.UK Verify, we collect other information that is used for monitoring, reporting and fraud prevention purposes. This includes:</p>
+          <ul class="list-bullet list">
+            <li>the IP address of the device you’re using to connect</li>
+            <li>the ‘device fingerprint’, which is information collected about a remote computing device for device identification</li>
+            <li>‘user agent string’, which is the type and version of browser and operating system</li>
+          </ul>
     <h2 class="heading-medium" id="cookies-and-analytics">Cookies and analytics</h2>
-    <p>You can read our full <a href="https://www.signin.service.gov.uk/cookies">cookie notice</a> to find out how we use cookies to track user journeys using PIWIK.</p>
+    <p>You can read our full <a href="https://www.signin.service.gov.uk/cookies">cookie notice</a> to find out how we use cookies.</p>
     <h2 class="heading-medium" id="How-long-we-keep-your-data">How long we keep your data for</h2>
     <p>We will only retain your personal data for as long as:
       <ul class="list-bullet list">
@@ -106,13 +96,10 @@ end %>
     <p>
       We may pass on personal data if we have a lawful reason, for example as part of a criminal investigation or fraud prevention activity.
     </p>
-    <h2 class="heading-medium" id="social-media-applications">Social media applications</h2>
-    <p>This website may host various blogs, forums, wikis and other social media applications or services that allow you to share content with other users. Any personal information or other information that you contribute to any social media application can be read, collected, and used by other users of that social media application. We are not responsible for any other user’s use, misuse, or misappropriation of any information that you contribute to any social media application.</p>
     <h2 class="heading-medium" id="where-data-is-stored">Where your data is stored</h2>
-    <p>We process your personal data in the European Economic Area (EEA).</p>
+    <p>GOV.UK Verify processes your personal data in the European Economic Area (EEA).</p>
     <h2 class="heading-medium" id="links-to-other-websites">Links to other websites</h2>
-    <p>GOV.UK Verify is one of the services on GOV.UK and has links to other websites. This privacy notice only applies to <a href="https://www.gov.uk/government/publications/introducing-govuk-verify">GOV.UK Verify</a> and doesn’t cover other government services and transactions that we link to.
-    </p>
+    <p>GOV.UK Verify is one of the services on GOV.UK and has links to other websites. This privacy notice only applies to <a href="https://www.gov.uk/government/publications/introducing-govuk-verify">GOV.UK Verify</a> and doesn’t cover other government services and transactions that we link to.</p>
     <h2 class="heading-medium" id="follow-link-to-another-website">Following a link to another website</h2>
     <p>If you go to another website from this one, read the privacy notice on that website to find out what it does with your information.
     </p>
@@ -132,17 +119,15 @@ end %>
     <p>We may update or change this privacy notice at any time. Any update or change to this privacy notice will be applied to your data from the revision date. We encourage you to review this privacy notice regularly to stay informed about how we are protecting your data.
     </p>
     <h2 class="heading-medium" id="who-controls-your-data">Who controls your data</h2>
-    <p>The data controller for your personal data is the Cabinet Office – a data controller determines how and why personal data is processed. <a href="https://ico.org.uk/ESDWebPages/Entry/Z7414053">Read the Cabinet Office’s entry in the Data Protection Public Register</a> for more information.
-    </p>
+    <p>The data controller for your personal data is the Cabinet Office – a data controller determines how and why personal data is processed.</p>
     <p><h4 class="heading-medium" id="your-rights">Your rights</h4>
-    You have the right to:
+    You have the right to request:
     <ul class="list-bullet list">
-        <li>request information about how your personal data is processed and to request a copy of that personal data you’ve given to us
-        </li>
-        <li>request that any inaccuracies about your personal data to be corrected without delay.</li>
-        <li>request that any incomplete personal data are completed, including by means of a supplementary statement. </li>
-        <li>request that your personal data is erased if there is no longer a justification for us to hold it</li>
-        <li>request that the processing of your personal data is restricted in certain circumstances- for example, where accuracy is contested.</li>
+        <li>information about how your personal data is processed and to request a copy of that personal data you’ve given to us</li>
+        <li>that any inaccuracies about your personal data be corrected without delay</li>
+        <li>that any incomplete personal data is completed, including by means of a supplementary statement</li>
+        <li>that your personal data is erased if there is no longer a justification for us to hold it</li>
+        <li>that the processing of your personal data is restricted in certain circumstances, for example when accuracy is contested</li>
       </ul>
     If your personal data is processed on the basis of consent, then you have the right to withdraw your consent at any time.
     </p>
