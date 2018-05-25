@@ -15,6 +15,13 @@ Rails.application.config.after_initialize do
     CONFIG.logo_directory,
     CONFIG.white_logo_directory
   )
+  # HUB-135 A/B test variant
+  IDENTITY_PROVIDER_DISPLAY_DECORATOR_VARIANT = Display::IdentityProviderDisplayDecoratorVariant.new(
+    IDP_DISPLAY_REPOSITORY,
+    CONFIG.logo_directory,
+    CONFIG.white_logo_directory
+  )
+
   COUNTRY_DISPLAY_DECORATOR = Display::CountryDisplayDecorator.new(
     COUNTRY_DISPLAY_REPOSITORY
   )
@@ -35,6 +42,7 @@ Rails.application.config.after_initialize do
   # IDP Config
   IDP_CONFIG = YAML.load_file(CONFIG.idp_config)
   UNAVAILABLE_IDPS = IDP_CONFIG.fetch('show_unavailable', [])
+  IDP_LOA1_ORDER = IDP_CONFIG.fetch('loa1_order', [])
 
   # IDP Recommendations
   yaml_loader = YamlLoader.new

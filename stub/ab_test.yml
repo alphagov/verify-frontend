@@ -31,3 +31,9 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
+  - loa1_perf_management:
+      alternatives:
+        - name: 'control'
+          percent: 100
+        - name: 'variant'
+          percent: 0
