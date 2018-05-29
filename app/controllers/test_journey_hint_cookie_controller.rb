@@ -8,12 +8,14 @@ class TestJourneyHintCookieController < ApplicationController
     render 'index'
   end
 
+  def set_old_cookie
+    set_journey_hint(params['entity-id-old'], false)
+    head :no_content
+  end
+
   def set_cookie
-    if params['status'].blank?
-      set_journey_hint(params['entity-id'])
-    else
-      set_journey_hint_by_status(params['entity-id'], params['status'])
-    end
+    set_journey_hint(params['entity-id'])
+    set_journey_hint_by_status(params['entity-id'], params['status']) unless params['status'].blank?
     head :no_content
   end
 end
