@@ -1,6 +1,7 @@
 en:
   routes:
     start: start
+    pick_journey: pick-journey
     begin_registration: begin-registration
     begin_sign_in: begin-sign-in
     about: about
@@ -84,6 +85,25 @@ en:
       title: Redirect to country
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
+    pick_journey:
+      title: Prove your identity to continue
+      heading: Prove your identity to continue
+      header_content: We need you to be sure you are accessing this service in your own name.
+      use_verify:
+        heading: Use GOV.UK Verify
+        content_html: |
+          <p>Registering with GOV.UK Verify usually takes about 15 minutes. It works best if you have:</p>
+          <ul class="list-bullet list">
+            <li>a UK address</li>
+            <li>a valid passport or photocard driving licence</li>
+          </ul>
+          <p>A certified identity provider will check your identity when you register with GOV.UK Verify. They’ve all met security standards set by government.</p>
+        button_text: Use GOV.UK Verify
+      use_eidas:
+        heading: Use a digital identity from another European country
+        content_html: |
+          <p>If you are part of Germany’s Verimi you can use it here. Identity schemes from other countries will become available later.</p>
+        button_text: Select your European digital identity
     start:
       title: Start
       heading: Sign in with GOV.UK Verify

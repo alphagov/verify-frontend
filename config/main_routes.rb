@@ -35,6 +35,7 @@ constraints IsLoa1 do
 end
 
 constraints IsLoa2 do
+  get 'pick_journey', to: 'pick_journey#index', as: :pick_journey
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration

@@ -1,0 +1,18 @@
+<%= page_title 'hub.pick_journey.title' %>
+<% content_for :feedback_source, 'PICK_JOURNEY_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.pick_journey.heading' %></h1>
+    <%= t 'hub.pick_journey.header_content' %>
+
+    <h2 class="heading-medium"><%= t 'hub.pick_journey.use_verify.heading' %></h2>
+    <%= t 'hub.pick_journey.use_verify.content_html' %>
+    <%= button_link_to t('hub.pick_journey.use_verify.button_text'), start_path %>
+
+
+    <h2 class="heading-medium"><%= t 'hub.pick_journey.use_eidas.heading' %></h2>
+    <%= t 'hub.pick_journey.use_eidas.content_html' %>
+    <%= button_link_to t('hub.pick_journey.use_eidas.button_text'), choose_a_country_path %>
+  </div>
+</div>
