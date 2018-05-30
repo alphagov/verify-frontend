@@ -1,0 +1,18 @@
+<%= page_title 'hub.prove_identity.title' %>
+<% content_for :feedback_source, 'PROVE_IDENTITY_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.prove_identity.heading' %></h1>
+    <%= t 'hub.prove_identity.header_content' %> <%= current_service %>.
+
+    <h2 class="heading-medium"><%= t 'hub.prove_identity.use_verify.heading' %></h2>
+    <%= t 'hub.prove_identity.use_verify.content_html' %>
+    <%= button_link_to t('hub.prove_identity.use_verify.button_text'), start_path %>
+
+
+    <h2 class="heading-medium"><%= t 'hub.prove_identity.use_eidas.heading' %></h2>
+    <%= t 'hub.prove_identity.use_eidas.content_html' %>
+    <%= button_link_to t('hub.prove_identity.use_eidas.button_text'), choose_a_country_path %>
+  </div>
+</div>

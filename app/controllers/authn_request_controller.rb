@@ -19,7 +19,7 @@ class AuthnRequestController < SamlController
       raise StandardError, 'Users session does not support eIDAS journeys' unless session[:transaction_supports_eidas]
       redirect_to choose_a_country_path
     elsif session[:transaction_supports_eidas]
-      redirect_to pick_journey_path
+      redirect_to prove_identity_path
     else
       redirect_to start_path
     end

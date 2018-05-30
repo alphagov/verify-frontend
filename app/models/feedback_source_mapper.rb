@@ -43,7 +43,7 @@ class FeedbackSourceMapper
       'CANCELLED_REGISTRATION' => 'cancelled_registration',
       'PROOF_OF_ADDRESS' => 'select_proof_of_address',
       'CONFIRMING_IT_IS_YOU_PAGE' => 'confirming_it_is_you',
-      'PICK_JOURNEY_PAGE' => 'pick_journey'
+      'PROVE_IDENTITY_PAGE' => 'prove_identity'
   }.freeze
   end
 

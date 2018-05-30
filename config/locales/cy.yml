@@ -1,6 +1,7 @@
 cy:
   routes:
     start: dechrau
+    prove_identity: prove-identity-cy
     begin_registration: begin-registration-cy
     begin_sign_in: begin-sign-in-cy
     about: am
@@ -86,6 +87,25 @@ cy:
       title: Redirect to country
       heading: Mynd ymlaen i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
+    prove_identity:
+      title: Prove your identity to continue
+      heading: Prove your identity to continue
+      header_content: Choose how you want to prove your identity so you can
+      use_verify:
+        heading: Use GOV.UK Verify
+        content_html: |
+          <p>Registering with GOV.UK Verify usually takes about 15 minutes. It works best if you have:</p>
+          <ul class="list-bullet list">
+            <li>a UK address</li>
+            <li>a valid passport or photocard driving licence</li>
+          </ul>
+          <p>A certified identity provider will check your identity when you register with GOV.UK Verify. They’ve all met security standards set by government.</p>
+        button_text: Use GOV.UK Verify
+      use_eidas:
+        heading: Use a digital identity from another European country
+        content_html: |
+          <p>If you are part of Germany’s Online-Ausweis you can use it here. Identity schemes from other countries will become available later.</p>
+        button_text: Select your European digital identity
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify

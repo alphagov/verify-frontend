@@ -1,7 +1,7 @@
 en:
   routes:
     start: start
-    pick_journey: pick-journey
+    prove_identity: prove-identity
     begin_registration: begin-registration
     begin_sign_in: begin-sign-in
     about: about
@@ -85,10 +85,10 @@ en:
       title: Redirect to country
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
-    pick_journey:
+    prove_identity:
       title: Prove your identity to continue
       heading: Prove your identity to continue
-      header_content: We need you to be sure you are accessing this service in your own name.
+      header_content: Choose how you want to prove your identity so you can
       use_verify:
         heading: Use GOV.UK Verify
         content_html: |
@@ -102,7 +102,7 @@ en:
       use_eidas:
         heading: Use a digital identity from another European country
         content_html: |
-          <p>If you are part of Germany’s Verimi you can use it here. Identity schemes from other countries will become available later.</p>
+          <p>If you are part of Germany’s Online-Ausweis you can use it here. Identity schemes from other countries will become available later.</p>
         button_text: Select your European digital identity
     start:
       title: Start

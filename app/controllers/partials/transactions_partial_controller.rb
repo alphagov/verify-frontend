@@ -7,6 +7,10 @@ module TransactionsPartialController
     DATA_CORRELATOR.correlate(CONFIG_PROXY.transactions)
   end
 
+  def current_service
+    DATA_CORRELATOR.retrieve_current_service(CONFIG_PROXY.transactions, session[:transaction_simple_id])
+  end
+
   def loa1_transactions_list
     Display::Rp::TransactionFilter.new.filter_by_loa(transactions_list, 'LEVEL_1')
   end

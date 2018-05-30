@@ -80,6 +80,17 @@ module Display
         transaction_data = {}
         expect(display_data_correlator.correlate(transaction_data)).to eq(DisplayDataCorrelator::Transactions.new([], []))
       end
+
+      it 'should return correct service name' do
+        transaction_data = [
+            { 'simpleId' => public_simple_id, 'serviceHomepage' => homepage, 'loaList' => public_simple_id_loa },
+            { 'simpleId' => public_simple_id_2, 'serviceHomepage' => homepage_2, 'loaList' => public_simple_id_2_loa },
+        ]
+        correlator = DisplayDataCorrelator.new(translator, [public_simple_id_2, public_simple_id], [])
+        actual_result = correlator.retrieve_current_service(transaction_data, public_simple_id_2)
+        expected_result = transaction_2_name
+        expect(actual_result).to eq expected_result
+      end
     end
   end
 end
