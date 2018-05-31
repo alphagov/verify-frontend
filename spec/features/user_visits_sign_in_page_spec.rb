@@ -127,7 +127,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
     context 'with an invalid idp-hint cookie (old version)' do
       before :each do
-        set_old_journey_hint_cookie('http://not-a-valid-idp.com')
+        set_journey_hint_cookie('http://not-a-valid-idp.com')
       end
 
       it 'will not render a suggested IDP' do
@@ -155,7 +155,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
 
     context 'with a valid idp-hint (old version)' do
       before :each do
-        set_old_journey_hint_cookie('http://idcorp.com')
+        set_journey_hint_cookie('http://idcorp.com')
       end
 
       it 'will render a suggested IDP' do

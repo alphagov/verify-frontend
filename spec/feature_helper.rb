@@ -139,13 +139,6 @@ module FeatureHelper
     click_button 'journey-hint-post'
   end
 
-  def set_old_journey_hint_cookie(entity_id, locale = 'en')
-    visit '/test-journey-hint'
-    fill_in 'entity-id-old', with: entity_id
-    fill_in 'locale-old', with: locale
-    click_button 'journey-hint-post-old'
-  end
-
   def cookie_header(cookie_name)
     set_cookies_headers = page.response_headers['Set-Cookie'].split(/\n/)
     set_cookies_headers.detect { |header| header.match(/^#{cookie_name}/) }
