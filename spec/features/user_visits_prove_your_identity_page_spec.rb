@@ -23,8 +23,8 @@ RSpec.describe 'When the user visits the prove identity page' do
     end
 
     it 'in Welsh' do
-      visit '/prove-identity-cy'
-      expect(page).to have_content t('hub.prove_identity.heading')
+      visit '/profi-hunaniaeth'
+      expect(page).to have_content t('hub.prove_identity.heading', locale: :cy)
       expect(page).to have_css 'html[lang=cy]'
     end
   end
