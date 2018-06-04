@@ -33,4 +33,32 @@ private
     @piwik_custom_variables_img_tracker =
       current_transaction_custom_variable.merge(loa_requested_custom_variable)
   end
+
+  #TODO: HUB-114: Remove logic, reg only & segment_to_be_tested once confirmed with analytics
+  SEGMENT_TO_BE_TESTED = '2doc_nidl_pp_mobile_app'.freeze
+  SEGMENT_FOR_TEST = 'test-segment'.freeze
+
+  def report_user_outcome_to_piwik(response_status)
+    if segment_should_be_reported? && is_registration?
+      FEDERATION_REPORTER.report_user_idp_outcome(
+        current_transaction: current_transaction,
+        request: request,
+        idp_name: session[:selected_idp_name],
+        user_segments: session[:user_segments],
+        transaction_simple_id: session[:transaction_simple_id],
+        attempt_number: session[:attempt_number],
+        journey_type: session[:journey_type],
+        response_status: response_status
+      )
+    end
+  end
+
+  def segment_should_be_reported?
+    return false if session[:user_segments].nil?
+    session[:user_segments].include?(SEGMENT_TO_BE_TESTED) || session[:user_segments].include?(SEGMENT_FOR_TEST)
+  end
+
+  def is_registration?
+    session[:journey_type] == 'registration'
+  end
 end

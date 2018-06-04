@@ -33,8 +33,8 @@ private
   end
 
   def increase_attempt_number
-    session[:attempt_number] = '0' if session[:attempt_number].nil?
-    session[:attempt_number] = (session[:attempt_number].to_i + 1).to_s
+    session[:attempt_number] = 0 if session[:attempt_number].nil?
+    session[:attempt_number] = session[:attempt_number] + 1
   end
 
   def request_form
