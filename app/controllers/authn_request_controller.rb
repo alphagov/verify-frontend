@@ -79,7 +79,7 @@ private
     elsif check_journey_hint('sign_in')
       redirect_to begin_sign_in_path
     else
-      Rails.logger.info "journey_hint value: #{params['journey_hint']}"
+      logger.info "journey_hint value: #{params['journey_hint']}"
       redirect_to confirm_your_identity_path
     end
   end
