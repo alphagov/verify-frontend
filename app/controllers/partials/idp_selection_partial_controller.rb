@@ -26,6 +26,18 @@ module IdpSelectionPartialController
     render json: idp_request.to_json(methods: :hints)
   end
 
+  def report_user_idp_attempt_to_piwik
+    FEDERATION_REPORTER.report_user_idp_attempt(
+      current_transaction: current_transaction,
+      request: request,
+      idp_name: session[:selected_idp_name],
+      user_segments: session[:user_segments],
+      transaction_simple_id: session[:transaction_simple_id],
+      attempt_number: session[:attempt_number],
+      journey_type: session[:journey_type]
+    )
+  end
+
   def report_idp_registration_to_piwik(recommended)
     FEDERATION_REPORTER.report_idp_registration(
       current_transaction: current_transaction,

@@ -54,6 +54,14 @@ module Analytics
       )
     end
 
+    def report_user_idp_attempt(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:)
+      report_action(
+        current_transaction,
+        request,
+        "ATTEMPT_#{attempt_number}: #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments}"
+      )
+    end
+
     def report_idp_registration(current_transaction:, request:, idp_name:, idp_name_history:, evidence:, recommended:, user_segments:)
       list_of_evidence = evidence.sort.join(', ')
       list_of_segments = user_segments.nil? ? nil : user_segments.sort.join(', ')
