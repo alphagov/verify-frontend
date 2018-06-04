@@ -6,7 +6,7 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
 
   def index
     session[:selected_answers].delete('interstitial')
-    suggestions = IDP_RECOMMENDATION_ENGINE.get_suggested_idps(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
+    suggestions = recommendation_engine.get_suggested_idps(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
     session[:user_segments] = suggestions[:user_segments]
@@ -16,7 +16,7 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
 
   def select_idp
     select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
-      session[:selected_idp_was_recommended] = IDP_RECOMMENDATION_ENGINE.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
+      session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
       redirect_to warning_or_question_page(decorated_idp)
     end
   end
@@ -37,5 +37,9 @@ private
 
   def interstitial_question_flag_enabled_for(decorated_idp)
     IDP_FEATURE_FLAGS_CHECKER.enabled?(:show_interstitial_question, decorated_idp.simple_id)
+  end
+
+  def recommendation_engine
+    IDP_RECOMMENDATION_ENGINE
   end
 end
