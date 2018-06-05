@@ -1,7 +1,7 @@
 cy:
   routes:
     start: dechrau
-    prove_identity: prove-identity-cy
+    prove_identity: profi-hunaniaeth
     begin_registration: begin-registration-cy
     begin_sign_in: begin-sign-in-cy
     about: am
@@ -88,24 +88,24 @@ cy:
       heading: Mynd ymlaen i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
     prove_identity:
-      title: Prove your identity to continue
-      heading: Prove your identity to continue
-      header_content: Choose how you want to prove your identity so you can
+      title: Profwch eich hunaniaeth i barhau
+      heading: Profwch eich hunaniaeth i barhau
+      header_content: Dewiswch sut rydych eisiau profi eich hunaniaeth er mwyn i chi allu
       use_verify:
-        heading: Use GOV.UK Verify
+        heading: Defnyddiwch GOV.UK Verify
         content_html: |
-          <p>Registering with GOV.UK Verify usually takes about 15 minutes. It works best if you have:</p>
+          <p>Mae cofrestru gyda GOV.UK Verify fel arfer yn cymryd tua 15 munud. Mae'n gweithio orau os oes gennych:</p>
           <ul class="list-bullet list">
-            <li>a UK address</li>
-            <li>a valid passport or photocard driving licence</li>
+            <li>cyfeiriad yn y DU</li>
+            <li>pasport neu drwydded gyrru gyda llun dilys</li>
           </ul>
-          <p>A certified identity provider will check your identity when you register with GOV.UK Verify. They’ve all met security standards set by government.</p>
-        button_text: Use GOV.UK Verify
+          <p>Bydd darparwr hunaniaeth ardystiedig yn gwirio eich hunaniaeth pan fyddwch yn cofrestru gyda GOV.UK Verify. Maent i gyd wedi cwrdd â safonnau diogewlch a osodwyd gan y llywodraeth.</p>
+        button_text: Defnyddiwch GOV.UK Verify
       use_eidas:
-        heading: Use a digital identity from another European country
+        heading: Defnyddiwch hunaniaeth digidol o wlad Ewropeaidd arall
         content_html: |
-          <p>If you are part of Germany’s Online-Ausweis you can use it here. Identity schemes from other countries will become available later.</p>
-        button_text: Select your European digital identity
+          <p>Os ydych yn rhan o gynllun ID mewn gwlad sy'n cymryd rhan, efallai y gallwch ei ddefnyddio yma.</p>
+        button_text: Dewiswch eich hunaniaeth digidol Ewropeaidd
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify
