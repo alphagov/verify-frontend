@@ -6,6 +6,9 @@ CONFIG = Configuration.load! do
   option_string 'cycle_3_display_locales', 'CYCLE_3_DISPLAY_LOCALES'
   option_string 'idp_display_locales', 'IDP_DISPLAY_LOCALES'
   option_string 'country_display_locales', 'COUNTRY_DISPLAY_LOCALES'
+  option_string 'country_flags_directory', 'COUNTRY_FLAGS_DIRECTORY'
+  option_string 'eidas_schemes_directory', 'EIDAS_SCHEMES_DIRECTORY'
+  option_string 'eidas_scheme_logos_directory', 'EIDAS_SCHEME_LOGOS_DIRECTORY'
   option_string 'session_cookie_duration', 'SESSION_COOKIE_DURATION_IN_HOURS', default: 2
   option_string 'config_api_host', 'CONFIG_API_HOST'
   option_string 'policy_host', 'POLICY_HOST'

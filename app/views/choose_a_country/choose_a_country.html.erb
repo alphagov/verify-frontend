@@ -1,19 +1,33 @@
 <%= page_title 'hub.choose_country.title' %>
 
-<div class="article-container column-two-thirds">
-  <h1 class="heading-large"><%= t('hub.choose_country.heading') %></h1>
 
-  <%= form_tag choose_a_country_submit_path do %>
-      <select name="country" id="country-picker" class="form-control-2-3 form-control">
-        <option value=""></option>
-        <% @countries.each do |country| %>
-        <option value="<%= country.simple_id %>"><%= country.display_name %></option>
-        <% end %>
-      </select>
-      <%= submit_tag "Select", class: "button"%>
-  <% end %>
-  <div id="no-country" style="display: <%= flash[:errors] ? 'block' : 'none' %>;">
-    <h2 class="heading-medium">Please select a country from the list</h2>
-    <p><a href="javascript:history.back()">Try another way to sign in.</a></p>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t('hub.choose_country.heading') %></h1>
+    <p><%= t 'hub.choose_country.description' %></p>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-full">
+    <table class="country-picker">
+      <% @countries.each do |country| %>
+        <tr>
+          <td class="country-flag"><img src="<%= country.flag_path %>"></td>
+          <td class="country-name"><p class="bold"><%= country.display_name %><p></td>
+          <td class="scheme-logo"><img src="<%= country.schemes.first.logo_path %>"></td>
+
+          <td class="scheme-button">
+            <%= form_tag choose_a_country_submit_path do %>
+              <%= hidden_field_tag :country, country.simple_id %>
+              <button class="button"><%= t 'hub.choose_country.select_label' %><%= country.schemes.first.display_name %></button>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <h3 class="heading-small"><%= t 'hub.choose_country.country_not_listed_heading' %></h3>
+    <p><%= t 'hub.choose_country.country_not_listed_description' %><%= link_to t('hub.choose_country.country_not_listed_link', other_ways_description: @other_ways_description), other_ways_to_access_service_path %></p>
   </div>
 </div>

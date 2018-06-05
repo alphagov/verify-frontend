@@ -1,4 +1,34 @@
+$flag-shadow-color: #bfc1c3;
+
 .country-picker {
   display: inline-block;
-  margin-bottom: 6px;
+  tr {height: 75px;}
+  tr:last-child td {border: none;}
+  td {vertical-align: middle;}
+}
+
+.country-flag {
+  width: 70px;
+  padding: 0;
+  img {max-width: 40px; max-height: 30px;
+    box-shadow: 0 0 2px $flag-shadow-color;
+    display: table-cell;}
+}
+
+.country-name {
+  min-width: 110px;
+  max-width: 200px;
+  padding-right: 65px;
+  p { display: table-cell; }
+}
+
+.scheme-logo {
+  width: 200px;
+  padding-right: 0;
+  img { max-width: 100px; max-height: 55px;}
+}
+
+.scheme-button {
+  width: 225px;
+  button {width: 100%; margin-bottom: 0; margin-top: 0;}
 }

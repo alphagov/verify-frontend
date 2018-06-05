@@ -1,7 +1,8 @@
 module Display
   class RepositoryFactory
-    def initialize(translator)
+    def initialize(translator, yaml_loader)
       @translator = translator
+      @yaml_loader = yaml_loader
     end
 
     def create_idp_repository(directory)
@@ -10,6 +11,10 @@ module Display
 
     def create_country_repository(directory)
       create(directory, Display::CountryDisplayData)
+    end
+
+    def create_eidas_scheme_repository(directory)
+      create_without_translation(directory, Display::EidasSchemeDisplayData)
     end
 
     def create_rp_repository(directory)
@@ -31,6 +36,13 @@ module Display
         hash[data.simple_id] = data
         hash
       end
+    end
+
+    def create_without_translation(directory, klass)
+      loaded_data = @yaml_loader.load_with_id(directory).map do |file, data|
+        [file, klass.new(file, data)]
+      end
+      loaded_data.to_h
     end
   end
 end
