@@ -66,8 +66,11 @@ private
     user_state = ->(response) { response.is_registration ? REGISTERING_STATE : SIGNING_IN_STATE }
 
     {
-      SUCCESS => ->(response) { report_to_analytics("Success - #{user_state.call(response)} at LOA #{response.loa_achieved}") },
-      CANCEL  => ->(response) { report_to_analytics("Cancel - #{user_state.call(response)}") },
+      SUCCESS => lambda do |response|
+        report_to_analytics("Success - #{user_state.call(response)} at LOA #{response.loa_achieved}");
+        report_user_outcome_to_piwik(SUCCESS)
+      end,
+      CANCEL => ->(response) { report_to_analytics("Cancel - #{user_state.call(response)}") },
       FAILED_UPLIFT => ->(response) { report_to_analytics("Failed Uplift - #{user_state.call(response)}") },
       PENDING => ->(response) { report_to_analytics("Paused - #{user_state.call(response)}") },
       OTHER => ->(response) { report_to_analytics("Failure - #{user_state.call(response)}") }
@@ -79,7 +82,7 @@ private
 
     {
       SUCCESS => ->() { set_journey_hint_by_status(selected_idp, SUCCESS) },
-      CANCEL  => ->() { set_journey_hint_by_status(selected_idp, CANCEL) },
+      CANCEL => ->() { set_journey_hint_by_status(selected_idp, CANCEL) },
       FAILED_UPLIFT => ->() { set_journey_hint_by_status(selected_idp, FAILED_UPLIFT) },
       PENDING => ->() { set_journey_hint_by_status(selected_idp, PENDING) },
       FAILED => ->() { set_journey_hint_by_status(selected_idp, FAILED) }

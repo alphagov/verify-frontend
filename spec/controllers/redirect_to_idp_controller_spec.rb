@@ -34,13 +34,13 @@ describe RedirectToIdpController do
       session[:user_segments] = ['test-segment']
 
       expect(FEDERATION_REPORTER).to receive(:report_idp_registration)
-                                 .with(current_transaction: a_kind_of(Display::RpDisplayData),
-                                       request: a_kind_of(ActionDispatch::Request),
-                                       idp_name: bobs_identity_service_idp_name,
-                                       idp_name_history: [bobs_identity_service_idp_name],
-                                       evidence: evidence.keys,
-                                       recommended: idp_was_recommended,
-                                       user_segments: ['test-segment'])
+        .with(current_transaction: a_kind_of(Display::RpDisplayData),
+              request: a_kind_of(ActionDispatch::Request),
+              idp_name: bobs_identity_service_idp_name,
+              idp_name_history: [bobs_identity_service_idp_name],
+              evidence: evidence.keys,
+              recommended: idp_was_recommended,
+              user_segments: ['test-segment'])
 
       subject
     end

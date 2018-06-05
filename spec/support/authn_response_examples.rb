@@ -9,6 +9,7 @@ shared_examples 'idp_authn_response' do |journey_hint, idp_result, piwik_action,
   it "should redirect to #{redirect_path} on #{idp_result}" do
     allow(saml_proxy_api).to receive(:idp_authn_response).and_return(IdpAuthnResponse.new('result' => idp_result, 'isRegistration' => (journey_hint == 'registration'), 'loaAchieved' => 'LEVEL_1'))
     allow(subject).to receive(:report_to_analytics).with(piwik_action)
+    allow(subject).to receive(:report_user_outcome_to_piwik).with(idp_result)
     post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
     expect(subject).to redirect_to(send(redirect_path))
   end

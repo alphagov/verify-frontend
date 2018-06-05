@@ -118,6 +118,60 @@ module Analytics
       end
     end
 
+    describe '#report_user_idp_attempt' do
+      idp_name = 'IDCorp'
+      attempt_number = '1'
+      transaction_simple_id = 'test-rp'
+      user_segments = %w(segment1)
+
+      it 'should report correctly if first registration' do
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            "ATTEMPT_#{attempt_number}: registration | #{transaction_simple_id} | #{idp_name} | #{user_segments}",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2)
+          )
+        federation_reporter.report_user_idp_attempt(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          user_segments: %w(segment1),
+          transaction_simple_id: 'test-rp',
+          attempt_number: '1',
+          journey_type: 'registration'
+        )
+      end
+    end
+
+    describe '#report_user_idp_outcome' do
+      idp_name = 'IDCorp'
+      attempt_number = '1'
+      transaction_simple_id = 'test-rp'
+      user_segments = %w(segment1)
+      response_status = 'success'
+
+      it 'should report correctly if first registration' do
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            "OUTCOME_#{attempt_number}: registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{response_status}",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2)
+                                          )
+        federation_reporter.report_user_idp_outcome(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          user_segments: %w(segment1),
+          transaction_simple_id: 'test-rp',
+          attempt_number: '1',
+          journey_type: 'registration',
+          response_status: 'success'
+        )
+      end
+    end
+
     describe '#report_ab_test' do
       before(:each) do
         RP_DISPLAY_REPOSITORY = double

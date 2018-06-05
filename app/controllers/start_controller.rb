@@ -24,11 +24,13 @@ class StartController < ApplicationController
 
   def register
     FEDERATION_REPORTER.report_registration(current_transaction, request)
+    session[:journey_type] = 'registration'
     redirect_to about_path
   end
 
   def sign_in
     FEDERATION_REPORTER.report_sign_in(current_transaction, request)
+    session[:journey_type] = 'sign-in'
     redirect_to sign_in_path
   end
 end
