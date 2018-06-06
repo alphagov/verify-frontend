@@ -52,9 +52,9 @@ end
 
 constraints IsLoa2 do
   get 'prove_identity', to: 'prove_identity#index', as: :prove_identity
-  get 'start', to: 'start#index', as: :start
-  post 'start', to: 'start#request_post', as: :start
-  get 'begin_registration', to: 'start#register', as: :begin_registration
+  # get 'start', to: 'start#index', as: :start
+  # post 'start', to: 'start#request_post', as: :start
+  # get 'begin_registration', to: 'start#register', as: :begin_registration
   # get 'about', to: 'about_loa2#index', as: :about
   # get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   # get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
@@ -125,10 +125,14 @@ constraints short_hub_v3_control_piwik do
 end
 
 constraints short_hub_v3_variant_piwik do
-  get 'about', to: 'about_loa2_variant#index', as: :about
+  get 'about_choosing_a_company', to: 'about_loa2_variant#choosing_a_company', as: :about_choosing_a_company
 end
 
 constraints short_hub_v3_control do
+  get 'start', to: 'start#index', as: :start
+  post 'start', to: 'start#request_post', as: :start
+  get 'begin_registration', to: 'start#register', as: :begin_registration
+
   get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
@@ -149,6 +153,10 @@ constraints short_hub_v3_control do
 end
 
 constraints short_hub_v3_variant do
+  get 'start', to: 'start_variant#index', as: :start
+  post 'start', to: 'start_variant#request_post', as: :start
+  get 'begin_registration', to: 'start_variant#register', as: :begin_registration
+
   get 'will_it_work_for_me', to: 'will_it_work_for_me_variant#index', as: :will_it_work_for_me
 
   get 'select_documents', to: 'select_documents_variant#index', as: :select_documents

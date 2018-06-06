@@ -10,8 +10,8 @@ describe AboutLoa2VariantController do
     stub_api_idp_list_for_loa
   end
 
-  context 'GET about#index' do
-    subject { get :index, params: { locale: 'en' } }
+  context 'GET about#choosing_a_company' do
+    subject { get :choosing_a_company, params: { locale: 'en' } }
 
     before(:each) do
       stub_const('IDENTITY_PROVIDER_DISPLAY_DECORATOR', identity_provider_display_decorator)
@@ -20,7 +20,7 @@ describe AboutLoa2VariantController do
     it 'renders the certified companies LOA2 variant template when LEVEL_2 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_2')
       expect(identity_provider_display_decorator).to receive(:decorate_collection).and_return([])
-      expect(subject).to render_template('about_variant/about')
+      expect(subject).to render_template('about_variant/choosing_a_company')
     end
   end
 end

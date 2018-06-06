@@ -15,10 +15,10 @@ RSpec.describe 'When the user visits the about page on variant' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
     end
     it "will display the page and report the user's selection to piwik" do
-      visit '/about'
+      visit '/about-choosing-a-company'
 
       expect(page).to have_content 'Set up a free account with one of GOV.UK Verify\'s certified identity providers.'
-      expect_feedback_source_to_be(page, 'ABOUT_PAGE', '/about')
+      expect_feedback_source_to_be(page, 'ABOUT_CHOOSING_A_COMPANY_PAGE', '/about-choosing-a-company')
 
       expect(page).to have_link('Set up an identity account', href: '/will-it-work-for-me')
     end
