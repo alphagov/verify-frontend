@@ -34,5 +34,13 @@
         _paq.push(['trackEvent', 'Engagement', 'Picker scroll', 'scrolled']);
     })
 
+    $('button').on('click', function(e) {
+        if (e.which === 1) {
+            var buttonOrder = parseInt($(e.target).data('order'))
+            _paq.push(['trackEvent', 'Engagement', buttonOrder, 'IDP order click']);
+        }
+        
+    })
+
 })(window);
 
