@@ -3,7 +3,7 @@ require 'controller_helper'
 require 'api_test_helper'
 require 'piwik_test_helper'
 
-describe StartController do
+describe StartVariantController do
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_2')
   end
@@ -25,14 +25,14 @@ describe StartController do
       expect(stub_piwik_request).to have_been_made.once
     end
 
-    it 'will redirect to about page when selection is true' do
+    it 'will redirect to about-choosing-a-company page when selection is true' do
       stub_piwik_request = stub_piwik_journey_type_request(
         'REGISTRATION',
         'The user started a registration journey',
         'LEVEL_2'
       )
       post :request_post, params: { locale: 'en', start_form: { selection: true } }
-      expect(subject).to redirect_to('/about')
+      expect(subject).to redirect_to('/about-choosing-a-company')
       expect(stub_piwik_request).to have_been_made.once
     end
   end
@@ -45,14 +45,14 @@ describe StartController do
     end
   end
 
-  it 'will redirect to about page when selection is registration' do
+  it 'will redirect to about-choosing-a-company page when selection is registration' do
     stub_piwik_request = stub_piwik_journey_type_request(
       'REGISTRATION',
       'The user started a registration journey',
       'LEVEL_2'
     )
     get :register, params: { locale: 'en' }
-    expect(subject).to redirect_to('/about')
+    expect(subject).to redirect_to('/about-choosing-a-company')
     expect(stub_piwik_request).to have_been_made.once
   end
 end

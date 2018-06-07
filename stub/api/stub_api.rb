@@ -13,10 +13,11 @@ class StubApi < Sinatra::Base
 
   get '/policy/received-authn-request/:session_id/sign-in-process-details' do
     entity_id = params['session_id'] == 'my-loa1-relay-state' ? 'http://www.test-rp-loa1.gov.uk/SAML2/MD' : 'http://www.test-rp.gov.uk/SAML2/MD'
+    transactionSupportsEidas = params['session_id'] == 'my-loa1-relay-state' ? false : true
     status 200
     "{
       \"requestIssuerId\":\"#{entity_id}\",
-      \"transactionSupportsEidas\":true
+      \"transactionSupportsEidas\":#{transactionSupportsEidas}
     }"
   end
 

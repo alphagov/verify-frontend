@@ -1,0 +1,34 @@
+<%= page_title 'hub.why_might_this_not_work_for_me.title' %>
+<% content_for :feedback_source, 'WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.why_might_this_not_work_for_me.heading' %></h1>
+
+    <p><%= t 'hub.why_might_this_not_work_for_me.explanation' %></p>
+
+    <h2 class="heading-medium"><%= t 'hub.why_might_this_not_work_for_me.what_youll_need' %></h2>
+
+    <p><%= t 'hub.why_might_this_not_work_for_me.if_you_have_these' %>:</p>
+
+    <ul class="list-bullet list">
+      <li><%= t 'hub.why_might_this_not_work_for_me.current_account' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.credit_card' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.personal_loan' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.mortgage' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.gas_electricity_bills' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.mobile_phone_contract' %></li>
+      <li><%= t 'hub.why_might_this_not_work_for_me.registered_to_vote' %></li>
+    </ul>
+
+    <p><%= t 'hub.why_might_this_not_work_for_me.youll_also_need' %></p>
+
+    <p><%= link_to t('hub.why_might_this_not_work_for_me.try_to_verify'), select_documents_path, id: 'verify-identity-online' %></p>
+    <h2 class="heading-medium"><%= t 'hub.other_ways_heading', other_ways_description: @other_ways_description %></h2>
+    <div class="other-ways-to-complete-transaction">
+      <%= raw @other_ways_text %>
+    </div>
+
+
+  </div>
+</div>

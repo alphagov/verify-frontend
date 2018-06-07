@@ -37,3 +37,9 @@ experiments:
           percent: 100
         - name: 'variant'
           percent: 0
+  - short_hub_v3:
+      alternatives:
+        - name: 'control'
+          percent: 100
+        - name: 'variant'
+          percent: 0

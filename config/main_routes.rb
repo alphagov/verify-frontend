@@ -11,6 +11,14 @@ LOA1_PERF_MANAGEMENT = "loa1_perf_management".freeze
 loa1_perf_management_control_piwik = SelectRoute.new(LOA1_PERF_MANAGEMENT, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_1')
 loa1_perf_management_variant_piwik = SelectRoute.new(LOA1_PERF_MANAGEMENT, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_1')
 
+SHORT_HUB_V3 = "short_hub_v3".freeze
+# HUB-160 Short hub v3 A/B test
+short_hub_v3_control_piwik = SelectRoute.new(SHORT_HUB_V3, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+short_hub_v3_variant_piwik = SelectRoute.new(SHORT_HUB_V3, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+
+short_hub_v3_control = SelectRoute.new(SHORT_HUB_V3, 'control', is_start_of_test: false, experiment_loa: 'LEVEL_2')
+short_hub_v3_variant = SelectRoute.new(SHORT_HUB_V3, 'variant', is_start_of_test: false, experiment_loa: 'LEVEL_2')
+
 
 constraints IsLoa1 do
   get 'start', to: 'start#index', as: :start
@@ -32,44 +40,51 @@ constraints IsLoa1 do
   get 'about_certified_companies', to: 'about_loa1#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa1#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
+
+  constraints loa1_perf_management_control_piwik do
+    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+  end
+
+  constraints loa1_perf_management_variant_piwik do
+    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant#index', as: :choose_a_certified_company
+  end
 end
 
 constraints IsLoa2 do
   get 'prove_identity', to: 'prove_identity#index', as: :prove_identity
-  get 'start', to: 'start#index', as: :start
-  post 'start', to: 'start#request_post', as: :start
-  get 'begin_registration', to: 'start#register', as: :begin_registration
-  get 'about', to: 'about_loa2#index', as: :about
-  get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
-  get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
-  get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
-  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
+  # get 'start', to: 'start#index', as: :start
+  # post 'start', to: 'start#request_post', as: :start
+  # get 'begin_registration', to: 'start#register', as: :begin_registration
+  # get 'about', to: 'about_loa2#index', as: :about
+  # get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
+  # get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
+  # get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+  # get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
   post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
   get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
   get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
   get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
-  get 'select_documents', to: 'select_documents#index', as: :select_documents
+  # get 'select_documents', to: 'select_documents#index', as: :select_documents
   get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
   post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
-  get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
+  # get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
   post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-  get 'select_phone', to: 'select_phone#index', as: :select_phone
+  # get 'select_phone', to: 'select_phone#index', as: :select_phone
   post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'no_mobile_phone', to: 'select_phone#no_mobile_phone', as: :no_mobile_phone
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
-  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+  # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+  # post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
   get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
   get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
   get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration
-  post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
-  get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+  # post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+  # get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
   get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#index', as: :redirect_to_idp_question
   post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
   get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
   get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
 end
-
 
 get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
 get 'verify_services', to: 'static#verify_services', as: :verify_services
@@ -102,10 +117,57 @@ get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
 get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 get 'paused_registration', to: 'paused_registration#index', as: :paused_registration
 
-constraints loa1_perf_management_control_piwik do
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+
+
+# HUB-160 Short hub v3 A/B test
+constraints short_hub_v3_control_piwik do
+  get 'about', to: 'about_loa2#index', as: :about
 end
 
-constraints loa1_perf_management_variant_piwik do
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant#index', as: :choose_a_certified_company
+constraints short_hub_v3_variant_piwik do
+  get 'about_choosing_a_company', to: 'about_loa2_variant#choosing_a_company', as: :about_choosing_a_company
+end
+
+constraints short_hub_v3_control do
+  get 'start', to: 'start#index', as: :start
+  post 'start', to: 'start#request_post', as: :start
+  get 'begin_registration', to: 'start#register', as: :begin_registration
+
+  get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
+  get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
+  get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+
+  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
+
+  get 'select_documents', to: 'select_documents#index', as: :select_documents
+
+  get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
+
+  get 'select_phone', to: 'select_phone#index', as: :select_phone
+
+  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+
+  post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
+  get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
+end
+
+constraints short_hub_v3_variant do
+  get 'start', to: 'start_variant#index', as: :start
+  post 'start', to: 'start_variant#request_post', as: :start
+  get 'begin_registration', to: 'start_variant#register', as: :begin_registration
+
+  get 'will_it_work_for_me', to: 'will_it_work_for_me_variant#index', as: :will_it_work_for_me
+
+  get 'select_documents', to: 'select_documents_variant#index', as: :select_documents
+
+  get 'other_identity_documents', to: 'other_identity_documents_variant#index', as: :other_identity_documents
+
+  get 'select_phone', to: 'select_phone_variant#index', as: :select_phone
+
+  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#index', as: :choose_a_certified_company
+  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#select_idp', as: :choose_a_certified_company_submit
+
+  post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#continue', as: :redirect_to_idp_warning_submit
+  get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning_variant#index', as: :redirect_to_idp_warning
 end
