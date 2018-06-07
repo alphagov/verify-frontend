@@ -20,6 +20,8 @@ module IdpSelectionPartialController
   end
 
   def ajax_idp_redirection_registration_request(recommended)
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik
     report_idp_registration_to_piwik(recommended)
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
     idp_request = idp_request_initilization(outbound_saml_message)
@@ -27,15 +29,17 @@ module IdpSelectionPartialController
   end
 
   def report_user_idp_attempt_to_piwik
-    FEDERATION_REPORTER.report_user_idp_attempt(
-      current_transaction: current_transaction,
-      request: request,
-      idp_name: session[:selected_idp_name],
-      user_segments: session[:user_segments],
-      transaction_simple_id: session[:transaction_simple_id],
-      attempt_number: session[:attempt_number],
-      journey_type: session[:journey_type]
-    )
+    if segment_should_be_reported?
+      FEDERATION_REPORTER.report_user_idp_attempt(
+        current_transaction: current_transaction,
+        request: request,
+        idp_name: session[:selected_idp_name],
+        user_segments: session[:user_segments],
+        transaction_simple_id: session[:transaction_simple_id],
+        attempt_number: session[:attempt_number],
+        journey_type: session[:journey_type]
+      )
+    end
   end
 
   def report_idp_registration_to_piwik(recommended)
@@ -56,5 +60,21 @@ module IdpSelectionPartialController
       selected_identity_provider.simple_id,
       selected_answer_store.selected_answers
     )
+  end
+
+  def increase_attempt_number
+    if segment_should_be_reported?
+      session[:attempt_number] = 0 if session[:attempt_number].nil?
+      session[:attempt_number] = session[:attempt_number] + 1
+    end
+  end
+
+  # TODO: HUB-114: To be removed together with method once we have assessed if the new reporting works
+  SEGMENT_TO_BE_TESTED = '2doc_nidl_pp_mobile_app'.freeze
+  SEGMENT_FOR_TEST = 'test-segment'.freeze
+
+  def segment_should_be_reported?
+    return false if session[:user_segments].nil?
+    session[:user_segments].include?(SEGMENT_TO_BE_TESTED) || session[:user_segments].include?(SEGMENT_FOR_TEST)
   end
 end
