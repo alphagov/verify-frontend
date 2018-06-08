@@ -1,34 +1,50 @@
-$flag-shadow-color: #bfc1c3;
-
 .country-picker {
+  $flag-shadow-color: #bfc1c3;
+
   display: inline-block;
-  tr {height: 75px;}
-  tr:last-child td {border: none;}
-  td {vertical-align: middle;}
-}
+  tr { height: 75px; }
+  tr:last-child td { border: none; }
+  td { vertical-align: middle; }
 
-.country-flag {
-  width: 70px;
-  padding: 0;
-  img {max-width: 40px; max-height: 30px;
-    box-shadow: 0 0 2px $flag-shadow-color;
-    display: table-cell;}
-}
+  .country-flag {
+    width: 70px;
+    padding: 0;
 
-.country-name {
-  min-width: 110px;
-  max-width: 200px;
-  padding-right: 65px;
-  p { display: table-cell; }
-}
+    img {
+      max-width: 40px;
+      max-height: 30px;
+      display: table-cell;
+      box-shadow: 0 0 2px $flag-shadow-color;
+    }
+  }
 
-.scheme-logo {
-  width: 200px;
-  padding-right: 0;
-  img { max-width: 100px; max-height: 55px;}
-}
+  .country-name {
+    min-width: 110px;
+    max-width: 200px;
+    padding-right: 65px;
 
-.scheme-button {
-  width: 225px;
-  button {width: 100%; margin-bottom: 0; margin-top: 0;}
+    p {
+      display: table-cell;
+    }
+  }
+
+  .scheme-logo {
+    width: 200px;
+    padding-right: 0;
+
+    img {
+      max-width: 100px;
+      max-height: 55px;
+    }
+  }
+
+  .scheme-button {
+    width: 225px;
+
+    button {
+      width: 100%;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
 }

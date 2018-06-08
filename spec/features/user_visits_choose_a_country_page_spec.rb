@@ -56,20 +56,20 @@ RSpec.describe 'When the user visits the choose a country page' do
     expect(page).to have_current_path(choose_a_country_path)
   end
 
-  it 'should have select when JS is disabled' do
+  it 'should have country picker table when JS is disabled' do
     given_a_session_supporting_eidas
 
     visit '/choose-a-country'
 
-    expect(page).to have_select 'country-picker'
+    expect(page).to have_table 'country-picker'
   end
 
-  it 'should have select when JS is enabled', js: true do
+  it 'should have country picker table  when JS is enabled', js: true do
     given_a_session_supporting_eidas
 
     visit '/choose-a-country'
 
-    expect(page).to have_select 'country-picker'
+    expect(page).to have_table 'country-picker'
   end
 
   it 'should redirect to country page' do
@@ -78,9 +78,7 @@ RSpec.describe 'When the user visits the choose a country page' do
     stub_session_country_authn_request(originating_ip, location, false)
 
     visit '/choose-a-country'
-
-    select 'Netherlands', from: 'country'
-    click_on 'Select'
+    click_button 'Select Stub IDP Demo'
 
     expect(page).to have_current_path('/redirect-to-country')
 
@@ -89,15 +87,13 @@ RSpec.describe 'When the user visits the choose a country page' do
     expect(page).to have_current_path('/a-country-page')
   end
 
-  it 'should error when invalid form is submitted' do
+  it 'should redirect to other-ways-to-access-service' do
     given_a_session_supporting_eidas
 
     visit '/choose-a-country'
+    click_on t('hub.choose_country.country_not_listed_link', other_ways_description: 'register for an identity profile')
 
-    click_on 'Select'
-
-    expect(page).to have_current_path('/choose-a-country')
-    expect(page).to have_content 'Please select a country from the list'
+    expect(page).to have_current_path('/other-ways-to-access-service')
   end
 
   def select_country_endpoint(session_id, country_code)
@@ -105,7 +101,7 @@ RSpec.describe 'When the user visits the choose a country page' do
   end
 
   def stub_select_country_request
-    stub_request(:post, policy_api_uri(select_country_endpoint("my-session-id-cookie", "NL")))
+    stub_request(:post, policy_api_uri(select_country_endpoint("my-session-id-cookie", "YY")))
         .to_return(body: '')
   end
 end

@@ -10,6 +10,6 @@ module Display
     attr_reader :country_simple_id
     attr_reader :name
 
-    alias_method :display_name, :name
+    alias display_name name
   end
 end

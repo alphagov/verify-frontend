@@ -10,7 +10,7 @@
 
 <div class="grid-row">
   <div class="column-full">
-    <table class="country-picker">
+    <table class="country-picker" id="country-picker">
       <% @countries.each do |country| %>
         <tr>
           <td class="country-flag"><img src="<%= country.flag_path %>"></td>
