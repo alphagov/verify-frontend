@@ -33,6 +33,7 @@ module Display
       display_data_collection = simple_ids.map do |simple_id|
         klass.new(simple_id, @translator)
       end
+
       display_data_collection.each(&:validate_content!)
       display_data_collection.inject({}) do |hash, data|
         hash[data.simple_id] = data
