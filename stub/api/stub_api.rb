@@ -31,9 +31,9 @@ class StubApi < Sinatra::Base
     }"
   end
 
-  get '/config/transactions/:entity_id/translation-data' do
-    '{
-      "en": {
+  get '/config/transactions/:entity_id/translations/:locale' do
+    if params['locale'] == 'en'
+      '{
         "name":"register for an identity profile",
         "rpName":"EN: Test RP",
         "analyticsDescription":"analytics description for test-rp",
@@ -41,8 +41,9 @@ class StubApi < Sinatra::Base
         "otherWaysDescription":"register for an identity profile",
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
         "taxonName":"Benefits"
-      },
-      "cy": {
+      }'
+    else
+      '{
         "name":"register for an identity profile",
         "rpName":"CY: Test RP",
         "analyticsDescription":"analytics description for test-rp",
@@ -50,8 +51,8 @@ class StubApi < Sinatra::Base
         "otherWaysDescription":"register for an identity profile",
         "tailoredText":"External data source: CY: This is tailored text for test-rp",
         "taxonName":"Benefits"
-      }
-    }'
+      }'
+    end
   end
 
   get '/config/idps/idp-list/:transaction_id/:level_of_assurance' do
