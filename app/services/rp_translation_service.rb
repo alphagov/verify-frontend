@@ -6,7 +6,9 @@ class RpTranslationService
   end
 
   def get_transactions
-    ['test-rp']
+    CONFIG_PROXY.transactions.map do |transaction|
+      transaction['simpleId']
+    end
   end
 
   def update_rp_translations
