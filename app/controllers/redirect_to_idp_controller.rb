@@ -13,6 +13,8 @@ class RedirectToIdpController < ApplicationController
 
   def sign_in
     request_form
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik
     if session[:user_followed_journey_hint].nil?
       FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name])
     else

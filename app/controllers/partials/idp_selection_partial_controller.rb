@@ -1,5 +1,7 @@
 module IdpSelectionPartialController
   def ajax_idp_redirection_sign_in_request(hint_shown, hint_followed)
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik
     if hint_shown
       FEDERATION_REPORTER.report_sign_in_idp_selection_after_journey_hint(current_transaction, request, session[:selected_idp_name], hint_followed)
     else
@@ -12,6 +14,8 @@ module IdpSelectionPartialController
   end
 
   def ajax_idp_redirection_sign_in_without_hint_request
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik
     FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name])
 
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])

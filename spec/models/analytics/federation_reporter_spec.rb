@@ -128,7 +128,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "ATTEMPT_#{attempt_number}: registration | #{transaction_simple_id} | #{idp_name} | #{user_segments}",
+            "ATTEMPT_#{attempt_number}| registration | #{transaction_simple_id} | #{idp_name} | #{user_segments}",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2)
           )
@@ -155,7 +155,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "OUTCOME_#{attempt_number}: registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{response_status}",
+            "OUTCOME_#{attempt_number}| registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{response_status}",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2)
                                           )

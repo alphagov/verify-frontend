@@ -58,7 +58,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        "ATTEMPT_#{attempt_number}: #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments}"
+        "ATTEMPT_#{attempt_number}| #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments}"
       )
     end
 
@@ -66,7 +66,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        "OUTCOME_#{attempt_number}: #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{response_status}"
+        "OUTCOME_#{attempt_number}| #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{response_status}"
       )
     end
 
