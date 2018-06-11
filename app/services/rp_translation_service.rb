@@ -1,12 +1,15 @@
 class RpTranslationService
   def initialize(translator)
     @translator = translator
+    @locales = %w(en cy)
 
     update_rp_translations
   end
 
   def get_transactions
-    ['test-rp']
+    CONFIG_PROXY.transactions.map do |transaction|
+      transaction['simpleId']
+    end
   end
 
   def update_rp_translations
@@ -14,14 +17,13 @@ class RpTranslationService
     # This could use all translations to get a list of transactions,
     # depending on how the returned data is structured.
     transactions = get_transactions
-    locales = %w(en cy)
 
     transactions.each do |transaction|
-      locales.each do |locale|
+      @locales.each do |locale|
         translations = get_translations(transaction, locale)
 
         I18n.backend.store_translations(locale, {
-            rps: Hash[transaction, translations]
+          rps: Hash[transaction, translations]
         })
       end
     end
