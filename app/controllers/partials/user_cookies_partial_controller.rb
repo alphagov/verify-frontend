@@ -19,10 +19,10 @@ module UserCookiesPartialController
     }
   end
 
-  def set_journey_hint(idp_entity_id)
+  def set_journey_hint(idp_entity_id, new_cookie = true)
     journey_hint_value_hash = journey_hint_value || {}
     journey_hint_value_hash['entity_id'] = idp_entity_id
-    journey_hint_value_hash['ATTEMPT'] = idp_entity_id
+    journey_hint_value_hash['ATTEMPT'] = idp_entity_id if new_cookie
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_value_hash.to_json,
                                                                   expires: 18.months.from_now }

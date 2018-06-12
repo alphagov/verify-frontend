@@ -125,7 +125,21 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       expect(page).not_to have_text 'You can use an identity account you set up with any certified company in the past:'
     end
 
-    context 'with an invalid idp-hint cookie' do
+    context 'with an invalid idp-hint cookie (old version)' do
+      before :each do
+        set_journey_hint_cookie('http://not-a-valid-idp.com')
+      end
+
+      it 'will not render a suggested IDP' do
+        page.set_rack_session(transaction_simple_id: 'test-rp')
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page
+        expect(page).not_to have_text 'The last certified company used on this device was'
+        expect(page).not_to have_text 'You can use an identity account you set up with any certified company in the past:'
+      end
+    end
+
+    context 'with an invalid idp-hint cookie (new version)' do
       before :each do
         set_journey_hint_cookie('http://not-a-valid-idp.com', 'SUCCESS')
       end
@@ -139,7 +153,37 @@ RSpec.describe 'user selects an IDP on the sign in page' do
       end
     end
 
-    context 'with a valid idp-hint cookie' do
+    context 'with a valid idp-hint (old version)' do
+      before :each do
+        set_journey_hint_cookie('http://idcorp.com')
+      end
+
+      it 'will render a suggested IDP' do
+        page.set_rack_session(transaction_simple_id: 'test-rp')
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page
+        expect(page).to have_text 'You can use an identity account you set up with any certified company in the past:'
+        expect(page).to have_text "The last certified company used on this device was #{idp_display_name}."
+        expect(page).to have_button("Select #{idp_display_name}", count: 2)
+        then_piwik_was_sent_a_journey_hint_shown_event_for(idp_display_name)
+      end
+
+      it 'will redirect the user to the hinted IDP' do
+        page.set_rack_session(transaction_simple_id: 'test-rp')
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page
+        then_piwik_was_sent_a_journey_hint_shown_event_for(idp_display_name)
+        expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
+        when_i_select_an_idp
+        then_im_at_the_idp
+        and_piwik_was_sent_a_signin_hint_followed_event
+        and_the_language_hint_is_set
+        and_the_hints_are_not_set
+        expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
+      end
+    end
+
+    context 'with a valid idp-hint (new version) cookie with SUCCESS status' do
       before :each do
         set_journey_hint_cookie('http://idcorp.com', 'SUCCESS')
       end
@@ -166,6 +210,20 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         and_the_language_hint_is_set
         and_the_hints_are_not_set
         expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
+      end
+    end
+
+    context 'with a valid idp-hint (new version) cookie with non-SUCCESS status' do
+      before :each do
+        set_journey_hint_cookie('http://idcorp.com', 'CANCEL')
+      end
+
+      it 'will not render a suggested IDP' do
+        page.set_rack_session(transaction_simple_id: 'test-rp')
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page
+        expect(page).not_to have_text 'The last certified company used on this device was'
+        expect(page).not_to have_text 'You can use an identity account you set up with any certified company in the past:'
       end
     end
 
