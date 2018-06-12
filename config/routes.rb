@@ -32,7 +32,6 @@ Rails.application.routes.draw do
     # see: https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives#report-uri
     # to use, add ';report-uri http://127.0.0.1:50300/csp-reporter' to the end of the CSP header in application.rb
     post 'csp-reporter', to: 'test_csp_reporter#report'
-    get 'hint', to: 'hint#index'
   end
 
   localized do
@@ -42,6 +41,7 @@ Rails.application.routes.draw do
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   get 'service-status', to: 'service_status#index', as: :service_status
+  get 'hint', to: 'hint#ajax_request'
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
   get '/SAML2/metadata/sp', to: 'metadata#service_providers', as: :service_provider_metadata
   get '/SAML2/metadata/idp', to: 'metadata#identity_providers', as: :identity_provider_metadata

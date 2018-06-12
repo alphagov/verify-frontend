@@ -5,10 +5,10 @@ class HintController < ApplicationController
   skip_before_action :validate_session
   skip_before_action :set_piwik_custom_variables
 
-  def index
+  def ajax_request
     set_headers
 
-    entity_id = entity_id_of_journey_hint_for('SUCCESS')
+    entity_id = entity_id_of_journey_hint
 
     render json: { 'status': 'OK', 'value': !entity_id.nil? }
   end
