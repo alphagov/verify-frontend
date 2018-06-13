@@ -3,7 +3,7 @@ class RpTranslationService
     @translator = translator
     @locales = %w(en cy)
 
-    update_rp_translations
+    update_rps_translations
   end
 
   def get_transactions
@@ -12,7 +12,15 @@ class RpTranslationService
     end
   end
 
-  def update_rp_translations
+  def update_rp_translations(transaction)
+    translations = CONFIG_PROXY.get_transaction_translations(transaction, I18n.locale)
+
+    I18n.backend.store_translations(I18n.locale, {
+        rps: Hash[transaction, translations]
+    })
+  end
+
+  def update_rps_translations
     # Get transactions from external endpoint
     # This could use all translations to get a list of transactions,
     # depending on how the returned data is structured.
