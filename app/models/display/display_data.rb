@@ -12,8 +12,8 @@ module Display
       def content(field, options = {})
         define_method(field) do
           begin
-            unless before_content.nil?
-              before_content.call(simple_id)
+            unless before_fetch_content.nil?
+              before_fetch_content.call(simple_id)
             end
             @translator.translate("#{prefix}.#{simple_id}.#{field}")
           rescue StandardError => e
@@ -30,8 +30,8 @@ module Display
         end
       end
 
-      def before_content(fn)
-        define_method :before_content do
+      def before_fetch_content(fn)
+        define_method :before_fetch_content do
           fn
         end
       end
@@ -47,7 +47,7 @@ module Display
       raise NotImplementedError, 'no prefix has been defined'
     end
 
-    def before_content
+    def before_fetch_content
       nil
     end
   end
