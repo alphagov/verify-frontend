@@ -11,6 +11,11 @@ LOA1_PERF_MANAGEMENT = "loa1_perf_management".freeze
 loa1_perf_management_control_piwik = SelectRoute.new(LOA1_PERF_MANAGEMENT, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_1')
 loa1_perf_management_variant_piwik = SelectRoute.new(LOA1_PERF_MANAGEMENT, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_1')
 
+LOA1_PERF_MANAGEMENT_V2 = "loa1_perf_management_v2".freeze
+# HUB-135 LOA1 perf management A/B test
+loa1_perf_management_v2_control_piwik = SelectRoute.new(LOA1_PERF_MANAGEMENT_V2, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_1')
+loa1_perf_management_v2_variant_piwik = SelectRoute.new(LOA1_PERF_MANAGEMENT_V2, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_1')
+
 SHORT_HUB_V3 = "short_hub_v3".freeze
 # HUB-160 Short hub v3 A/B test
 short_hub_v3_control_piwik = SelectRoute.new(SHORT_HUB_V3, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
@@ -46,6 +51,14 @@ constraints IsLoa1 do
   end
 
   constraints loa1_perf_management_variant_piwik do
+    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant#index', as: :choose_a_certified_company
+  end
+
+  constraints loa1_perf_management_v2_control_piwik do
+    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+  end
+
+  constraints loa1_perf_management_v2_variant_piwik do
     get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant#index', as: :choose_a_certified_company
   end
 end
