@@ -3,9 +3,15 @@ module Display
     def initialize(repository, logos_directory)
       @repository = repository
       @logos_directory = logos_directory
+      @schemes_by_country = @repository.values.group_by(&:country_simple_id)
+    end
+
+    def decorated_schemes_for_country(country_simple_id)
+      decorate_collection(@schemes_by_country[country_simple_id])
     end
 
     def decorate_collection(scheme_list)
+      return [] if scheme_list.nil? || scheme_list.empty?
       scheme_list.map { |scheme| correlate_display_data(scheme) }.select(&:viewable?).sort_by(&:display_name)
     end
 

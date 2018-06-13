@@ -1,5 +1,5 @@
 <%= page_title 'hub.choose_country.title' %>
-<% content_for :feedback_source, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE' %>
+<% content_for :feedback_source, 'CHOOSE_A_COUNTRY_PAGE' %>
 
 <div class="grid-row">
   <div class="column-two-thirds">
@@ -8,21 +8,21 @@
   </div>
 
   <div class="column-full js-redirect-to-country" data-location="<%= url_for(controller: 'redirect_to_country', action: 'choose_a_country_submit_ajax') %>">
-    <div class="country-picker">
+    <div class="country-picker" id="country-picker">
       <% @countries.each do |country| %>
         <div class="country-option">
           <% country.schemes.each do |scheme| %>
             <div class="scheme-option">
               <div class="scheme-info">
                 <div class="country-flag">
-                  <img src="<%= country.flag_path %>" alt="<%= country.display_name %> flag">
+                  <%= image_tag country.flag_path, alt: country.display_name + ' flag' %>
                 </div>
                 <div class="country-name">
                   <p class="bold"><%= country.display_name %></p>
                 </div>
                 <div class="scheme-logo">
                   <div class="scheme-logo-img-container">
-                    <img src="<%= scheme.logo_path %>" alt="<%= scheme.display_name %> logo">
+                    <%= image_tag scheme.logo_path, alt: scheme.display_name + ' logo' %>
                   </div>
                 </div>
               </div>

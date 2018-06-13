@@ -7,6 +7,7 @@ class FeedbackSourceMapper
       'ABOUT_PAGE' => 'about',
       'CHOOSE_A_CERTIFIED_COMPANY_PAGE' => 'choose_a_certified_company',
       'CERTIFIED_COMPANY_UNAVAILABLE_PAGE' => 'choose_a_certified_company',
+      'CHOOSE_A_COUNTRY_PAGE' => 'choose_a_country',
       'CONFIRM_YOUR_IDENTITY' => 'confirm_your_identity',
       'CONFIRMATION_PAGE' => 'confirmation',
       'COOKIE_NOT_FOUND_PAGE' => nil,
