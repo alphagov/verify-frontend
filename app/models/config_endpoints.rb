@@ -4,7 +4,7 @@ module ConfigEndpoints
   IDP_LIST_SUFFIX = 'idps/idp-list/%<transaction_name>s/%<loa>s'.freeze
   IDP_LIST_SIGN_IN_SUFFIX = 'idps/idp-list-for-sign-in/%<transaction_name>s'.freeze
   DISPLAY_DATA_SUFFIX = 'transactions/%<transaction_entity_id>s/display-data'.freeze
-  TRANSLATION_DATA_SUFFIX = 'transactions/%<transaction_entity_id>s/translations/%<locale>s'.freeze
+  TRANSLATION_DATA_SUFFIX = 'transactions/%<transaction_simple_id>s/translations/%<locale>s'.freeze
   TRANSACTIONS_SUFFIX = 'transactions/enabled'.freeze
 
   def idp_list_for_loa_endpoint(transaction_id, loa)
@@ -23,7 +23,7 @@ module ConfigEndpoints
     PATH_PREFIX.join(DISPLAY_DATA_SUFFIX % { transaction_entity_id: CGI.escape(transaction_entity_id) }).to_s
   end
 
-  def transaction_translation_data_endpoint(transaction_entity_id, locale)
-    PATH_PREFIX.join(TRANSLATION_DATA_SUFFIX % { transaction_entity_id: CGI.escape(transaction_entity_id), locale: locale }).to_s
+  def transaction_translation_data_endpoint(transaction_simple_id, locale)
+    PATH_PREFIX.join(TRANSLATION_DATA_SUFFIX % { transaction_simple_id: CGI.escape(transaction_simple_id), locale: locale }).to_s
   end
 end

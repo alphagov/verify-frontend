@@ -18,9 +18,7 @@ module Display
     end
 
     def create_rp_repository
-      transactions = @rp_translation_service.get_transactions
-
-      create(Display::RpDisplayData, transactions)
+      RpDisplayRepository.new(@translator)
     end
 
     def create_cycle_three_repository(directory)

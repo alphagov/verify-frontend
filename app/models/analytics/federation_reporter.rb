@@ -34,7 +34,7 @@ module Analytics
 
     def report_ab_test(transaction_id, request, alternative_name)
       unless transaction_id.nil?
-        current_transaction = RP_DISPLAY_REPOSITORY.fetch(transaction_id)
+        current_transaction = RP_DISPLAY_REPOSITORY.get_translations(transaction_id)
         ab_test_custom_var = Analytics::CustomVariable.build(:ab_test, alternative_name)
 
         report_action(

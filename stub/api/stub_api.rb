@@ -40,7 +40,8 @@ class StubApi < Sinatra::Base
         "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
         "otherWaysDescription":"register for an identity profile",
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
-        "taxonName":"Benefits"
+        "taxonName":"Benefits",
+        "customFailHeading":"This is a custom fail page."
       }'
     else
       '{
@@ -50,7 +51,8 @@ class StubApi < Sinatra::Base
         "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
         "otherWaysDescription":"register for an identity profile",
         "tailoredText":"External data source: CY: This is tailored text for test-rp",
-        "taxonName":"Benefits"
+        "taxonName":"Benefits",
+        "customFailHeading":"This is a custom fail page in welsh."
       }'
     end
   end
