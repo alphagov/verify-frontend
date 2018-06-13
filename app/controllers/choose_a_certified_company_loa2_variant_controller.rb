@@ -11,7 +11,7 @@ class ChooseACertifiedCompanyLoa2VariantController < ApplicationController
     @non_uk_id_document = non_uk_id_document unless driving_licence || passport
     @any_docs = @driving_licence || @passport || @smart_phone
     @transaction = current_transaction
-    session[:selected_answers].delete('interstitial')
+    session[:selected_answers]&.delete('interstitial')
     suggestions = recommendation_engine.get_suggested_idps(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
