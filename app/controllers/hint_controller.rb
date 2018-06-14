@@ -4,13 +4,16 @@ class HintController < ApplicationController
   include JourneyHintingPartialController
   skip_before_action :validate_session
   skip_before_action :set_piwik_custom_variables
+  skip_before_action :verify_authenticity_token
 
   def ajax_request
     set_headers
 
     entity_id = entity_id_of_journey_hint
 
-    render json: { 'status': 'OK', 'value': !entity_id.nil? }
+    json_object = { 'status': 'OK', 'value': !entity_id.nil? }
+
+    render json: json_object.to_json, callback: params['callback']
   end
 
   def set_headers
