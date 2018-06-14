@@ -39,6 +39,7 @@ class SignInController < ApplicationController
       hint_followed = user_followed_journey_hint(decorated_idp.entity_id, 'SUCCESS')
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       ajax_idp_redirection_sign_in_request(hint_shown, hint_followed)
+      session[:user_followed_journey_hint] = user_followed_journey_hint(decorated_idp.entity_id, 'SUCCESS')
     end
   end
 

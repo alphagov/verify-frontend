@@ -54,19 +54,24 @@ module Analytics
       )
     end
 
-    def report_user_idp_attempt(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:)
+    def report_user_idp_attempt(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, hint_followed:)
+      report = "ATTEMPT_#{attempt_number}| #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments} |"
+      report << journey_hint_details(hint_followed)
       report_action(
         current_transaction,
         request,
-        "ATTEMPT_#{attempt_number}| #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments}"
+        report
       )
     end
 
-    def report_user_idp_outcome(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, response_status:)
+    def report_user_idp_outcome(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, hint_followed:, response_status:)
+      report = "OUTCOME_#{attempt_number}| #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments} |"
+      report << journey_hint_details(hint_followed)
+      report << " #{response_status} |"
       report_action(
         current_transaction,
         request,
-        "OUTCOME_#{attempt_number}| #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{response_status}"
+        report
       )
     end
 
@@ -151,6 +156,15 @@ module Analytics
     end
 
   private
+
+    HINT_NOT_PRESENT = " not shown | not followed |".freeze
+    HINT_FOLLOWED = " shown | followed |".freeze
+    HINT_NOT_FOLLOWED = " shown | not followed |".freeze
+
+    def journey_hint_details(hint)
+      return HINT_NOT_PRESENT if hint.nil? || hint.empty?
+      hint ? HINT_FOLLOWED : HINT_NOT_FOLLOWED
+    end
 
     # The RP and LoA Requested custom variables are reported for all piwik requests.
     def universal_custom_variables(current_transaction, request)

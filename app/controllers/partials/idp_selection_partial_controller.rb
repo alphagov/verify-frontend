@@ -1,7 +1,7 @@
 module IdpSelectionPartialController
   def ajax_idp_redirection_sign_in_request(hint_shown, hint_followed)
     increase_attempt_number
-    report_user_idp_attempt_to_piwik
+    report_user_idp_attempt_to_piwik(hint_followed)
     if hint_shown
       FEDERATION_REPORTER.report_sign_in_idp_selection_after_journey_hint(current_transaction, request, session[:selected_idp_name], hint_followed)
     else
@@ -32,7 +32,8 @@ module IdpSelectionPartialController
     render json: idp_request.to_json(methods: :hints)
   end
 
-  def report_user_idp_attempt_to_piwik
+  def report_user_idp_attempt_to_piwik(hint = nil)
+    save_journey_hint_details(hint)
     FEDERATION_REPORTER.report_user_idp_attempt(
       current_transaction: current_transaction,
       request: request,
@@ -40,7 +41,8 @@ module IdpSelectionPartialController
       user_segments: session[:user_segments],
       transaction_simple_id: session[:transaction_simple_id],
       attempt_number: session[:attempt_number],
-      journey_type: session[:journey_type]
+      journey_type: session[:journey_type],
+      hint_followed: session[:hint_details]
     )
   end
 
@@ -67,5 +69,9 @@ module IdpSelectionPartialController
   def increase_attempt_number
     session[:attempt_number] = 0 if session[:attempt_number].nil?
     session[:attempt_number] = session[:attempt_number] + 1
+  end
+
+  def save_journey_hint_details(hint)
+    session[:hint_details] = session[:user_followed_journey_hint] unless hint
   end
 end

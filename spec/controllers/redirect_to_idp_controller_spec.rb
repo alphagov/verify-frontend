@@ -91,6 +91,7 @@ describe RedirectToIdpController do
         session[:user_segments] = ['test-segment']
         session[:transaction_simple_id] = 'test-rp'
         session[:journey_type] = 'registration'
+        session[:user_followed_journey_hint] = nil
 
 
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
@@ -100,7 +101,8 @@ describe RedirectToIdpController do
                                                  user_segments: ['test-segment'],
                                                  transaction_simple_id: 'test-rp',
                                                  attempt_number: 1,
-                                                 journey_type: 'registration')
+                                                 journey_type: 'registration',
+                                                 hint_followed: nil)
         subject
       end
 
@@ -113,6 +115,7 @@ describe RedirectToIdpController do
         session[:transaction_simple_id] = 'test-rp'
         session[:attempt_number] = 1
         session[:journey_type] = 'registration'
+        session[:user_followed_journey_hint] = nil
 
 
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
@@ -122,7 +125,8 @@ describe RedirectToIdpController do
                                                  user_segments: ['test-segment'],
                                                  transaction_simple_id: 'test-rp',
                                                  attempt_number: 2,
-                                                 journey_type: 'registration')
+                                                 journey_type: 'registration',
+                                                 hint_followed: nil)
         subject
       end
     end
@@ -143,10 +147,11 @@ describe RedirectToIdpController do
 
       subject { get :sign_in, params: { locale: 'en' } }
 
-      it 'reports idp sign in attempt details to piwik' do
+      it 'reports idp sign in attempt details to piwik when a user has no journey hint' do
         session[:user_segments] = ['test-segment']
         session[:transaction_simple_id] = 'test-rp'
         session[:journey_type] = 'sign-in'
+        session[:user_followed_journey_hint] = nil
 
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
                                            .with(current_transaction: a_kind_of(Display::RpDisplayData),
@@ -155,7 +160,44 @@ describe RedirectToIdpController do
                                                  user_segments: ['test-segment'],
                                                  transaction_simple_id: 'test-rp',
                                                  attempt_number: 1,
-                                                 journey_type: 'sign-in')
+                                                 journey_type: 'sign-in',
+                                                 hint_followed: nil)
+        subject
+      end
+
+      it 'reports idp sign in attempt details to piwik when a user does not follow journey hint' do
+        session[:user_segments] = ['test-segment']
+        session[:transaction_simple_id] = 'test-rp'
+        session[:journey_type] = 'sign-in'
+        session[:user_followed_journey_hint] = false
+
+        expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
+                                           .with(current_transaction: a_kind_of(Display::RpDisplayData),
+                                                 request: a_kind_of(ActionDispatch::Request),
+                                                 idp_name: bobs_identity_service_idp_name,
+                                                 user_segments: ['test-segment'],
+                                                 transaction_simple_id: 'test-rp',
+                                                 attempt_number: 1,
+                                                 journey_type: 'sign-in',
+                                                 hint_followed: false)
+        subject
+      end
+
+      it 'reports idp sign in attempt details to piwik when a user followes the journey hint' do
+        session[:user_segments] = ['test-segment']
+        session[:transaction_simple_id] = 'test-rp'
+        session[:journey_type] = 'sign-in'
+        session[:user_followed_journey_hint] = true
+
+        expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
+                                           .with(current_transaction: a_kind_of(Display::RpDisplayData),
+                                                 request: a_kind_of(ActionDispatch::Request),
+                                                 idp_name: bobs_identity_service_idp_name,
+                                                 user_segments: ['test-segment'],
+                                                 transaction_simple_id: 'test-rp',
+                                                 attempt_number: 1,
+                                                 journey_type: 'sign-in',
+                                                 hint_followed: true)
         subject
       end
     end
