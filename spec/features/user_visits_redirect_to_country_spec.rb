@@ -5,6 +5,7 @@ RSpec.describe 'When the user visits the redirect to country page' do
   before(:each) do
     set_session_and_session_cookies!
     stub_transactions_list
+    stub_countries_list
   end
 
   def no_eidas_session
@@ -30,13 +31,12 @@ RSpec.describe 'When the user visits the redirect to country page' do
     expect(page).to have_content t('errors.something_went_wrong.heading')
   end
 
-  it 'should show something went wrong when visiting redirect to country directly without choosing a country' do
-    stub_api_bad_request_response_to_country_authn_request
-
+  it 'should render choose-a-country page when session set and visiting redirect-to-country directly without choosing a country' do
     given_a_session_supporting_eidas
 
     visit '/redirect-to-country'
 
-    expect(page).to have_content t('errors.something_went_wrong.heading')
+    expect(page).to have_content t('hub.choose_country.heading')
+    expect(page).to have_css('.country-picker')
   end
 end

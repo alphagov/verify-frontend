@@ -104,7 +104,7 @@ get 'verify_services', to: 'static#verify_services', as: :verify_services
 get 'cookies', to: 'static#cookies', as: :cookies
 get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
 get 'choose_a_country', to: 'choose_a_country#choose_a_country', as: :choose_a_country
-post 'choose_a_country', to: 'choose_a_country#choose_a_country_submit', as: :choose_a_country_submit
+post 'redirect_to_country', to: 'redirect_to_country#choose_a_country_submit', as: :choose_a_country_submit
 get 'failed_uplift', to: 'failed_uplift#index', as: :failed_uplift
 get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
 get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
@@ -115,9 +115,7 @@ get 'redirect_to_idp_sign_in', to: 'redirect_to_idp#sign_in', as: :redirect_to_i
 get 'redirect_to_service_signing_in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
 get 'redirect_to_service_start_again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
 get 'redirect_to_service_error' => 'redirect_to_service#error', as: :redirect_to_service_error
-get 'redirect_to_country' => 'redirect_to_country#index', as: :redirect_to_country
-post 'redirect_to_country', to: 'redirect_to_country#submit', as: :redirect_to_country
-post 'a_country_page' => 'a_country_page#index', as: :a_country_page
+get 'redirect_to_country' => 'choose_a_country#choose_a_country', as: :redirect_to_country
 get 'feedback', to: 'feedback#index', as: :feedback
 post 'feedback', to: 'feedback#submit', as: :feedback_submit
 get 'feedback_sent', to: 'feedback_sent#index', as: :feedback_sent

@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
+  put 'redirect-to-country', to: 'redirect_to_country#choose_a_country_submit_ajax', as: :redirect_to_country_ajax
   get 'service-status', to: 'service_status#index', as: :service_status
   get 'hint', to: 'hint#ajax_request'
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }

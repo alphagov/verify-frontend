@@ -5,11 +5,13 @@ require 'idp_recommendations/recommendations_engine'
 
 Rails.application.config.after_initialize do
   # Federation localisation and display
+  yaml_loader = YamlLoader.new
   federation_translator = Display::FederationTranslator.new
-  repository_factory = Display::RepositoryFactory.new(federation_translator)
+  repository_factory = Display::RepositoryFactory.new(federation_translator, yaml_loader)
   IDP_DISPLAY_REPOSITORY = repository_factory.create_idp_repository(CONFIG.idp_display_locales)
   RP_DISPLAY_REPOSITORY = repository_factory.create_rp_repository(CONFIG.rp_display_locales)
   COUNTRY_DISPLAY_REPOSITORY = repository_factory.create_country_repository(CONFIG.country_display_locales)
+  EIDAS_SCHEME_REPOSITORY = repository_factory.create_eidas_scheme_repository(CONFIG.eidas_schemes_directory)
   IDENTITY_PROVIDER_DISPLAY_DECORATOR = Display::IdentityProviderDisplayDecorator.new(
     IDP_DISPLAY_REPOSITORY,
     CONFIG.logo_directory,
@@ -22,8 +24,14 @@ Rails.application.config.after_initialize do
     CONFIG.white_logo_directory
   )
 
+  EIDAS_SCHEME_DISPLAY_DECORATOR = Display::EidasSchemeDisplayDecorator.new(
+    EIDAS_SCHEME_REPOSITORY,
+    CONFIG.eidas_scheme_logos_directory
+  )
+
   COUNTRY_DISPLAY_DECORATOR = Display::CountryDisplayDecorator.new(
-    COUNTRY_DISPLAY_REPOSITORY
+    COUNTRY_DISPLAY_REPOSITORY,
+    CONFIG.country_flags_directory
   )
 
   # Cycle Three display
@@ -45,7 +53,6 @@ Rails.application.config.after_initialize do
   IDP_LOA1_ORDER = IDP_CONFIG.fetch('loa1_order', [])
 
   # IDP Recommendations
-  yaml_loader = YamlLoader.new
   idp_rules_loader = IdpProfilesLoader.new(yaml_loader)
   idp_rules = idp_rules_loader.parse_config_files(CONFIG.rules_directory)
   segment_config = YAML.load_file(CONFIG.segment_definitions)

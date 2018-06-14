@@ -1,4 +1,136 @@
 .country-picker {
-  display: inline-block;
-  margin-bottom: 6px;
+
+  .country-flag {
+    width: 11%;
+    min-width: 49px;
+    display: inline-block;
+    vertical-align: middle;
+
+    img {
+      max-width: 40px;
+      max-height: 30px;
+      box-shadow: 0 0 2px $grey-2;
+    }
+  }
+
+  .country-name {
+    width: 35%;
+    display: inline-block;
+    vertical-align: middle;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .scheme-logo {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+
+    img {
+      max-width: 100px;
+      max-height: 55px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      padding-bottom: 10px;
+    }
+  }
+
+  .scheme-button {
+    width: 100%;
+
+    button {
+      margin: 0;
+      width: 100%;
+      vertical-align: middle;
+    }
+  }
+
+  .country-option {
+    max-width: 670px;
+    border-bottom: 1px solid $grey-1;
+
+    @include media(tablet) {
+      border-bottom: 1px solid $grey-2;
+
+      .scheme-option:not(:first-child) {
+        .country-flag,
+        .country-name {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  .scheme-option {
+    padding-bottom: 20px;
+
+    @include media(tablet) {
+      padding-top: 12px;
+      padding-bottom: 7px;
+
+      .scheme-button {
+        display: inline-block;
+        vertical-align: middle;
+        width: 34%;
+      }
+    }
+  }
+
+  .scheme-info {
+    width: 100%;
+    height: 125px;
+    display: inline-block;
+
+    @include media(tablet) {
+      width: 65%;
+      height: unset;
+
+      .country-flag {
+        width: 16%;
+
+        img {
+          vertical-align: middle;
+        }
+      }
+
+      .country-name {
+        width: 41%;
+      }
+
+      .scheme-logo {
+        width: 40%;
+        line-height: 45px;
+        margin-bottom: 10px;
+
+        .scheme-logo-img-container {
+          width: 100px;
+          text-align: center;
+        }
+
+        img {
+          padding: 0;
+          position: relative;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  .scheme-option:not(:last-child) {
+    @include media(mobile) {
+      border-bottom: 1px solid $grey-1;
+    }
+  }
+
+  .country-option:last-child {
+    border: none;
+  }
 }

@@ -81,4 +81,20 @@ describe StubApi do
       expect(response.map { |country| country['simpleId'] }).to eq(['NL', 'ES', 'SE'])
     end
   end
+
+  context '#get /policy/countries/session_id' do
+    it 'should respond with valid countries' do
+      get '/policy/countries/session_id'
+      expect(last_response).to be_ok
+      response = last_response_json
+      expect(response.map { |country| country['simpleId'] }).to eq(['ZZ', 'YY'])
+    end
+  end
+
+  context '#post /policy/countries/session_id/countryCode' do
+    it 'should respond with 200' do
+      post '/policy/countries/session_id/countryCode'
+      expect(last_response).to be_ok
+    end
+  end
 end

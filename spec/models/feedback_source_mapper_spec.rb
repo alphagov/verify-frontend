@@ -37,6 +37,14 @@ describe FeedbackSourceMapper do
     expect(@feedback_source_mapper.page_from_source('CHOOSE_A_CERTIFIED_COMPANY_ABOUT_SOME_IDP_PAGE', :en)).to eql(choose_a_certified_company_path)
   end
 
+  it 'should map choose a certified company feedback source to choose a certified company page' do
+    expect(@feedback_source_mapper.page_from_source('CHOOSE_A_CERTIFIED_COMPANY_PAGE', :en)).to eql(choose_a_certified_company_path)
+  end
+
+  it 'should map choose a country feedback source to choose a country page' do
+    expect(@feedback_source_mapper.page_from_source('CHOOSE_A_COUNTRY_PAGE', :en)).to eql(choose_a_country_path)
+  end
+
   it 'should map feedback source to corresponding welsh path' do
     expect(@feedback_source_mapper.page_from_source('CONFIRM_YOUR_IDENTITY', :cy)).to eql('/cadarnhau-eich-hunaniaeth')
   end
