@@ -12,7 +12,8 @@ module Display
 
     def decorate_collection(scheme_list)
       return [] if scheme_list.nil? || scheme_list.empty?
-      scheme_list.map { |scheme| correlate_display_data(scheme) }.select(&:viewable?).sort_by(&:display_name)
+      scheme_list.map { |scheme| correlate_display_data(scheme) }.select(&:viewable?)
+          .sort_by { |scheme| scheme.display_name.downcase }
     end
 
     def decorate(scheme)
