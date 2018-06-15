@@ -67,6 +67,10 @@
         }
       }
     }
+
+    &:last-child {
+      border: none;
+    }
   }
 
   .scheme-option {
@@ -80,6 +84,12 @@
         display: inline-block;
         vertical-align: middle;
         width: 34%;
+      }
+    }
+
+    &:not(:last-child) {
+      @include media(mobile) {
+        border-bottom: 1px solid $grey-1;
       }
     }
   }
@@ -122,15 +132,5 @@
         }
       }
     }
-  }
-
-  .scheme-option:not(:last-child) {
-    @include media(mobile) {
-      border-bottom: 1px solid $grey-1;
-    }
-  }
-
-  .country-option:last-child {
-    border: none;
   }
 }

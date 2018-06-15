@@ -7,7 +7,7 @@ module Display
 
     def decorate_collection(country_list)
       country_list.map { |country| correlate_display_data(country) }
-          .select(&:viewable?).sort_by(&:display_name)
+          .select(&:viewable?).sort_by { |country| country.display_name.downcase }
     end
 
     def decorate(country)
