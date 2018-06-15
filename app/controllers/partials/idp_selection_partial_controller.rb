@@ -33,7 +33,7 @@ module IdpSelectionPartialController
   end
 
   def report_user_idp_attempt_to_piwik(hint = nil)
-    save_journey_hint_details(hint)
+    session[:hint_details] = session[:user_followed_journey_hint] unless hint
     FEDERATION_REPORTER.report_user_idp_attempt(
       current_transaction: current_transaction,
       request: request,
@@ -69,9 +69,5 @@ module IdpSelectionPartialController
   def increase_attempt_number
     session[:attempt_number] = 0 if session[:attempt_number].nil?
     session[:attempt_number] = session[:attempt_number] + 1
-  end
-
-  def save_journey_hint_details(hint)
-    session[:hint_details] = session[:user_followed_journey_hint] unless hint
   end
 end

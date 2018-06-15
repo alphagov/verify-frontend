@@ -123,7 +123,7 @@ module Analytics
       attempt_number = '1'
       transaction_simple_id = 'test-rp'
       user_segments = %w(segment1)
-      hint_details = 'not shown | not followed |'
+      hint_details = 'nil | nil |'
 
       it 'should report attempt correctly when idp selected if first registration' do
         hint_followed = nil
@@ -146,8 +146,8 @@ module Analytics
         )
       end
 
-      it 'should report attempt correctly when journey hint is empty' do
-        hint_followed = ''
+      it 'should report attempt correctly when journey hint is set but the user selected registration' do
+        hint_followed = true
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
@@ -173,33 +173,11 @@ module Analytics
       attempt_number = '1'
       transaction_simple_id = 'test-rp'
       user_segments = %w(segment1)
-      hint_details = 'not shown | not followed |'
+      hint_details = 'nil | nil |'
       response_status = 'success'
 
       it 'should report outcome correctly on response from first registration' do
         hint_followed = nil
-        expect(analytics_reporter).to receive(:report_action)
-          .with(
-            request,
-            "OUTCOME_#{attempt_number}| registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{hint_details} #{response_status} |",
-            1 => %w(RP description),
-            2 => %w(LOA_REQUESTED LEVEL_2)
-          )
-        federation_reporter.report_user_idp_outcome(
-          current_transaction: current_transaction,
-          request: request,
-          idp_name: idp_name,
-          user_segments: %w(segment1),
-          transaction_simple_id: 'test-rp',
-          attempt_number: '1',
-          journey_type: 'registration',
-          hint_followed: hint_followed,
-          response_status: 'success'
-        )
-      end
-
-      it 'should report outcome correctly if journey hint is empty' do
-        hint_followed = ''
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
