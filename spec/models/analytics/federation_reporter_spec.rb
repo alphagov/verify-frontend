@@ -123,12 +123,14 @@ module Analytics
       attempt_number = '1'
       transaction_simple_id = 'test-rp'
       user_segments = %w(segment1)
+      hint_details = 'nil | nil |'
 
-      it 'should report correctly if first registration' do
+      it 'should report attempt correctly when idp selected if first registration' do
+        hint_followed = nil
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "ATTEMPT_#{attempt_number}: registration | #{transaction_simple_id} | #{idp_name} | #{user_segments}",
+            "ATTEMPT_#{attempt_number}| registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{hint_details}",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2)
           )
@@ -139,7 +141,29 @@ module Analytics
           user_segments: %w(segment1),
           transaction_simple_id: 'test-rp',
           attempt_number: '1',
-          journey_type: 'registration'
+          journey_type: 'registration',
+          hint_followed: hint_followed
+        )
+      end
+
+      it 'should report attempt correctly when journey hint is set but the user selected registration' do
+        hint_followed = true
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            "ATTEMPT_#{attempt_number}| registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{hint_details}",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2)
+          )
+        federation_reporter.report_user_idp_attempt(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          user_segments: %w(segment1),
+          transaction_simple_id: 'test-rp',
+          attempt_number: '1',
+          journey_type: 'registration',
+          hint_followed: hint_followed
         )
       end
     end
@@ -149,16 +173,18 @@ module Analytics
       attempt_number = '1'
       transaction_simple_id = 'test-rp'
       user_segments = %w(segment1)
+      hint_details = 'nil | nil |'
       response_status = 'success'
 
-      it 'should report correctly if first registration' do
+      it 'should report outcome correctly on response from first registration' do
+        hint_followed = nil
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "OUTCOME_#{attempt_number}: registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{response_status}",
+            "OUTCOME_#{attempt_number}| registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{hint_details} #{response_status} |",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2)
-                                          )
+          )
         federation_reporter.report_user_idp_outcome(
           current_transaction: current_transaction,
           request: request,
@@ -167,6 +193,7 @@ module Analytics
           transaction_simple_id: 'test-rp',
           attempt_number: '1',
           journey_type: 'registration',
+          hint_followed: hint_followed,
           response_status: 'success'
         )
       end

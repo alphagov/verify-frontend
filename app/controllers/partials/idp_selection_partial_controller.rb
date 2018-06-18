@@ -1,5 +1,7 @@
 module IdpSelectionPartialController
   def ajax_idp_redirection_sign_in_request(hint_shown, hint_followed)
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik(hint_followed)
     if hint_shown
       FEDERATION_REPORTER.report_sign_in_idp_selection_after_journey_hint(current_transaction, request, session[:selected_idp_name], hint_followed)
     else
@@ -12,6 +14,8 @@ module IdpSelectionPartialController
   end
 
   def ajax_idp_redirection_sign_in_without_hint_request
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik
     FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name])
 
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
@@ -28,18 +32,18 @@ module IdpSelectionPartialController
     render json: idp_request.to_json(methods: :hints)
   end
 
-  def report_user_idp_attempt_to_piwik
-    if segment_should_be_reported?
-      FEDERATION_REPORTER.report_user_idp_attempt(
-        current_transaction: current_transaction,
-        request: request,
-        idp_name: session[:selected_idp_name],
-        user_segments: session[:user_segments],
-        transaction_simple_id: session[:transaction_simple_id],
-        attempt_number: session[:attempt_number],
-        journey_type: session[:journey_type]
-      )
-    end
+  def report_user_idp_attempt_to_piwik(hint = nil)
+    session[:hint_details] = session[:user_followed_journey_hint] unless hint
+    FEDERATION_REPORTER.report_user_idp_attempt(
+      current_transaction: current_transaction,
+      request: request,
+      idp_name: session[:selected_idp_name],
+      user_segments: session[:user_segments],
+      transaction_simple_id: session[:transaction_simple_id],
+      attempt_number: session[:attempt_number],
+      journey_type: session[:journey_type],
+      hint_followed: session[:hint_details]
+    )
   end
 
   def report_idp_registration_to_piwik(recommended)
@@ -63,18 +67,7 @@ module IdpSelectionPartialController
   end
 
   def increase_attempt_number
-    if segment_should_be_reported?
-      session[:attempt_number] = 0 if session[:attempt_number].nil?
-      session[:attempt_number] = session[:attempt_number] + 1
-    end
-  end
-
-  # TODO: HUB-114: To be removed together with method once we have assessed if the new reporting works
-  SEGMENT_TO_BE_TESTED = '2doc_nidl_pp_mobile_app'.freeze
-  SEGMENT_FOR_TEST = 'test-segment'.freeze
-
-  def segment_should_be_reported?
-    return false if session[:user_segments].nil?
-    session[:user_segments].include?(SEGMENT_TO_BE_TESTED) || session[:user_segments].include?(SEGMENT_FOR_TEST)
+    session[:attempt_number] = 0 if session[:attempt_number].nil?
+    session[:attempt_number] = session[:attempt_number] + 1
   end
 end

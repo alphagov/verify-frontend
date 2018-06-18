@@ -67,13 +67,25 @@ private
 
     {
       SUCCESS => lambda do |response|
-        report_to_analytics("Success - #{user_state.call(response)} at LOA #{response.loa_achieved}");
+        report_to_analytics("Success - #{user_state.call(response)} at LOA #{response.loa_achieved}")
         report_user_outcome_to_piwik(SUCCESS)
       end,
-      CANCEL => ->(response) { report_to_analytics("Cancel - #{user_state.call(response)}") },
-      FAILED_UPLIFT => ->(response) { report_to_analytics("Failed Uplift - #{user_state.call(response)}") },
-      PENDING => ->(response) { report_to_analytics("Paused - #{user_state.call(response)}") },
-      OTHER => ->(response) { report_to_analytics("Failure - #{user_state.call(response)}") }
+      CANCEL => lambda do |response|
+        report_to_analytics("Cancel - #{user_state.call(response)}")
+        report_user_outcome_to_piwik(CANCEL)
+      end,
+      FAILED_UPLIFT => lambda do |response|
+        report_to_analytics("Failed Uplift - #{user_state.call(response)}")
+        report_user_outcome_to_piwik(FAILED_UPLIFT)
+      end,
+      PENDING => lambda do |response|
+        report_to_analytics("Paused - #{user_state.call(response)}")
+        report_user_outcome_to_piwik(PENDING)
+      end,
+      OTHER => lambda do |response|
+        report_to_analytics("Failure - #{user_state.call(response)}")
+        report_user_outcome_to_piwik(OTHER)
+      end
     }
   end
 
