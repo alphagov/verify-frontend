@@ -5,9 +5,6 @@ $(document).ready(function() {
         dataType: 'jsonp'
       }).then(function(data){
         if(data.value){
-          var verifyRadio = $('input[value=sign-in-with-gov-uk-verify]');
-          var verifyContainer = verifyRadio.parent();
-          verifyContainer.prev().insertAfter(verifyContainer);
           GOVUK.analytics.trackEvent('verify-hint', 'shown', { transport: 'beacon' })
 
           $('*[data-module="track-radio-group"]').on('submit', function (event) {
