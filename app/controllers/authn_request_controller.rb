@@ -14,6 +14,7 @@ class AuthnRequestController < SamlController
     AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
 
     if params['journey_hint'].present?
+      logger.info "journey_hint value: #{params['journey_hint']}"
       follow_journey_hint
     elsif params['eidas_journey'].present?
       raise StandardError, 'Users session does not support eIDAS journeys' unless session[:transaction_supports_eidas]
@@ -21,6 +22,7 @@ class AuthnRequestController < SamlController
     elsif session[:transaction_supports_eidas]
       redirect_to prove_identity_path
     else
+      logger.info "journey_hint value: <not present>"
       redirect_to start_path
     end
   end
@@ -79,7 +81,7 @@ private
     elsif check_journey_hint('sign_in')
       redirect_to begin_sign_in_path
     else
-      logger.info "journey_hint value: #{params['journey_hint']}"
+      
       redirect_to confirm_your_identity_path
     end
   end
