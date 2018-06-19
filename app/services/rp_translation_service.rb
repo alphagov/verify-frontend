@@ -2,8 +2,6 @@ class RpTranslationService
   def initialize(translator)
     @translator = translator
     @locales = %w(en cy)
-
-    update_rps_translations
   end
 
   def get_transactions
