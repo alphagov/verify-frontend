@@ -81,7 +81,6 @@ private
     elsif check_journey_hint('sign_in')
       redirect_to begin_sign_in_path
     else
-      
       redirect_to confirm_your_identity_path
     end
   end
