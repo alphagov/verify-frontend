@@ -30,7 +30,7 @@ class RedirectToIdpWarningController < ApplicationController
     idp = decorated_idp
     if idp.viewable?
       select_registration(idp)
-      ajax_idp_redirection_registration_request(recommended)
+      ajax_idp_redirection_registration_request(recommended, idp.entity_id)
     else
       render status: :bad_request
     end
@@ -40,6 +40,7 @@ private
 
   def select_registration(idp)
     POLICY_PROXY.select_idp(session['verify_session_id'], idp.entity_id, session['requested_loa'], true)
+    set_journey_hint_followed(idp.entity_id)
     set_journey_hint(idp.entity_id)
     register_idp_selections(idp.display_name)
   end

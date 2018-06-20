@@ -43,7 +43,7 @@ private
       transaction_simple_id: session[:transaction_simple_id],
       attempt_number: session[:attempt_number],
       journey_type: session[:journey_type],
-      hint_followed: session[:hint_details],
+      hint_followed: session[:user_followed_journey_hint],
       response_status: response_status
     )
   end

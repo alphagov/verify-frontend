@@ -1,9 +1,23 @@
+require 'partials/journey_hinting_partial_controller'
+
 module IdpSelectionPartialController
-  def ajax_idp_redirection_sign_in_request(hint_shown, hint_followed)
+  include JourneyHintingPartialController
+
+  def set_journey_hint_followed(entity_id)
+    session[:user_followed_journey_hint] = user_followed_journey_hint(entity_id, 'SUCCESS') if has_journey_hint?
+  end
+
+  def has_journey_hint?
+    !entity_id_of_journey_hint_for('SUCCESS').nil?
+  end
+
+  def ajax_idp_redirection_sign_in_request(entity_id)
+    shown = has_journey_hint?
+    set_journey_hint_followed(entity_id)
     increase_attempt_number
-    report_user_idp_attempt_to_piwik(hint_followed)
-    if hint_shown
-      FEDERATION_REPORTER.report_sign_in_idp_selection_after_journey_hint(current_transaction, request, session[:selected_idp_name], hint_followed)
+    report_user_idp_attempt_to_piwik
+    if shown
+      FEDERATION_REPORTER.report_sign_in_idp_selection_after_journey_hint(current_transaction, request, session[:selected_idp_name], session[:user_followed_journey_hint])
     else
       FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name])
     end
@@ -23,7 +37,8 @@ module IdpSelectionPartialController
     render json: idp_request
   end
 
-  def ajax_idp_redirection_registration_request(recommended)
+  def ajax_idp_redirection_registration_request(recommended, entity_id)
+    set_journey_hint_followed(entity_id)
     increase_attempt_number
     report_user_idp_attempt_to_piwik
     report_idp_registration_to_piwik(recommended)
@@ -32,8 +47,7 @@ module IdpSelectionPartialController
     render json: idp_request.to_json(methods: :hints)
   end
 
-  def report_user_idp_attempt_to_piwik(hint = nil)
-    session[:hint_details] = hint ? hint : session[:user_followed_journey_hint]
+  def report_user_idp_attempt_to_piwik
     FEDERATION_REPORTER.report_user_idp_attempt(
       current_transaction: current_transaction,
       request: request,
@@ -42,7 +56,7 @@ module IdpSelectionPartialController
       transaction_simple_id: session[:transaction_simple_id],
       attempt_number: session[:attempt_number],
       journey_type: session[:journey_type],
-      hint_followed: session[:hint_details]
+      hint_followed: session[:user_followed_journey_hint]
     )
   end
 
