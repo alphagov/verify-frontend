@@ -18,7 +18,7 @@ module Display
     end
 
     def create_rp_repository
-      RpTranslationRepository.new(@translator)
+      RpDisplayRepository.new(@translator)
     end
 
     def create_cycle_three_repository(directory)
