@@ -18,7 +18,7 @@ cy:
     may_not_work_if_you_live_overseas: efallai-na-fydd-yn-gweithio-os-ydych-yn-byw-dramor
     why_might_this_not_work_for_me: pam-efallai-na-fydd-hyn-yn-gweithio-i-mi
     will_not_work_without_uk_address: ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du
-    choose_a_country: choose-a-country-cy
+    choose_a_country: dewiswch-wlad
     redirect_to_country: redirect-to-country-cy
     choose_a_certified_company: dewis-cwmni-ardystiedig
     why_companies: pam-cwmniau
@@ -80,14 +80,14 @@ cy:
   hub:
     other_ways_title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
-    choose_country:
-      title: Choose a country
-      heading: Use a digital identity from another European country
-      description: You can use a digital identity from another European country to access services on GOV.UK.
-      country_not_listed_heading: My country isn't listed
-      country_not_listed_description: "If your country hasn't joined yet, there are "
-      country_not_listed_link: other ways to %{other_ways_description}.
-      select_label: "Select "
+    choose_a_country:
+      title: Dewiswch wlad
+      heading: Defnyddio hunaniaeth digidol o wlad Ewropeaidd arall
+      description: Gallwch ddefnyddio hunaniaeth digidol o wlad Ewropeaidd arall i gael mynediad i wasanaethau ar GOV.UK.
+      country_not_listed_heading: Nid yw fy ngwlad wedi'i restru
+      country_not_listed_description: Os nad yw eich cwmni wedi ymuno eto, mae
+      country_not_listed_link: ffyrdd eraill i %{other_ways_description}.
+      select_label: "Dewis "
     redirect_to_country:
       title: Redirect to country
       heading: Mynd ymlaen i’r cam nesaf

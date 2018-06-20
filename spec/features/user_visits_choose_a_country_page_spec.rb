@@ -94,7 +94,7 @@ RSpec.describe 'When the user visits the choose a country page' do
     given_a_session_supporting_eidas
 
     visit '/choose-a-country'
-    click_on t('hub.choose_country.country_not_listed_link', other_ways_description: 'register for an identity profile')
+    click_on t('hub.choose_a_country.country_not_listed_link', other_ways_description: 'register for an identity profile')
 
     expect(page).to have_current_path('/other-ways-to-access-service')
   end
@@ -108,9 +108,9 @@ RSpec.describe 'When the user visits the choose a country page' do
 
   it 'displays the page in welsh' do
     given_a_session_supporting_eidas
-    visit '/choose-a-country-cy'
+    visit '/dewiswch-wlad'
 
-    expect(page).to have_title t('hub.choose_country.title', locale: :cy)
+    expect(page).to have_title t('hub.choose_a_country.title', locale: :cy)
     expect(page).to have_css 'html[lang=cy]'
   end
 

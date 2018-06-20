@@ -45,7 +45,7 @@ describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post-eidas'
 
-      expect(page).to have_title t('hub.choose_country.title')
+      expect(page).to have_title t('hub.choose_a_country.title')
       expect(page.get_rack_session['transaction_supports_eidas']).to eql true
     end
 

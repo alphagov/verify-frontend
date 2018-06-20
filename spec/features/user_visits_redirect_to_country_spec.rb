@@ -36,7 +36,7 @@ RSpec.describe 'When the user visits the redirect to country page' do
 
     visit '/redirect-to-country'
 
-    expect(page).to have_content t('hub.choose_country.heading')
+    expect(page).to have_content t('hub.choose_a_country.heading')
     expect(page).to have_css('.country-picker')
   end
 end
