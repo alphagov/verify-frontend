@@ -1,5 +1,5 @@
 module Display
-  class RpTranslationRepository
+  class RpDisplayRepository
     def initialize(translator)
       @translator = translator
       @display_data = {}
