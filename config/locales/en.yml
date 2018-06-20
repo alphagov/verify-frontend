@@ -77,7 +77,7 @@ en:
   hub:
     other_ways_title: Other ways to access the service
     other_ways_heading: Other ways to %{other_ways_description}
-    choose_country:
+    choose_a_country:
       title: Choose a country
       heading: Use a digital identity from another European country
       description: You can use a digital identity from another European country to access services on GOV.UK.
