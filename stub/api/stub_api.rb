@@ -137,13 +137,13 @@ class StubApi < Sinatra::Base
         "entityId":"http://example.com/test-rp",
         "serviceHomepage":"http://example.com/test-rp",
         "loaList":["LEVEL_2"]
-      }]'#,
-      # {
-      #   "simpleId": "loa1-test-rp",
-      #   "entityId": "http://example.com/test-rp-loa1",
-      #   "serviceHomepage":"http://example.com/test-rp-loa1",
-      #   "loaList":["LEVEL_1","LEVEL_2"]
-      # }]'
+      },
+      {
+        "simpleId": "loa1-test-rp",
+        "entityId": "http://example.com/test-rp-loa1",
+        "serviceHomepage":"http://example.com/test-rp-loa1",
+        "loaList":["LEVEL_1","LEVEL_2"]
+      }]'
   end
 
   get '/api/countries/blah' do

@@ -12,9 +12,7 @@ module Display
       def content(field, options = {})
         define_method(field) do
           begin
-            unless before_fetch_content.nil?
-              before_fetch_content.call(simple_id)
-            end
+            before_fetch_content&.call(simple_id)
             @translator.translate("#{prefix}.#{simple_id}.#{field}")
           rescue StandardError => e
             options.fetch(:default) { raise e }
