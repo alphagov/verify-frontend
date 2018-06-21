@@ -141,20 +141,6 @@ en:
     about:
       title: About
       verify_is_a_service: GOV.UK Verify is a secure service built to fight the growing problem of online identity theft.
-      ab_test_heading: Prove your identity
-      ab_test_intro: Set up a free account with one of GOV.UK Verify's certified identity providers. You can then securely sign in to %{other_ways_description}.
-      ab_test_summary: Who are Verify's certified identity providers?
-      ab_test_details: These companies can verify your identity. They've all met security and privacy standards set by government. You don't need to be an existing customer.
-      ab_test_more_details: The identity provider you choose will ask for some details to prove your identity. They can then confirm your identity to %{service}.
-      ab_test_requirements_html: |
-        <p class="medium-top">You need to:</p>
-        <ul class="list-bullet list">
-          <li>be over 18 years old</li>
-          <li>have a UK address</li>
-        </ul>
-      ab_test_next: Set up an identity account
-      ab_test_or: or
-      ab_test_other_ways: view other ways to %{other_ways_description}
     about_certified_companies:
       title: About certified companies
       a_certified_company_will_verify: A certified company will verify your identity. They’ve all met security standards set by government.
@@ -234,13 +220,10 @@ en:
       driving_licence_details:
         great_britain: Great Britain
         northern_ireland: Northern Ireland
-      ab_test_intro: Identity providers use information from identity documents to verify you.
-      ab_test_highlight: The more identity documents you can provide now, the more likely it is that the identity provider can verify you successfully.
     other_documents:
       title: Other identity documents
       title_other_identity_documents: Other identity documents
       non_uk_id_document: Do you have a non-UK passport, ID card or driving licence?
-      ab_test_intro: Some identity providers can use identity documents from other countries to verify you.
     select_phone:
       title: Do you have a mobile phone or tablet?
       explanation: Certified companies can send security codes to your mobile.
@@ -254,8 +237,6 @@ en:
       errors:
         no_selection: Please answer all the questions
         invalid_selection: Please check your selection
-      ab_test_intro: Identity providers can send security codes to your mobile.
-      ab_test_smart_phone_subtitle: "Some identity providers ask you to download a free app and use your phone's camera as part of verifying your identity."
     will_it_work_for_me:
       title: Can I be verified?
       heading: About you
@@ -270,7 +251,6 @@ en:
           no_address: I don’t have a UK address
         errors:
           no_selection: Please answer all the questions
-      ab_test_intro: Answer these questions to see which identity providers are likely to be able to verify your identity.
     idp_wont_work_for_you_one_doc:
       title: "%{idp_name} cannot verify your identity"
       heading: "%{idp_name} cannot verify your identity"
@@ -339,17 +319,6 @@ en:
         title: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
-      ab_test_title: Choose an identity provider
-      ab_test_intro: "You can choose any of these identity providers, because you have a:"
-      ab_test_driving_licence: driving licence
-      ab_test_non_uk_id_document: non-UK document
-      ab_test_smart_phone: smartphone or tablet
-      ab_test_passport: passport
-      ab_test_summary: How identity providers verify your identity
-      ab_test_details_html: | 
-        <p>The company you choose will check that your details match records held by mobile phone providers, credit reference agencies, HM Passport Office, the DVLA or DVA.</p>
-        <p>They can then confirm your identity to %{service_you_are_accessing}.</p>
-      ab_test_free: You don’t need to be an existing customer and all identity providers offer this service for free.
     why_companies:
       title: Why there’s a choice of companies
       choose_a_company: Choose a company
@@ -375,10 +344,6 @@ en:
       service_use: You'll then be able to %{service_name}.
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
-      ab_test_heading: Set up your %{display_name} identity account
-      ab_test_intro: We'll now send you to %{display_name}'s website.
-      ab_test_requirements: "You need your:"
-      ab_test_future_use: In the future you can use your identity account wherever you see the GOV.UK Verify logo.
     redirect_to_idp_question:
       heading: Verifying with %{display_name}
       loa1_heading: Setting up a %{display_name} account
