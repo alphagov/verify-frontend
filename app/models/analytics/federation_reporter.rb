@@ -55,8 +55,9 @@ module Analytics
     end
 
     def report_user_idp_attempt(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, hint_followed:)
-      report = "ATTEMPT_#{attempt_number}| #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments} |"
-      report << journey_hint_details(journey_type, hint_followed)
+      segment_list = user_segments.nil? ? 'nil' : user_segments.sort.join(', ')
+      report = "ATTEMPT_#{attempt_number} | #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{segment_list} |"
+      report << journey_hint_details(hint_followed)
       report_action(
         current_transaction,
         request,
@@ -65,8 +66,9 @@ module Analytics
     end
 
     def report_user_idp_outcome(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, hint_followed:, response_status:)
-      report = "OUTCOME_#{attempt_number}| #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{user_segments} |"
-      report << journey_hint_details(journey_type, hint_followed)
+      segment_list = user_segments.nil? ? 'nil' : user_segments.sort.join(', ')
+      report = "OUTCOME_#{attempt_number} | #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{segment_list} |"
+      report << journey_hint_details(hint_followed)
       report << " #{response_status} |"
       report_action(
         current_transaction,
@@ -157,13 +159,11 @@ module Analytics
 
   private
 
-    HINT_NA = ' nil | nil |'.freeze
-    HINT_NOT_PRESENT = ' not shown | not followed |'.freeze
-    HINT_FOLLOWED = ' shown | followed |'.freeze
-    HINT_NOT_FOLLOWED = ' shown | not followed |'.freeze
+    HINT_NOT_PRESENT = ' not present | not followed |'.freeze
+    HINT_FOLLOWED = ' present | followed |'.freeze
+    HINT_NOT_FOLLOWED = ' present | not followed |'.freeze
 
-    def journey_hint_details(journey, hint)
-      return HINT_NA if journey == 'registration'
+    def journey_hint_details(hint)
       return HINT_NOT_PRESENT if hint.nil?
       hint ? HINT_FOLLOWED : HINT_NOT_FOLLOWED
     end

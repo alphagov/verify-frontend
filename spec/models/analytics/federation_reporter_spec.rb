@@ -122,15 +122,13 @@ module Analytics
       idp_name = 'IDCorp'
       attempt_number = '1'
       transaction_simple_id = 'test-rp'
-      user_segments = %w(segment1)
-      hint_details = 'nil | nil |'
+      user_segments = 'segment1'
 
       it 'should report attempt correctly when idp selected if first registration' do
-        hint_followed = nil
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "ATTEMPT_#{attempt_number}| registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{hint_details}",
+            "ATTEMPT_#{attempt_number} | registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} |#{FederationReporter::HINT_NOT_PRESENT}",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2)
           )
@@ -142,16 +140,15 @@ module Analytics
           transaction_simple_id: 'test-rp',
           attempt_number: '1',
           journey_type: 'registration',
-          hint_followed: hint_followed
+          hint_followed: nil
         )
       end
 
       it 'should report attempt correctly when journey hint is set but the user selected registration' do
-        hint_followed = true
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "ATTEMPT_#{attempt_number}| registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{hint_details}",
+            "ATTEMPT_#{attempt_number} | registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} |#{FederationReporter::HINT_NOT_FOLLOWED}",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2)
           )
@@ -163,7 +160,27 @@ module Analytics
           transaction_simple_id: 'test-rp',
           attempt_number: '1',
           journey_type: 'registration',
-          hint_followed: hint_followed
+          hint_followed: false
+        )
+      end
+
+      it 'should report attempt correctly when segments are nil and the user followed the journey hint' do
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            "ATTEMPT_#{attempt_number} | sign-in | #{transaction_simple_id} | #{idp_name} | nil |#{FederationReporter::HINT_FOLLOWED}",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2)
+          )
+        federation_reporter.report_user_idp_attempt(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          user_segments: nil,
+          transaction_simple_id: 'test-rp',
+          attempt_number: '1',
+          journey_type: 'sign-in',
+          hint_followed: true
         )
       end
     end
@@ -172,16 +189,15 @@ module Analytics
       idp_name = 'IDCorp'
       attempt_number = '1'
       transaction_simple_id = 'test-rp'
-      user_segments = %w(segment1)
-      hint_details = 'nil | nil |'
-      response_status = 'success'
+      user_segments = 'segment1'
+      response_status = 'SUCCESS'
 
       it 'should report outcome correctly on response from first registration' do
         hint_followed = nil
         expect(analytics_reporter).to receive(:report_action)
           .with(
             request,
-            "OUTCOME_#{attempt_number}| registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} | #{hint_details} #{response_status} |",
+            "OUTCOME_#{attempt_number} | registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} |#{FederationReporter::HINT_NOT_PRESENT} #{response_status} |",
             1 => %w(RP description),
             2 => %w(LOA_REQUESTED LEVEL_2)
           )
@@ -194,7 +210,7 @@ module Analytics
           attempt_number: '1',
           journey_type: 'registration',
           hint_followed: hint_followed,
-          response_status: 'success'
+          response_status: 'SUCCESS'
         )
       end
     end

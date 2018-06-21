@@ -1,11 +1,9 @@
 require 'partials/idp_selection_partial_controller'
 require 'partials/viewable_idp_partial_controller'
-require 'partials/journey_hinting_partial_controller'
 
 class SignInController < ApplicationController
   include IdpSelectionPartialController
   include ViewableIdpPartialController
-  include JourneyHintingPartialController
 
   def index
     entity_id = entity_id_of_journey_hint_for('SUCCESS')
@@ -25,9 +23,7 @@ class SignInController < ApplicationController
 
   def select_idp
     select_viewable_idp_for_sign_in(params.fetch('entity_id')) do |decorated_idp|
-      unless entity_id_of_journey_hint_for('SUCCESS').nil?
-        session[:user_followed_journey_hint] = user_followed_journey_hint(decorated_idp.entity_id, 'SUCCESS')
-      end
+      set_journey_hint_followed(decorated_idp.entity_id)
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       redirect_to redirect_to_idp_sign_in_path
     end
@@ -35,10 +31,8 @@ class SignInController < ApplicationController
 
   def select_idp_ajax
     select_viewable_idp_for_sign_in(params.fetch('entityId')) do |decorated_idp|
-      hint_shown = !entity_id_of_journey_hint_for('SUCCESS').nil?
-      hint_followed = user_followed_journey_hint(decorated_idp.entity_id, 'SUCCESS')
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      ajax_idp_redirection_sign_in_request(hint_shown, hint_followed)
+      ajax_idp_redirection_sign_in_request(decorated_idp.entity_id)
       session[:user_followed_journey_hint] = user_followed_journey_hint(decorated_idp.entity_id, 'SUCCESS')
     end
   end
