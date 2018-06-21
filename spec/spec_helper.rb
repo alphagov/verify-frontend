@@ -102,8 +102,8 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    # stub_transactions_list
-    # stub_translations
+    stub_transactions_list
+    stub_translations
   end
 end
 

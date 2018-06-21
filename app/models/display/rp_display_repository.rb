@@ -15,17 +15,10 @@ module Display
     end
 
     def get_translations(transaction_simple_id)
-      if @display_data.empty?
-        transactions = RP_TRANSLATION_SERVICE.get_transactions
-        transactions.each do |transaction|
-          update_display_data(transaction)
-        end
-      else
-        unless @display_data.has_key?(transaction_simple_id)
-          display_data = Display::RpDisplayData.new(transaction_simple_id, @translator)
-          display_data.validate_content!
-          @display_data[transaction_simple_id] = display_data
-        end
+      unless @display_data.has_key?(transaction_simple_id)
+        display_data = Display::RpDisplayData.new(transaction_simple_id, @translator)
+        display_data.validate_content!
+        @display_data[transaction_simple_id] = display_data
       end
 
       @display_data.fetch(transaction_simple_id)

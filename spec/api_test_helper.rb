@@ -309,9 +309,4 @@ end
 
 RSpec.configure do |c|
   c.include ApiTestHelper
-
-  c.before(:each) do
-    stub_transactions_list
-    stub_translations
-  end
 end

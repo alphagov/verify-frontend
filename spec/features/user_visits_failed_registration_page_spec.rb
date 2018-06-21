@@ -72,12 +72,6 @@ RSpec.describe 'When the user visits the failed registration page and' do
     end
 
     it 'includes expected content when custom fail LOA2 journey in welsh' do
-      # puts '-------TRANSLATIONS-------------'
-      # puts RP_DISPLAY_REPOSITORY.get_translations(CUSTOM_FAIL_PAGE_RP).rp_name
-      # puts RP_DISPLAY_REPOSITORY.get_translations(CUSTOM_FAIL_PAGE_RP).tailored_text
-      # puts RP_DISPLAY_REPOSITORY.get_translations(CUSTOM_FAIL_PAGE_RP).custom_fail_heading
-
-
       set_loa_in_session('LEVEL_2')
       visit '/cofrestru-wedi-methu'
       expect(page).to have_content "This is a custom fail page in welsh."
