@@ -8,9 +8,6 @@ RSpec.describe 'When the user visits the choose a country page' do
     stub_api_idp_list_for_loa
     stub_transactions_list
     stub_countries_list
-    stub_translations
-
-
   end
 
   def no_eidas_session

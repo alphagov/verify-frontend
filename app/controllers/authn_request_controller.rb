@@ -39,10 +39,6 @@ private
     set_transaction_supports_eidas(sign_in_process_details.transaction_supports_eidas)
     set_transaction_entity_id(sign_in_process_details.transaction_entity_id)
     transaction_data = CONFIG_PROXY.get_transaction_details(sign_in_process_details.transaction_entity_id)
-
-    # puts '---------------AUTHN_REQUEST_CONTROLLER-------------------'
-    # puts transaction_data.to_s
-
     set_transaction_simple_id(transaction_data.simple_id)
     set_requested_loa(transaction_data.levels_of_assurance)
     set_transaction_homepage(transaction_data.transaction_homepage)
@@ -63,8 +59,6 @@ private
   end
 
   def set_transaction_simple_id(simple_id)
-    # puts '-----SETTING SIMPLE ID-------'
-    # puts simple_id
     session[:transaction_simple_id] = simple_id
   end
 

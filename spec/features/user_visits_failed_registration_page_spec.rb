@@ -23,10 +23,10 @@ RSpec.describe 'When the user visits the failed registration page and' do
       set_loa_in_session('LEVEL_2')
       visit '/failed-registration'
 
+      expect_page_to_have_main_content
       expect(page).to have_content t('hub.failed_registration.continue_text', rp_name: 'Test RP')
       expect(page).to have_link t('navigation.continue'), href: redirect_to_service_error_path
       expect(page).to have_link t('hub.failed_registration.try_another_company'), href: select_documents_path
-      expect_page_to_have_main_content
     end
 
     it 'includes expected content for LOA1 journey' do
@@ -72,10 +72,10 @@ RSpec.describe 'When the user visits the failed registration page and' do
     end
 
     it 'includes expected content when custom fail LOA2 journey in welsh' do
-      puts '-------TRANSLATIONS-------------'
-      puts RP_DISPLAY_REPOSITORY.get_translations(CUSTOM_FAIL_PAGE_RP).rp_name
-      puts RP_DISPLAY_REPOSITORY.get_translations(CUSTOM_FAIL_PAGE_RP).tailored_text
-      puts RP_DISPLAY_REPOSITORY.get_translations(CUSTOM_FAIL_PAGE_RP).custom_fail_heading
+      # puts '-------TRANSLATIONS-------------'
+      # puts RP_DISPLAY_REPOSITORY.get_translations(CUSTOM_FAIL_PAGE_RP).rp_name
+      # puts RP_DISPLAY_REPOSITORY.get_translations(CUSTOM_FAIL_PAGE_RP).tailored_text
+      # puts RP_DISPLAY_REPOSITORY.get_translations(CUSTOM_FAIL_PAGE_RP).custom_fail_heading
 
 
       set_loa_in_session('LEVEL_2')

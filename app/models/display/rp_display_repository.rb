@@ -6,9 +6,11 @@ module Display
     end
 
     def update_all_translations
-      transactions = RP_TRANSLATION_SERVICE.get_transactions
-      transactions.each do |transaction|
-        update_display_data(transaction)
+      if @display_data.empty?
+        transactions = RP_TRANSLATION_SERVICE.get_transactions
+        transactions.each do |transaction|
+          update_display_data(transaction)
+        end
       end
     end
 

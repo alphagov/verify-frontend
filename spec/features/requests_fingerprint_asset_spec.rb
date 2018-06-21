@@ -4,11 +4,6 @@ require 'api_test_helper'
 RSpec.describe 'When the user visits the start page' do
   let(:request_log) { double(:request_log) }
 
-  before(:each) do
-    # stub_transactions_list
-    # stub_translations
-  end
-
   context 'when JS is enabled', js: true do
     before :each do
       # Capture requests to our fingerprint endpoint using a temporary middleware

@@ -46,6 +46,5 @@ Rails.application.routes.draw do
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
   get '/SAML2/metadata/sp', to: 'metadata#service_providers', as: :service_provider_metadata
   get '/SAML2/metadata/idp', to: 'metadata#identity_providers', as: :identity_provider_metadata
-  get '/healthcheck', to: 'translations_cache_warmup#warmup'
   get '/humans.txt', to: 'static#humanstxt'
 end

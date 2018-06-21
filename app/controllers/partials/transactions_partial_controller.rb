@@ -1,10 +1,5 @@
 module TransactionsPartialController
   def transaction_taxon_list
-    # puts '---------SIMPLE ID--------------'
-    # puts "\"#{current_transaction_simple_id}\""
-
-    # RP_DISPLAY_REPOSITORY.get_translations(current_transaction_simple_id)
-
     TRANSACTION_TAXON_CORRELATOR.correlate(CONFIG_PROXY.transactions)
   end
 
