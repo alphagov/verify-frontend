@@ -50,7 +50,15 @@ module ApiTestHelper
       }'
     stub_request(:get, api_translations_endpoint('test-rp', 'en')).to_return(body: en_translation_data, status: 200)
     stub_request(:get, api_translations_endpoint('test-rp', 'cy')).to_return(body: en_translation_data, status: 200)
-    stub_request(:get, api_translations_endpoint('test-rp-noc3', 'en')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-noc3', 'en')).to_return(body: '{
+        "name":"Register for an identity profile (forceauthn & no cycle3)",
+        "rpName":"Test RP",
+        "analyticsDescription":"analytics description for test-rp",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"register for an identity profile",
+        "tailoredText":"External data source: EN: This is tailored text for test-rp",
+        "taxonName":"Benefits"
+      }', status: 200)
     stub_request(:get, api_translations_endpoint('headless-rp', 'en')).to_return(body: en_translation_data, status: 200)
     stub_request(:get, api_translations_endpoint('test-rp-with-continue-on-fail', 'en')).to_return(body: en_translation_data, status: 200)
     stub_request(:get, api_translations_endpoint('test-rp-no-ab-test', 'en')).to_return(body: en_translation_data, status: 200)
