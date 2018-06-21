@@ -6,7 +6,9 @@ describe AboutLoa1Controller do
   let(:identity_provider_display_decorator) { double(:IdentityProviderDisplayDecorator) }
 
   before(:each) do
-    stub_request(:get, CONFIG.config_api_host + '/config/transactions/enabled')
+    # stub_request(:get, CONFIG.config_api_host + '/config/transactions/enabled')
+    stub_transactions_list
+    stub_translations
     stub_api_idp_list_for_loa
   end
 

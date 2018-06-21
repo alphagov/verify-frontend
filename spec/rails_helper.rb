@@ -43,4 +43,30 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Rails.application.routes.url_helpers
+
+  # config.before(:each) do
+  #   en_translation_data = '{
+  #       "name":"register for an identity profile",
+  #       "rpName":"EN: Test RP",
+  #       "analyticsDescription":"analytics description for test-rp",
+  #       "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+  #       "otherWaysDescription":"register for an identity profile",
+  #       "tailoredText":"External data source: EN: This is tailored text for test-rp",
+  #       "taxonName":"Benefits"
+  #     }'
+  #   cy_translation_data = '{
+  #       "name":"register for an identity profile",
+  #       "rpName":"CY: Test RP",
+  #       "analyticsDescription":"analytics description for test-rp",
+  #       "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+  #       "otherWaysDescription":"register for an identity profile",
+  #       "tailoredText":"External data source: CY: This is tailored text for test-rp",
+  #       "taxonName":"Benefits"
+  #     }'
+  #   # stub_request(:get, 'http://api.com:50240/config/transactions/test-rp/translations/en').to_return(body: en_translation_data)
+  #   # stub_request(:get, 'http://api.com:50240/config/transactions/test-rp/translations/cy').to_return(body: cy_translation_data)
+  #   stub_request(:get, 'http://api.com:50240/config/transactions/test-rp-with-continue-on-fail/translations/en').to_return(body: en_translation_data)
+  #   # stub_request(:get, 'http://api.com:50240/config/transactions/test-rp-noc3/translations/en').to_return(body: en_translation_data)
+  #   # stub_request(:get, 'http://api.com:50240/config/transactions/test-rp-noc3/translations/cy').to_return(body: cy_translation_data)
+  # end
 end

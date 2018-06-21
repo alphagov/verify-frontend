@@ -5,8 +5,11 @@ RSpec.describe 'user encounters error page' do
   let(:api_select_idp_endpoint) { policy_api_uri(select_idp_endpoint(default_session_id)) }
   let(:api_saml_endpoint) { saml_proxy_api_uri(new_session_endpoint) }
 
+  before :each do
+    RP_DISPLAY_REPOSITORY.update_all_translations
+  end
+
   it 'will present the user with a list of transactions' do
-    stub_transactions_list
     stub_session_creation_error
     visit '/test-saml'
     click_button "saml-post"

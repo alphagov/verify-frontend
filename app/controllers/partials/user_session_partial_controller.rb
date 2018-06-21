@@ -12,6 +12,8 @@ module UserSessionPartialController
   end
 
   def current_transaction_simple_id
+    # puts '-----SESSION--------'
+    # puts session[:transaction_simple_id]
     session[:transaction_simple_id]
   end
 
