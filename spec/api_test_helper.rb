@@ -19,6 +19,10 @@ module ApiTestHelper
     config_api_uri('/config/transactions/enabled')
   end
 
+  def api_translations_endpoint(simple_id, locale)
+    config_api_uri("/config/transactions/#{simple_id}/translations/#{locale}")
+  end
+
   def api_countries_endpoint(session_id)
     policy_api_uri('/policy/countries/' + session_id)
   end
@@ -27,10 +31,68 @@ module ApiTestHelper
     transactions = [
         { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
         { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] }
+        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-with-continue-on-fail',  'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp-with-continue-on-fail', 'loaList' => ['LEVEL_2'] }
     ]
 
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
+  end
+
+  def stub_translations
+    en_translation_data = '{
+        "name":"register for an identity profile",
+        "rpName":"Test RP",
+        "analyticsDescription":"analytics description for test-rp",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"register for an identity profile",
+        "tailoredText":"External data source: EN: This is tailored text for test-rp",
+        "taxonName":"Benefits"
+      }'
+    stub_request(:get, api_translations_endpoint('test-rp', 'en')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp', 'cy')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-noc3', 'en')).to_return(body: '{
+        "name":"Register for an identity profile (forceauthn & no cycle3)",
+        "rpName":"Test RP",
+        "analyticsDescription":"analytics description for test-rp",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"register for an identity profile",
+        "tailoredText":"External data source: EN: This is tailored text for test-rp",
+        "taxonName":"Benefits"
+      }', status: 200)
+    stub_request(:get, api_translations_endpoint('headless-rp', 'en')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-with-continue-on-fail', 'en')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-no-ab-test', 'en')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-no-demo', 'en')).to_return(body: '{
+        "name":"register for an identity profile",
+        "rpName":"Test RP",
+        "analyticsDescription":"analytics description for test-rp",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"register for an identity profile",
+        "tailoredText":"External data source: EN: This is tailored text for test-rp",
+        "taxonName":"Benefits",
+        "customFailHeading":"This is a custom fail page.",
+        "customFailOtherOptions":"Custom text to be provided by RP.",
+        "customFailWhatNextContent":"This is custom what next content.",
+        "customFailTryAnotherSummary":"This is custom try another summary.",
+        "customFailTryAnotherText":"This is custom try another text.",
+        "customFailContactDetailsIntro":"This is custom contact details."
+      }', status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-no-demo', 'cy')).to_return(body: '{
+        "name":"Register for an identity profile (forceauthn & no cycle3)",
+        "rpName":"EN: Test RP",
+        "analyticsDescription":"analytics description for test-rp",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"register for an identity profile",
+        "tailoredText":"External data source: EN: This is tailored text for test-rp",
+        "taxonName":"Benefits",
+        "customFailHeading":"This is a custom fail page in welsh.",
+        "customFailOtherOptions":"Custom text to be provided by RP.",
+        "customFailWhatNextContent":"This is custom what next content.",
+        "customFailTryAnotherSummary":"This is custom try another summary.",
+        "customFailTryAnotherText":"This is custom try another text.",
+        "customFailContactDetailsIntro":"This is custom contact details."
+      }', status: 200)
+    stub_request(:get, api_translations_endpoint('foobar', 'en')).to_return(body: en_translation_data, status: 200)
   end
 
   def stub_countries_list

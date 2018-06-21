@@ -220,7 +220,7 @@ module Analytics
         RP_DISPLAY_REPOSITORY = double
         transaction = double
         allow(transaction).to receive(:analytics_description).and_return('description')
-        allow(RP_DISPLAY_REPOSITORY).to receive(:fetch).with('test-rp').and_return(transaction)
+        allow(RP_DISPLAY_REPOSITORY).to receive(:get_translations).with('test-rp').and_return(transaction)
       end
 
       it 'should report an ab test custom variable' do
