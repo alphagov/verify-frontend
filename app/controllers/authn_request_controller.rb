@@ -22,7 +22,6 @@ class AuthnRequestController < SamlController
     elsif session[:transaction_supports_eidas]
       redirect_to prove_identity_path
     else
-      logger.info "journey_hint value: <not present>"
       redirect_to start_path
     end
   end
