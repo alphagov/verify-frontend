@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'controller_helper'
 require 'authn_response_examples'
+require 'tracking_cookie_examples'
 require 'spec_helper'
 require 'api_test_helper'
 require 'piwik_test_helper'
@@ -58,88 +59,74 @@ describe AuthnResponseController do
     end
   end
 
-  describe 'idp tracking cookie' do
-    let(:saml_proxy_api) { double(:saml_proxy_api) }
-    let(:idp_authn_response) { IdpAuthnResponse.new(
-      'result' => status,
-      'isRegistration' => 'registration',
-      'loaAchieved' => 'LEVEL_1'
-    ) }
-    let(:selected_idp) { {
-      'entity_id' => 'http://idcorp.com',
-      'simple_id' => 'stub-idp-one',
-      'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
-    } }
-    let(:status) { 'SUCCESS' }
-    let(:expected_cookie) { {
-      entity_id: 'http://idcorp.com',
-      simple_id: 'stub-idp-one',
-      levels_of_assurance: %w(LEVEL_1 LEVEL_2),
-      SUCCESS: 'http://idcorp.com'
-    } }
-
+  describe 'country tracking cookie' do
+    let(:country_authn_response) {
+      CountryAuthnResponse.new(
+        'result' => status,
+        'isRegistration' => 'registration',
+        'loaAchieved' => 'LEVEL_1'
+      )
+    }
+    let(:post_endpoint) { :country_response }
+    let(:selected_entity) {
+      {
+        'entity_id' => 'http://idcorp.com',
+        'simple_id' => 'stub-entity-one',
+        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+      }
+    }
     before(:each) do
-      stub_const('SAML_PROXY_API', saml_proxy_api)
-      set_session_and_cookies_with_loa('LEVEL_1')
+      allow(saml_proxy_api).to receive(:forward_country_authn_response).and_return(country_authn_response)
+      session[:selected_country] = selected_entity
+    end
+
+    include_examples 'tracking cookie'
+
+    context 'receiving CANCEL status' do
+      let(:status) { 'CANCEL' }
+      let(:cookie_with_failed_status) { { FAILED: 'http://idcorp.com' }.to_json }
+      it { should eq cookie_with_failed_status }
+    end
+    context 'receiving FAILED_UPLIFT status' do
+      let(:status) { 'FAILED_UPLIFT' }
+      let(:cookie_with_failed_uplift_status) { { FAILED_UPLIFT: 'http://idcorp.com' }.to_json }
+      it { should eq cookie_with_failed_uplift_status }
+    end
+  end
+
+  describe 'idp tracking cookie' do
+    let(:idp_authn_response) {
+      IdpAuthnResponse.new(
+        'result' => status,
+        'isRegistration' => 'registration',
+        'loaAchieved' => 'LEVEL_1'
+      )
+    }
+    let(:post_endpoint) { :idp_response }
+    let(:selected_entity) {
+      {
+        'entity_id' => 'http://idcorp.com',
+        'simple_id' => 'stub-entity-one',
+        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+      }
+    }
+    before(:each) do
       allow(saml_proxy_api).to receive(:idp_authn_response).and_return(idp_authn_response)
-      stub_piwik_request_with_rp_and_loa({}, 'LEVEL_1')
-      session[:selected_idp] = selected_idp
+      session[:selected_idp] = selected_entity
     end
 
-    subject(:cookie_after_request) do
-      post :idp_response, params: { RelayState: 'my-session-id-cookie', SAMLResponse: 'a-saml-response', locale: 'en' }
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]
+    include_examples 'tracking cookie'
+
+    context 'receiving OTHER status' do
+      let(:status) { 'OTHER' }
+      let(:cookie_with_failed_status) { { FAILED: 'http://idcorp.com' }.to_json }
+      it { should eq cookie_with_failed_status }
     end
 
-    context 'with no selected idp' do
-      let(:selected_idp) { nil }
-      it { should be_nil }
-    end
-
-    context 'receiving SUCCESS without previous cookie' do
-      let(:expected_cookie) { { SUCCESS: 'http://idcorp.com' } }
-      it('should add new success status') { should eq expected_cookie.to_json }
-    end
-
-    context 'receiving SUCCESS and has cookie with existing entity id' do
-      let!(:existing_cookie) {
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-          'entity_id' => 'http://idcorp.com',
-          'simple_id' => 'stub-idp-one',
-          'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
-        }.to_json
-      }
-      it('should not delete/overwrite previous entity_id') { should eq expected_cookie.to_json }
-    end
-
-    context 'receiving SUCCESS and has cookie with existing status' do
-      let!(:existing_cookie) {
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-          'entity_id' => 'http://idcorp.com',
-          'simple_id' => 'stub-idp-one',
-          'levels_of_assurance' => %w(LEVEL_1 LEVEL_2),
-          'SUCCESS' => 'http://old-idcorp.com'
-        }.to_json
-      }
-      it('should update the existing status') { should eq(expected_cookie.to_json) }
-    end
-
-    context 'receiving PENDING and has cookie with existing status' do
+    context 'receiving PENDING status' do
       let(:status) { 'PENDING' }
-      let(:expected_cookie) { {
-        SUCCESS: 'http://success-idcorp.com',
-        PENDING: 'http://idcorp.com'
-      } }
-      let!(:existing_cookie) {
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { 'SUCCESS' => 'http://success-idcorp.com' }.to_json
-      }
-      it('should add a new status') { should eq expected_cookie.to_json }
-    end
-
-    context 'receiving FAILED' do
-      let(:status) { 'FAILED' }
-      let(:expected_cookie) { { FAILED: 'http://idcorp.com' } }
-      it('should add a new failure status with idp entity id') { should eq expected_cookie.to_json }
+      let(:cookie_with_pending_status) { { PENDING: 'http://idcorp.com' }.to_json }
+      it { should eq cookie_with_pending_status }
     end
   end
 end

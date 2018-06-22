@@ -20,11 +20,7 @@ class AuthnResponseController < SamlController
   end
 
   def country_response
-    if params['RelayState'].nil?
-      if session[:transaction_supports_eidas]
-        params['RelayState'] = session[:verify_session_id]
-      end
-    end
+    params['RelayState'] ||= session[:verify_session_id] if session[:transaction_supports_eidas]
     raise_error_if_session_mismatch(params['RelayState'], session[:verify_session_id])
 
     response = SAML_PROXY_API.forward_country_authn_response(params['RelayState'], params['SAMLResponse'])
@@ -34,32 +30,40 @@ class AuthnResponseController < SamlController
 private
 
   def raise_error_if_session_mismatch(relay_state, session_id)
-    if relay_state != session_id
-      raise Errors::WarningLevelError, "Relay state should match session id. Relay state was #{relay_state.inspect}"
-    end
+    error_message = "Relay state should match session id. Relay state was #{relay_state.inspect}"
+    raise Errors::WarningLevelError, error_message if relay_state != session_id
   end
 
   def idp_response_handlers
     handlers = {
-      SUCCESS => ->(response) { analytics_reporters[SUCCESS].call(response); idp_selection_reporters[SUCCESS].call; redirecters[SUCCESS].call(response) },
-      CANCEL => ->(response) { analytics_reporters[CANCEL].call(response); idp_selection_reporters[CANCEL].call; redirecters[CANCEL].call(response) },
-      FAILED_UPLIFT => ->(response) { analytics_reporters[FAILED_UPLIFT].call(response); idp_selection_reporters[FAILED_UPLIFT].call; redirecters[FAILED_UPLIFT].call(response) },
-      PENDING => ->(response) { analytics_reporters[PENDING].call(response); idp_selection_reporters[PENDING].call; redirecters[PENDING].call(response) }
+      SUCCESS => ->(response) { idp_response_handler_for(SUCCESS, response) },
+      CANCEL => ->(response) { idp_response_handler_for(CANCEL, response) },
+      FAILED_UPLIFT => ->(response) { idp_response_handler_for(FAILED_UPLIFT, response) },
+      PENDING => ->(response) { idp_response_handler_for(PENDING, response) }
     }
-    handlers.default = ->(response) { analytics_reporters[OTHER].call(response); idp_selection_reporters[FAILED].call; redirecters[OTHER].call(response) }
-
+    handlers.default = ->(response) { idp_response_handler_for(OTHER, response, FAILED) }
     handlers
+  end
+
+  def idp_response_handler_for(status, response, report_status = status)
+    analytics_reporters[status].call(response)
+    selection_reporters(:selected_idp, report_status).call
+    redirecters[status].call(response)
   end
 
   def country_response_handlers
     handlers = {
-      SUCCESS => redirecters[SUCCESS],
-      CANCEL => redirecters[FAILED],
-      FAILED_UPLIFT => redirecters[FAILED_UPLIFT]
+      SUCCESS => ->(response) { country_response_handler_for(SUCCESS, response) },
+      CANCEL => ->(response) { country_response_handler_for(FAILED, response) },
+      FAILED_UPLIFT => ->(response) { country_response_handler_for(FAILED_UPLIFT, response) }
     }
     handlers.default = redirecters[OTHER]
-
     handlers
+  end
+
+  def country_response_handler_for(status, response)
+    selection_reporters(:selected_country, status).call
+    redirecters[status].call(response)
   end
 
   def analytics_reporters
@@ -89,16 +93,10 @@ private
     }
   end
 
-  def idp_selection_reporters
-    selected_idp = session[:selected_idp].nil? ? nil : session[:selected_idp].fetch('entity_id', nil)
-
-    {
-      SUCCESS => ->() { set_journey_hint_by_status(selected_idp, SUCCESS) },
-      CANCEL => ->() { set_journey_hint_by_status(selected_idp, CANCEL) },
-      FAILED_UPLIFT => ->() { set_journey_hint_by_status(selected_idp, FAILED_UPLIFT) },
-      PENDING => ->() { set_journey_hint_by_status(selected_idp, PENDING) },
-      FAILED => ->() { set_journey_hint_by_status(selected_idp, FAILED) }
-    }
+  def selection_reporters(selected_entity_type, status)
+    selected_entity = session[selected_entity_type].try(:fetch, 'entity_id', nil)
+    return unless [SUCCESS, CANCEL, FAILED_UPLIFT, PENDING, FAILED].include? status
+    ->() { set_journey_hint_by_status(selected_entity, status) }
   end
 
   def redirecters
