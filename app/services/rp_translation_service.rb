@@ -1,7 +1,7 @@
 class RpTranslationService
   def initialize(translator)
     @translator = translator
-    @locales = %w(en cy)
+    @locales = %w[en cy]
   end
 
   def get_transactions
@@ -30,11 +30,9 @@ class RpTranslationService
       end
     end
 
-    if defined? RP_DISPLAY_REPOSITORY
-      RP_DISPLAY_REPOSITORY.merge!(
-        transaction => Display::RpDisplayData.new(transaction, @translator)
-      )
-    end
+    RP_DISPLAY_REPOSITORY.merge!(
+      transaction => Display::RpDisplayData.new(transaction, @translator)
+    ) if defined? RP_DISPLAY_REPOSITORY
   end
 
 private
