@@ -25,7 +25,7 @@ module Display
       allow(@translator).to receive(:translate).and_return("")
 
       RP_TRANSLATION_SERVICE = instance_double("RpTranslationService")
-      allow(RP_TRANSLATION_SERVICE).to receive(:get_transactions).and_return(['test-rp'])
+      allow(RP_TRANSLATION_SERVICE).to receive(:transactions).and_return(['test-rp'])
       allow(RP_TRANSLATION_SERVICE).to receive(:update_rp_translations).with('test-rp').and_return(@translations)
     end
 
@@ -34,7 +34,7 @@ module Display
       rp_display_repo = RpDisplayRepository.new(@translator)
       rp_display_repo.update_all_translations
 
-      expect(RP_TRANSLATION_SERVICE).to have_received(:get_transactions)
+      expect(RP_TRANSLATION_SERVICE).to have_received(:transactions)
       expect(rp_display_repo.instance_variable_get('@display_data').keys).to eq(['test-rp'])
       expect(rp_display_repo.instance_variable_get('@display_data').fetch('test-rp')).to be_a(Display::RpDisplayData)
     end
@@ -44,7 +44,7 @@ module Display
       rp_display_repo.update_all_translations
       rp_display_repo.update_all_translations
 
-      expect(RP_TRANSLATION_SERVICE).to have_received(:get_transactions).once
+      expect(RP_TRANSLATION_SERVICE).to have_received(:transactions).once
     end
 
     it 'should get translations for a transaction when cached translations are available' do
