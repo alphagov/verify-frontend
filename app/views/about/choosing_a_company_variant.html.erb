@@ -1,0 +1,12 @@
+<%= page_title 'hub.about_choosing_a_company.title' %>
+<% content_for :feedback_source, 'ABOUT_CHOOSING_A_COMPANY_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.about_choosing_a_company.heading' %></h1>
+      <%= t 'hub.about_choosing_a_company.content_html' %>
+  </div>
+</div>
+<div class="actions">
+  <%= button_link_to t('navigation.continue'), select_documents_path, id: 'next-button' %>
+</div>

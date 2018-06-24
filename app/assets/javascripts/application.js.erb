@@ -24,7 +24,7 @@ window.GOVUK.willItWorkForMe.init();
 window.GOVUK.feedback.init();
 window.GOVUK.furtherInformation.init();
 window.GOVUK.interstitialQuestion.init();
-window.GOVUK.otherDocuments.init();
+//window.GOVUK.otherDocuments.init();
 window.GOVUK.piwikEventsTracking.init();
 window.GOVUK.details.init();
 
@@ -40,6 +40,17 @@ window.GOVUK.details.init();
 //    {name: 'variant', route: window.GOVUK.selectPhoneCleverQuestions}
 //  ]
 //})
+
+abTest({
+     experiment: 'questions_light_v2',
+     control: {
+       route: window.GOVUK.otherDocuments
+     },
+ alternatives: [
+       {name: 'variant', route: window.GOVUK.otherDocumentsVariant}
+     ]
+})
+
 
 $(function () {
   window.GOVUK.validation.attach();
