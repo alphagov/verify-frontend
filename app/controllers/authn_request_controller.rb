@@ -73,23 +73,19 @@ private
     when 'uk_idp_sign_in'
       redirect_to begin_sign_in_path
     when 'eidas_sign_in'
-      raise StandardError, 'Users session does not support eIDAS journeys' unless session[:transaction_supports_eidas]
-      redirect_to choose_a_country_path
+      if session[:transaction_supports_eidas]
+        redirect_to choose_a_country_path
+      else
+        redirect_to start_path
+      end
     when 'submission_confirmation'
       redirect_to confirm_your_identity_path
-    when 'unspecified'
+    else
       if session[:transaction_supports_eidas]
         redirect_to prove_identity_path
       else
         redirect_to start_path
       end
-    else
-      # TODO: we actually want this to be the same as the unspecified case.
-      # However, the old code allowed RPs to submit any other value they liked
-      # and get the non-repudiation flow. Hence, we cannot remove this until we've
-      # verified what everyone is sending to activate that flow.
-      logger.info "journey_hint value: #{hint}"
-      redirect_to confirm_your_identity_path
     end
   end
 end
