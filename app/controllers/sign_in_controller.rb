@@ -33,7 +33,6 @@ class SignInController < ApplicationController
     select_viewable_idp_for_sign_in(params.fetch('entityId')) do |decorated_idp|
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       ajax_idp_redirection_sign_in_request(decorated_idp.entity_id)
-      session[:user_followed_journey_hint] = user_followed_journey_hint(decorated_idp.entity_id, 'SUCCESS')
     end
   end
 
