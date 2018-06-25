@@ -7,7 +7,7 @@ module Display
 
     def update_all_translations
       if @display_data.empty?
-        transactions = RP_TRANSLATION_SERVICE.get_transactions
+        transactions = RP_TRANSLATION_SERVICE.transactions
         transactions.each do |transaction|
           update_display_data(transaction)
         end

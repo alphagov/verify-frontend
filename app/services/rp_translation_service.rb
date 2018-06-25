@@ -4,7 +4,7 @@ class RpTranslationService
     @locales = %w[en cy]
   end
 
-  def get_transactions
+  def transactions
     CONFIG_PROXY.transactions.map do |transaction|
       transaction['simpleId']
     end

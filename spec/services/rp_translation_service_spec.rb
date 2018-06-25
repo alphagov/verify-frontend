@@ -23,7 +23,7 @@ describe 'RpTranslationService' do
   it 'should call to config service to get transactions' do
     translation_service = RpTranslationService.new(@translator)
 
-    transactions = translation_service.get_transactions
+    transactions = translation_service.transactions
 
     expect(CONFIG_PROXY).to have_received(:transactions)
     expect(transactions).to eq(['test-rp'])
