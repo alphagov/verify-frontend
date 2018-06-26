@@ -1,0 +1,28 @@
+<%= page_title 'hub.start.title', {}, "with hint (#{@suggested_idp[0].display_name})" %>
+<% content_for :body_classes, 'hub-start' %>
+<% content_for :feedback_source, 'START_PAGE_WITH_HINT' %>
+
+<h1 class="heading-large"><%= t 'hub.start.heading' %></h1>
+
+<div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
+    <p><%= t('hub.start.with_hint.intro', idp: @suggested_idp[0].display_name) %>
+    <%= form_for(@suggested_idp[0], url: sign_in_submit_path, html: {class: 'idp-option js-idp-form', id: nil}) do |f| %>
+      <%= hidden_field_tag 'entity_id', @suggested_idp[0].entity_id, id: nil, class: 'js-entity-id' %>
+      <div class="actions">
+        <%= f.button  t('hub.start.with_hint.continue', idp: @suggested_idp[0].display_name),
+                      class: 'button',
+                      name: @suggested_idp[0].entity_id,
+                      id: nil,
+                      type: 'submit',
+                      value: @suggested_idp[0].display_name
+        %>
+      </div>
+  </div>
+  <% end %>
+  <%= t('hub.start.with_hint.other_options') %>
+    <ul class="list-bullet list other-options">
+      <li><%= link_to t('hub.start.with_hint.create_option'), begin_registration_path %></li>
+      <li><%= link_to t('hub.start.with_hint.signin_option'), begin_sign_in_path %></li>
+    </ul>
+  
+  <%= render partial: 'shared/continue_to_idp_form' %>

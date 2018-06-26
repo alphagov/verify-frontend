@@ -1,11 +1,21 @@
+require 'partials/idp_selection_partial_controller'
+require 'partials/viewable_idp_partial_controller'
+
 class StartController < ApplicationController
+  include IdpSelectionPartialController
+  include ViewableIdpPartialController
   layout 'slides'
   before_action :set_device_type_evidence
 
   def index
-    @form = StartForm.new({})
-
-    render :start
+    entity_id = entity_id_of_journey_hint_for('SUCCESS')
+    @suggested_idp = entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, entity_id)
+    if @suggested_idp.empty? || !defined?(@suggested_idp)
+      @form = StartForm.new({})
+      render :start
+    else
+      render :start_with_hint
+    end
   end
 
   def request_post
