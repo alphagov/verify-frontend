@@ -8,8 +8,7 @@ class AuthnRequestController < SamlController
   def rp_request
     create_session
 
-    # HUB-113: Temporarily disabling to allow the perf team to analyze the data
-    # session[:new_visit] = true
+    session[:new_visit] = true
 
     AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
 

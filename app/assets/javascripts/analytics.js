@@ -25,10 +25,19 @@
     var siteId = $('#piwik-site-id').text();
     var customUrl = $('#piwik-custom-url').text();
     var enTitle = $('meta[name="verify|title"]').attr("content");
-    var newVisit = $('#piwik-new-visit').length ? 1 : 0;
+    var newVisit = $('#piwik-new-visit')
+
+    if(newVisit.length) {
+        var newVisitFlag = 1;
+        // to make sure the new visit flag is used only once
+        newVisit.remove();
+    }
+    else {
+        var newVisitFlag = 0;
+    }
 
     var piwikAnalyticsQueue = [
-        ['appendToTrackingUrl', 'new_visit=' + newVisit],
+        ['appendToTrackingUrl', 'new_visit=' + newVisitFlag],
         ['setUserId', getPiwikVisitorIdCookie()],
         ['setDocumentTitle', enTitle ],
         ['trackPageView'],
