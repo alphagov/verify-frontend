@@ -15,7 +15,7 @@ class AuthnRequestController < SamlController
 
 
     journey_hint = params['journey_hint'].present? ? params['journey_hint'] : 'unspecified'
-    follow_journey_hint journey_hint
+    redirect_for_journey_hint journey_hint
   end
 
 private
@@ -66,26 +66,29 @@ private
     session[:transaction_homepage] = transaction_homepage
   end
 
-  def follow_journey_hint(hint)
+  def redirect_for_journey_hint(hint)
     case hint
     when 'registration'
       redirect_to begin_registration_path
     when 'uk_idp_sign_in'
       redirect_to begin_sign_in_path
     when 'eidas_sign_in'
-      if session[:transaction_supports_eidas]
-        redirect_to choose_a_country_path
-      else
-        redirect_to start_path
-      end
+      do_eidas_sign_in_redirect
     when 'submission_confirmation'
       redirect_to confirm_your_identity_path
     else
-      if session[:transaction_supports_eidas]
-        redirect_to prove_identity_path
-      else
-        redirect_to start_path
-      end
+      logger.info "journey_hint value: #{hint}"
+      do_default_redirect
     end
+  end
+
+  def do_eidas_sign_in_redirect
+    return redirect_to start_path unless session[:transaction_supports_eidas]
+    redirect_to choose_a_country_path
+  end
+
+  def do_default_redirect
+    return redirect_to start_path unless session[:transaction_supports_eidas]
+    redirect_to prove_identity_path
   end
 end
