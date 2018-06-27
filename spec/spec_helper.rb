@@ -101,9 +101,11 @@ RSpec.configure do |config|
     I18n.locale = :en if defined? I18n
   end
 
-  config.before(:each) do
-    stub_transactions_list
-    stub_translations
+  config.before(:each) do |test|
+    unless test.metadata[:skip_before]
+      stub_transactions_list
+      stub_translations
+    end
   end
 end
 
