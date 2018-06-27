@@ -185,7 +185,7 @@ GEM
       stud
     powerpack (0.1.1)
     public_suffix (2.0.4)
-    puma (3.7.0)
+    puma (3.6.0)
     rack (2.0.3)
     rack-handlers (0.7.3)
       rack
