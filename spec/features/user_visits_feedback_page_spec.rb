@@ -190,6 +190,15 @@ RSpec.feature 'When the user visits the feedback page' do
     expect(DUMMY_ZENDESK_CLIENT.tickets.last.comment).to include 'From page: http://www.example.com/start'
   end
 
+  it 'should show altered feedback form when feedback disabled' do
+    set_session_and_session_cookies!
+    stub_const("FEEDBACK_DISABLED", true)
+    visit start_path
+    click_on t('feedback_link.feedback_form')
+
+    expect(page).to have_content "Feedback is disabled on this environment"
+  end
+
   it 'should also be in welsh' do
     visit feedback_cy_path
     expect(page).to have_title t('hub.feedback.title', locale: :cy)

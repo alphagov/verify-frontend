@@ -60,6 +60,8 @@ Rails.application.config.after_initialize do
   transaction_grouper = TransactionGroups::TransactionGrouper.new(RP_CONFIG)
   IDP_RECOMMENDATION_ENGINE = RecommendationsEngine.new(idp_rules, segment_matcher, transaction_grouper)
 
+  FEEDBACK_DISABLED = CONFIG.feedback_disabled
+
   # Feature flags
   IDP_FEATURE_FLAGS_CHECKER = IdpConfiguration::IdpFeatureFlagsLoader.new(YamlLoader.new)
                                  .load(CONFIG.rules_directory, %i[send_hints send_language_hint show_interstitial_question show_interstitial_question_loa1])

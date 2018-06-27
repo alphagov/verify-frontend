@@ -38,4 +38,5 @@ CONFIG = Configuration.load! do
   option_string 'ab_test_file', 'AB_TEST_FILE', allow_missing: true
   option_string 'segment_definitions', 'SEGMENT_DEFINITIONS'
   option_string 'saml_proxy_host', 'SAML_PROXY_HOST'
+  option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
 end

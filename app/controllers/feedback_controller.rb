@@ -3,15 +3,10 @@ class FeedbackController < ApplicationController
   skip_before_action :set_piwik_custom_variables
 
   def index
-    @form = FeedbackForm.new({})
-    flash['feedback_referer'] = request.referer
-    feedback_source = params['feedback-source'].nil? ? flash['feedback_source'] : params['feedback-source']
-    if feedback_source.nil?
-      render
-    elsif FEEDBACK_SOURCE_MAPPER.is_feedback_source_valid(feedback_source)
-      flash['feedback_source'] = feedback_source
+    if FEEDBACK_DISABLED
+      render :disabled
     else
-      render 'errors/404', status: 400
+      render_feedback_form
     end
   end
 
@@ -38,5 +33,18 @@ private
 
   def feedback_form_params
     (params['feedback_form'] || {}).merge(user_agent: request.user_agent, referer: flash['feedback_referer'])
+  end
+
+  def render_feedback_form
+    @form = FeedbackForm.new({})
+    flash['feedback_referer'] = request.referer
+    feedback_source = params['feedback-source'].nil? ? flash['feedback_source'] : params['feedback-source']
+    if feedback_source.nil?
+      render
+    elsif FEEDBACK_SOURCE_MAPPER.is_feedback_source_valid(feedback_source)
+      flash['feedback_source'] = feedback_source
+    else
+      render 'errors/404', status: 400
+    end
   end
 end

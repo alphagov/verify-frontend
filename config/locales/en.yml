@@ -469,6 +469,10 @@ en:
         send_failure: Unfortunately, we are unable to record your feedback at the moment. Please try again later.
         reply: Please select an option
       send_message: Send message
+    feedback_disabled:
+      title: Feedback Disabled
+      heading: Feedback is disabled on this environment
+      error_content: You are currently using a non-production version of Verify, where feedback has been disabled.
     feedback_sent:
       title: Feedback
       heading: Thank you for your feedback
