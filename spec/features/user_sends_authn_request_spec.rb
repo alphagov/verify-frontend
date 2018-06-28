@@ -82,7 +82,8 @@ describe 'user sends authn requests' do
       ab_test_cookie_value = {
         'about_companies' => 'about_companies_with_logo',
         'select_documents_v2' => 'select_documents_v2_control',
-        'loa1_perf_management_v2' => 'loa1_perf_management_v2_control'
+        'loa1_perf_management_v2' => 'loa1_perf_management_v2_control',
+        'questions_light_v2' => 'questions_light_v2_control'
       }.to_json
       cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape(ab_test_cookie_value))
       set_cookies!(cookie_hash)
