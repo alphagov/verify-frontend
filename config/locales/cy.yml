@@ -486,6 +486,10 @@ cy:
         send_failure: Yn anffodus rydym yn methu cofnodi eich adborth ar hyn o bryd. Rhowch gynnig arall yn hwyrach ymlaen.
         reply: Dylech ddewis opsiwn
       send_message: Anfon neges
+    feedback_disabled:
+      title: Feedback Disabled
+      heading: Feedback is disabled on this environment
+      error_content: You are currently using a non-production version of Verify, where feedback has been disabled.
     feedback_sent:
       title: Adborth
       heading: Diolch am eich adborth

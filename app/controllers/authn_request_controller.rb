@@ -8,23 +8,12 @@ class AuthnRequestController < SamlController
   def rp_request
     create_session
 
-    # HUB-113: Temporarily disabling to allow the perf team to analyze the data
-    # session[:new_visit] = true
+    session[:new_visit] = true
 
     AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
 
-    if params['journey_hint'].present?
-      logger.info "journey_hint value: #{params['journey_hint']}"
-      follow_journey_hint
-    elsif params['eidas_journey'].present?
-      raise StandardError, 'Users session does not support eIDAS journeys' unless session[:transaction_supports_eidas]
-      redirect_to choose_a_country_path
-    elsif session[:transaction_supports_eidas]
-      redirect_to prove_identity_path
-    else
-      logger.info "journey_hint value: <not present>"
-      redirect_to start_path
-    end
+    journey_hint = params['journey_hint'].present? ? params['journey_hint'] : 'unspecified'
+    redirect_for_journey_hint journey_hint
   end
 
 private
@@ -75,17 +64,31 @@ private
     session[:transaction_homepage] = transaction_homepage
   end
 
-  def follow_journey_hint
-    if check_journey_hint('registration')
+  def redirect_for_journey_hint(hint)
+    case hint
+    when 'registration'
       redirect_to begin_registration_path
-    elsif check_journey_hint('sign_in')
+    when 'uk_idp_sign_in'
       redirect_to begin_sign_in_path
-    else
+    when 'eidas_sign_in'
+      do_eidas_sign_in_redirect
+    when 'submission_confirmation'
       redirect_to confirm_your_identity_path
+    when 'unspecified'
+      do_default_redirect
+    else
+      logger.info "journey_hint value: #{hint}"
+      do_default_redirect
     end
   end
 
-  def check_journey_hint(path)
-    params['journey_hint'].downcase == path
+  def do_eidas_sign_in_redirect
+    return redirect_to start_path unless session[:transaction_supports_eidas]
+    redirect_to choose_a_country_path
+  end
+
+  def do_default_redirect
+    return redirect_to start_path unless session[:transaction_supports_eidas]
+    redirect_to prove_identity_path
   end
 end

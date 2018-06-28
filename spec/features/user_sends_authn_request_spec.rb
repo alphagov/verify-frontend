@@ -27,16 +27,6 @@ describe 'user sends authn requests' do
       expect(page.get_rack_session['transaction_supports_eidas']).to eql false
     end
 
-    it 'will redirect user to /confirm-your-identity when journey hint is set (not to registration or sign_in)' do
-      stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
-      set_journey_hint_cookie('http://idcorp.com')
-      stub_session_creation('transactionSupportsEidas' => true)
-      visit('/test-saml')
-      click_button 'saml-post-journey-hint'
-      expect(page).to have_title t('hub.confirm_your_identity.title')
-      expect(page.get_rack_session['transaction_supports_eidas']).to eql true
-    end
-
     it 'will redirect the user to /choose-a-country for an eidas journey where eidas is enabled' do
       stub_session_creation('transactionSupportsEidas' => true)
       stub_transactions_list
@@ -47,17 +37,6 @@ describe 'user sends authn requests' do
 
       expect(page).to have_title t('hub.choose_a_country.title')
       expect(page.get_rack_session['transaction_supports_eidas']).to eql true
-    end
-
-    it 'will render the something went wrong page for an eidas journey where eidas is disabled' do
-      stub_session_creation('transactionSupportsEidas' => false)
-      stub_transactions_list
-
-      visit('/test-saml')
-      click_button 'saml-post-eidas'
-
-      expect(page).to have_content t('errors.something_went_wrong.heading')
-      expect(page.get_rack_session['transaction_supports_eidas']).to eql false
     end
 
     it 'will redirect the user to /about when journey hint is set to registration' do

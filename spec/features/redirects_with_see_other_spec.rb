@@ -7,10 +7,9 @@ describe 'pages redirect with see other', type: :request do
     expect(response.status).to eql 303
   end
 
-  # HUB-113: Temporarily disabling to allow the perf team to analyze the data
-  # it 'does not delete the new_visit flag' do
-  #   stub_session_creation
-  #   post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
-  #   expect(request.session['new_visit']).to eql true
-  # end
+  it 'does not delete the new_visit flag' do
+    stub_session_creation
+    post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
+    expect(request.session['new_visit']).to eql true
+  end
 end

@@ -41,4 +41,5 @@ CONFIG = Configuration.load! do
   # HUB-164 Variant config
   option_string 'rules_directory_variant', 'RULES_DIRECTORY_VARIANT'
   option_string 'segment_definitions_variant', 'SEGMENT_DEFINITIONS_VARIANT'
+  option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
 end
