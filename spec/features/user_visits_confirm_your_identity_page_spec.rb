@@ -144,7 +144,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
       click_button 'Ddewis Welsh IDCorp'
 
       visit '/test-saml'
-      click_button 'saml-post-journey-hint'
+      click_button 'saml-post-journey-hint-non-repudiation'
       expect(page).to have_title t('hub.confirm_your_identity.title', locale: :cy)
       expect(page).to have_current_path('/cadarnhau-eich-hunaniaeth')
       expect(page).to have_css 'html[lang=cy]'
@@ -166,7 +166,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
       stub_session_creation
       visit '/test-saml'
-      click_button 'saml-post-journey-hint'
+      click_button 'saml-post-journey-hint-non-repudiation'
 
       expect(page).to have_title t('hub.confirm_your_identity.title', locale: :cy)
       expect(page).to have_current_path('/cadarnhau-eich-hunaniaeth')
