@@ -40,6 +40,6 @@ experiments:
   - questions_light_v2:
       alternatives:
         - name: 'control'
-          percent: 0
-        - name: 'variant'
           percent: 100
+        - name: 'variant'
+          percent: 0
