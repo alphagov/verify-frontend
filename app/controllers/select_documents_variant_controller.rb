@@ -5,7 +5,7 @@ class SelectDocumentsVariantController < ApplicationController
 
   def index
     @form = SelectDocumentsForm.new({})
-    render :index
+    render 'select_documents/index'
   end
 
   def select_documents
@@ -15,7 +15,7 @@ class SelectDocumentsVariantController < ApplicationController
       redirect_to @form.further_id_information_required? ? other_identity_documents_path : choose_a_certified_company_path
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')
-      render :index
+      render 'select_documents/index'
     end
   end
 
