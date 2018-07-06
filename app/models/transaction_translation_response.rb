@@ -1,6 +1,6 @@
 class TransactionTranslationResponse < Api::Response
   attr_reader :name, :rp_name, :analytics_description, :other_ways_text, :other_ways_description, :tailored_text, :taxon_name, :custom_fail_heading, :custom_fail_what_next_content, :custom_fail_other_options, :custom_fail_try_another_summary, :custom_fail_try_another_text, :custom_fail_contact_details_intro
-  validates :name, :rp_name, :analytics_description, :other_ways_text, :other_ways_description, :tailored_text, :taxon_name, presence: true
+  validates :name, :rp_name, :analytics_description, :other_ways_text, :other_ways_description, :tailored_text, presence: true
 
   def initialize(hash)
     @name = hash['name']
