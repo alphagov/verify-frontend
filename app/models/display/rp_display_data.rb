@@ -1,7 +1,6 @@
 module Display
   class RpDisplayData < ::Display::DisplayData
     prefix :rps
-    before_fetch_content(proc { |simple_id| RP_TRANSLATION_SERVICE.update_rp_translations(simple_id) })
     content :other_ways_description
     content :name
     content :rp_name

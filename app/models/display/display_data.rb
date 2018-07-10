@@ -12,7 +12,6 @@ module Display
       def content(field, options = {})
         define_method(field) do
           begin
-            before_fetch_content&.call(simple_id)
             @translator.translate("#{prefix}.#{simple_id}.#{field}")
           rescue StandardError => e
             options.fetch(:default) { raise e }
@@ -27,12 +26,6 @@ module Display
           value
         end
       end
-
-      def before_fetch_content(fn)
-        define_method :before_fetch_content do
-          fn
-        end
-      end
     end
 
     def validate_content!
@@ -43,10 +36,6 @@ module Display
 
     def prefix
       raise NotImplementedError, 'no prefix has been defined'
-    end
-
-    def before_fetch_content
-      nil
     end
   end
 end

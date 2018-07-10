@@ -54,6 +54,6 @@ private
   end
 
   def update_translations
-    RP_DISPLAY_REPOSITORY.update_all_translations
+    RP_DISPLAY_REPOSITORY.update_translations(current_transaction_simple_id)
   end
 end

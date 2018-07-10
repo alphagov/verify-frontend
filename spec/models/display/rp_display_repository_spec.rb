@@ -32,7 +32,7 @@ module Display
 
     it 'should update all translations when display data is empty' do
       rp_display_repo = RpDisplayRepository.new(@translator)
-      rp_display_repo.update_all_translations
+      rp_display_repo.update_translations
 
       expect(RP_TRANSLATION_SERVICE).to have_received(:transactions)
       expect(rp_display_repo.instance_variable_get('@display_data').keys).to eq(['test-rp'])
@@ -41,15 +41,15 @@ module Display
 
     it 'should not update all translations when translations are already cached' do
       rp_display_repo = RpDisplayRepository.new(@translator)
-      rp_display_repo.update_all_translations
-      rp_display_repo.update_all_translations
+      rp_display_repo.update_translations
+      rp_display_repo.update_translations
 
       expect(RP_TRANSLATION_SERVICE).to have_received(:transactions).once
     end
 
     it 'should get translations for a transaction when cached translations are available' do
       rp_display_repo = RpDisplayRepository.new(@translator)
-      rp_display_repo.update_all_translations
+      rp_display_repo.update_translations
 
       rp_display_repo.get_translations('test-rp')
 
@@ -60,7 +60,7 @@ module Display
       allow(RP_TRANSLATION_SERVICE).to receive(:update_rp_translations).with('new-rp').and_return(@translations)
 
       rp_display_repo = RpDisplayRepository.new(@translator)
-      rp_display_repo.update_all_translations
+      rp_display_repo.update_translations
 
       rp_display_repo.get_translations('new-rp')
 
