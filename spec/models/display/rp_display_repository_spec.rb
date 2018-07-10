@@ -32,7 +32,7 @@ module Display
 
     it 'should update all translations when display data is empty' do
       rp_display_repo = RpDisplayRepository.new(@translator)
-      rp_display_repo.update_translations
+      rp_display_repo.update_translations 'test-rp'
 
       expect(RP_TRANSLATION_SERVICE).to have_received(:transactions)
       expect(rp_display_repo.instance_variable_get('@display_data').keys).to eq(['test-rp'])
@@ -41,30 +41,31 @@ module Display
 
     it 'should not update all translations when translations are already cached' do
       rp_display_repo = RpDisplayRepository.new(@translator)
-      rp_display_repo.update_translations
-      rp_display_repo.update_translations
+      rp_display_repo.update_translations 'test-rp'
+      rp_display_repo.update_translations 'test-rp'
 
       expect(RP_TRANSLATION_SERVICE).to have_received(:transactions).once
     end
 
     it 'should get translations for a transaction when cached translations are available' do
       rp_display_repo = RpDisplayRepository.new(@translator)
-      rp_display_repo.update_translations
+      rp_display_repo.update_translations 'test-rp'
 
       rp_display_repo.get_translations('test-rp')
 
-      expect(RP_TRANSLATION_SERVICE).to have_received(:update_rp_translations).with('test-rp').exactly(12).times
+      expect(RP_TRANSLATION_SERVICE).to have_received(:update_rp_translations).with('test-rp').exactly(1).times
     end
 
     it 'should update translations for a particular transaction when no cached translations are available' do
-      allow(RP_TRANSLATION_SERVICE).to receive(:update_rp_translations).with('new-rp').and_return(@translations)
+      allow(RP_TRANSLATION_SERVICE).to receive(:update_rp_translations).with('test-rp').and_return(@translations)
+      allow(RP_TRANSLATION_SERVICE).to receive(:update_rp_translations).with('new-rp').and_return({})
 
       rp_display_repo = RpDisplayRepository.new(@translator)
-      rp_display_repo.update_translations
+      rp_display_repo.update_translations 'test-rp'
 
       rp_display_repo.get_translations('new-rp')
 
-      expect(RP_TRANSLATION_SERVICE).to have_received(:update_rp_translations).with('new-rp').exactly(12).times
+      expect(RP_TRANSLATION_SERVICE).to have_received(:update_rp_translations).with('new-rp').exactly(1).times
     end
   end
 end

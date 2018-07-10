@@ -19,6 +19,7 @@ module Display
 
     def get_translations(transaction_simple_id)
       unless @display_data.key?(transaction_simple_id)
+        update_translations(transaction_simple_id)
         create_display_data(transaction_simple_id)
       end
 
