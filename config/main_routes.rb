@@ -6,12 +6,6 @@ get 'sign_in', to: 'sign_in#index', as: :sign_in
 post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
 
-LOA1_PERF_MANAGEMENT_V2 = "loa1_perf_management_v2".freeze
-# HUB-135 LOA1 perf management A/B test
-loa1_perf_management_v2_control_piwik = SelectRoute.new(LOA1_PERF_MANAGEMENT_V2, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_1')
-loa1_perf_management_v2_variant_piwik = SelectRoute.new(LOA1_PERF_MANAGEMENT_V2, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_1')
-
-
 QUESTIONS_LIGHT_V2 = "questions_light_v2".freeze
 
 questions_light_v2_control_piwik = SelectRoute.new(QUESTIONS_LIGHT_V2, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
@@ -23,7 +17,7 @@ constraints IsLoa1 do
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
-  # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
   get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
@@ -39,14 +33,6 @@ constraints IsLoa1 do
   get 'about_certified_companies', to: 'about_loa1#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa1#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
-
-  constraints loa1_perf_management_v2_control_piwik do
-    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
-  end
-
-  constraints loa1_perf_management_v2_variant_piwik do
-    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant#index', as: :choose_a_certified_company
-  end
 end
 
 constraints IsLoa2 do
@@ -113,8 +99,6 @@ post 'further_information_null_attribute', to: 'further_information#submit_null_
 get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
 get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 get 'paused_registration', to: 'paused_registration#index', as: :paused_registration
-
-
 
 constraints questions_light_v2_control_piwik do
   get 'about', to: 'about_loa2#index', as: :about

@@ -17,12 +17,6 @@ Rails.application.config.after_initialize do
     CONFIG.logo_directory,
     CONFIG.white_logo_directory
   )
-  # HUB-135 A/B test variant
-  IDENTITY_PROVIDER_DISPLAY_DECORATOR_VARIANT = Display::IdentityProviderDisplayDecoratorVariant.new(
-    IDP_DISPLAY_REPOSITORY,
-    CONFIG.logo_directory,
-    CONFIG.white_logo_directory
-  )
 
   EIDAS_SCHEME_DISPLAY_DECORATOR = Display::EidasSchemeDisplayDecorator.new(
     EIDAS_SCHEME_REPOSITORY,
