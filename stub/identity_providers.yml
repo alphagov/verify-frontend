@@ -1,4 +1,2 @@
 show_unavailable:
     - stub-idp-unavailable
-
-loa1_order: ["stub-idp-loa1", "stub-idp-one"]
