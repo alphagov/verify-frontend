@@ -1,6 +1,7 @@
 module Analytics
   class FederationReporter
     AB_TEST_ACTION_NAME = 'The user has started an AB test'.freeze
+    EXTERNAL_AB_TEST_ACTION_NAME = 'The user has started an external AB test'.freeze
 
     def initialize(analytics_reporter)
       @analytics_reporter = analytics_reporter
@@ -44,6 +45,16 @@ module Analytics
           ab_test_custom_var
         )
       end
+    end
+
+    def report_external_ab_test(request, ab_test_name)
+      ab_test_custom_var = Analytics::CustomVariable.build(:ab_test, ab_test_name)
+
+      report_action_without_current_transaction(
+        request,
+        EXTERNAL_AB_TEST_ACTION_NAME,
+        ab_test_custom_var
+      )
     end
 
     def report_sign_in_journey_hint_shown(current_transaction, request, idp_display_name)
@@ -141,6 +152,14 @@ module Analytics
       rescue Display::FederationTranslator::TranslationError => e
         Rails.logger.warn e
       end
+    end
+
+    def report_action_without_current_transaction(request, action, extra_custom_vars = {})
+      @analytics_reporter.report_action(
+        request,
+        action,
+        extra_custom_vars
+      )
     end
 
     def report_event(current_transaction, request, event_category, event_name, event_action)

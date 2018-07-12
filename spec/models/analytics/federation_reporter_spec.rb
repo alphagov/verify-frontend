@@ -237,6 +237,24 @@ module Analytics
       end
     end
 
+    describe '#report_external_ab_test' do
+      before(:each) do
+        transaction = double
+        allow(transaction).to receive(:analytics_description).and_return('description')
+      end
+
+      it 'should report an ab test custom variable' do
+        alternative_name = 'alternative_name'
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            'The user has started an external AB test',
+            6 => ['AB_TEST', alternative_name]
+          )
+        federation_reporter.report_external_ab_test(request, alternative_name)
+      end
+    end
+
     describe '#report_cycle_three' do
       it 'should report cycle 3 attribute name' do
         attribute_name = 'anAttribute'
