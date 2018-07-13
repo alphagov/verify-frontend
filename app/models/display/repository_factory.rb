@@ -6,36 +6,45 @@ module Display
     end
 
     def create_idp_repository(directory)
-      create(directory, Display::IdpDisplayData)
+      create_from_directory(Display::IdpDisplayData, directory)
     end
 
     def create_country_repository(directory)
-      create(directory, Display::CountryDisplayData)
+      create_from_directory(Display::CountryDisplayData, directory)
     end
 
     def create_eidas_scheme_repository(directory)
       create_without_translation(directory, Display::EidasSchemeDisplayData)
     end
 
-    def create_rp_repository(directory)
-      create(directory, Display::RpDisplayData)
+    def create_rp_repository
+      RpDisplayRepository.new(@translator)
     end
 
     def create_cycle_three_repository(directory)
-      create(directory, Display::CycleThreeDisplayData)
+      create_from_directory(Display::CycleThreeDisplayData, directory)
     end
 
   private
 
-    def create(directory, klass)
-      display_data_collection = Dir[File.join(directory, '*.yml').to_s].map do |file|
-        klass.new(File.basename(file, '.yml'), @translator)
+    def create(klass, simple_ids)
+      display_data_collection = simple_ids.map do |simple_id|
+        klass.new(simple_id, @translator)
       end
+
       display_data_collection.each(&:validate_content!)
       display_data_collection.inject({}) do |hash, data|
         hash[data.simple_id] = data
         hash
       end
+    end
+
+    def create_from_directory(klass, directory)
+      simple_ids = Dir[File.join(directory, "*.yml").to_s].map do |file|
+        File.basename(file, ".yml")
+      end
+
+      create(klass, simple_ids)
     end
 
     def create_without_translation(directory, klass)

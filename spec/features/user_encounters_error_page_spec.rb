@@ -6,7 +6,6 @@ RSpec.describe 'user encounters error page' do
   let(:api_saml_endpoint) { saml_proxy_api_uri(new_session_endpoint) }
 
   it 'will present the user with a list of transactions' do
-    stub_transactions_list
     stub_session_creation_error
     visit '/test-saml'
     click_button "saml-post"
@@ -34,7 +33,6 @@ RSpec.describe 'user encounters error page' do
 
   it 'will present error page when timeout occurs in upstream systems' do
     stub_request(:post, api_saml_endpoint).to_timeout
-    stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content t('errors.something_went_wrong.heading')
@@ -45,7 +43,6 @@ RSpec.describe 'user encounters error page' do
   it 'will present error page when standard error occurs in upstream systems' do
     e = StandardError.new("my message")
     stub_request(:post, api_saml_endpoint).to_raise(e)
-    stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content t('errors.something_went_wrong.heading')
@@ -57,7 +54,6 @@ RSpec.describe 'user encounters error page' do
     e = StandardError.new("my message")
     expect(Raven).to receive(:capture_exception).with(e)
     stub_request(:post, api_saml_endpoint).to_raise(e)
-    stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content t('errors.something_went_wrong.heading')
@@ -69,7 +65,6 @@ RSpec.describe 'user encounters error page' do
     expect(Rails.logger).to_not receive(:error)
     error_body = { errorId: '0', exceptionType: 'SERVER_ERROR' }
     stub_request(:post, api_saml_endpoint).and_return(status: 500, body: error_body.to_json)
-    stub_transactions_list
     visit '/test-saml'
     click_button "saml-post"
     expect(page).to have_content t('errors.something_went_wrong.heading')
@@ -80,7 +75,6 @@ RSpec.describe 'user encounters error page' do
     before :each do
       set_session_and_session_cookies!
       stub_api_idp_list_for_sign_in
-      stub_transactions_list
     end
 
     it 'will present session error page when session error occurs in upstream systems' do

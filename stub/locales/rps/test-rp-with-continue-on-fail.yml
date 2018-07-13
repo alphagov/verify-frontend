@@ -1,9 +1,0 @@
-en:
-  rps:
-    test-rp-with-continue-on-fail:
-      name: register for an identity profile
-      rp_name: Test RP
-      analytics_description: analytics description for test-rp
-      other_ways_text: <p>You can still continue to complete your transaction.</p>
-      other_ways_description: sign your declaration
-      tailored_text: <p>This is tailored text for test-rp-with-continue-on-fail</p>

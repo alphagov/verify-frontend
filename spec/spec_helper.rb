@@ -100,6 +100,13 @@ RSpec.configure do |config|
   config.before(:example) do
     I18n.locale = :en if defined? I18n
   end
+
+  config.before(:each) do |test|
+    unless test.metadata[:skip_before]
+      stub_transactions_list
+      stub_translations
+    end
+  end
 end
 
 $:.unshift File.expand_path('../../app/', __FILE__)

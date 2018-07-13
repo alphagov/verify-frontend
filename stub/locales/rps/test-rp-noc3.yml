@@ -1,9 +1,0 @@
-en:
-  rps:
-    test-rp-noc3:
-      name: Register for an identity profile (forceauthn & no cycle3)
-      rp_name: Test RP
-      analytics_description: analytics description for test-rp-noc3
-      other_ways_text: If you can’t verify your identity using GOV.UK Verify, there are other ways to <a href='http://www.example.com'>register for an identity profile (forceauthn & no cycle3)</a>
-      other_ways_description: other ways to register for an identity profile (forceauthn & no cycle3)
-      tailored_text: <p>This is tailored text for test-rp-noc3</p>
