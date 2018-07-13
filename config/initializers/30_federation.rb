@@ -39,6 +39,7 @@ Rails.application.config.after_initialize do
   CONTINUE_ON_FAILED_REGISTRATION_RPS = RP_CONFIG.fetch('allow_continue_on_failed_registration', [])
   rps_name_and_homepage = RP_CONFIG['transaction_type']['display_name_and_homepage'] || []
   rps_name_only = RP_CONFIG['transaction_type']['display_name_only'] || []
+  REDIRECT_TO_RP_LIST = RP_CONFIG['redirect_to_rp'] || []
   DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(federation_translator, rps_name_and_homepage.clone, rps_name_only.clone)
   TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(federation_translator, rps_name_and_homepage.clone, rps_name_only.clone)
 
