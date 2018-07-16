@@ -1,7 +1,7 @@
 en:
   idps:
     stub-idp-demo:
-      name: "Demo IDP"
+      name: "Stub Idp Demo"
       tagline: "a really demo identity provider"
       about: |
           <p>Something something.</p>
