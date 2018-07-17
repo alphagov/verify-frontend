@@ -40,7 +40,7 @@ module UserCookiesPartialController
 private
 
   def journey_hint_value
-    MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] ||= '')
+    MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT])
   rescue MultiJson::ParseError
     nil
   end
