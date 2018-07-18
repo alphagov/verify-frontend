@@ -7,7 +7,6 @@ require 'i18n'
 
 describe 'RpTranslationService' do
   before(:each) do
-    CONFIG_PROXY = instance_double("ConfigProxy")
     allow(CONFIG_PROXY).to receive(:transactions).and_return(MultiJson.load('[{
       "simpleId":"test-rp",
       "entityId":"http://example.com/test-rp",
