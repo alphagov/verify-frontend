@@ -67,6 +67,8 @@ private
 
   def redirect_for_journey_hint(hint)
     case hint
+    when 'verify_start'
+      redirect_to start_path
     when 'registration'
       redirect_to begin_registration_path
     when 'uk_idp_sign_in'
