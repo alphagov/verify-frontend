@@ -2,6 +2,12 @@ require 'feature_helper'
 require 'api_test_helper'
 
 describe 'pages redirect with journey hint parameter', type: :request do
+  it 'will redirect the user to verify start path when journey hint parameter is set to uk_idp_start' do
+    stub_session_creation
+    post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state', 'journey_hint' => 'uk_idp_start' }
+    expect(response).to redirect_to start_path
+  end
+
   it 'will redirect the user to registration path when journey hint parameter is set to registration' do
     stub_session_creation
     post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state', 'journey_hint' => 'registration' }
@@ -29,6 +35,30 @@ describe 'pages redirect with journey hint parameter', type: :request do
   it 'will redirect the user to start path when journey hint parameter is not present' do
     stub_session_creation
     post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
+    expect(response).to redirect_to start_path
+  end
+
+  it 'will redirect the user to eidas enabled start path when journey hint parameter is not present and eidas is enabled' do
+    stub_session_creation('transactionSupportsEidas' => true)
+    post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
+    expect(response).to redirect_to prove_identity_path
+  end
+
+  it 'will redirect the user to start path path when journey hint parameter is an unknown value and eidas is enabled' do
+    stub_session_creation('transactionSupportsEidas' => true)
+    post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state', 'journey_hint' => 'foobar' }
+    expect(response).to redirect_to prove_identity_path
+  end
+
+  it 'will redirect the user to eidas country picker path when journey hint parameter is set to eidas_sign_in and eidas is enabled' do
+    stub_session_creation('transactionSupportsEidas' => true)
+    post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state', 'journey_hint' => 'eidas_sign_in' }
+    expect(response).to redirect_to choose_a_country_path
+  end
+
+  it 'will redirect the user to eidas country picker path when journey hint parameter is set to eidas_sign_in and eidas is disabled' do
+    stub_session_creation
+    post '/SAML2/SSO', params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state', 'journey_hint' => 'eidas_sign_in' }
     expect(response).to redirect_to start_path
   end
 end
