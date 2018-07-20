@@ -13,7 +13,7 @@ describe AuthnResponseController do
       include_examples 'idp_authn_response', 'registration', 'CANCEL', 'Cancel - REGISTER_WITH_IDP', :cancelled_registration_path
       include_examples 'idp_authn_response', 'registration', 'FAILED_UPLIFT', 'Failed Uplift - REGISTER_WITH_IDP', :failed_uplift_path
       include_examples 'idp_authn_response', 'registration', 'PENDING', 'Paused - REGISTER_WITH_IDP', :paused_registration_path
-      include_examples 'idp_authn_response', 'registration', 'OTHER', 'Failure - REGISTER_WITH_IDP', :failed_registration_path
+      include_examples 'idp_authn_response', 'registration', 'FAILED', 'Failure - REGISTER_WITH_IDP', :failed_registration_path
     end
 
     context 'sign_in' do
@@ -21,7 +21,7 @@ describe AuthnResponseController do
       include_examples 'idp_authn_response', 'sign_in', 'CANCEL', 'Cancel - SIGN_IN_WITH_IDP', :start_path
       include_examples 'idp_authn_response', 'sign_in', 'FAILED_UPLIFT', 'Failed Uplift - SIGN_IN_WITH_IDP', :failed_uplift_path
       include_examples 'idp_authn_response', 'sign_in', 'PENDING', 'Paused - SIGN_IN_WITH_IDP', :paused_registration_path
-      include_examples 'idp_authn_response', 'sign_in', 'OTHER', 'Failure - SIGN_IN_WITH_IDP', :failed_sign_in_path
+      include_examples 'idp_authn_response', 'sign_in', 'FAILED', 'Failure - SIGN_IN_WITH_IDP', :failed_sign_in_path
     end
 
     it 'when relay state does not equal session id in the idp response' do
@@ -39,14 +39,14 @@ describe AuthnResponseController do
       include_examples 'country_authn_response', 'registration', 'SUCCESS', :confirmation_path
       include_examples 'country_authn_response', 'registration', 'CANCEL', :failed_registration_path
       include_examples 'country_authn_response', 'registration', 'FAILED_UPLIFT', :failed_uplift_path
-      include_examples 'country_authn_response', 'registration', 'OTHER', :failed_registration_path
+      include_examples 'country_authn_response', 'registration', 'FAILED', :failed_registration_path
     end
 
     context 'sign_in' do
       include_examples 'country_authn_response', 'sign_in', 'SUCCESS', :response_processing_path
       include_examples 'country_authn_response', 'sign_in', 'CANCEL', :start_path
       include_examples 'country_authn_response', 'sign_in', 'FAILED_UPLIFT', :failed_uplift_path
-      include_examples 'country_authn_response', 'sign_in', 'OTHER', :failed_sign_in_path
+      include_examples 'country_authn_response', 'sign_in', 'FAILED', :failed_sign_in_path
     end
 
     it 'when relay state does not equal session id in the country response' do
@@ -84,9 +84,10 @@ describe AuthnResponseController do
 
     context 'receiving CANCEL status' do
       let(:status) { 'CANCEL' }
-      let(:cookie_with_failed_status) { { FAILED: 'http://idcorp.com' }.to_json }
-      it { should eq cookie_with_failed_status }
+      let(:cookie_with_cancelled_status) { { CANCEL: 'http://idcorp.com' }.to_json }
+      it { should eq cookie_with_cancelled_status }
     end
+
     context 'receiving FAILED_UPLIFT status' do
       let(:status) { 'FAILED_UPLIFT' }
       let(:cookie_with_failed_uplift_status) { { FAILED_UPLIFT: 'http://idcorp.com' }.to_json }
