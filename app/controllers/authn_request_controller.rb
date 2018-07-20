@@ -13,8 +13,7 @@ class AuthnRequestController < SamlController
 
     AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
 
-    journey_hint = params['journey_hint'].present? ? params['journey_hint'] : 'unspecified'
-    redirect_for_journey_hint journey_hint
+    redirect_for_journey_hint params['journey_hint']
   end
 
 private
@@ -67,7 +66,7 @@ private
 
   def redirect_for_journey_hint(hint)
     case hint
-    when 'verify_start'
+    when 'uk_idp_start'
       redirect_to start_path
     when 'registration'
       redirect_to begin_registration_path
@@ -77,10 +76,7 @@ private
       do_eidas_sign_in_redirect
     when 'submission_confirmation'
       redirect_to confirm_your_identity_path
-    when 'unspecified'
-      do_default_redirect
     else
-      logger.info "journey_hint value: #{hint}"
       do_default_redirect
     end
   end
