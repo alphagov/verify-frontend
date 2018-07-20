@@ -77,6 +77,7 @@ private
     when 'submission_confirmation'
       redirect_to confirm_your_identity_path
     else
+      logger.info "Unrecognised journey_hint value: #{hint}" unless hint.nil? or hint.eql?('unspecified')
       do_default_redirect
     end
   end
