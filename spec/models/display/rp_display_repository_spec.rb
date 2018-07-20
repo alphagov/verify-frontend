@@ -24,7 +24,6 @@ module Display
       @translator = instance_double("Display::FederationTranslator")
       allow(@translator).to receive(:translate).and_return("")
 
-      RP_TRANSLATION_SERVICE = instance_double("RpTranslationService")
       allow(RP_TRANSLATION_SERVICE).to receive(:transactions).and_return(['test-rp'])
       allow(RP_TRANSLATION_SERVICE).to receive(:update_rp_translations).with('test-rp').and_return(@translations)
     end
