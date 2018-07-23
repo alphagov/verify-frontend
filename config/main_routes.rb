@@ -8,7 +8,7 @@ get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
 
 QUESTIONS_LIGHT_V2 = "questions_light_v2".freeze
 
-questions_light_v2_control_piwik = SelectRoute.new(QUESTIONS_LIGHT_V2, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
+# questions_light_v2_control_piwik = SelectRoute.new(QUESTIONS_LIGHT_V2, 'control', is_start_of_test: true, experiment_loa: 'LEVEL_2')
 questions_light_v2_control = SelectRoute.new(QUESTIONS_LIGHT_V2, 'control', is_start_of_test: false, experiment_loa: 'LEVEL_2')
 questions_light_v2_variant_piwik = SelectRoute.new(QUESTIONS_LIGHT_V2, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_2')
 questions_light_v2_variant = SelectRoute.new(QUESTIONS_LIGHT_V2, 'variant', is_start_of_test: false, experiment_loa: 'LEVEL_2')
@@ -100,11 +100,14 @@ get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
 get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 get 'paused_registration', to: 'paused_registration#index', as: :paused_registration
 
-constraints questions_light_v2_control_piwik do
-  get 'about', to: 'about_loa2#index', as: :about
-end
+# HUB-198 Temporarily stopping the A/B test
+# constraints questions_light_v2_control_piwik do
+#   get 'about', to: 'about_loa2#index', as: :about
+# end
 
 constraints questions_light_v2_control do
+  get 'about', to: 'about_loa2#index', as: :about
+
   get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
