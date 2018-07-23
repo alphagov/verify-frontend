@@ -13,7 +13,7 @@ describe AuthnResponseController do
       include_examples 'idp_authn_response', 'registration', 'CANCEL', 'Cancel - REGISTER_WITH_IDP', :cancelled_registration_path
       include_examples 'idp_authn_response', 'registration', 'FAILED_UPLIFT', 'Failed Uplift - REGISTER_WITH_IDP', :failed_uplift_path
       include_examples 'idp_authn_response', 'registration', 'PENDING', 'Paused - REGISTER_WITH_IDP', :paused_registration_path
-      include_examples 'idp_authn_response', 'registration', 'OTHER', 'Failure - REGISTER_WITH_IDP', :failed_registration_path
+      include_examples 'idp_authn_response', 'registration', 'FAILED', 'Failure - REGISTER_WITH_IDP', :failed_registration_path
     end
 
     context 'sign_in' do
@@ -21,7 +21,7 @@ describe AuthnResponseController do
       include_examples 'idp_authn_response', 'sign_in', 'CANCEL', 'Cancel - SIGN_IN_WITH_IDP', :start_path
       include_examples 'idp_authn_response', 'sign_in', 'FAILED_UPLIFT', 'Failed Uplift - SIGN_IN_WITH_IDP', :failed_uplift_path
       include_examples 'idp_authn_response', 'sign_in', 'PENDING', 'Paused - SIGN_IN_WITH_IDP', :paused_registration_path
-      include_examples 'idp_authn_response', 'sign_in', 'OTHER', 'Failure - SIGN_IN_WITH_IDP', :failed_sign_in_path
+      include_examples 'idp_authn_response', 'sign_in', 'FAILED', 'Failure - SIGN_IN_WITH_IDP', :failed_sign_in_path
     end
 
     it 'when relay state does not equal session id in the idp response' do
@@ -39,14 +39,14 @@ describe AuthnResponseController do
       include_examples 'country_authn_response', 'registration', 'SUCCESS', :confirmation_path
       include_examples 'country_authn_response', 'registration', 'CANCEL', :failed_registration_path
       include_examples 'country_authn_response', 'registration', 'FAILED_UPLIFT', :failed_uplift_path
-      include_examples 'country_authn_response', 'registration', 'OTHER', :failed_registration_path
+      include_examples 'country_authn_response', 'registration', 'FAILED', :failed_registration_path
     end
 
     context 'sign_in' do
       include_examples 'country_authn_response', 'sign_in', 'SUCCESS', :response_processing_path
       include_examples 'country_authn_response', 'sign_in', 'CANCEL', :start_path
       include_examples 'country_authn_response', 'sign_in', 'FAILED_UPLIFT', :failed_uplift_path
-      include_examples 'country_authn_response', 'sign_in', 'OTHER', :failed_sign_in_path
+      include_examples 'country_authn_response', 'sign_in', 'FAILED', :failed_sign_in_path
     end
 
     it 'when relay state does not equal session id in the country response' do
@@ -67,30 +67,34 @@ describe AuthnResponseController do
         'loaAchieved' => 'LEVEL_1'
       )
     }
-    let(:post_endpoint) { :country_response }
     let(:selected_entity) {
       {
-        'entity_id' => 'http://idcorp.com',
-        'simple_id' => 'stub-entity-one',
-        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+        'entity_id' => 'https://acme.de/ServiceMetadata',
+        'simple_id' => 'DE',
+        'levels_of_assurance' => %w[LEVEL_1 LEVEL_2]
       }
     }
+
+    let(:saml_proxy_api) { double(:saml_proxy_api) }
+
     before(:each) do
+      stub_const('SAML_PROXY_API', saml_proxy_api)
+      set_session_and_cookies_with_loa('LEVEL_1')
+      stub_piwik_request_with_rp_and_loa({}, 'LEVEL_1')
       allow(saml_proxy_api).to receive(:forward_country_authn_response).and_return(country_authn_response)
       session[:selected_country] = selected_entity
     end
 
-    include_examples 'tracking cookie'
-
-    context 'receiving CANCEL status' do
-      let(:status) { 'CANCEL' }
-      let(:cookie_with_failed_status) { { FAILED: 'http://idcorp.com' }.to_json }
-      it { should eq cookie_with_failed_status }
+    subject(:cookie_after_request) do
+      post :country_response, params: { RelayState: 'my-session-id-cookie', SAMLResponse: 'a-saml-response', locale: 'en' }
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]
     end
-    context 'receiving FAILED_UPLIFT status' do
-      let(:status) { 'FAILED_UPLIFT' }
-      let(:cookie_with_failed_uplift_status) { { FAILED_UPLIFT: 'http://idcorp.com' }.to_json }
-      it { should eq cookie_with_failed_uplift_status }
+
+    %w[CANCEL FAILED_UPLIFT SUCCESS FAILED].each do |status|
+      context "receiving #{status} status" do
+        let(:status) { status }
+        it { should be_nil }
+      end
     end
   end
 
