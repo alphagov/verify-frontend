@@ -52,7 +52,6 @@ private
   end
 
   def handle_country_response(status, response)
-    set_journey_status(session[:selected_country], status)
     redirect_to country_redirects(status, response)
   end
 

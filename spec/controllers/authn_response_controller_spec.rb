@@ -67,31 +67,34 @@ describe AuthnResponseController do
         'loaAchieved' => 'LEVEL_1'
       )
     }
-    let(:post_endpoint) { :country_response }
     let(:selected_entity) {
       {
-        'entity_id' => 'http://idcorp.com',
-        'simple_id' => 'stub-entity-one',
-        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+        'entity_id' => 'https://acme.de/ServiceMetadata',
+        'simple_id' => 'DE',
+        'levels_of_assurance' => %w[LEVEL_1 LEVEL_2]
       }
     }
+
+    let(:saml_proxy_api) { double(:saml_proxy_api) }
+
     before(:each) do
+      stub_const('SAML_PROXY_API', saml_proxy_api)
+      set_session_and_cookies_with_loa('LEVEL_1')
+      stub_piwik_request_with_rp_and_loa({}, 'LEVEL_1')
       allow(saml_proxy_api).to receive(:forward_country_authn_response).and_return(country_authn_response)
       session[:selected_country] = selected_entity
     end
 
-    include_examples 'tracking cookie'
-
-    context 'receiving CANCEL status' do
-      let(:status) { 'CANCEL' }
-      let(:cookie_with_cancelled_status) { { CANCEL: 'http://idcorp.com' }.to_json }
-      it { should eq cookie_with_cancelled_status }
+    subject(:cookie_after_request) do
+      post :country_response, params: { RelayState: 'my-session-id-cookie', SAMLResponse: 'a-saml-response', locale: 'en' }
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]
     end
 
-    context 'receiving FAILED_UPLIFT status' do
-      let(:status) { 'FAILED_UPLIFT' }
-      let(:cookie_with_failed_uplift_status) { { FAILED_UPLIFT: 'http://idcorp.com' }.to_json }
-      it { should eq cookie_with_failed_uplift_status }
+    %w[CANCEL FAILED_UPLIFT SUCCESS FAILED].each do |status|
+      context "receiving #{status} status" do
+        let(:status) { status }
+        it { should be_nil }
+      end
     end
   end
 
