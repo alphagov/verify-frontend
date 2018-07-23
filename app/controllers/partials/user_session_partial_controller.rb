@@ -25,10 +25,15 @@ module UserSessionPartialController
 
   def selected_identity_provider
     selected_idp = session[:selected_idp]
-    if selected_idp.nil?
-      raise(Errors::WarningLevelError, 'No selected IDP in session')
-    else
-      IdentityProvider.from_session(selected_idp)
-    end
+    raise(Errors::WarningLevelError, 'No selected IDP in session') if selected_idp.nil?
+
+    IdentityProvider.from_session(selected_idp)
+  end
+
+  def selected_country
+    selected_country = session[:selected_country]
+    raise(Errors::WarningLevelError, 'No selected Country in session') if selected_country.nil?
+
+    Country.from_session(selected_country)
   end
 end

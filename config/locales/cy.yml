@@ -34,6 +34,7 @@ cy:
     failed_registration: cofrestru-wedi-methu
     failed_sign_in: mewngofnodi-wedi-methu
     failed_uplift: methwyd-yr-ymgodiad
+    failed_country_sign_in: failed-country-sign-in-cy
     other_ways_to_access_service: ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth
     forgot_company: wedi-anghofio-cwmni
     response_processing: prosesu-ymateb
@@ -407,6 +408,13 @@ cy:
       try_another_text: Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth.
       try_another_summary: Ceisiwch wirio gyda chwmni ardystiedig arall
       contact_details_intro: Cysylltwch â %{idp_name}
+    failed_country_sign_in:
+      title: Methu eich mewngofnodi
+      heading: "Mae eich cynllun hunaniaeth yn %{country_name} wedi methu â chadarnhau eich hunaniaeth"
+      other_ways: "Mae yna ffyrdd eraill y gallwch %{other_ways_description}."
+      online_link: Ffyrdd eraill i brofi eich hunaniaeth ar-lein
+      online: Ar-lein
+      offline: All-lein
     failed_sign_in:
       title: Methu eich mewngofnodi
       heading: Ni all %{display_name} eich mewngofnodi

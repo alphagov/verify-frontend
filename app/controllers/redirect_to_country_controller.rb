@@ -6,6 +6,7 @@ class RedirectToCountryController < ApplicationController
 
   def choose_a_country_submit
     country = decorated_country(params[:country])
+    session[:selected_country] = country.country
     if country.viewable?
       select_country(country)
       render :index
@@ -16,6 +17,7 @@ class RedirectToCountryController < ApplicationController
 
   def choose_a_country_submit_ajax
     country = decorated_country(params[:country])
+    session[:selected_country] = country.country
     if country.viewable?
       select_country(country)
       render json: @country_request

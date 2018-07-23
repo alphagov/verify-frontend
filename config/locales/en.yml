@@ -401,6 +401,13 @@ en:
       try_another_text: "Other companies use different methods from %{idp_name} and may therefore stand a better chance of verifying your identity."
       try_another_summary: Try verifying with another certified company
       contact_details_intro: "Contact %{idp_name}"
+    failed_country_sign_in:
+      title: Unable to sign you in
+      heading: "Your identity scheme in %{country_name} has been unable to confirm your identity"
+      other_ways: "There are other ways you can %{other_ways_description}."
+      online_link: Other ways to prove your identity online
+      online: Online
+      offline: Offline
     failed_sign_in:
       title: Unable to sign you in
       heading: "%{display_name} couldn’t sign you in"
