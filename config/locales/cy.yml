@@ -2,15 +2,15 @@ cy:
   routes:
     start: dechrau
     prove_identity: profi-hunaniaeth
-    begin_registration: begin-registration-cy
-    begin_sign_in: begin-sign-in-cy
+    begin_registration: dechrau-cofrestru
+    begin_sign_in: dechrau-mewngofnodi
     about: am
     sign_in: mewngofnodi
     about_certified_companies: am-gwmniau-ardystiedig
     about_identity_accounts: am-gyfrifon-hunaniaeth
     about_choosing_a_company: am-ddewis-cwmni
     select_documents: dewis-dogfennau
-    select_documents_none: select-documents-none-cy
+    select_documents_none: dewis-dogfennau-dim
     other_identity_documents: dogfennau-hunaniaeth-eraill
     select_phone: dewis-ffon
     will_it_work_for_me: a-fydd-yn-gweithio-i-mi
@@ -19,22 +19,22 @@ cy:
     why_might_this_not_work_for_me: pam-efallai-na-fydd-hyn-yn-gweithio-i-mi
     will_not_work_without_uk_address: ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du
     choose_a_country: dewiswch-wlad
-    redirect_to_country: redirect-to-country-cy
+    redirect_to_country: ailgyfeirio-i-wlad
     choose_a_certified_company: dewis-cwmni-ardystiedig
     why_companies: pam-cwmniau
     unlikely_to_verify: anhebygol-i-ddilysu
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
     redirect_to_idp_question: ailgyfeirio-i-gwestiwn-idp
-    idp_wont_work_for_you_one_doc: idp-wont-work-for-you-one-doc-welsh
+    idp_wont_work_for_you_one_doc: nid-yw-idp-yn-gweithio-i-chi-un-ddogfen
     privacy_notice: hysbysiad-preifatrwydd
-    verify_services: verify-services-cy     # TODO: Get cy translation
+    verify_services: gwasanaethau-verify
     cookies: cwcis
     confirm_your_identity: cadarnhau-eich-hunaniaeth
     confirmation: cadarnhad
     failed_registration: cofrestru-wedi-methu
     failed_sign_in: mewngofnodi-wedi-methu
     failed_uplift: methwyd-yr-ymgodiad
-    failed_country_sign_in: failed-country-sign-in-cy
+    failed_country_sign_in: methu-mewngofnodi-gwlad
     other_ways_to_access_service: ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth
     forgot_company: wedi-anghofio-cwmni
     response_processing: prosesu-ymateb
@@ -52,7 +52,7 @@ cy:
     no_idps_available: dim-idps-ar-gael
     cancelled_registration: cofrestru-wedi-ganslo
     select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
-    confirming_it_is_you: confirming-it-is-you-cy
+    confirming_it_is_you: cadarnhau-mai-chi-ydyw
     paused_registration: wedi-oedi
   title:
     error: Error
@@ -90,7 +90,7 @@ cy:
       country_not_listed_link: ffyrdd eraill i %{other_ways_description}.
       select_label: "Dewis "
     redirect_to_country:
-      title: Redirect to country
+      title: Ailgyfeirio i wlad
       heading: Mynd ymlaen i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
     prove_identity:
@@ -125,8 +125,8 @@ cy:
       back: Yn ôl
       about_link: Dechreuwch nawr
       registration_message_html: Os nad oes gennych gyfrif hunaniaeth, gallwch %{href}.
-      last_certified: The last certified company used on this device was %{company_name}.
-      any_certified_company: "You can use an identity account you set up with any certified company in the past:"
+      last_certified: "Y cwmni ardystiedig diwethaf a ddefnyddiwyd ar y ddyfais hon oedd %{company_name}"
+      any_certified_company: "Gallwch ddefnyddio cyfrif hunaniaeth rydych wedi'i sefydlu gydag unrhyw gwmni ardystiedig yn y gorffennol:"
       select_idp: Ddewis %{display_name}
       sign_in_idp: Llofnodi i mewn gyda %{display_name}
       forgot_company: Ni allaf gofio pa gwmni wnaeth fy nilysu
@@ -134,8 +134,8 @@ cy:
       title: Cwcis
     privacy_notice:
       title: Hysbysiad preifatrwydd
-    verify_services:    # TODO: Get cy translation
-      title: Verify services
+    verify_services:
+      title: Gwasanaethau Verify
       heading: GOV.UK Verify
       message: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
     transaction_list:
@@ -147,12 +147,12 @@ cy:
       verify_is_a_service: Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
       ab_test:
         eligibility_info_html: |
-          <p>To use Verify, you need to:</p>
+          <p>I ddefnyddio Verify rydych angen:</p>
           <ul class="list-bullet list">
-          <li>be over 18 years old</li>
-          <li>have a UK address</li>
+          <li>bod dros 18 oed</li>
+          <li>bod â chyfeiriad  yn y DU</li>
           </ul>
-        other_ways_link: "Other ways to %{other_ways_description}"
+        other_ways_link: "Ffyrdd eraill i %{other_ways_description}"
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
@@ -236,8 +236,8 @@ cy:
       title_other_identity_documents: Dogfennau hunaniaeth eraill
       non_uk_id_document: Oes gennych chi pasbort sydd ddim yn un o'r DU, cerdyn ID neu drwydded yrru?
       ab_test:
-        smart_phone_question: Do you have a smartphone or tablet that can download apps?
-        smart_phone_subtitle: You will need to download a free app and use your device's camera to take a photo of your identity document and a selfie.
+        smart_phone_question: Oes gennych ffôn clyfar neu lechen a all lawr lwytho apiau?
+        smart_phone_subtitle: Byddwch angen lawr lwytho ap am ddim a defnyddio camera eich dyfais i gymryd llun o'ch dogfen adnabyddiaeth a hun-lun.
     select_phone:
       title: Oes gennych ffôn symudol neu lechen?
       explanation: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.
@@ -364,7 +364,7 @@ cy:
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
     redirect_to_idp_question:
       heading: Dilysu gyda %{display_name}
-      loa1_heading: Setting up a %{display_name} account
+      loa1_heading: Sefydlu cyfrif %{display_name}
       answer_yes: Ydw
       answer_no: Na
       warning_html: |
@@ -410,7 +410,7 @@ cy:
       contact_details_intro: Cysylltwch â %{idp_name}
     failed_country_sign_in:
       title: Methu eich mewngofnodi
-      heading: "Mae eich cynllun hunaniaeth yn %{country_name} wedi methu â chadarnhau eich hunaniaeth"
+      heading: "Mae'r cynllun hunaniaeth yn eich gwlad wedi methu â chadarnhau eich hunaniaeth."
       other_ways: "Mae yna ffyrdd eraill y gallwch %{other_ways_description}."
       online_link: Ffyrdd eraill i brofi eich hunaniaeth ar-lein
       online: Ar-lein

@@ -10,7 +10,7 @@ RSpec.describe 'When the user visits the Verify services picker page' do
 
   it 'should display the page in Welsh' do
     stub_transactions_list
-    visit '/verify-services-cy'
+    visit '/gwasanaethau-verify'
     expect(page).to have_content t('hub.verify_services.message', locale: :cy)
   end
 
