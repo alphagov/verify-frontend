@@ -78,7 +78,8 @@ get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_you
 get 'choose_a_country', to: 'choose_a_country#choose_a_country', as: :choose_a_country
 post 'redirect_to_country', to: 'redirect_to_country#choose_a_country_submit', as: :choose_a_country_submit
 get 'failed_uplift', to: 'failed_uplift#index', as: :failed_uplift
-get 'failed_sign_in', to: 'failed_sign_in#index', as: :failed_sign_in
+get 'failed_sign_in', to: 'failed_sign_in#idp', as: :failed_sign_in
+get 'failed_country_sign_in', to: 'failed_sign_in#country', as: :failed_country_sign_in
 get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
 get 'forgot_company', to: 'static#forgot_company', as: :forgot_company
 get 'response_processing', to: 'response_processing#index', as: :response_processing

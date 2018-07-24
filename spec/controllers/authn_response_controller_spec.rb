@@ -46,7 +46,7 @@ describe AuthnResponseController do
       include_examples 'country_authn_response', 'sign_in', 'SUCCESS', :response_processing_path
       include_examples 'country_authn_response', 'sign_in', 'CANCEL', :start_path
       include_examples 'country_authn_response', 'sign_in', 'FAILED_UPLIFT', :failed_uplift_path
-      include_examples 'country_authn_response', 'sign_in', 'FAILED', :failed_sign_in_path
+      include_examples 'country_authn_response', 'sign_in', 'FAILED', :failed_country_sign_in_path
     end
 
     it 'when relay state does not equal session id in the country response' do

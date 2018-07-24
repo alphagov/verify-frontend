@@ -80,21 +80,23 @@ private
   end
 
   def idp_redirects(status, response)
+    is_registration = response.is_registration
     {
-      SUCCESS => response.is_registration ? confirmation_path : response_processing_path,
-      CANCEL => response.is_registration ? cancelled_registration_path : start_path,
+      SUCCESS => is_registration ? confirmation_path : response_processing_path,
+      CANCEL => is_registration ? cancelled_registration_path : start_path,
       FAILED_UPLIFT => failed_uplift_path,
       PENDING => paused_registration_path,
-      FAILED => response.is_registration ? failed_registration_path : failed_sign_in_path
+      FAILED => is_registration ? failed_registration_path : failed_sign_in_path
     }.fetch(status)
   end
 
   def country_redirects(status, response)
+    is_registration = response.is_registration
     {
-      SUCCESS => response.is_registration ? confirmation_path : response_processing_path,
-      CANCEL => response.is_registration ? failed_registration_path : start_path,
+      SUCCESS => is_registration ? confirmation_path : response_processing_path,
+      CANCEL => is_registration ? failed_registration_path : start_path,
       FAILED_UPLIFT => failed_uplift_path,
-      FAILED => response.is_registration ? failed_registration_path : failed_sign_in_path
+      FAILED => is_registration ? failed_registration_path : failed_country_sign_in_path
     }.fetch(status)
   end
 end
