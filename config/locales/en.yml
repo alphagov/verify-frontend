@@ -403,7 +403,7 @@ en:
       contact_details_intro: "Contact %{idp_name}"
     failed_country_sign_in:
       title: Unable to sign you in
-      heading: "Your identity scheme in %{country_name} has been unable to confirm your identity"
+      heading: "Your identity scheme in %{country_name} was unable to confirm your identity"
       other_ways: "There are other ways you can %{other_ways_description}."
       online_link: Other ways to prove your identity online
       online: Online
@@ -437,10 +437,11 @@ en:
       heading: "%{rp_name} is processing your details"
       bear_with_us: "This may take a few seconds, please bear with us."
       matching_error:
-        problem: "Sorry, %{rp_name} is having technical problems."
-        start_again_link: start again
-        start_again_message_html: "Please %{start_again_link} in a few minutes by signing in with your certified company."
-        other_ways: "If you continue having problems, there are other ways to %{other_ways_description}."
+        heading: "Sorry, there is a problem with the service"
+        other_ways: "Please try again later or see other ways you can %{other_ways_description}."
+        online_link: Other ways to prove your identity online
+        online: Online
+        offline: Offline
     forgot_company:
       title: Advice for forgotten company
     redirect_to_service:

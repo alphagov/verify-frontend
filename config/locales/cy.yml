@@ -410,7 +410,7 @@ cy:
       contact_details_intro: Cysylltwch â %{idp_name}
     failed_country_sign_in:
       title: Methu eich mewngofnodi
-      heading: "Mae'r cynllun hunaniaeth yn eich gwlad wedi methu â chadarnhau eich hunaniaeth."
+      heading: "Your identity scheme in %{country_name} was unable to confirm your identity"
       other_ways: "Mae yna ffyrdd eraill y gallwch %{other_ways_description}."
       online_link: Ffyrdd eraill i brofi eich hunaniaeth ar-lein
       online: Ar-lein
@@ -444,10 +444,11 @@ cy:
       heading: Mae %{rp_name} yn prosesu eich manylion
       bear_with_us: Gallai hyn gymryd ychydig o eiliadau, diolch am eich amynedd.
       matching_error:
-        problem: Mae’n ddrwg gennym, mae %{rp_name} yn cael problemau technegol.
-        start_again_link: dechrau eto
-        start_again_message_html: Dylech %{start_again_link} mewn ychydig o funudau drwy fewngofnodi gyda’ch cwmni ardystiedig.
-        other_ways: Os byddwch yn parhau i gael problemau, mae ffyrdd eraill i %{other_ways_description}.
+        heading: Sorry, there is a problem with the service
+        other_ways: "Please try again later or see other ways you can %{other_ways_description}."
+        online_link: Ffyrdd eraill i brofi eich hunaniaeth ar-lein
+        online: Ar-lein
+        offline: All-lein
     forgot_company:
       title: Cyngor ar gyfer cwmni sydd wedi’i anghofio
     redirect_to_service:
