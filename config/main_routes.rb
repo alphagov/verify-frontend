@@ -72,6 +72,7 @@ constraints IsLoa2 do
 end
 
 get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
+get 'verify-services.json', to: 'metadata#service_list', as: :verify_services_json
 get 'verify_services', to: 'static#verify_services', as: :verify_services
 get 'cookies', to: 'static#cookies', as: :cookies
 get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity

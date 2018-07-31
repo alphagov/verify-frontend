@@ -42,6 +42,7 @@ Rails.application.config.after_initialize do
   REDIRECT_TO_RP_LIST = RP_CONFIG['redirect_to_rp'] || []
   DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(federation_translator, rps_name_and_homepage.clone, rps_name_only.clone)
   TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(federation_translator, rps_name_and_homepage.clone, rps_name_only.clone)
+  SERVICE_LIST_DATA_CORRELATOR = Display::Rp::ServiceListDataCorrelator.new(federation_translator, rps_name_and_homepage.clone)
 
   # IDP Config
   IDP_CONFIG = YAML.load_file(CONFIG.idp_config)
