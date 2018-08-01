@@ -100,7 +100,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        "Sign In - #{idp_display_name} - #{hint_followed ? 'Followed' : 'Ignored'} Hint"
+        "Sign In - #{idp_display_name} - Hint #{hint_followed ? 'Followed' : 'Ignored'}"
       )
     end
 

@@ -155,7 +155,7 @@ RSpec.describe 'When the user visits the start page' do
       expect_any_instance_of(SignInController).to receive(:select_idp).and_call_original
       stub_session_select_idp_request(encrypted_entity_id)
       click_button 'Continue with'
-      expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Followed Hint")).to have_been_made.once
+      expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Hint Followed")).to have_been_made.once
       expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
     end
 
@@ -166,7 +166,7 @@ RSpec.describe 'When the user visits the start page' do
       stub_session_select_idp_request(encrypted_entity_id)
       click_button 'Continue with'
       then_im_at_the_idp
-      expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Followed Hint")).to have_been_made.once
+      expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Hint Followed")).to have_been_made.once
       expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
     end
 
