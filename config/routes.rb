@@ -48,5 +48,8 @@ Rails.application.routes.draw do
   get '/assets2/fp.gif', to: proc { |_| [200, {}, ['OK']] }
   get '/SAML2/metadata/sp', to: 'metadata#service_providers', as: :service_provider_metadata
   get '/SAML2/metadata/idp', to: 'metadata#identity_providers', as: :identity_provider_metadata
+  if SINGLE_IDP_FEATURE
+    get '/get-available-services', to: 'metadata#service_list', as: :verify_services_json
+  end
   get '/humans.txt', to: 'static#humanstxt'
 end
