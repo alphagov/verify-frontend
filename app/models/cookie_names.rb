@@ -2,6 +2,7 @@ module CookieNames
   SESSION_COOKIE_NAME = '_verify-frontend_session'.freeze
   SESSION_ID_COOKIE_NAME = 'x_govuk_session_cookie'.freeze
   VERIFY_FRONT_JOURNEY_HINT = 'verify-front-journey-hint'.freeze
+  VERIFY_SINGLE_IDP_JOURNEY = 'verify-single-idp-journey'.freeze
   VERIFY_LOCALE = 'x_verify_locale'.freeze
   PIWIK_USER_ID = 'PIWIK_USER_ID'.freeze
   NO_CURRENT_SESSION_VALUE = 'no-current-session'.freeze

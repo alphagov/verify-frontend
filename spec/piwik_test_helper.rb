@@ -18,6 +18,27 @@ def stub_piwik_request(extra_parameters = {},
     .with(headers: piwik_headers.update(extra_headers), query: hash_including(piwik_request.update(extra_parameters)))
 end
 
+def stub_piwik_request_no_session(extra_parameters = {}, extra_headers = {}, extra_custom_variables = [])
+  piwik_request = {
+      'rec' => '1',
+      'apiv' => '1',
+      'idsite' => INTERNAL_PIWIK.site_id.to_s,
+      'cookie' => 'false',
+      '_cvar' => create_extra_custom_variables_only(extra_custom_variables)
+  }
+  piwik_headers = {
+      'Connection' => 'Keep-Alive',
+      'Host' => 'localhost:4242',
+      'User-Agent' => 'Rails Testing'
+  }
+  stub_request(:get, INTERNAL_PIWIK.url)
+      .with(headers: piwik_headers.update(extra_headers), query: hash_including(piwik_request.update(extra_parameters)))
+end
+
+def create_extra_custom_variables_only(extra_custom_variables)
+  '{' + extra_custom_variables.join(',') + '}'
+end
+
 def create_custom_variable_param(loa, extra_custom_variables, transaction_analytics_description)
   rp_custom_variable = "\"1\":[\"RP\",\"#{transaction_analytics_description}\"]"
   loa_custom_variable = "\"2\":[\"LOA_REQUESTED\",\"#{loa}\"]"
@@ -74,11 +95,20 @@ def stub_piwik_report_number_of_recommended_idps(number_of_recommended_idps, loa
   stub_piwik_request(piwik_request, {}, loa, [], transaction_analytics_description)
 end
 
-def stub_piwik_journey_type_request(journey_type, action_name, loa)
+def stub_piwik_journey_type_request(journey_type, action_name, loa = 'LEVEL_2')
   journey_custom_variable = "\"3\":[\"JOURNEY_TYPE\",\"#{journey_type}\"]"
 
   piwik_request = {
       'action_name' => action_name
   }
   stub_piwik_request(piwik_request, {}, loa, [journey_custom_variable])
+end
+
+def stub_piwik_journey_type_request_no_session(journey_type, action_name)
+  journey_custom_variable = "\"3\":[\"JOURNEY_TYPE\",\"#{journey_type}\"]"
+
+  piwik_request = {
+      'action_name' => action_name
+  }
+  stub_piwik_request_no_session(piwik_request, {}, [journey_custom_variable])
 end

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   get '/SAML2/metadata/idp', to: 'metadata#identity_providers', as: :identity_provider_metadata
   if SINGLE_IDP_FEATURE
     get '/get-available-services', to: 'metadata#service_list', as: :services
+    post 'initiate-single-idp-journey', to: 'initiate_single_idp_journey#redirect_from_idp'
   end
   get '/humans.txt', to: 'static#humanstxt'
 end

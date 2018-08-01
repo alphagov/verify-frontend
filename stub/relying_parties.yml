@@ -18,3 +18,9 @@ redirect_to_rp:
   test-rp:
     url: 'http://localhost:50300/test-saml'
     ab_test: 'test_ab_test'
+
+single_idp_enabled:
+  test-rp-no-demo:
+    url: 'http://localhost:50300/test-saml'
+
+
