@@ -1,7 +1,7 @@
 module Display
   module Rp
     class ServiceListDataCorrelator
-      Transaction = Struct.new(:name, :loa, :taxon, :simpleId)
+      Transaction = Struct.new(:name, :loa, :taxon, :serviceId)
 
       def initialize(translator, rps_name_homepage)
         @translator = translator
@@ -11,7 +11,7 @@ module Display
       def correlate(data)
         filter_transactions(data, @rps_name_homepage).map do |transaction|
           name = translate_name(transaction)
-          Transaction.new(name, transaction.fetch('loaList').min, translate_taxon(transaction), transaction.fetch('simpleId'))
+          Transaction.new(name, transaction.fetch('loaList').min, translate_taxon(transaction), transaction.fetch('entityId'))
         end
       rescue KeyError => e
         Rails.logger.error e

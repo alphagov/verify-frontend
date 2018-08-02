@@ -12,18 +12,18 @@ describe MetadataController do
     expect(subject.content_type).to eq("application/json")
     expect(subject).to have_http_status(200)
 
-    test_rp_object = body.find { |rp| rp["simpleId"] == "test-rp" }
+    test_rp_object = body.find { |rp| rp["serviceId"] == "some-entity-id" }
 
     expect(test_rp_object.nil?).to be false
     expect(test_rp_object["name"]).to eq("register for an identity profile")
     expect(test_rp_object["loa"]).to eq("LEVEL_2")
     expect(test_rp_object["taxon"]).to eq("Benefits")
 
-    loa1_test_rp_object = body.find { |rp| rp["simpleId"] == "test-rp-noc3" }
+    another_test_rp_object = body.find { |rp| rp["serviceId"] == "some-other-entity-id" }
 
-    expect(loa1_test_rp_object.nil?).to be false
-    expect(loa1_test_rp_object["name"]).to eq("Register for an identity profile (forceauthn & no cycle3)")
-    expect(loa1_test_rp_object["loa"]).to eq("LEVEL_2")
-    expect(loa1_test_rp_object["taxon"]).to eq("Benefits")
+    expect(another_test_rp_object.nil?).to be false
+    expect(another_test_rp_object["name"]).to eq("Register for an identity profile (forceauthn & no cycle3)")
+    expect(another_test_rp_object["loa"]).to eq("LEVEL_2")
+    expect(another_test_rp_object["taxon"]).to eq("Benefits")
   end
 end
