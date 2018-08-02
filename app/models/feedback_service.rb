@@ -40,7 +40,7 @@ With email: <%= presented_email(form) %>
   end
 
   def subject(form)
-    form.reply_required? ? 'Enquiry' : 'Feedback'
+    form.reply_required? ? '[GOV.UK Verify] Enquiry' : '[GOV.UK Verify] Feedback'
   end
 
   def presented_name(form)
