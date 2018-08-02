@@ -71,7 +71,7 @@ With email: #{email}
 
 
     expected_ticket = {
-                        subject: 'Enquiry',
+                        subject: '[GOV.UK Verify] Enquiry',
                         comment: { value: enquiry_comment_value },
                         requester: { name: name, email: email }
                       }
@@ -93,7 +93,7 @@ With email: #{email}
 
 
     expected_ticket = {
-                        subject: 'Feedback',
+                        subject: '[GOV.UK Verify] Feedback',
                         comment: { value: feedback_comment_value },
                         requester: { name: '', email: default_email }
                       }
