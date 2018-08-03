@@ -34,8 +34,10 @@ Rails.application.routes.draw do
     post 'csp-reporter', to: 'test_csp_reporter#report'
   end
 
-  localized do
-    add_routes :main_routes
+  constraints(format: /html/) do
+    localized do
+      add_routes :main_routes
+    end
   end
 
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
