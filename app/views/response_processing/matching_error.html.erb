@@ -3,13 +3,14 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'errors.something_went_wrong.heading' %></h1>
-    <p>
-      <%= t('hub.response_processing.matching_error.problem', rp_name: @rp_name) %>
-    </p>
-    <p><%= t('hub.response_processing.matching_error.start_again_message_html', start_again_link: link_to(t('hub.response_processing.matching_error.start_again_link'), redirect_to_service_error_path)) %></p>
+    <h1 class="heading-large"><%= t 'hub.response_processing.matching_error.heading' %></h1>
 
     <p><%= t('hub.response_processing.matching_error.other_ways', other_ways_description: @other_ways_description) %></p>
-    <%= render partial: 'shared/other_ways', locals: {other_ways_description: @other_ways_description, other_ways_text: @other_ways_text} %>
+
+    <h2 class="heading-medium"><%= t 'hub.response_processing.matching_error.online' %></h2>
+    <p><%= link_to(t('hub.response_processing.matching_error.online_link'), redirect_to_service_error_path) %></p>
+
+    <h2 class="heading-medium"><%= t 'hub.response_processing.matching_error.offline' %></h2>
+    <div class="other-ways-to-complete-transaction"><%= raw @other_ways_text %></div>
   </div>
 </div>
