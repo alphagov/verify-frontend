@@ -30,6 +30,7 @@ class FeedbackSourceMapper
       'NO_MOBILE_PHONE' => 'no_mobile_phone',
       'SIGN_IN_PAGE' => 'sign_in',
       'START_PAGE' => 'start',
+      'START_PAGE_WITH_HINT' => 'start',
       'COOKIES_INFO_PAGE' => 'cookies',
       'FORGOT_COMPANY_PAGE' => 'forgot_company',
       'PRIVACY_NOTICE_PAGE' => 'privacy_notice',

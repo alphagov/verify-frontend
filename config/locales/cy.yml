@@ -119,6 +119,12 @@ cy:
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
       continue: Parhau
       error_message: Dewiswch opsiwn
+      with_hint:
+        intro: The last certified company used on this device was %{idp}.
+        continue: Continue with %{idp}
+        other_options: "You can also:"
+        create_option: create a new identity account
+        signin_option: sign in with another certified company
     signin:
       title: Mewngofnodi gyda chwmni ardystiedig
       heading: Gyda phwy mae gennych gyfrif hunaniaeth?
