@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'controller_helper'
 require 'spec_helper'
+require 'api_test_helper'
 
 describe HintController do
   subject { get :ajax_request, params: { locale: 'en' } }
