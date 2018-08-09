@@ -26,4 +26,23 @@ RSpec.describe 'When the user visits the response processing page' do
     visit '/prosesu-ymateb'
     expect(page).to have_css 'html[lang=cy]'
   end
+
+  it 'should redirect to prove-identity page on matching error for an eIDAS journey' do
+    page.set_rack_session selected_country: 'stub-country'
+    stub_matching_outcome MatchingOutcomeResponse::SHOW_MATCHING_ERROR_PAGE
+
+    visit '/response-processing'
+    click_on 'Other ways to prove your identity online'
+
+    expect(page).to have_current_path('/prove-identity')
+  end
+
+  it 'should redirect to redirect-to-service page on matching error for a Verify (IDP) journey' do
+    page.set_rack_session selected_idp: 'stub-idp'
+    stub_matching_outcome MatchingOutcomeResponse::SHOW_MATCHING_ERROR_PAGE
+
+    visit '/response-processing'
+
+    expect(page).to have_link('Other ways to prove your identity online', href: '/redirect-to-service/error')
+  end
 end

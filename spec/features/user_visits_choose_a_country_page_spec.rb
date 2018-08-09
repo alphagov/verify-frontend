@@ -40,6 +40,14 @@ RSpec.describe 'When the user visits the choose a country page' do
     click_button t('navigation.continue')
   end
 
+  it 'should delete selected_idp from session when choose_a_country page is rendered' do
+    given_a_session_supporting_eidas
+    page.set_rack_session selected_idp: 'stub-idp'
+
+    visit '/choose-a-country'
+    expect { page.get_rack_session_key 'selected_idp' }.to raise_error(KeyError, 'key not found: "selected_idp"')
+  end
+
   it 'should show something went wrong when visiting choose a country page directly with session not supporting eidas' do
     given_a_session_not_supporting_eidas
 

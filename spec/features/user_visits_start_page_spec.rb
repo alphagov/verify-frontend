@@ -113,6 +113,15 @@ RSpec.describe 'When the user visits the start page' do
     expect(page).to have_css('meta[name="robots"][content="noindex"]', visible: false)
   end
 
+  it 'will delete selected_country from session' do
+    set_session_and_session_cookies!
+    page.set_rack_session selected_country: 'stub-country'
+
+    visit '/start'
+
+    expect { page.get_rack_session_key 'selected_country' }.to raise_error(KeyError, 'key not found: "selected_country"')
+  end
+
   context 'with a valid idp-hint cookie' do
     let(:idp_entity_id) { 'http://idcorp.com' }
     let(:encrypted_entity_id) { 'an-encrypted-entity-id' }

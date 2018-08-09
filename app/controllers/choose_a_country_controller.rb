@@ -6,6 +6,7 @@ class ChooseACountryController < ApplicationController
   before_action :setup_countries
 
   def choose_a_country
+    session.delete(:selected_idp)
     @other_ways_description = current_transaction.other_ways_description
   end
 
