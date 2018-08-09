@@ -32,7 +32,7 @@ RSpec.describe 'When the user visits the response processing page' do
     stub_matching_outcome MatchingOutcomeResponse::SHOW_MATCHING_ERROR_PAGE
 
     visit '/response-processing'
-    click_on 'Other ways to prove your identity online'
+    click_on t('hub.response_processing.matching_error.online_link')
 
     expect(page).to have_current_path('/prove-identity')
   end
@@ -43,6 +43,6 @@ RSpec.describe 'When the user visits the response processing page' do
 
     visit '/response-processing'
 
-    expect(page).to have_link('Other ways to prove your identity online', href: '/redirect-to-service/error')
+    expect(page).to have_link(t('hub.response_processing.matching_error.online_link'), href: '/redirect-to-service/error')
   end
 end

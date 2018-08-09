@@ -37,7 +37,7 @@ private
   end
 
   def select_country(decorated_country)
-    session[:selected_country] = decorated_country.country
+    switch_to_eidas_journey(decorated_country.country)
     POLICY_PROXY.select_a_country(session[:verify_session_id], decorated_country.simple_id)
 
     saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])

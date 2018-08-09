@@ -8,7 +8,6 @@ class StartController < ApplicationController
   before_action :set_device_type_evidence
 
   def index
-    session.delete(:selected_country)
     entity_id = entity_id_of_journey_hint_for('SUCCESS')
     @suggested_idp = entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, entity_id)
     if @suggested_idp.empty? || !defined?(@suggested_idp)
