@@ -35,8 +35,10 @@ class ResponseProcessingController < ApplicationController
 
   def render_error_page(feedback_source)
     @hide_available_languages = false
-    @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
+    @other_ways_description = current_transaction.other_ways_description
+    @redirect_path = session[:selected_country] ? prove_identity_path : redirect_to_service_error_path
+
     render 'matching_error', status: 500, locals: { error_feedback_source: feedback_source }
   end
 end
