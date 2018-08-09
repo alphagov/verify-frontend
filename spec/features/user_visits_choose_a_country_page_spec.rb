@@ -69,7 +69,7 @@ RSpec.describe 'When the user visits the choose a country page' do
 
   it 'should redirect to country page' do
     given_a_session_supporting_eidas
-    stub_select_country_request
+    stub_select_country_request('YY')
     stub_session_country_authn_request(originating_ip, redirect_to_country_path, false)
 
     visit '/choose-a-country'
@@ -83,7 +83,7 @@ RSpec.describe 'When the user visits the choose a country page' do
 
   it 'should redirect to country page when JS is enabled', js: true do
     given_a_session_supporting_eidas
-    stub_select_country_request
+    stub_select_country_request('YY')
     stub_session_country_authn_request(originating_ip, redirect_to_country_path, false)
 
     visit '/choose-a-country'
@@ -112,14 +112,5 @@ RSpec.describe 'When the user visits the choose a country page' do
 
     expect(page).to have_title t('hub.choose_a_country.title', locale: :cy)
     expect(page).to have_css 'html[lang=cy]'
-  end
-
-  def select_country_endpoint(session_id, country_code)
-    '/policy/countries/' + session_id + '/' + country_code
-  end
-
-  def stub_select_country_request
-    stub_request(:post, policy_api_uri(select_country_endpoint("my-session-id-cookie", "YY")))
-        .to_return(body: '')
   end
 end

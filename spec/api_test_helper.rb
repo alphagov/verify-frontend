@@ -28,7 +28,11 @@ module ApiTestHelper
   end
 
   def api_countries_endpoint(session_id)
-    policy_api_uri('/policy/countries/' + session_id)
+    policy_api_uri("/policy/countries/#{session_id}")
+  end
+
+  def api_select_country_endpoint(session_id, country_code)
+    policy_api_uri("/policy/countries/#{session_id}/#{country_code}")
   end
 
   def stub_transactions_list
@@ -125,6 +129,11 @@ module ApiTestHelper
     ]
 
     stub_request(:get, api_countries_endpoint(default_session_id)).to_return(body: countries.to_json, status: 200)
+  end
+
+  def stub_select_country_request(country_code)
+    stub_request(:post, api_select_country_endpoint(default_session_id, country_code))
+        .to_return(body: '')
   end
 
   def stub_session_country_authn_request(originating_ip, country_location, registration)
