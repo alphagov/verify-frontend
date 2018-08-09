@@ -6,6 +6,7 @@ module ConfigEndpoints
   DISPLAY_DATA_SUFFIX = 'transactions/%<transaction_entity_id>s/display-data'.freeze
   TRANSLATION_DATA_SUFFIX = 'transactions/%<transaction_simple_id>s/translations/%<locale>s'.freeze
   TRANSACTIONS_SUFFIX = 'transactions/enabled'.freeze
+  TRANSACTIONS_FOR_SERVICE_LIST_SUFFIX = 'transactions/for-service-list'.freeze
 
   def idp_list_for_loa_endpoint(transaction_id, loa)
     PATH_PREFIX.join(IDP_LIST_SUFFIX % { transaction_name: CGI.escape(transaction_id), loa: CGI.escape(loa) }).to_s
@@ -17,6 +18,10 @@ module ConfigEndpoints
 
   def transactions_endpoint
     PATH_PREFIX.join(TRANSACTIONS_SUFFIX).to_s
+  end
+
+  def transactions_for_service_list_endpoint
+    PATH_PREFIX.join(TRANSACTIONS_FOR_SERVICE_LIST_SUFFIX).to_s
   end
 
   def transaction_display_data_endpoint(transaction_entity_id)

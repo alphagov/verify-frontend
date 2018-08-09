@@ -25,6 +25,10 @@ class ConfigProxy
     @api_client.get(transactions_endpoint)
   end
 
+  def transactions_for_service_list
+    @api_client.get(transactions_for_service_list_endpoint)
+  end
+
   def get_idp_list_for_loa(transaction_id, loa)
     response = @api_client.get(idp_list_for_loa_endpoint(transaction_id, loa))
     IdpListResponse.validated_response(response)

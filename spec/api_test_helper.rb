@@ -19,6 +19,10 @@ module ApiTestHelper
     config_api_uri('/config/transactions/enabled')
   end
 
+  def api_transactions_for_service_list_endpoint
+    config_api_uri('/config/transactions/for-service-list')
+  end
+
   def api_translations_endpoint(simple_id, locale)
     config_api_uri("/config/transactions/#{simple_id}/translations/#{locale}")
   end
@@ -29,6 +33,12 @@ module ApiTestHelper
 
   def stub_transactions_list
     transactions = [
+        { 'simpleId' => 'test-rp', 'serviceHomepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-noc3', 'serviceHomepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'headless-rp', 'serviceHomepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-with-continue-on-fail', 'serviceHomepage' => 'http://localhost:50130/test-rp-with-continue-on-fail', 'loaList' => ['LEVEL_2'] }
+    ]
+    transactions_for_service_list = [
         { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
         { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-other-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
         { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] },
@@ -36,6 +46,7 @@ module ApiTestHelper
     ]
 
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
+    stub_request(:get, api_transactions_for_service_list_endpoint).to_return(body: transactions_for_service_list.to_json, status: 200)
   end
 
   def stub_translations
