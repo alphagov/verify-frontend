@@ -134,15 +134,28 @@ class StubApi < Sinatra::Base
    get '/config/transactions/enabled' do
     '[{
         "simpleId":"test-rp",
-        "entityId":"http://example.com/test-rp",
         "serviceHomepage":"http://example.com/test-rp",
         "loaList":["LEVEL_2"]
       },
       {
         "simpleId": "loa1-test-rp",
-        "entityId": "http://example.com/test-rp-loa1",
         "serviceHomepage":"http://example.com/test-rp-loa1",
         "loaList":["LEVEL_1","LEVEL_2"]
+      }]'
+   end
+
+  get '/config/transactions/for-service-list' do
+    '[{
+        "simpleId":"test-rp",
+        "serviceHomepage":"http://example.com/test-rp",
+        "loaList":["LEVEL_2"],
+        "entityId":"http://example.com/test-rp"
+      },
+      {
+        "simpleId": "loa1-test-rp",
+        "serviceHomepage":"http://example.com/test-rp-loa1",
+        "loaList":["LEVEL_1","LEVEL_2"],
+        "entityId": "http://example.com/test-rp-loa1"
       }]'
   end
 

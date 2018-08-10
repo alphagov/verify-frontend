@@ -7,6 +7,8 @@ describe MetadataController do
   subject { get :service_list, params: { locale: 'en' } }
 
   it 'json array should contain 2 objects with correct values' do
+    stub_transactions_for_service_list
+
     body = JSON.parse(subject.body)
 
     expect(body.size).to eq(2)
