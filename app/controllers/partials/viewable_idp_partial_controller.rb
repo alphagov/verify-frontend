@@ -1,14 +1,14 @@
 module ViewableIdpPartialController
   def select_viewable_idp_for_sign_in(entity_id)
     for_viewable_idp(entity_id, current_identity_providers_for_sign_in) do |decorated_idp|
-      session[:selected_idp] = decorated_idp.identity_provider
+      switch_to_verify_journey(decorated_idp.identity_provider)
       yield decorated_idp
     end
   end
 
   def select_viewable_idp_for_loa(entity_id)
     for_viewable_idp(entity_id, current_identity_providers_for_loa) do |decorated_idp|
-      session[:selected_idp] = decorated_idp.identity_provider
+      switch_to_verify_journey(decorated_idp.identity_provider)
       yield decorated_idp
     end
   end

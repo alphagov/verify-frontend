@@ -23,6 +23,18 @@ describe SignInController do
   end
 
   context '#select_idp' do
+    it 'deletes selected_country from session' do
+      stub_session_select_idp_request('http://idcorp.com')
+      stub_piwik_request('action_name' => 'Sign In - IDCorp')
+      session[:selected_country] = 'stub-country'
+
+      post :select_idp, params: { locale: 'en', 'entity_id' => 'http://idcorp.com' }
+
+      expect(session[:selected_idp]).to_not be_nil
+      expect(session[:selected_idp].simple_id).to eq('stub-idp-one')
+      expect(session[:selected_country]).to be_nil
+    end
+
     it 'will redirect to the path for the selected IDP' do
       stub_session_select_idp_request('http://idcorp.com')
       stub_piwik_request('action_name' => 'Sign In - IDCorp')
