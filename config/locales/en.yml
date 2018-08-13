@@ -34,6 +34,7 @@ en:
     confirmation: confirmation
     failed_registration: failed-registration
     failed_sign_in: failed-sign-in
+    failed_country_sign_in: failed-country-sign-in
     failed_uplift: failed-uplift
     other_ways_to_access_service: other-ways-to-access-service
     forgot_company: forgot-company
