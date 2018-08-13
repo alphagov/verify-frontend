@@ -36,14 +36,4 @@ module UserSessionPartialController
 
     Country.from_session(selected_country)
   end
-
-  def switch_to_verify_journey(selected_idp)
-    session.delete(:selected_country)
-    session[:selected_idp] = selected_idp
-  end
-
-  def switch_to_eidas_journey(selected_country)
-    session.delete(:selected_idp)
-    session[:selected_country] = selected_country
-  end
 end
