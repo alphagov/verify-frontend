@@ -11,7 +11,7 @@ module Display
       def correlate(data)
         filter_transactions(data, @rps_name_homepage).map do |transaction|
           Transaction.new(translate_name(transaction), transaction.fetch('loaList').min,
-            translate_taxon(transaction), transaction.fetch('entityId'))
+                          translate_taxon(transaction), transaction.fetch('entityId'))
         end
       rescue KeyError => e
         Rails.logger.error e
