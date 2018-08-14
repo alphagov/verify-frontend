@@ -1,7 +1,7 @@
 module Display
   module Rp
     class ServiceListDataCorrelator
-      Transaction = Struct.new(:name, :loa, :taxon, :serviceId)
+      Transaction = Struct.new(:name, :loa, :serviceCategory, :serviceId)
 
       def initialize(translator, rps_name_homepage)
         @translator = translator
