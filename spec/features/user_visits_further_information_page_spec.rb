@@ -22,7 +22,7 @@ RSpec.describe 'user visits further information page' do
 
     visit further_information_path
 
-    rp_name = t('rps.test-rp.name').capitalize
+    rp_name = t('rps.test-rp.name')
 
     expect(page).to have_title t('hub.further_information.title', cycle_three_name: attribute_field_name)
     expect(page).to have_css '.form-label-bold', text: attribute_field_name
@@ -58,7 +58,7 @@ RSpec.describe 'user visits further information page' do
 
     visit further_information_path
 
-    rp_name = t('rps.test-rp.name').capitalize
+    rp_name = t('rps.test-rp.name')
     click_button t('hub.further_information.cancel', transaction_name: rp_name)
 
     expect(page.current_path).to eql(redirect_to_service_start_again_path)
