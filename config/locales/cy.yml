@@ -416,7 +416,7 @@ cy:
       contact_details_intro: Cysylltwch â %{idp_name}
     failed_country_sign_in:
       title: Methu eich mewngofnodi
-      heading: "Your identity scheme in %{country_name} was unable to confirm your identity"
+      heading: Mae'r cynllun hunaniaeth yn eich gwlad wedi methu â chadarnhau eich hunaniaeth.
       other_ways: "Mae yna ffyrdd eraill y gallwch %{other_ways_description}."
       online_link: Ffyrdd eraill i brofi eich hunaniaeth ar-lein
       online: Ar-lein
@@ -450,8 +450,8 @@ cy:
       heading: Mae %{rp_name} yn prosesu eich manylion
       bear_with_us: Gallai hyn gymryd ychydig o eiliadau, diolch am eich amynedd.
       matching_error:
-        heading: Sorry, there is a problem with the service
-        other_ways: "Please try again later or see other ways you can %{other_ways_description}."
+        heading: Mae'n ddrwg gennym, mae yna broblem gyda'r gwasanaeth
+        other_ways: "Ceisiwch eto'n hwyrach neu edrychwch ar ffyrdd eraill y gallwch %{service_name}."
         online_link: Ffyrdd eraill i brofi eich hunaniaeth ar-lein
         online: Ar-lein
         offline: All-lein
