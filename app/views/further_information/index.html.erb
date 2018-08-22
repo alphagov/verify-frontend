@@ -3,7 +3,7 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h1 class="heading-large"><%= @transaction_name.capitalize %></h1>
+    <h1 class="heading-large"><%= @transaction_name.slice(0,1).upcase + @transaction_name.slice(1..-1)%></h1>
     <p><%= t('hub.further_information.first_time') %></p>
 
     <%= form_for @cycle_three_attribute, url: further_information_submit_path,
@@ -51,7 +51,7 @@
     <% end %>
     <div class="cancel-process">
       <%= form_tag(further_information_cancel_path) do %>
-        <%= button_tag t('hub.further_information.cancel', transaction_name: @transaction_name.capitalize),
+        <%= button_tag t('hub.further_information.cancel', transaction_name: @transaction_name),
                        id: 'cancel', class: 'button-link', role: 'link' %>
       <% end %>
     </div>
