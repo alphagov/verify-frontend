@@ -115,12 +115,6 @@ en:
       answer_no: I’ve used Verify before
       continue: Continue
       error_message: Please select an option
-      with_hint:
-        intro: The last certified company used on this device was %{idp}.
-        continue: Continue with %{idp}
-        other_options: "You can also:"
-        create_option: create a new identity account
-        signin_option: sign in with another certified company
     signin:
       title: Sign in with a certified company
       heading: Who do you have an identity account with?

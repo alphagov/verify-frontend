@@ -20,6 +20,13 @@ describe SignInController do
       expect(subject).to render_template(:index)
       expect(response).to have_http_status(:ok)
     end
+
+    it 'will render the index page with invalid cookie' do
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: 'some-nonsense-idp-entity-id' }.to_json
+      get :index, params: { locale: 'en' }
+      expect(subject).to render_template(:index)
+      expect(response).to have_http_status(:ok)
+    end
   end
 
   context '#select_idp' do
