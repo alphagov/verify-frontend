@@ -1,12 +1,12 @@
 module ApplicationHelper
-  def page_title(title_key, locale_data = {}, extra_string = nil)
+  def page_title(title_key, locale_data = {})
     title = ''
     title << "#{t('title.error', locale_data)}: " if flash[:errors]
     title << t(title_key, locale_data)
-    en_title = [t(title_key, locale_data.merge(locale: :en)), extra_string, 'GOV.UK Verify', 'GOV.UK']
+    en_title = [t(title_key, locale_data.merge(locale: :en)), 'GOV.UK Verify', 'GOV.UK']
     en_title << session[:requested_loa] if session[:requested_loa]
     content_for :page_title, title
-    content_for :page_title_in_english, en_title.compact.join(' - ')
+    content_for :page_title_in_english, en_title.join(' - ')
     content_for :head do
       tag('meta', name: 'verify|title', content: content_for(:page_title_in_english))
     end

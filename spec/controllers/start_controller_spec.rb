@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'application_helper'
 require 'controller_helper'
 require 'api_test_helper'
 require 'piwik_test_helper'
@@ -55,31 +54,5 @@ describe StartController do
     get :register, params: { locale: 'en' }
     expect(subject).to redirect_to('/about')
     expect(stub_piwik_request).to have_been_made.once
-  end
-
-  context 'when hint cookie is present' do
-    before :each do
-      stub_api_idp_list_for_sign_in([{  'simpleId' => 'stub-idp-one',
-                                        'entityId' => 'http://idcorp.com',
-                                        'levelsOfAssurance' => %w(LEVEL_1) }])
-    end
-
-    it 'will render start page with hint' do
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: 'http://idcorp.com', SUCCESS: 'http://idcorp.com' }.to_json
-      get :index, params: { locale: 'en' }
-      expect(subject).to render_template(:start_with_hint)
-    end
-
-    it 'will render normal start page if the hint has non-existing IDP' do
-      get :index, params: { locale: 'en' }
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: 'http://idcorpzz.com', SUCCESS: 'http://idcorpzz.com' }.to_json
-      expect(subject).to render_template(:start)
-    end
-
-    it 'will render normal start page if hint cookie is invalid/corrupted' do
-      get :index, params: { locale: 'en' }
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { blah: 'nothing here' }.to_json
-      expect(subject).to render_template(:start)
-    end
   end
 end
