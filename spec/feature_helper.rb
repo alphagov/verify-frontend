@@ -7,17 +7,6 @@ WebMock.disable_net_connect!(allow_localhost: true)
 
 RACK_COOKIE_DATE_FORMAT = "%a, %d %b %Y".freeze
 
-if ENV['HEADLESS'] == 'true'
-  require 'headless'
-  headless = Headless.new
-  headless.start
-  at_exit do
-    exit_status = $!.status if $!.is_a?(SystemExit)
-    headless.destroy
-    exit exit_status if exit_status
-  end
-end
-
 RSpec.configure do |config|
   config.before(:each, js: true) do
     page.driver.browser.manage.window.resize_to(1280, 1024)
@@ -25,15 +14,8 @@ RSpec.configure do |config|
   config.include AbstractController::Translation
 end
 
-Capybara.configure do |config|
-  config.server = :puma
-end
-
-Capybara.register_driver :selenium do |app|
-  require 'selenium/webdriver'
-  Selenium::WebDriver::Firefox::Binary.path = ENV['FIREFOX_PATH'] || Selenium::WebDriver::Firefox::Binary.path
-  Capybara::Selenium::Driver.new(app, browser: :firefox)
-end
+require 'selenium/webdriver'
+Capybara.javascript_driver = :selenium_chrome_headless
 
 module FeatureHelper
   def current_time_in_millis
