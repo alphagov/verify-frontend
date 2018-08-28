@@ -145,14 +145,6 @@ cy:
     about:
       title: Am
       verify_is_a_service: Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
-      ab_test:
-        eligibility_info_html: |
-          <p>I ddefnyddio Verify rydych angen:</p>
-          <ul class="list-bullet list">
-          <li>bod dros 18 oed</li>
-          <li>bod â chyfeiriad  yn y DU</li>
-          </ul>
-        other_ways_link: "Ffyrdd eraill i %{other_ways_description}"
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
@@ -235,9 +227,6 @@ cy:
     other_documents:
       title_other_identity_documents: Dogfennau hunaniaeth eraill
       non_uk_id_document: Oes gennych chi pasbort sydd ddim yn un o'r DU, cerdyn ID neu drwydded yrru?
-      ab_test:
-        smart_phone_question: Oes gennych ffôn clyfar neu lechen a all lawr lwytho apiau?
-        smart_phone_subtitle: Byddwch angen lawr lwytho ap am ddim a defnyddio camera eich dyfais i gymryd llun o'ch dogfen adnabyddiaeth a hun-lun.
     select_phone:
       title: Oes gennych ffôn symudol neu lechen?
       explanation: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.

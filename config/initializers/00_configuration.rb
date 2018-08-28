@@ -37,9 +37,6 @@ CONFIG = Configuration.load! do
   option_string 'ab_test_file', 'AB_TEST_FILE', allow_missing: true
   option_string 'segment_definitions', 'SEGMENT_DEFINITIONS'
   option_string 'saml_proxy_host', 'SAML_PROXY_HOST'
-  # HUB-164 Variant config
-  option_string 'rules_directory_variant', 'RULES_DIRECTORY_VARIANT'
-  option_string 'segment_definitions_variant', 'SEGMENT_DEFINITIONS_VARIANT'
   option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
   # Feature flags
   option_bool 'single_idp_feature', 'SINGLE_IDP_FEATURE', default: false
