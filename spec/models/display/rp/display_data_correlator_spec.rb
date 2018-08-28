@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 require 'models/display/rp/display_data_correlator'
+require 'display/rp_display_repository'
 
 module Display
   module Rp
@@ -10,7 +11,24 @@ module Display
       let(:transaction_3_name) { 'Transaction 3' }
       let(:transaction_4_name) { 'Transaction 4' }
       let(:transaction_b_name) { 'Private Transaction B' }
-      let(:translator) { double(:translator) }
+      let(:transaction_a_display_data) do
+        instance_double("Display::RpDisplayData", name: transaction_a_name)
+      end
+      let(:transaction_b_display_data) do
+        instance_double("Display::RpDisplayData", name: transaction_b_name)
+      end
+      let(:transaction_2_display_data) do
+        instance_double("Display::RpDisplayData", name: transaction_2_name)
+      end
+      let(:transaction_3_display_data) do
+        instance_double("Display::RpDisplayData", name: transaction_3_name)
+      end
+      let(:transaction_4_display_data) do
+        instance_double("Display::RpDisplayData", name: transaction_4_name)
+      end
+      let(:rp_display_repository) do
+        instance_double("Display::RpDisplayRepository")
+      end
       let(:homepage) { 'http://transaction-a.com' }
       let(:homepage_2) { 'http://transaction-2.com' }
       let(:homepage_3) { 'http://transaction-3.com' }
@@ -30,15 +48,15 @@ module Display
 
 
       let(:display_data_correlator) {
-        DisplayDataCorrelator.new(translator, [public_simple_id], [private_simple_id])
+        DisplayDataCorrelator.new(rp_display_repository, [public_simple_id], [private_simple_id])
       }
 
       before(:each) do
-        allow(translator).to receive(:translate!).with('rps.test-rp.name').and_return(transaction_a_name)
-        allow(translator).to receive(:translate!).with('rps.test-rp-2.name').and_return(transaction_2_name)
-        allow(translator).to receive(:translate!).with('rps.test-rp-3.name').and_return(transaction_3_name)
-        allow(translator).to receive(:translate!).with('rps.test-rp-4.name').and_return(transaction_4_name)
-        allow(translator).to receive(:translate!).with('rps.some-simple-id.name').and_return(transaction_b_name)
+        allow(rp_display_repository).to receive(:get_translations).with('test-rp').and_return(transaction_a_display_data)
+        allow(rp_display_repository).to receive(:get_translations).with('test-rp-2').and_return(transaction_2_display_data)
+        allow(rp_display_repository).to receive(:get_translations).with('test-rp-3').and_return(transaction_3_display_data)
+        allow(rp_display_repository).to receive(:get_translations).with('test-rp-4').and_return(transaction_4_display_data)
+        allow(rp_display_repository).to receive(:get_translations).with('some-simple-id').and_return(transaction_b_display_data)
       end
 
       it 'returns the transactions with display name and homepage in the order listed in the relying_parties_config' do
@@ -48,7 +66,7 @@ module Display
               { 'simpleId' => public_simple_id_3, 'serviceHomepage' => homepage_3, 'loaList' => public_simple_id_3_loa },
               { 'simpleId' => public_simple_id_4, 'serviceHomepage' => homepage_4, 'loaList' => public_simple_id_4_loa },
         ]
-        correlator = DisplayDataCorrelator.new(translator, [public_simple_id_4, public_simple_id_2, public_simple_id, public_simple_id_3], [])
+        correlator = DisplayDataCorrelator.new(rp_display_repository, [public_simple_id_4, public_simple_id_2, public_simple_id, public_simple_id_3], [])
         actual_result = correlator.correlate(transaction_data)
         expected_result = DisplayDataCorrelator::Transactions.new(
           [
@@ -86,7 +104,7 @@ module Display
             { 'simpleId' => public_simple_id, 'serviceHomepage' => homepage, 'loaList' => public_simple_id_loa },
             { 'simpleId' => public_simple_id_2, 'serviceHomepage' => homepage_2, 'loaList' => public_simple_id_2_loa },
         ]
-        correlator = DisplayDataCorrelator.new(translator, [public_simple_id_2, public_simple_id], [])
+        correlator = DisplayDataCorrelator.new(rp_display_repository, [public_simple_id_2, public_simple_id], [])
         actual_result = correlator.retrieve_current_service(transaction_data, public_simple_id_2)
         expected_result = transaction_2_name
         expect(actual_result).to eq expected_result

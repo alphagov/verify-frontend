@@ -4,8 +4,8 @@ module Display
       Transaction = Struct.new(:name, :taxon, :homepage, :loa_list)
       Taxon = Struct.new(:name, :transactions)
 
-      def initialize(translator, rps_with_homepage_link, rps_with_name_only)
-        @translator = translator
+      def initialize(rp_display_repository, rps_with_homepage_link, rps_with_name_only)
+        @rp_display_repository = rp_display_repository
         @rps_with_homepage_link = rps_with_homepage_link
         @rps_with_name_only = rps_with_name_only
       end
@@ -26,12 +26,12 @@ module Display
 
       def map_to_transactions(data)
         data.map do |item|
-          name = translate_name(item)
+          display_data = @rp_display_repository.get_translations(item.fetch('simpleId'))
           homepage = @rps_with_name_only.include?(item.fetch('simpleId')) ? nil : item.fetch('serviceHomepage', nil)
           # if there's no homepage, move the transaction down to the 'Other service' taxon
-          taxon = homepage.nil? ? other_services_translation : translate_taxon(item)
+          taxon = homepage.nil? ? other_services_translation : display_data.taxon
           loa_list = item.fetch('loaList')
-          Transaction.new(name, taxon, homepage, loa_list)
+          Transaction.new(display_data.name, taxon, homepage, loa_list)
         end
       end
 
@@ -68,16 +68,6 @@ module Display
 
       def other_services_translation
         I18n.translate('hub.transaction_list.other_services')
-      end
-
-      def translate_name(transaction)
-        simple_id = transaction.fetch('simpleId')
-        @translator.translate!("rps.#{simple_id}.name")
-      end
-
-      def translate_taxon(transaction)
-        simple_id = transaction.fetch('simpleId')
-        @translator.translate("rps.#{simple_id}.taxon_name", default: other_services_translation)
       end
 
       def group_by_taxon(transactions)

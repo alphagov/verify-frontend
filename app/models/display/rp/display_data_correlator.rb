@@ -8,8 +8,8 @@ module Display
       end
       Transaction = Struct.new(:name, :homepage, :loa_list)
 
-      def initialize(translator, rps_name_homepage, rps_name_only)
-        @translator = translator
+      def initialize(rp_display_repository, rps_name_homepage, rps_name_only)
+        @rp_display_repository = rp_display_repository
         @rps_name_homepage = rps_name_homepage
         @rps_name_only = rps_name_only
       end
@@ -38,7 +38,7 @@ module Display
 
       def translate_name(transaction)
         simple_id = transaction.fetch('simpleId')
-        @translator.translate!("rps.#{simple_id}.name")
+        @rp_display_repository.get_translations(simple_id).name
       end
 
       def filter_transactions(transactions, simple_ids)
