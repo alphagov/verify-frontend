@@ -5,8 +5,6 @@ require 'models/display/rp/transaction_taxon_correlator'
 module Display
   module Rp
     describe TransactionTaxonCorrelator do
-      let(:translator) { double(:translator) }
-
       let(:simple_id_1) { 'test-rp-1' }
       let(:simple_id_2) { 'test-rp-2' }
       let(:simple_id_a) { 'test-rp-a' }
@@ -26,14 +24,19 @@ module Display
       let(:taxon_other_services) { 'Other services' }
 
       before(:each) do
-        allow(translator).to receive(:translate).with('rps.test-rp-1.name').and_return(transaction_1_name)
-        allow(translator).to receive(:translate).with('rps.test-rp-2.name').and_return(transaction_2_name)
-        allow(translator).to receive(:translate).with('rps.test-rp-a.name').and_return(transaction_a_name)
-        allow(translator).to receive(:translate).with('rps.test-rp-b.name').and_return(transaction_b_name)
+        @old_backend = I18n.backend
+        I18n.backend = I18n::Backend::Simple.new
+        I18n.backend.store_translations('hub.transaction_list.other_services', taxon_other_services)
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-1' => { 'name' => transaction_1_name } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-2' => { 'name' => transaction_2_name } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-a' => { 'name' => transaction_a_name } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-b' => { 'name' => transaction_b_name } })
 
-        allow(translator).to receive(:translate).with('hub.transaction_list.other_services').and_return(taxon_other_services)
+        @correlator = TransactionTaxonCorrelator.new(I18n, [simple_id_1, simple_id_2, simple_id_a, simple_id_b], [])
+      end
 
-        @correlator = TransactionTaxonCorrelator.new(translator, [simple_id_1, simple_id_2, simple_id_a, simple_id_b], [])
+      after(:each) do
+        I18n.backend = @old_backend
       end
 
       it 'should return an empty list when there are no transactions' do
@@ -48,10 +51,10 @@ module Display
             { 'simpleId' => simple_id_a, 'serviceHomepage' => homepage, 'loaList' => loa_list },
             { 'simpleId' => simple_id_b, 'serviceHomepage' => homepage, 'loaList' => loa_list },
         ]
-        allow(translator).to receive(:translate).with('rps.test-rp-1.taxon_name').and_return(taxon_benefits)
-        allow(translator).to receive(:translate).with('rps.test-rp-2.taxon_name').and_return(taxon_working_jobs_and_pensions)
-        allow(translator).to receive(:translate).with('rps.test-rp-a.taxon_name').and_return(taxon_benefits)
-        allow(translator).to receive(:translate).with('rps.test-rp-b.taxon_name').and_return(taxon_working_jobs_and_pensions)
+        I18n.backend.store_translations('en', 'rps' => { 'test-rp-1' => { 'taxon_name' => taxon_benefits } })
+        I18n.backend.store_translations('en', 'rps' => { 'test-rp-2' => { 'taxon_name' => taxon_working_jobs_and_pensions } })
+        I18n.backend.store_translations('en', 'rps' => { 'test-rp-a' => { 'taxon_name' => taxon_benefits } })
+        I18n.backend.store_translations('en', 'rps' => { 'test-rp-b' => { 'taxon_name' => taxon_working_jobs_and_pensions } })
 
         actual_result = @correlator.correlate(transaction_data)
 
@@ -75,9 +78,6 @@ module Display
       end
 
       it 'should group transactions without a taxon as Other services' do
-        allow(translator).to receive(:translate)
-                                 .with('rps.test-rp-1.taxon_name')
-                                 .and_raise(Display::FederationTranslator::TranslationError.new)
         transaction_data = [
             { 'simpleId' => simple_id_1, 'serviceHomepage' => homepage, 'loaList' => loa_list }
         ]
@@ -95,7 +95,7 @@ module Display
       end
 
       it 'should create an other services taxon for transactions without a homepage if it does not already exist' do
-        allow(translator).to receive(:translate).with('rps.test-rp-1.taxon_name').and_return(taxon_benefits)
+        I18n.backend.store_translations('en', 'rps' => { 'test-rp-1' => { 'taxon_name' => taxon_benefits } })
         transaction_data = [
             { 'simpleId' => simple_id_1, 'loaList' => loa_list }
         ]
@@ -113,8 +113,8 @@ module Display
       end
 
       it 'should add transactions without a homepage to the other services taxon if the taxon already exists' do
-        allow(translator).to receive(:translate).with('rps.test-rp-1.taxon_name').and_return(taxon_other_services)
-        allow(translator).to receive(:translate).with('rps.test-rp-2.taxon_name').and_return(taxon_benefits)
+        I18n.backend.store_translations('en', 'rps' => { 'test-rp-1' => { 'taxon_name' => taxon_other_services } })
+        I18n.backend.store_translations('en', 'rps' => { 'test-rp-2' => { 'taxon_name' => taxon_benefits } })
         transaction_data = [
             { 'simpleId' => simple_id_1, 'serviceHomepage' => homepage, 'loaList' => loa_list },
             { 'simpleId' => simple_id_2, 'loaList' => loa_list }
@@ -134,9 +134,10 @@ module Display
       end
 
       it 'should sort the taxons alphabetically, with Other services last.' do
-        allow(translator).to receive(:translate).with('rps.test-rp-1.taxon_name').and_return(taxon_other_services)
-        allow(translator).to receive(:translate).with('rps.test-rp-2.taxon_name').and_return(taxon_working_jobs_and_pensions)
-        allow(translator).to receive(:translate).with('rps.test-rp-a.taxon_name').and_return(taxon_benefits)
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-1' => { 'taxon_name' => taxon_other_services } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-2' => { 'taxon_name' => taxon_working_jobs_and_pensions } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-a' => { 'taxon_name' => taxon_benefits } })
+
         transaction_data = [
             { 'simpleId' => simple_id_2, 'serviceHomepage' => homepage, 'loaList' => loa_list },
             { 'simpleId' => simple_id_a, 'serviceHomepage' => homepage, 'loaList' => loa_list },
@@ -169,10 +170,10 @@ module Display
       end
 
       it 'should sort the transactions within a taxon alphabetically' do
-        allow(translator).to receive(:translate).with('rps.test-rp-1.taxon_name').and_return(taxon_benefits)
-        allow(translator).to receive(:translate).with('rps.test-rp-2.taxon_name').and_return(taxon_benefits)
-        allow(translator).to receive(:translate).with('rps.test-rp-a.taxon_name').and_return(taxon_benefits)
-        allow(translator).to receive(:translate).with('rps.test-rp-b.taxon_name').and_return(taxon_benefits)
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-1' => { 'taxon_name' => taxon_benefits } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-2' => { 'taxon_name' => taxon_benefits } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-a' => { 'taxon_name' => taxon_benefits } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-b' => { 'taxon_name' => taxon_benefits } })
         transaction_data = [
             { 'simpleId' => simple_id_2, 'serviceHomepage' => homepage, 'loaList' => loa_list },
             { 'simpleId' => simple_id_b, 'serviceHomepage' => homepage, 'loaList' => loa_list },
@@ -198,9 +199,9 @@ module Display
       end
 
       it 'should not show transactions which are not listed in the enabled list' do
-        allow(translator).to receive(:translate).with('rps.test-rp-1.taxon_name').and_return(taxon_benefits)
-        allow(translator).to receive(:translate).with('rps.test-rp-2.taxon_name').and_return(taxon_benefits)
-        allow(translator).to receive(:translate).with('rps.test-rp-a.taxon_name').and_return(taxon_benefits)
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-1' => { 'taxon_name' => taxon_benefits } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-2' => { 'taxon_name' => taxon_benefits } })
+        I18n.backend.store_translations("en", 'rps' => { 'test-rp-a' => { 'taxon_name' => taxon_benefits } })
 
         transaction_data = [
             { 'simpleId' => simple_id_1, 'serviceHomepage' => homepage, 'loaList' => loa_list },
@@ -208,7 +209,7 @@ module Display
             { 'simpleId' => simple_id_a, 'serviceHomepage' => homepage, 'loaList' => loa_list }
         ]
 
-        test_correlator = TransactionTaxonCorrelator.new(translator, [simple_id_1], [simple_id_2])
+        test_correlator = TransactionTaxonCorrelator.new(I18n, [simple_id_1], [simple_id_2])
         actual_result = test_correlator.correlate(transaction_data)
 
         expected_results = [

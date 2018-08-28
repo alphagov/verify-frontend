@@ -12,8 +12,8 @@ module Display
       def content(field, options = {})
         define_method(field) do
           begin
-            @translator.translate("#{prefix}.#{simple_id}.#{field}")
-          rescue StandardError => e
+            @translator.translate!("#{prefix}.#{simple_id}.#{field}")
+          rescue I18n::MissingTranslationData => e
             options.fetch(:default) { raise e }
           end
         end

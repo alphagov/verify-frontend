@@ -1,7 +1,6 @@
 require 'feature_helper'
 require 'api_test_helper'
 require 'rp_translation_service'
-require 'models/display/federation_translator'
 require 'models/config_proxy'
 require 'i18n'
 
@@ -14,13 +13,11 @@ describe 'RpTranslationService' do
       "loaList":["LEVEL_2"]
     }]'))
 
-    @translator = instance_double("Display::FederationTranslator")
-
     I18n.backend = I18n::Backend::Simple.new
   end
 
   it 'should call to config service to get transactions' do
-    translation_service = RpTranslationService.new(@translator)
+    translation_service = RpTranslationService.new
 
     transactions = translation_service.transactions
 
@@ -46,7 +43,7 @@ describe 'RpTranslationService' do
     }
     allow(CONFIG_PROXY).to receive(:get_transaction_translations).with('test-rp', :en).and_return(translations)
 
-    translation_service = RpTranslationService.new(@translator)
+    translation_service = RpTranslationService.new
     translation_service.update_rp_translations('test-rp')
 
     translations.keys.each do |key|
@@ -72,7 +69,7 @@ describe 'RpTranslationService' do
     }
     allow(CONFIG_PROXY).to receive(:get_transaction_translations).with('test-rp', :en).and_return(translations, {})
 
-    translation_service = RpTranslationService.new(@translator)
+    translation_service = RpTranslationService.new
     translation_service.update_rp_translations('test-rp')
     translation_service.update_rp_translations('test-rp')
 
@@ -102,7 +99,7 @@ describe 'RpTranslationService' do
     }
     allow(CONFIG_PROXY).to receive(:get_transaction_translations).with('test-rp', :en).and_return(translations, partial_translations)
 
-    translation_service = RpTranslationService.new(@translator)
+    translation_service = RpTranslationService.new
     translation_service.update_rp_translations('test-rp')
     translation_service.update_rp_translations('test-rp')
 

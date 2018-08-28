@@ -1,6 +1,5 @@
 require 'feature_helper'
 require 'api_test_helper'
-require 'models/display/federation_translator'
 require 'models/display/rp_display_repository'
 
 module Display
@@ -21,8 +20,8 @@ module Display
           custom_fail_try_another_text: '',
           custom_fail_contact_details_intro: ''
       }
-      @translator = instance_double("Display::FederationTranslator")
-      allow(@translator).to receive(:translate).and_return("")
+      @translator = class_double("I18n")
+      allow(@translator).to receive(:translate!).and_return("")
 
       allow(RP_TRANSLATION_SERVICE).to receive(:transactions).and_return(['test-rp'])
       allow(RP_TRANSLATION_SERVICE).to receive(:update_rp_translations).with('test-rp').and_return(@translations)
