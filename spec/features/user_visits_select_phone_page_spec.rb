@@ -31,7 +31,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_smart_phone_true', allow_label_click: true
       click_button t('navigation.continue')
 
-      expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
+      expect(page).to have_current_path(choose_a_certified_company_path, ignore_query: true)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
         'phone' => { 'mobile_phone' => true, 'smart_phone' => true }
@@ -46,7 +46,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_smart_phone_do_not_know', allow_label_click: true
       click_button t('navigation.continue')
 
-      expect(page).to have_current_path(choose_a_certified_company_path, only_path: true)
+      expect(page).to have_current_path(choose_a_certified_company_path, ignore_query: true)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
         'phone' => { 'mobile_phone' => true }
