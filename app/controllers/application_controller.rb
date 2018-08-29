@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
   include TransactionsPartialController
   include AnalyticsPartialController
 
-  before_action :update_translations
   before_action :validate_session
   before_action :set_visitor_cookie
   # Prevent CSRF attacks by raising an exception.
@@ -51,9 +50,5 @@ private
 
   def store_originating_ip
     OriginatingIpStore.store(request)
-  end
-
-  def update_translations
-    RP_DISPLAY_REPOSITORY.update_translations(current_transaction_simple_id)
   end
 end

@@ -43,4 +43,12 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Rails.application.routes.url_helpers
+
+  require 'api_test_helper'
+  config.before(:each) do |test|
+    unless test.metadata[:skip_before]
+      stub_transactions_list
+      stub_translations
+    end
+  end
 end

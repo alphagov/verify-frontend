@@ -1,3 +1,4 @@
+require 'display/display_data'
 module Display
   class RpDisplayData < ::Display::DisplayData
     prefix :rps

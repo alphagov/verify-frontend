@@ -1,5 +1,4 @@
 class ServiceStatusController < ApplicationController
-  skip_before_action :update_translations
   skip_before_action :validate_session
   skip_before_action :set_piwik_custom_variables
 
