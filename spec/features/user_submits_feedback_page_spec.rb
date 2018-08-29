@@ -23,7 +23,7 @@ RSpec.feature 'When the user submits the feedback page' do
 
       click_button t('hub.feedback.send_message')
       expect(page).to have_title t('hub.feedback_sent.title')
-      expect(page).to have_current_path(feedback_sent_path, only_path: true)
+      expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
       expect(page).to have_content t('hub.feedback_sent.message_email')
       expect(page).to have_content session_not_valid_link
       expect(page).to have_content t('hub.transaction_list.title')
@@ -37,7 +37,7 @@ RSpec.feature 'When the user submits the feedback page' do
       choose 'feedback_form_reply_false'
 
       click_button t('hub.feedback.send_message')
-      expect(page).to have_current_path(feedback_sent_path, only_path: true)
+      expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
       expect(page).to_not have_content t('hub.feedback_sent.message_email')
       expect(page).to have_content session_not_valid_link
       expect(page).to have_content t('hub.transaction_list.title')
@@ -99,7 +99,7 @@ RSpec.feature 'When the user submits the feedback page' do
       choose 'feedback_form_reply_false'
 
       click_button t('hub.feedback.send_message')
-      expect(page).to have_current_path(feedback_sent_path, only_path: true)
+      expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
       expect(page).to_not have_content session_not_valid_link
       expect(page).to have_link t('hub.feedback_sent.session_valid_link'), href: start_path
     end
@@ -113,7 +113,7 @@ RSpec.feature 'When the user submits the feedback page' do
       choose 'feedback_form_reply_false'
 
       click_button t('hub.feedback.send_message')
-      expect(page).to have_current_path(feedback_sent_path, only_path: true)
+      expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
       expect(page).to_not have_content session_not_valid_link
       expect(page).to have_link t('hub.feedback_sent.session_valid_link'), href: select_documents_path
     end
@@ -128,7 +128,7 @@ RSpec.feature 'When the user submits the feedback page' do
       choose 'feedback_form_reply_false'
 
       click_button t('hub.feedback.send_message')
-      expect(page).to have_current_path(feedback_sent_path, only_path: true)
+      expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
       expect(page).to_not have_content session_not_valid_link
       expect(page).to have_link t('hub.feedback_sent.session_valid_link'), href: start_path
     end
@@ -141,7 +141,7 @@ RSpec.feature 'When the user submits the feedback page' do
       choose 'feedback_form_reply_false'
 
       click_button t('hub.feedback.send_message')
-      expect(page).to have_current_path(feedback_sent_path, only_path: true)
+      expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
       expect(page).to_not have_content session_not_valid_link
       expect(page).to have_link t('hub.feedback_sent.session_valid_link'), href: start_path
     end

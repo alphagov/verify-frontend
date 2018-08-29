@@ -7,20 +7,19 @@ RSpec.describe 'When the user visits a page' do
   let(:request_log) { double(:request_log) }
 
   before(:all) do
-    WebMock.allow_net_connect!
+    Rails.application.routes.append do
+      get "piwik.php", to: MockPiwikMiddleware.new, as: :test_piwik
+    end
+    Rails.application.reload_routes!
   end
 
-  before :each do
-    # Add our mock piwik endpoint to the capybara server
-    capybara_server = Capybara::Server.new(MockPiwikMiddleware.new(request_log))
-    capybara_server.boot
-    server_url = "http://#{[capybara_server.host, capybara_server.port].join(':')}/piwik.php"
-    allow(PUBLIC_PIWIK).to receive(:url).and_return(server_url)
+  before(:each) do
+    visit '/test-saml' #get Rails app host
+    @server_url = URI.join(current_url, test_piwik_path).to_s
+    allow(MockPiwikMiddleware).to receive(:request_log).and_return(request_log)
+    expect(PUBLIC_PIWIK).to receive(:url).and_return(@server_url).at_least(2).times
   end
 
-  after(:all) do
-    WebMock.disable_net_connect!(allow_localhost: true)
-  end
 
   context 'when JS is enabled', js: true do
     it 'sends a page view to analytics' do
@@ -47,6 +46,8 @@ RSpec.describe 'When the user visits a page' do
     end
 
     it 'sends a page view with a custom url for error pages' do
+      browser = Capybara.current_session.driver.browser
+      browser.manage.delete_all_cookies
       stub_transactions_list
       expect(request_log).to receive(:log).with(
         hash_including(
@@ -84,6 +85,7 @@ RSpec.describe 'When the user visits a page' do
       choose 'start_form_selection_false', allow_label_click: true
       choose 'start_form_selection_false', allow_label_click: true
       choose 'start_form_selection_true', allow_label_click: true
+      click_button 'Continue'
     end
 
     it 'sends a page view with a new_visit parameter if new session' do
@@ -170,6 +172,8 @@ RSpec.describe 'When the user visits a page' do
     end
 
     it 'sends a page view with a custom url for error pages' do
+      browser = Capybara.current_session.driver.browser
+      browser.clear_cookies
       stub_transactions_list
       visit '/start'
       expect(page).to have_content t('errors.no_cookies.enable_cookies')

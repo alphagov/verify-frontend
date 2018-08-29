@@ -11,7 +11,7 @@ RSpec.feature 'When users visits other documents page' do
     choose 'other_identity_documents_form_non_uk_id_document_true', allow_label_click: true
     click_button t('navigation.continue')
 
-    expect(page).to have_current_path(select_phone_path, only_path: true)
+    expect(page).to have_current_path(select_phone_path, ignore_query: true)
   end
 
   it 'redirects user to select-phone page if selects no' do
@@ -19,7 +19,7 @@ RSpec.feature 'When users visits other documents page' do
     choose 'other_identity_documents_form_non_uk_id_document_false', allow_label_click: true
     click_button t('navigation.continue')
 
-    expect(page).to have_current_path(select_phone_path, only_path: true)
+    expect(page).to have_current_path(select_phone_path, ignore_query: true)
   end
 
   it 'should show a feedback link' do
