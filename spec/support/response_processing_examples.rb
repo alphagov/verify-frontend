@@ -14,6 +14,7 @@ end
 shared_examples 'response_processing_errors' do |matching_outcome, piwik_action, error_feedback_source|
   it "renders error page and reports \"#{piwik_action}\" to Piwik for matching outcome #{matching_outcome}" do
     set_session_and_cookies_with_loa('LEVEL_1')
+    set_selected_idp(simple_id: 'stub-country')
     stub_piwik_request('action_name' => piwik_action)
     stub_matching_outcome(matching_outcome)
     expect(subject).to receive(:render).with(

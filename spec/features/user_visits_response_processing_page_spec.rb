@@ -28,17 +28,18 @@ RSpec.describe 'When the user visits the response processing page' do
   end
 
   it 'should redirect to prove-identity page on matching error for an eIDAS journey' do
-    page.set_rack_session selected_country: 'stub-country'
+    set_selected_country_in_session(simple_id: 'stub-country')
     stub_matching_outcome MatchingOutcomeResponse::SHOW_MATCHING_ERROR_PAGE
+    stub_restart_eidas_journey
 
     visit '/response-processing'
     click_on t('hub.response_processing.matching_error.online_link')
 
-    expect(page).to have_current_path('/prove-identity')
+    expect(page).to have_current_path(prove_identity_retry_path)
   end
 
   it 'should redirect to redirect-to-service page on matching error for a Verify (IDP) journey' do
-    page.set_rack_session selected_idp: 'stub-idp'
+    set_selected_idp_in_session(simple_id: 'stub-idp')
     stub_matching_outcome MatchingOutcomeResponse::SHOW_MATCHING_ERROR_PAGE
 
     visit '/response-processing'

@@ -2,6 +2,7 @@ en:
   routes:
     start: start
     prove_identity: prove-identity
+    prove_identity_retry: prove-identity-retry
     begin_registration: begin-registration
     begin_sign_in: begin-sign-in
     about: about

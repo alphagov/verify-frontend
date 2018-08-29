@@ -306,6 +306,10 @@ module ApiTestHelper
     stub_request(:post, policy_api_uri(select_idp_endpoint(default_session_id))).to_return(status: 201)
   end
 
+  def stub_restart_eidas_journey
+    stub_request(:post, policy_api_uri(restart_eidas_journey_endpoint(default_session_id))).to_return(status: 500)
+  end
+
   def stub_api_no_docs_idps
     idps = [
       { 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_2) },
