@@ -64,9 +64,6 @@ GEM
       xpath (>= 2.0, < 4.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
-    chromedriver-helper (1.2.0)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
     clamp (1.0.1)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
@@ -102,6 +99,8 @@ GEM
       pleaserun (~> 0.0.29)
       ruby-xz
       stud
+    geckodriver-helper (0.21.0)
+      archive-zip (~> 0.7)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     govuk-lint (3.3.0)
@@ -354,10 +353,10 @@ DEPENDENCIES
   browser
   byebug
   capybara (~> 2.10)
-  chromedriver-helper
   connection_pool
   dotenv-rails
   email_validator
+  geckodriver-helper
   govuk-lint
   govuk_elements_rails
   govuk_frontend_toolkit

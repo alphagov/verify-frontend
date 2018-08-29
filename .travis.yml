@@ -2,8 +2,7 @@ language: ruby
 cache:
   directories:
     - $HOME/.phantomjs 
-sudo: required #this is needed for the chromedriver to work
+env:
+    - MOZ_HEADLESS=1
 addons:
-  apt:
-    packages:
-      - google-chrome-stable
+    firefox: latest
