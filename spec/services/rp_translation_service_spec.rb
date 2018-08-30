@@ -5,27 +5,28 @@ require 'models/config_proxy'
 require 'i18n'
 
 describe 'RpTranslationService' do
+  let(:config_proxy) { instance_double("ConfigProxy") }
   before(:each) do
-    allow(CONFIG_PROXY).to receive(:transactions).and_return(MultiJson.load('[{
-      "simpleId":"test-rp",
-      "entityId":"http://example.com/test-rp",
-      "serviceHomepage":"http://example.com/test-rp",
-      "loaList":["LEVEL_2"]
-    }]'))
+    stub_const("CONFIG_PROXY", config_proxy)
 
     I18n.backend = I18n::Backend::Simple.new
   end
 
   it 'should call to config service to get transactions' do
     translation_service = RpTranslationService.new
+    expect(config_proxy).to receive(:transactions).and_return(MultiJson.load('[{
+      "simpleId":"test-rp",
+      "entityId":"http://example.com/test-rp",
+      "serviceHomepage":"http://example.com/test-rp",
+      "loaList":["LEVEL_2"]
+    }]'))
 
     transactions = translation_service.transactions
 
-    expect(CONFIG_PROXY).to have_received(:transactions)
     expect(transactions).to eq(['test-rp'])
   end
 
-  it 'should update I18n with translations for a particular transaction in the current locale' do
+  it 'should update I18n with translations for a particular transaction in all locales' do
     translations = {
       name: "register for an identity profile",
       rp_name: "Test RP",
@@ -41,13 +42,17 @@ describe 'RpTranslationService' do
       custom_fail_try_another_text: '',
       custom_fail_contact_details_intro: ''
     }
-    allow(CONFIG_PROXY).to receive(:get_transaction_translations).with('test-rp', :en).and_return(translations)
+    translations_cy = translations.map { |key, value| [key, value + " cy"] }.to_h
+    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', "en").and_return(translations)
+    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', "cy").and_return(translations_cy)
 
     translation_service = RpTranslationService.new
     translation_service.update_rp_translations('test-rp')
 
     translations.keys.each do |key|
-      expect(I18n.t("rps.test-rp.#{key}")).to eq(translations.fetch(key))
+      expect(I18n.t("rps.test-rp.#{key}", locale: :en)).to eq(translations.fetch(key))
+      expect(I18n.t("rps.test-rp.#{key}", locale: :cy)).to_not eq(translations.fetch(key))
+      expect(I18n.t("rps.test-rp.#{key}", locale: :cy)).to eq(translations_cy.fetch(key))
     end
   end
 
@@ -67,13 +72,13 @@ describe 'RpTranslationService' do
         custom_fail_try_another_text: '',
         custom_fail_contact_details_intro: ''
     }
-    allow(CONFIG_PROXY).to receive(:get_transaction_translations).with('test-rp', :en).and_return(translations, {})
+    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', 'en').and_return(translations, {})
+    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', 'cy').and_return(translations, {})
 
     translation_service = RpTranslationService.new
     translation_service.update_rp_translations('test-rp')
     translation_service.update_rp_translations('test-rp')
 
-    expect(CONFIG_PROXY).to have_received(:get_transaction_translations).with('test-rp', :en).twice
     expect(I18n.t("rps.test-rp.name")).to eq("register for an identity profile")
     expect(I18n.t("rps.test-rp.rp_name")).to eq("Test RP")
   end
@@ -97,13 +102,13 @@ describe 'RpTranslationService' do
     partial_translations = {
         rp_name: "Updated Test RP"
     }
-    allow(CONFIG_PROXY).to receive(:get_transaction_translations).with('test-rp', :en).and_return(translations, partial_translations)
+    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', 'en').and_return(translations, partial_translations)
+    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', 'cy').and_return(translations, partial_translations)
 
     translation_service = RpTranslationService.new
     translation_service.update_rp_translations('test-rp')
     translation_service.update_rp_translations('test-rp')
 
-    expect(CONFIG_PROXY).to have_received(:get_transaction_translations).with('test-rp', :en).twice
     expect(I18n.t("rps.test-rp.name")).to eq("register for an identity profile")
     expect(I18n.t("rps.test-rp.rp_name")).to eq("Updated Test RP")
   end

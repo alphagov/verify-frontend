@@ -65,7 +65,7 @@ module ApiTestHelper
       }'
     stub_request(:get, api_translations_endpoint('test-rp', 'en')).to_return(body: en_translation_data, status: 200)
     stub_request(:get, api_translations_endpoint('test-rp', 'cy')).to_return(body: en_translation_data, status: 200)
-    stub_request(:get, api_translations_endpoint('test-rp-noc3', 'en')).to_return(body: '{
+    test_rp_noc3_translations = '{
         "name":"Register for an identity profile (forceauthn & no cycle3)",
         "rpName":"Test RP",
         "analyticsDescription":"analytics description for test-rp",
@@ -73,10 +73,15 @@ module ApiTestHelper
         "otherWaysDescription":"register for an identity profile",
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
         "taxonName":"Benefits"
-      }', status: 200)
+      }'
+    stub_request(:get, api_translations_endpoint('test-rp-noc3', 'en')).to_return(body: test_rp_noc3_translations, status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-noc3', 'cy')).to_return(body: '{}', status: 200)
     stub_request(:get, api_translations_endpoint('headless-rp', 'en')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('headless-rp', 'cy')).to_return(body: '{}', status: 200)
     stub_request(:get, api_translations_endpoint('test-rp-with-continue-on-fail', 'en')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-with-continue-on-fail', 'cy')).to_return(body: '{}', status: 200)
     stub_request(:get, api_translations_endpoint('test-rp-no-ab-test', 'en')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-no-ab-test', 'cy')).to_return(body: '{}', status: 200)
     stub_request(:get, api_translations_endpoint('test-rp-no-demo', 'en')).to_return(body: '{
         "name":"register for an identity profile",
         "rpName":"Test RP",
@@ -108,6 +113,7 @@ module ApiTestHelper
         "customFailContactDetailsIntro":"This is custom contact details."
       }', status: 200)
     stub_request(:get, api_translations_endpoint('foobar', 'en')).to_return(body: en_translation_data, status: 200)
+    stub_request(:get, api_translations_endpoint('foobar', 'cy')).to_return(body: '{}', status: 200)
   end
 
   def stub_countries_list
