@@ -313,6 +313,19 @@ module Analytics
       end
     end
 
+    describe '#report_started_single_idp_journey' do
+      it 'should report a single idp journey' do
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            'The user has started a single idp journey',
+            3 => %w(JOURNEY_TYPE SINGLE_IDP)
+          )
+
+        federation_reporter.report_started_single_idp_journey(request)
+      end
+    end
+
     describe '#report_number_of_idps_recommended' do
       it 'should report the number of IDPs that were recommended' do
         expect(analytics_reporter).to receive(:report_event)

@@ -33,6 +33,14 @@ module Analytics
       )
     end
 
+    def report_started_single_idp_journey(request)
+      report_action_without_current_transaction(
+        request,
+        'The user has started a single idp journey',
+        Analytics::CustomVariable.build(:journey_type, 'SINGLE_IDP')
+      )
+    end
+
     def report_ab_test(transaction_id, request, alternative_name)
       unless transaction_id.nil?
         current_transaction = RP_DISPLAY_REPOSITORY.get_translations(transaction_id)

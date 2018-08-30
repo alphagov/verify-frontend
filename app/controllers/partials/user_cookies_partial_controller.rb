@@ -33,8 +33,14 @@ module UserCookiesPartialController
     journey_hint_by_status_value = journey_hint_value || {}
     journey_hint_by_status_value[status] = idp_entity_id
 
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_by_status_value.to_json,
-                                                                  expires: 18.months.from_now }
+    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_by_status_value.to_json, expires: 18.months.from_now }
+  end
+
+  def set_single_idp_journey_cookie(data)
+    cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = {
+      value: data.to_json,
+      expires: 90.minutes.from_now
+    }
   end
 
 private
