@@ -34,11 +34,11 @@ module Display
       }
 
       before(:each) do
-        allow(translator).to receive(:translate).with('rps.test-rp.name').and_return(transaction_a_name)
-        allow(translator).to receive(:translate).with('rps.test-rp-2.name').and_return(transaction_2_name)
-        allow(translator).to receive(:translate).with('rps.test-rp-3.name').and_return(transaction_3_name)
-        allow(translator).to receive(:translate).with('rps.test-rp-4.name').and_return(transaction_4_name)
-        allow(translator).to receive(:translate).with('rps.some-simple-id.name').and_return(transaction_b_name)
+        allow(translator).to receive(:translate!).with('rps.test-rp.name').and_return(transaction_a_name)
+        allow(translator).to receive(:translate!).with('rps.test-rp-2.name').and_return(transaction_2_name)
+        allow(translator).to receive(:translate!).with('rps.test-rp-3.name').and_return(transaction_3_name)
+        allow(translator).to receive(:translate!).with('rps.test-rp-4.name').and_return(transaction_4_name)
+        allow(translator).to receive(:translate!).with('rps.some-simple-id.name').and_return(transaction_b_name)
       end
 
       it 'returns the transactions with display name and homepage in the order listed in the relying_parties_config' do
