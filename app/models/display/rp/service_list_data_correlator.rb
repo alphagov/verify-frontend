@@ -22,7 +22,7 @@ module Display
 
       def translate_name(transaction)
         simple_id = transaction.fetch('simpleId')
-        @translator.translate("rps.#{simple_id}.name")
+        @translator.translate!("rps.#{simple_id}.name")
       end
 
       def filter_transactions(transactions, simple_ids)
@@ -34,9 +34,7 @@ module Display
 
       def translate_taxon(transaction)
         simple_id = transaction.fetch('simpleId')
-        @translator.translate("rps.#{simple_id}.taxon_name")
-      rescue Display::FederationTranslator::TranslationError
-        @other_services_translation
+        @translator.translate("rps.#{simple_id}.taxon_name", default: @other_services_translation)
       end
     end
   end

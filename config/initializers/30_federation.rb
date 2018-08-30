@@ -6,9 +6,8 @@ require 'idp_recommendations/recommendations_engine'
 Rails.application.config.after_initialize do
   # Federation localisation and display
   yaml_loader = YamlLoader.new
-  federation_translator = Display::FederationTranslator.new
-  RP_TRANSLATION_SERVICE = RpTranslationService.new(federation_translator)
-  repository_factory = Display::RepositoryFactory.new(federation_translator, yaml_loader)
+  RP_TRANSLATION_SERVICE = RpTranslationService.new
+  repository_factory = Display::RepositoryFactory.new(I18n, yaml_loader)
   IDP_DISPLAY_REPOSITORY = repository_factory.create_idp_repository(CONFIG.idp_display_locales)
   RP_DISPLAY_REPOSITORY = repository_factory.create_rp_repository
   COUNTRY_DISPLAY_REPOSITORY = repository_factory.create_country_repository(CONFIG.country_display_locales)
@@ -41,10 +40,11 @@ Rails.application.config.after_initialize do
   rps_name_only = RP_CONFIG['transaction_type']['display_name_only'] || []
   REDIRECT_TO_RP_LIST = RP_CONFIG['redirect_to_rp'] || []
   SINGLE_IDP_ENABLED_RP_LIST = RP_CONFIG['single_idp_enabled'] || []
-  DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(federation_translator, rps_name_and_homepage.clone, rps_name_only.clone)
-  TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(federation_translator, rps_name_and_homepage.clone, rps_name_only.clone)
+  DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(I18n, rps_name_and_homepage.clone, rps_name_only.clone)
+  TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(I18n, rps_name_and_homepage.clone, rps_name_only.clone)
+
   SERVICE_LIST_DATA_CORRELATOR = Display::Rp::ServiceListDataCorrelator.new(
-    federation_translator,
+    I18n,
     rps_name_and_homepage.clone
   )
 

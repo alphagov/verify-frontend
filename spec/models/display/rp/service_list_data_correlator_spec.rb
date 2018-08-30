@@ -10,7 +10,7 @@ module Display
       let(:transaction_3_name) { 'Transaction 3' }
       let(:transaction_4_name) { 'Transaction 4' }
 
-      let(:translator) { double(:translator) }
+      let(:translator) { I18n }
       let(:homepage) { 'http://transaction-a.com' }
       let(:homepage_2) { 'http://transaction-2.com' }
       let(:homepage_3) { 'http://transaction-3.com' }
@@ -45,40 +45,26 @@ module Display
         ServiceListDataCorrelator.new(translator, [public_simple_id])
       end
 
-      before(:each) do
-        allow(translator)
-          .to receive(:translate)
-            .with('rps.test-rp.name')
-            .and_return(transaction_a_name)
-        allow(translator)
-          .to receive(:translate)
-            .with('rps.test-rp-2.name')
-            .and_return(transaction_2_name)
-        allow(translator)
-          .to receive(:translate)
-            .with('rps.test-rp-3.name')
-            .and_return(transaction_3_name)
-        allow(translator)
-          .to receive(:translate)
-            .with('rps.test-rp-4.name')
-            .and_return(transaction_4_name)
+      def store_translation(rp, key, value)
+        I18n.backend.store_translations('en', 'rps' => { rp => { key => value } })
+      end
 
-        allow(translator)
-          .to receive(:translate)
-            .with('rps.test-rp.taxon_name')
-            .and_return(public_taxon)
-        allow(translator)
-          .to receive(:translate)
-            .with('rps.test-rp-2.taxon_name')
-            .and_return(public_taxon_2)
-        allow(translator)
-          .to receive(:translate)
-            .with('rps.test-rp-3.taxon_name')
-            .and_return(public_taxon_3)
-        allow(translator)
-          .to receive(:translate)
-            .with('rps.test-rp-4.taxon_name')
-            .and_return(public_taxon_4)
+      before(:each) do
+        @old_backend = I18n.backend
+        I18n.backend = I18n::Backend::Simple.new
+        store_translation('test-rp', 'name', transaction_a_name)
+        store_translation('test-rp-2', 'name', transaction_2_name)
+        store_translation('test-rp-3', 'name', transaction_3_name)
+        store_translation('test-rp-4', 'name', transaction_4_name)
+
+        store_translation('test-rp', 'taxon_name', public_taxon)
+        store_translation('test-rp-2', 'taxon_name', public_taxon_2)
+        store_translation('test-rp-3', 'taxon_name', public_taxon_3)
+        store_translation('test-rp-4', 'taxon_name', public_taxon_4)
+      end
+
+      after(:each) do
+        I18n.backend = @old_backend
       end
 
       it 'returns the transactions with display name, homepage, loa and simpleId' do

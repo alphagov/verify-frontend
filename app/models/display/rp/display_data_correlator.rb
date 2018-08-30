@@ -38,7 +38,7 @@ module Display
 
       def translate_name(transaction)
         simple_id = transaction.fetch('simpleId')
-        @translator.translate("rps.#{simple_id}.name")
+        @translator.translate!("rps.#{simple_id}.name")
       end
 
       def filter_transactions(transactions, simple_ids)

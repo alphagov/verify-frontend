@@ -8,7 +8,6 @@ module Display
         @translator = translator
         @rps_with_homepage_link = rps_with_homepage_link
         @rps_with_name_only = rps_with_name_only
-        @other_services_translation = @translator.translate('hub.transaction_list.other_services')
       end
 
       def correlate(data)
@@ -30,7 +29,7 @@ module Display
           name = translate_name(item)
           homepage = @rps_with_name_only.include?(item.fetch('simpleId')) ? nil : item.fetch('serviceHomepage', nil)
           # if there's no homepage, move the transaction down to the 'Other service' taxon
-          taxon = homepage.nil? ? @other_services_translation : translate_taxon(item)
+          taxon = homepage.nil? ? other_services_translation : translate_taxon(item)
           loa_list = item.fetch('loaList')
           Transaction.new(name, taxon, homepage, loa_list)
         end
@@ -57,9 +56,9 @@ module Display
       def sort_taxons(taxons)
         # Sort alphabetically, except putting 'Other services' at the bottom of the list.
         taxons.sort do |x, y|
-          if x.name === @other_services_translation
+          if x.name == other_services_translation
             1
-          elsif y.name === @other_services_translation
+          elsif y.name == other_services_translation
             -1
           else
             x.name.casecmp(y.name)
@@ -67,16 +66,18 @@ module Display
         end
       end
 
+      def other_services_translation
+        I18n.translate('hub.transaction_list.other_services')
+      end
+
       def translate_name(transaction)
         simple_id = transaction.fetch('simpleId')
-        @translator.translate("rps.#{simple_id}.name")
+        @translator.translate!("rps.#{simple_id}.name")
       end
 
       def translate_taxon(transaction)
         simple_id = transaction.fetch('simpleId')
-        @translator.translate("rps.#{simple_id}.taxon_name")
-      rescue Display::FederationTranslator::TranslationError
-        @other_services_translation
+        @translator.translate("rps.#{simple_id}.taxon_name", default: other_services_translation)
       end
 
       def group_by_taxon(transactions)

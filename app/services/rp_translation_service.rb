@@ -1,6 +1,5 @@
 class RpTranslationService
-  def initialize(translator)
-    @translator = translator
+  def initialize
     @locales = %w[en cy]
   end
 

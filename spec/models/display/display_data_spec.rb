@@ -1,9 +1,25 @@
 require 'spec_helper'
+require 'rails_helper'
 require 'display/display_data'
 
 module Display
   describe DisplayData do
-    let(:translator) { double(:translator) }
+    let(:translator) { I18n }
+
+    def store_translation(key, value)
+      keys = key.split(".")
+      hash = keys.reverse.inject(value) { |a, n| { n => a } }
+      I18n.backend.store_translations('en', hash)
+    end
+
+    before(:each) do
+      @old_backend = I18n.backend
+      I18n.backend = I18n::Backend::Simple.new
+    end
+
+    after(:each) do
+      I18n.backend = @old_backend
+    end
 
     describe "::prefix" do
       it 'defines the prefix to the localisation key' do
@@ -20,7 +36,7 @@ module Display
           prefix :foo
           content :bob
         end
-        expect(translator).to receive(:translate).with('foo.simpleid.bob').and_return 'foobar'
+        store_translation('foo.simpleid.bob', 'foobar')
         expect(derived_class.new('simpleid', translator).bob).to eql 'foobar'
       end
 
@@ -38,7 +54,6 @@ module Display
           prefix :foo
           content :bob, default: 'foobarbaz'
         end
-        expect(translator).to receive(:translate).with('foo.simpleid.bob').and_raise
         expect(derived_class.new('simpleid', translator).bob).to eql 'foobarbaz'
       end
 

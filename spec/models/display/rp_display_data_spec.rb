@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'rails_helper'
 require 'display_data_examples'
 require 'display/display_data'
 require 'display/rp_display_data'
