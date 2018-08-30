@@ -74,7 +74,7 @@ group :test, :development do
   gem 'thin'
 
   gem 'govuk-lint'
-  gem 'chromedriver-helper'
+  gem 'geckodriver-helper'
 end
 
 platforms :mswin, :mingw, :x64_mingw do
