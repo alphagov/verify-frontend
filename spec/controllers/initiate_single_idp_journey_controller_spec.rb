@@ -7,7 +7,7 @@ require 'partials/user_cookies_partial_controller'
 
 describe InitiateSingleIdpJourneyController do
   VALID_TEST_RP = 'test-rp-no-demo'.freeze
-  VALID_STUB_IDP = 'stub-idp-demo'.freeze
+  VALID_STUB_IDP = 'stub-idp-demo-one'.freeze
   UUID_ONE = 'e58394dc-6a4f-40ed-8ddd-e0e028d09da9'.freeze
   SINGLE_IDP_ENABLED_RP_LIST_MOCK = { VALID_TEST_RP => { 'url' => 'http://localhost:50300/test-saml' } }.freeze
   SINGLE_IDP_ENABLED_IDP_LIST_MOCK = [VALID_STUB_IDP].freeze

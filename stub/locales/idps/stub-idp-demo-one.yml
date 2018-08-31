@@ -1,6 +1,6 @@
 en:
   idps:
-    stub-idp-demo:
+    stub-idp-demo-one:
       name: "Demo IDP"
       tagline: "a really demo identity provider"
       about: |
@@ -18,7 +18,7 @@ en:
         </p>
 cy:
   idps:
-    stub-idp-demo:
+    stub-idp-demo-one:
       name: "Welsh Demo IDP"
       about: |
            <p>ID Corp is the premier identity proofing service around.</p>
