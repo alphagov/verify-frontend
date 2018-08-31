@@ -1,6 +1,8 @@
 require 'spec_helper'
 require 'rails_helper'
-require 'models/display/rp/service_list_data_correlator'
+require 'display/rp/service_list_data_correlator'
+require 'display/rp_display_data'
+require 'display/rp_display_repository'
 
 module Display
   module Rp
@@ -10,7 +12,6 @@ module Display
       let(:transaction_3_name) { 'Transaction 3' }
       let(:transaction_4_name) { 'Transaction 4' }
 
-      let(:translator) { I18n }
       let(:homepage) { 'http://transaction-a.com' }
       let(:homepage_2) { 'http://transaction-2.com' }
       let(:homepage_3) { 'http://transaction-3.com' }
@@ -41,33 +42,30 @@ module Display
       let(:public_taxon_3) { 'Taxon 3' }
       let(:public_taxon_4) { 'Taxon 4' }
 
+      let(:rp_display_repository) { instance_double("Display::RpDisplayRepository") }
+
       let(:service_list_data_correlator) do
-        ServiceListDataCorrelator.new(translator, [public_simple_id])
+        ServiceListDataCorrelator.new(rp_display_repository, [public_simple_id])
       end
 
-      def store_translation(rp, key, value)
-        I18n.backend.store_translations('en', 'rps' => { rp => { key => value } })
+      let(:display_data_1) do
+        instance_double("Display::RpDisplayData", name: transaction_a_name, taxon: public_taxon)
       end
-
-      before(:each) do
-        @old_backend = I18n.backend
-        I18n.backend = I18n::Backend::Simple.new
-        store_translation('test-rp', 'name', transaction_a_name)
-        store_translation('test-rp-2', 'name', transaction_2_name)
-        store_translation('test-rp-3', 'name', transaction_3_name)
-        store_translation('test-rp-4', 'name', transaction_4_name)
-
-        store_translation('test-rp', 'taxon_name', public_taxon)
-        store_translation('test-rp-2', 'taxon_name', public_taxon_2)
-        store_translation('test-rp-3', 'taxon_name', public_taxon_3)
-        store_translation('test-rp-4', 'taxon_name', public_taxon_4)
+      let(:display_data_2) do
+        instance_double("Display::RpDisplayData", name: transaction_2_name, taxon: public_taxon_2)
       end
-
-      after(:each) do
-        I18n.backend = @old_backend
+      let(:display_data_3) do
+        instance_double("Display::RpDisplayData", name: transaction_3_name, taxon: public_taxon_3)
+      end
+      let(:display_data_4) do
+        instance_double("Display::RpDisplayData", name: transaction_4_name, taxon: public_taxon_4)
       end
 
       it 'returns the transactions with display name, homepage, loa and simpleId' do
+        expect(rp_display_repository).to receive(:get_translations).with(public_simple_id).and_return(display_data_1)
+        expect(rp_display_repository).to receive(:get_translations).with(public_simple_id_2).and_return(display_data_2)
+        expect(rp_display_repository).to receive(:get_translations).with(public_simple_id_3).and_return(display_data_3)
+        expect(rp_display_repository).to receive(:get_translations).with(public_simple_id_4).and_return(display_data_4)
         transaction_data = [
           {
               'simpleId' => public_simple_id,
@@ -95,7 +93,7 @@ module Display
           },
         ]
         correlator = ServiceListDataCorrelator.new(
-          translator,
+          rp_display_repository,
           [
             public_simple_id_4,
             public_simple_id_2,

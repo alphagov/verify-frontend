@@ -49,12 +49,30 @@ module Display
         }.to raise_error NotImplementedError
       end
 
-      it 'will allow default values if translation is not found' do
-        derived_class = Class.new(Display::DisplayData) do
-          prefix :foo
-          content :bob, default: 'foobarbaz'
+      context "will support defaults" do
+        it 'as values if translation is not found' do
+          derived_class = Class.new(Display::DisplayData) do
+            prefix :foo
+            content :bob, default: 'foobarbaz'
+          end
+          expect(derived_class.new('simpleid', translator).bob).to eql 'foobarbaz'
         end
-        expect(derived_class.new('simpleid', translator).bob).to eql 'foobarbaz'
+
+        it 'as procs if translation is not found' do
+          derived_class = Class.new(Display::DisplayData) do
+            prefix :foo
+            content :bob, default: -> { "foobar" }
+          end
+          expect(derived_class.new('simpleid', translator).bob).to eql 'foobar'
+        end
+
+        it 'as procs that are instance_evaled if translation is not found' do
+          derived_class = Class.new(Display::DisplayData) do
+            prefix :foo
+            content :bob, default: -> { prefix.to_s + " foobar" }
+          end
+          expect(derived_class.new('simpleid', translator).bob).to eql 'foo foobar'
+        end
       end
 
       it 'content will not be shared between derived classes' do

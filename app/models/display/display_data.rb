@@ -1,6 +1,7 @@
 module Display
   class DisplayData
     attr_reader :simple_id
+    attr_reader :translator
     def initialize(simple_id, translator)
       @simple_id = simple_id
       @translator = translator
@@ -14,7 +15,12 @@ module Display
           begin
             @translator.translate!("#{prefix}.#{simple_id}.#{field}")
           rescue I18n::MissingTranslationData => e
-            options.fetch(:default) { raise e }
+            default = options.fetch(:default) { raise e }
+            if default.is_a? Proc
+              instance_exec(&default)
+            else
+              default
+            end
           end
         end
         @localizable_fields ||= []

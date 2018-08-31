@@ -13,5 +13,7 @@ module Display
     content :custom_fail_try_another_summary, default: nil
     content :custom_fail_try_another_text, default: nil
     content :custom_fail_contact_details_intro, default: nil
+    content :taxon_name, default: -> { I18n.translate('hub.transaction_list.other_services') }
+    alias_method :taxon, :taxon_name
   end
 end
