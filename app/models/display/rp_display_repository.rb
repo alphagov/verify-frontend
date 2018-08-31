@@ -1,5 +1,4 @@
-require 'concurrent'
-require 'date'
+require 'loading_cache'
 module Display
   class RpDisplayRepository
     def initialize(translator, logger)
@@ -20,60 +19,18 @@ module Display
 
     def create_display_data(simple_id)
       display_data = Display::RpDisplayData.new(simple_id, @translator)
-      DisplayDataCache.new(display_data, @logger)
+      LoadingCache.new(display_data, translation_refresh_proc)
     end
 
-    class DisplayDataCache
-      include Concurrent::Async
-      def initialize(display_data, logger)
-        @last_updated = :never
-        @display_data = display_data
-        @logger = logger
-      end
-
-      def fetch!
-        result = self.await.fetch_display_data!
-        if(result.fulfilled?)
-          return result.value
-        else
-          raise result.reason
-        end
-      end
-
-      def fetch_display_data!
-        if need_to_fetch_upstream?
-          fetch_upstream!
-        end
-        @display_data
-      end
-
-    private
-
-      def fetch_upstream!
+    def translation_refresh_proc
+      @display_data_refresh_proc ||= ->(display_data) {
         begin
-          RP_TRANSLATION_SERVICE.update_rp_translations(@display_data.simple_id)
+          RP_TRANSLATION_SERVICE.update_rp_translations(display_data.simple_id)
         rescue StandardError => e
           @logger.error(e)
         end
-        @display_data.validate_content!
-        @last_updated = DateTime.now
-      end
-
-      def need_to_fetch_upstream?
-        never_updated? || expired?
-      end
-
-      def never_updated?
-        @last_updated == :never
-      end
-
-      def expired?
-        (@last_updated + lifetime).to_datetime < DateTime.now
-      end
-
-      def lifetime
-        @lifetime ||= 30.minutes
-      end
+        display_data.tap(&:validate_content!)
+      }
     end
   end
 end

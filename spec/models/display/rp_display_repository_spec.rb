@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'display/rp_display_repository'
 require 'display/rp_display_data'
 require 'rp_translation_service'
+require 'loading_cache'
 
 module Display
   describe RpDisplayRepository do
