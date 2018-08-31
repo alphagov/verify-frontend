@@ -68,6 +68,19 @@ describe 'user sends authn requests' do
       expect(stub_piwik_request).to have_been_made.once
     end
 
+    it 'will redirect the user to /continue-with-your-idp when user has a single idp cookie' do
+      stub_api_idp_list_for_single_idp_journey
+      stub_session_creation
+
+      visit('/test-single-idp-journey')
+      click_button 'initiate-single-idp-post'
+
+      visit('/test-saml')
+      click_button 'saml-post-journey-hint-sign-in'
+
+      expect(page).to have_title t('hub.single_idp_journey.title', display_name: 'IDCorp')
+    end
+
     it 'will set ab_test cookie' do
       stub_session_creation
 

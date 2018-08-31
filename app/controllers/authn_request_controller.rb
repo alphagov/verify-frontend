@@ -65,20 +65,24 @@ private
   end
 
   def redirect_for_journey_hint(hint)
-    case hint
-    when 'uk_idp_start'
-      redirect_to start_path
-    when 'registration'
-      redirect_to begin_registration_path
-    when 'uk_idp_sign_in'
-      redirect_to begin_sign_in_path
-    when 'eidas_sign_in'
-      do_eidas_sign_in_redirect
-    when 'submission_confirmation'
-      redirect_to confirm_your_identity_path
+    if !cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY].nil? && SINGLE_IDP_FEATURE
+      redirect_to continue_to_your_idp_path
     else
-      logger.info "Unrecognised journey_hint value: #{hint}" unless hint.nil? || hint.eql?('unspecified')
-      do_default_redirect
+      case hint
+      when 'uk_idp_start'
+        redirect_to start_path
+      when 'registration'
+        redirect_to begin_registration_path
+      when 'uk_idp_sign_in'
+        redirect_to begin_sign_in_path
+      when 'eidas_sign_in'
+        do_eidas_sign_in_redirect
+      when 'submission_confirmation'
+        redirect_to confirm_your_identity_path
+      else
+        logger.info "Unrecognised journey_hint value: #{hint}" unless hint.nil? || hint.eql?('unspecified')
+        do_default_redirect
+      end
     end
   end
 

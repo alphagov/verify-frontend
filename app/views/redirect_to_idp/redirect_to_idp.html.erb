@@ -10,6 +10,7 @@
           <%= hidden_field_tag 'SAMLRequest', @request.saml_request %>
           <%= hidden_field_tag 'RelayState', @request.relay_state %>
           <%= hidden_field_tag 'registration', @request.registration %>
+          <%= hidden_field_tag 'singleIdpJourneyIdentifier', @request.uuid if !@request.uuid.nil? %>
           <% @request.hints.each do |hint| %>
               <%= hidden_field_tag 'hint', hint, id:nil %>
           <% end %>

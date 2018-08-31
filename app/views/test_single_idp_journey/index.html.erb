@@ -1,0 +1,6 @@
+<%= form_tag(initiate_single_idp_journey_path) do -%>
+  <%= text_field_tag('serviceId', 'test-rp-no-demo', placeholder: 'serviceId') %>
+  <%= text_field_tag('idpEntityId', 'http://idcorp.com', placeholder: 'idpEntityId') %>
+  <%= text_field_tag('singleIdpJourneyIdentifier', SecureRandom.uuid) %>
+  <div><%= submit_tag 'initiate-single-idp-post' %></div>
+<% end -%>

@@ -47,6 +47,16 @@ module IdpSelectionPartialController
     render json: idp_request.to_json(methods: :hints)
   end
 
+  def ajax_idp_redirection_single_idp_journey_request(uuid)
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik
+    FEDERATION_REPORTER.report_single_idp_journey_selection(current_transaction, request, session[:selected_idp_name])
+
+    outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
+    idp_request = idp_request_initilization_for_single_idp_journey(outbound_saml_message, uuid)
+    render json: idp_request
+  end
+
   def report_user_idp_attempt_to_piwik
     FEDERATION_REPORTER.report_user_idp_attempt(
       current_transaction: current_transaction,
@@ -77,6 +87,15 @@ module IdpSelectionPartialController
       outbound_saml_message,
       selected_identity_provider.simple_id,
       selected_answer_store.selected_answers
+    )
+  end
+
+  def idp_request_initilization_for_single_idp_journey(outbound_saml_message, uuid)
+    IdentityProviderRequest.new(
+      outbound_saml_message,
+      selected_identity_provider.simple_id,
+      selected_answer_store.selected_answers,
+      uuid
     )
   end
 

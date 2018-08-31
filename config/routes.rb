@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     post 'another-idp-endpoint' => 'test_saml#idp_request'
     get 'test-journey-hint' => 'test_journey_hint_cookie#index', as: :test_journey_hint
     post 'test-journey-hint' => 'test_journey_hint_cookie#set_cookie', as: :test_journey_hint_submit
+    get 'test-single-idp-journey' => 'test_single_idp_journey#index'
     # route analytics through frontend URI, as like prod, to not violate our csp policy
     get 'analytics', to: 'test_analytics#forward'
     # fake basic csp reporter so reports can be logged (in development.log)
@@ -43,7 +44,7 @@ Rails.application.routes.draw do
   put 'redirect-to-idp-warning', to: 'redirect_to_idp_warning#continue_ajax', as: :redirect_to_idp_warning_submit_ajax
   put 'select-idp', to: 'sign_in#select_idp_ajax', as: :select_idp_submit_ajax
   put 'redirect-to-country', to: 'redirect_to_country#choose_a_country_submit_ajax', as: :redirect_to_country_ajax
-  #Used for tracking ab tests that start in Gov.uk
+  # Used for tracking ab tests that start in Gov.uk
   get 'redirect-to-rp/:transaction_simple_id', to: 'redirect_to_rp#redirect_to_rp'
   get 'service-status', to: 'service_status#index', as: :service_status
   get 'hint', to: 'hint#ajax_request'
@@ -51,8 +52,9 @@ Rails.application.routes.draw do
   get '/SAML2/metadata/sp', to: 'metadata#service_providers', as: :service_provider_metadata
   get '/SAML2/metadata/idp', to: 'metadata#identity_providers', as: :identity_provider_metadata
   if SINGLE_IDP_FEATURE
-    get '/get-available-services', to: 'metadata#service_list', as: :services
-    post 'initiate-single-idp-journey', to: 'initiate_single_idp_journey#redirect_from_idp'
+    get 'get-available-services', to: 'metadata#service_list'
+    post 'initiate-single-idp-journey', to: 'single_idp_journey#redirect_from_idp'
+    put 'select-single-idp', to: 'single_idp_journey#continue_ajax'
   end
   get '/humans.txt', to: 'static#humanstxt'
 end

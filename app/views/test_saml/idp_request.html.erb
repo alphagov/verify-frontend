@@ -3,3 +3,6 @@ relay state is '<%= @relay_state %>'
 registration is '<%= @registration %>'
 hints are '<%= @hints %>'
 language hint was '<%= @language_hint %>'
+<% if !@single_idp.nil?%>
+single IDP journey uuid is '<%= @single_idp %>' 
+<% end %>

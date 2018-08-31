@@ -22,5 +22,7 @@ redirect_to_rp:
 single_idp_enabled:
   test-rp-no-demo:
     url: 'http://localhost:50300/test-saml'
+  test-rp:
+    url: 'http://www.gov.uk'
 
 
