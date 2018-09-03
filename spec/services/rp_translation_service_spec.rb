@@ -12,20 +12,6 @@ describe 'RpTranslationService' do
     I18n.backend = I18n::Backend::Simple.new
   end
 
-  it 'should call to config service to get transactions' do
-    translation_service = RpTranslationService.new
-    expect(config_proxy).to receive(:transactions).and_return(MultiJson.load('[{
-      "simpleId":"test-rp",
-      "entityId":"http://example.com/test-rp",
-      "serviceHomepage":"http://example.com/test-rp",
-      "loaList":["LEVEL_2"]
-    }]'))
-
-    transactions = translation_service.transactions
-
-    expect(transactions).to eq(['test-rp'])
-  end
-
   it 'should update I18n with translations for a particular transaction in all locales' do
     translations = {
       name: "register for an identity profile",
