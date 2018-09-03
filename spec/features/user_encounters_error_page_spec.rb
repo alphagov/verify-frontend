@@ -16,10 +16,10 @@ RSpec.describe 'user encounters error page' do
 
   it 'will present the user with no list of transactions if we cant read the errors' do
     allow(Rails.logger).to receive(:error)
-    expect(Rails.logger).to receive(:error).with(kind_of(KeyError)).at_least(:once)
+    error_message = "missing: Transaction homepage can't be blank, Levels of assurance can't be blank"
+    expect(Rails.logger).to receive(:error).with(error_message).at_least(:once)
     bad_transactions_json = [
-        'public' => [{ 'homepage' => 'http://localhost:50130/test-rp' }],
-        'private' => []
+        { 'simpleId' => 'missing' },
     ]
     stub_session_creation_error
     stub_request(:get, api_transactions_endpoint).to_return(body: bad_transactions_json.to_json, status: 200)

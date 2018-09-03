@@ -1,3 +1,4 @@
+require 'active_model'
 module Api
   class Response
     include ActiveModel::Model
@@ -7,7 +8,11 @@ module Api
     end
 
     def validate
-      raise ModelError, self.errors.full_messages.join(', ') unless self.valid?
+      raise ModelError, self.error_messages unless self.valid?
+    end
+
+    def error_messages
+      self.errors.full_messages.join(', ') if errors.any?
     end
 
     ModelError = Class.new(StandardError)

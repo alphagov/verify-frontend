@@ -1,4 +1,5 @@
 require 'display/display_data'
+require 'taxon'
 module Display
   class RpDisplayData < ::Display::DisplayData
     prefix :rps
@@ -14,7 +15,11 @@ module Display
     content :custom_fail_try_another_summary, default: nil
     content :custom_fail_try_another_text, default: nil
     content :custom_fail_contact_details_intro, default: nil
-    content :taxon_name, default: -> { I18n.translate('hub.transaction_list.other_services') }
+    content :taxon_name, default: -> { default_taxon }
     alias_method :taxon, :taxon_name
+
+    def default_taxon
+      Taxon.default_taxon
+    end
   end
 end

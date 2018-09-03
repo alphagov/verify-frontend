@@ -1,3 +1,4 @@
+require 'config_endpoints'
 class ConfigProxy
   include ConfigEndpoints
 
@@ -22,6 +23,12 @@ class ConfigProxy
   end
 
   def transactions
+    raw_transactions.map do |entry|
+      TransactionResponse.new(entry)
+    end
+  end
+
+  def raw_transactions
     @api_client.get(transactions_endpoint)
   end
 

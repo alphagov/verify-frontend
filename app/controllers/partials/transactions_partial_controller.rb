@@ -4,7 +4,7 @@ module TransactionsPartialController
   end
 
   def transactions_list
-    DATA_CORRELATOR.correlate(CONFIG_PROXY.transactions)
+    DATA_CORRELATOR.correlate(CONFIG_PROXY.raw_transactions)
   end
 
   def transactions_for_service_list
