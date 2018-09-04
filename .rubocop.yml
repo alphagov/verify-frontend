@@ -5,3 +5,9 @@ Metrics/BlockLength:
     - '**/*.rake'
     - 'spec/**/*.rb'
     - 'config/initializers/**/*.rb'
+
+Metrics/LineLength:
+  Max: 140
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
