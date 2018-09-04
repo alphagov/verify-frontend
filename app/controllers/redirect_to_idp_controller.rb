@@ -23,11 +23,25 @@ class RedirectToIdpController < ApplicationController
     render :redirect_to_idp
   end
 
+  def single_idp
+    uuid = MultiJson.load(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).fetch('uuid', nil)
+    request_form_for_single_idp_journey(uuid)
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik
+    FEDERATION_REPORTER.report_single_idp_journey_selection(current_transaction, request, session[:selected_idp_name])
+    render :redirect_to_idp
+  end
+
 private
 
   def request_form
     saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
     @request = idp_request_initilization(saml_message)
+  end
+
+  def request_form_for_single_idp_journey(uuid)
+    saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
+    @request = idp_request_initilization_for_single_idp_journey(saml_message, uuid)
   end
 
   def recommended

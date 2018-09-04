@@ -183,6 +183,26 @@ module Analytics
           hint_followed: true
         )
       end
+
+      it 'should report single IDP journey correctly' do
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            "ATTEMPT_#{attempt_number} | single-idp | #{transaction_simple_id} | #{idp_name} | nil |#{FederationReporter::HINT_NOT_FOLLOWED}",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2)
+          )
+        federation_reporter.report_user_idp_attempt(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          user_segments: nil,
+          transaction_simple_id: 'test-rp',
+          attempt_number: '1',
+          journey_type: 'single-idp',
+          hint_followed: false
+        )
+      end
     end
 
     describe '#report_user_idp_outcome' do

@@ -1,4 +1,4 @@
 show_unavailable:
     - stub-idp-unavailable
 
-single_idp_enabled: ['stub-idp-demo']
+single_idp_enabled: ['http://idcorp.com', 'http://stub_idp.acme.org/stub-idp-demo-one/SSO/POST']

@@ -28,6 +28,14 @@
           $samlForm.find('input[name=RelayState]').val(response.relay_state);
           $samlForm.find('input[name=registration]').val(response.registration);
 
+          if(response.uuid) {
+            $samlForm.find('input[name=singleIdpJourneyIdentifier]').val(response.uuid);
+          }
+          else {
+            $samlForm.find('input[name=singleIdpJourneyIdentifier]').remove();
+          }
+          
+
           if (response.hints) {
             $.each(response.hints, function (index, hint) {
               $samlForm.append($('<input name="hint" type="hidden">').val(hint));

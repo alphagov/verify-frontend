@@ -115,6 +115,14 @@ module Analytics
       )
     end
 
+    def report_single_idp_journey_selection(current_transaction, request, idp_display_name)
+      report_action(
+        current_transaction,
+        request,
+        "Single IDP selected - #{idp_display_name}"
+      )
+    end
+
     def report_sign_in_idp_selection_after_journey_hint(current_transaction, request, idp_display_name, hint_followed)
       report_action(
         current_transaction,

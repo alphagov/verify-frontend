@@ -25,6 +25,7 @@ cy:
     unlikely_to_verify: anhebygol-i-ddilysu
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
     redirect_to_idp_question: ailgyfeirio-i-gwestiwn-idp
+    continue_to_your_idp: continue-to-your-idp-cy
     idp_wont_work_for_you_one_doc: nid-yw-idp-yn-gweithio-i-chi-un-ddogfen
     privacy_notice: hysbysiad-preifatrwydd
     verify_services: gwasanaethau-verify
@@ -534,6 +535,14 @@ cy:
         title: Dilysu Wedi'i Oedi
         heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.
         restart_instructions: Pan rydych yn barod i barhau i ddilysu pwy ydych chi, mae angen i chi fynd yn ôl i wasanaeth y llywodraeth a mewngofnodi i'ch cwmni ardystiedig a mewngofnodi gyda'r enw defnyddiwr a chyfrinair y gwnaethoch eu creu.
+    single_idp_journey:
+      title: Continue with %{display_name}
+      heading: Prove your identity with %{display_name}
+      intro: "%{idp_display_name} will confirm your identity with GOV.UK Verify, and you can continue to %{service_display_name}."
+      continue_button: Continue with %{display_name}
+      alternatives: "You can also:"
+      alternative_one: use a different certified company
+      alternative_two: see other ways to %{service_display_name}
   errors:
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan

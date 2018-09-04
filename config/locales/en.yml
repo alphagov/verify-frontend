@@ -25,6 +25,7 @@ en:
     unlikely_to_verify: unlikely-to-verify
     redirect_to_idp_warning: redirect-to-idp-warning
     redirect_to_idp_question: redirect-to-idp-question
+    continue_to_your_idp: continue-to-your-idp
     idp_wont_work_for_you_one_doc: idp-wont-work-for-you-one-doc
     privacy_notice: privacy-notice
     verify_services: verify-services
@@ -527,6 +528,14 @@ en:
         title: Verification Paused
         heading: The certified company has saved your information
         restart_instructions: When you're ready to carry on verifying your identity, you need to go back to the government service and sign in to your certified company with the username and password you created.
+    single_idp_journey:
+      title: Continue with %{display_name}
+      heading: Prove your identity with %{display_name}
+      intro: "%{idp_display_name} will confirm your identity with GOV.UK Verify, and you can continue to %{service_display_name}."
+      continue_button: Continue with %{display_name}
+      alternatives: "You can also:"
+      alternative_one: use a different certified company
+      alternative_two: see other ways to %{service_display_name}
   errors:
     cookie_expired:
       title: Your session has timed out
