@@ -521,9 +521,17 @@ en:
     paused_registration:
       with_session:
         title: Verification Paused
-        heading: "%{idp_name} has saved your information"
-        restart_instructions_html: "When you're ready to carry on verifying your identity, go back to <a href=\"%{rp_start_page}\">%{rp_name}</a>."
-        username_and_password_instructions: You'll need the username and password you created to sign in to %{idp_name}.
+        heading: "Your %{idp_name} identity account has been saved"
+        restart_instructions_html: |
+          <p>To return you can:</p>
+          <ul class="list list-bullet">
+            <li>go back to <a href=\"%{rp_start_page}\">%{rp_name}</a>.</li>
+            <li>check for an email from %{idp_name}</li>
+            <li>bookmark this page</li>
+            </ul>
+          <p>You'll need the email or username and password you used to create an account with %{idp_name}.</p>
+        continue_verifying: 'Continue verifying with %{idp_name}'
+        return_html: 'Or return to <a href=\"%{rp_start_page}\">%{rp_name}</a>.'
       without_session:
         title: Verification Paused
         heading: The certified company has saved your information

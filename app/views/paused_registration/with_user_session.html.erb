@@ -5,8 +5,13 @@
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'hub.paused_registration.with_session.heading', idp_name: @idp.display_name %></h1>
 
-    <p><%= t 'hub.paused_registration.with_session.restart_instructions_html', rp_name: @transaction[:name], rp_start_page: @transaction[:homepage] %></p>
-    <p><%= t 'hub.paused_registration.with_session.username_and_password_instructions', idp_name: @idp.display_name %></p>
+    <p><%= t 'hub.paused_registration.with_session.restart_instructions_html', idp_name: @idp.display_name, rp_name: @transaction[:name], rp_start_page: @transaction[:homepage] %></p>
+
+    <div class="actions">
+      <%= button_link_to t('hub.paused_registration.with_session.continue_verifying', idp_name: @idp.display_name), @transaction[:homepage], id: 'next-button' %>
+    </div>
+
+    <p><%= t 'hub.paused_registration.with_session.return_html', rp_name: @transaction[:name], rp_start_page: @transaction[:homepage] %></p>
 
     <%= render 'shared/logos_container' unless @idp.nil? %>
   </div>
