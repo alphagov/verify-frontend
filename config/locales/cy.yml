@@ -527,9 +527,17 @@ cy:
     paused_registration:
       with_session:
         title: Dilysu Wedi'i Oedi
-        heading: "Mae %{idp_name} wedi arbed eich gwybodaeth"
-        restart_instructions_html: "Pan rydych yn barod i barhau i ddilysu pwy ydych chi, ewch yn ôl i <a href=\"%{rp_start_page}\">%{rp_name}</a>."
-        username_and_password_instructions: Byddwch angen yr enw defnyddiwr a chyfrinair y gwnaethoch eu creu i fewngofnodi i %{idp_name}.
+        heading: "Your %{idp_name} identity account has been saved"
+        restart_instructions_html: |
+          <p>To return you can:</p>
+          <ul class="list list-bullet">
+            <li>go back to <a href=\"%{rp_start_page}\">%{rp_name}</a>.</li>
+            <li>check for an email from %{idp_name}</li>
+            <li>bookmark this page</li>
+            </ul>
+          <p>You'll need the email or username and password you used to create an account with %{idp_name}.</p>
+        continue_verifying: 'Continue verifying with %{idp_name}'
+        return_html: 'Or return to <a href=\"%{rp_start_page}\">%{rp_name}</a>.'
       without_session:
         title: Dilysu Wedi'i Oedi
         heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.
