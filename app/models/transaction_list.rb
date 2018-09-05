@@ -43,6 +43,15 @@ class TransactionList
         new([])
       end
     end
+
+    def group_by_taxon(transactions)
+      TransactionList.from(transactions)
+        .select_enabled
+        .with_display_data
+        .sort
+        .group_by_taxon
+        .sort
+    end
   end
 
 

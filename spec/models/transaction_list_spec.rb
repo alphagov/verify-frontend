@@ -3,8 +3,24 @@ require 'active_model'
 require 'transaction_list'
 require 'display/rp_display_data'
 require 'display/rp_display_repository'
+require 'transaction_response'
 
-RSpec.describe TransactionList, type: :model do
+RSpec.describe TransactionList do
+  let(:simple_id_one) { :simple_id_one }
+  let(:simple_id_two) { :simple_id_two }
+  let(:simple_id_three) { :simple_id_three }
+  let(:simple_id_four) { :simple_id_four }
+
+  let(:repository) { instance_double("Display::RpDisplayRepository") }
+  let(:display_data_one) { instance_double("Display::RpDisplayData", "1", name: 'display_data_one') }
+  let(:display_data_two) { instance_double("Display::RpDisplayData", "2", name: 'display_data_two') }
+  let(:display_data_three) { instance_double("Display::RpDisplayData", "3", name: 'display_data_three') }
+  let(:display_data_four) { instance_double("Display::RpDisplayData", "4", name: 'display_data_four') }
+
+  before(:each) do
+    allow(TransactionList).to receive(:rp_display_repository).and_return(repository)
+  end
+
   context "#sort" do
     it "will sort using transactions and return a TransactionList" do
       unsorted_list = TransactionList.new([5, 4, 3, 2, 1])
@@ -55,6 +71,7 @@ RSpec.describe TransactionList, type: :model do
       expect(TransactionList.new(transactions).select_with_homepage.to_a).to eql [transaction_one]
     end
   end
+
   context "#select_enabled" do
     it 'will select the rps that can be shared but without their homepage' do
       transactions = [
@@ -81,10 +98,6 @@ RSpec.describe TransactionList, type: :model do
       display_data_three = instance_double("Display::RpDisplayData")
       display_data_four = instance_double("Display::RpDisplayData")
 
-      repository = instance_double("Display::RpDisplayRepository")
-
-      expect(TransactionList).to receive(:rp_display_repository).and_return(repository)
-
       expect(repository).to receive(:get_translations).with(:simple_id_one).and_return(display_data_one)
       expect(repository).to receive(:get_translations).with(:simple_id_two).and_return(display_data_two)
       expect(repository).to receive(:get_translations).with(:simple_id_three).and_return(display_data_three)
@@ -105,8 +118,6 @@ RSpec.describe TransactionList, type: :model do
       ]
 
       display_data_one = instance_double("Display::RpDisplayData")
-
-      repository = instance_double("Display::RpDisplayRepository")
 
       expect(TransactionList).to receive(:rp_display_repository).and_return(repository)
 
@@ -174,6 +185,66 @@ RSpec.describe TransactionList, type: :model do
       expect(transaction_one).to receive(:error_messages).and_return transaction_one_error_messages
       expect(transaction_two).to receive(:error_messages).and_return transaction_two_error_messages
       expect(TransactionList.from(transactions).to_a).to be_empty
+    end
+  end
+
+  context "::group_by_taxon" do
+    it 'should group transactions that are enabled by taxon' do
+      transactions = [
+        transaction_one = instance_double("TransactionResponse", "1", simple_id: simple_id_one, valid?: true, homepage: 'foo.com'),
+        transaction_two = instance_double("TransactionResponse", "2", simple_id: simple_id_two, valid?: true),
+        instance_double("TransactionResponse", "3", simple_id: simple_id_three, valid?: true),
+        transaction_four = instance_double("TransactionResponse", "4", simple_id: simple_id_four, valid?: true, homepage: nil),
+      ]
+
+      expect(repository).to receive(:get_translations).with(simple_id_one).and_return display_data_one
+      expect(repository).to receive(:get_translations).with(simple_id_two).and_return display_data_two
+      expect(repository).to receive(:get_translations).with(simple_id_four).and_return display_data_four
+      expect(repository).to_not receive(:get_translations).with(simple_id_three)
+
+      expect(display_data_one).to receive(:taxon).and_return(:taxon_one)
+      expect(display_data_two).to receive(:default_taxon).and_return(:taxon_two)
+      expect(display_data_four).to receive(:default_taxon).and_return(:taxon_two)
+
+      expect(TransactionList).to receive(:rps_with_homepage).and_return([simple_id_one, simple_id_four]).twice
+      expect(TransactionList).to receive(:rps_without_homepage).and_return([simple_id_two])
+
+      actual_result = TransactionList.group_by_taxon(transactions)
+
+      expected_results = [
+        Taxon.new(
+          :taxon_one,
+          [
+            Display::DecoratedTransaction.new(display_data_one, transaction_one),
+          ]
+        ),
+        Taxon.new(
+          :taxon_two,
+          [
+            Display::DecoratedTransaction.new(display_data_four, transaction_four),
+            Display::DecoratedTransaction.new(display_data_two, transaction_two),
+          ]
+        )
+      ]
+      expect(actual_result).to eq expected_results
+    end
+
+    it 'should return nothing a transaction is invalid' do
+      transactions = [
+        instance_double("TransactionResponse", "1", simple_id: simple_id_one, valid?: true, homepage: 'foo.com'),
+        instance_double("TransactionResponse", "2", simple_id: simple_id_two, valid?: true),
+        instance_double("TransactionResponse", "3", simple_id: simple_id_three, valid?: true),
+        transaction_four = instance_double("TransactionResponse", "4", simple_id: simple_id_four, valid?: false, homepage: nil),
+      ]
+
+      expect(transaction_four).to receive(:error_messages).and_return "errors"
+      expect(TransactionList).to receive(:logger).and_return(double.as_null_object)
+      expect(TransactionList).to receive(:rps_with_homepage).and_return([simple_id_one, simple_id_four]).twice
+      expect(TransactionList).to receive(:rps_without_homepage).and_return([simple_id_two])
+
+      actual_result = TransactionList.group_by_taxon(transactions)
+
+      expect(actual_result).to eq []
     end
   end
 end

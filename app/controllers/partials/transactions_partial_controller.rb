@@ -1,6 +1,6 @@
 module TransactionsPartialController
   def transaction_taxon_list
-    TRANSACTION_TAXON_CORRELATOR.correlate(CONFIG_PROXY.transactions)
+    TransactionList.group_by_taxon(CONFIG_PROXY.transactions)
   end
 
   def transactions_list
