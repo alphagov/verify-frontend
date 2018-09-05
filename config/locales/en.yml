@@ -520,7 +520,7 @@ en:
         contact_verify: 'Contact GOV.UK Verify'
     paused_registration:
       with_session:
-        title: Verification Paused
+        title: "Verification Paused %{idp_name}"
         heading: "Your %{idp_name} identity account has been saved"
         restart_instructions_html: |
           <p>To return you can:</p>
@@ -535,7 +535,14 @@ en:
       without_session:
         title: Verification Paused
         heading: The certified company has saved your information
-        restart_instructions: When you're ready to carry on verifying your identity, you need to go back to the government service and sign in to your certified company with the username and password you created.
+        restart_instructions: |
+          <p>To return you can:</p>
+          <ul class="list list-bullet">
+            <li>go back to the service you were using</li>
+            <li>check for an email from the identity provider you chose</li>
+            <li>bookmark this page</li>
+            </ul>
+          <p>You'll need the email or username and password you used to create an account.</p>
     single_idp_journey:
       title: Continue with %{display_name}
       heading: Prove your identity with %{display_name}

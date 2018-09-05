@@ -527,7 +527,7 @@ cy:
         contact_verify: Cysylltu â GOV.UK Verify
     paused_registration:
       with_session:
-        title: Dilysu Wedi'i Oedi
+        title: "Dilysu Wedi'i Oedi %{idp_name}"
         heading: "Your %{idp_name} identity account has been saved"
         restart_instructions_html: |
           <p>To return you can:</p>
@@ -535,14 +535,21 @@ cy:
             <li>go back to <a href=\"%{rp_start_page}\">%{rp_name}</a>.</li>
             <li>check for an email from %{idp_name}</li>
             <li>bookmark this page</li>
-            </ul>
+          </ul>
           <p>You'll need the email or username and password you used to create an account with %{idp_name}.</p>
         continue_verifying: 'Continue verifying with %{idp_name}'
         return_html: 'Or return to <a href=\"%{rp_start_page}\">%{rp_name}</a>.'
       without_session:
         title: Dilysu Wedi'i Oedi
         heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.
-        restart_instructions: Pan rydych yn barod i barhau i ddilysu pwy ydych chi, mae angen i chi fynd yn ôl i wasanaeth y llywodraeth a mewngofnodi i'ch cwmni ardystiedig a mewngofnodi gyda'r enw defnyddiwr a chyfrinair y gwnaethoch eu creu.
+        restart_instructions: |
+          <p>To return you can:</p>
+          <ul class="list list-bullet">
+            <li>go back to the service you were using</li>
+            <li>check for an email from the identity provider you chose</li>
+            <li>bookmark this page</li>
+          </ul>
+          <p>You'll need the email or username and password you used to create an account.</p>
     single_idp_journey:
       title: Continue with %{display_name}
       heading: Prove your identity with %{display_name}
