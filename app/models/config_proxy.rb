@@ -25,8 +25,8 @@ class ConfigProxy
     @api_client.get(transactions_endpoint)
   end
 
-  def transactions_for_service_list
-    @api_client.get(transactions_for_service_list_endpoint)
+  def transactions_for_single_idp_list
+    @api_client.get(transactions_for_single_idp_list_endpoint)
   end
 
   def get_idp_list_for_loa(transaction_id, loa)
@@ -36,6 +36,11 @@ class ConfigProxy
 
   def get_idp_list_for_sign_in(transaction_id)
     response = @api_client.get(idp_list_for_sign_in_endpoint(transaction_id))
+    IdpListResponse.validated_response(response)
+  end
+
+  def get_idp_list_for_single_idp(transaction_id)
+    response = @api_client.get(idp_list_for_single_idp_endpoint(transaction_id))
     IdpListResponse.validated_response(response)
   end
 end

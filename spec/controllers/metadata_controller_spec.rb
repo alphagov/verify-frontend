@@ -7,7 +7,7 @@ describe MetadataController do
   subject { get :service_list, params: { locale: 'en' } }
 
   it 'json array should contain 2 objects with correct values' do
-    stub_transactions_for_service_list
+    stub_transactions_for_single_idp_list
 
     body = JSON.parse(subject.body)
 
@@ -16,7 +16,7 @@ describe MetadataController do
     expect(subject).to have_http_status(200)
 
     test_rp_object =
-      body.find { |rp| rp['serviceId'] == 'some-entity-id' }
+      body.find { |rp| rp['serviceId'] == 'http://www.test-rp.gov.uk/SAML2/MD' }
 
     expect(test_rp_object.nil?).to be false
     expect(test_rp_object['name']).to eq('register for an identity profile')

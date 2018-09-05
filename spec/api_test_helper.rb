@@ -19,8 +19,8 @@ module ApiTestHelper
     config_api_uri('/config/transactions/enabled')
   end
 
-  def api_transactions_for_service_list_endpoint
-    config_api_uri('/config/transactions/for-service-list')
+  def api_transactions_for_single_idp_endpoint
+    config_api_uri('/config/transactions/single-idp-enabled-list')
   end
 
   def api_translations_endpoint(simple_id, locale)
@@ -46,15 +46,15 @@ module ApiTestHelper
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
   end
 
-  def stub_transactions_for_service_list
-    transactions_for_service_list = [
-        { 'simpleId' => 'test-rp',      'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-other-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
+  def stub_transactions_for_single_idp_list
+    transactions_for_single_idp_list = [
+        { 'simpleId' => 'test-rp',      'entityId' => 'http://www.test-rp.gov.uk/SAML2/MD', 'serviceHomepage' => 'http://localhost:50130/test-saml', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-other-entity-id', 'serviceHomepage' => 'https://www.gov.uk/', 'loaList' => ['LEVEL_2'] },
         { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] },
         { 'simpleId' => 'test-rp-with-continue-on-fail', 'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp-with-continue-on-fail', 'loaList' => ['LEVEL_2'] }
     ]
 
-    stub_request(:get, api_transactions_for_service_list_endpoint).to_return(body: transactions_for_service_list.to_json, status: 200)
+    stub_request(:get, api_transactions_for_single_idp_endpoint).to_return(body: transactions_for_single_idp_list.to_json, status: 200)
   end
 
   def stub_translations
@@ -297,9 +297,8 @@ module ApiTestHelper
     stub_request(:get, config_api_uri(idp_list_for_sign_in_endpoint(default_transaction_entity_id))).to_return(body: idps.to_json)
   end
 
-  def stub_api_idp_list_for_single_idp_journey(idps = default_idps)
-    # TODO with HUB-271
-    stub_api_idp_list_for_sign_in(idps)
+  def stub_api_idp_list_for_single_idp_journey(transaction_id = default_transaction_entity_id, idps = default_idps)
+    stub_request(:get, config_api_uri(idp_list_for_single_idp_endpoint(transaction_id))).to_return(body: idps.to_json)
   end
 
   def stub_api_select_idp

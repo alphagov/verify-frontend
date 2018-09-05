@@ -111,6 +111,34 @@ class StubApi < Sinatra::Base
     }]'
   end
 
+  get '/config/idps/idp-list-for-single-idp/:transaction_id' do
+    '[{
+        "simpleId":"stub-idp-one",
+        "entityId":"http://example.com/stub-idp-one",
+        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
+     },
+     {
+        "simpleId":"stub-idp-loa1",
+        "entityId":"http://stub-idp-loa1.com",
+        "levelsOfAssurance": ["LEVEL_1"]
+     },
+     {
+        "simpleId":"stub-idp-loa1-with-interstitial",
+        "entityId":"http://stub-idp-loa1-with-interstitial.com",
+        "levelsOfAssurance": ["LEVEL_1"]
+     },
+     {
+        "simpleId":"stub-idp-two",
+        "entityId":"http://example.com/stub-idp-two",
+        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
+      },
+      {
+        "simpleId":"stub-idp-one",
+        "entityId":"http://idcorp.com",
+        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
+    }]'
+  end
+
   get '/SAML2/SSO/API/SENDER/AUTHN_REQ' do
     '{
       "postEndpoint":"http://localhost:50300/test-saml",
@@ -149,12 +177,12 @@ class StubApi < Sinatra::Base
       }]'
    end
 
-  get '/config/transactions/for-service-list' do
+  get '/config/transactions/single-idp-enabled-list' do
     '[{
         "simpleId":"test-rp",
-        "serviceHomepage":"http://example.com/test-rp",
+        "serviceHomepage":"http://example.com/test-saml",
         "loaList":["LEVEL_2"],
-        "entityId":"http://example.com/test-rp"
+        "entityId":"http://www.test-rp.gov.uk/SAML2/MD"
       },
       {
         "simpleId": "loa1-test-rp",

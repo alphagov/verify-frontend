@@ -39,7 +39,6 @@ Rails.application.config.after_initialize do
   rps_name_and_homepage = RP_CONFIG['transaction_type']['display_name_and_homepage'] || []
   rps_name_only = RP_CONFIG['transaction_type']['display_name_only'] || []
   REDIRECT_TO_RP_LIST = RP_CONFIG['redirect_to_rp'] || []
-  SINGLE_IDP_ENABLED_RP_LIST = RP_CONFIG['single_idp_enabled'] || []
   DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
   TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
 
@@ -51,7 +50,6 @@ Rails.application.config.after_initialize do
   # IDP Config
   IDP_CONFIG = YAML.load_file(CONFIG.idp_config)
   UNAVAILABLE_IDPS = IDP_CONFIG.fetch('show_unavailable', [])
-  SINGLE_IDP_ENABLED_IDP_LIST = IDP_CONFIG.fetch('single_idp_enabled', [])
   IDP_LOA1_ORDER = IDP_CONFIG.fetch('loa1_order', [])
 
   # IDP Recommendations

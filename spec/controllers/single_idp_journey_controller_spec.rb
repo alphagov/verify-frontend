@@ -6,14 +6,16 @@ require 'partials/user_cookies_partial_controller'
 
 
 describe SingleIdpJourneyController do
-  VALID_TEST_RP = 'test-rp-no-demo'.freeze
+  VALID_TEST_RP = 'http://www.test-rp.gov.uk/SAML2/MD'.freeze
   VALID_STUB_IDP = 'http://idcorp.com'.freeze
   UUID_ONE = 'e58394dc-6a4f-40ed-8ddd-e0e028d09da9'.freeze
-  SINGLE_IDP_ENABLED_RP_LIST_MOCK = { VALID_TEST_RP => { 'url' => 'http://localhost:50300/test-saml' } }.freeze
+  SINGLE_IDP_ENABLED_RP_LIST_MOCK = { VALID_TEST_RP => { 'url' => 'http://localhost:50130/test-saml' } }.freeze
   SINGLE_IDP_ENABLED_IDP_LIST_MOCK = [VALID_STUB_IDP].freeze
 
   before :each do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+    stub_transactions_for_single_idp_list
+    stub_api_idp_list_for_single_idp_journey
   end
 
   context 'idp hits post providing correct parameters' do
@@ -148,6 +150,8 @@ describe SingleIdpJourneyController do
   context '#index' do
     before :each do
       set_session_and_cookies_with_loa('LEVEL_2')
+      stub_transactions_for_single_idp_list
+      stub_api_idp_list_for_single_idp_journey
     end
 
     subject { get :continue_to_your_idp, params: { locale: 'en' } }
@@ -157,8 +161,6 @@ describe SingleIdpJourneyController do
         idp_entity_id: VALID_STUB_IDP,
         uuid: UUID_ONE
       }
-
-      stub_api_idp_list_for_single_idp_journey
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
 
       expect(subject).to render_template(:continue_to_your_idp)
@@ -193,14 +195,14 @@ describe SingleIdpJourneyController do
     end
 
     it 'should redirect to /start if rp is not enabled' do
+      stub_api_idp_list_for_single_idp_journey('disabled-rp')
       single_idp_cookie = {
         transaction_id: 'disabled-rp',
         idp_entity_id: VALID_STUB_IDP,
         uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
-      # TODO with HUB-271
-      # expect(subject).to redirect_to(start_path)
+      expect(subject).to redirect_to(start_path)
     end
 
     it 'should redirect to /start if uuid is in a wrong format' do
@@ -212,12 +214,24 @@ describe SingleIdpJourneyController do
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
       expect(subject).to redirect_to(start_path)
     end
+
+    it 'should redirect to /start if rp in cookie does not match the one in the session' do
+      stub_api_idp_list_for_single_idp_journey('test-rp-noc3')
+      single_idp_cookie = {
+          transaction_id: 'test-rp-noc3',
+          idp_entity_id: VALID_STUB_IDP,
+          uuid: UUID_ONE
+      }
+      cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
+      expect(subject).to redirect_to(start_path)
+    end
   end
 
 
   context '#continue' do
     before :each do
       set_session_and_cookies_with_loa('LEVEL_2')
+      stub_transactions_for_single_idp_list
       stub_api_idp_list_for_single_idp_journey
     end
 

@@ -8,7 +8,7 @@ module TransactionsPartialController
   end
 
   def transactions_for_service_list
-    SERVICE_LIST_DATA_CORRELATOR.correlate(CONFIG_PROXY.transactions_for_service_list)
+    SERVICE_LIST_DATA_CORRELATOR.correlate(CONFIG_PROXY.transactions_for_single_idp_list)
   end
 
   def current_service
