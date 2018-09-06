@@ -14,7 +14,10 @@ module Display
   private
 
     def find_or_create(simple_id)
-      @store[simple_id] ||= create_display_data(simple_id)
+      @store.compute_if_absent(simple_id) do
+        create_display_data(simple_id)
+      end
+      @store[simple_id]
     end
 
     def create_display_data(simple_id)
