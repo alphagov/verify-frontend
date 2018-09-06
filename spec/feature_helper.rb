@@ -104,6 +104,18 @@ module FeatureHelper
     )
   end
 
+  def set_selected_idp_in_session(selected_idp)
+    page.set_rack_session(
+      selected_provider: SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
+    )
+  end
+
+  def set_selected_country_in_session(selected_country)
+    page.set_rack_session(
+      selected_provider: SelectedProviderData.new(JourneyType::EIDAS, selected_country)
+    )
+  end
+
   def set_session_cookies!
     cookie_hash = create_cookie_hash
     set_cookies!(create_cookie_hash)

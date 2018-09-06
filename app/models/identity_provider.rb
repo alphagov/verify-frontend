@@ -28,7 +28,7 @@ class IdentityProvider
 
   def self.from_session(object)
     return object if object.is_a? IdentityProvider
-    if object.is_a? Hash
+    if object.is_a?(Hash) || (object.is_a?(SelectedProviderData) && object.journey_type == JourneyType::VERIFY)
       new('simpleId' => object['simple_id'], 'entityId' => object['entity_id'], 'levelsOfAssurance' => object['levels_of_assurance'])
     end
   end
