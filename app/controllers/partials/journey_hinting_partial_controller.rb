@@ -19,6 +19,16 @@ module JourneyHintingPartialController
     journey_hint.nil? ? nil : journey_hint['STATE']
   end
 
+  def is_last_status?(status)
+    last_status_value = last_status
+    !last_status_value.nil? && last_status_value['STATUS'] == status
+  end
+
+  def last_idp
+    last_status_value = last_status
+    last_status_value.nil? ? nil : last_status_value.fetch('IDP', nil)
+  end
+
   def user_followed_journey_hint(entity_id_followed_by_user)
     hinted_id = success_entity_id
     !hinted_id.nil? && hinted_id == entity_id_followed_by_user

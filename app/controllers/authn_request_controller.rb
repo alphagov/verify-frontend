@@ -1,6 +1,8 @@
 require 'ab_test/ab_test'
+require 'partials/journey_hinting_partial_controller'
 
 class AuthnRequestController < SamlController
+  include JourneyHintingPartialController
   protect_from_forgery except: :rp_request
   skip_before_action :validate_session
   skip_before_action :set_piwik_custom_variables
@@ -67,6 +69,8 @@ private
   def redirect_for_journey_hint(hint)
     if !cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY].nil? && SINGLE_IDP_FEATURE
       redirect_to continue_to_your_idp_path
+    elsif PAUSE_AND_RESUME_FEATURE && is_last_status?('PENDING') && hint != 'submission_confirmation'
+      redirect_to resume_registration_path
     else
       case hint
       when 'uk_idp_start'

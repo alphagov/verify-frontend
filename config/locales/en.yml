@@ -56,6 +56,7 @@ en:
     select_proof_of_address: select-proof-of-address
     confirming_it_is_you: confirming-it-is-you
     paused_registration: paused
+    resume_registration: resume-registration
   title:
     error: Error
   navigation:
@@ -530,7 +531,7 @@ en:
             <li>go back to <a href=\"%{rp_start_page}\">%{rp_name}</a>.</li>
             <li>check for an email from %{idp_name}</li>
             <li>bookmark this page</li>
-            </ul>
+          </ul>
           <p>You'll need the email or username and password you used to create an account with %{idp_name}.</p>
         continue_verifying: 'Continue verifying with %{idp_name}'
         return_html: 'Or return to <a href=\"%{rp_start_page}\">%{rp_name}</a>.'
@@ -543,8 +544,17 @@ en:
             <li>go back to the service you were using</li>
             <li>check for an email from the identity provider you chose</li>
             <li>bookmark this page</li>
-            </ul>
+          </ul>
           <p>You'll need the email or username and password you used to create an account.</p>
+      resume:
+        title: "Continue verifying with %{display_name}"
+        heading: "Continue verifying with %{display_name}"
+        intro: "You'll need to finish verifying your identity with %{display_name} to %{rp_name}"
+        continue: "Continue with %{display_name}"
+        alternatives: "If this wasn't you, you can:"
+        alternative_new_identity: "create a new identity account"
+        alternative_start: "sign in with another certified company"
+        alternative_other_ways: "see other ways to %{rp_name}"
     single_idp_journey:
       title: Continue with %{display_name}
       heading: Prove your identity with %{display_name}
