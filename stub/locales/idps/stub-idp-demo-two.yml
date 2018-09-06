@@ -1,0 +1,20 @@
+en:
+  idps:
+    stub-idp-demo-two:
+      name: "Stub IDP Demo Two"
+      about: |
+        <p> Stub Idp Demo Two Content </p>
+      requirements:
+        - "a UK passport"
+      contact_details: |
+        <h3>No contact details available</h3>
+cy:
+  idps:
+    stub-idp-demo-two:
+      name: "Welsh Stub IDP Demo Two"
+      about: |
+        <p>ID Corp is the premier identity proofing service around.</p>
+        <ul>
+          <li>Identity</li>
+          <li>Verification</li>
+        </ul>
