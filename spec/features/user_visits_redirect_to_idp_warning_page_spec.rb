@@ -9,43 +9,43 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   let(:selected_answers) { { 'phone' => { 'mobile_phone' => true, 'smart_phone' => true }, 'documents' => { 'passport' => true } } }
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:given_an_idp_with_no_display_data) {
+    set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-x')
     page.set_rack_session(
-      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-x' },
       selected_idp_was_recommended: true,
       selected_answers: selected_answers,
     )
   }
   let(:given_a_session_with_document_answers) {
+    set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-one')
     page.set_rack_session(
-      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: true,
       selected_answers: selected_answers,
     )
   }
   let(:given_a_session_with_a_hints_disabled_idp) {
+    set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-two')
     page.set_rack_session(
-      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-two' },
       selected_idp_was_recommended: true,
       selected_answers: selected_answers,
     )
   }
   let(:given_a_session_with_non_recommended_idp) {
+    set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-one')
     page.set_rack_session(
-      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: false,
       selected_answers: selected_answers,
     )
   }
   let(:given_a_session_with_no_document_answers) {
+    set_selected_idp_in_session(entity_id: 'http://idpnodocs.com', simple_id: 'stub-idp-no-docs')
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idpnodocs.com', simple_id: 'stub-idp-no-docs' },
       selected_idp_was_recommended: true,
       selected_answers: { phone: { mobile_phone: true, smart_phone: true }, documents: {} },
     )
   }
   let(:given_a_session_with_non_uk_id_document_answers) {
+    set_selected_idp_in_session(entity_id: 'http://idpwithnonukid.com', simple_id: 'stub-idp-four')
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idpwithnonukid.com', simple_id: 'stub-idp-four' },
       selected_idp_was_recommended: true,
       selected_answers: { phone: { mobile_phone: true, smart_phone: true }, documents: { non_uk_id_document: true } },
     )

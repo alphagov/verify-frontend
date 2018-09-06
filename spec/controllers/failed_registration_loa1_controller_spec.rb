@@ -8,7 +8,7 @@ describe FailedRegistrationLoa1Controller do
   A_NON_CONTINUE_ON_FAILED_REGISTRATION_RP = 'test-rp'.freeze
 
   before(:each) do
-    session[:selected_idp] = { 'entity_id' => 'http://idcorp.com', 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+    set_selected_idp('entity_id' => 'http://idcorp.com', 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     session[:selected_idp_was_recommended] = false
   end
 

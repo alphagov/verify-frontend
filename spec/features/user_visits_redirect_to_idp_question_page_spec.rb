@@ -12,8 +12,8 @@ RSpec.describe 'When the user visits the redirect to IDP question page' do
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:idp_location) { '/test-idp-request-endpoint' }
   let(:given_an_idp_with_interstitial_question_needed) {
+    set_selected_idp_in_session(entity_id: 'stub-idp-one-doc-question', simple_id: 'stub-idp-one-doc-question')
     page.set_rack_session(
-      selected_idp: { entity_id: 'stub-idp-one-doc-question', simple_id: 'stub-idp-one-doc-question' },
       selected_idp_was_recommended: true,
       selected_answers: selected_answers,
     )

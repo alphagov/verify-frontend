@@ -231,7 +231,7 @@ describe SingleIdpJourneyController do
       stub_api_select_idp
       stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
-      session[:selected_idp] = valid_idp
+      set_selected_idp(valid_idp)
       post :continue, params: { locale: 'en', entity_id: VALID_STUB_IDP }
 
       expect(subject).to redirect_to redirect_to_single_idp_path

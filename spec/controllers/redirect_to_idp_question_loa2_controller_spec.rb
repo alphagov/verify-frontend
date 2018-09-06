@@ -10,7 +10,7 @@ describe RedirectToIdpQuestionLoa2Controller do
 
   before(:each) do
     set_session_and_cookies_with_loa('LEVEL_1')
-    session[:selected_idp] = { 'entity_id' => 'http://example.com/stub-idp-one-doc-question', 'simple_id' => 'stub-idp-one-doc-question', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+    set_selected_idp('entity_id' => 'http://example.com/stub-idp-one-doc-question', 'simple_id' => 'stub-idp-one-doc-question', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     session[:selected_idp_was_recommended] = true
   end
 

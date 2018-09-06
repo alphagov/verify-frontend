@@ -82,7 +82,7 @@ describe AuthnResponseController do
       set_session_and_cookies_with_loa('LEVEL_1')
       stub_piwik_request_with_rp_and_loa({}, 'LEVEL_1')
       allow(saml_proxy_api).to receive(:forward_country_authn_response).and_return(country_authn_response)
-      session[:selected_country] = selected_entity
+      set_selected_country(selected_entity)
     end
 
     subject(:cookie_after_request) do
@@ -116,7 +116,7 @@ describe AuthnResponseController do
     }
     before(:each) do
       allow(saml_proxy_api).to receive(:idp_authn_response).and_return(idp_authn_response)
-      session[:selected_idp] = selected_entity
+      set_selected_idp(selected_entity)
     end
 
     include_examples 'tracking cookie'

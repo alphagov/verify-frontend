@@ -35,7 +35,7 @@ describe SignInController do
       stub_piwik_request('action_name' => 'Sign In - IDCorp')
 
       post :select_idp, params: { locale: 'en', 'entity_id' => 'http://idcorp.com' }
-      expect(session[:selected_idp].simple_id).to eq('stub-idp-one')
+      expect(session[:selected_provider].simple_id).to eq('stub-idp-one')
       expect(subject).to redirect_to(redirect_to_idp_sign_in_path)
     end
 

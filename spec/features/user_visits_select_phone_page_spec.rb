@@ -10,8 +10,8 @@ RSpec.describe 'When the user visits the select phone page' do
     }
   }
   let(:given_a_session_with_document_evidence) {
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: true,
       selected_answers: selected_answers,
     )
