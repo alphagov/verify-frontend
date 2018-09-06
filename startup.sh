@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+cd "$(dirname "$0")"
+
 ./kill-service.sh
 
 if [ "$1" == '--stub-api' ]
