@@ -2,6 +2,7 @@ en:
   routes:
     start: start
     prove_identity: prove-identity
+    prove_identity_retry: prove-identity-retry
     begin_registration: begin-registration
     begin_sign_in: begin-sign-in
     about: about
@@ -34,6 +35,7 @@ en:
     confirmation: confirmation
     failed_registration: failed-registration
     failed_sign_in: failed-sign-in
+    failed_country_sign_in: failed-country-sign-in
     failed_uplift: failed-uplift
     other_ways_to_access_service: other-ways-to-access-service
     forgot_company: forgot-company

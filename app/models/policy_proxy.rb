@@ -56,4 +56,8 @@ class PolicyProxy
   def select_a_country(session_id, country)
     @api_client.post(select_a_country_endpoint(session_id, country), '')
   end
+
+  def restart_eidas_journey(session_id)
+    @api_client.post(restart_eidas_journey_endpoint(session_id), '')
+  end
 end

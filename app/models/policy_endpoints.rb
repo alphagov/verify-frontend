@@ -4,6 +4,7 @@ module PolicyEndpoints
   SIGN_IN_PROCESS_DETAILS_SUFFIX = 'sign-in-process-details'.freeze
   SELECT_IDP_SUFFIX = 'select-identity-provider'.freeze
   MATCHING_OUTCOME_SUFFIX = 'response-from-idp/response-processing-details'.freeze
+  RESTART_EIDAS_JOURNEY_SUFFIX = 'restart-eidas-journey'.freeze
   PARAM_PRINCIPAL_IP = 'principalIpAddress'.freeze
   PARAM_CYCLE_3_INPUT = 'cycle3Input'.freeze
   PARAM_SELECTED_ENTITY_ID = 'selectedIdpEntityId'.freeze
@@ -41,6 +42,10 @@ module PolicyEndpoints
 
   def cycle_three_cancel_endpoint(session_id)
     policy_endpoint(session_id, CYCLE_THREE_CANCEL_SUFFIX)
+  end
+
+  def restart_eidas_journey_endpoint(session_id)
+    policy_endpoint(session_id, RESTART_EIDAS_JOURNEY_SUFFIX)
   end
 
   def countries_endpoint(session_id)
