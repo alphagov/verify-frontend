@@ -10,3 +10,11 @@ def set_session_and_cookies_with_loa(loa_requested, transaction_simple_id = 'tes
   cookies[CookieNames::SESSION_COOKIE_NAME] = 'my-session-cookie'
   cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'my-session-id-cookie'
 end
+
+def set_selected_idp(selected_idp)
+  session[:selected_provider] = SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
+end
+
+def set_selected_country(selected_country)
+  session[:selected_provider] = SelectedProviderData.new(JourneyType::EIDAS, selected_country)
+end

@@ -5,10 +5,8 @@ require 'piwik_test_helper'
 RSpec.describe 'When user visits cancelled registration page' do
   before :each do
     set_session_and_session_cookies!
-    page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
-      transaction_simple_id: 'test-rp'
-    )
+    page.set_rack_session transaction_simple_id: 'test-rp'
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
   end
 
   it 'the page is rendered with the correct links for LOA2 journey' do

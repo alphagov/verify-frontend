@@ -15,8 +15,8 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
     }
   }
   let(:given_a_session_with_selected_answers) {
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: true,
       selected_answers: selected_answers,
     )
@@ -29,7 +29,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
     expect(page).to have_content('ID Corp is the premier identity proofing service around.')
     click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
     expect(page).to have_current_path(redirect_to_idp_warning_path)
-    expect(page.get_rack_session_key('selected_idp')).to include('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
+    expect(page.get_rack_session_key('selected_provider')['identity_provider']).to include('entity_id' => entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     expect(page.get_rack_session_key('selected_idp_was_recommended')).to eql true
   end
 

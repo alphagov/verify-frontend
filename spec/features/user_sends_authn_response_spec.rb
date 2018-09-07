@@ -8,8 +8,8 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     session[:verify_session_id]
   end
   let(:stub_session) {
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
     page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
       selected_idp_was_recommended: true,
       transaction_simple_id: 'test-rp',
       transaction_homepage: 'www.example.com'
@@ -48,10 +48,8 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   end
 
   it 'will redirect the user to /cancelled-registration when they cancel at the IDP' do
-    page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
-      transaction_simple_id: 'test-rp'
-    )
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
+    page.set_rack_session transaction_simple_id: 'test-rp'
     api_request = stub_api_authn_response(session_id, 'result' => 'CANCEL', 'isRegistration' => true, 'loaAchieved' => nil)
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
@@ -61,10 +59,8 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
   end
 
   it 'will redirect the user to /failed-registration when they failed registration at the IDP' do
-    page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' },
-      transaction_simple_id: 'test-rp'
-    )
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
+    page.set_rack_session transaction_simple_id: 'test-rp'
     api_request = stub_api_authn_response(session_id, 'result' => 'OTHER', 'isRegistration' => true, 'loaAchieved' => nil)
     visit("/test-saml?session-id=#{session_id}")
     click_button 'saml-response-post'
@@ -75,9 +71,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
 
   it 'will redirect the user to /failed-sign-in when they failed sign in at the IDP' do
     api_request = stub_api_authn_response(session_id, 'result' => 'OTHER', 'isRegistration' => false, 'loaAchieved' => nil)
-    page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' }
-    )
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
 
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     visit("/test-saml?session-id=#{session_id}")
@@ -105,9 +99,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
 
   it 'will redirect the user to /paused-registration on pending response' do
     stub_session
-    page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' }
-    )
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including)
     stub_api_request = stub_api_authn_response(session_id, 'result' => 'PENDING', 'isRegistration' => true)
 

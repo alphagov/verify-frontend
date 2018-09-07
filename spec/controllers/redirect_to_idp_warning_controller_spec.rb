@@ -15,15 +15,17 @@ describe RedirectToIdpWarningController do
     subject { get :index, params: { locale: 'en' } }
 
     it 'warning page when idp selected' do
-      session[:selected_idp] = { 'simple_id' => 'stub-idp-two',
-                                 'entity_id' => 'http://idcorp.com',
-                                 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2) }
+      set_selected_idp(
+        'simple_id' => 'stub-idp-two',
+        'entity_id' => 'http://idcorp.com',
+        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+      )
 
       expect(subject).to render_template(:redirect_to_idp_warning)
     end
 
     it 'error page when no idp selected' do
-      session[:selected_idp] = {}
+      session[:selected_provider] = {}
 
       expect(subject).to render_template('errors/something_went_wrong')
     end
@@ -41,7 +43,7 @@ describe RedirectToIdpWarningController do
     subject { post :continue, params: { locale: 'en' } }
 
     it 'redirects to idp website' do
-      session[:selected_idp] = bobs_identity_service
+      set_selected_idp bobs_identity_service
 
       expect(subject).to redirect_to redirect_to_idp_register_path
     end

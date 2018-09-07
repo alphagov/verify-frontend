@@ -19,6 +19,6 @@ class PausedRegistrationController < ApplicationController
 private
 
   def session_is_valid
-    session_validator.validate(cookies, session).ok? && session.key?(:selected_idp)
+    session_validator.validate(cookies, session).ok? && session.key?(:selected_provider) && !selected_identity_provider.nil?
   end
 end

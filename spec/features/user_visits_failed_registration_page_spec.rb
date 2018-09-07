@@ -9,9 +9,7 @@ RSpec.describe 'When the user visits the failed registration page and' do
   before(:each) do
     set_session_and_session_cookies!
     stub_api_idp_list_for_loa
-    page.set_rack_session(
-      selected_idp: { entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one' }
-    )
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
   end
 
   context 'relying party is allowed to continue on fail then page rendered' do

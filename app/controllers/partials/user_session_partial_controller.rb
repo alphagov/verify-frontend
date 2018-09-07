@@ -26,7 +26,6 @@ module UserSessionPartialController
   def current_selected_provider_data
     selected_provider_data = SelectedProviderData.from_session(session[:selected_provider])
     raise(Errors::WarningLevelError, 'No selected identity provider data in session') if selected_provider_data.nil?
-
     selected_provider_data
   end
 
@@ -40,32 +39,22 @@ module UserSessionPartialController
   end
 
   def selected_identity_provider
-    selected_idp = session[:selected_idp]
-    raise(Errors::WarningLevelError, 'No selected IDP in session') if selected_idp.nil?
-
-    IdentityProvider.from_session(selected_idp)
+    selected_provider_data = current_selected_provider_data
+    raise(Errors::WarningLevelError, 'No selected IDP in session') unless selected_provider_data.is_selected_verify_idp?
+    IdentityProvider.from_session(selected_provider_data.identity_provider)
   end
 
   def selected_country
-    selected_country = session[:selected_country]
-    raise(Errors::WarningLevelError, 'No selected Country in session') if selected_country.nil?
-
-    Country.from_session(selected_country)
+    selected_provider_data = current_selected_provider_data
+    raise(Errors::WarningLevelError, 'No selected Country in session') unless selected_provider_data.is_selected_country?
+    Country.from_session(selected_provider_data.identity_provider)
   end
 
   def store_selected_idp_for_session(selected_idp)
     session[:selected_provider] = SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
-
-    # TODO: Remove after the first release for EID-885
-    session.delete(:selected_country)
-    session[:selected_idp] = selected_idp
   end
 
   def store_selected_country_for_session(selected_country)
     session[:selected_provider] = SelectedProviderData.new(JourneyType::EIDAS, selected_country)
-
-    # TODO: Remove after the first release for EID-885
-    session.delete(:selected_idp)
-    session[:selected_country] = selected_country
   end
 end

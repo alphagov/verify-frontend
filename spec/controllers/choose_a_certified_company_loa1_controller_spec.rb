@@ -64,7 +64,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
     it 'sets selected IDP in user session' do
       post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp-loa1.com' }
 
-      expect(session[:selected_idp].entity_id).to eql('http://idcorp-loa1.com')
+      expect(session[:selected_provider].entity_id).to eql('http://idcorp-loa1.com')
     end
 
     it 'checks whether IDP was recommended' do

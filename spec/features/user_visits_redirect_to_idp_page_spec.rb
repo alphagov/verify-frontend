@@ -7,8 +7,8 @@ RSpec.describe 'When the user visits the redirect to IDP page' do
   let(:selected_answers) { { phone: { mobile_phone: true, smart_phone: false }, documents: { passport: true } } }
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:given_a_session_with_a_hints_enabled_idp) {
+    set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-one')
     page.set_rack_session(
-      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-one' },
       selected_idp_name: "Demo IDP",
       selected_idp_names: ["IDP 1", "IDP 2"],
       selected_idp_was_recommended: true,
@@ -16,8 +16,8 @@ RSpec.describe 'When the user visits the redirect to IDP page' do
     )
   }
   let(:given_a_session_with_a_hints_disabled_idp) {
+    set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-two')
     page.set_rack_session(
-      selected_idp: { entity_id: idp_entity_id, simple_id: 'stub-idp-two' },
       selected_idp_name: "Demo IDP",
       selected_idp_names: ["IDP 1", "IDP 2"],
       selected_idp_was_recommended: true,

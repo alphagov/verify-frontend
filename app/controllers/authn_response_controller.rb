@@ -47,7 +47,7 @@ private
 
   def handle_idp_response(status, response)
     analytics_reporters(status, response)
-    set_journey_status(session[:selected_idp], status)
+    set_journey_status(session[:selected_provider], status)
     redirect_to idp_redirects(status, response)
   end
 

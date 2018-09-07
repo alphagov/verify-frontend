@@ -26,7 +26,7 @@ describe RedirectToIdpController do
       idp_was_recommended = '(recommended)'
       evidence = { driving_licence: true, passport: true }
 
-      session[:selected_idp] = bobs_identity_service
+      set_selected_idp bobs_identity_service
       session[:selected_idp_name] = bobs_identity_service_idp_name
       session[:selected_idp_names] = [bobs_identity_service_idp_name]
       session[:selected_answers] = { 'documents' => evidence }
@@ -50,7 +50,7 @@ describe RedirectToIdpController do
       idp_was_recommended = '(idp recommendation key not set)'
       evidence = { driving_licence: true, passport: true }
 
-      session[:selected_idp] = bobs_identity_service
+      set_selected_idp bobs_identity_service
       session[:selected_idp_name] = bobs_identity_service_idp_name
       session[:selected_idp_names] = [bobs_identity_service_idp_name]
       session[:selected_answers] = { 'documents' => evidence }
@@ -86,7 +86,7 @@ describe RedirectToIdpController do
       it 'reports idp registration attempt details to piwik' do
         bobs_identity_service_idp_name = "Bob’s Identity Service"
 
-        session[:selected_idp] = bobs_identity_service
+        set_selected_idp bobs_identity_service
         session[:selected_idp_name] = bobs_identity_service_idp_name
         session[:user_segments] = ['test-segment']
         session[:transaction_simple_id] = 'test-rp'
@@ -109,7 +109,7 @@ describe RedirectToIdpController do
       it 'reports idp second attempt details to piwik' do
         bobs_identity_service_idp_name = "Bob’s Identity Service"
 
-        session[:selected_idp] = bobs_identity_service
+        set_selected_idp bobs_identity_service
         session[:selected_idp_name] = bobs_identity_service_idp_name
         session[:user_segments] = ['test-segment']
         session[:transaction_simple_id] = 'test-rp'
@@ -141,7 +141,7 @@ describe RedirectToIdpController do
         stub_session_idp_authn_request('<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>', 'idp-location', false)
         stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
-        session[:selected_idp] = bobs_identity_service
+        set_selected_idp bobs_identity_service
         session[:selected_idp_name] = bobs_identity_service_idp_name
       end
 
@@ -222,7 +222,7 @@ describe RedirectToIdpController do
         stub_session_idp_authn_request('<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>', 'idp-location', false)
         stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
-        session[:selected_idp] = bobs_identity_service
+        set_selected_idp bobs_identity_service
         session[:selected_idp_name] = bobs_identity_service_idp_name
       end
 
