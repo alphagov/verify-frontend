@@ -1,4 +1,5 @@
 require 'zendesk_api'
+require 'zendesk_client'
 
 if Rails.env == 'test'
   require 'feedback/dummy_zendesk_client'

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'models/zendesk_client'
+require 'zendesk_client'
 
 describe ZendeskClient do
   let(:client) { double("ZendeskAPI::Client") }
