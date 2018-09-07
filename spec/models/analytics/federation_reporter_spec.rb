@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'models/analytics/federation_reporter'
 require 'analytics'
 require 'logger_helper'
-require 'models/errors/warning_level_error'
+require 'errors/warning_level_error'
 
 module Analytics
   describe FederationReporter do
