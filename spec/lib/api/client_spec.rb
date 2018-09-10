@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'models/api/client'
+require 'api/client'
 require 'cookie_names'
 require 'webmock/rspec'
 require 'active_support'
