@@ -9,7 +9,7 @@ describe HintController do
   context 'user has a journey hint present' do
     it 'json object should return true' do
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        'entity_id' => 'http://idcorp.com',
+        'ATTEMPT' => 'http://idcorp.com',
       }.to_json
 
       body = JSON.parse(subject.body)
@@ -20,7 +20,7 @@ describe HintController do
 
     it 'json object should return true even if the value is not set' do
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        'entity_id' => '',
+        'ATTEMPT' => '',
       }.to_json
 
       body = JSON.parse(subject.body)

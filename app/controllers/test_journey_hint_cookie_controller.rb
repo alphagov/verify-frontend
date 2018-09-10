@@ -10,7 +10,7 @@ class TestJourneyHintCookieController < ApplicationController
 
   def set_cookie
     if params['status'].blank?
-      set_journey_hint(params['entity-id'])
+      set_attempt_journey_hint(params['entity-id'])
     else
       set_journey_hint_by_status(params['entity-id'], params['status'])
     end

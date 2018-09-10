@@ -9,7 +9,7 @@ class HintController < ApplicationController
   def ajax_request
     set_headers
 
-    entity_id = entity_id_of_journey_hint
+    entity_id = attempted_entity_id
 
     json_object = { 'status': 'OK', 'value': !entity_id.nil? }
 

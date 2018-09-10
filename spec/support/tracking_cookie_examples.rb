@@ -19,24 +19,31 @@ shared_examples 'tracking cookie' do
   end
 
   context 'receiving SUCCESS without previous cookie' do
-    let(:cookie_with_just_success_status) { { SUCCESS: 'http://idcorp.com' }.to_json }
+    let(:cookie_with_just_success_status) {
+      { SUCCESS: 'http://idcorp.com',
+        STATE:  {
+                  IDP: 'http://idcorp.com',
+                  RP: 'http://www.test-rp.gov.uk/SAML2/MD',
+                  STATUS: 'SUCCESS'
+                } }.to_json
+    }
     it { should eq cookie_with_just_success_status }
   end
 
   context 'receiving SUCCESS and has cookie with existing entity id' do
     let(:cookie_with_success_status_and_old_entity) {
       {
-        entity_id: 'http://idcorp.com',
-        simple_id: 'stub-entity-one',
-        levels_of_assurance: %w(LEVEL_1 LEVEL_2),
-        SUCCESS: 'http://idcorp.com'
+        SUCCESS: 'http://idcorp.com',
+        STATE:  {
+                  IDP: 'http://idcorp.com',
+                  RP: 'http://www.test-rp.gov.uk/SAML2/MD',
+                  STATUS: 'SUCCESS'
+        }
       }.to_json
     }
     let!(:existing_cookie) {
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        'entity_id' => 'http://idcorp.com',
-        'simple_id' => 'stub-entity-one',
-        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+        'entity_id' => 'http://idcorp.com'
       }.to_json
     }
     it { should eq cookie_with_success_status_and_old_entity }
@@ -45,33 +52,52 @@ shared_examples 'tracking cookie' do
   context 'receiving SUCCESS and has cookie with existing status' do
     let(:cookie_with_new_success_status) {
       {
-        entity_id: 'http://idcorp.com',
-        simple_id: 'stub-entity-one',
-        levels_of_assurance: %w(LEVEL_1 LEVEL_2),
-        SUCCESS: 'http://idcorp.com'
+        SUCCESS: 'http://idcorp.com',
+        STATE:  {
+                    IDP: 'http://idcorp.com',
+                    RP: 'http://www.test-rp.gov.uk/SAML2/MD',
+                    STATUS: 'SUCCESS'
+                }
       }.to_json
     }
     let!(:existing_cookie) {
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        'entity_id' => 'http://idcorp.com',
-        'simple_id' => 'stub-entity-one',
-        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2),
-        'SUCCESS' => 'http://old-idcorp.com'
+        'entity_id' => 'http://old-idcorp.com',
+        'SUCCESS' => 'http://old-idcorp.com',
+        'STATE' => {
+                      'IDP' => 'http://old-idcorp.com',
+                      'RP' => 'http://www.test-rp.gov.uk/SAML2/MD',
+                      'STATUS' => 'SUCCESS'
+                   }
       }.to_json
     }
     it { should eq cookie_with_new_success_status }
   end
 
-  context 'receiving new status and has cookie with existing status' do
+  context 'receiving new status and has cookie with existing old statuses' do
     let(:status) { 'FAILED_UPLIFT' }
     let(:cookie_with_multiple_status) {
       {
+        ATTEMPT: 'http://attempt-idcorp.com',
         SUCCESS: 'http://success-idcorp.com',
-        FAILED_UPLIFT: 'http://idcorp.com'
+        STATE: {
+                  IDP: 'http://idcorp.com',
+                  RP: 'http://www.test-rp.gov.uk/SAML2/MD',
+                  STATUS: 'FAILED_UPLIFT'
+               }
       }.to_json
     }
     let!(:existing_cookie) {
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { 'SUCCESS' => 'http://success-idcorp.com' }.to_json
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
+        'ATTEMPT' => 'http://attempt-idcorp.com',
+        'SUCCESS' => 'http://success-idcorp.com',
+        'FAILED_UPLIFT' => 'http://idcorp.com',
+        'STATE' =>  {
+                      'IDP' => 'http://idcorp.com',
+                      'RP' => 'http://www.test-rp.gov.uk/SAML2/MD',
+                      'STATUS' => 'FAILED'
+                    }
+      }.to_json
     }
     it { should eq cookie_with_multiple_status }
   end

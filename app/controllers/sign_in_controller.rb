@@ -6,7 +6,7 @@ class SignInController < ApplicationController
   include ViewableIdpPartialController
 
   def index
-    entity_id = entity_id_of_journey_hint_for('SUCCESS')
+    entity_id = success_entity_id
     @suggested_idp = entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, entity_id)
     unless @suggested_idp.empty?
       FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp[0].display_name)
@@ -40,7 +40,7 @@ private
 
   def sign_in(entity_id, idp_name)
     POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'])
-    set_journey_hint(entity_id)
+    set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
   end
 

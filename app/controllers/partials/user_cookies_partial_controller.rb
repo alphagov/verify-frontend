@@ -19,9 +19,8 @@ module UserCookiesPartialController
     }
   end
 
-  def set_journey_hint(idp_entity_id)
+  def set_attempt_journey_hint(idp_entity_id)
     journey_hint_value_hash = journey_hint_value || {}
-    journey_hint_value_hash['entity_id'] = idp_entity_id
     journey_hint_value_hash['ATTEMPT'] = idp_entity_id
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_value_hash.to_json,
@@ -31,7 +30,11 @@ module UserCookiesPartialController
   def set_journey_hint_by_status(idp_entity_id, status)
     return if idp_entity_id.nil?
     journey_hint_by_status_value = journey_hint_value || {}
-    journey_hint_by_status_value[status] = idp_entity_id
+    journey_hint_by_status_value = eat_journey_hint_cookie(journey_hint_by_status_value) unless journey_hint_by_status_value.empty?
+    journey_hint_by_status_value['SUCCESS'] = idp_entity_id if status == 'SUCCESS'
+    journey_hint_by_status_value['STATE'] = { IDP: idp_entity_id,
+                                              RP: session[:transaction_entity_id],
+                                              STATUS: status }
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_by_status_value.to_json, expires: 18.months.from_now }
   end
@@ -49,5 +52,16 @@ private
     MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT])
   rescue MultiJson::ParseError
     nil
+  end
+
+  # Clean up users' existing cookies, remove in March 2020
+  def eat_journey_hint_cookie(cookie)
+    yummy_cookie = cookie
+
+    bad_crumbs = %w(CANCEL FAILED FAILED_UPLIFT PENDING OTHER entity_id)
+
+    bad_crumbs.each { |old_status| yummy_cookie.delete(old_status) }
+
+    yummy_cookie
   end
 end
