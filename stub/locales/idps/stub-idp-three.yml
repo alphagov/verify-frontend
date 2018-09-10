@@ -22,3 +22,11 @@ cy:
       requirements:
         - a UK passport
         - a UK photocard driving licence
+      special_no_docs_instructions_html: |
+        <h2 class="heading-medium">Requirements</h2>
+        <ul id="requirements" class="list-bullet">
+          <li>A left leg</li>
+        </ul>
+        <p>Stick your left leg in, stick your left leg out</p>
+      contact_details: |
+        <strong id="stub-idp-three-contact-details">3 Pie Sq</strong>

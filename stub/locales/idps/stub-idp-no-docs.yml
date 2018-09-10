@@ -13,3 +13,10 @@ cy:
   idps:
     stub-idp-no-docs:
       name: "Welsh No Docs IDP"
+      about: "<p>The number one source of identities without documents.</p>"
+      requirements:
+        - "A requirement"
+      special_no_docs_instructions_html: "<p>Additional IDP Instructions</p>"
+      no_docs_requirement: "If you do not have a current account"
+      contact_details: |
+        <strong id="stub-idp-one-contact-details">6 Lax Path</strong>

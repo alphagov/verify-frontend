@@ -2,7 +2,7 @@ en:
   idps:
     verify-eidas-bridge:
       name: "European eID"
-      tagline: "a really european identity provider"
+      tagline: "A really european identity provider"
       about: |
           <p>ID Corp is the premier identity proofing service around.</p>
           <ul>
@@ -29,6 +29,7 @@ cy:
   idps:
     verify-eidas-bridge:
       name: "EWROP"
+      tagline: "A really european identity provider"
       about: |
            <p>ID Corp is the premier identity proofing service around.</p>
            <ul>
