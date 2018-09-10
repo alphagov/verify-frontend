@@ -3,14 +3,13 @@ require 'date'
 
 class LoadingCache
   include Concurrent::Async
-  def initialize(object, refresh_proc)
+  def initialize
     @last_updated = :never
-    @object = object
-    @refresh_proc = refresh_proc
+    @cached_object = nil
   end
 
-  def fetch!
-    result = self.await.fetch_object!
+  def fetch(&blk)
+    result = self.await.fetch_object(&blk)
     if(result.fulfilled?)
       return result.value
     else
@@ -18,17 +17,17 @@ class LoadingCache
     end
   end
 
-  def fetch_object!
+  def fetch_object(&blk)
     if need_to_refresh?
-      refresh!
+      refresh(&blk)
     end
-    @object
+    @cached_object
   end
 
 private
 
-  def refresh!
-    @object = @refresh_proc.call(@object)
+  def refresh
+    @cached_object = yield
     @last_updated = DateTime.now
   end
 
