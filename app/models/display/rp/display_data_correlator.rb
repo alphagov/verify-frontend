@@ -29,11 +29,6 @@ module Display
         Transactions.new([], [])
       end
 
-      def retrieve_current_service(data, service_name)
-        current_service_transaction = data.select { |tx| tx['simpleId'] == service_name }
-        translate_name(current_service_transaction[0])
-      end
-
     private
 
       def translate_name(transaction)
