@@ -2,7 +2,7 @@ en:
   idps:
     stub-idp-four:
       name: "Best ID"
-      tagline: "a really really cool identity provider"
+      tagline: "A really really cool identity provider"
       about: |
           <p>Best ID is the premier identity proofing service around.</p>
           <p>Once you get verified you can transact with online government services.</p>
@@ -11,6 +11,11 @@ en:
       special_no_docs_instructions_html: "<p>Additional IDP Instructions</p>"
       no_docs_requirement: "If you do not have a current account"
       contact_details: |
+cy:
+  idps:
+    stub-idp-four:
+      name: "Welsh Best ID"
+      tagline: "A really really cool identity provider"
       about: Best ID is BEST ID
       requirements:
         - a UK passport
@@ -23,7 +28,3 @@ en:
           <br/>Saturday and Sunday, 8am to 5pm
           <br/>Closed on bank holidays
         </p>
-cy:
-  idps:
-    stub-idp-four:
-      name: "Welsh Best ID"

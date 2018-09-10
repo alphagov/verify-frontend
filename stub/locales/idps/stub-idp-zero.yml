@@ -7,6 +7,15 @@ en:
       requirements:
         - a UK passport
         - a UK photocard driving licence
+
+cy:
+  idps:
+    stub-idp-zero:
+      name: "Welsh CitzenVerifier"
+      about: CitzenVerifier is an IDP
+      requirements:
+        - a UK passport
+        - a UK photocard driving licence
       contact_details: |
         <p>
           <strong id="stub-idp-zero-contact-details">0 Null Drive, Nowheresville</strong>
@@ -15,7 +24,3 @@ en:
           <br/>Saturday and Sunday, 8am to 5pm
           <br/>Closed on bank holidays
         </p>
-cy:
-  idps:
-    stub-idp-zero:
-      name: "Welsh CitzenVerifier"
