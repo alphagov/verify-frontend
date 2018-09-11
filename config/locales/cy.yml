@@ -543,7 +543,7 @@ cy:
       without_session:
         title: Dilysu Wedi'i Oedi
         heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.
-        restart_instructions: |
+        restart_instructions_html: |
           <p>To return you can:</p>
           <ul class="list list-bullet">
             <li>go back to the service you were using</li>
