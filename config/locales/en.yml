@@ -537,7 +537,7 @@ en:
       without_session:
         title: Verification Paused
         heading: The certified company has saved your information
-        restart_instructions: |
+        restart_instructions_html: |
           <p>To return you can:</p>
           <ul class="list list-bullet">
             <li>go back to the service you were using</li>
