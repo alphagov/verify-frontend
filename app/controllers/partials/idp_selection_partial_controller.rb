@@ -4,11 +4,11 @@ module IdpSelectionPartialController
   include JourneyHintingPartialController
 
   def set_journey_hint_followed(entity_id)
-    session[:user_followed_journey_hint] = user_followed_journey_hint(entity_id, 'SUCCESS') if has_journey_hint?
+    session[:user_followed_journey_hint] = user_followed_journey_hint(entity_id) if has_journey_hint?
   end
 
   def has_journey_hint?
-    !entity_id_of_journey_hint_for('SUCCESS').nil?
+    !success_entity_id.nil?
   end
 
   def ajax_idp_redirection_sign_in_request(entity_id)

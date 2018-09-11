@@ -123,13 +123,21 @@ describe AuthnResponseController do
 
     context 'receiving OTHER status' do
       let(:status) { 'OTHER' }
-      let(:cookie_with_failed_status) { { FAILED: 'http://idcorp.com' }.to_json }
+      let(:cookie_with_failed_status) {
+        { STATE: { IDP: 'http://idcorp.com',
+                   RP: 'http://www.test-rp.gov.uk/SAML2/MD',
+                   STATUS: 'FAILED' } }.to_json
+      }
       it { should eq cookie_with_failed_status }
     end
 
     context 'receiving PENDING status' do
       let(:status) { 'PENDING' }
-      let(:cookie_with_pending_status) { { PENDING: 'http://idcorp.com' }.to_json }
+      let(:cookie_with_pending_status) {
+        { STATE: { IDP: 'http://idcorp.com',
+                   RP: 'http://www.test-rp.gov.uk/SAML2/MD',
+                   STATUS: 'PENDING' } }.to_json
+      }
       it { should eq cookie_with_pending_status }
     end
   end

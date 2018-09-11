@@ -47,7 +47,7 @@ private
 
   def handle_idp_response(status, response)
     analytics_reporters(status, response)
-    set_journey_status(session[:selected_provider], status)
+    set_journey_status(status)
     redirect_to idp_redirects(status, response)
   end
 
@@ -60,8 +60,8 @@ private
     report_user_outcome_to_piwik(status)
   end
 
-  def set_journey_status(session_entity, status)
-    selected_entity = session_entity.try(:fetch, 'entity_id', nil)
+  def set_journey_status(status)
+    selected_entity = session[:selected_provider].try(:fetch, 'entity_id', nil)
     set_journey_hint_by_status(selected_entity, status)
   end
 

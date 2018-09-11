@@ -6,18 +6,21 @@ module JourneyHintingPartialController
     nil
   end
 
-  def entity_id_of_journey_hint
-    journey_hint = journey_hint_value
-    journey_hint.nil? ? nil : journey_hint['entity_id']
+  def attempted_entity_id
+    journey_hint_value.nil? ? nil : journey_hint_value['ATTEMPT']
   end
 
-  def entity_id_of_journey_hint_for(status)
-    journey_hint = journey_hint_value
-    journey_hint.nil? ? nil : journey_hint[status]
+  def success_entity_id
+    journey_hint_value.nil? ? nil : journey_hint_value['SUCCESS']
   end
 
-  def user_followed_journey_hint(entity_id_followed_by_user, status)
-    hinted_id = entity_id_of_journey_hint_for(status)
+  def last_status
+    journey_hint = journey_hint_value
+    journey_hint.nil? ? nil : journey_hint['STATE']
+  end
+
+  def user_followed_journey_hint(entity_id_followed_by_user)
+    hinted_id = success_entity_id
     !hinted_id.nil? && hinted_id == entity_id_followed_by_user
   end
 
