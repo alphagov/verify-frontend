@@ -14,8 +14,7 @@ module ViewableIdpPartialController
   end
 
   def select_viewable_idp_for_single_idp_journey(entity_id)
-    # TODO with HUB-271
-    for_viewable_idp(entity_id, current_identity_providers_for_sign_in) do |decorated_idp|
+    for_viewable_idp(entity_id, current_identity_providers_for_single_idp) do |decorated_idp|
       store_selected_idp_for_session(decorated_idp.identity_provider)
       yield decorated_idp
     end
@@ -38,5 +37,9 @@ module ViewableIdpPartialController
 
   def current_identity_providers_for_sign_in
     CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps
+  end
+
+  def current_identity_providers_for_single_idp
+    CONFIG_PROXY.get_idp_list_for_single_idp(session[:transaction_entity_id]).idps
   end
 end

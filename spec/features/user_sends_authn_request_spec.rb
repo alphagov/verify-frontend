@@ -69,8 +69,9 @@ describe 'user sends authn requests' do
     end
 
     it 'will redirect the user to /continue-with-your-idp when user has a single idp cookie' do
-      stub_api_idp_list_for_single_idp_journey
       stub_session_creation
+      stub_transactions_for_single_idp_list
+      stub_api_idp_list_for_single_idp_journey
 
       visit('/test-single-idp-journey')
       click_button 'initiate-single-idp-post'

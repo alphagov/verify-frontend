@@ -23,6 +23,7 @@ RSpec.describe 'When the user visits the continue to your IDP page' do
   context 'javascript disabled' do
     before(:each) do
       set_session_and_session_cookies!
+      stub_transactions_for_single_idp_list
       stub_api_idp_list_for_single_idp_journey
     end
 
@@ -65,12 +66,24 @@ RSpec.describe 'When the user visits the continue to your IDP page' do
   end
 
   context 'with JS enabled', js: true do
+    def single_idp_session
+      {
+          transaction_simple_id: 'test-rp-noc3',
+          start_time: start_time_in_millis,
+          verify_session_id: default_session_id,
+          requested_loa: 'LEVEL_2',
+          transaction_entity_id: 'some-other-entity-id',
+          selected_answers: { device_type: { device_type_other: true } },
+      }
+    end
+
     before(:each) do
-      set_session_and_session_cookies!
-      stub_api_idp_list_for_single_idp_journey
+      set_session_and_session_cookies!(session: single_idp_session)
+      stub_transactions_for_single_idp_list
+      stub_api_idp_list_for_single_idp_journey('some-other-entity-id')
       visit '/test-single-idp-journey'
       # javascript driver needs a redirect to a real page
-      fill_in('serviceId', with: 'test-rp')
+      fill_in('serviceId', with: 'some-other-entity-id')
       click_button 'initiate-single-idp-post'
     end
 
