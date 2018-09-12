@@ -1,4 +1,4 @@
-# 2. AB Testing Using Rails Routes
+# 3. AB Testing Using Rails Routes
 
 Date: 12/06/2017
 
