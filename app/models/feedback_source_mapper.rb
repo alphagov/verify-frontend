@@ -46,7 +46,8 @@ class FeedbackSourceMapper
       'PROOF_OF_ADDRESS' => 'select_proof_of_address',
       'CONFIRMING_IT_IS_YOU_PAGE' => 'confirming_it_is_you',
       'PROVE_IDENTITY_PAGE' => 'prove_identity',
-      'CONTINUE_TO_YOUR_IDP_PAGE' => 'continue_to_your_idp'
+      'CONTINUE_TO_YOUR_IDP_PAGE' => 'continue_to_your_idp',
+      'RESUME_PAGE' => 'resume_registration'
   }.freeze
   end
 

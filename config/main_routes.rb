@@ -94,6 +94,8 @@ post 'further_information_null_attribute', to: 'further_information#submit_null_
 get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
 get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 get 'paused_registration', to: 'paused_registration#index', as: :paused_registration
+get 'resume_registration', to: 'paused_registration#resume', as: :resume_registration
+post 'resume_registration', to: 'sign_in#select_idp'
 
 if SINGLE_IDP_FEATURE
   get 'redirect_to_single_idp', to: 'redirect_to_idp#single_idp', as: :redirect_to_single_idp
