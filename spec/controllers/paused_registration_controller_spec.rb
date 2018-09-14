@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'api_test_helper'
 
 describe PausedRegistrationController do
-  let(:valid_rp) { 'test-rp-no-demo' }
+  let(:valid_rp) { 'http://www.test-rp.gov.uk/SAML2/MD' }
   let(:valid_idp) { 'http://idcorp.com' }
 
   before(:each) do
@@ -16,8 +16,48 @@ describe PausedRegistrationController do
   context 'user visits pause page' do
     subject { get :index, params: { locale: 'en' } }
 
-    it 'renders paused registration page' do
+    it 'renders paused registration page when session is present' do
       expect(subject).to render_template(:with_user_session)
+    end
+
+    it 'renders paused registration page when cookie is present but no session' do
+      session.delete(:selected_provider)
+
+      stub_transaction_details
+      stub_translations
+      stub_api_idp_list_for_sign_in
+
+      front_journey_hint_cookie = {
+          STATE: {
+              IDP: valid_idp,
+              RP: valid_rp,
+              STATUS: 'PENDING'
+          }
+      }
+
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+
+      expect(subject).to render_template(:with_user_session)
+    end
+
+    it 'renders paused registration without session page when there is no idp selected and no pending cookie' do
+      session.delete(:selected_provider)
+
+      stub_transaction_details
+      stub_translations
+      stub_api_idp_list_for_sign_in
+
+      front_journey_hint_cookie = {
+          STATE: {
+              IDP: valid_idp,
+              RP: valid_rp,
+              STATUS: 'OTHER'
+          }
+      }
+
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+
+      expect(subject).to render_template(:without_user_session)
     end
 
     it 'should render paused registration without session page when there is no idp selected' do
