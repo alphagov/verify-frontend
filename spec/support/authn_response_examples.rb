@@ -1,9 +1,17 @@
 shared_examples 'idp_authn_response' do |journey_hint, idp_result, piwik_action, redirect_path|
   let(:saml_proxy_api) { double(:saml_proxy_api) }
+  let(:selected_entity) {
+    {
+      'entity_id' => 'https://acme.de/ServiceMetadata',
+      'simple_id' => 'DE',
+      'levels_of_assurance' => %w[LEVEL_1 LEVEL_2]
+    }
+  }
 
   before(:each) do
     stub_const('SAML_PROXY_API', saml_proxy_api)
     set_session_and_cookies_with_loa('LEVEL_1')
+    set_selected_idp(selected_entity)
   end
 
   it "should redirect to #{redirect_path} on #{idp_result}" do
