@@ -61,7 +61,7 @@ private
   end
 
   def set_journey_status(status)
-    selected_entity = session[:selected_provider].try(:fetch, 'entity_id', nil)
+    selected_entity = selected_identity_provider.entity_id
     set_journey_hint_by_status(selected_entity, status)
   end
 

@@ -2,6 +2,13 @@ require 'feature_helper'
 require 'api_test_helper'
 
 RSpec.describe 'locale is set based on multiple sources', type: :feature do
+  let(:selected_entity) {
+    {
+      'entity_id' => 'http://idcorp.com',
+      'simple_id' => 'stub-entity-one',
+      'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+    }
+  }
   before(:each) do
     set_session_and_session_cookies!
     stub_api_idp_list_for_loa
@@ -45,6 +52,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
       it "will render the response processing page in #{locale} after SAML response when locale cookie set to #{locale}" do
         set_locale_cookie_to(locale)
         session = set_session!
+        set_selected_idp_in_session(selected_entity)
         stub_matching_outcome
         stub_api_authn_response(session[:verify_session_id])
 
@@ -86,6 +94,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
 
       it "will render the response processing page in #{form_locale} after SAML Response submission when locale cookie #{locale_cookie_message} and form param set to #{form_locale}" do
         session = set_session!
+        set_selected_idp_in_session(selected_entity)
         if cookie_locale
           set_locale_cookie_to(cookie_locale)
           expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of cookie_locale
