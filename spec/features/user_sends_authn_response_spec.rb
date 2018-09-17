@@ -97,8 +97,9 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
                .with(query: hash_including('action_name' => 'Success - SIGN_IN_WITH_IDP at LOA LEVEL_2'))).to have_been_made.once
   end
 
-  it 'will redirect the user to /paused-registration on pending response' do
+  it 'will redirect the user to /paused on pending response' do
     stub_session
+    stub_transaction_details
     set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including)
     stub_api_request = stub_api_authn_response(session_id, 'result' => 'PENDING', 'isRegistration' => true)

@@ -15,7 +15,7 @@ class TestJourneyHintCookieController < ApplicationController
     if params['status'].blank?
       set_attempt_journey_hint(params['entity-id'])
     else
-      set_journey_hint_by_status(params['entity-id'], params['status'])
+      set_journey_hint_by_status(params['entity-id'], params['status'], params['rp-entity-id'])
     end
     head :no_content
   end

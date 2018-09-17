@@ -5,6 +5,7 @@ require 'piwik_test_helper'
 RSpec.describe 'When the user visits the resume registration page and' do
   let(:idp_display_name) { 'IDCorp' }
   let(:service_name) { 'register for an identity profile' }
+  let(:rp_entity_id) { 'http://www.test-rp.gov.uk/SAML2/MD' }
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
@@ -22,8 +23,9 @@ RSpec.describe 'When the user visits the resume registration page and' do
     set_session_and_session_cookies!
     stub_api_idp_list_for_sign_in
     set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-one')
-    set_journey_hint_cookie(idp_entity_id, 'PENDING', 'en')
+    set_journey_hint_cookie(idp_entity_id, 'PENDING', 'en', rp_entity_id)
     stub_translations
+    stub_transaction_details
   end
 
   context 'and has a cookie containing a PENDING state and valid IDP identifiers' do

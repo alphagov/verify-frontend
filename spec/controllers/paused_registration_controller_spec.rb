@@ -11,6 +11,7 @@ describe PausedRegistrationController do
     set_selected_idp('entity_id' => 'http://idcorp.com', 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_1 LEVEL_2))
     set_session_and_cookies_with_loa('LEVEL_2', 'test-rp')
     stub_api_idp_list_for_sign_in
+    stub_transaction_details
   end
 
   context 'user visits pause page' do
@@ -23,7 +24,6 @@ describe PausedRegistrationController do
     it 'renders paused registration page when cookie is present but no session' do
       session.delete(:selected_provider)
 
-      stub_transaction_details
       stub_translations
       stub_api_idp_list_for_sign_in
 
@@ -43,7 +43,6 @@ describe PausedRegistrationController do
     it 'renders paused registration without session page when there is no idp selected and no pending cookie' do
       session.delete(:selected_provider)
 
-      stub_transaction_details
       stub_translations
       stub_api_idp_list_for_sign_in
 

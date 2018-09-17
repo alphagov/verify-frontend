@@ -1,5 +1,7 @@
 # Shared methods for controllers which use the journey hint cookie to give users IDP suggestions
 module JourneyHintingPartialController
+  PENDING_STATUS = 'PENDING'.freeze
+
   def journey_hint_value
     MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT])
   rescue MultiJson::ParseError

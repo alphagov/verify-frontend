@@ -68,7 +68,16 @@ module ApiTestHelper
         "taxonName":"Benefits"
       }'
     stub_request(:get, api_translations_endpoint('test-rp', 'en')).to_return(body: en_translation_data, status: 200)
-    stub_request(:get, api_translations_endpoint('test-rp', 'cy')).to_return(body: en_translation_data, status: 200)
+    cy_translation_data = '{
+        "name":"Welsh register for an identity profile",
+        "rpName":"Welsh Test RP",
+        "analyticsDescription":"analytics description for test-rp",
+        "otherWaysText":"<p>Welsh If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"Welsh register for an identity profile",
+        "tailoredText":"Welsh External data source: EN: This is tailored text for test-rp",
+        "taxonName":"Welsh Benefits"
+      }'
+    stub_request(:get, api_translations_endpoint('test-rp', 'cy')).to_return(body: cy_translation_data, status: 200)
     test_rp_noc3_translations = '{
         "name":"Register for an identity profile (forceauthn & no cycle3)",
         "rpName":"Test RP",
@@ -209,8 +218,9 @@ module ApiTestHelper
   def transaction_details_stub_response(options)
     defaults = {
         'simpleId' => 'test-rp',
-        'serviceHomepage' => 'www.example.com',
-        'loaList' => %w(LEVEL_1 LEVEL_2)
+        'serviceHomepage' => 'http://www.test-rp.gov.uk/',
+        'loaList' => %w(LEVEL_1 LEVEL_2),
+        'headlessStartpage' => 'http://www.test-rp.gov.uk/success'
     }
     defaults.merge(options)
   end

@@ -27,7 +27,8 @@ class StubApi < Sinatra::Base
     "{
       \"simpleId\":\"test-rp\",
       \"serviceHomepage\":\"www.example.com\",
-      \"loaList\":[\"#{level_of_assurance}\"]
+      \"loaList\":[\"#{level_of_assurance}\"],
+      \"headlessStartpage\":\"http://example.com/success\"
     }"
   end
 
@@ -168,12 +169,14 @@ class StubApi < Sinatra::Base
     '[{
         "simpleId":"test-rp",
         "serviceHomepage":"http://example.com/test-rp",
-        "loaList":["LEVEL_2"]
+        "loaList":["LEVEL_2"],
+        "headlessStartpage":"http://example.com/test-rp/success"
       },
       {
         "simpleId": "loa1-test-rp",
         "serviceHomepage":"http://example.com/test-rp-loa1",
-        "loaList":["LEVEL_1","LEVEL_2"]
+        "loaList":["LEVEL_1","LEVEL_2"],
+        "headlessStartpage":"http://example.com/test-rp-loa1/success"
       }]'
    end
 

@@ -27,13 +27,13 @@ module UserCookiesPartialController
                                                                   expires: 18.months.from_now }
   end
 
-  def set_journey_hint_by_status(idp_entity_id, status)
+  def set_journey_hint_by_status(idp_entity_id, status, rp_entity_id = nil)
     return if idp_entity_id.nil?
     journey_hint_by_status_value = journey_hint_value || {}
     journey_hint_by_status_value = eat_journey_hint_cookie(journey_hint_by_status_value) unless journey_hint_by_status_value.empty?
     journey_hint_by_status_value['SUCCESS'] = idp_entity_id if status == 'SUCCESS'
     journey_hint_by_status_value['STATE'] = { IDP: idp_entity_id,
-                                              RP: session[:transaction_entity_id],
+                                              RP: rp_entity_id.nil? ? session[:transaction_entity_id] : rp_entity_id,
                                               STATUS: status }
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_by_status_value.to_json, expires: 18.months.from_now }

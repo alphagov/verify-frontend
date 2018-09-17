@@ -528,13 +528,13 @@ en:
         restart_instructions_html: |
           <p>To return you can:</p>
           <ul class="list list-bullet">
-            <li>go back to <a href=\"%{rp_start_page}\">%{rp_name}</a>.</li>
+            <li>go back to <a href="%{rp_start_page}">%{rp_name}</a>.</li>
             <li>check for an email from %{idp_name}</li>
             <li>bookmark this page</li>
           </ul>
           <p>You'll need the email or username and password you used to create an account with %{idp_name}.</p>
         continue_verifying: 'Continue verifying with %{idp_name}'
-        return_html: 'Or return to <a href=\"%{rp_start_page}\">%{rp_name}</a>.'
+        return_html: 'Or return to <a href="%{rp_start_page}">%{rp_name}</a>.'
       without_session:
         title: Verification Paused
         heading: The certified company has saved your information

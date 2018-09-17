@@ -18,7 +18,7 @@ class PausedRegistrationController < ApplicationController
   def index
     if session_is_valid?
       with_session
-    elsif is_last_status?('PENDING')
+    elsif is_last_status?(PENDING_STATUS)
       with_cookie
     else
       render :without_user_session
@@ -44,7 +44,7 @@ private
   def get_idp_from_cookie
     last_idp_value = last_idp
     unless last_idp_value.nil?
-      return retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, last_idp_value).first
+      retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, last_idp_value).first
     end
   end
 
@@ -55,7 +55,7 @@ private
   end
 
   def with_cookie
-    selected_rp = get_rp_details
+    selected_rp = get_rp_details(last_rp)
     set_transaction_from_cookie(selected_rp)
     enabled_idp_list = get_idp_list(last_rp)
     idp = get_idp_choice(enabled_idp_list, last_idp)
@@ -64,21 +64,23 @@ private
   end
 
   def set_transaction_from_session
+    selected_rp = get_rp_details(current_transaction_entity_id)
     @transaction = {
       name: current_transaction.name,
-      homepage: current_transaction_homepage
+      homepage: current_transaction_homepage,
+      start_page: preferred_start_page(selected_rp)
     }
   end
 
   def set_transaction_from_cookie(selected_rp)
     @transaction = {
       name: get_translated_service_name(selected_rp.simple_id),
-      homepage: selected_rp.transaction_homepage
+      homepage: selected_rp.transaction_homepage,
+      start_page: preferred_start_page(selected_rp)
     }
   end
 
-  def get_rp_details
-    last_rp_value = last_rp
+  def get_rp_details(last_rp_value)
     return nil if last_rp_value.nil?
     CONFIG_PROXY.get_transaction_details(last_rp_value)
   end
@@ -91,5 +93,9 @@ private
     list = CONFIG_PROXY.get_idp_list_for_sign_in(transaction_id)
     return nil if list.nil?
     list.idps
+  end
+
+  def preferred_start_page(selected_rp)
+    selected_rp.headless_startpage.nil? ? selected_rp.transaction_homepage : selected_rp.headless_startpage
   end
 end
