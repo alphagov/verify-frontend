@@ -10,9 +10,9 @@ class ConfigProxy
     TransactionResponse.validated_response(response)
   end
 
-  def get_transaction_translations(transaction_entity_id, locale)
+  def get_transaction_translations(transaction_simple_id, locale)
     begin
-      response = @api_client.get(transaction_translation_data_endpoint(transaction_entity_id, locale))
+      response = @api_client.get(transaction_translation_data_endpoint(transaction_simple_id, locale))
       translations_for_locale = TransactionTranslationResponse.validated_response(response)
 
       translations_for_locale.to_h
