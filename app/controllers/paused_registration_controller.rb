@@ -84,7 +84,7 @@ private
   end
 
   def get_translated_service_name(simple_id)
-    CONFIG_PROXY.transaction_translation_data_endpoint(simple_id, params[:locale])
+    CONFIG_PROXY.get_transaction_translations(simple_id, params[:locale]).fetch(:name, nil)
   end
 
   def get_idp_list(transaction_id)
