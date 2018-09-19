@@ -555,12 +555,12 @@ cy:
       resume:
         title: "Parhau i ddilysu gyda %{display_name}"
         heading: "Parhau i ddilysu gyda %{display_name}"
-        intro: "Bydd angen i chi orffen gwirio'ch hunaniaeth gyda %{display_name} i %{rp_name}"
+        intro: "Bydd angen i chi orffen gwirio'ch hunaniaeth gyda %{display_name} i %{service_name}."
         continue: "Parhewch gyda %{display_name}"
         alternatives: "Os nid chi oedd hyn, gallwch:"
         alternative_new_identity: "creu cyfrif hunaniaeth newydd"
         alternative_start: "mewngofnodi gyda chwmni ardystiedig arall"
-        alternative_other_ways: "gwelwch ffyrdd eraill i %{rp_name}"
+        alternative_other_ways: "gwelwch ffyrdd eraill i %{service_name}"
     single_idp_journey:
       title: Continue with %{display_name}
       heading: Prove your identity with %{display_name}

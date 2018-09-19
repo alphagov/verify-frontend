@@ -549,12 +549,12 @@ en:
       resume:
         title: "Continue verifying with %{display_name}"
         heading: "Continue verifying with %{display_name}"
-        intro: "You'll need to finish verifying your identity with %{display_name} to %{rp_name}"
+        intro: "You'll need to finish verifying your identity with %{display_name} to %{service_name}."
         continue: "Continue with %{display_name}"
         alternatives: "If this wasn't you, you can:"
         alternative_new_identity: "create a new identity account"
         alternative_start: "sign in with another certified company"
-        alternative_other_ways: "see other ways to %{rp_name}"
+        alternative_other_ways: "see other ways to %{service_name}"
     single_idp_journey:
       title: Continue with %{display_name}
       heading: Prove your identity with %{display_name}

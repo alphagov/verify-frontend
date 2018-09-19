@@ -4,7 +4,7 @@ require 'piwik_test_helper'
 
 RSpec.describe 'When the user visits the resume registration page and' do
   let(:idp_display_name) { 'IDCorp' }
-  let(:rp_display_name) { 'Test RP' }
+  let(:service_name) { 'register for an identity profile' }
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:idp_entity_id) { 'http://idcorp.com' }
   let(:encrypted_entity_id) { 'an-encrypted-entity-id' }
@@ -30,10 +30,10 @@ RSpec.describe 'When the user visits the resume registration page and' do
     it 'displays correct text and button' do
       visit '/resume-registration'
 
-      expect(page).to have_content t('hub.paused_registration.resume.intro', rp_name: rp_display_name, display_name: idp_display_name)
-      expect(page).to have_content t('hub.paused_registration.resume.heading', rp_name: rp_display_name, display_name: idp_display_name)
+      expect(page).to have_content t('hub.paused_registration.resume.intro', service_name: service_name, display_name: idp_display_name)
+      expect(page).to have_content t('hub.paused_registration.resume.heading', display_name: idp_display_name)
       expect(page).to have_button t('hub.paused_registration.resume.continue', display_name: idp_display_name)
-      expect(page).to have_content t('hub.paused_registration.resume.alternative_other_ways', rp_name: rp_display_name)
+      expect(page).to have_content t('hub.paused_registration.resume.alternative_other_ways', service_name: service_name)
     end
   end
 
