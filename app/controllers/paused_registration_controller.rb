@@ -65,7 +65,7 @@ private
 
   def set_transaction_from_session
     @transaction = {
-      name: current_transaction.rp_name,
+      name: current_transaction.name,
       homepage: current_transaction_homepage
     }
   end
