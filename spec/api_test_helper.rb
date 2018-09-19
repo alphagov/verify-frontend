@@ -202,7 +202,7 @@ module ApiTestHelper
     defaults.merge(options)
   end
 
-  def stub_transaction_details(options)
+  def stub_transaction_details(options = {})
     stub_request(:get, config_api_uri(transaction_display_data_endpoint(default_transaction_entity_id))).to_return(body: transaction_details_stub_response(options).to_json, status: 200)
   end
 

@@ -3,12 +3,14 @@
 require 'partials/user_cookies_partial_controller'
 require 'partials/idp_selection_partial_controller'
 require 'partials/viewable_idp_partial_controller'
+require 'partials/retrieve_federation_data_partial_controller'
 
 class SingleIdpJourneyController < ApplicationController
   layout 'slides'
 
   include IdpSelectionPartialController
   include ViewableIdpPartialController
+  include RetrieveFederationDataPartialController
 
   protect_from_forgery except: :redirect_from_idp
   skip_before_action :validate_session, except: %i[index continue continue_ajax]
@@ -16,7 +18,7 @@ class SingleIdpJourneyController < ApplicationController
 
   def continue_to_your_idp
     if valid_cookie? && valid_selection?
-      @idp = retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_single_idp, single_idp_cookie['idp_entity_id'])[0]
+      @idp = retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_single_idp, single_idp_cookie['idp_entity_id']).first
       @service_name = current_transaction.name
       @uuid = single_idp_cookie.fetch('uuid', nil)
       session[:journey_type] = 'single-idp'
@@ -44,9 +46,10 @@ class SingleIdpJourneyController < ApplicationController
     transaction_id = params['serviceId']
     idp_entity_id = params['idpEntityId']
     uuid = params['singleIdpJourneyIdentifier'].to_s.downcase
-    rp_url = get_service_choice_url(transaction_id)
 
-    if !rp_url.nil? && valid_idp_choice?(idp_entity_id, transaction_id) && valid_uuid?(uuid)
+    rp_url = get_service_choice_url(get_service_list, transaction_id)
+
+    if !rp_url.nil? && valid_request?(transaction_id, idp_entity_id, uuid)
       save_to_cookie(transaction_id, idp_entity_id, uuid)
       FEDERATION_REPORTER.report_started_single_idp_journey(request)
       redirect_to(rp_url)
@@ -65,34 +68,10 @@ private
     CONFIG_PROXY.transactions_for_single_idp_list
   end
 
-  def get_selected_rp(list, transaction_id)
-    list.select { |hash| hash.fetch('entityId') == transaction_id }.first
-  end
-
-  def get_url(selected_rp)
-    return nil if selected_rp.nil?
-    selected_rp.fetch('serviceHomepage', nil)
-  end
-
-  def get_service_choice_url(transaction_id)
-    enabled_rp_list = get_service_list
-    selected_rp = get_selected_rp(enabled_rp_list, transaction_id)
-    get_url(selected_rp)
-  end
-
-  def valid_transaction?(transaction_id)
-    enabled_rp_list = get_service_list
-    selected_rp = get_selected_rp(enabled_rp_list, transaction_id)
-    !selected_rp.nil?
-  end
-
-  def valid_idp_choice?(idp_entity_id, transaction_id)
-    begin
-      enabled_idp_list = CONFIG_PROXY.get_idp_list_for_single_idp(transaction_id).idps
-      enabled_idp_list.detect { |idp| idp.entity_id == idp_entity_id }
-    rescue NoMethodError
-      return false
-    end
+  def get_idp_list(transaction_id)
+    list = CONFIG_PROXY.get_idp_list_for_single_idp(transaction_id)
+    return nil if list.nil?
+    list.idps
   end
 
   def save_to_cookie(transaction_id, idp_entity_id, uuid)
@@ -115,10 +94,22 @@ private
   end
 
   def valid_selection?
-    idp = single_idp_cookie.fetch('idp_entity_id', nil)
-    transaction = single_idp_cookie.fetch('transaction_id', nil)
+    idp_entity_id = single_idp_cookie.fetch('idp_entity_id', nil)
+    transaction_id = single_idp_cookie.fetch('transaction_id', nil)
     uuid = single_idp_cookie.fetch('uuid', nil)
-    cookie_matches_session?(transaction) && valid_idp_choice?(idp, transaction) && valid_transaction?(transaction) && valid_uuid?(uuid)
+    single_idp_rp_list = get_service_list
+
+    return false unless cookie_matches_session?(transaction_id)
+    return false unless valid_transaction?(single_idp_rp_list, transaction_id)
+    valid_request?(transaction_id, idp_entity_id, uuid)
+  end
+
+  def valid_request?(transaction_id, idp_entity_id, uuid)
+    single_idp_idp_list = get_idp_list(transaction_id)
+
+    return false if single_idp_idp_list.nil?
+    return false unless valid_idp_choice?(get_idp_list(transaction_id), idp_entity_id)
+    valid_uuid?(uuid)
   end
 
   def cookie_matches_session?(transaction)
