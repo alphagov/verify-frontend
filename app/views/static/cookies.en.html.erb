@@ -54,6 +54,13 @@ end %>
       <td>This identifies the certified company last used to access a government service with this browser on this device. It can also identify the government service you were using. We use this cookie to make it easier for you to sign in again.</td>
       <td>18 months</td>
     </tr>
+    <% if SINGLE_IDP_FEATURE %>
+      <tr>
+        <td><var>verify-single-idp-journey</var></td>
+        <td>This cookie tells us that you have been referred directly from an identity provider. It tells us which provider has referred you, and passes a unique identifier back to that provider.</td>
+        <td>90 minutes</td>
+      </tr>
+    <% end %>
     <tr>
       <td><var>x_verify_locale</var></td>
       <td>This identifies if you’re using the English or Welsh version of GOV.UK Verify. We use
