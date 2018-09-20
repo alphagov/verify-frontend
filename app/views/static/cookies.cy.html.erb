@@ -49,6 +49,13 @@ end %>
       <td>Mae hyn yn nodi'r cwmni ardystiedig a ddefnyddiwyd ddiwethaf i gael mynediad at wasanaeth y llywodraeth gyda'r porwr hwn ar y ddyfais hon. Gall hefyd nodi'r gwasanaeth llywodraeth yr oeddech yn ei ddefnyddio. Defnyddiwn y cwci hwn i'w gwneud hi'n haws i chi lofnodi eto.</td>
       <td>18 mis</td>
     </tr>
+    <% if SINGLE_IDP_FEATURE %>
+      <tr>
+        <td><var>verify-single-idp-journey</var></td>
+        <td>Mae'r cwci hwn yn dweud wrthym eich bod wedi cael eich cyfeirio'n uniongyrchol gan ddarparwr hunaniaeth. Mae'n dweud wrthym pa ddarparwr sydd wedi eich cyfeirio, ac yn rhoi dynodwr unigryw yn ôl i'r darparwr hwnnw.</td>
+        <td>90 munud</td>
+      </tr>
+    <% end %>
     <tr>
       <td><var>x_verify_locale</var></td>
       <td>Mae hyn yn nodi os ydych yn defnyddio fersiwn Saesneg neu Gymraeg o GOV.UK Verify. Rydym yn defnyddio hyn i ddangos y safle i chi yn eich dewis iaith</td>
