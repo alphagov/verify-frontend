@@ -81,7 +81,7 @@ module FeatureHelper
   end
 
   def set_session_and_session_cookies!(cookie_hash: create_cookie_hash, session: default_session)
-    set_cookies!(create_cookie_hash)
+    set_cookies!(cookie_hash)
     set_session!(session)
     cookie_hash
   end
@@ -132,11 +132,13 @@ module FeatureHelper
     current_uri.query ? CGI::parse(current_uri.query) : {}
   end
 
-  def set_journey_hint_cookie(entity_id, status = nil, locale = 'en')
+  def set_journey_hint_cookie(entity_id, status = nil, locale = 'en', rp_entity_id = nil)
     visit '/test-journey-hint'
     fill_in 'entity-id', with: entity_id
     fill_in 'status', with: status
     fill_in 'locale', with: locale
+    fill_in 'rp-entity-id', with: rp_entity_id
+
     click_button 'journey-hint-post'
   end
 
@@ -154,6 +156,7 @@ private
       verify_session_id: default_session_id,
       requested_loa: 'LEVEL_2',
       transaction_entity_id: 'http://www.test-rp.gov.uk/SAML2/MD',
+      transaction_homepage: 'http://www.test-rp.gov.uk/',
       selected_answers: { device_type: { device_type_other: true } },
     }
   end
@@ -165,6 +168,7 @@ private
         verify_session_id: default_session_id,
         requested_loa: 'LEVEL_2',
         transaction_entity_id: 'http://www.test-rp.gov.uk/SAML2/MD',
+        transaction_homepage: 'http://www.test-rp.gov.uk/',
         selected_answers: { documents: { driving_licence: false }, device_type: { device_type_other: true } },
     }
   end

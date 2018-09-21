@@ -20,8 +20,8 @@ RSpec.describe 'When the user visits the other ways to access page' do
     visit "/ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth"
 
     expect(page).to have_title t('hub.other_ways_title', locale: :cy)
-    expect(page).to have_content t('hub.other_ways_heading', locale: :cy, other_ways_description: t('rps.test-rp.name'))
+    expect(page).to have_content t('hub.other_ways_heading', locale: :cy, other_ways_description: t('rps.test-rp.name', locale: :cy))
 
-    expect(page.body).to include t('rps.test-rp.other_ways_text')
+    expect(page.body).to include t('rps.test-rp.other_ways_text', locale: :cy)
   end
 end

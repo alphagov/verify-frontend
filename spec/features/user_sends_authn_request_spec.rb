@@ -15,7 +15,7 @@ describe 'user sends authn requests' do
 
       expect(page.get_rack_session['transaction_simple_id']).to eql 'test-rp'
       expect(page.get_rack_session['verify_session_id']).to eql default_session_id
-      expect(page.get_rack_session['transaction_homepage']).to eql 'www.example.com'
+      expect(page.get_rack_session['transaction_homepage']).to eql 'http://www.test-rp.gov.uk/'
       expect(page.get_rack_session['requested_loa']).to eql 'LEVEL_1'
 
       cookies = Capybara.current_session.driver.browser.rack_mock_session.cookie_jar
