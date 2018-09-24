@@ -24,6 +24,14 @@ describe AuthnResponseController do
       include_examples 'idp_authn_response', 'sign_in', 'FAILED', 'Failure - SIGN_IN_WITH_IDP', :failed_sign_in_path
     end
 
+    context 'resuming' do
+      include_examples 'idp_authn_response', 'resuming', 'SUCCESS', 'Success - RESUME_WITH_IDP at LOA LEVEL_1', :response_processing_path
+      include_examples 'idp_authn_response', 'resuming', 'CANCEL', 'Cancel - RESUME_WITH_IDP', :start_path
+      include_examples 'idp_authn_response', 'resuming', 'FAILED_UPLIFT', 'Failed Uplift - RESUME_WITH_IDP', :failed_uplift_path
+      include_examples 'idp_authn_response', 'resuming', 'PENDING', 'Paused - RESUME_WITH_IDP', :paused_registration_path
+      include_examples 'idp_authn_response', 'resuming', 'FAILED', 'Failure - RESUME_WITH_IDP', :failed_sign_in_path
+    end
+
     it 'when relay state does not equal session id in the idp response' do
       set_session_and_cookies_with_loa('LEVEL_1')
       session[:verify_session_id] = 'non-existent'

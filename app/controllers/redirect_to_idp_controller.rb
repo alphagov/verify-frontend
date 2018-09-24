@@ -23,6 +23,14 @@ class RedirectToIdpController < ApplicationController
     render :redirect_to_idp
   end
 
+  def resume
+    request_form
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik
+    FEDERATION_REPORTER.report_idp_resume_journey_selection(current_transaction, request, session[:selected_idp_name])
+    render :redirect_to_idp
+  end
+
   def single_idp
     uuid = MultiJson.load(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).fetch('uuid', nil)
     request_form_for_single_idp_journey(uuid)

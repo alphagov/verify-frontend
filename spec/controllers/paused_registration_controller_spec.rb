@@ -79,7 +79,7 @@ describe PausedRegistrationController do
       }
 
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
-      expect(subject).to render_template(:resume_with_idp)
+      expect(subject).to render_template(:resume)
     end
 
     it 'redirects to start page when invalid/disabled IDP present in cookie' do

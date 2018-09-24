@@ -123,6 +123,14 @@ module Analytics
       )
     end
 
+    def report_idp_resume_journey_selection(current_transaction, request, idp_display_name)
+      report_action(
+        current_transaction,
+        request,
+        "Resume - #{idp_display_name}"
+      )
+    end
+
     def report_sign_in_idp_selection_after_journey_hint(current_transaction, request, idp_display_name, hint_followed)
       report_action(
         current_transaction,
