@@ -15,6 +15,8 @@ class AuthnResponseController < SamlController
   FAILED_UPLIFT = 'FAILED_UPLIFT'
   PENDING = 'PENDING'
   OTHER = 'OTHER'
+  SINGLE_IDP_JOURNEY_TYPE = 'single-idp'
+  RESUMING_JOURNEY_TYPE = 'resuming'
 
   ACCEPTED_IDP_RESPONSES = [SUCCESS, CANCEL, FAILED_UPLIFT, PENDING].freeze
   ACCEPTED_COUNTRY_RESPONSES = [SUCCESS, CANCEL, FAILED_UPLIFT].freeze
@@ -80,9 +82,9 @@ private
   def user_state(response)
     return REGISTERING_STATE if response.is_registration
     case session[:journey_type]
-    when 'resuming'
+    when RESUMING_JOURNEY_TYPE
       RESUMING_STATE
-    when 'single-idp'
+    when SINGLE_IDP_JOURNEY_TYPE
       SINGLE_IDP_STATE
     else
       SIGNING_IN_STATE
@@ -96,8 +98,20 @@ private
       CANCEL => is_registration ? cancelled_registration_path : start_path,
       FAILED_UPLIFT => failed_uplift_path,
       PENDING => paused_registration_path,
-      FAILED => is_registration ? failed_registration_path : failed_sign_in_path
+      FAILED => failed_page_redirects(is_registration)
     }.fetch(status)
+  end
+
+  def failed_page_redirects(is_registration)
+    if is_registration || journey_type?(SINGLE_IDP_JOURNEY_TYPE)
+      failed_registration_path
+    else
+      failed_sign_in_path
+    end
+  end
+
+  def journey_type?(journey_type)
+    session[:journey_type] == journey_type
   end
 
   def country_redirects(status, response)
