@@ -42,6 +42,7 @@ cy:
     response_processing: prosesu-ymateb
     redirect_to_idp_sign_in: ailgyfeirio-i-idp/mewngofnodi
     redirect_to_idp_register: ailgyfeirio-i-idp/cofrestru
+    redirect_to_idp_resume: ailgyfeirio-i-idp/ailddechrau
     redirect_to_service_signing_in: ailgyfeirio-i-gwasanaeth/mewngofnodi
     redirect_to_service_start_again: ailgyfeirio-i-gwasanaeth/dechrau-eto
     redirect_to_service_error: ailgyfeirio-i-gwasanaeth/gwall

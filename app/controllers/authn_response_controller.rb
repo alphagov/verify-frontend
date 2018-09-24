@@ -7,6 +7,8 @@ class AuthnResponseController < SamlController
 
   SIGNING_IN_STATE = 'SIGN_IN_WITH_IDP'
   REGISTERING_STATE = 'REGISTER_WITH_IDP'
+  RESUMING_STATE = 'RESUME_WITH_IDP'
+  SINGLE_IDP_STATE = 'SINGLE_IDP'
   SUCCESS = 'SUCCESS'
   CANCEL = 'CANCEL'
   FAILED = 'FAILED'
@@ -76,7 +78,15 @@ private
   end
 
   def user_state(response)
-    response.is_registration ? REGISTERING_STATE : SIGNING_IN_STATE
+    return REGISTERING_STATE if response.is_registration
+    case session[:journey_type]
+    when 'resuming'
+      RESUMING_STATE
+    when 'single-idp'
+      SINGLE_IDP_STATE
+    else
+      SIGNING_IN_STATE
+    end
   end
 
   def idp_redirects(status, response)

@@ -57,6 +57,16 @@ module IdpSelectionPartialController
     render json: idp_request
   end
 
+  def ajax_idp_redirection_resume_journey_request
+    increase_attempt_number
+    report_user_idp_attempt_to_piwik
+    FEDERATION_REPORTER.report_idp_resume_journey_selection(current_transaction, request, session[:selected_idp_name])
+
+    outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
+    idp_request = idp_request_initilization(outbound_saml_message)
+    render json: idp_request
+  end
+
   def report_user_idp_attempt_to_piwik
     FEDERATION_REPORTER.report_user_idp_attempt(
       current_transaction: current_transaction,

@@ -2,13 +2,13 @@ require 'partials/user_cookies_partial_controller'
 require 'partials/journey_hinting_partial_controller'
 require 'partials/viewable_idp_partial_controller'
 require 'partials/retrieve_federation_data_partial_controller'
-
-
+require 'partials/idp_selection_partial_controller'
 
 class PausedRegistrationController < ApplicationController
   include JourneyHintingPartialController
   include ViewableIdpPartialController
   include RetrieveFederationDataPartialController
+  include IdpSelectionPartialController
 
   # Validate the session manually within the action, as we don't want the normal 'no session' page.
   skip_before_action :validate_session, except: :resume
@@ -31,7 +31,24 @@ class PausedRegistrationController < ApplicationController
     if @idp.nil?
       redirect_to start_path
     else
-      render :resume_with_idp
+      journey_type = 'resuming'
+      session[:journey_type] = journey_type
+      set_additional_piwik_custom_variable(:journey_type, journey_type.upcase)
+      render :resume
+    end
+  end
+
+  def resume_with_idp
+    select_viewable_idp_for_sign_in(params.fetch('entity_id')) do |decorated_idp|
+      select_resume(decorated_idp.entity_id, decorated_idp.display_name)
+      redirect_to redirect_to_idp_resume_path
+    end
+  end
+
+  def resume_with_idp_ajax
+    select_viewable_idp_for_sign_in(params.fetch('entityId')) do |decorated_idp|
+      select_resume(decorated_idp.entity_id, decorated_idp.display_name)
+      ajax_idp_redirection_resume_journey_request
     end
   end
 
@@ -55,8 +72,7 @@ private
   end
 
   def with_cookie
-    selected_rp = get_rp_details(last_rp)
-    set_transaction_from_cookie(selected_rp)
+    set_transaction_from_cookie
     enabled_idp_list = get_idp_list(last_rp)
     idp = get_idp_choice(enabled_idp_list, last_idp)
     @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
@@ -72,7 +88,8 @@ private
     }
   end
 
-  def set_transaction_from_cookie(selected_rp)
+  def set_transaction_from_cookie
+    selected_rp = get_rp_details(last_rp)
     @transaction = {
       name: get_translated_service_name(selected_rp.simple_id),
       homepage: selected_rp.transaction_homepage,
@@ -97,5 +114,11 @@ private
 
   def preferred_start_page(selected_rp)
     selected_rp.headless_startpage.nil? ? selected_rp.transaction_homepage : selected_rp.headless_startpage
+  end
+
+  def select_resume(entity_id, idp_name)
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'])
+    set_attempt_journey_hint(entity_id)
+    session[:selected_idp_name] = idp_name
   end
 end

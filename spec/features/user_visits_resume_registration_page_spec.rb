@@ -36,6 +36,9 @@ RSpec.describe 'When the user visits the resume registration page and' do
       expect(page).to have_content t('hub.paused_registration.resume.heading', display_name: idp_display_name)
       expect(page).to have_button t('hub.paused_registration.resume.continue', display_name: idp_display_name)
       expect(page).to have_content t('hub.paused_registration.resume.alternative_other_ways', service_name: service_name)
+
+      piwik_custom_variable_resuming_journey = '{"index":3,"name":"JOURNEY_TYPE","value":"RESUMING","scope":"visit"}'
+      expect(page).to have_content(piwik_custom_variable_resuming_journey)
     end
   end
 
@@ -47,9 +50,9 @@ RSpec.describe 'When the user visits the resume registration page and' do
 
       click_button t('hub.paused_registration.resume.continue', display_name: idp_display_name)
 
-      expect(page).to have_current_path(redirect_to_idp_sign_in_path)
+      expect(page).to have_current_path(redirect_to_idp_resume_path)
       expect(select_idp_stub_request).to have_been_made.once
-      expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name}")).to have_been_made.once
+      expect(stub_piwik_request('action_name' => "Resume - #{idp_display_name}")).to have_been_made.once
     end
   end
 
@@ -58,10 +61,10 @@ RSpec.describe 'When the user visits the resume registration page and' do
       visit '/resume-registration'
       select_idp_stub_request
       stub_session_idp_authn_request(originating_ip, location, false)
-      expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
+      expect_any_instance_of(PausedRegistrationController).to receive(:resume_with_idp_ajax).and_call_original
 
       click_button t('hub.paused_registration.resume.continue', display_name: idp_display_name)
-      expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name}")).to have_been_made.once
+      expect(stub_piwik_request('action_name' => "Resume - #{idp_display_name}")).to have_been_made.once
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")

@@ -12,6 +12,7 @@ shared_examples 'idp_authn_response' do |journey_hint, idp_result, piwik_action,
     stub_const('SAML_PROXY_API', saml_proxy_api)
     set_session_and_cookies_with_loa('LEVEL_1')
     set_selected_idp(selected_entity)
+    session[:journey_type] = journey_hint if journey_hint == 'resuming'
   end
 
   it "should redirect to #{redirect_path} on #{idp_result}" do

@@ -12,6 +12,13 @@ module AnalyticsPartialController
     custom_variables_for_img_tracker
   end
 
+  def set_additional_piwik_custom_variable(key, value)
+    @piwik_custom_variables.push(Analytics::CustomVariable.build_for_js_client(key, value))
+
+    @piwik_custom_variables_img_tracker =
+      @piwik_custom_variables_img_tracker.merge(Analytics::CustomVariable.build(key, value))
+  end
+
   def delete_new_visit_flag
     http_redirect = 302
     http_see_other = 303
