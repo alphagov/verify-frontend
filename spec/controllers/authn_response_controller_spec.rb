@@ -156,5 +156,16 @@ describe AuthnResponseController do
       }
       it { should eq cookie_with_pending_status }
     end
+
+    context 'receiving status with no single idp cookie set will not error' do
+      let(:status) { 'PENDING' }
+      let(:cookie_with_pending_status) {
+        { STATE: { IDP: 'http://idcorp.com',
+                   RP: 'http://www.test-rp.gov.uk/SAML2/MD',
+                   STATUS: 'PENDING' } }.to_json
+      }
+      it { should eq cookie_with_pending_status }
+      it { expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be_nil }
+    end
   end
 end
