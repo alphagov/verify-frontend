@@ -42,10 +42,7 @@ Rails.application.config.after_initialize do
   DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
   TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
 
-  SERVICE_LIST_DATA_CORRELATOR = Display::Rp::ServiceListDataCorrelator.new(
-    RP_DISPLAY_REPOSITORY,
-    rps_name_and_homepage.clone
-  )
+  SERVICE_LIST_DATA_CORRELATOR = Display::Rp::ServiceListDataCorrelator.new(RP_DISPLAY_REPOSITORY)
 
   # IDP Config
   IDP_CONFIG = YAML.load_file(CONFIG.idp_config)
