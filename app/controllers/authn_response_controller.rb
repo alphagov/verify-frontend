@@ -50,6 +50,7 @@ private
   def handle_idp_response(status, response)
     analytics_reporters(status, response)
     set_journey_status(status)
+    clear_single_idp_cookie
     redirect_to idp_redirects(status, response)
   end
 
@@ -108,5 +109,9 @@ private
       FAILED_UPLIFT => failed_uplift_path,
       FAILED => is_registration ? failed_registration_path : failed_country_sign_in_path
     }.fetch(status)
+  end
+
+  def clear_single_idp_cookie
+    cookies.delete CookieNames::VERIFY_SINGLE_IDP_JOURNEY
   end
 end
