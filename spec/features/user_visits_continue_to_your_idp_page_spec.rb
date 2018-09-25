@@ -27,13 +27,15 @@ RSpec.describe 'When the user visits the continue to your IDP page' do
       stub_api_idp_list_for_single_idp_journey
     end
 
-    it 'includes the appropriate feedback source and page title' do
+    it 'includes the appropriate feedback source, page title and piwik custom variable' do
       set_single_idp_journey_cookie
       visit '/continue-to-your-idp'
 
       expect(page).to have_current_path('/continue-to-your-idp')
       expect(page).to have_title t('hub.single_idp_journey.title', display_name: idp_display_name)
       expect_feedback_source_to_be(page, 'CONTINUE_TO_YOUR_IDP_PAGE', '/continue-to-your-idp')
+      piwik_custom_variable_single_idp_journey = '{"index":3,"name":"JOURNEY_TYPE","value":"SINGLE_IDP","scope":"visit"}'
+      expect(page).to have_content(piwik_custom_variable_single_idp_journey)
     end
 
     it 'supports the welsh language' do
