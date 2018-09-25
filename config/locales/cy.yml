@@ -383,13 +383,7 @@ cy:
       title: Methu dilysu eich hunaniaeth
       heading: Roedd %{idp_name} yn methu dilysu eich hunaniaeth
       try_another_company: Rhowch gynnig ar gwmni ardystiedig arall
-      reasons_html: |
-        <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
-        <ul class="list list-bullet">
-          <li>nid yw eich ateb i gwestiwn yn cyd fynd a chofnodion ar-lein</li>
-          <li>rydych yn ddiweddar wedi cael newid yn eich amgylchiadau, ac nid ydynt wedi cael eu diweddaru ar-lein</li>
-          <li>Nid oes gan %{idp_name} fynediad i ddigon o wybodaeth amdanoch chi</li>
-        </ul>
+      reasons_html: You can still %{service_name}
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
       what_to_do_next: Beth i’w wneud nesaf
       problems_verifying_your_identity: Problemau gyda dilysu eich hunaniaeth
