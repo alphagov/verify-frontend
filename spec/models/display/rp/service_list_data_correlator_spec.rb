@@ -45,7 +45,7 @@ module Display
       let(:rp_display_repository) { instance_double("Display::RpDisplayRepository") }
 
       let(:service_list_data_correlator) do
-        ServiceListDataCorrelator.new(rp_display_repository, [public_simple_id])
+        ServiceListDataCorrelator.new(rp_display_repository)
       end
 
       let(:display_data_1) do
@@ -92,22 +92,14 @@ module Display
               'entityId' => entityId_4
           },
         ]
-        correlator = ServiceListDataCorrelator.new(
-          rp_display_repository,
-          [
-            public_simple_id_4,
-            public_simple_id_2,
-            public_simple_id,
-            public_simple_id_3
-          ]
-        )
+        correlator = ServiceListDataCorrelator.new(rp_display_repository)
         actual_result = correlator.correlate(transaction_data)
         expected_result = [
           ServiceListDataCorrelator::Transaction.new(
-            transaction_4_name,
-            expected_public_simple_id_4_loa,
-            public_taxon_4,
-            entityId_4
+            transaction_a_name,
+            expected_public_simple_id_loa,
+            public_taxon,
+            entityId
           ),
           ServiceListDataCorrelator::Transaction.new(
             transaction_2_name,
@@ -116,16 +108,16 @@ module Display
             entityId_2
           ),
           ServiceListDataCorrelator::Transaction.new(
-            transaction_a_name,
-            expected_public_simple_id_loa,
-            public_taxon,
-            entityId
-          ),
-          ServiceListDataCorrelator::Transaction.new(
             transaction_3_name,
             expected_public_simple_id_3_loa,
             public_taxon_3,
             entityId_3
+          ),
+          ServiceListDataCorrelator::Transaction.new(
+            transaction_4_name,
+            expected_public_simple_id_4_loa,
+            public_taxon_4,
+            entityId_4
           )
         ]
         expect(actual_result).to eq expected_result
