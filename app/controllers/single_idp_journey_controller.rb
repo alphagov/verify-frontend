@@ -13,8 +13,8 @@ class SingleIdpJourneyController < ApplicationController
   include RetrieveFederationDataPartialController
 
   protect_from_forgery except: :redirect_from_idp
-  skip_before_action :validate_session, except: %i[index continue continue_ajax]
-  skip_before_action :set_piwik_custom_variables, except: %i[index continue continue_ajax]
+  skip_before_action :validate_session, only: :redirect_from_idp
+  skip_before_action :set_piwik_custom_variables, only: :redirect_from_idp
 
   def continue_to_your_idp
     if valid_cookie? && valid_selection?
@@ -22,6 +22,7 @@ class SingleIdpJourneyController < ApplicationController
       @service_name = current_transaction.name
       @uuid = single_idp_cookie.fetch('uuid', nil)
       session[:journey_type] = 'single-idp'
+      set_additional_piwik_custom_variable(:journey_type, 'SINGLE_IDP')
       render
     else
       redirect_to start_path
