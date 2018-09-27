@@ -132,12 +132,13 @@ module FeatureHelper
     current_uri.query ? CGI::parse(current_uri.query) : {}
   end
 
-  def set_journey_hint_cookie(entity_id, status = nil, locale = 'en', rp_entity_id = nil)
+  def set_journey_hint_cookie(entity_id, status = nil, locale = 'en', rp_entity_id = nil, resume_link_entity_id = nil)
     visit '/test-journey-hint'
     fill_in 'entity-id', with: entity_id
     fill_in 'status', with: status
     fill_in 'locale', with: locale
     fill_in 'rp-entity-id', with: rp_entity_id
+    fill_in 'resume-link-simple-id', with: resume_link_entity_id
 
     click_button 'journey-hint-post'
   end

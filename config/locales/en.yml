@@ -58,6 +58,7 @@ en:
     confirming_it_is_you: confirming-it-is-you
     paused_registration: paused
     resume_registration: resume-registration
+    paused_registration_resume_link: paused/:idp
   title:
     error: Error
   navigation:
@@ -538,6 +539,17 @@ en:
           <ul class="list list-bullet">
             <li>go back to the service you were using</li>
             <li>check for an email from the identity provider you chose</li>
+            <li>bookmark this page</li>
+          </ul>
+          <p>You'll need the email or username and password you used to create an account.</p>
+      from_resume_link:
+        title: "Verification Paused %{idp_name} - Link"
+        heading: "Your %{idp_name} identity account has been saved"
+        restart_instructions_html: |
+          <p>To return you can:</p>
+          <ul class="list list-bullet">
+            <li>go back to the service you were using</li>
+            <li>check for an email from %{idp_name}</li>
             <li>bookmark this page</li>
           </ul>
           <p>You'll need the email or username and password you used to create an account.</p>
