@@ -1,7 +1,7 @@
 require 'feature_helper'
 require 'api_test_helper'
 
-RSpec.describe 'When the user visits the select phone page' do
+RSpec.describe 'When the user visits the Verify will not work for you page' do
   before(:each) do
     set_session_and_session_cookies!
     page.set_rack_session(transaction_simple_id: 'test-rp')
@@ -13,18 +13,18 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   it 'displays the page in English' do
-    visit '/no-mobile-phone'
+    visit '/verify-will-not-work-for-you'
     expect(page).to have_css 'html[lang=en]'
   end
 
   it 'includes the appropriate feedback source' do
-    visit '/no-mobile-phone'
+    visit '/verify-will-not-work-for-you'
 
-    expect_feedback_source_to_be(page, 'NO_MOBILE_PHONE', '/no-mobile-phone')
+    expect_feedback_source_to_be(page, 'VERIFY_WILL_NOT_WORK_FOR_YOU', '/verify-will-not-work-for-you')
   end
 
   it 'includes other ways text' do
-    visit '/no-mobile-phone'
+    visit '/verify-will-not-work-for-you'
 
     expect(page).to have_content('If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile here')
     expect(page).to have_content('register for an identity profile')
