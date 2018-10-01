@@ -27,7 +27,7 @@ class FeedbackSourceMapper
       'SELECT_DOCUMENTS_PAGE_PHOTO_DOCUMENTS' => 'select_documents',
       'UNLIKELY_TO_VERIFY_PAGE' => 'unlikely_to_verify',
       'SELECT_PHONE_PAGE' => 'select_phone',
-      'NO_MOBILE_PHONE' => 'no_mobile_phone',
+      'VERIFY_WILL_NOT_WORK_FOR_YOU' => 'verify_will_not_work_for_you',
       'SIGN_IN_PAGE' => 'sign_in',
       'START_PAGE' => 'start',
       'COOKIES_INFO_PAGE' => 'cookies',

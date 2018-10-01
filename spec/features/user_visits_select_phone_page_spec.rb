@@ -116,7 +116,7 @@ RSpec.describe 'When the user visits the select phone page' do
       choose 'select_phone_form_mobile_phone_false', allow_label_click: true
       click_button t('navigation.continue')
 
-      expect(page).to have_current_path(no_mobile_phone_path)
+      expect(page).to have_current_path(verify_will_not_work_for_you_path)
       expect(page.get_rack_session['selected_answers']).to eql(
         'device_type' => { 'device_type_other' => true },
         'phone' => { 'mobile_phone' => false }

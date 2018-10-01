@@ -32,7 +32,7 @@ describe SelectPhoneController do
                                    'entityId' => 'http://idcorp.com',
                                    'levelsOfAssurance' => %w(LEVEL_2) }], 'LEVEL_2')
 
-      expect(subject).to redirect_to('/no-mobile-phone')
+      expect(subject).to redirect_to('/verify-will-not-work-for-you')
     end
 
     it 'captures form values in session cookie' do

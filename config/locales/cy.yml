@@ -15,7 +15,7 @@ cy:
     other_identity_documents: dogfennau-hunaniaeth-eraill
     select_phone: dewis-ffon
     will_it_work_for_me: a-fydd-yn-gweithio-i-mi
-    no_mobile_phone: dim-ffon-symudol
+    verify_will_not_work_for_you: dim-ffon-symudol
     may_not_work_if_you_live_overseas: efallai-na-fydd-yn-gweithio-os-ydych-yn-byw-dramor
     why_might_this_not_work_for_me: pam-efallai-na-fydd-hyn-yn-gweithio-i-mi
     will_not_work_without_uk_address: ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du
@@ -263,7 +263,7 @@ cy:
       heading: Ni all %{idp_name} cadarnhau pwy ydych chi
       choose_another_company: Mae'n rhaid i chi ddewis cwmni ardystiedig wahanol i wirio eich hunaniaeth.
       choose_another_certified_company_link: Dewiswch gwmni arall
-    no_mobile_phone:
+    verify_will_not_work_for_you:
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
       content_html: |
         <p>Rydych angen ffôn neu lechen i ddefnyddio GOV.UK Verify. Os nad oes gennych un o’r rhain, mae ffyrdd eraill y gallwch %{other_ways_description}.</p>
