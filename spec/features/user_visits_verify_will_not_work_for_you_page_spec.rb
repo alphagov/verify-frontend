@@ -26,8 +26,8 @@ RSpec.describe 'When the user visits the Verify will not work for you page' do
   it 'includes other ways text' do
     visit '/verify-will-not-work-for-you'
 
-    expect(page).to have_content('If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile here')
-    expect(page).to have_content('register for an identity profile')
+    expect(page).to have_content('If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys here')
+    expect(page).to have_content('test GOV.UK Verify user journeys')
     expect(page).to have_link 'here', href: 'http://www.example.com'
   end
 end

@@ -4,7 +4,7 @@ require 'piwik_test_helper'
 
 RSpec.describe 'When the user visits the resume registration page and' do
   let(:idp_display_name) { 'IDCorp' }
-  let(:service_name) { 'register for an identity profile' }
+  let(:service_name) { 'test GOV.UK Verify user journeys' }
   let(:rp_entity_id) { 'http://www.test-rp.gov.uk/SAML2/MD' }
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   let(:idp_entity_id) { 'http://idcorp.com' }

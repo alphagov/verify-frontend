@@ -94,7 +94,7 @@ RSpec.describe 'When the user visits the choose a country page' do
     given_a_session_supporting_eidas
 
     visit '/choose-a-country'
-    click_on t('hub.choose_a_country.country_not_listed_link', other_ways_description: 'register for an identity profile')
+    click_on t('hub.choose_a_country.country_not_listed_link', other_ways_description: 'test GOV.UK Verify user journeys')
 
     expect(page).to have_current_path('/other-ways-to-access-service')
   end

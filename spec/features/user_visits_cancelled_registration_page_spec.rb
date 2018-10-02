@@ -15,7 +15,7 @@ RSpec.describe 'When user visits cancelled registration page' do
     visit('/cancelled-registration')
 
     expect(page).to have_title t('hub.cancelled_registration.title')
-    expect(page).to have_link('Find out the other ways to register for an identity profile', href: other_ways_to_access_service_path)
+    expect(page).to have_link('Find out the other ways to test GOV.UK Verify user journeys', href: other_ways_to_access_service_path)
     expect(page).to have_link t('hub.cancelled_registration.options.verify_with_another_company'), href: choose_a_certified_company_path
     expect(page).to have_link t('hub.cancelled_registration.options.verify_using_other_documents'), href: select_documents_path
     expect(page).to have_link t('hub.cancelled_registration.options.contact_verify'), href: "#{feedback_path}?feedback-source=CANCELLED_REGISTRATION"
@@ -27,7 +27,7 @@ RSpec.describe 'When user visits cancelled registration page' do
     visit('/cancelled-registration')
 
     expect(page).to have_title t('hub.cancelled_registration.title')
-    expect(page).to have_link('Find out the other ways to register for an identity profile', href: other_ways_to_access_service_path)
+    expect(page).to have_link('Find out the other ways to test GOV.UK Verify user journeys', href: other_ways_to_access_service_path)
     expect(page).to have_link t('hub.cancelled_registration.options.verify_with_another_company'), href: choose_a_certified_company_path
     expect(page).to have_link t('hub.cancelled_registration.options.contact_verify'), href: "#{feedback_path}?feedback-source=CANCELLED_REGISTRATION"
 

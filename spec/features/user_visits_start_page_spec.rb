@@ -36,7 +36,7 @@ RSpec.describe 'When the user visits the start page' do
       expect(page).to have_content t('errors.no_cookies.enable_cookies')
       expect(page).to have_http_status :forbidden
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=COOKIE_NOT_FOUND_PAGE'
-      expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
+      expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
     end
 
     it 'will display the generic error when start time is missing from session' do
@@ -100,7 +100,7 @@ RSpec.describe 'When the user visits the start page' do
       page.set_rack_session(start_time: expired_start_time)
       visit '/start'
       expect(page).to have_content t('hub.transaction_list.title')
-      expect(page).to have_link 'register for an identity profile', href: 'http://localhost:50130/test-rp'
+      expect(page).to have_link 'test GOV.UK Verify user journeys', href: 'http://localhost:50130/test-rp'
       expect(page).to have_http_status :bad_request
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=EXPIRED_ERROR_PAGE'
     end

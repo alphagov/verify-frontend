@@ -36,6 +36,6 @@ RSpec.describe 'When the user visits the prove identity page' do
     expect(page).to have_content t('errors.no_cookies.enable_cookies')
     expect(page).to have_http_status :forbidden
     expect(page).to have_link 'feedback', href: '/feedback?feedback-source=COOKIE_NOT_FOUND_PAGE'
-    expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
+    expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
   end
 end

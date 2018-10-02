@@ -11,7 +11,7 @@ RSpec.describe 'user encounters error page' do
     click_button "saml-post"
     expect(page).to have_content t('errors.something_went_wrong.heading')
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
-    expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
+    expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
   end
 
   it 'will present the user with no list of transactions if we cant read the errors' do
@@ -113,7 +113,7 @@ RSpec.describe 'user encounters error page' do
       visit sign_in_path
       click_button 'IDCorp'
       expect(page).to have_content t('errors.something_went_wrong.heading')
-      expect(page).to have_link "register for an identity profile", href: "http://localhost:50130/test-rp"
+      expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
       expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
       expect(page.status_code).to eq(500)
     end

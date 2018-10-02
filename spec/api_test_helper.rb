@@ -59,31 +59,31 @@ module ApiTestHelper
 
   def stub_translations
     en_translation_data = '{
-        "name":"register for an identity profile",
+        "name":"test GOV.UK Verify user journeys",
         "rpName":"Test RP",
         "analyticsDescription":"analytics description for test-rp",
-        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
-        "otherWaysDescription":"register for an identity profile",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"test GOV.UK Verify user journeys",
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
         "taxonName":"Benefits"
       }'
     stub_request(:get, api_translations_endpoint('test-rp', 'en')).to_return(body: en_translation_data, status: 200)
     cy_translation_data = '{
-        "name":"Welsh register for an identity profile",
+        "name":"Welsh test GOV.UK Verify user journeys",
         "rpName":"Welsh Test RP",
         "analyticsDescription":"analytics description for test-rp",
-        "otherWaysText":"<p>Welsh If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
-        "otherWaysDescription":"Welsh register for an identity profile",
+        "otherWaysText":"<p>Welsh If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"Welsh test GOV.UK Verify user journeys",
         "tailoredText":"Welsh External data source: EN: This is tailored text for test-rp",
         "taxonName":"Welsh Benefits"
       }'
     stub_request(:get, api_translations_endpoint('test-rp', 'cy')).to_return(body: cy_translation_data, status: 200)
     test_rp_noc3_translations = '{
-        "name":"Register for an identity profile (forceauthn & no cycle3)",
+        "name":"Test GOV.UK Verify user journeys (forceauthn & no cycle3)",
         "rpName":"Test RP",
         "analyticsDescription":"analytics description for test-rp",
-        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
-        "otherWaysDescription":"register for an identity profile",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"test GOV.UK Verify user journeys",
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
         "taxonName":"Benefits"
       }'
@@ -96,11 +96,11 @@ module ApiTestHelper
     stub_request(:get, api_translations_endpoint('test-rp-no-ab-test', 'en')).to_return(body: en_translation_data, status: 200)
     stub_request(:get, api_translations_endpoint('test-rp-no-ab-test', 'cy')).to_return(body: '{}', status: 200)
     stub_request(:get, api_translations_endpoint('test-rp-no-demo', 'en')).to_return(body: '{
-        "name":"register for an identity profile",
+        "name":"test GOV.UK Verify user journeys",
         "rpName":"Test RP",
         "analyticsDescription":"analytics description for test-rp",
-        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
-        "otherWaysDescription":"register for an identity profile",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"test GOV.UK Verify user journeys",
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
         "taxonName":"Benefits",
         "customFailHeading":"This is a custom fail page.",
@@ -111,11 +111,11 @@ module ApiTestHelper
         "customFailContactDetailsIntro":"This is custom contact details."
       }', status: 200)
     stub_request(:get, api_translations_endpoint('test-rp-no-demo', 'cy')).to_return(body: '{
-        "name":"Register for an identity profile (forceauthn & no cycle3)",
+        "name":"Test GOV.UK Verify user journeys (forceauthn & no cycle3)",
         "rpName":"EN: Test RP",
         "analyticsDescription":"analytics description for test-rp",
-        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
-        "otherWaysDescription":"register for an identity profile",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"test GOV.UK Verify user journeys",
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
         "taxonName":"Benefits",
         "customFailHeading":"This is a custom fail page in welsh.",
