@@ -32,7 +32,7 @@ RSpec.describe 'When the user visits the failed sign in page' do
   context '#country' do
     before(:each) do
       stub_countries_list
-      stub_restart_eidas_journey
+      stub_restart_journey
       set_selected_country_in_session(entity_id: 'http://stub-country.uk', simple_id: 'YY', enabled: true)
     end
 

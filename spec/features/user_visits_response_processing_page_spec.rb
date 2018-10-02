@@ -30,7 +30,7 @@ RSpec.describe 'When the user visits the response processing page' do
   it 'should redirect to prove-identity page on matching error for an eIDAS journey' do
     set_selected_country_in_session(simple_id: 'stub-country')
     stub_matching_outcome MatchingOutcomeResponse::SHOW_MATCHING_ERROR_PAGE
-    stub_restart_eidas_journey
+    stub_restart_journey
 
     visit '/response-processing'
     click_on t('hub.response_processing.matching_error.online_link')
