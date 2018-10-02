@@ -23,6 +23,12 @@ module UserSessionPartialController
     session[:transaction_homepage]
   end
 
+  def is_provider_type?(type)
+    selected_provider_data = SelectedProviderData.from_session(session[:selected_provider])
+    return false if selected_provider_data.nil?
+    type == selected_provider_data.journey_type
+  end
+
   def current_selected_provider_data
     selected_provider_data = SelectedProviderData.from_session(session[:selected_provider])
     raise(Errors::WarningLevelError, 'No selected identity provider data in session') if selected_provider_data.nil?
