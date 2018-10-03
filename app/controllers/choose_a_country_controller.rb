@@ -6,7 +6,7 @@ class ChooseACountryController < ApplicationController
   before_action :setup_countries
 
   def choose_a_country
-    POLICY_PROXY.restart_journey(session[:verify_session_id]) if is_provider_type?(JourneyType::VERIFY)
+    restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::EIDAS)
     @other_ways_description = current_transaction.other_ways_description
   end
 

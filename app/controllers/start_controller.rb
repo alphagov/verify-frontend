@@ -3,7 +3,7 @@ class StartController < ApplicationController
   before_action :set_device_type_evidence
 
   def index
-    POLICY_PROXY.restart_journey(session[:verify_session_id]) if is_provider_type?(JourneyType::EIDAS)
+    restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::VERIFY)
     @form = StartForm.new({})
 
     render :start
