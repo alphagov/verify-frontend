@@ -48,7 +48,7 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
 
     it 'includes rp display name in text' do
       visit '/confirm-your-identity'
-      expect(page).to have_text t('hub.confirm_your_identity.need_to_signin_again', transaction_name: 'register for an identity profile')
+      expect(page).to have_text t('hub.confirm_your_identity.need_to_signin_again', transaction_name: 'test GOV.UK Verify user journeys')
     end
 
     it 'should include a link to sign-in in case listed idp is incorrect' do

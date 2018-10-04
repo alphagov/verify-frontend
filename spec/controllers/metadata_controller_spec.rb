@@ -19,7 +19,7 @@ describe MetadataController do
       body.find { |rp| rp['serviceId'] == 'http://www.test-rp.gov.uk/SAML2/MD' }
 
     expect(test_rp_object.nil?).to be false
-    expect(test_rp_object['name']).to eq('register for an identity profile')
+    expect(test_rp_object['name']).to eq('test GOV.UK Verify user journeys')
     expect(test_rp_object['loa']).to eq('LEVEL_2')
     expect(test_rp_object['serviceCategory']).to eq('Benefits')
 
@@ -28,7 +28,7 @@ describe MetadataController do
 
     expect(another_test_rp_object.nil?).to be false
     expect(another_test_rp_object['name'])
-      .to eq('Register for an identity profile (forceauthn & no cycle3)')
+      .to eq('Test GOV.UK Verify user journeys (forceauthn & no cycle3)')
     expect(another_test_rp_object['loa']).to eq('LEVEL_2')
     expect(another_test_rp_object['serviceCategory']).to eq('Benefits')
   end

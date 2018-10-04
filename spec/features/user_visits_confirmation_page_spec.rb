@@ -18,7 +18,7 @@ RSpec.describe 'When user visits the confirmation page' do
     expect(page).to have_link t('hub.feedback.title'), href: '/feedback?feedback-source=CONFIRMATION_PAGE'
     expect(page).to have_title t('hub.confirmation.title')
     expect(page).to have_text t('hub.confirmation.message', display_name: 'IDCorp')
-    expect(page).to have_text t('hub.confirmation.continue_to_rp', transaction_name: 'register for an identity profile')
+    expect(page).to have_text t('hub.confirmation.continue_to_rp', transaction_name: 'test GOV.UK Verify user journeys')
   end
 
   it 'displays the IDP name' do

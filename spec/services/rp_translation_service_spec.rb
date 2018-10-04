@@ -14,11 +14,11 @@ describe 'RpTranslationService' do
 
   it 'should update I18n with translations for a particular transaction in all locales' do
     translations = {
-      name: "register for an identity profile",
+      name: "test GOV.UK Verify user journeys",
       rp_name: "Test RP",
       analytics_description: "analytics description for test-rp",
-      other_ways_text: "<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
-      other_ways_description: "register for an identity profile",
+      other_ways_text: "<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+      other_ways_description: "test GOV.UK Verify user journeys",
       tailored_text: "External data source: EN: This is tailored text for test-rp",
       taxon_name: "Benefits",
       custom_fail_heading: '',
@@ -44,11 +44,11 @@ describe 'RpTranslationService' do
 
   it 'should keep existing translations when config proxy returns an empty hash' do
     translations = {
-        name: "register for an identity profile",
+        name: "test GOV.UK Verify user journeys",
         rp_name: "Test RP",
         analytics_description: "analytics description for test-rp",
-        other_ways_text: "<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
-        other_ways_description: "register for an identity profile",
+        other_ways_text: "<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        other_ways_description: "test GOV.UK Verify user journeys",
         tailored_text: "External data source: EN: This is tailored text for test-rp",
         taxon_name: "Benefits",
         custom_fail_heading: '',
@@ -65,17 +65,17 @@ describe 'RpTranslationService' do
     translation_service.update_rp_translations('test-rp')
     translation_service.update_rp_translations('test-rp')
 
-    expect(I18n.t("rps.test-rp.name")).to eq("register for an identity profile")
+    expect(I18n.t("rps.test-rp.name")).to eq("test GOV.UK Verify user journeys")
     expect(I18n.t("rps.test-rp.rp_name")).to eq("Test RP")
   end
 
   it 'should only update individual translations when config proxy returns partial translations' do
     translations = {
-        name: "register for an identity profile",
+        name: "test GOV.UK Verify user journeys",
         rp_name: "Test RP",
         analytics_description: "analytics description for test-rp",
-        other_ways_text: "<p>If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
-        other_ways_description: "register for an identity profile",
+        other_ways_text: "<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        other_ways_description: "test GOV.UK Verify user journeys",
         tailored_text: "External data source: EN: This is tailored text for test-rp",
         taxon_name: "Benefits",
         custom_fail_heading: '',
@@ -95,7 +95,7 @@ describe 'RpTranslationService' do
     translation_service.update_rp_translations('test-rp')
     translation_service.update_rp_translations('test-rp')
 
-    expect(I18n.t("rps.test-rp.name")).to eq("register for an identity profile")
+    expect(I18n.t("rps.test-rp.name")).to eq("test GOV.UK Verify user journeys")
     expect(I18n.t("rps.test-rp.rp_name")).to eq("Updated Test RP")
   end
 end

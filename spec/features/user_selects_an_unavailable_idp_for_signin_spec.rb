@@ -55,8 +55,8 @@ RSpec.describe 'when user visits sign-in page with an unavailable IDP configured
       expect(page).to have_title t('hub.certified_company_unavailable.title')
       expect(page).to have_link t('hub.certified_company_unavailable.verify_another_company_link'), href: about_certified_companies_path
 
-      expect(page).to have_content 'Other ways to register for an identity profile'
-      expect(page).to have_content 'If you can’t verify your identity using GOV.UK Verify, you can register for an identity profile'
+      expect(page).to have_content 'Other ways to test GOV.UK Verify user journeys'
+      expect(page).to have_content 'If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys'
       expect(page).to have_link 'here', href: 'http://www.example.com'
     end
 

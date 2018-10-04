@@ -26,8 +26,8 @@ RSpec.describe 'When the user visits the about identity accounts page' do
 
     expect(page).to have_content t('hub.about_identity_accounts.summary')
     expect(page).to have_content t('hub.about_identity_accounts.details')
-    expect(page).to have_content 'register for an identity profile'
-    expect(page).to have_content 'Register for an identity profile (forceauthn & no cycle3)'
+    expect(page).to have_content 'test GOV.UK Verify user journeys'
+    expect(page).to have_content 'Test GOV.UK Verify user journeys (forceauthn & no cycle3)'
   end
 
   it 'will go to about choosing a company page when start now is clicked if user on LOA2 journey' do
