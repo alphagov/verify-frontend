@@ -8,9 +8,33 @@ describe StartController do
     set_session_and_cookies_with_loa('LEVEL_2')
   end
 
-  it 'renders LOA2 start page if service is level 2' do
-    get :index, params: { locale: 'en' }
-    expect(subject).to render_template(:start)
+  context 'when rendering start page' do
+    let(:stub_restart_journey_request) { stub_restart_journey }
+
+    it 'renders LOA2 start page if service is level 2' do
+      get :index, params: { locale: 'en' }
+      expect(subject).to render_template(:start)
+      expect(stub_restart_journey_request).to have_not_been_made
+    end
+
+    it 'will not restart journey when IDP selected' do
+      set_selected_idp 'stub-idp'
+
+      get :index, params: { locale: 'en' }
+      expect(subject).to render_template(:start)
+      expect(stub_restart_journey_request).to have_not_been_made
+    end
+
+    it 'will restart journey when it is not Verify' do
+      set_selected_country 'stub-country'
+      stub_restart_journey
+
+      get :index, params: { locale: 'en' }
+
+      expect(subject).to render_template(:start)
+      expect(stub_restart_journey_request).to have_been_made.once
+      expect(session[:selected_provider]).to be_nil
+    end
   end
 
   context 'when form is valid' do

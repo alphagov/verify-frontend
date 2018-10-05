@@ -51,7 +51,8 @@ RSpec.describe 'When the user visits the failed sign in page' do
       visit '/failed-country-sign-in'
       click_on t('hub.failed_country_sign_in.online_link')
 
-      expect(page).to have_current_path(prove_identity_retry_path)
+      expect(page).to have_current_path(prove_identity_path)
+      expect(page.get_rack_session.key?('selected_provider')).to be_falsey
     end
 
     it 'displays the content in Welsh' do

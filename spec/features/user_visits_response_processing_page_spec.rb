@@ -35,7 +35,8 @@ RSpec.describe 'When the user visits the response processing page' do
     visit '/response-processing'
     click_on t('hub.response_processing.matching_error.online_link')
 
-    expect(page).to have_current_path(prove_identity_retry_path)
+    expect(page).to have_current_path(prove_identity_path)
+    expect(page.get_rack_session.key?('selected_provider')).to be_falsey
   end
 
   it 'should redirect to redirect-to-service page on matching error for a Verify (IDP) journey' do
@@ -44,6 +45,6 @@ RSpec.describe 'When the user visits the response processing page' do
 
     visit '/response-processing'
 
-    expect(page).to have_link t('hub.response_processing.matching_error.online_link'), href: '/redirect-to-service/error'
+    expect(page).to have_link t('hub.response_processing.matching_error.online_link'), href: redirect_to_service_error_path
   end
 end
