@@ -499,10 +499,6 @@ cy:
       sorry: Mae'n ddrwg gennym, nid yw %{display_name} ar gael.
       verify_another_company_html: Er mwyn cael mynediad i wasanaethau'r llywodraeth, mae'n rhaid i chi %{link}.
       verify_another_company_link: ddilysu eich hunaniaeth gyda chwmni ardystiedig arall
-    certified_companies_disconnected:
-      title: The following companies no longer provide identity services as part of GOV.UK Verify (WELSH)
-      verify_another_company_html: If you have an identity account with one of these companies, you'll need to %{link} (WELSH).
-      verify_another_company_link: verify your identity with another certified company (WELSH)
     further_information:
       title: Rhowch eich %{cycle_three_name}
       first_time: Hwn yw'r tro cyntaf i chi fewngofnodi.
