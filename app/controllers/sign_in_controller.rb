@@ -18,8 +18,6 @@ class SignInController < ApplicationController
       unavailable_idps.map { |simple_id| IdentityProvider.new('simpleId' => simple_id, 'entityId' => simple_id, 'levelsOfAssurance' => []) }
     )
 
-    @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_disconnected_identity_providers_for_sign_in)
-
     render :index
   end
 
