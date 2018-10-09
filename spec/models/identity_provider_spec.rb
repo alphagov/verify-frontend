@@ -23,4 +23,14 @@ describe IdentityProvider do
     expect(idp).to_not be_valid
     expect(idp.errors.full_messages).to eql ['Levels of assurance can\'t be blank']
   end
+
+  it 'provides authentication by default if no value is supplied' do
+    idp = IdentityProvider.new('simpleId' => 'simpleId1', 'entityId' => 'entityId1')
+    expect(idp.authentication_enabled).to eql true
+  end
+
+  it 'provides no authentication when authentication enabled is set to false' do
+    idp = IdentityProvider.new('simpleId' => 'simpleId1', 'entityId' => 'entityId1', 'authenticationEnabled' => false)
+    expect(idp.authentication_enabled).to eql false
+  end
 end
