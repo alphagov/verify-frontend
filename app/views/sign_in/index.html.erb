@@ -37,3 +37,9 @@
     <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>
   </div>
 </div>
+
+<% if !@disconnected_idps.empty? %>
+  <div class="grid-row">
+    <%= render partial: 'shared/disconnected_idp_list', locals: {disconnected_identity_providers: @disconnected_idps} %>
+  </div>
+<% end %>

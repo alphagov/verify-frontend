@@ -36,7 +36,11 @@ module ViewableIdpPartialController
   end
 
   def current_identity_providers_for_sign_in
-    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps
+    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps.select(&:authentication_enabled)
+  end
+
+  def current_disconnected_identity_providers_for_sign_in
+    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps.reject(&:authentication_enabled)
   end
 
   def current_identity_providers_for_single_idp
