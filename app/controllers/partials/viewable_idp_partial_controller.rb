@@ -43,6 +43,10 @@ module ViewableIdpPartialController
     CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps.reject(&:authentication_enabled)
   end
 
+  def current_identity_providers_for_rp_sign_in(rp_entity_id)
+    CONFIG_PROXY.get_idp_list_for_sign_in(rp_entity_id).idps
+  end
+
   def current_identity_providers_for_single_idp
     CONFIG_PROXY.get_idp_list_for_single_idp(session[:transaction_entity_id]).idps
   end

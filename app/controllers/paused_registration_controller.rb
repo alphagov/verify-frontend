@@ -3,17 +3,19 @@ require 'partials/journey_hinting_partial_controller'
 require 'partials/viewable_idp_partial_controller'
 require 'partials/retrieve_federation_data_partial_controller'
 require 'partials/idp_selection_partial_controller'
+require 'partials/user_cookies_partial_controller'
 
 class PausedRegistrationController < ApplicationController
   include JourneyHintingPartialController
   include ViewableIdpPartialController
   include RetrieveFederationDataPartialController
   include IdpSelectionPartialController
+  include UserCookiesPartialController
 
   # Validate the session manually within the action, as we don't want the normal 'no session' page.
   skip_before_action :validate_session, except: :resume
   skip_before_action :set_piwik_custom_variables, except: :resume
-  layout 'slides', except: :index
+  layout 'slides', only: :resume
 
   def index
     if session_is_valid?
@@ -22,6 +24,21 @@ class PausedRegistrationController < ApplicationController
       with_cookie
     else
       render :without_user_session
+    end
+  end
+
+  def from_resume_link
+    idp_simple_id = params[:idp]
+    if is_resume_link_for_pending_idp?(idp_simple_id)
+      redirect_to paused_registration_path
+    else
+      @idp_display_data = IDP_DISPLAY_REPOSITORY.fetch(idp_simple_id, nil)
+      if @idp_display_data.nil?
+        render :without_user_session
+      else
+        set_resume_link_journey_hint(idp_simple_id)
+        render :from_resume_link
+      end
     end
   end
 
@@ -59,9 +76,12 @@ private
   end
 
   def get_idp_from_cookie
-    last_idp_value = last_idp
-    unless last_idp_value.nil?
-      retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, last_idp_value).first
+    from_resume_link_idp_value = resume_link_idp
+    if from_resume_link_idp_value.nil?
+      last_idp_value = last_idp
+      last_idp_value.nil? ? nil : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, last_idp_value).first
+    else
+      retrieve_decorated_singleton_idp_array_by_simple_id(current_identity_providers_for_sign_in, from_resume_link_idp_value).first
     end
   end
 
@@ -120,5 +140,12 @@ private
     POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'])
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
+  end
+
+  def is_resume_link_for_pending_idp?(idp_simple_id)
+    return false unless is_last_status?(PENDING_STATUS)
+    idp = retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_rp_sign_in(last_rp), last_idp).first
+
+    idp.simple_id == idp_simple_id
   end
 end

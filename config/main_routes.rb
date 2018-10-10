@@ -95,6 +95,7 @@ post 'further_information_null_attribute', to: 'further_information#submit_null_
 get 'no_idps_available', to: 'no_idps_available#index', as: :no_idps_available
 get 'cancelled_registration', to: 'cancelled_registration#index', as: :cancelled_registration
 get 'paused_registration', to: 'paused_registration#index', as: :paused_registration
+get 'paused_registration_resume_link', to: 'paused_registration#from_resume_link', as: :paused_registration_resume_link
 get 'resume_registration', to: 'paused_registration#resume', as: :resume_registration
 post 'resume_registration', to: 'paused_registration#resume_with_idp', as: :resume_registration_submit
 

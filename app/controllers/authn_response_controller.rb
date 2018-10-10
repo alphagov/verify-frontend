@@ -26,6 +26,7 @@ class AuthnResponseController < SamlController
 
     response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params['SAMLResponse'])
     status = response.idp_result
+    remove_resume_link_journey_hint unless journey_hint_value.nil?
 
     return handle_idp_response(status, response) if ACCEPTED_IDP_RESPONSES.include?(status)
     handle_idp_response(FAILED, response)
