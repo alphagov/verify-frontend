@@ -37,10 +37,22 @@ module ApiTestHelper
 
   def stub_transactions_list
     transactions = [
-        { 'simpleId' => 'test-rp', 'serviceHomepage' => 'http://localhost:50130/test-rp', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'test-rp-noc3', 'serviceHomepage' => 'http://localhost:50130/test-rp-noc3', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'headless-rp', 'serviceHomepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'test-rp-with-continue-on-fail', 'serviceHomepage' => 'http://localhost:50130/test-rp-with-continue-on-fail', 'loaList' => ['LEVEL_2'] }
+      {
+        'simpleId' => 'test-rp', 'serviceHomepage' => 'http://localhost:50130/test-rp',
+        'loaList' => ['LEVEL_2'], 'headlessStartpage' => 'http://localhost:50130/success?rp-name=test-rp'
+      },
+      {
+        'simpleId' => 'test-rp-noc3', 'serviceHomepage' => 'http://localhost:50130/test-rp-noc3',
+        'loaList' => ['LEVEL_2'], 'headlessStartpage' => nil
+      },
+      {
+        'simpleId' => 'headless-rp', 'serviceHomepage' => 'http://localhost:50130/headless-rp',
+        'loaList' => ['LEVEL_2'], 'headlessStartpage' => nil
+      },
+      {
+        'simpleId' => 'test-rp-with-continue-on-fail', 'serviceHomepage' => 'http://localhost:50130/test-rp-with-continue-on-fail',
+        'loaList' => ['LEVEL_2'], 'headlessStartpage' => 'http://localhost:50130/success?rp-name=test-rp-with-continue-on-fail'
+      }
     ]
 
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)

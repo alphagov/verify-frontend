@@ -8,6 +8,6 @@
     <p><%= t 'hub.paused_registration.from_resume_link.restart_instructions_html', idp_name: @idp_display_data.name %></p>
 
     <h2 class="heading-medium"><%= t 'hub.transaction_list.title' %></h2>
-    <%= render partial: 'shared/transaction_list' %>
+    <%= render partial: 'shared/transaction_list_prefer_headless_start' %>
   </div>
 </div>
