@@ -63,5 +63,4 @@ Rails.application.config.after_initialize do
   IDP_FEATURE_FLAGS_CHECKER = IdpConfiguration::IdpFeatureFlagsLoader.new(YamlLoader.new)
                                  .load(CONFIG.rules_directory, %i[send_hints send_language_hint show_interstitial_question show_interstitial_question_loa1])
   SINGLE_IDP_FEATURE = CONFIG.single_idp_feature
-  PAUSE_AND_RESUME_FEATURE = CONFIG.pause_and_resume_feature
 end

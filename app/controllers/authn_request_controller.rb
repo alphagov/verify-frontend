@@ -69,7 +69,7 @@ private
   def redirect_for_journey_hint(hint)
     if !cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY].nil? && SINGLE_IDP_FEATURE
       redirect_to continue_to_your_idp_path
-    elsif PAUSE_AND_RESUME_FEATURE && (is_last_status?(PENDING_STATUS) || resume_link?) && hint != 'submission_confirmation'
+    elsif (is_last_status?(PENDING_STATUS) || resume_link?) && hint != 'submission_confirmation'
       redirect_to resume_registration_path
     else
       case hint
