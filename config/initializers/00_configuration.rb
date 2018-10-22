@@ -40,5 +40,4 @@ CONFIG = Configuration.load! do
   option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
   # Feature flags
   option_bool 'single_idp_feature', 'SINGLE_IDP_FEATURE', default: false
-  option_bool 'pause_and_resume_feature', 'PAUSE_AND_RESUME_FEATURE', default: false
 end
