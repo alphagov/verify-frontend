@@ -96,7 +96,7 @@ private
   def idp_redirects(status, response)
     is_registration = response.is_registration
     {
-      SUCCESS => is_registration ? confirmation_path : response_processing_path,
+      SUCCESS => is_registration || journey_type?(SINGLE_IDP_JOURNEY_TYPE) ? confirmation_path : response_processing_path,
       CANCEL => is_registration ? cancelled_registration_path : start_path,
       FAILED_UPLIFT => failed_uplift_path,
       PENDING => paused_registration_path,
