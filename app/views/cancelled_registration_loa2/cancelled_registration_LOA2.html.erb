@@ -5,13 +5,27 @@
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'hub.cancelled_registration.heading', idp_name: @idp.display_name %></h1>
 
-    <p><%= t 'hub.cancelled_registration.next' %></p>
+    <p><%= t 'hub.cancelled_registration.what_next', service_name: @transaction.name%></p>
 
-    <ul class="list list-bullet">
-      <li><%= link_to t('hub.cancelled_registration.options.other_ways_to_verify', service_name: @service_name), other_ways_to_access_service_path %></li>
-      <li><%= link_to t('hub.cancelled_registration.options.verify_with_another_company'), choose_a_certified_company_path %></li>
-      <li><%= link_to t('hub.cancelled_registration.options.verify_using_other_documents'), select_documents_path %></li>
-      <li><%= link_to t('hub.cancelled_registration.options.contact_verify'), feedback_path('feedback-source': feedback_source) %></li>
+    <h2 class="heading-medium"><%= t 'hub.cancelled_registration.try_another_summary' %></h2>
+
+    <div>
+      <p><%= t 'hub.cancelled_registration.try_another_text', idp_name: @idp.display_name %></p>
+      <%= link_to t('hub.cancelled_registration.about_choosing_a_company'), about_choosing_a_company_path%>
+    </div>
+
+    <h2 class="heading-medium"><%= t 'hub.cancelled_registration.other_ways_summary', other_ways_decorated: @other_ways_decorated %></h2>
+    <div>
+      <%= raw @transaction.other_ways_text %>
+    </div>
+
+    <h2 class="heading-medium"><%= t 'hub.cancelled_registration.feedback_summary' %></h2>
+
+    <div>
+      <p><%= t 'hub.cancelled_registration.feedback_text' %></p>
+      <%= link_to t('hub.cancelled_registration.send_feedback'), feedback_path %>
+    </div>
+
     </ul>
   </div>
 </div>

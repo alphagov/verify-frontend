@@ -519,7 +519,15 @@ cy:
       details_link: newid eich atebion i'r cwestiynau
     cancelled_registration:
       title: Cofrestriad Verify Wedi'i Ganslo
-      heading: Mae dilysu eich hunaniaeth gyda %{idp_name} wedi cael ei ddiddymu
+      heading: "You cancelled your identity verification with %{idp_name}"
+      what_next: 'You can still %{service_name}'
+      try_another_summary: 'Try another identity provider'
+      try_another_text: 'Other companies use different methods from %{idp_name} and may stand a better chance of verifying your identity.'
+      about_choosing_a_company: 'Find another company to verify you'
+      other_ways_summary: '%{other_ways_decorated} without using GOV.UK Verify'
+      feedback_summary: 'Send feedback to GOV.UK Verify'
+      feedback_text: 'Ask a question, report a problem or suggest and improvement to GOV.UK Verify'
+      send_feedback: 'Send feedback'
       next: Beth ydych chi eisiau ei wneud nesaf?
       options:
         other_ways_to_verify: Darganfod ffyrdd eraill i %{service_name}
