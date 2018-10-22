@@ -8,7 +8,7 @@ RSpec.describe 'When the user visits the Verify will not work for you page' do
   end
 
   it 'displays the page in Welsh' do
-    visit '/dim-ffon-symudol'
+    visit '/ni-fydd-verify-yn-gweithio-i-chi'
     expect(page).to have_css 'html[lang=cy]'
   end
 
