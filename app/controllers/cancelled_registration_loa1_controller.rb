@@ -5,6 +5,6 @@ class CancelledRegistrationLoa1Controller < ApplicationController
     @other_ways_decorated = @transaction.other_ways_description
     @other_ways_decorated[0] = @other_ways_decorated[0].capitalize
 
-    render :cancelled_registration_LOA1, locals: { transaction: @transaction }
+    render :cancelled_registration_LOA1
   end
 end

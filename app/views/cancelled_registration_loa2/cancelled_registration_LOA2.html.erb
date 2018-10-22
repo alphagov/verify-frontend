@@ -16,7 +16,7 @@
 
     <h2 class="heading-medium"><%= t 'hub.cancelled_registration.other_ways_summary', other_ways_decorated: @other_ways_decorated %></h2>
     <div>
-      <%= raw transaction.other_ways_text %>
+      <%= raw @transaction.other_ways_text %>
     </div>
 
     <h2 class="heading-medium"><%= t 'hub.cancelled_registration.feedback_summary' %></h2>

@@ -525,7 +525,7 @@ cy:
       try_another_summary: 'Try another identity provider'
       try_another_text: 'Other companies use different methods from %{idp_name} and may stand a better chance of verifying your identity.'
       about_choosing_a_company: 'Find another company to verify you'
-      other_ways_summary: '%{other_ways_description} without using GOV.UK Verify'
+      other_ways_summary: '%{other_ways_decorated} without using GOV.UK Verify'
       feedback_summary: 'Send feedback to GOV.UK Verify'
       feedback_text: 'Ask a question, report a problem or suggest and improvement to GOV.UK Verify'
       send_feedback: 'Send feedback'
