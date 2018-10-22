@@ -23,7 +23,7 @@
 
     <div>
       <p><%= t 'hub.cancelled_registration.feedback_text' %></p>
-      <%= link_to t('hub.cancelled_registration.send_feedback'), feedback_path %>
+      <%= link_to t('hub.cancelled_registration.send_feedback'), feedback_path('feedback-source' => feedback_source) %>
     </div>
 
     </ul>
