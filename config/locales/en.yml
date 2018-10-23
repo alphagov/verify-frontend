@@ -515,13 +515,13 @@ en:
       title: Verify registration cancelled
       heading: "You cancelled your identity verification with %{idp_name}"
       next: 'What do you want to do next?'
-      what_next: 'You can still %{service_name}'
+      what_next: 'You can still %{service_name}.'
       try_another_summary: 'Try another identity provider'
       try_another_text: 'Other companies use different methods from %{idp_name} and may stand a better chance of verifying your identity.'
       about_choosing_a_company: 'Find another company to verify you'
       other_ways_summary: '%{other_ways_decorated} without using GOV.UK Verify'
       feedback_summary: 'Send feedback to GOV.UK Verify'
-      feedback_text: 'Ask a question, report a problem or suggest and improvement to GOV.UK Verify'
+      feedback_text: 'Ask a question, report a problem or suggest and improvement to GOV.UK Verify.'
       send_feedback: 'Send feedback'
       options:
         other_ways_to_verify: 'Find out the other ways to %{service_name}'
