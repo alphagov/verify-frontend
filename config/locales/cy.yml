@@ -526,7 +526,7 @@ cy:
       about_choosing_a_company: 'Find another company to verify you'
       other_ways_summary: '%{other_ways_decorated} without using GOV.UK Verify'
       feedback_summary: 'Send feedback to GOV.UK Verify'
-      feedback_text: 'Ask a question, report a problem or suggest and improvement to GOV.UK Verify.'
+      feedback_text: 'Ask a question, report a problem or suggest an improvement to GOV.UK Verify.'
       send_feedback: 'Send feedback'
       next: Beth ydych chi eisiau ei wneud nesaf?
       options:
