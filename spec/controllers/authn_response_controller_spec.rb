@@ -33,7 +33,7 @@ describe AuthnResponseController do
     end
 
     context 'single-idp' do
-      include_examples 'idp_authn_response', 'single-idp', 'SUCCESS', 'Success - SINGLE_IDP at LOA LEVEL_1', :response_processing_path
+      include_examples 'idp_authn_response', 'single-idp', 'SUCCESS', 'Success - SINGLE_IDP at LOA LEVEL_1', :confirmation_path
       include_examples 'idp_authn_response', 'single-idp', 'CANCEL', 'Cancel - SINGLE_IDP', :start_path
       include_examples 'idp_authn_response', 'single-idp', 'FAILED_UPLIFT', 'Failed Uplift - SINGLE_IDP', :failed_uplift_path
       include_examples 'idp_authn_response', 'single-idp', 'PENDING', 'Paused - SINGLE_IDP', :paused_registration_path
