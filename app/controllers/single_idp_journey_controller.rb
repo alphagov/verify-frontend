@@ -44,18 +44,24 @@ class SingleIdpJourneyController < ApplicationController
   end
 
   def redirect_from_idp
-    transaction_id = params['serviceId']
-    idp_entity_id = params['idpEntityId']
-    uuid = params['singleIdpJourneyIdentifier'].to_s.downcase
-
-    rp_url = get_service_choice_url(get_service_list, transaction_id)
-
-    if !rp_url.nil? && valid_request?(transaction_id, idp_entity_id, uuid)
-      save_to_cookie(transaction_id, idp_entity_id, uuid)
-      FEDERATION_REPORTER.report_started_single_idp_journey(request)
-      redirect_to(rp_url)
-    else
+    if params_are_missing(%w(serviceId idpEntityId singleIdpJourneyIdentifier))
       redirect_to verify_services_path
+    else
+      transaction_id = params['serviceId']
+      idp_entity_id = params['idpEntityId']
+      uuid = params['singleIdpJourneyIdentifier'].to_s.downcase
+
+      rp_url = get_service_choice_url(get_service_list, transaction_id)
+
+      if rp_url.nil?
+        redirect_to verify_services_path
+      elsif !valid_request?(transaction_id, idp_entity_id, uuid)
+        redirect_to verify_services_path
+      else
+        save_to_cookie(transaction_id, idp_entity_id, uuid)
+        FEDERATION_REPORTER.report_started_single_idp_journey(request)
+        redirect_to(rp_url)
+      end
     end
   end
 
@@ -109,7 +115,7 @@ private
     single_idp_idp_list = get_idp_list(transaction_id)
 
     return false if single_idp_idp_list.nil?
-    return false unless valid_idp_choice?(get_idp_list(transaction_id), idp_entity_id)
+    return false unless valid_idp_choice?(single_idp_idp_list, idp_entity_id)
     valid_uuid?(uuid)
   end
 
@@ -121,5 +127,16 @@ private
     POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'])
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
+  end
+
+  def params_are_missing(params_keys)
+    params_are_missing = false
+    params_keys.each do |param_key|
+      if params[param_key].nil?
+        params_are_missing = true
+        break
+      end
+    end
+    params_are_missing
   end
 end
