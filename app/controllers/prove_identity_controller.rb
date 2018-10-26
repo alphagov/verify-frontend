@@ -4,7 +4,7 @@ class ProveIdentityController < ApplicationController
   end
 
   def retry_eidas_journey
-    POLICY_PROXY.restart_eidas_journey(session[:verify_session_id])
+    restart_journey if identity_provider_selected? && user_journey_type?(JourneyType::EIDAS)
     redirect_to prove_identity_path
   end
 end

@@ -38,10 +38,19 @@ module UserSessionPartialController
     journey_type
   end
 
+  def user_journey_type?(journey_type)
+    journey_type == current_selected_provider_data.journey_type
+  end
+
   def selected_identity_provider
     selected_provider_data = current_selected_provider_data
     raise(Errors::WarningLevelError, 'No selected IDP in session') unless selected_provider_data.is_selected_verify_idp?
     IdentityProvider.from_session(selected_provider_data.identity_provider)
+  end
+
+  def identity_provider_selected?
+    selected_provider_data = SelectedProviderData.from_session(session[:selected_provider])
+    !selected_provider_data.nil?
   end
 
   def selected_country
@@ -56,5 +65,10 @@ module UserSessionPartialController
 
   def store_selected_country_for_session(selected_country)
     session[:selected_provider] = SelectedProviderData.new(JourneyType::EIDAS, selected_country)
+  end
+
+  def restart_journey
+    POLICY_PROXY.restart_journey(session[:verify_session_id])
+    session.delete(:selected_provider)
   end
 end

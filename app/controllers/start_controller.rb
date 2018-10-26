@@ -3,6 +3,7 @@ class StartController < ApplicationController
   before_action :set_device_type_evidence
 
   def index
+    restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::VERIFY)
     @form = StartForm.new({})
 
     render :start
