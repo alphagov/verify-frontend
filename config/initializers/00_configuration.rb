@@ -1,17 +1,19 @@
 require 'configuration'
 
+FED_CONFIG_DIR = '/usr/share/verify-frontend-federation-config'.freeze
+
 CONFIG = Configuration.load! do
   option_string 'product_page_url', 'VERIFY_PRODUCT_PAGE', default: 'https://govuk-verify.cloudapps.digital/'
-  option_string 'cycle_3_display_locales', 'CYCLE_3_DISPLAY_LOCALES'
-  option_string 'idp_display_locales', 'IDP_DISPLAY_LOCALES'
-  option_string 'country_display_locales', 'COUNTRY_DISPLAY_LOCALES'
-  option_string 'country_flags_directory', 'COUNTRY_FLAGS_DIRECTORY'
-  option_string 'eidas_schemes_directory', 'EIDAS_SCHEMES_DIRECTORY'
-  option_string 'eidas_scheme_logos_directory', 'EIDAS_SCHEME_LOGOS_DIRECTORY'
+  option_string 'cycle_3_display_locales', 'CYCLE_3_DISPLAY_LOCALES', default: "#{FED_CONFIG_DIR}/display-locales/cycle_3/"
+  option_string 'idp_display_locales', 'IDP_DISPLAY_LOCALES', default: "#{FED_CONFIG_DIR}/display-locales/idps/"
+  option_string 'country_display_locales', 'COUNTRY_DISPLAY_LOCALES', default: "#{FED_CONFIG_DIR}/display-locales/countries/"
+  option_string 'country_flags_directory', 'COUNTRY_FLAGS_DIRECTORY', default: '/eidas/country-flags'
+  option_string 'eidas_schemes_directory', 'EIDAS_SCHEMES_DIRECTORY', default: "#{FED_CONFIG_DIR}/eidas/schemes/"
+  option_string 'eidas_scheme_logos_directory', 'EIDAS_SCHEME_LOGOS_DIRECTORY', default: '/eidas/scheme-logos'
   option_string 'session_cookie_duration', 'SESSION_COOKIE_DURATION_IN_HOURS', default: 2
   option_string 'config_api_host', 'CONFIG_API_HOST'
   option_string 'policy_host', 'POLICY_HOST'
-  option_string 'logo_directory', 'LOGO_DIRECTORY'
+  option_string 'logo_directory', 'LOGO_DIRECTORY', default: '/idp-logos'
   option_string 'white_logo_directory', 'WHITE_LOGO_DIRECTORY'
   option_string 'zdd_file', 'ZDD_LATCH'
   option_string 'polling_wait_time', 'POLLING_WAIT_TIME', default: 6
@@ -26,16 +28,16 @@ CONFIG = Configuration.load! do
   option_int 'piwik_site_id', 'PIWIK_SITE_ID', default: 1
   option_int 'read_timeout', 'READ_TIMEOUT', default: 60
   option_int 'connect_timeout', 'CONNECT_TIMEOUT', default: 4
-  option_string 'rules_directory', 'RULES_DIRECTORY'
+  option_string 'rules_directory', 'RULES_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules/"
   option_string 'zendesk_url', 'ZENDESK_URL'
   option_string 'zendesk_username', 'ZENDESK_USERNAME'
   option_string 'zendesk_token', 'ZENDESK_TOKEN'
   option_string 'zendesk_proxy', 'ZENDESK_PROXY', allow_missing: true
-  option_string 'rp_config', 'RP_CONFIG'
+  option_string 'rp_config', 'RP_CONFIG', default: "#{FED_CONFIG_DIR}/relying_parties.yml"
   option_string 'idp_config', 'IDP_CONFIG'
-  option_string 'cycle_three_attributes_directory', 'CYCLE_THREE_ATTRIBUTES_DIRECTORY'
+  option_string 'cycle_three_attributes_directory', 'CYCLE_THREE_ATTRIBUTES_DIRECTORY', default: "#{FED_CONFIG_DIR}/cycle-three-attributes/"
   option_string 'ab_test_file', 'AB_TEST_FILE', allow_missing: true
-  option_string 'segment_definitions', 'SEGMENT_DEFINITIONS'
+  option_string 'segment_definitions', 'SEGMENT_DEFINITIONS', default: "#{FED_CONFIG_DIR}/segment_definitions.yml"
   option_string 'saml_proxy_host', 'SAML_PROXY_HOST'
   option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
   # Feature flags
