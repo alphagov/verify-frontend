@@ -1,5 +1,6 @@
 require 'redirect_with_see_other'
 require 'cookies/cookies'
+require 'errors/warning_level_error'
 require 'partials/user_characteristics_partial_controller'
 require 'partials/user_errors_partial_controller'
 require 'partials/user_cookies_partial_controller'
