@@ -51,7 +51,7 @@ class SingleIdpJourneyController < ApplicationController
       idp_entity_id = params['idpEntityId']
       uuid = params['singleIdpJourneyIdentifier'].to_s.downcase
 
-      rp_url = get_service_choice_url(get_service_list, transaction_id)
+      rp_url = get_single_idp_url(get_service_list, transaction_id)
 
       if rp_url.nil?
         redirect_to verify_services_path
