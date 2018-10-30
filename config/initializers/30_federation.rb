@@ -15,7 +15,6 @@ Rails.application.config.after_initialize do
   IDENTITY_PROVIDER_DISPLAY_DECORATOR = Display::IdentityProviderDisplayDecorator.new(
     IDP_DISPLAY_REPOSITORY,
     CONFIG.logo_directory,
-    CONFIG.white_logo_directory
   )
 
   EIDAS_SCHEME_DISPLAY_DECORATOR = Display::EidasSchemeDisplayDecorator.new(

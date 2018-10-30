@@ -7,7 +7,7 @@ require 'logger_helper'
 module Display
   describe IdentityProviderDisplayDecorator do
     let(:repository) { double(:repository) }
-    let(:decorator) { IdentityProviderDisplayDecorator.new(repository, '/stub-logos', '/stub-logos/white') }
+    let(:decorator) { IdentityProviderDisplayDecorator.new(repository, '/stub-logos') }
 
     it 'takes an IDP object and a repository with knowledge of IDPs and returns the IDP with display data' do
       idp = double(:idp_one, 'simple_id' => 'test-simple-id', 'entity_id' => 'test-entity-id')

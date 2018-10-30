@@ -1,9 +1,8 @@
 module Display
   class IdentityProviderDisplayDecorator
-    def initialize(repository, logo_directory, white_logo_directory)
+    def initialize(repository, logo_directory)
       @repository = repository
       @logo_directory = logo_directory
-      @white_logo_directory = white_logo_directory
     end
 
     def decorate_collection(idp_list)
@@ -21,7 +20,7 @@ module Display
       return not_viewable(idp) if idp.nil?
       simple_id = idp.simple_id
       logo_path = File.join(@logo_directory, "#{simple_id}.png")
-      white_logo_path = File.join(@white_logo_directory, "#{simple_id}.png")
+      white_logo_path = File.join(@logo_directory, 'white', "#{simple_id}.png")
       display_data = @repository.fetch(simple_id)
       ViewableIdentityProvider.new(idp, display_data, logo_path, white_logo_path)
     rescue KeyError => e
