@@ -60,6 +60,7 @@ class SingleIdpJourneyController < ApplicationController
       else
         save_to_cookie(transaction_id, idp_entity_id, uuid)
         FEDERATION_REPORTER.report_started_single_idp_journey(request)
+        logger.info "Successful Single IDP redirect to RP URL #{rp_url} from IdpId #{idp_entity_id} with uuid #{uuid}"
         redirect_to(rp_url)
       end
     end

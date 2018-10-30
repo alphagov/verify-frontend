@@ -31,6 +31,7 @@ describe SingleIdpJourneyController do
         'SINGLE_IDP',
         'The user has started a single idp journey'
       )
+      expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IdpId #{VALID_STUB_IDP} with uuid #{UUID_ONE}")
       expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url'])
       expect(stub_piwik_request).to have_been_made.once
       expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
@@ -54,6 +55,7 @@ describe SingleIdpJourneyController do
         'SINGLE_IDP',
         'The user has started a single idp journey'
       )
+      expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IdpId #{VALID_STUB_IDP} with uuid #{UUID_ONE}")
       expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url'])
       expect(stub_piwik_request).to have_been_made.once
       expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
