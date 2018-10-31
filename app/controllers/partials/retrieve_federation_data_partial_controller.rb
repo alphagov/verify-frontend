@@ -4,14 +4,14 @@ module RetrieveFederationDataPartialController
     list.select { |hash| hash.fetch('entityId') == entity_id }.first
   end
 
-  def get_service_choice_url(list, transaction_id)
+  def get_single_idp_url(list, transaction_id)
     selected_rp = get_selected_rp_from_entity_id(list, transaction_id)
-    get_rp_homepage(selected_rp)
+    get_rp_attribute(selected_rp, 'redirectUrl')
   end
 
-  def get_rp_homepage(selected_rp)
+  def get_rp_attribute(selected_rp, attribute)
     return nil if selected_rp.nil?
-    selected_rp.fetch('serviceHomepage', nil)
+    selected_rp.fetch(attribute, nil)
   end
 
   def get_idp_choice(list, idp_entity_id)

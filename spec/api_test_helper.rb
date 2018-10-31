@@ -60,10 +60,10 @@ module ApiTestHelper
 
   def stub_transactions_for_single_idp_list
     transactions_for_single_idp_list = [
-        { 'simpleId' => 'test-rp',      'entityId' => 'http://www.test-rp.gov.uk/SAML2/MD', 'serviceHomepage' => 'http://localhost:50130/test-saml', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-other-entity-id', 'serviceHomepage' => 'https://www.gov.uk/', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] },
-        { 'simpleId' => 'test-rp-with-continue-on-fail', 'entityId' => 'some-entity-id', 'serviceHomepage' => 'http://localhost:50130/test-rp-with-continue-on-fail', 'loaList' => ['LEVEL_2'] }
+        { 'simpleId' => 'test-rp',      'entityId' => 'http://www.test-rp.gov.uk/SAML2/MD', 'redirectUrl' => 'http://localhost:50130/test-saml', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-noc3', 'entityId' => 'some-other-entity-id', 'redirectUrl' => 'https://www.gov.uk/', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'headless-rp',  'entityId' => 'some-entity-id', 'redirectUrl' => 'http://localhost:50130/headless-rp', 'loaList' => ['LEVEL_2'] },
+        { 'simpleId' => 'test-rp-with-continue-on-fail', 'entityId' => 'some-entity-id', 'redirectUrl' => 'http://localhost:50130/test-rp-with-continue-on-fail', 'loaList' => ['LEVEL_2'] }
     ]
 
     stub_request(:get, api_transactions_for_single_idp_endpoint).to_return(body: transactions_for_single_idp_list.to_json, status: 200)

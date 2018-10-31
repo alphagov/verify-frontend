@@ -183,13 +183,13 @@ class StubApi < Sinatra::Base
   get '/config/transactions/single-idp-enabled-list' do
     '[{
         "simpleId":"test-rp",
-        "serviceHomepage":"http://example.com/test-saml",
+        "redirectUrl":"http://example.com/test-saml",
         "loaList":["LEVEL_2"],
         "entityId":"http://www.test-rp.gov.uk/SAML2/MD"
       },
       {
         "simpleId": "loa1-test-rp",
-        "serviceHomepage":"http://example.com/test-rp-loa1",
+        "redirectUrl":"http://example.com/test-rp-loa1",
         "loaList":["LEVEL_1","LEVEL_2"],
         "entityId": "http://example.com/test-rp-loa1"
       }]'
