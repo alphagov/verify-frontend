@@ -6,6 +6,8 @@ mkdir -p /ida
 # We manage service restarts via the meta package
 ln -fs /opt/front/upstart/front.conf /etc/init/front.conf
 
+ln -fs /opt/front/conf.d/zdd_latch.conf /etc/front/conf.d/zdd_latch.conf
+
 # We want to ensure upstart realizes it's config may have changed.
 /sbin/initctl reload-configuration
 
