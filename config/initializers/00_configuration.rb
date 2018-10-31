@@ -39,5 +39,5 @@ CONFIG = Configuration.load! do
   option_string 'saml_proxy_host', 'SAML_PROXY_HOST'
   option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
   # Feature flags
-  option_bool 'single_idp_feature', 'SINGLE_IDP_FEATURE', default: false
+  option_bool 'single_idp_feature', 'SINGLE_IDP_FEATURE', default: true
 end
