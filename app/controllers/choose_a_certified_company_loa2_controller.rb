@@ -15,9 +15,13 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   end
 
   def select_idp
-    select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
-      session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
-      redirect_to warning_or_question_page(decorated_idp)
+    if params[:entity_id].present?
+      select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
+        session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
+        redirect_to warning_or_question_page(decorated_idp)
+      end
+    else
+      render 'errors/something_went_wrong', status: 400
     end
   end
 
