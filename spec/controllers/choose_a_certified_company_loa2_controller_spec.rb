@@ -105,6 +105,13 @@ describe ChooseACertifiedCompanyLoa2Controller do
 
       expect(response).to have_http_status :not_found
     end
+
+    it 'returns 400 if `entity_id` param is not present' do
+      post :select_idp, params: { locale: 'en' }
+
+      expect(subject).to render_template 'errors/something_went_wrong'
+      expect(response).to have_http_status :bad_request
+    end
   end
 
   context '#about' do
