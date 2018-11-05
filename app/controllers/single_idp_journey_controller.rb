@@ -54,12 +54,14 @@ class SingleIdpJourneyController < ApplicationController
       rp_url = get_single_idp_url(get_service_list, transaction_id)
 
       if rp_url.nil?
+        logger.error "Could not get the RP URL for single IDP with transaction_id #{transaction_id} " + referrer_string
         redirect_to verify_services_path
       elsif !valid_request?(transaction_id, idp_entity_id, uuid)
         redirect_to verify_services_path
       else
         save_to_cookie(transaction_id, idp_entity_id, uuid)
         FEDERATION_REPORTER.report_started_single_idp_journey(request)
+        logger.info "Successful Single IDP redirect to RP URL #{rp_url} from IdpId #{idp_entity_id} with uuid #{uuid}"
         redirect_to(rp_url)
       end
     end
@@ -68,7 +70,12 @@ class SingleIdpJourneyController < ApplicationController
 private
 
   def valid_uuid?(uuid)
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.match?(uuid)
+    if /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.match?(uuid)
+      true
+    else
+      logger.error "Single IDP UUID #{uuid} not valid" + referrer_string
+      false
+    end
   end
 
   def get_service_list
@@ -97,7 +104,11 @@ private
   end
 
   def valid_cookie?
-    !single_idp_cookie.nil?
+    if single_idp_cookie.nil?
+      logger.error "Single IDP cookies was not found or was malformed" + referrer_string
+      return false
+    end
+    true
   end
 
   def valid_selection?
@@ -106,16 +117,34 @@ private
     uuid = single_idp_cookie.fetch('uuid', nil)
     single_idp_rp_list = get_service_list
 
-    return false unless cookie_matches_session?(transaction_id)
-    return false unless valid_transaction?(single_idp_rp_list, transaction_id)
+    return false if cookie_value_is_missing(%w(idp_entity_id transaction_id uuid))
+
+    unless cookie_matches_session?(transaction_id)
+      logger.error "The value of the Single IDP cookie does not match the session for transaction_id #{transaction_id}" + referrer_string
+      return false
+    end
+
+    unless valid_transaction?(single_idp_rp_list, transaction_id)
+      logger.error "The Single IDP transaction is not valid for transaction_id #{transaction_id}" + referrer_string
+      return false
+    end
+
     valid_request?(transaction_id, idp_entity_id, uuid)
   end
 
   def valid_request?(transaction_id, idp_entity_id, uuid)
     single_idp_idp_list = get_idp_list(transaction_id)
 
-    return false if single_idp_idp_list.nil?
-    return false unless valid_idp_choice?(single_idp_idp_list, idp_entity_id)
+    if single_idp_idp_list.nil?
+      logger.error "The IDP list for single IDP is empty for transaction_id #{transaction_id}" + referrer_string
+      return false
+    end
+
+    unless valid_idp_choice?(single_idp_idp_list, idp_entity_id)
+      logger.error "The IDP is not valid or disabled for transaction_id #{transaction_id} and idp_entity_id #{idp_entity_id}" + referrer_string
+      return false
+    end
+
     valid_uuid?(uuid)
   end
 
@@ -133,10 +162,27 @@ private
     params_are_missing = false
     params_keys.each do |param_key|
       if params[param_key].nil?
+        logger.error "Single IDP parameter #{param_key} is missing" + referrer_string
         params_are_missing = true
         break
       end
     end
     params_are_missing
+  end
+
+  def cookie_value_is_missing(cookie_keys)
+    value_is_missing = false
+    cookie_keys.each do |cookie_key|
+      if single_idp_cookie.fetch(cookie_key, nil).nil?
+        logger.error "Single IDP cookie value for #{cookie_key} is missing" + referrer_string
+        value_is_missing = true
+        break
+      end
+    end
+    value_is_missing
+  end
+
+  def referrer_string
+    " - referrer: " + (request.nil? || request.referer.nil? ? "[could not get the referrer]" : request.referer)
   end
 end

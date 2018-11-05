@@ -31,6 +31,7 @@ describe SingleIdpJourneyController do
         'SINGLE_IDP',
         'The user has started a single idp journey'
       )
+      expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IdpId #{VALID_STUB_IDP} with uuid #{UUID_ONE}")
       expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url'])
       expect(stub_piwik_request).to have_been_made.once
       expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
@@ -54,6 +55,7 @@ describe SingleIdpJourneyController do
         'SINGLE_IDP',
         'The user has started a single idp journey'
       )
+      expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IdpId #{VALID_STUB_IDP} with uuid #{UUID_ONE}")
       expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url'])
       expect(stub_piwik_request).to have_been_made.once
       expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
@@ -67,6 +69,7 @@ describe SingleIdpJourneyController do
     describe 'no parameters provided' do
       subject { post :redirect_from_idp }
       it 'should redirect to the start page and not set a cookie when an incorrect rp is supplied' do
+        expect(Rails.logger).to receive(:error).with(/Single IDP parameter serviceId is missing/)
         expect(subject).to redirect_to(verify_services_path)
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
@@ -81,6 +84,7 @@ describe SingleIdpJourneyController do
         }
       }
       it 'should redirect to the start page and not set a cookie when an incorrect rp is supplied' do
+        expect(Rails.logger).to receive(:error).with(/Single IDP parameter serviceId is missing/)
         expect(subject).to redirect_to(verify_services_path)
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
@@ -96,6 +100,7 @@ describe SingleIdpJourneyController do
         }
       }
       it 'should redirect to the start page and not set a cookie when an incorrect rp is supplied' do
+        expect(Rails.logger).to receive(:error).with(/Could not get the RP URL for single IDP with transaction_id fake-test-rp/)
         expect(subject).to redirect_to(verify_services_path)
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
@@ -111,6 +116,7 @@ describe SingleIdpJourneyController do
         }
       }
       it 'should redirect to the start page and not set a cookie when an incorrect idp is supplied' do
+        expect(Rails.logger).to receive(:error).with(/The IDP is not valid or disabled for transaction_id http:\/\/www.test-rp.gov.uk\/SAML2\/MD and idp_entity_id fake-stub-idp/)
         expect(subject).to redirect_to(verify_services_path)
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
@@ -126,13 +132,14 @@ describe SingleIdpJourneyController do
         }
       }
       it 'redirects to start page without cookie when uuid has invalid characters' do
+        expect(Rails.logger).to receive(:error).with(/Single IDP UUID #{Regexp.quote(uuid_invalid_char)} not valid/)
         expect(subject).to redirect_to(verify_services_path)
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
     end
 
     describe 'uuid is an invalid length' do
-      uuid_invalid_length = 'OooooOooow5c8d5ca-1aeb-42e1-81b8-5a5d66ef4288'
+      uuid_invalid_length = '5oooo5ooow5c8d5ca-1aeb-42e1-81b8-5a5d66ef4288'
       subject {
         post :redirect_from_idp, params: {
           serviceId: VALID_TEST_RP,
@@ -141,6 +148,7 @@ describe SingleIdpJourneyController do
         }
       }
       it 'redirects to start page without cookie when uuid has invalid length' do
+        expect(Rails.logger).to receive(:error).with(/Single IDP UUID #{Regexp.quote(uuid_invalid_length)} not valid/)
         expect(subject).to redirect_to(verify_services_path)
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
@@ -167,11 +175,13 @@ describe SingleIdpJourneyController do
     end
 
     it 'should redirect to /start if cookie is missing' do
+      expect(Rails.logger).to receive(:error).with(/Single IDP cookies was not found or was malformed/)
       expect(subject).to redirect_to(start_path)
     end
 
     it 'should redirect to /start if cookie is corrupted' do
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = "blah"
+      expect(Rails.logger).to receive(:error).with(/Single IDP cookies was not found or was malformed/)
       expect(subject).to redirect_to(start_path)
     end
 
@@ -181,6 +191,7 @@ describe SingleIdpJourneyController do
         uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
+      expect(Rails.logger).to receive(:error).with(/Single IDP cookie value for idp_entity_id is missing/)
       expect(subject).to redirect_to(start_path)
     end
 
@@ -191,6 +202,7 @@ describe SingleIdpJourneyController do
         uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
+      expect(Rails.logger).to receive(:error).with(/The IDP is not valid or disabled for transaction_id http:\/\/www.test-rp.gov.uk\/SAML2\/MD and idp_entity_id disabled-idp/)
       expect(subject).to redirect_to(start_path)
     end
 
@@ -202,6 +214,7 @@ describe SingleIdpJourneyController do
         uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
+      expect(Rails.logger).to receive(:error).with(/The value of the Single IDP cookie does not match the session for transaction_id disabled-rp/)
       expect(subject).to redirect_to(start_path)
     end
 
@@ -212,6 +225,7 @@ describe SingleIdpJourneyController do
         uuid: 'wrong-uuid'
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
+      expect(Rails.logger).to receive(:error).with(/Single IDP UUID wrong-uuid not valid/)
       expect(subject).to redirect_to(start_path)
     end
 
@@ -223,6 +237,7 @@ describe SingleIdpJourneyController do
           uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
+      expect(Rails.logger).to receive(:error).with(/The value of the Single IDP cookie does not match the session for transaction_id test-rp-noc3/)
       expect(subject).to redirect_to(start_path)
     end
   end
