@@ -17,7 +17,10 @@ end
 require 'selenium/webdriver'
 Capybara.register_driver :firefox_headless do |app|
   options = ::Selenium::WebDriver::Firefox::Options.new
-  options.args << '--headless'
+  # Stop firefox getting upgraded to version 63 which does not work with Selenium.
+  options.add_preference('app.update.auto', false)
+  options.add_preference('app.update.enabled', false)
+  options.add_argument('--headless')
 
   Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
 end

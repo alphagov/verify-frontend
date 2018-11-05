@@ -4,6 +4,7 @@ class FailedSignInController < ApplicationController
   end
 
   def country
+    session[:failed_country_sign_in] = true
     @entity = COUNTRY_DISPLAY_DECORATOR.decorate(selected_country)
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text

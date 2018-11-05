@@ -5,6 +5,11 @@ class RedirectToCountryController < ApplicationController
   before_action :ensure_session_eidas_supported
 
   def choose_a_country_submit
+    if session[:failed_country_sign_in]
+      restart_journey
+      session.delete(:failed_country_sign_in)
+    end
+
     decorated_country = decorated_country(params[:country])
     if decorated_country.viewable?
       select_country(decorated_country)

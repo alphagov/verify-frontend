@@ -1,6 +1,7 @@
 module UserSessionPartialController
   def validate_session
     validation = session_validator.validate(cookies, session)
+
     unless validation.ok?
       logger.info(validation.message)
       render_error(validation.type, validation.status)
