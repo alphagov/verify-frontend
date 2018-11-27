@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'models/display/viewable_identity_provider'
 
 describe ConfirmationLoa2Controller do
-  subject { get :index, params: { locale: 'en' } }
+  subject { get :matching_journey, params: { locale: 'en' } }
 
   context 'user has selected an idp' do
     before(:each) do
@@ -21,7 +21,7 @@ describe ConfirmationLoa2Controller do
     it 'should raise a WarningLevelError' do
       set_session_and_cookies_with_loa('LEVEL_2')
       expect(Rails.logger).to receive(:warn).with(kind_of(Errors::WarningLevelError)).once
-      get :index, params: { locale: 'en' }
+      get :matching_journey, params: { locale: 'en' }
       expect(response).to have_http_status(500)
     end
   end

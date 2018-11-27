@@ -76,7 +76,7 @@ private
   def analytics_message(status, response)
     {
       SUCCESS => "Success - #{user_state(response)} at LOA #{response.loa_achieved}",
-      MATCHING_JOURNEY_SUCCESS => "Success - #{user_state(response)} at LOA #{response.loa_achieved}",
+      MATCHING_JOURNEY_SUCCESS => "Success Matching Journey - #{user_state(response)} at LOA #{response.loa_achieved}",
       NON_MATCHING_JOURNEY_SUCCESS => "Success Non Matching Journey - #{user_state(response)} at LOA #{response.loa_achieved}",
       CANCEL => "Cancel - #{user_state(response)}",
       FAILED_UPLIFT => "Failed Uplift - #{user_state(response)}",
@@ -101,12 +101,16 @@ private
     is_registration || journey_type?(SINGLE_IDP_JOURNEY_TYPE) ? confirmation_path : response_processing_path
   end
 
+  def path_for_success_non_matching(is_registration)
+    is_registration || journey_type?(SINGLE_IDP_JOURNEY_TYPE) ? confirmation_non_matching_journey_path : redirect_to_service_signing_in_path
+  end
+
   def idp_redirects(status, response)
     is_registration = response.is_registration
     {
       SUCCESS => path_for_success(is_registration),
       MATCHING_JOURNEY_SUCCESS => path_for_success(is_registration),
-      NON_MATCHING_JOURNEY_SUCCESS => path_for_success(is_registration),
+      NON_MATCHING_JOURNEY_SUCCESS => path_for_success_non_matching(is_registration),
       CANCEL => is_registration ? cancelled_registration_path : start_path,
       FAILED_UPLIFT => failed_uplift_path,
       PENDING => paused_registration_path,

@@ -33,6 +33,7 @@ cy:
     cookies: cwcis
     confirm_your_identity: cadarnhau-eich-hunaniaeth
     confirmation: cadarnhad
+    confirmation_non_matching_journey: cadarnhad-ailgyfeirio-i-gwasanaeth
     failed_registration: cofrestru-wedi-methu
     failed_sign_in: mewngofnodi-wedi-methu
     failed_country_sign_in: methu-mewngofnodi-gwlad
