@@ -432,7 +432,7 @@ cy:
       bear_with_us: Gallai hyn gymryd ychydig o eiliadau, diolch am eich amynedd.
       matching_error:
         heading: Mae'n ddrwg gennym, mae yna broblem gyda'r gwasanaeth
-        other_ways: "Ceisiwch eto'n hwyrach neu edrychwch ar ffyrdd eraill y gallwch %{service_name}."
+        other_ways: "Ceisiwch eto'n hwyrach neu edrychwch ar ffyrdd eraill y gallwch %{other_ways_description}."
         online_link: Ffyrdd eraill i brofi eich hunaniaeth ar-lein
         online: Ar-lein
         offline: All-lein

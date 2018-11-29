@@ -27,6 +27,13 @@ RSpec.describe 'When the user visits the response processing page' do
     expect(page).to have_css 'html[lang=cy]'
   end
 
+  it 'displays the error content in Welsh' do
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
+    stub_matching_outcome MatchingOutcomeResponse::SHOW_MATCHING_ERROR_PAGE
+    visit '/prosesu-ymateb'
+    expect(page).to have_content 'Ceisiwch eto'
+  end
+
   it 'should redirect to prove-identity page on matching error for an eIDAS journey' do
     set_selected_country_in_session(simple_id: 'stub-country')
     stub_matching_outcome MatchingOutcomeResponse::SHOW_MATCHING_ERROR_PAGE
