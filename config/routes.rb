@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
   end
 
+  get 'initiate-journey/:transaction_simple_id', to: 'initiate_journey#index'
   post 'SAML2/SSO' => 'authn_request#rp_request'
   post 'SAML2/SSO/Response/POST' => 'authn_response#idp_response'
   post 'SAML2/SSO/EidasResponse/POST' => 'authn_response#country_response'
