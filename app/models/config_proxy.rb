@@ -25,6 +25,12 @@ class ConfigProxy
     @api_client.get(transactions_endpoint)
   end
 
+  def get_transaction_by_simple_id(transaction_simple_id)
+    transactions_list = transactions
+
+    transactions_list.find { |transaction| transaction.fetch('simpleId') == transaction_simple_id } unless transactions_list.nil?
+  end
+
   def transactions_for_single_idp_list
     @api_client.get(transactions_for_single_idp_list_endpoint)
   end
