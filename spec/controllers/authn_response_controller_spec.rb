@@ -9,7 +9,7 @@ require 'piwik_test_helper'
 describe AuthnResponseController do
   context 'idp' do
     context 'registration' do
-      include_examples 'idp_authn_response', 'registration', 'SUCCESS', 'Success - REGISTER_WITH_IDP at LOA LEVEL_1', :confirmation_path
+      include_examples 'idp_authn_response', 'registration', 'SUCCESS', 'Success - REGISTER_WITH_IDP at LOA LEVEL_1', :confirmation_path, '2018-09-03T10:02:07.566Z'
       include_examples 'idp_authn_response', 'registration', 'MATCHING_JOURNEY_SUCCESS', 'Success Matching Journey - REGISTER_WITH_IDP at LOA LEVEL_1', :confirmation_path
       include_examples 'idp_authn_response', 'registration', 'NON_MATCHING_JOURNEY_SUCCESS', 'Success Non Matching Journey - REGISTER_WITH_IDP at LOA LEVEL_1', :confirmation_non_matching_journey_path
       include_examples 'idp_authn_response', 'registration', 'CANCEL', 'Cancel - REGISTER_WITH_IDP', :cancelled_registration_path
@@ -39,7 +39,7 @@ describe AuthnResponseController do
     end
 
     context 'single-idp' do
-      include_examples 'idp_authn_response', 'single-idp', 'SUCCESS', 'Success - SINGLE_IDP at LOA LEVEL_1', :confirmation_path
+      include_examples 'idp_authn_response', 'single-idp', 'SUCCESS', 'Success - SINGLE_IDP at LOA LEVEL_1', :confirmation_path, '2018-09-03T10:02:07.566Z'
       include_examples 'idp_authn_response', 'single-idp', 'MATCHING_JOURNEY_SUCCESS', 'Success Matching Journey - SINGLE_IDP at LOA LEVEL_1', :confirmation_path
       include_examples 'idp_authn_response', 'single-idp', 'NON_MATCHING_JOURNEY_SUCCESS', 'Success Non Matching Journey - SINGLE_IDP at LOA LEVEL_1', :confirmation_non_matching_journey_path
       include_examples 'idp_authn_response', 'single-idp', 'CANCEL', 'Cancel - SINGLE_IDP', :start_path
@@ -174,6 +174,36 @@ describe AuthnResponseController do
       }
       it { should eq cookie_with_pending_status }
       it { expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be_nil }
+    end
+  end
+  context 'notOnOrAfter' do
+    let(:saml_proxy_api) { double(:saml_proxy_api) }
+    let(:selected_entity) {
+      {
+          'entity_id' => 'https://acme.de/ServiceMetadata',
+          'simple_id' => 'DE',
+          'levels_of_assurance' => %w[LEVEL_1 LEVEL_2]
+      }
+    }
+
+    before(:each) do
+      stub_const('SAML_PROXY_API', saml_proxy_api)
+      set_session_and_cookies_with_loa('LEVEL_1')
+      set_selected_idp(selected_entity)
+    end
+    it 'is stored in session on success' do
+      allow(saml_proxy_api).to receive(:idp_authn_response).and_return(IdpAuthnResponse.new('result' => 'SUCCESS', 'isRegistration' => true, 'loaAchieved' => 'LEVEL_1', 'notOnOrAfter' => '2018-09-03T10:02:07.566Z'))
+      allow(subject).to receive(:report_to_analytics).with('Success - REGISTER_WITH_IDP at LOA LEVEL_1')
+      allow(subject).to receive(:report_user_outcome_to_piwik).with('SUCCESS')
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+      expect(session[:not_on_or_after]).to eq('2018-09-03T10:02:07.566Z')
+    end
+    it 'isnt stored in session on failure' do
+      allow(saml_proxy_api).to receive(:idp_authn_response).and_return(IdpAuthnResponse.new('result' => 'FAILED', 'isRegistration' => true, 'loaAchieved' => 'LEVEL_1', 'notOnOrAfter' => '2018-09-03T10:02:07.566Z'))
+      allow(subject).to receive(:report_to_analytics).with('Failure - REGISTER_WITH_IDP')
+      allow(subject).to receive(:report_user_outcome_to_piwik).with('FAILED')
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+      expect(session[:not_on_or_after]).to eq(nil)
     end
   end
 end
