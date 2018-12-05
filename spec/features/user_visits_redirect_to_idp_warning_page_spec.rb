@@ -59,6 +59,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
   }
 
   before(:each) do
+    stub_api_idp_list_for_loa
     session = default_session.merge(user_segments: ['test-segment'])
     set_session_and_session_cookies!(session: session)
   end
