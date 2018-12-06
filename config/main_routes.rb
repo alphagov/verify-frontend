@@ -111,6 +111,7 @@ post 'feedback', to: 'feedback#submit', as: :feedback_submit
 get 'feedback_sent', to: 'feedback_sent#index', as: :feedback_sent
 get 'certified_company_unavailable/:company', to: 'certified_company_unavailable#index', as: :certified_company_unavailable
 get 'further_information', to: 'further_information#index', as: :further_information
+get 'further_information_timeout', to: 'further_information#timeout', as: :further_information_timeout
 post 'further_information', to: 'further_information#submit', as: :further_information_submit
 post 'further_information_cancel', to: 'further_information#cancel', as: :further_information_cancel
 post 'further_information_null_attribute', to: 'further_information#submit_null_attribute', as: :further_information_null_attribute_submit

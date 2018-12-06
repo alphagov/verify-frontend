@@ -51,6 +51,7 @@ en:
     feedback_sent: feedback/feedback-sent
     certified_company_unavailable: certified-company-unavailable
     further_information: further-information
+    further_information_timeout: further-information/timeout
     further_information_cancel: further-information/cancel
     further_information_null_attribute: futher-information/null-attribute
     no_idps_available: no-idps-available
@@ -506,6 +507,14 @@ en:
       example_text: "Example: %{example}"
       attribute_validation_message: Enter a valid %{cycle_three_name}
       null_attribute: I don’t have an %{cycle_three_name}
+      timeout:
+        title: "You've been signed out"
+        heading: "You've been signed out"
+        intro: "To keep your information safe, you've been signed out after 10 minutes of inactivity."
+        continue: "To continue to %{service_name}, you'll need to sign in again with %{idp_name}."
+        start_again: Sign in with %{idp_name}
+        other_ways_text: You can also see
+        other_ways_link: other ways to %{service_name}
     no_idps_available:
       title: No IDPS available
       heading: GOV.UK Verify won’t work for you

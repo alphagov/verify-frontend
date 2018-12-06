@@ -53,7 +53,7 @@ private
   end
 
   def handle_idp_response(status, response)
-    success_not_on_or_after(status, response)
+    store_assertion_expiry(status, response)
     analytics_reporters(status, response)
     set_journey_status(status)
     clear_single_idp_cookie
@@ -98,6 +98,7 @@ private
     end
   end
 
+<<<<<<< HEAD
   def path_for_success(is_registration)
     is_registration || journey_type?(SINGLE_IDP_JOURNEY_TYPE) ? confirmation_path : response_processing_path
   end
@@ -112,6 +113,12 @@ private
       SUCCESS => path_for_success(is_registration),
       MATCHING_JOURNEY_SUCCESS => path_for_success(is_registration),
       NON_MATCHING_JOURNEY_SUCCESS => path_for_success_non_matching(is_registration),
+=======
+  def idp_redirects(status, response)
+    is_registration = response.is_registration
+    {
+      SUCCESS => is_registration || journey_type?(SINGLE_IDP_JOURNEY_TYPE) ? confirmation_path : response_processing_path,
+>>>>>>> HUB-368: Show user session timeout message based on not_on_or_after time
       CANCEL => is_registration ? cancelled_registration_path : start_path,
       FAILED_UPLIFT => failed_uplift_path,
       PENDING => paused_registration_path,
@@ -145,7 +152,7 @@ private
     cookies.delete CookieNames::VERIFY_SINGLE_IDP_JOURNEY
   end
 
-  def success_not_on_or_after(status, response)
-    session[:not_on_or_after] = response.not_on_or_after if status == SUCCESS
+  def store_assertion_expiry(status, response)
+    session[:assertion_expiry] = response.assertion_expiry if status == SUCCESS
   end
 end

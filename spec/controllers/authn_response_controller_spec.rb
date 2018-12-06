@@ -16,16 +16,18 @@ describe AuthnResponseController do
       include_examples 'idp_authn_response', 'registration', 'FAILED_UPLIFT', 'Failed Uplift - REGISTER_WITH_IDP', :failed_uplift_path
       include_examples 'idp_authn_response', 'registration', 'PENDING', 'Paused - REGISTER_WITH_IDP', :paused_registration_path
       include_examples 'idp_authn_response', 'registration', 'FAILED', 'Failure - REGISTER_WITH_IDP', :failed_registration_path
+      include_examples 'idp_authn_response', 'registration', 'FAILED', 'Failure - REGISTER_WITH_IDP', :failed_registration_path, '2018-09-03T10:02:07.566Z'
     end
 
     context 'sign_in' do
-      include_examples 'idp_authn_response', 'sign_in', 'SUCCESS', 'Success - SIGN_IN_WITH_IDP at LOA LEVEL_1', :response_processing_path
+      include_examples 'idp_authn_response', 'sign_in', 'SUCCESS', 'Success - SIGN_IN_WITH_IDP at LOA LEVEL_1', :response_processing_path, '2018-09-03T10:02:07.566Z'
       include_examples 'idp_authn_response', 'sign_in', 'MATCHING_JOURNEY_SUCCESS', 'Success Matching Journey - SIGN_IN_WITH_IDP at LOA LEVEL_1', :response_processing_path
       include_examples 'idp_authn_response', 'sign_in', 'NON_MATCHING_JOURNEY_SUCCESS', 'Success Non Matching Journey - SIGN_IN_WITH_IDP at LOA LEVEL_1', :redirect_to_service_signing_in_path
       include_examples 'idp_authn_response', 'sign_in', 'CANCEL', 'Cancel - SIGN_IN_WITH_IDP', :start_path
       include_examples 'idp_authn_response', 'sign_in', 'FAILED_UPLIFT', 'Failed Uplift - SIGN_IN_WITH_IDP', :failed_uplift_path
       include_examples 'idp_authn_response', 'sign_in', 'PENDING', 'Paused - SIGN_IN_WITH_IDP', :paused_registration_path
       include_examples 'idp_authn_response', 'sign_in', 'FAILED', 'Failure - SIGN_IN_WITH_IDP', :failed_sign_in_path
+      include_examples 'idp_authn_response', 'sign_in', 'FAILED', 'Failure - SIGN_IN_WITH_IDP', :failed_sign_in_path, '2018-09-03T10:02:07.566Z'
     end
 
     context 'resuming' do
@@ -174,36 +176,6 @@ describe AuthnResponseController do
       }
       it { should eq cookie_with_pending_status }
       it { expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be_nil }
-    end
-  end
-  context 'notOnOrAfter' do
-    let(:saml_proxy_api) { double(:saml_proxy_api) }
-    let(:selected_entity) {
-      {
-          'entity_id' => 'https://acme.de/ServiceMetadata',
-          'simple_id' => 'DE',
-          'levels_of_assurance' => %w[LEVEL_1 LEVEL_2]
-      }
-    }
-
-    before(:each) do
-      stub_const('SAML_PROXY_API', saml_proxy_api)
-      set_session_and_cookies_with_loa('LEVEL_1')
-      set_selected_idp(selected_entity)
-    end
-    it 'is stored in session on success' do
-      allow(saml_proxy_api).to receive(:idp_authn_response).and_return(IdpAuthnResponse.new('result' => 'SUCCESS', 'isRegistration' => true, 'loaAchieved' => 'LEVEL_1', 'notOnOrAfter' => '2018-09-03T10:02:07.566Z'))
-      allow(subject).to receive(:report_to_analytics).with('Success - REGISTER_WITH_IDP at LOA LEVEL_1')
-      allow(subject).to receive(:report_user_outcome_to_piwik).with('SUCCESS')
-      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
-      expect(session[:not_on_or_after]).to eq('2018-09-03T10:02:07.566Z')
-    end
-    it 'isnt stored in session on failure' do
-      allow(saml_proxy_api).to receive(:idp_authn_response).and_return(IdpAuthnResponse.new('result' => 'FAILED', 'isRegistration' => true, 'loaAchieved' => 'LEVEL_1', 'notOnOrAfter' => '2018-09-03T10:02:07.566Z'))
-      allow(subject).to receive(:report_to_analytics).with('Failure - REGISTER_WITH_IDP')
-      allow(subject).to receive(:report_user_outcome_to_piwik).with('FAILED')
-      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
-      expect(session[:not_on_or_after]).to eq(nil)
     end
   end
 end

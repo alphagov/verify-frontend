@@ -1,0 +1,16 @@
+<%= page_title 'hub.further_information.timeout.title' %>
+<% content_for :feedback_source, 'TIMEOUT_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.further_information.timeout.heading' %></h1>
+
+    <p><%= t 'hub.further_information.timeout.intro' %></p>
+
+    <p><%= t 'hub.further_information.timeout.continue', service_name: @transaction_name, idp_name: @idp_name %></p>
+
+    <%= button_link_to t('hub.further_information.timeout.start_again', idp_name: @idp_name), start_path, id: 'startAgain' %>
+
+    <p><%= t 'hub.further_information.timeout.other_ways_text' %> <%= link_to t('hub.further_information.timeout.other_ways_link', service_name: @transaction_name), other_ways_to_access_service_path %></p>
+  </div>
+</div>
