@@ -26,6 +26,7 @@ module UserSessionPartialController
   def current_selected_provider_data
     selected_provider_data = SelectedProviderData.from_session(session[:selected_provider])
     raise(Errors::WarningLevelError, 'No selected identity provider data in session') if selected_provider_data.nil?
+
     selected_provider_data
   end
 
@@ -45,6 +46,7 @@ module UserSessionPartialController
   def selected_identity_provider
     selected_provider_data = current_selected_provider_data
     raise(Errors::WarningLevelError, 'No selected IDP in session') unless selected_provider_data.is_selected_verify_idp?
+
     IdentityProvider.from_session(selected_provider_data.identity_provider)
   end
 
@@ -56,6 +58,7 @@ module UserSessionPartialController
   def selected_country
     selected_provider_data = current_selected_provider_data
     raise(Errors::WarningLevelError, 'No selected Country in session') unless selected_provider_data.is_selected_country?
+
     Country.from_session(selected_provider_data.identity_provider)
   end
 

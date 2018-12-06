@@ -24,7 +24,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
     {
         'simpleId' => 'stub-idp-two',
         'entityId' => 'http://idcorp-two.com',
-        'levelsOfAssurance' => ['LEVEL_1']
+        'levelsOfAssurance' => %w(LEVEL_1')
     }.freeze
   }
 

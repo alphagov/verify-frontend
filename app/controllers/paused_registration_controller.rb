@@ -119,6 +119,7 @@ private
 
   def get_rp_details(last_rp_value)
     return nil if last_rp_value.nil?
+
     CONFIG_PROXY.get_transaction_details(last_rp_value)
   end
 
@@ -129,6 +130,7 @@ private
   def get_idp_list(transaction_id)
     list = CONFIG_PROXY.get_idp_list_for_sign_in(transaction_id)
     return nil if list.nil?
+
     list.idps
   end
 
@@ -144,6 +146,7 @@ private
 
   def is_resume_link_for_pending_idp?(idp_simple_id)
     return false unless is_last_status?(PENDING_STATUS)
+
     idp = retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_rp_sign_in(last_rp), last_idp).first
 
     idp.simple_id == idp_simple_id

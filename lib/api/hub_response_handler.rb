@@ -34,6 +34,7 @@ module Api
 
     def parse_json(body, status)
       return nil if body.empty?
+
       begin
         MultiJson.load(body)
       rescue MultiJson::ParseError

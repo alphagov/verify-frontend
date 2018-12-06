@@ -6,6 +6,16 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'config/initializers/**/*.rb'
 
+Style/WordArray:
+  Exclude:
+    - 'config/routes.rb'
+    - 'config/main_routes.rb'
+
+Style/MixinUsage:
+  Exclude:
+    - 'config/routes.rb'
+    - 'config/main_routes.rb'
+
 Metrics/LineLength:
   Max: 140
 

@@ -19,6 +19,7 @@ class Country
 
   def self.from_session(object)
     return object if object.is_a? Country
+
     new(object) if object.is_a?(Hash) || (object.is_a?(SelectedProviderData) && object.is_selected_country?)
   end
 end

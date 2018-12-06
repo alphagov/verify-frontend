@@ -101,10 +101,10 @@ RSpec.configure do |config|
     I18n.locale = :en if defined? I18n
   end
 end
-$:.unshift File.expand_path('../../app/', __FILE__)
-$:.unshift File.expand_path('../../spec/support/', __FILE__)
-$:.unshift File.expand_path('../../app/models', __FILE__)
-$:.unshift File.expand_path('../../app/services', __FILE__)
+$:.unshift File.expand_path('../app/', __dir__)
+$:.unshift File.expand_path('../spec/support/', __dir__)
+$:.unshift File.expand_path('../app/models', __dir__)
+$:.unshift File.expand_path('../app/services', __dir__)
 
 require 'active_support'
 require 'active_support/core_ext'

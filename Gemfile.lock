@@ -146,7 +146,7 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.6)
-    libv8 (3.16.14.19)
+    libv8 (6.7.288.46.1)
     logstash-event (1.2.02)
     logstash-logger (0.26.1)
       logstash-event (~> 1.2)
@@ -161,6 +161,8 @@ GEM
     mime-types-data (3.2018.0812)
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
+    mini_racer (0.2.4)
+      libv8 (>= 6.3)
     minitest (5.11.3)
     mixlib-log (1.7.1)
     mixlib-shellout (1.6.1)
@@ -234,7 +236,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    ref (2.0.0)
     request_store (1.3.2)
     route_translator (5.6.4)
       actionpack (>= 5.0.0.1, < 6)
@@ -306,9 +307,6 @@ GEM
       sprockets (>= 3.0.0)
     statsd-ruby (1.3.0)
     stud (0.0.23)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -368,6 +366,7 @@ DEPENDENCIES
   jasmine-jquery-rails
   jquery-rails
   logstash-logger
+  mini_racer
   multi_json
   pkgr (~> 1.5.1)
   puma
@@ -386,7 +385,6 @@ DEPENDENCIES
   sentry-raven
   spring
   statsd-ruby (~> 1.3.0)
-  therubyracer (~> 0.12.3)
   thin
   tzinfo-data
   uglifier (~> 2.7.0)
@@ -400,4 +398,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.4
+   1.17.1

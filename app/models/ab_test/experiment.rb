@@ -12,6 +12,7 @@ module AbTest
       random = random * @total
       @alternatives.each do |name, weight|
         return name.to_s if random <= weight
+
         random -= weight
       end
     end
@@ -20,6 +21,7 @@ module AbTest
       unless @alternatives[alternative_name]
         return @default
       end
+
       alternative_name
     end
 

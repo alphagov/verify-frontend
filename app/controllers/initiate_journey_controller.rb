@@ -27,6 +27,7 @@ private
 
   def merge_query_params(uri, journey_hint)
     return uri if journey_hint.nil?
+
     uri = URI.parse(uri)
     query_array = URI.decode_www_form(String(uri.query)) << ["journey_hint", journey_hint]
     uri.query = URI.encode_www_form(query_array)

@@ -92,11 +92,13 @@ private
 
   def do_eidas_sign_in_redirect
     return redirect_to start_path unless session[:transaction_supports_eidas]
+
     redirect_to choose_a_country_path
   end
 
   def do_default_redirect
     return redirect_to start_path unless session[:transaction_supports_eidas]
+
     redirect_to prove_identity_path
   end
 end
