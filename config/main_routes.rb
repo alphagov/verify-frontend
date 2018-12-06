@@ -21,11 +21,12 @@ constraints IsLoa1 do
   post 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#continue', as: :redirect_to_idp_warning_submit
   get 'redirect_to_idp_warning', to: 'redirect_to_idp_warning#index', as: :redirect_to_idp_warning
   get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa1#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
-  get 'confirmation', to: 'confirmation_loa1#index', as: :confirmation
+  get 'confirmation', to: 'confirmation_loa1#matching_journey', as: :confirmation
   get 'about', to: 'about_loa1#index', as: :about
   get 'about_certified_companies', to: 'about_loa1#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa1#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
+  get 'confirmation_non_matching_journey', to: 'confirmation_loa1#non_matching_journey', as: :confirmation_non_matching_journey
 end
 
 constraints IsLoa2 do
@@ -62,7 +63,8 @@ constraints IsLoa2 do
   get 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#index', as: :redirect_to_idp_question
   post 'redirect_to_idp_question', to: 'redirect_to_idp_question_loa2#continue', as: :redirect_to_idp_question_submit
   get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
-  get 'confirmation', to: 'confirmation_loa2#index', as: :confirmation
+  get 'confirmation', to: 'confirmation_loa2#matching_journey', as: :confirmation
+  get 'confirmation_non_matching_journey', to: 'confirmation_loa2#non_matching_journey', as: :confirmation_non_matching_journey
 end
 
 get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice

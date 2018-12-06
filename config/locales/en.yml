@@ -33,6 +33,7 @@ en:
     cookies: cookies
     confirm_your_identity: confirm-your-identity
     confirmation: confirmation
+    confirmation_non_matching_journey: confirmation-redirect-to-service
     failed_registration: failed-registration
     failed_sign_in: failed-sign-in
     failed_country_sign_in: failed-country-sign-in
