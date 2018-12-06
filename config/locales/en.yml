@@ -351,7 +351,7 @@ en:
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
     redirect_to_idp_question:
-      title: "You'll now be redirected - question"
+      title: "Extra question"
       heading: Verifying with %{display_name}
       loa1_heading: Setting up a %{display_name} account
       answer_yes: "Yes"
