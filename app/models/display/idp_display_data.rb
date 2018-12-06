@@ -14,6 +14,7 @@ module Display
     content :interstitial_question, default: ''
     content :interstitial_explanation, default: ''
     content :mobile_app_installation, default: ''
+    content :additional_content, default: ''
 
     alias_method :about_content, :about
     alias_method :display_name, :name
