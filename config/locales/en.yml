@@ -33,6 +33,7 @@ en:
     cookies: cookies
     confirm_your_identity: confirm-your-identity
     confirmation: confirmation
+    confirmation_non_matching_journey: confirmation-redirect-to-service
     failed_registration: failed-registration
     failed_sign_in: failed-sign-in
     failed_country_sign_in: failed-country-sign-in
@@ -350,7 +351,7 @@ en:
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
     redirect_to_idp_question:
-      title: "You'll now be redirected - question"
+      title: "Extra question"
       heading: Verifying with %{display_name}
       loa1_heading: Setting up a %{display_name} account
       answer_yes: "Yes"
@@ -495,9 +496,8 @@ en:
       verify_another_company_html: To access government services, you must %{link}.
       verify_another_company_link: verify your identity with another certified company
     certified_companies_disconnected:
-      title: The following companies are not currently providing identity services as part of GOV.UK Verify. You may be able to sign in with them later.
-      verify_another_company_html: If you have an identity account with one of these companies, you'll need to %{link}.
-      verify_another_company_link: verify your identity with another certified company
+      title: These companies are temporarily unavailable with GOV.UK Verify
+      verify_another_company_html: You can try again later or verify your identity with another certified company.
     further_information:
       title: Enter your %{cycle_three_name}
       first_time: This is the first time you’ve signed in.
