@@ -502,9 +502,8 @@ cy:
       verify_another_company_html: Er mwyn cael mynediad i wasanaethau'r llywodraeth, mae'n rhaid i chi %{link}.
       verify_another_company_link: ddilysu eich hunaniaeth gyda chwmni ardystiedig arall
     certified_companies_disconnected:
-      title: The following companies are not currently providing identity services as part of GOV.UK Verify. You may be able to sign in with them later.
-      verify_another_company_html: If you have an identity account with one of these companies, you'll need to %{link}.
-      verify_another_company_link: verify your identity with another certified company
+      title: These companies are temporarily unavailable with GOV.UK Verify
+      verify_another_company_html: You can try again later or verify your identity with another certified company.
     further_information:
       title: Rhowch eich %{cycle_three_name}
       first_time: Hwn yw'r tro cyntaf i chi fewngofnodi.
