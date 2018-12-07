@@ -3,7 +3,7 @@ require 'partials/journey_hinting_partial_controller'
 require 'partials/viewable_idp_partial_controller'
 require 'partials/retrieve_federation_data_partial_controller'
 require 'partials/idp_selection_partial_controller'
-require 'partials/user_cookies_partial_controller'
+require 'partials/analytics_cookie_partial_controller'
 
 class PausedRegistrationController < ApplicationController
   include JourneyHintingPartialController
@@ -11,6 +11,7 @@ class PausedRegistrationController < ApplicationController
   include RetrieveFederationDataPartialController
   include IdpSelectionPartialController
   include UserCookiesPartialController
+  include AnalyticsCookiePartialController
 
   # Validate the session manually within the action, as we don't want the normal 'no session' page.
   skip_before_action :validate_session, except: :resume
@@ -137,7 +138,7 @@ private
   end
 
   def select_resume(entity_id, idp_name)
-    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'])
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'], false, analytics_session_id, session[:journey_type])
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
   end
