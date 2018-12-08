@@ -2,6 +2,12 @@ def add_routes(routes_name)
   instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
 end
 
+EXTRA_IDP_INFO_B = "extra_idp_info_b".freeze
+# HUB-388 Extra IDP info A/B test
+extra_idp_info_b_control_piwik = SelectRoute.new(EXTRA_IDP_INFO_B, 'control', is_start_of_test: true)
+extra_idp_info_b_variant_piwik = SelectRoute.new(EXTRA_IDP_INFO_B, 'variant', is_start_of_test: true)
+
+
 get 'sign_in', to: 'sign_in#index', as: :sign_in
 post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
@@ -10,7 +16,7 @@ constraints IsLoa1 do
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+  #get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa1#about', as: :choose_a_certified_company_about
   get 'why_companies', to: 'why_companies_loa1#index', as: :why_companies
@@ -27,6 +33,13 @@ constraints IsLoa1 do
   get 'about_identity_accounts', to: 'about_loa1#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa1#choosing_a_company', as: :about_choosing_a_company
   get 'confirmation_non_matching_journey', to: 'confirmation_loa1#non_matching_journey', as: :confirmation_non_matching_journey
+
+  constraints extra_idp_info_b_control_piwik do
+    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
+  end
+  constraints extra_idp_info_b_variant_piwik do
+    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1_variant#index', as: :choose_a_certified_company
+  end
 end
 
 constraints IsLoa2 do
@@ -52,7 +65,7 @@ constraints IsLoa2 do
   get 'select_phone', to: 'select_phone#index', as: :select_phone
   post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'verify_will_not_work_for_you', to: 'select_phone#verify_will_not_work_for_you', as: :verify_will_not_work_for_you
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+  #get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
   get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
@@ -65,6 +78,13 @@ constraints IsLoa2 do
   get 'idp_wont_work_for_you_one_doc', to: 'redirect_to_idp_question_loa2#idp_wont_work_for_you', as: :idp_wont_work_for_you_one_doc
   get 'confirmation', to: 'confirmation_loa2#matching_journey', as: :confirmation
   get 'confirmation_non_matching_journey', to: 'confirmation_loa2#non_matching_journey', as: :confirmation_non_matching_journey
+
+  constraints extra_idp_info_b_control_piwik do
+    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+  end
+  constraints extra_idp_info_b_variant_piwik do
+    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#index', as: :choose_a_certified_company
+  end
 end
 
 get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice

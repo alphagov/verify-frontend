@@ -31,3 +31,9 @@ experiments:
           percent: 0
         - name: 'no_logo_privacy'
           percent: 0
+  - extra_idp_info_b:
+      alternatives:
+        - name: 'control'
+          percent: 100
+        - name: 'variant'
+          percent: 0
