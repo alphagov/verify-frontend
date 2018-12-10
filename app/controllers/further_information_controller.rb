@@ -1,32 +1,32 @@
 class FurtherInformationController < ApplicationController
   def index
+    return redirect_to further_information_timeout_path if !session[:assertion_expiry].nil? && expired?
+
     session_id = session[:verify_session_id]
     @cycle_three_attribute = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id).new({})
     @transaction_name = current_transaction.name
+    @idp_name = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider).display_name
   end
 
   def submit
-    if !session[:assertion_expiry].nil? && expired?
-      redirect_to further_information_timeout_path
+    return redirect_to further_information_timeout_path if !session[:assertion_expiry].nil? && expired?
+
+    session_id = session[:verify_session_id]
+    cycle_three_attribute_class = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id)
+    @cycle_three_attribute = cycle_three_attribute_class.new(params['cycle_three_attribute'])
+    if @cycle_three_attribute.valid?
+      FURTHER_INFORMATION_SERVICE.submit(session_id, @cycle_three_attribute.sanitised_cycle_three_data)
+      FEDERATION_REPORTER.report_cycle_three(current_transaction, request, @cycle_three_attribute.simple_id)
+      redirect_to response_processing_path
     else
-      session_id = session[:verify_session_id]
-      cycle_three_attribute_class = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id)
-      @cycle_three_attribute = cycle_three_attribute_class.new(params['cycle_three_attribute'])
-      if @cycle_three_attribute.valid?
-        FURTHER_INFORMATION_SERVICE.submit(session_id, @cycle_three_attribute.sanitised_cycle_three_data)
-        FEDERATION_REPORTER.report_cycle_three(current_transaction, request, @cycle_three_attribute.simple_id)
-        redirect_to response_processing_path
-      else
-        @transaction_name = current_transaction.name
-        render 'index'
-      end
+      @transaction_name = current_transaction.name
+      render 'index'
     end
   end
 
   def timeout
     @idp_name = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider).display_name
     @transaction_name = current_transaction.name
-    render 'timeout'
   end
 
   def cancel
@@ -48,9 +48,9 @@ class FurtherInformationController < ApplicationController
     end
   end
 
-  private
+private
 
   def expired?
-    Time.parse(session[:assertion_expiry]) > Time.now
+    Time.parse(session[:assertion_expiry]) < Time.now
   end
 end

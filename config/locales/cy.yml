@@ -51,6 +51,7 @@ cy:
     feedback_sent: adborth/adborth-wedi'i-anfon
     certified_company_unavailable: cwmni-ardystiedig-ddim-ar-gael
     further_information: gwybodaeth-bellach
+    further_information_timeout: gwybodaeth-bellach/timeout
     further_information_cancel: gwybodaeth-bellach/dileu
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
     no_idps_available: dim-idps-ar-gael
@@ -512,6 +513,20 @@ cy:
       example_text: "Enghraifft: %{example}"
       attribute_validation_message: Rhowch %{cycle_three_name} dilys
       null_attribute: Nid oes gennyf %{cycle_three_name}
+      modal:
+        heading: You’ll be signed out soon
+        text: To keep your information safe, you’ll be automatically signed out in 
+        extra_text: You’ll then need to sign in again with %{idp_name}.
+        button_continue: Continue
+        button_signout: Sign out now
+      timeout:
+        title: "You've been signed out"
+        heading: "You've been signed out"
+        intro: "To keep your information safe, you've been signed out after a period of inactivity."
+        continue: "To continue to %{service_name}, you'll need to sign in again with %{idp_name}."
+        start_again: Sign in with %{idp_name}
+        other_ways_text: You can also see
+        other_ways_link: other ways to %{service_name}
     no_idps_available:
       title: Dim IDPS ar gael
       heading: Ni fydd GOV.UK Verify yn gweithio i chi

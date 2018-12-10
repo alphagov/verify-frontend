@@ -1,6 +1,10 @@
 <%= page_title 'hub.further_information.title', cycle_three_name: @cycle_three_attribute.field_name %>
 <% content_for :feedback_source, 'CYCLE_3_PAGE' %>
 
+<% if !session[:assertion_expiry].nil? %>
+ <%= render partial: 'further_information/modal_dialog'%>
+<% end %>
+
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= @transaction_name.slice(0,1).upcase + @transaction_name.slice(1..-1)%></h1>

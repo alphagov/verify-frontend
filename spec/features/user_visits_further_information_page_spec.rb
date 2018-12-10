@@ -5,6 +5,7 @@ require 'piwik_test_helper'
 RSpec.describe 'user visits further information page' do
   before(:each) do
     set_session_and_session_cookies!
+    set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: 'stub-idp-one')
   end
   let(:attribute_field_name) { t('cycle3.NationalInsuranceNumber.field_name') }
   let(:attribute_name) { t('cycle3.NationalInsuranceNumber.name') }
@@ -135,6 +136,40 @@ RSpec.describe 'user visits further information page' do
       expect(page).to have_current_path(further_information_path)
       expect(page).to have_css '.error-message', text: t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
       expect(page.find('#cycle_three_attribute_cycle_three_data').value).to eql invalid_input
+    end
+  end
+
+  context 'timeout modal', js: true do
+    it 'will not show up if the expiry time is >5mins' do
+      page.set_rack_session(assertion_expiry: 10.minutes.from_now)
+      stub_cycle_three_attribute_request('NationalInsuranceNumber')
+
+      visit further_information_path
+
+      expect(page).to have_current_path(further_information_path)
+      expect(page).to have_selector('#js-modal-dialog', visible: false)
+    end
+
+    it 'will show up if the expiry time is <5mins' do
+      page.set_rack_session(assertion_expiry: 4.minutes.from_now)
+      stub_cycle_three_attribute_request('NationalInsuranceNumber')
+
+      visit further_information_path
+
+      expect(page).to have_current_path(further_information_path)
+      expect(page).to have_selector('#js-modal-dialog', visible: true)
+    end
+
+    it 'will show up automatically if the timeout limit reaches 5 mins' do
+      page.set_rack_session(assertion_expiry: 303.seconds.from_now)
+      stub_cycle_three_attribute_request('NationalInsuranceNumber')
+
+      visit further_information_path
+
+      expect(page).to have_selector('#js-modal-dialog', visible: false)
+      sleep 6
+      expect(page).to have_selector('#js-modal-dialog', visible: true)
+      expect(page).to have_current_path(further_information_path)
     end
   end
 end

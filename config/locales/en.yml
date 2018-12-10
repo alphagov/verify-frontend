@@ -507,10 +507,16 @@ en:
       example_text: "Example: %{example}"
       attribute_validation_message: Enter a valid %{cycle_three_name}
       null_attribute: I don’t have an %{cycle_three_name}
+      modal:
+        heading: You’ll be signed out soon
+        text: To keep your information safe, you’ll be automatically signed out in 
+        extra_text: You’ll then need to sign in again with %{idp_name}.
+        button_continue: Continue
+        button_signout: Sign out now
       timeout:
         title: "You've been signed out"
         heading: "You've been signed out"
-        intro: "To keep your information safe, you've been signed out after 10 minutes of inactivity."
+        intro: "To keep your information safe, you've been signed out after a period of inactivity."
         continue: "To continue to %{service_name}, you'll need to sign in again with %{idp_name}."
         start_again: Sign in with %{idp_name}
         other_ways_text: You can also see
