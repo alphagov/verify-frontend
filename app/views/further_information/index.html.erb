@@ -1,7 +1,7 @@
 <%= page_title 'hub.further_information.title', cycle_three_name: @cycle_three_attribute.field_name %>
 <% content_for :feedback_source, 'CYCLE_3_PAGE' %>
 
-<% if !session[:assertion_expiry].nil? %>
+<% unless session[:assertion_expiry].nil? %>
  <%= render partial: 'further_information/modal_dialog'%>
 <% end %>
 

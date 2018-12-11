@@ -1,6 +1,6 @@
 class FurtherInformationController < ApplicationController
   def index
-    return redirect_to further_information_timeout_path if !session[:assertion_expiry].nil? && expired?
+    return redirect_to further_information_timeout_path if expired?
 
     session_id = session[:verify_session_id]
     @cycle_three_attribute = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id).new({})
@@ -9,7 +9,7 @@ class FurtherInformationController < ApplicationController
   end
 
   def submit
-    return redirect_to further_information_timeout_path if !session[:assertion_expiry].nil? && expired?
+    return redirect_to further_information_timeout_path if expired?
 
     session_id = session[:verify_session_id]
     cycle_three_attribute_class = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id)
@@ -51,6 +51,6 @@ class FurtherInformationController < ApplicationController
 private
 
   def expired?
-    Time.parse(session[:assertion_expiry]) < Time.now
+    !session[:assertion_expiry].nil? && Time.parse(session[:assertion_expiry]) <= Time.now
   end
 end
