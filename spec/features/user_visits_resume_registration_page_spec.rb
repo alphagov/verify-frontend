@@ -15,13 +15,12 @@ RSpec.describe 'When the user visits the resume registration page and ' do
     stub_session_select_idp_request(
       encrypted_entity_id,
       PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
-      PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => 'LEVEL_2',
-      PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => 'resuming'
+      PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => 'LEVEL_2'
     )
   }
 
   before(:each) do
-    set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session)
+    set_session_and_session_cookies!
     stub_api_idp_list_for_sign_in
     set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-one')
     stub_translations

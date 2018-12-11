@@ -1,9 +1,7 @@
 require 'partials/idp_selection_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
 
 class RedirectToIdpWarningController < ApplicationController
   include IdpSelectionPartialController
-  include AnalyticsCookiePartialController
 
   SELECTED_IDP_HISTORY_LENGTH = 5
   helper_method :user_has_no_docs_or_foreign_id_only?, :other_ways_description
@@ -41,7 +39,7 @@ class RedirectToIdpWarningController < ApplicationController
 private
 
   def select_registration(idp)
-    POLICY_PROXY.select_idp(session['verify_session_id'], idp.entity_id, session['requested_loa'], true, analytics_session_id, session[:journey_type])
+    POLICY_PROXY.select_idp(session['verify_session_id'], idp.entity_id, session['requested_loa'], true)
     set_journey_hint_followed(idp.entity_id)
     set_attempt_journey_hint(idp.entity_id)
     register_idp_selections(idp.display_name)
