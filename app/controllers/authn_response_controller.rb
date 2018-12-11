@@ -53,6 +53,7 @@ private
   end
 
   def handle_idp_response(status, response)
+    store_assertion_expiry(status, response)
     analytics_reporters(status, response)
     set_journey_status(status)
     clear_single_idp_cookie
@@ -142,5 +143,9 @@ private
 
   def clear_single_idp_cookie
     cookies.delete CookieNames::VERIFY_SINGLE_IDP_JOURNEY
+  end
+
+  def store_assertion_expiry(status, response)
+    session[:assertion_expiry] = response.assertion_expiry if status == SUCCESS
   end
 end

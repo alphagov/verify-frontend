@@ -9,23 +9,25 @@ require 'piwik_test_helper'
 describe AuthnResponseController do
   context 'idp' do
     context 'registration' do
-      include_examples 'idp_authn_response', 'registration', 'SUCCESS', 'Success - REGISTER_WITH_IDP at LOA LEVEL_1', :confirmation_path
+      include_examples 'idp_authn_response', 'registration', 'SUCCESS', 'Success - REGISTER_WITH_IDP at LOA LEVEL_1', :confirmation_path, '2018-09-03T10:02:07.566Z'
       include_examples 'idp_authn_response', 'registration', 'MATCHING_JOURNEY_SUCCESS', 'Success Matching Journey - REGISTER_WITH_IDP at LOA LEVEL_1', :confirmation_path
       include_examples 'idp_authn_response', 'registration', 'NON_MATCHING_JOURNEY_SUCCESS', 'Success Non Matching Journey - REGISTER_WITH_IDP at LOA LEVEL_1', :confirmation_non_matching_journey_path
       include_examples 'idp_authn_response', 'registration', 'CANCEL', 'Cancel - REGISTER_WITH_IDP', :cancelled_registration_path
       include_examples 'idp_authn_response', 'registration', 'FAILED_UPLIFT', 'Failed Uplift - REGISTER_WITH_IDP', :failed_uplift_path
       include_examples 'idp_authn_response', 'registration', 'PENDING', 'Paused - REGISTER_WITH_IDP', :paused_registration_path
       include_examples 'idp_authn_response', 'registration', 'FAILED', 'Failure - REGISTER_WITH_IDP', :failed_registration_path
+      include_examples 'idp_authn_response', 'registration', 'FAILED', 'Failure - REGISTER_WITH_IDP', :failed_registration_path, '2018-09-03T10:02:07.566Z'
     end
 
     context 'sign_in' do
-      include_examples 'idp_authn_response', 'sign_in', 'SUCCESS', 'Success - SIGN_IN_WITH_IDP at LOA LEVEL_1', :response_processing_path
+      include_examples 'idp_authn_response', 'sign_in', 'SUCCESS', 'Success - SIGN_IN_WITH_IDP at LOA LEVEL_1', :response_processing_path, '2018-09-03T10:02:07.566Z'
       include_examples 'idp_authn_response', 'sign_in', 'MATCHING_JOURNEY_SUCCESS', 'Success Matching Journey - SIGN_IN_WITH_IDP at LOA LEVEL_1', :response_processing_path
       include_examples 'idp_authn_response', 'sign_in', 'NON_MATCHING_JOURNEY_SUCCESS', 'Success Non Matching Journey - SIGN_IN_WITH_IDP at LOA LEVEL_1', :redirect_to_service_signing_in_path
       include_examples 'idp_authn_response', 'sign_in', 'CANCEL', 'Cancel - SIGN_IN_WITH_IDP', :start_path
       include_examples 'idp_authn_response', 'sign_in', 'FAILED_UPLIFT', 'Failed Uplift - SIGN_IN_WITH_IDP', :failed_uplift_path
       include_examples 'idp_authn_response', 'sign_in', 'PENDING', 'Paused - SIGN_IN_WITH_IDP', :paused_registration_path
       include_examples 'idp_authn_response', 'sign_in', 'FAILED', 'Failure - SIGN_IN_WITH_IDP', :failed_sign_in_path
+      include_examples 'idp_authn_response', 'sign_in', 'FAILED', 'Failure - SIGN_IN_WITH_IDP', :failed_sign_in_path, '2018-09-03T10:02:07.566Z'
     end
 
     context 'resuming' do
@@ -39,7 +41,7 @@ describe AuthnResponseController do
     end
 
     context 'single-idp' do
-      include_examples 'idp_authn_response', 'single-idp', 'SUCCESS', 'Success - SINGLE_IDP at LOA LEVEL_1', :confirmation_path
+      include_examples 'idp_authn_response', 'single-idp', 'SUCCESS', 'Success - SINGLE_IDP at LOA LEVEL_1', :confirmation_path, '2018-09-03T10:02:07.566Z'
       include_examples 'idp_authn_response', 'single-idp', 'MATCHING_JOURNEY_SUCCESS', 'Success Matching Journey - SINGLE_IDP at LOA LEVEL_1', :confirmation_path
       include_examples 'idp_authn_response', 'single-idp', 'NON_MATCHING_JOURNEY_SUCCESS', 'Success Non Matching Journey - SINGLE_IDP at LOA LEVEL_1', :confirmation_non_matching_journey_path
       include_examples 'idp_authn_response', 'single-idp', 'CANCEL', 'Cancel - SINGLE_IDP', :start_path
