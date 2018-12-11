@@ -1,11 +1,9 @@
 require 'partials/idp_selection_partial_controller'
 require 'partials/viewable_idp_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
 
 class SignInController < ApplicationController
   include IdpSelectionPartialController
   include ViewableIdpPartialController
-  include AnalyticsCookiePartialController
 
   def index
     entity_id = success_entity_id
@@ -43,7 +41,7 @@ class SignInController < ApplicationController
 private
 
   def sign_in(entity_id, idp_name)
-    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'], false, analytics_session_id, session[:journey_type])
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'])
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
   end
