@@ -5,7 +5,7 @@ class StartController < ApplicationController
   def index
     restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::VERIFY)
     @form = StartForm.new({})
-
+    @journey_hint = flash[:journey_hint]
     render :start
   end
 

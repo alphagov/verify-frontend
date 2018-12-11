@@ -151,6 +151,10 @@ module FeatureHelper
     set_cookies_headers.detect { |header| header.match(/^#{cookie_name}/) }
   end
 
+  def initialise_journey_hint(journey_hint, journey_hint_rp = 'test-rp')
+    post '/test-initiate-journey', params: { journey_hint: journey_hint, journey_hint_rp: journey_hint_rp }
+  end
+
 private
 
   def default_session

@@ -41,31 +41,32 @@ describe 'user sends authn requests' do
 
     it 'will redirect the user to /about when journey hint is set to registration' do
       stub_session_creation
-      stub_piwik_request = stub_piwik_journey_type_request(
-        'REGISTRATION',
-        'The user started a registration journey',
-        'LEVEL_1'
-      )
+      # Piwik expectation temporarily moved due to change in destination page
+      # stub_piwik_request = stub_piwik_journey_type_request(
+      #   'REGISTRATION',
+      #   'The user started a registration journey',
+      #   'LEVEL_1'
+      # )
       visit('/test-saml')
       click_button 'saml-post-journey-hint-registration'
 
-      expect(page).to have_title t('hub.about.title')
-      expect(stub_piwik_request).to have_been_made.once
+      expect(page).to have_title t('hub.start.title')
+      # expect(stub_piwik_request).to have_been_made.once
     end
 
     it 'will redirect the user to /sign-in when journey hint is set to sign_in' do
       stub_api_idp_list_for_sign_in(default_idps)
       stub_session_creation
-      stub_piwik_request = stub_piwik_journey_type_request(
-        'SIGN_IN',
-        'The user started a sign-in journey',
-        'LEVEL_1'
-      )
+      # stub_piwik_request = stub_piwik_journey_type_request(
+      #   'SIGN_IN',
+      #   'The user started a sign-in journey',
+      #   'LEVEL_1'
+      # )
       visit('/test-saml')
       click_button 'saml-post-journey-hint-sign-in'
 
-      expect(page).to have_title t('hub.signin.title')
-      expect(stub_piwik_request).to have_been_made.once
+      expect(page).to have_title t('hub.start.title')
+      # expect(stub_piwik_request).to have_been_made.once
     end
 
     it 'will redirect the user to /continue-with-your-idp when user has a single idp cookie' do
@@ -138,5 +139,26 @@ describe 'user sends authn requests' do
       click_button 'saml-post'
       expect(page).to have_content t('errors.something_went_wrong.heading')
     end
+  end
+
+  it 'will redirect the user to /start when journey hint session is set to registration in session' do
+    stub_session_creation
+    page.set_rack_session(journey_hint: 'registration', journey_hint_rp: 'test-rp')
+    visit('/test-saml')
+    click_button 'saml-post'
+
+    expect(page).to have_title t('hub.start.title')
+    expect(page.get_rack_session.has_key?(:journey_hint)).to be false
+  end
+
+  it 'will redirect the user to /start when journey hint is set to uk_idp_sign_in in session' do
+    stub_api_idp_list_for_sign_in(default_idps)
+    stub_session_creation
+    page.set_rack_session(journey_hint: 'uk_idp_sign_in', journey_hint_rp: 'test-rp')
+    visit('/test-saml')
+    click_button 'saml-post'
+
+    expect(page).to have_title t('hub.start.title')
+    expect(page.get_rack_session.has_key?(:journey_hint)).to be false
   end
 end
