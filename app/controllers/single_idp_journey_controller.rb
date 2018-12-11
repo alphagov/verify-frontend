@@ -4,6 +4,7 @@ require 'partials/user_cookies_partial_controller'
 require 'partials/idp_selection_partial_controller'
 require 'partials/viewable_idp_partial_controller'
 require 'partials/retrieve_federation_data_partial_controller'
+require 'partials/analytics_cookie_partial_controller'
 
 class SingleIdpJourneyController < ApplicationController
   layout 'slides'
@@ -11,6 +12,7 @@ class SingleIdpJourneyController < ApplicationController
   include IdpSelectionPartialController
   include ViewableIdpPartialController
   include RetrieveFederationDataPartialController
+  include AnalyticsCookiePartialController
 
   protect_from_forgery except: :redirect_from_idp
   skip_before_action :validate_session, only: :redirect_from_idp
@@ -153,7 +155,7 @@ private
   end
 
   def select_idp(entity_id, idp_name)
-    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'])
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'], false, analytics_session_id, session[:journey_type])
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
   end
