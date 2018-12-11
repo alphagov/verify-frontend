@@ -160,6 +160,31 @@ RSpec.describe 'user visits further information page' do
       expect(page).to have_selector('#js-modal-dialog', visible: true)
     end
 
+    it 'can be closed when shown' do
+      page.set_rack_session(assertion_expiry: 4.minutes.from_now)
+      stub_cycle_three_attribute_request('NationalInsuranceNumber')
+
+      visit further_information_path
+
+      expect(page).to have_current_path(further_information_path)
+      expect(page).to have_selector('#js-modal-dialog', visible: true)
+
+      find(".js-dialog-close").click
+      expect(page).to have_selector('#js-modal-dialog', visible: false)
+    end
+
+    it 'can be closed and signed out when shown' do
+      page.set_rack_session(assertion_expiry: 4.minutes.from_now)
+      stub_cycle_three_attribute_request('NationalInsuranceNumber')
+
+      visit further_information_path
+
+      expect(page).to have_current_path(further_information_path)
+      expect(page).to have_selector('#js-modal-dialog', visible: true)
+      click_link t('hub.further_information.modal.button_signout')
+      expect(page).to have_current_path(further_information_timeout_path)
+    end
+
     it 'will show up automatically if the timeout limit reaches 5 mins' do
       page.set_rack_session(assertion_expiry: 303.seconds.from_now)
       stub_cycle_three_attribute_request('NationalInsuranceNumber')
