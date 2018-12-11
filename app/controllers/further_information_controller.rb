@@ -5,7 +5,7 @@ class FurtherInformationController < ApplicationController
     session_id = session[:verify_session_id]
     @cycle_three_attribute = FURTHER_INFORMATION_SERVICE.get_attribute_for_session(session_id).new({})
     @transaction_name = current_transaction.name
-    @idp_name = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider).display_name
+    @idp_name = selected_provider.display_name
   end
 
   def submit
@@ -25,8 +25,9 @@ class FurtherInformationController < ApplicationController
   end
 
   def timeout
-    @idp_name = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider).display_name
+    @idp_name = selected_provider.display_name
     @transaction_name = current_transaction.name
+    @journey_hint = user_journey_type?(JourneyType::VERIFY) ? 'submission_confirmation' : 'eidas_sign_in'
   end
 
   def cancel

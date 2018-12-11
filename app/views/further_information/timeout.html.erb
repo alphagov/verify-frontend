@@ -9,7 +9,7 @@
 
     <p><%= t 'hub.further_information.timeout.continue', service_name: @transaction_name, idp_name: @idp_name %></p>
 
-    <%= button_link_to t('hub.further_information.timeout.start_again', idp_name: @idp_name), initiate_journey_path(session[:transaction_simple_id], journey_hint: 'submission_confirmation') %>
+    <%= button_link_to t('hub.further_information.timeout.start_again', idp_name: @idp_name), initiate_journey_path(session[:transaction_simple_id], journey_hint: @journey_hint) %>
 
     <p><%= t 'hub.further_information.timeout.other_ways_text' %> <%= link_to t('hub.further_information.timeout.other_ways_link', service_name: @transaction_name), other_ways_to_access_service_path %></p>
   </div>
