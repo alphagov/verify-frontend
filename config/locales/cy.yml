@@ -638,4 +638,9 @@ cy:
       reason_pre: "Gallai hyn fod oherwydd:"
       reason_one: bod y ddolen rydych wedi clicio arni wedi torri
       reason_two: rydych wedi rhoi cyfeiriad gwefan anghywir
+    eidas_scheme_unavailable:
+      title: Identity scheme unavailable
+      heading: "Your identity scheme in %{country_name} is currently unavailable"
+      other_ways: "Try again later or choose another way to "
+      other_ways_link: "prove your identity online"
     no_selection: Dylech ateb y cwestiynau

@@ -45,6 +45,10 @@ describe FeedbackSourceMapper do
     expect(@feedback_source_mapper.page_from_source('CHOOSE_A_COUNTRY_PAGE', :en)).to eql(choose_a_country_path)
   end
 
+  it 'should map eidas scheme unavailable feedback source to redirect to country page' do
+    expect(@feedback_source_mapper.page_from_source('EIDAS_SCHEME_UNAVAILABLE', :en)).to eql(redirect_to_country_path)
+  end
+
   it 'should map feedback source to corresponding welsh path' do
     expect(@feedback_source_mapper.page_from_source('CONFIRM_YOUR_IDENTITY', :cy)).to eql('/cadarnhau-eich-hunaniaeth')
   end

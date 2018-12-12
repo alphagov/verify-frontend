@@ -21,7 +21,7 @@ class MetadataClient
       json_output = MultiJson.load(response.to_s)
       json_output.fetch('saml') { raise 'Received 200, but could not find saml on response' }
     else
-      raise Api::UpstreamError, "Expected 200 and got #{response.status}"
+      raise Api::UpstreamError.new, "Expected 200 and got #{response.status}"
     end
   end
 end

@@ -87,7 +87,7 @@ describe StubApi do
       get '/policy/countries/session_id'
       expect(last_response).to be_ok
       response = last_response_json
-      expect(response.map { |country| country['simpleId'] }).to eq(['ZZ', 'YY'])
+      expect(response.map { |country| country['simpleId'] }).to eq(['YY'])
     end
   end
 

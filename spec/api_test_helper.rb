@@ -35,6 +35,10 @@ module ApiTestHelper
     policy_api_uri("/policy/countries/#{session_id}/#{country_code}")
   end
 
+  def set_transaction_supports_eidas
+    page.set_rack_session transaction_supports_eidas: true
+  end
+
   def stub_transactions_list
     transactions = [
       {

@@ -215,11 +215,7 @@ class StubApi < Sinatra::Base
   end
 
   get '/policy/countries/:session_id' do
-    '[{
-        "entityId":"http://localhost:56002/ServiceMetadata",
-        "simpleId":"ZZ",
-        "enabled":true
-      },
+    '[
       {
         "entityId":"http://localhost:50140/stub-country/ServiceMetadata",
         "simpleId":"YY",

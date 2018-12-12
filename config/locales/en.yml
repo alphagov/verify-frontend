@@ -632,4 +632,9 @@ en:
       reason_pre: "This may be because:"
       reason_one: the link you clicked is broken
       reason_two: you entered an incorrect web address
+    eidas_scheme_unavailable:
+      title: Identity scheme unavailable
+      heading: "Your identity scheme in %{country_name} is currently unavailable"
+      other_ways: "Try again later or choose another way to "
+      other_ways_link: "prove your identity online"
     no_selection: Please answer all the questions
