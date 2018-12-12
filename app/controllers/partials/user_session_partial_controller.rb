@@ -59,6 +59,14 @@ module UserSessionPartialController
     Country.from_session(selected_provider_data.identity_provider)
   end
 
+  def selected_provider
+    if current_selected_provider_data.is_selected_verify_idp?
+      IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
+    else
+      COUNTRY_DISPLAY_DECORATOR.decorate(selected_country)
+    end
+  end
+
   def store_selected_idp_for_session(selected_idp)
     session[:selected_provider] = SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
   end
