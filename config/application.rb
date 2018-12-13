@@ -44,7 +44,7 @@ module VerifyFrontend
       'X-XSS-Protection' => '1; mode=block',
       'X-Content-Type-Options' => 'nosniff',
       'Content-Security-Policy' => "default-src 'self'; " +
-        "font-src data:; " +
+        "font-src 'self'; " +
         "img-src 'self'; " +
         "object-src 'none'; " +
         # the script digests are for the two inline scripts in govuk_template.gem:govuk_template.html.erb
