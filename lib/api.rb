@@ -1,5 +1,6 @@
 require 'api/client'
 require 'api/error'
+require 'api/eidas_error'
 require 'api/response'
 require 'api/hub_response_handler'
 require 'api/session_error'

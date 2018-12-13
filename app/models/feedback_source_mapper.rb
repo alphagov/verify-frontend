@@ -18,6 +18,7 @@ class FeedbackSourceMapper
       'FAILED_REGISTRATION_PAGE' => 'failed_registration',
       'FAILED_SIGN_IN_PAGE' => 'failed_sign_in',
       'FAILED_COUNTRY_SIGN_IN_PAGE' => 'failed_country_sign_in',
+      'EIDAS_SCHEME_UNAVAILABLE' => 'redirect_to_country',
       'CYCLE_3_PAGE' => 'further_information',
       'OTHER_WAYS_PAGE' => 'other_ways_to_access_service',
       'REDIRECT_TO_IDP_WARNING_PAGE' => 'redirect_to_idp_warning',

@@ -2,8 +2,9 @@ require 'feature_helper'
 require 'api_test_helper'
 
 RSpec.describe 'user encounters error page' do
-  let(:api_select_idp_endpoint) { policy_api_uri(select_idp_endpoint(default_session_id)) }
   let(:api_saml_endpoint) { saml_proxy_api_uri(new_session_endpoint) }
+  let(:api_select_idp_endpoint) { policy_api_uri(select_idp_endpoint(default_session_id)) }
+  let(:api_select_country_endpoint) { policy_api_uri(select_a_country_endpoint(default_session_id, 'YY')) }
 
   it 'will present the user with a list of transactions' do
     stub_session_creation_error
@@ -74,48 +75,70 @@ RSpec.describe 'user encounters error page' do
   context 'user session exists' do
     before :each do
       set_session_and_session_cookies!
-      stub_api_idp_list_for_sign_in
     end
 
-    it 'will present session error page when session error occurs in upstream systems' do
-      error_body = { errorId: '0', exceptionType: 'EXPECTED_SESSION_STARTED_STATE_ACTUAL_IDP_SELECTED_STATE' }
-      stub_request(:post, api_saml_endpoint).to_return(body: error_body.to_json, status: 400)
-      visit('/test-saml')
-      click_button 'saml-post'
-      expect(page).to have_content t('errors.session_error.heading')
-      expect(page).to have_content t('errors.session_error.security')
-      expect(page).to have_css "#piwik-custom-url", text: "errors/session-error"
-      expect(page.status_code).to eq(400)
+    context 'idp' do
+      before :each do
+        stub_api_idp_list_for_sign_in
+      end
+
+      it 'will present session error page when session error occurs in upstream systems' do
+        error_body = { errorId: '0', exceptionType: 'EXPECTED_SESSION_STARTED_STATE_ACTUAL_IDP_SELECTED_STATE' }
+        stub_request(:post, api_saml_endpoint).to_return(body: error_body.to_json, status: 400)
+        visit('/test-saml')
+        click_button 'saml-post'
+        expect(page).to have_content t('errors.session_error.heading')
+        expect(page).to have_content t('errors.session_error.security')
+        expect(page).to have_css "#piwik-custom-url", text: "errors/session-error"
+        expect(page.status_code).to eq(400)
+      end
+
+      it 'will present a session timeout error page when the API returns session timeout' do
+        error_body = { errorId: '0', exceptionType: 'SESSION_TIMEOUT' }
+        stub_request(:post, api_saml_endpoint).to_return(body: error_body.to_json, status: 400)
+        visit('/test-saml')
+        click_button 'saml-post'
+        expect(page).to have_content t('errors.session_timeout.title')
+        expect(page).to have_content t('errors.session_timeout.return_to_service')
+        expect(page).to have_css "#piwik-custom-url", text: "errors/timeout-error"
+        expect(page).to have_css "a[href*=EXPIRED_ERROR_PAGE]"
+        expect(page.status_code).to eq(403)
+      end
+
+      it 'will present the something went wrong page in Welsh when secure cookie is invalid' do
+        stub_request(:post, api_select_idp_endpoint).and_return(status: 403)
+        visit sign_in_cy_path
+        click_button 'Welsh IDCorp'
+        expect(page).to have_content t('errors.something_went_wrong.heading', locale: :cy)
+        expect(page.status_code).to eq(500)
+      end
+
+      it 'will present the something went wrong page when secure cookie is invalid' do
+        stub_request(:post, api_select_idp_endpoint).and_return(status: 403)
+        visit sign_in_path
+        click_button 'IDCorp'
+        expect(page).to have_content t('errors.something_went_wrong.heading')
+        expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
+        expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
+        expect(page.status_code).to eq(500)
+      end
     end
 
-    it 'will present a session timeout error page when the API returns session timeout' do
-      error_body = { errorId: '0', exceptionType: 'SESSION_TIMEOUT' }
-      stub_request(:post, api_saml_endpoint).to_return(body: error_body.to_json, status: 400)
-      visit('/test-saml')
-      click_button 'saml-post'
-      expect(page).to have_content t('errors.session_timeout.title')
-      expect(page).to have_content t('errors.session_timeout.return_to_service')
-      expect(page).to have_css "#piwik-custom-url", text: "errors/timeout-error"
-      expect(page).to have_css "a[href*=EXPIRED_ERROR_PAGE]"
-      expect(page.status_code).to eq(403)
-    end
+    context 'country' do
+      before :each do
+        set_transaction_supports_eidas
+        stub_countries_list
+      end
 
-    it 'will present the something went wrong page in Welsh when secure cookie is invalid' do
-      stub_request(:post, api_select_idp_endpoint).and_return(status: 403)
-      visit sign_in_cy_path
-      click_button 'Welsh IDCorp'
-      expect(page).to have_content t('errors.something_went_wrong.heading', locale: :cy)
-      expect(page.status_code).to eq(500)
-    end
+      it 'will present eIDAS scheme unavailable error page when country metadata cannot be reached' do
+        error_body = { errorId: '0', exceptionType: 'METADATA_PROVIDER_EXCEPTION' }
+        stub_request(:post, api_select_country_endpoint).to_return(body: error_body.to_json, status: 400)
 
-    it 'will present the something went wrong page when secure cookie is invalid' do
-      stub_request(:post, api_select_idp_endpoint).and_return(status: 403)
-      visit sign_in_path
-      click_button 'IDCorp'
-      expect(page).to have_content t('errors.something_went_wrong.heading')
-      expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
-      expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
-      expect(page.status_code).to eq(500)
+        visit choose_a_country_path
+        click_button 'Select Stub IDP Demo'
+
+        expect(page).to have_content t 'errors.eidas_scheme_unavailable.heading', country_name: 'Stub Country'
+      end
     end
   end
 end

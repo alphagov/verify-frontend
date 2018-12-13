@@ -52,7 +52,7 @@ module PolicyEndpoints
     COUNTRIES_PATH_PREFIX.join(session_id).to_s
   end
 
-  def select_a_country_endpoint(session_id, suffix)
-    COUNTRIES_PATH_PREFIX.join(session_id, suffix).to_s
+  def select_a_country_endpoint(session_id, country)
+    COUNTRIES_PATH_PREFIX.join(session_id, country).to_s
   end
 end
