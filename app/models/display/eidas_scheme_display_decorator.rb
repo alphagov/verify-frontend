@@ -12,6 +12,7 @@ module Display
 
     def decorate_collection(scheme_list)
       return [] if scheme_list.nil? || scheme_list.empty?
+
       scheme_list.map { |scheme| correlate_display_data(scheme) }.select(&:viewable?)
           .sort_by { |scheme| scheme.display_name.downcase }
     end
@@ -24,6 +25,7 @@ module Display
 
     def correlate_display_data(scheme)
       return not_viewable(scheme) if scheme.nil?
+
       simple_id = scheme.simple_id
       logo_path = File.join(@logos_directory, "#{simple_id}.png")
       display_data = @repository.fetch(simple_id.to_s.downcase)

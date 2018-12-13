@@ -11,9 +11,9 @@ describe 'recommendations engine' do
   let(:user_profile) { %i(driving_licence passport) }
   let(:idp_rules) {
     {
-        'idp' => generate_idp_rules(capabilities: ['passport'], protected_recommended_segments: %w(SEGMENT_1)),
-        'idp2' => generate_idp_rules(capabilities: ['passport'], protected_unlikely_segments: %w(SEGMENT_1 SEGMENT_2)),
-        'idp3' => generate_idp_rules(capabilities: ['passport']),
+        'idp' => generate_idp_rules(capabilities: %w(passport), protected_recommended_segments: %w(SEGMENT_1)),
+        'idp2' => generate_idp_rules(capabilities: %w(passport), protected_unlikely_segments: %w(SEGMENT_1 SEGMENT_2)),
+        'idp3' => generate_idp_rules(capabilities: %w(passport)),
         'less_capable_idp' => generate_idp_rules(capabilities: %w(passport smart_phone), protected_recommended_segments: %w(SEGMENT_1)),
     }
   }

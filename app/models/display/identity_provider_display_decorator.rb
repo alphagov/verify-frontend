@@ -18,6 +18,7 @@ module Display
 
     def correlate_display_data(idp)
       return not_viewable(idp) if idp.nil?
+
       simple_id = idp.simple_id
       logo_path = File.join(@logo_directory, "#{simple_id}.png")
       white_logo_path = File.join(@logo_directory, 'white', "#{simple_id}.png")

@@ -9,7 +9,7 @@ class SegmentMatcher
     matching_segments = @segments
                            .select { |segment_name| segment_matches_profile(segment_name, user_profile_as_array_of_strings) }
 
-    matching_segments.empty? ? ['other'] : matching_segments
+    matching_segments.empty? ? %w(other) : matching_segments
   end
 
   def segment_matches_profile(segment_name, user_profile)

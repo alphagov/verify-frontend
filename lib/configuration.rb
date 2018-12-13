@@ -57,7 +57,7 @@ private
   def set_reader(name, value)
     instance_variable_set("@#{name}", value)
     eigenclass = class << self;
-      self;
+                   self;
     end
     eigenclass.class_eval { attr_reader name }
     Rails.logger.debug("Config being set: Name: #{name}, Value: #{value}")

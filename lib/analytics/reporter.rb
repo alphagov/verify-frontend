@@ -1,4 +1,3 @@
-
 module Analytics
   class Reporter
     def initialize(client, site_id)

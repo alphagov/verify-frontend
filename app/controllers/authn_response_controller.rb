@@ -31,6 +31,7 @@ class AuthnResponseController < SamlController
     remove_resume_link_journey_hint unless journey_hint_value.nil?
 
     return handle_idp_response(status, response) if ACCEPTED_IDP_RESPONSES.include?(status)
+
     handle_idp_response(FAILED, response)
   end
 
@@ -42,6 +43,7 @@ class AuthnResponseController < SamlController
     status = response.country_result
 
     return handle_country_response(status, response) if ACCEPTED_COUNTRY_RESPONSES.include?(status)
+
     handle_country_response(FAILED, response)
   end
 
@@ -88,6 +90,7 @@ private
 
   def user_state(response)
     return REGISTERING_STATE if response.is_registration
+
     case session[:journey_type]
     when RESUMING_JOURNEY_TYPE
       RESUMING_STATE

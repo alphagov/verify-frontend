@@ -1,4 +1,3 @@
-
 class RedirectToRpController < ApplicationController
   skip_before_action :validate_session
   skip_before_action :set_piwik_custom_variables
@@ -8,7 +7,7 @@ class RedirectToRpController < ApplicationController
     begin
       rp_url = REDIRECT_TO_RP_LIST[simple_id]['url']
       ab_test = REDIRECT_TO_RP_LIST[simple_id]['ab_test']
-    rescue
+    rescue StandardError
       redirect_to start_path
       return
     end

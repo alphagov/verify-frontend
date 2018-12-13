@@ -4,7 +4,7 @@ describe 'Idp Profiles Loader' do
   let(:yaml_loader) { double('yaml_loader') }
   let(:idp_one) {
     {
-        'simpleIds' => ['idp_one'],
+        'simpleIds' => %w(idp_one),
         'segments' => {
             'protected' => {
                 'recommended' => ['SEGMENT 1'],
@@ -53,7 +53,7 @@ describe 'Idp Profiles Loader' do
     expect(idp_rules['idp_one'].recommended_segments(TransactionGroups::NON_PROTECTED)).to eql(['SEGMENT 1', 'SEGMENT 3'])
     expect(idp_rules['idp_one'].unlikely_segments(TransactionGroups::PROTECTED)).to eql(['SEGMENT 2'])
     expect(idp_rules['idp_one'].unlikely_segments(TransactionGroups::NON_PROTECTED)).to eql(['SEGMENT 4'])
-    expect(idp_rules['idp_one'].capabilities).to eql([['passport']])
+    expect(idp_rules['idp_one'].capabilities).to eql([%w(passport)])
 
     expect(idp_rules['idp_two'].recommended_segments(TransactionGroups::PROTECTED)).to eql(['SEGMENT 1', 'SEGMENT 4'])
     expect(idp_rules['idp_two'].recommended_segments(TransactionGroups::NON_PROTECTED)).to eql(['SEGMENT 7'])

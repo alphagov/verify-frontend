@@ -24,8 +24,6 @@ class HintsMapper
     result
   end
 
-  private_class_method
-
   def self.create_hint(evidence_name, answer)
     hint_suffix = ANSWER_TO_HINT_MAPPING[evidence_name]
     hint_prefix = answer ? 'has_' : 'not_'

@@ -16,7 +16,7 @@ module Display
         transaction_list = sort_transactions(transaction_list)
         taxon_groups = group_by_taxon(transaction_list)
         taxons = sort_taxons(taxon_groups)
-        return taxons
+        taxons
       rescue KeyError => e
         Rails.logger.error e
         []

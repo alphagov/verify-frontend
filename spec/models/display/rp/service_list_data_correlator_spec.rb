@@ -27,10 +27,10 @@ module Display
       let(:public_simple_id_3) { 'test-rp-3' }
       let(:public_simple_id_4) { 'test-rp-4' }
 
-      let(:public_simple_id_loa) { ['LEVEL_1'] }
-      let(:public_simple_id_2_loa) { ['LEVEL_1'] }
-      let(:public_simple_id_3_loa) { %w'LEVEL_1 LEVEL_2' }
-      let(:public_simple_id_4_loa) { ['LEVEL_2'] }
+      let(:public_simple_id_loa) { %w(LEVEL_1) }
+      let(:public_simple_id_2_loa) { %w(LEVEL_1) }
+      let(:public_simple_id_3_loa) { %w(LEVEL_1 LEVEL_2) }
+      let(:public_simple_id_4_loa) { %w(LEVEL_2) }
 
       let(:expected_public_simple_id_loa) { 'LEVEL_1' }
       let(:expected_public_simple_id_2_loa) { 'LEVEL_1' }

@@ -15,6 +15,7 @@ class SessionValidator
       if sessions_do_not_match(session_id, verify_session_id)
         return ValidationFailure.session_id_mismatch
       end
+
       SuccessfulValidation
     end
 

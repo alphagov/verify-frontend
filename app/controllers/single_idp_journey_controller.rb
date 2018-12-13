@@ -85,6 +85,7 @@ private
   def get_idp_list(transaction_id)
     list = CONFIG_PROXY.get_idp_list_for_single_idp(transaction_id)
     return nil if list.nil?
+
     list.idps
   end
 

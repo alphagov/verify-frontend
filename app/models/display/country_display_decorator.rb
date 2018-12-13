@@ -19,6 +19,7 @@ module Display
     def correlate_display_data(country)
       schemes = EIDAS_SCHEME_DISPLAY_DECORATOR.decorated_schemes_for_country(country.simple_id)
       return not_viewable(country) if country.nil? || country.enabled == false || schemes.nil? || schemes.empty?
+
       simple_id = country.simple_id
       flag_path = File.join(@flags_directory, "#{simple_id.to_s.downcase}.svg")
       display_data = @repository.fetch(simple_id.to_s.downcase)

@@ -21,7 +21,7 @@ gem 'govuk_template'
 gem 'govuk_frontend_toolkit'
 gem 'govuk_elements_rails'
 
-gem 'therubyracer', '~> 0.12.3', platforms: :ruby
+gem 'mini_racer'
 
 # Use statsd-ruby to talk collect and send metrics to graphite
 gem 'statsd-ruby', '~> 1.3.0'

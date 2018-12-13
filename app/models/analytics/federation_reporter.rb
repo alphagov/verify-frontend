@@ -208,6 +208,7 @@ module Analytics
 
     def journey_hint_details(hint)
       return HINT_NOT_PRESENT if hint.nil?
+
       hint ? HINT_FOLLOWED : HINT_NOT_FOLLOWED
     end
 

@@ -53,7 +53,7 @@ def create_custom_variable_param(loa, extra_custom_variables, transaction_analyt
   param
 end
 
-def stub_piwik_idp_registration(idp_name, selected_answers: {}, recommended: false, idp_list: idp_name, loa: 'LEVEL_2', segments: ['other'])
+def stub_piwik_idp_registration(idp_name, selected_answers: {}, recommended: false, idp_list: idp_name, loa: 'LEVEL_2', segments: %w(other))
   recommended_str = recommended ? 'recommended' : 'not recommended'
   evidence = selected_answers.values.flat_map { |answer_set|
     answer_set.select { |_, v| v }.map { |item| item[0] }

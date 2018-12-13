@@ -18,7 +18,7 @@ RSpec.describe IdentityProviderRequest do
   it 'should have hints when idp has hints is enabled' do
     saml_message = OutboundSamlMessage.new('registration' => true)
     answers_hash = { phone: { mobile_phone: true } }
-    hints = ['has_mobile']
+    hints = %w(has_mobile)
 
     allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(true)
     allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_language_hint, 'simple-id').and_return(false)
@@ -45,7 +45,7 @@ RSpec.describe IdentityProviderRequest do
 
     allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_hints, 'simple-id').and_return(true)
     allow(IDP_FEATURE_FLAGS_CHECKER).to receive(:enabled?).with(:send_language_hint, 'simple-id').and_return(false)
-    allow(HintsMapper).to receive(:map_answers_to_hints).with(answers_hash).and_return(['has_mobile'])
+    allow(HintsMapper).to receive(:map_answers_to_hints).with(answers_hash).and_return(%w(has_mobile))
 
     request = IdentityProviderRequest.new(saml_message, 'simple-id', answers_hash)
     expect(request.hints).to eql([])

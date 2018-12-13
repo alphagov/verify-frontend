@@ -8,6 +8,7 @@ class IdpListResponse < Api::Response
 
   def consistent_idps
     return if @idps.empty?
+
     if @idps.none?(&:valid?)
       errors.add(:identity_providers, 'are malformed')
     end

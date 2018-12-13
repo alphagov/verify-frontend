@@ -8,6 +8,7 @@ class CountryResponse < Api::Response
 
   def consistent_countries
     return if @countries.empty?
+
     if @countries.none?(&:valid?)
       errors.add(:countries, 'are malformed')
     end
