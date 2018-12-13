@@ -21,4 +21,10 @@ class TestSamlController < ApplicationController
 
     render 'idp_request'
   end
+
+  def initiate_journey_session
+    session[:journey_hint] = params[:journey_hint]
+    session[:journey_hint_rp] = params[:journey_hint_rp]
+    redirect_to test_saml_path
+  end
 end

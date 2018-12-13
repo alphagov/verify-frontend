@@ -8,6 +8,8 @@ class AuthnRequestController < SamlController
   skip_before_action :set_piwik_custom_variables
 
   def rp_request
+    session_journey_hint_value = session.fetch(:journey_hint, nil)
+    session_journey_hint_rp = session.fetch(:journey_hint_rp, nil)
     create_session
 
     # HUB-113: Temporarily disabling to allow the perf team to analyze the data
@@ -15,7 +17,7 @@ class AuthnRequestController < SamlController
 
     AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
 
-    redirect_for_journey_hint params['journey_hint']
+    redirect_for_journey_hint preferred_journey_hint(session_journey_hint_value, session_journey_hint_rp)
   end
 
 private
@@ -66,6 +68,11 @@ private
     session[:transaction_homepage] = transaction_homepage
   end
 
+  def preferred_journey_hint(session_journey_hint, session_journey_hint_rp)
+    default_value = session[:transaction_simple_id] == session_journey_hint_rp ? session_journey_hint : nil
+    params.fetch('journey_hint', default_value)
+  end
+
   def redirect_for_journey_hint(hint)
     if !cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY].nil? && SINGLE_IDP_FEATURE
       redirect_to continue_to_your_idp_path
@@ -74,11 +81,14 @@ private
     else
       case hint
       when 'uk_idp_start'
+        flash[:journey_hint] = hint
         redirect_to start_path
       when 'registration'
-        redirect_to begin_registration_path
+        flash[:journey_hint] = hint
+        redirect_to start_path # Change temporarily, original value = begin_registration_path
       when 'uk_idp_sign_in'
-        redirect_to begin_sign_in_path
+        flash[:journey_hint] = hint
+        redirect_to start_path # Change temporarily, original value = begin_sign_in_path
       when 'eidas_sign_in'
         do_eidas_sign_in_redirect
       when 'submission_confirmation'

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get 'test-saml' => 'test_saml#index'
     post 'test-rp', to: proc { |_| [200, {}, ['OK']] }
     post 'test-idp-request-endpoint' => 'test_saml#idp_request'
+    post 'test-initiate-journey' => 'test_saml#initiate_journey_session'
     post 'another-idp-endpoint' => 'test_saml#idp_request'
     get 'test-journey-hint' => 'test_journey_hint_cookie#index', as: :test_journey_hint
     post 'test-journey-hint' => 'test_journey_hint_cookie#set_cookie', as: :test_journey_hint_submit
