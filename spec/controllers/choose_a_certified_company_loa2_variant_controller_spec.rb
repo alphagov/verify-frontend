@@ -16,7 +16,7 @@ describe ChooseACertifiedCompanyLoa2VariantController do
     {
         'simpleId' => 'stub-idp-one-doc-question',
         'entityId' => 'http://idcorp.com',
-        'levelsOfAssurance' => ['LEVEL_2']
+        'levelsOfAssurance' => %w(LEVEL_2)
     }.freeze
   }
 
