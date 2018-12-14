@@ -32,11 +32,11 @@ describe InitiateJourneyController do
   end
 
   context 'is called with invalid parameters' do
-    it 'should display error page if invalid journey hint value passed' do
-      expect(Rails.logger).to receive(:error).with("Invalid initiate-journey request - RP simple ID = 'test-rp', journey hint = 'bad_journey_hint_value'")
+    it 'should discard invalid journey hint value before routing to RP' do
+      expect(Rails.logger).to receive(:warn).with("Invalid initiate-journey request - RP simple ID = 'test-rp', journey hint = 'bad_journey_hint_value'")
       get :index, params: { transaction_simple_id: 'test-rp', locale: 'en', journey_hint: 'bad_journey_hint_value' }
 
-      expect(subject).to render_template("errors/something_went_wrong")
+      expect(subject).to redirect_to('http://localhost:50130/success?rp-name=test-rp')
     end
 
     it 'should render error page if invalid RP passed' do
