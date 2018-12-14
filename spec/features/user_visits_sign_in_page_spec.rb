@@ -13,7 +13,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   end
 
   def given_im_on_the_sign_in_page(locale = 'en')
-    set_session_and_session_cookies!
+    set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session)
     stub_api_idp_list_for_sign_in
     visit "/#{t('routes.sign_in', locale: locale)}"
   end
@@ -36,7 +36,8 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     expect(cookie_value('verify-front-journey-hint')).to_not be_nil
     expect(a_request(:post, policy_api_uri(select_idp_endpoint(default_session_id)))
              .with(body: { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
-                           PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => 'LEVEL_2' })).to have_been_made.once
+                           PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => 'LEVEL_2',
+                           PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil })).to have_been_made.once
     expect(a_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
              .with(headers: { 'X_FORWARDED_FOR' => originating_ip })).to have_been_made.once
   end

@@ -15,12 +15,14 @@ class PolicyProxy
     SignInProcessDetailsResponse.validated_response(response)
   end
 
-  def select_idp(session_id, entity_id, requested_loa, registration = false)
+  def select_idp(session_id, entity_id, requested_loa, registration = false, analytics_session_id = nil, journey_type = nil)
     body = {
       PARAM_SELECTED_ENTITY_ID => entity_id,
       PARAM_PRINCIPAL_IP => originating_ip,
       PARAM_REGISTRATION => registration,
-      PARAM_REQUESTED_LOA => requested_loa
+      PARAM_REQUESTED_LOA => requested_loa,
+      PARAM_ANALYTICS_SESSION_ID => analytics_session_id,
+      PARAM_JOURNEY_TYPE => journey_type
     }
 
     @api_client.post(select_idp_endpoint(session_id), body)
