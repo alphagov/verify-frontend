@@ -79,6 +79,19 @@ module FeatureHelper
     }
   end
 
+  def create_cookie_hash_with_piwik_session
+    create_cookie_hash.merge('_pk_id.1.ffff' => piwik_session_cookie_value)
+  end
+
+  def piwik_session_cookie_value
+    session_id_value = piwik_session_id
+    "#{session_id_value}.1544441431.1.1544441431.1544441431."
+  end
+
+  def piwik_session_id
+    'cdf47f93f1419b32'
+  end
+
   def start_time_in_millis
     Time.now.to_i * 1000
   end
