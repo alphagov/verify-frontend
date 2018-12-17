@@ -14,13 +14,16 @@ class InitiateJourneyController < ApplicationController
     transaction = CONFIG_PROXY.get_transaction_by_simple_id(simple_id_value)
     headless_start_page = transaction.nil? ? nil : transaction.fetch('headlessStartpage')
 
-    if !headless_start_page.nil? && valid_journey_hint?(journey_hint_value)
-      session[:journey_hint] = journey_hint_value
-      session[:journey_hint_rp] = simple_id_value
-
-      return redirect_to merge_query_params(headless_start_page, journey_hint_value)
+    if !headless_start_page.nil?
+      if valid_journey_hint?(journey_hint_value)
+        session[:journey_hint] = journey_hint_value
+        session[:journey_hint_rp] = simple_id_value
+        return redirect_to merge_query_params(headless_start_page, journey_hint_value)
+      end
+      logger.warn(invalid_parameters_message(simple_id_value, journey_hint_value))
+      return redirect_to headless_start_page
     end
-    something_went_wrong(invalid_parameters_error(simple_id_value, journey_hint_value), 400)
+    something_went_wrong(invalid_parameters_message(simple_id_value, journey_hint_value), 400)
   end
 
 private
@@ -38,7 +41,7 @@ private
     [nil, 'uk_idp_start', 'registration', 'uk_idp_sign_in', 'eidas_sign_in', 'submission_confirmation'].include?(journey_hint)
   end
 
-  def invalid_parameters_error(simple_id_value, journey_hint_value)
+  def invalid_parameters_message(simple_id_value, journey_hint_value)
     "Invalid initiate-journey request - RP simple ID = '#{simple_id_value}', journey hint = '#{journey_hint_value}'"
   end
 end
