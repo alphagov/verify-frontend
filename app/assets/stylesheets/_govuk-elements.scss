@@ -53,3 +53,8 @@
 // @import "elements/phase-banner";                  // Alpha and beta banners and tags
 @import "elements/components";                    // GOV.UK prefixed styles - blue highlighted box
 @import "elements/shame";                         // Hacks and workarounds that will go away eventually
+
+// Work around for focus outline corruption within the gov uk template: EID-1170
+.form-group-error::after {
+  content: none;
+}
