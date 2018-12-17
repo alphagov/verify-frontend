@@ -639,8 +639,8 @@ cy:
       reason_one: bod y ddolen rydych wedi clicio arni wedi torri
       reason_two: rydych wedi rhoi cyfeiriad gwefan anghywir
     eidas_scheme_unavailable:
-      title: Identity scheme unavailable
-      heading: "Your identity scheme in %{country_name} is currently unavailable"
-      other_ways: "Try again later or choose another way to "
-      other_ways_link: "prove your identity online"
+      title: Cynllun hunaniaeth ddim ar gael
+      heading: Nid yw eich cynllun hunaniaeth ar gael ar hyn o bryd
+      other_ways: "Ceisiwch eto yn nes ymlaen neu ddewis ffordd arall i "
+      other_ways_link: "profi eich hunaniaeth ar-lein"
     no_selection: Dylech ateb y cwestiynau
