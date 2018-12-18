@@ -6,7 +6,11 @@ module ApplicationHelper
     en_title = [t(title_key, locale_data.merge(locale: :en)), extra_string, 'GOV.UK Verify', 'GOV.UK']
     en_title << session[:requested_loa] if session[:requested_loa]
     content_for :page_title, title
-    content_for :page_title_in_english, en_title.compact.join(' - ')
+    analytics_title en_title.compact.join(' - ')
+  end
+
+  def analytics_title(english_title)
+    content_for :page_title_in_english, english_title
     content_for :head do
       tag('meta', name: 'verify|title', content: content_for(:page_title_in_english))
     end

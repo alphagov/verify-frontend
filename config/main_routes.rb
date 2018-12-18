@@ -126,4 +126,5 @@ if SINGLE_IDP_FEATURE
   get 'redirect_to_single_idp', to: 'redirect_to_idp#single_idp', as: :redirect_to_single_idp
   get 'continue_to_your_idp', to: 'single_idp_journey#continue_to_your_idp', as: :continue_to_your_idp
   post 'continue_to_your_idp', to: 'single_idp_journey#continue'
+  get 'single_idp_start_page', to: 'single_idp_journey#rp_start_page', as: :single_idp_start_page
 end

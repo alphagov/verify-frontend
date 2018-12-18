@@ -61,6 +61,7 @@ cy:
     paused_registration: wedi-oedi
     resume_registration: ail-ddechrau-cofrestru
     paused_registration_resume_link: wedi-oedi/:idp
+    single_idp_start_page: single-start-welsh/:transaction_simple_id
   title:
     error: Error
   navigation:

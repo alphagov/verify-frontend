@@ -81,7 +81,9 @@ module ApiTestHelper
         "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
         "otherWaysDescription":"test GOV.UK Verify user journeys",
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
-        "taxonName":"Benefits"
+        "taxonName":"Benefits",
+        "singleIdpStartPageTitle": "This is the Single IDP Start Page Title",
+        "singleIdpStartPageContent": "This is the Single IDP Start Page Content <a href=\'%<start_url>s\'>Sign In</a>"
       }'
     stub_request(:get, api_translations_endpoint('test-rp', 'en')).to_return(body: en_translation_data, status: 200)
     cy_translation_data = '{
@@ -91,7 +93,9 @@ module ApiTestHelper
         "otherWaysText":"<p>Welsh If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
         "otherWaysDescription":"Welsh test GOV.UK Verify user journeys",
         "tailoredText":"Welsh External data source: EN: This is tailored text for test-rp",
-        "taxonName":"Welsh Benefits"
+        "taxonName":"Welsh Benefits",
+        "singleIdpStartPageTitle": "This is the Single IDP Start Page Title-Welsh",
+        "singleIdpStartPageContent": "This is the Single IDP Start Page Content in Welsh <a href=\'%<start_url>s\'>Sign In</a>"
       }'
     stub_request(:get, api_translations_endpoint('test-rp', 'cy')).to_return(body: cy_translation_data, status: 200)
     test_rp_noc3_translations = '{

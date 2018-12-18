@@ -7,7 +7,7 @@ require 'partials/retrieve_federation_data_partial_controller'
 require 'partials/analytics_cookie_partial_controller'
 
 class SingleIdpJourneyController < ApplicationController
-  layout 'slides'
+  layout 'slides', except: :rp_start_page
 
   include IdpSelectionPartialController
   include ViewableIdpPartialController
@@ -15,8 +15,8 @@ class SingleIdpJourneyController < ApplicationController
   include AnalyticsCookiePartialController
 
   protect_from_forgery except: :redirect_from_idp
-  skip_before_action :validate_session, only: :redirect_from_idp
-  skip_before_action :set_piwik_custom_variables, only: :redirect_from_idp
+  skip_before_action :validate_session, only: %i{redirect_from_idp rp_start_page}
+  skip_before_action :set_piwik_custom_variables, only: %i{redirect_from_idp rp_start_page}
 
   def continue_to_your_idp
     if valid_cookie? && valid_selection?
@@ -67,6 +67,21 @@ class SingleIdpJourneyController < ApplicationController
         redirect_to(rp_url)
       end
     end
+  end
+
+  def rp_start_page
+    @simple_id_value = params.fetch('transaction_simple_id', nil)
+
+    @transaction = CONFIG_PROXY.get_transaction_by_simple_id(@simple_id_value) unless @simple_id_value.nil?
+    return render "errors/404" if @transaction.nil?
+
+    @hide_available_languages = true
+    @headless_start_page = @transaction.nil? ? nil : @transaction.fetch('headlessStartpage')
+    @translation = CONFIG_PROXY.get_transaction_translations(@simple_id_value, params['locale'])
+    @english_translation = CONFIG_PROXY.get_transaction_translations(@simple_id_value, 'en')
+    return render "errors/404" if @translation[:single_idp_start_page_content_html].nil?
+
+    render
   end
 
 private

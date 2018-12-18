@@ -61,6 +61,7 @@ en:
     paused_registration: paused
     resume_registration: resume-registration
     paused_registration_resume_link: paused/:idp
+    single_idp_start_page: single-start/:transaction_simple_id
   title:
     error: Error
   navigation:

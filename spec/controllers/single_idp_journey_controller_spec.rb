@@ -266,4 +266,29 @@ describe SingleIdpJourneyController do
       expect(subject).to redirect_to redirect_to_single_idp_path
     end
   end
+
+  context "#rp_start_page" do
+    before :each do
+      stub_transactions_list
+      stub_translations
+    end
+
+    it 'renders 404 error if invalid RP passed' do
+      get :rp_start_page, params: { locale: 'en', transaction_simple_id: 'bad-rp' }
+
+      expect(subject).to render_template 'errors/404'
+    end
+
+    it 'renders 404 error if RP does not have singleIdpStartPage content defined' do
+      get :rp_start_page, params: { locale: 'en', transaction_simple_id: 'test-rp-noc3' }
+
+      expect(subject).to render_template 'errors/404'
+    end
+
+    it 'renders correct page if RP has singleIdpStartPage content defined' do
+      get :rp_start_page, params: { locale: 'en', transaction_simple_id: 'test-rp' }
+
+      expect(subject).to render_template 'rp_start_page'
+    end
+  end
 end
