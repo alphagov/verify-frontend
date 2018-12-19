@@ -13,7 +13,6 @@ en:
         <h2 class="heading-medium">Are you sure you want to continue?</h2>
       interstitial_explanation: |
         <p>LOA1 Corp will not work for you.</p>
-      additional_content: Additional content text
 cy:
   idps:
     stub-idp-loa1-with-interstitial:
@@ -27,4 +26,3 @@ cy:
         <h2 class="heading-medium">Are you sure you want to continue?</h2>
       interstitial_explanation: |
         <p>LOA1 Corp will not work for you.</p>
-      additional_content: Additional content text in welsh

@@ -21,25 +21,3 @@
 .subtitle {
   color: $secondary-text-colour;
 }
-
-.ab-test-extra-idp-info-b {
-
-  form {
-    min-width: 250px;
-    float: left;
-  }
-
-  .idp-additional-info {
-    padding-top: 25px;
-
-    @media (max-width: 900px){
-      padding-top: 15px;
-    }
-  }
-
-  @media (max-width: $desktop-breakpoint){
-    form {
-      float: none;
-    }
-  }
-}
