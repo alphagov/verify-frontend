@@ -538,8 +538,8 @@ cy:
       heading: "Gwnaethoch ganslo eich dilysiad hunaniaeth gyda %{idp_name}"
       what_next: 'Gallwch ddal %{service_name}.'
       try_another_summary: 'Rhowch gynnig ar ddarparwr hunaniaeth arall'
-      try_another_text: 'Mae cwmnïau eraill yn defnyddio dulliau gwahanol gan %{idp_name} ac efallai y byddant yn well i chi wirio'ch hunaniaeth.'
-      about_choosing_a_company: 'Dod o hyd i gwmni arall i'ch gwirio'
+      try_another_text: Mae cwmnïau eraill yn defnyddio dulliau gwahanol gan %{idp_name} ac efallai y byddant yn well i chi wirio'ch hunaniaeth.
+      about_choosing_a_company: Dod o hyd i gwmni arall i'ch gwirio
       other_ways_summary: '%{other_ways_decorated} heb ddefnyddio GOV.UK Verify'
       feedback_summary: 'Anfon adborth i GOV.UK Verify'
       feedback_text: 'Gofyn cwestiwn, rhoi gwybod am broblem neu awgrymu gwelliant i GOV.UK Verify.'
@@ -639,3 +639,4 @@ cy:
       reason_one: bod y ddolen rydych wedi clicio arni wedi torri
       reason_two: rydych wedi rhoi cyfeiriad gwefan anghywir
     no_selection: Dylech ateb y cwestiynau
+    
