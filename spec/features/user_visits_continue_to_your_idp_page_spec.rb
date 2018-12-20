@@ -41,7 +41,7 @@ RSpec.describe 'When the user visits the continue to your IDP page' do
 
     it 'supports the welsh language' do
       set_single_idp_journey_cookie
-      visit '/continue-to-your-idp-cy'
+      visit '/parhau-ich-idp'
 
       expect(page).to have_title t('hub.single_idp_journey.title', locale: :cy, display_name: 'Welsh IDCorp')
       expect(page).to have_css 'html[lang=cy]'
