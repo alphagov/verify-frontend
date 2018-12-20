@@ -4,6 +4,7 @@ require 'partials/analytics_cookie_partial_controller'
 class RedirectToIdpWarningController < ApplicationController
   include IdpSelectionPartialController
   include AnalyticsCookiePartialController
+  include ViewableIdpPartialController
 
   SELECTED_IDP_HISTORY_LENGTH = 5
   helper_method :user_has_no_docs_or_foreign_id_only?, :other_ways_description
@@ -11,7 +12,9 @@ class RedirectToIdpWarningController < ApplicationController
   def index
     @idp = decorated_idp
     @service_name = current_transaction.name
-    if @idp.viewable?
+    if !idp_is_providing_registrations?(@idp)
+      something_went_wrong("IDP with entity id: #{@idp.entity_id} is not providing registrations", :bad_request)
+    elsif @idp.viewable?
       render 'redirect_to_idp_warning'
     else
       something_went_wrong("Couldn't display IDP with entity id: #{@idp.entity_id}")
@@ -86,5 +89,9 @@ private
 
   def user_has_foreign_doc_only?
     selected_answer_store.selected_evidence_for('documents') == [:non_uk_id_document]
+  end
+
+  def idp_is_providing_registrations?(idp)
+    current_identity_providers_for_loa.any? { |check_idp| check_idp.simple_id == idp.simple_id }
   end
 end
