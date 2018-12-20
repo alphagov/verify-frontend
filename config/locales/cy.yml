@@ -2,7 +2,7 @@ cy:
   routes:
     start: dechrau
     prove_identity: profi-hunaniaeth
-    prove_identity_retry: prove-identity-retry-cy
+    prove_identity_retry: profi-hunaniaeth-ailgeisio
     begin_registration: dechrau-cofrestru
     begin_sign_in: dechrau-mewngofnodi
     about: am
@@ -26,7 +26,7 @@ cy:
     unlikely_to_verify: anhebygol-i-ddilysu
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
     redirect_to_idp_question: ailgyfeirio-i-gwestiwn-idp
-    continue_to_your_idp: continue-to-your-idp-cy
+    continue_to_your_idp: parhau-ich-idp
     idp_wont_work_for_you_one_doc: nid-yw-idp-yn-gweithio-i-chi-un-ddogfen
     privacy_notice: hysbysiad-preifatrwydd
     verify_services: gwasanaethau-verify
@@ -62,7 +62,7 @@ cy:
     resume_registration: ail-ddechrau-cofrestru
     paused_registration_resume_link: wedi-oedi/:idp
   title:
-    error: Error
+    error: Gwall
   navigation:
     next: Nesaf
     start_now: Dechreuwch nawr
@@ -386,7 +386,7 @@ cy:
       title: Methu dilysu eich hunaniaeth
       heading: Roedd %{idp_name} yn methu dilysu eich hunaniaeth
       try_another_company: Rhowch gynnig ar gwmni ardystiedig arall
-      reasons_html: You can still %{service_name}
+      reasons_html: Gallwch barhau i ddal %{service_name}
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
       what_to_do_next: Beth i’w wneud nesaf
       problems_verifying_your_identity: Problemau gyda dilysu eich hunaniaeth
@@ -486,9 +486,9 @@ cy:
         reply: Dylech ddewis opsiwn
       send_message: Anfon neges
     feedback_disabled:
-      title: Feedback Disabled
-      heading: Feedback is disabled on this environment
-      error_content: You are currently using a non-production version of Verify, where feedback has been disabled.
+      title: Adborth wedi'i Analluogi
+      heading: Mae adborth wedi'i analluogi ar yr amgylchedd hwn
+      error_content: Ar hyn o bryd rydych yn defnyddio fersiwn ddi-gynhyrchu o Verify, lle mae adborth wedi'i analluogi.
     feedback_sent:
       title: Adborth
       heading: Diolch am eich adborth
@@ -503,8 +503,8 @@ cy:
       verify_another_company_html: Er mwyn cael mynediad i wasanaethau'r llywodraeth, mae'n rhaid i chi %{link}.
       verify_another_company_link: ddilysu eich hunaniaeth gyda chwmni ardystiedig arall
     certified_companies_disconnected:
-      title: These companies are temporarily unavailable with GOV.UK Verify
-      verify_another_company_html: You can try again later or verify your identity with another certified company.
+      title: Nid yw'r cwmnïau hyn ar gael dros dro gyda GOV.UK Verify
+      verify_another_company_html: Gallwch geisio nes ymlaen eto neu wirio'ch hunaniaeth gyda chwmni ardystiedig arall.
     further_information:
       title: Rhowch eich %{cycle_three_name}
       first_time: Hwn yw'r tro cyntaf i chi fewngofnodi.
@@ -514,19 +514,19 @@ cy:
       attribute_validation_message: Rhowch %{cycle_three_name} dilys
       null_attribute: Nid oes gennyf %{cycle_three_name}
       modal:
-        heading: You’ll be signed out soon
-        text: To keep your information safe, you’ll be automatically signed out in 
-        extra_text: You’ll then need to sign in again with %{idp_name}.
-        button_continue: Continue
-        button_signout: Sign out now
+        heading: Byddwch yn cael eich allgofnodi'n fuan
+        text: Er mwyn cadw'ch gwybodaeth yn ddiogel, byddwch yn cael eich allgofnodi'n awtomatig
+        extra_text: Bydd angen i chi fewngofnodi eto gyda %{idp_name}.
+        button_continue: Parhau
+        button_signout: Allgofnodi nawr
       timeout:
-        title: "You've been signed out"
-        heading: "You've been signed out"
-        intro: "To keep your information safe, you've been signed out after a period of inactivity."
-        continue: "To continue to %{service_name}, you'll need to sign in again with %{idp_name}."
-        start_again: Sign in with %{idp_name}
-        other_ways_text: You can also see
-        other_ways_link: other ways to %{service_name}
+        title: "Rydych wedi cael eich allgofnodi"
+        heading: "Rydych wedi cael eich allgofnodi"
+        intro: "I gadw'ch wybodaeth yn ddiogel, rydych wedi cael eich allgofnodi ar ôl cyfnod o anweithgarwch."
+        continue: "I barhau i %{service_name}, bydd angen i chi fewngofnodi eto gyda %{idp_name}."
+        start_again: Mewngofnodi gyda %{idp_name}
+        other_ways_text: Gallwch hefyd weld
+        other_ways_link: ffyrdd eraill i %{service_name}
     no_idps_available:
       title: Dim IDPS ar gael
       heading: Ni fydd GOV.UK Verify yn gweithio i chi
@@ -535,15 +535,15 @@ cy:
       details_link: newid eich atebion i'r cwestiynau
     cancelled_registration:
       title: Cofrestriad Verify Wedi'i Ganslo
-      heading: "You cancelled your identity verification with %{idp_name}"
-      what_next: 'You can still %{service_name}.'
-      try_another_summary: 'Try another identity provider'
-      try_another_text: 'Other companies use different methods from %{idp_name} and may stand a better chance of verifying your identity.'
-      about_choosing_a_company: 'Find another company to verify you'
-      other_ways_summary: '%{other_ways_decorated} without using GOV.UK Verify'
-      feedback_summary: 'Send feedback to GOV.UK Verify'
-      feedback_text: 'Ask a question, report a problem or suggest an improvement to GOV.UK Verify.'
-      send_feedback: 'Send feedback'
+      heading: "Gwnaethoch ganslo eich dilysiad hunaniaeth gyda %{idp_name}"
+      what_next: 'Gallwch ddal %{service_name}.'
+      try_another_summary: 'Rhowch gynnig ar ddarparwr hunaniaeth arall'
+      try_another_text: 'Mae cwmnïau eraill yn defnyddio dulliau gwahanol gan %{idp_name} ac efallai y byddant yn well i chi wirio'ch hunaniaeth.'
+      about_choosing_a_company: 'Dod o hyd i gwmni arall i'ch gwirio'
+      other_ways_summary: '%{other_ways_decorated} heb ddefnyddio GOV.UK Verify'
+      feedback_summary: 'Anfon adborth i GOV.UK Verify'
+      feedback_text: 'Gofyn cwestiwn, rhoi gwybod am broblem neu awgrymu gwelliant i GOV.UK Verify.'
+      send_feedback: 'Anfon adborth'
       next: Beth ydych chi eisiau ei wneud nesaf?
       options:
         other_ways_to_verify: Darganfod ffyrdd eraill i %{service_name}
@@ -555,15 +555,15 @@ cy:
         title: "Dilysu Wedi'i Oedi %{idp_name}"
         heading: "Mae eich cyfrif hunaniaeth %{idp_name} wedi cael ei arbed"
         restart_instructions_html: |
-          <p>To return you can:</p>
+          <p>I ddychwelyd gallwch:</p>
           <ul class="list list-bullet">
             <li>ewch 'nôl i <a href="%{rp_start_page}">%{rp_name}</a>.</li>
             <li>gwiriwch am e-bost gan %{idp_name}</li>
             <li>rhowch nod tudalen yma</li>
           </ul>
-          <p>You'll need the email or username and password you used to create an account with %{idp_name}.</p>
-        continue_verifying: 'Continue verifying with %{idp_name}'
-        return_html: 'Or return to <a href="%{rp_start_page}">%{rp_name}</a>.'
+          <p>Bydd angen yr e-bost neu'r enw defnyddiwr a'r cyfrinair a ddefnyddiwyd gennych i greu cyfrif gyda %{idp_name}.</p>
+        continue_verifying: 'Parhau i wirio gyda %{idp_name}'
+        return_html: 'Neu dychwelyd i <a href="%{rp_start_page}">%{rp_name}</a>.'
       without_session:
         title: Dilysu Wedi'i Oedi
         heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.
@@ -596,13 +596,13 @@ cy:
         alternative_start: "mewngofnodi gyda chwmni ardystiedig arall"
         alternative_other_ways: "gwelwch ffyrdd eraill i %{service_name}"
     single_idp_journey:
-      title: Continue with %{display_name}
+      title: Parhau gyda %{display_name}
       heading: Prove your identity with %{display_name}
-      intro: "%{idp_display_name} will confirm your identity with GOV.UK Verify, and you can continue to %{service_display_name}."
-      continue_button: Continue with %{display_name}
-      alternatives: "You can also:"
-      alternative_one: use a different certified company
-      alternative_two: see other ways to %{service_display_name}
+      intro: "Bydd %{idp_display_name} yn cadarnhau eich hunaniaeth gyda GOV.UK Verify,a gallwch barhau i %{service_display_name}."
+      continue_button: Profi eich hunaniaeth gyda %{display_name}
+      alternatives: "Gallwch hefyd:"
+      alternative_one: defnyddio cwmni ardystiedig gwahanol
+      alternative_two: gweld ffyrdd eraill i %{service_display_name}
   errors:
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan
