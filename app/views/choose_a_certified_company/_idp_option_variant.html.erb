@@ -1,0 +1,21 @@
+<div class="idp-choice ab-test <%= 'recommended-'+ recommended.to_s %>">
+  <%= form_for(identity_provider, url: choose_a_certified_company_submit_path, html: {class: nil, id: nil}) do |f| %>
+    <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil %>
+    <div class="company-logo">
+      <div class="company-logo-img-container">
+        <%= image_submit_tag(identity_provider.logo_path, alt: "#{identity_provider.display_name} logo") %>
+      </div>
+    </div>
+    <div class="idp-option">
+      <%= f.button t('hub.choose_a_certified_company.ab_test.choose_idp', display_name: identity_provider.display_name),
+                    class: recommended ? 'button' : 'button-link',
+                    role: recommended ? nil : 'link',
+                    name: identity_provider.simple_id,
+                    id: nil,
+                    type: 'submit',
+                    value: identity_provider.display_name,
+                    'data-order': recommended ? order : order.to_s + ' not recommended'
+      %>
+    </div>
+  <% end %>
+</div>
