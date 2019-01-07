@@ -99,25 +99,29 @@ module Display
             transaction_a_name,
             expected_public_simple_id_loa,
             public_taxon,
-            entityId
+            entityId,
+            public_simple_id
           ),
           ServiceListDataCorrelator::Transaction.new(
             transaction_2_name,
             expected_public_simple_id_2_loa,
             public_taxon_2,
-            entityId_2
+            entityId_2,
+            public_simple_id_2
           ),
           ServiceListDataCorrelator::Transaction.new(
             transaction_3_name,
             expected_public_simple_id_3_loa,
             public_taxon_3,
-            entityId_3
+            entityId_3,
+            public_simple_id_3
           ),
           ServiceListDataCorrelator::Transaction.new(
             transaction_4_name,
             expected_public_simple_id_4_loa,
             public_taxon_4,
-            entityId_4
+            entityId_4,
+            public_simple_id_4
           )
         ]
         expect(actual_result).to eq expected_result
