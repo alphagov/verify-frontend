@@ -13,6 +13,7 @@
 /tmp
 .idea
 *.swp
+local.env
 
 verify-frontend.iml
 
