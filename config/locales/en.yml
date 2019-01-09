@@ -26,6 +26,7 @@ en:
     unlikely_to_verify: unlikely-to-verify
     redirect_to_idp_warning: redirect-to-idp-warning
     redirect_to_idp_question: redirect-to-idp-question
+    redirect_to_single_idp: redirect-to-single-idp
     continue_to_your_idp: continue-to-your-idp
     idp_wont_work_for_you_one_doc: idp-wont-work-for-you-one-doc
     privacy_notice: privacy-notice

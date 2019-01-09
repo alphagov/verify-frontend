@@ -26,6 +26,7 @@ cy:
     unlikely_to_verify: anhebygol-i-ddilysu
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
     redirect_to_idp_question: ailgyfeirio-i-gwestiwn-idp
+    redirect_to_single_idp: redirect-to-single-idp-cy
     continue_to_your_idp: parhau-ich-idp
     idp_wont_work_for_you_one_doc: nid-yw-idp-yn-gweithio-i-chi-un-ddogfen
     privacy_notice: hysbysiad-preifatrwydd
