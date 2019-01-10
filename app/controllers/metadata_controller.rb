@@ -20,7 +20,9 @@ class MetadataController < ApplicationController
   end
 
   def service_list
-    transactions = transactions_for_service_list
+    transaction_list = transactions_for_service_list
+    displayed_transactions = RPS_NAME_AND_HOMEPAGE
+    transactions = displayed_transactions.map { |simple_id| transaction_list.select { |tx| tx['simpleId'] == simple_id } }.flatten
     render json: transactions
   end
 

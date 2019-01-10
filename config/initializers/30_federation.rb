@@ -35,11 +35,11 @@ Rails.application.config.after_initialize do
   # RP/transactions config
   RP_CONFIG = YAML.load_file(CONFIG.rp_config)
   CONTINUE_ON_FAILED_REGISTRATION_RPS = RP_CONFIG.fetch('allow_continue_on_failed_registration', [])
-  rps_name_and_homepage = RP_CONFIG['transaction_type']['display_name_and_homepage'] || []
+  RPS_NAME_AND_HOMEPAGE = RP_CONFIG['transaction_type']['display_name_and_homepage'] || []
   rps_name_only = RP_CONFIG['transaction_type']['display_name_only'] || []
   REDIRECT_TO_RP_LIST = RP_CONFIG['redirect_to_rp'] || []
-  DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
-  TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
+  DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(RP_DISPLAY_REPOSITORY, RPS_NAME_AND_HOMEPAGE.clone, rps_name_only.clone)
+  TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(RP_DISPLAY_REPOSITORY, RPS_NAME_AND_HOMEPAGE.clone, rps_name_only.clone)
 
   SERVICE_LIST_DATA_CORRELATOR = Display::Rp::ServiceListDataCorrelator.new(RP_DISPLAY_REPOSITORY)
 
