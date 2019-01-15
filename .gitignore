@@ -11,8 +11,10 @@
 /log/*
 !/log/.keep
 /tmp
+.gems
 .idea
 *.swp
+local.env
 
 verify-frontend.iml
 
