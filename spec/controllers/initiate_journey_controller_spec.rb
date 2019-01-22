@@ -24,10 +24,10 @@ describe InitiateJourneyController do
       expect(session[:journey_hint_rp]).to eq('test-rp')
     end
 
-    it 'should redirect to error page if headless startpage not defined for RP' do
+    it 'should redirect to service homepage if headless startpage not defined for RP' do
       get :index, params: { transaction_simple_id: 'test-rp-noc3', locale: 'en' }
 
-      expect(subject).to render_template("errors/something_went_wrong")
+      expect(subject).to redirect_to('http://localhost:50130/test-rp-noc3')
     end
   end
 
