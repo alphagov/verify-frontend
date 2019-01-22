@@ -3,7 +3,7 @@
     <h2 class="heading-medium"><%= t 'hub.certified_companies_disconnected.title' %></h2>
     <p><%=
       t('hub.certified_companies_disconnected.verify_another_company_html',
-        link: link_to(t('hub.certified_companies_disconnected.verify_another_company_link'), choose_a_certified_company_path)
+        link: link_to(t('hub.certified_companies_disconnected.verify_another_company_link'), begin_registration_path, id: 'begin-registration-route')
       )
     %></p>
   </div>
