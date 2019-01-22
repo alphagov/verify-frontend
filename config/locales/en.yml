@@ -502,7 +502,7 @@ en:
       verify_another_company_html: To access government services, you must %{link}.
       verify_another_company_link: verify your identity with another certified company
     certified_companies_disconnected:
-      title: The following companies are no longer providing identity services as part of GOV.UK Verify.
+      title: The following companies are no longer providing identity services as part of GOV.UK Verify
       verify_another_company_html: If you have an identity account with one of these companies, you'll need to %{link}.
       verify_another_company_link: verify your identity with another certified company 
     further_information:
