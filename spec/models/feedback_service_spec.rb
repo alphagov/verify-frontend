@@ -18,6 +18,12 @@ describe FeedbackService do
   let(:feedback_comment_value) {
     %{User feedback received
 
+What were you trying to do?
+#{what}
+
+Please provide details of your question, problem or feedback:
+#{details}
+
 session id: #{session_id}
 
 From page: #{referer}
@@ -25,12 +31,6 @@ From page: #{referer}
 User agent: #{user_agent}
 
 Javascript enabled: #{js_enabled}
-
-What were you trying to do?
-#{what}
-
-Please provide details of your question, problem or feedback:
-#{details}
 
 From user:\s
 With email: #{default_email}
@@ -40,6 +40,12 @@ With email: #{default_email}
   let(:enquiry_comment_value) {
     %{User feedback received
 
+What were you trying to do?
+#{what}
+
+Please provide details of your question, problem or feedback:
+#{details}
+
 session id: #{session_id}
 
 From page: #{referer}
@@ -47,12 +53,6 @@ From page: #{referer}
 User agent: #{user_agent}
 
 Javascript enabled: #{js_enabled}
-
-What were you trying to do?
-#{what}
-
-Please provide details of your question, problem or feedback:
-#{details}
 
 From user: #{name}
 With email: #{email}

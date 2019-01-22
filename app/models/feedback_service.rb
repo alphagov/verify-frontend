@@ -17,6 +17,12 @@ private
 
   ERROR_MESSAGE_TEMPLATE = %{User feedback received
 
+What were you trying to do?
+<%= form.what %>
+
+Please provide details of your question, problem or feedback:
+<%= form.details %>
+
 session id: <%= session_id %>
 
 From page: <%= form.referer %>
@@ -24,12 +30,6 @@ From page: <%= form.referer %>
 User agent: <%= form.user_agent %>
 
 Javascript enabled: <%= form.js_enabled? %>
-
-What were you trying to do?
-<%= form.what %>
-
-Please provide details of your question, problem or feedback:
-<%= form.details %>
 
 From user: <%= presented_name(form) %>
 With email: <%= presented_email(form) %>
