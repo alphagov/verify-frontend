@@ -140,7 +140,7 @@ private
     unless cookie_matches_session?(transaction_id)
       # TODO: we think this should be noted in Piwik; probably does't need to be in the error log at all
       logger.info "The value of the Single IDP cookie does not match the session value of #{session[:transaction_entity_id]}"\
-                      " for transaction_id #{transaction_id}" + referrer_string
+                      " for transaction_id #{transaction_id} with uuid #{uuid}"
       return false
     end
 
