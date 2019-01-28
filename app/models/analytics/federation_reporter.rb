@@ -41,6 +41,16 @@ module Analytics
       )
     end
 
+    def report_unexpected_single_idp_journey(current_transaction, request, session_value, uuid)
+      report_action(
+        current_transaction,
+        request,
+        'The user unexpectedly entered the single idp journey',
+        Analytics::CustomVariable.build(:session_value, session_value)
+            .merge(Analytics::CustomVariable.build(:uuid, uuid))
+      )
+    end
+
     def report_ab_test(transaction_id, request, alternative_name)
       unless transaction_id.nil?
         current_transaction = RP_DISPLAY_REPOSITORY.get_translations(transaction_id)

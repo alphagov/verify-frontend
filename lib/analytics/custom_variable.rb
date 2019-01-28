@@ -7,6 +7,8 @@ module Analytics
       cycle_three_attribute: { name: 'CYCLE_3', index: 4 },
       idp_selection: { name: 'IDP_SELECTION', index: 5 },
       ab_test: { name: 'AB_TEST', index: 6 },
+      session_value: { name: 'SESSION_VALUE', index: 7 },
+      uuid: { name: 'UUID', index: 8 },
     }.freeze
 
     def self.build(type, value)

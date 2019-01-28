@@ -363,5 +363,22 @@ module Analytics
         federation_reporter.report_number_of_idps_recommended(current_transaction, request, 5)
       end
     end
+
+    describe '#report_unexpected_single_idp_journey' do
+      it 'should report an unexpected single idp journey' do
+        session_value = 'session_value'
+        uuid = 'uuid'
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            'The user unexpectedly entered the single idp journey',
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
+            7 => ['SESSION_VALUE', session_value],
+            8 => ['UUID', uuid]
+          )
+        federation_reporter.report_unexpected_single_idp_journey(current_transaction, request, session_value, uuid)
+      end
+    end
   end
 end
