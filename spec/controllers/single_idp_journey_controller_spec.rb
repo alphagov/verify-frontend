@@ -214,7 +214,7 @@ describe SingleIdpJourneyController do
         uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
-      expect(Rails.logger).to receive(:error).with(/The value of the Single IDP cookie does not match the session value of http:\/\/www.test-rp.gov.uk\/SAML2\/MD for transaction_id disabled-rp/)
+      expect(Rails.logger).to receive(:info).with(/The value of the Single IDP cookie does not match the session value of http:\/\/www.test-rp.gov.uk\/SAML2\/MD for transaction_id disabled-rp/)
       expect(subject).to redirect_to(start_path)
     end
 
@@ -237,7 +237,7 @@ describe SingleIdpJourneyController do
           uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
-      expect(Rails.logger).to receive(:error).with(/The value of the Single IDP cookie does not match the session value of http:\/\/www.test-rp.gov.uk\/SAML2\/MD for transaction_id test-rp-noc3/)
+      expect(Rails.logger).to receive(:info).with(/The value of the Single IDP cookie does not match the session value of http:\/\/www.test-rp.gov.uk\/SAML2\/MD for transaction_id test-rp-noc3/)
       expect(subject).to redirect_to(start_path)
     end
   end
