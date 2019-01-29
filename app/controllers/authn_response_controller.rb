@@ -32,6 +32,8 @@ class AuthnResponseController < SamlController
 
     return handle_idp_response(status, response) if ACCEPTED_IDP_RESPONSES.include?(status)
 
+    logger.info("IDP response status of '#{status}' for session ID '#{session[:verify_session_id]}' not in "\
+      "accepted IDP response statuses. Falling back to 'FAILED'")
     handle_idp_response(FAILED, response)
   end
 
