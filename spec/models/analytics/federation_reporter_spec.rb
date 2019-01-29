@@ -363,5 +363,44 @@ module Analytics
         federation_reporter.report_number_of_idps_recommended(current_transaction, request, 5)
       end
     end
+
+    describe '#report_single_idp_success' do
+      it 'should record that we are successfully continuing to the user\'s IDP' do
+        service = 'service'
+        uuid = '123'
+        expect(analytics_reporter).to receive(:report_event)
+          .with(
+            request,
+            {
+              1 => %w(RP description),
+              2 => %w(LOA_REQUESTED LEVEL_2)
+            },
+            'Single IDP',
+            'success',
+            "Service: #{service}, UUID: #{uuid}"
+          )
+        federation_reporter.report_single_idp_success(current_transaction, request, service, uuid)
+      end
+    end
+
+    describe '#report_single_idp_service_mismatch' do
+      it 'should record the expected service and the service in the request' do
+        expected_service = 'original'
+        actual_service = 'current'
+        uuid = '123'
+        expect(analytics_reporter).to receive(:report_event)
+          .with(
+            request,
+            {
+              1 => %w(RP description),
+              2 => %w(LOA_REQUESTED LEVEL_2)
+            },
+            'Single IDP',
+            'change of service',
+            "Expected service: #{expected_service}, Actual service: #{actual_service}, UUID: #{uuid}"
+          )
+        federation_reporter.report_single_idp_service_mismatch(current_transaction, request, expected_service, actual_service, uuid)
+      end
+    end
   end
 end
