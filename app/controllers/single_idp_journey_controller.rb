@@ -25,6 +25,7 @@ class SingleIdpJourneyController < ApplicationController
       @uuid = single_idp_cookie.fetch('uuid', nil)
       session[:journey_type] = 'single-idp'
       set_additional_piwik_custom_variable(:journey_type, 'SINGLE_IDP')
+      FEDERATION_REPORTER.report_single_idp_success(current_transaction, request, session[:transaction_entity_id], @uuid)
       render
     else
       redirect_to start_path
@@ -138,8 +139,11 @@ private
     return false if cookie_value_is_missing(%w(idp_entity_id transaction_id uuid))
 
     unless cookie_matches_session?(transaction_id)
-      # TODO: we think this should be noted in Piwik; probably does't need to be in the error log at all
-      logger.info "The value of the Single IDP cookie does not match the session value of #{session[:transaction_entity_id]}"\
+      actual_service_identifier = session[:transaction_entity_id]
+      FEDERATION_REPORTER.report_single_idp_service_mismatch(
+        current_transaction, request, transaction_id, actual_service_identifier, uuid
+      )
+      logger.info "The value of the Single IDP cookie does not match the session value of #{actual_service_identifier}"\
                       " for transaction_id #{transaction_id} with uuid #{uuid}"
       return false
     end

@@ -87,12 +87,32 @@ end
 
 def stub_piwik_report_number_of_recommended_idps(number_of_recommended_idps, loa, transaction_analytics_description)
   piwik_request = {
-      e_c: 'Engagement',
-      action_name: 'trackEvent',
-      e_n: 'IDPs Recommended',
-      e_a: number_of_recommended_idps.to_s
+    e_c: 'Engagement',
+    action_name: 'trackEvent',
+    e_n: 'IDPs Recommended',
+    e_a: number_of_recommended_idps.to_s
   }
   stub_piwik_request(piwik_request, {}, loa, [], transaction_analytics_description)
+end
+
+def stub_piwik_report_single_idp_success(service_id, uuid)
+  piwik_request = {
+    e_c: 'Single IDP',
+    action_name: 'trackEvent',
+    e_n: 'redirected to IDP',
+    e_a: "Service: #{service_id}, UUID: #{uuid}"
+  }
+  stub_piwik_request(piwik_request, 'User-Agent' => 'Rails Testing')
+end
+
+def stub_piwik_report_single_idp_service_mismatch(expected_service, actual_service, uuid)
+  piwik_request = {
+    e_c: 'Single IDP',
+    action_name: 'trackEvent',
+    e_n: 'change of service',
+    e_a: "Expected service: #{expected_service}, Actual service: #{actual_service}, UUID: #{uuid}"
+  }
+  stub_piwik_request(piwik_request, 'User-Agent' => 'Rails Testing')
 end
 
 def stub_piwik_journey_type_request(journey_type, action_name, loa = 'LEVEL_2')

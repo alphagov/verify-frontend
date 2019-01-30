@@ -166,6 +166,26 @@ module Analytics
       )
     end
 
+    def report_single_idp_success(current_transaction, request, service_id, uuid)
+      report_event(
+        current_transaction,
+        request,
+        'Single IDP',
+        'redirected to IDP',
+        "Service: #{service_id}, UUID: #{uuid}"
+      )
+    end
+
+    def report_single_idp_service_mismatch(current_transaction, request, expected_service, actual_service, uuid)
+      report_event(
+        current_transaction,
+        request,
+        'Single IDP',
+        'change of service',
+        "Expected service: #{expected_service}, Actual service: #{actual_service}, UUID: #{uuid}"
+      )
+    end
+
     def report_action(current_transaction, request, action, extra_custom_vars = {})
       begin
         @analytics_reporter.report_action(
