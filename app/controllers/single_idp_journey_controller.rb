@@ -25,7 +25,7 @@ class SingleIdpJourneyController < ApplicationController
       @uuid = single_idp_cookie.fetch('uuid', nil)
       session[:journey_type] = 'single-idp'
       set_additional_piwik_custom_variable(:journey_type, 'SINGLE_IDP')
-      FEDERATION_REPORTER.report_single_idp_success(current_transaction, request, @service_name, @uuid)
+      FEDERATION_REPORTER.report_single_idp_success(current_transaction, request, session[:transaction_entity_id], @uuid)
       render
     else
       redirect_to start_path

@@ -166,13 +166,13 @@ module Analytics
       )
     end
 
-    def report_single_idp_success(current_transaction, request, service_name, uuid)
+    def report_single_idp_success(current_transaction, request, service_id, uuid)
       report_event(
         current_transaction,
         request,
         'Single IDP',
-        'success',
-        "Service: #{service_name}, UUID: #{uuid}"
+        'redirected to IDP',
+        "Service: #{service_id}, UUID: #{uuid}"
       )
     end
 
@@ -182,7 +182,7 @@ module Analytics
         request,
         'Single IDP',
         'change of service',
-        %(Expected service: #{expected_service}, Actual service: #{actual_service}, UUID: #{uuid})
+        "Expected service: #{expected_service}, Actual service: #{actual_service}, UUID: #{uuid}"
       )
     end
 

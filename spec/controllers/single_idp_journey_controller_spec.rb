@@ -4,7 +4,6 @@ require 'api_test_helper'
 require 'piwik_test_helper'
 require 'partials/user_cookies_partial_controller'
 
-
 describe SingleIdpJourneyController do
   VALID_TEST_RP = 'http://www.test-rp.gov.uk/SAML2/MD'.freeze
   VALID_STUB_IDP = 'http://idcorp.com'.freeze
@@ -163,6 +162,7 @@ describe SingleIdpJourneyController do
     end
 
     subject { get :continue_to_your_idp, params: { locale: 'en' } }
+
     it 'should render /continue-to-your-idp if all is valid' do
       single_idp_cookie = {
         transaction_id: VALID_TEST_RP,
@@ -170,8 +170,10 @@ describe SingleIdpJourneyController do
         uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
+      stub_piwik_event = stub_piwik_report_single_idp_success(VALID_TEST_RP, UUID_ONE)
 
       expect(subject).to render_template(:continue_to_your_idp)
+      expect(stub_piwik_event).to have_been_made.once
     end
 
     it 'should redirect to /start if cookie is missing' do
@@ -231,17 +233,19 @@ describe SingleIdpJourneyController do
 
     it 'should redirect to /start if rp in cookie does not match the one in the session' do
       stub_api_idp_list_for_single_idp_journey('test-rp-noc3')
+      stub_piwik_event = stub_piwik_report_single_idp_service_mismatch('test-rp-noc3', VALID_TEST_RP, UUID_ONE)
       single_idp_cookie = {
           transaction_id: 'test-rp-noc3',
           idp_entity_id: VALID_STUB_IDP,
           uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
+
       expect(Rails.logger).to receive(:info).with(/The value of the Single IDP cookie does not match the session value of http:\/\/www.test-rp.gov.uk\/SAML2\/MD for transaction_id test-rp-noc3/)
-      expect(subject).to redirect_to(start_path)
+      expect(subject).to redirect_to(start_path) # call to subject is made here – NB retrospective expect statements (e.g. have_been_made) must come after this line.
+      expect(stub_piwik_event).to(have_been_made.once)
     end
   end
-
 
   context '#continue' do
     before :each do
