@@ -1,6 +1,8 @@
 module Api
   class HubResponseHandler
-    ERROR_MESSAGE_PATTERN = "Received %s with error message: %s, type: '%s' and id: '%s'".freeze
+    ERROR_MESSAGE_PATTERN = "Unexpected error whilst trying to communicate wth the Hub. " \
+                            "Received %s with error message: %s, type: '%s' and id: '%s'\n" \
+                            "The Hub may be unreachable. Check all services are running and are accessible".freeze
 
     def handle_response(response_status, response_body)
       if response_status.success?
