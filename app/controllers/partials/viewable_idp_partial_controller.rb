@@ -20,6 +20,7 @@ module ViewableIdpPartialController
     end
   end
 
+
   def for_viewable_idp(entity_id, identity_provider_list)
     matching_idp = identity_provider_list.detect { |idp| idp.entity_id == entity_id }
     idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
@@ -38,6 +39,10 @@ module ViewableIdpPartialController
 
   def current_identity_providers_for_sign_in
     CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps.select(&:authentication_enabled)
+  end
+
+  def current_temporarily_unavailable_identity_providers_for_sign_in
+    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps.select(&:temporarily_unavailable)
   end
 
   def current_disconnected_identity_providers_for_sign_in

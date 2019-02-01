@@ -36,6 +36,7 @@
 
 <div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
   <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
+  <%= render partial: 'shared/idp_list', locals: {identity_providers: @temporarily_unavailable_identity_providers} %>
   <%= render partial: 'shared/unavailable_idp_list', locals: {unavailable_identity_providers: @unavailable_identity_providers, offset: @identity_providers.count} %>
   <%= render partial: 'shared/continue_to_idp_form' %>
 </div>
