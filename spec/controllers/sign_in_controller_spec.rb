@@ -62,6 +62,10 @@ describe SignInController do
       expect(subject.current_temporarily_unavailable_identity_providers_for_sign_in.length).to eq(1)
     end
 
+    it 'will have two available IDPs' do
+      expect(subject.current_identity_providers_for_sign_in.length).to eq(2)
+    end
+
     context 'with idp journey hint cookie' do
       before :each do
         cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { entity_id: 'http://idcorp.com', SUCCESS: 'http://idcorp.com' }.to_json
