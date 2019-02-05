@@ -177,13 +177,13 @@ describe SingleIdpJourneyController do
     end
 
     it 'should redirect to /start if cookie is missing' do
-      expect(Rails.logger).to receive(:error).with(/Single IDP cookies was not found or was malformed/)
+      expect(Rails.logger).to receive(:warn).with(/Single IDP cookies was not found or was malformed/)
       expect(subject).to redirect_to(start_path)
     end
 
     it 'should redirect to /start if cookie is corrupted' do
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = "blah"
-      expect(Rails.logger).to receive(:error).with(/Single IDP cookies was not found or was malformed/)
+      expect(Rails.logger).to receive(:warn).with(/Single IDP cookies was not found or was malformed/)
       expect(subject).to redirect_to(start_path)
     end
 
