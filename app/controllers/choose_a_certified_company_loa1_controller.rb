@@ -6,6 +6,7 @@ class ChooseACertifiedCompanyLoa1Controller < ApplicationController
 
   def index
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_loa)
+    @recommended_idps = @recommended_idps.reject(&:temporarily_unavailable) + @recommended_idps.select(&:temporarily_unavailable)
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
     render 'choose_a_certified_company/choose_a_certified_company_LOA1'
   end

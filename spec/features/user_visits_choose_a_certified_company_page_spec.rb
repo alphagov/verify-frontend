@@ -78,7 +78,7 @@ describe 'When the user visits the choose a certified company page' do
   end
 
   context 'user is from an LOA1 service' do
-    it 'only LEVEL_1 recommended IDPs are displayed' do
+    before(:each) do
       stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
       page.set_rack_session(
         transaction_simple_id: 'test-rp',
@@ -89,7 +89,9 @@ describe 'When the user visits the choose a certified company page' do
           phone: { mobile_phone: true }
         },
       )
+    end
 
+    it 'only LEVEL_1 recommended IDPs are displayed' do
       visit '/choose-a-certified-company'
 
       expect(page).to have_current_path(choose_a_certified_company_path)
@@ -97,6 +99,12 @@ describe 'When the user visits the choose a certified company page' do
       within('#matching-idps') do
         expect(page).to have_button('Choose LOA1 Corp')
       end
+    end
+
+    it 'unavailable LEVEL_1 recommended IDPs are marked as unavailable' do
+      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1), 'temporarilyUnavailable' => true }], 'LEVEL_1')
+      visit '/choose-a-certified-company'
+      expect(page).to have_content t('hub.certified_companies_unavailable.singular_title', company: 'IDCorp')
     end
   end
 
