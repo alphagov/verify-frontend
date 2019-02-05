@@ -124,7 +124,9 @@ private
 
   def valid_cookie?
     if single_idp_cookie.nil?
-      logger.error "Single IDP cookies was not found or was malformed" + referrer_string
+      # This is still valid behaviour, it can be the users session has genuinely expired,
+      # or that the session has been tampered with.
+      logger.warn "Single IDP cookies was not found or was malformed" + referrer_string
       return false
     end
     true
