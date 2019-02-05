@@ -11,6 +11,7 @@ module Display
     delegate :to_key, to: :identity_provider
     delegate :authentication_enabled, to: :identity_provider
     delegate :display_name, :about_content, :requirements, :special_no_docs_instructions, :no_docs_requirement, :contact_details, :interstitial_question, :interstitial_explanation, :mobile_app_installation, :tagline, to: :display_data
+    delegate :temporarily_unavailable, to: :identity_provider
 
     def viewable?
       true

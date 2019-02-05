@@ -20,7 +20,6 @@ module ViewableIdpPartialController
     end
   end
 
-
   def for_viewable_idp(entity_id, identity_provider_list)
     matching_idp = identity_provider_list.detect { |idp| idp.entity_id == entity_id }
     idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)

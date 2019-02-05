@@ -8,7 +8,9 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
     session[:selected_answers]&.delete('interstitial')
     suggestions = recommendation_engine.get_suggested_idps(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
+    @recommended_idps = @recommended_idps.reject(&:temporarily_unavailable) + @recommended_idps.select(&:temporarily_unavailable)
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
+    @non_recommended_idps = @non_recommended_idps.reject(&:temporarily_unavailable) + @non_recommended_idps.select(&:temporarily_unavailable)
     session[:user_segments] = suggestions[:user_segments]
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
     render 'choose_a_certified_company/choose_a_certified_company_LOA2'

@@ -65,4 +65,12 @@ module ApplicationHelper
     options[:role] = 'button'
     link_to text, path, options
   end
+
+  def unavailable_certified_company_title(unavailable_companies)
+    if unavailable_companies.length == 1
+      'hub.certified_companies_unavailable.singular_title'
+    else
+      'hub.certified_companies_unavailable.plural_title'
+    end
+  end
 end

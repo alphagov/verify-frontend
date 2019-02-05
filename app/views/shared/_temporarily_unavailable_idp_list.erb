@@ -1,0 +1,23 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h2 class="heading-medium"><%= t(unavailable_certified_company_title(unavailable_identity_providers), company: unavailable_identity_providers.first.display_name) %></h2>
+    <p><%=
+      t('hub.certified_companies_unavailable.verify_another_company_html', link: link_to(t('hub.certified_company_unavailable.verify_another_company_link'), about_certified_companies_path))
+    %></p>
+  </div>
+</div>
+
+<% unavailable_identity_providers.each do |identity_provider| %>
+  <div class="column-one-third company-wrapper">
+    <div class="company">
+      <div class="company-inner">
+        <div class="company-logo">
+          <div class="company-logo-inner">
+            <%= image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)) %>
+          </div>
+        </div>
+      </div>
+      <p class="subtitle"><%= identity_provider.display_name %> is unavailable</p>
+    </div>
+  </div>
+<% end %>
