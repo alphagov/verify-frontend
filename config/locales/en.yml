@@ -50,7 +50,6 @@ en:
     redirect_to_service_error: redirect-to-service/error
     feedback: feedback
     feedback_sent: feedback/feedback-sent
-    certified_company_unavailable: certified-company-unavailable
     further_information: further-information
     further_information_timeout: further-information/timeout
     further_information_cancel: further-information/cancel
@@ -504,11 +503,6 @@ en:
       verify_another_company_link: verify your identity with another certified company
       verify_another_company_text: You can try again later or verify your identity with another certified company.
       company_text: "%{company} is unavailable"
-    certified_company_unavailable:
-      title: This certified company is unavailable
-      sorry: Sorry, %{display_name} is not available.
-      verify_another_company_html: To access government services, you must %{link}.
-      verify_another_company_link: verify your identity with another certified company
     certified_companies_disconnected:
       title: The following companies are no longer part of GOV.UK Verify
       verify_another_company_html: If you had an identity account with one of these companies, you'll need to %{link}.

@@ -33,7 +33,6 @@ CONFIG = Configuration.load! do
   option_string 'zendesk_token', 'ZENDESK_TOKEN'
   option_string 'zendesk_proxy', 'ZENDESK_PROXY', allow_missing: true
   option_string 'rp_config', 'RP_CONFIG', default: "#{FED_CONFIG_DIR}/relying_parties.yml"
-  option_string 'idp_config', 'IDP_CONFIG'
   option_string 'cycle_three_attributes_directory', 'CYCLE_THREE_ATTRIBUTES_DIRECTORY', default: "#{FED_CONFIG_DIR}/cycle-three-attributes/"
   option_string 'ab_test_file', 'AB_TEST_FILE', allow_missing: true
   option_string 'segment_definitions', 'SEGMENT_DEFINITIONS', default: "#{FED_CONFIG_DIR}/segment_definitions.yml"
