@@ -36,16 +36,20 @@ module ViewableIdpPartialController
     CONFIG_PROXY.get_idp_list_for_loa(session[:transaction_entity_id], session[:requested_loa]).idps
   end
 
+  def current_all_identity_providers_for_sign_in
+    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps
+  end
+
   def current_identity_providers_for_sign_in
-    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps.select(&:authentication_enabled).reject(&:temporarily_unavailable)
+    current_all_identity_providers_for_sign_in.select(&:authentication_enabled).reject(&:temporarily_unavailable)
   end
 
   def current_temporarily_unavailable_identity_providers_for_sign_in
-    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps.select(&:temporarily_unavailable)
+    current_all_identity_providers_for_sign_in.select(&:temporarily_unavailable)
   end
 
   def current_disconnected_identity_providers_for_sign_in
-    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps.reject(&:authentication_enabled)
+    current_all_identity_providers_for_sign_in.reject(&:authentication_enabled)
   end
 
   def current_identity_providers_for_rp_sign_in(rp_entity_id)
