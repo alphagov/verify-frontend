@@ -1,6 +1,8 @@
 <div class="grid-row">
   <div class="column-two-thirds">
-    <h2 class="heading-medium"><%= t(unavailable_certified_company_title(unavailable_identity_providers), company: unavailable_identity_providers.first.display_name) %></h2>
+    <h2 class="heading-medium"><%= t('hub.certified_companies_unavailable.title',
+                                     count: unavailable_identity_providers.length,
+                                     company: unavailable_identity_providers.first.display_name) %></h2>
     <p><%=
       t('hub.certified_companies_unavailable.verify_another_company_html', link: link_to(t('hub.certified_company_unavailable.verify_another_company_link'), about_certified_companies_path))
     %></p>

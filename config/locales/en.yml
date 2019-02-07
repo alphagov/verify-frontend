@@ -497,8 +497,9 @@ en:
       session_not_valid_link: start again
       product_page: Return to the GOV.UK Verify product page
     certified_companies_unavailable:
-      singular_title: "%{company} is temporarily unavailable with GOV.UK Verify"
-      plural_title: These companies are temporarily unavailable with GOV.UK Verify
+      title:
+        one: "%{company} is temporarily unavailable with GOV.UK Verify"
+        other: These companies are temporarily unavailable with GOV.UK Verify
       verify_another_company_html: You can try again later or %{link}.
       verify_another_company_link: verify your identity with another certified company
       verify_another_company_text: You can try again later or verify your identity with another certified company.
