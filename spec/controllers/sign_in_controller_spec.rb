@@ -63,7 +63,7 @@ describe SignInController do
     end
 
     it 'will have two available IDPs' do
-      expect(subject.current_identity_providers_for_sign_in.length).to eq(2)
+      expect(subject.current_available_identity_providers_for_sign_in.length).to eq(2)
     end
 
     context 'with idp journey hint cookie' do
