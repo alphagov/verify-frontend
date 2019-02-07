@@ -59,4 +59,8 @@ module ViewableIdpPartialController
   def current_identity_providers_for_single_idp
     CONFIG_PROXY.get_idp_list_for_single_idp(session[:transaction_entity_id]).idps
   end
+
+  def order_with_unavailable_last(idps)
+    idps.reject(&:temporarily_unavailable) + idps.select(&:temporarily_unavailable)
+  end
 end
