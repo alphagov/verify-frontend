@@ -10,6 +10,16 @@ describe RedirectToIdpController do
     session[:selected_idp_was_recommended] = [true, false].sample
   end
 
+  context 'single idp journey without cookies' do
+    subject { get :single_idp, params: { locale: 'en' } }
+
+    it 'renders a session timeout page' do
+      cookies.delete CookieNames::VERIFY_SINGLE_IDP_JOURNEY
+      expect(subject).to render_template(:session_timeout)
+      subject
+    end
+  end
+
   context 'continuing to idp with javascript disabled' do
     bobs_identity_service = { 'simple_id' => 'stub-idp-two',
                               'entity_id' => 'http://idcorp.com',
@@ -188,7 +198,7 @@ describe RedirectToIdpController do
         subject
       end
 
-      it 'reports idp sign in attempt details to piwik when a user followes the journey hint' do
+      it 'reports idp sign in attempt details to piwik when a user follows the journey hint' do
         session[:user_segments] = ['test-segment']
         session[:transaction_simple_id] = 'test-rp'
         session[:journey_type] = 'sign-in'
