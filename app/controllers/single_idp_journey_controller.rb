@@ -5,14 +5,18 @@ require 'partials/idp_selection_partial_controller'
 require 'partials/viewable_idp_partial_controller'
 require 'partials/retrieve_federation_data_partial_controller'
 require 'partials/analytics_cookie_partial_controller'
+require 'partials/single_idp_partial_controller'
 
 class SingleIdpJourneyController < ApplicationController
+  before_action :do_not_cache
+
   layout 'slides', except: :rp_start_page
 
   include IdpSelectionPartialController
   include ViewableIdpPartialController
   include RetrieveFederationDataPartialController
   include AnalyticsCookiePartialController
+  include SingleIdpPartialController
 
   protect_from_forgery except: :redirect_from_idp
   skip_before_action :validate_session, only: %i{redirect_from_idp rp_start_page}
@@ -116,22 +120,6 @@ private
     set_single_idp_journey_cookie(data)
   end
 
-  def single_idp_cookie
-    MultiJson.load(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
-  rescue MultiJson::ParseError
-    nil
-  end
-
-  def valid_cookie?
-    if single_idp_cookie.nil?
-      # This is still valid behaviour, it can be the users session has genuinely expired,
-      # or that the session has been tampered with.
-      logger.warn "Single IDP cookies was not found or was malformed" + referrer_string
-      return false
-    end
-    true
-  end
-
   def valid_selection?
     idp_entity_id = single_idp_cookie.fetch('idp_entity_id', nil)
     transaction_id = single_idp_cookie.fetch('transaction_id', nil)
@@ -208,7 +196,7 @@ private
     value_is_missing
   end
 
-  def referrer_string
-    " - referrer: " + (request.nil? || request.referer.nil? ? "[could not get the referrer]" : request.referer)
+  def do_not_cache
+    response.headers['Cache-Control'] = 'no-cache, no-store, no-transform'
   end
 end
