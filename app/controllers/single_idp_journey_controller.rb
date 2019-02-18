@@ -105,10 +105,7 @@ private
   end
 
   def get_idp_list(transaction_id)
-    list = CONFIG_PROXY.get_idp_list_for_single_idp(transaction_id)
-    return nil if list.nil?
-
-    list.idps
+    CONFIG_PROXY.get_idp_list_for_single_idp(transaction_id)&.idps
   end
 
   def save_to_cookie(transaction_id, idp_entity_id, uuid)
@@ -173,27 +170,23 @@ private
   end
 
   def params_are_missing(params_keys)
-    params_are_missing = false
     params_keys.each do |param_key|
       if params[param_key].nil?
         logger.error "Single IDP parameter #{param_key} is missing" + referrer_string
-        params_are_missing = true
-        break
+        return true
       end
     end
-    params_are_missing
+    false
   end
 
   def cookie_value_is_missing(cookie_keys)
-    value_is_missing = false
     cookie_keys.each do |cookie_key|
       if single_idp_cookie.fetch(cookie_key, nil).nil?
         logger.error "Single IDP cookie value for #{cookie_key} is missing" + referrer_string
-        value_is_missing = true
-        break
+        return true
       end
     end
-    value_is_missing
+    false
   end
 
   def do_not_cache
