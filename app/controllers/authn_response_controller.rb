@@ -21,7 +21,7 @@ class AuthnResponseController < SamlController
   RESUMING_JOURNEY_TYPE = 'resuming'
 
   ACCEPTED_IDP_RESPONSES = [SUCCESS, MATCHING_JOURNEY_SUCCESS, NON_MATCHING_JOURNEY_SUCCESS, CANCEL, FAILED_UPLIFT, PENDING].freeze
-  ACCEPTED_COUNTRY_RESPONSES = [SUCCESS, CANCEL, FAILED_UPLIFT].freeze
+  ACCEPTED_COUNTRY_RESPONSES = [SUCCESS, NON_MATCHING_JOURNEY_SUCCESS, CANCEL, FAILED_UPLIFT].freeze
 
   def idp_response
     raise_error_if_session_mismatch(params['RelayState'], session[:verify_session_id])
@@ -140,6 +140,7 @@ private
     is_registration = response.is_registration
     {
       SUCCESS => is_registration ? confirmation_path : response_processing_path,
+      NON_MATCHING_JOURNEY_SUCCESS => redirect_to_service_signing_in_path,
       CANCEL => is_registration ? failed_registration_path : start_path,
       FAILED_UPLIFT => failed_uplift_path,
       FAILED => is_registration ? failed_registration_path : failed_country_sign_in_path

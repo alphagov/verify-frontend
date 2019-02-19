@@ -63,6 +63,7 @@ describe AuthnResponseController do
   context 'country' do
     context 'registration' do
       include_examples 'country_authn_response', 'registration', 'SUCCESS', :confirmation_path
+      include_examples 'country_authn_response', 'registration', 'NON_MATCHING_JOURNEY_SUCCESS', :redirect_to_service_signing_in_path
       include_examples 'country_authn_response', 'registration', 'CANCEL', :failed_registration_path
       include_examples 'country_authn_response', 'registration', 'FAILED_UPLIFT', :failed_uplift_path
       include_examples 'country_authn_response', 'registration', 'FAILED', :failed_registration_path
@@ -70,6 +71,7 @@ describe AuthnResponseController do
 
     context 'sign_in' do
       include_examples 'country_authn_response', 'sign_in', 'SUCCESS', :response_processing_path
+      include_examples 'country_authn_response', 'sign_in', 'NON_MATCHING_JOURNEY_SUCCESS', :redirect_to_service_signing_in_path
       include_examples 'country_authn_response', 'sign_in', 'CANCEL', :start_path
       include_examples 'country_authn_response', 'sign_in', 'FAILED_UPLIFT', :failed_uplift_path
       include_examples 'country_authn_response', 'sign_in', 'FAILED', :failed_country_sign_in_path
