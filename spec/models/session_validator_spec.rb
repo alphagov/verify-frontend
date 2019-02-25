@@ -22,7 +22,8 @@ describe SessionValidator do
       start_time: Time.now.to_i * 1000,
       verify_session_id: 'session_id',
       identity_providers: [{ 'simple_id' => 'stub-idp-one' }],
-      requested_loa: 'LEVEL_1'
+      requested_loa: 'LEVEL_1',
+      transaction_entity_id: 'test-rp'
     }
   }
 
@@ -42,6 +43,7 @@ describe SessionValidator do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
     session[:start_time] = Time.now.to_i * 1000
     session[:verify_session_id] = 'session_id'
+    session[:transaction_entity_id] = 'test-rp'
     validation = session_validator.validate(cookies, session)
     expect(validation).to be_ok
   end
@@ -135,6 +137,23 @@ describe SessionValidator do
     expect(validation).to_not be_ok
     expect(validation.type).to eql :something_went_wrong
     expect(validation.message).to eql "Requested LOA can not be found in the user's session"
+  end
+
+  it 'will fail validation if transaction entity id is missing' do
+    session = good_session
+    session.delete(:transaction_entity_id)
+    session[:verify_session_id] = 'session_id'
+    cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
+    logger = double(:logger)
+    stub_const('Rails', double(:rails, logger: logger))
+    expect(logger).to receive(:error).with(/Transaction entity ID/)
+    validation = session_validator.validate(cookies, session)
+
+    # To be turned on once we're certain that this does not raise any false positives.
+    expect(validation).to be_ok # delete this line and uncomment the rest below
+    # expect(validation).to_not be_ok
+    # expect(validation.type).to eql :something_went_wrong
+    # expect(validation.message).to eql "Transaction entity ID can not be found in the user's session"
   end
 
   it 'will log an error if the session cookie is getting too large' do

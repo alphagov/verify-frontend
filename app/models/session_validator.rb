@@ -7,7 +7,8 @@ class SessionValidator
       TransactionSimpleIdPresence.new,
       SessionStartTimeValidator.new(session_duration),
       CookieSizeValidator.new,
-      RequestedLOAValidator.new
+      RequestedLOAValidator.new,
+      TransactionEntityIdPresence.new
     ]
   end
 
