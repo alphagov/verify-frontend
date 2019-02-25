@@ -10,15 +10,21 @@
   </div>
 </div>
 
-<% if defined?(@suggested_idp) && !@suggested_idp.empty? %>
+<% unless @suggested_idp.nil? %>
   <div class="grid-row">
     <div class="column-two-thirds">
-      <p><%= t 'hub.signin.last_certified', company_name: @suggested_idp[0].display_name %></p>
+      <p><%= t 'hub.signin.last_certified', company_name: @suggested_idp.display_name %></p>
     </div>
   </div>
-  <div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
-    <%= render partial: 'shared/idp_list', locals: {identity_providers: @suggested_idp} %>
-  </div>
+
+  <% if @suggested_idp.authentication_enabled %>
+    <div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
+      <%= render partial: 'shared/idp_list', locals: {identity_providers: [@suggested_idp]} %>
+    </div>
+  <% else %>
+    <%= render partial: 'shared/disconnected_suggested_idp_list', locals: {identity_provider: @suggested_idp} %>
+  <% end %>
+
   <div class="grid-row">
     <div class="column-two-thirds">
       <p><%= t 'hub.signin.any_certified_company' %></p>

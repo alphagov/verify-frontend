@@ -18,6 +18,18 @@
   }
 }
 
+.company-full-width {
+  overflow: auto;
+  margin: 15px;
+  border-bottom: 1px solid $border-colour;
+  text-align: center;
+
+  @include media (tablet) {
+    border: 5px solid $panel-colour;
+    margin-bottom: 30px;
+  }
+}
+
 .company.no-underline {
   border-bottom: none;
   padding-bottom: 30px;

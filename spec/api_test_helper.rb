@@ -371,6 +371,7 @@ private
       { 'simpleId' => 'stub-idp-demo', 'entityId' => 'demo-entity-id', 'levelsOfAssurance' => %w(LEVEL_2) },
       { 'simpleId' => 'stub-idp-loa1', 'entityId' => 'loa1-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) },
       { 'simpleId' => 'stub-idp-loa1-with-interstitial', 'entityId' => 'loa1-entity-id-with-interstitial', 'levelsOfAssurance' => %w(LEVEL_1) },
+      { 'simpleId' => 'stub-idp-unavailable', 'entityId' => 'unavailable-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2), "authenticationEnabled" => false }
     ]
   end
 end

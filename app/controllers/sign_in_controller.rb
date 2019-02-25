@@ -9,9 +9,10 @@ class SignInController < ApplicationController
 
   def index
     entity_id = success_entity_id
-    @suggested_idp = entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, entity_id)
-    unless @suggested_idp.empty?
-      FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp[0].display_name)
+    all_identity_providers = current_identity_providers_for_sign_in + current_disconnected_identity_providers_for_sign_in
+    @suggested_idp = entity_id && retrieve_decorated_singleton_idp_array_by_entity_id(all_identity_providers, entity_id).first
+    unless @suggested_idp.nil?
+      FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp.display_name)
     end
 
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_sign_in)
@@ -21,7 +22,6 @@ class SignInController < ApplicationController
     )
 
     @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_disconnected_identity_providers_for_sign_in)
-
     render :index
   end
 

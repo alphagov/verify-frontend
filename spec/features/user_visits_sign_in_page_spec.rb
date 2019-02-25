@@ -149,7 +149,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         page.set_rack_session(transaction_simple_id: 'test-rp')
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
-        expect(page).to have_text 'You can use an identity account you set up with any certified company in the past:'
+        expect(page).to have_text 'You can use an identity account you set up with any of these companies:'
         expect(page).to have_text "The last certified company used on this device was #{idp_display_name}."
         expect(page).to have_button("Select #{idp_display_name}", count: 2)
         then_piwik_was_sent_a_journey_hint_shown_event_for(idp_display_name)
@@ -182,7 +182,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
         then_piwik_was_sent_a_journey_hint_shown_event_for(hinted_idp_name)
-        expect(page).to have_text 'You can use an identity account you set up with any certified company in the past:'
+        expect(page).to have_text 'You can use an identity account you set up with any of these companies:'
         expect(page).to have_text "The last certified company used on this device was #{hinted_idp_name}."
         expect(page).to have_button("Select #{hinted_idp_name}", count: 2)
 
@@ -193,6 +193,22 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         and_the_language_hint_is_set
         and_the_hints_are_not_set
         expect(page.get_rack_session_key('selected_provider')['identity_provider']).to include('entity_id' => idp_entity_id, 'simple_id' => 'stub-idp-one', 'levels_of_assurance' => %w(LEVEL_2))
+      end
+    end
+
+    context 'with an idp-hint cookie for a disconnected IDP' do
+      hinted_idp_name = 'Unavailable IDP'
+
+      before :each do
+        set_journey_hint_cookie('unavailable-entity-id', 'SUCCESS')
+      end
+
+      it 'will tell the user the hinted IDP is disconnected' do
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page
+
+        expect(page).to have_text "#{hinted_idp_name} is no longer a part of GOV.UK Verify"
+        expect(page).to_not have_button("Select #{hinted_idp_name}")
       end
     end
   end
