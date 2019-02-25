@@ -105,6 +105,16 @@ def stub_piwik_report_single_idp_success(service_id, uuid)
   stub_piwik_request(piwik_request, 'User-Agent' => 'Rails Testing')
 end
 
+def stub_piwik_report_single_idp_invalid_cookie
+  piwik_request = {
+    e_c: 'Single IDP',
+    action_name: 'trackEvent',
+    e_n: 'invalid cookie',
+    e_a: "Missing or malformed cookie"
+  }
+  stub_piwik_request(piwik_request, 'User-Agent' => 'Rails Testing')
+end
+
 def stub_piwik_report_single_idp_service_mismatch(expected_service, actual_service, uuid)
   piwik_request = {
     e_c: 'Single IDP',
