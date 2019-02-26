@@ -116,6 +116,26 @@ module Analytics
           user_segments: %w(segment1 segment2)
         )
       end
+
+      it 'should report default idp history to the chosen idp' do
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            "#{idp_name} was chosen for registration (recommended) with segment(s) segment1 and evidence passport",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
+            5 => ['IDP_SELECTION', idp_name]
+          )
+        federation_reporter.report_idp_registration(
+          current_transaction: current_transaction,
+          request: request,
+          idp_name: idp_name,
+          idp_name_history: nil,
+          evidence: %w(passport),
+          recommended: '(recommended)',
+          user_segments: %w(segment1)
+        )
+      end
     end
 
     describe '#report_user_idp_attempt' do
