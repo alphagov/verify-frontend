@@ -99,6 +99,7 @@ module Analytics
     def report_idp_registration(current_transaction:, request:, idp_name:, idp_name_history:, evidence:, recommended:, user_segments:)
       list_of_evidence = evidence.sort.join(', ')
       list_of_segments = user_segments.nil? ? nil : user_segments.sort.join(', ')
+      idp_name_history ||= [idp_name]
       report_action(
         current_transaction,
         request,
