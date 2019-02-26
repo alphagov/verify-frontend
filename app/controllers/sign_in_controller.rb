@@ -22,6 +22,8 @@ class SignInController < ApplicationController
     )
 
     @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_disconnected_identity_providers_for_sign_in)
+    @idp_disconnected_alternative_html = current_transaction.idp_disconnected_alternative_html
+
     render :index
   end
 

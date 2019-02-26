@@ -208,6 +208,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         given_im_on_the_sign_in_page
 
         expect(page).to have_text "#{hinted_idp_name} is no longer a part of GOV.UK Verify"
+        expect(page).to have_text 'or go elsewhere'
         expect(page).to_not have_button("Select #{hinted_idp_name}")
       end
     end

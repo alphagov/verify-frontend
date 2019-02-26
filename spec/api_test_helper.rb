@@ -83,7 +83,8 @@ module ApiTestHelper
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
         "taxonName":"Benefits",
         "singleIdpStartPageTitle": "This is the Single IDP Start Page Title",
-        "singleIdpStartPageContent": "This is the Single IDP Start Page Content <a href=\'%<start_url>s\'>Sign In</a>"
+        "singleIdpStartPageContent": "This is the Single IDP Start Page Content <a href=\'%<start_url>s\'>Sign In</a>",
+        "idpDisconnectedAlternativeHtml": " or <a href=\"https://www.example.com\">go elsewhere</a>"
       }'
     stub_request(:get, api_translations_endpoint('test-rp', 'en')).to_return(body: en_translation_data, status: 200)
     cy_translation_data = '{
