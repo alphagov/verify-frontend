@@ -504,10 +504,10 @@ cy:
       product_page: Dychwelyd i dudalen GOV.UK  Verify
     certified_companies_unavailable:
       title:
-        one: "%{company} is temporarily unavailable with GOV.UK Verify"
+        one: "Nid yw %{company} ar gael ar hyn o bryd ar GOV.UK Verify"
         other: Nid yw'r cwmnïau hyn ar gael dros dro gyda GOV.UK Verify
-      verify_another_company_html: You can try again later or %{link}.
-      verify_another_company_link: verify your identity with another certified company
+      verify_another_company_html: Gallwch gynnig eto yn nes ymlaen neu %{link}.
+      verify_another_company_link: dilysu eich hunaniaeth gyda chwmni ardystiedig arall
       verify_another_company_text: Gallwch geisio nes ymlaen eto neu wirio'ch hunaniaeth gyda chwmni ardystiedig arall.
     certified_company_unavailable:
       title: Nid yw'r cwmni ardystiedig hwn ar gael
