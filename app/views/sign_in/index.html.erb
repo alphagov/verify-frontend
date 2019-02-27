@@ -22,7 +22,9 @@
       <%= render partial: 'shared/idp_list', locals: {identity_providers: [@suggested_idp]} %>
     </div>
   <% else %>
-    <%= render partial: 'shared/disconnected_suggested_idp_list', locals: {identity_provider: @suggested_idp} %>
+    <div  class="grid-row">
+      <%= render partial: 'shared/disconnected_suggested_idp_list', locals: {identity_provider: @suggested_idp} %>
+    </div>
   <% end %>
 
   <div class="grid-row">
