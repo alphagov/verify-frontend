@@ -97,7 +97,7 @@ cy:
       country_not_listed_heading: Nid yw fy ngwlad wedi'i restru
       country_not_listed_description: Os nad yw eich cwmni wedi ymuno eto, mae
       country_not_listed_link: ffyrdd eraill i %{other_ways_description}.
-      select_label: "Dewis "
+      select_label: "Dewis %{scheme_name}"
     redirect_to_country:
       title: Ailgyfeirio i wlad
       heading: Mynd ymlaen i’r cam nesaf

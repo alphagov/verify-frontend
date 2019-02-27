@@ -29,7 +29,13 @@
               <div class="scheme-button">
                 <%= form_tag choose_a_country_submit_path, :class => 'js-country-form' do %>
                   <%= hidden_field_tag :country, country.simple_id, class: 'js-country-simple-id' %>
-                  <button class="button"><%= t 'hub.choose_a_country.select_label' %><%= scheme.display_name %></button>
+                  <%= button_tag t('hub.choose_a_country.select_label', scheme_name: scheme.display_name),
+                             class: 'button',
+                             name: country.simple_id,
+                             id: nil,
+                             type: 'submit',
+                             value: scheme.display_name
+                  %>
                 <% end %>
               </div>
             </div>
