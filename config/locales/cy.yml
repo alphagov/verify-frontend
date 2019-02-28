@@ -135,7 +135,7 @@ cy:
       about_link: Dechreuwch nawr
       registration_message_html: Os nad oes gennych gyfrif hunaniaeth, gallwch %{href}.
       last_certified: "Y cwmni ardystiedig diwethaf a ddefnyddiwyd ar y ddyfais hon oedd %{company_name}"
-      any_certified_company: "Gallwch ddefnyddio cyfrif hunaniaeth a sefydlwyd gennych gydag unrhyw yn o'r cwmnïau hyn:"
+      any_certified_company: "Gallwch ddefnyddio cyfrif hunaniaeth a sefydlwyd gennych gydag unrhyw un o'r cwmnïau hyn:"
       select_idp: Ddewis %{display_name}
       sign_in_idp: Llofnodi i mewn gyda %{display_name}
       forgot_company: Ni allaf gofio pa gwmni wnaeth fy nilysu
