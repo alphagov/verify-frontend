@@ -13,6 +13,7 @@ class SignInController < ApplicationController
     @suggested_idp = entity_id && retrieve_decorated_singleton_idp_array_by_entity_id(all_identity_providers, entity_id).first
     unless @suggested_idp.nil?
       FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp.display_name)
+      @idp_disconnected_hint_html = get_disconnection_hint_text(@suggested_idp.display_name)
     end
 
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_sign_in)
@@ -22,7 +23,6 @@ class SignInController < ApplicationController
     )
 
     @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_disconnected_identity_providers_for_sign_in)
-    @idp_disconnected_alternative_html = current_transaction.idp_disconnected_alternative_html
 
     render :index
   end
@@ -53,5 +53,13 @@ private
   def unavailable_idps
     api_idp_simple_ids = current_identity_providers_for_sign_in.map(&:simple_id)
     UNAVAILABLE_IDPS.reject { |simple_id| api_idp_simple_ids.include?(simple_id) }
+  end
+
+  def get_disconnection_hint_text(idp_name)
+    if current_transaction.idp_disconnected_hint_html.nil?
+      t('hub.signin.company_no_longer_verifies_text', company: idp_name, link: link_to(t('hub.signin.company_no_longer_verifies_link'), begin_registration_path))
+    else
+      format(current_transaction.idp_disconnected_hint_html, company: idp_name, begin_registration_path: begin_registration_path)
+    end
   end
 end

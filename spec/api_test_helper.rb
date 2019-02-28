@@ -56,6 +56,10 @@ module ApiTestHelper
       {
         'simpleId' => 'test-rp-with-continue-on-fail', 'serviceHomepage' => 'http://localhost:50130/test-rp-with-continue-on-fail',
         'loaList' => %w(LEVEL_2), 'headlessStartpage' => 'http://localhost:50130/success?rp-name=test-rp-with-continue-on-fail'
+      },
+      {
+        'simpleId' => 'test-rp-with-custom-hint', 'serviceHomepage' => 'http://localhost:50130/test-rp-with-custom-hint',
+        'loaList' => %w(LEVEL_2), 'headlessStartpage' => 'http://localhost:50130/success?rp-name=test-rp-with-custom-hint'
       }
     ]
 
@@ -83,8 +87,7 @@ module ApiTestHelper
         "tailoredText":"External data source: EN: This is tailored text for test-rp",
         "taxonName":"Benefits",
         "singleIdpStartPageTitle": "This is the Single IDP Start Page Title",
-        "singleIdpStartPageContent": "This is the Single IDP Start Page Content <a href=\'%<start_url>s\'>Sign In</a>",
-        "idpDisconnectedAlternativeHtml": " or <a href=\"https://www.example.com\">go elsewhere</a>"
+        "singleIdpStartPageContent": "This is the Single IDP Start Page Content <a href=\'%<start_url>s\'>Sign In</a>"
       }'
     stub_request(:get, api_translations_endpoint('test-rp', 'en')).to_return(body: en_translation_data, status: 200)
     cy_translation_data = '{
@@ -148,6 +151,19 @@ module ApiTestHelper
       }', status: 200)
     stub_request(:get, api_translations_endpoint('foobar', 'en')).to_return(body: en_translation_data, status: 200)
     stub_request(:get, api_translations_endpoint('foobar', 'cy')).to_return(body: '{}', status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-custom-hint', 'en')).to_return(body: '{
+        "name":"test GOV.UK Verify user journeys",
+        "rpName":"Test RP with custom hint",
+        "analyticsDescription":"analytics description for test-rp",
+        "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        "otherWaysDescription":"test GOV.UK Verify user journeys",
+        "tailoredText":"External data source: EN: This is tailored text for test-rp",
+        "taxonName":"Benefits",
+        "singleIdpStartPageTitle": "This is the Single IDP Start Page Title",
+        "singleIdpStartPageContent": "This is the Single IDP Start Page Content <a href=\'%<start_url>s\'>Sign In</a>",
+        "idpDisconnectedAlternativeHtml": "If you have an identity account with %<company>s, you’ll need to <a href=\"%<begin_registration_path>s\">verify your identity with another company</a> or <a href=\"https://www.universal-credit.service.gov.uk/sign-in\">sign in with your Universal Credit account</a>"
+      }', status: 200)
+    stub_request(:get, api_translations_endpoint('test-rp-custom-hint', 'cy')).to_return(body: ' {}', status: 200)
   end
 
   def stub_countries_list

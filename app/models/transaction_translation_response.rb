@@ -21,7 +21,7 @@ class TransactionTranslationResponse < Api::Response
     @custom_fail_contact_details_intro = hash['customFailContactDetailsIntro']
     @single_idp_start_page_content_html = hash['singleIdpStartPageContent']
     @single_idp_start_page_title = hash['singleIdpStartPageTitle']
-    @idp_disconnected_alternative_html = hash['idpDisconnectedAlternativeHtml']
+    @idp_disconnected_hint_html = hash['idpDisconnectedAlternativeHtml']
   end
 
   def to_h
@@ -41,7 +41,7 @@ class TransactionTranslationResponse < Api::Response
       custom_fail_contact_details_intro: custom_fail_contact_details_intro,
       single_idp_start_page_content_html: @single_idp_start_page_content_html,
       single_idp_start_page_title: @single_idp_start_page_title,
-      idp_disconnected_alternative_html: @idp_disconnected_alternative_html
+      idp_disconnected_hint_html: @idp_disconnected_hint_html
     }
   end
 end

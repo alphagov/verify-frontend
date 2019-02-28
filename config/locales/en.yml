@@ -137,7 +137,7 @@ en:
       sign_in_idp: Sign in with %{display_name}
       forgot_company: I can’t remember which company verified me
       company_no_longer_verifies_title: "%{company} is no longer a part of GOV.UK Verify"
-      company_no_longer_verifies_text: If you have an identity account with %{company}, you’ll need to %{link}%{other_ways}.
+      company_no_longer_verifies_text: If you have an identity account with %{company}, you’ll need to %{link}.
       company_no_longer_verifies_link: verify your identity with another company
     cookies:
       title: Cookies
