@@ -13,6 +13,6 @@
 
   <div class="column-two-thirds company-disconnect-text">
     <h2 class="heading-medium"><%= t('hub.signin.company_no_longer_verifies_title', company: identity_provider.display_name) %></h2>
-    <p><%= raw t('hub.signin.company_no_longer_verifies_text', company: identity_provider.display_name, link: link_to(t('hub.signin.company_no_longer_verifies_link'), begin_registration_path)) %></p>
+    <p><%= raw @idp_disconnected_hint_html %></p>
   </div>
 </div>

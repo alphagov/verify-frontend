@@ -18,6 +18,13 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     visit "/#{t('routes.sign_in', locale: locale)}"
   end
 
+  def given_im_on_the_sign_in_page_from_test_rp_with_custom_hint
+    set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session)
+    stub_api_idp_list_for_sign_in
+    page.set_rack_session(transaction_simple_id: 'test-rp-custom-hint')
+    visit "/#{t('routes.sign_in', locale: 'en')}"
+  end
+
   def when_i_select_an_idp
     # There may be multiple identical buttons due to the journey hint
     # so we can't use 'click_button'
@@ -208,6 +215,16 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         given_im_on_the_sign_in_page
 
         expect(page).to have_text "#{hinted_idp_name} is no longer a part of GOV.UK Verify"
+        expect(page).to have_text "If you have an identity account with #{hinted_idp_name}, you’ll need to verify your identity with another company."
+        expect(page).to_not have_button("Select #{hinted_idp_name}")
+      end
+
+      it 'will show the user service-specific text when the hinted IDP is disconnected' do
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page_from_test_rp_with_custom_hint
+
+        expect(page).to have_text "#{hinted_idp_name} is no longer a part of GOV.UK Verify"
+        expect(page).to have_text 'An alternative hint warning.'
         expect(page).to_not have_button("Select #{hinted_idp_name}")
       end
     end
