@@ -502,8 +502,9 @@ en:
       verify_another_company_html: To access government services, you must %{link}.
       verify_another_company_link: verify your identity with another certified company
     certified_companies_disconnected:
-      title: These companies are temporarily unavailable with GOV.UK Verify
-      verify_another_company_html: You can try again later or verify your identity with another certified company.
+      title: The following companies are no longer part of GOV.UK Verify
+      verify_another_company_html: If you had an identity account with one of these companies, you'll need to %{link}.
+      verify_another_company_link: verify your identity with a different company
     further_information:
       title: Enter your %{cycle_three_name}
       first_time: This is the first time you’ve signed in.
