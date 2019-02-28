@@ -140,7 +140,7 @@ cy:
       sign_in_idp: Llofnodi i mewn gyda %{display_name}
       forgot_company: Ni allaf gofio pa gwmni wnaeth fy nilysu
       company_no_longer_verifies_title: "Nid yw %{company} bellach yn rhan o GOV.UK Verify"
-      company_no_longer_verifies_text: Os oes gennych gyfrif hunaniaeth gyda %{company}, bydd angen i chi o %{link}%{other_ways}.
+      company_no_longer_verifies_text: Os oes gennych gyfrif hunaniaeth gyda %{company}, bydd angen i chi o %{link}.
       company_no_longer_verifies_link: dilysu eich hunaniaeth gyda chwmni arall
     cookies:
       title: Cwcis
