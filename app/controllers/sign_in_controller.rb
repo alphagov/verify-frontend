@@ -6,6 +6,7 @@ class SignInController < ApplicationController
   include IdpSelectionPartialController
   include ViewableIdpPartialController
   include AnalyticsCookiePartialController
+  include ActionView::Helpers::UrlHelper
 
   def index
     entity_id = success_entity_id

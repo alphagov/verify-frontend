@@ -210,21 +210,21 @@ RSpec.describe 'user selects an IDP on the sign in page' do
         set_journey_hint_cookie('unavailable-entity-id', 'SUCCESS')
       end
 
-      it 'will show the user service-specific text when the hinted IDP is disconnected' do
-        given_api_requests_have_been_mocked!
-        given_im_on_the_sign_in_page_from_test_rp_with_custom_hint
-
-        expect(page).to have_text "#{hinted_idp_name} is no longer a part of GOV.UK Verify"
-        expect(page).to have_text 'sign in with your Universal Credit account'
-        expect(page).to_not have_button("Select #{hinted_idp_name}")
-      end
-
       it 'will tell the user the hinted IDP is disconnected' do
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
 
         expect(page).to have_text "#{hinted_idp_name} is no longer a part of GOV.UK Verify"
-        expect(page).to_not have_text 'sign in with your Universal Credit account'
+        expect(page).to have_text "If you have an identity account with #{hinted_idp_name}, you’ll need to verify your identity with another company."
+        expect(page).to_not have_button("Select #{hinted_idp_name}")
+      end
+
+      it 'will show the user service-specific text when the hinted IDP is disconnected' do
+        given_api_requests_have_been_mocked!
+        given_im_on_the_sign_in_page_from_test_rp_with_custom_hint
+
+        expect(page).to have_text "#{hinted_idp_name} is no longer a part of GOV.UK Verify"
+        expect(page).to have_text 'An alternative hint warning.'
         expect(page).to_not have_button("Select #{hinted_idp_name}")
       end
     end

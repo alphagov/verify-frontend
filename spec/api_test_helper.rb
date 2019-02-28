@@ -161,7 +161,7 @@ module ApiTestHelper
         "taxonName":"Benefits",
         "singleIdpStartPageTitle": "This is the Single IDP Start Page Title",
         "singleIdpStartPageContent": "This is the Single IDP Start Page Content <a href=\'%<start_url>s\'>Sign In</a>",
-        "idpDisconnectedAlternativeHtml": "If you have an identity account with %<company>s, you’ll need to <a href=\"%<begin_registration_path>s\">verify your identity with another company</a> or <a href=\"https://www.universal-credit.service.gov.uk/sign-in\">sign in with your Universal Credit account</a>"
+        "idpDisconnectedAlternativeHtml": "An alternative hint warning."
       }', status: 200)
     stub_request(:get, api_translations_endpoint('test-rp-custom-hint', 'cy')).to_return(body: ' {}', status: 200)
   end
