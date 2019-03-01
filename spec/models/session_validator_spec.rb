@@ -146,14 +146,10 @@ describe SessionValidator do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'session_id'
     logger = double(:logger)
     stub_const('Rails', double(:rails, logger: logger))
-    expect(logger).to receive(:error).with(/Transaction entity ID/)
     validation = session_validator.validate(cookies, session)
-
-    # To be turned on once we're certain that this does not raise any false positives.
-    expect(validation).to be_ok # delete this line and uncomment the rest below
-    # expect(validation).to_not be_ok
-    # expect(validation.type).to eql :something_went_wrong
-    # expect(validation.message).to eql "Transaction entity ID can not be found in the user's session"
+    expect(validation).to_not be_ok
+    expect(validation.type).to eql :something_went_wrong
+    expect(validation.message).to eql "Transaction entity ID can not be found in the user's session"
   end
 
   it 'will log an error if the session cookie is getting too large' do
