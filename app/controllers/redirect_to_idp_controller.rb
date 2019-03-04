@@ -50,12 +50,12 @@ private
 
   def request_form
     saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
-    @request = idp_request_initilization(saml_message)
+    @request = idp_request_initialisation(saml_message)
   end
 
   def request_form_for_single_idp_journey(uuid)
     saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
-    @request = idp_request_initilization_for_single_idp_journey(saml_message, uuid)
+    @request = idp_request_initialisation_for_single_idp_journey(saml_message, uuid)
   end
 
   def recommended
