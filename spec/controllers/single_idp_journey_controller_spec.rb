@@ -271,6 +271,39 @@ describe SingleIdpJourneyController do
     end
   end
 
+  context '#continue_ajax' do
+    before :each do
+      set_session_and_cookies_with_loa('LEVEL_2')
+      stub_transactions_for_single_idp_list
+      stub_api_idp_list_for_single_idp_journey
+    end
+
+    it 'should handle missing cookie' do
+      valid_idp = {
+        'simple_id' => 'stub-idp-one',
+        'entity_id' => VALID_STUB_IDP,
+        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+      }
+
+      stub_api_select_idp
+      stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+      stub_request(:get, saml_proxy_api_uri('/SAML2/SSO/API/SENDER/AUTHN_REQ?sessionId=my-session-id-cookie')).to_return(
+        body: {
+          postEndpoint: 'location',
+          samlMessage: 'a-saml-request',
+          relayState: 'a-relay-state',
+          registration: false
+        }.to_json,
+        status: 200
+      )
+
+      set_selected_idp(valid_idp)
+      post :continue_ajax, params: { locale: 'en', entityId: VALID_STUB_IDP }
+
+      expect(response).to have_http_status :ok
+    end
+  end
+
   context "#rp_start_page" do
     before :each do
       stub_transactions_list
