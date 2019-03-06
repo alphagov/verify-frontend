@@ -15,6 +15,7 @@ CONFIG = Configuration.load! do
   option_string 'policy_host', 'POLICY_HOST'
   option_string 'logo_directory', 'LOGO_DIRECTORY', default: '/idp-logos'
   option_string 'zdd_file', 'ZDD_LATCH'
+  option_bool 'prometheus_enabled', 'PROMETHEUS_ENABLED', default: true
   option_bool 'metrics_enabled', 'METRICS_ENABLED', default: true
   if metrics_enabled
     option_string 'statsd_host', 'STATSD_HOST', default: '127.0.0.1'

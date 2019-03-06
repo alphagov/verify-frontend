@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/gocardless/prometheus_client_ruby.git
+  revision: 5cae3b47ead3a050efba7089db8ac9fd964f8237
+  branch: pluggable_data_stores
+  specs:
+    prometheus-client (0.9.0)
+      concurrent-ruby
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -371,6 +379,7 @@ DEPENDENCIES
   mini_racer
   multi_json
   pkgr (~> 1.5.1)
+  prometheus-client!
   puma
   rack-handlers
   rack-test
