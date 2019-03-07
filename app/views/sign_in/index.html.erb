@@ -47,7 +47,5 @@
 </div>
 
 <% if !@disconnected_idps.empty? %>
-  <div class="grid-row">
-    <%= render partial: 'shared/disconnected_idp_list', locals: {disconnected_identity_providers: @disconnected_idps} %>
-  </div>
+  <%= render partial: 'shared/disconnected_idp_list', locals: {disconnected_identity_providers: @disconnected_idps} %>
 <% end %>

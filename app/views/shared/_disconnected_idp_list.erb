@@ -9,16 +9,18 @@
   </div>
 </div>
 
-<% disconnected_identity_providers.each do |identity_provider| %>
-  <div class="column-one-third company-wrapper">
-    <div class="company">
-      <div class="company-inner">
-        <div class="company-logo">
-          <div class="company-logo-inner">
-            <%= image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)) %>
+<div class="grid-row">
+  <% disconnected_identity_providers.each do |identity_provider| %>
+    <div class="column-one-third company-wrapper">
+      <div class="company">
+        <div class="company-inner">
+          <div class="company-logo">
+            <div class="company-logo-inner">
+              <%= image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)) %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
