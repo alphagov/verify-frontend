@@ -177,6 +177,16 @@ module Analytics
       )
     end
 
+    def report_single_idp_invalid_cookie(current_transaction, request)
+      report_event(
+        current_transaction,
+        request,
+        'Single IDP',
+        'invalid cookie',
+        'Missing or malformed cookie'
+      )
+    end
+
     def report_single_idp_service_mismatch(current_transaction, request, expected_service, actual_service, uuid)
       report_event(
         current_transaction,

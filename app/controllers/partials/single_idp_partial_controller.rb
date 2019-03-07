@@ -10,6 +10,9 @@ module SingleIdpPartialController
       # This is still valid behaviour, it can be the users session has genuinely expired,
       # or that the session has been tampered with.
       logger.warn "Single IDP cookies was not found or was malformed" + referrer_string
+      FEDERATION_REPORTER.report_single_idp_invalid_cookie(
+        current_transaction, request
+      )
       return false
     end
     true
