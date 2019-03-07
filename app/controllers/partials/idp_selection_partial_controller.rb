@@ -23,7 +23,7 @@ module IdpSelectionPartialController
     end
 
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
-    idp_request = idp_request_initilization(outbound_saml_message)
+    idp_request = idp_request_initialisation(outbound_saml_message)
     render json: idp_request
   end
 
@@ -33,7 +33,7 @@ module IdpSelectionPartialController
     FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction, request, session[:selected_idp_name])
 
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
-    idp_request = idp_request_initilization(outbound_saml_message)
+    idp_request = idp_request_initialisation(outbound_saml_message)
     render json: idp_request
   end
 
@@ -43,7 +43,7 @@ module IdpSelectionPartialController
     report_user_idp_attempt_to_piwik
     report_idp_registration_to_piwik(recommended)
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
-    idp_request = idp_request_initilization(outbound_saml_message)
+    idp_request = idp_request_initialisation(outbound_saml_message)
     render json: idp_request.to_json(methods: :hints)
   end
 
@@ -53,7 +53,7 @@ module IdpSelectionPartialController
     FEDERATION_REPORTER.report_single_idp_journey_selection(current_transaction, request, session[:selected_idp_name])
 
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
-    idp_request = idp_request_initilization_for_single_idp_journey(outbound_saml_message, uuid)
+    idp_request = idp_request_initialisation_for_single_idp_journey(outbound_saml_message, uuid)
     render json: idp_request
   end
 
@@ -63,7 +63,7 @@ module IdpSelectionPartialController
     FEDERATION_REPORTER.report_idp_resume_journey_selection(current_transaction, request, session[:selected_idp_name])
 
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
-    idp_request = idp_request_initilization(outbound_saml_message)
+    idp_request = idp_request_initialisation(outbound_saml_message)
     render json: idp_request
   end
 
@@ -92,7 +92,7 @@ module IdpSelectionPartialController
     )
   end
 
-  def idp_request_initilization(outbound_saml_message)
+  def idp_request_initialisation(outbound_saml_message)
     IdentityProviderRequest.new(
       outbound_saml_message,
       selected_identity_provider.simple_id,
@@ -100,7 +100,7 @@ module IdpSelectionPartialController
     )
   end
 
-  def idp_request_initilization_for_single_idp_journey(outbound_saml_message, uuid)
+  def idp_request_initialisation_for_single_idp_journey(outbound_saml_message, uuid)
     IdentityProviderRequest.new(
       outbound_saml_message,
       selected_identity_provider.simple_id,

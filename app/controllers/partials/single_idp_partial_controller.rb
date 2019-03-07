@@ -19,6 +19,6 @@ module SingleIdpPartialController
   end
 
   def referrer_string
-    " - referrer: " + (request.nil? || request.referer.nil? ? "[could not get the referrer]" : request.referer)
+    ' - referrer: ' + (request&.referer || '[could not get the referrer]')
   end
 end

@@ -46,7 +46,7 @@ class SingleIdpJourneyController < ApplicationController
   def continue_ajax
     select_viewable_idp_for_single_idp_journey(params.fetch('entityId')) do |decorated_idp|
       select_idp(decorated_idp.entity_id, decorated_idp.display_name)
-      ajax_idp_redirection_single_idp_journey_request(single_idp_cookie.fetch('uuid', nil))
+      ajax_idp_redirection_single_idp_journey_request(single_idp_cookie&.fetch('uuid', nil))
     end
   end
 
