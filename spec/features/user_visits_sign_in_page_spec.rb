@@ -204,10 +204,10 @@ RSpec.describe 'user selects an IDP on the sign in page' do
     end
 
     context 'with an idp-hint cookie for a disconnected IDP' do
-      hinted_idp_name = 'Unavailable IDP'
+      hinted_idp_name = 'Disconnected IDP'
 
       before :each do
-        set_journey_hint_cookie('unavailable-entity-id', 'SUCCESS')
+        set_journey_hint_cookie('disconnected-entity-id', 'SUCCESS')
       end
 
       it 'will tell the user the hinted IDP is disconnected' do
