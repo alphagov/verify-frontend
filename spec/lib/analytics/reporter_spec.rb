@@ -93,7 +93,7 @@ module Analytics
       reporter.report_action(request, action_name, custom_variables)
     end
 
-    private
+  private
 
     def piwik_hash(action_name, extra_fields = {})
       {
