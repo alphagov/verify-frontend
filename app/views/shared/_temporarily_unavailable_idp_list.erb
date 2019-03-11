@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      <p class="subtitle"><%= identity_provider.display_name %> is unavailable</p>
+      <p class="subtitle"><%= t('hub.certified_companies_unavailable.company_text', company: identity_provider.display_name) %></p>
     </div>
   </div>
 <% end %>

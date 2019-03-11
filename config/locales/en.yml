@@ -503,6 +503,7 @@ en:
       verify_another_company_html: You can try again later or %{link}.
       verify_another_company_link: verify your identity with another certified company
       verify_another_company_text: You can try again later or verify your identity with another certified company.
+      company_text: "%{company} is unavailable"
     certified_company_unavailable:
       title: This certified company is unavailable
       sorry: Sorry, %{display_name} is not available.
