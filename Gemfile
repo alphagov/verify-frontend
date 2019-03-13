@@ -33,7 +33,7 @@ gem 'statsd-ruby', '~> 1.3.0'
 # upstream master soon, so to avoid us having to rewrite code let's
 # target the new client immediately (and then point at the official
 # client again when it's merged)
-gem 'prometheus-client', :git => 'https://github.com/gocardless/prometheus_client_ruby.git', :branch => 'pluggable_data_stores'
+gem 'prometheus-client', git: 'https://github.com/gocardless/prometheus_client_ruby.git', branch: 'pluggable_data_stores'
 
 # Use sentry-raven for sending logs to Sentry via the raven protocol
 gem 'sentry-raven'
