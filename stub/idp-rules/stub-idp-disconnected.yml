@@ -1,0 +1,13 @@
+simpleIds: [ "stub-idp-disconnected" ]
+send_hints: false
+
+segments:
+  protected:
+    recommended: []
+    unlikely: []
+  non_protected:
+    recommended: []
+    unlikely: []
+
+capabilities:
+  - []
