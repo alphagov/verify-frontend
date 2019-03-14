@@ -16,8 +16,17 @@ Style/MixinUsage:
     - 'config/routes.rb'
     - 'config/main_routes.rb'
 
+Layout/AccessModifierIndentation:
+  EnforcedStyle: 'outdent'
+
 Metrics/LineLength:
-  Max: 140
+  Max: 160
 
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Layout/LeadingCommentSpace:
   Enabled: false
