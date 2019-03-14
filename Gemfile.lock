@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/gocardless/prometheus_client_ruby.git
-  revision: 5cae3b47ead3a050efba7089db8ac9fd964f8237
+  revision: 5dce3e5855f2aa67c65874c953878e124c23edcd
   branch: pluggable_data_stores
   specs:
     prometheus-client (0.9.0)
@@ -54,7 +54,7 @@ GEM
     arr-pm (0.0.10)
       cabin (> 0)
     ast (2.4.0)
-    autoprefixer-rails (9.4.9)
+    autoprefixer-rails (9.4.10.2)
       execjs
     backports (3.12.0)
     binding_of_caller (0.8.0)
@@ -122,7 +122,7 @@ GEM
     govuk_frontend_toolkit (8.1.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
-    govuk_template (0.25.0)
+    govuk_template (0.26.0)
       rails (>= 3.1)
     hashdiff (0.3.8)
     hashie (3.6.0)
@@ -409,4 +409,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   2.0.1
+   1.17.1
