@@ -52,7 +52,10 @@ class AuthnResponseController < SamlController
 private
 
   def raise_error_if_session_mismatch(relay_state, session_id)
+    raise Errors::WarningLevelError, 'Empty IDP response' if params.empty?
+
     error_message = "Relay state should match session id. Relay state was #{relay_state.inspect}"
+    error_message += ' and SAML was missing' unless params.key?('SAMLResponse')
     raise Errors::WarningLevelError, error_message if relay_state != session_id
   end
 
