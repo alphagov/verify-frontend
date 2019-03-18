@@ -216,7 +216,7 @@ describe SingleIdpJourneyController do
       stub_api_idp_list_for_single_idp_journey(VALID_TEST_RP,
                                                [{ 'simpleId' => 'stub-idp-one',
                                                   'entityId' => 'http://idcorp.com',
-                                                  'levelsOfAssurance' => %w[LEVEL_2],
+                                                  'levelsOfAssurance' => %w(LEVEL_2),
                                                   'temporarilyUnavailable' => true }])
       single_idp_cookie = {
         transaction_id: VALID_TEST_RP,

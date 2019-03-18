@@ -30,3 +30,7 @@ Style/Documentation:
 
 Layout/LeadingCommentSpace:
   Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    Default: ()
