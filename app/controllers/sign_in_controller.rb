@@ -17,7 +17,11 @@ class SignInController < ApplicationController
       @idp_disconnected_hint_html = get_disconnection_hint_text(@suggested_idp.display_name)
     end
 
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_sign_in)
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_sign_in)
+
+    @temporarily_unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
+      current_temporarily_unavailable_identity_providers_for_sign_in
+    )
 
     @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
       unavailable_idps.map { |simple_id| IdentityProvider.new('simpleId' => simple_id, 'entityId' => simple_id, 'levelsOfAssurance' => []) }
@@ -52,7 +56,7 @@ private
   end
 
   def unavailable_idps
-    api_idp_simple_ids = current_identity_providers_for_sign_in.map(&:simple_id)
+    api_idp_simple_ids = current_available_identity_providers_for_sign_in.map(&:simple_id)
     UNAVAILABLE_IDPS.reject { |simple_id| api_idp_simple_ids.include?(simple_id) }
   end
 

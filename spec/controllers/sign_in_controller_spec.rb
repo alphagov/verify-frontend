@@ -10,7 +10,11 @@ describe SignInController do
                                      'levelsOfAssurance' => %w(LEVEL_1) },
                                    { 'simpleId' => 'stub-idp-two',
                                      'entityId' => 'http://idcorp-two.com',
-                                     'levelsOfAssurance' => %w(LEVEL_1) }])
+                                     'levelsOfAssurance' => %w(LEVEL_1) },
+                                   { 'simpleId' => 'stub-idp-broken',
+                                     'entityId' => 'http://idcorp-broken.com',
+                                     'levelsOfAssurance' => %w(LEVEL_1),
+                                     'temporarilyUnavailable' => true }])
     set_session_and_cookies_with_loa('LEVEL_1')
   end
 
@@ -52,6 +56,14 @@ describe SignInController do
 
       post :select_idp, params: { locale: 'en', 'entity_id' => 'http://idcorp.com' }
       expect(session[:user_followed_journey_hint]).to be_nil
+    end
+
+    it 'will have one temporarily unavailable IDP' do
+      expect(subject.current_temporarily_unavailable_identity_providers_for_sign_in.length).to eq(1)
+    end
+
+    it 'will have two available IDPs' do
+      expect(subject.current_available_identity_providers_for_sign_in.length).to eq(2)
     end
 
     context 'with idp journey hint cookie' do

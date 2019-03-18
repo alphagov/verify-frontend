@@ -40,6 +40,12 @@
   <%= render partial: 'shared/continue_to_idp_form' %>
 </div>
 
+<% if @temporarily_unavailable_identity_providers.any? %>
+  <div class="grid-row">
+    <%= render partial: 'shared/temporarily_unavailable_idp_list', locals: {unavailable_identity_providers: @temporarily_unavailable_identity_providers} %>
+  </div>
+<% end %>
+
 <div class="grid-row">
   <div class="column-two-thirds">
     <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>

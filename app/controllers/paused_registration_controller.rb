@@ -80,9 +80,9 @@ private
     from_resume_link_idp_value = resume_link_idp
     if from_resume_link_idp_value.nil?
       last_idp_value = last_idp
-      last_idp_value.nil? ? nil : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_sign_in, last_idp_value).first
+      last_idp_value.nil? ? nil : retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, last_idp_value).first
     else
-      retrieve_decorated_singleton_idp_array_by_simple_id(current_identity_providers_for_sign_in, from_resume_link_idp_value).first
+      retrieve_decorated_singleton_idp_array_by_simple_id(current_available_identity_providers_for_sign_in, from_resume_link_idp_value).first
     end
   end
 

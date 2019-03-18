@@ -6,7 +6,7 @@ class CertifiedCompanyUnavailableController < ApplicationController
   def index
     simple_id = params[:company]
 
-    if UNAVAILABLE_IDPS.include?(simple_id) && !current_identity_providers_for_sign_in.map(&:simple_id).include?(simple_id)
+    if UNAVAILABLE_IDPS.include?(simple_id) && !current_available_identity_providers_for_sign_in.map(&:simple_id).include?(simple_id)
       @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(
         IdentityProvider.new('simpleId' => simple_id, 'entityId' => simple_id, 'levelsOfAssurance' => [])
       )
