@@ -19,8 +19,8 @@ class SignInController < ApplicationController
 
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_sign_in)
 
-    @temporarily_unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      current_temporarily_unavailable_identity_providers_for_sign_in
+    @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
+      current_unavailable_identity_providers_for_sign_in
     )
 
     @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_disconnected_identity_providers_for_sign_in)

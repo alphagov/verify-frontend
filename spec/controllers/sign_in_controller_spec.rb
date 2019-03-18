@@ -59,7 +59,7 @@ describe SignInController do
     end
 
     it 'will have one temporarily unavailable IDP' do
-      expect(subject.current_temporarily_unavailable_identity_providers_for_sign_in.length).to eq(1)
+      expect(subject.current_unavailable_identity_providers_for_sign_in.length).to eq(1)
     end
 
     it 'will have two available IDPs' do
