@@ -24,7 +24,7 @@ class AuthnResponseController < SamlController
   ACCEPTED_COUNTRY_RESPONSES = [SUCCESS, NON_MATCHING_JOURNEY_SUCCESS, CANCEL, FAILED_UPLIFT].freeze
 
   def idp_response
-    raise_error_if_session_mismatch(params['RelayState'], session[:verify_session_id])
+    raise_error_if_params_invalid(params, session[:verify_session_id])
 
     response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params['SAMLResponse'])
     status = response.idp_result
@@ -39,7 +39,7 @@ class AuthnResponseController < SamlController
 
   def country_response
     params['RelayState'] ||= session[:verify_session_id] if session[:transaction_supports_eidas]
-    raise_error_if_session_mismatch(params['RelayState'], session[:verify_session_id])
+    raise_error_if_params_invalid(params, session[:verify_session_id])
 
     response = SAML_PROXY_API.forward_country_authn_response(params['RelayState'], params['SAMLResponse'])
     status = response.country_result
@@ -51,11 +51,12 @@ class AuthnResponseController < SamlController
 
 private
 
-  def raise_error_if_session_mismatch(relay_state, session_id)
-    raise Errors::WarningLevelError, 'Empty IDP response' if params.empty?
+  def raise_error_if_params_invalid(response_params, session_id)
+    raise Errors::WarningLevelError, 'Empty IDP response' if response_params.empty?
 
+    relay_state = response_params['RelayState']
     error_message = "Relay state should match session id. Relay state was #{relay_state.inspect}"
-    error_message += ' and SAML was missing' unless params.key?('SAMLResponse')
+    error_message += ' and SAML was missing' unless response_params.key?('SAMLResponse')
     raise Errors::WarningLevelError, error_message if relay_state != session_id
   end
 
