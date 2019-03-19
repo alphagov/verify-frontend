@@ -52,9 +52,16 @@ describe AuthnResponseController do
 
     it 'when relay state does not equal session id in the idp response' do
       set_session_and_cookies_with_loa('LEVEL_1')
-      session[:verify_session_id] = 'non-existent'
 
-      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+      post :idp_response, params: { 'RelayState' => 'wrong_session_id', 'SAMLResponse' => 'a-saml-response', locale: 'en' }
+
+      expect(subject).to render_template(:something_went_wrong)
+    end
+
+    it 'when idp response is empty' do
+      set_session_and_cookies_with_loa('LEVEL_1')
+
+      post :idp_response, params: {}
 
       expect(subject).to render_template(:something_went_wrong)
     end
