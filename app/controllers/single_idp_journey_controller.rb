@@ -125,6 +125,11 @@ private
 
     return false if cookie_value_is_missing(%w(idp_entity_id transaction_id uuid))
 
+    unless current_identity_providers_for_single_idp.select(&:unavailable).select { |idp| idp.entity_id == idp_entity_id }.empty?
+      logger.info "IDP #{idp_entity_id} is unavailable so not valid for single IDP" + referrer_string
+      return false
+    end
+
     unless cookie_matches_session?(transaction_id)
       actual_service_identifier = session[:transaction_entity_id]
       FEDERATION_REPORTER.report_single_idp_service_mismatch(

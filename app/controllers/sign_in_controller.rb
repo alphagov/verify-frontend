@@ -10,7 +10,7 @@ class SignInController < ApplicationController
 
   def index
     entity_id = success_entity_id
-    all_identity_providers = current_identity_providers_for_sign_in + current_disconnected_identity_providers_for_sign_in
+    all_identity_providers = current_available_identity_providers_for_sign_in + current_disconnected_identity_providers_for_sign_in
     @suggested_idp = entity_id && retrieve_decorated_singleton_idp_array_by_entity_id(all_identity_providers, entity_id).first
     unless @suggested_idp.nil?
       FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp.display_name)
@@ -19,12 +19,8 @@ class SignInController < ApplicationController
 
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_sign_in)
 
-    @temporarily_unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      current_temporarily_unavailable_identity_providers_for_sign_in
-    )
-
     @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      unavailable_idps.map { |simple_id| IdentityProvider.new('simpleId' => simple_id, 'entityId' => simple_id, 'levelsOfAssurance' => []) }
+      current_unavailable_identity_providers_for_sign_in
     )
 
     @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_disconnected_identity_providers_for_sign_in)
@@ -53,11 +49,6 @@ private
     POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'], false, analytics_session_id, session[:journey_type])
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
-  end
-
-  def unavailable_idps
-    api_idp_simple_ids = current_available_identity_providers_for_sign_in.map(&:simple_id)
-    UNAVAILABLE_IDPS.reject { |simple_id| api_idp_simple_ids.include?(simple_id) }
   end
 
   def get_disconnection_hint_text(idp_name)

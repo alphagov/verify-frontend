@@ -1,7 +1,7 @@
 class IdentityProvider
   include ActiveModel::Model
 
-  attr_reader :simple_id, :entity_id, :levels_of_assurance, :authentication_enabled, :temporarily_unavailable
+  attr_reader :simple_id, :entity_id, :levels_of_assurance, :authentication_enabled, :unavailable
   validates_presence_of :simple_id, :entity_id, :levels_of_assurance
 
   def initialize(hash)
@@ -9,7 +9,7 @@ class IdentityProvider
     @entity_id = hash['entityId']
     @levels_of_assurance = hash['levelsOfAssurance']
     @authentication_enabled = hash.fetch('authenticationEnabled', true)
-    @temporarily_unavailable = hash.fetch('temporarilyUnavailable', false)
+    @unavailable = hash.fetch('temporarilyUnavailable', false)
   end
 
   def ==(other)
@@ -18,7 +18,7 @@ class IdentityProvider
         entity_id == other.entity_id &&
         levels_of_assurance == other.levels_of_assurance &&
         authentication_enabled == other.authentication_enabled &&
-        temporarily_unavailable == other.temporarily_unavailable
+        unavailable == other.unavailable
     else
       super
     end
@@ -27,7 +27,7 @@ class IdentityProvider
   alias_method :eql?, :==
 
   def hash
-    simple_id.hash + entity_id.hash + levels_of_assurance.hash + authentication_enabled.hash + temporarily_unavailable.hash
+    simple_id.hash + entity_id.hash + levels_of_assurance.hash + authentication_enabled.hash + unavailable.hash
   end
 
   def self.from_session(object)
@@ -38,7 +38,7 @@ class IdentityProvider
           'entityId' => object['entity_id'],
           'levelsOfAssurance' => object['levels_of_assurance'],
           'authenticationEnabled' => object['authentication_enabled'],
-          'temporarilyUnavailable' => object['temporarily_unavailable'])
+          'temporarilyUnavailable' => object['unavailable'])
     end
   end
 end

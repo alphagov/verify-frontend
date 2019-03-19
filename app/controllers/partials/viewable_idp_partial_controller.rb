@@ -41,11 +41,11 @@ module ViewableIdpPartialController
   end
 
   def current_available_identity_providers_for_sign_in
-    current_identity_providers_for_sign_in.select(&:authentication_enabled).reject(&:temporarily_unavailable)
+    current_identity_providers_for_sign_in.select(&:authentication_enabled).reject(&:unavailable)
   end
 
-  def current_temporarily_unavailable_identity_providers_for_sign_in
-    current_identity_providers_for_sign_in.select(&:temporarily_unavailable)
+  def current_unavailable_identity_providers_for_sign_in
+    current_identity_providers_for_sign_in.select(&:unavailable)
   end
 
   def current_disconnected_identity_providers_for_sign_in
@@ -61,6 +61,6 @@ module ViewableIdpPartialController
   end
 
   def order_with_unavailable_last(idps)
-    idps.reject(&:temporarily_unavailable) + idps.select(&:temporarily_unavailable)
+    idps.reject(&:unavailable) + idps.select(&:unavailable)
   end
 end

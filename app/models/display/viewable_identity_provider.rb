@@ -10,7 +10,7 @@ module Display
              :model_name,
              :to_key,
              :authentication_enabled,
-             :temporarily_unavailable,
+             :unavailable,
              to: :identity_provider
 
     delegate :display_name,

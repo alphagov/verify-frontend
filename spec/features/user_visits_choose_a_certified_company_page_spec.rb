@@ -21,7 +21,10 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     it 'marks the unavailable IDP as unavailable' do
-      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_2), 'temporarilyUnavailable' => true }])
+      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one',
+                                   'entityId' => 'http://idcorp.com',
+                                   'levelsOfAssurance' => %w(LEVEL_2),
+                                   'temporarilyUnavailable' => true }])
       visit '/choose-a-certified-company'
       expect(page).to have_content t('hub.certified_companies_unavailable.title', count: 1, company: 'IDCorp')
     end
@@ -102,7 +105,10 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     it 'unavailable LEVEL_1 recommended IDPs are marked as unavailable' do
-      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one', 'entityId' => 'http://idcorp.com', 'levelsOfAssurance' => %w(LEVEL_1), 'temporarilyUnavailable' => true }], 'LEVEL_1')
+      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one',
+                                   'entityId' => 'http://idcorp.com',
+                                   'levelsOfAssurance' => %w(LEVEL_1),
+                                   'temporarilyUnavailable' => true }], 'LEVEL_1')
       visit '/choose-a-certified-company'
       expect(page).to have_content t('hub.certified_companies_unavailable.title', count: 1, company: 'IDCorp')
     end

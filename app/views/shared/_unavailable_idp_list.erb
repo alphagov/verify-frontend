@@ -1,15 +1,25 @@
-  <% unavailable_identity_providers.each_with_index do |identity_provider, idx| %>
-      <div class="column-one-third company-wrapper <%= (idx+offset) % 3 == 0 ? 'clear-left' : nil %>">
-        <div class="company">
-          <div class="company-inner">
-            <div class="company-logo">
-              <div class="company-logo-inner">
-                <%= link_to image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)), certified_company_unavailable_path(:company => identity_provider.simple_id) %>
-              </div>
-            </div>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h2 class="heading-medium"><%= t('hub.certified_companies_unavailable.title',
+                                     count: unavailable_identity_providers.length,
+                                     company: unavailable_identity_providers.first.display_name) %></h2>
+    <p><%=
+      t('hub.certified_companies_unavailable.verify_another_company_html', link: link_to(t('hub.certified_companies_unavailable.verify_another_company_link'), about_certified_companies_path))
+    %></p>
+  </div>
+</div>
 
-            <%= button_link_to t('hub.signin.select_idp', display_name: identity_provider.display_name), certified_company_unavailable_path(:company => identity_provider.simple_id) %>
+<% unavailable_identity_providers.each do |identity_provider| %>
+  <div class="column-one-third company-wrapper">
+    <div class="company">
+      <div class="company-inner">
+        <div class="company-logo">
+          <div class="company-logo-inner">
+            <%= image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)) %>
           </div>
         </div>
       </div>
-  <% end %>
+      <p class="subtitle"><%= t('hub.certified_companies_unavailable.company_text', company: identity_provider.display_name) %></p>
+    </div>
+  </div>
+<% end %>

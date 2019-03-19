@@ -43,11 +43,6 @@ Rails.application.config.after_initialize do
 
   SERVICE_LIST_DATA_CORRELATOR = Display::Rp::ServiceListDataCorrelator.new(RP_DISPLAY_REPOSITORY)
 
-  # IDP Config
-  IDP_CONFIG = YAML.load_file(CONFIG.idp_config)
-  UNAVAILABLE_IDPS = IDP_CONFIG.fetch('show_unavailable', [])
-  IDP_LOA1_ORDER = IDP_CONFIG.fetch('loa1_order', [])
-
   # IDP Recommendations
   idp_rules_loader = IdpProfilesLoader.new(yaml_loader)
   idp_rules = idp_rules_loader.parse_config_files(CONFIG.rules_directory)

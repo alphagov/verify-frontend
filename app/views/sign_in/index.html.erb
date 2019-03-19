@@ -36,13 +36,12 @@
 
 <div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
   <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
-  <%= render partial: 'shared/unavailable_idp_list', locals: {unavailable_identity_providers: @unavailable_identity_providers, offset: @identity_providers.count} %>
   <%= render partial: 'shared/continue_to_idp_form' %>
 </div>
 
-<% if @temporarily_unavailable_identity_providers.any? %>
+<% if @unavailable_identity_providers.any? %>
   <div class="grid-row">
-    <%= render partial: 'shared/temporarily_unavailable_idp_list', locals: {unavailable_identity_providers: @temporarily_unavailable_identity_providers} %>
+    <%= render partial: 'shared/unavailable_idp_list', locals: {unavailable_identity_providers: @unavailable_identity_providers} %>
   </div>
 <% end %>
 
@@ -52,6 +51,6 @@
   </div>
 </div>
 
-<% if !@disconnected_idps.empty? %>
+<% if @disconnected_idps.any? %>
   <%= render partial: 'shared/disconnected_idp_list', locals: {disconnected_identity_providers: @disconnected_idps} %>
 <% end %>
