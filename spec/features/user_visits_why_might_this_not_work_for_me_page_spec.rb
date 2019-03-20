@@ -30,7 +30,7 @@ RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
   it 'redirects to select documents page if user clicks try to verify link' do
     visit why_might_this_not_work_for_me_path
 
-    click_link 'I’d like to try to verify my identity online'
+    click_link 'I’d like to try to verify my identity using GOV.UK Verify'
 
     expect(page).to have_current_path(select_documents_path)
   end
