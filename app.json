@@ -1,0 +1,21 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-ruby"
+    }
+  ],
+  "description": "",
+  "env": {
+    "RAILS_ENV": "DEVELOPMENT"
+  },
+  "formation": {
+  },
+  "name": "jakub-verify-frontend",
+  "scripts": {
+    "postdeploy": "./startup.sh --stub-api"
+  },
+  "stack": "heroku-18"
+}
