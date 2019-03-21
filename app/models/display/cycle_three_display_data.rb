@@ -8,5 +8,6 @@ module Display
     content :field_name
     content :help_to_find
     content :example
+    content :intro_html, default: nil
   end
 end

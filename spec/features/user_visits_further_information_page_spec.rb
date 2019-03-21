@@ -28,10 +28,19 @@ RSpec.describe 'user visits further information page' do
     expect(page).to have_title t('hub.further_information.title', cycle_three_name: attribute_field_name)
     expect(page).to have_css '.form-label-bold', text: attribute_field_name
     expect(page).to have_css 'span.form-hint', text: t('hub.further_information.example_text', example: t('cycle3.NationalInsuranceNumber.example'))
+    expect(page).to have_content t('hub.further_information.first_time')
     expect(page).to have_content t('hub.further_information.help_with_your', cycle_three_name: attribute_name)
     expect(page).to have_content 'Your National Insurance number can be found on'
     expect(page).to have_content t('hub.further_information.cancel', transaction_name: rp_name)
     expect_feedback_source_to_be(page, 'CYCLE_3_PAGE', further_information_path)
+  end
+
+  it 'allows the introductory text to be customised' do
+    stub_cycle_three_attribute_request('DrivingLicenceNumber')
+    visit further_information_path
+
+    expect(page.body).to include t('cycle3.DrivingLicenceNumber.intro_html')
+    expect(page).not_to have_content t('hub.further_information.first_time')
   end
 
   it 'will submit valid driving license number' do

@@ -16,6 +16,7 @@ module CycleThree
       field_name
       help_to_find
       example
+      intro_html
     ].each do |field|
       include_examples "delegates to display_data", field, CycleThreeAttribute
     end

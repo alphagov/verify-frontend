@@ -1,6 +1,7 @@
 en:
   cycle3:
     DrivingLicenceNumber:
+      intro_html: <p>Now we need to link your identity to your Driving License.</p>
       name: driving licence number
       field_name: Driving licence number
       help_to_find: |

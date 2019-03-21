@@ -5,6 +5,7 @@ require 'display/display_data'
 module Display
   describe CycleThreeDisplayData do
     %i[
+      intro_html
       name
       field_name
       help_to_find

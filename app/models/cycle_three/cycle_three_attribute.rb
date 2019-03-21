@@ -42,7 +42,7 @@ module CycleThree
       self.class.simple_id
     end
 
-    delegate :name, :field_name, :help_to_find, :example, to: :display_data
+    delegate :name, :field_name, :help_to_find, :example, :intro_html, to: :display_data
 
   private
 
