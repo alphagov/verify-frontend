@@ -19,7 +19,7 @@ RSpec.describe 'When the user visits the may-not-work-if-you-live-overseas page'
   it 'redirects to select documents page if user clicks try to verify link' do
     visit may_not_work_if_you_live_overseas_path
 
-    click_link 'I’d like to try to verify my identity online'
+    click_link 'I’d like to try to verify my identity using GOV.UK Verify'
 
     expect(page).to have_current_path(select_documents_path)
   end
