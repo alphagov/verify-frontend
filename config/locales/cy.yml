@@ -62,6 +62,7 @@ cy:
     resume_registration: ail-ddechrau-cofrestru
     paused_registration_resume_link: wedi-oedi/:idp
     single_idp_start_page: single-start-welsh/:transaction_simple_id
+    proxy_node_error: proxy-node-error-cy
   title:
     error: Gwall
   navigation:
@@ -640,6 +641,8 @@ cy:
       heading: Mae’n ddrwg gennym, mae rhywbeth wedi mynd o’i le
       error_message: Gall hyn fod oherwydd bod eich sesiwn wedi’i amseru allan neu roedd gwall yn y system.
       start_again: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.
+    proxy_node_error:
+      start_again: Because you were using a secure service from another European country, you’ll need to go back to the page where you started using that service.
     page_not_found:
       title: Ni ellir dod o hyd i’r dudalen hon
       heading: Ni ellir dod o hyd i’r dudalen hon

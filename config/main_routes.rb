@@ -69,6 +69,7 @@ end
 
 get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
 get 'verify_services', to: 'static#verify_services', as: :verify_services
+get 'proxy_node_error', to: 'errors#proxy_node_error', as: :proxy_node_error
 get 'cookies', to: 'static#cookies', as: :cookies
 get 'confirm_your_identity', to: 'confirm_your_identity#index', as: :confirm_your_identity
 get 'choose_a_country', to: 'choose_a_country#choose_a_country', as: :choose_a_country

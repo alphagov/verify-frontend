@@ -62,6 +62,7 @@ en:
     resume_registration: resume-registration
     paused_registration_resume_link: paused/:idp
     single_idp_start_page: single-start/:transaction_simple_id
+    proxy_node_error: proxy-node-error
   title:
     error: Error
   navigation:
@@ -639,6 +640,8 @@ en:
       heading: Sorry, something went wrong
       error_message: This may be because your session timed out or there was a system error.
       start_again: Because this is a secure service, you’ll need to start again.
+    proxy_node_error:
+      start_again: Because you were using a secure service from another European country, you’ll need to go back to the page where you started using that service.
     page_not_found:
       title: This page can’t be found
       heading: This page can’t be found
