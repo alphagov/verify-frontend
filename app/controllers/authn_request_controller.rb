@@ -24,7 +24,7 @@ private
 
   def create_session
     reset_session
-
+    store_rp_request_data
     session_id = SAML_PROXY_API.create_session(params['SAMLRequest'], params['RelayState'])
     set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, session_id)
     set_session_id(session_id)
@@ -110,5 +110,11 @@ private
     return redirect_to start_path unless session[:transaction_supports_eidas]
 
     redirect_to prove_identity_path
+  end
+
+  def store_rp_request_data
+    RequestStore.store[:rp_referer] = request.referer
+    RequestStore.store[:rp_saml_request] = params.fetch('SAMLRequest', nil)
+    RequestStore.store[:rp_relay_state] = params.fetch('RelayState', nil)
   end
 end

@@ -1,7 +1,7 @@
 module Api
   class HubResponseHandler
     ERROR_MESSAGE_PATTERN = "Unexpected error whilst trying to communicate wth the Hub. " \
-                            "Received %s with error message: %s, type: '%s' and id: '%s'\n" \
+                            "Received %s with error message: %s, type: '%s' and id: '%s', Referer: '%s'%s\n" \
                             "The Hub may be unreachable. Check all services are running and are accessible".freeze
 
     def handle_response(response_status, response_body)
@@ -33,7 +33,12 @@ module Api
       id = json.fetch('errorId', 'NONE')
       type = json.fetch('exceptionType', 'NONE')
       error_message = json.fetch('clientMessage', 'NONE')
-      ERROR_MESSAGE_PATTERN % [status, "'#{error_message}'", type, id]
+      rp_referer = RequestStore.store[:rp_referer]
+      rp_saml_request = ''
+      if 'INVALID_SAML'.eql? type
+        rp_saml_request = ", RelayState: '#{RequestStore.store[:rp_relay_state]}', SAML Request: '#{RequestStore.store[:rp_saml_request]}'"
+      end
+      ERROR_MESSAGE_PATTERN % [status, "'#{error_message}'", type, id, rp_referer, rp_saml_request]
     end
 
     def parse_json(body, status)

@@ -4,6 +4,9 @@ require 'http/response'
 
 module Api
   describe HubResponseHandler do
+    before(:each) do
+      RequestStore.clear!
+    end
     let(:response_handler) { HubResponseHandler.new }
     context 'on an unsuccessful response' do
       it 'raises an error with message, id and type from the Hub response' do
@@ -37,6 +40,26 @@ module Api
         expect {
           response_handler.handle_response(HTTP::Response::Status[400], error_body.to_json)
         }.to raise_error UpstreamError, /Received 400 with error message: 'Failure', type: 'SERVER_ERROR' and id: '0'/
+      end
+
+      it 'raises an upstream error including http referer, saml payload, and RP RelayState when exceptionType is INVALID_SAML' do
+        RequestStore.store[:rp_referer] = 'referer'
+        RequestStore.store[:rp_saml_request] = 'saml'
+        RequestStore.store[:rp_relay_state] = 'relaystate'
+        error_body = { clientMessage: 'Failure', errorId: '0', exceptionType: 'INVALID_SAML' }
+        expect {
+          response_handler.handle_response(HTTP::Response::Status[400], error_body.to_json)
+        }.to raise_error UpstreamError, /id: '0', Referer: 'referer', RelayState: 'relaystate', SAML Request: 'saml'/
+      end
+
+      it 'raises an upstream error including empty saml payload' do
+        RequestStore.store[:rp_referer] = 'referer'
+        RequestStore.store[:rp_saml_request] = nil
+        RequestStore.store[:rp_relay_state] = 'relaystate'
+        error_body = { clientMessage: 'Failure', errorId: '0', exceptionType: 'INVALID_SAML' }
+        expect {
+          response_handler.handle_response(HTTP::Response::Status[400], error_body.to_json)
+        }.to raise_error UpstreamError, /id: '0', Referer: 'referer', RelayState: 'relaystate', SAML Request: ''/
       end
     end
   end
