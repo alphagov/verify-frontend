@@ -54,14 +54,14 @@ GEM
     arr-pm (0.0.10)
       cabin (> 0)
     ast (2.4.0)
-    autoprefixer-rails (9.4.10.2)
+    autoprefixer-rails (9.5.0)
       execjs
     backports (3.12.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     browser (2.5.3)
     builder (3.2.3)
-    byebug (11.0.0)
+    byebug (11.0.1)
     cabin (0.9.0)
     capybara (2.18.0)
       addressable
@@ -83,9 +83,9 @@ GEM
     diff-lcs (1.3)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.7.1)
-    dotenv-rails (2.7.1)
-      dotenv (= 2.7.1)
+    dotenv (2.7.2)
+    dotenv-rails (2.7.2)
+      dotenv (= 2.7.2)
       railties (>= 3.2, < 6.1)
     email_validator (1.6.0)
       activemodel
@@ -178,10 +178,10 @@ GEM
     multipart-post (2.0.0)
     mustache (0.99.8)
     nio4r (2.3.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
-    parallel (1.14.0)
-    parser (2.6.0.0)
+    parallel (1.15.0)
+    parser (2.6.2.0)
       ast (~> 2.4.0)
     phantomjs (2.1.1.0)
     pkgr (1.5.1)
@@ -198,10 +198,9 @@ GEM
       insist
       mustache (= 0.99.8)
       stud
-    powerpack (0.1.2)
     psych (3.1.0)
     public_suffix (3.0.3)
-    puma (3.12.0)
+    puma (3.12.1)
     rack (2.0.6)
     rack-handlers (0.7.3)
       rack
@@ -246,9 +245,9 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     request_store (1.3.2)
-    route_translator (5.8.0)
-      actionpack (>= 5.0.0.1, <= 6.0.0.beta2)
-      activesupport (>= 5.0.0.1, <= 6.0.0.beta2)
+    route_translator (5.9.0)
+      actionpack (>= 5.0.0.1, <= 6.0.0.beta3)
+      activesupport (>= 5.0.0.1, <= 6.0.0.beta3)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -270,15 +269,14 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rubocop (0.65.0)
+    rubocop (0.66.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
-      powerpack (~> 0.1)
       psych (>= 3.1.0)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (~> 1.4.0)
+      unicode-display_width (>= 1.4.0, < 1.6)
     rubocop-rspec (1.32.0)
       rubocop (>= 0.60.0)
     ruby-progressbar (1.10.0)
@@ -332,7 +330,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
-    unicode-display_width (1.4.1)
+    unicode-display_width (1.5.0)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -347,7 +345,7 @@ GEM
     websocket-extensions (0.1.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zendesk_api (1.16.0)
+    zendesk_api (1.17.0)
       faraday (~> 0.9)
       hashie (>= 3.5.2, < 4.0.0)
       inflection
@@ -406,7 +404,7 @@ DEPENDENCIES
   zendesk_api
 
 RUBY VERSION
-   ruby 2.4.2p198
+   ruby 2.5.5p157
 
 BUNDLED WITH
-   1.17.1
+   2.0.1
