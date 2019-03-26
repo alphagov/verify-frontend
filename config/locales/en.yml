@@ -319,8 +319,8 @@ en:
     choose_a_certified_company:
       title: Choose a certified company
       heading: Choose a company to verify your identity
-      existing_customer: You don't have to be an existing customer with the company you choose.
-      personal_information: They'll ask you to provide personal information and evidence, and check it's correct.
+      existing_customer: You don’t have to be an existing customer with the company you choose.
+      personal_information: They’ll ask you to provide personal information and evidence, and check it’s correct.
       why_companies: Why there’s a choice of companies
       choose_idp: "Choose %{display_name}"
       idp_count_html: "Based on your answers, %{company_count} can verify you now:"
@@ -352,13 +352,13 @@ en:
         <p>These 5 companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
         <p>Using these companies to verify your identity will not affect your credit score.</p>
     redirect_to_idp_warning:
-      title: "You'll now be redirected"
+      title: "You’ll now be redirected"
       create_account: Create your %{display_name} identity account
       continue_website: Continue to the %{display_name} website
       identity_account_use_html: |
-        <p>You'll now verify your identity on the %{display_name} website.</p>
-        <p>They'll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
-      service_use: You'll then be able to %{service_name}.
+        <p>You’ll now verify your identity on the %{display_name} website.</p>
+        <p>They’ll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
+      service_use: You’ll then be able to %{service_name}.
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
     redirect_to_idp_question:
@@ -384,7 +384,7 @@ en:
       message: "You can sign in wherever you see the GOV.UK Verify logo with your %{display_name} identity account username and password."
       continue_to_rp: "You can now %{transaction_name}."
       heading: "%{display_name} has verified your identity"
-      add_security_loa1: When you access some government services, you'll be asked to provide more evidence, but you only need to do this once.
+      add_security_loa1: When you access some government services, you’ll be asked to provide more evidence, but you only need to do this once.
       extra_security: Government services requiring extra evidence
     failed_registration:
       title: Unable to verify your identity
@@ -422,9 +422,9 @@ en:
       reasons_html: |
         <p>There are a few reasons why this might happen, including:</p>
         <ul class="list list-bullet">
-          <li>your answer to a question doesn't match online records</li>
-          <li>you've recently had a change in your circumstances, and they aren't up to date online</li>
-          <li>%{idp_name} doesn't have access to enough information about you</li>
+          <li>your answer to a question doesn’t match online records</li>
+          <li>you’ve recently had a change in your circumstances, and they aren’t up to date online</li>
+          <li>%{idp_name} doesn’t have access to enough information about you</li>
         </ul>
       start_again: Find another company to verify you
       still_use_heading: "You can still access these government services with your %{idp_name} identity account"
@@ -465,8 +465,8 @@ en:
       heading: Send your feedback to GOV.UK Verify
       introduction_html: |
         <p>Use this form to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
-        <p><strong>Don't include any personal or financial information like your National Insurance number or credit card details.</strong></p>
-      request_reply: Leave your details below if you'd like a response from GOV.UK Verify.
+        <p><strong>Don’t include any personal or financial information like your National Insurance number or credit card details.</strong></p>
+      request_reply: Leave your details below if you’d like a response from GOV.UK Verify.
       consent_message_html: By sending this message, you consent to us using your information as detailed in the %{href}.
       privacy_notice_link: privacy notice
       character_count_message: " characters remaining %{limit_message}"
@@ -496,7 +496,7 @@ en:
     feedback_sent:
       title: Feedback
       heading: Thank you for your feedback
-      message_email: We've received your message, and we'll reply as soon as possible.
+      message_email: We’ve received your message, and we’ll reply as soon as possible.
       session_valid_link: Return to GOV.UK Verify
       session_not_valid: Your session has timed out.
       session_not_valid_link: start again
@@ -511,7 +511,7 @@ en:
       company_text: "%{company} is unavailable"
     certified_companies_disconnected:
       title: The following companies are no longer part of GOV.UK Verify
-      verify_another_company_html: If you had an identity account with one of these companies, you'll need to %{link}.
+      verify_another_company_html: If you had an identity account with one of these companies, you’ll need to %{link}.
       verify_another_company_link: verify your identity with a different company
     further_information:
       title: Enter your %{cycle_three_name}
@@ -528,10 +528,10 @@ en:
         button_continue: Continue
         button_signout: Sign out now
       timeout:
-        title: "You've been signed out"
-        heading: "You've been signed out"
-        intro: "To keep your information safe, you've been signed out after a period of inactivity."
-        continue: "To continue to %{service_name}, you'll need to sign in again with %{idp_name}."
+        title: "You’ve been signed out"
+        heading: "You’ve been signed out"
+        intro: "To keep your information safe, you’ve been signed out after a period of inactivity."
+        continue: "To continue to %{service_name}, you’ll need to sign in again with %{idp_name}."
         start_again: Sign in with %{idp_name}
         other_ways_text: You can also see
         other_ways_link: other ways to %{service_name}
@@ -582,7 +582,7 @@ en:
             <li>check for an email from the identity provider you chose</li>
             <li>bookmark this page</li>
           </ul>
-          <p>You'll need the email or username and password you used to create an account.</p>
+          <p>You’ll need the email or username and password you used to create an account.</p>
       from_resume_link:
         title: "Verification Paused %{idp_name} - Link"
         heading: "Your %{idp_name} identity account has been saved"
@@ -593,13 +593,13 @@ en:
             <li>check for an email from %{idp_name}</li>
             <li>bookmark this page</li>
           </ul>
-          <p>You'll need the email or username and password you used to create an account.</p>
+          <p>You’ll need the email or username and password you used to create an account.</p>
       resume:
         title: "Continue verifying with %{display_name}"
         heading: "Continue verifying with %{display_name}"
-        intro: "You'll need to finish verifying your identity with %{display_name} to %{service_name}."
+        intro: "You’ll need to finish verifying your identity with %{display_name} to %{service_name}."
         continue: "Continue with %{display_name}"
-        alternatives: "If this wasn't you, you can:"
+        alternatives: "If this wasn’t you, you can:"
         alternative_new_identity: "create a new identity account"
         alternative_start: "sign in with another certified company"
         alternative_other_ways: "see other ways to %{service_name}"
