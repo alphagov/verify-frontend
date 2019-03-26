@@ -161,13 +161,13 @@ en:
       a_certified_company_will_verify_security: You choose from a list of companies certified to verify your identity. They’ve all met security standards set by government.
       a_certified_company_will_verify_security_start: You start by choosing a company to verify your identity. The companies you choose from have met security standards set by government.
       ensure_privacy: The certified company doesn’t know which government service you’re accessing, and the government department doesn’t know which company verified your identity. This ensures your privacy.
-      no_charge: You don't need to pay to use GOV.UK Verify.
+      no_charge: You don’t need to pay to use GOV.UK Verify.
       summary: How companies can verify identities
       details_html: |
-        <p>These companies can check it's really you by using their own records, or by accessing information like credit records. If you have a passport or driving licence, they can check that information too.</p>
+        <p>These companies can check it’s really you by using their own records, or by accessing information like credit records. If you have a passport or driving licence, they can check that information too.</p>
         <p>These 5 companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
         <p>Using these companies to verify your identity will not affect credit score.</p>
-        <p>There's more than one company so that:</p>
+        <p>There’s more than one company so that:</p>
         <ul class="list list-bullet">
           <li>you can choose who verifies your identity</li>
           <li>everyone's information is not stored in one place</li>
@@ -176,7 +176,7 @@ en:
         <p>These companies can check it's really you by using their own records, or by accessing information like credit records. If you have a passport or driving licence, they can check that information too.</p>
         <p>These 5 companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
         <p>Using these companies to verify your identity will not affect credit score.</p>
-        <p>There's more than one company so that:</p>
+        <p>There’s more than one company so that:</p>
         <ul class="list list-bullet">
           <li>you can choose who verifies your identity</li>
           <li>everyone's information is not stored in one place</li>
@@ -205,8 +205,8 @@ en:
       content_html: |
         <p>These companies have built secure systems to verify identities. These systems work by checking:</p>
         <ul class="list-bullet list">
-        <li>your identity documents are valid</li>
-        <li>it’s you providing your details, and not someone pretending to be you</li>
+          <li>your identity documents are valid</li>
+          <li>it’s you providing your details, and not someone pretending to be you</li>
         </ul>
         <p>Each company uses different methods for each of these steps.</p>
         <p>We need to ask you some questions to check which companies can verify you. We’ll then send you to the website of the company you choose.</p>

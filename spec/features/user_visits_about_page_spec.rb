@@ -24,7 +24,7 @@ RSpec.describe 'When the user visits the about page' do
 
     it 'will display the about page in Welsh' do
       visit '/am'
-      expect(page).to have_content 'Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro'
+      expect(page).to have_content 'Mae GOV.UK Verify yn ffordd ddiogel o brofi pwy ydych ar-lein. Ei nod yw amddiffyn pobl rhag y broblem gynyddol o ddwyn hunaniaeth ar-lein.'
       expect(page).to have_css 'html[lang=cy]'
     end
   end
