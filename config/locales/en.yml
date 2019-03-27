@@ -277,7 +277,7 @@ en:
       choose_another_company: You have to choose a different certified company to verify your identity.
       choose_another_certified_company_link: Choose another company
     verify_will_not_work_for_you:
-      heading: GOV.UK Verify will not work for you
+      heading: You won’t be able to use GOV.UK Verify
       content_html: |
         <p>Based on your answers, none of the identity providers (also called certified companies) that work with GOV.UK Verify are able to verify your identity.</p>
     may_not_work_if_you_live_overseas:
@@ -314,7 +314,7 @@ en:
       youll_also_need: You’ll also need a UK passport or a UK driving licence.
     will_not_work_without_uk_address:
       title: GOV.UK Verify will not work for you
-      heading: GOV.UK Verify will not work for you
+      heading: You won’t be able to use GOV.UK Verify
       explanation: You need a current UK address to get your identity verified.
     choose_a_certified_company:
       title: Choose a certified company
