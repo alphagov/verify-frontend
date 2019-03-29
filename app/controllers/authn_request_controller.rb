@@ -122,6 +122,6 @@ private
   end
 
   def raise_error_if_params_invalid
-    session_error("Missing/empty SAML message from #{request.referer}") if params['SAMLRequest'].blank?
+    something_went_wrong_warn("Missing/empty SAML message from #{request.referer}", :bad_request) if params['SAMLRequest'].blank?
   end
 end
