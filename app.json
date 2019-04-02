@@ -1,22 +1,17 @@
 {
-  "addons": [
-
-  ],
-  "buildpacks": [
-    {
-      "url": "https://github.com/heroku/heroku-buildpack-ruby"
-    }
-  ],
+  "addons": [],
+  "buildpacks": [],
   "description": "",
   "env": {
-    "RAILS_ENV": "DEVELOPMENT",
-    "CYCLE_3_DISPLAY_LOCALES": "stub/locales/cycle3"
+    "RAILS_ENV": "TEST",
+    "CYCLE_3_DISPLAY_LOCALES": "stub/locales/cycle3",
+    "SECRET_KEY_BASE": "c3c3674815a6d38e2c8ca34962645095cbf69cd14a37d13384c574ee3ad1ba670c69c916ef0b0e04f7d9b7e27642b5c83fd1882db10089d9692f9e7a51fdc171"
   },
   "formation": {
   },
   "name": "jakub-verify-frontend",
   "scripts": {
-    "postdeploy": "./startup.sh --stub-api"
+    "postdeploy": "RAILS_ENV=TEST ./startup.sh --stub-api"
   },
   "stack": "heroku-18"
 }
