@@ -8,7 +8,11 @@
 <div class="grid-row">
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= @transaction_name.slice(0,1).upcase + @transaction_name.slice(1..-1)%></h1>
-    <p><%= t('hub.further_information.first_time') %></p>
+    <% if @cycle_three_attribute.intro_html %>
+      <%= raw @cycle_three_attribute.intro_html %>
+    <% else %>
+      <p><%= t('hub.further_information.first_time') %></p>
+    <% end %>
 
     <%= form_for @cycle_three_attribute, url: further_information_submit_path,
                  html: { novalidate: true,

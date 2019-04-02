@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.4.2'
+ruby '2.5.5'
 
 gem 'rails', '5.0.7.2'
 gem 'rails-i18n', '~> 5.1'
@@ -12,7 +12,7 @@ gem 'http', '~> 2.0.0'
 gem 'connection_pool'
 
 # Assets
-gem 'sass-rails', '~> 5.0'
+gem 'sassc', '~> 2.0.1'
 gem 'autoprefixer-rails'
 gem 'uglifier', '~> 2.7.0'
 gem 'jquery-rails'

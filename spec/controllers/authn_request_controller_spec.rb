@@ -66,4 +66,19 @@ describe AuthnRequestController do
     post :rp_request, params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
     expect(response).to redirect_to start_path
   end
+
+  it 'will show error page when SAMLRequest param is missing' do
+    post :rp_request, params: { 'RelayState' => 'my-relay-state' }
+    expect(response).to have_http_status :bad_request
+  end
+
+  it 'will show error page when SAMLRequest param is empty string' do
+    post :rp_request, params: { 'SAMLRequest' => '', 'RelayState' => 'my-relay-state' }
+    expect(response).to have_http_status :bad_request
+  end
+
+  it 'will show error page when SAMLRequest param is nil' do
+    post :rp_request, params: { 'SAMLRequest' => nil, 'RelayState' => 'my-relay-state' }
+    expect(response).to have_http_status :bad_request
+  end
 end

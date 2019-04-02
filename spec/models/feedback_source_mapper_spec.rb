@@ -46,7 +46,11 @@ describe FeedbackSourceMapper do
   end
 
   it 'should map eidas scheme unavailable feedback source to redirect to country page' do
-    expect(@feedback_source_mapper.page_from_source('EIDAS_SCHEME_UNAVAILABLE', :en)).to eql(redirect_to_country_path)
+    expect(@feedback_source_mapper.page_from_source('EIDAS_SCHEME_UNAVAILABLE_PAGE', :en)).to eql(redirect_to_country_path)
+  end
+
+  it 'should map proxy node error feedback source to proxy node error page' do
+    expect(@feedback_source_mapper.page_from_source('PROXY_NODE_ERROR_PAGE', :en)).to eql(proxy_node_error_path)
   end
 
   it 'should map feedback source to corresponding welsh path' do
