@@ -9,7 +9,8 @@
   ],
   "description": "",
   "env": {
-    "RAILS_ENV": "DEVELOPMENT"
+    "RAILS_ENV": "DEVELOPMENT",
+    "CYCLE_3_DISPLAY_LOCALES": "stub/locales/cycle3"
   },
   "formation": {
   },
