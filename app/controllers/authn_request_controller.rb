@@ -1,5 +1,6 @@
 require 'ab_test/ab_test'
 require 'partials/journey_hinting_partial_controller'
+require 'partials/user_errors_partial_controller'
 
 class AuthnRequestController < SamlController
   include JourneyHintingPartialController
@@ -8,6 +9,8 @@ class AuthnRequestController < SamlController
   skip_before_action :set_piwik_custom_variables
 
   def rp_request
+    return if raise_error_if_params_invalid
+
     session_journey_hint_value = session.fetch(:journey_hint, nil)
     session_journey_hint_rp = session.fetch(:journey_hint_rp, nil)
     create_session
@@ -116,5 +119,9 @@ private
     RequestStore.store[:rp_referer] = request.referer
     RequestStore.store[:rp_saml_request] = params.fetch('SAMLRequest', nil)
     RequestStore.store[:rp_relay_state] = params.fetch('RelayState', nil)
+  end
+
+  def raise_error_if_params_invalid
+    something_went_wrong_warn("Missing/empty SAML message from #{request.referer}", :bad_request) if params['SAMLRequest'].blank?
   end
 end

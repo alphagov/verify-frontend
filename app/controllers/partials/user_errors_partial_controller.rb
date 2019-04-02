@@ -38,9 +38,9 @@ module UserErrorsPartialController
     render_error('something_went_wrong', status)
   end
 
-  def something_went_wrong_warn(exception)
+  def something_went_wrong_warn(exception, status = :internal_server_error)
     logger.warn(exception)
-    render_error('something_went_wrong', :internal_server_error)
+    render_error('something_went_wrong', status)
   end
 
   def eidas_scheme_unavailable_error(exception)
