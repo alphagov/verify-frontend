@@ -1,0 +1,19 @@
+<%= page_title 'hub.feedback_landing.title' %>
+<% content_for :show_to_search_engine, true %>
+<% content_for :feedback_source, flash['feedback_source'] %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.feedback_landing.heading', service_name: @service_name %></h1>
+    <h2 class="heading-medium"><%= link_to(t('hub.feedback_landing.idps.heading'), t('hub.feedback_landing.idps.href')) %></h2>
+    <p><%= raw t('hub.feedback_landing.idps.description', bank_holidays: link_to("bank holidays", "http://www.gov.uk/bank-holidays")) %></p>
+
+    <h2 class="heading-medium"><%= raw @other_ways_heading %></h2>
+    <p><%= raw @other_ways_text %></p>
+
+    <h2 class="heading-medium"><%= link_to(t('hub.feedback_landing.feedback_form.heading'), feedback_path('feedback-source': feedback_source)) %></h2>
+    <p><%= t 'hub.feedback_landing.feedback_form.paragraph' %></p>
+
+  </div>
+
+</div>

@@ -30,7 +30,7 @@
     <div class="grid-row show-mobile">
       <%= render 'shared/available_languages' unless @hide_available_languages %>
     </div>
-    <%= render 'shared/feedback_link' if feedback_source.present? && !@hide_feedback_link %>
+    <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>
     <div class="verify-logo-right">
       <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: 'GOV.UK VERIFY' %>
     </div>

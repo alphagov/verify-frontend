@@ -159,7 +159,7 @@ RSpec.feature 'When the user visits the feedback page' do
     page.driver.browser.header('User-Agent', user_agent)
     set_session_and_session_cookies!
     visit start_path
-    click_on t('feedback_link.feedback_form')
+    navigate_to_feedback_form
 
     fill_in 'feedback_form_what', with: what_text_field
     fill_in 'feedback_form_details', with: details_text_field
@@ -175,7 +175,7 @@ RSpec.feature 'When the user visits the feedback page' do
   it 'should keep the referer if form submission fails validation' do
     set_session_and_session_cookies!
     visit start_path
-    click_on t('feedback_link.feedback_form')
+    navigate_to_feedback_form
 
     fill_in 'feedback_form_what', with: what_text_field
     fill_in 'feedback_form_details', with: details_text_field
@@ -194,7 +194,7 @@ RSpec.feature 'When the user visits the feedback page' do
     set_session_and_session_cookies!
     stub_const("FEEDBACK_DISABLED", true)
     visit start_path
-    click_on t('feedback_link.feedback_form')
+    navigate_to_feedback_form
 
     expect(page).to have_content "Feedback is disabled on this environment"
   end

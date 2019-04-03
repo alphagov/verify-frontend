@@ -48,6 +48,7 @@ cy:
     redirect_to_service_signing_in: ailgyfeirio-i-gwasanaeth/mewngofnodi
     redirect_to_service_start_again: ailgyfeirio-i-gwasanaeth/dechrau-eto
     redirect_to_service_error: ailgyfeirio-i-gwasanaeth/gwall
+    feedback_landing: feedback_landing_cy
     feedback: adborth
     feedback_sent: adborth/adborth-wedi'i-anfon
     further_information: gwybodaeth-bellach
@@ -81,8 +82,7 @@ cy:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth
   feedback_link:
-    message: Defnyddiwch y %{href} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant
-    feedback_form: ffurflen adborth
+    message: Get help accessing %{service_name}
   footer:
     support_links: Dolenni cymorth
     help: Help

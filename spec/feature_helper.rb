@@ -33,7 +33,7 @@ module FeatureHelper
   end
 
   def expect_feedback_source_to_be(page, source, feedback_source_path)
-    expect(page).to have_link 'feedback', href: "/feedback?feedback-source=#{source}"
+    expect(page).to have_link 'feedback form', href: "/feedback_landing?feedback-source=#{source}"
     expect(FEEDBACK_SOURCE_MAPPER.page_from_source(source, :en)).to eql(feedback_source_path)
   end
 
@@ -192,6 +192,11 @@ private
         transaction_homepage: 'http://www.test-rp.gov.uk/',
         selected_answers: { documents: { driving_licence: false }, device_type: { device_type_other: true } },
     }
+  end
+
+  def navigate_to_feedback_form(locale = 'en')
+    click_link id: 'feedback_landing_link_id'
+    click_link t('hub.feedback_landing.feedback_form.link_text', locale: locale)
   end
 end
 

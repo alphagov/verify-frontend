@@ -48,6 +48,7 @@ en:
     redirect_to_service_signing_in: redirect-to-service/signing-in
     redirect_to_service_start_again: redirect-to-service/start-again
     redirect_to_service_error: redirect-to-service/error
+    feedback_landing: feedback_landing
     feedback: feedback
     feedback_sent: feedback/feedback-sent
     further_information: further-information
@@ -78,8 +79,7 @@ en:
     message: GOV.UK Verify uses cookies to make the site simpler.
     link: Find out more about cookies
   feedback_link:
-    message: Use the %{href} to ask a question, report a problem or suggest an improvement
-    feedback_form: feedback form
+    message: Get help accessing %{service_name}
   footer:
     support_links: Support links
     help: Help
@@ -460,6 +460,19 @@ en:
       title: Loading
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
+    feedback_landing:
+      title: Help
+      heading: Get help accessing %{service_name}
+      idps:
+        heading: Get help signing in with GOV.UK Verify
+        href: https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify#how-to-get-help-signing-in
+        description: Contact the company you’re trying to use directly. Support is available 7 days a week (except %{bank_holidays}).
+      services:
+        heading: Other ways to prove your identity
+        paragraph: Contact %{service_name} directly to find out other ways you can prove your identity.
+      feedback_form:
+        heading: Give feedback on GOV.UK Verify
+        paragraph: Ask a question, report a problem or suggest an improvement GOV.UK Verify can make.
     feedback:
       title: Feedback
       heading: Send your feedback to GOV.UK Verify
