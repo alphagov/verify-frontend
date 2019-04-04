@@ -1,0 +1,31 @@
+{
+  "description": "verify-frontend PR stub app",
+  "env": {
+    "CONFIG_API_HOST": "http://localhost:50199",
+    "POLICY_HOST": "http://localhost:50199",
+    "SAML_PROXY_HOST": "http://localhost:50199",
+    "ZDD_LATCH": "notused",
+    "PROMETHEUS_ENABLED": "false",
+    "METRICS_ENABLED": "false",
+    "ZENDESK_URL": "https://notused",
+    "ZENDESK_USERNAME": "notused",
+    "ZENDESK_TOKEN": "notused",
+    "CYCLE_3_DISPLAY_LOCALES": "stub/locales/cycle3",
+    "RULES_DIRECTORY": "stub/idp-rules",
+    "RP_CONFIG": "stub/relying_parties.yml",
+    "IDP_DISPLAY_LOCALES": "stub/locales/idps",
+    "CYCLE_THREE_ATTRIBUTES_DIRECTORY": "stub/attributes",
+    "AB_TEST_FILE": "stub/ab_test.yml",
+    "SEGMENT_DEFINITIONS": "stub/segment_definitions.yml",
+    "SECRET_KEY_BASE": "c3c3674815a6d38e2c8ca34962645095cbf69cd14a37d13384c574ee3ad1ba670c69c916ef0b0e04f7d9b7e27642b5c83fd1882db10089d9692f9e7a51fdc171",
+    "INTERNAL_PIWIK_HOST": "true",
+    "COUNTRY_DISPLAY_LOCALES": "stub/locales/countries",
+    "COUNTRY_FLAGS_DIRECTORY": "/eidas/country-flags",
+    "EIDAS_SCHEMES_DIRECTORY": "stub/eidas/schemes",
+    "EIDAS_SCHEME_LOGOS_DIRECTORY": "/eidas/scheme-logos",
+    "LOGO_DIRECTORY": "/stub-logos",
+    "WHITE_LOGO_DIRECTORY": "/stub-logos/white"
+  },
+  "name": "alphagov-verify-frontend",
+  "stack": "container"
+}
