@@ -1,6 +1,7 @@
 class TestSamlController < ApplicationController
   skip_before_action :validate_session
   skip_before_action :set_piwik_custom_variables
+  skip_before_action :verify_authenticity_token
   skip_after_action :store_locale_in_cookie
   layout 'test'
 

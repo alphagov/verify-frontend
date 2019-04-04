@@ -142,7 +142,7 @@ class StubApi < Sinatra::Base
 
   get '/SAML2/SSO/API/SENDER/AUTHN_REQ' do
     '{
-      "postEndpoint":"http://localhost:50300/test-saml",
+      "postEndpoint":"/test-idp-request-endpoint",
       "samlMessage":"blah",
       "relayState":"whatever",
       "registration":false
@@ -193,6 +193,11 @@ class StubApi < Sinatra::Base
         "loaList":["LEVEL_1","LEVEL_2"],
         "entityId": "http://example.com/test-rp-loa1"
       }]'
+  end
+
+  post '/policy/received-authn-request/my-relay-state/select-identity-provider' do
+    status 200
+    ''
   end
 
   get '/api/countries/blah' do
