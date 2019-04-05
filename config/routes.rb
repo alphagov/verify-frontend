@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   post 'SAML2/SSO/EidasResponse/POST' => 'authn_response#country_response'
   match "/404", to: "errors#page_not_found", via: :all
 
-  if %w(test development).include? Rails.env
+  if %w(test development).include?(Rails.env) || STUB_MODE
     mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
     get 'test-saml' => 'test_saml#index'
+    get '/' => 'test_saml#index'
     post 'test-rp', to: proc { |_| [200, {}, ['OK']] }
     post 'test-idp-request-endpoint' => 'test_saml#idp_request'
     post 'test-initiate-journey' => 'test_saml#initiate_journey_session'
