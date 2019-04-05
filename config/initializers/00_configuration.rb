@@ -40,5 +40,7 @@ CONFIG = Configuration.load! do
   option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
   # Feature flags
   option_bool 'single_idp_feature', 'SINGLE_IDP_FEATURE', default: true
+
+  # Enables dev/test routes when compiled for a production env
   option_bool 'stub_mode', 'STUB_MODE', default: false
 end
