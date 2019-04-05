@@ -53,4 +53,4 @@ The PR is also deployed to Heroku as [a review app](https://devcenter.heroku.com
 * `Dockerfile.heroku` - to configure the docker image of frontend
 * `heroku.yml` - Heroku [deployment manifest](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml) 
 * `app.json` - Heroku [application manifest](https://devcenter.heroku.com/articles/app-json-schema)
-* `heroku-startup.sh` - startup script used to start the app and api, with supplied port by Heroku
+* `heroku-startup.sh` - startup script used to start the app and api, on the port supplied by Heroku

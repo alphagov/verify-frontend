@@ -41,6 +41,6 @@ CONFIG = Configuration.load! do
   # Feature flags
   option_bool 'single_idp_feature', 'SINGLE_IDP_FEATURE', default: true
 
-  # Enables dev/test routes when compiled for a production env
+  # Enables dev/test routes when compiled for a production env (i.e. when RAILS_ENV=production)
   option_bool 'stub_mode', 'STUB_MODE', default: false
 end
