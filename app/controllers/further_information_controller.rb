@@ -52,6 +52,6 @@ class FurtherInformationController < ApplicationController
 private
 
   def expired?
-    !session[:assertion_expiry].nil? && Time.parse(session[:assertion_expiry]) <= Time.now
+    !session[:assertion_expiry].nil? && Time.parse(session[:assertion_expiry]) <= Time.now.utc
   end
 end
