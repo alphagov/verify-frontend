@@ -33,7 +33,7 @@ module FeatureHelper
   end
 
   def expect_feedback_source_to_be(page, source, feedback_source_path)
-    expect(page).to have_link 'feedback form', href: "/feedback_landing?feedback-source=#{source}"
+    expect(page).to have_link id: t('feedback_link.id'), href: "/feedback_landing?feedback-source=#{source}"
     expect(FEEDBACK_SOURCE_MAPPER.page_from_source(source, :en)).to eql(feedback_source_path)
   end
 
@@ -195,8 +195,8 @@ private
   end
 
   def navigate_to_feedback_form(locale = 'en')
-    click_link id: 'feedback_landing_link_id'
-    click_link t('hub.feedback_landing.feedback_form.link_text', locale: locale)
+    click_link id: t('feedback_link.id')
+    click_link t('hub.feedback_landing.feedback_form.heading', locale: locale)
   end
 end
 

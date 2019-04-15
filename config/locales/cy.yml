@@ -78,11 +78,13 @@ cy:
   cookie_message:
     message: Mae GOV.UK Verify yn defnyddio cwcis i wneud y safle'n symlach.
     link: Darganfyddwch fwy am gwcis
+  feedback_link:
+    message: Defnyddiwch y %{href} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant
+    feedback_form: ffurflen adborth
+    id: feedback_link_id
   translation_in_progress_banner:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth
-  feedback_link:
-    message: Get help accessing %{service_name}
   footer:
     support_links: Dolenni cymorth
     help: Help
@@ -461,6 +463,20 @@ cy:
       title: Llwytho
       heading: Mynd ymlaen i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
+    feedback_landing:
+      title: Help
+      basic_heading: Get help using GOV.UK Verify
+      heading: Get help accessing %{service_name}
+      idps:
+        heading: Get help signing in with GOV.UK Verify
+        href: https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify#how-to-get-help-signing-in
+        description: Companies who verify identities for GOV.UK Verify provide support 7 days a week (except %{bank_holidays}).
+      services:
+        heading: Other ways to prove your identity
+        paragraph: Contact %{service_name} directly to find out other ways you can prove your identity.
+      feedback_form:
+        heading: Give feedback on GOV.UK Verify
+        paragraph: Ask a question, report a problem or suggest an improvement GOV.UK Verify can make. The support team aims to respond to questions in 5 working days.
     feedback:
       title: Adborth
       heading: Anfonnwch eich adborth i GOV.UK Verify
