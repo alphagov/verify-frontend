@@ -18,7 +18,7 @@
       $accessibleTimer: $('#js-modal-dialog .at-timer'),
       // Timer specific settings. If these are not set, timeout and redirection are disabled
       timeOutRedirectUrl: $('#js-modal-dialog').data('url-redirect'),
-      expiryTime: $('#js-modal-dialog').data('utc-expiry'),
+      expiryTime: new Date().getTime() + ($('#js-modal-dialog').data('seconds-to-timeout') * 1000),
       secondsTimeOutModalVisible: $('#js-modal-dialog').data('seconds-modal-visible'),
       modalText: $('#js-modal-dialog').data('text'),
       modalExtraText: $('#js-modal-dialog').data('extra-text'),
