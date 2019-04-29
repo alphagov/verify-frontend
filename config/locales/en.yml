@@ -470,9 +470,9 @@ en:
         heading: Get help signing in with GOV.UK Verify
         href: https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify#how-to-get-help-signing-in
         description: Companies who verify identities for GOV.UK Verify provide support 7 days a week (except %{bank_holidays}).
+        bank_holidays: bank holidays
       services:
         heading: Other ways to prove your identity
-        paragraph: Contact %{service_name} directly to find out other ways you can prove your identity.
       feedback_form:
         heading: Give feedback on GOV.UK Verify
         paragraph: Ask a question, report a problem or suggest an improvement GOV.UK Verify can make. The support team aims to respond to questions in 5 working days.

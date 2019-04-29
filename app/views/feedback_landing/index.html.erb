@@ -6,7 +6,7 @@
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= @feedback_landing_heading %></h1>
     <h2 class="heading-medium"><%= link_to(t('hub.feedback_landing.idps.heading'), t('hub.feedback_landing.idps.href')) %></h2>
-    <p><%= raw t('hub.feedback_landing.idps.description', bank_holidays: link_to("bank holidays", "http://www.gov.uk/bank-holidays")) %></p>
+    <p><%= raw t('hub.feedback_landing.idps.description', bank_holidays: link_to(t('hub.feedback_landing.idps.bank_holidays'), "http://www.gov.uk/bank-holidays")) %></p>
 
     <% unless @other_ways_text.nil? %>
       <h2 class="heading-medium"><%= raw @other_ways_heading %></h2>
