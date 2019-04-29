@@ -33,7 +33,7 @@ module FeatureHelper
   end
 
   def expect_feedback_source_to_be(page, source, feedback_source_path)
-    expect(page).to have_link id: t('feedback_link.id'), href: "/feedback_landing?feedback-source=#{source}"
+    expect(page).to have_link id: t('feedback_link.id'), href: "/feedback-landing?feedback-source=#{source}"
     expect(FEEDBACK_SOURCE_MAPPER.page_from_source(source, :en)).to eql(feedback_source_path)
   end
 

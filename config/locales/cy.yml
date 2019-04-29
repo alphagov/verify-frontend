@@ -48,7 +48,7 @@ cy:
     redirect_to_service_signing_in: ailgyfeirio-i-gwasanaeth/mewngofnodi
     redirect_to_service_start_again: ailgyfeirio-i-gwasanaeth/dechrau-eto
     redirect_to_service_error: ailgyfeirio-i-gwasanaeth/gwall
-    feedback_landing: feedback_landing_cy
+    feedback_landing: feedback-landing-cy
     feedback: adborth
     feedback_sent: adborth/adborth-wedi'i-anfon
     further_information: gwybodaeth-bellach

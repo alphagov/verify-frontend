@@ -35,7 +35,7 @@ RSpec.describe 'When the user visits the start page' do
       visit "/start"
       expect(page).to have_content t('errors.no_cookies.enable_cookies')
       expect(page).to have_http_status :forbidden
-      expect(page).to have_link 'feedback', href: '/feedback_landing?feedback-source=COOKIE_NOT_FOUND_PAGE'
+      expect(page).to have_link 'feedback', href: '/feedback-landing?feedback-source=COOKIE_NOT_FOUND_PAGE'
       expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
     end
 
@@ -51,7 +51,7 @@ RSpec.describe 'When the user visits the start page' do
       visit '/start'
       expect(page).to have_content t('errors.something_went_wrong.heading')
       expect(page).to have_http_status :internal_server_error
-      expect(page).to have_link 'feedback', href: '/feedback_landing?feedback-source=ERROR_PAGE'
+      expect(page).to have_link 'feedback', href: '/feedback-landing?feedback-source=ERROR_PAGE'
     end
 
     it 'will display the generic error when the session cookie is missing' do
@@ -62,7 +62,7 @@ RSpec.describe 'When the user visits the start page' do
       visit '/start'
       expect(page).to have_content t('errors.something_went_wrong.heading')
       expect(page).to have_http_status :internal_server_error
-      expect(page).to have_link 'feedback', href: '/feedback_landing?feedback-source=ERROR_PAGE'
+      expect(page).to have_link 'feedback', href: '/feedback-landing?feedback-source=ERROR_PAGE'
     end
 
     it 'will display the generic error when the session id cookie is missing' do
@@ -73,7 +73,7 @@ RSpec.describe 'When the user visits the start page' do
       visit '/start'
       expect(page).to have_content t('errors.something_went_wrong.heading')
       expect(page).to have_http_status :internal_server_error
-      expect(page).to have_link 'feedback', href: '/feedback_landing?feedback-source=ERROR_PAGE'
+      expect(page).to have_link 'feedback', href: '/feedback-landing?feedback-source=ERROR_PAGE'
     end
 
     it 'will display the something went wrong page when the session id is missing' do
@@ -82,7 +82,7 @@ RSpec.describe 'When the user visits the start page' do
       visit '/start'
       expect(page).to have_content t('errors.something_went_wrong.heading')
       expect(page).to have_http_status :internal_server_error
-      expect(page).to have_link 'feedback', href: '/feedback_landing?feedback-source=ERROR_PAGE'
+      expect(page).to have_link 'feedback', href: '/feedback-landing?feedback-source=ERROR_PAGE'
     end
 
     it 'will display the something went wrong page when the session id does not match the cookie value' do
@@ -91,7 +91,7 @@ RSpec.describe 'When the user visits the start page' do
       visit '/start'
       expect(page).to have_content t('errors.something_went_wrong.heading')
       expect(page).to have_http_status :bad_request
-      expect(page).to have_link 'feedback', href: '/feedback_landing?feedback-source=ERROR_PAGE'
+      expect(page).to have_link 'feedback', href: '/feedback-landing?feedback-source=ERROR_PAGE'
     end
 
     it 'will display the timeout expiration error when the session start cookie is old' do

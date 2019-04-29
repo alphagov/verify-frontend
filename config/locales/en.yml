@@ -48,7 +48,7 @@ en:
     redirect_to_service_signing_in: redirect-to-service/signing-in
     redirect_to_service_start_again: redirect-to-service/start-again
     redirect_to_service_error: redirect-to-service/error
-    feedback_landing: feedback_landing
+    feedback_landing: feedback-landing
     feedback: feedback
     feedback_sent: feedback/feedback-sent
     further_information: further-information
