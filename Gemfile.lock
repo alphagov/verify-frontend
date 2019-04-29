@@ -1,7 +1,6 @@
 GIT
-  remote: https://github.com/gocardless/prometheus_client_ruby.git
-  revision: 5dce3e5855f2aa67c65874c953878e124c23edcd
-  branch: pluggable_data_stores
+  remote: https://github.com/prometheus/client_ruby.git
+  revision: 460c2bbe70fb4434adaa2bdbeb7ff09e84abd0de
   specs:
     prometheus-client (0.9.0)
       concurrent-ruby
