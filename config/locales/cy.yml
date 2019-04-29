@@ -466,7 +466,7 @@ cy:
     feedback_landing:
       title: Help
       basic_heading: Cael help i ddefnyddio GOV.UK Verify
-      heading: Get help accessing %{service_name}
+      heading: Cael help i gael mynediad %{service_name}
       idps:
         heading: Cael help i fewngofnodi gyda GOV.UK Verify
         href: https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify#how-to-get-help-signing-in
