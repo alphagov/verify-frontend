@@ -48,6 +48,7 @@ cy:
     redirect_to_service_signing_in: ailgyfeirio-i-gwasanaeth/mewngofnodi
     redirect_to_service_start_again: ailgyfeirio-i-gwasanaeth/dechrau-eto
     redirect_to_service_error: ailgyfeirio-i-gwasanaeth/gwall
+    feedback_landing: feedback-landing-cy
     feedback: adborth
     feedback_sent: adborth/adborth-wedi'i-anfon
     further_information: gwybodaeth-bellach
@@ -77,12 +78,13 @@ cy:
   cookie_message:
     message: Mae GOV.UK Verify yn defnyddio cwcis i wneud y safle'n symlach.
     link: Darganfyddwch fwy am gwcis
-  translation_in_progress_banner:
-    message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
-    feedback: adborth
   feedback_link:
     message: Defnyddiwch y %{href} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant
     feedback_form: ffurflen adborth
+    id: feedback_link_id
+  translation_in_progress_banner:
+    message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
+    feedback: adborth
   footer:
     support_links: Dolenni cymorth
     help: Help
@@ -461,6 +463,20 @@ cy:
       title: Llwytho
       heading: Mynd ymlaen i’r cam nesaf
       description: Oherwydd nad yw Javascript wedi’i alluogi ar eich porwr, mae’n rhaid i chi bwyso’r botwm parhau
+    feedback_landing:
+      title: Help
+      basic_heading: Cael help i ddefnyddio GOV.UK Verify
+      heading: Cael help i gael mynediad %{service_name}
+      idps:
+        heading: Cael help i fewngofnodi gyda GOV.UK Verify
+        href: https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify#how-to-get-help-signing-in
+        description: Mae cwmnïau sy'n gwirio hunaniaeth ar gyfer GOV.UK Verify yn darparu cymorth 7 diwrnod yr wythnos (ac eithrio %{bank_holidays}).
+        bank_holidays: gwyliau banc
+      services:
+        heading: Ffyrdd eraill i brofi eich hunaniaeth
+      feedback_form:
+        heading: Rhoi adborth ar GOV.UK Verify
+        paragraph: Gofyn cwestiwn, rhoi gwybod am broblem neu awgrymu gwelliant y gall GOV.UK Verify ei wneud. Nod y tîm cymorth yw ymateb i gwestiynau mewn 5 diwrnod gwaith.
     feedback:
       title: Adborth
       heading: Anfonnwch eich adborth i GOV.UK Verify

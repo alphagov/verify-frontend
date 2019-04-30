@@ -87,6 +87,7 @@ get 'redirect_to_service_signing_in' => 'redirect_to_service#signing_in', as: :r
 get 'redirect_to_service_start_again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again
 get 'redirect_to_service_error' => 'redirect_to_service#error', as: :redirect_to_service_error
 get 'redirect_to_country' => 'choose_a_country#choose_a_country', as: :redirect_to_country
+get 'feedback_landing', to: 'feedback_landing#index', as: :feedback_landing
 get 'feedback', to: 'feedback#index', as: :feedback
 post 'feedback', to: 'feedback#submit', as: :feedback_submit
 get 'feedback_sent', to: 'feedback_sent#index', as: :feedback_sent

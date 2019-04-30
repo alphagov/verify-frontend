@@ -37,7 +37,7 @@ private
 
   def render_feedback_form
     @form = FeedbackForm.new({})
-    flash['feedback_referer'] = request.referer
+    flash.keep('feedback_referer')
     feedback_source = params['feedback-source'].nil? ? flash['feedback_source'] : params['feedback-source']
     if feedback_source.nil?
       render

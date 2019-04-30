@@ -92,7 +92,7 @@ RSpec.feature 'When the user submits the feedback page' do
 
     it 'should show user link back to start page' do
       visit start_path
-      click_link t('feedback_link.feedback_form')
+      navigate_to_feedback_form
 
       fill_in 'feedback_form_what', with: what_text_field
       fill_in 'feedback_form_details', with: details_text_field
@@ -106,8 +106,7 @@ RSpec.feature 'When the user submits the feedback page' do
 
     it 'should show user link back to page the user came from' do
       visit select_documents_path
-      click_link t('feedback_link.feedback_form')
-
+      navigate_to_feedback_form
       fill_in 'feedback_form_what', with: what_text_field
       fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false'
@@ -121,8 +120,7 @@ RSpec.feature 'When the user submits the feedback page' do
     it 'should show user link back to start page if the user came from an error page' do
       visit about_path
       visit '/404'
-      click_link t('feedback_link.feedback_form')
-
+      navigate_to_feedback_form
       fill_in 'feedback_form_what', with: what_text_field
       fill_in 'feedback_form_details', with: details_text_field
       choose 'feedback_form_reply_false'
@@ -148,7 +146,7 @@ RSpec.feature 'When the user submits the feedback page' do
 
     it 'should show feedback sent in Welsh and have the appropriate link back to Verify' do
       visit select_documents_cy_path
-      click_link t('feedback_link.feedback_form', locale: :cy)
+      navigate_to_feedback_form :cy
 
       fill_in 'feedback_form_what', with: what_text_field
       fill_in 'feedback_form_details', with: details_text_field
