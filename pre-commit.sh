@@ -10,8 +10,6 @@ if [[ ! $(git secrets 2>/dev/null) ]]; then
   echo "   git secrets --install"
   echo "   git secrets --register-aws"
   echo " === !!! !!! !!! === "
-  funky_fail_banner
-  exit 1
 else
   for hook in .git/hooks/commit-msg .git/hooks/pre-commit .git/hooks/prepare-commit-msg; do
     if ! grep -q "git secrets" $hook; then
