@@ -29,9 +29,9 @@ gem 'statsd-ruby', '~> 1.3.0'
 # Use prometheus-client to expose metrics to prometheus
 #
 # prometheus/client_ruby had a massive rewrite in
-# https://github.com/prometheus/client_ruby/pull/95 - it has landed in
-# master but not been released yet
-gem 'prometheus-client', git: 'https://github.com/prometheus/client_ruby.git'
+# https://github.com/prometheus/client_ruby/pull/95
+# This is the prerelease version of that work
+gem 'prometheus-client', '~> 0.10.0.pre.alpha.1'
 
 # Use sentry-raven for sending logs to Sentry via the raven protocol
 gem 'sentry-raven'
