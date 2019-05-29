@@ -180,7 +180,7 @@ private
 
   def params_are_missing(params_keys)
     params_keys.each do |param_key|
-      if params[param_key].nil?
+      if params[param_key].nil? or params[param_key].blank?
         logger.error "Single IDP parameter #{param_key} is missing" + referrer_string
         return true
       end
