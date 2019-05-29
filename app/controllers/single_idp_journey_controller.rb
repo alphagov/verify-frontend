@@ -37,9 +37,13 @@ class SingleIdpJourneyController < ApplicationController
   end
 
   def continue
-    select_viewable_idp_for_single_idp_journey(params.fetch('entity_id')) do |decorated_idp|
-      select_idp(decorated_idp.entity_id, decorated_idp.display_name)
-      redirect_to redirect_to_single_idp_path
+    if params_are_missing(%w(entity_id))
+      redirect_to start_path
+    else
+      select_viewable_idp_for_single_idp_journey(params.fetch('entity_id')) do |decorated_idp|
+        select_idp(decorated_idp.entity_id, decorated_idp.display_name)
+        redirect_to redirect_to_single_idp_path
+      end
     end
   end
 
