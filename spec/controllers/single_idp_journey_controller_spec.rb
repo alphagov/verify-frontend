@@ -290,35 +290,16 @@ describe SingleIdpJourneyController do
       expect(subject).to redirect_to redirect_to_single_idp_path
     end
 
-    describe 'invalid idp (entity idp id is empty)' do
-      fake_stub_idp = 'fake-stub-idp'
-
-      valid_idp = {
-          'simple_id' => 'stub-idp-one',
-          'entity_id' => fake_stub_idp,
-          'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
-      }
-      it 'should redirect to the start page and not set a cookie when an incorrect idp is supplied' do
-        stub_api_select_idp
-        stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-
-        set_selected_idp(valid_idp)
+    describe 'with invalid idp (entity idp id is empty)' do
+      it 'should redirect to the start page' do
         post :continue, params: { locale: 'en', entity_id: '' }
 
         expect(subject).to redirect_to start_path
       end
     end
 
-    describe 'invalid idp (entity idp id missing)' do
-      valid_idp = {
-          'simple_id' => 'stub-idp-one',
-          'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
-      }
-      it 'should redirect to the start page and not set a cookie when an incorrect idp is supplied' do
-        stub_api_select_idp
-        stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-
-        set_selected_idp(valid_idp)
+    describe 'with invalid idp (entity idp id missing)' do
+      it 'should redirect to the start page' do
         post :continue, params: { locale: 'en' }
 
         expect(subject).to redirect_to start_path
