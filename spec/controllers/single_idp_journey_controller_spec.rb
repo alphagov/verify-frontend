@@ -268,6 +268,12 @@ describe SingleIdpJourneyController do
   end
 
   context '#continue' do
+    valid_idp = {
+        'simple_id' => 'stub-idp-one',
+        'entity_id' => VALID_STUB_IDP,
+        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+    }
+
     before :each do
       set_session_and_cookies_with_loa('LEVEL_2')
       stub_transactions_for_single_idp_list
@@ -275,12 +281,6 @@ describe SingleIdpJourneyController do
     end
 
     it 'should redirect to IDP website' do
-      valid_idp = {
-        'simple_id' => 'stub-idp-one',
-        'entity_id' => VALID_STUB_IDP,
-        'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
-      }
-
       stub_api_select_idp
       stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
@@ -288,6 +288,17 @@ describe SingleIdpJourneyController do
       post :continue, params: { locale: 'en', entity_id: VALID_STUB_IDP }
 
       expect(subject).to redirect_to redirect_to_single_idp_path
+    end
+
+    describe 'invalid session entity id' do
+      it 'should redirect to the start page' do
+        stub_api_select_idp
+        session[:transaction_entity_id] = nil
+
+        post :continue, params: { locale: 'en' }
+
+        expect(subject).to redirect_to start_path
+      end
     end
 
     describe 'with invalid idp (entity idp id is empty)' do
