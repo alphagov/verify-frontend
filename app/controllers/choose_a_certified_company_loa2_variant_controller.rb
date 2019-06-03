@@ -10,6 +10,12 @@ class ChooseACertifiedCompanyLoa2VariantController < ApplicationController
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
     session[:user_segments] = suggestions[:user_segments]
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
+    # Hack this in here to make this AB test work ...
+    top_three = { "post-office-stub" => "post-office-stub", "digidentity" => "digidentity", "experian" => "experian" }
+    @non_recommended_idps += @recommended_idps
+    @recommended_idps = @recommended_idps.select { |idp| top_three.include?(idp.simple_id) }
+    @recommended_idps = @recommended_idps.slice(0, 2) if @recommended_idps.length > 2
+    @non_recommended_idps = @non_recommended_idps.reject { |idp| top_three.include?(idp.simple_id) }
     render 'choose_a_certified_company/choose_a_certified_company_LOA2_variant'
   end
 
