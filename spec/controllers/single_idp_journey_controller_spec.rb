@@ -68,7 +68,7 @@ describe SingleIdpJourneyController do
     describe 'no parameters provided' do
       subject { post :redirect_from_idp }
       it 'should redirect to the start page and not set a cookie when an incorrect rp is supplied' do
-        expect(Rails.logger).to receive(:error).with(/Single IDP parameter serviceId is missing/)
+        expect(Rails.logger).to receive(:warn).with(/Single IDP parameter serviceId is missing/)
         expect(subject).to redirect_to(verify_services_path)
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
@@ -83,7 +83,7 @@ describe SingleIdpJourneyController do
         }
       }
       it 'should redirect to the start page and not set a cookie when an incorrect rp is supplied' do
-        expect(Rails.logger).to receive(:error).with(/Single IDP parameter serviceId is missing/)
+        expect(Rails.logger).to receive(:warn).with(/Single IDP parameter serviceId is missing/)
         expect(subject).to redirect_to(verify_services_path)
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
