@@ -37,7 +37,7 @@ class SingleIdpJourneyController < ApplicationController
   end
 
   def continue
-    if params_are_missing(%w(entity_id)) || session[:transaction_entity_id].nil?
+    if params_are_missing(%w(entity_id))
       redirect_to start_path
     else
       select_viewable_idp_for_single_idp_journey(params.fetch('entity_id')) do |decorated_idp|

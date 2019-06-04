@@ -297,7 +297,7 @@ describe SingleIdpJourneyController do
 
         post :continue, params: { locale: 'en' }
 
-        expect(subject).to redirect_to start_path
+        expect(subject).to render_template(:something_went_wrong)
       end
     end
 
