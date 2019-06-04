@@ -122,12 +122,12 @@ private
   end
 
   def valid_selection?
+    return false if cookie_value_is_missing(%w(idp_entity_id transaction_id uuid))
+
     idp_entity_id = single_idp_cookie.fetch('idp_entity_id', nil)
     transaction_id = single_idp_cookie.fetch('transaction_id', nil)
     uuid = single_idp_cookie.fetch('uuid', nil)
     single_idp_rp_list = get_service_list
-
-    return false if cookie_value_is_missing(%w(idp_entity_id transaction_id uuid))
 
     unless current_identity_providers_for_single_idp.select(&:unavailable).select { |idp| idp.entity_id == idp_entity_id }.empty?
       logger.info "IDP #{idp_entity_id} is unavailable so not valid for single IDP" + referrer_string
