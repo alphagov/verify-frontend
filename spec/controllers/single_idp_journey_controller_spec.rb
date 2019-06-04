@@ -290,9 +290,8 @@ describe SingleIdpJourneyController do
       expect(subject).to redirect_to redirect_to_single_idp_path
     end
 
-    describe 'invalid session entity id' do
-      it 'should redirect to the start page' do
-        stub_api_select_idp
+    describe 'missing transaction entity id in session' do
+      it 'should show an error page' do
         session[:transaction_entity_id] = nil
 
         post :continue, params: { locale: 'en' }
