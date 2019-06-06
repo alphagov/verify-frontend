@@ -19,8 +19,8 @@ class SingleIdpJourneyController < ApplicationController
   include SingleIdpPartialController
 
   protect_from_forgery except: :redirect_from_idp
-  skip_before_action :validate_session, only: %i{redirect_from_idp rp_start_page}
-  skip_before_action :set_piwik_custom_variables, only: %i{redirect_from_idp rp_start_page}
+  skip_before_action :validate_session, only: %i{:redirect_from_idp :rp_start_page}
+  skip_before_action :set_piwik_custom_variables, only: %i{:redirect_from_idp :rp_start_page}
 
   def continue_to_your_idp
     if valid_cookie? && valid_selection?
