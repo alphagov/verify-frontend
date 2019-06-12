@@ -3,3 +3,8 @@
 # To ban all spiders from the entire site uncomment the next two lines:
 # User-agent: *
 # Disallow: /
+
+# Explicitly allow all pages to be accessed by crawlers
+User-agent: *
+Disallow:
+Allow: /
