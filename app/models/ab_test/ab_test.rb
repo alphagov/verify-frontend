@@ -25,7 +25,7 @@ module AbTest
   end
 
   def self.set_ab_test_cookie(value, cookies)
-    cookies[CookieNames::AB_TEST] = { value: value.to_json, expires: 1.week.from_now }
+    cookies[CookieNames::AB_TEST] = { value: value.to_json, expires: 2.weeks.from_now }
   end
 
   def self.experiment_selections
