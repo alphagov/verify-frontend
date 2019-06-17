@@ -17,7 +17,10 @@ module ApplicationHelper
   end
 
   def hide_from_search_engine?
-    !content_for(:show_to_search_engine)
+    return false if content_for(:show_to_search_engine)
+
+    response.set_header("X-Robots-Tag", "noindex")
+    true
   end
 
   def feedback_source
