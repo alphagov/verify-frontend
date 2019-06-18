@@ -4,9 +4,9 @@ RSpec.describe 'When the user visits the privacy notice page' do
   it 'displays the page in English' do
     visit '/privacy-notice'
     expect(page).to have_title t('hub.privacy_notice.title')
-    expect(page).to have_content 'We process some personal data to help to prevent fraud in government services.'
+    expect(page).to have_content 'We process information about you when you use GOV.UK Verify. This may include any of the following.'
     expect(page).to have_link 'DPO@cabinetoffice.gov.uk', href: 'mailto:DPO@cabinetoffice.gov.uk'
-    expect(page).to have_content 'The data controller for your personal data is the Cabinet Office – a data controller determines how and why personal data is processed.'
+    expect(page).to have_content 'Cabinet Office is the data controller for the data processed by GOV.UK Verify.'
   end
 
   it 'displays the page in Welsh' do
