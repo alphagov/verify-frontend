@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'partials/user_cookies_partial_controller'
 
 class AuthnResponseController < SamlController
   protect_from_forgery except: %i[idp_response country_response]

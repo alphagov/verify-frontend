@@ -1,9 +1,7 @@
 require 'ab_test/ab_test'
-require 'partials/journey_hinting_partial_controller'
-require 'partials/user_errors_partial_controller'
 
 class AuthnRequestController < SamlController
-  include JourneyHintingPartialController
+  include JourneyHinting
   protect_from_forgery except: :rp_request
   skip_before_action :validate_session
   skip_before_action :set_piwik_custom_variables

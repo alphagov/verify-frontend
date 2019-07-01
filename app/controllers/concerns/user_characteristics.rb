@@ -1,4 +1,6 @@
-module UserCharacteristicsPartialController
+module UserCharacteristics
+  extend ActiveSupport::Concern
+
   def selected_answer_store
     @selected_answer_store ||= SelectedAnswerStore.new(session)
   end

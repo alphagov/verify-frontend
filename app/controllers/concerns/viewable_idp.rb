@@ -1,4 +1,6 @@
-module ViewableIdpPartialController
+module ViewableIdp
+  extend ActiveSupport::Concern
+
   def select_viewable_idp_for_sign_in(entity_id)
     for_viewable_idp(entity_id, current_available_identity_providers_for_sign_in) do |decorated_idp|
       store_selected_idp_for_session(decorated_idp.identity_provider)

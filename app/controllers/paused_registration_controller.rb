@@ -1,17 +1,10 @@
-require 'partials/user_cookies_partial_controller'
-require 'partials/journey_hinting_partial_controller'
-require 'partials/viewable_idp_partial_controller'
-require 'partials/retrieve_federation_data_partial_controller'
-require 'partials/idp_selection_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
-
 class PausedRegistrationController < ApplicationController
-  include JourneyHintingPartialController
-  include ViewableIdpPartialController
-  include RetrieveFederationDataPartialController
-  include IdpSelectionPartialController
-  include UserCookiesPartialController
-  include AnalyticsCookiePartialController
+  include JourneyHinting
+  include ViewableIdp
+  include RetrieveFederationData
+  include IdpSelection
+  include UserCookies
+  include AnalyticsCookie
 
   # Validate the session manually within the action, as we don't want the normal 'no session' page.
   skip_before_action :validate_session, except: :resume

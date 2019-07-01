@@ -1,4 +1,5 @@
-module RetrieveFederationDataPartialController
+module RetrieveFederationData
+  extend ActiveSupport::Concern
   def get_selected_rp_from_entity_id(list, entity_id)
     return nil if list.nil?
 

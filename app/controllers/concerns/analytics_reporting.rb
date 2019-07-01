@@ -1,4 +1,12 @@
-module AnalyticsPartialController
+module AnalyticsReporting
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :set_piwik_custom_variables
+    after_action :delete_new_visit_flag
+    helper_method :public_piwik
+  end
+
   def public_piwik
     PUBLIC_PIWIK
   end

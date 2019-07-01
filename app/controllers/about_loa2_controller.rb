@@ -1,7 +1,5 @@
-require 'partials/viewable_idp_partial_controller'
-
 class AboutLoa2Controller < ApplicationController
-  include ViewableIdpPartialController
+  include ViewableIdp
 
   layout 'slides', except: [:choosing_a_company]
 

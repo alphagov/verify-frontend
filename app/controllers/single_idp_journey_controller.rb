@@ -1,22 +1,15 @@
 # frozen_string_literal: true
 
-require 'partials/user_cookies_partial_controller'
-require 'partials/idp_selection_partial_controller'
-require 'partials/viewable_idp_partial_controller'
-require 'partials/retrieve_federation_data_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
-require 'partials/single_idp_partial_controller'
-
 class SingleIdpJourneyController < ApplicationController
   before_action :do_not_cache
 
   layout 'slides', except: :rp_start_page
 
-  include IdpSelectionPartialController
-  include ViewableIdpPartialController
-  include RetrieveFederationDataPartialController
-  include AnalyticsCookiePartialController
-  include SingleIdpPartialController
+  include IdpSelection
+  include ViewableIdp
+  include RetrieveFederationData
+  include AnalyticsCookie
+  include SingleIdp
 
   skip_before_action :verify_authenticity_token, only: :redirect_from_idp
   skip_before_action :validate_session, only: %i{redirect_from_idp rp_start_page}

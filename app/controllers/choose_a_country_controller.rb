@@ -1,7 +1,5 @@
-require 'partials/eidas_validation_partial_controller'
-
 class ChooseACountryController < ApplicationController
-  include EidasValidationPartialController
+  include EidasValidation
   before_action :ensure_session_eidas_supported
   before_action :setup_countries
 

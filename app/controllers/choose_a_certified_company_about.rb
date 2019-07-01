@@ -1,7 +1,5 @@
-require 'partials/viewable_idp_partial_controller'
-
 module ChooseACertifiedCompanyAbout
-  include ViewableIdpPartialController
+  include ViewableIdp
 
   def about
     simple_id = params[:company]

@@ -1,7 +1,5 @@
-require 'partials/viewable_idp_partial_controller'
-
 class SelectDocumentsController < ApplicationController
-  include ViewableIdpPartialController
+  include ViewableIdp
 
   def index
     @form = SelectDocumentsForm.new({})

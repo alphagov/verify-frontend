@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'controller_helper'
 require 'api_test_helper'
 require 'piwik_test_helper'
-require 'partials/user_cookies_partial_controller'
+# require 'concerns/user_cookies'
 
 describe SingleIdpJourneyController do
   VALID_TEST_RP = 'http://www.test-rp.gov.uk/SAML2/MD'.freeze

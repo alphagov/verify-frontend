@@ -1,4 +1,5 @@
-module SingleIdpPartialController
+module SingleIdp
+  extend ActiveSupport::Concern
   def single_idp_cookie
     MultiJson.load(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
   rescue MultiJson::ParseError

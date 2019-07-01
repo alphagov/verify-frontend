@@ -1,11 +1,7 @@
-require 'partials/idp_selection_partial_controller'
-require 'partials/viewable_idp_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
-
 class SignInController < ApplicationController
-  include IdpSelectionPartialController
-  include ViewableIdpPartialController
-  include AnalyticsCookiePartialController
+  include IdpSelection
+  include ViewableIdp
+  include AnalyticsCookie
   include ActionView::Helpers::UrlHelper
 
   def index

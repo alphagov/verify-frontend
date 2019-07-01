@@ -1,4 +1,9 @@
-module UserSessionPartialController
+module UserSession
+  extend ActiveSupport::Concern
+  included do
+    before_action :validate_session
+  end
+
   def validate_session
     validation = session_validator.validate(cookies, session)
     unless validation.ok?

@@ -1,4 +1,14 @@
-module UserErrorsPartialController
+module UserErrors
+  extend ActiveSupport::Concern
+
+  included do
+    rescue_from StandardError, with: :something_went_wrong unless Rails.env == 'development'
+    rescue_from Errors::WarningLevelError, with: :something_went_wrong_warn
+    rescue_from Api::SessionError, with: :session_error
+    rescue_from Api::UpstreamError, with: :upstream_error
+    rescue_from Api::SessionTimeoutError, with: :session_timeout
+  end
+
   def render_error(partial, status)
     set_locale
     respond_to do |format|

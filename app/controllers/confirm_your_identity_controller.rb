@@ -1,9 +1,6 @@
-require 'partials/viewable_idp_partial_controller'
-require 'partials/journey_hinting_partial_controller'
-
 class ConfirmYourIdentityController < ApplicationController
-  include ViewableIdpPartialController
-  include JourneyHintingPartialController
+  include ViewableIdp
+  include JourneyHinting
 
   def index
     journey_hint_entity_id = attempted_entity_id

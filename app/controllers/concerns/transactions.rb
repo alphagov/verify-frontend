@@ -1,4 +1,14 @@
-module TransactionsPartialController
+module Transactions
+  extend ActiveSupport::Concern
+
+  included do
+    helper_method :transaction_taxon_list
+    helper_method :transactions_list
+    helper_method :current_transaction
+    helper_method :loa1_transactions_list
+    helper_method :loa2_transactions_list
+  end
+
   def transaction_taxon_list
     TRANSACTION_TAXON_CORRELATOR.correlate(CONFIG_PROXY.transactions)
   end

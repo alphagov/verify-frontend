@@ -1,7 +1,5 @@
-require 'partials/journey_hinting_partial_controller'
-
 class HintController < ApplicationController
-  include JourneyHintingPartialController
+  include JourneyHinting
   skip_before_action :validate_session
   skip_before_action :set_piwik_custom_variables
   skip_before_action :verify_authenticity_token

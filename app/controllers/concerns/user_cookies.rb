@@ -1,4 +1,11 @@
-module UserCookiesPartialController
+module UserCookies
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :set_visitor_cookie
+    after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
+  end
+
   def set_secure_cookie(name, value)
     cookies[name] = {
         value: value,

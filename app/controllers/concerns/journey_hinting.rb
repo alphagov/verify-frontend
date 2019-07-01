@@ -1,5 +1,7 @@
 # Shared methods for controllers which use the journey hint cookie to give users IDP suggestions
-module JourneyHintingPartialController
+module JourneyHinting
+  extend ActiveSupport::Concern
+
   PENDING_STATUS = 'PENDING'.freeze
 
   def journey_hint_value

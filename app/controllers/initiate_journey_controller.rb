@@ -1,7 +1,5 @@
-require 'partials/user_errors_partial_controller'
-
 class InitiateJourneyController < ApplicationController
-  include UserErrorsPartialController
+  include UserErrors
 
   skip_before_action :validate_session
   skip_before_action :set_piwik_custom_variables

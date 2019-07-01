@@ -1,7 +1,7 @@
-require 'partials/journey_hinting_partial_controller'
+module IdpSelection
+  extend ActiveSupport::Concern
 
-module IdpSelectionPartialController
-  include JourneyHintingPartialController
+  include JourneyHinting
 
   def set_journey_hint_followed(entity_id)
     session[:user_followed_journey_hint] = user_followed_journey_hint(entity_id) if has_journey_hint?

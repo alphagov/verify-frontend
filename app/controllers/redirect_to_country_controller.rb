@@ -1,7 +1,5 @@
-require 'partials/eidas_validation_partial_controller'
-
 class RedirectToCountryController < ApplicationController
-  include EidasValidationPartialController
+  include EidasValidation
   before_action :ensure_session_eidas_supported
 
   def choose_a_country_submit

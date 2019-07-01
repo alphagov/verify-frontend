@@ -1,10 +1,7 @@
-require 'partials/idp_selection_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
-
 class RedirectToIdpWarningController < ApplicationController
-  include IdpSelectionPartialController
-  include AnalyticsCookiePartialController
-  include ViewableIdpPartialController
+  include IdpSelection
+  include AnalyticsCookie
+  include ViewableIdp
 
   SELECTED_IDP_HISTORY_LENGTH = 5
   helper_method :user_has_no_docs_or_foreign_id_only?, :other_ways_description

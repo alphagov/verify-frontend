@@ -1,4 +1,6 @@
-module AnalyticsCookiePartialController
+module AnalyticsCookie
+  extend ActiveSupport::Concern
+
   def analytics_session_id
     cookie_value = cookies.fetch(analytics_cookie_name, nil)
     cookie_value.split('.').first unless cookie_value.nil?

@@ -1,8 +1,6 @@
-require 'partials/viewable_idp_partial_controller'
-
 class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
-  include ViewableIdpPartialController
+  include ViewableIdp
 
   def index
     session[:selected_answers]&.delete('interstitial')
