@@ -33,13 +33,30 @@ module UserErrorsPartialController
     end
   end
 
+  # How often do we have the information needed to redirect the user back to the
+  # service start page?
+  def check_whether_recoverable
+    begin
+      if session && current_transaction
+        logger.info("Session may be recoverable; " +
+          "session_id: #{session[:verify_session_id]}, rp: #{current_transaction.rp_name}")
+      end
+    rescue StandardError => e
+      # We do not want to interfere with the normal error-handling behaviour, so
+      # catch all errors.
+      logger.info("Failed to recover: #{e.message}")
+    end
+  end
+
   def something_went_wrong(exception, status = :internal_server_error)
     logger.error(exception)
+    check_whether_recoverable
     render_error('something_went_wrong', status)
   end
 
   def something_went_wrong_warn(exception, status = :internal_server_error)
     logger.warn(exception)
+    check_whether_recoverable
     render_error('something_went_wrong', status)
   end
 
