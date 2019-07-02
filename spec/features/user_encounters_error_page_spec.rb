@@ -13,6 +13,7 @@ RSpec.describe 'user encounters error page' do
     expect(page).to have_content t('errors.something_went_wrong.heading')
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
+    expect(page).to_not have_link t('errors.session_timeout.start_again')
   end
 
   it 'will present the user with no list of transactions if we cant read the errors' do
@@ -118,7 +119,8 @@ RSpec.describe 'user encounters error page' do
         visit sign_in_path
         click_button 'IDCorp'
         expect(page).to have_content t('errors.something_went_wrong.heading')
-        expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
+        expect(page).to have_link t('errors.session_timeout.start_again'), href: default_transaction_homepage
+        expect(page).to have_content t('hub.other_ways_heading', other_ways_description: t('rps.test-rp.name'))
         expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
         expect(page.status_code).to eq(500)
       end

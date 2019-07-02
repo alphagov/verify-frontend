@@ -1,8 +1,8 @@
 module UserErrorsPartialController
-  def render_error(partial, status)
+  def render_error(partial, status, locals = {})
     set_locale
     respond_to do |format|
-      format.html { render "errors/#{partial}", status: status, layout: 'application' }
+      format.html { render "errors/#{partial}", status: status, layout: 'application', locals: locals }
       format.json { render json: {}, status: status }
     end
   end
@@ -33,38 +33,37 @@ module UserErrorsPartialController
     end
   end
 
-  # How often do we have the information needed to redirect the user back to the
-  # service homepage?
-  def check_whether_recoverable
+  def render_something_went_wrong(status)
+    locals = {}
+
     begin
       if session
-        logger.info("Session may be recoverable; service: #{session[:verify_simple_id]}, homepage: #{session[:transaction_homepage]}")
+        logger.info("Recovering session for: #{session[:verify_simple_id]}")
+        locals[:transaction_homepage] = session[:transaction_homepage]
 
-        # Can we be clever and show the user other ways to access the service in
-        # case Verify is persistently failing for them?
         if current_transaction
-          logger.info("Have valid transaction: #{current_transaction.other_ways_description}")
+          logger.info("Recovered other ways to: #{current_transaction.other_ways_description}")
+          locals[:other_ways_description] = current_transaction.other_ways_description
+          locals[:other_ways_text] = current_transaction.other_ways_text
         end
-      else
-        logger.info("Failed to recover: missing session")
       end
     rescue StandardError => e
-      # We do not want to interfere with the normal error-handling behaviour, so
-      # catch all errors.
+      # Rendering the error page must never fail (to avoid infinite loops), so
+      # catch and swallow any errors raised.
       logger.info("Failed to recover: #{e.message}")
     end
+
+    render_error('something_went_wrong', status, locals)
   end
 
   def something_went_wrong(exception, status = :internal_server_error)
     logger.error(exception)
-    check_whether_recoverable
-    render_error('something_went_wrong', status)
+    render_something_went_wrong(status)
   end
 
   def something_went_wrong_warn(exception, status = :internal_server_error)
     logger.warn(exception)
-    check_whether_recoverable
-    render_error('something_went_wrong', status)
+    render_something_went_wrong(status)
   end
 
   def eidas_scheme_unavailable_error(exception)

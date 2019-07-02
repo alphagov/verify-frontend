@@ -7,7 +7,14 @@
     <h1 class="heading-large"><%= t 'errors.something_went_wrong.heading' %></h1>
     <p><%= t 'errors.something_went_wrong.error_message' %></p>
     <p><%= t 'errors.something_went_wrong.start_again' %></p>
-    <% if transaction_taxon_list.any? %>
+
+    <% if local_assigns[:transaction_homepage] %>
+      <p><%= link_to t('errors.session_timeout.start_again'), transaction_homepage, class: 'button' %></p>
+
+      <% if local_assigns[:other_ways_text] && local_assigns[:other_ways_description] %>
+        <%= render partial: 'shared/other_ways', locals: {other_ways_text: other_ways_text, other_ways_description: other_ways_description} %>
+      <% end %>
+    <% elsif transaction_taxon_list.any? %>
       <h2 class="heading-medium"><%= t 'hub.transaction_list.title' %></h2>
       <%= render partial: 'shared/transaction_list' %>
     <% end %>
