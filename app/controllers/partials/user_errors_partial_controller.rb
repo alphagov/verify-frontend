@@ -35,7 +35,6 @@ module UserErrorsPartialController
 
   # How often do we have the information needed to redirect the user back to the
   # service start page?
-  # TODO: if this works, start using RedirectToServiceController (or similar).
   def check_whether_recoverable
     begin
       if session && current_transaction
