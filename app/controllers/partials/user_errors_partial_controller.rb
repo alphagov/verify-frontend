@@ -34,12 +34,19 @@ module UserErrorsPartialController
   end
 
   # How often do we have the information needed to redirect the user back to the
-  # service start page?
+  # service homepage?
   def check_whether_recoverable
     begin
-      if session && current_transaction
-        logger.info("Session may be recoverable; " +
-          "session_id: #{session[:verify_session_id]}, rp: #{current_transaction.rp_name}")
+      if session
+        logger.info("Session may be recoverable; service: #{session[:verify_simple_id]}, homepage: #{session[:transaction_homepage]}")
+
+        # Can we be clever and show the user other ways to access the service in
+        # case Verify is persistently failing for them?
+        if current_transaction
+          logger.info("Have valid transaction: #{current_transaction.other_ways_description}")
+        end
+      else
+        logger.info("Failed to recover: missing session")
       end
     rescue StandardError => e
       # We do not want to interfere with the normal error-handling behaviour, so
