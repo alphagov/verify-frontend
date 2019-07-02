@@ -662,7 +662,8 @@ cy:
       title: Mae rhywbeth wedi mynd o’i le
       heading: Mae’n ddrwg gennym, mae rhywbeth wedi mynd o’i le
       error_message: Gall hyn fod oherwydd bod eich sesiwn wedi’i amseru allan neu roedd gwall yn y system.
-      start_again: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.
+      start_again_text: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.
+      start_again_link: Dechrau eto
     proxy_node_error:
       start_again: Gan eich bod yn defnyddio gwasanaeth diogel o wlad Ewropeaidd arall, bydd angen i chi fynd yn ôl i'r dudalen lle dechreuoch  ddefnyddio'r gwasanaeth hwnnw.
     page_not_found:

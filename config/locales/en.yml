@@ -661,7 +661,8 @@ en:
       title: Something went wrong
       heading: Sorry, something went wrong
       error_message: This may be because your session timed out or there was a system error.
-      start_again: Because this is a secure service, you’ll need to start again.
+      start_again_text: Because this is a secure service, you’ll need to start again.
+      start_again_link: Start again
     proxy_node_error:
       start_again: Because you were using a secure service from another European country, you’ll need to go back to the page where you started using that service.
     page_not_found:
