@@ -57,12 +57,14 @@ module UserErrorsPartialController
 
   def something_went_wrong(exception, status = :internal_server_error)
     logger.error(exception)
+    logger.info("Something went wrong: #{exception.try(:message) || exception}")
     check_whether_recoverable
     render_error('something_went_wrong', status)
   end
 
   def something_went_wrong_warn(exception, status = :internal_server_error)
     logger.warn(exception)
+    logger.info("Something went wrong: #{exception.try(:message) || exception}")
     check_whether_recoverable
     render_error('something_went_wrong', status)
   end
