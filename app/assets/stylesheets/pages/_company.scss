@@ -195,28 +195,3 @@
   margin-top: 2em;
   margin-bottom: 0;
 }
-
-.idp-choice.ab-test {
-  &.recommended-false {
-    border-bottom: none;
-
-    @include media (tablet) {
-      padding-left: 170px;
-    }
-  }
-
-  &.recommended-false .company-logo {
-    width: 150px;
-  }
-
-  .company-logo {
-    height: 70px;
-
-    .company-logo-img-container {
-
-      @include media (mobile) {
-        width: 100%;
-      }
-    }
-  }
-}

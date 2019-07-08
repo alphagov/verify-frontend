@@ -2,13 +2,6 @@ def add_routes(routes_name)
   instance_eval(File.read(Rails.root.join("config/#{routes_name}.rb")))
 end
 
-MODEL_V1 = "model_v1".freeze
-# HUB-405 Recommendation model v1 A/B test
-model_v1_control_piwik = SelectRoute.new(MODEL_V1, 'control', is_start_of_test: true)
-model_v1_control = SelectRoute.new(MODEL_V1, 'control', is_start_of_test: false)
-model_v1_variant_piwik = SelectRoute.new(MODEL_V1, 'variant', is_start_of_test: true)
-model_v1_variant = SelectRoute.new(MODEL_V1, 'variant', is_start_of_test: false)
-
 get 'sign_in', to: 'sign_in#index', as: :sign_in
 post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
@@ -59,22 +52,9 @@ constraints IsLoa2 do
   get 'select_phone', to: 'select_phone#index', as: :select_phone
   post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'verify_will_not_work_for_you', to: 'select_phone#verify_will_not_work_for_you', as: :verify_will_not_work_for_you
-  #get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
-  #post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
-  #get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
-  constraints model_v1_control_piwik do
-    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
-  end
-  constraints model_v1_control do
-    post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
-    get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
-  end
-  constraints model_v1_variant_piwik do
-    get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#index', as: :choose_a_certified_company
-  end
-  constraints model_v1_variant do
-    post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant#select_idp', as: :choose_a_certified_company_submit
-  end
+  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
+  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+  get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
   get 'why_companies', to: 'why_companies_loa2#index', as: :why_companies
   get 'failed_registration', to: 'failed_registration_loa2#index', as: :failed_registration
   get 'cancelled_registration', to: 'cancelled_registration_loa2#index', as: :cancelled_registration

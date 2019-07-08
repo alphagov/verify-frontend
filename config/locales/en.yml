@@ -340,12 +340,6 @@ en:
         title: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
-      ab_test:
-        intro: 'Based on your answers, these companies are most likely to successfully verify your identity:'
-        heading_less_likely: Other companies you can use
-        less_likely: You can also choose one of the following companies. Based on your answers, they are less likely to be able to verify your identity.
-        choose_idp: "Select %{display_name}"
-        existing_customer: You don't have to be an existing customer with the company you choose.
     why_companies:
       title: Why there’s a choice of companies
       choose_a_company: Choose a company
