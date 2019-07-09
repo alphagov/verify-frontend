@@ -44,6 +44,8 @@ BUNDLE_GEMFILE=stub/api/Gemfile bundle
 BUNDLE_GEMFILE=stub/api/Gemfile bundle exec rspec --pattern stub/api/**/*_spec.rb
 success=$((success || $?))
 
+rm -Rf coverage/
+
 if [ -t 1 ]; then
   if [ $success -eq 0 ]
   then

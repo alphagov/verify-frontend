@@ -21,5 +21,8 @@ verify-frontend.iml
 .DS_Store
 /spec/pacts
 
+# Codacy coverage results
+/coverage/
+
 *~
 \#*#

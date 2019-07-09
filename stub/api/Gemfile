@@ -6,4 +6,5 @@ group :test do
   gem 'activemodel'
   gem 'rspec'
   gem 'rack-test'
+  gem 'codacy-coverage', :require => false
 end
