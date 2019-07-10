@@ -82,6 +82,8 @@ group :test, :development do
 
   gem 'govuk-lint'
   gem 'geckodriver-helper'
+
+  gem 'codacy-coverage', :require => false
 end
 
 platforms :mswin, :mingw, :x64_mingw do

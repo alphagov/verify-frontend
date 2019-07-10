@@ -108,3 +108,6 @@ $:.unshift File.expand_path('../app/services', __dir__)
 
 require 'active_support'
 require 'active_support/core_ext'
+
+require 'codacy-coverage'
+Codacy::Reporter.start
