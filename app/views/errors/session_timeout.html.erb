@@ -6,7 +6,7 @@
   <div class="column-two-thirds">
     <h1 class="heading-large"><%= t 'errors.session_timeout.title' %></h1>
     <h2 class="heading-medium"><%= t 'errors.session_timeout.return_to_service' %></h2>
-    <p><%= link_to t('errors.session_timeout.start_again'), '/redirect-to-service/error', class: 'button' %></p>
+    <p><%= link_to t('errors.session_timeout.start_again'), @redirect_to_destination, class: 'button' %></p>
     <p><%= raw t('errors.session_timeout.feedback_message', feedback_link: link_to(t('errors.session_timeout.feedback'), feedback_path('feedback-source': feedback_source))) %></p>
   </div>
 </div>
