@@ -17,6 +17,11 @@ module UserErrorsPartialController
 
   def session_timeout(exception)
     logger.info(exception)
+    @redirect_to_destination = if CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
+                                 '/redirect-to-service/error'
+                               else
+                                 session[:transaction_homepage]
+                               end
     render_error('session_timeout', :forbidden)
   end
 
