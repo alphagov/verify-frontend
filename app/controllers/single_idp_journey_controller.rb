@@ -38,7 +38,7 @@ class SingleIdpJourneyController < ApplicationController
 
   def continue
     unless session_is_valid?
-      something_went_wrong_warn("Invalid session in Single IDP journey")
+      return something_went_wrong_warn("Invalid session in Single IDP journey")
     end
 
     if params_are_missing(%w(entity_id))
