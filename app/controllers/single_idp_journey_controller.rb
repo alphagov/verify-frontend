@@ -37,10 +37,6 @@ class SingleIdpJourneyController < ApplicationController
   end
 
   def continue
-    unless session_is_valid?
-      return something_went_wrong_warn("Invalid session in Single IDP journey")
-    end
-
     if params_are_missing(%w(entity_id))
       redirect_to start_path
     else
@@ -123,10 +119,6 @@ private
         uuid: uuid
     }
     set_single_idp_journey_cookie(data)
-  end
-
-  def session_is_valid?
-    session_validator.validate(cookies, session).ok?
   end
 
   def valid_selection?
