@@ -15,6 +15,7 @@ describe SingleIdpJourneyController do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     stub_transactions_for_single_idp_list
     stub_api_idp_list_for_single_idp_journey
+    allow(Rails.logger).to receive(:info)
   end
 
   context 'idp hits post providing correct parameters' do
