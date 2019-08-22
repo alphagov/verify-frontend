@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.3.6)
     actioncable (5.0.7.2)
       actionpack (= 5.0.7.2)
       nio4r (>= 1.2, < 3.0)
@@ -88,6 +89,8 @@ GEM
     eventmachine (1.2.7)
     execjs (2.7.0)
     facter (2.5.1)
+    facter (2.5.1-universal-darwin)
+      CFPropertyList (~> 2.2)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffi (1.10.0)
@@ -150,6 +153,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.6)
     libv8 (7.3.492.27.1)
+    libv8 (7.3.492.27.1-x86_64-darwin-17)
     logstash-event (1.2.02)
     logstash-logger (0.26.1)
       logstash-event (~> 1.2)
@@ -173,7 +177,7 @@ GEM
     multipart-post (2.0.0)
     mustache (0.99.8)
     nio4r (2.3.1)
-    nokogiri (1.10.2)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     parallel (1.15.0)
     parser (2.6.2.0)
@@ -352,6 +356,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-17
 
 DEPENDENCIES
   autoprefixer-rails
