@@ -67,10 +67,10 @@
     var cross_gov_ga_tracker_id = $('#cross-gov-ga-tracker-id').text();
     if (cross_gov_ga_tracker_id) {
         var domain_list = JSON.parse($('#cross-gov-ga-domain-list').text());
-        ga('create', cross_gov_ga_tracker_id, 'auto', 'govuk-cross-domain', {'allowLinker': true});
-        ga('govuk-cross-domain.require', 'linker');
-        ga('govuk-cross-domain.linker.set', 'anonymizeIp', true);
-        ga('govuk-cross-domain.linker:autoLink', domain_list);
-        ga('govuk-cross-domain.linker.send', 'pageview');
+        ga('create', cross_gov_ga_tracker_id, 'auto', 'govuk_shared', {'allowLinker': true});
+        ga('govuk_shared.require', 'linker');
+        ga('govuk_shared.linker.set', 'anonymizeIp', true);
+        ga('govuk_shared.linker:autoLink', domain_list, false, true);
+        ga('govuk_shared.send', 'pageview');
     }
 })(window);

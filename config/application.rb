@@ -46,9 +46,10 @@ module VerifyFrontend
       'X-Frame-Options' => 'DENY',
       'X-XSS-Protection' => '1; mode=block',
       'X-Content-Type-Options' => 'nosniff',
-      'Content-Security-Policy' => "default-src 'self'; " +
+      'Content-Security-Policy' => "default-src 'self' ; " +
         "font-src 'self'; " +
-        "img-src 'self'; " +
+        "img-src 'self' www.google-analytics.com; " +
+        "connect-src 'self' www.google-analytics.com; " +
         "object-src 'none'; " +
         # the script digests are for the two inline scripts in govuk_template.gem:govuk_template.html.erb
         # if the scripts in that file change, or more are added, use a command similar to
