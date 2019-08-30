@@ -6,6 +6,10 @@ class TestSamlController < ApplicationController
   layout 'test'
 
   def index
+    @form_action = '/SAML2/SSO'
+    if params['_ga'].present?
+      @form_action = @form_action + '?_ga=' + params['_ga']
+    end
     render 'index'
   end
 

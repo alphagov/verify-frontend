@@ -1,4 +1,5 @@
 require 'piwik'
+require 'google_analytics'
 require 'analytics'
 require 'originating_ip_store'
 
@@ -14,4 +15,9 @@ Rails.application.config.after_initialize do
   end
 
   FEDERATION_REPORTER = Analytics::FederationReporter.new(ANALYTICS_REPORTER)
+
+  CROSS_GOV_GA = GoogleAnalytics.new(
+    CONFIG.cross_gov_google_analytics_tracker_id,
+    CONFIG.cross_gov_domain_list.nil? ? [] : CONFIG.cross_gov_domain_list.split(' ')
+  )
 end

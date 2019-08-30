@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
   helper_method :loa1_transactions_list
   helper_method :loa2_transactions_list
   helper_method :public_piwik
+  helper_method :cross_gov_ga
 
   rescue_from StandardError, with: :something_went_wrong unless Rails.env == 'development'
   rescue_from Errors::WarningLevelError, with: :something_went_wrong_warn

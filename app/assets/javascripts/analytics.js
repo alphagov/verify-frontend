@@ -1,3 +1,8 @@
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
 (function(global) {
     'use strict';
     var GOVUK = global.GOVUK || {};
@@ -57,4 +62,15 @@
     }
 
     global._paq = piwikAnalyticsQueue;
+
+
+    var cross_gov_ga_tracker_id = $('#cross-gov-ga-tracker-id').text();
+    if (cross_gov_ga_tracker_id) {
+        var domain_list = JSON.parse($('#cross-gov-ga-domain-list').text());
+        ga('create', cross_gov_ga_tracker_id, 'auto', 'govuk-cross-domain', {'allowLinker': true});
+        ga('govuk-cross-domain.require', 'linker');
+        ga('govuk-cross-domain.linker.set', 'anonymizeIp', true);
+        ga('govuk-cross-domain.linker:autoLink', domain_list);
+        ga('govuk-cross-domain.linker.send', 'pageview');
+    }
 })(window);

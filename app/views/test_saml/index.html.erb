@@ -1,50 +1,50 @@
-<%= form_tag('/SAML2/SSO') do -%>
+<%= form_tag(@form_action) do -%>
   <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
   <%= hidden_field_tag('RelayState', 'my-relay-state') %>
   <div><%= submit_tag 'saml-post' %></div>
 <% end -%>
-<%= form_tag('/SAML2/SSO') do -%>
+<%= form_tag(@form_action) do -%>
     <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
     <%= hidden_field_tag('RelayState', 'my-loa1-relay-state') %>
     <div><%= submit_tag 'saml-post-with-loa1' %></div>
 <% end -%>
-<%= form_tag('/SAML2/SSO') do -%>
+<%= form_tag(@form_action) do -%>
   <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
   <%= hidden_field_tag('RelayState', 'my-relay-state') %>
   <%= hidden_field_tag('language', 'en') %>
   <div><%= submit_tag 'saml-post-with-en-language' %></div>
 <% end -%>
-<%= form_tag('/SAML2/SSO') do -%>
+<%= form_tag(@form_action) do -%>
   <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
   <%= hidden_field_tag('RelayState', 'my-relay-state') %>
   <%= hidden_field_tag('language', 'cy') %>
   <div><%= submit_tag 'saml-post-with-cy-language' %></div>
 <% end -%>
-<%= form_tag('/SAML2/SSO') do -%>
+<%= form_tag(@form_action) do -%>
   <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
   <%= hidden_field_tag('RelayState', 'my-relay-state') %>
   <%= hidden_field_tag('journey_hint', 'my-journey-hint') %>
   <div><%= submit_tag 'saml-post-journey-hint' %></div>
 <% end -%>
-<%= form_tag('/SAML2/SSO') do -%>
+<%= form_tag(@form_action) do -%>
     <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
     <%= hidden_field_tag('RelayState', 'my-relay-state') %>
     <%= hidden_field_tag('journey_hint', 'submission_confirmation') %>
     <div><%= submit_tag 'saml-post-journey-hint-non-repudiation' %></div>
   <% end -%>
-<%= form_tag('/SAML2/SSO') do -%>
+<%= form_tag(@form_action) do -%>
   <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
   <%= hidden_field_tag('RelayState', 'my-relay-state') %>
   <%= hidden_field_tag('journey_hint', 'registration') %>
   <div><%= submit_tag 'saml-post-journey-hint-registration' %></div>
 <% end -%>
-<%= form_tag('/SAML2/SSO') do -%>
+<%= form_tag(@form_action) do -%>
   <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
   <%= hidden_field_tag('RelayState', 'my-relay-state') %>
   <%= hidden_field_tag('journey_hint', 'uk_idp_sign_in') %>
   <div><%= submit_tag 'saml-post-journey-hint-sign-in' %></div>
 <% end -%>
-<%= form_tag('/SAML2/SSO') do -%>
+<%= form_tag(@form_action) do -%>
     <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
     <%= hidden_field_tag('RelayState', 'my-relay-state') %>
     <%= hidden_field_tag('journey_hint', 'eidas_sign_in') %>
