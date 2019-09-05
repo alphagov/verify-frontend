@@ -7,6 +7,8 @@ post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
 
 constraints IsLoa1 do
+  get 'prove_identity', to: 'prove_identity#index', as: :prove_identity
+  get 'prove_identity_retry', to: 'prove_identity#retry_eidas_journey', as: :prove_identity_retry
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
   get 'begin_registration', to: 'start#register', as: :begin_registration
