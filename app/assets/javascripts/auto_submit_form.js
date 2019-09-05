@@ -5,9 +5,7 @@
 
   GOVUK.autoSubmitForm = {
     attach: function () {
-        var destinationLink = $("#saml-response-form")[0];
-        window.ga("govuk_shared.linker:decorate", destinationLink);
-        $("form.js-auto-submit").submit();
+      $("#continue-button").click();
     }
   };
 
