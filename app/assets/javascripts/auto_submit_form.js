@@ -1,13 +1,13 @@
 (function(global) {
-  'use strict';
+  "use strict";
   var GOVUK = global.GOVUK || {};
   var $ = global.jQuery;
 
   GOVUK.autoSubmitForm = {
     attach: function () {
-        var destinationLink = $('#saml-response-form')[0];
+        var destinationLink = $("#saml-response-form")[0];
         window.ga("govuk_shared.linker:decorate", destinationLink);
-        $('form.js-auto-submit').submit();
+        $("form.js-auto-submit").submit();
     }
   };
 

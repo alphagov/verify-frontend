@@ -56,3 +56,11 @@ The PR is also deployed to Heroku as [a review app](https://devcenter.heroku.com
 * `heroku.yml` - Heroku [deployment manifest](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml) 
 * `app.json` - Heroku [application manifest](https://devcenter.heroku.com/articles/app-json-schema)
 * `heroku-startup.sh` - startup script used to start the app and api, on the port supplied by Heroku
+
+## Cross GOV.UK Domain Google Analytics
+
+To track user journeys across the whole of GOV.UK, including Verify, Google Analytics code has been introduced to the Verify Frontend.
+
+We will occasionally be asked to add domains to the list of domains for which cross domain tracking is enabled. This list is injected through the `CROSS_GOV_GOOGLE_ANALYTICS_DOMAIN_LIST`
+environment variable, which is set in the [`verify-infrastructure-config` repository](https://github.com/alphagov/verify-infrastructure-config/blob/master/terraform/deployments/prod/hub/site.tf)
+by setting the `cross_gov_ga_domain_names` variable in the `site.tf` for the relevant environment.

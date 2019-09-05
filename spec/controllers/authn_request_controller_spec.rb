@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'controller_helper'
 require 'api_test_helper'
+require 'support/authn_request_redirect_examples'
 
 describe AuthnRequestController do
   let(:valid_rp) { 'test-rp-no-demo' }
@@ -11,113 +12,12 @@ describe AuthnRequestController do
     stub_session_creation
   end
 
-  it 'will redirect the user to resume registration page if cookie state is PENDING' do
-    front_journey_hint_cookie = {
-        STATE: {
-            IDP: valid_idp,
-            RP: valid_rp,
-            STATUS: 'PENDING'
-        }
-    }
-
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
-    post :rp_request, params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
-    expect(response).to redirect_to resume_registration_path
+  context 'where GA cross domain tracking parameter is NOT included in request' do
+    include_examples 'idp_authn_request_redirects'
   end
 
-  it 'will redirect the user to confirm your identity page if this is a non-repudiation even if cookie state is PENDING' do
-    front_journey_hint_cookie = {
-        STATE: {
-            IDP: valid_idp,
-            RP: valid_rp,
-            STATUS: 'PENDING'
-        }
-    }
-
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
-    post :rp_request, params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state', 'journey_hint' => 'submission_confirmation' }
-    expect(response).to redirect_to confirm_your_identity_path
-  end
-
-  it 'will redirect the user to default start page if cookie state is not PENDING' do
-    front_journey_hint_cookie = {
-        STATE: {
-            IDP: valid_idp,
-            RP: valid_rp,
-            STATUS: 'SUCCESS'
-        }
-    }
-
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
-    post :rp_request, params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
-    expect(response).to redirect_to start_path
-  end
-
-  it 'will redirect the user to default start page if cookie state is missing' do
-    front_journey_hint_cookie = {
-
-    }
-
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
-    post :rp_request, params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
-    expect(response).to redirect_to start_path
-  end
-
-  it 'will redirect the user to default start page if cookie is missing' do
-    post :rp_request, params: { 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
-    expect(response).to redirect_to start_path
-  end
-
-  it 'will redirect the user to resume registration page and maintain _ga parameter if cookie state is PENDING' do
-    front_journey_hint_cookie = {
-        STATE: {
-            IDP: valid_idp,
-            RP: valid_rp,
-            STATUS: 'PENDING'
-        }
-    }
-
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
-    post :rp_request, params: { '_ga' => :ga_id, 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
-    expect(response).to redirect_to resume_registration_path(_ga: :ga_id)
-  end
-
-  it 'will redirect the user to confirm your identity page and maintain _ga parameter if this is a non-repudiation even if cookie state is PENDING' do
-    front_journey_hint_cookie = {
-        STATE: {
-            IDP: valid_idp,
-            RP: valid_rp,
-            STATUS: 'PENDING'
-        }
-    }
-
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
-    post :rp_request, params: { '_ga' => :ga_id, 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state', 'journey_hint' => 'submission_confirmation' }
-    expect(response).to redirect_to confirm_your_identity_path(_ga: :ga_id)
-  end
-
-  it 'will redirect the user to default start page and maintain _ga parameter if cookie state is not PENDING' do
-    front_journey_hint_cookie = {
-        STATE: {
-            IDP: valid_idp,
-            RP: valid_rp,
-            STATUS: 'SUCCESS'
-        }
-    }
-
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
-    post :rp_request, params: { '_ga' => :ga_id, 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
-    expect(response).to redirect_to start_path(_ga: :ga_id)
-  end
-
-  it 'will redirect the user to default start page and maintain _ga parameter if cookie state is missing' do
-    front_journey_hint_cookie = {
-
-    }
-
-    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
-    post :rp_request, params: { '_ga' => :ga_id, 'SAMLRequest' => 'my-saml-request', 'RelayState' => 'my-relay-state' }
-    expect(response).to redirect_to start_path(_ga: :ga_id)
+  context 'where GA cross domain tracking parameter is included in request' do
+    include_examples 'idp_authn_request_redirects', '_ga' => '123456'
   end
 
   it 'will redirect the user to default start page and maintain _ga parameter if cookie is missing' do

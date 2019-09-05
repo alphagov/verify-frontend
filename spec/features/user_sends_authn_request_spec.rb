@@ -170,7 +170,7 @@ describe 'user sends authn requests' do
 
       expect(page).to have_title t('hub.start.title')
       expect(page).to have_current_path start_path(_ga: '123456')
-      expect(page).to have_selector 'span#cross-gov-ga-tracker-id', text: 'UA-145652997-1'
+      expect(page).to have_selector 'span#cross-gov-ga-tracker-id', text: 'UA-XXXXX-Y'
       expect(page).to have_selector 'span#cross-gov-ga-domain-list', text: '["www.gov.uk"]'
     end
   end
