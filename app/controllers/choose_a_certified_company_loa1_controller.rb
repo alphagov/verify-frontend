@@ -3,6 +3,7 @@ require 'partials/viewable_idp_partial_controller'
 class ChooseACertifiedCompanyLoa1Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
   include ViewableIdpPartialController
+  skip_before_action :render_cross_gov_ga, only: %i{about}
 
   def index
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_loa)

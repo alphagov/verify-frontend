@@ -7,6 +7,10 @@ module AnalyticsPartialController
     CROSS_GOV_GA
   end
 
+  def render_cross_gov_ga
+    @render_cross_gov_ga = true
+  end
+
   def report_to_analytics(action_name)
     FEDERATION_REPORTER.report_action(current_transaction, request, action_name)
   end

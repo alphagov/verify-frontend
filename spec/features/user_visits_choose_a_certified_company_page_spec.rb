@@ -194,4 +194,64 @@ describe 'When the user visits the choose a certified company page' do
       end
     end
   end
+
+  context 'Google Analytics elements are rendered correctly' do
+    context 'when coming from an LOA2 service' do
+      before :each do
+        stub_api_idp_list_for_loa(default_idps, 'LEVEL_2')
+        page.set_rack_session(
+          transaction_simple_id: 'test-rp',
+          requested_loa: 'LEVEL_2',
+          selected_answers: {
+            device_type: { device_type_other: true },
+            documents: { passport: true, driving_licence: true },
+            phone: { mobile_phone: true }
+          },
+          )
+      end
+
+      it 'should render GA elements on choose certified company page' do
+        visit '/choose-a-certified-company'
+
+        expect(page).to have_css "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
+      end
+
+      it 'should not render GA elements on about page' do
+        visit '/choose-a-certified-company'
+
+        click_link 'About IDCorp'
+
+        expect(page).to_not have_css "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
+      end
+    end
+
+    context 'when coming from an LOA1 service' do
+      before :each do
+        stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
+        page.set_rack_session(
+          transaction_simple_id: 'test-rp',
+          requested_loa: 'LEVEL_1',
+          selected_answers: {
+            device_type: { device_type_other: true },
+            documents: { passport: true, driving_licence: true },
+            phone: { mobile_phone: true }
+          },
+          )
+      end
+
+      it 'should render GA elements on choose certified company page' do
+        visit '/choose-a-certified-company'
+
+        expect(page).to have_css "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
+      end
+
+      it 'should not render GA elements on about page' do
+        visit '/choose-a-certified-company'
+
+        click_link 'About IDCorp'
+
+        expect(page).to_not have_css "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
+      end
+    end
+  end
 end
