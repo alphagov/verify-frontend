@@ -118,7 +118,7 @@ en:
       use_eidas:
         heading: Use a digital identity from another European country
         content_html: |
-          <p>If you are part of Germany’s Online-Ausweis you can use it here. Identity schemes from other countries will become available later.</p>
+          <p>If you’re part of an ID scheme in Germany or Italy you may be able to use it here.</p>
         button_text: Select your European digital identity
     start:
       title: Start
