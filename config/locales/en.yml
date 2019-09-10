@@ -64,6 +64,8 @@ en:
     paused_registration_resume_link: paused/:idp
     single_idp_start_page: single-start/:transaction_simple_id
     proxy_node_error: proxy-node-error
+  common:
+    logo: "%{name} logo"
   title:
     error: Error
   navigation:
