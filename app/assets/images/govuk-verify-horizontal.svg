@@ -1,12 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 256 64">
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 256 64" role="presentation">
     <defs>
         <style>
             .cls-1{fill:#0a0b0b;}.cls-2{fill:#fff;}
         </style>
     </defs>
-    <title>
-        Artboard 1
-    </title>
+    <title></title>
     <path d="M31.65,63.59A31.65,31.65,0,1,0,0,31.94,31.65,31.65,0,0,0,31.65,63.59" class="cls-1"/>
     <path d="M19.53,25.7A2.07,2.07,0,1,0,18.41,23a2.07,2.07,0,0,0,1.12,2.69" class="cls-2"/>
     <path d="M14.83,28.45a2.07,2.07,0,1,0-1.12-2.69,2.07,2.07,0,0,0,1.12,2.69" class="cls-2"/>
