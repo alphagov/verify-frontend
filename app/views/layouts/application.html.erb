@@ -32,7 +32,7 @@
     </div>
     <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>
     <div class="verify-logo-right">
-      <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: 'GOV.UK VERIFY' %>
+      <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation' %>
     </div>
   </main>
   <%= render 'shared/piwik' %>
