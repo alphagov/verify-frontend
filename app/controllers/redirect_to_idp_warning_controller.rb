@@ -37,7 +37,7 @@ class RedirectToIdpWarningController < ApplicationController
       select_registration(idp)
       ajax_idp_redirection_registration_request(recommended, idp.entity_id)
     else
-      render status: :bad_request
+      head :bad_request
     end
   end
 
