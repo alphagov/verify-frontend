@@ -20,7 +20,7 @@ class RedirectToCountryController < ApplicationController
       select_country(decorated_country)
       render json: @country_request
     else
-      render status: :bad_request
+      head :bad_request
     end
   end
 
