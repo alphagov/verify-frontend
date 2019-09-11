@@ -1,0 +1,4 @@
+<% if @render_cross_gov_ga && cross_gov_ga.enabled? %>
+  <span class="hidden" id="cross-gov-ga-tracker-id"><%= cross_gov_ga.tracker_id %></span>
+  <span class="hidden" id="cross-gov-ga-domain-list"><%= raw(cross_gov_ga.cross_domain_list.to_json) %></span>
+<% end %>

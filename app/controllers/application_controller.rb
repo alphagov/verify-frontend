@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :store_originating_ip
   before_action :set_piwik_custom_variables
+  before_action :render_cross_gov_ga
   after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
   after_action :delete_new_visit_flag
 
@@ -34,6 +35,7 @@ class ApplicationController < ActionController::Base
   helper_method :loa1_transactions_list
   helper_method :loa2_transactions_list
   helper_method :public_piwik
+  helper_method :cross_gov_ga
 
   rescue_from StandardError, with: :something_went_wrong unless Rails.env == 'development'
   rescue_from Errors::WarningLevelError, with: :something_went_wrong_warn

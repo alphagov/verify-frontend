@@ -160,4 +160,18 @@ describe 'user sends authn requests' do
     expect(page).to have_title t('hub.start.title')
     expect(page.get_rack_session.has_key?(:journey_hint)).to be false
   end
+
+  context 'and request contains cross-domain GA code' do
+    it 'will render the start page with GA elements and URL will contains _ga parameter' do
+      stub_session_creation
+
+      visit('/test-saml?_ga=123456')
+      click_button 'saml-post'
+
+      expect(page).to have_title t('hub.start.title')
+      expect(page).to have_current_path start_path(_ga: '123456')
+      expect(page).to have_selector 'span#cross-gov-ga-tracker-id', text: 'UA-XXXXX-Y'
+      expect(page).to have_selector 'span#cross-gov-ga-domain-list', text: '["www.gov.uk"]'
+    end
+  end
 end

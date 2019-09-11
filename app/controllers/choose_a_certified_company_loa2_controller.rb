@@ -3,6 +3,7 @@ require 'partials/viewable_idp_partial_controller'
 class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
   include ViewableIdpPartialController
+  skip_before_action :render_cross_gov_ga, only: %i{about}
 
   def index
     session[:selected_answers]&.delete('interstitial')

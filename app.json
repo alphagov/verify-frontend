@@ -24,7 +24,9 @@
     "EIDAS_SCHEMES_DIRECTORY": "stub/eidas/schemes",
     "EIDAS_SCHEME_LOGOS_DIRECTORY": "/eidas/scheme-logos",
     "LOGO_DIRECTORY": "/stub-logos",
-    "WHITE_LOGO_DIRECTORY": "/stub-logos/white"
+    "WHITE_LOGO_DIRECTORY": "/stub-logos/white",
+    "CROSS_GOV_GOOGLE_ANALYTICS_TRACKER_ID": "UA-XXXXX-Y",
+    "CROSS_GOV_GOOGLE_ANALYTICS_DOMAIN_LIST": "www.gov.uk"
   },
   "name": "alphagov-verify-frontend",
   "stack": "container"

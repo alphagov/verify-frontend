@@ -17,8 +17,8 @@ class AuthnRequestController < SamlController
 
     # HUB-113: Temporarily disabling to allow the perf team to analyze the data
     # session[:new_visit] = true
-
     AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
+
 
     redirect_for_journey_hint preferred_journey_hint(session_journey_hint_value, session_journey_hint_rp)
   end
@@ -77,42 +77,46 @@ private
   end
 
   def redirect_for_journey_hint(hint)
+    redirect_params = {}
+    if params['_ga'].present?
+      redirect_params = { _ga: params['_ga'] }
+    end
     if !cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY].nil? && SINGLE_IDP_FEATURE
-      redirect_to continue_to_your_idp_path
+      redirect_to continue_to_your_idp_path(redirect_params)
     elsif (is_last_status?(PENDING_STATUS) || resume_link?) && hint != 'submission_confirmation'
-      redirect_to resume_registration_path
+      redirect_to resume_registration_path(redirect_params)
     else
       case hint
       when 'uk_idp_start'
         flash[:journey_hint] = hint
-        redirect_to start_path
+        redirect_to start_path(redirect_params)
       when 'registration'
         flash[:journey_hint] = hint
-        redirect_to start_path # Change temporarily, original value = begin_registration_path
+        redirect_to start_path(redirect_params) # Change temporarily, original value = begin_registration_path
       when 'uk_idp_sign_in'
         flash[:journey_hint] = hint
-        redirect_to start_path # Change temporarily, original value = begin_sign_in_path
+        redirect_to start_path(redirect_params) # Change temporarily, original value = begin_sign_in_path
       when 'eidas_sign_in'
-        do_eidas_sign_in_redirect
+        do_eidas_sign_in_redirect(redirect_params)
       when 'submission_confirmation'
-        redirect_to confirm_your_identity_path
+        redirect_to confirm_your_identity_path(redirect_params)
       else
         logger.info "Unrecognised journey_hint value: #{hint}" unless hint.nil? || hint.eql?('unspecified')
-        do_default_redirect
+        do_default_redirect(redirect_params)
       end
     end
   end
 
-  def do_eidas_sign_in_redirect
-    return redirect_to start_path unless session[:transaction_supports_eidas]
+  def do_eidas_sign_in_redirect(redirect_params = {})
+    return redirect_to start_path(redirect_params) unless session[:transaction_supports_eidas]
 
-    redirect_to choose_a_country_path
+    redirect_to choose_a_country_path(redirect_params)
   end
 
-  def do_default_redirect
-    return redirect_to start_path unless session[:transaction_supports_eidas]
+  def do_default_redirect(redirect_params = {})
+    return redirect_to start_path(redirect_params) unless session[:transaction_supports_eidas]
 
-    redirect_to prove_identity_path
+    redirect_to prove_identity_path(redirect_params)
   end
 
   def store_rp_request_data

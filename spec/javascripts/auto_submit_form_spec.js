@@ -20,7 +20,7 @@ describe('auto', function () {
   });
 
   it('should immediately submit auto-submitting forms', function () {
-    $dom = $('<form class="js-auto-submit"><input type="submit"></form>');
+    $dom = $('<form class="js-auto-submit"><input id="continue-button" type="submit"></form>');
     $(document.body).append($dom);
     GOVUK.autoSubmitForm.attach();
     expect(formSpy).toHaveBeenCalled();
