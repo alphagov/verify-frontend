@@ -64,6 +64,8 @@ cy:
     paused_registration_resume_link: wedi-oedi/:idp
     single_idp_start_page: single-start-welsh/:transaction_simple_id
     proxy_node_error: proxy-node-error-cy
+  common:
+    logo: "logo %{name}"
   title:
     error: Gwall
   navigation:

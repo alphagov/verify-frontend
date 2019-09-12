@@ -26,3 +26,6 @@
 @import "pages/failed-uplift";
 @import "pages/logos-container";
 @import "pages/feedback-landing";
+
+// Temporary overrides to resolve some accessibility issues
+@import "helpers/overrides";
