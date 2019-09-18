@@ -67,6 +67,7 @@ constraints IsLoa2 do
   get 'confirmation_non_matching_journey', to: 'confirmation_loa2#non_matching_journey', as: :confirmation_non_matching_journey
 end
 
+get 'accessibility', to: 'static#accessibility', as: :accessibility
 get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
 get 'verify_services', to: 'static#verify_services', as: :verify_services
 get 'proxy_node_error', to: 'errors#proxy_node_error', as: :proxy_node_error

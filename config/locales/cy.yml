@@ -64,6 +64,7 @@ cy:
     paused_registration_resume_link: wedi-oedi/:idp
     single_idp_start_page: single-start-welsh/:transaction_simple_id
     proxy_node_error: proxy-node-error-cy
+    accessibility: accessibility-cy
   common:
     logo: "logo %{name}"
   title:
@@ -630,6 +631,8 @@ cy:
       alternatives: "Gallwch hefyd:"
       alternative_one: defnyddio cwmni ardystiedig gwahanol
       alternative_two: gweld ffyrdd eraill i %{service_display_name}
+    accessibility:
+      title: Accessibility
   errors:
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan
