@@ -169,10 +169,10 @@ module ApiTestHelper
   def stub_countries_list
     countries = [
         { 'entityId' => 'http://netherlandsEnitity.nl', 'simpleId' => 'NL', 'enabled' => true },
-        { 'entityId' => 'http://spainEnitity.es',       'simpleId' => 'ES', 'enabled' => true },
-        { 'entityId' => 'http://stub-country.uk',       'simpleId' => 'YY', 'enabled' => true },
+        { 'entityId' => 'http://spainEnitity.es', 'simpleId' => 'ES', 'enabled' => true },
+        { 'entityId' => 'http://stub-country.uk', 'simpleId' => 'YY', 'enabled' => true },
         { 'entityId' => 'http://stub-country-unsigned-assertions.uk', 'simpleId' => 'XX', 'enabled' => true },
-        { 'entityId' => 'http://swedenEnitity.se',      'simpleId' => 'SE', 'enabled' => false },
+        { 'entityId' => 'http://swedenEnitity.se', 'simpleId' => 'SE', 'enabled' => false },
     ]
 
     stub_request(:get, api_countries_endpoint(default_session_id)).to_return(body: countries.to_json, status: 200)
