@@ -171,6 +171,7 @@ module ApiTestHelper
         { 'entityId' => 'http://netherlandsEnitity.nl', 'simpleId' => 'NL', 'enabled' => true },
         { 'entityId' => 'http://spainEnitity.es',       'simpleId' => 'ES', 'enabled' => true },
         { 'entityId' => 'http://stub-country.uk',       'simpleId' => 'YY', 'enabled' => true },
+        { 'entityId' => 'http://stub-country-unsigned-assertions.uk', 'simpleId' => 'XX', 'enabled' => true },
         { 'entityId' => 'http://swedenEnitity.se',      'simpleId' => 'SE', 'enabled' => false },
     ]
 

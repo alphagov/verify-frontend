@@ -226,7 +226,14 @@ class StubApi < Sinatra::Base
         "simpleId":"YY",
         "enabled":true
       }
-     ]'
+     ],
+     [
+      {
+         "entityId":"http://localhost:50140/stub-country-unsigned-assertions/ServiceMetadata",
+         "simpleId":"XX",
+         "enabled":true
+       }
+      ]'
   end
 
   post '/api/countries/:session_id/:countryCode' do
