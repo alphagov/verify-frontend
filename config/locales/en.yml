@@ -64,6 +64,7 @@ en:
     paused_registration_resume_link: paused/:idp
     single_idp_start_page: single-start/:transaction_simple_id
     proxy_node_error: proxy-node-error
+    accessibility: accessibility
   common:
     logo: "%{name} logo"
   title:
@@ -629,6 +630,8 @@ en:
       alternatives: "You can also:"
       alternative_one: use a different certified company
       alternative_two: see other ways to %{service_display_name}
+    accessibility:
+      title: Accessibility
   errors:
     cookie_expired:
       title: Your session has timed out

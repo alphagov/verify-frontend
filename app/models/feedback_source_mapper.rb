@@ -49,7 +49,8 @@ class FeedbackSourceMapper
       'PROVE_IDENTITY_PAGE' => 'prove_identity',
       'CONTINUE_TO_YOUR_IDP_PAGE' => 'continue_to_your_idp',
       'RESUME_PAGE' => 'resume_registration',
-      'TIMEOUT_PAGE' => 'further_information_timeout'
+      'TIMEOUT_PAGE' => 'further_information_timeout',
+      'ACCESSIBILITY_PAGE' => 'accessibility',
   }.freeze
   end
 
