@@ -137,6 +137,8 @@ RSpec.describe 'user visits further information page' do
 
       visit further_information_path
 
+      expect(page).not_to have_css '.error-message', text: t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
+
       invalid_input = 'not valid'
       fill_in 'cycle_three_attribute_cycle_three_data', with: invalid_input
 
