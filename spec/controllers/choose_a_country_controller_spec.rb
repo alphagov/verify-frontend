@@ -39,7 +39,7 @@ describe ChooseACountryController do
       allow(Rails.logger).to receive(:error)
       allow(Rails.logger).to receive(:warn)
       expect(Rails.logger).not_to receive(:error)
-      expect(Rails.logger).to receive(:warn)
+      expect(Rails.logger).to receive(:warn).with('Transaction does not support Eidas')
       get :choose_a_country, params: { locale: 'en' }
     end
   end
