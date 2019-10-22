@@ -14,7 +14,6 @@ RSpec.describe 'When the user visits the redirect to country page' do
 
   def given_a_session_not_supporting_eidas
     page.set_rack_session(
-      verify_session_id: no_eidas_session,
       transaction_supports_eidas: false
     )
   end
