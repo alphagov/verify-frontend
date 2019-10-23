@@ -272,7 +272,7 @@ cy:
       choose_another_company: Mae'n rhaid i chi ddewis cwmni ardystiedig wahanol i wirio eich hunaniaeth.
       choose_another_certified_company_link: Dewiswch gwmni arall
     verify_will_not_work_for_you:
-      heading: Ni fydd GOV.UK Verify yn gweithio i chi
+      heading: Ni fyddwch yn gallu defnyddio GOV.UK Verify
       content_html: |
         <p>Yn seiliedig ar eich atebion, nid oes unrhyw un o'r darparwyr hunaniaeth (a elwir hefyd yn gwmnïau ardystiedig) sy'n gweithio gyda GOV.UK Verify yn gallu cadarnhau'ch hunaniaeth.</p>
     may_not_work_if_you_live_overseas:
@@ -309,7 +309,7 @@ cy:
       youll_also_need: Byddwch hefyd angen pasport y DU neu drwydded yrru’r DU.
     will_not_work_without_uk_address:
       title: Ni fydd GOV.UK Verify yn gweithio i chi
-      heading: Ni fydd GOV.UK Verify yn gweithio i chi
+      heading: Ni fyddwch yn gallu defnyddio GOV.UK Verify
       explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi’i ddilysu.
       verify_wont_work_but_there_is_still_a_way: Ni all 'GOV.UK Verify' cadarnhau pwy ydych chi oherwydd mai angen o leiaf un cyfeiriad yn y DU arnoch.  %{other_ways_text}
     choose_a_certified_company:
