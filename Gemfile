@@ -47,6 +47,9 @@ gem 'multi_json'
 
 gem 'browser'
 
+# Used as a dependancy by some of the Gems we have but earlier versions have a vunerability
+gem "rubyzip", ">= 1.3.0"
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
