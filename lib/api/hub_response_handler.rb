@@ -47,7 +47,11 @@ module Api
       begin
         MultiJson.load(body)
       rescue MultiJson::ParseError
-        raise Error, "Received #{status}, but unable to parse JSON"
+        case status
+        when HTTP::Response::Status[502], HTTP::Response::Status[504] then return nil
+        else
+          raise Error, "Received #{status}, but unable to parse JSON"
+        end
       end
     end
   end
