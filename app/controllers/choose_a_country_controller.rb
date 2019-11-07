@@ -8,7 +8,6 @@ class ChooseACountryController < ApplicationController
   def choose_a_country
     restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::EIDAS)
     @other_ways_description = current_transaction.other_ways_description
-    logger.info request.referrer ? "choose a country controller - referred by #{request.referrer}" : 'choose a country controller - no referrer'
   end
 
 private
