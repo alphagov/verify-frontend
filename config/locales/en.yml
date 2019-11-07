@@ -1,4 +1,8 @@
 en:
+  layout:
+    application:
+      service_name: Verify
+      logo_text: GOV.UK
   routes:
     start: start
     prove_identity: prove-identity
