@@ -21,24 +21,6 @@ module Api
         }.to raise_error Error, /Received 500 with error message: 'NONE', type: 'NONE' and id: 'NONE'/
       end
 
-      it 'raises an error when API response status is 502 and message is not JSON' do
-        expect {
-          response_handler.handle_response(HTTP::Response::Status[502], '<html><head><title>502 Bad Gateway</title></head><body>Bad Gateway</body></html>')
-        }.to raise_error Error, /Received 502 with error message: 'NONE', type: 'NONE' and id: 'NONE'/
-      end
-
-      it 'raises an error when API response status is 504 and message is not JSON' do
-        expect {
-          response_handler.handle_response(HTTP::Response::Status[504], '<html><head><title>504 Gateway Timeout</title></head><body>Gateway Timeout</body></html>')
-        }.to raise_error Error, /Received 504 with error message: 'NONE', type: 'NONE' and id: 'NONE'/
-      end
-
-      it 'raises an error when API response status is 500 and message is not JSON' do
-        expect {
-          response_handler.handle_response(HTTP::Response::Status[500], '<html><head><title>500 Server Error</title></head><body>Server Error</body></html>')
-        }.to raise_error Error, /Received 500, but unable to parse JSON/
-      end
-
       it 'raises a session error when type is set to SESSION_ERROR' do
         error_body = { clientMessage: 'Failure', errorId: '0', exceptionType: 'EXPECTED_SESSION_STARTED_STATE_ACTUAL_IDP_SELECTED_STATE' }
         expect {
