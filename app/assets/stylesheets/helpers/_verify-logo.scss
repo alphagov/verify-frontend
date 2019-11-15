@@ -1,4 +1,4 @@
-@include media(tablet) {
+@include govuk-media-query($until: tablet) {
   main {
     position: relative;
   }
@@ -32,3 +32,4 @@
     display: none;
   }
 }
+@include govuk-media-query($from: tablet);

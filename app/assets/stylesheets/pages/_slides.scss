@@ -3,43 +3,45 @@
 
 .slides {
 
-  background-color: $mainstream-brand;
-  color: $white;
+  background-color: $govuk-brand-colour;
+  color: govuk-colour("white");
 
-  margin-top: $gutter-half;
-  margin-bottom: $gutter-half;
+  margin-top: $govuk-gutter-half;
+  margin-bottom: $govuk-gutter-half;
 
-  @include media(tablet) {
-    margin-top: $gutter;
+  @include govuk-media-query($from: tablet) {
+    margin-top: $govuk-gutter;
   }
-
-  @include box-sizing(border-box);
 
   min-height: 480px;
 
-  padding: $gutter;
+  padding: $govuk-gutter;
 
-  @include media(tablet) {
-    padding: $gutter * 1.5;
+  @include govuk-media-query($from: tablet) {
+    padding: $govuk-gutter * 1.5;
   }
 
-  @include media(desktop) {
+  @include govuk-media-query($from: desktop) {
     padding: 75px 70px;
   }
 
   h1 {
-    @include media (mobile) {
-      margin-top: $gutter-half;
-      margin-bottom: $gutter-half;
+    @include govuk-media-query($from: mobile) {
+      margin-top: $govuk-gutter-half;
+      margin-bottom: $govuk-gutter-half;
+    }
+    @include govuk-media-query($until: mobile) {
+      margin-top: $govuk-gutter-half;
+      margin-bottom: $govuk-gutter-half;
     }
 
     margin-top: 0;
-    margin-bottom: $gutter;
+    margin-bottom: $govuk-gutter;
   }
 
   p,
   ul {
-    @include core-24;
+    @include govuk-font(24)
   }
 
   a,
@@ -55,46 +57,47 @@
   .multiple-choice > label {
     &::before,
     &::after {
-      background-color: $white;
-      border-color: $text-colour;
+      background-color: govuk-colour("white");
+      border-color: $govuk-text-colour;
     }
   }
 
   .actions {
-    margin: $gutter 0 $gutter-half;
+    margin: $govuk-gutter 0 $govuk-gutter-half;
 
     .button {
-      background: $white;
-      color: $mainstream-brand;
+      background: govuk-colour("white");
+      color: $govuk-brand-colour;
       font-weight: bold;
-      box-shadow: 0 2px 0 darken($mainstream-brand, 15%);
+      box-shadow: 0 2px 0 darken($govuk-brand-colour, 15%);
     }
   }
 
   .small-details {
-    @include core-19;
+    @include govuk-font(19)
   }
 
   // slides-verify-logo is used to wrap the logo
   .slides-verify-logo {
     max-width: 200px;
+    margin-top: 20px;
 
     img {
       width: 100%;
     }
 
-    @include media(mobile) {
+    @include govuk-media-query($until: mobile) {
       width: 140px;
     }
   }
 
   details {
     summary {
-      color: $white;
+      color: govuk-colour("white");
     }
 
     .panel {
-      border-left-color: $white;
+      border-left-color: govuk-colour("white");
     }
 
     p,
@@ -105,13 +108,16 @@
 }
 
 .hide-mobile {
-  @include media(mobile) {
+  @include govuk-media-query($until: mobile) {
     display: none;
   }
 }
 
 .show-mobile {
-  @include media(tablet, desktop) {
+  @include govuk-media-query($from: desktop) {
+    display: none;
+  }
+  @include govuk-media-query($from: tablet) {
     display: none;
   }
 }
@@ -123,7 +129,7 @@
 
   .form-group-error,
   .validation-message {
-    border-color: $white;
+    border-color: govuk-colour("white");
     color: inherit;
 
     .form-group-error:focus {
@@ -132,24 +138,24 @@
   }
 
   .multiple-choice {
-    @include core-24;
+    @include govuk-font(24)
   }
 
 }
 
 // About certified companies
 .list-companies {
-  margin-bottom: $gutter-half;
+  margin-bottom: $govuk-gutter-half;
   text-align: center;
 
   li {
-    @include inline-block;
     width: 49%;
+    display: inline-block;
 
-    @include media (tablet) {
+    @include govuk-media-query($from: tablet) {
       width: 25%;
-      margin-left: $gutter-one-third;
-      margin-right: $gutter-one-third;
+      margin-left: $govuk-gutter-half;
+      margin-right: $govuk-gutter-half;
     }
   }
 

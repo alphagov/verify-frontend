@@ -3,7 +3,7 @@
   <head>
     <meta name="robots" content="noindex,nofollow">
 
-    <title><%= display_page_title %></title>
+    <title><%= display_page_title %>  - GOV.UK Verify - GOV.UK</title>
 
     <%= csrf_meta_tags %>
 
@@ -16,12 +16,7 @@
     <link rel="apple-touch-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-167x167.png')%>" sizes="167x167">
     <link rel="apple-touch-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-152x152.png')%>" sizes="152x152">
     <link rel="apple-touch-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-apple-touch-icon.png')%>">
-    <% if content_for?(:meta_refresh) %>
-      <meta http-equiv="refresh" content="<%= yield(:meta_refresh) %>">
-    <% end %>
-    <% if hide_from_search_engine? %>
-      <meta name="robots" content="noindex" />
-    <% end %>
+
 </head>
 
   <body class="govuk-template__body">
@@ -50,7 +45,7 @@
         </div>
         <div class="govuk-header__content">
 
-          <%= link_to t('layout.application.service_name'), 'http://www.gov.uk', class: "govuk-header__link govuk-header__link--service-name" %>
+          <!-- <%= link_to t('layout.application.service_name'), 'http://www.gov.uk/', class: "govuk-header__link govuk-header__link--service-name" %> -->
 
           <button type="button" role="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation" data-module="govuk-button"><%= t 'layout.application.menu' %></button>
         </div>
@@ -58,16 +53,22 @@
     </header>
 
     <div class="govuk-width-container">
-      
-      <main class="govuk-main-wrapper" id="main-content" role="main">
-        
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-three-quarters">
-            <%= content_for?(:main) ? yield(:main) : yield %>
+      <main class="govuk-main-wrapper " id="main-content" role="main">
+        <% if flash.present? && (flash.keys & %w[error errors notice success warn alert]).size > 0 %>
+          <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+              <span class="govuk-warning-text__assistive"><%= t 'layout.application.warning' %></span>
+              <% flash.each do |name, msg| -%>
+                <% if %w(error errors warn notice success alert).include?(name) %><%= t('layout.application.message', message: msg) %><% end %>
+              <% end -%>
+            </strong>
           </div>
-          <div class="govuk-grid-column-one-quarter">
-            <%= render 'shared/available_languages' unless @hide_available_languages %>
-          </div>
+        <% end %>
+        <%= content_for?(:main) ? yield(:main) : yield %>
+        <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>
+        <div class="verify-logo-right">
+          <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation' %>
         </div>
       </main>
       <%= render 'shared/piwik' %>

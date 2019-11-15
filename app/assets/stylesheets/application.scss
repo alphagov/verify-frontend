@@ -18,10 +18,30 @@
 
  $warning-colour: #CB4B0B;
 
- @import "components";
- @import "events";
- @import "user_journey";
- @import "users";
- @import "admin";
- @import "helpers/verify-logo.scss";
- @import "helpers/available-languages.scss";
+ @import "verify-frontend.scss";
+
+@import "helpers/available-languages";
+@import "helpers/validation-message";
+@import "helpers/meta-data";
+@import "helpers/feedback-link";
+@import "helpers/verify-logo";
+@import "helpers/js-show";
+@import "helpers/modal-dialog";
+
+ // Specific pages
+@import "pages/choose-a-certified-company";
+@import "pages/choose-a-country";
+@import "pages/company";
+@import "pages/config-provided-html";
+@import "pages/cookies";
+@import "pages/failed-uplift";
+@import "pages/feedback-landing";
+@import "pages/feedback";
+@import "pages/logos-container";
+@import "pages/privacy-notice";
+@import "pages/response-processing";
+@import "pages/select-documents";
+@import "pages/select-phone";
+@import "pages/slides";
+
+@import "helpers/overrides";

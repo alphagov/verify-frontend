@@ -37,7 +37,7 @@
     -ms-transform: translate(0, -50%);
     transform: translate(0, -50%);
 
-    @include media(tablet) {
+    @include govuk-media-query($until: tablet) {
       padding: 0;
     }
   }
@@ -45,13 +45,13 @@
   &__inner {
     padding: 20px;
 
-    @include media(tablet) {
+    @include govuk-media-query($until: tablet) {
       padding: 30px;
     }
 
     &__text {
 
-      @include copy-19;
+      @extend %govuk-body !optional;
       margin-bottom: 20px;
     }
 
@@ -61,19 +61,19 @@
 
     &__link {
 
-      @include copy-19;
+      @extend %govuk-body !optional;
       background: none;
       border: none;
       vertical-align: middle;
       margin-top: 20px;
 
-      @include media(mobile) {
+      @include govuk-media-query($until: mobile) {
         text-align: center;
         display: block;
         margin-top: 25px;
       }
 
-      @include media(tablet) {
+      @include govuk-media-query($until: tablet) {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -139,7 +139,7 @@ dialog {
     padding: 15px;
     width: 90%;
 
-    @include media(tablet) {
+    @include govuk-media-query($until: tablet) {
       padding: 30px;
       margin: 30px auto;
       max-width: 500px;
@@ -157,6 +157,3 @@ dialog {
   }
 }
 
-.tabular-numbers {
-  font-family: $toolkit-font-stack-tabular;
-}
