@@ -38,6 +38,11 @@ module UserErrorsPartialController
     end
   end
 
+  def raise_unknown_format
+    logger.warn("Received a request with unexpected accept headers - #{request.headers['ACCEPT']}")
+    render plain: 'Unable to serve the requested format', status: 406
+  end
+
   # How often do we have the information needed to redirect the user back to the
   # service homepage?
   def check_whether_recoverable
