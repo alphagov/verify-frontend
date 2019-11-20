@@ -16,6 +16,11 @@ module ApplicationHelper
     end
   end
 
+  # true for requests coming form localhost
+  def show_debugging_information?
+    request.local?
+  end
+
   def hide_from_search_engine?
     return false if content_for(:show_to_search_engine)
 
