@@ -31,4 +31,12 @@ describe ResponseProcessingController do
     expect(subject).to receive(:something_went_wrong).with('Unknown matching response "SOMETHING"')
     get :index, params: { locale: 'en' }
   end
+
+  it 'renders error text when the request is not proccesable' do
+    request.headers['ACCEPT'] = 'image/*'
+    expect(Rails.logger).to receive(:warn).with("Received a request with unexpected accept headers - #{request.headers['ACCEPT']}")
+    get :index, params: { locale: 'en' }
+    expect(response).to have_http_status :not_acceptable
+    expect(response.body).to eq 'Unable to serve the requested format'
+  end
 end

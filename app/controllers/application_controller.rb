@@ -42,6 +42,7 @@ class ApplicationController < ActionController::Base
   rescue_from Api::SessionError, with: :session_error
   rescue_from Api::UpstreamError, with: :upstream_error
   rescue_from Api::SessionTimeoutError, with: :session_timeout
+  rescue_from ActionController::UnknownFormat, with: :raise_unknown_format
 
   prepend RedirectWithSeeOther
 
