@@ -23,6 +23,7 @@
 
 <% content_for :content do %>
   <main id="content">
+    <% if show_debugging_information? %>Controller is: <%= controller_name %><% end %>
     <div class="grid-row hide-mobile">
       <%= render 'shared/available_languages' unless @hide_available_languages %>
     </div>
