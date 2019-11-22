@@ -28,6 +28,14 @@ CONFIG = Configuration.load! do
   option_int 'read_timeout', 'READ_TIMEOUT', default: 60
   option_int 'connect_timeout', 'CONNECT_TIMEOUT', default: 4
   option_string 'rules_directory', 'RULES_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules/"
+
+  # begin abc-testing-modifications
+  option_string 'rules_variant_b_directory', 'RULES_B_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules-variant-b/"
+  option_string 'rules_variant_c_directory', 'RULES_C_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules-variant-c/"
+  option_string 'abc_variants_config', 'ABC_VARIANTS_CONFIG', default: "#{FED_CONFIG_DIR}/special-cases/abc-variants.yml"
+
+  # end abc-testing-modifications
+
   option_string 'zendesk_url', 'ZENDESK_URL'
   option_string 'zendesk_username', 'ZENDESK_USERNAME'
   option_string 'zendesk_token', 'ZENDESK_TOKEN'

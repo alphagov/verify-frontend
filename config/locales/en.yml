@@ -170,7 +170,7 @@ en:
       summary: How companies can verify identities
       details_html: |
         <p>These companies can check it's really you by using their own records, or by accessing information like credit records. If you have a passport or driving licence, they can check that information too.</p>
-        <p>These 5 companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
+        <p>These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
         <p>Using these companies to verify your identity will not affect credit score.</p>
         <p>There's more than one company so that:</p>
         <ul class="list list-bullet">
@@ -179,7 +179,7 @@ en:
         </ul>
       loa1_details_html: |
         <p>These companies can check it's really you by using their own records, or by accessing information like credit records. If you have a passport or driving licence, they can check that information too.</p>
-        <p>These 5 companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
+        <p>These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
         <p>Using these companies to verify your identity will not affect credit score.</p>
         <p>There's more than one company so that:</p>
         <ul class="list list-bullet">
@@ -349,12 +349,12 @@ en:
       content_html: |
         <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
         <p>When verifying your identity, these companies can use their own records, and they can access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
-        <p>These 5 companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p>These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
         <p>Using these companies to verify your identity will not affect your credit score.</p>
       content_loa1_html: |
         <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
         <p>When verifying your identity, these companies can use their own records, and they can access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
-        <p>These 5 companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p>These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
         <p>Using these companies to verify your identity will not affect your credit score.</p>
     redirect_to_idp_warning:
       title: "You'll now be redirected"
