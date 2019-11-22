@@ -6,6 +6,28 @@ segments:
   - "non-protected-segment-4"
   - "non-protected-segment-5"
 
+  - "2doc_gbdl_pp"
+  - "2doc_nidl_pp"
+  - "2doc_gbdl_pp_mobile"
+  - "2doc_gbdl_pp_mobile_app"
+  - "2doc_nidl_pp_mobile"
+  - "2doc_nidl_pp_mobile_app"
+  - "1doc_gbdl"
+  - "1doc_pp"
+  - "1doc_nidl"
+  - "1doc_gbdl_mobile"
+  - "1doc_pp_mobile"
+  - "1doc_nidl_mobile"
+  - "1doc_pp_mobile_app"
+  - "1doc_gbdl_mobile_app"
+  - "1doc_nidl_mobile_app"
+  - "1doc_foreign_mobile_app"
+  - "1doc_foreign"
+  - "1doc_foreign_mobile"
+  - "0doc"
+  - "0doc_mobile"
+  - "0doc_mobile_app"
+
 segment_definitions:
   protected-segment-1:
     - ["device_type_other", "passport", "driving_licence", "mobile_phone"]
@@ -21,3 +43,103 @@ segment_definitions:
     - ["device_type_other", "passport", "driving_licence", "mobile_phone"]
   non-protected-segment-5:
     - ["device_type_other", "smart_phone"]
+
+  2doc_gbdl_pp:
+    - ["device_type_other", "passport", "driving_licence"]
+    - ["device_type_mobile", "passport", "driving_licence"]
+
+  2doc_nidl_pp:
+    - ["device_type_other", "passport", "ni_driving_licence"]
+    - ["device_type_mobile", "passport", "ni_driving_licence"]
+
+  2doc_gbdl_pp_mobile:
+    - ["device_type_other", "passport", "driving_licence", "mobile_phone"]
+    - ["device_type_mobile", "passport", "driving_licence", "mobile_phone"]
+
+  2doc_gbdl_pp_mobile_app:
+    - ["device_type_other", "passport", "driving_licence", "mobile_phone", "smart_phone"]
+    - ["device_type_mobile", "passport", "driving_licence", "mobile_phone", "smart_phone"]
+
+  2doc_nidl_pp_mobile:
+    - ["device_type_other", "passport", "ni_driving_licence", "mobile_phone"]
+    - ["device_type_mobile", "passport", "ni_driving_licence", "mobile_phone"]
+
+  2doc_nidl_pp_mobile_app:
+    - ["device_type_other", "passport", "ni_driving_licence", "mobile_phone", "smart_phone"]
+    - ["device_type_mobile", "passport", "ni_driving_licence", "mobile_phone", "smart_phone"]
+
+  1doc_gbdl:
+    - ["device_type_other", "driving_licence"]
+    - ["device_type_mobile", "driving_licence"]
+    - ["device_type_other", "driving_licence", "non_uk_id_document"]
+    - ["device_type_mobile", "driving_licence", "non_uk_id_document"]
+
+  1doc_pp:
+    - ["device_type_other", "passport"]
+    - ["device_type_mobile", "passport"]
+    - ["device_type_other", "passport", "ni_driving_licence"]
+    - ["device_type_mobile", "passport", "ni_driving_licence"]
+
+  1doc_nidl:
+    - ["device_type_other", "ni_driving_licence"]
+    - ["device_type_mobile", "ni_driving_licence"]
+    - ["device_type_other", "ni_driving_licence", "non_uk_id_document"]
+    - ["device_type_mobile", "ni_driving_licence", "non_uk_id_document"]
+
+  1doc_gbdl_mobile:
+    - ["device_type_other", "driving_licence", "mobile_phone"]
+    - ["device_type_mobile", "driving_licence", "mobile_phone"]
+    - ["device_type_other", "driving_licence", "non_uk_id_document", "mobile_phone"]
+    - ["device_type_mobile", "driving_licence", "non_uk_id_document", "mobile_phone"]
+
+  1doc_pp_mobile:
+    - ["device_type_other", "passport", "mobile_phone"]
+    - ["device_type_mobile", "passport", "mobile_phone"]
+    - ["device_type_other", "passport", "ni_driving_licence", "mobile_phone"]
+    - ["device_type_mobile", "passport", "ni_driving_licence", "mobile_phone"]
+
+  1doc_nidl_mobile:
+    - ["device_type_other", "ni_driving_licence", "mobile_phone"]
+    - ["device_type_mobile", "ni_driving_licence", "mobile_phone"]
+
+  1doc_pp_mobile_app:
+    - ["device_type_other", "passport", "mobile_phone", "smart_phone"]
+    - ["device_type_mobile", "passport", "mobile_phone", "smart_phone"]
+    - ["device_type_other", "passport", "ni_driving_licence", "mobile_phone", "smart_phone"]
+    - ["device_type_mobile", "passport", "ni_driving_licence", "mobile_phone", "smart_phone"]
+
+  1doc_gbdl_mobile_app:
+    - ["device_type_other", "driving_licence", "mobile_phone", "smart_phone"]
+    - ["device_type_mobile", "driving_licence", "mobile_phone", "smart_phone"]
+    - ["device_type_other", "driving_licence", "non_uk_id_document", "mobile_phone", "smart_phone"]
+    - ["device_type_mobile", "driving_licence", "non_uk_id_document", "mobile_phone", "smart_phone"]
+
+  1doc_nidl_mobile_app:
+    - ["device_type_other", "ni_driving_licence", "mobile_phone", "smart_phone"]
+    - ["device_type_mobile", "ni_driving_licence", "mobile_phone", "smart_phone"]
+
+  1doc_foreign_mobile_app:
+    - ["device_type_other", "non_uk_id_document", "mobile_phone", "smart_phone"]
+    - ["device_type_mobile", "non_uk_id_document", "mobile_phone", "smart_phone"]
+
+  1doc_foreign:
+    - ["device_type_other", "non_uk_id_document"]
+    - ["device_type_mobile", "non_uk_id_document"]
+
+  1doc_foreign_mobile:
+    - ["device_type_other", "non_uk_id_document", "mobile_phone"]
+    - ["device_type_mobile", "non_uk_id_document", "mobile_phone"]
+
+  0doc:
+    - ["device_type_other"]
+    - ["device_type_mobile"]
+
+  0doc_mobile:
+    - ["device_type_other", "mobile_phone"]
+    - ["device_type_mobile", "mobile_phone"]
+
+  0doc_mobile_app:
+    - ["device_type_other", "mobile_phone", "smart_phone"]
+    - ["device_type_mobile", "mobile_phone", "smart_phone"]
+
+

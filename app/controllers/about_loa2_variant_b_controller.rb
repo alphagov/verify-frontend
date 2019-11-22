@@ -24,14 +24,13 @@ class AboutLoa2VariantBController < ApplicationController
     render 'about/choosing_a_company'
   end
 
-  private
+private
 
   def reduce_to_variant_subset(idps)
-    idps.select{ |idp| ABC_VARIANTS_CONFIG["variant_idp_set"].include?(idp.simple_id) }
+    idps.select { |idp| ABC_VARIANTS_CONFIG["variant_idp_set"].include?(idp.simple_id) }
   end
 
   def variant_config
     ABC_VARIANTS_CONFIG
   end
-
 end
