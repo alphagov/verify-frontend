@@ -27,7 +27,20 @@ CONFIG = Configuration.load! do
   option_int 'piwik_site_id', 'PIWIK_SITE_ID', default: 1
   option_int 'read_timeout', 'READ_TIMEOUT', default: 60
   option_int 'connect_timeout', 'CONNECT_TIMEOUT', default: 4
+
   option_string 'rules_directory', 'RULES_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules/"
+  option_string 'segment_definitions', 'SEGMENT_DEFINITIONS', default: "#{FED_CONFIG_DIR}/segment_definitions.yml"
+
+  # begin abc-testing-modifications
+  option_string 'abc_variants_config', 'ABC_VARIANTS_CONFIG', default: "#{FED_CONFIG_DIR}/special-cases/abc-variants.yml"
+
+  option_string 'rules_variant_b_directory', 'RULES_B_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules-variant-b/"
+  option_string 'rules_variant_c_directory', 'RULES_C_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules-variant-c/"
+
+  option_string 'segment_definitions_variant_b', 'SEGMENT_DEFINITIONS_VARIANT_B', default: "#{FED_CONFIG_DIR}/segment_definitions_variant_b.yml"
+  option_string 'segment_definitions_variant_c', 'SEGMENT_DEFINITIONS_VARIANT_C', default: "#{FED_CONFIG_DIR}/segment_definitions_variant_c.yml"
+  # end abc-testing-modifications
+
   option_string 'zendesk_url', 'ZENDESK_URL'
   option_string 'zendesk_username', 'ZENDESK_USERNAME'
   option_string 'zendesk_token', 'ZENDESK_TOKEN'
@@ -35,7 +48,8 @@ CONFIG = Configuration.load! do
   option_string 'rp_config', 'RP_CONFIG', default: "#{FED_CONFIG_DIR}/relying_parties.yml"
   option_string 'cycle_three_attributes_directory', 'CYCLE_THREE_ATTRIBUTES_DIRECTORY', default: "#{FED_CONFIG_DIR}/cycle-three-attributes/"
   option_string 'ab_test_file', 'AB_TEST_FILE', allow_missing: true
-  option_string 'segment_definitions', 'SEGMENT_DEFINITIONS', default: "#{FED_CONFIG_DIR}/segment_definitions.yml"
+
+
   option_string 'saml_proxy_host', 'SAML_PROXY_HOST'
   option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
   # Feature flags

@@ -1,0 +1,14 @@
+simpleIds: [ "stub-idp-one" ]
+send_hints: true
+send_language_hint: true
+
+segments:
+  protected:
+    recommended: ["2doc_gbdl_pp_mobile", "2doc_gbdl_pp_mobile_app", "2doc_nidl_pp_mobile", "2doc_nidl_pp_mobile_app", "1doc_gbdl_mobile", "1doc_pp_mobile", "1doc_nidl_mobile", "1doc_pp_mobile_app", "1doc_gbdl_mobile_app", "1doc_nidl_mobile_app", "1doc_foreign_mobile_app"]
+    unlikely:    []
+  non_protected:
+    recommended: ["2doc_gbdl_pp_mobile", "2doc_gbdl_pp_mobile_app", "2doc_nidl_pp_mobile", "2doc_nidl_pp_mobile_app", "1doc_gbdl_mobile", "1doc_pp_mobile", "1doc_nidl_mobile", "1doc_pp_mobile_app", "1doc_gbdl_mobile_app", "1doc_nidl_mobile_app", "1doc_foreign_mobile_app"]
+    unlikely:    []
+
+capabilities:
+  - []

@@ -1,0 +1,5 @@
+---
+variant_idp_set:
+  - stub-idp-one
+  - stub-idp-two
+  - stub-idp-three
