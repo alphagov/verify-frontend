@@ -89,7 +89,7 @@ describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post'
 
-      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"short_hub_2019_q3":"short_hub_2019_q3_control_a","select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_with_logo".*}/)
+      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"short_hub_2019_q3":"short_hub_2019_q3_variant_b_2_idp","select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_with_logo".*}/)
     end
 
     it 'will not set ab_test cookie if already set' do
@@ -116,7 +116,7 @@ describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post'
 
-      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"short_hub_2019_q3":"short_hub_2019_q3_control_a","select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_no_logo".*}/)
+      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"short_hub_2019_q3":"short_hub_2019_q3_variant_b_2_idp","select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_no_logo".*}/)
     end
 
     it 'will not set ab_test cookie if RP is in AB test blacklist' do
