@@ -29,5 +29,4 @@ private
   def recommendation_engine
     IDP_RECOMMENDATION_ENGINE_variant_b
   end
-
 end
