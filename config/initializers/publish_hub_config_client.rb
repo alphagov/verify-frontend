@@ -1,0 +1,1 @@
+PUBLISH_HUB_CONFIG_CLIENT = PublishHubConfigClient.new(CONFIG.config_api_host) if CONFIG.publish_hub_config_enabled

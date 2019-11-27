@@ -195,6 +195,24 @@ class StubApi < Sinatra::Base
       }]'
   end
 
+  get '/config/certificates/:entity_id/certs/signing' do
+    '[{
+        "issuerId":"http://www.test-rp.gov.uk/SAML2/MD",
+        "certificate":"certificate-value",
+        "keyUse":"Signing",
+        "federationEntityType":"RP"
+     }]'
+  end
+
+  get '/config/certificates/:entity_id/certs/encryption' do
+    '{
+        "issuerId":"http://www.test-rp.gov.uk/SAML2/MD",
+        "certificate":"certificate-value",
+        "keyUse":"Encryption",
+        "federationEntityType":"RP"
+     }'
+  end
+
   post '/policy/received-authn-request/my-relay-state/select-identity-provider' do
     status 200
     ''
@@ -235,6 +253,11 @@ class StubApi < Sinatra::Base
   end
 
   post '/policy/countries/:session_id/:countryCode' do
+    status 200
+    ''
+  end
+
+  get '/service-status' do
     status 200
     ''
   end
