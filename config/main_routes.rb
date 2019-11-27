@@ -60,8 +60,8 @@ constraints IsLoa2 do
   post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
   get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
   post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
-  get 'select_phone', to: 'select_phone#index', as: :select_phone
-  post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
+  # get 'select_phone', to: 'select_phone#index', as: :select_phone
+  # post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
   get 'verify_will_not_work_for_you', to: 'select_phone#verify_will_not_work_for_you', as: :verify_will_not_work_for_you
 
   # get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
@@ -150,6 +150,9 @@ constraints short_hub_v3_control_a do
   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
 
+  get 'select_phone', to: 'select_phone#index', as: :select_phone
+  post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
+
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
@@ -160,6 +163,9 @@ constraints short_hub_v3_variant_b do
   get 'about_certified_companies', to: 'about_loa2_variant_b#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa2_variant_b#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa2_variant_b#choosing_a_company', as: :about_choosing_a_company
+
+  get 'select_phone', to: 'select_phone_variant_b#index', as: :select_phone
+  post 'select_phone', to: 'select_phone_variant_b#select_phone', as: :select_phone_submit
 
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant_b#index', as: :choose_a_certified_company
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2_variant_b#about', as: :choose_a_certified_company_about
