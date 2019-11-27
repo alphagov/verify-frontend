@@ -4,10 +4,10 @@ send_language_hint: false
 
 segments:
   protected:
-    recommended: ["2doc_gbdl_pp", "2doc_nidl_pp", "1doc_gbdl ", "1doc_pp", "1doc_nidl", "1doc_foreign_mobile", "1doc_foreign", "0doc", "0doc_mobile", "0doc_mobile_app"]
+    recommended: ["2doc_gbdl_pp", "2doc_nidl_pp", "1doc_gbdl", "1doc_pp", "1doc_nidl", "1doc_foreign_mobile", "1doc_foreign", "0doc", "0doc_mobile", "0doc_mobile_app", "other"]
     unlikely:    []
   non_protected:
-    recommended: ["2doc_gbdl_pp", "2doc_nidl_pp", "1doc_gbdl ", "1doc_pp", "1doc_nidl", "1doc_foreign_mobile", "1doc_foreign", "0doc", "0doc_mobile", "0doc_mobile_app"]
+    recommended: ["2doc_gbdl_pp", "2doc_nidl_pp", "1doc_gbdl", "1doc_pp", "1doc_nidl", "1doc_foreign_mobile", "1doc_foreign", "0doc", "0doc_mobile", "0doc_mobile_app", "other"]
     unlikely:    []
 
 capabilities:
