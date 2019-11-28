@@ -1,13 +1,11 @@
 <%= page_title 'hub.paused_registration.from_resume_link.title', idp_name: @idp_display_data.name %>
 <% content_for :feedback_source, 'PAUSED_REGISTRATION_PAGE' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.paused_registration.from_resume_link.heading', idp_name: @idp_display_data.name %></h1>
+<div class="govuk-grid-column-three-quarters">
+  <h1 class="govuk-heading-l"><%= t 'hub.paused_registration.from_resume_link.heading', idp_name: @idp_display_data.name %></h1>
 
-    <p><%= t 'hub.paused_registration.from_resume_link.restart_instructions_html', idp_name: @idp_display_data.name %></p>
+  <p><%= t 'hub.paused_registration.from_resume_link.restart_instructions_html', idp_name: @idp_display_data.name %></p>
 
-    <h2 class="heading-medium"><%= t 'hub.transaction_list.title' %></h2>
-    <%= render partial: 'shared/transaction_list_prefer_headless_start' %>
-  </div>
+  <h2 class="govuk-heading-m"><%= t 'hub.transaction_list.title' %></h2>
+  <%= render partial: 'shared/transaction_list_prefer_headless_start' %>
 </div>

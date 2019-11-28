@@ -5,7 +5,7 @@ en:
       tagline: "A really european identity provider"
       about: |
           <p>ID Corp is the premier identity proofing service around.</p>
-          <ul>
+          <ul class="govuk-list govuk-list--bullet">
             <li>Identity</li>
             <li>Verification</li>
           </ul>
@@ -32,7 +32,7 @@ cy:
       tagline: "A really european identity provider"
       about: |
            <p>ID Corp is the premier identity proofing service around.</p>
-           <ul>
+           <ul class="govuk-list govuk-list--bullet">
              <li>Identity</li>
              <li>Verification</li>
            </ul>
