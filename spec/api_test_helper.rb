@@ -366,6 +366,10 @@ module ApiTestHelper
     stub_api_idp_list_for_loa(idps)
   end
 
+  def stub_hub_config_healthcheck(status: 200)
+    stub_request(:get, config_api_uri('service-status')).to_return(status: status)
+  end
+
 private
 
   def default_session_id

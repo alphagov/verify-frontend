@@ -59,5 +59,9 @@ Rails.application.routes.draw do
     post 'initiate-single-idp-journey', to: 'single_idp_journey#redirect_from_idp'
     put 'select-single-idp', to: 'single_idp_journey#continue_ajax'
   end
+  if PUBLISH_HUB_CONFIG_ENABLED
+    get 'hub/config/service-status', to: 'publish_hub_config#service_status'
+    match 'hub/config/certificates/:path', to: 'publish_hub_config#certificates', constraints: { path: /.*/ }, via: :get
+  end
   get '/humans.txt', to: 'static#humanstxt'
 end

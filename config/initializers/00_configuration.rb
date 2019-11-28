@@ -40,6 +40,7 @@ CONFIG = Configuration.load! do
   option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
   # Feature flags
   option_bool 'single_idp_feature', 'SINGLE_IDP_FEATURE', default: true
+  option_bool 'publish_hub_config_enabled', 'PUBLISH_HUB_CONFIG_ENABLED', default: false
 
   option_string 'cross_gov_google_analytics_tracker_id', 'CROSS_GOV_GOOGLE_ANALYTICS_TRACKER_ID', allow_missing: true
   option_string 'cross_gov_domain_list', 'CROSS_GOV_GOOGLE_ANALYTICS_DOMAIN_LIST', allow_missing: true
