@@ -12,9 +12,14 @@
 
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+              <h1 class="govuk-fieldset__heading">
+                Have you changed your name?
+              </h1>
+            </legend>
             <div class="govuk-radios">
               <div class="govuk-radios__item">
-                <%= f.radio_button :interstitial_question_result, true, {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}, class: "govuk-radios__input" }%>
+                <%= f.radio_button :interstitial_question_result, true, {required: true, data: { required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}, class: "govuk-radios__input"}%>
                 <%= f.label :interstitial_question_result_true, t('hub.redirect_to_idp_question.answer_yes'), class: "govuk-label govuk-radios__label verify-inverse"%>
               </div>
               <div class="govuk-radios__item">
