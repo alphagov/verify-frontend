@@ -89,7 +89,8 @@ describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post'
 
-      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"short_hub_2019_q3":"short_hub_2019_q3_variant_b_2_idp","select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_with_logo".*}/)
+      #HUH-239
+      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"short_hub_2019_q3":"short_hub_2019_q3_variant_c_2_idp_short_hub","select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_with_logo".*}/)
     end
 
     it 'will not set ab_test cookie if already set' do
@@ -108,6 +109,7 @@ describe 'user sends authn requests' do
       expect_cookie(CookieNames::AB_TEST, ab_test_cookie_value)
     end
 
+    #HUH-239
     it 'will include both experiments in the ab_test cookie if only one experiment is currently in the ab_test cookie' do
       stub_session_creation
       cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_no_logo' }.to_json))
@@ -116,7 +118,8 @@ describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post'
 
-      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"short_hub_2019_q3":"short_hub_2019_q3_variant_b_2_idp","select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_no_logo".*}/)
+      #HUH-239
+      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"short_hub_2019_q3":"short_hub_2019_q3_variant_c_2_idp_short_hub","select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_no_logo".*}/)
     end
 
     it 'will not set ab_test cookie if RP is in AB test blacklist' do

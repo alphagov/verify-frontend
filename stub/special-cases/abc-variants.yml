@@ -1,5 +1,60 @@
 ---
-variant_idp_set:
+variant_b_idp_set:
   - stub-idp-one
   - stub-idp-two
   - stub-idp-three
+variant_c_idp_set:
+  - stub-idp-one
+  - stub-idp-three
+
+segment_advice:
+  0doc:
+    - 3-more-things-and-req-photo-id
+    - if-int-id-req-app-and-1-thing
+    - offer-try-again
+  cc:
+    - 2-more-things-and-req-photo-id-and-app
+    - app-explanation
+    - if-int-id-req-app
+    - offer-try-again
+  app:
+    - 2-more-things-and-req-photo-id-and-card
+    - cc-explanation
+    - offer-try-again
+  app_cc:
+    - 1-more-thing-req-photo-id
+    - offer-try-again
+  dl:
+    - 2-more-things-of-doc-cc-app
+    - app-explanation
+    - if-int-id-photo-req-app
+    - offer-try-again
+  dl_cc:
+    - 1-more-thing-of-photo-id-and-app
+    - app-explanation
+    - offer-try-again
+  dl_app:
+    - 1-more-thing-of-photo-id-and-cc
+    - cc-explanation
+    - offer-try-again
+  dl_app_cc:
+  pp:
+    - 2-more-things-of-doc-cc-app
+    - app-explanation
+    - if-int-id-photo-req-app
+    - offer-try-again
+  pp_cc:
+    - 1-more-thing-of-photo-id-and-app
+    - app-explanation
+    - offer-try-again
+  pp_app:
+    - 1-more-thing-of-photo-id-and-cc
+    - cc-explanation
+    - offer-try-again
+  pp_app_cc:
+  pp_dl:
+    - 1-more-thing-of-cc-and-app
+    - offer-try-again
+  pp_dl_cc:
+  pp_dl_app:
+  pp_dl_app_cc:

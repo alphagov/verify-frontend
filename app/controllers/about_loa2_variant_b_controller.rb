@@ -1,7 +1,9 @@
 require 'partials/viewable_idp_partial_controller'
+require 'partials/variant_partial_controller'
 
 class AboutLoa2VariantBController < ApplicationController
   include ViewableIdpPartialController
+  include VariantPartialController
 
   layout 'slides', except: [:choosing_a_company]
 
@@ -11,7 +13,7 @@ class AboutLoa2VariantBController < ApplicationController
   end
 
   def certified_companies
-    variant_idps = reduce_to_variant_subset(current_identity_providers_for_loa)
+    variant_idps = current_identity_providers_for_loa_by_variant('b')
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(variant_idps)
     render 'about/certified_companies_LOA2'
   end
@@ -22,15 +24,5 @@ class AboutLoa2VariantBController < ApplicationController
 
   def choosing_a_company
     render 'about/choosing_a_company'
-  end
-
-private
-
-  def reduce_to_variant_subset(idps)
-    idps.select { |idp| ABC_VARIANTS_CONFIG["variant_idp_set"].include?(idp.simple_id) }
-  end
-
-  def variant_config
-    ABC_VARIANTS_CONFIG
   end
 end

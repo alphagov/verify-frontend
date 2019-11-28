@@ -24,9 +24,9 @@ experiments:
         - name: 'control_a'
           percent: 0
         - name: 'variant_b_2_idp'
-          percent: 100
-        - name: 'variant_c_2_idp_short_hub'
           percent: 0
+        - name: 'variant_c_2_idp_short_hub'
+          percent: 100
   - select_documents_v2:
       alternatives:
         - name: 'control'

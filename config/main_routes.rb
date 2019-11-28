@@ -50,14 +50,14 @@ constraints IsLoa2 do
   # get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   # get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
 
-  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
-  post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+  #get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
+  #post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
   get 'why_might_this_not_work_for_me', to: 'will_it_work_for_me#why_might_this_not_work_for_me', as: :why_might_this_not_work_for_me
   get 'may_not_work_if_you_live_overseas', to: 'will_it_work_for_me#may_not_work_if_you_live_overseas', as: :may_not_work_if_you_live_overseas
   get 'will_not_work_without_uk_address', to: 'will_it_work_for_me#will_not_work_without_uk_address', as: :will_not_work_without_uk_address
-  get 'select_documents', to: 'select_documents#index', as: :select_documents
-  get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
-  post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
+  #get 'select_documents', to: 'select_documents#index', as: :select_documents
+  #get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
+  #post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
   get 'other_identity_documents', to: 'other_identity_documents#index', as: :other_identity_documents
   post 'other_identity_documents', to: 'other_identity_documents#select_other_documents', as: :other_identity_documents_submit
   # get 'select_phone', to: 'select_phone#index', as: :select_phone
@@ -141,7 +141,7 @@ end
 
 # TODO (HUH-234) implement piwik variant C starting route
 constraints short_hub_v3_variant_c_piwik do
-  # TODO
+  get 'about', to: 'about_loa2_variant_c#index', as: :about
 end
 
 # HUH-233: implement piwik control A route
@@ -149,6 +149,13 @@ constraints short_hub_v3_control_a do
   get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+
+  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
+  post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+
+  get 'select_documents', to: 'select_documents#index', as: :select_documents
+  get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
+  post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
 
   get 'select_phone', to: 'select_phone#index', as: :select_phone
   post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
@@ -164,6 +171,13 @@ constraints short_hub_v3_variant_b do
   get 'about_identity_accounts', to: 'about_loa2_variant_b#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa2_variant_b#choosing_a_company', as: :about_choosing_a_company
 
+  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
+  post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+
+  get 'select_documents', to: 'select_documents#index', as: :select_documents
+  get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
+  post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
+
   get 'select_phone', to: 'select_phone_variant_b#index', as: :select_phone
   post 'select_phone', to: 'select_phone_variant_b#select_phone', as: :select_phone_submit
 
@@ -174,5 +188,17 @@ end
 
 # TODO (HUH-234) implement appropriate variant C routes
 constraints short_hub_v3_variant_c do
-  # TODO
+  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
+  post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+
+  get 'select_documents', to: 'select_documents_variant_c#index', as: :select_documents
+
+  #TODO: fix these to go with the vC controller
+  get 'select_documents_none', to: 'select_documents_variant_c#no_documents', as: :select_documents_no_documents
+  post 'select_documents', to: 'select_documents_variant_c#select_documents', as: :select_documents_submit
+  get 'select_documents_advice', to: 'select_documents_variant_c#advice', as: :select_documents_advice
+
+  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant_c#index', as: :choose_a_certified_company
+  get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2_variant_c#about', as: :choose_a_certified_company_about
+  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa_variant_c2#select_idp', as: :choose_a_certified_company_submit
 end

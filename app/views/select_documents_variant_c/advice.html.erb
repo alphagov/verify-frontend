@@ -1,0 +1,30 @@
+<%= page_title 'hub_variant_c.select_documents.title' %>
+<% content_for :feedback_source, 'SELECT_DOCUMENTS_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <!-- short codes: <%= @advice_codes %> -->
+
+    <!-- special case -->
+    <% if @advice_codes.include?('3-more-things-and-req-photo-id') %>
+      <%= raw t 'hub_variant_c.select_documents_advice.advice_html.3-more-things-special-heading' %>
+      <div class="other-ways-to-complete-transaction">
+        <%= raw @other_ways_text %>
+      </div>
+    <% end %>
+
+    <% @advice_codes.each do |code| %>
+      <%= raw t('hub_variant_c.select_documents_advice.advice_html.' + code,
+                try_again_link_start: "<a href='"+ html_escape(url_for(select_documents_path)) + "'>",
+                try_again_link_end: "</a>") %>
+    <% end %>
+
+    <% unless @advice_codes.include?('3-more-things-and-req-photo-id') %>
+      <h2 class="heading-medium"><%= t 'hub_variant_c.select_documents_advice.what_to_do_other_ways_heading' %></h2>
+      <div class="other-ways-to-complete-transaction">
+        <%= raw @other_ways_text %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

@@ -65,6 +65,7 @@ cy:
     single_idp_start_page: single-start-welsh/:transaction_simple_id
     proxy_node_error: proxy-node-error-cy
     accessibility: accessibility-cy
+    select_documents_advice: select-documents-advice-cy
   common:
     logo: "logo %{name}"
   title:
@@ -92,6 +93,180 @@ cy:
     support_links: Dolenni cymorth
     help: Help
     built_by_the: Adeiladwyd gan yr
+  hub_variant_c:
+    about_what_is_verify:
+      heading: What GOV.UK Verify is
+      content: GOV.UK Verify is a secure way to prove who you are online. It helps protect you against online identity theft.
+    about_how_it_works:
+      heading: How it works
+      content: You create an identity account with a company that meets government privacy and security standards.
+    about_company:
+      content_html: <p>The company will ask you questions and check your identity documents.</p>
+        <p>It will never share your information for any other purpose without your consent.</p>
+    select_documents:
+      title: Your documents
+      heading: Which of these do you have available right now?
+      explanation: This will help us tell you if GOV.UK Verify will work for you. The more items you have, the more likely it is that you can verify your identity.
+      select_all_that_apply: "Select all that apply:"
+      documents_option_valid_passport: Your valid passport
+      documents_option_driving_license: Your current driving licence, full or provisional, with your photo on it
+      documents_option_phone_can_app: A phone or tablet that can download an app
+      documents_option_credit_card: Your credit or debit card
+      documents_option_nothing: None of the above
+      further_explanation:
+        title: What GOV.UK Verify uses these for
+        content_html: |
+          <p>
+            The companies can check your passport and driving licence against official records.
+            They can also confirm your personal details by accessing information like credit records.
+            This will help them be sure it's really you.
+          </p>
+          <p>
+            If you only have one photo identity document (ID), you will also need to download a free app and take
+            pictures of it. This will prove that the ID is yours.
+          </p>
+          <p>
+            The companies will only use your credit or debit card details as more evidence of your identity.
+            They cannot see your transactions and cannot charge your account.
+          </p>
+      errors:
+        no_selection: Select the items you have available right now
+    select_documents_advice:
+      advice_html:
+        3-more-things-special-heading: |
+          <h1 class="heading-large">Based on your answers, GOV.UK Verify will not work for you</h1>
+
+          <p>If you don't have the items you need to set up an identity account, you can try another way to access the service.</p>
+
+        3-more-things-and-req-photo-id: |
+          <h2 class="heading-medium">Try again with GOV.UK Verify</h2>
+
+          <p>To set up an identity account, you need 3 of the following items:</p>
+
+          <ul class="list list-bullet">
+            <li>your valid passport</li>
+            <li>your current driving licence, full or provisional, with your photo on it</li>
+            <li>a phone or tablet that can download an app</li>
+            <li>your credit or debit card</li>
+          </ul>
+
+        2-more-things-of-doc-cc-app: |
+          <h1 class="heading-large">Based on your answers, you need 2 more items</h1>
+
+          <p>To set up an identity account, you also need 2 of these 3 items:</p>
+
+          <ul class="list list-bullet">
+            <li>another photo ID</li>
+            <li>your credit or debit card</li>
+            <li>a phone or tablet that can download an app</li>
+          </ul>
+
+        2-more-things-and-req-photo-id-and-card: |
+          <h1 class="heading-large">Based on your answers, you need 2 more items</h1>
+
+          <p>To set up an identity account, you also need either:</p>
+
+          <ul class="list list-bullet">
+            <li>2 photo IDs</li>
+            <li>1 photo ID and your credit or debit card</li>
+          </ul>
+
+        2-more-things-and-req-photo-id-and-app: |
+          <h1 class="heading-large">Based on your answers, you need 2 more items</h1>
+
+          <p>To set up an identity account, you also need either:</p>
+
+          <ul class="list list-bullet">
+            <li>2 photo IDs</li>
+            <li>1 photo ID and a phone or tablet that can download an app</li>
+          </ul>
+
+        1-more-thing-req-photo-id: |
+          <h1 class="heading-large">Based on your answers you need a photo ID</h1>
+
+          <p>To set up an identity account, you also need either:</p>
+
+          <ul class="list list-bullet">
+            <li>a passport - this can be up to 6 months past the expiry date</li>
+            <li>a valid driving licence with your photo on it</li>
+          </ul>
+
+        1-more-thing-of-cc-and-app: |
+          <h1 class="heading-large">Based on your answers, you need 1 more item</h1>
+
+          <p>To set up an identity account, you also need either:</p>
+
+          <ul class="list list-bullet">
+            <li>your credit or debit card</li>
+            <li>a phone or tablet that can download an app</li>
+          </ul>
+
+        1-more-thing-of-photo-id-and-cc: |
+          <h1 class="heading-large">Based on your answers, you need 1 more item</h1>
+
+          <p>To set up an identity account, you also need either:</p>
+
+          <ul class="list list-bullet">
+            <li>a second photo ID</li>
+            <li>your credit or debit card</li>
+          </ul>
+
+        1-more-thing-of-photo-id-and-app: |
+          <h1 class="heading-large">Based on your answers, you need 1 more item</h1>
+
+          <p>To set up an identity account, you also need either:</p>
+
+          <ul class="list list-bullet">
+            <li>a second photo ID</li>
+            <li>a phone or tablet that can download an app</li>
+          </ul>
+
+        cc-explanation: |
+          <p>The card is only used as evidence of your address. The company you choose cannot see your transactions or charge your account.</p>
+
+        app-explanation: |
+          <p>The app lets you upload pictures of yourself and your photo ID. This helps your chosen company be confident it’s you answering the questions.</p>
+
+        if-int-id-req-app-and-1-thing: |
+          <!-- shortcode was 'if-int-id-req-app-and-1-thing' -->
+
+        if-int-id-photo-req-app: |
+          <!-- shortcode was 'if-int-id-photo-req-app' -->
+
+        if-int-id-req-app: |
+          <!-- shortcode was 'if-int-id-req-app' -->
+
+        offer-try-again: |
+          <p>If you have these now, you can %{try_again_link_start}try again%{try_again_link_end}.</p>
+
+          <p>If you have these elsewhere, try again when you have them with you.</p>
+
+      what_to_do_other_ways_heading: What to do if you do not have these items
+    choose_a_certified_company:
+      title: Pick a certified company
+      heading: Pick a company to verify you
+      intro: One of these companies will create your identity account.
+      idp_count: You can pick either company.
+      idp_explanation: "There’s more than one so that:"
+      content_html: |
+        <ul class="list list-bullet">
+          <li>you can choose who verifies your identity</li>
+          <li>everyone’s information is not stored in one place</li>
+        </ul>
+        <p>
+          It usually takes 15 minutes to prove who you are.
+          You can then use your account to sign in to other government services too.
+        </p>
+      show_all_companies: Companies that are unlikely to verify you
+      filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
+      about_idp: About %{display_name}
+      dialog:
+        information_provided_by: Information provided by %{display_name}
+        close: close
+      about:
+        title: About %{display_name}
+        information_provided_by: Information provided by %{display_name}
+        close: close
   hub:
     other_ways_title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
