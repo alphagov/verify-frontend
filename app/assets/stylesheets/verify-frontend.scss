@@ -16,7 +16,6 @@
   }
 }
 
-
 // Fields that were hidden by JS but marked
 // as validation errors should always be visible:
 .js-hidden.form-group-error {
@@ -43,4 +42,22 @@
 .verify-inverse-btn:hover {
   color: $govuk-brand-colour;
   background-color: govuk-colour("light-grey");
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.pin-to-top {
+  margin-top: -2.5em;
+  float: right;
+}
+
+.js-hidden {
+  display: none;
+}
+
+.idp-btn-nudge {
+  margin-top: 30px !important;
 }

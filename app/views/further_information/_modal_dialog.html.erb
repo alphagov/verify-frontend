@@ -1,7 +1,7 @@
 <dialog id="js-modal-dialog" data-seconds-to-timeout="<%= @seconds_to_timeout %>" data-seconds-modal-visible="300"
 data-url-redirect="<%= url_for(controller: 'further_information', action: 'timeout') %>" data-text="<%= t('hub.further_information.modal.text') %>" data-extra-text="<%= t('hub.further_information.modal.extra_text', idp_name: @idp_name) %>" class="modal-dialog dialog" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer">
   <div class="modal-dialog__inner">
-	  <h1 id="dialog-title" class="dialog-title heading-large">
+	  <h1 id="dialog-title" class="dialog-title govuk-heading-l">
       <%= t('hub.further_information.modal.heading') %>
     </h1>
     <div class="modal-dialog__inner__text">

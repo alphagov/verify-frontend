@@ -1,19 +1,16 @@
 <%= page_title 'hub.paused_registration.with_session.title', idp_name: @idp.display_name %>
 <% content_for :feedback_source, 'PAUSED_REGISTRATION_PAGE' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.paused_registration.with_session.heading', idp_name: @idp.display_name %></h1>
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l"><%= t 'hub.paused_registration.with_session.heading', idp_name: @idp.display_name %></h1>
 
     <p><%= t 'hub.paused_registration.with_session.restart_instructions_html', idp_name: @idp.display_name, rp_name: @transaction[:name], rp_start_page: @transaction[:homepage] %></p>
 
     <div class="actions">
-      <%= button_link_to t('hub.paused_registration.with_session.continue_verifying', idp_name: @idp.display_name), @transaction[:start_page], id: 'next-button' %>
+      <%= button_link_to t('hub.paused_registration.with_session.continue_verifying', idp_name: @idp.display_name), @transaction[:start_page], id: 'next-button', class: 'govuk-button' %>
     </div>
 
     <p><%= t 'hub.paused_registration.with_session.return_html', rp_name: @transaction[:name], rp_start_page: @transaction[:homepage] %></p>
 
     <%= render 'shared/logos_container' unless @idp.nil? %>
   </div>
-</div>
-

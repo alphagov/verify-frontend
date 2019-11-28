@@ -7,8 +7,8 @@ en:
         - a UK passport
         - a UK photocard driving licence
       special_no_docs_instructions_html: |
-        <h2 class="heading-medium">Requirements</h2>
-        <ul id="requirements" class="list-bullet">
+        <h2 class="govuk-heading-m">Requirements</h2>
+        <ul id="requirements" class="govuk-list govuk-list--bullet">
           <li>A left leg</li>
         </ul>
         <p>Stick your left leg in, stick your left leg out</p>
@@ -23,8 +23,8 @@ cy:
         - a UK passport
         - a UK photocard driving licence
       special_no_docs_instructions_html: |
-        <h2 class="heading-medium">Requirements</h2>
-        <ul id="requirements" class="list-bullet">
+        <h2 class="govuk-heading-m">Requirements</h2>
+        <ul id="requirements" class="govuk-list govuk-list--bullet">
           <li>A left leg</li>
         </ul>
         <p>Stick your left leg in, stick your left leg out</p>

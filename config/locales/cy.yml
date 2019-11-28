@@ -115,7 +115,7 @@ cy:
         heading: Defnyddiwch GOV.UK Verify
         content_html: |
           <p>Mae cofrestru gyda GOV.UK Verify fel arfer yn cymryd tua 15 munud. Mae'n gweithio orau os oes gennych:</p>
-          <ul class="list-bullet list">
+          <ul class="govuk-list govuk-list--bullet">
             <li>cyfeiriad yn y DU</li>
             <li>pasport neu drwydded gyrru gyda llun dilys</li>
           </ul>
@@ -204,7 +204,7 @@ cy:
       heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
       content_html: |
         <p>Mae cwmnïau ardystiedig wedi adeiladu systemau newydd, diogel i ddilysu hunaniaeth. Mae'r systemau hyn yn gweithio trwy wirio:</p>
-        <ul class="list-bullet list">
+        <ul class="govuk-list govuk-list--bullet">
         <li>bod eich dogfennau hunaniaeth yn ddilys</li>
         <li>mai chi sy'n darparu eich manylion, dim rhywun sy'n honni bod yn chi</li>
         </ul>
@@ -427,7 +427,7 @@ cy:
       heading: "Nid oedd %{display_name} yn gallu dilysu'r dystiolaeth a ddarparwyd gennych"
       reasons_html: |
         <p>Mae ychydig o resymau pam allai hyn ddigwydd, yn cynnwys:</p>
-        <ul class="list list-bullet">
+        <ul class="govuk-list govuk-list--bullet">
           <li>nid yw eich ateb i gwestiwn yn cyd fynd a chofnodion ar-lein</li>
           <li>rydych yn ddiweddar wedi cael newid yn eich amgylchiadau, ac nid ydynt wedi cael eu diweddaru ar-lein</li>
           <li>Nid oes gan %{idp_name} fynediad i ddigon o wybodaeth amdanoch chi</li>
@@ -584,7 +584,7 @@ cy:
         heading: "Mae eich cyfrif hunaniaeth %{idp_name} wedi cael ei arbed"
         restart_instructions_html: |
           <p>I ddychwelyd gallwch:</p>
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>ewch 'nôl i <a href="%{rp_start_page}">%{rp_name}</a>.</li>
             <li>gwiriwch am e-bost gan %{idp_name}</li>
             <li>rhowch nod tudalen yma</li>
@@ -597,7 +597,7 @@ cy:
         heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.
         restart_instructions_html: |
           <p>I ddychwelyd gallwch:</p>
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>ewch nôl i'r gwasanaeth oeddech yn ei ddefnyddio</li>
             <li>gwiriwch am e-bost gan y darparwr hunaniaeth a ddewiswyd gennych</li>
             <li>rhowch nod tudalen yma</li>
@@ -608,7 +608,7 @@ cy:
         heading: "Mae eich cyfrif hunaniaeth %{idp_name} wedi cael ei arbed"
         restart_instructions_html: |
           <p>I ddychwelyd gallwch:</p>
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>ewch nôl i'r gwasanaeth oeddech yn ei ddefnyddio</li>
             <li>gwiriwch am e-bost gan %{idp_name}</li>
             <li>rhowch nod tudalen yma</li>

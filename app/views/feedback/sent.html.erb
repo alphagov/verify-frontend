@@ -1,20 +1,18 @@
 <%= page_title 'hub.feedback_sent.title' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.feedback_sent.heading' %></h1>
-    <h2 class="heading-medium"><%= t 'hub.feedback_sent.sub_heading' %></h2>
+<div class="govuk-grid-column-three-quarters">
+  <h1 class="govuk-heading-l"><%= t 'hub.feedback_sent.heading' %></h1>
+  <h2 class="govuk-heading-m"><%= t 'hub.feedback_sent.sub_heading' %></h2>
 
-    <% if emailProvided %>
-      <p><%= t 'hub.feedback_sent.message_email' %></p>
-    <% else %>
-      <p><%= t 'hub.feedback_sent.message_no_email' %></p>
-    <% end %>
+  <% if emailProvided %>
+    <p><%= t 'hub.feedback_sent.message_email' %></p>
+  <% else %>
+    <p><%= t 'hub.feedback_sent.message_no_email' %></p>
+  <% end %>
 
-    <% if sessionValid %>
-      <p><%= link_to t('hub.feedback_sent.start_again_link'), start_path %></p>
-    <% else %>
-      <p><%= t 'hub.feedback_sent.session_timeout' %></p>
-    <% end %>
-  </div>
+  <% if sessionValid %>
+    <p><%= link_to t('hub.feedback_sent.start_again_link'), start_path %></p>
+  <% else %>
+    <p><%= t 'hub.feedback_sent.session_timeout' %></p>
+  <% end %>
 </div>

@@ -1,47 +1,83 @@
 <%= page_title 'hub.will_it_work_for_me.title' %>
 <% content_for :feedback_source, 'WILL_IT_WORK_FOR_ME_PAGE' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.will_it_work_for_me.heading' %></h1>
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l"><%= t 'hub.will_it_work_for_me.heading' %></h1>
     <%= form_for @form, url: will_it_work_for_me_path, html: { id: 'validate-will-it-work-for-me', class: 'will-it-work-for-me-form heading-banner-top-margin', novalidate: 'novalidate', 'data-msg': t('hub.will_it_work_for_me.question.errors.no_selection')} do |f| %>
 
         <%= render 'shared/form-errors', errors: flash[:errors] %>
 
-        <%= content_tag :div, class: form_question_class do %>
-            <fieldset class="inline">
-              <legend>
-                <span class="form-label"><%= t 'hub.will_it_work_for_me.question.above_age_threshold' %></span>
-              </legend>
-              <%= f.custom_radio_button :above_age_threshold, true, t('hub.will_it_work_for_me.question.option_yes') %>
-              <%= f.custom_radio_button :above_age_threshold, false, t('option.no') %>
-            </fieldset>
-        <% end %>
-        <%= content_tag :div, class: form_question_class do %>
-            <fieldset class="inline">
-              <legend>
-                <span class="form-label"><%= t 'hub.will_it_work_for_me.question.resident_last_12_months' %></span>
-              </legend>
-              <%= f.custom_radio_button :resident_last_12_months, true, t('hub.will_it_work_for_me.question.option_yes') %>
-              <%= f.custom_radio_button :resident_last_12_months, false, t('option.no') %>
-            </fieldset>
-        <% end %>
-        <%= content_tag :div, id: :not_resident_reason, class: hidden_form_question_class do %>
-            <fieldset>
-              <legend>
-                <span class="form-label"><%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %></span>
-              </legend>
-              <%= f.custom_radio_button :not_resident_reason, 'MovedRecently', t('hub.will_it_work_for_me.question.not_resident_reason.recently') %>
-              <%= f.custom_radio_button :not_resident_reason, 'AddressButNotResident', t('hub.will_it_work_for_me.question.not_resident_reason.not_resident') %>
-              <%= f.custom_radio_button :not_resident_reason, 'NoAddress', t('hub.will_it_work_for_me.question.not_resident_reason.no_address') %>
-            </fieldset>
-        <% end %>
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="changed-name-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              <h2 class="govuk-fieldset__heading">
+                <%= t 'hub.will_it_work_for_me.question.above_age_threshold' %>
+              </h2>
+            </legend>
+            <div class="govuk-radios">
+              <div class="govuk-radios__item">
+                <%= f.radio_button :above_age_threshold, true, {class: "govuk-radios__input"}%>
+                <%= f.label :above_age_threshold_true, t('hub.will_it_work_for_me.question.option_yes'), class: "govuk-label govuk-radios__label"%>
+              </div>
+              <div class="govuk-radios__item">
+                <%= f.radio_button :above_age_threshold, false, {class: "govuk-radios__input"}%>
+                <%= f.label :above_age_threshold_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              <h2 class="govuk-fieldset__heading">
+                <%= t 'hub.will_it_work_for_me.question.resident_last_12_months' %>
+              </h2>
+            </legend>
+            <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <%= f.radio_button :resident_last_12_months, true, {class: "govuk-radios__input"}%>
+                <%= f.label :resident_last_12_months_true, t('hub.will_it_work_for_me.question.option_yes'), class: "govuk-label govuk-radios__label"%>
+              </div>
+              <div class="govuk-radios__item">
+                <%= f.radio_button :resident_last_12_months, false, {class: "govuk-radios__input", 'data-aria-controls': "conditional-will_it_work_for_me_form_resident_last_12_months_false"}%>
+                <%= f.label :resident_last_12_months_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
+              </div>
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                id="conditional-will_it_work_for_me_form_resident_last_12_months_false">
+                <div class="govuk-form-group">
+                  <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                      <h2 class="govuk-heading-s">
+                        <%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %>
+                      </h2>
+                    </legend>
+                    <div class="govuk-radios">
+                      <div class="govuk-radios__item">
+                        <%= f.radio_button :not_resident_reason, 'MovedRecently', {class: "govuk-radios__input"}%>
+                        <%= f.label :not_resident_reason_moved_recently, t('hub.will_it_work_for_me.question.not_resident_reason.recently'), class: "govuk-label govuk-radios__label"%>
+                      </div>
+                      <div class="govuk-radios__item">
+                        <%= f.radio_button :not_resident_reason, 'AddressButNotResident', {class: "govuk-radios__input"}%>
+                        <%= f.label :not_resident_reason_address_but_not_resident, t('hub.will_it_work_for_me.question.not_resident_reason.not_resident'), class: "govuk-label govuk-radios__label"%>
+                      </div>
+                      <div class="govuk-radios__item">
+                        <%= f.radio_button :not_resident_reason, 'NoAddress', {class: "govuk-radios__input"}%>
+                        <%= f.label :not_resident_reason_no_address, t('hub.will_it_work_for_me.question.not_resident_reason.no_address'), class: "govuk-label govuk-radios__label"%>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>       
 
         <div id="validation-error-message-js"></div>
 
         <div class="actions">
-          <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+          <%= f.submit t('navigation.continue'), class: 'govuk-button', id: 'next-button' %>
         </div>
     <% end %>
   </div>
-</div>

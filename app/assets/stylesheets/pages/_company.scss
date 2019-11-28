@@ -11,7 +11,7 @@
 .company {
   border-bottom: 1px solid $govuk-border-colour;
   text-align: center;
-
+  @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
     border: 5px solid $govuk-brand-colour;
     margin-bottom: 30px;
@@ -26,6 +26,7 @@
   border-bottom: none;
   padding-bottom: 30px;
 
+  @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
     border: 5px solid $govuk-brand-colour;
     margin-bottom: 30px;
@@ -35,6 +36,7 @@
 .company-inner {
   padding: 5px 0 18px;
 
+  @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
     padding: 20px;
   }
@@ -47,6 +49,7 @@
   padding-bottom: 25%;
   margin: 0 auto 15px;
 
+  @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
     margin: 0 auto 15px;
     width: 80%;
@@ -69,15 +72,16 @@
   }
 }
 
-.company .button {
+.company .govuk-button {
   margin: 0 0 20px;
 
+  @include govuk-media-query($until: mobile);
   @include govuk-media-query($from: mobile) {
     width: 65%;
   }
 }
 
-.company dialog .button {
+.company dialog .govuk-button {
   margin: 0 0 15px;
 }
 
@@ -107,6 +111,7 @@
 
   }
 
+  @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
     padding-left: 230px;
     min-height: 96px;
@@ -128,6 +133,7 @@
     }
   }
 
+  @include govuk-media-query($until: mobile);
   @include govuk-media-query($from: mobile) {
     .company-logo {
       input[type="image"] {
@@ -158,15 +164,17 @@
   .idp-option {
     text-align: center;
 
+    @include govuk-media-query($until: tablet);
     @include govuk-media-query($from: tablet) {
       text-align: left;
     }
 
-    .button,
+    .govuk-button,
     .button-link {
       margin-top: 30px;
       text-align: center;
 
+      @include govuk-media-query($until: tablet);
       @include govuk-media-query($from: tablet) {
         min-width: 230px;
 
@@ -175,6 +183,7 @@
         }
       }
 
+      @include govuk-media-query($until: mobile);
       @include govuk-media-query($from: mobile) {
         margin-top: 5px;
       }

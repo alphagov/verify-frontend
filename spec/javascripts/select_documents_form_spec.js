@@ -3,14 +3,14 @@ describe("Select Documents Form", function () {
     var formWithNoErrors = '<div id="no-documents-message" class="visually-hidden" aria-live="assertive"></div>' +
         '<div class="grid-row">' +
         '<div class="column-two-thirds">' +
-        '<h1 class="heading-large">Your photo identity document</h1>' +
+        '<h1 class="govuk-heading-l">Your photo identity document</h1>' +
         '<p>Certified companies use information from identity documents to verify you.</p>' +
         '<div class="panel panel-border-narrow">' +
         'The more identity documents you can provide now, the more likely it is that the company can verify you successfully.' +
         '</div>' +
         '<form id="validate-select-documents" class="select-documents-form" novalidate="novalidate" data-msg="Please select the documents you have" action="/select-documents" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="2Vb46CN8Bljm/f6lHNxqu3PGWMVAsVdjIe6uJrnzoxbUic0vi8jU/Ea8UrmOWBtwan860qN2uvdFNW8DoFNVuQ==" />' +
         '<div class="form-group">' +
-        '<h2 class="heading-medium">Do you have a valid UK photocard driving licence, full or provisional?</h2>' +
+        '<h2 class="govuk-heading-m">Do you have a valid UK photocard driving licence, full or provisional?</h2>' +
         '<div class="form-group form-field">' +
         '<fieldset>' +
         '<label class="block-label selection-button-radio" for="select_documents_form_any_driving_licence_true"><input type="radio" value="true" name="select_documents_form[any_driving_licence]" id="select_documents_form_any_driving_licence_true" /> Yes</label>' +
@@ -24,7 +24,7 @@ describe("Select Documents Form", function () {
         '<div class="multiple-choice"><input value="northern_ireland" name="select_documents_form[driving_licence]" id="select_documents_form_driving_licence_northern_ireland" type="radio"> <label for="select_documents_form_driving_licence_northern_ireland">Northern Ireland</label></div>' +
         '</fieldset>' +
         '</div>' +
-        '<h2 class="heading-medium">Do you have a UK passport?</h2>' +
+        '<h2 class="govuk-heading-m">Do you have a UK passport?</h2>' +
         '<div class="form-group form-field">' +
         '<fieldset>' +
         '<label class="block-label selection-button-radio" for="select_documents_form_passport_true"><input type="radio" value="true" name="select_documents_form[passport]" id="select_documents_form_passport_true" /> Yes</label>' +
@@ -48,7 +48,7 @@ describe("Select Documents Form", function () {
             .prop('checked', true)
             .trigger('click');
     }
-    
+
     function submitForm() {
         selectDocumentsForm.triggerHandler('submit')
     }
@@ -143,7 +143,7 @@ describe("Select Documents Form", function () {
         submitForm();
         expectErrorMessage('Please select the documents you have');
     });
-    
+
     it("should clear errors when driving licence details are given", function () {
         this.selectYesValidDrivingLicence();
         this.selectYesPassport();

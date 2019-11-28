@@ -1,25 +1,23 @@
 <%= page_title @title %>
 
-<div class="content-inner js-hidden no-right-hand-logo">
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h1 class="heading-large"><%= t('hub.redirect_to_service.heading') %></h1>
-      <div class="application-notice info-notice">
-        <p><%= t('hub.redirect_to_service.no_javascript') %></p>
-      </div>
-      <%= form_tag(@response_for_rp.location, class: 'js-auto-submit', authenticity_token: false, enforce_utf8: false, id: 'saml-response-form') do %>
-          <%= hidden_field_tag 'SAMLResponse', @response_for_rp.saml_message %>
-          <% if @response_for_rp.relay_state %>
-            <%= hidden_field_tag 'RelayState', @response_for_rp.relay_state %>
-          <% end %>
-          <%= submit_tag t('navigation.continue'), id: 'continue-button', class: 'button' %>
-      <% end %>
-    </div>
+<div class="govuk-grid-column-three-quarters js-hidden no-right-hand-logo">
+    
+  <h1 class="govuk-heading-l"><%= t('hub.redirect_to_service.heading') %></h1>
+  
+  <div class="application-notice info-notice">
+    <p><%= t('hub.redirect_to_service.no_javascript') %></p>
   </div>
-</div>
 
-<div class="grid-row response-processing js-show no-right-hand-logo">
-  <h1 class="heading-large"><%= @transition_message %></h1>
+  <%= form_tag(@response_for_rp.location, class: 'js-auto-submit', authenticity_token: false, enforce_utf8: false, id: 'saml-response-form') do %>
+      <%= hidden_field_tag 'SAMLResponse', @response_for_rp.saml_message %>
+      <% if @response_for_rp.relay_state %>
+        <%= hidden_field_tag 'RelayState', @response_for_rp.relay_state %>
+      <% end %>
+      <%= submit_tag t('navigation.continue'), id: 'continue-button', class: 'button' %>
+  <% end %>
+
+  <h1 class="govuk-heading-l"><%= @transition_message %></h1>
   <p><%= t('hub.redirect_to_service.please_wait') %></p>
   <%= image_tag 'loading.gif', alt: t('hub.redirect_to_service.loading'), class: 'loading' %>
+
 </div>

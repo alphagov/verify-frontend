@@ -1,8 +1,8 @@
 <% taxons = transaction_taxon_list %>
 <% if taxons.any? %>
   <% taxons.each do |taxon| %>
-    <h3 class="heading-small"><%= taxon.name %></h3>
-    <ul class="list">
+    <h3 class="govuk-heading-s"><%= taxon.name %></h3>
+    <ul class="govuk-list">
       <% taxon.transactions.each do |transaction| %>
         <li>
           <% if transaction.headless_startpage %>

@@ -1,6 +1,6 @@
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h2 class="heading-medium"><%= t('hub.certified_companies_unavailable.title',
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-m"><%= t('hub.certified_companies_unavailable.title',
                                      count: unavailable_identity_providers.length,
                                      company: unavailable_identity_providers.first.display_name) %></h2>
     <p><%=
@@ -10,7 +10,7 @@
 </div>
 
 <% unavailable_identity_providers.each do |identity_provider| %>
-  <div class="column-one-third company-wrapper">
+  <div class="govuk-grid-column-one-third company-wrapper">
     <div class="company">
       <div class="company-inner">
         <div class="company-logo">
