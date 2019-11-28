@@ -4,23 +4,18 @@
     <%= javascript_include_tag 'piwik_idp_picker_tracking' %>
 <% end %>
 
-<div class="content-inner">
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h1 class="heading-large"><%= t 'hub.choose_a_certified_company.heading' %></h1>
-      <p><%= t 'hub.choose_a_certified_company.existing_customer' %></p>
-      <p><%= t 'hub.choose_a_certified_company.personal_information' %></p>
+<div class="govuk-grid-column-two-thirds">
+  <h1 class="govuk-heading-l"><%= t 'hub.choose_a_certified_company.heading' %></h1>
+  <p class="govuk-body"><%= t 'hub.choose_a_certified_company.existing_customer' %></p>
+  <p class="govuk-body"><%= t 'hub.choose_a_certified_company.personal_information' %></p>
 
-      <ul class="list list-bullet">
-        <li><%= link_to(t('hub.choose_a_certified_company.why_companies'), why_companies_path) %></li>
-      </ul>
+  <ul class="govuk-list govuk-list--bullet">
+    <li><%= link_to(t('hub.choose_a_certified_company.why_companies'), why_companies_path) %></li>
+  </ul>
 
-      <div id="matching-idps">
-        <% @recommended_idps.each.with_index do |identity_provider, index| %>
-            <%= render partial: 'choose_a_certified_company/idp_option', locals: {recommended: true, identity_provider: identity_provider, order: index + 1} %>
-        <% end %>
-      </div>
-
-    </div>
+  <div id="matching-idps">
+    <% @recommended_idps.each.with_index do |identity_provider, index| %>
+        <%= render partial: 'choose_a_certified_company/idp_option', locals: {recommended: true, identity_provider: identity_provider, order: index + 1} %>
+    <% end %>
   </div>
 </div>

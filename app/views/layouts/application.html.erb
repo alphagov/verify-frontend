@@ -21,9 +21,7 @@
 
   <body class="govuk-template__body">
 
-    <%= javascript_tag nonce: true do %>
-      document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    <% end %>
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
 
     <a href="#main-content" class="govuk-skip-link"><%= t 'layout.application.skip_link' %></a>
@@ -51,24 +49,23 @@
         </div>
       </div>
     </header>
-
+    
     <div class="govuk-width-container">
-      <main class="govuk-main-wrapper " id="main-content" role="main">
-        <% if flash.present? && (flash.keys & %w[error errors notice success warn alert]).size > 0 %>
-          <div class="govuk-warning-text">
-            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-            <strong class="govuk-warning-text__text">
-              <span class="govuk-warning-text__assistive"><%= t 'layout.application.warning' %></span>
-              <% flash.each do |name, msg| -%>
-                <% if %w(error errors warn notice success alert).include?(name) %><%= t('layout.application.message', message: msg) %><% end %>
-              <% end -%>
-            </strong>
+      <main class="govuk-main-wrapper " id="content" role="main">        
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-three-quarters">&nbsp;</div>
+          <div class="govuk-grid-column-one-quarter hide-mobile pin-to-top">
+            <%= render 'shared/available_languages' unless @hide_available_languages %>
           </div>
-        <% end %>
-        <%= content_for?(:main) ? yield(:main) : yield %>
-        <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>
-        <div class="verify-logo-right">
-          <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation' %>
+        </div>
+        <div class="govuk-grid-row">
+            <%= content_for?(:main) ? yield(:main) : yield %>
+          
+            <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>      
+
+            <div class="verify-logo-right">
+              <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation' %>
+            </div>
         </div>
       </main>
       <%= render 'shared/piwik' %>
@@ -81,12 +78,18 @@
           <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
             <h2 class="govuk-visually-hidden">Support links</h2>
             <ul class="govuk-footer__inline-list">
+              <li class="govuk-footer__inline-list-item"><a href="https://www.gov.uk/help" hreflang="en"><%= t 'footer.help' %></a></li>
+              <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.accessibility.title'), accessibility_path) %></li>
+              <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.cookies.title'), cookies_path) %></li>
+              <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.privacy_notice.title'), privacy_notice_path) %></li>
               <li class="govuk-footer__inline-list-item">
-                <%= link_to t('layout.application.footer.cookies'), cookies_path, class: "govuk-footer__link" %>
+              <% if feedback_source.present? %>
+                  <%= raw link_to(t('hub.feedback.title'), feedback_path('feedback-source' => feedback_source)) %>
+              <% else %>
+                  <%= link_to(t('hub.feedback.title'), feedback_path) %>
+              <% end %>
               </li>
-              <li class="govuk-footer__inline-list-item">
-                <%= link_to t('layout.application.footer.privacy'), privacy_notice_path, class: "govuk-footer__link" %>
-              </li>
+              <li class="govuk-footer__inline-list-item"><%= t 'footer.built_by_the' %> <a href="https://gds.blog.gov.uk" lang="en" hreflang="en">Government Digital Service</a></li>
             </ul>
 
             <svg role="presentation" focusable="false" class="govuk-footer__licence-logo" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 483.2 195.7" height="17" width="41">
@@ -104,8 +107,7 @@
         </div>
       </div>
     </footer>
-    <%= javascript_tag nonce: true do %>
-      window.GOVUKFrontend.initAll()
-    <% end %>
+    <script nonce="true" src="/assets/govuk-frontend/govuk/all.js"></script>
+    <script>window.GOVUKFrontend.initAll()</script>
   </body>
 </html>

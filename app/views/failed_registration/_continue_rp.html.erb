@@ -1,4 +1,4 @@
-<h1 class="heading-large"><%= t('hub.failed_registration.continue_heading', transaction_name: transaction.name) %></h1>
+<h1 class="govuk-heading-l"><%= t('hub.failed_registration.continue_heading', transaction_name: transaction.name) %></h1>
 
 <p>
   <%= t 'hub.failed_registration.continue_idp_text', idp_name: idp.display_name %>
@@ -7,15 +7,15 @@
 
 <p><%= t 'hub.failed_registration.continue_text', rp_name: transaction.rp_name %></p>
 
-<%= button_link_to t('navigation.continue'), redirect_to_service_error_path %>
+<%= button_link_to t('navigation.continue'), redirect_to_service_error_path, class: 'govuk-button' %>
 
-<h2 class="heading-medium"><%= t 'hub.failed_registration.try_another_summary' %></h2>
+<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.try_another_summary' %></h2>
 <div>
   <p><%= t 'hub.failed_registration.try_another_text', idp_name: @idp.display_name %></p>
   <%= link_to t('hub.failed_registration.try_another_company'), try_another_company_path %>
 </div>
 
-<h2 class="heading-medium"><%= t 'hub.failed_registration.contact_details_intro', idp_name: idp.display_name %></h2>
+<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.contact_details_intro', idp_name: idp.display_name %></h2>
 <div>
   <%= raw idp.contact_details %>
 </div>

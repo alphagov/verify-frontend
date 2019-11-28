@@ -1,19 +1,19 @@
-<h1 class="heading-large"><%= t 'hub.failed_registration.heading', idp_name: idp.display_name %></h1>
+<h1 class="govuk-heading-l"><%= t 'hub.failed_registration.heading', idp_name: idp.display_name %></h1>
 
 <%= t 'hub.failed_registration.reasons_html', service_name: @transaction.name %>
 
-<h2 class="heading-medium"><%= t 'hub.failed_registration.try_another_summary' %></h2>
+<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.try_another_summary' %></h2>
 <div>
   <p><%= t 'hub.failed_registration.try_another_text', idp_name: @idp.display_name %></p>
   <%= link_to t('hub.failed_registration.start_again'), start_again_path %>
 </div>
 
-<h2 class="heading-medium"><%= t 'hub.failed_registration.other_ways_summary', other_ways_description: raw(transaction.other_ways_description) %></h2>
+<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.other_ways_summary', other_ways_description: raw(transaction.other_ways_description) %></h2>
 <div>
   <%= raw transaction.other_ways_text %>
 </div>
 
-<h2 class="heading-medium"><%= t 'hub.failed_registration.contact_details_intro', idp_name: idp.display_name %></h2>
+<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.contact_details_intro', idp_name: idp.display_name %></h2>
 <div>
   <%= raw idp.contact_details %>
 </div>

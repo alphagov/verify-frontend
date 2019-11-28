@@ -1,32 +1,30 @@
 <%= page_title 'hub.may_not_work_if_you_live_overseas.title' %>
 <% content_for :feedback_source, 'MAY_NOT_WORK_IF_YOU_LIVE_OVERSEAS_PAGE' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.may_not_work_if_you_live_overseas.heading' %></h1>
+<div class="govuk-grid-column-three-quarters">
+  <h1 class="govuk-heading-l"><%= t 'hub.may_not_work_if_you_live_overseas.heading' %></h1>
 
-    <p><%= t 'hub.may_not_work_if_you_live_overseas.explanation1' %></p>
-    <p><%= t 'hub.may_not_work_if_you_live_overseas.explanation2' %></p>
+  <p><%= t 'hub.may_not_work_if_you_live_overseas.explanation1' %></p>
+  <p><%= t 'hub.may_not_work_if_you_live_overseas.explanation2' %></p>
 
-    <h2 class="heading-medium"><%= t 'hub.may_not_work_if_you_live_overseas.what_youll_need' %></h2>
+  <h2 class="govuk-heading-m"><%= t 'hub.may_not_work_if_you_live_overseas.what_youll_need' %></h2>
 
-    <p><%= t 'hub.may_not_work_if_you_live_overseas.if_you_have_these' %>:</p>
+  <p><%= t 'hub.may_not_work_if_you_live_overseas.if_you_have_these' %>:</p>
 
-    <ul class="list-bullet list">
-      <li><%= t 'hub.may_not_work_if_you_live_overseas.current_account_overdraft' %></li>
-      <li><%= t 'hub.may_not_work_if_you_live_overseas.credit_card' %></li>
-      <li><%= t 'hub.may_not_work_if_you_live_overseas.phone_contract' %></li>
-      <li><%= t 'hub.may_not_work_if_you_live_overseas.gas_electricity_bills' %></li>
-      <li><%= t 'hub.may_not_work_if_you_live_overseas.mortgage' %></li>
-      <li><%= t 'hub.may_not_work_if_you_live_overseas.student_loan' %></li>
-      <li><%= t 'hub.may_not_work_if_you_live_overseas.payday_loan' %></li>
-      <li><%= t 'hub.may_not_work_if_you_live_overseas.mail_order_account' %></li>
-    </ul>
+  <ul class="govuk-list govuk-list--bullet">
+    <li><%= t 'hub.may_not_work_if_you_live_overseas.current_account_overdraft' %></li>
+    <li><%= t 'hub.may_not_work_if_you_live_overseas.credit_card' %></li>
+    <li><%= t 'hub.may_not_work_if_you_live_overseas.phone_contract' %></li>
+    <li><%= t 'hub.may_not_work_if_you_live_overseas.gas_electricity_bills' %></li>
+    <li><%= t 'hub.may_not_work_if_you_live_overseas.mortgage' %></li>
+    <li><%= t 'hub.may_not_work_if_you_live_overseas.student_loan' %></li>
+    <li><%= t 'hub.may_not_work_if_you_live_overseas.payday_loan' %></li>
+    <li><%= t 'hub.may_not_work_if_you_live_overseas.mail_order_account' %></li>
+  </ul>
 
-    <p><%= t 'hub.may_not_work_if_you_live_overseas.youll_also_need' %></p>
+  <p><%= t 'hub.may_not_work_if_you_live_overseas.youll_also_need' %></p>
 
-    <p><%= link_to t('hub.may_not_work_if_you_live_overseas.try_to_verify'), select_documents_path %></p>
+  <p><%= link_to t('hub.may_not_work_if_you_live_overseas.try_to_verify'), select_documents_path %></p>
 
-    <%= render partial: 'shared/other_ways', locals: { other_ways_text: @other_ways_text, other_ways_description: @other_ways_description } %>
-  </div>
+  <%= render partial: 'shared/other_ways', locals: { other_ways_text: @other_ways_text, other_ways_description: @other_ways_description } %>
 </div>
