@@ -32,5 +32,4 @@ class SelectDocumentsVariantCController < ApplicationController
 
     render :advice
   end
-
 end
