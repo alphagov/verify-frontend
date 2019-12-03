@@ -17,12 +17,12 @@
         <%= t 'hub.choose_a_certified_company.idp_count_html',
               company_count: t('hub.choose_a_certified_company.company_html', count: @recommended_idps.length) %>
       </p>
+      <div id="matching-idps">
+        <% @recommended_idps.each.with_index do |identity_provider, index| %>
+          <%= render partial: 'choose_a_certified_company/idp_option', locals: {recommended: true, identity_provider: identity_provider, order: index + 1} %>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <div id="matching-idps">
-    <% @recommended_idps.each.with_index do |identity_provider, index| %>
-      <%= render partial: 'choose_a_certified_company/idp_option', locals: {recommended: true, identity_provider: identity_provider, order: index + 1} %>
-    <% end %>
   </div>
   <% if @non_recommended_idps.any? %>
     <div id="non-matching-idps">

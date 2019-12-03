@@ -14,13 +14,14 @@
         <%= t 'hub_variant_c.choose_a_certified_company.idp_explanation' %>
       </p>
       <%= t 'hub_variant_c.choose_a_certified_company.content_html' %>
+      <div id="matching-idps">
+        <% @recommended_idps.each.with_index do |identity_provider, index| %>
+          <%= render partial: 'choose_a_certified_company/idp_option', locals: {recommended: true, identity_provider: identity_provider, order: index + 1} %>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div id="matching-idps">
-    <% @recommended_idps.each.with_index do |identity_provider, index| %>
-      <%= render partial: 'choose_a_certified_company/idp_option', locals: {recommended: true, identity_provider: identity_provider, order: index + 1} %>
-    <% end %>
-  </div>
+
   <% if @non_recommended_idps.any? %>
     <div id="non-matching-idps">
       <div class="grid-row">
