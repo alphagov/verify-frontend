@@ -6,14 +6,14 @@ class SelectDocumentsVariantCController < ApplicationController
   include VariantPartialController
 
   def index
-    @form = SelectDocumentsVariantCForm.new({})
+    @form = SelectDocumentsVariantCForm.from_session_storage(selected_answer_store.selected_answers.fetch('documents', {}))
     render :index
   end
 
   def select_documents
-    @form = SelectDocumentsVariantCForm.new(params['select_documents_variant_c_form'] || {})
+    @form = SelectDocumentsVariantCForm.from_post(params['select_documents_variant_c_form'] || {})
     if @form.valid?
-      selected_answer_store.store_selected_answers('documents', @form.selected_answers)
+      selected_answer_store.store_selected_answers('documents', @form.to_session_storage)
       idps_available = IDP_RECOMMENDATION_ENGINE_variant_c.any?(current_identity_providers_for_loa_by_variant('c'), selected_evidence, current_transaction_simple_id)
       redirect_to idps_available ? choose_a_certified_company_path : select_documents_advice_path
     else
@@ -32,4 +32,5 @@ class SelectDocumentsVariantCController < ApplicationController
 
     render :advice
   end
+
 end
