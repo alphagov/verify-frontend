@@ -26,14 +26,12 @@ RSpec.describe ApplicationHelper, type: :helper do
       session['requested_loa'] = 'LEVEL_1'
       helper.page_title('hub.start.title', locale: :cy)
       expect(helper.content_for(:page_title_in_english)).to eql title
-      expect(helper.content_for(:head)).to eql "<meta name=\"verify|title\" content=\"#{title}\" />"
     end
 
     it 'should just output English page title when requested_loa not in session' do
       title = "#{I18n.t('hub.start.title', locale: 'en')} - GOV.UK Verify - GOV.UK"
       helper.page_title('hub.start.title', locale: :cy)
       expect(helper.content_for(:page_title_in_english)).to eql title
-      expect(helper.content_for(:head)).to eql "<meta name=\"verify|title\" content=\"#{title}\" />"
     end
   end
 
