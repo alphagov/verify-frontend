@@ -30,11 +30,11 @@
           <div class="govuk-radios">
             <div class="govuk-radios__item">
               <%= f.radio_button :non_uk_id_document, true, {class: "govuk-radios__input"}%>
-              <%= f.label :non_uk_id_document_true, t('hub.select_documents.documents_option_yes'), class: "govuk-label govuk-radios__label verify-inverse"%>
+              <%= f.label :non_uk_id_document_true, t('hub.select_documents.documents_option_yes'), class: "govuk-label govuk-radios__label"%>
             </div>
             <div class="govuk-radios__item">
               <%= f.radio_button :non_uk_id_document, false, {class: "govuk-radios__input"}%>
-              <%= f.label :non_uk_id_document_false, t('option.no'), class: "govuk-label govuk-radios__label verify-inverse"%>
+              <%= f.label :non_uk_id_document_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
             </div>
           </div>
         </fieldset>

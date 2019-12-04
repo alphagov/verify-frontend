@@ -52,7 +52,7 @@ module ApplicationHelper
   end
 
   def form_question_class
-    flash[:errors] ? 'form-group form-group-error' : 'form-group'
+    flash[:errors] ? 'govuk-form-group govuk-form-group--error' : 'govuk-form-group'
   end
 
   def hidden_form_question_class
@@ -67,12 +67,5 @@ module ApplicationHelper
     options[:class] = [options[:class], 'button'].compact.join(' ')
     options[:role] = 'button'
     link_to text, path, options
-  end
-
-  def display_page_title
-    title = content_for :page_title
-    raise NotImplementedError.new('Missing page title') if Rails.env.test? && (title == PAGE_TITLE_SUFFIX || title.nil?)
-
-    title
   end
 end

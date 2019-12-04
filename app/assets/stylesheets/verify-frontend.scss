@@ -23,13 +23,6 @@
   visibility: visible;
 }
 
-#footer,
-#footer .footer-wrapper,
-#footer .footer-meta {
-  color: #0b0c0c !important;
-  background: #f3f2f1 !important;
-}
-
 .verify-inverse {
   color: govuk-colour("white");
 }
@@ -60,4 +53,11 @@
 
 .idp-btn-nudge {
   margin-top: 30px !important;
+}
+
+.cookie-msg {
+  padding-top: 0.5em;
+  padding-bottom: 0.1em;
+  padding-left: 0.8em;
+  margin-bottom: 0.4em;
 }

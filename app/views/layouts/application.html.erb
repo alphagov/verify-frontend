@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" class="govuk-template">
+<html lang="<%= params['locale'] %>" class="govuk-template">
   <head>
-    <meta name="robots" content="noindex,nofollow">
+    <% if hide_from_search_engine? %>
+      <meta name="robots" content="noindex">
+    <% end %>
+    <% if content_for?(:meta_refresh) %>
+      <meta http-equiv="refresh" content="<%= yield(:meta_refresh) %>">
+    <% end %>
 
-    <title><%= display_page_title %>  - GOV.UK Verify - GOV.UK</title>
+    <title><%= yield :page_title %> - GOV.UK Verify - GOV.UK</title>
 
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', nonce: true %>
+    
     <%= favicon_link_tag        asset_path('govuk-frontend/govuk/assets/images/favicon.ico'), sizes: "16x16 32x32 48x48" %>
 
     <link rel="mask-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-mask-icon.svg')%>" color="blue">
@@ -16,15 +21,32 @@
     <link rel="apple-touch-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-167x167.png')%>" sizes="167x167">
     <link rel="apple-touch-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-152x152.png')%>" sizes="152x152">
     <link rel="apple-touch-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-apple-touch-icon.png')%>">
-
+    <%= content_for :head %>
 </head>
 
   <body class="govuk-template__body">
 
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-
     <a href="#main-content" class="govuk-skip-link"><%= t 'layout.application.skip_link' %></a>
+    
+    <% if cookies[:seen_cookie_message].nil? %>
+      
+      <div id="global-cookie-message">
+        <div class="govuk-width-container cookie-msg">
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full-width">
+                <p class="govuk-body-s cookie-msg">
+                  <%= t 'cookie_message.message' %>
+                  <%= link_to t('cookie_message.link'), cookies_path %>
+                </p>
+              </div>
+              <script>document.cookie = "seen_cookie_message=yes; expires=" + new Date(new Date(Date.now()).setMonth(new Date(Date.now()).getMonth() + 1)) + ";"</script>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
 
     <header class="govuk-header " role="banner" data-module="govuk-header">
       <div class="govuk-header__container govuk-width-container">
@@ -109,5 +131,8 @@
     </footer>
     <script nonce="true" src="/assets/govuk-frontend/govuk/all.js"></script>
     <script>window.GOVUKFrontend.initAll()</script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', nonce: true %>
+    <%= content_for :additional_javascript %>
+    <%= content_for :test %>
   </body>
 </html>

@@ -97,7 +97,7 @@
 .idp-choice {
   padding: 15px 0;
   border-bottom: 1px solid govuk-colour("dark-grey");
-  	@include govuk-clearfix;
+  @include govuk-clearfix;
 
   .company-logo {
     width: auto;
@@ -127,7 +127,7 @@
       width: 200px;
       height: 96px;
 
-      	@include govuk-if-ie8 {
+      @include govuk-if-ie8 {
         top: 15px;
       }
     }
@@ -178,7 +178,7 @@
       @include govuk-media-query($from: tablet) {
         min-width: 230px;
 
-        	@include govuk-if-ie8 {
+        @include govuk-if-ie8 {
           min-width: 260px;
         }
       }

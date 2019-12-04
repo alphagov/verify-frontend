@@ -18,39 +18,53 @@
 
   <%= form_for @form, url: feedback_submit_path, html: { class: 'feedback-form', id: 'feedback', novalidate: true } do |f| %>
       <fieldset class="govuk-fieldset">
-        <%= content_tag :div, class: @form.errors.include?(:what) ? 'govuk-form-group govuk-form-group--error' : 'govuk-form-group' do %>
-          <div class="govuk-form-group">
+        <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="<%= @form.long_limit %>">
+          <div class="govuk-form-group <% if @form.errors.include?(:details) %>govuk-form-group--error<% end %>">
             <%= f.label :what, t('hub.feedback.questions.what'), class: 'govuk-label' %>
             <% if @form.errors.include?(:what) %>
-                <span class="govuk-error-message"><%= @form.errors[:what].first %></span>
+                <span class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> <%= @form.errors[:what].first %>
+                </span>
             <% end %>
-            <%= f.text_area :what, rows: 10, cols: 80, class: 'govuk-textarea counted', required: true,
+            <%= f.text_area :what, rows: 10, cols: 80, class: 'govuk-textarea govuk-textarea--error govuk-js-character-count govuk-textarea--error', required: true,
                             'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
                             data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
-                'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit)} %>
-            <p id="feedback_form_what_counter" class="govuk-hint" aria-live="polite" aria-atomic="false">
-              <%= t('hub.feedback.character_limit_message') %>
-            </p>
+                'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit),
+                 'aria_describedby': "feedback_form_what-info feedback_form_what-error"} %>
           </div>
-        <% end %>
 
-        <%= content_tag :div, class: @form.errors.include?(:details) ? 'govuk-form-group govuk-form-group--error' : 'govuk-form-group' do %>
-          <div class="govuk-form-group">
+          <span class="govuk-hint">
+            <span id="feedback_form_what-info" class="govuk-character-count__message" aria-live="polite">
+               
+            </span>
+            <%= t('hub.feedback.character_limit_message') %>
+          </span>
+        </div>
+
+        <fieldset class="govuk-fieldset">
+        <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="<%= @form.long_limit %>">
+          <div class="govuk-form-group <% if @form.errors.include?(:details) %>govuk-form-group--error<% end %>">
             <%= f.label :details, t('hub.feedback.questions.details'), class: 'govuk-label' %>
-            <% if @form.errors.include?(:details)%>
-                <span class="govuk-error-message"><%= @form.errors[:details].first %></span>
+            <% if @form.errors.include?(:details) %>
+                <span class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> <span class="govuk-error-message"><%= @form.errors[:details].first %></span>
+                </span>
             <% end %>
-            <%= f.text_area :details, rows: 20, cols: 80, class: 'govuk-textarea counted', required: true,
+            <%= f.text_area :details, rows: 15, cols: 80, class: 'govuk-textarea govuk-textarea--error govuk-js-character-count govuk-textarea--error', required: true,
                             'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
                             data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
-                'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit) } %>
-            <p id="feedback_form_details_counter" class="govuk-hint" aria-live="polite" aria-atomic="false">
-              <%= t('hub.feedback.character_limit_message') %>
-            </p>
+                'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit),
+                'aria_describedby': "feedback_form_details-info feedback_form_details-error" } %>
           </div>
-        <% end %>
+          <span class="govuk-hint">
+            <span id="feedback_form_details-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+               
+            </span>
+            <%= t('hub.feedback.character_limit_message') %>
+          </span>
+        </div>
 
-          <div class="govuk-form-group">
+          <div class="<%= form_question_class %>">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
                 <h2 class="govuk-heading-m">

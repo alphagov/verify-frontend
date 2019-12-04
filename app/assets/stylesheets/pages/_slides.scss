@@ -30,6 +30,7 @@
       margin-top: $govuk-gutter-half;
       margin-bottom: $govuk-gutter-half;
     }
+
     @include govuk-media-query($until: mobile) {
       margin-top: $govuk-gutter-half;
       margin-bottom: $govuk-gutter-half;
@@ -117,6 +118,7 @@
   @include govuk-media-query($from: desktop) {
     display: none;
   }
+
   @include govuk-media-query($from: tablet) {
     display: none;
   }
