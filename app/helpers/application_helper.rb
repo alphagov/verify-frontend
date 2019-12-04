@@ -11,9 +11,6 @@ module ApplicationHelper
 
   def analytics_title(english_title)
     content_for :page_title_in_english, english_title
-    content_for :head do
-      tag('meta', name: 'verify|title', content: content_for(:page_title_in_english))
-    end
   end
 
   def hide_from_search_engine?
