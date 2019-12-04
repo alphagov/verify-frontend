@@ -11,9 +11,6 @@ module ApplicationHelper
 
   def analytics_title(english_title)
     content_for :page_title_in_english, english_title
-    content_for :head do
-      tag('meta', name: 'verify|title', content: content_for(:page_title_in_english))
-    end
   end
 
   def hide_from_search_engine?
@@ -71,7 +68,7 @@ module ApplicationHelper
 
   def display_page_title
     title = content_for :page_title
-    raise NotImplementedError.new('Missing page title') if Rails.env.test? && (title == PAGE_TITLE_SUFFIX || title.nil?)
+    raise NotImplementedError.new('Missing page title') if Rails.env.test? && title.nil?
 
     title
   end
