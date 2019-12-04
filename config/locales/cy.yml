@@ -172,29 +172,29 @@ cy:
       no_charge: Nid oes tâl am y gwasanaeth hwn.
       summary: Sut y gall cwmnïau wirio hunaniaeth
       details_html: |
-        <p>Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth o basbortau a thrwyddedau gyrru yn gywir.</p>
-        <p>Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
-        <p>Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
-        <p>Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
+        <p class="govuk-body verify-inverse">Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth o basbortau a thrwyddedau gyrru yn gywir.</p>
+        <p class="govuk-body verify-inverse">Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
+        <p class="govuk-body verify-inverse">Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
+        <p class="govuk-body verify-inverse">Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
       loa1_details_html: |
-        <p>Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd.</p>
-        <p>Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
-        <p>Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
-        <p>Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
+        <p class="govuk-body verify-inverse">Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd.</p>
+        <p class="govuk-body verify-inverse">Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
+        <p class="govuk-body verify-inverse">Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
+        <p class="govuk-body verify-inverse">Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
     about_identity_accounts:
       title: Am gyfrifon hunaniaeth
       content_html: |
-        <p>Mae dilysu eich hunaniaeth yn cymryd tua 15 munud i'w gwblhau, ond dim ond unwaith mae angen i chi ei wneud.</p>
-        <p>Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
-        <p>Yna gallwch gael mynediad i wasanaethau eraill y llywodraeth mewn llai na munud lle bynnag y byddwch yn gweld y logo GOV.UK Verify.</p>
+        <p class="govuk-body verify-inverse">Mae dilysu eich hunaniaeth yn cymryd tua 15 munud i'w gwblhau, ond dim ond unwaith mae angen i chi ei wneud.</p>
+        <p class="govuk-body verify-inverse">Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
+        <p class="govuk-body verify-inverse">Yna gallwch gael mynediad i wasanaethau eraill y llywodraeth mewn llai na munud lle bynnag y byddwch yn gweld y logo GOV.UK Verify.</p>
       content_loa1_html: |
-        <p>Mae dilysu eich hunaniaeth yn cymryd tua 5 munud i'w gwblhau.</p>
-        <p>Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
-        <p>Gallwch ddefnyddio'r cyfrif hunaniaeth hwn i gael mynediad i wasanaethau eraill y llywodraeth ble bynnag rydych yn gweld y logo GOV.UK Verify.</p>
+        <p class="govuk-body verify-inverse">Mae dilysu eich hunaniaeth yn cymryd tua 5 munud i'w gwblhau.</p>
+        <p class="govuk-body verify-inverse">Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
+        <p class="govuk-body verify-inverse">Gallwch ddefnyddio'r cyfrif hunaniaeth hwn i gael mynediad i wasanaethau eraill y llywodraeth ble bynnag rydych yn gweld y logo GOV.UK Verify.</p>
       summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
       details_loa1_html: |
-        <p>Mae GOV.UK Verify yn newydd ac mae gwasanaethau'r llywodraeth yn ymuno drwy'r amser.</p>
-        <p>Gallwch ddefnyddio eich cyfrif hunaniaeth i gael mynediad i:</p>
+        <p class="govuk-body verify-inverse">Mae GOV.UK Verify yn newydd ac mae gwasanaethau'r llywodraeth yn ymuno drwy'r amser.</p>
+        <p class="govuk-body verify-inverse">Gallwch ddefnyddio eich cyfrif hunaniaeth i gael mynediad i:</p>
       details: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
       details_loa1_uplift_list: "Pan fyddwch yn defnyddio'r gwasanaethau llywodraeth hyn, bydd gofyn i chi ddarparu mwy o dystiolaeth gan fod angen i'r gwasanaethau hyn fod yn hyderus nad yw rhywun arall yn defnyddio eich hunaniaeth: "
       navigation:

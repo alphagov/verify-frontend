@@ -7,7 +7,7 @@
 
         <%= render 'shared/form-errors', errors: flash[:errors] %>
 
-        <div class="govuk-form-group">
+        <div class="<%= form_question_class %>">
           <fieldset class="govuk-fieldset" aria-describedby="changed-name-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
               <h2 class="govuk-fieldset__heading">
@@ -27,7 +27,7 @@
           </fieldset>
         </div>
 
-        <div class="govuk-form-group">
+        <div class="<%= form_question_class %>">
           <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
               <h2 class="govuk-fieldset__heading">
@@ -45,7 +45,7 @@
               </div>
               <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
                 id="conditional-will_it_work_for_me_form_resident_last_12_months_false">
-                <div class="govuk-form-group">
+                <div class="<%= form_question_class %>">
                   <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                       <h2 class="govuk-heading-s">
@@ -74,7 +74,7 @@
           </fieldset>
         </div>       
 
-        <div id="validation-error-message-js"></div>
+        <div class="govuk-error-message" id="validation-error-message-js"></div>
 
         <div class="actions">
           <%= f.submit t('navigation.continue'), class: 'govuk-button', id: 'next-button' %>

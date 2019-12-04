@@ -8,10 +8,11 @@
       width: 50%;
       box-sizing: border-box;
       display: inline-block;
-      
+
       @include govuk-media-query($from: tablet) {
         max-width: 200px;
       }
+
       @include govuk-media-query($until: tablet);
 
       &.verify {
@@ -19,6 +20,7 @@
         border-right-width: 1px;
         border-right-color: $govuk-border-colour;
       }
+
       &.verify:last-child {
         border-right-style: none;
       }

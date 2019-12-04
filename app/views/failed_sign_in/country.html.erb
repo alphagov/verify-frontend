@@ -6,9 +6,9 @@
 
   <p><%= t 'hub.failed_country_sign_in.other_ways', other_ways_description: @other_ways_description %></p>
 
-  <h2 class="govuk-heading-m><%= t 'hub.failed_country_sign_in.online' %></h2>
+  <h2 class="govuk-heading-m"><%= t 'hub.failed_country_sign_in.online' %></h2>
   <p><%= link_to t('hub.failed_country_sign_in.online_link'), prove_identity_retry_path %></p>
 
-  <h2 class="govuk-heading-m><%= t 'hub.failed_country_sign_in.offline' %></h2>
+  <h2 class="govuk-heading-m"><%= t 'hub.failed_country_sign_in.offline' %></h2>
   <p><%= raw @other_ways_text %></p>
 </div>

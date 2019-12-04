@@ -13,7 +13,7 @@
       <% if @response_for_rp.relay_state %>
         <%= hidden_field_tag 'RelayState', @response_for_rp.relay_state %>
       <% end %>
-      <%= submit_tag t('navigation.continue'), id: 'continue-button', class: 'button' %>
+      <%= submit_tag t('navigation.continue'), id: 'continue-button', class: 'govuk-button' %>
   <% end %>
 
   <h1 class="govuk-heading-l"><%= @transition_message %></h1>

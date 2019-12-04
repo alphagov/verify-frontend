@@ -57,7 +57,7 @@
     max-width: 670px;
     border-bottom: 1px solid govuk-colour("dark-grey");
 
-    	@include govuk-media-query($from: tablet) {
+    @include govuk-media-query($from: tablet) {
       border-bottom: 1px solid govuk-colour("mid-grey");
 
       .scheme-option:not(:first-child) {
@@ -76,7 +76,7 @@
   .scheme-option {
     padding-bottom: 20px;
 
-    	@include govuk-media-query($from: tablet) {
+    @include govuk-media-query($from: tablet) {
       padding-top: 12px;
       padding-bottom: 7px;
 
