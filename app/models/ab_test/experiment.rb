@@ -18,6 +18,10 @@ module AbTest
     end
 
     def alternative_name(alternative_name)
+      # This function validates the passed-in alternative name (that came from an AB-test cookie)
+      # and, if valid, returns that name. If it is not valid, e.g. alternative_name will be `nil`
+      # when no cookie is present, then the name of the first (default) alternative will be returned
+      # instead.
       unless @alternatives[alternative_name]
         return @default
       end
