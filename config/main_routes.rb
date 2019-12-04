@@ -7,7 +7,7 @@ post 'sign_in', to: 'sign_in#select_idp', as: :sign_in_submit
 get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
 
 # HUH-233 short hub 2019 q3 multivariate tests - LOA2 only
-SHORT_HUB_2019_Q3 = "short_hub_2019_q3".freeze
+SHORT_HUB_2019_Q3 = "short_hub_2019_q3-preview".freeze
 short_hub_v3_control_a_piwik = SelectRoute.new(SHORT_HUB_2019_Q3, 'control_a', is_start_of_test: true, experiment_loa: 'LEVEL_2')
 short_hub_v3_variant_b_piwik = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_b_2_idp', is_start_of_test: true, experiment_loa: 'LEVEL_2')
 short_hub_v3_variant_c_piwik = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_c_2_idp_short_hub', is_start_of_test: true, experiment_loa: 'LEVEL_2')
