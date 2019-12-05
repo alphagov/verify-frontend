@@ -21,10 +21,8 @@ class SelectDocumentsVariantCForm
     instance.has_driving_license = hash['has_driving_license']
     instance.has_phone_can_app = hash['has_phone_can_app']
     instance.has_credit_card = hash['has_credit_card']
-
-    if !(instance.has_valid_passport || instance.has_driving_license || instance.has_phone_can_app || instance.has_credit_card)
-      instance.has_nothing = true
-    end
+    # has_nothing is set on post only – it's used for validation, but we don't pre-select
+    # it when displaying the form.
 
     instance
   end
