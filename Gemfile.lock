@@ -201,7 +201,7 @@ GEM
       concurrent-ruby
     psych (3.1.0)
     public_suffix (3.0.3)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.6)
     rack-handlers (0.7.3)
       rack
