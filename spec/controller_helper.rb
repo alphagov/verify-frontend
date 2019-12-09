@@ -11,6 +11,11 @@ def set_session_and_cookies_with_loa(loa_requested, transaction_simple_id = 'tes
   cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'my-session-id-cookie'
 end
 
+def set_session_and_cookies_with_loa_and_variant(loa_request, experiment, variant, transaction_simple_id = 'test-rp')
+  set_session_and_cookies_with_loa(loa_request, transaction_simple_id)
+  cookies[CookieNames::AB_TEST] = "{\"#{experiment}\": \"#{variant}\"}"
+end
+
 def set_selected_idp(selected_idp)
   session[:selected_provider] = SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
 end
