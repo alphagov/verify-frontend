@@ -5,7 +5,7 @@
       <meta name="robots" content="noindex">
     <% end %>
     <% if content_for?(:meta_refresh) %>
-      <meta http-equiv="refresh" content="<%= yield(:meta_refresh) %>">
+       <meta http-equiv="refresh" content="<%= yield(:meta_refresh) %>">
     <% end %>
 
     <title><%= display_page_title %> - GOV.UK Verify - GOV.UK</title>
@@ -27,7 +27,7 @@
 
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-    <a href="#main-content" class="govuk-skip-link"><%= t 'layout.application.skip_link' %></a>
+    <a href="#main-content" class="govuk-skip-link"><%= t 'navigation.skip_link' %></a>
     
     <% if cookies[:seen_cookie_message].nil? %>
       

@@ -70,6 +70,7 @@ cy:
   title:
     error: Gwall
   navigation:
+    skip_link: Neidio i'r prif gynnwys
     next: Nesaf
     start_now: Dechreuwch nawr
     continue: Parhau
