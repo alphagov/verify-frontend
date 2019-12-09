@@ -9,7 +9,7 @@ data-url-redirect="<%= url_for(controller: 'further_information', action: 'timeo
       <div id="at-timer" class="at-timer visually-hidden" role="status"></div>
     </div>
     <div class="modal-dialog__inner__block">
-      <button class="button dialog-button modal-dialog__inner__button js-dialog-close"><%= t('hub.further_information.modal.button_continue') %></button>
+      <button class="govuk-button dialog-button modal-dialog__inner__button js-dialog-close"><%= t('hub.further_information.modal.button_continue') %></button>
       <%= link_to t('hub.further_information.modal.button_signout'), further_information_timeout_path, :class => 'modal-dialog__inner__link js-dialog-cancel' %>
     </div>
   </div>

@@ -111,3 +111,4 @@ require 'active_support/core_ext'
 
 require 'codacy-coverage'
 Codacy::Reporter.start
+require 'pry'

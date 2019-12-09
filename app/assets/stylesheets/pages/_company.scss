@@ -13,7 +13,7 @@
   text-align: center;
   @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
-    border: 5px solid $govuk-brand-colour;
+    border: 5px solid $govuk-border-colour;
     margin-bottom: 30px;
   }
 }

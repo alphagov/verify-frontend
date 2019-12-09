@@ -76,6 +76,7 @@ en:
   title:
     error: Error
   navigation:
+    skip_link: Skip to main content
     next: Next
     start_now: Start now
     continue: Continue
