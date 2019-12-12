@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   get 'redirect-to-rp/:transaction_simple_id', to: 'redirect_to_rp#redirect_to_rp'
   get 'service-status', to: 'service_status#index', as: :service_status
   get 'hint', to: 'hint#ajax_request'
+  get 'successful-idp', to: 'hint#last_successful_idp'
   get '/SAML2/metadata/sp', to: 'metadata#service_providers', as: :service_provider_metadata
   get '/SAML2/metadata/idp', to: 'metadata#identity_providers', as: :identity_provider_metadata
   if SINGLE_IDP_FEATURE
