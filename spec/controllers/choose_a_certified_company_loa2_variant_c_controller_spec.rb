@@ -32,6 +32,7 @@ describe ChooseACertifiedCompanyLoa2VariantCController do
     stub_request(:get, CONFIG.config_api_host + '/config/transactions/enabled')
     experiment = 'short_hub_2019_q3-preview'
     variant = 'variant_c_2_idp_short_hub'
+    stub_api_select_idp
     set_session_and_cookies_with_loa_and_variant('LEVEL_2', experiment, variant)
     stub_api_idp_list_for_loa([stub_idp_one, stub_idp_three])
   end
@@ -100,14 +101,14 @@ describe ChooseACertifiedCompanyLoa2VariantCController do
       expect(session[:selected_idp_was_recommended]).to eql(true)
     end
 
-    it 'redirects to IDP warning page by default' do
+    it 'redirects to IDP redirect page by default' do
       session[:selected_answers] = {
           'documents' => { 'has_driving_license' => true, 'has_phone_can_app' => true, 'has_valid_passport' => true, 'has_credit_card' => false },
           'device_type' => { 'device_type_other' => true }
       }
       post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp-one.com' }
 
-      expect(subject).to redirect_to redirect_to_idp_warning_path
+      expect(subject).to redirect_to redirect_to_idp_register_path
     end
 
     it 'returns 404 page if IDP is non-existent' do

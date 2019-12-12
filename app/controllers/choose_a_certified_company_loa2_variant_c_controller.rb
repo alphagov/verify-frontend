@@ -1,7 +1,7 @@
 require 'partials/viewable_idp_partial_controller'
 require 'partials/variant_partial_controller'
 
-class ChooseACertifiedCompanyLoa2VariantCController < ApplicationController
+class ChooseACertifiedCompanyLoa2VariantCController < RedirectToIdpWarningController
   include ChooseACertifiedCompanyAbout
   include ViewableIdpPartialController
   include VariantPartialController
@@ -23,8 +23,9 @@ class ChooseACertifiedCompanyLoa2VariantCController < ApplicationController
   def select_idp
     if params[:entity_id].present?
       select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
-        session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
-        redirect_to warning_or_question_page(decorated_idp)
+        session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa_by_variant('c'), selected_evidence, current_transaction_simple_id)
+        # TODO - do the spinny thing page
+        do_redirect(decorated_idp)
       end
     else
       render 'errors/something_went_wrong', status: 400
@@ -33,11 +34,14 @@ class ChooseACertifiedCompanyLoa2VariantCController < ApplicationController
 
 private
 
-  def warning_or_question_page(decorated_idp)
-    if not_more_than_one_uk_doc_selected && interstitial_question_flag_enabled_for(decorated_idp)
-      redirect_to_idp_question_path
+  def do_redirect(idp)
+    if not_more_than_one_uk_doc_selected && interstitial_question_flag_enabled_for(idp)
+      redirect_to redirect_to_idp_question_path
+    elsif idp.viewable?
+      select_registration(idp)
+      redirect_to redirect_to_idp_register_path
     else
-      redirect_to_idp_warning_path
+      something_went_wrong("Couldn't display IDP with entity id: #{idp.entity_id}")
     end
   end
 
