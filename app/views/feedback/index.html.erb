@@ -3,16 +3,18 @@
 <div class="govuk-grid-column-three-quarters">
   <h1 class="govuk-heading-l"><%= t 'hub.feedback.heading' %></h1>
 
-  <%= render 'shared/form-errors', errors: flash[:errors] %>
+  <%= render 'shared/form-errors', errors: flash[:errors], form_errors: @form.errors %>
 
   <%= t 'hub.feedback.introduction_html' %>
 
   <% if @has_email_sending_error %>
     <div class="error-summary" aria-labelledby="error-summary-heading" role="alert" tabindex="-1">
-      <h2 class="govuk-heading-m error-summary-heading" id="error-summary-heading"><%= t 'hub.feedback.errors.heading' %></h2>
-      <ul class="govuk-list error-summary-list">
-        <li><%= t 'hub.feedback.errors.send_failure' %></li>
-      </ul>
+      <h2 class="govuk-heading-m govuk-error-summary__title" id="error-summary-heading"><%= t 'hub.feedback.errors.heading' %></h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li><%= t 'hub.feedback.errors.send_failure' %></li>
+        </ul>
+      </div>
     </div>
   <% end %>
 

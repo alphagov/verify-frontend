@@ -9,7 +9,7 @@
 
       <%= render 'shared/form-errors', errors: flash[:errors] %>
 
-        <div class="govuk-form-group">
+      <div class="govuk-form-group <% if @form.errors %>govuk-form-group--error<% end %>">
         <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
             <h2 class="govuk-heading-m govuk-visually-hidden">
