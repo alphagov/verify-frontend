@@ -10,14 +10,21 @@ class ChooseACertifiedCompanyLoa2VariantCController < RedirectToIdpWarningContro
 
   def index
     session[:selected_answers]&.delete('interstitial')
-    suggestions = recommendation_engine.get_suggested_idps(current_identity_providers_for_loa_by_variant('c'), selected_evidence, current_transaction_simple_id)
+    idps = current_identity_providers_for_loa_by_variant('c')
+    suggestions = recommendation_engine.get_suggested_idps(idps, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
     @recommended_idps = order_with_unavailable_last(@recommended_idps)
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
     @non_recommended_idps = order_with_unavailable_last(@non_recommended_idps)
-    session[:user_segments] = suggestions[:user_segments]
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
-    render 'choose_a_certified_company_variant_c/choose_a_certified_company_LOA2'
+
+    idps_available = IDP_RECOMMENDATION_ENGINE_variant_c.any?(idps, selected_evidence, current_transaction_simple_id)
+    if idps_available
+      session[:user_segments] = suggestions[:user_segments]
+      render 'choose_a_certified_company_variant_c/choose_a_certified_company_LOA2'
+    else
+      redirect_to select_documents_advice_path
+    end
   end
 
   def select_idp

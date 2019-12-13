@@ -55,21 +55,16 @@ describe ChooseACertifiedCompanyLoa2VariantCController do
       expect(subject).to render_template(:choose_a_certified_company_LOA2)
     end
 
-    it 'cannot render any IDPs when the user has chosen 2 docs' do
+    it 'redirects away and logs to piwik when the user has chosen 2 docs' do
       session[:selected_answers] = {
           'documents' => { 'has_driving_license' => true, 'has_phone_can_app' => true, 'has_valid_passport' => false, 'has_credit_card' => false },
           'device_type' => { 'device_type_other' => true }
       }
       stub_piwik_request = stub_piwik_report_number_of_recommended_idps(0, 'LEVEL_2', 'analytics description for test-rp')
-
-      expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).twice do |idps|
-        idps.each { |idp| expect(idp.levels_of_assurance).to include 'LEVEL_2' }
-      end
-
       get :index, params: { locale: 'en' }
 
       expect(stub_piwik_request).to have_been_made.once
-      expect(subject).to render_template(:choose_a_certified_company_LOA2)
+      expect(subject).to redirect_to select_documents_advice_path
     end
 
     it 'removes interstitial answer when IDP picker page is rendered' do
