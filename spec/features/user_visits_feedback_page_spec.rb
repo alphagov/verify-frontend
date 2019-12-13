@@ -68,7 +68,7 @@ RSpec.feature 'When the user visits the feedback page' do
     click_button t('hub.feedback.send_message')
 
     expect(page).to have_css('.govuk-form-group.govuk-form-group--error', count: 4)
-    expect(page).to have_css('.validation-message', text: t('hub.feedback.errors.no_selection'))
+    expect(page).to have_css('.govuk-error-summary__title', text: t('hub.feedback.errors.no_selection'))
     expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.name'))
     expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.email'))
     expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.details'), count: 2)
@@ -95,7 +95,7 @@ RSpec.feature 'When the user visits the feedback page' do
     click_button t('hub.feedback.send_message')
 
     expect(page).to have_css('.govuk-form-group.govuk-form-group--error', count: 2)
-    expect(page).to have_css('.validation-message', text: t('hub.feedback.errors.no_selection'))
+    expect(page).to have_css('.govuk-error-summary__title', text: t('hub.feedback.errors.no_selection'))
     expect(page).to_not have_css('.govuk-error-message', text: t('hub.feedback.errors.name'))
     expect(page).to_not have_css('.govuk-error-message', text: t('hub.feedback.errors.email'))
   end
@@ -108,7 +108,7 @@ RSpec.feature 'When the user visits the feedback page' do
 
     expect(page).to have_css('.govuk-form-group.govuk-form-group--error', count: 3)
     expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.reply'))
-    expect(page).to have_css('.validation-message', text: t('hub.feedback.errors.no_selection'))
+    expect(page).to have_css('.govuk-error-summary__title', text: t('hub.feedback.errors.no_selection'))
   end
 
   it 'should report on the what box character limit', js: true do

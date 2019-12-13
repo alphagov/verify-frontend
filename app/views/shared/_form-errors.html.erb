@@ -1,5 +1,7 @@
 <% if errors %>
-  <div id="validation-error-message-no-js" class="validation-message form-group">
-    <p class="govuk-error-message error"><%= errors %></p>
+  <div  class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+    <h2 class="govuk-error-summary__title" id="error-summary-title">
+      <%= errors %>
+    </h2>
   </div>
 <% end %>
