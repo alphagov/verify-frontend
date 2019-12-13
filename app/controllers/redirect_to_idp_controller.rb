@@ -1,9 +1,13 @@
 require 'partials/idp_selection_partial_controller'
 require 'partials/single_idp_partial_controller'
+require 'partials/viewable_idp_partial_controller'
+require 'partials/analytics_cookie_partial_controller'
 
 class RedirectToIdpController < ApplicationController
   include IdpSelectionPartialController
   include SingleIdpPartialController
+  include ViewableIdpPartialController
+  include AnalyticsCookiePartialController
 
   def register
     request_form
@@ -23,6 +27,22 @@ class RedirectToIdpController < ApplicationController
       FEDERATION_REPORTER.report_sign_in_idp_selection_after_journey_hint(current_transaction, request, session[:selected_idp_name], session[:user_followed_journey_hint])
     end
     render :redirect_to_idp
+  end
+
+  def sign_in_with_last_successful_idp
+    simple_id = flash[:journey_hint]
+    return render_not_found unless simple_id
+
+    simple_id.slice!('idp_')
+    begin
+      select_viewable_idp_for_sign_in_by_simple_id(simple_id) do |decorated_idp|
+        set_journey_hint_followed(decorated_idp.entity_id)
+        select_idp(decorated_idp.entity_id, decorated_idp.display_name)
+      end
+    rescue StandardError
+      return render_not_found
+    end
+    sign_in
   end
 
   def resume
@@ -68,5 +88,11 @@ private
     rescue KeyError
       '(idp recommendation key not set)'
     end
+  end
+
+  def select_idp(entity_id, idp_name)
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'], false, analytics_session_id, session[:journey_type])
+    set_attempt_journey_hint(entity_id)
+    session[:selected_idp_name] = idp_name
   end
 end

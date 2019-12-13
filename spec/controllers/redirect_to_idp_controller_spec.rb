@@ -248,4 +248,57 @@ describe RedirectToIdpController do
       end
     end
   end
+
+  context 'signing in with last successful idp' do
+    describe '#sign_in_with_last_successful_idp' do
+      before :each do
+        stub_api_idp_list_for_sign_in([{ 'simpleId' => 'stub-idp-two',
+                                         'entityId' => 'http://idcorp-two.com',
+                                         'levelsOfAssurance' => %w(LEVEL_1) }])
+        set_session_and_cookies_with_loa('LEVEL_1')
+        stub_session_select_idp_request('http://idcorp-two.com')
+        stub_session_idp_authn_request('<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>', 'idp-location', true)
+      end
+
+      subject { get :sign_in_with_last_successful_idp, params: { locale: 'en' } }
+
+      it 'sets the selected IdP in Policy and the users session before rendering redirect_to_idp' do
+        RedirectToIdpController.any_instance.stub(:flash) { { journey_hint: 'idp_stub-idp-two' } }
+
+        expect(POLICY_PROXY).to receive(:select_idp)
+                                  .with(
+                                    instance_of(String),
+                                    'http://idcorp-two.com',
+                                    'LEVEL_1',
+                                    false,
+                                    nil,
+                                    nil
+                                  )
+
+        subject
+
+        expect(response).to have_http_status :ok
+        expect(response).to render_template(:redirect_to_idp)
+        expect(session[:selected_idp_name]).to eq('Bob’s Identity Service')
+      end
+
+      it 'returns a 404 if the hint is missing' do
+        RedirectToIdpController.any_instance.stub(:flash) { {} }
+        expect(POLICY_PROXY).to_not receive(:select_idp)
+
+        subject
+
+        expect(response).to have_http_status :not_found
+      end
+
+      it 'returns a 404 if the hint is wrong' do
+        RedirectToIdpController.any_instance.stub(:flash) { { journey_hint: 'idp_sausages' } }
+        expect(POLICY_PROXY).to_not receive(:select_idp)
+
+        subject
+
+        expect(response).to have_http_status :not_found
+      end
+    end
+  end
 end

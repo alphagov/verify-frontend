@@ -83,6 +83,7 @@ get 'forgot_company', to: 'static#forgot_company', as: :forgot_company
 get 'response_processing', to: 'response_processing#index', as: :response_processing
 get 'redirect_to_idp_register', to: 'redirect_to_idp#register', as: :redirect_to_idp_register
 get 'redirect_to_idp_sign_in', to: 'redirect_to_idp#sign_in', as: :redirect_to_idp_sign_in
+get 'redirect_to_idp_sign_in_with_last_successful_idp', to: 'redirect_to_idp#sign_in_with_last_successful_idp', as: :redirect_to_idp_sign_in_with_last_successful_idp
 get 'redirect_to_idp_resume', to: 'redirect_to_idp#resume', as: :redirect_to_idp_resume
 get 'redirect_to_service_signing_in' => 'redirect_to_service#signing_in', as: :redirect_to_service_signing_in
 get 'redirect_to_service_start_again' => 'redirect_to_service#start_again', as: :redirect_to_service_start_again

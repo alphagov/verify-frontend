@@ -100,6 +100,9 @@ private
         do_eidas_sign_in_redirect(redirect_params)
       when 'submission_confirmation'
         redirect_to confirm_your_identity_path(redirect_params)
+      when successful_idp_hint?
+        flash[:journey_hint] = hint
+        redirect_to redirect_to_idp_sign_in_with_last_successful_idp_path(redirect_params)
       else
         logger.info "Unrecognised journey_hint value: #{hint}" unless hint.nil? || hint.eql?('unspecified')
         do_default_redirect(redirect_params)
@@ -127,5 +130,9 @@ private
 
   def raise_error_if_params_invalid
     something_went_wrong_warn("Missing/empty SAML message from #{request.referer}", :bad_request) if params['SAMLRequest'].blank?
+  end
+
+  def successful_idp_hint?
+    ->(hint) { hint && hint.start_with?('idp_') }
   end
 end
