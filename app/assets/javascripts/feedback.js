@@ -31,7 +31,7 @@
     init: function () {
       feedback.$form = $('#feedback');
       feedback.$replyRadios = $('input[name="feedback_form[reply]"]');
-      feedback.$replyFields = $('.reply-fields');
+      feedback.$replyFields = $('#conditional-reply_true');
 
       if (feedback.$form.length === 1) {
         feedback.$replyRadios.on('click', feedback.toggleReply);
