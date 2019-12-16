@@ -1,14 +1,28 @@
 describe('The start page', function () {
   var $dom,
-      formSpy,
-      html = '<form id="start-page-form" class="js-validate" novalidate>'
-           +   '<div class="form-group">'
-           +     '<input name=selection type=radio id=start_form_selection_true required data-msg="Test error message">'
-           +     '<input name=selection type=radio id=start_form_selection_false>'
-           +     '<input type=submit>'
-           +   '</div>'
-           +   '<div id="validation-error-message-js"></div>'
-           + '</form>';
+    formSpy,
+    html = '<form id="start-page-form" class="js-validate" novalidate="novalidate" action="/start" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="zVsV/kc37UALs+lkjpiy4G0kxRdCQo/Wx9J3dYVfuFraSHJHjtnwsVpMx1p+Y6ij1Zx5k0LdaeydpeVl5msGcQ==" />' +
+      '<div class="govuk-form-group">' +
+      '<fieldset class="govuk-fieldset">' +
+      '<div class="govuk-radios">' +
+      '<div class="govuk-radios__item">' +
+      '<input required="required" data-msg="Test error message" piwik_event_tracking="journey_user_type" class="govuk-radios__input" type="radio" value="true" name="start_form[selection]" id="start_form_selection_true" />' +
+      '<label class="govuk-label govuk-radios__label verify-inverse" for="start_form_selection_true">This is my first time using GOV.UK Verify</label>' +
+      '</div>' +
+      '<div class="govuk-radios__item">' +
+      '<input required="required" data-msg="Test error message" piwik_event_tracking="journey_user_type" class="govuk-radios__input" type="radio" value="false" name="start_form[selection]" id="start_form_selection_false" />' +
+      '<label class="govuk-label govuk-radios__label verify-inverse" for="start_form_selection_false">I’ve used GOV.UK Verify before</label>' +
+      '</div>' +
+      '</div>' +
+      '</fieldset>' +
+      '</div>' +
+      '<div id="validation-error-message-js"></div>' +
+      '<div class="form-group-tight">' +
+      '<div class="actions">' +
+      '<input type="submit" name="commit" value="Continue" class="govuk-button verify-inverse-btn" id="next-button" />' +
+      '</div>' +
+      '</div>' +
+      '</form>';
 
   beforeEach(function () {
     $dom = $(html);
@@ -30,7 +44,7 @@ describe('The start page', function () {
       $(document).submit(formSpy);
       $('form').submit();
       expect(formSpy).toHaveBeenCalled();
-      expect($('.form-group').hasClass('form-group-error')).toBe(false);
+      expect($('.govuk-form-group').hasClass('govuk-form-group--error')).toBe(false);
     });
   });
 
@@ -39,24 +53,24 @@ describe('The start page', function () {
       $(document).submit(formSpy);
       $('form').submit();
       expect(formSpy).not.toHaveBeenCalled();
-      expect($('.form-group').hasClass('form-group-error')).toBe(true);
+      expect($('.govuk-form-group').hasClass('govuk-form-group--error')).toBe(true);
       expect($('#validation-error-message-js').text()).toBe('Test error message')
     });
   });
 
-  describe('when the form has errors and the user selects an option', function (){
+  describe('when the form has errors and the user selects an option', function () {
     var $formGroup;
 
     beforeEach(function () {
-      $formGroup = $('.form-group');
+      $formGroup = $('.govuk-form-group');
       $(document).submit(formSpy);
       $('form').submit();
     });
 
     it('should remove the error message and highlights', function () {
-      expect($formGroup.hasClass('form-group-error')).toBe(true);
+      expect($formGroup.hasClass('govuk-form-group--error')).toBe(true);
       $('#start_form_selection_true').prop('checked', true).click();
-      expect($formGroup.hasClass('form-group-error')).toBe(false);
+      expect($formGroup.hasClass('govuk-form-group--error')).toBe(false);
     });
   });
 });

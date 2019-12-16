@@ -16,24 +16,18 @@
         selectPhone.$smartphoneQuestion.addClass('js-hidden').removeClass('govuk-form-group--error')
           .find('input').prop('checked', false);
       }
-      selectPhone.$form.find('.govuk-form-group').removeClass('govuk-form-group--error');
+      selectPhone.$form.find('.form-group').removeClass('govuk-form-group-error');
       selectPhone.validator.resetForm();
     },
     init: function () {
       selectPhone.$form = $('#validate-phone');
-      selectPhone.$smartphoneQuestion = $('#smartphone-question');
+      selectPhone.$smartphoneQuestion = $('#conditional-mobile_phone_true');
       var errorMessage = selectPhone.$form.data('msg');
       if (selectPhone.$form.length === 1) {
         selectPhone.validator = selectPhone.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
           rules: {
             'select_phone_form[mobile_phone]': 'required',
-            'select_phone_form[smart_phone]': () => {
-              if ($('input[name="select_phone_form[mobile_phone]"]:checked').val()) {
-                return 'required';
-              } else {
-                return 'false';
-              }
-            }
+            'select_phone_form[smart_phone]': 'required'
           },
           messages: {
             'select_phone_form[mobile_phone]': errorMessage,

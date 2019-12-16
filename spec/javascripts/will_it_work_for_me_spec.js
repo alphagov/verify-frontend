@@ -1,51 +1,72 @@
 describe("Will it work for me form", function () {
-    var formWithNoErrors =
-        '<form method="POST" action="" id="validate-will-it-work-for-me" data-msg="Please answer all the questions">' +
-        '<div id="above-age-threshold" class="form-group">' +
-        '<fieldset class="inline">' +
-        '<legend>Are you 20 or over?</legend>' +
-        '<div class="multiple-choice">' +
-        '<input id="will_it_work_for_me_form_above_age_threshold_true" name="will_it_work_for_me_form[above_age_threshold]" type="radio" value="true">' +
-        '<label for="age-yes">Yes' +
-        '</label>' +
-        '<div class="multiple-choice">' +
-        '<input id="will_it_work_for_me_form_above_age_threshold_false" name="will_it_work_for_me_form[above_age_threshold]" type="radio" value="false">' +
-        '<label for="age-no">No</label>' +
+    var formWithNoErrors = '<form id="validate-will-it-work-for-me" class="will-it-work-for-me-form heading-banner-top-margin" novalidate="novalidate" data-msg="Please answer all the questions" action="/will-it-work-for-me" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="vPUzc2UPWlp7kMZHVfMA6dv84Owy6LXL6Gmqs3AIWjSr5lTKrOFHqypv6HmlCBqqY0RcaDJ3U/GyHjijEzzkHw==" />' +
+        '<div class="govuk-form-group" id="above-age-threshold">' +
+        '<fieldset class="govuk-fieldset" aria-describedby="changed-name-hint">' +
+        '<legend class="govuk-fieldset__legend govuk-fieldset__legend--m">' +
+        '<h2 class="govuk-fieldset__heading">' +
+        'Are you 20 or over?' +
+        '</h2>' +
+        '</legend>' +
+        '<div class="govuk-radios">' +
+        '<div class="govuk-radios__item">' +
+        '<input class="govuk-radios__input" type="radio" value="true" name="will_it_work_for_me_form[above_age_threshold]" id="will_it_work_for_me_form_above_age_threshold_true" />' +
+        '<label class="govuk-label govuk-radios__label" for="will_it_work_for_me_form_above_age_threshold_true">Yes</label>' +
+        '</div>' +
+        '<div class="govuk-radios__item">' +
+        '<input class="govuk-radios__input" type="radio" value="false" name="will_it_work_for_me_form[above_age_threshold]" id="will_it_work_for_me_form_above_age_threshold_false" />' +
+        '<label class="govuk-label govuk-radios__label" for="will_it_work_for_me_form_above_age_threshold_false">No</label>' +
+        '</div>' +
         '</div>' +
         '</fieldset>' +
         '</div>' +
-        '<div id="resident_last_12_months" class="form-group">' +
-        '<fieldset class="inline"><legend>Have you lived in the UK for the last 12 months?</legend>' +
-        '<div class="multiple-choice">' +
-        '<input id="will_it_work_for_me_form_resident_last_12_months_true" name="will_it_work_for_me_form[resident_last_12_months]" type="radio" value="true">' +
-        '<label for="resident-last-12-months">Yes</label>' +
+        '<div class="govuk-form-group" id="resident_last_12_months">' +
+        '<fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">' +
+        '<legend class="govuk-fieldset__legend govuk-fieldset__legend--m">' +
+        '<h2 class="govuk-fieldset__heading">' +
+        'Have you lived in the UK for the last 12 months?' +
+        '</h2>' +
+        '</legend>' +
+        '<div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">' +
+        '<div class="govuk-radios__item">' +
+        '<input class="govuk-radios__input" type="radio" value="true" name="will_it_work_for_me_form[resident_last_12_months]" id="will_it_work_for_me_form_resident_last_12_months_true" />' +
+        '<label class="govuk-label govuk-radios__label" for="will_it_work_for_me_form_resident_last_12_months_true">Yes</label>' +
         '</div>' +
-        '<div class="multiple-choice">' +
-        '<input id="will_it_work_for_me_form_resident_last_12_months_false" name="will_it_work_for_me_form[resident_last_12_months]" type="radio" value="false">' +
-        '<label for="not-resident-last-12-months">No</label>' +
+        '<div class="govuk-radios__item">' +
+        '<input class="govuk-radios__input" data-aria-controls="conditional-will_it_work_for_me_form_resident_last_12_months_false" type="radio" value="false" name="will_it_work_for_me_form[resident_last_12_months]" id="will_it_work_for_me_form_resident_last_12_months_false" />' +
+        '<label class="govuk-label govuk-radios__label" for="will_it_work_for_me_form_resident_last_12_months_false">No</label>' +
+        '</div>' +
+        '<div class="govuk-radios__conditional govuk-radios__conditional--hidden"' +
+        'id="conditional-will_it_work_for_me_form_resident_last_12_months_false">' +
+        '<div class="govuk-form-group">' +
+        '<fieldset class="govuk-fieldset">' +
+        '<legend class="govuk-fieldset__legend govuk-fieldset__legend--m">' +
+        '<h2 class="govuk-heading-s">' +
+        'Which of these applies to you?' +
+        '</h2>' +
+        '</legend>' +
+        '<div class="govuk-radios">' +
+        '<div class="govuk-radios__item">' +
+        '<input class="govuk-radios__input" type="radio" value="MovedRecently" name="will_it_work_for_me_form[not_resident_reason]" id="will_it_work_for_me_form_not_resident_reason_movedrecently" />' +
+        '<label class="govuk-label govuk-radios__label" for="will_it_work_for_me_form_not_resident_reason_moved_recently">I moved to the UK in the last 12 months</label>' +
+        '</div>' +
+        '<div class="govuk-radios__item">' +
+        '<input class="govuk-radios__input" type="radio" value="AddressButNotResident" name="will_it_work_for_me_form[not_resident_reason]" id="will_it_work_for_me_form_not_resident_reason_addressbutnotresident" />' +
+        '<label class="govuk-label govuk-radios__label" for="will_it_work_for_me_form_not_resident_reason_address_but_not_resident">I have an address in the UK but I don’t live there</label>' +
+        '</div>' +
+        '<div class="govuk-radios__item">' +
+        '<input class="govuk-radios__input" type="radio" value="NoAddress" name="will_it_work_for_me_form[not_resident_reason]" id="will_it_work_for_me_form_not_resident_reason_noaddress" />' +
+        '<label class="govuk-label govuk-radios__label" for="will_it_work_for_me_form_not_resident_reason_no_address">I don’t have a UK address</label>' +
+        '</div>' +
         '</div>' +
         '</fieldset>' +
         '</div>' +
-        '<div class="form-group" id="not_resident_reason">' +
-        '<fieldset>' +
-        '<legend>Which of these applies to you?</legend>' +
-        '<div class="multiple-choice">' +
-        '<input id="will_it_work_for_me_form_not_resident_reason_movedrecently" name="will_it_work_for_me_form[not_resident_reason]" type="radio" value="MovedRecently">' +
-        '<label for="moved-to-uk-in-last-12-months">I moved to the UK in the last 12 months</label>' +
         '</div>' +
-        '<div class="multiple-choice">' +
-        '<input id="will_it_work_for_me_form_not_resident_reason_addressbutnotresident" name="will_it_work_for_me_form[not_resident_reason]" type="radio" value="AddressButNotResident">' +
-        '<label for="has-uk-address">I have an address in the UK but I don&rsquo;t live there</label>' +
-        '</div>' +
-        '<div class="multiple-choice">' +
-        '<input id="will_it_work_for_me_form_not_resident_reason_noaddress" name="will_it_work_for_me_form[not_resident_reason]" type="radio" value="NoAddress">' +
-        '<label for="no-uk-address">I don&rsquo;t have a UK address</label>' +
         '</div>' +
         '</fieldset>' +
-        '</div>' +
-        '<div id="validation-error-message-js"></div>' +
-        '<div class="form-group">' +
-        '<input class="button" id="next-button" type="submit" value="Continue">' +
+        '</div>       ' +
+        '<div class="govuk-error-message" id="validation-error-message-js"></div>' +
+        '<div class="actions">' +
+        '<input type="submit" name="commit" value="Continue" class="govuk-button" id="next-button" />' +
         '</div>' +
         '</form>';
 
@@ -89,7 +110,7 @@ describe("Will it work for me form", function () {
     }
 
     function expectNoError() {
-        expect(willItWorkForMeForm.children('.form-group:first').is('.form-group-error')).toBe(false);
+        expect(willItWorkForMeForm.children('.form-group:first').is('.govuk-form-group--error')).toBe(false);
         expect(willItWorkForMeForm.find('#validation-error-message-js').text()).toBe('');
     }
 
@@ -102,19 +123,7 @@ describe("Will it work for me form", function () {
     });
 
     it("should not initially show 'not-resident-reason' section.", function () {
-        expect(willItWorkForMeForm.find('#not_resident_reason').attr("class")).toContain("js-hidden");
-    });
-
-    it("should show 'not-resident-reason' section when user indicates no residency for 12 months", function () {
-        this.selectNotResident12Months();
-
-        expect(willItWorkForMeForm.find('#not_resident_reason').attr("class")).not.toContain("js-hidden");
-    });
-
-    it("should not show 'not-resident-reason' section when user indicates residency for 12 months", function () {
-        this.selectResident12Months();
-
-        expect(willItWorkForMeForm.find('#not_resident_reason').attr("class")).toContain("js-hidden");
+        expect(willItWorkForMeForm.find('#conditional-will_it_work_for_me_form_resident_last_12_months_false').attr("class")).toContain("govuk-radios__conditional--hidden");
     });
 
     it("should have errors on submit if user does not answer any questions", function () {
@@ -141,7 +150,7 @@ describe("Will it work for me form", function () {
     it("should have errors on submit if user indicates not resident for 12 months and does not supply reason", function () {
         this.selectNotResident12Months();
         this.submitForm();
-        expect(willItWorkForMeForm.children('#not_resident_reason').attr("class")).toContain('error');
+        expect($('#conditional-will_it_work_for_me_form_resident_last_12_months_false').children('.govuk-form-group').attr('class')).toContain('error');
         expectErrorMessage();
     });
 
