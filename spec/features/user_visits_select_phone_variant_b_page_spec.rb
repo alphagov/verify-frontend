@@ -39,37 +39,6 @@ RSpec.describe 'When the user visits the select phone page' do
   end
 
   context 'with javascript disabled' do
-    # TODO(HUH-234): these don't work - failing because expected to move to /choose-a-certified-company, but remaining on /select-phone
-    # it 'redirects to the idp picker page when user has a phone' do
-    #   stub_api_no_docs_idps
-    #   visit '/select-phone'
-    #
-    #   choose 'select_phone_form_mobile_phone_true', allow_label_click: true
-    #   choose 'select_phone_form_smart_phone_true', allow_label_click: true
-    #   click_button t('navigation.continue')
-    #
-    #   expect(page).to have_current_path(choose_a_certified_company_path, ignore_query: true)
-    #   expect(page.get_rack_session['selected_answers']).to eql(
-    #     'device_type' => { 'device_type_other' => true },
-    #     'phone' => { 'mobile_phone' => true, 'smart_phone' => true }
-    #   )
-    # end
-    #
-    # it 'does not include apps if user doesnt know if their phone has apps' do
-    #   stub_api_no_docs_idps
-    #   visit '/select-phone'
-    #
-    #   choose 'select_phone_form_mobile_phone_true', allow_label_click: true
-    #   choose 'select_phone_form_smart_phone_do_not_know', allow_label_click: true
-    #   click_button t('navigation.continue')
-    #
-    #   expect(page).to have_current_path(choose_a_certified_company_path, ignore_query: true)
-    #   expect(page.get_rack_session['selected_answers']).to eql(
-    #     'device_type' => { 'device_type_other' => true },
-    #     'phone' => { 'mobile_phone' => true }
-    #   )
-    # end
-
     it 'allows you to overwrite the values of your selected evidence' do
       page.set_rack_session(transaction_simple_id: 'test-rp')
       given_a_session_with_document_evidence
