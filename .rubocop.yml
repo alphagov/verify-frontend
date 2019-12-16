@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - 'lib/node_modules'
+
 Metrics/BlockLength:
   Exclude:
     - 'config/routes.rb'
