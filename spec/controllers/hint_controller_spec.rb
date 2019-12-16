@@ -44,7 +44,8 @@ describe HintController do
 
   context '#last_successful_idp' do
     before(:each) do
-      stub_api_idp_list_for_sign_in([{ 'simpleId' => 'stub-idp-one',
+      stub_api_idp_list_for_sign_in_without_session([
+                                     { 'simpleId' => 'stub-idp-one',
                                        'entityId' => 'http://idcorp.com',
                                        'levelsOfAssurance' => %w(LEVEL_1) },
                                      { 'simpleId' => 'stub-idp-two',
@@ -53,8 +54,9 @@ describe HintController do
                                      { 'simpleId' => 'stub-idp-broken',
                                        'entityId' => 'http://idcorp-broken.com',
                                        'levelsOfAssurance' => %w(LEVEL_1),
-                                       'temporarilyUnavailable' => true }])
-      set_session_and_cookies_with_loa('LEVEL_1')
+                                       'temporarilyUnavailable' => true }
+                                     ],
+                                     'https://prod-left.tax.service.gov.uk/SAML2/PERTAX')
     end
 
     context 'user has previously succesfully signed in' do
@@ -91,7 +93,7 @@ describe HintController do
 
     context 'list of available identity providers is empty' do
       it 'json object should contain empty strings for simpleId and displayName' do
-        stub_api_idp_list_for_sign_in([])
+        stub_api_idp_list_for_sign_in_without_session([], 'https://prod-left.tax.service.gov.uk/SAML2/PERTAX')
         cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
           'SUCCESS' => 'http://idcorp-two.com',
         }.to_json

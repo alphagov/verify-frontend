@@ -344,6 +344,10 @@ module ApiTestHelper
     stub_request(:get, config_api_uri(idp_list_for_sign_in_endpoint(default_transaction_entity_id))).to_return(body: idps.to_json)
   end
 
+  def stub_api_idp_list_for_sign_in_without_session(idps = default_idps, transaction_entity_id = default_transaction_entity_id)
+    stub_request(:get, config_api_uri(idp_list_for_sign_in_endpoint(transaction_entity_id))).to_return(body: idps.to_json)
+  end
+
   def stub_api_idp_list_for_single_idp_journey(transaction_id = default_transaction_entity_id, idps = default_idps)
     stub_request(:get, config_api_uri(idp_list_for_single_idp_endpoint(transaction_id))).to_return(body: idps.to_json)
   end
