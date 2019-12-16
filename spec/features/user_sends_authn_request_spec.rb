@@ -2,6 +2,13 @@ require 'feature_helper'
 require 'api_test_helper'
 require 'piwik_test_helper'
 
+AB_TEST_COOKIE_DEFAULTS = {
+  'short_hub_2019_q3-preview' => 'short_hub_2019_q3-preview_control_a',
+  'short_hub_2019_q3' => 'short_hub_2019_q3_control_a',
+  'select_documents_v2' => 'select_documents_v2_control',
+  'about_companies' => 'about_companies_with_logo'
+}.freeze
+
 describe 'user sends authn requests' do
   context 'and it is received successfully' do
     let(:session_start_time) { Time.now }
@@ -89,33 +96,37 @@ describe 'user sends authn requests' do
       visit('/test-saml')
       click_button 'saml-post'
 
-      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_with_logo".*}/)
+      expect_cookie(CookieNames::AB_TEST, AB_TEST_COOKIE_DEFAULTS.to_json)
     end
 
     it 'will not set ab_test cookie if already set' do
       stub_session_creation
-      ab_test_cookie_value = {
-        'about_companies' => 'about_companies_with_logo',
-        'select_documents_v2' => 'select_documents_v2_control'
-      }.to_json
-      cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape(ab_test_cookie_value))
+
+      existing_cookie = AB_TEST_COOKIE_DEFAULTS.merge('about_companies' => 'about_companies_no_logo').to_json
+      cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape(existing_cookie))
       set_cookies!(cookie_hash)
 
       visit('/test-saml')
       click_button 'saml-post'
 
-      expect_cookie(CookieNames::AB_TEST, ab_test_cookie_value)
+      expect_cookie(CookieNames::AB_TEST, existing_cookie)
     end
 
+    #HUH-239
     it 'will include both experiments in the ab_test cookie if only one experiment is currently in the ab_test cookie' do
       stub_session_creation
-      cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape({ 'about_companies' => 'about_companies_no_logo' }.to_json))
+
+      existing = AB_TEST_COOKIE_DEFAULTS.dup
+      existing.delete('about_companies')
+      existing_cookie = existing.to_json
+
+      cookie_hash = create_cookie_hash.merge!(ab_test: CGI.escape(existing_cookie))
       set_cookies!(cookie_hash)
 
       visit('/test-saml')
       click_button 'saml-post'
 
-      expect(cookie_value(CookieNames::AB_TEST)).to match(/{"select_documents_v2":"select_documents_v2_control","about_companies":"about_companies_no_logo".*}/)
+      expect_cookie(CookieNames::AB_TEST, AB_TEST_COOKIE_DEFAULTS.to_json)
     end
 
     it 'will not set ab_test cookie if RP is in AB test blacklist' do

@@ -1,0 +1,14 @@
+simpleIds: [ "stub-idp-one" ]
+send_hints: true
+send_language_hint: true
+
+segments:
+  protected:
+    recommended: ["dl_app_cc", "pp_app_cc", "pp_dl_cc", "pp_dl_app", "pp_dl_app_cc"]
+    unlikely:    []
+  non_protected:
+    recommended: ["dl_app_cc", "pp_app_cc", "pp_dl_cc", "pp_dl_app", "pp_dl_app_cc"]
+    unlikely:    []
+
+capabilities:
+  - []

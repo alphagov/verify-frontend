@@ -40,7 +40,7 @@ class StubApi < Sinatra::Base
         "analyticsDescription":"analytics description for test-rp",
         "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
         "otherWaysDescription":"test GOV.UK Verify user journeys",
-        "tailoredText":"External data source: EN: This is tailored text for test-rp",
+        "tailoredText":"<p>External data source: EN: This is tailored text for test-rp</p>",
         "taxonName":"Benefits",
         "customFailHeading":"This is a custom fail page."
       }'
@@ -51,7 +51,7 @@ class StubApi < Sinatra::Base
         "analyticsDescription":"analytics description for test-rp",
         "otherWaysText":"<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
         "otherWaysDescription":"test GOV.UK Verify user journeys",
-        "tailoredText":"External data source: CY: This is tailored text for test-rp",
+        "tailoredText":"<p>External data source: CY: This is tailored text for test-rp</p>",
         "taxonName":"Benefits",
         "customFailHeading":"This is a custom fail page in welsh."
       }'
@@ -76,9 +76,19 @@ class StubApi < Sinatra::Base
         "levelsOfAssurance": ["LEVEL_1"]
      }]'
     else
-      '[{
+    '[{
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one",
+        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
+     },
+     {
+        "simpleId":"stub-idp-two",
+        "entityId":"http://example.com/stub-idp-two",
+        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
+     },
+     {
+        "simpleId":"stub-idp-three",
+        "entityId":"http://example.com/stub-idp-three",
         "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
      }]'
     end
@@ -104,12 +114,12 @@ class StubApi < Sinatra::Base
         "simpleId":"stub-idp-two",
         "entityId":"http://example.com/stub-idp-two",
         "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-      },
-      {
-        "simpleId":"stub-idp-one",
-        "entityId":"http://idcorp.com",
+     },
+     {
+        "simpleId":"stub-idp-three",
+        "entityId":"http://example.com/stub-idp-three",
         "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-    }]'
+     }]'
   end
 
   get '/config/idps/idp-list-for-single-idp/:transaction_id' do
@@ -132,12 +142,17 @@ class StubApi < Sinatra::Base
         "simpleId":"stub-idp-two",
         "entityId":"http://example.com/stub-idp-two",
         "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-      },
-      {
+     },
+     {
+        "simpleId":"stub-idp-three",
+        "entityId":"http://example.com/stub-idp-three",
+        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
+     },
+     {
         "simpleId":"stub-idp-one",
         "entityId":"http://idcorp.com",
         "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-    }]'
+     }]'
   end
 
   get '/SAML2/SSO/API/SENDER/AUTHN_REQ' do

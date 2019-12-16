@@ -1,0 +1,9 @@
+<%= page_title 'hub.about.title' %>
+<% content_for :feedback_source, 'ABOUT_PAGE' %>
+
+<p><%= t 'hub.about.verify_is_a_service' %></p>
+<%= raw @tailored_text %>
+
+<div class="actions">
+  <%= button_link_to t('navigation.next'), about_certified_companies_path, id: 'next-button' %>
+</div>

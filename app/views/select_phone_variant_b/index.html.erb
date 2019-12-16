@@ -1,0 +1,42 @@
+<%= page_title 'hub.select_phone.title' %>
+<% content_for :feedback_source, 'SELECT_PHONE_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large"><%= t 'hub.select_phone.title' %></h1>
+    <p><%= t 'hub.select_phone.explanation' %></p>
+
+    <%= form_for @form, url: select_phone_path, html: { id: 'validate-phone', class: 'select-phone-form', novalidate: 'novalidate', 'data-msg': t('hub.select_phone.errors.no_selection')} do |f| %>
+
+        <%= render 'shared/form-errors', errors: flash[:errors] %>
+
+        <%= content_tag :div, class: form_question_class do %>
+            <fieldset class="inline">
+              <legend class="visually-hidden">
+                <span class="form-label"><%= t 'hub.select_phone.question.mobile_phone' %></span>
+              </legend>
+              <%= f.custom_radio_button :mobile_phone, true, t('hub.select_phone.question.mobile_phone_option_yes') %>
+              <%= f.custom_radio_button :mobile_phone, false, t('option.no') %>
+            </fieldset>
+        <% end %>
+
+        <%= content_tag :div, id: 'smartphone-question', class: hidden_form_question_class do %>
+            <fieldset>
+              <legend>
+                <span class="form-label"><%= t 'hub.select_phone.question.smart_phone' %></span>
+              </legend>
+              <p class="form-hint"><%= t 'hub.select_phone.question.smart_phone_subtitle' %></p>
+              <%= f.custom_radio_button :smart_phone, true, t('hub.select_phone.question.smart_phone_option_yes') %>
+              <%= f.custom_radio_button :smart_phone, false, t('option.no') %>
+              <%= f.custom_radio_button :smart_phone, 'do_not_know', t('option.unknown') %>
+            </fieldset>
+        <% end %>
+
+        <div id="validation-error-message-js"></div>
+
+        <div class="actions">
+          <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
+        </div>
+  <% end %>
+  </div>
+</div>
