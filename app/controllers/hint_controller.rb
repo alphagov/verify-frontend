@@ -39,11 +39,16 @@ class HintController < ApplicationController
         entity_id
       ).first
 
-      json_object = {
-        'found': 'true',
-        'simpleId': idp.simple_id,
-        'displayName': idp.display_name
-      }
+      if idp.nil?
+        logger.info "No IDP found for entity ID #{entity_id} and identity providers #{identity_providers}"
+        json_object = { 'found': 'false' }
+      else
+        json_object = {
+          'found': 'true',
+          'simpleId': idp.simple_id,
+          'displayName': idp.display_name
+        }
+      end
     else
       json_object = { 'found': 'false' }
     end

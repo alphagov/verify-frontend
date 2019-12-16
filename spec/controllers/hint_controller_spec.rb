@@ -73,10 +73,24 @@ describe HintController do
         expect(successful_idp.content_type).to eq("application/json")
         expect(successful_idp).to have_http_status(200)
       end
+
+      it 'should return not found if last succesful entity ID not in available providers' do
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
+          'SUCCESS' => 'http://not-available.com',
+        }.to_json
+
+        body = JSON.parse(successful_idp.body)
+
+        expect(body['found']).to eq('false')
+        expect(body.keys).not_to include('simpleId')
+        expect(body.keys).not_to include('displayName')
+        expect(successful_idp.content_type).to eq("application/json")
+        expect(successful_idp).to have_http_status(200)
+      end
     end
 
     context 'user has not previously successfully signed in' do
-      it 'json object should contain empty strings for simpleId and displayName' do
+      it 'json object should not contain simpleId and displayName' do
         cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
           'ATTEMPT' => 'http://idcorp-two.com',
         }.to_json
@@ -92,7 +106,7 @@ describe HintController do
     end
 
     context 'list of available identity providers is empty' do
-      it 'json object should contain empty strings for simpleId and displayName' do
+      it 'json object should not contain simpleId and displayName' do
         stub_api_idp_list_for_sign_in_without_session([], 'https://prod-left.tax.service.gov.uk/SAML2/PERTAX')
         cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
           'SUCCESS' => 'http://idcorp-two.com',
