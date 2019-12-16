@@ -1,13 +1,13 @@
 require 'partials/idp_selection_partial_controller'
 require 'partials/single_idp_partial_controller'
-require 'partials/viewable_idp_partial_controller'
 require 'partials/analytics_cookie_partial_controller'
+require 'partials/viewable_idp_partial_controller'
 
 class RedirectToIdpController < ApplicationController
   include IdpSelectionPartialController
   include SingleIdpPartialController
-  include ViewableIdpPartialController
   include AnalyticsCookiePartialController
+  include ViewableIdpPartialController
 
   def register
     request_form
@@ -34,12 +34,16 @@ class RedirectToIdpController < ApplicationController
     return render_not_found unless simple_id
 
     simple_id.slice!('idp_')
-    begin
-      select_viewable_idp_for_sign_in_by_simple_id(simple_id) do |decorated_idp|
-        set_journey_hint_followed(decorated_idp.entity_id)
-        select_idp(decorated_idp.entity_id, decorated_idp.display_name)
-      end
-    rescue StandardError
+
+    decorated_idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(
+      current_available_identity_providers_for_sign_in.detect { |idp| idp.simple_id == simple_id }
+    )
+    if decorated_idp.viewable?
+      store_selected_idp_for_session(decorated_idp.identity_provider)
+      set_journey_hint_followed(decorated_idp.entity_id)
+      select_idp(decorated_idp.entity_id, decorated_idp.display_name)
+    else
+      logger.error "Viewable IdP not found for simple ID #{simple_id}"
       return render_not_found
     end
     sign_in
