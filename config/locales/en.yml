@@ -43,6 +43,7 @@ en:
     forgot_company: forgot-company
     response_processing: response-processing
     redirect_to_idp_sign_in: redirect-to-idp/sign-in
+    redirect_to_idp_sign_in_with_last_successful_idp: redirect-to-idp-sign-in-with-last-successful-idp
     redirect_to_idp_register: redirect-to-idp/register
     redirect_to_idp_resume: redirect-to-idp/resume
     redirect_to_service_signing_in: redirect-to-service/signing-in

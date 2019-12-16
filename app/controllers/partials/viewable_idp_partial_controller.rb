@@ -27,7 +27,7 @@ module ViewableIdpPartialController
       yield idp
     else
       simple_id = matching_idp.nil? ? nil : matching_idp.simple_id
-      logger.error "Unrecognised IdP simple id (#{simple_id}) for entity ID #{entity_id}"
+      logger.error "Viewable IdP not found for entity ID #{entity_id} with simple ID #{simple_id}"
       render_not_found
     end
   end

@@ -43,6 +43,7 @@ cy:
     forgot_company: wedi-anghofio-cwmni
     response_processing: prosesu-ymateb
     redirect_to_idp_sign_in: ailgyfeirio-i-idp/mewngofnodi
+    redirect_to_idp_sign_in_with_last_successful_idp: redirect-to-idp-sign-in-with-last-successful-idp-cy
     redirect_to_idp_register: ailgyfeirio-i-idp/cofrestru
     redirect_to_idp_resume: ailgyfeirio-i-idp/ailddechrau
     redirect_to_service_signing_in: ailgyfeirio-i-gwasanaeth/mewngofnodi
