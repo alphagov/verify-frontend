@@ -24,6 +24,14 @@ describe InitiateJourneyController do
       expect(session[:journey_hint_rp]).to eq('test-rp')
     end
 
+    it 'should redirect to RP headless start page with journey hint when an IDP-specific one is used' do
+      get :index, params: { transaction_simple_id: 'test-rp', locale: 'en', journey_hint: 'idp_stub_idp' }
+
+      expect(subject).to redirect_to('http://localhost:50130/success?rp-name=test-rp&journey_hint=idp_stub_idp')
+      expect(session[:journey_hint]).to eq('idp_stub_idp')
+      expect(session[:journey_hint_rp]).to eq('test-rp')
+    end
+
     it 'should redirect to service homepage if headless startpage not defined for RP' do
       get :index, params: { transaction_simple_id: 'test-rp-noc3', locale: 'en' }
 
