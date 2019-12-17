@@ -64,3 +64,19 @@ To track user journeys across the whole of GOV.UK, including Verify, Google Anal
 We will occasionally be asked to add domains to the list of domains for which cross domain tracking is enabled. This list is injected through the `CROSS_GOV_GOOGLE_ANALYTICS_DOMAIN_LIST`
 environment variable, which is set in the [`verify-infrastructure-config` repository](https://github.com/alphagov/verify-infrastructure-config/blob/master/terraform/deployments/prod/hub/site.tf)
 by setting the `cross_gov_ga_domain_names` variable in the `site.tf` for the relevant environment.
+
+# GOV.UK Design System 3
+
+[GOV.UK frontend](https://github.com/alphagov/govuk-frontend) is included in the repository under 
+`lib/node_modules`.  This is installed using `npm`.
+Should you have to update the GOV.UK frontend in the future you'll need to run npm within the lib directory and 
+commit the results. e.g.
+
+```
+git checkout -b <some_branch_name>
+cd ./lib
+npm update
+git add .
+git commit
+push
+```

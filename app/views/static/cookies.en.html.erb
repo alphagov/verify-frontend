@@ -6,8 +6,8 @@ end %>
 <% content_for :feedback_source, 'COOKIES_INFO_PAGE' %>
 <% content_for :show_to_search_engine, true %>
 
-<div class="govuk-grid-column-full no-right-hand-logo">
-
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
   <h1 class="govuk-heading-l">Cookies</h1>
   <p>GOV.UK Verify puts small files (known as 'cookies') onto your computer.</p>
   <p>These cookies are used to:</p>
@@ -22,7 +22,8 @@ end %>
   <p>Find out more about <a href="http://www.aboutcookies.org/">how to manage cookies.</a></p>
   <h2 class="govuk-heading-m">Session cookies</h2>
   <p>We store session cookies on your computer to help keep your information secure while you use the service.</p>
-
+</div>
+<div class="govuk-grid-column-full">
   <table class="govuk-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -72,7 +73,8 @@ end %>
       </tr>
     </tbody>
   </table>
-
+</div>
+<div class="govuk-grid-column-two-thirds">
   <h2 class="govuk-heading-m">Analytics cookies</h2>
   <p>We use Piwik to collect information about how you use the website. This information
     helps us to improve the service.</p>
@@ -83,7 +85,8 @@ end %>
     <li>what you click on while using the website</li>
   </ul>
   <p>Piwik isn’t allowed to use or share our analytics data with anyone, but you can opt out of analytics cookies.</p>
-
+</div>
+<div class="govuk-grid-column-full">
   <table class="govuk-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -116,10 +119,12 @@ end %>
       </tr>
     </tbody>
   </table>
-
+</div>
+<div class="govuk-grid-column-two-thirds">
   <h2 class="govuk-heading-m">Introductory message cookies</h2>
   <p>When you first use GOV.UK Verify, you may see a pop-up ‘welcome’ message. Once you’ve seen the message, we store a cookie on your computer so it knows not to show it again.</p>
-
+</div>
+<div class="govuk-grid-column-full">
   <table class="govuk-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -136,4 +141,5 @@ end %>
       </tr>
     </tbody>
   </table>
+</div>
 </div>
