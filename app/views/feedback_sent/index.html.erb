@@ -1,22 +1,24 @@
 <% content_for :page_title, t('hub.feedback_sent.title') %>
-<div class="govuk-grid-column-three-quarters">
-  <h1 class="govuk-heading-l"><%= t 'hub.feedback_sent.heading' %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.feedback_sent.heading' %></h1>
 
-  <p>
-    <% if @email_provided %>
-        <%= t 'hub.feedback_sent.message_email'  %>
-    <% end %>
-  </p>
+    <p>
+      <% if @email_provided %>
+          <%= t 'hub.feedback_sent.message_email'  %>
+      <% end %>
+    </p>
 
-  <p>
-    <%if @from_product_page%>
-        <%= link_to t('hub.feedback_sent.product_page'), @link_back %>
-    <% elsif @session_valid %>
-        <%= link_to t('hub.feedback_sent.session_valid_link'), @link_back %>
-    <% else %>
-        <%= t('hub.feedback_sent.session_not_valid') %>
-        <h2 class="govuk-heading-m"><%= t 'hub.transaction_list.title' %></h2>
-        <%= render partial: 'shared/transaction_list' %>
-    <% end %>
-  </p>
+    <p>
+      <%if @from_product_page%>
+          <%= link_to t('hub.feedback_sent.product_page'), @link_back %>
+      <% elsif @session_valid %>
+          <%= link_to t('hub.feedback_sent.session_valid_link'), @link_back %>
+      <% else %>
+          <%= t('hub.feedback_sent.session_not_valid') %>
+          <h2 class="govuk-heading-m"><%= t 'hub.transaction_list.title' %></h2>
+          <%= render partial: 'shared/transaction_list' %>
+      <% end %>
+    </p>
+  </div>
 </div>

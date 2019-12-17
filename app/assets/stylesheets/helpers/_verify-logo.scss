@@ -1,4 +1,4 @@
-@include govuk-media-query($until: tablet) {
+@include govuk-media-query($from: tablet) {
   main {
     position: relative;
   }

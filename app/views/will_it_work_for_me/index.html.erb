@@ -1,7 +1,8 @@
 <%= page_title 'hub.will_it_work_for_me.title' %>
 <% content_for :feedback_source, 'WILL_IT_WORK_FOR_ME_PAGE' %>
 
-  <div class="govuk-grid-column-three-quarters">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l"><%= t 'hub.will_it_work_for_me.heading' %></h1>
     <%= form_for @form, url: will_it_work_for_me_path, html: { id: 'validate-will-it-work-for-me', class: 'will-it-work-for-me-form heading-banner-top-margin', novalidate: 'novalidate', 'data-msg': t('hub.will_it_work_for_me.question.errors.no_selection')} do |f| %>
 
@@ -81,3 +82,4 @@
         </div>
     <% end %>
   </div>
+</div>

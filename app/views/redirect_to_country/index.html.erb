@@ -1,14 +1,16 @@
 <%= page_title 'hub.redirect_to_country.title' %>
 
-<div class="govuk-grid-column-three-quarters">
-  <h1 class="govuk-heading-l"><%= t('hub.redirect_to_country.heading')%></h1>
-  <div class="application-notice info-notice">
-    <p><%= t('hub.redirect_to_country.description')%></p>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t('hub.redirect_to_country.heading')%></h1>
+    <div class="application-notice info-notice">
+      <p><%= t('hub.redirect_to_country.description')%></p>
+    </div>
+    <%= form_tag(@country_request.location, class: 'js-auto-submit', authenticity_token: true, enforce_utf8: false) do %>
+      <%= hidden_field_tag 'SAMLRequest', @country_request.saml_request %>
+      <%= hidden_field_tag 'RelayState', @country_request.relay_state %>
+      <%= hidden_field_tag 'registration', @country_request.registration %>
+      <%= submit_tag 'Continue', id: 'continue-button', class: 'govuk-button' %>
+    <% end %>
   </div>
-  <%= form_tag(@country_request.location, class: 'js-auto-submit', authenticity_token: true, enforce_utf8: false) do %>
-    <%= hidden_field_tag 'SAMLRequest', @country_request.saml_request %>
-    <%= hidden_field_tag 'RelayState', @country_request.relay_state %>
-    <%= hidden_field_tag 'registration', @country_request.registration %>
-    <%= submit_tag 'Continue', id: 'continue-button', class: 'govuk-button' %>
-  <% end %>
 </div>

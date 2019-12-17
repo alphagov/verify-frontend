@@ -1,29 +1,30 @@
 <%= page_title 'hub.cancelled_registration.title' %>
 <% content_for :feedback_source, 'CANCELLED_REGISTRATION' %>
+<div class="govuk-row">
+  <div class="govuk-grid-column-two-thrids">
+    <h1 class="govuk-heading-l"><%= t 'hub.cancelled_registration.heading', idp_name: @idp.display_name %></h1>
 
-<div class="govuk-grid-column-three-quarters">
-  <h1 class="govuk-heading-l"><%= t 'hub.cancelled_registration.heading', idp_name: @idp.display_name %></h1>
+    <p><%= t 'hub.cancelled_registration.what_next', service_name: @transaction.name%></p>
 
-  <p><%= t 'hub.cancelled_registration.what_next', service_name: @transaction.name%></p>
+    <h2 class="govuk-heading-m"><%= t 'hub.cancelled_registration.try_another_summary' %></h2>
 
-  <h2 class="govuk-heading-m"><%= t 'hub.cancelled_registration.try_another_summary' %></h2>
+    <div>
+      <p><%= t 'hub.cancelled_registration.try_another_text', idp_name: @idp.display_name %></p>
+      <%= link_to t('hub.cancelled_registration.about_choosing_a_company'), about_choosing_a_company_path%>
+    </div>
 
-  <div>
-    <p><%= t 'hub.cancelled_registration.try_another_text', idp_name: @idp.display_name %></p>
-    <%= link_to t('hub.cancelled_registration.about_choosing_a_company'), about_choosing_a_company_path%>
+    <h2 class="govuk-heading-m"><%= t 'hub.cancelled_registration.other_ways_summary', other_ways_decorated: @other_ways_decorated %></h2>
+    <div>
+      <%= raw @transaction.other_ways_text %>
+    </div>
+
+    <h2 class="govuk-heading-m"><%= t 'hub.cancelled_registration.feedback_summary' %></h2>
+
+    <div>
+      <p><%= t 'hub.cancelled_registration.feedback_text' %></p>
+      <%= link_to t('hub.cancelled_registration.send_feedback'), feedback_path('feedback-source' => feedback_source) %>
+    </div>
+
+    </ul>
   </div>
-
-  <h2 class="govuk-heading-m"><%= t 'hub.cancelled_registration.other_ways_summary', other_ways_decorated: @other_ways_decorated %></h2>
-  <div>
-    <%= raw @transaction.other_ways_text %>
-  </div>
-
-  <h2 class="govuk-heading-m"><%= t 'hub.cancelled_registration.feedback_summary' %></h2>
-
-  <div>
-    <p><%= t 'hub.cancelled_registration.feedback_text' %></p>
-    <%= link_to t('hub.cancelled_registration.send_feedback'), feedback_path('feedback-source' => feedback_source) %>
-  </div>
-
-  </ul>
 </div>
