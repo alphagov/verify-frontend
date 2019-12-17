@@ -66,7 +66,6 @@
 
           <!-- <%= link_to t('layout.application.service_name'), 'http://www.gov.uk/', class: "govuk-header__link govuk-header__link--service-name" %> -->
 
-          <button type="button" role="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation" data-module="govuk-button"><%= t 'layout.application.menu' %></button>
         </div>
       </div>
     </header>
@@ -74,20 +73,23 @@
     <div class="govuk-width-container">
       <main class="govuk-main-wrapper " id="content" role="main">        
         <div class="govuk-grid-row">
-          <div class="govuk-grid-column-three-quarters">&nbsp;</div>
-          <div class="govuk-grid-column-one-quarter hide-mobile pin-to-top">
+          <div class="govuk-grid-column-two-thirds">&nbsp;</div>
+          <div class="govuk-grid-column-one-third hide-mobile pin-to-top">
             <%= render 'shared/available_languages' unless @hide_available_languages %>
           </div>
         </div>
-        <div class="govuk-grid-row">
+        
             <%= content_for?(:main) ? yield(:main) : yield %>
-          
-            <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>      
 
-            <div class="verify-logo-right">
-              <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation' %>
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full-width">
+              <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>      
             </div>
-        </div>
+          </div>
+        
+          <div class="verify-logo-right">
+            <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation' %>
+          </div>
       </main>
       <%= render 'shared/piwik' %>
       <%= render 'shared/ga' %>

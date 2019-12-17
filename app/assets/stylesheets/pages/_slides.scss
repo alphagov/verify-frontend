@@ -12,7 +12,7 @@
   @include govuk-media-query($from: tablet) {
     margin-top: $govuk-gutter;
   }
-
+  box-sizing: border-box;
   min-height: 480px;
 
   padding: $govuk-gutter;

@@ -37,7 +37,7 @@
     -ms-transform: translate(0, -50%);
     transform: translate(0, -50%);
 
-    @include govuk-media-query($until: tablet) {
+    @include govuk-media-query($from: tablet) {
       padding: 0;
     }
   }
@@ -45,7 +45,7 @@
   &__inner {
     padding: 20px;
 
-    @include govuk-media-query($until: tablet) {
+    @include govuk-media-query($from: tablet) {
       padding: 30px;
     }
 
@@ -67,13 +67,13 @@
       vertical-align: middle;
       margin-top: 20px;
 
-      @include govuk-media-query($until: mobile) {
+      @include govuk-media-query($from: mobile, $until: tablet) {
         text-align: center;
         display: block;
         margin-top: 25px;
       }
 
-      @include govuk-media-query($until: tablet) {
+      @include govuk-media-query($from: tablet) {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -139,7 +139,7 @@ dialog {
     padding: 15px;
     width: 90%;
 
-    @include govuk-media-query($until: tablet) {
+    @include govuk-media-query($from: tablet) {
       padding: 30px;
       margin: 30px auto;
       max-width: 500px;

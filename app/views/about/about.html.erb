@@ -3,7 +3,7 @@
 <% # Uses slide layout %>
 
 <p class="verify-inverse"><%= t 'hub.about.verify_is_a_service' %></p>
-<span class="govuk-body verify-inverse"><%= raw @tailored_text %></span>
+<div class="verify-inverse"><%= raw @tailored_text %></div>
 
 <div class="actions">
   <%= button_link_to t('navigation.next'), about_certified_companies_path, id: 'next-button', class: "govuk-button verify-inverse-btn"%>

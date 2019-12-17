@@ -4,11 +4,11 @@ data-url-redirect="<%= url_for(controller: 'further_information', action: 'timeo
 	  <h1 id="dialog-title" class="dialog-title govuk-heading-l">
       <%= t('hub.further_information.modal.heading') %>
     </h1>
-    <div class="modal-dialog__inner__text">
+    <div class="modal-dialog__inner__text govuk-body">
       <div class="timer" aria-hidden="true" aria-relevant="additions"></div>
       <div id="at-timer" class="at-timer visually-hidden" role="status"></div>
     </div>
-    <div class="modal-dialog__inner__block">
+    <div class="modal-dialog__inner__block govuk-body">
       <button class="govuk-button dialog-button modal-dialog__inner__button js-dialog-close"><%= t('hub.further_information.modal.button_continue') %></button>
       <%= link_to t('hub.further_information.modal.button_signout'), further_information_timeout_path, :class => 'modal-dialog__inner__link js-dialog-cancel' %>
     </div>

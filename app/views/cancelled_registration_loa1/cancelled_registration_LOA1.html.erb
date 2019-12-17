@@ -1,7 +1,7 @@
 <%= page_title 'hub.cancelled_registration.title' %>
 <% content_for :feedback_source, 'CANCELLED_REGISTRATION' %>
 
-<div class="govuk-grid-column-three-quarters">
+<div class="govuk-grid-column-two-thirds">
   <h1 class="govuk-heading-l"><%= t 'hub.cancelled_registration.heading', idp_name: @idp.display_name %></h1>
 
   <p><%= t 'hub.cancelled_registration.what_next', service_name: @transaction.name%></p>

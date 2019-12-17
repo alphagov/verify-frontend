@@ -1,14 +1,16 @@
 <%= page_title 'hub.will_not_work_without_uk_address.title' %>
 <% content_for :feedback_source, 'WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE' %>
 
-<div class="govuk-grid-column-three-quarters">
-  <h1 class="govuk-heading-l"><%= t 'hub.will_not_work_without_uk_address.heading' %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.will_not_work_without_uk_address.heading' %></h1>
 
-  <p><%= t 'hub.will_not_work_without_uk_address.explanation' %></p>
-  <h2 class="govuk-heading-m"><%= t 'hub.other_ways_heading', other_ways_description: @other_ways_description %></h2>
-  <div class="other-ways-to-complete-transaction">
-    <p>
-    <%= raw @other_ways_text %>
-    </p>
+    <p><%= t 'hub.will_not_work_without_uk_address.explanation' %></p>
+    <h2 class="govuk-heading-m"><%= t 'hub.other_ways_heading', other_ways_description: @other_ways_description %></h2>
+    <div class="other-ways-to-complete-transaction">
+      <p>
+      <%= raw @other_ways_text %>
+      </p>
+    </div>
   </div>
 </div>

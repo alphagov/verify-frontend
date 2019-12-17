@@ -1,116 +1,118 @@
 <%= page_title 'hub.feedback.title' %>
 
-<div class="govuk-grid-column-three-quarters">
-  <h1 class="govuk-heading-l"><%= t 'hub.feedback.heading' %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.feedback.heading' %></h1>
 
-  <%= render 'shared/form-errors', errors: flash[:errors], form_errors: @form.errors %>
+    <%= render 'shared/form-errors', errors: flash[:errors], form_errors: @form.errors %>
 
-  <%= t 'hub.feedback.introduction_html' %>
+    <%= t 'hub.feedback.introduction_html' %>
 
-  <% if @has_email_sending_error %>
-    <div class="error-summary" aria-labelledby="error-summary-heading" role="alert" tabindex="-1">
-      <h2 class="govuk-heading-m govuk-error-summary__title" id="error-summary-heading"><%= t 'hub.feedback.errors.heading' %></h2>
-      <div class="govuk-error-summary__body">
-        <ul class="govuk-list govuk-error-summary__list">
-          <li><%= t 'hub.feedback.errors.send_failure' %></li>
-        </ul>
+    <% if @has_email_sending_error %>
+      <div class="error-summary" aria-labelledby="error-summary-heading" role="alert" tabindex="-1">
+        <h2 class="govuk-heading-m govuk-error-summary__title" id="error-summary-heading"><%= t 'hub.feedback.errors.heading' %></h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li><%= t 'hub.feedback.errors.send_failure' %></li>
+          </ul>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
 
-  <%= form_for @form, url: feedback_submit_path, html: { class: 'feedback-form', id: 'feedback', novalidate: true } do |f| %>
-      <fieldset class="govuk-fieldset">
-        <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="<%= @form.long_limit %>">
-          <div class="govuk-form-group <% if @form.errors.include?(:details) %>govuk-form-group--error<% end %>">
-            <%= f.label :what, t('hub.feedback.questions.what'), class: 'govuk-label' %>
-            <% if @form.errors.include?(:what) %>
-                <span class="govuk-error-message">
-                  <%= @form.errors[:what].first %>
-                </span>
-            <% end %>
-            <%= f.text_area :what, rows: 10, cols: 80, class: 'govuk-textarea govuk-textarea--error govuk-js-character-count govuk-textarea--error', required: true,
-                            'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
-                            data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
-                'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit),
-                 'aria_describedby': "feedback_form_what-info feedback_form_what-error"} %>
-          </div>
-          <span id="feedback_form_what-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
-            <%= t('hub.feedback.character_limit_message') %>
-          </span>
-        </div>
-
-        <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="<%= @form.long_limit %>">
-          <div class="govuk-form-group <% if @form.errors.include?(:details) %>govuk-form-group--error<% end %>">
-            <%= f.label :details, t('hub.feedback.questions.details'), class: 'govuk-label' %>
-            <% if @form.errors.include?(:details) %>
-                <span class="govuk-error-message">
-                  <%= @form.errors[:details].first %>
-                </span>
-            <% end %>
-            <%= f.text_area :details, rows: 15, cols: 80, class: 'govuk-textarea govuk-textarea--error govuk-js-character-count govuk-textarea--error', required: true,
-                            'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
-                            data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
-                'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit),
-                'aria_describedby': "feedback_form_details-info feedback_form_details-error" } %>
-          </div>
-          <span id="feedback_form_details-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
-            <%= t('hub.feedback.character_limit_message') %>
-          </span>
-        </div>
-      </fieldset>
-
-        <div class="govuk-form-group <% if @form.errors.include?(:reply) %>govuk-form-group--error<% end %>">
-          <fieldset class="govuk-fieldset" aria-describedby="reply-conditional-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                <%= t 'hub.feedback.questions.reply' %>
-              <% if @form.errors.include?(:reply) %>
-                <span class="govuk-error-message"><%= @form.errors[:reply].first %></span>
+    <%= form_for @form, url: feedback_submit_path, html: { class: 'feedback-form', id: 'feedback', novalidate: true } do |f| %>
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="<%= @form.long_limit %>">
+            <div class="govuk-form-group <% if @form.errors.include?(:details) %>govuk-form-group--error<% end %>">
+              <%= f.label :what, t('hub.feedback.questions.what'), class: 'govuk-label' %>
+              <% if @form.errors.include?(:what) %>
+                  <span class="govuk-error-message">
+                    <%= @form.errors[:what].first %>
+                  </span>
               <% end %>
-            </legend>
-            <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
-              <div class="govuk-radios__item">
-                <%= f.radio_button :reply, true, {required: true, class: "govuk-radios__input", 'data-aria-controls': "conditional-reply_true", data: { msg: t('hub.feedback.errors.reply')}}%>
-                <%= f.label :reply_true,  t('hub.feedback.questions.reply_option_yes'), class: "govuk-label govuk-radios__label"%>
-              </div>
-              <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-                id="conditional-reply_true">
-                <div class="govuk-form-group <% if @form.errors.include?(:name) %>govuk-form-group--error<% end %>">
-                  <p><%= t 'hub.feedback.request_reply' %></p>
+              <%= f.text_area :what, rows: 10, cols: 80, class: 'govuk-textarea govuk-textarea--error govuk-js-character-count govuk-textarea--error', required: true,
+                              'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
+                              data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
+                  'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit),
+                  'aria_describedby': "feedback_form_what-info feedback_form_what-error"} %>
+            </div>
+            <span id="feedback_form_what-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+              <%= t('hub.feedback.character_limit_message') %>
+            </span>
+          </div>
 
-                  <div class="govuk-form-group">
-                    <%= f.label :name, t('hub.feedback.questions.name'), class: 'govuk-label' %>
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="<%= @form.long_limit %>">
+            <div class="govuk-form-group <% if @form.errors.include?(:details) %>govuk-form-group--error<% end %>">
+              <%= f.label :details, t('hub.feedback.questions.details'), class: 'govuk-label' %>
+              <% if @form.errors.include?(:details) %>
+                  <span class="govuk-error-message">
+                    <%= @form.errors[:details].first %>
+                  </span>
+              <% end %>
+              <%= f.text_area :details, rows: 15, cols: 80, class: 'govuk-textarea govuk-textarea--error govuk-js-character-count govuk-textarea--error', required: true,
+                              'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
+                              data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
+                  'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit),
+                  'aria_describedby': "feedback_form_details-info feedback_form_details-error" } %>
+            </div>
+            <span id="feedback_form_details-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+              <%= t('hub.feedback.character_limit_message') %>
+            </span>
+          </div>
+        </fieldset>
+
+          <div class="govuk-form-group <% if @form.errors.include?(:reply) %>govuk-form-group--error<% end %>">
+            <fieldset class="govuk-fieldset" aria-describedby="reply-conditional-hint">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                  <%= t 'hub.feedback.questions.reply' %>
+                <% if @form.errors.include?(:reply) %>
+                  <span class="govuk-error-message"><%= @form.errors[:reply].first %></span>
+                <% end %>
+              </legend>
+              <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <%= f.radio_button :reply, true, {required: true, class: "govuk-radios__input", 'data-aria-controls': "conditional-reply_true", data: { msg: t('hub.feedback.errors.reply')}}%>
+                  <%= f.label :reply_true,  t('hub.feedback.questions.reply_option_yes'), class: "govuk-label govuk-radios__label"%>
+                </div>
+                <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                  id="conditional-reply_true">
+                  <div class="govuk-form-group <% if @form.errors.include?(:name) %>govuk-form-group--error<% end %>">
+                    <p><%= t 'hub.feedback.request_reply' %></p>
+
+                    <div class="govuk-form-group">
+                      <%= f.label :name, t('hub.feedback.questions.name'), class: 'govuk-label' %>
+                      <% if @form.errors.include?(:name) %>
+                          <span class="govuk-error-message"><%= @form.errors[:name].first %></span>
+                      <% end %>
+                      <%= f.text_field :name, required: true, maxlength: @form.short_limit, class: 'govuk-input', data: { 'msg-required': t('hub.feedback.errors.name') } %>
+                    </div>
+
+                    <div class="govuk-form-group <% if @form.errors.include?(:email) %>govuk-form-group--error<% end %>">
+                    <%= f.label :email, t('hub.feedback.questions.email'), class: 'govuk-label' %>
                     <% if @form.errors.include?(:name) %>
-                        <span class="govuk-error-message"><%= @form.errors[:name].first %></span>
-                    <% end %>
-                    <%= f.text_field :name, required: true, maxlength: @form.short_limit, class: 'govuk-input', data: { 'msg-required': t('hub.feedback.errors.name') } %>
-                  </div>
+                          <span class="govuk-error-message"><%= @form.errors[:email].first %></span>
+                      <% end %>
+                      <span id="event-name-hint" class="govuk-hint">
+                        <%= t('hub.feedback.questions.email_hint') %>
+                      </span>
+                      <%= f.email_field :email, required: true, maxlength: @form.short_limit, class: 'govuk-input', data: { msg: t('hub.feedback.errors.email') } %>
+                    </div>
 
-                  <div class="govuk-form-group <% if @form.errors.include?(:email) %>govuk-form-group--error<% end %>">
-                   <%= f.label :email, t('hub.feedback.questions.email'), class: 'govuk-label' %>
-                   <% if @form.errors.include?(:name) %>
-                        <span class="govuk-error-message"><%= @form.errors[:email].first %></span>
-                    <% end %>
-                    <span id="event-name-hint" class="govuk-hint">
-                      <%= t('hub.feedback.questions.email_hint') %>
-                    </span>
-                    <%= f.email_field :email, required: true, maxlength: @form.short_limit, class: 'govuk-input', data: { msg: t('hub.feedback.errors.email') } %>
+                    <p class="govuk-body govuk-!-margin-top-4"><%= t('hub.feedback.consent_message_html', href: link_to(t('hub.feedback.privacy_notice_link'), privacy_notice_path(anchor:'how-we-use-information'))) %></p>
                   </div>
-
-                  <p class="govuk-body govuk-!-margin-top-4"><%= t('hub.feedback.consent_message_html', href: link_to(t('hub.feedback.privacy_notice_link'), privacy_notice_path(anchor:'how-we-use-information'))) %></p>
+                </div>
+                <div class="govuk-radios__item">
+                  <%= f.radio_button :reply, false, {required: true, class: "govuk-radios__input", data: { msg: t('hub.feedback.errors.reply')}}%>
+                  <%= f.label :reply_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
                 </div>
               </div>
-              <div class="govuk-radios__item">
-                <%= f.radio_button :reply, false, {required: true, class: "govuk-radios__input", data: { msg: t('hub.feedback.errors.reply')}}%>
-                <%= f.label :reply_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
-              </div>
-            </div>
-          </fieldset>
-        </div>
+            </fieldset>
+          </div>
 
-        <%= f.hidden_field :js_disabled, value: true %>
+          <%= f.hidden_field :js_disabled, value: true %>
 
-        <div class="actions">
-          <%= f.submit t('hub.feedback.send_message'), class: 'govuk-button' %>
-        </div>
-  <% end %>
+          <div class="actions">
+            <%= f.submit t('hub.feedback.send_message'), class: 'govuk-button' %>
+          </div>
+    <% end %>
+  </div>
 </div>

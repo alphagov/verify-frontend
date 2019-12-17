@@ -1,63 +1,65 @@
 <%= page_title 'hub.select_phone.title' %>
 <% content_for :feedback_source, 'SELECT_PHONE_PAGE' %>
 
-<div class="govuk-grid-column-three-quarters">
-  <h1 class="govuk-heading-l"><%= t 'hub.select_phone.title' %></h1>
-  <p><%= t 'hub.select_phone.explanation' %></p>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.select_phone.title' %></h1>
+    <p><%= t 'hub.select_phone.explanation' %></p>
 
-  <%= form_for @form, url: select_phone_path, html: { id: 'validate-phone', class: 'select-phone-form', novalidate: 'novalidate', 'data-msg': t('hub.select_phone.errors.no_selection')} do |f| %>
+    <%= form_for @form, url: select_phone_path, html: { id: 'validate-phone', class: 'select-phone-form', novalidate: 'novalidate', 'data-msg': t('hub.select_phone.errors.no_selection')} do |f| %>
 
-      <%= render 'shared/form-errors', errors: flash[:errors] %>
+        <%= render 'shared/form-errors', errors: flash[:errors] %>
 
-      <div class="govuk-form-group <% if @form.errors %>govuk-form-group--error<% end %>">
-        <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-            <h2 class="govuk-heading-m govuk-visually-hidden">
-              <%= t 'hub.select_phone.question.mobile_phone' %>
-            </h2>
-          </legend>
-          <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <%= f.radio_button :mobile_phone, true, {class: "govuk-radios__input", 'data-aria-controls': "conditional-mobile_phone_true"}%>
-              <%= f.label :mobile_phone_true, t('hub.select_phone.question.mobile_phone_option_yes'), class: "govuk-label govuk-radios__label"%>
-            </div>
-            <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-              id="conditional-mobile_phone_true">
-              <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset">
+        <div class="govuk-form-group <% if @form.errors %>govuk-form-group--error<% end %>">
+          <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+              <h2 class="govuk-heading-m govuk-visually-hidden">
+                <%= t 'hub.select_phone.question.mobile_phone' %>
+              </h2>
+            </legend>
+            <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <%= f.radio_button :mobile_phone, true, {class: "govuk-radios__input", 'data-aria-controls': "conditional-mobile_phone_true"}%>
+                <%= f.label :mobile_phone_true, t('hub.select_phone.question.mobile_phone_option_yes'), class: "govuk-label govuk-radios__label"%>
+              </div>
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                id="conditional-mobile_phone_true">
+                <div class="govuk-form-group">
                   <fieldset class="govuk-fieldset">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-                      <h2 class="govuk-heading-s"><%= t 'hub.select_phone.question.smart_phone' %></h2>
-                    </legend>
-                    <div class="govuk-radios">
-                      <div class="govuk-radios__item">
-                        <%= f.radio_button :smart_phone, true, {class: "govuk-radios__input"}%>
-                        <%= f.label :smart_phone_true, t('hub.select_phone.question.smart_phone_option_yes'), class: "govuk-label govuk-radios__label"%>
+                    <fieldset class="govuk-fieldset">
+                      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                        <h2 class="govuk-heading-s"><%= t 'hub.select_phone.question.smart_phone' %></h2>
+                      </legend>
+                      <div class="govuk-radios">
+                        <div class="govuk-radios__item">
+                          <%= f.radio_button :smart_phone, true, {class: "govuk-radios__input"}%>
+                          <%= f.label :smart_phone_true, t('hub.select_phone.question.smart_phone_option_yes'), class: "govuk-label govuk-radios__label"%>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <%= f.radio_button :smart_phone, false, {class: "govuk-radios__input"}%>
+                          <%= f.label :smart_phone_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
+                        </div>
+                        <div class="govuk-radios__item">
+                          <%= f.radio_button :smart_phone, 'do_not_know', {class: "govuk-radios__input"}%>
+                          <%= f.label :smart_phone_do_not_know, t('option.unknown'), class: "govuk-label govuk-radios__label"%>
+                        </div>
                       </div>
-                      <div class="govuk-radios__item">
-                        <%= f.radio_button :smart_phone, false, {class: "govuk-radios__input"}%>
-                        <%= f.label :smart_phone_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
-                      </div>
-                      <div class="govuk-radios__item">
-                        <%= f.radio_button :smart_phone, 'do_not_know', {class: "govuk-radios__input"}%>
-                        <%= f.label :smart_phone_do_not_know, t('option.unknown'), class: "govuk-label govuk-radios__label"%>
-                      </div>
-                    </div>
-                  </fieldset>
+                    </fieldset>
+                </div>
+              </div>
+              <div class="govuk-radios__item">
+                <%= f.radio_button :mobile_phone, false, {class: "govuk-radios__input"}%>
+                <%= f.label :mobile_phone_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
               </div>
             </div>
-            <div class="govuk-radios__item">
-              <%= f.radio_button :mobile_phone, false, {class: "govuk-radios__input"}%>
-              <%= f.label :mobile_phone_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
-            </div>
-          </div>
-        </fieldset>
-      </div>
+          </fieldset>
+        </div>
 
-      <div id="validation-error-message-js"></div>
+        <div id="validation-error-message-js"></div>
 
-      <div class="actions">
-        <%= f.submit t('navigation.continue'), class: 'govuk-button', id: 'next-button' %>
-      </div>
-<% end %>
+        <div class="actions">
+          <%= f.submit t('navigation.continue'), class: 'govuk-button', id: 'next-button' %>
+        </div>
+  <% end %>
+  </div>
 </div>

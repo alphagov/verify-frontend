@@ -1,66 +1,67 @@
 <%= page_title 'hub.further_information.title', cycle_three_name: @cycle_three_attribute.field_name %>
 <% content_for :feedback_source, 'CYCLE_3_PAGE' %>
 
-<div class="govuk-grid-column-three-quarters">
-  <% unless session[:assertion_expiry].nil? %>
-    <%= render partial: 'further_information/modal_dialog'%>
-  <% end %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <% unless session[:assertion_expiry].nil? %>
+      <%= render partial: 'further_information/modal_dialog'%>
+    <% end %>
 
-  <h1 class="govuk-heading-l"><%= @transaction_name.slice(0,1).upcase + @transaction_name.slice(1..-1)%></h1>
-  <% if @cycle_three_attribute.intro_html %>
-    <%= raw @cycle_three_attribute.intro_html %>
-  <% else %>
-    <p><%= t('hub.further_information.first_time') %></p>
-  <% end %>
+    <h1 class="govuk-heading-l"><%= @transaction_name.slice(0,1).upcase + @transaction_name.slice(1..-1)%></h1>
+    <% if @cycle_three_attribute.intro_html %>
+      <%= raw @cycle_three_attribute.intro_html %>
+    <% else %>
+      <p><%= t('hub.further_information.first_time') %></p>
+    <% end %>
 
-  <%= form_for @cycle_three_attribute, url: further_information_submit_path,
-                html: { novalidate: true,
-                        id: 'further-information' } do |f| %>
-    <fieldset>
-      <div class="form-group <%= 'error' if @cycle_three_attribute.errors[:cycle_three_data].any? %>">
-        <%= f.label :cycle_three_data, class: 'form-label-bold' do %>
-          <%= @cycle_three_attribute.field_name %>
-          <span class="form-hint"><%= t('hub.further_information.example_text', example: @cycle_three_attribute.example) %></span>
-          <% if @cycle_three_attribute.errors.include?(:cycle_three_data) %>
-            <span class="error-message">
-              <%= t(@cycle_three_attribute.errors[:cycle_three_data].first, cycle_three_name: @cycle_three_attribute.name) %>
-            </span>
-          <% end %>
-        <% end %>
-        <%= f.text_field :cycle_three_data, required: true, pattern: h(@cycle_three_attribute.pattern.source),
-                          class: 'govuk-input govuk-!-width-three-quarters',
-                          'data-msg': t('hub.further_information.attribute_validation_message',
-                                        cycle_three_name: @cycle_three_attribute.name),
-                          autocomplete: 'off' %>
-      </div>
-      <div class="form-group">
-      <details>
-        <summary>
-          <span class="summary"><%= t 'hub.further_information.help_with_your', cycle_three_name: @cycle_three_attribute.name %></span>
-        </summary>
-        <div class="panel help-finding-further-information">
-          <%= raw @cycle_three_attribute.help_to_find %>
+    <%= form_for @cycle_three_attribute, url: further_information_submit_path,
+                  html: { novalidate: true,
+                          id: 'further-information' } do |f| %>
+      <fieldset class="govuk-fieldset">
+        <div class="govuk-form-group <%= 'error' if @cycle_three_attribute.errors[:cycle_three_data].any? %>">
+          <%= f.label :cycle_three_data, class: 'govuk-label govuk-!-font-weight-bold' do %>
+            <%= @cycle_three_attribute.field_name %><% end %>
+            <span class="govuk-hint"><%= t('hub.further_information.example_text', example: @cycle_three_attribute.example) %></span>
+            <% if @cycle_three_attribute.errors.include?(:cycle_three_data) %>
+              <span class="error-message">
+                <%= t(@cycle_three_attribute.errors[:cycle_three_data].first, cycle_three_name: @cycle_three_attribute.name) %>
+              </span>
+            <% end %>
+          
+          <%= f.text_field :cycle_three_data, required: true, pattern: h(@cycle_three_attribute.pattern.source),
+                            class: 'govuk-input govuk-!-width-three-quarters',
+                            'data-msg': t('hub.further_information.attribute_validation_message',
+                                          cycle_three_name: @cycle_three_attribute.name),
+                            autocomplete: 'off' %>
         </div>
-      </details>
-      </div>
+        <div class="govuk-form-group">
+        <details class="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text"><%= t 'hub.further_information.help_with_your', cycle_three_name: @cycle_three_attribute.name %></span>
+          </summary>
+          <div class="govuk-details__text">
+            <%= raw @cycle_three_attribute.help_to_find %>
+          </div>
+        </details>
+        </div>
+        <div class="form-group">
+          <%= f.submit t('navigation.continue'), id: 'continue-button', class: 'govuk-button' %>
+        </div>
+      </fieldset>
+    <% end %>
+    <% if @cycle_three_attribute.allows_nullable? %>
       <div class="form-group">
-        <%= f.submit t('navigation.continue'), id: 'continue-button', class: 'govuk-button' %>
+        <%= form_tag(further_information_null_attribute_submit_path) do %>
+          <%= button_tag t('hub.further_information.null_attribute', cycle_three_name: @cycle_three_attribute.name),
+            id: 'cycle_three_null_attribute_link', class: 'govuk-button', role: 'link' %>
+        <% end %>
       </div>
-    </fieldset>
-  <% end %>
-  <% if @cycle_three_attribute.allows_nullable? %>
-    <div class="form-group">
-      <%= form_tag(further_information_null_attribute_submit_path) do %>
-        <%= button_tag t('hub.further_information.null_attribute', cycle_three_name: @cycle_three_attribute.name),
-          id: 'cycle_three_null_attribute_link', class: 'govuk-button', role: 'link' %>
+    <% end %>
+    <div class="cancel-process">
+      <%= form_tag(further_information_cancel_path) do %>
+        <%= button_tag t('hub.further_information.cancel', transaction_name: @transaction_name),
+                        id: 'cancel', class: 'button-link', role: 'link' %>
       <% end %>
     </div>
-  <% end %>
-  <div class="cancel-process">
-    <%= form_tag(further_information_cancel_path) do %>
-      <%= button_tag t('hub.further_information.cancel', transaction_name: @transaction_name),
-                      id: 'cancel', class: 'govuk-button', role: 'link' %>
-    <% end %>
   </div>
 </div>
-

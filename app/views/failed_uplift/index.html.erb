@@ -1,38 +1,40 @@
 <%= page_title 'hub.failed_uplift.title' %>
 <% content_for :feedback_source, 'FAILED_UPLIFT_PAGE' %>
 
-<div class="govuk-grid-column-three-quarters">
-  <h1 class="govuk-heading-l"><%= t 'hub.failed_uplift.heading', display_name: @idp.display_name %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.failed_uplift.heading', display_name: @idp.display_name %></h1>
 
-  <%= t 'hub.failed_uplift.reasons_html', idp_name: @idp.display_name %>
+    <%= t 'hub.failed_uplift.reasons_html', idp_name: @idp.display_name %>
 
-  <h2 class="govuk-heading-m"><%= t 'hub.failed_uplift.what_next_heading' %></h2>
-  <details class="next-actions">
-    <summary><span class="summary"><%= t 'hub.failed_uplift.other_ways_summary', other_ways_description: @transaction.other_ways_description %></span></summary>
-    <div class="govuk-inset-text">
-      <%= raw @transaction.other_ways_text %>
-    </div>
-  </details>
+    <h2 class="govuk-heading-m"><%= t 'hub.failed_uplift.what_next_heading' %></h2>
+    <details class="next-actions">
+      <summary><span class="summary"><%= t 'hub.failed_uplift.other_ways_summary', other_ways_description: @transaction.other_ways_description %></span></summary>
+      <div class="govuk-inset-text">
+        <%= raw @transaction.other_ways_text %>
+      </div>
+    </details>
 
-  <details class="next-actions">
-    <summary><span class="summary"><%= t 'hub.failed_uplift.contact_summary', idp_name: @idp.display_name %></span></summary>
-    <div class="govuk-inset-text">
-      <%= raw @idp.contact_details %>
-    </div>
-  </details>
+    <details class="next-actions">
+      <summary><span class="summary"><%= t 'hub.failed_uplift.contact_summary', idp_name: @idp.display_name %></span></summary>
+      <div class="govuk-inset-text">
+        <%= raw @idp.contact_details %>
+      </div>
+    </details>
 
-  <details class="next-actions">
-    <summary><span class="summary"><%= t 'hub.failed_uplift.try_another_summary' %></span></summary>
-    <div class="govuk-inset-text">
-      <p><%= t 'hub.failed_uplift.try_another_text', idp_name: @idp.display_name %></p>
-      <p><%= link_to t('hub.failed_uplift.start_again'), about_choosing_a_company_path, id: 'startAgain' %></p>
-    </div>
-  </details>
+    <details class="next-actions">
+      <summary><span class="summary"><%= t 'hub.failed_uplift.try_another_summary' %></span></summary>
+      <div class="govuk-inset-text">
+        <p><%= t 'hub.failed_uplift.try_another_text', idp_name: @idp.display_name %></p>
+        <p><%= link_to t('hub.failed_uplift.start_again'), about_choosing_a_company_path, id: 'startAgain' %></p>
+      </div>
+    </details>
 
-  <h2 class="govuk-heading-m"><%= t 'hub.failed_uplift.still_use_heading', idp_name: @idp.display_name %></h2>
-  <ul class="govuk-list govuk-list--bullet">
-    <% loa1_transactions_list.each do |transaction| -%>
-        <li><%= link_to transaction.name, transaction.homepage %></li>
-    <% end %>
-  </ul>
+    <h2 class="govuk-heading-m"><%= t 'hub.failed_uplift.still_use_heading', idp_name: @idp.display_name %></h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <% loa1_transactions_list.each do |transaction| -%>
+          <li><%= link_to transaction.name, transaction.homepage %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
