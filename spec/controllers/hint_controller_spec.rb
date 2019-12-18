@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'controller_helper'
 require 'spec_helper'
 require 'api_test_helper'
+require 'piwik_test_helper'
 
 describe HintController do
   subject { get :ajax_request, params: { locale: 'en' } }
@@ -14,10 +15,13 @@ describe HintController do
           'SUCCESS' => 'http://idcorp.com',
         }.to_json
 
+        stub_piwik_request = stub_piwik_report_journey_hint_present('yes')
+
         body = JSON.parse(subject.body)
         expect(body["value"]).to eq(true)
         expect(subject.content_type).to eq("application/json")
         expect(subject).to have_http_status(200)
+        expect(stub_piwik_request).to have_been_made.once
       end
 
       it 'json object should return true even if the value is not set' do
@@ -25,19 +29,24 @@ describe HintController do
           'SUCCESS' => '',
         }.to_json
 
+        stub_piwik_request = stub_piwik_report_journey_hint_present('yes')
+
         body = JSON.parse(subject.body)
         expect(body["value"]).to eq(true)
         expect(subject.content_type).to eq("application/json")
         expect(subject).to have_http_status(200)
+        expect(stub_piwik_request).to have_been_made.once
       end
     end
 
     context 'user does not have a journey hint present' do
       it 'json object should return false' do
+        stub_piwik_request = stub_piwik_report_journey_hint_present('no')
         body = JSON.parse(subject.body)
         expect(body["value"]).to eq(false)
         expect(subject.content_type).to eq("application/json")
         expect(subject).to have_http_status(200)
+        expect(stub_piwik_request).to have_been_made.once
       end
     end
   end
