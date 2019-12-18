@@ -197,6 +197,15 @@ module Analytics
       )
     end
 
+    def report_hint_present(request, hint_present)
+      report_event_without_current_transaction(
+        request,
+        'Engagement',
+        'Journey hint present',
+        hint_present ? 'yes' : 'no'
+      )
+    end
+
     def report_action(current_transaction, request, action, extra_custom_vars = {})
       begin
         @analytics_reporter.report_action(
@@ -229,6 +238,16 @@ module Analytics
       rescue Display::FederationTranslator::TranslationError => e
         Rails.logger.warn e
       end
+    end
+
+    def report_event_without_current_transaction(request, event_category, event_name, event_action)
+      @analytics_reporter.report_event(
+        request,
+        '',
+        event_category,
+        event_name,
+        event_action
+      )
     end
 
   private
