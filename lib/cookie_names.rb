@@ -8,7 +8,8 @@ module CookieNames
   NO_CURRENT_SESSION_VALUE = 'no-current-session'.freeze
   AB_TEST = 'ab_test'.freeze
   AB_TEST_TRIAL = 'ab_test_trial'.freeze
-  ANALYTICS_SESSION_COOKIE_PREFIX = '_pk_id.'.freeze
+  MATOMO_COOKIE_PREFIX = '_pk'.freeze
+  ANALYTICS_SESSION_COOKIE_PREFIX = MATOMO_COOKIE_PREFIX + '_id.'.freeze
 
   def self.session_cookies
     [SESSION_ID_COOKIE_NAME, SESSION_COOKIE_NAME]

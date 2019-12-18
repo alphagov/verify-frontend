@@ -11,6 +11,14 @@ module UserCookiesPartialController
     cookies[CookieNames::PIWIK_USER_ID] = SecureRandom.hex(8) unless cookies.has_key? CookieNames::PIWIK_USER_ID
   end
 
+  def delete_visitor_cookie
+    cookies.delete CookieNames::PIWIK_USER_ID
+  end
+
+  def delete_piwik_cookies
+    cookies.each { |name, _value| cookies.delete name if name.starts_with? CookieNames::MATOMO_COOKIE_PREFIX }
+  end
+
   def store_locale_in_cookie
     cookies.signed[CookieNames::VERIFY_LOCALE] = {
         value: I18n.locale,

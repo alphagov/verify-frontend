@@ -35,6 +35,22 @@ def stub_piwik_request_no_session(extra_parameters = {}, extra_headers = {}, ext
       .with(headers: piwik_headers.update(extra_headers), query: hash_including(piwik_request.update(extra_parameters)))
 end
 
+def stub_piwik_request_no_session_no_cvar(extra_parameters = {}, extra_headers = {})
+  piwik_request = {
+      'rec' => '1',
+      'apiv' => '1',
+      'idsite' => INTERNAL_PIWIK.site_id.to_s,
+      'cookie' => 'false'
+  }
+  piwik_headers = {
+      'Connection' => 'Keep-Alive',
+      'Host' => 'localhost:4242',
+      'User-Agent' => 'Rails Testing'
+  }
+  stub_request(:get, INTERNAL_PIWIK.url)
+      .with(headers: piwik_headers.update(extra_headers), query: hash_including(piwik_request.update(extra_parameters)))
+end
+
 def create_extra_custom_variables_only(extra_custom_variables)
   '{' + extra_custom_variables.join(',') + '}'
 end
@@ -93,6 +109,16 @@ def stub_piwik_report_number_of_recommended_idps(number_of_recommended_idps, loa
     e_a: number_of_recommended_idps.to_s
   }
   stub_piwik_request(piwik_request, {}, loa, [], transaction_analytics_description)
+end
+
+def stub_piwik_report_journey_hint_present(hint_present)
+  piwik_request = {
+    e_c: 'Engagement',
+    action_name: 'trackEvent',
+    e_n: 'Journey hint present',
+    e_a: hint_present
+  }
+  stub_piwik_request_no_session_no_cvar(piwik_request)
 end
 
 def stub_piwik_report_single_idp_success(service_id, uuid)

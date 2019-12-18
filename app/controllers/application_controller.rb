@@ -18,7 +18,8 @@ class ApplicationController < ActionController::Base
   include AnalyticsPartialController
 
   before_action :validate_session
-  before_action :set_visitor_cookie
+  before_action :delete_visitor_cookie
+  before_action :delete_piwik_cookies
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception

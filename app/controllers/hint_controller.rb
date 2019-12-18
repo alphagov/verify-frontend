@@ -15,6 +15,8 @@ class HintController < ApplicationController
 
     entity_id = success_entity_id
 
+    FEDERATION_REPORTER.report_hint_present(request, !entity_id.nil?)
+
     json_object = { 'status': 'OK', 'value': !entity_id.nil? }
 
     render json: json_object.to_json, callback: params['callback']
