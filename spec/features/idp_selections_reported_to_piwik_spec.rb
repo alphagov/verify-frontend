@@ -45,7 +45,7 @@ RSpec.describe 'When the user selects an IDP' do
     click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
     click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
-    expect(piwik_registration_virtual_page).to have_been_made.once
+    expect(piwik_registration_virtual_page).to_not have_been_made
   end
 
   it 'appends the IDP name on subsequent selections' do
@@ -61,13 +61,13 @@ RSpec.describe 'When the user selects an IDP' do
     click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
     click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
-    expect(idcorp_piwik_request).to have_been_made.once
+    expect(idcorp_piwik_request).to_not have_been_made
 
     visit '/choose-a-certified-company'
     click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-two.name'))
     click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-two.name'))
 
-    expect(idcorp_and_bobs_piwik_request).to have_been_made.once
+    expect(idcorp_and_bobs_piwik_request).to_not have_been_made
   end
 
   it 'truncates IdP names' do
@@ -84,7 +84,7 @@ RSpec.describe 'When the user selects an IDP' do
     click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
     click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
-    expect(idcorp_piwik_request).to have_been_made.once
+    expect(idcorp_piwik_request).to_not have_been_made
   end
 end
 

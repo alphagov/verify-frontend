@@ -44,7 +44,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     expect(page).to have_current_path '/confirmation'
     expect(api_request).to have_been_made.once
     expect(a_request(:get, INTERNAL_PIWIK.url)
-      .with(query: hash_including('action_name' => 'Success - REGISTER_WITH_IDP at LOA LEVEL_2'))).to have_been_made.once
+      .with(query: hash_including('action_name' => 'Success - REGISTER_WITH_IDP at LOA LEVEL_2'))).to_not have_been_made
   end
 
   it 'will redirect the user to /cancelled-registration when they cancel at the IDP' do
@@ -80,7 +80,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     expect(page).to have_current_path '/failed-sign-in'
     expect(api_request).to have_been_made.once
     piwik_request = { 'action_name' => 'Failure - SIGN_IN_WITH_IDP' }
-    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
+    expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to_not have_been_made
   end
 
   it 'will redirect the user to /response-processing on successful sign in at the IDP' do
@@ -94,7 +94,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     expect(page).to have_current_path '/response-processing'
     expect(api_request).to have_been_made.once
     expect(a_request(:get, INTERNAL_PIWIK.url)
-               .with(query: hash_including('action_name' => 'Success - SIGN_IN_WITH_IDP at LOA LEVEL_2'))).to have_been_made.once
+               .with(query: hash_including('action_name' => 'Success - SIGN_IN_WITH_IDP at LOA LEVEL_2'))).to_not have_been_made
   end
 
   it 'will redirect the user to /paused on pending response' do
@@ -110,7 +110,7 @@ RSpec.describe 'User returns from an IDP with an AuthnResponse' do
     expect(page).to have_current_path '/paused'
     expect(stub_api_request).to have_been_made.once
     expect(a_request(:get, INTERNAL_PIWIK.url)
-               .with(query: hash_including('action_name' => 'Paused - REGISTER_WITH_IDP'))).to have_been_made.once
+               .with(query: hash_including('action_name' => 'Paused - REGISTER_WITH_IDP'))).to_not have_been_made
   end
 
   it 'will redirect the user to /response-processing on successful sign in at the Country' do

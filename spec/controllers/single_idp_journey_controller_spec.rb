@@ -33,7 +33,7 @@ describe SingleIdpJourneyController do
       )
       expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IdpId #{VALID_STUB_IDP} with uuid #{UUID_ONE}")
       expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url'])
-      expect(stub_piwik_request).to have_been_made.once
+      expect(stub_piwik_request).to_not have_been_made
       expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
         .to match({
           transaction_id: VALID_TEST_RP, idp_entity_id: VALID_STUB_IDP, uuid: UUID_ONE
@@ -57,7 +57,7 @@ describe SingleIdpJourneyController do
       )
       expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IdpId #{VALID_STUB_IDP} with uuid #{UUID_ONE}")
       expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url'])
-      expect(stub_piwik_request).to have_been_made.once
+      expect(stub_piwik_request).to_not have_been_made
       expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
         .to match({
           transaction_id: VALID_TEST_RP, idp_entity_id: VALID_STUB_IDP, uuid: UUID_ONE
@@ -174,14 +174,14 @@ describe SingleIdpJourneyController do
       stub_piwik_event = stub_piwik_report_single_idp_success(VALID_TEST_RP, UUID_ONE)
 
       expect(subject).to render_template(:continue_to_your_idp)
-      expect(stub_piwik_event).to have_been_made.once
+      expect(stub_piwik_event).to_not have_been_made
     end
 
     it 'should redirect to /start if cookie is missing' do
       stub_piwik_event = stub_piwik_report_single_idp_invalid_cookie
       expect(Rails.logger).to receive(:warn).with(/Single IDP cookies was not found or was malformed/)
       expect(subject).to redirect_to(start_path)
-      expect(stub_piwik_event).to(have_been_made.once)
+      expect(stub_piwik_event).to_not have_been_made
     end
 
     it 'should redirect to /start if cookie is corrupted' do
@@ -189,7 +189,7 @@ describe SingleIdpJourneyController do
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = "blah"
       expect(Rails.logger).to receive(:warn).with(/Single IDP cookies was not found or was malformed/)
       expect(subject).to redirect_to(start_path)
-      expect(stub_piwik_event).to(have_been_made.once)
+      expect(stub_piwik_event).to_not have_been_made
     end
 
     it 'should redirect to /start if cookie is missing some fields' do
@@ -264,7 +264,7 @@ describe SingleIdpJourneyController do
 
       expect(Rails.logger).to receive(:info).with(/The value of the Single IDP cookie does not match the session value of http:\/\/www.test-rp.gov.uk\/SAML2\/MD for transaction_id test-rp-noc3/)
       expect(subject).to redirect_to(start_path) # call to subject is made here – NB retrospective expect statements (e.g. have_been_made) must come after this line.
-      expect(stub_piwik_event).to(have_been_made.once)
+      expect(stub_piwik_event).to_not have_been_made
     end
   end
 

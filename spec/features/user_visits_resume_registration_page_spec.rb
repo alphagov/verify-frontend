@@ -84,7 +84,7 @@ RSpec.describe 'When the user visits the resume registration page and ' do
 
       expect(page).to have_current_path(redirect_to_idp_resume_path)
       expect(select_idp_stub_request).to have_been_made.once
-      expect(stub_piwik_request('action_name' => "Resume - #{idp_display_name}")).to have_been_made.once
+      expect(stub_piwik_request('action_name' => "Resume - #{idp_display_name}")).to_not have_been_made
     end
   end
 
@@ -97,7 +97,7 @@ RSpec.describe 'When the user visits the resume registration page and ' do
       expect_any_instance_of(PausedRegistrationController).to receive(:resume_with_idp_ajax).and_call_original
 
       click_button t('hub.paused_registration.resume.continue', display_name: idp_display_name)
-      expect(stub_piwik_request('action_name' => "Resume - #{idp_display_name}")).to have_been_made.once
+      expect(stub_piwik_request('action_name' => "Resume - #{idp_display_name}")).to_not have_been_made
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")

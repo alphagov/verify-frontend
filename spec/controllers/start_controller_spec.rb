@@ -46,7 +46,7 @@ describe StartController do
       )
       post :request_post, params: { locale: 'en', start_form: { selection: false } }
       expect(subject).to redirect_to('/sign-in')
-      expect(stub_piwik_request).to have_been_made.once
+      expect(stub_piwik_request).to_not have_been_made
     end
 
     it 'will redirect to about page when selection is true' do
@@ -57,7 +57,7 @@ describe StartController do
       )
       post :request_post, params: { locale: 'en', start_form: { selection: true } }
       expect(subject).to redirect_to('/about')
-      expect(stub_piwik_request).to have_been_made.once
+      expect(stub_piwik_request).to_not have_been_made
     end
   end
 
@@ -77,6 +77,6 @@ describe StartController do
     )
     get :register, params: { locale: 'en' }
     expect(subject).to redirect_to('/about')
-    expect(stub_piwik_request).to have_been_made.once
+    expect(stub_piwik_request).to_not have_been_made
   end
 end

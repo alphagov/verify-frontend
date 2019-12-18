@@ -51,7 +51,7 @@ describe ChooseACertifiedCompanyLoa2VariantCController do
 
       get :index, params: { locale: 'en' }
 
-      expect(stub_piwik_request).to have_been_made.once
+      expect(stub_piwik_request).to_not have_been_made
       expect(subject).to render_template(:choose_a_certified_company_LOA2)
     end
 
@@ -63,7 +63,7 @@ describe ChooseACertifiedCompanyLoa2VariantCController do
       stub_piwik_request = stub_piwik_report_number_of_recommended_idps(0, 'LEVEL_2', 'analytics description for test-rp')
       get :index, params: { locale: 'en' }
 
-      expect(stub_piwik_request).to have_been_made.once
+      expect(stub_piwik_request).to_not have_been_made
       expect(subject).to redirect_to select_documents_advice_path
     end
 

@@ -57,7 +57,7 @@ RSpec.describe 'user visits further information page' do
 
     expect(page.current_path).to eql(response_processing_path)
     expect(stub_request).to have_been_made
-    expect(piwik_request).to have_been_made
+    expect(piwik_request).to_not have_been_made
   end
 
   it 'will redirect to start on cancel' do
@@ -72,7 +72,7 @@ RSpec.describe 'user visits further information page' do
     click_button t('hub.further_information.cancel', transaction_name: rp_name)
 
     expect(page.current_path).to eql(redirect_to_service_start_again_path)
-    expect(piwik_request).to have_been_made
+    expect(piwik_request).to_not have_been_made
     expect(cancel_request).to have_been_made
   end
 
@@ -88,7 +88,7 @@ RSpec.describe 'user visits further information page' do
 
     expect(page.current_path).to eql(response_processing_path)
     expect(stub_request).to have_been_made
-    expect(piwik_request).to have_been_made
+    expect(piwik_request).to_not have_been_made
   end
 
   it 'will error if user tries to submit to null attribute end point with non-nullable attribute' do

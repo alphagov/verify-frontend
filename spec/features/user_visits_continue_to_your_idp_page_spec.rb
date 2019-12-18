@@ -64,7 +64,7 @@ RSpec.describe 'When the user visits the continue to your IDP page' do
 
       expect(page).to have_current_path(redirect_to_single_idp_path)
       expect(select_idp_stub_request).to have_been_made.once
-      expect(stub_piwik_request('action_name' => "Single IDP selected - #{idp_display_name}")).to have_been_made.once
+      expect(stub_piwik_request('action_name' => "Single IDP selected - #{idp_display_name}")).to_not have_been_made
     end
   end
 
@@ -97,7 +97,7 @@ RSpec.describe 'When the user visits the continue to your IDP page' do
       expect_any_instance_of(SingleIdpJourneyController).to receive(:continue_ajax).and_call_original
 
       click_button t('hub.single_idp_journey.continue_button', display_name: idp_display_name)
-      expect(stub_piwik_request('action_name' => "Single IDP selected - #{idp_display_name}")).to have_been_made.once
+      expect(stub_piwik_request('action_name' => "Single IDP selected - #{idp_display_name}")).to_not have_been_made
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")

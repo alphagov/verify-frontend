@@ -116,7 +116,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
     expect(page).to have_current_path(redirect_to_idp_register_path)
     expect(select_idp_stub_request).to have_been_made.once
-    expect(piwik_registration_virtual_page).to have_been_made.once
+    expect(piwik_registration_virtual_page).to_not have_been_made
     expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   end
 
@@ -134,7 +134,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
 
     expect(page).to have_current_path(redirect_to_idp_register_path)
     expect(select_idp_stub_request).to have_been_made.once
-    expect(piwik_registration_virtual_page).to have_been_made.once
+    expect(piwik_registration_virtual_page).to_not have_been_made
     expect(cookie_value('verify-front-journey-hint')).to_not be_nil
   end
 
@@ -165,7 +165,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
       expect(page).to have_content("hints are 'has_mobile, has_apps, has_ukpassport'")
       expect(page).to have_content("language hint was 'en'")
       expect(select_idp_stub_request).to have_been_made.once
-      expect(piwik_registration_virtual_page).to have_been_made.once
+      expect(piwik_registration_virtual_page).to_not have_been_made
       expect(cookie_value('verify-front-journey-hint')).to_not be_nil
     end
 

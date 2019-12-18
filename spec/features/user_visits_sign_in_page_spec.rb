@@ -50,18 +50,22 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   end
 
   def and_piwik_was_sent_a_signin_event
+    skip "piwik tracking disabled until consent established"
     expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name}")).to have_been_made.once
   end
 
   def and_piwik_was_sent_a_signin_hint_followed_event
+    skip "piwik tracking disabled until consent established"
     expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Hint Followed")).to have_been_made.once
   end
 
   def and_piwik_was_sent_a_signin_hint_ignored_event
+    skip "piwik tracking disabled until consent established"
     expect(stub_piwik_request('action_name' => "Sign In - #{idp_display_name} - Hint Ignored")).to have_been_made.once
   end
 
   def then_piwik_was_sent_a_journey_hint_shown_event_for(idp_name)
+    skip "piwik tracking disabled until consent established"
     expect(stub_piwik_request('action_name' => "Sign In Journey Hint Shown - #{idp_name}")).to have_been_made.once
   end
 
@@ -82,7 +86,7 @@ RSpec.describe 'user selects an IDP on the sign in page' do
   end
 
   def expect_to_have_updated_the_piwik_journey_type_variable
-    expect(@stub_piwik_journey_request).to have_been_made.once
+    expect(@stub_piwik_journey_request).to_not have_been_made
   end
 
   let(:idp_entity_id) { 'http://idcorp.com' }
