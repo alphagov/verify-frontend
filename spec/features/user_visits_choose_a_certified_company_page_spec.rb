@@ -211,6 +211,7 @@ describe 'When the user visits the choose a certified company page' do
       end
 
       it 'should render GA elements on choose certified company page' do
+        skip "Google Analytics disabled until consent mechanism in place"
         visit '/choose-a-certified-company'
 
         expect(page).to have_css "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
@@ -240,9 +241,16 @@ describe 'When the user visits the choose a certified company page' do
       end
 
       it 'should render GA elements on choose certified company page' do
+        skip "Google Analytics disabled until consent mechanism in place"
         visit '/choose-a-certified-company'
 
         expect(page).to have_css "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
+      end
+
+      it 'should not render GA elements on choose certified company page' do
+        visit '/choose-a-certified-company'
+
+        expect(page).to_not have_css "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
       end
 
       it 'should not render GA elements on about page' do

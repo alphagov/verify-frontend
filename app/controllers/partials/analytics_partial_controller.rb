@@ -8,7 +8,7 @@ module AnalyticsPartialController
   end
 
   def render_cross_gov_ga
-    @render_cross_gov_ga = true
+    @render_cross_gov_ga = false
   end
 
   def report_to_analytics(action_name)
