@@ -28,21 +28,21 @@ describe('Analytics', function () {
             $('input[piwik_event_tracking="journey_user_type"][value="false"]').prop('checked', true).change();
             $('input[piwik_event_tracking="journey_user_type"][value="true"]').prop('checked', true).change();
 
-            expect(_paq.push.calls.count()).toBe(1);
+            expect(_paq.push.calls.count()).toBe(2);
             expectLatestEntryInPiwikQueueToMatch('Journey', 'Change to First Time', 'user_type');
         });
 
         it('should report to Piwik when evidence is selected', function () {
             $('input[piwik_event_tracking="evidence_example"]').prop('checked', true).change();
 
-            expect(_paq.push.calls.count()).toBe(1);
+            expect(_paq.push.calls.count()).toBe(2);
             expectLatestEntryInPiwikQueueToMatch('Evidence', 'yes', 'example');
         });
 
         it('should not report to Piwik when an input without the markup is changed', function () {
             $('#some-other-checkbox').prop('checked', true).change();
 
-            expect(_paq.push).not.toHaveBeenCalled();
+            expect(_paq.push.calls.count()).toBe(1);
         });
     });
     describe('on a page with the user_type already selected', function() {
@@ -58,7 +58,7 @@ describe('Analytics', function () {
         it('should report to Piwik when the user type input is changed from an initial value', function () {
             $('input[piwik_event_tracking="journey_user_type"][value="true"]').prop('checked', true).change();
 
-            expect(_paq.push.calls.count()).toBe(1);
+            expect(_paq.push.calls.count()).toBe(2);
             expectLatestEntryInPiwikQueueToMatch('Journey', 'Change to First Time', 'user_type');
         });
     });
