@@ -13,7 +13,7 @@ RSpec.describe 'When the user visits the continue to your IDP page' do
       encrypted_entity_id,
       PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
       PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => 'LEVEL_2',
-      PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => 'single-idp'
+      PolicyEndpoints::PARAM_JOURNEY_TYPE => 'single-idp'
     )
   }
   let(:set_single_idp_journey_cookie) {
@@ -97,7 +97,7 @@ RSpec.describe 'When the user visits the continue to your IDP page' do
       expect_any_instance_of(SingleIdpJourneyController).to receive(:continue_ajax).and_call_original
 
       click_button t('hub.single_idp_journey.continue_button', display_name: idp_display_name)
-      expect(stub_piwik_request('action_name' => "Single IDP selected - #{idp_display_name}")).to have_been_made.once
+      expect(stub_piwik_request('action_name' => "Single IDP selected - #{idp_display_name}")).to_not have_been_made
       expect(page).to have_current_path(location)
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")
