@@ -26,8 +26,6 @@
 
     global.GOVUK.piwikEventsTracking = {
         init: function() {
-            _paq.push(['disableCookies']);
-
             var piwikEvents = {
                 evidence_example: getEvidenceEvent('example'),
                 journey_user_type: getUserTypeEvent()
