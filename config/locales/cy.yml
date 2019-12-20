@@ -40,6 +40,7 @@ cy:
     failed_country_sign_in: methu-mewngofnodi-gwlad
     failed_uplift: methwyd-yr-ymgodiad
     other_ways_to_access_service: ffyrdd-eraill-i-gael-mynediad-i'r-gwasanaeth
+    other_ways_after_eidas: country-not-listed-cy
     forgot_company: wedi-anghofio-cwmni
     response_processing: prosesu-ymateb
     redirect_to_idp_sign_in: ailgyfeirio-i-idp/mewngofnodi
@@ -271,6 +272,21 @@ cy:
   hub:
     other_ways_title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
+    other_ways_after_eidas:
+      title: Country not listed
+      heading: Other ways to %{other_ways_description}
+      explanation: If your digital identity scheme is not available yet, you can prove who you are another way to %{other_ways_description}.
+      verify:
+        heading: "Use GOV.UK Verify"
+        explanation_html: |
+          <p>To create an account, you must choose a company to verify your identity. The company will check your personal details and identity documents.</p>
+          <p>GOV.UK Verify works best if you:</p>
+          <ul>
+          <li>have a UK address</li>
+          <li>are over 20</li>
+          <li>have at least one photo identity document, from any country</li>
+          </ul>
+        button: "Use GOV.UK Verify"
     choose_a_country:
       title: Dewiswch wlad
       heading: Defnyddio hunaniaeth digidol o wlad Ewropeaidd arall

@@ -3,4 +3,9 @@ class OtherWaysToAccessServiceController < ApplicationController
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
   end
+
+  def after_eidas
+    @other_ways_description = current_transaction.other_ways_description
+    @other_ways_text = current_transaction.other_ways_text
+  end
 end
