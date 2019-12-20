@@ -2,8 +2,8 @@
 <% content_for :feedback_source, 'ABOUT_CERTIFIED_COMPANIES_PAGE' %>
 <% # Uses slide layout %>
 
-<p class="verify-inverse"><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
-<p class="verify-inverse"><%= t 'hub.about_certified_companies.dont_need_to_be_existing_customer' %></p>
+<p ><%= t 'hub.about_certified_companies.a_certified_company_will_verify' %></p>
+<p ><%= t 'hub.about_certified_companies.dont_need_to_be_existing_customer' %></p>
 
 <ul class="govuk-list list-companies">
   <% @identity_providers.each do |idp| %>
@@ -13,10 +13,10 @@
   <% end %>
 </ul>
 
-<p class="verify-inverse"><%= t 'hub.about_certified_companies.no_charge' %></p>
+<p ><%= t 'hub.about_certified_companies.no_charge' %></p>
 
 <div class="actions">
-  <%= button_link_to t('navigation.next'), about_identity_accounts_path, id: 'next-button', class: "govuk-button verify-inverse" %>
+  <%= button_link_to t('navigation.next'), about_identity_accounts_path, id: 'next-button', class: "govuk-button" %>
 </div>
 
 <details class="govuk-details">

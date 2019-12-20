@@ -3,7 +3,7 @@
 <% content_for :feedback_source, 'START_PAGE' %>
 <% # Uses slide layout %>
 
-  <h1 class="govuk-heading-l verify-inverse"><%= t 'hub.start.heading' %></h1>
+  <h1 class="govuk-heading-l"><%= t 'hub.start.heading' %></h1>
 
   <%= form_for @form, url: start_path, html: {id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
 
@@ -14,11 +14,11 @@
         <div class="govuk-radios">
           <div class="govuk-radios__item">
             <%= f.radio_button :selection, true, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input"}%>
-            <%= f.label :selection_true, t('hub.start.answer_yes'), class: "govuk-label govuk-radios__label verify-inverse"%>
+            <%= f.label :selection_true, t('hub.start.answer_yes'), class: "govuk-label govuk-radios__label"%>
           </div>
           <div class="govuk-radios__item">
             <%= f.radio_button :selection, false, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input"}%>
-            <%= f.label :selection_false, t('hub.start.answer_no'), class: "govuk-label govuk-radios__label verify-inverse"%>
+            <%= f.label :selection_false, t('hub.start.answer_no'), class: "govuk-label govuk-radios__label"%>
           </div>
         </div>
       </fieldset>
@@ -28,7 +28,7 @@
 
     <div class="form-group-tight">
       <div class="actions">
-        <%= f.submit t('hub.start.continue'), class: 'govuk-button verify-inverse-btn', id: 'next-button' %>
+        <%= f.submit t('hub.start.continue'), class: 'govuk-button verify-inverse-btn button', id: 'next-button' %>
       </div>
     </div>
   <% end %>

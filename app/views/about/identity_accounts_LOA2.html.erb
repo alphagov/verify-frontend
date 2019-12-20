@@ -13,8 +13,8 @@
     <span class="govuk-details__summary-text"><%= t 'hub.about_identity_accounts.summary' %></span>
   </summary>
   <div class="govuk-details__text">
-    <p class="govuk-body verify-inverse"><%= t 'hub.about_identity_accounts.details' %></p>
-    <ul class="govuk-list govuk-list--bullet verify-inverse">
+    <p class="govuk-body"><%= t 'hub.about_identity_accounts.details' %></p>
+    <ul class="govuk-list govuk-list--bullet">
       <% transactions_list.name_homepage.each do |transaction| -%>
           <li><%= transaction.name %></li>
       <% end %>

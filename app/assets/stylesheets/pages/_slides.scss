@@ -27,12 +27,7 @@
   }
 
   h1 {
-    @include govuk-media-query($from: mobile) {
-      margin-top: $govuk-gutter-half;
-      margin-bottom: $govuk-gutter-half;
-    }
-
-    @include govuk-media-query($until: mobile) {
+    @include govuk-media-query($from: mobile, $until: mobile) {
       margin-top: $govuk-gutter-half;
       margin-bottom: $govuk-gutter-half;
     }
@@ -42,8 +37,11 @@
   }
 
   p,
+  h1,
+  label,
   ul {
-    @include govuk-font(24)
+    color: govuk-colour("white");
+    @include govuk-font(24);
   }
 
   a,
@@ -110,8 +108,12 @@
 }
 
 .hide-mobile {
-  @include govuk-media-query($until: mobile) {
+  @include govuk-media-query($from: mobile) {
     display: none;
+  }
+
+  @include govuk-media-query($from: tablet) {
+    display: block;
   }
 }
 

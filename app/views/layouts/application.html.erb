@@ -44,10 +44,10 @@
     <% if cookies[:seen_cookie_message].nil? %>
       
       <div id="global-cookie-message">
-        <div class="govuk-width-container cookie-msg">
+        <div class="govuk-width-container">
           <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full-width">
-                <p class="govuk-body-s cookie-msg">
+            <div class="govuk-grid-column-full">
+                <p class="govuk-body-s govuk-!-margin-top-4">
                   <%= t 'cookie_message.message' %>
                   <%= link_to t('cookie_message.link'), cookies_path %>
                 </p>
@@ -59,7 +59,7 @@
       </div>
     <% end %>
 
-    <header class="govuk-header " role="banner" data-module="govuk-header">
+    <header class="govuk-header" role="banner" data-module="govuk-header">
       <div class="govuk-header__container govuk-width-container">
         <div class="govuk-header__logo">
           <a href="/" class="govuk-header__link govuk-header__link--homepage">
@@ -76,17 +76,15 @@
         </div>
         <div class="govuk-header__content">
 
-          <!-- <%= link_to t('layout.application.service_name'), 'http://www.gov.uk/', class: "govuk-header__link govuk-header__link--service-name" %> -->
-
         </div>
       </div>
     </header>
     
     <div class="govuk-width-container">
-      <main class="govuk-main-wrapper " id="content" role="main">        
+      <main class="govuk-main-wrapper govuk-!-padding-top-0" id="content" role="main">        
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-two-thirds">&nbsp;</div>
-          <div class="govuk-grid-column-one-third hide-mobile pin-to-top">
+          <div class="govuk-grid-column-one-third hide-mobile">
             <%= render 'shared/available_languages' unless @hide_available_languages %>
           </div>
         </div>
@@ -94,7 +92,7 @@
             <%= content_for?(:main) ? yield(:main) : yield %>
 
           <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full-width">
+            <div class="govuk-grid-column-full">
               <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>      
             </div>
           </div>
@@ -107,11 +105,11 @@
       <%= render 'shared/ga' %>
     </div>
 
-    <footer class="govuk-footer " role="contentinfo">
-      <div class="govuk-width-container ">
+    <footer class="govuk-footer" role="contentinfo">
+      <div class="govuk-width-container">
         <div class="govuk-footer__meta">
           <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
-            <h2 class="govuk-visually-hidden">Support links</h2>
+            <h2 class="govuk-visually-hidden"><%= t 'footer.support_links' %></h2>
             <ul class="govuk-footer__inline-list">
               <li class="govuk-footer__inline-list-item"><a href="https://www.gov.uk/help" hreflang="en"><%= t 'footer.help' %></a></li>
               <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.accessibility.title'), accessibility_path) %></li>

@@ -34,12 +34,12 @@
           $label.append($error);
         },
         highlight: function (element) {
-          $(element).addClass('form-control-error')
+          $(element).addClass('govuk-input--error')
             .closest('.govuk-form-group').addClass('govuk-form-group--error');
         },
         unhighlight: function (element) {
           var formGroup = $(element).closest('.govuk-form-group');
-          $(element).removeClass('form-control-error');
+          $(element).removeClass('govuk-input--error');
           formGroup.removeClass('govuk-form-group--error');
           formGroup.find('.govuk-error-message').hide();
         },
