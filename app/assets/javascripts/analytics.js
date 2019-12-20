@@ -26,6 +26,7 @@
 
     var piwikAnalyticsQueue = [
       ["appendToTrackingUrl", "new_visit=" + newVisit],
+      ["setUserId", getPiwikVisitorIdCookie()],
       ["setDocumentTitle", enTitle],
       ["trackPageView"],
       ["enableLinkTracking"],
