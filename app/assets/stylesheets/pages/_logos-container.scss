@@ -13,10 +13,6 @@
         max-width: 200px;
       }
 
-      @include govuk-media-query($until: tablet);
-
-      @include govuk-media-query($until: tablet);
-
       &.verify {
         border-right-style: solid;
         border-right-width: 1px;

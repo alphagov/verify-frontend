@@ -1,6 +1,6 @@
 describe("Select Documents Form", function () {
 
-    var formWithNoErrors = '<div id="no-documents-message" class="visually-hidden" aria-live="assertive"></div>' +
+    var formWithNoErrors = '<div id="no-documents-message" class="govuk-visually-hidden" aria-live="assertive"></div>' +
         '<div class="grid-row">' +
         '<div class="column-two-thirds">' +
         '<h1 class="govuk-heading-l">Your photo identity document</h1>' +

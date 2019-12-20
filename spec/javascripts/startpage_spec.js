@@ -7,11 +7,11 @@ describe('The start page', function () {
       '<div class="govuk-radios">' +
       '<div class="govuk-radios__item">' +
       '<input required="required" data-msg="Test error message" piwik_event_tracking="journey_user_type" class="govuk-radios__input" type="radio" value="true" name="start_form[selection]" id="start_form_selection_true" />' +
-      '<label class="govuk-label govuk-radios__label verify-inverse" for="start_form_selection_true">This is my first time using GOV.UK Verify</label>' +
+      '<label class="govuk-label govuk-radios__label" for="start_form_selection_true">This is my first time using GOV.UK Verify</label>' +
       '</div>' +
       '<div class="govuk-radios__item">' +
       '<input required="required" data-msg="Test error message" piwik_event_tracking="journey_user_type" class="govuk-radios__input" type="radio" value="false" name="start_form[selection]" id="start_form_selection_false" />' +
-      '<label class="govuk-label govuk-radios__label verify-inverse" for="start_form_selection_false">I’ve used GOV.UK Verify before</label>' +
+      '<label class="govuk-label govuk-radios__label" for="start_form_selection_false">I’ve used GOV.UK Verify before</label>' +
       '</div>' +
       '</div>' +
       '</fieldset>' +

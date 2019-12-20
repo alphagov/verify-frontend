@@ -14,15 +14,15 @@
   </summary>
 
   <div class="govuk-details__text">
-    <p class="govuk-body verify-inverse"><%= t 'hub.about_identity_accounts.details_loa1_html' %></p>
-    <ul class="govuk-list govuk-list--bullet verify-inverse">
+    <p class="govuk-body"><%= t 'hub.about_identity_accounts.details_loa1_html' %></p>
+    <ul class="govuk-list govuk-list--bullet">
       <% loa1_transactions_list.each do |transaction| -%>
           <li><%= transaction.name %></li>
       <% end %>
     </ul>
 
-    <p class="govuk-body verify-inverse"><%= t 'hub.about_identity_accounts.details_loa1_uplift_list' %></p>
-    <ul class="govuk-list govuk-list--bullet verify-inverse">
+    <p class="govuk-body"><%= t 'hub.about_identity_accounts.details_loa1_uplift_list' %></p>
+    <ul class="govuk-list govuk-list--bullet">
       <% loa2_transactions_list.each do |transaction| -%>
           <li><%= transaction.name %></li>
       <% end %>

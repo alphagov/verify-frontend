@@ -50,8 +50,6 @@
     }
 
     &__text {
-
-      @extend %govuk-body !optional;
       margin-bottom: 20px;
     }
 
@@ -60,8 +58,6 @@
     }
 
     &__link {
-
-      @extend %govuk-body !optional;
       background: none;
       border: none;
       vertical-align: middle;
@@ -103,7 +99,7 @@
 
 // Modal dialog polyfill styles
 $border-color: #000000;
-$background-color: #ffffff;
+$background-color: govuk-colour("white");
 $dialog-backdrop-colour: rgba(0, 0, 0, 0.8);
 $dialog-border: 5px solid $border-color;
 
@@ -156,4 +152,3 @@ dialog {
     }
   }
 }
-

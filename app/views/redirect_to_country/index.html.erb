@@ -3,7 +3,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l"><%= t('hub.redirect_to_country.heading')%></h1>
-    <div class="application-notice info-notice">
+    <div>
       <p><%= t('hub.redirect_to_country.description')%></p>
     </div>
     <%= form_tag(@country_request.location, class: 'js-auto-submit', authenticity_token: true, enforce_utf8: false) do %>

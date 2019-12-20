@@ -111,7 +111,6 @@
 
   }
 
-  @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
     padding-left: 230px;
     min-height: 96px;
@@ -126,14 +125,9 @@
       margin: auto;
       width: 200px;
       height: 96px;
-
-      @include govuk-if-ie8 {
-        top: 15px;
-      }
     }
   }
 
-  @include govuk-media-query($until: mobile);
   @include govuk-media-query($from: mobile) {
     .company-logo {
       input[type="image"] {
@@ -164,7 +158,6 @@
   .idp-option {
     text-align: center;
 
-    @include govuk-media-query($until: tablet);
     @include govuk-media-query($from: tablet) {
       text-align: left;
     }
@@ -174,7 +167,6 @@
       margin-top: 30px;
       text-align: center;
 
-      @include govuk-media-query($until: tablet);
       @include govuk-media-query($from: tablet) {
         min-width: 230px;
 
@@ -183,8 +175,7 @@
         }
       }
 
-      @include govuk-media-query($until: mobile);
-      @include govuk-media-query($from: mobile) {
+      @include govuk-media-query($until: mobile) {
         margin-top: 5px;
       }
     }

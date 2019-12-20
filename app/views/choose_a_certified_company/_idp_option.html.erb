@@ -12,7 +12,7 @@
     <% unless identity_provider.unavailable %>
         <div class="idp-option">
           <%= f.button t('hub.choose_a_certified_company.choose_idp', display_name: identity_provider.display_name),
-                        class: recommended ? 'govuk-button idp-btn-nudge' : 'govuk-button govuk-button--secondary idp-btn-nudge',
+                        class: recommended ? 'govuk-button' : 'govuk-button govuk-button--secondary',
                         role: recommended ? nil : 'link',
                         name: identity_provider.simple_id,
                         id: nil,

@@ -23,11 +23,6 @@
   visibility: visible;
 }
 
-.verify-inverse,
-.verify-inverse p {
-  color: govuk-colour("white");
-}
-
 .verify-inverse-btn {
   color: $govuk-brand-colour;
   background-color: govuk-colour("white");
@@ -43,22 +38,7 @@
   visibility: hidden;
 }
 
-.pin-to-top {
-  margin-top: -2.5em;
-  float: right;
-}
-
 .js-hidden {
   display: none;
 }
 
-.idp-btn-nudge {
-  margin-top: 30px !important;
-}
-
-.cookie-msg {
-  padding-top: 0.5em;
-  padding-bottom: 0.1em;
-  padding-left: 0.8em;
-  margin-bottom: 0.4em;
-}
