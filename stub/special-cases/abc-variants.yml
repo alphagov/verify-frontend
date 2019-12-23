@@ -1,8 +1,4 @@
 ---
-variant_b_idp_set:
-  - stub-idp-one
-  - stub-idp-two
-  - stub-idp-three
 variant_c_idp_set:
   - stub-idp-one
   - stub-idp-three

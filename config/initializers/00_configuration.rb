@@ -33,11 +33,7 @@ CONFIG = Configuration.load! do
 
   # begin abc-testing-modifications
   option_string 'abc_variants_config', 'ABC_VARIANTS_CONFIG', default: "#{FED_CONFIG_DIR}/special-cases/abc-variants.yml"
-
-  option_string 'rules_variant_b_directory', 'RULES_B_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules-variant-b/"
   option_string 'rules_variant_c_directory', 'RULES_C_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules-variant-c/"
-
-  option_string 'segment_definitions_variant_b', 'SEGMENT_DEFINITIONS_VARIANT_B', default: "#{FED_CONFIG_DIR}/segment_definitions_variant_b.yml"
   option_string 'segment_definitions_variant_c', 'SEGMENT_DEFINITIONS_VARIANT_C', default: "#{FED_CONFIG_DIR}/segment_definitions_variant_c.yml"
   # end abc-testing-modifications
 

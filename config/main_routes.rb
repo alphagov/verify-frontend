@@ -9,10 +9,8 @@ get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
 # HUH-233 short hub 2019 q3 multivariate tests - LOA2 only
 SHORT_HUB_2019_Q3 = "short_hub_2019_q3-preview".freeze
 short_hub_v3_control_a_piwik = SelectRoute.new(SHORT_HUB_2019_Q3, 'control_a', is_start_of_test: true, experiment_loa: 'LEVEL_2')
-short_hub_v3_variant_b_piwik = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_b_2_idp', is_start_of_test: true, experiment_loa: 'LEVEL_2')
 short_hub_v3_variant_c_piwik = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_c_2_idp_short_hub', is_start_of_test: true, experiment_loa: 'LEVEL_2')
 short_hub_v3_control_a = SelectRoute.new(SHORT_HUB_2019_Q3, 'control_a', is_start_of_test: false, experiment_loa: 'LEVEL_2')
-short_hub_v3_variant_b = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_b_2_idp', is_start_of_test: false, experiment_loa: 'LEVEL_2')
 short_hub_v3_variant_c = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_c_2_idp_short_hub', is_start_of_test: false, experiment_loa: 'LEVEL_2')
 
 constraints IsLoa1 do
@@ -127,17 +125,11 @@ end
 
 # HUH-233 short hub 2019 q3 multivariate tests - LOA2 only
 # Control A = unaffected
-# Variant B = 2 IDPs
 # Variant C = 2 IDPs and new shorter hub journey
 
 # HUH-233: implement piwik control A starting route
 constraints short_hub_v3_control_a_piwik do
   get 'about', to: 'about_loa2#index', as: :about
-end
-
-# HUH-233: implement piwik variant B starting route
-constraints short_hub_v3_variant_b_piwik do
-  get 'about', to: 'about_loa2_variant_b#index', as: :about
 end
 
 # HUH-234: implement piwik variant C starting route
@@ -165,28 +157,6 @@ constraints short_hub_v3_control_a do
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
-end
-
-# HUH-233: implement appropriate variant B routes
-constraints short_hub_v3_variant_b do
-  get 'about_certified_companies', to: 'about_loa2_variant_b#certified_companies', as: :about_certified_companies
-  get 'about_identity_accounts', to: 'about_loa2_variant_b#identity_accounts', as: :about_identity_accounts
-  get 'about_choosing_a_company', to: 'about_loa2_variant_b#choosing_a_company', as: :about_choosing_a_company
-
-  get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
-  post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
-
-  get 'select_documents', to: 'select_documents#index', as: :select_documents
-  get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
-  post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
-
-  get 'select_phone', to: 'select_phone_variant_b#index', as: :select_phone
-  post 'select_phone', to: 'select_phone_variant_b#select_phone', as: :select_phone_submit
-  get 'verify_will_not_work_for_you', to: 'select_phone_variant_b#verify_will_not_work_for_you', as: :verify_will_not_work_for_you
-
-  get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant_b#index', as: :choose_a_certified_company
-  get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2_variant_b#about', as: :choose_a_certified_company_about
-  post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant_b#select_idp', as: :choose_a_certified_company_submit
 end
 
 # HUH-234: implement appropriate variant C routes
