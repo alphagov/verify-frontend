@@ -34,10 +34,10 @@
 
     margin-top: 0;
     margin-bottom: $govuk-gutter;
+    color: govuk-colour("white");
   }
 
   p,
-  h1,
   label,
   ul {
     color: govuk-colour("white");
@@ -80,7 +80,6 @@
   // slides-verify-logo is used to wrap the logo
   .slides-verify-logo {
     max-width: 200px;
-    margin-top: 20px;
 
     img {
       width: 100%;
@@ -108,20 +107,12 @@
 }
 
 .hide-mobile {
-  @include govuk-media-query($from: mobile) {
+  @include govuk-media-query($from: mobile, $until: tablet) {
     display: none;
-  }
-
-  @include govuk-media-query($from: tablet) {
-    display: block;
   }
 }
 
 .show-mobile {
-  @include govuk-media-query($from: desktop) {
-    display: none;
-  }
-
   @include govuk-media-query($from: tablet) {
     display: none;
   }

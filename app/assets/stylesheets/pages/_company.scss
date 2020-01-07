@@ -11,7 +11,7 @@
 .company {
   border-bottom: 1px solid $govuk-border-colour;
   text-align: center;
-  @include govuk-media-query($until: tablet);
+
   @include govuk-media-query($from: tablet) {
     border: 5px solid $govuk-border-colour;
     margin-bottom: 30px;
@@ -26,7 +26,6 @@
   border-bottom: none;
   padding-bottom: 30px;
 
-  @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
     border: 5px solid $govuk-brand-colour;
     margin-bottom: 30px;
@@ -36,7 +35,6 @@
 .company-inner {
   padding: 5px 0 18px;
 
-  @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
     padding: 20px;
   }
@@ -49,7 +47,6 @@
   padding-bottom: 25%;
   margin: 0 auto 15px;
 
-  @include govuk-media-query($until: tablet);
   @include govuk-media-query($from: tablet) {
     margin: 0 auto 15px;
     width: 80%;
@@ -75,7 +72,6 @@
 .company .govuk-button {
   margin: 0 0 20px;
 
-  @include govuk-media-query($until: mobile);
   @include govuk-media-query($from: mobile) {
     width: 65%;
   }
