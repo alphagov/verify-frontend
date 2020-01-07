@@ -33,12 +33,8 @@
   background-color: govuk-colour("light-grey");
 }
 
-.hidden {
+.hidden,
+.js-hidden {
   display: none;
   visibility: hidden;
 }
-
-.js-hidden {
-  display: none;
-}
-
