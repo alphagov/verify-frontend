@@ -8,21 +8,21 @@
     <%= t 'hub.failed_uplift.reasons_html', idp_name: @idp.display_name %>
 
     <h2 class="govuk-heading-m"><%= t 'hub.failed_uplift.what_next_heading' %></h2>
-    <details class="govuk-details" data-module="govuk-details">>
+    <details class="govuk-details" data-module="govuk-details">
       <summary class="govuk-details__summary"><span class="govuk-details__summary-text"><%= t 'hub.failed_uplift.other_ways_summary', other_ways_description: @transaction.other_ways_description %></span></summary>
       <div class="govuk-details__text">
         <%= raw @transaction.other_ways_text %>
       </div>
     </details>
 
-    <details class="govuk-details" data-module="govuk-details">>
+    <details class="govuk-details" data-module="govuk-details">
       <summary class="govuk-details__summary"><span class="govuk-details__summary-text"><%= t 'hub.failed_uplift.contact_summary', idp_name: @idp.display_name %></span></summary>
       <div class="govuk-details__text">
         <%= raw @idp.contact_details %>
       </div>
     </details>
 
-    <details class="govuk-details" data-module="govuk-details">>
+    <details class="govuk-details" data-module="govuk-details">
       <summary class="govuk-details__summary"><span class="govuk-details__summary-text"><%= t 'hub.failed_uplift.try_another_summary' %></span></summary>
       <div class="govuk-details__text">
         <p><%= t 'hub.failed_uplift.try_another_text', idp_name: @idp.display_name %></p>

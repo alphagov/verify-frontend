@@ -8,20 +8,12 @@
        <meta http-equiv="refresh" content="<%= yield(:meta_refresh) %>">
     <% end %>
 
-<<<<<<< HEAD
-    <title><%= yield :page_title %> - GOV.UK Verify - GOV.UK</title>
-=======
     <title><%= display_page_title %> - GOV.UK Verify - GOV.UK</title>
     <%= tag('meta', name: 'verify|title', content: content_for(:page_title_in_english)) %>
->>>>>>> VBTIJLHg: Fix the analytics client
 
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<<<<<<< HEAD
-    
-=======
->>>>>>> VBTIJLHg: Fix the analytics client
     <%= favicon_link_tag        asset_path('govuk-frontend/govuk/assets/images/favicon.ico'), sizes: "16x16 32x32 48x48" %>
 
     <link rel="mask-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-mask-icon.svg')%>" color="blue">
@@ -29,10 +21,6 @@
     <link rel="apple-touch-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-167x167.png')%>" sizes="167x167">
     <link rel="apple-touch-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-apple-touch-icon-152x152.png')%>" sizes="152x152">
     <link rel="apple-touch-icon" href="<%= asset_path('govuk-frontend/govuk/assets/images/govuk-apple-touch-icon.png')%>">
-<<<<<<< HEAD
-    <%= content_for :head %>
-=======
->>>>>>> VBTIJLHg: Fix the analytics client
 </head>
 
   <body class="govuk-template__body">
@@ -142,8 +130,6 @@
     </footer>
     <script nonce="true" src="/assets/govuk-frontend/govuk/all.js"></script>
     <script>window.GOVUKFrontend.initAll()</script>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', nonce: true %>
-    <%= content_for :additional_javascript %>
-    <%= content_for :test %>
+    <%= javascript_include_tag 'application', nonce: true %>
   </body>
 </html>
