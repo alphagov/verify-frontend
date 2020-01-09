@@ -6,10 +6,9 @@
     <h1 class="govuk-heading-l"><%= t 'hub.redirect_to_idp_question.loa1_heading', display_name: @idp.display_name %></h1>
     <%= raw @idp.interstitial_question %>
 
+    <%= render 'shared/form-errors', errors: flash[:errors], form_name: 'interstitial-question-form' %>
+    
     <%= form_for @form, url: redirect_to_idp_question_submit_path, html: {id: 'interstitial-question-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
-
-        <%= render 'shared/form-errors', errors: flash[:errors] %>
-
         <%= content_tag :div, class: form_question_class do %>
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">

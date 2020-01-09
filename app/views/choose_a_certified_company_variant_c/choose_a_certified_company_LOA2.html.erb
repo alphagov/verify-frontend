@@ -4,10 +4,9 @@
     <%= javascript_include_tag 'piwik_idp_picker_tracking' %>
 <% end %>
 
-<div class="content-inner">
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h1 class="heading-large"><%= t 'hub_variant_c.choose_a_certified_company.heading' %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l"><%= t 'hub_variant_c.choose_a_certified_company.heading' %></h1>
       <p><%= t 'hub_variant_c.choose_a_certified_company.intro' %></p>
       <p>
         <%= t 'hub_variant_c.choose_a_certified_company.idp_count' %>
@@ -20,7 +19,6 @@
         <% end %>
       </div>
     </div>
-  </div>
 
   <% if @non_recommended_idps.any? %>
     <div id="non-matching-idps">

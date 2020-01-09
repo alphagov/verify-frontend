@@ -5,10 +5,9 @@
 
   <h1 class="govuk-heading-l"><%= t 'hub.start.heading' %></h1>
 
+  <%= render 'shared/form-errors', errors: flash[:errors], form_name: "start-page-form" %>
+
   <%= form_for @form, url: start_path, html: {id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
-
-    <%= render 'shared/form-errors', errors: flash[:errors] %>
-
     <%= content_tag :div, class: form_question_class do %>
       <fieldset class="govuk-fieldset">
         <div class="govuk-radios">

@@ -37,6 +37,10 @@
     color: govuk-colour("white");
   }
 
+  h2 {
+    color: govuk-colour("white");
+  }
+
   p,
   label,
   ul {
@@ -102,6 +106,10 @@
     p,
     ul {
       font-size: 1em;
+    }
+
+    summary:hover {
+      color: govuk-colour("light-grey");
     }
   }
 }

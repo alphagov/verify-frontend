@@ -2,7 +2,7 @@
 <% content_for :feedback_source, 'CONFIRMATION_PAGE' %>
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-l"><%= t 'hub.confirmation.heading', display_name: @idp_name %></h1>
     <p><%= t 'hub.confirmation.message', display_name: @idp_name %></p>
     <p><%= t 'hub.confirmation.continue_to_rp', transaction_name: @transaction_name %></p>
@@ -12,12 +12,12 @@
 
     <p class="small-details"><%= t 'hub.confirmation.add_security_loa1' %></p>
 
-    <details>
-      <summary>
-        <span class="summary"><%= t 'hub.confirmation.extra_security' %></span>
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text"><%= t 'hub.confirmation.extra_security' %></span>
       </summary>
 
-      <div class="govuk-inset-text">
+      <div class="govuk-details__text">
         <ul class="govuk-list govuk-list--bullet">
           <% loa2_transactions_list.each do |transaction| -%>
               <li><%= transaction.name %></li>

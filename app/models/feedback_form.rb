@@ -52,7 +52,7 @@ private
 
   def mandatory_fields_present
     if what_missing? || details_missing? || @reply.blank?
-      errors.add(:base, I18n.t('hub.feedback.errors.no_selection'))
+      errors.add(:base, I18n.t('hub.feedback.errors.no_selection')) unless errors.include?(:base)
     end
   end
 
@@ -64,7 +64,7 @@ private
 
   def what_should_be_present
     if what_missing?
-      errors.add(:what, I18n.t('hub.feedback.errors.details'))
+      errors.add(:what, I18n.t('hub.feedback.errors.what'))
     end
   end
 
@@ -76,14 +76,14 @@ private
 
   def name_should_be_present
     if reply_required? && name_missing?
-      errors.add(:base, I18n.t('hub.feedback.errors.no_selection'))
+      errors.add(:base, I18n.t('hub.feedback.errors.no_selection')) unless errors.include?(:base)
       errors.add(:name, I18n.t('hub.feedback.errors.name'))
     end
   end
 
   def email_format_should_be_valid
     if reply_required? && (email_missing? || !EmailValidator.valid?(email, strict_mode: true))
-      errors.add(:base, I18n.t('hub.feedback.errors.no_selection'))
+      errors.add(:base, I18n.t('hub.feedback.errors.no_selection')) unless errors.include?(:base)
       errors.add(:email, I18n.t('hub.feedback.errors.email'))
     end
   end

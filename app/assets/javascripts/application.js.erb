@@ -19,6 +19,7 @@ window.GOVUK.shimLinksWithButtonRole.init();
 
 window.GOVUK.validation.init();
 window.GOVUK.selectDocuments.init();
+window.GOVUK.selectDocumentsVariantC.init();
 window.GOVUK.selectPhone.init();
 window.GOVUK.willItWorkForMe.init();
 window.GOVUK.feedback.init();
@@ -47,4 +48,11 @@ $(function () {
   window.GOVUK.signin.attach();
   window.GOVUK.chooseCountry.attach();
   window.GOVUK.autoSubmitForm.attach();
+
+  elementsToHide = document.getElementsByClassName("verify-js-show")
+  for(i=0; i<elementsToHide.length; i++) { elementsToHide[i].classList.remove("verify-js-show"); }
+  elementsToShow = document.getElementsByClassName("verify-js-hidden")
+  for(i=0; i<elementsToShow.length; i++) { elementsToShow[i].style.display = "none"; }
+
 });
+

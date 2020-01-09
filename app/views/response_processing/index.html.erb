@@ -1,8 +1,8 @@
 <%= page_title 'hub.response_processing.title' %>
 <% content_for :meta_refresh, '2' %>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds response-processing no-right-hand-logo">
+<div class="govuk-grid-row no-right-hand-logo">
+  <div class="govuk-grid-column-full response-processing">
     <h1 class="govuk-heading-l"><%= t('hub.response_processing.heading', rp_name: @rp_name) %></h1>
     <p><%= t('hub.response_processing.bear_with_us') %></p>
     <%= image_tag 'loading.gif', alt: 'Loading animation', class: 'loading' %>

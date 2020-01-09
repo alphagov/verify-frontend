@@ -136,16 +136,16 @@ cy:
     select_documents_advice:
       advice_html:
         3-more-things-special-heading: |
-          <h1 class="heading-large">Based on your answers, GOV.UK Verify will not work for you</h1>
+          <h1 class="govuk-heading-l">Based on your answers, GOV.UK Verify will not work for you</h1>
 
           <p>If you don't have the items you need to set up an identity account, you can try another way to access the service.</p>
 
         3-more-things-and-req-photo-id: |
-          <h2 class="heading-medium">Try again with GOV.UK Verify</h2>
+          <h2 class="govuk-heading-m">Try again with GOV.UK Verify</h2>
 
           <p>To set up an identity account, you need 3 of the following items:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>your valid passport</li>
             <li>your current driving licence, full or provisional, with your photo on it</li>
             <li>a phone or tablet that can download an app</li>
@@ -153,72 +153,72 @@ cy:
           </ul>
 
         2-more-things-of-doc-cc-app: |
-          <h1 class="heading-large">Based on your answers, you need 2 more items</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
 
           <p>To set up an identity account, you also need 2 of these 3 items:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>another photo ID</li>
             <li>your credit or debit card</li>
             <li>a phone or tablet that can download an app</li>
           </ul>
 
         2-more-things-and-req-photo-id-and-card: |
-          <h1 class="heading-large">Based on your answers, you need 2 more items</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
 
           <p>To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>2 photo IDs</li>
             <li>1 photo ID and your credit or debit card</li>
           </ul>
 
         2-more-things-and-req-photo-id-and-app: |
-          <h1 class="heading-large">Based on your answers, you need 2 more items</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
 
           <p>To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>2 photo IDs</li>
             <li>1 photo ID and a phone or tablet that can download an app</li>
           </ul>
 
         1-more-thing-req-photo-id: |
-          <h1 class="heading-large">Based on your answers you need a photo ID</h1>
+          <h1 class="govuk-heading-l">Based on your answers you need a photo ID</h1>
 
           <p>To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>a passport - this can be up to 6 months past the expiry date</li>
             <li>a valid driving licence with your photo on it</li>
           </ul>
 
         1-more-thing-of-cc-and-app: |
-          <h1 class="heading-large">Based on your answers, you need 1 more item</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
 
           <p>To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>your credit or debit card</li>
             <li>a phone or tablet that can download an app</li>
           </ul>
 
         1-more-thing-of-photo-id-and-cc: |
-          <h1 class="heading-large">Based on your answers, you need 1 more item</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
 
           <p>To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>a second photo ID</li>
             <li>your credit or debit card</li>
           </ul>
 
         1-more-thing-of-photo-id-and-app: |
-          <h1 class="heading-large">Based on your answers, you need 1 more item</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
 
           <p>To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>a second photo ID</li>
             <li>a phone or tablet that can download an app</li>
           </ul>
@@ -251,7 +251,7 @@ cy:
       idp_count: You can pick either company.
       idp_explanation: "There’s more than one so that:"
       content_html: |
-        <ul class="list list-bullet">
+        <ul class="govuk-list govuk-list--bullet">
           <li>you can choose who verifies your identity</li>
           <li>everyone’s information is not stored in one place</li>
         </ul>

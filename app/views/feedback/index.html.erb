@@ -4,7 +4,7 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l"><%= t 'hub.feedback.heading' %></h1>
 
-    <%= render 'shared/form-errors', errors: flash[:errors], form_errors: @form.errors %>
+    <%= render 'shared/form-errors', errors: flash[:errors], form: @form %>
 
     <%= t 'hub.feedback.introduction_html' %>
 
@@ -22,14 +22,15 @@
     <%= form_for @form, url: feedback_submit_path, html: { class: 'feedback-form', id: 'feedback', novalidate: true } do |f| %>
         <fieldset class="govuk-fieldset">
           <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="<%= @form.long_limit %>">
-            <div class="govuk-form-group <% if @form.errors.include?(:details) %>govuk-form-group--error<% end %>">
+            <div class="govuk-form-group <% if @form.errors.include?(:what) %>govuk-form-group--error<% end %>">
               <%= f.label :what, t('hub.feedback.questions.what'), class: 'govuk-label' %>
               <% if @form.errors.include?(:what) %>
                   <span class="govuk-error-message">
                     <%= @form.errors[:what].first %>
                   </span>
               <% end %>
-              <%= f.text_area :what, rows: 10, cols: 80, class: 'govuk-textarea govuk-textarea--error govuk-js-character-count govuk-textarea--error', required: true,
+
+              <%= f.text_area :what, rows: 10, cols: 80, class: "govuk-textarea govuk-js-character-count #{@form.errors.include?(:what) ? 'govuk-textarea--error':''}", required: true,
                               'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
                               data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
                   'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit),
@@ -48,7 +49,7 @@
                     <%= @form.errors[:details].first %>
                   </span>
               <% end %>
-              <%= f.text_area :details, rows: 15, cols: 80, class: 'govuk-textarea govuk-textarea--error govuk-js-character-count govuk-textarea--error', required: true,
+              <%= f.text_area :details, rows: 15, cols: 80, class: "govuk-textarea govuk-js-character-count #{@form.errors.include?(:details) ? 'govuk-textarea--error':''}", required: true,
                               'data-msg': t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message')),
                               data: { 'rule-maxlength': @form.long_limit, 'msg-required': t('hub.feedback.errors.details'),
                   'msg-maxlength': t('hub.feedback.errors.too_long', max_length: @form.long_limit),

@@ -13,14 +13,16 @@
     </div>
 
     <% if flash[:errors] %>
-        <div id="validation-error-message-no-js" class="validation-message form-group">
-          <p class="error"><%= flash[:errors] %></p>
+      <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li><a href="#validate-other-documents"><%= flash[:errors] %></a></li>
+          </ul>
         </div>
+      </div>
     <% end %>
 
     <%= form_for @form, url: other_identity_documents_submit_path, html: {id: 'validate-other-documents', class: 'select-documents-form', novalidate: 'novalidate', 'data-msg': t('hub.select_documents.errors.no_selection')} do |f| %>
-
-      <h2 class="govuk-heading-m"><%= t 'hub.other_documents.non_uk_id_document' %></h2>
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">

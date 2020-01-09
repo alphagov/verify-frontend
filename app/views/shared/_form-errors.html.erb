@@ -1,7 +1,16 @@
 <% if errors %>
   <div  class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
-    <h2 class="govuk-error-summary__title" id="error-summary-title">
-      <%= errors %>
-    </h2>
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list">
+        
+        <% if defined?(form) %>
+          <% form.errors.each do |attribute, message| %>
+            <li><a href="#<%= "#{form.model_name.to_str.underscore}_#{attribute}" %>"><%= message %></a></li>
+          <% end %>
+        <% else %>
+          <li><a href="#<%= "#{form_name if defined?(form_name)}"%>"><%= errors %></a></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 <% end %>

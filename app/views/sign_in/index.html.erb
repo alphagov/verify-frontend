@@ -1,47 +1,49 @@
 <%= page_title 'hub.signin.title' %>
 <% content_for :feedback_source, 'SIGN_IN_PAGE' %>
 
-<div class="govuk-grid-column-full">
-  <p><%= link_to t('navigation.back'), start_path, class: 'govuk-back-link' %></p>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <p><%= link_to t('navigation.back'), start_path, class: 'govuk-back-link' %></p>
 
-  <h1 class="govuk-heading-l"><%= t 'hub.signin.heading' %></h1>
-  <p class="lede"><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), begin_registration_path, id: 'begin-registration-route') %></p>
+    <h1 class="govuk-heading-l"><%= t 'hub.signin.heading' %></h1>
+    <p class="lede"><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), begin_registration_path, id: 'begin-registration-route') %></p>
 
-  <% unless @suggested_idp.nil? %>
-    <p><%= t 'hub.signin.last_certified', company_name: @suggested_idp.display_name %></p>
+    <% unless @suggested_idp.nil? %>
+      <p><%= t 'hub.signin.last_certified', company_name: @suggested_idp.display_name %></p>
 
-    <% if @suggested_idp.authentication_enabled %>
-      <div class="govuk-grid-row">
-        <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
-          <%= render partial: 'shared/idp_list', locals: {identity_providers: [@suggested_idp]} %>
+      <% if @suggested_idp.authentication_enabled %>
+        <div class="govuk-grid-row">
+          <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
+            <%= render partial: 'shared/idp_list', locals: {identity_providers: [@suggested_idp]} %>
+          </div>
         </div>
-      </div>
-    <% else %>
+      <% else %>
+        <div class="govuk-grid-row">
+          <div class="">
+            <%= render partial: 'shared/disconnected_suggested_idp_list', locals: {identity_provider: @suggested_idp} %>
+          </div>
+        </div>
+      <% end %>
       <div class="govuk-grid-row">
-        <div class="">
-          <%= render partial: 'shared/disconnected_suggested_idp_list', locals: {identity_provider: @suggested_idp} %>
+        <div class="govuk-grid-column-full">
+          <p><%= t 'hub.signin.any_certified_company' %></p>
         </div>
       </div>
     <% end %>
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-        <p><%= t 'hub.signin.any_certified_company' %></p>
+      <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
+        <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
+        <%= render partial: 'shared/continue_to_idp_form' %>
       </div>
     </div>
-  <% end %>
-  <div class="govuk-grid-row">
-    <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
-      <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
-      <%= render partial: 'shared/continue_to_idp_form' %>
-    </div>
-  </div>
-  <% if @unavailable_identity_providers.any? %>
-    <%= render partial: 'shared/unavailable_idp_list', locals: {unavailable_identity_providers: @unavailable_identity_providers} %>
-  <% end %>
+    <% if @unavailable_identity_providers.any? %>
+      <%= render partial: 'shared/unavailable_idp_list', locals: {unavailable_identity_providers: @unavailable_identity_providers} %>
+    <% end %>
 
-  <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>
-  
-  <% if @disconnected_idps.any? %>
-    <%= render partial: 'shared/disconnected_idp_list', locals: {disconnected_identity_providers: @disconnected_idps} %>
-  <% end %>
+    <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>
+    
+    <% if @disconnected_idps.any? %>
+      <%= render partial: 'shared/disconnected_idp_list', locals: {disconnected_identity_providers: @disconnected_idps} %>
+    <% end %>
+  </div>
 </div>

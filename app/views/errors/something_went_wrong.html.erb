@@ -2,12 +2,14 @@
 <% content_for :feedback_source, 'ERROR_PAGE' %>
 <% content_for :piwik_custom_path, 'errors/generic-error' %>
 
-<div class="govuk-grid-column-two-thirds">
-  <h1 class="govuk-heading-l"><%= t 'errors.something_went_wrong.heading' %></h1>
-  <p class="govuk-body"><%= t 'errors.something_went_wrong.error_message' %></p>
-  <p class="govuk-body"><%= t 'errors.something_went_wrong.start_again' %></p>
-  <% if transaction_taxon_list.any? %>
-    <h2 class="govuk-heading-m"><%= t 'hub.transaction_list.title' %></h2>
-    <%= render partial: 'shared/transaction_list' %>
-  <% end %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'errors.something_went_wrong.heading' %></h1>
+    <p class="govuk-body"><%= t 'errors.something_went_wrong.error_message' %></p>
+    <p class="govuk-body"><%= t 'errors.something_went_wrong.start_again' %></p>
+    <% if transaction_taxon_list.any? %>
+      <h2 class="govuk-heading-m"><%= t 'hub.transaction_list.title' %></h2>
+      <%= render partial: 'shared/transaction_list' %>
+    <% end %>
+  </div>
 </div>
