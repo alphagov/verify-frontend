@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   end
   if PUBLISH_HUB_CONFIG_ENABLED
     get 'hub/config/service-status', to: 'publish_hub_config#service_status'
-    match 'hub/config/certificates/:path', to: 'publish_hub_config#certificates', constraints: { path: /.*/ }, via: :get
+    match 'hub/config/config/certificates/:path', to: 'publish_hub_config#certificates', constraints: { path: /.*/ }, via: :get
   end
   get '/humans.txt', to: 'static#humanstxt'
 end
