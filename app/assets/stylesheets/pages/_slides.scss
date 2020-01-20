@@ -50,9 +50,14 @@
 
   a,
   a:focus,
-  a:hover,
-  a:active {
+  a:hover {
     color: inherit;
+  }
+
+  a:focus {
+    color: $govuk-brand-colour;
+    box-shadow: 0 -2px govuk-colour("white"), 0 4px govuk-colour("dark-blue");
+    background-color: govuk-colour("white");
   }
 
   // Override elements radio button colour for start page
@@ -111,6 +116,20 @@
     summary:hover {
       color: govuk-colour("light-grey");
     }
+
+    summary:focus {
+      color: $govuk-brand-colour;
+      box-shadow: 0 -2px govuk-colour("white"), 0 4px govuk-colour("dark-blue");
+      background-color: govuk-colour("white");
+    }
+  }
+
+  .validation-message {
+    color: govuk-colour("white");
+  }
+
+  .govuk-form-group--error {
+    border-left: 5px solid govuk-colour("white");
   }
 }
 

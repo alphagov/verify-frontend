@@ -84,7 +84,6 @@ group :test, :development do
   gem 'geckodriver-helper'
 
   gem 'codacy-coverage', :require => false
-  gem 'pry'
 end
 
 platforms :mswin, :mingw, :x64_mingw do

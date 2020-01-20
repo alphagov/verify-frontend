@@ -86,7 +86,6 @@ describe("Select Phone form", function () {
     it("mobile answered yes", function () {
       check(selectPhoneForm.find('#select_phone_form_mobile_phone_true'));
       selectPhoneForm.triggerHandler('submit');
-      console.log(GOVUK.selectPhone.$form.text());
       expect(selectPhoneForm.find('#validation-error-message-js').text()).toBe('Please answer the question');
       expect($('#conditional-mobile_phone_true').children().is('.govuk-form-group--error')).toBe(true);
     });

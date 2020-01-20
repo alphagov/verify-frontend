@@ -104,8 +104,8 @@ en:
       heading: How it works
       content: You create an identity account with a company that meets government privacy and security standards.
     about_company:
-      content_html: <p>The company will ask you questions and check your identity documents.</p>
-                    <p>It will never share your information for any other purpose without your consent.</p>
+      content_html: <p class="govuk-body">The company will ask you questions and check your identity documents.</p>
+                    <p class="govuk-body">It will never share your information for any other purpose without your consent.</p>
     select_documents:
       title: Your documents
       heading: Which of these do you have available right now?
@@ -119,16 +119,16 @@ en:
       further_explanation:
         title: What GOV.UK Verify uses these for
         content_html: |
-          <p>
+          <p class="govuk-body">
             The companies can check your passport and driving licence against official records.
             They can also confirm your personal details by accessing information like credit records.
             This will help them be sure it's really you.
           </p>
-          <p>
+          <p class="govuk-body">
             If you only have one photo identity document (ID), you will also need to download a free app and take
             pictures of it. This will prove that the ID is yours.
           </p>
-          <p>
+          <p class="govuk-body">
             The companies will only use your credit or debit card details as more evidence of your identity.
             They cannot see your transactions and cannot charge your account.
           </p>
@@ -139,12 +139,12 @@ en:
         3-more-things-special-heading: |
           <h1 class="govuk-heading-l">Based on your answers, GOV.UK Verify will not work for you</h1>
 
-          <p>If you don't have the items you need to set up an identity account, you can try another way to access the service.</p>
+          <p class="govuk-body">If you don't have the items you need to set up an identity account, you can try another way to access the service.</p>
 
         3-more-things-and-req-photo-id: |
           <h2 class="govuk-heading-m">Try again with GOV.UK Verify</h2>
 
-          <p>To set up an identity account, you need 3 of the following items:</p>
+          <p class="govuk-body">To set up an identity account, you need 3 of the following items:</p>
 
           <ul class="govuk-list govuk-list--bullet">
             <li>your valid passport</li>
@@ -156,7 +156,7 @@ en:
         2-more-things-of-doc-cc-app: |
           <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
 
-          <p>To set up an identity account, you also need 2 of these 3 items:</p>
+          <p class="govuk-body">To set up an identity account, you also need 2 of these 3 items:</p>
 
           <ul class="govuk-list govuk-list--bullet">
             <li>another photo ID</li>
@@ -167,7 +167,7 @@ en:
         2-more-things-and-req-photo-id-and-card: |
           <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
           <ul class="govuk-list govuk-list--bullet">
             <li>2 photo IDs</li>
@@ -177,7 +177,7 @@ en:
         2-more-things-and-req-photo-id-and-app: |
           <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
           <ul class="govuk-list govuk-list--bullet">
             <li>2 photo IDs</li>
@@ -187,7 +187,7 @@ en:
         1-more-thing-req-photo-id: |
           <h1 class="govuk-heading-l">Based on your answers you need a photo ID</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
           <ul class="govuk-list govuk-list--bullet">
             <li>a passport - this can be up to 6 months past the expiry date</li>
@@ -197,7 +197,7 @@ en:
         1-more-thing-of-cc-and-app: |
           <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
           <ul class="govuk-list govuk-list--bullet">
             <li>your credit or debit card</li>
@@ -207,7 +207,7 @@ en:
         1-more-thing-of-photo-id-and-cc: |
           <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
           <ul class="govuk-list govuk-list--bullet">
             <li>a second photo ID</li>
@@ -217,7 +217,7 @@ en:
         1-more-thing-of-photo-id-and-app: |
           <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
           <ul class="govuk-list govuk-list--bullet">
             <li>a second photo ID</li>
@@ -225,10 +225,10 @@ en:
           </ul>
 
         cc-explanation: |
-          <p>The card is only used as evidence of your address. The company you choose cannot see your transactions or charge your account.</p>
+          <p class="govuk-body">The card is only used as evidence of your address. The company you choose cannot see your transactions or charge your account.</p>
 
         app-explanation: |
-          <p>The app lets you upload pictures of yourself and your photo ID. This helps your chosen company be confident it’s you answering the questions.</p>
+          <p class="govuk-body">The app lets you upload pictures of yourself and your photo ID. This helps your chosen company be confident it’s you answering the questions.</p>
 
         if-int-id-req-app-and-1-thing: |
           <!-- shortcode was 'if-int-id-req-app-and-1-thing' -->
@@ -240,9 +240,9 @@ en:
           <!-- shortcode was 'if-int-id-req-app' -->
 
         offer-try-again: |
-          <p>If you have these now, you can %{try_again_link_start}try again%{try_again_link_end}.</p>
+          <p class="govuk-body">If you have these now, you can %{try_again_link_start}try again%{try_again_link_end}.</p>
 
-          <p>If you have these elsewhere, try again when you have them with you.</p>
+          <p class="govuk-body">If you have these elsewhere, try again when you have them with you.</p>
 
       what_to_do_other_ways_heading: What to do if you do not have these items
     choose_a_certified_company:
@@ -256,7 +256,7 @@ en:
           <li>you can choose who verifies your identity</li>
           <li>everyone’s information is not stored in one place</li>
         </ul>
-        <p>
+        <p class="govuk-body">
           It usually takes 15 minutes to prove who you are.
           You can then use your account to sign in to other government services too.
         </p>
