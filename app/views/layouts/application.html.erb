@@ -77,7 +77,7 @@
           </div>
         </div>
         
-            <%= content_for?(:main) ? yield(:main) : yield %>
+          <%= content_for?(:main) ? yield(:main) : yield %>
 
           <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
@@ -128,8 +128,8 @@
         </div>
       </div>
     </footer>
-    <script nonce="true" src="/assets/govuk-frontend/govuk/all.js"></script>
-    <script>window.GOVUKFrontend.initAll()</script>
+    
     <%= javascript_include_tag 'application', nonce: true %>
+    <script>window.GOVUKFrontend.initAll()</script>
   </body>
 </html>

@@ -1,13 +1,10 @@
-// polyfills from govuk_frontend_toolkit
-//= require vendor/polyfills/bind
-//= require govuk/details.polyfill
-
 //= require jquery
 //= require jquery_ujs
 //= require govuk/shim-links-with-button-role
 //= require ga
 //= require_tree .
 //= require piwik
+//= require govuk-frontend/govuk/all
 
 /*
     ignoring the piwik script from the bundle
@@ -27,7 +24,6 @@ window.GOVUK.furtherInformation.init();
 window.GOVUK.interstitialQuestion.init();
 window.GOVUK.otherDocuments.init();
 window.GOVUK.piwikEventsTracking.init();
-window.GOVUK.details.init();
 window.GOVUK.modalDialog.init()
 
 /*

@@ -9,4 +9,4 @@ Rails.application.config.assets.paths << Rails.root.join("lib/node_modules")
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w(style.css style-ie8.css gov.uk_logotype_crown.svg piwik_idp_picker_tracking.js jasmine-jquery.js *.ico *.svg *.png)
+Rails.application.config.assets.precompile += %w(style.css style-ie8.css gov.uk_logotype_crown.svg piwik_idp_picker_tracking.js all.js jasmine-jquery.js *.woff *.woff2 *.ico *.svg *.png)
