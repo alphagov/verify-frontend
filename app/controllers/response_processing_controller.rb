@@ -2,8 +2,11 @@ class ResponseProcessingController < ApplicationController
   before_action { @hide_available_languages = true }
 
   def index
+    logger.info "Entering response-processing for session ID: #{session[:verify_session_id]}"
     @rp_name = current_transaction.rp_name
+    logger.info "Retrieved rp_name for session ID '#{session[:verify_session_id]}': #{@rp_name}"
     outcome = POLICY_PROXY.matching_outcome(session[:verify_session_id])
+    logger.info "Received outcome from policy proxy for session ID '#{session[:verify_session_id]}': #{outcome}"
     case outcome
     when MatchingOutcomeResponse::GOTO_HUB_LANDING_PAGE
       report_to_analytics('Matching Outcome - Hub Landing')
