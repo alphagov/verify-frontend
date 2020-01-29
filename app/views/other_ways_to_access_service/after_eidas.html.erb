@@ -16,7 +16,7 @@
 
     <%= button_link_to t('hub.other_ways_after_eidas.verify.button'), start_path, id: 'next-button' %>
 
-    <h2 class="heading-medium"><%= t 'hub.other_ways_heading', other_ways_description: @other_ways_description %></h2>
+    <h2 class="heading-medium"><%= t 'hub.other_ways_after_eidas.cannot_verify', other_ways_description: @other_ways_description %></h2>
     <div class="other-ways-to-complete-transaction">
       <%= raw @other_ways_text %>
     </div>

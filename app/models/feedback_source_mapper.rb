@@ -21,6 +21,7 @@ class FeedbackSourceMapper
       'PROXY_NODE_ERROR_PAGE' => 'proxy_node_error',
       'CYCLE_3_PAGE' => 'further_information',
       'OTHER_WAYS_PAGE' => 'other_ways_to_access_service',
+      'OTHER_WAYS_AFTER_EIDAS_PAGE' => 'other_ways_after_eidas',
       'REDIRECT_TO_IDP_WARNING_PAGE' => 'redirect_to_idp_warning',
       'MATCHING_ERROR_PAGE' => 'response_processing',
       'ACCOUNT_CREATION_FAILED_PAGE' => 'response_processing',

@@ -284,6 +284,7 @@ en:
           <li>have at least one photo identity document, from any country</li>
           </ul>
         button: "Use GOV.UK Verify"
+      cannot_verify: What to do if you cannot use GOV.UK Verify
     choose_a_country:
       title: Choose a country
       heading: Use a digital identity from another European country
@@ -734,7 +735,7 @@ en:
       null_attribute: I don’t have an %{cycle_three_name}
       modal:
         heading: You’ll be signed out soon
-        text: To keep your information safe, you’ll be automatically signed out in 
+        text: To keep your information safe, you’ll be automatically signed out in
         extra_text: You’ll then need to sign in again with %{idp_name}.
         button_continue: Continue
         button_signout: Sign out now
