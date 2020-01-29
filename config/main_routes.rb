@@ -90,6 +90,7 @@ get 'failed_uplift', to: 'failed_uplift#index', as: :failed_uplift
 get 'failed_sign_in', to: 'failed_sign_in#idp', as: :failed_sign_in
 get 'failed_country_sign_in', to: 'failed_sign_in#country', as: :failed_country_sign_in
 get 'other_ways_to_access_service', to: 'other_ways_to_access_service#index', as: :other_ways_to_access_service
+get 'other_ways_after_eidas', to: 'other_ways_to_access_service#after_eidas', as: :other_ways_after_eidas
 get 'forgot_company', to: 'static#forgot_company', as: :forgot_company
 get 'response_processing', to: 'response_processing#index', as: :response_processing
 get 'redirect_to_idp_register', to: 'redirect_to_idp#register', as: :redirect_to_idp_register
