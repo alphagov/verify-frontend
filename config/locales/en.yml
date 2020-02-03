@@ -40,6 +40,7 @@ en:
     failed_country_sign_in: failed-country-sign-in
     failed_uplift: failed-uplift
     other_ways_to_access_service: other-ways-to-access-service
+    other_ways_after_eidas: country-not-listed
     forgot_company: forgot-company
     response_processing: response-processing
     redirect_to_idp_sign_in: redirect-to-idp/sign-in
@@ -268,13 +269,29 @@ en:
   hub:
     other_ways_title: Other ways to access the service
     other_ways_heading: Other ways to %{other_ways_description}
+    other_ways_after_eidas:
+      title: Country not listed
+      heading: Other ways to %{other_ways_description}
+      explanation: If your digital identity scheme isn't available yet, you can prove who you are another way so you can %{other_ways_description}.
+      verify:
+        heading: "Use GOV.UK Verify"
+        explanation_html: |
+          <p>To create an account, you must choose a company to verify your identity. The company will check your personal details and identity documents.</p>
+          <p>GOV.UK Verify works best if you:</p>
+          <ul>
+          <li>have a UK address</li>
+          <li>are over 20</li>
+          <li>have at least one photo identity document, from any country</li>
+          </ul>
+        button: "Use GOV.UK Verify"
+      cannot_verify: What to do if you cannot use GOV.UK Verify
     choose_a_country:
       title: Choose a country
       heading: Use a digital identity from another European country
       description: You can use a digital identity from another European country to access services on GOV.UK.
       country_not_listed_heading: My country isn't listed
-      country_not_listed_description: "If your country hasn't joined yet, there are "
-      country_not_listed_link: other ways to %{other_ways_description}.
+      country_not_listed_description: "If your country's digital identity scheme isn't available yet, see how else you can "
+      country_not_listed_link: "%{other_ways_description}."
       select_label: "Select %{scheme_name}"
     redirect_to_country:
       title: Redirect to country
@@ -718,7 +735,7 @@ en:
       null_attribute: I don’t have an %{cycle_three_name}
       modal:
         heading: You’ll be signed out soon
-        text: To keep your information safe, you’ll be automatically signed out in 
+        text: To keep your information safe, you’ll be automatically signed out in
         extra_text: You’ll then need to sign in again with %{idp_name}.
         button_continue: Continue
         button_signout: Sign out now

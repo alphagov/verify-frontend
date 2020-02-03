@@ -1,0 +1,25 @@
+<%= page_title 'hub.other_ways_after_eidas.title' %>
+<% content_for :feedback_source, 'OTHER_WAYS_AFTER_EIDAS_PAGE' %>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+
+    <h1 class="heading-large"><%= t 'hub.other_ways_after_eidas.heading', other_ways_description: @other_ways_description %></h1>
+    <div class="other-ways-to-complete-transaction">
+      <%= t 'hub.other_ways_after_eidas.explanation', other_ways_description: @other_ways_description %>
+    </div>
+
+    <h2 class="heading-medium"><%= t 'hub.other_ways_after_eidas.verify.heading' %></h2>
+    <div class="other-ways-to-complete-transaction">
+      <%= t 'hub.other_ways_after_eidas.verify.explanation_html' %>
+    </div>
+
+    <%= button_link_to t('hub.other_ways_after_eidas.verify.button'), start_path, id: 'next-button' %>
+
+    <h2 class="heading-medium"><%= t 'hub.other_ways_after_eidas.cannot_verify', other_ways_description: @other_ways_description %></h2>
+    <div class="other-ways-to-complete-transaction">
+      <%= raw @other_ways_text %>
+    </div>
+
+  </div>
+</div>

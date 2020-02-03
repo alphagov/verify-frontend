@@ -47,7 +47,7 @@
 
   <div class="column-two-thirds">
     <h3 class="heading-small"><%= t 'hub.choose_a_country.country_not_listed_heading' %></h3>
-    <p><%= t 'hub.choose_a_country.country_not_listed_description' %><%= link_to t('hub.choose_a_country.country_not_listed_link', other_ways_description: @other_ways_description), other_ways_to_access_service_path %></p>
+    <p><%= t 'hub.choose_a_country.country_not_listed_description' %><%= link_to t('hub.choose_a_country.country_not_listed_link', other_ways_description: @other_ways_description), other_ways_after_eidas_path %></p>
   </div>
 
   <%= form_tag({}, {id: 'post-to-country', class: 'hidden', authenticity_token: false, enforce_utf8: false}) do %>

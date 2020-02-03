@@ -96,7 +96,7 @@ RSpec.describe 'When the user visits the choose a country page' do
     visit '/choose-a-country'
     click_on t('hub.choose_a_country.country_not_listed_link', other_ways_description: 'test GOV.UK Verify user journeys')
 
-    expect(page).to have_current_path('/other-ways-to-access-service')
+    expect(page).to have_current_path('/country-not-listed')
   end
 
   it 'includes the appropriate feedback source' do
