@@ -1,6 +1,6 @@
 //= require vendor/jquery.inputevent
 
-(function(global) {
+(function (global) {
   "use strict";
   var GOVUK = global.GOVUK || {};
   var $ = global.jQuery;
@@ -12,8 +12,8 @@
    */
   function placeReplyRadioErrorMessage($element, $error) {
     if ($element.attr('name') === 'feedback_form[reply]') {
-      var $replyFieldset = $element.closest('.form-group');
-      $replyFieldset.children('.error-message').remove();
+      var $replyFieldset = $element.closest('.govuk-form-group');
+      $replyFieldset.children('.govuk-error-message').remove();
       $replyFieldset.prepend($error);
     }
   }
@@ -31,7 +31,7 @@
     init: function () {
       feedback.$form = $('#feedback');
       feedback.$replyRadios = $('input[name="feedback_form[reply]"]');
-      feedback.$replyFields = $('.reply-fields');
+      feedback.$replyFields = $('#conditional-reply_true');
 
       if (feedback.$form.length === 1) {
         feedback.$replyRadios.on('click', feedback.toggleReply);

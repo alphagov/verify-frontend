@@ -7,12 +7,12 @@
 
   // scss-lint:disable PlaceholderInExtend
   ul {
-    @extend .list;
-    @extend .list-bullet;
+    @extend .govuk-list;
+    @extend .govuk-list--bullet;
   }
 
   ol {
-    @extend .list;
-    @extend .list-number;
+    @extend .govuk-list;
+    @extend .govuk-list--number;
   }
 }

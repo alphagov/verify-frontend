@@ -6,135 +6,131 @@ end %>
 <% content_for :feedback_source, 'COOKIES_INFO_PAGE' %>
 <% content_for :show_to_search_engine, true %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large">Cwcis</h1>
-    <p>Mae GOV.UK Verify yn gosod feiliau bychan (a elwir yn 'cwcis') ar eich cyfrifiadur.</p>
-    <p>Defnyddir y cwcis hyn i:</p>
-    <ul class="list-bullet list">
-      <li>ein helpu i ddeall sut rydych yn defnyddio’r wefan, er mwyn i ni allu gwneud gwelliannau</li>
-      <li>cofio pa hysbysiadau rydych wedi’u gweld fel nad ydych yn eu gweld mwy nag unwaith</li>
-      <li>cadw’r dewisiadau rydych wedi’u gwneud dros dro</li>
-    </ul>
-    <div class="panel panel-border-narrow">
-      <p>Nid yw cwcis GOV.UK Verify yn cael eu defnyddio i’ch adnabod yn bersonol.</p>
-    </div>
-    <p>Darganfyddwch <a href="http://www.aboutcookies.org/">sut i reoli cwcis</a>.</p>
-    <h2 class="heading-medium">Cwcis sesiwn</h2>
-    <p>Rydym yn cadw cwcis sesiwn ar eich cyfrifiadur i helpu i gadw eich gwybodaeth yn ddiogel wrth i chi ddefnyddio’r gwasanaeth.</p>
-  </div>
-</div>
 
-<table class="cookies-table table-font-xsmall">
-  <thead>
-    <tr>
-      <th>Enw</th>
-      <th>Diben</th>
-      <th>Dirwyn i Ben</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><var>x_govuk_session_cookie</var></td>
-      <td>Mae’r cwci hwn yn cynnwys cymeriadau a gynhyrchir ar hap er mwyn i ni eich adnabod yn ystod eich ymweliad</td>
-      <td>Pan fyddwch yn cau ffenestr eich porwr</td>
-    </tr>
-    <tr>
-      <td><var>_verify-frontend_session</var></td>
-      <td>Pan fyddwch yn ceisio defnyddio gwasanaeth y llywodraeth ar GOV.UK, mae'r cwci hwn yn helpu gwneud yn siŵr na all unrhyw ddefnyddiwr arall fewngofnodi gyda'ch gwybodaeth. Mae'n cael ei ddefnyddio hefyd i gadw gwybodaeth ynghylch eich sesiwn, gan gynnwys pryd ddechreuoch eich sesiwn, pa wasanaeth y llywodraeth rydych yn ei ddefnyddio, eich atebion i gwestiynau hidlo, a pha gwmni ardystiedig y byddwch yn ei ddewis er mwyn i ni allu cyflwyno gwybodaeth sy'n berthnasol i'ch dewisiadau. Mae'r wybodaeth hon yn cael ei ddiogelu fel mai dim ond GOV.UK Verify all ei ddarllen</td>
-      <td>Pan fyddwch yn cau ffenestr eich porwr</td>
-    </tr>
-    <tr>
-      <td><var>verify-front-journey-hint</var></td>
-      <td>Mae hyn yn nodi'r cwmni ardystiedig a ddefnyddiwyd ddiwethaf i gael mynediad at wasanaeth y llywodraeth gyda'r porwr hwn ar y ddyfais hon. Gall hefyd nodi'r gwasanaeth llywodraeth yr oeddech yn ei ddefnyddio. Defnyddiwn y cwci hwn i'w gwneud hi'n haws i chi lofnodi eto.</td>
-      <td>18 mis</td>
-    </tr>
-    <% if SINGLE_IDP_FEATURE %>
-      <tr>
-        <td><var>verify-single-idp-journey</var></td>
-        <td>Mae'r cwci hwn yn dweud wrthym eich bod wedi cael eich cyfeirio'n uniongyrchol gan ddarparwr hunaniaeth. Mae'n dweud wrthym pa ddarparwr sydd wedi eich cyfeirio, ac yn rhoi dynodwr unigryw yn ôl i'r darparwr hwnnw.</td>
-        <td>90 munud</td>
+<div class="govuk-grid-column-full no-right-hand-logo">
+  <h1 class="govuk-heading-l">Cwcis</h1>
+  <p>Mae GOV.UK Verify yn gosod feiliau bychan (a elwir yn 'cwcis') ar eich cyfrifiadur.</p>
+  <p>Defnyddir y cwcis hyn i:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>ein helpu i ddeall sut rydych yn defnyddio’r wefan, er mwyn i ni allu gwneud gwelliannau</li>
+    <li>cofio pa hysbysiadau rydych wedi’u gweld fel nad ydych yn eu gweld mwy nag unwaith</li>
+    <li>cadw’r dewisiadau rydych wedi’u gwneud dros dro</li>
+  </ul>
+  <div class="govuk-inset-text">
+    <p>Nid yw cwcis GOV.UK Verify yn cael eu defnyddio i’ch adnabod yn bersonol.</p>
+  </div>
+  <p>Darganfyddwch <a href="http://www.aboutcookies.org/">sut i reoli cwcis</a>.</p>
+  <h2 class="govuk-heading-m">Cwcis sesiwn</h2>
+  <p>Rydym yn cadw cwcis sesiwn ar eich cyfrifiadur i helpu i gadw eich gwybodaeth yn ddiogel wrth i chi ddefnyddio’r gwasanaeth.</p>
+
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Enw</th>
+        <th scope="col" class="govuk-table__header govuk-!-width-one-half">Diben</th>
+        <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Dirwyn i Ben</th>
       </tr>
-    <% end %>
-    <tr>
-      <td><var>x_verify_locale</var></td>
-      <td>Mae hyn yn nodi os ydych yn defnyddio fersiwn Saesneg neu Gymraeg o GOV.UK Verify. Rydym yn defnyddio hyn i ddangos y safle i chi yn eich dewis iaith</td>
-      <td>Pan fyddwch yn cau ffenestr eich porwr</td>
-    </tr>
-    <tr>
-      <td><var>ab_test</var></td>
-      <td>Mae hyn yn gadael i ni wybod bod eich ymweliad yn rhan o brawf i'n helpu i wella GOV.UK Verify</td>
-      <td>1 wythnos</td>
-    </tr>
-  </tbody>
-</table>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>x_govuk_session_cookie</var></td>
+        <td class="govuk-table__cell">Mae’r cwci hwn yn cynnwys cymeriadau a gynhyrchir ar hap er mwyn i ni eich adnabod yn ystod eich ymweliad</td>
+        <td class="govuk-table__cell">Pan fyddwch yn cau ffenestr eich porwr</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>_verify-frontend_session</var></td>
+        <td class="govuk-table__cell">Pan fyddwch yn ceisio defnyddio gwasanaeth y llywodraeth ar GOV.UK, mae'r cwci hwn yn helpu gwneud yn siŵr na all unrhyw ddefnyddiwr arall fewngofnodi gyda'ch gwybodaeth. Mae'n cael ei ddefnyddio hefyd i gadw gwybodaeth ynghylch eich sesiwn, gan gynnwys pryd ddechreuoch eich sesiwn, pa wasanaeth y llywodraeth rydych yn ei ddefnyddio, eich atebion i gwestiynau hidlo, a pha gwmni ardystiedig y byddwch yn ei ddewis er mwyn i ni allu cyflwyno gwybodaeth sy'n berthnasol i'ch dewisiadau. Mae'r wybodaeth hon yn cael ei ddiogelu fel mai dim ond GOV.UK Verify all ei ddarllen</td>
+        <td class="govuk-table__cell">Pan fyddwch yn cau ffenestr eich porwr</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>verify-front-journey-hint</var></td>
+        <td class="govuk-table__cell">Mae hyn yn nodi'r cwmni ardystiedig a ddefnyddiwyd ddiwethaf i gael mynediad at wasanaeth y llywodraeth gyda'r porwr hwn ar y ddyfais hon. Gall hefyd nodi'r gwasanaeth llywodraeth yr oeddech yn ei ddefnyddio. Defnyddiwn y cwci hwn i'w gwneud hi'n haws i chi lofnodi eto.</td>
+        <td class="govuk-table__cell">18 mis</td>
+      </tr>
+      <% if SINGLE_IDP_FEATURE %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell"><var>verify-single-idp-journey</var></td>
+          <td class="govuk-table__cell">Mae'r cwci hwn yn dweud wrthym eich bod wedi cael eich cyfeirio'n uniongyrchol gan ddarparwr hunaniaeth. Mae'n dweud wrthym pa ddarparwr sydd wedi eich cyfeirio, ac yn rhoi dynodwr unigryw yn ôl i'r darparwr hwnnw.</td>
+          <td class="govuk-table__cell">90 munud</td>
+        </tr>
+      <% end %>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>x_verify_locale</var></td>
+        <td class="govuk-table__cell">Mae hyn yn nodi os ydych yn defnyddio fersiwn Saesneg neu Gymraeg o GOV.UK Verify. Rydym yn defnyddio hyn i ddangos y safle i chi yn eich dewis iaith</td>
+        <td class="govuk-table__cell">Pan fyddwch yn cau ffenestr eich porwr</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>ab_test</var></td>
+        <td class="govuk-table__cell">Mae hyn yn gadael i ni wybod bod eich ymweliad yn rhan o brawf i'n helpu i wella GOV.UK Verify</td>
+        <td class="govuk-table__cell">1 wythnos</td>
+      </tr>
+    </tbody>
+  </table>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h2 class="heading-medium">Cwcis dadansoddiadol</h2>
-    <p>Rydym yn defnyddio Piwik i gasglu gwybodaeth am sut rydych yn defnyddio'r wefan. Mae'r wybodaeth hon yn ein helpu i wella'r gwasanaeth.</p>
-    <p>Mae'r cwcis dadansoddiadol yn casglu ac yn storio gwybodaeth am:</p>
-    <ul class="list-bullet list">
-      <li>y tudalennau rydych yn ymweld â</li>
-      <li>sut y cyrraeddoch i GOV.UK Verify</li>
-      <li>beth rydych yn clicio arno wrth ddefnyddio’r wefan</li>
-    </ul>
-    <p>Ni chaniateir i Piwik ddefnyddio neu rannu ein data dadansoddiadol gydag unrhyw un, ond gallwch ddewis eithrio allan o gwcis dadansoddiadol.</p>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h2 class="govuk-heading-m">Cwcis dadansoddiadol</h2>
+      <p>Rydym yn defnyddio Piwik i gasglu gwybodaeth am sut rydych yn defnyddio'r wefan. Mae'r wybodaeth hon yn ein helpu i wella'r gwasanaeth.</p>
+      <p>Mae'r cwcis dadansoddiadol yn casglu ac yn storio gwybodaeth am:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>y tudalennau rydych yn ymweld â</li>
+        <li>sut y cyrraeddoch i GOV.UK Verify</li>
+        <li>beth rydych yn clicio arno wrth ddefnyddio’r wefan</li>
+      </ul>
+      <p>Ni chaniateir i Piwik ddefnyddio neu rannu ein data dadansoddiadol gydag unrhyw un, ond gallwch ddewis eithrio allan o gwcis dadansoddiadol.</p>
+    </div>
   </div>
-</div>
 
-<table class="cookies-table table-font-xsmall">
-  <thead>
-    <tr>
-      <th>Enw</th>
-      <th>Diben</th>
-      <th>Dirwyn i Ben</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><var>_pk_id</var></td>
-      <td>Mae hyn yn ein helpu i nodi sut rydych yn defnyddio GOV.UK Verify er mwyn i ni allu gwella'r safle</td>
-      <td>2 flynedd</td>
-    </tr>
-    <tr>
-      <td><var>_pk_ses</var></td>
-      <td>Mae hyn yn gweithio gyda _pk_id i gyfrif y nifer o weithiau y byddwch yn ymweld â'r wefan</td>
-      <td>90 munud</td>
-    </tr>
-    <tr>
-      <td><var>_pk_ref</var></td>
-      <td>Mae hyn yn darparu gwybodaeth am sut rydych yn cyrraedd y wefan</td>
-      <td>6 mis</td>
-    </tr>
-    <tr>
-    <tr>
-      <td><var>PIWIK_USER_ID</var></td>
-      <td>Mae hyn yn darparu gwybodaeth am eich ymweliad ar gyfer ein dadansoddiadau, sy'n ein galluogi i wella'r gwasanaeth</td>
-      <td>Pan fyddwch yn cau ffenestr eich porwr</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Enw</th>
+        <th scope="col" class="govuk-table__header govuk-!-width-one-half">Diben</th>
+        <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Dirwyn i Ben</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>_pk_id</var></td>
+        <td class="govuk-table__cell">Mae hyn yn ein helpu i nodi sut rydych yn defnyddio GOV.UK Verify er mwyn i ni allu gwella'r safle</td>
+        <td class="govuk-table__cell">2 flynedd</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>_pk_ses</var></td>
+        <td class="govuk-table__cell">Mae hyn yn gweithio gyda _pk_id i gyfrif y nifer o weithiau y byddwch yn ymweld â'r wefan</td>
+        <td class="govuk-table__cell">90 munud</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>_pk_ref</var></td>
+        <td class="govuk-table__cell">Mae hyn yn darparu gwybodaeth am sut rydych yn cyrraedd y wefan</td>
+        <td class="govuk-table__cell">6 mis</td>
+      </tr>
+      <tr class="govuk-table__row">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>PIWIK_USER_ID</var></td>
+        <td class="govuk-table__cell">Mae hyn yn darparu gwybodaeth am eich ymweliad ar gyfer ein dadansoddiadau, sy'n ein galluogi i wella'r gwasanaeth</td>
+        <td class="govuk-table__cell">Pan fyddwch yn cau ffenestr eich porwr</td>
+      </tr>
+    </tbody>
+  </table>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h2 class="heading-medium">Neges cwcis rhagarweiniol</h2>
-    <p>Pan fyddwch yn defnyddio GOV.UK Verify am y tro cyntaf, efallai y byddwch yn gweld neges ‘croeso’ yn ymddangos. Unwaith y byddwch wedi gweld y neges, rydym yn cadw cwci ar eich cyfrifiadur fel ei bod yn gwybod i beidio ei ddangos eto.</p>
-  </div>
+  <h2 class="govuk-heading-m">Neges cwcis rhagarweiniol</h2>
+  <p>Pan fyddwch yn defnyddio GOV.UK Verify am y tro cyntaf, efallai y byddwch yn gweld neges ‘croeso’ yn ymddangos. Unwaith y byddwch wedi gweld y neges, rydym yn cadw cwci ar eich cyfrifiadur fel ei bod yn gwybod i beidio ei ddangos eto.</p>
+
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Enw</th>
+        <th scope="col" class="govuk-table__header govuk-!-width-one-half">Diben</th>
+        <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Dirwyn i Ben</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><var>seen_cookie_message</var></td>
+        <td class="govuk-table__cell">Mae'n arbed neges i roi gwybod i ni eich bod wedi gweld ein neges cwci</td>
+        <td class="govuk-table__cell">1 mis</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<table class="cookies-table table-font-xsmall">
-  <thead>
-    <tr>
-      <th>Enw</th>
-      <th>Diben</th>
-      <th>Dirwyn i Ben</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><var>seen_cookie_message</var></td>
-      <td>Mae'n arbed neges i roi gwybod i ni eich bod wedi gweld ein neges cwci</td>
-      <td>1 mis</td>
-    </tr>
-  </tbody>
-</table>

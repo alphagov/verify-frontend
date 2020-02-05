@@ -2,13 +2,13 @@
 <% content_for :feedback_source, 'COOKIE_NOT_FOUND_PAGE' %>
 <% content_for :piwik_custom_path, '/cookies-not-found' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'errors.no_cookies.heading' %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'errors.no_cookies.heading' %></h1>
     <p><%= t 'errors.no_cookies.access_restriction' %></p>
-    <h2 class="heading-medium"><%= t 'hub.transaction_list.title' %></h2>
+    <h2 class="govuk-heading-m"><%= t 'hub.transaction_list.title' %></h2>
     <%= render partial: 'shared/transaction_list' %>
     <p><%= t 'errors.no_cookies.read_more_html'  %></p>
-    <p class="panel panel-border-narrow"><%= t 'errors.no_cookies.enable_cookies' %></p>
+    <p class="govuk-inset-text"><%= t 'errors.no_cookies.enable_cookies' %></p>
   </div>
 </div>

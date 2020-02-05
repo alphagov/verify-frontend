@@ -26,8 +26,8 @@ RSpec.describe 'user visits further information page' do
     rp_name = t('rps.test-rp.name')
 
     expect(page).to have_title t('hub.further_information.title', cycle_three_name: attribute_field_name)
-    expect(page).to have_css '.form-label-bold', text: attribute_field_name
-    expect(page).to have_css 'span.form-hint', text: t('hub.further_information.example_text', example: t('cycle3.NationalInsuranceNumber.example'))
+    expect(page).to have_css '.govuk-label', text: attribute_field_name
+    expect(page).to have_css 'span.govuk-hint', text: t('hub.further_information.example_text', example: t('cycle3.NationalInsuranceNumber.example'))
     expect(page).to have_content t('hub.further_information.first_time')
     expect(page).to have_content t('hub.further_information.help_with_your', cycle_three_name: attribute_name)
     expect(page).to have_content 'Your National Insurance number can be found on'
@@ -145,7 +145,7 @@ RSpec.describe 'user visits further information page' do
       click_button t('navigation.continue')
 
       expect(page).to have_current_path(further_information_path)
-      expect(page).to have_css '.error-message', text: t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
+      expect(page).to have_css '.govuk-error-message', text: t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
       expect(page.find('#cycle_three_attribute_cycle_three_data').value).to eql invalid_input
     end
   end

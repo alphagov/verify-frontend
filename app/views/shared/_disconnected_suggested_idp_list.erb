@@ -1,6 +1,6 @@
 <div class="company-full-width">
   <div class="column-full company">
-    <div class="column-one-third company-wrapper company-inner">
+    <div class="govuk-grid-column-one-third company-wrapper company-inner">
       <div class="company-logo">
         <div class="company-logo-inner">
           <%= image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)) %>
@@ -8,8 +8,8 @@
       </div>
     </div>
 
-    <div class="column-two-thirds company-disconnect-text">
-      <h2 class="heading-medium"><%= t('hub.signin.company_no_longer_verifies_title', company: identity_provider.display_name) %></h2>
+    <div class="govuk-grid-column-two-thirds company-disconnect-text">
+      <h2 class="govuk-heading-m"><%= t('hub.signin.company_no_longer_verifies_title', company: identity_provider.display_name) %></h2>
       <p><%= raw @idp_disconnected_hint_html %></p>
     </div>
   </div>

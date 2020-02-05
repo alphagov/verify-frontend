@@ -1,44 +1,63 @@
 <%= page_title 'hub_variant_c.select_documents.title' %>
 <% content_for :feedback_source, 'SELECT_DOCUMENTS_PAGE' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <%= form_for @form, url: select_documents_submit_path, html: {id: 'validate-select-documents', class: 'select-documents-form', novalidate: 'novalidate', 'data-msg': t('hub_variant_c.select_documents.errors.no_selection')} do |f| %>
-       <%= content_tag :div, class: form_question_class do %>
-        <fieldset>
-          <legend>
-            <h1 class="govuk-fieldset__heading heading-large" style="margin-top: 0;"><%= t 'hub_variant_c.select_documents.heading' %></h1>
-          </legend>
-          <p><%= t 'hub_variant_c.select_documents.explanation' %></p>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-form-group <% if flash[:errors] %>govuk-form-group--error<% end %>">
+      <%= form_for @form, url: select_documents_submit_path, html: {id: 'validate-select-documents', novalidate: 'novalidate', 'data-msg': t('hub_variant_c.select_documents.errors.no_selection')} do |f| %>
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading"><%= t 'hub_variant_c.select_documents.heading' %></h1>
+            </legend>
+            <p><%= t 'hub_variant_c.select_documents.explanation' %></p>
 
-          <p><%= t 'hub_variant_c.select_documents.select_all_that_apply' %></p>
+            <p><%= t 'hub_variant_c.select_documents.select_all_that_apply' %></p>
 
-          <% if flash[:errors] %>
-            <div id="validation-error-message-no-js" class="validation-message" style="padding-top: 0;">
-              <b><%= flash[:errors] %></b>
+            <% if flash[:errors] %>
+              <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+                <div class="govuk-error-summary__body">
+                  <ul class="govuk-list govuk-error-summary__list">
+                    <li><a href="#checkboxes"><%= flash[:errors] %></a></li>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
+            <div id="checkboxes" class="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <%= f.check_box :has_valid_passport,{class: "govuk-checkboxes__input" }, "t", "f" %>
+                <%= f.label :has_valid_passport,  t('hub_variant_c.select_documents.documents_option_valid_passport'), class: "govuk-label govuk-checkboxes__label"%>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <%= f.check_box :has_driving_license,{class: "govuk-checkboxes__input" }, "t", "f" %>
+                <%= f.label :has_driving_license,  t('hub_variant_c.select_documents.documents_option_driving_license'), class: "govuk-label govuk-checkboxes__label"%>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <%= f.check_box :has_phone_can_app,{class: "govuk-checkboxes__input" }, "t", "f" %>
+                <%= f.label :has_phone_can_app,  t('hub_variant_c.select_documents.documents_option_phone_can_app'), class: "govuk-label govuk-checkboxes__label"%>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <%= f.check_box :has_credit_card,{class: "govuk-checkboxes__input" }, "t", "f" %>
+                <%= f.label :has_credit_card,  t('hub_variant_c.select_documents.documents_option_credit_card'), class: "govuk-label govuk-checkboxes__label"%>
+              </div>
+              <div class="govuk-radios__divider">or</div>
+              <div class="govuk-checkboxes__item">
+                <%= f.check_box :has_nothing,{class: "govuk-checkboxes__input" }, "t", "f" %>
+                <%= f.label :has_nothing,  t('hub_variant_c.select_documents.documents_option_nothing'), class: "govuk-label govuk-checkboxes__label"%>
+              </div>
             </div>
-          <% end %>
+          </fieldset>
 
-          <%= f.custom_check_box :has_valid_passport, { }, "t", "f", t('hub_variant_c.select_documents.documents_option_valid_passport') %>
-          <%= f.custom_check_box :has_driving_license, { }, "t", "f", t('hub_variant_c.select_documents.documents_option_driving_license') %>
-          <%= f.custom_check_box :has_phone_can_app, { }, "t", "f", t('hub_variant_c.select_documents.documents_option_phone_can_app') %>
-          <%= f.custom_check_box :has_credit_card, { }, "t", "f", t('hub_variant_c.select_documents.documents_option_credit_card') %>
-          <%= f.custom_check_box :has_nothing, { }, "t", "f", t('hub_variant_c.select_documents.documents_option_nothing') %>
-        </fieldset>
+        <details class="govuk-details govuk-!-padding-top-6" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text"><%= t 'hub_variant_c.select_documents.further_explanation.title' %></span>
+          </summary>
+          <div class="govuk-details__text">
+            <%= t 'hub_variant_c.select_documents.further_explanation.content_html' %>
+          </div>
+        </details>
+
+        <%= f.submit t('navigation.continue'), class: 'govuk-button', id: 'next-button' %>
       <% end %>
-
-      <details class="govuk-details" style="margin-bottom: 20px;">
-        <summary>
-          <span class="summary"><%= t 'hub_variant_c.select_documents.further_explanation.title' %></span>
-        </summary>
-        <div class="panel panel-border-narrow">
-          <%= t 'hub_variant_c.select_documents.further_explanation.content_html' %>
-        </div>
-      </details>
-
-      <div class="actions">
-        <%= f.submit t('navigation.continue'), class: 'button', id: 'next-button' %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>

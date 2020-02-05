@@ -2,12 +2,12 @@ describe("Further Information Form", function () {
 
   var formWithNoErrors =
     '<form id="further-information" novalidate="novalidate">' +
-      '<div class="form-group">' +
-        '<label for="cycle_three_attribute_cycle_three_data">' +
-        'Enter your National Insurance number' +
-        '</label>' +
-        '<input required="required" pattern="^pear$" type="text" id="cycle_three_attribute_cycle_three_data" data-msg="validation message">' +
-      '</div>' +
+    '<div class="form-group">' +
+    '<label for="cycle_three_attribute_cycle_three_data">' +
+    'Enter your National Insurance number' +
+    '</label>' +
+    '<input required="required" pattern="^pear$" type="text" id="cycle_three_attribute_cycle_three_data" data-msg="validation message">' +
+    '</div>' +
     '</form>';
 
   var furtherInformationForm;
@@ -18,7 +18,7 @@ describe("Further Information Form", function () {
   }
 
   function expectNoError() {
-    expect(furtherInformationForm.find('.error, .error-message').length).toBe(0);
+    expect(furtherInformationForm.find('.error, .govuk-error-message').length).toBe(0);
   }
 
   beforeEach(function () {
@@ -39,13 +39,13 @@ describe("Further Information Form", function () {
 
   it("should have errors on submit when no details entered.", function () {
     submitForm();
-    expect(furtherInformationForm.find('.error-message').eq(0).text()).toBe('validation message');
+    expect(furtherInformationForm.find('.govuk-error-message').eq(0).text()).toBe('validation message');
   });
 
   it("should have errors on submit when non-matching details entered.", function () {
     furtherInformationForm.find('input').val('banana');
     submitForm();
-    expect(furtherInformationForm.find('.error-message').eq(0).text()).toBe('validation message');
+    expect(furtherInformationForm.find('.govuk-error-message').eq(0).text()).toBe('validation message');
   });
 
   it("should have no errors with correct details", function () {

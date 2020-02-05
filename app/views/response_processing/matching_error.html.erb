@@ -1,16 +1,16 @@
 <%= page_title 'errors.something_went_wrong.title' %>
 <% content_for :feedback_source, error_feedback_source %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.response_processing.matching_error.heading' %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.response_processing.matching_error.heading' %></h1>
 
     <p><%= t('hub.response_processing.matching_error.other_ways', other_ways_description: @other_ways_description) %></p>
 
-    <h2 class="heading-medium"><%= t 'hub.response_processing.matching_error.online' %></h2>
+    <h2 class="govuk-heading-m"><%= t 'hub.response_processing.matching_error.online' %></h2>
     <p><%= link_to(t('hub.response_processing.matching_error.online_link'), @redirect_path) %></p>
 
-    <h2 class="heading-medium"><%= t 'hub.response_processing.matching_error.offline' %></h2>
+    <h2 class="govuk-heading-m"><%= t 'hub.response_processing.matching_error.offline' %></h2>
     <div class="other-ways-to-complete-transaction"><%= raw @other_ways_text %></div>
   </div>
 </div>

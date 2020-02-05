@@ -1,25 +1,29 @@
 <%= page_title 'hub.confirmation.title' %>
 <% content_for :feedback_source, 'CONFIRMATION_PAGE' %>
 
-<h1 class="heading-large"><%= t 'hub.confirmation.heading', display_name: @idp_name %></h1>
-<p><%= t 'hub.confirmation.message', display_name: @idp_name %></p>
-<p><%= t 'hub.confirmation.continue_to_rp', transaction_name: @transaction_name %></p>
-<div class="actions">
-  <%= button_link_to t('navigation.continue'), @redirect_path, id:'next-button' %>
-</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l"><%= t 'hub.confirmation.heading', display_name: @idp_name %></h1>
+    <p><%= t 'hub.confirmation.message', display_name: @idp_name %></p>
+    <p><%= t 'hub.confirmation.continue_to_rp', transaction_name: @transaction_name %></p>
+    <div class="actions">
+      <%= button_link_to t('navigation.continue'), @redirect_path, id:'next-button', class: 'govuk-button' %>
+    </div>
 
-<p class="small-details"><%= t 'hub.confirmation.add_security_loa1' %></p>
+    <p class="small-details"><%= t 'hub.confirmation.add_security_loa1' %></p>
 
-<details>
-  <summary>
-    <span class="summary"><%= t 'hub.confirmation.extra_security' %></span>
-  </summary>
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text"><%= t 'hub.confirmation.extra_security' %></span>
+      </summary>
 
-  <div class="panel panel-border-narrow">
-    <ul class="list-bullet list">
-      <% loa2_transactions_list.each do |transaction| -%>
-          <li><%= transaction.name %></li>
-      <% end %>
-    </ul>
+      <div class="govuk-details__text">
+        <ul class="govuk-list govuk-list--bullet">
+          <% loa2_transactions_list.each do |transaction| -%>
+              <li><%= transaction.name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </details>
   </div>
-</details>
+</div>

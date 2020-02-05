@@ -1,13 +1,13 @@
 <%= page_title 'hub.paused_registration.without_session.title' %>
 <% content_for :feedback_source, 'PAUSED_REGISTRATION_PAGE' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.paused_registration.without_session.heading' %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.paused_registration.without_session.heading' %></h1>
 
     <p><%= t 'hub.paused_registration.without_session.restart_instructions_html' %></p>
 
-    <h2 class="heading-medium"><%= t 'hub.transaction_list.title' %></h2>
+    <h2 class="govuk-heading-m"><%= t 'hub.transaction_list.title' %></h2>
     <%= render partial: 'shared/transaction_list' %>
   </div>
 </div>

@@ -1,18 +1,18 @@
 <%= page_title 'hub.prove_identity.title' %>
 <% content_for :feedback_source, 'PROVE_IDENTITY_PAGE' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.prove_identity.heading' %></h1>
-    <%= t 'hub.prove_identity.header_content' %> <%= current_transaction.name %>.
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.prove_identity.heading' %></h1>
+    <p class="govuk-body"><%= t 'hub.prove_identity.header_content' %> <%= current_transaction.name %>.</p>
 
-    <h2 class="heading-medium"><%= t 'hub.prove_identity.use_verify.heading' %></h2>
+    <h2 class="govuk-heading-m"><%= t 'hub.prove_identity.use_verify.heading' %></h2>
     <%= t 'hub.prove_identity.use_verify.content_html' %>
-    <%= button_link_to t('hub.prove_identity.use_verify.button_text'), start_path %>
+    <%= button_link_to t('hub.prove_identity.use_verify.button_text'), start_path, class: "govuk-button" %>
 
 
-    <h2 class="heading-medium"><%= t 'hub.prove_identity.use_eidas.heading' %></h2>
+    <h2 class="govuk-heading-m govuk-!-margin-top-4"><%= t 'hub.prove_identity.use_eidas.heading' %></h2>
     <%= t 'hub.prove_identity.use_eidas.content_html' %>
-    <%= button_link_to t('hub.prove_identity.use_eidas.button_text'), choose_a_country_path %>
+    <%= button_link_to t('hub.prove_identity.use_eidas.button_text'), choose_a_country_path, class: "govuk-button" %>
   </div>
 </div>

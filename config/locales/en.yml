@@ -1,4 +1,8 @@
 en:
+  layout:
+    application:
+      service_name: Verify
+      logo_text: GOV.UK
   routes:
     start: start
     prove_identity: prove-identity
@@ -73,6 +77,7 @@ en:
   title:
     error: Error
   navigation:
+    skip_link: Skip to main content
     next: Next
     start_now: Start now
     continue: Continue
@@ -100,8 +105,8 @@ en:
       heading: How it works
       content: You create an identity account with a company that meets government privacy and security standards.
     about_company:
-      content_html: <p>The company will ask you questions and check your identity documents.</p>
-                    <p>It will never share your information for any other purpose without your consent.</p>
+      content_html: <p class="govuk-body">The company will ask you questions and check your identity documents.</p>
+                    <p class="govuk-body">It will never share your information for any other purpose without your consent.</p>
     select_documents:
       title: Your documents
       heading: Which of these do you have available right now?
@@ -115,16 +120,16 @@ en:
       further_explanation:
         title: What GOV.UK Verify uses these for
         content_html: |
-          <p>
+          <p class="govuk-body">
             The companies can check your passport and driving licence against official records.
             They can also confirm your personal details by accessing information like credit records.
             This will help them be sure it's really you.
           </p>
-          <p>
+          <p class="govuk-body">
             If you only have one photo identity document (ID), you will also need to download a free app and take
             pictures of it. This will prove that the ID is yours.
           </p>
-          <p>
+          <p class="govuk-body">
             The companies will only use your credit or debit card details as more evidence of your identity.
             They cannot see your transactions and cannot charge your account.
           </p>
@@ -133,16 +138,16 @@ en:
     select_documents_advice:
       advice_html:
         3-more-things-special-heading: |
-          <h1 class="heading-large">Based on your answers, GOV.UK Verify will not work for you</h1>
+          <h1 class="govuk-heading-l">Based on your answers, GOV.UK Verify will not work for you</h1>
 
-          <p>If you don't have the items you need to set up an identity account, you can try another way to access the service.</p>
+          <p class="govuk-body">If you don't have the items you need to set up an identity account, you can try another way to access the service.</p>
 
         3-more-things-and-req-photo-id: |
-          <h2 class="heading-medium">Try again with GOV.UK Verify</h2>
+          <h2 class="govuk-heading-m">Try again with GOV.UK Verify</h2>
 
-          <p>To set up an identity account, you need 3 of the following items:</p>
+          <p class="govuk-body">To set up an identity account, you need 3 of the following items:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>your valid passport</li>
             <li>your current driving licence, full or provisional, with your photo on it</li>
             <li>a phone or tablet that can download an app</li>
@@ -150,81 +155,81 @@ en:
           </ul>
 
         2-more-things-of-doc-cc-app: |
-          <h1 class="heading-large">Based on your answers, you need 2 more items</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
 
-          <p>To set up an identity account, you also need 2 of these 3 items:</p>
+          <p class="govuk-body">To set up an identity account, you also need 2 of these 3 items:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>another photo ID</li>
             <li>your credit or debit card</li>
             <li>a phone or tablet that can download an app</li>
           </ul>
 
         2-more-things-and-req-photo-id-and-card: |
-          <h1 class="heading-large">Based on your answers, you need 2 more items</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>2 photo IDs</li>
             <li>1 photo ID and your credit or debit card</li>
           </ul>
 
         2-more-things-and-req-photo-id-and-app: |
-          <h1 class="heading-large">Based on your answers, you need 2 more items</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>2 photo IDs</li>
             <li>1 photo ID and a phone or tablet that can download an app</li>
           </ul>
 
         1-more-thing-req-photo-id: |
-          <h1 class="heading-large">Based on your answers you need a photo ID</h1>
+          <h1 class="govuk-heading-l">Based on your answers you need a photo ID</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>a passport - this can be up to 6 months past the expiry date</li>
             <li>a valid driving licence with your photo on it</li>
           </ul>
 
         1-more-thing-of-cc-and-app: |
-          <h1 class="heading-large">Based on your answers, you need 1 more item</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>your credit or debit card</li>
             <li>a phone or tablet that can download an app</li>
           </ul>
 
         1-more-thing-of-photo-id-and-cc: |
-          <h1 class="heading-large">Based on your answers, you need 1 more item</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>a second photo ID</li>
             <li>your credit or debit card</li>
           </ul>
 
         1-more-thing-of-photo-id-and-app: |
-          <h1 class="heading-large">Based on your answers, you need 1 more item</h1>
+          <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
 
-          <p>To set up an identity account, you also need either:</p>
+          <p class="govuk-body">To set up an identity account, you also need either:</p>
 
-          <ul class="list list-bullet">
+          <ul class="govuk-list govuk-list--bullet">
             <li>a second photo ID</li>
             <li>a phone or tablet that can download an app</li>
           </ul>
 
         cc-explanation: |
-          <p>The card is only used as evidence of your address. The company you choose cannot see your transactions or charge your account.</p>
+          <p class="govuk-body">The card is only used as evidence of your address. The company you choose cannot see your transactions or charge your account.</p>
 
         app-explanation: |
-          <p>The app lets you upload pictures of yourself and your photo ID. This helps your chosen company be confident it’s you answering the questions.</p>
+          <p class="govuk-body">The app lets you upload pictures of yourself and your photo ID. This helps your chosen company be confident it’s you answering the questions.</p>
 
         if-int-id-req-app-and-1-thing: |
           <!-- shortcode was 'if-int-id-req-app-and-1-thing' -->
@@ -236,9 +241,9 @@ en:
           <!-- shortcode was 'if-int-id-req-app' -->
 
         offer-try-again: |
-          <p>If you have these now, you can %{try_again_link_start}try again%{try_again_link_end}.</p>
+          <p class="govuk-body">If you have these now, you can %{try_again_link_start}try again%{try_again_link_end}.</p>
 
-          <p>If you have these elsewhere, try again when you have them with you.</p>
+          <p class="govuk-body">If you have these elsewhere, try again when you have them with you.</p>
 
       what_to_do_other_ways_heading: What to do if you do not have these items
     choose_a_certified_company:
@@ -248,11 +253,11 @@ en:
       idp_count: You can pick either company.
       idp_explanation: "There’s more than one so that:"
       content_html: |
-        <ul class="list list-bullet">
+        <ul class="govuk-list govuk-list--bullet">
           <li>you can choose who verifies your identity</li>
           <li>everyone’s information is not stored in one place</li>
         </ul>
-        <p>
+        <p class="govuk-body">
           It usually takes 15 minutes to prove who you are.
           You can then use your account to sign in to other government services too.
         </p>
@@ -304,17 +309,17 @@ en:
       use_verify:
         heading: Use GOV.UK Verify
         content_html: |
-          <p>Registering with GOV.UK Verify usually takes about 15 minutes. It works best if you have:</p>
-          <ul class="list-bullet list">
+          <p class="govuk-body">Registering with GOV.UK Verify usually takes about 15 minutes. It works best if you have:</p>
+          <ul class="govuk-list govuk-list--bullet">
             <li>a UK address</li>
             <li>a valid passport or photocard driving licence</li>
           </ul>
-          <p>A certified identity provider will check your identity when you register with GOV.UK Verify. They’ve all met security standards set by government.</p>
+          <p class="govuk-body">A certified identity provider will check your identity when you register with GOV.UK Verify. They’ve all met security standards set by government.</p>
         button_text: Use GOV.UK Verify
       use_eidas:
         heading: Use a digital identity from another European country
         content_html: |
-          <p>If you’re part of an ID scheme in a participating country, you may be able to use it here.</p>
+          <p class="govuk-body">If you’re part of an ID scheme in a participating country, you may be able to use it here.</p>
         button_text: Select your European digital identity
     start:
       title: Start
@@ -362,37 +367,37 @@ en:
       no_charge: You don't need to pay to use GOV.UK Verify.
       summary: How companies can verify identities
       details_html: |
-        <p>These companies can check it's really you by using their own records, or by accessing information like credit records. If you have a passport or driving licence, they can check that information too.</p>
-        <p>These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
-        <p>Using these companies to verify your identity will not affect credit score.</p>
-        <p>There's more than one company so that:</p>
-        <ul class="list list-bullet">
+        <p class="govuk-body">These companies can check it's really you by using their own records, or by accessing information like credit records. If you have a passport or driving licence, they can check that information too.</p>
+        <p class="govuk-body">These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
+        <p class="govuk-body">Using these companies to verify your identity will not affect credit score.</p>
+        <p class="govuk-body">There's more than one company so that:</p>
+        <ul class="govuk-list govuk-list--bullet">
           <li>you can choose who verifies your identity</li>
           <li>everyone's information is not stored in one place</li>
         </ul>
       loa1_details_html: |
-        <p>These companies can check it's really you by using their own records, or by accessing information like credit records. If you have a passport or driving licence, they can check that information too.</p>
-        <p>These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
-        <p>Using these companies to verify your identity will not affect credit score.</p>
-        <p>There's more than one company so that:</p>
-        <ul class="list list-bullet">
+        <p class="govuk-body">These companies can check it's really you by using their own records, or by accessing information like credit records. If you have a passport or driving licence, they can check that information too.</p>
+        <p class="govuk-body">These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
+        <p class="govuk-body">Using these companies to verify your identity will not affect credit score.</p>
+        <p class="govuk-body">There's more than one company so that:</p>
+        <ul class="govuk-list govuk-list--bullet">
           <li>you can choose who verifies your identity</li>
           <li>everyone's information is not stored in one place</li>
         </ul>
     about_identity_accounts:
       title: About identity accounts
       content_html: |
-        <p>Verifying your identity takes about 15 minutes, but you only have to do it once.</p>
-        <p>You’ll then have an identity account with the company you choose.</p>
-        <p>You can then access other government services in less than 1 minute wherever you see the GOV.UK Verify logo.</p>
+        <p class="govuk-body">Verifying your identity takes about 15 minutes, but you only have to do it once.</p>
+        <p class="govuk-body">You’ll then have an identity account with the company you choose.</p>
+        <p class="govuk-body">You can then access other government services in less than 1 minute wherever you see the GOV.UK Verify logo.</p>
       content_loa1_html: |
-        <p>Verifying your identity takes about 5 minutes to complete.</p>
-        <p>You’ll then have an identity account with the certified company.</p>
-        <p>You can use this identity account to access other government services wherever you see the GOV.UK Verify logo.</p>
+        <p class="govuk-body">Verifying your identity takes about 5 minutes to complete.</p>
+        <p class="govuk-body">You’ll then have an identity account with the certified company.</p>
+        <p class="govuk-body">You can use this identity account to access other government services wherever you see the GOV.UK Verify logo.</p>
       summary: Where you can use your identity account
       details_loa1_html: |
-        <p>GOV.UK Verify is new, and government services are joining all the time.</p>
-        <p>You can use your identity account to access:</p>
+        <p class="govuk-body">GOV.UK Verify is new, and government services are joining all the time.</p>
+        <p class="govuk-body">You can use your identity account to access:</p>
       details: "The current services using GOV.UK Verify are:"
       details_loa1_uplift_list: "When you access these government services, you'll be asked to provide more evidence as these services need to be confident someone isn't pretending to be you:"
       navigation:
@@ -401,13 +406,13 @@ en:
       title: About choosing a company
       heading: Finding the right company to verify you
       content_html: |
-        <p>These companies have built secure systems to verify identities. These systems work by checking:</p>
-        <ul class="list-bullet list">
+        <p class="govuk-body">These companies have built secure systems to verify identities. These systems work by checking:</p>
+        <ul class="govuk-list govuk-list--bullet">
         <li>your identity documents are valid</li>
         <li>it’s you providing your details, and not someone pretending to be you</li>
         </ul>
-        <p>Each company uses different methods for each of these steps.</p>
-        <p>We need to ask you some questions to check which companies can verify you. We’ll then send you to the website of the company you choose.</p>
+        <p class="govuk-body">Each company uses different methods for each of these steps.</p>
+        <p class="govuk-body">We need to ask you some questions to check which companies can verify you. We’ll then send you to the website of the company you choose.</p>
     select_documents:
       title: Select all the documents you have
       title_photo_documents: Your photo identity document
@@ -477,7 +482,7 @@ en:
     verify_will_not_work_for_you:
       heading: You won’t be able to use GOV.UK Verify
       content_html: |
-        <p>Based on your answers, none of the identity providers (also called certified companies) that work with GOV.UK Verify are able to verify your identity.</p>
+        <p class="govuk-body">Based on your answers, none of the identity providers (also called certified companies) that work with GOV.UK Verify are able to verify your identity.</p>
     may_not_work_if_you_live_overseas:
       title: You might not be able to have your identity verified
       heading: You might not be able to have your identity verified
@@ -540,22 +545,22 @@ en:
       title: Why there’s a choice of companies
       choose_a_company: Choose a company
       content_html: |
-        <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
-        <p>When verifying your identity, these companies can use their own records, and they can access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
-        <p>These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
-        <p>Using these companies to verify your identity will not affect your credit score.</p>
+        <p class="govuk-body">It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
+        <p class="govuk-body">When verifying your identity, these companies can use their own records, and they can access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
+        <p class="govuk-body">These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p class="govuk-body">Using these companies to verify your identity will not affect your credit score.</p>
       content_loa1_html: |
-        <p>It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
-        <p>When verifying your identity, these companies can use their own records, and they can access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
-        <p>These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
-        <p>Using these companies to verify your identity will not affect your credit score.</p>
+        <p class="govuk-body">It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
+        <p class="govuk-body">When verifying your identity, these companies can use their own records, and they can access information like credit records. They do this to check information you provide from passports and driving licences is correct.</p>
+        <p class="govuk-body">These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
+        <p class="govuk-body">Using these companies to verify your identity will not affect your credit score.</p>
     redirect_to_idp_warning:
       title: "You'll now be redirected"
       create_account: Create your %{display_name} identity account
       continue_website: Continue to the %{display_name} website
       identity_account_use_html: |
-        <p>You'll now verify your identity on the %{display_name} website.</p>
-        <p>They'll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
+        <p class="govuk-body">You'll now verify your identity on the %{display_name} website.</p>
+        <p class="govuk-body">They'll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
       service_use: You'll then be able to %{service_name}.
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
@@ -567,7 +572,7 @@ en:
       answer_no: "No"
       warning_html: |
          <p class="error-message">%{display_name} may not be able to verify you</p>
-         <p>We recommend that you %{choose_another_company_link}.</p>
+         <p class="govuk-body">We recommend that you %{choose_another_company_link}.</p>
       choose_another_certified_company_link: choose another company
       identity_documents: You need your identity documents with you so you can enter details from them, or take a picture of them.
       or_html: or %{choose_another_company_link}
@@ -611,15 +616,15 @@ en:
       title: Unable to sign you in
       heading: "%{display_name} couldn’t sign you in"
       reasons_html: |
-        <p>You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.</p>
-        <p>You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
+        <p class="govuk-body">You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.</p>
+        <p class="govuk-body">You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
       start_again: "Start again"
     failed_uplift:
       title: Failed to uplift
       heading: "%{display_name} was not able to validate the evidence you provided"
       reasons_html: |
-        <p>There are a few reasons why this might happen, including:</p>
-        <ul class="list list-bullet">
+        <p class="govuk-body">There are a few reasons why this might happen, including:</p>
+        <ul class="govuk-list govuk-list--bullet">
           <li>your answer to a question doesn't match online records</li>
           <li>you've recently had a change in your circumstances, and they aren't up to date online</li>
           <li>%{idp_name} doesn't have access to enough information about you</li>
@@ -676,8 +681,8 @@ en:
       title: Feedback
       heading: Send your feedback to GOV.UK Verify
       introduction_html: |
-        <p>Use this form to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
-        <p><strong>Don't include any personal or financial information like your National Insurance number or credit card details.</strong></p>
+        <p class="govuk-body">Use this form to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
+        <p class="govuk-body"><strong>Don't include any personal or financial information like your National Insurance number or credit card details.</strong></p>
       request_reply: Leave your details below if you'd like a response from GOV.UK Verify.
       consent_message_html: By sending this message, you consent to us using your information as detailed in the %{href}.
       privacy_notice_link: privacy notice
@@ -694,7 +699,9 @@ en:
       errors:
         heading: There was a problem submitting the form
         no_selection: Please answer the questions
-        details: Please provide details
+        what: Please tell us what were you trying to do?
+        details: Please provide further details of your question, problem or feedback?
+        reply: Please tell us who you are for a reply?
         too_long: This field can be up to %{max_length} characters  #TODO TT-1461: confirm text
         name: Please enter a name
         email: Please enter a valid email address
@@ -775,37 +782,37 @@ en:
         title: "Verification Paused %{idp_name}"
         heading: "Your %{idp_name} identity account has been saved"
         restart_instructions_html: |
-          <p>To return you can:</p>
-          <ul class="list list-bullet">
+          <p class="govuk-body">To return you can:</p>
+          <ul class="govuk-list govuk-list--bullet">
             <li>go back to <a href="%{rp_start_page}">%{rp_name}</a>.</li>
             <li>check for an email from %{idp_name}</li>
             <li>bookmark this page</li>
           </ul>
-          <p>You'll need the email or username and password you used to create an account with %{idp_name}.</p>
+          <p class="govuk-body">You'll need the email or username and password you used to create an account with %{idp_name}.</p>
         continue_verifying: 'Continue verifying with %{idp_name}'
         return_html: 'Or return to <a href="%{rp_start_page}">%{rp_name}</a>.'
       without_session:
         title: Verification Paused
         heading: The certified company has saved your information
         restart_instructions_html: |
-          <p>To return you can:</p>
-          <ul class="list list-bullet">
+          <p class="govuk-body">To return you can:</p>
+          <ul class="govuk-list govuk-list--bullet">
             <li>go back to the service you were using</li>
             <li>check for an email from the identity provider you chose</li>
             <li>bookmark this page</li>
           </ul>
-          <p>You'll need the email or username and password you used to create an account.</p>
+          <p class="govuk-body">You'll need the email or username and password you used to create an account.</p>
       from_resume_link:
         title: "Verification Paused %{idp_name} - Link"
         heading: "Your %{idp_name} identity account has been saved"
         restart_instructions_html: |
-          <p>To return you can:</p>
-          <ul class="list list-bullet">
+          <p class="govuk-body">To return you can:</p>
+          <ul class="govuk-list govuk-list--bullet">
             <li>go back to the service you were using</li>
             <li>check for an email from %{idp_name}</li>
             <li>bookmark this page</li>
           </ul>
-          <p>You'll need the email or username and password you used to create an account.</p>
+          <p class="govuk-body">You'll need the email or username and password you used to create an account.</p>
       resume:
         title: "Continue verifying with %{display_name}"
         heading: "Continue verifying with %{display_name}"

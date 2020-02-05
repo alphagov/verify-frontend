@@ -5,7 +5,7 @@ en:
       field_name: National Insurance number(NINO)
       help_to_find: |
         <p>Your National Insurance number can be found on</p>
-        <ul>
+        <ul class="govuk-list govuk-list--bullet">
             <li>your National Insurance card</li>
             <li>your payslip</li>
             <li>P60</li>

@@ -1,9 +1,9 @@
 <%= page_title 'errors.eidas_scheme_unavailable.title' %>
 <% content_for :feedback_source, 'EIDAS_SCHEME_UNAVAILABLE_PAGE' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'errors.eidas_scheme_unavailable.heading', country_name: @selected_country.display_name %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'errors.eidas_scheme_unavailable.heading', country_name: @selected_country.display_name %></h1>
 
     <p><%= t 'errors.eidas_scheme_unavailable.other_ways' %><%= link_to t('errors.eidas_scheme_unavailable.other_ways_link'), prove_identity_retry_path %></p>
 

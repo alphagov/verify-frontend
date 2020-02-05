@@ -2,6 +2,8 @@
 <%= content_for :show_to_search_engine, false %>
 <%= analytics_title @english_translation[:single_idp_start_page_title] %>
 
-<div class="grid-row no-right-hand-logo">
-  <%= raw(@translation[:single_idp_start_page_content_html] % { start_url: @headless_start_page }) %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds no-right-hand-logo">
+    <%= raw(@translation[:single_idp_start_page_content_html] % { start_url: @headless_start_page }) %>
+  </div>
 </div>

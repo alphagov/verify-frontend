@@ -1,35 +1,47 @@
 <%= page_title 'hub.redirect_to_idp_question.title' %>
 <% content_for :feedback_source, 'REDIRECT_TO_IDP_WARNING_PAGE' %>
 
-<div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'redirect_to_idp_warning', action: 'continue_ajax', locale: I18n.locale)  %>">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'hub.redirect_to_idp_question.heading', display_name: @idp.display_name %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds js-continue-to-idp" data-location="<%= url_for(controller: 'redirect_to_idp_warning', action: 'continue_ajax', locale: I18n.locale)  %>">
+    <h1 class="govuk-heading-l"><%= t 'hub.redirect_to_idp_question.heading', display_name: @idp.display_name %></h1>
     <%= raw @idp.interstitial_question %>
 
+    <%= render 'shared/form-errors', errors: flash[:errors], form_name: "interstitial-question-form" %>
+
     <%= form_for @form, url: redirect_to_idp_question_submit_path, html: {id: 'interstitial-question-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
-
-        <%= render 'shared/form-errors', errors: flash[:errors] %>
-
-        <%= content_tag :div, class: form_question_class do %>
-            <fieldset>
-              <%= f.custom_radio_button :interstitial_question_result, true, t('hub.redirect_to_idp_question.answer_yes'), {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}} %>
-              <%= f.custom_radio_button :interstitial_question_result, false, t('hub.redirect_to_idp_question.answer_no'), {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}} %>
-            </fieldset>
-        <% end %>
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+              <h1 class="govuk-fieldset__heading">
+                Have you changed your name?
+              </h1>
+            </legend>
+            <div class="govuk-radios">
+              <div class="govuk-radios__item">
+                <%= f.radio_button :interstitial_question_result, true, {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}, class: "govuk-radios__input" }%>
+                <%= f.label :interstitial_question_result_true, t('hub.redirect_to_idp_question.answer_yes'), class: "govuk-label govuk-radios__label"%>
+              </div>
+              <div class="govuk-radios__item">
+                <%= f.radio_button :interstitial_question_result, false, {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}, class: "govuk-radios__input"}%>
+                <%= f.label :interstitial_question_result_false, t('hub.redirect_to_idp_question.answer_no'), class: "govuk-label govuk-radios__label"%>
+              </div>
+            </div>
+          </fieldset>
+        </div>
 
         <div id="validation-error-message-js"></div>
 
-        <div id="interstitial_question_details" class="hidden panel">
+        <div id="interstitial_question_details" class="hidden govuk-inset-text">
           <%= t 'hub.redirect_to_idp_question.warning_html', display_name: @idp.display_name, choose_another_company_link: link_to(t('hub.redirect_to_idp_question.choose_another_certified_company_link'), choose_a_certified_company_path)%>
         </div>
 
-        <div class="panel panel-border-wide">
+        <div class="govuk-inset-text">
           <%= t 'hub.redirect_to_idp_question.identity_documents' %>
         </div>
 
         <div class="form-group-tight">
             <%= button_tag t('navigation.continue'),
-                           class: 'button',
+                           class: 'govuk-button',
                            id: 'continue-to-idp-button',
                            type: 'submit'
             %>
@@ -38,6 +50,6 @@
     <div>
       <%= t 'hub.redirect_to_idp_question.or_html', choose_another_company_link: link_to(t('hub.redirect_to_idp_question.choose_another_certified_company_link'), choose_a_certified_company_path)%>
     </div>
+    <%= render partial: 'shared/continue_to_idp_form' %>
   </div>
-  <%= render partial: 'shared/continue_to_idp_form' %>
 </div>

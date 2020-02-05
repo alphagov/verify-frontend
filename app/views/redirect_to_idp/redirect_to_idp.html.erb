@@ -1,24 +1,23 @@
 <% page_title 'hub.redirect_to_idp.title' %>
 
-<div class="content">
-  <div class="grid-row">
-    <div class="column-two-thirds"><h1 class="heading-large"><%= t('hub.redirect_to_idp.heading')%></h1>
-      <div class="application-notice info-notice">
-        <p><%= t('hub.redirect_to_idp.description')%></p>
-      </div>
-      <%= form_tag(@request.location, class: 'js-auto-submit', authenticity_token: false, enforce_utf8: false) do %>
-          <%= hidden_field_tag 'SAMLRequest', @request.saml_request %>
-          <%= hidden_field_tag 'RelayState', @request.relay_state %>
-          <%= hidden_field_tag 'registration', @request.registration %>
-          <%= hidden_field_tag 'singleIdpJourneyIdentifier', @request.uuid if !@request.uuid.nil? %>
-          <% @request.hints.each do |hint| %>
-              <%= hidden_field_tag 'hint', hint, id:nil %>
-          <% end %>
-          <% unless @request.language_hint.nil? %>
-              <%= hidden_field_tag 'language', @request.language_hint %>
-          <% end %>
-          <%= submit_tag t('navigation.continue'), id: 'continue-button', class: 'button' %>
-      <% end %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t('hub.redirect_to_idp.heading')%></h1>
+    <div>
+      <p><%= t('hub.redirect_to_idp.description')%></p>
     </div>
+    <%= form_tag(@request.location, class: 'js-auto-submit', authenticity_token: false, enforce_utf8: false) do %>
+        <%= hidden_field_tag 'SAMLRequest', @request.saml_request %>
+        <%= hidden_field_tag 'RelayState', @request.relay_state %>
+        <%= hidden_field_tag 'registration', @request.registration %>
+        <%= hidden_field_tag 'singleIdpJourneyIdentifier', @request.uuid if !@request.uuid.nil? %>
+        <% @request.hints.each do |hint| %>
+            <%= hidden_field_tag 'hint', hint, id:nil %>
+        <% end %>
+        <% unless @request.language_hint.nil? %>
+            <%= hidden_field_tag 'language', @request.language_hint %>
+        <% end %>
+        <%= submit_tag t('navigation.continue'), id: 'continue-button', class: 'govuk-button' %>
+    <% end %>
   </div>
 </div>

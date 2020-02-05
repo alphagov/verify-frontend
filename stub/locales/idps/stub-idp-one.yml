@@ -5,7 +5,7 @@ en:
       tagline: "a really cool identity provider"
       about: |
           <p>ID Corp is the premier identity proofing service around.</p>
-          <ul>
+          <ul class="govuk-list govuk-list--bullet">
             <li>Identity</li>
             <li>Verification</li>
           </ul>
@@ -27,7 +27,7 @@ en:
         </p>
       interstitial_question: |
         <p>FancyPants can use existing customers data to verify them.</p>
-        <h2 class="heading-medium">Are you a FancyPants customer?</h2>
+        <h2 class="govuk-heading-m">Are you a FancyPants customer?</h2>
         <p>You will need FancyPants stuff</p>
       mobile_app_installation:
         You <b>will</b> have to download an app for IDCorp
@@ -37,7 +37,7 @@ cy:
       name: "Welsh IDCorp"
       about: |
            <p>ID Corp is the premier identity proofing service around.</p>
-           <ul>
+           <ul class="govuk-list govuk-list--bullet">
              <li>Identity</li>
              <li>Verification</li>
            </ul>
@@ -54,5 +54,5 @@ cy:
         </p>
       interstitial_question: |
         <p>FancyPants can use existing customers data to verify them.</p>
-        <h2 class="heading-medium">Are you a FancyPants customer?</h2>
+        <h2 class="govuk-heading-m">Are you a FancyPants customer?</h2>
         <p>You will need FancyPants stuff</p>

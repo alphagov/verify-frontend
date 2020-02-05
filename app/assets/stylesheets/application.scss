@@ -1,0 +1,45 @@
+//
+// This is a manifest file that'll be compiled into application.css, which will include all the files
+// listed below.
+//
+// Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+// vendor/assets/stylesheets directory can be referenced here using a relative path.
+//
+// You're free to add application-wide styles to this file and they'll appear at the bottom of the
+// compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+// files in this directory. Styles in this file should be added after the last require_// statement.
+// It is generally better to create a new file per style scope.
+//
+//
+$govuk-global-styles: true;
+$govuk-images-path: "govuk-frontend/govuk/assets/images/";
+$govuk-fonts-path: "govuk-frontend/govuk/assets/fonts/";
+@import "govuk-frontend/govuk/all";
+
+@import "verify-frontend";
+
+@import "helpers/available-languages";
+@import "helpers/validation-message";
+@import "helpers/meta-data";
+@import "helpers/feedback-link";
+@import "helpers/verify-logo";
+@import "helpers/js-show";
+@import "helpers/modal-dialog";
+
+ // Specific pages
+@import "pages/choose-a-certified-company";
+@import "pages/choose-a-country";
+@import "pages/company";
+@import "pages/config-provided-html";
+@import "pages/cookies";
+@import "pages/failed-uplift";
+@import "pages/feedback-landing";
+@import "pages/feedback";
+@import "pages/logos-container";
+@import "pages/privacy-notice";
+@import "pages/response-processing";
+@import "pages/select-documents";
+@import "pages/select-phone";
+@import "pages/slides";
+
+@import "helpers/overrides";

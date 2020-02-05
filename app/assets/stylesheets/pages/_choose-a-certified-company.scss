@@ -3,9 +3,9 @@
 }
 
 .button-link {
-  @include core-19;
+  @include govuk-font(19);
   background: none;
-  color: $link-colour;
+  color: $govuk-link-colour;
   text-align: left;
   text-decoration: underline;
   border: 0;
@@ -14,10 +14,10 @@
 }
 
 .button-link:hover {
-  color: $link-hover-colour;
-  border-color: $link-hover-colour;
+  color: $govuk-link-hover-colour;
+  border-color: $govuk-link-hover-colour;
 }
 
 .subtitle {
-  color: $secondary-text-colour;
+  color: $govuk-secondary-text-colour;
 }
