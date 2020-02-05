@@ -78,8 +78,8 @@ RSpec.describe 'When the user visits the select phone page' do
       visit '/select-phone'
       click_button t('navigation.continue')
 
-      expect(page).to have_css '.validation-message', text: 'Please answer all the questions'
-      expect(page).to have_css '.form-group-error'
+      expect(page).to have_css '.govuk-error-summary__list', text: 'Please answer all the questions'
+      expect(page).to have_css '.govuk-form-group--error'
     end
   end
 

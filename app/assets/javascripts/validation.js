@@ -1,10 +1,10 @@
-(function(global) {
+(function (global) {
   "use strict";
   var GOVUK = global.GOVUK || {};
   var $ = global.jQuery;
 
   function placeRadioErrorMessages($error, $element) {
-    $error.addClass('validation-message form-group');
+    $error.addClass('validation-message govuk-form-group');
     $error.children('a')
       .attr({ href: '#' + $element.attr('id') })
       .on('click', function (e) {
@@ -18,36 +18,36 @@
   GOVUK.validation = {
     radiosValidation: {
       focusInvalid: false,
-      errorClass: 'form-group-error',
+      errorClass: 'govuk-error-message',
       errorElement: 'a',
       wrapper: 'div',
       errorPlacement: placeRadioErrorMessages
     },
-    init: function (){
+    init: function () {
       $.validator.setDefaults({
         errorElement: 'span',
-        errorPlacement: function($error, $element) {
+        errorPlacement: function ($error, $element) {
           var $label = $('label[for=' + $element.attr('id') + ']');
           $error.removeClass('error');
-          $error.addClass('error-message');
-          $label.children('.error-message').remove();
+          $error.addClass('govuk-error-message');
+          $label.children('.govuk-error-message').remove();
           $label.append($error);
         },
-        highlight: function(element) {
-          $(element).addClass('form-control-error')
-            .closest('.form-group').addClass('form-group-error');
+        highlight: function (element) {
+          $(element).addClass('govuk-input--error')
+            .closest('.govuk-form-group').addClass('govuk-form-group--error');
         },
-        unhighlight: function(element) {
-        var formGroup = $(element).closest('.form-group');
-            $(element).removeClass('form-control-error');
-            formGroup.removeClass('form-group-error');
-            formGroup.find('.error-message').hide();
+        unhighlight: function (element) {
+          var formGroup = $(element).closest('.govuk-form-group');
+          $(element).removeClass('govuk-input--error');
+          formGroup.removeClass('govuk-form-group--error');
+          formGroup.find('.govuk-error-message').hide();
         },
         ignore: '.js-hidden *'
       });
-      $.validator.methods.email = function( value, element ) {
+      $.validator.methods.email = function (value, element) {
         // This should be equivalent to the validation done by email_validator.rb (in strict mode) in the backend.
-        return this.optional( element ) || /^\s*([-+._\w]{1,64})@((?:[-\w]+\.)+[a-zA-Z]{2,})\s*$/.test( value );
+        return this.optional(element) || /^\s*([-+._\w]{1,64})@((?:[-\w]+\.)+[a-zA-Z]{2,})\s*$/.test(value);
       }
     },
     attach: function () {

@@ -2,28 +2,30 @@
 <% content_for :body_classes, 'hub-start' %>
 <% content_for :feedback_source, 'RESUME_PAGE' %>
 
-<div class="grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'paused_registration', action: 'resume_with_idp_ajax', locale: I18n.locale)  %>">
-  <h1 class="heading-large"><%= t 'hub.paused_registration.resume.heading', display_name: @idp.display_name %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds js-continue-to-idp" data-location="<%= url_for(controller: 'paused_registration', action: 'resume_with_idp_ajax', locale: I18n.locale)  %>">
+    <h1 class="govuk-heading-l"><%= t 'hub.paused_registration.resume.heading', display_name: @idp.display_name %></h1>
 
-  <%= t 'hub.paused_registration.resume.intro', display_name: @idp.display_name, service_name: @transaction[:name] %>
+    <p class="govuk-body"><%= t 'hub.paused_registration.resume.intro', display_name: @idp.display_name, service_name: @transaction[:name] %></p>
 
-  <div class="actions">
-    <%= form_tag('', class: 'js-idp-form') do %>
-      <%= hidden_field_tag 'entity_id', @idp.entity_id, id: nil, class: 'js-entity-id' %>
-      <%= button_tag t('hub.paused_registration.resume.continue', display_name: @idp.display_name),
-                     class: 'button',
-                     id: 'continue-to-idp-button',
-                     type: 'submit'
-      %>
-    <% end %>
-    <br>
-    <%= t('hub.paused_registration.resume.alternatives') %>
-    <ul class="list-bullet list small-details">
-      <li><%= link_to t('hub.paused_registration.resume.alternative_new_identity'), begin_registration_path %></li>
-      <li><%= link_to t('hub.paused_registration.resume.alternative_start'), begin_sign_in_path %></li>
-      <li><%= link_to t('hub.paused_registration.resume.alternative_other_ways', service_name: @transaction[:name]), other_ways_to_access_service_path %></li>
-    </ul>
+    <div class="actions">
+      <%= form_tag('', class: 'js-idp-form') do %>
+        <%= hidden_field_tag 'entity_id', @idp.entity_id, id: nil, class: 'js-entity-id' %>
+        <%= button_tag t('hub.paused_registration.resume.continue', display_name: @idp.display_name),
+                      class: 'govuk-button button verify-inverse-btn',
+                      id: 'continue-to-idp-button',
+                      type: 'submit'
+        %>
+      <% end %>
+      
+      <p class="govuk-body"><%= t('hub.paused_registration.resume.alternatives') %></p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><%= link_to t('hub.paused_registration.resume.alternative_new_identity'), begin_registration_path %></li>
+        <li><%= link_to t('hub.paused_registration.resume.alternative_start'), begin_sign_in_path %></li>
+        <li><%= link_to t('hub.paused_registration.resume.alternative_other_ways', service_name: @transaction[:name]), other_ways_to_access_service_path %></li>
+      </ul>
+    </div>
+
+    <%= render partial: 'shared/continue_to_idp_form' %>
   </div>
-
-  <%= render partial: 'shared/continue_to_idp_form' %>
 </div>

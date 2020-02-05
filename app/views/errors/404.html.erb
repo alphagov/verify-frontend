@@ -1,10 +1,11 @@
 <%= page_title 'errors.page_not_found.title' %>
 <% content_for :feedback_source, 'ERROR_PAGE' %>
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t 'errors.page_not_found.heading' %></h1>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'errors.page_not_found.heading' %></h1>
     <p><%= t 'errors.page_not_found.reason_pre' %></p>
-    <ul class="list-bullet list">
+    <ul class="govuk-list govuk-list--bullet">
       <li><%= t 'errors.page_not_found.reason_one' %></li>
       <li><%= t 'errors.page_not_found.reason_two' %></li>
     </ul>

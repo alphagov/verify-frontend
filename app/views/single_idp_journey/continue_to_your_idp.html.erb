@@ -1,27 +1,28 @@
 <%= page_title 'hub.single_idp_journey.title', display_name: @idp.display_name %>
 <% content_for :feedback_source, 'CONTINUE_TO_YOUR_IDP_PAGE' %>
 
-<div class="grid-row js-continue-to-idp no-right-hand-logo" data-location="<%= url_for(controller: 'single_idp_journey', action: 'continue_ajax', locale: I18n.locale)  %>">
-    <h1 class="heading-large"><%= t 'hub.single_idp_journey.heading', display_name: @idp.display_name %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds js-continue-to-idp no-right-hand-logo" data-location="<%= url_for(controller: 'single_idp_journey', action: 'continue_ajax', locale: I18n.locale)  %>">
+      <h1 class="govuk-heading-l"><%= t 'hub.single_idp_journey.heading', display_name: @idp.display_name %></h1>
 
-    <%= t 'hub.single_idp_journey.intro', idp_display_name: @idp.display_name, service_display_name: @service_name %>
-    <div class="actions">
-      <%= form_tag('', class: 'js-idp-form') do %>
-          <%= hidden_field_tag 'entity_id', @idp.entity_id, id: nil, class: 'js-entity-id' %>
-          <%= hidden_field_tag 'singleIdpJourneyIdentifier', @uuid %>
-          <%= button_tag t('hub.single_idp_journey.continue_button', display_name: @idp.display_name),
-                        class: 'button',
-                        id: 'continue-to-idp-button',
-                        type: 'submit'
-          %>
-      <% end %>
-      <br>
-      <%= t('hub.single_idp_journey.alternatives') %>
-      <ul class="list-bullet list small-details">
-        <li><%= link_to t('hub.single_idp_journey.alternative_one'), start_path %></li>
-        <li><%= link_to t('hub.single_idp_journey.alternative_two', service_display_name: @service_name), other_ways_to_access_service_path %></li>
-      </ul>
-    </div>
-  <%= render partial: 'shared/continue_to_idp_form' %>
+      <p class="govuk-body"><%= t 'hub.single_idp_journey.intro', idp_display_name: @idp.display_name, service_display_name: @service_name %></p>
+      <div class="actions">
+        <%= form_tag('', class: 'js-idp-form') do %>
+            <%= hidden_field_tag 'entity_id', @idp.entity_id, id: nil, class: 'js-entity-id' %>
+            <%= hidden_field_tag 'singleIdpJourneyIdentifier', @uuid %>
+            <%= button_tag t('hub.single_idp_journey.continue_button', display_name: @idp.display_name),
+                          class: 'govuk-button',
+                          id: 'continue-to-idp-button',
+                          type: 'submit'
+            %>
+        <% end %>
+        
+        <p class="govuk-body"><%= t('hub.single_idp_journey.alternatives') %></p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li><%= link_to t('hub.single_idp_journey.alternative_one'), start_path %></li>
+          <li><%= link_to t('hub.single_idp_journey.alternative_two', service_display_name: @service_name), other_ways_to_access_service_path %></li>
+        </ul>
+      </div>
+    <%= render partial: 'shared/continue_to_idp_form' %>
+  </div>
 </div>
-

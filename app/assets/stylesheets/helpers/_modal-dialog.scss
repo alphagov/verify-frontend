@@ -37,7 +37,7 @@
     -ms-transform: translate(0, -50%);
     transform: translate(0, -50%);
 
-    @include media(tablet) {
+    @include govuk-media-query($from: tablet) {
       padding: 0;
     }
   }
@@ -45,13 +45,11 @@
   &__inner {
     padding: 20px;
 
-    @include media(tablet) {
+    @include govuk-media-query($from: tablet) {
       padding: 30px;
     }
 
     &__text {
-
-      @include copy-19;
       margin-bottom: 20px;
     }
 
@@ -60,20 +58,18 @@
     }
 
     &__link {
-
-      @include copy-19;
       background: none;
       border: none;
       vertical-align: middle;
       margin-top: 20px;
 
-      @include media(mobile) {
+      @include govuk-media-query($from: mobile, $until: tablet) {
         text-align: center;
         display: block;
         margin-top: 25px;
       }
 
-      @include media(tablet) {
+      @include govuk-media-query($from: tablet) {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -103,7 +99,7 @@
 
 // Modal dialog polyfill styles
 $border-color: #000000;
-$background-color: #ffffff;
+$background-color: govuk-colour("white");
 $dialog-backdrop-colour: rgba(0, 0, 0, 0.8);
 $dialog-border: 5px solid $border-color;
 
@@ -139,7 +135,7 @@ dialog {
     padding: 15px;
     width: 90%;
 
-    @include media(tablet) {
+    @include govuk-media-query($from: tablet) {
       padding: 30px;
       margin: 30px auto;
       max-width: 500px;
@@ -155,8 +151,4 @@ dialog {
       background: $dialog-backdrop-colour;
     }
   }
-}
-
-.tabular-numbers {
-  font-family: $toolkit-font-stack-tabular;
 }

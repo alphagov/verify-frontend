@@ -4,19 +4,23 @@
   .list-logos {
 
     li {
-      @include inline-block;
       padding: 0 20px 0 20px;
       width: 50%;
       box-sizing: border-box;
+      display: inline-block;
 
-      @include media (tablet) {
+      @include govuk-media-query($from: tablet) {
         max-width: 200px;
       }
 
       &.verify {
         border-right-style: solid;
         border-right-width: 1px;
-        border-right-color: $border-colour;
+        border-right-color: $govuk-border-colour;
+      }
+
+      &.verify:last-child {
+        border-right-style: none;
       }
     }
 

@@ -126,6 +126,7 @@ RSpec.describe 'When the user visits a page' do
     it 'sends a page view with a new_visit parameter if new session and on next page the parameter is not present' do
       set_session_and_session_cookies!
       page.set_rack_session(new_visit: 'true')
+
       expect(request_log).to receive(:log).with(
         hash_including(
           'action_name' => 'Start - GOV.UK Verify - GOV.UK - LEVEL_2',

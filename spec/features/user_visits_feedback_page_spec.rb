@@ -31,17 +31,17 @@ RSpec.feature 'When the user visits the feedback page' do
 
     click_button t('hub.feedback.send_message')
 
-    expect(page).to have_css('.form-group.form-group-error', count: 3)
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.reply'))
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.details'), count: 2)
+    expect(page).to have_css('.govuk-form-group.govuk-form-group--error', count: 3)
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.reply'))
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.details'), count: 2)
 
     choose 'feedback_form_reply_true', allow_label_click: true
     click_button t('hub.feedback.send_message')
 
-    expect(page).to_not have_css('.error-message', text: t('hub.feedback.errors.reply'))
-    expect(page).to have_css('.form-group.form-group-error', count: 4)
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.name'))
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.email'))
+    expect(page).to_not have_css('.govuk-error-message', text: t('hub.feedback.errors.reply'))
+    expect(page).to have_css('.govuk-form-group.govuk-form-group--error', count: 4)
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.name'))
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.email'))
   end
 
   it 'should show errors for email address when not valid', js: true do
@@ -52,12 +52,12 @@ RSpec.feature 'When the user visits the feedback page' do
     fill_in 'feedback_form_email', with: 'foo@bar'
     click_button t('hub.feedback.send_message')
 
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.email'))
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.email'))
 
     fill_in 'feedback_form_email', with: 'foo@bar.com'
     click_button t('hub.feedback.send_message')
 
-    expect(page).to_not have_css('.error-message', text: t('hub.feedback.errors.email'))
+    expect(page).to_not have_css('.govuk-error-message', text: t('hub.feedback.errors.email'))
   end
 
   it 'should show errors for all input fields when missing input and user wants a reply' do
@@ -67,11 +67,12 @@ RSpec.feature 'When the user visits the feedback page' do
     choose 'feedback_form_reply_true', allow_label_click: true
     click_button t('hub.feedback.send_message')
 
-    expect(page).to have_css('.form-group.form-group-error', count: 4)
-    expect(page).to have_css('.validation-message', text: t('hub.feedback.errors.no_selection'))
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.name'))
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.email'))
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.details'), count: 2)
+    expect(page).to have_css('.govuk-form-group.govuk-form-group--error', count: 4)
+    expect(page).to have_css('.govuk-error-summary__list', text: t('hub.feedback.errors.no_selection'))
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.name'))
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.email'))
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.what'))
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.details'))
   end
 
   it 'should show errors when input fields values too long' do
@@ -83,8 +84,8 @@ RSpec.feature 'When the user visits the feedback page' do
 
     click_button t('hub.feedback.send_message')
 
-    expect(page).to have_css('.form-group.form-group-error', count: 2)
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.too_long', max_length: long_text_limit), count: 2)
+    expect(page).to have_css('.govuk-form-group.govuk-form-group--error', count: 2)
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.too_long', max_length: long_text_limit), count: 2)
   end
 
   it 'should not show errors for name and email when missing input and user does not want a reply' do
@@ -94,10 +95,10 @@ RSpec.feature 'When the user visits the feedback page' do
     choose 'feedback_form_reply_false', allow_label_click: true
     click_button t('hub.feedback.send_message')
 
-    expect(page).to have_css('.form-group.form-group-error', count: 2)
-    expect(page).to have_css('.validation-message', text: t('hub.feedback.errors.no_selection'))
-    expect(page).to_not have_css('.error-message', text: t('hub.feedback.errors.name'))
-    expect(page).to_not have_css('.error-message', text: t('hub.feedback.errors.email'))
+    expect(page).to have_css('.govuk-form-group.govuk-form-group--error', count: 2)
+    expect(page).to have_css('.govuk-error-summary__list', text: t('hub.feedback.errors.no_selection'))
+    expect(page).to_not have_css('.govuk-error-message', text: t('hub.feedback.errors.name'))
+    expect(page).to_not have_css('.govuk-error-message', text: t('hub.feedback.errors.email'))
   end
 
   it 'should not show errors for reply when it is not selected' do
@@ -106,31 +107,31 @@ RSpec.feature 'When the user visits the feedback page' do
 
     click_button t('hub.feedback.send_message')
 
-    expect(page).to have_css('.form-group.form-group-error', count: 3)
-    expect(page).to have_css('.error-message', text: t('hub.feedback.errors.reply'))
-    expect(page).to have_css('.validation-message', text: t('hub.feedback.errors.no_selection'))
+    expect(page).to have_css('.govuk-form-group.govuk-form-group--error', count: 3)
+    expect(page).to have_css('.govuk-error-message', text: t('hub.feedback.errors.reply'))
+    expect(page).to have_css('.govuk-error-summary__list', text: t('hub.feedback.errors.no_selection'))
   end
 
   it 'should report on the what box character limit', js: true do
     visit feedback_path
 
     character_count_message_suffix = t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message'))
-    expect(page).to have_content t('hub.feedback.character_limit_message')
+    expect(page).to have_content "You have 3000 characters remaining"
     expect(page).to_not have_content character_count_message_suffix
     fill_in 'feedback_form_what', with: what_text_field
     page.execute_script('$("#feedback_form_what").triggerHandler("txtinput")')
-    expect(page).to have_content("#{long_text_limit - what_text_field.size}#{character_count_message_suffix}")
+    expect(page).to have_content("#{long_text_limit - what_text_field.size} characters remaining")
   end
 
   it 'should report on the details box character limit', js: true do
     visit feedback_path
 
     character_count_message_suffix = t('hub.feedback.character_count_message', limit_message: t('hub.feedback.character_limit_message'))
-    expect(page).to have_content t('hub.feedback.character_limit_message')
+    expect(page).to have_content "You have 3000 characters remaining"
     expect(page).to_not have_content character_count_message_suffix
     fill_in 'feedback_form_details', with: details_text_field
     page.execute_script('$("#feedback_form_details").triggerHandler("txtinput")')
-    expect(page).to have_content("#{long_text_limit - details_text_field.size}#{character_count_message_suffix}")
+    expect(page).to have_content("#{long_text_limit - details_text_field.size} characters remaining")
   end
 
   it 'should not go to feedback sent page when a error with zendesk occurs' do

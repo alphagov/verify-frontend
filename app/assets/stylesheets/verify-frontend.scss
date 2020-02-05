@@ -1,0 +1,40 @@
+.validation-message {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: $govuk-error-colour;
+  font-weight: bold;
+
+  .form-group-error,
+  .form-group-error:focus {
+    display: block;
+    padding: 15px;
+    margin: 15px 0;
+    color: $govuk-error-colour;
+    background: transparent;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+// Fields that were hidden by JS but marked
+// as validation errors should always be visible:
+.js-hidden.form-group-error {
+  display: block;
+  visibility: visible;
+}
+
+.verify-inverse-btn {
+  color: $govuk-brand-colour;
+  background-color: govuk-colour("white");
+}
+
+.verify-inverse-btn:hover {
+  color: $govuk-brand-colour;
+  background-color: govuk-colour("light-grey");
+}
+
+.hidden,
+.verify-js-show {
+  display: none;
+  visibility: hidden;
+}

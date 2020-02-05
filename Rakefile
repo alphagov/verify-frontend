@@ -8,3 +8,4 @@ Rails.application.load_tasks
 
 task spec: ['lint:ruby', 'lint:sass']
 task default: [:spec, 'jasmine:ci']
+task "assets:precompile" => ["copy_govuk_dependencies"]

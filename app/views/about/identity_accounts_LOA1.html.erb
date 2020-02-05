@@ -1,27 +1,28 @@
 <%= page_title 'hub.about_identity_accounts.title' %>
 <% content_for :feedback_source, 'ABOUT_IDENTITY_ACCOUNTS_PAGE' %>
+<% # Uses slide layout %>
 
 <%= t 'hub.about_identity_accounts.content_loa1_html' %>
 
 <div class="actions">
-  <%= button_link_to t('navigation.start_now'), choose_a_certified_company_path, id: 'next-button' %>
+  <%= button_link_to t('navigation.start_now'), choose_a_certified_company_path, id: 'next-button', class: "govuk-button verify-inverse-btn" %>
 </div>
 
-<details>
-  <summary>
-    <span class="summary"><%= t 'hub.about_identity_accounts.summary' %></span>
+<details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text"><%= t 'hub.about_identity_accounts.summary' %></span>
   </summary>
 
-  <div class="panel panel-border-narrow">
-    <p><%= t 'hub.about_identity_accounts.details_loa1_html' %></p>
-    <ul class="list-bullet list">
+  <div class="govuk-details__text">
+    <p class="govuk-body"><%= t 'hub.about_identity_accounts.details_loa1_html' %></p>
+    <ul class="govuk-list govuk-list--bullet">
       <% loa1_transactions_list.each do |transaction| -%>
           <li><%= transaction.name %></li>
       <% end %>
     </ul>
 
-    <p><%= t 'hub.about_identity_accounts.details_loa1_uplift_list' %></p>
-    <ul class="list-bullet list">
+    <p class="govuk-body"><%= t 'hub.about_identity_accounts.details_loa1_uplift_list' %></p>
+    <ul class="govuk-list govuk-list--bullet">
       <% loa2_transactions_list.each do |transaction| -%>
           <li><%= transaction.name %></li>
       <% end %>

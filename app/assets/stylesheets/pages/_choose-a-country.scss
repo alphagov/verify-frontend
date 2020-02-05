@@ -9,7 +9,7 @@
     img {
       max-width: 40px;
       max-height: 30px;
-      box-shadow: 0 0 2px $grey-2;
+      box-shadow: 0 0 2px govuk-colour("mid-grey");
     }
   }
 
@@ -55,10 +55,10 @@
 
   .country-option {
     max-width: 670px;
-    border-bottom: 1px solid $grey-1;
+    border-bottom: 1px solid govuk-colour("dark-grey");
 
-    @include media(tablet) {
-      border-bottom: 1px solid $grey-2;
+    @include govuk-media-query($from: tablet) {
+      border-bottom: 1px solid govuk-colour("mid-grey");
 
       .scheme-option:not(:first-child) {
         .country-flag,
@@ -76,7 +76,7 @@
   .scheme-option {
     padding-bottom: 20px;
 
-    @include media(tablet) {
+    @include govuk-media-query($from: tablet) {
       padding-top: 12px;
       padding-bottom: 7px;
 
@@ -88,8 +88,8 @@
     }
 
     &:not(:last-child) {
-      @include media(mobile) {
-        border-bottom: 1px solid $grey-1;
+      @include govuk-media-query($from: mobile) {
+        border-bottom: 1px solid govuk-colour("dark-grey");
       }
     }
   }
@@ -99,7 +99,7 @@
     height: 125px;
     display: inline-block;
 
-    @include media(tablet) {
+    @include govuk-media-query($from: tablet) {
       width: 65%;
       height: unset;
 

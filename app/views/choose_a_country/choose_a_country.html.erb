@@ -1,13 +1,15 @@
 <%= page_title 'hub.choose_a_country.title' %>
 <% content_for :feedback_source, 'CHOOSE_A_COUNTRY_PAGE' %>
-
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large"><%= t('hub.choose_a_country.heading') %></h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    
+    <h1 class="govuk-heading-l"><%= t('hub.choose_a_country.heading') %></h1>
     <p><%= t 'hub.choose_a_country.description' %></p>
   </div>
+</div>
 
-  <div class="column-full js-redirect-to-country" data-location="<%= url_for(controller: 'redirect_to_country', action: 'choose_a_country_submit_ajax') %>">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full js-redirect-to-country" data-location="<%= url_for(controller: 'redirect_to_country', action: 'choose_a_country_submit_ajax') %>">
     <div class="country-picker" id="country-picker">
       <% @countries.each do |country| %>
         <div class="country-option">
@@ -30,7 +32,7 @@
                 <%= form_tag choose_a_country_submit_path, :class => 'js-country-form' do %>
                   <%= hidden_field_tag :country, country.simple_id, class: 'js-country-simple-id' %>
                   <%= button_tag t('hub.choose_a_country.select_label', scheme_name: scheme.display_name),
-                             class: 'button',
+                             class: 'govuk-button',
                              name: country.simple_id,
                              id: nil,
                              type: 'submit',
@@ -44,16 +46,17 @@
       <% end %>
     </div>
   </div>
-
-  <div class="column-two-thirds">
-    <h3 class="heading-small"><%= t 'hub.choose_a_country.country_not_listed_heading' %></h3>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h3 class="govuk-heading-s"><%= t 'hub.choose_a_country.country_not_listed_heading' %></h3>
     <p><%= t 'hub.choose_a_country.country_not_listed_description' %><%= link_to t('hub.choose_a_country.country_not_listed_link', other_ways_description: @other_ways_description), other_ways_after_eidas_path %></p>
-  </div>
 
-  <%= form_tag({}, {id: 'post-to-country', class: 'hidden', authenticity_token: false, enforce_utf8: false}) do %>
-    <input name=SAMLRequest type=hidden>
-    <input name=RelayState type=hidden>
-    <input name=registration type=hidden>
-    <input type=submit>
-  <% end %>
+    <%= form_tag({}, {id: 'post-to-country', class: 'hidden', authenticity_token: false, enforce_utf8: false}) do %>
+      <input name=SAMLRequest type=hidden>
+      <input name=RelayState type=hidden>
+      <input name=registration type=hidden>
+      <input type=submit>
+    <% end %>
+  </div>
 </div>

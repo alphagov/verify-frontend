@@ -7,7 +7,7 @@ describe FeedbackForm do
   context 'is not valid when' do
     short_text_limit = FeedbackForm::SHORT_TEXT_LIMIT
     long_text_limit = FeedbackForm::LONG_TEXT_LIMIT
-    what_error_message = 'What ' + I18n.t('hub.feedback.errors.details')
+    what_error_message = 'What ' + I18n.t('hub.feedback.errors.what')
     details_error_message = 'Details ' + I18n.t('hub.feedback.errors.details')
     name_error_message = 'Name ' + I18n.t('hub.feedback.errors.name')
     no_selection_error_message = I18n.t('hub.feedback.errors.no_selection')

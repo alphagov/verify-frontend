@@ -1,7 +1,7 @@
 <% content_for :main do %>
   <div class="content-inner slides">
-    <div class="grid-row">
-      <div class="column-one-third">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
         <div class="slides-verify-logo hide-mobile">
           <%= image_tag 'govuk-verify.png', srcset: "#{asset_path 'govuk-verify.svg'} 1x", alt: ' ', role: 'presentation' %>
         </div>
@@ -9,7 +9,7 @@
           <%= image_tag 'govuk-verify-horizontal.png', srcset: "#{asset_path 'govuk-verify-horizontal.svg'} 1x", alt: ' ', role: 'presentation' %>
         </div>
       </div>
-      <div class="column-two-thirds">
+      <div class="govuk-grid-column-two-thirds">
         <%= yield %>
       </div>
     </div>
