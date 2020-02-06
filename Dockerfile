@@ -11,6 +11,6 @@ WORKDIR /verify-frontend
 # Puma needs these dockerignored dirs to write to
 RUN mkdir -p log tmp
 
-RUN bundle exec rake assets:precompile assets:undigest_assets
+RUN bundle exec rake assets:precompile
 
 CMD bundle exec puma -e development -p 80
