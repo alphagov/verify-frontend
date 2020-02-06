@@ -20,7 +20,7 @@ namespace :assets do
             else
               ''
             end
-    path = File.join(Rails.root, "./public/assets/#{build}govuk-frontend/govuk/assets/**/*")
+    path = File.join(Rails.root, "./public/#{build}govuk-frontend/govuk/assets/**/*")
     assets = Dir.glob(path)
     puts "INFO - Found #{assets.length} assets to examine from #{path}"
     regex = /(-{1}[a-z0-9]{32}*\.{1}){1}/
