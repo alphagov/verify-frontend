@@ -21,7 +21,7 @@ WORKDIR /verify-frontend
 RUN bundle config --global frozen 1 && \
     bundle check || bundle install --without development test
 
-RUN echo 'heroku' > /verify-frontend/.build-number
+RUN echo 'assets/heroku' > /verify-frontend/.build-number
 
 RUN bash -c 'source .env \
              && export $(cut -d= -f1 .env) \
