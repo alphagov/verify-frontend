@@ -55,9 +55,10 @@ module VerifyFrontend
         # if the scripts in that file change, or more are added, use a command similar to
         # this to generate the digests:
         # `echo "'sha256-"$(echo -n "inline javascript text" | openssl dgst -sha256 -binary | openssl enc -base64)"'"`
-        "script-src 'self' 'unsafe-eval' 'sha256-l1eTVSK8DTnK8+yloud7wZUqFrI0atVo6VlC6PJvYaQ=' 'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=' 'sha256-G29/qSW/JHHANtFhlrZVDZW1HOkCDRc78ggbqwwIJ2g=' 'sha256-Q4QUjejvbTKD2vc18z+Lm8re547rtOd8EcBB111VRLU' 'unsafe-inline' www.google-analytics.com; " +
+        "script-src 'self' 'unsafe-eval' 'sha256-l1eTVSK8DTnK8+yloud7wZUqFrI0atVo6VlC6PJvYaQ=' 'sha256-z+w14eMdBnQz5R7dNjibxeljAXmb/YS1Ldn35EM+png=' 'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=' 'sha256-G29/qSW/JHHANtFhlrZVDZW1HOkCDRc78ggbqwwIJ2g=' 'sha256-Q4QUjejvbTKD2vc18z+Lm8re547rtOd8EcBB111VRLU' 'unsafe-inline' www.google-analytics.com; " +
         "style-src 'self' 'unsafe-inline'"
     }
+
     RouteTranslator.config do |config|
       config.hide_locale = true
       config.available_locales = %i[en cy]
