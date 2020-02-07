@@ -23,18 +23,18 @@
   <% if @non_recommended_idps.any? %>
     <div id="non-matching-idps">
       <div class="grid-row">
-        <div class="column-two-thirds">
-          <p class="large-top">
+        <div class="column-two-thirds govuk-!-padding-top-3">
+          <p class="govuk-body">
             <%= t 'hub.choose_a_certified_company.filtered_idps_message_html',
                   company_count: t('hub.choose_a_certified_company.company_html', count: @non_recommended_idps.length) %>
           </p>
         </div>
       </div>
       <details class="govuk-details" data-module="govuk-details">
-        <summary>
-          <span class="summary"><%= t 'hub.choose_a_certified_company.show_all_companies' %></span>
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text"><%= t 'hub.choose_a_certified_company.show_all_companies' %></span>
         </summary>
-        <div class="panel panel-border-narrow">
+        <div class="govuk-details__text">
           <% @non_recommended_idps.each.with_index do |identity_provider, index| %>
             <%= render partial: 'choose_a_certified_company/idp_option', locals: {recommended: false, identity_provider: identity_provider, order: index + 1} %>
           <% end %>
