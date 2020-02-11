@@ -11,11 +11,6 @@
     <%= form_for @form, url: redirect_to_idp_question_submit_path, html: {id: 'interstitial-question-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-              <h1 class="govuk-fieldset__heading">
-                Have you changed your name?
-              </h1>
-            </legend>
             <div class="govuk-radios">
               <div class="govuk-radios__item">
                 <%= f.radio_button :interstitial_question_result, true, {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}, class: "govuk-radios__input" }%>
