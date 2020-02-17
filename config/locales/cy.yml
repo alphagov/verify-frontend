@@ -281,9 +281,9 @@ cy:
         heading: Defnyddiwch GOV.UK Verify
         explanation_html: |
           <p>I greu cyfrif, mae'n rhaid i chi ddewis cwmni i wirio'ch hunaniaeth. Bydd y cwmni'n gwirio'ch manylion personol a'ch dogfennau hunaniaeth.</p>
-          <p>Mae GOV.UK Verify yn gweithio orau os :</p>
+          <p>Mae GOV.UK Verify yn gweithio orau os:</p>
           <ul>
-          <li>oes gennych gyfeiriad y DU/li>
+          <li>oes gennych gyfeiriad y DU</li>
           <li>ydych dros 20 oed</li>
           <li>oes gennych o leiaf un ddogfen hunaniaeth â llun, o unrhyw wlad</li>
           </ul>
