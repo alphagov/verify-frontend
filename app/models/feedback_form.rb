@@ -2,8 +2,7 @@ class FeedbackForm
   include ActiveModel::Model
 
   attr_reader :what, :details, :reply, :name, :email, :referer, :user_agent, :js_disabled
-  validate :mandatory_fields_present, :name_should_be_present,
-           :what_should_be_present, :details_should_be_present, :reply_should_be_present,
+  validate :name_should_be_present, :what_should_be_present, :details_should_be_present, :reply_should_be_present,
            :email_format_should_be_valid
 
   validate :length_of_what, :length_of_details, :length_of_name, :length_of_email
@@ -50,15 +49,9 @@ class FeedbackForm
 
 private
 
-  def mandatory_fields_present
-    if what_missing? || details_missing? || @reply.blank?
-      errors.add(:base, I18n.t('hub.feedback.errors.no_selection')) unless errors.include?(:base)
-    end
-  end
-
   def reply_should_be_present
     if @reply.blank?
-      errors.add(:reply, I18n.t('hub.feedback.errors.reply'))
+      errors.add(:reply_true, I18n.t('hub.feedback.errors.reply'))
     end
   end
 
@@ -76,14 +69,12 @@ private
 
   def name_should_be_present
     if reply_required? && name_missing?
-      errors.add(:base, I18n.t('hub.feedback.errors.no_selection')) unless errors.include?(:base)
       errors.add(:name, I18n.t('hub.feedback.errors.name'))
     end
   end
 
   def email_format_should_be_valid
     if reply_required? && (email_missing? || !EmailValidator.valid?(email, strict_mode: true))
-      errors.add(:base, I18n.t('hub.feedback.errors.no_selection')) unless errors.include?(:base)
       errors.add(:email, I18n.t('hub.feedback.errors.email'))
     end
   end

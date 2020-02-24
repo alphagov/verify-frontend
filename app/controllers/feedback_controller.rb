@@ -24,7 +24,7 @@ class FeedbackController < ApplicationController
         render :index
       end
     else
-      flash.now[:errors] = @form.errors[:base].first
+      flash.now[:errors] = @form.errors.full_messages.join(', ')
       render :index
     end
   end

@@ -695,7 +695,6 @@ cy:
         email_hint: Byddwn ond yn ei ddefnyddio i ateb eich neges.
       errors:
         heading: Roedd problem wrth anfon y ffurflen
-        no_selection: Dylech ateb y cwestiynau
         details: Dylech roi manylion
         too_long: Gall y maes hwn fod hyd at %{max_length} nod  #TODO TT-1461: confirm text
         name: Dylech roi enw

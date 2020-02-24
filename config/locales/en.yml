@@ -698,10 +698,8 @@ en:
         email_hint: We’ll only use this to reply to your message.
       errors:
         heading: There was a problem submitting the form
-        no_selection: Please answer the questions
         what: Please tell us what were you trying to do?
         details: Please provide further details of your question, problem or feedback?
-        reply: Please tell us who you are for a reply?
         too_long: This field can be up to %{max_length} characters  #TODO TT-1461: confirm text
         name: Please enter a name
         email: Please enter a valid email address
