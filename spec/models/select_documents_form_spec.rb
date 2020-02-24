@@ -4,19 +4,25 @@ require 'rails_helper'
 describe SelectDocumentsForm do
   context '#validations' do
     context '#invalid form' do
+      any_driving_license_error_message = 'Any driving licence true ' + I18n.t('hub.select_documents.errors.no_driving_license_selection')
+      passport_error_message = 'Passport true ' + I18n.t('hub.select_documents.errors.no_passport_selection')
+      driving_license_issuer_error_message = 'Driving licence great britain ' + I18n.t('hub.select_documents.errors.no_driving_licence_issuer_selection')
+
       it 'should be invalid if all inputs are empty' do
         form = SelectDocumentsForm.new({})
         expect(form).to_not be_valid
-        expect(form.errors.full_messages).to eql ['Please select the documents you have']
+        expect(form.errors.full_messages).to include any_driving_license_error_message
+        expect(form.errors.full_messages).to include passport_error_message
+        expect(form.errors.full_messages).not_to include driving_license_issuer_error_message
       end
 
-      it 'should be invalid if no driving licence details are given' do
+      it 'should be invalid if no driving licence issuer details are given' do
         form = SelectDocumentsForm.new(
           any_driving_licence: 'true',
           passport: 'false'
         )
         expect(form).to_not be_valid
-        expect(form.errors.full_messages).to eql ['Please select the documents you have']
+        expect(form.errors.full_messages).to eql [driving_license_issuer_error_message]
       end
 
       it 'should be invalid if user only inputs driving licence details' do
@@ -25,7 +31,7 @@ describe SelectDocumentsForm do
           driving_licence: 'great_britain'
         )
         expect(form).to_not be_valid
-        expect(form.errors.full_messages).to eql ['Please select the documents you have']
+        expect(form.errors.full_messages).to eql [passport_error_message]
       end
 
       it 'should be invalid if user only inputs passport details' do
@@ -33,7 +39,7 @@ describe SelectDocumentsForm do
           passport: 'true'
         )
         expect(form).to_not be_valid
-        expect(form.errors.full_messages).to eql ['Please select the documents you have']
+        expect(form.errors.full_messages).to eql [any_driving_license_error_message]
       end
     end
 
@@ -41,7 +47,7 @@ describe SelectDocumentsForm do
       it 'should be valid if answers are given to every question' do
         form = SelectDocumentsForm.new(
           any_driving_licence: 'false',
-          passport: 'true',
+          passport: 'true'
         )
         expect(form).to be_valid
       end

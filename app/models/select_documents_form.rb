@@ -2,7 +2,7 @@ class SelectDocumentsForm
   include ActiveModel::Model
 
   attr_reader :driving_licence, :ni_driving_licence, :passport, :any_driving_licence
-  validate :any_driving_licence_and_passport_must_be_present
+  validate :any_driving_license_must_be_present, :passport_must_be_present
   validate :driving_licence_details_present
 
   def initialize(hash)
@@ -36,23 +36,19 @@ class SelectDocumentsForm
 
 private
 
-  def any_driving_licence_and_passport_must_be_present
-    unless any_driving_licence && passport
-      add_documents_error
-    end
+  def any_driving_license_must_be_present
+    errors.add(:any_driving_licence_true, I18n.t('hub.select_documents.errors.no_driving_license_selection')) unless any_driving_licence
+  end
+
+  def passport_must_be_present
+    errors.add(:passport_true, I18n.t('hub.select_documents.errors.no_passport_selection')) unless passport
   end
 
   def driving_licence_details_present
-    if any_driving_licence == 'true' && no_driving_licence_details?
-      add_documents_error
-    end
+    errors.add(:driving_licence_great_britain, I18n.t('hub.select_documents.errors.no_driving_licence_issuer_selection')) if any_driving_licence == 'true' && no_driving_licence_details?
   end
 
   def no_driving_licence_details?
     !(driving_licence == 'great_britain' || driving_licence == 'northern_ireland')
-  end
-
-  def add_documents_error
-    errors.add(:base, I18n.t('hub.select_documents.errors.no_selection'))
   end
 end

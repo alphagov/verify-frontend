@@ -428,8 +428,9 @@ cy:
         no_documents: Nid oes gennyf y dogfennau hyn gyda mi
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych
-        invalid_selection: Edrychwch dros eich dewis
-        no_driving_licence_selection: Dewiswch y drwydded yrru sydd gennych
+        no_driving_license_selection: Please select if you have a driving license
+        no_passport_selection: Please select if you have a passport
+        no_driving_licence_issuer_selection: Please select the issuer of your driving license
       neither_documents: Nid yw'r un o'r dogfennau hyn gennyf
       where_driving_licence_issued: Ble cyhoeddwyd eich trwydded yrru?
       driving_licence_details:

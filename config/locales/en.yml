@@ -436,8 +436,9 @@ en:
         no_documents: I don’t have any of these documents with me
       errors:
         no_selection: Please select the documents you have
-        invalid_selection: Please check your selection
-        no_driving_licence_selection: Please select the driving licence you have
+        no_driving_license_selection: Please select if you have a driving license
+        no_passport_selection: Please select if you have a passport
+        no_driving_licence_issuer_selection: Please select the issuer of your driving license
       neither_documents: I don't have either of these documents
       where_driving_licence_issued: Where was your driving licence issued?
       driving_licence_details:
