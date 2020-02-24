@@ -1,22 +1,22 @@
 <%= page_title 'hub.other_ways_after_eidas.title' %>
 <% content_for :feedback_source, 'OTHER_WAYS_AFTER_EIDAS_PAGE' %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="heading-large"><%= t 'hub.other_ways_after_eidas.heading', other_ways_description: @other_ways_description %></h1>
+    <h1 class="govuk-heading-l"><%= t 'hub.other_ways_after_eidas.heading', other_ways_description: @other_ways_description %></h1>
     <div class="other-ways-to-complete-transaction">
-      <%= t 'hub.other_ways_after_eidas.explanation', other_ways_description: @other_ways_description %>
+      <p><%= t 'hub.other_ways_after_eidas.explanation', other_ways_description: @other_ways_description %></p>
     </div>
 
-    <h2 class="heading-medium"><%= t 'hub.other_ways_after_eidas.verify.heading' %></h2>
+    <h2 class="govuk-heading-m"><%= t 'hub.other_ways_after_eidas.verify.heading' %></h2>
     <div class="other-ways-to-complete-transaction">
       <%= t 'hub.other_ways_after_eidas.verify.explanation_html' %>
     </div>
 
-    <%= button_link_to t('hub.other_ways_after_eidas.verify.button'), start_path, id: 'next-button' %>
+    <%= button_link_to t('hub.other_ways_after_eidas.verify.button'), start_path, id: 'next-button', class: 'govuk-button' %>
 
-    <h2 class="heading-medium"><%= t 'hub.other_ways_after_eidas.cannot_verify', other_ways_description: @other_ways_description %></h2>
+    <h2 class="govuk-heading-m govuk-!-margin-top-4"><%= t 'hub.other_ways_after_eidas.cannot_verify', other_ways_description: @other_ways_description %></h2>
     <div class="other-ways-to-complete-transaction">
       <%= raw @other_ways_text %>
     </div>
