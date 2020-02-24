@@ -22,6 +22,7 @@ class FurtherInformationController < ApplicationController
     else
       @seconds_to_timeout = get_seconds_to_timeout
       @transaction_name = current_transaction.name
+      flash.now[:errors] = @cycle_three_attribute.errors.full_messages.join(', ')
       render 'index'
     end
   end
