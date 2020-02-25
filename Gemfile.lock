@@ -68,7 +68,6 @@ GEM
     clamp (1.0.1)
     codacy-coverage (2.1.0)
       simplecov
-    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crack (0.4.3)
@@ -178,7 +177,7 @@ GEM
     multipart-post (2.0.0)
     mustache (0.99.8)
     nio4r (2.3.1)
-    nokogiri (1.10.5)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     parallel (1.15.0)
     parser (2.6.2.0)
