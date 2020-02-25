@@ -27,22 +27,19 @@ private
 
   def residency_questions_answered
     if resident_last_12_months.blank?
-      no_selection_error
+      errors.add(:resident_last_12_months_true, I18n.t('hub.will_it_work_for_me.question.errors.resident_12_months'))
     end
 
-    if !resident_last_12_months? && not_resident_reason.blank?
-      no_selection_error
+    if not_resident_missing?
+      errors.add(:not_resident_reason_moved_recently, I18n.t('hub.will_it_work_for_me.question.errors.not_resident_reason'))
     end
   end
 
   def age_threshold_question_answered
-    if above_age_threshold.blank?
-      no_selection_error
-    end
+    errors.add(:above_age_threshold_true, I18n.t('hub.will_it_work_for_me.question.errors.age_threshold')) if above_age_threshold.blank?
   end
 
-  def no_selection_error
-    errors.add(:base, I18n.t('hub.will_it_work_for_me.question.errors.no_selection'))
-    throw(:abort)
+  def not_resident_missing?
+    resident_last_12_months == 'false' && not_resident_reason.blank?
   end
 end

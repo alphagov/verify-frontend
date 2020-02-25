@@ -475,6 +475,9 @@ en:
           no_address: I don’t have a UK address
         errors:
           no_selection: Please answer all the questions
+          age_threshold: Please tell us if you are 20 or over
+          resident_12_months: Please tell us if you lived in the UK for the last 12 months
+          not_resident_reason: Please tell us why you haven't lived in the UK for the last 12 months
     idp_wont_work_for_you_one_doc:
       title: "%{idp_name} cannot verify your identity"
       heading: "%{idp_name} cannot verify your identity"
