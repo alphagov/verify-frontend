@@ -452,6 +452,8 @@ cy:
       errors:
         no_selection: Dylech ateb pob cwestiwn
         invalid_selection: Dylech edrych dros eich dewis
+        mobile_phone: Please tell us if you have a mobile phone or tablet
+        smart_phone: Please tell us if you can install apps
     will_it_work_for_me:
       title: Allai i gael fy nilysu?
       heading: Amdanoch chi

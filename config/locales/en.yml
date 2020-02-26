@@ -461,6 +461,8 @@ en:
       errors:
         no_selection: Please answer all the questions
         invalid_selection: Please check your selection
+        mobile_phone: Please tell us if you have a mobile phone or tablet
+        smart_phone: Please tell us if you can install apps
     will_it_work_for_me:
       title: Can I be verified?
       heading: About you

@@ -3,7 +3,7 @@ class SelectPhoneForm
 
   attr_reader :mobile_phone, :smart_phone
 
-  validate :smart_phone_not_specified_when_required
+  validate :mobile_phone_must_be_present_when_required, :smart_phone_not_specified_when_required
   validate :invalid_selection
 
   def initialize(params)
@@ -24,24 +24,31 @@ class SelectPhoneForm
 
 private
 
+  def mobile_phone_must_be_present_when_required
+    if mobile_phone.nil? && smart_phone_not_specified?
+      errors.add(:mobile_phone_true, I18n.t('hub.select_phone.errors.mobile_phone'))
+    end
+  end
+
   def smart_phone_not_specified_when_required
-    if mobile_phone != 'false' && smart_phone_not_specified?
-      add_no_selection_error
+    if has_mobile_phone? && smart_phone_not_specified?
+      errors.add(:smart_phone_true, I18n.t('hub.select_phone.errors.smart_phone'))
     end
   end
 
   def invalid_selection
     if has_no_mobile_phone? && has_smart_phone?
-      errors.add(:base, I18n.t('hub.select_phone.errors.invalid_selection'))
+      errors.add(:mobile_phone_true, I18n.t('hub.select_phone.errors.invalid_selection'))
+      errors.add(:smart_phone_true, I18n.t('hub.select_phone.errors.invalid_selection'))
     end
-  end
-
-  def add_no_selection_error
-    errors.add(:base, I18n.t('hub.select_phone.errors.no_selection'))
   end
 
   def has_smart_phone?
     smart_phone == 'true'
+  end
+
+  def has_mobile_phone?
+    mobile_phone == 'true'
   end
 
   def has_no_mobile_phone?
