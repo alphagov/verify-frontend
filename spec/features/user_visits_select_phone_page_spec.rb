@@ -78,7 +78,7 @@ RSpec.describe 'When the user visits the select phone page' do
       visit '/select-phone'
       click_button t('navigation.continue')
 
-      expect(page).to have_css '.govuk-error-summary__list', text: 'Please tell us if you have a mobile phone or tablet'
+      expect(page).to have_css '.govuk-error-summary__list', text: 'Tell us if you have a mobile phone or tablet'
       expect(page).to have_css '.govuk-form-group--error'
     end
   end

@@ -7,7 +7,7 @@ describe OtherIdentityDocumentsForm do
       it 'should be invalid if all inputs are empty' do
         form = OtherIdentityDocumentsForm.new({})
         expect(form).to_not be_valid
-        expect(form.errors.full_messages).to eql ['Non uk id document true Please select the documents you have']
+        expect(form.errors.full_messages).to eql ['Non uk id document true Tell us if you have a non-UK passport, ID card or driving licence']
       end
 
       it 'should be invalid if input is not true or false' do

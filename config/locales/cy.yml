@@ -439,6 +439,8 @@ cy:
     other_documents:
       title_other_identity_documents: Dogfennau hunaniaeth eraill
       non_uk_id_document: Oes gennych chi pasbort sydd ddim yn un o'r DU, cerdyn ID neu drwydded yrru?
+      errors:
+        non_uk_docs: Tell us if you have a non-UK passport, ID card or driving licence
     select_phone:
       title: Oes gennych ffôn symudol neu lechen?
       explanation: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.
@@ -579,7 +581,7 @@ cy:
       choose_another_certified_company_link: dewis cwmni ardystiedig arall
       identity_documents: Rydych angen eich dogfennau hunaniaeth gyda chi oherwydd bydd yn rhaid i chi ychwanegu eu manylion.
       or_html: neu %{choose_another_company_link}
-      validation_message: Dylech ateb y cwestiwn
+      validation_message: Dewiswch opsiwn
     confirm_your_identity:
       title: Cadarnhau eich hunaniaeth
       use_other_idp: Os nad hwn yw’r cwmni a wnaeth eich dilysu, %{sign_in_link}.

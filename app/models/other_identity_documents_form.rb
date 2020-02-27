@@ -16,7 +16,7 @@ private
 
   def one_must_be_present
     unless %w(true false).include?(@non_uk_id_document)
-      errors.add(:non_uk_id_document_true, I18n.t('hub.select_documents.errors.no_selection'))
+      errors.add(:non_uk_id_document_true, I18n.t('hub.other_documents.errors.non_uk_docs'))
     end
   end
 end

@@ -18,8 +18,8 @@ RSpec.describe 'When the user visits the will it work for me page' do
       click_button t('navigation.continue')
 
       expect(page).to have_current_path(will_it_work_for_me_path)
-      expect(page).to have_content 'Please tell us if you are 20 or over'
-      expect(page).to have_content 'Please tell us if you lived in the UK for the last 12 months'
+      expect(page).to have_content "Tell us if you're 20 or over"
+      expect(page).to have_content "Tell us if you've lived in the UK for the last 12 months"
     end
 
     it 'when js is on', js: true do
