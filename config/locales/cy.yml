@@ -472,7 +472,7 @@ cy:
           no_selection: Dylech ateb pob cwestiwn
           age_threshold: Please tell us if you are 20 or over
           resident_12_months: Please tell us if you lived in the UK for the last 12 months
-          not_resident_reason: Please tell us why you haven't lived in the UK for the last 12 months
+          not_resident_reason: Dewiswch opsiwn
     idp_wont_work_for_you_one_doc:
       title: Ni all %{idp_name} cadarnhau pwy ydych chi
       heading: Ni all %{idp_name} cadarnhau pwy ydych chi

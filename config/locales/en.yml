@@ -481,7 +481,7 @@ en:
           no_selection: Please answer all the questions
           age_threshold: Tell us if you're 20 or over
           resident_12_months: Tell us if you've lived in the UK for the last 12 months
-          not_resident_reason: Tell us why you have not lived in the UK for the last 12 months
+          not_resident_reason: Select an option
     idp_wont_work_for_you_one_doc:
       title: "%{idp_name} cannot verify your identity"
       heading: "%{idp_name} cannot verify your identity"
