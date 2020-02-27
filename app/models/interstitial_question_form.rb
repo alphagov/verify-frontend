@@ -24,7 +24,7 @@ private
 
   def answer_required
     if @interstitial_question_result.blank?
-      errors.add(:base, [I18n.t('hub.redirect_to_idp_question.validation_message')])
+      errors.add(:interstitial_question_result_true, I18n.t('hub.redirect_to_idp_question.validation_message'))
     end
   end
 end
