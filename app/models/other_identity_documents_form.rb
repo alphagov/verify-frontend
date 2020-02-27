@@ -15,8 +15,8 @@ class OtherIdentityDocumentsForm
 private
 
   def one_must_be_present
-    if !%w(true false).include?(@non_uk_id_document)
-      errors.add(:base, I18n.t('hub.select_documents.errors.no_selection'))
+    unless %w(true false).include?(@non_uk_id_document)
+      errors.add(:non_uk_id_document_true, I18n.t('hub.select_documents.errors.no_selection'))
     end
   end
 end
