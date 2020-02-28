@@ -5,45 +5,47 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+
+    <%= render 'shared/form-errors', errors: flash[:errors], form: @form %>
+
     <h1 class="govuk-heading-l"><%= t 'hub.select_documents.title_photo_documents' %></h1>
     <div class="govuk-inset-text">
       <%= t 'hub.select_documents.highlight' %>
     </div>
-    
-    <% if flash[:errors] %>
-      <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
-        <div class="govuk-error-summary__body">
-          <ul class="govuk-list govuk-error-summary__list">
-            <li><a href="#validate-select-documents"><%= flash[:errors] %></a></li>
-          </ul>
-        </div>
-      </div>
-    <% end %>
-    
+
     <%= form_for @form, url: select_documents_submit_path, html: {id: 'validate-select-documents', class: 'select-documents-form', novalidate: 'novalidate', 'data-msg': t('hub.select_documents.errors.no_selection')} do |f| %>
-      <div class="govuk-form-group <% if @form.errors.include?(:base) %>govuk-form-group--error<% end %>">
+      <div class="govuk-form-group <% if @form.errors.include?(:any_driving_licence_true) %>govuk-form-group--error<% end %>">
         <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
             <h2 class="govuk-heading-m">
               <%= t 'hub.select_documents.valid_UK_driving_licence' %>
             </h2>
           </legend>
+          <% if @form.errors.include?(:any_driving_licence_true) %>
+            <span class="govuk-error-message">
+              <%= @form.errors[:any_driving_licence_true].first %>
+            </span>
+          <% end %>
           <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
             <div class="govuk-radios__item">
-              <%= f.radio_button :any_driving_licence, true, {class: "govuk-radios__input", 'data-aria-controls': "conditional-any_driving_licence_true"}%>
+              <%= f.radio_button :any_driving_licence, true, {class: "govuk-radios__input", id: "select_documents_form_any_driving_licence_true", 'data-aria-controls': "conditional-any_driving_licence_true"}%>
               <%= f.label :any_driving_licence_true, t('hub.select_documents.documents_option_yes'), class: "govuk-label govuk-radios__label"%>
             </div>
-            <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-              id="conditional-any_driving_licence_true">
-              <div class="govuk-form-group">
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-any_driving_licence_true">
+              <div class="govuk-form-group<% if @form.errors.include?(:driving_licence_great_britain) %> govuk-form-group--error<% end %>">
                 <fieldset class="govuk-fieldset">
                   <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
                       <h2 class="govuk-heading-s"><%= t 'hub.select_documents.where_driving_licence_issued' %></h2>
                     </legend>
+                    <% if @form.errors.include?(:driving_licence_great_britain) %>
+                      <span class="govuk-error-message">
+                        <%= @form.errors[:driving_licence_great_britain].first %>
+                      </span>
+                    <% end %>
                     <div class="govuk-radios">
                       <div class="govuk-radios__item">
-                        <%= f.radio_button :driving_licence, 'great_britain', {class: "govuk-radios__input"}%>
+                        <%= f.radio_button :driving_licence, 'great_britain', {class: "govuk-radios__input", id: "select_documents_form_driving_licence_great_britain"}%>
                         <%= f.label :driving_licence_great_britain, t('hub.select_documents.driving_licence_details.great_britain'), class: "govuk-label govuk-radios__label"%>
                       </div>
                       <div class="govuk-radios__item">
@@ -52,6 +54,7 @@
                       </div>
                     </div>
                   </fieldset>
+                </fieldset>
               </div>
             </div>
             <div class="govuk-radios__item">
@@ -62,14 +65,19 @@
         </fieldset>
       </div>
       
-      <div class="govuk-form-group <% if @form.errors.include?(:base) %>govuk-form-group--error<% end %>">
+      <div class="govuk-form-group <% if @form.errors.include?(:passport_true) %>govuk-form-group--error<% end %>">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
             <h2 class="govuk-heading-m"><%= t 'hub.select_documents.uk_passport' %></h2>
           </legend>
+          <% if @form.errors.include?(:passport_true) %>
+            <span class="govuk-error-message">
+              <%= @form.errors[:passport_true].first %>
+            </span>
+          <% end %>
           <div class="govuk-radios">
-            <div class="govuk-radios__item">
-              <%= f.radio_button :passport, true, {class: "govuk-radios__input"}%>
+            <div class="govuk-radios__item" >
+              <%= f.radio_button :passport, true, {class: "govuk-radios__input", id: "select_documents_form_passport_true"}%>
               <%= f.label :passport_true, t('hub.select_documents.documents_option_yes'), class: "govuk-label govuk-radios__label"%>
             </div>
             <div class="govuk-radios__item">

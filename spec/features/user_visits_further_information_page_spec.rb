@@ -122,7 +122,7 @@ RSpec.describe 'user visits further information page' do
 
       expect(page.current_path).to eql(further_information_path)
       expect(page).to have_css(
-        '.error-message',
+        '.govuk-error-message',
         text: t('hub.further_information.attribute_validation_message', cycle_three_name: attribute_name)
       )
       expect(page.find('#cycle_three_attribute_cycle_three_data').value).to eql invalid_input

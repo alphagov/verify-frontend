@@ -436,8 +436,9 @@ en:
         no_documents: I don’t have any of these documents with me
       errors:
         no_selection: Please select the documents you have
-        invalid_selection: Please check your selection
-        no_driving_licence_selection: Please select the driving licence you have
+        no_driving_license_selection: Select if you have a driving licence
+        no_passport_selection: Select if you have a UK passport
+        no_driving_licence_issuer_selection: Select where your driving licence was issued
       neither_documents: I don't have either of these documents
       where_driving_licence_issued: Where was your driving licence issued?
       driving_licence_details:
@@ -447,6 +448,8 @@ en:
       title: Other identity documents
       title_other_identity_documents: Other identity documents
       non_uk_id_document: Do you have a non-UK passport, ID card or driving licence?
+      errors:
+        non_uk_docs: Tell us if you have a non-UK passport, ID card or driving licence
     select_phone:
       title: Do you have a mobile phone or tablet?
       explanation: Some companies send security codes to your mobile.
@@ -459,7 +462,9 @@ en:
         smart_phone_subtitle: "Some companies ask you to download a free app and use your phone's camera as part of verifying your identity."
       errors:
         no_selection: Please answer all the questions
-        invalid_selection: Please check your selection
+        invalid_selection: Check your selection
+        mobile_phone: Tell us if you have a mobile phone or tablet
+        smart_phone: Tell us if you can install apps
     will_it_work_for_me:
       title: Can I be verified?
       heading: About you
@@ -474,6 +479,9 @@ en:
           no_address: I don’t have a UK address
         errors:
           no_selection: Please answer all the questions
+          age_threshold: Tell us if you're 20 or over
+          resident_12_months: Tell us if you've lived in the UK for the last 12 months
+          not_resident_reason: Select an option
     idp_wont_work_for_you_one_doc:
       title: "%{idp_name} cannot verify your identity"
       heading: "%{idp_name} cannot verify your identity"
@@ -576,7 +584,7 @@ en:
       choose_another_certified_company_link: choose another company
       identity_documents: You need your identity documents with you so you can enter details from them, or take a picture of them.
       or_html: or %{choose_another_company_link}
-      validation_message: Please answer the question
+      validation_message: Select an option
     confirm_your_identity:
       title: Confirm your identity
       use_other_idp: If this isn’t the company that verified you, %{sign_in_link}.
@@ -698,15 +706,13 @@ en:
         email_hint: We’ll only use this to reply to your message.
       errors:
         heading: There was a problem submitting the form
-        no_selection: Please answer the questions
-        what: Please tell us what were you trying to do?
-        details: Please provide further details of your question, problem or feedback?
-        reply: Please tell us who you are for a reply?
+        what: Tell us what were you trying to do
+        details: Provide further details of your question, problem or feedback
         too_long: This field can be up to %{max_length} characters  #TODO TT-1461: confirm text
-        name: Please enter a name
-        email: Please enter a valid email address
+        name: Enter your name
+        email: Enter a valid email address
         send_failure: Unfortunately, we are unable to record your feedback at the moment. Please try again later.
-        reply: Please select an option
+        reply: Tell us if you want a reply
       send_message: Send message
     feedback_disabled:
       title: Feedback Disabled
@@ -875,3 +881,5 @@ en:
       other_ways: "Try again later or choose another way to "
       other_ways_link: "prove your identity online"
     no_selection: Please answer all the questions
+    form:
+      there_is_a_problem: There is a problem

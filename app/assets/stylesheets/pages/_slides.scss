@@ -129,6 +129,19 @@
   .govuk-details__text {
     border-left: 5px solid govuk-colour("white");
   }
+
+  .govuk-error-summary {
+    border: 5px solid govuk-colour("white");
+    color: govuk-colour("white");
+  }
+
+  .govuk-error-message {
+    color: govuk-colour("white");
+  }
+
+  .govuk-error-summary__list a {
+    color: govuk-colour("white");
+  }
 }
 
 .hide-mobile {

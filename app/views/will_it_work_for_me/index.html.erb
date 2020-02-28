@@ -3,21 +3,27 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+
+    <%= render 'shared/form-errors', errors: flash[:errors], form: @form %>
+
     <h1 class="govuk-heading-l"><%= t 'hub.will_it_work_for_me.heading' %></h1>
 
-    <%= render 'shared/form-errors', errors: flash[:errors], form_name: 'validate-will-it-work-for-me' %>  
-
     <%= form_for @form, url: will_it_work_for_me_path, html: { id: 'validate-will-it-work-for-me', class: 'will-it-work-for-me-form heading-banner-top-margin', novalidate: 'novalidate', 'data-msg': t('hub.will_it_work_for_me.question.errors.no_selection')} do |f| %>
-        <div class="govuk-form-group">
+        <div class="govuk-form-group <% if @form.errors.include?(:above_age_threshold_true) %>govuk-form-group--error<% end %>">
           <fieldset class="govuk-fieldset" aria-describedby="changed-name-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
               <h2 class="govuk-fieldset__heading">
                 <%= t 'hub.will_it_work_for_me.question.above_age_threshold' %>
               </h2>
             </legend>
+            <% if @form.errors.include?(:above_age_threshold_true) %>
+              <span class="govuk-error-message">
+                <%= @form.errors[:above_age_threshold_true].first %>
+              </span>
+            <% end %>
             <div class="govuk-radios">
               <div class="govuk-radios__item">
-                <%= f.radio_button :above_age_threshold, true, {class: "govuk-radios__input"}%>
+              <%= f.radio_button :above_age_threshold, true, {class: "govuk-radios__input", id: "will_it_work_for_me_form_above_age_threshold_true"}%>
                 <%= f.label :above_age_threshold_true, t('hub.will_it_work_for_me.question.option_yes'), class: "govuk-label govuk-radios__label"%>
               </div>
               <div class="govuk-radios__item">
@@ -28,16 +34,21 @@
           </fieldset>
         </div>
 
-        <div class="govuk-form-group">
+        <div class="govuk-form-group <% if @form.errors.include?(:resident_last_12_months_true) %>govuk-form-group--error<% end %>">
           <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
               <h2 class="govuk-fieldset__heading">
                 <%= t 'hub.will_it_work_for_me.question.resident_last_12_months' %>
               </h2>
             </legend>
+            <% if @form.errors.include?(:resident_last_12_months_true) %>
+              <span class="govuk-error-message">
+                <%= @form.errors[:resident_last_12_months_true].first %>
+              </span>
+            <% end %>
             <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
               <div class="govuk-radios__item">
-                <%= f.radio_button :resident_last_12_months, true, {class: "govuk-radios__input"}%>
+                <%= f.radio_button :resident_last_12_months, true, {class: "govuk-radios__input", id: "will_it_work_for_me_form_resident_last_12_months_true"}%>
                 <%= f.label :resident_last_12_months_true, t('hub.will_it_work_for_me.question.option_yes'), class: "govuk-label govuk-radios__label"%>
               </div>
               <div class="govuk-radios__item">
@@ -46,16 +57,21 @@
               </div>
               <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
                 id="conditional-will_it_work_for_me_form_resident_last_12_months_false">
-                <div class="govuk-form-group">
+                <div class="govuk-form-group <% if @form.errors.include?(:not_resident_reason_moved_recently) %>govuk-form-group--error<% end %>">
                   <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                       <h2 class="govuk-heading-s">
                         <%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %>
                       </h2>
                     </legend>
+                    <% if @form.errors.include?(:not_resident_reason_moved_recently) %>
+                      <span class="govuk-error-message">
+                        <%= @form.errors[:not_resident_reason_moved_recently].first %>
+                      </span>
+                    <% end %>
                     <div class="govuk-radios">
                       <div class="govuk-radios__item">
-                        <%= f.radio_button :not_resident_reason, 'MovedRecently', {class: "govuk-radios__input"}%>
+                        <%= f.radio_button :not_resident_reason, 'MovedRecently', {class: "govuk-radios__input", id: "will_it_work_for_me_form_not_resident_reason_moved_recently"}%>
                         <%= f.label :not_resident_reason_moved_recently, t('hub.will_it_work_for_me.question.not_resident_reason.recently'), class: "govuk-label govuk-radios__label"%>
                       </div>
                       <div class="govuk-radios__item">

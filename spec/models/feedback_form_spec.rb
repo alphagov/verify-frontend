@@ -10,9 +10,8 @@ describe FeedbackForm do
     what_error_message = 'What ' + I18n.t('hub.feedback.errors.what')
     details_error_message = 'Details ' + I18n.t('hub.feedback.errors.details')
     name_error_message = 'Name ' + I18n.t('hub.feedback.errors.name')
-    no_selection_error_message = I18n.t('hub.feedback.errors.no_selection')
     email_error_message = 'Email ' + I18n.t('hub.feedback.errors.email')
-    reply_error_message = 'Reply ' + I18n.t('hub.feedback.errors.reply')
+    reply_error_message = 'Reply true ' + I18n.t('hub.feedback.errors.reply')
     long_length_error = I18n.t('hub.feedback.errors.too_long', max_length: long_text_limit)
     short_length_error = I18n.t('hub.feedback.errors.too_long', max_length: short_text_limit)
 
@@ -20,14 +19,16 @@ describe FeedbackForm do
       form = FeedbackForm.new({})
 
       expect(form).to_not be_valid
-      expect(form.errors.full_messages).to include no_selection_error_message
+      expect(form.errors.full_messages).to include what_error_message
+      expect(form.errors.full_messages).to include details_error_message
+      expect(form.errors.full_messages).to include reply_error_message
     end
 
     it 'reply question is not answered' do
       form = FeedbackForm.new(what: 'what i was doing', details: 'what happened')
 
       expect(form).to_not be_valid
-      expect(form.errors.full_messages).to eql [no_selection_error_message, reply_error_message]
+      expect(form.errors.full_messages).to eql [reply_error_message]
     end
 
     it 'what were you trying to do question was not answered' do
@@ -91,8 +92,7 @@ describe FeedbackForm do
                               email: 'bob@smith.com')
 
       expect(form).to_not be_valid
-      expect(form.errors.full_messages).to eql [no_selection_error_message,
-                                                name_error_message]
+      expect(form.errors.full_messages).to eql [name_error_message]
     end
 
     it 'email is not provided when reply requested' do
@@ -102,8 +102,7 @@ describe FeedbackForm do
                               name: 'bob smith')
 
       expect(form).to_not be_valid
-      expect(form.errors.full_messages).to eql [no_selection_error_message,
-                                                email_error_message]
+      expect(form.errors.full_messages).to eql [email_error_message]
     end
 
     it 'email contains whitespace' do
@@ -119,8 +118,7 @@ describe FeedbackForm do
                                                     email: whitespaced_email)
 
         expect(form).to_not be_valid
-        expect(form.errors.full_messages).to eql [no_selection_error_message,
-                                                  email_error_message]
+        expect(form.errors.full_messages).to eql [email_error_message]
       end
     end
 
@@ -134,8 +132,7 @@ describe FeedbackForm do
                                                     email: bad_email)
 
         expect(form).to_not be_valid
-        expect(form.errors.full_messages).to eql [no_selection_error_message,
-                                                  email_error_message]
+        expect(form.errors.full_messages).to eql [email_error_message]
       end
     end
 
@@ -150,7 +147,7 @@ describe FeedbackForm do
       )
 
       expect(form).to_not be_valid
-      expect(form.errors.full_messages).to eql [no_selection_error_message, email_error_message]
+      expect(form.errors.full_messages).to eql [email_error_message]
     end
   end
 

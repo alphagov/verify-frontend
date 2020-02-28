@@ -8,6 +8,10 @@ module CycleThree
         define_method(:pattern) do
           Regexp.new('^[a-z]*$')
         end
+
+        define_method(:name) do
+          'Sausage'
+        end
       end
     }
 
@@ -35,7 +39,7 @@ module CycleThree
       form = form_class.new(cycle_three_data: '123')
 
       expect(form).to_not be_valid
-      expect(form.errors.full_messages).to eql ['Cycle three data hub.further_information.attribute_validation_message']
+      expect(form.errors.full_messages).to eql ['Cycle three data Enter a valid Sausage']
     end
 
     it 'should not allow nullable fields by default' do

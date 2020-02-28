@@ -428,8 +428,9 @@ cy:
         no_documents: Nid oes gennyf y dogfennau hyn gyda mi
       errors:
         no_selection: Dewiswch y dogfennau sydd gennych
-        invalid_selection: Edrychwch dros eich dewis
-        no_driving_licence_selection: Dewiswch y drwydded yrru sydd gennych
+        no_driving_license_selection: Please select if you have a driving license
+        no_passport_selection: Please select if you have a passport
+        no_driving_licence_issuer_selection: Please select the issuer of your driving license
       neither_documents: Nid yw'r un o'r dogfennau hyn gennyf
       where_driving_licence_issued: Ble cyhoeddwyd eich trwydded yrru?
       driving_licence_details:
@@ -438,6 +439,8 @@ cy:
     other_documents:
       title_other_identity_documents: Dogfennau hunaniaeth eraill
       non_uk_id_document: Oes gennych chi pasbort sydd ddim yn un o'r DU, cerdyn ID neu drwydded yrru?
+      errors:
+        non_uk_docs: Tell us if you have a non-UK passport, ID card or driving licence
     select_phone:
       title: Oes gennych ffôn symudol neu lechen?
       explanation: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.
@@ -451,6 +454,8 @@ cy:
       errors:
         no_selection: Dylech ateb pob cwestiwn
         invalid_selection: Dylech edrych dros eich dewis
+        mobile_phone: Please tell us if you have a mobile phone or tablet
+        smart_phone: Please tell us if you can install apps
     will_it_work_for_me:
       title: Allai i gael fy nilysu?
       heading: Amdanoch chi
@@ -465,6 +470,9 @@ cy:
           no_address: Nid oes gennyf gyfeiriad yn y DU
         errors:
           no_selection: Dylech ateb pob cwestiwn
+          age_threshold: Please tell us if you are 20 or over
+          resident_12_months: Please tell us if you lived in the UK for the last 12 months
+          not_resident_reason: Dewiswch opsiwn
     idp_wont_work_for_you_one_doc:
       title: Ni all %{idp_name} cadarnhau pwy ydych chi
       heading: Ni all %{idp_name} cadarnhau pwy ydych chi
@@ -573,7 +581,7 @@ cy:
       choose_another_certified_company_link: dewis cwmni ardystiedig arall
       identity_documents: Rydych angen eich dogfennau hunaniaeth gyda chi oherwydd bydd yn rhaid i chi ychwanegu eu manylion.
       or_html: neu %{choose_another_company_link}
-      validation_message: Dylech ateb y cwestiwn
+      validation_message: Dewiswch opsiwn
     confirm_your_identity:
       title: Cadarnhau eich hunaniaeth
       use_other_idp: Os nad hwn yw’r cwmni a wnaeth eich dilysu, %{sign_in_link}.
@@ -695,7 +703,6 @@ cy:
         email_hint: Byddwn ond yn ei ddefnyddio i ateb eich neges.
       errors:
         heading: Roedd problem wrth anfon y ffurflen
-        no_selection: Dylech ateb y cwestiynau
         details: Dylech roi manylion
         too_long: Gall y maes hwn fod hyd at %{max_length} nod  #TODO TT-1461: confirm text
         name: Dylech roi enw
@@ -870,3 +877,5 @@ cy:
       other_ways: "Ceisiwch eto yn nes ymlaen neu ddewis ffordd arall i "
       other_ways_link: "profi eich hunaniaeth ar-lein"
     no_selection: Dylech ateb y cwestiynau
+    form:
+      there_is_a_problem: There is a problem

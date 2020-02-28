@@ -7,6 +7,8 @@
       <%= render partial: 'further_information/modal_dialog'%>
     <% end %>
 
+    <%= render 'shared/form-errors', errors: flash[:errors], form: @cycle_three_attribute %>
+
     <h1 class="govuk-heading-l"><%= @transaction_name.slice(0,1).upcase + @transaction_name.slice(1..-1)%></h1>
     <% if @cycle_three_attribute.intro_html %>
       <%= raw @cycle_three_attribute.intro_html %>
@@ -18,13 +20,13 @@
                   html: { novalidate: true,
                           id: 'further-information' } do |f| %>
       <fieldset class="govuk-fieldset">
-        <div class="govuk-form-group <%= 'error' if @cycle_three_attribute.errors[:cycle_three_data].any? %>">
+        <div class="govuk-form-group <%= 'govuk-form-group--error' if @cycle_three_attribute.errors[:cycle_three_data].any? %>">
           <%= f.label :cycle_three_data, class: 'govuk-label govuk-!-font-weight-bold' do %>
             <%= @cycle_three_attribute.field_name %><% end %>
             <span class="govuk-hint"><%= t('hub.further_information.example_text', example: @cycle_three_attribute.example) %></span>
             <% if @cycle_three_attribute.errors.include?(:cycle_three_data) %>
-              <span class="error-message">
-                <%= t(@cycle_three_attribute.errors[:cycle_three_data].first, cycle_three_name: @cycle_three_attribute.name) %>
+              <span class="govuk-error-message">
+                <%= @cycle_three_attribute.errors[:cycle_three_data].first %>
               </span>
             <% end %>
           

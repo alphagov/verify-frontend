@@ -3,16 +3,21 @@
 <% content_for :feedback_source, 'START_PAGE' %>
 <% # Uses slide layout %>
 
-  <h1 class="govuk-heading-l"><%= t 'hub.start.heading' %></h1>
+  <%= render 'shared/form-errors', errors: flash[:errors], form: @form %>
 
-  <%= render 'shared/form-errors', errors: flash[:errors], form_name: "start-page-form" %>
+  <h1 class="govuk-heading-l"><%= t 'hub.start.heading' %></h1>
 
   <%= form_for @form, url: start_path, html: {id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
     <%= content_tag :div, class: form_question_class do %>
       <fieldset class="govuk-fieldset">
+        <% if @form.errors.include?(:selection_true) %>
+            <span class="govuk-error-message">
+              <%= @form.errors[:selection_true].first %>
+            </span>
+        <% end %>
         <div class="govuk-radios">
           <div class="govuk-radios__item">
-            <%= f.radio_button :selection, true, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input"}%>
+            <%= f.radio_button :selection, true, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input", id: "start_form_selection_true"}%>
             <%= f.label :selection_true, t('hub.start.answer_yes'), class: "govuk-label govuk-radios__label"%>
           </div>
           <div class="govuk-radios__item">
