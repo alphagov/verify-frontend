@@ -48,7 +48,7 @@ module CycleThree
 
     def matches_regex
       unless pattern.match?(@cycle_three_data)
-        errors.add(:cycle_three_data, format(I18n.t('hub.further_information.attribute_validation_message'), cycle_three_name: name))
+        errors.add(:cycle_three_data, I18n.t('hub.further_information.attribute_validation_message', cycle_three_name: name))
       end
     end
   end
