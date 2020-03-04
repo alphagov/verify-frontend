@@ -68,7 +68,6 @@ GEM
     clamp (1.0.1)
     codacy-coverage (2.1.0)
       simplecov
-    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crack (0.4.3)
@@ -202,7 +201,7 @@ GEM
       concurrent-ruby
     psych (3.1.0)
     public_suffix (3.0.3)
-    puma (3.12.2)
+    puma (3.12.4)
     rack (2.0.6)
     rack-handlers (0.7.3)
       rack
