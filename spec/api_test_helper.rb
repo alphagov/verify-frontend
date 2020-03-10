@@ -399,6 +399,17 @@ private
       { 'simpleId' => 'stub-idp-disconnected', 'entityId' => 'disconnected-entity-id', 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2), "authenticationEnabled" => false }
     ]
   end
+
+  def stub_policy
+    stub_request(:get, "http://api.com:50110/policy/received-authn-request/my-session-id-cookie/response-from-idp/response-processing-details").
+        with(
+            headers: {
+                'Connection'=>'Keep-Alive',
+                'Host'=>'api.com:50110',
+                'User-Agent'=>'Verify Frontend Micro Service Client'
+            }).
+        to_return(status: 200, body: "", headers: {})
+  end
 end
 
 RSpec.configure do |c|

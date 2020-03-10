@@ -81,6 +81,7 @@ en:
     next: Next
     start_now: Start now
     continue: Continue
+    continue_to: Continue to %{service}
     back: Back
   option:
     "no": "No"
@@ -592,11 +593,12 @@ en:
       need_to_signin_again: In order to %{transaction_name}, you need to sign in again with your certified company. You don’t need to register again.
     confirmation:
       title: Your identity has been verified
-      message: "You can sign in wherever you see the GOV.UK Verify logo with your %{display_name} identity account username and password."
+      message: "You can sign in wherever you see the GOV.UK Verify logo with your %{display_name} identity account."
       continue_to_rp: "You can now %{transaction_name}."
       heading: "%{display_name} has verified your identity"
       add_security_loa1: When you access some government services, you'll be asked to provide more evidence, but you only need to do this once.
       extra_security: Government services requiring extra evidence
+      remember_idp: Remember %{idp} on this device
     failed_registration:
       title: Unable to verify your identity
       heading: "%{idp_name} was unable to verify your identity"

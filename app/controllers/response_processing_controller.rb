@@ -1,9 +1,16 @@
 class ResponseProcessingController < ApplicationController
+  require 'partials/user_cookies_partial_controller'
+
   before_action { @hide_available_languages = true }
 
   def index
     @rp_name = current_transaction.rp_name
     outcome = POLICY_PROXY.matching_outcome(session[:verify_session_id])
+    unless params["remember-idp"] then
+      hash_of_values = journey_hint_value
+      hash_of_values.delete 'SUCCESS'
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = hash_of_values.as_json
+    end
     case outcome
     when MatchingOutcomeResponse::GOTO_HUB_LANDING_PAGE
       report_to_analytics('Matching Outcome - Hub Landing')

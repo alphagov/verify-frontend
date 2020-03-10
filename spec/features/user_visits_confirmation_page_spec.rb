@@ -10,6 +10,7 @@ RSpec.describe 'When user visits the confirmation page' do
     set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
     set_session_and_session_cookies!
     stub_api_idp_list_for_loa
+    stub_policy
   end
 
   it 'includes the appropriate feedback source, title and content' do
@@ -37,10 +38,11 @@ RSpec.describe 'When user visits the confirmation page' do
   end
 
   it 'sends user to response-processing page when they click the link' do
-    stub_matching_outcome
+    stub_transactions_list
     visit '/confirmation'
-    click_link t('navigation.continue')
-    expect(page).to have_current_path(response_processing_path)
+    click_button t('navigation.continue')
+    # TODO - make this not rubbish
+    expect(page).to have_current_path(response_processing_path + "/response-processing")
   end
 
   it 'displays government services requiring extra security when LOA is level one' do
@@ -55,5 +57,47 @@ RSpec.describe 'When user visits the confirmation page' do
     set_loa_in_session('LEVEL_2')
     visit '/confirmation'
     expect(page).not_to have_text t('hub.confirmation.extra_security')
+  end
+
+  it 'saves a remember-idp cookie when the check box is ticked by default' do
+    stub_matching_outcome
+    set_journey_hint_cookie('entity-id')
+
+    visit '/confirmation'
+    click_button "Continue"
+    visit '/confirmation'
+    journey_hint_cookie.encrypted["entity-id"] = "foobar"
+
+  end
+
+  it 'does not save a remember-idp cookie when the check box is unticked' do
+    stub_matching_outcome
+    visit '/confirmation'
+    uncheck "remember-idp"
+    click_button "Continue"
+    visit '/confirmation'
+    Capybara.current_session.driver.request.cookies.[]('verify-front-journey-hint').should be_nil
+  end
+
+  it 'clears an existing remember-idp cookie if the check box is unticked' do
+    set_journey_hint_cookie('entity-id')
+
+    stub_matching_outcome
+    visit '/confirmation'
+    uncheck "remember-idp"
+    click_button "Continue"
+    Capybara.current_session.driver.request.cookies.[]('verify-front-journey-hint').should be_nil
+  end
+
+  it 'changes the existing value of the stored cookie when different idp is used' do
+    stub_matching_outcome
+    visit '/confirmation'
+    check "remember-idp"
+    click_button "Continue"
+    Capybara.current_session.driver.request.cookies.[]('verify-front-journey-hint').should be_nil
+  end
+
+  def journey_hint_cookie
+    ActionDispatch::Cookies::CookieJar.build(Capybara.current_session.driver.request, nil)
   end
 end

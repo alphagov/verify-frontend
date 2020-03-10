@@ -7,7 +7,17 @@
     <p><%= t 'hub.confirmation.message', display_name: @idp_name %></p>
     <p><%= t 'hub.confirmation.continue_to_rp', transaction_name: @transaction_name %></p>
     <div class="actions">
-      <%= button_link_to t('navigation.continue'), @redirect_path, id:'next-button', class: 'govuk-button' %>
+      <%= form_tag(@redirect_path, method: "get", id: 'remember-idp-form', class: 'form', novalidate: 'novalidate') do %>
+        <%= submit_tag(t('navigation.continue_to', service: @transaction_name), class: 'govuk-button verify-inverse-btn', data_module: 'govuk-button') %>
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <%= check_box_tag "remember-idp", 1, true, {class: "govuk-checkboxes__input"} %>
+              <label class="govuk-label govuk-checkboxes__label" for="waste"> <%= t('hub.confirmation.remember_idp', idp: @idp_name) %></label>
+            </div>
+          </div>
+        </fieldset>
+      <% end %>
     </div>
   </div>
 </div>

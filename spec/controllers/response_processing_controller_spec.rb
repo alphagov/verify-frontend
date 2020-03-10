@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'controller_helper'
 require 'api_test_helper'
 require 'response_processing_examples'
+require  'application_controller'
 
 describe ResponseProcessingController do
   before :each do
@@ -38,5 +39,18 @@ describe ResponseProcessingController do
     get :index, params: { locale: 'en' }
     expect(response).to have_http_status :not_acceptable
     expect(response.body).to eq 'Unable to serve the requested format'
+  end
+
+  it 'unsets SUCCESS if checkbox unticked' do
+    set_session_and_cookies_with_loa('LEVEL_2')
+    stub_matching_outcome(MatchingOutcomeResponse::WAIT)
+    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
+        'SUCCESS' => 'http://idcorp-two.com',
+        'FOO' => 'BAR'
+    }.to_json
+    get :index, params: { locale: 'en' }
+    jar = ActionDispatch::Cookies::CookieJar.build(@response, @response.cookies.to_h)
+    decrypted_cookie = jar.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT]
+    expect(decrypted_cookie).to eq('entity-id')
   end
 end

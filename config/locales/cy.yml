@@ -77,6 +77,7 @@ cy:
     next: Nesaf
     start_now: Dechreuwch nawr
     continue: Parhau
+    continue_to: Continue to %{service}
     back: Yn ôl
   option:
     "no": "Na"
@@ -594,6 +595,7 @@ cy:
       heading: Mae %{display_name} wedi dilysu eich hunaniaeth
       add_security_loa1: Pan fyddwch yn defnyddio rhai o wasanaethau'r llywodraeth, gofynnir i chi ddarparu mwy o dystiolaeth gan fod angen i'r gwasanaethau hyn fod yn hyderus nad yw rhywun arall yn honni i fod yn chi.
       extra_security: Gwasanaethau'r llywodraeth sydd angen tystiolaeth ychwanegol
+      remember_idp: Remember %{idp} on this device
     failed_registration:
       title: Methu dilysu eich hunaniaeth
       heading: Roedd %{idp_name} yn methu dilysu eich hunaniaeth
