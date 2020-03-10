@@ -3,6 +3,6 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= render partial: 'failed_registration/non_continue_rp', locals: {idp: @idp, transaction: @transaction, start_again_path: choose_a_certified_company_path} %>
+    <%= render partial: @continue_rp_partial, locals: {idp: @idp, transaction: @transaction, try_another_company_path: choose_a_certified_company_path} %>
   </div>
 </div>

@@ -6,7 +6,7 @@
     <% if @custom_fail %>
         <%= render partial: 'failed_registration/custom_failed_registration', locals: {idp: @idp, transaction: @transaction, start_again_path: select_documents_path} %>
     <% else %>
-        <%= render partial: 'failed_registration/non_continue_rp', locals: {idp: @idp, transaction: @transaction, start_again_path: select_documents_path} %>
+        <%= render partial: @continue_rp_partial, locals: {idp: @idp, transaction: @transaction, try_another_company_path: select_documents_path, other_idp: @decorated_other_idp} %>
     <% end %>
   </div>
 </div>

@@ -1,0 +1,19 @@
+<h1 class="govuk-heading-l"><%= t('hub.failed_registration.continue_idp_text', idp_name: @idp.display_name) %></h1>
+
+<p><%= t 'hub.failed_registration.reasons_html', service_name: transaction.rp_name %></p>
+
+<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.try_other_company_heading' %></h2>
+<div>
+  <p><%= t 'hub.failed_registration.try_other_company_text', other_idp: other_idp.display_name %></p>
+  <p><%= link_to t('hub.failed_registration.try_other_company_link', other_idp: other_idp.display_name ), try_another_company_path, class: 'govuk-link' %></p>
+</div>
+
+<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.different_ways', service_name: transaction.rp_name %></h2>
+<p><%= raw transaction.other_ways_text %></p>
+
+<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.acccount_with_idp', idp_name: @idp.display_name %></h2>
+<p><%= t 'hub.failed_registration.contact_details_summary', idp_name: @idp.display_name, account: @account %></p>
+
+<div>
+  <%= raw idp.contact_details %>
+</div>

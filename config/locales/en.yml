@@ -613,6 +613,12 @@ en:
       try_another_text: "Other companies use different methods from %{idp_name} and may therefore stand a better chance of verifying your identity."
       try_another_summary: Try verifying with another certified company
       contact_details_intro: "Contact %{idp_name}"
+      try_other_company_heading: Try to verify yourself with the other company
+      try_other_company_text: "%{other_idp} may still be able to verify you."
+      try_other_company_link: Try again with %{other_idp}
+      different_ways: Try a different way to %{service_name}
+      acccount_with_idp: Your account with %{idp_name}
+      contact_details_summary: "%{idp_name} will not contact you or use your data for anything that is not related to %{account}. You can contact %{idp_name} for more help."
     failed_country_sign_in:
       title: Unable to sign you in
       heading: "Your identity scheme in %{country_name} was unable to confirm your identity"
