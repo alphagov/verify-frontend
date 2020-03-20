@@ -3,11 +3,13 @@ require 'idp_recommendations/idp_rules'
 require 'idp_recommendations/transaction_grouper'
 
 describe 'recommendations engine' do
-  let(:idp_one) { double(:idp_one, simple_id: 'idp') }
-  let(:idp_two) { double(:idp_two, simple_id: 'idp2') }
-  let(:idp_three) { double(:idp_three, simple_id: 'idp3') }
-  let(:less_capable_idp) { double(:less_capable_idp, simple_id: 'less_capable_idp') }
-  let(:idps) { [idp_one, idp_two, idp_three, less_capable_idp] }
+  let(:idp_one) { double(:idp_one, simple_id: 'idp', provide_registration_until: nil) }
+  let(:idp_two) { double(:idp_two, simple_id: 'idp2', provide_registration_until: nil) }
+  let(:idp_three) { double(:idp_three, simple_id: 'idp3', provide_registration_until: nil) }
+  let(:hidden_soft_disconnecting_idp) { double(:hidden_soft_disconnecting_idp, simple_id: 'hidden_soft_disconnecting_idp', provide_registration_until: DateTime.now + 14.minutes) }
+  let(:not_hidden_soft_disconnecting_idp) { double(:not_hidden_soft_disconnecting_idp, simple_id: 'not_hidden_soft_disconnecting_idp', provide_registration_until: DateTime.now + 17.minutes) }
+  let(:less_capable_idp) { double(:less_capable_idp, simple_id: 'less_capable_idp', provide_registration_until: nil) }
+  let(:idps) { [idp_one, idp_two, idp_three, less_capable_idp, hidden_soft_disconnecting_idp, not_hidden_soft_disconnecting_idp] }
   let(:user_profile) { %i(driving_licence passport) }
   let(:idp_rules) {
     {
@@ -15,20 +17,32 @@ describe 'recommendations engine' do
         'idp2' => generate_idp_rules(capabilities: %w(passport), protected_unlikely_segments: %w(SEGMENT_1 SEGMENT_2)),
         'idp3' => generate_idp_rules(capabilities: %w(passport)),
         'less_capable_idp' => generate_idp_rules(capabilities: %w(passport smart_phone), protected_recommended_segments: %w(SEGMENT_1)),
+        'hidden_soft_disconnecting_idp' => generate_idp_rules(capabilities: %w(passport), protected_recommended_segments: %w(SEGMENT_3)),
+        'not_hidden_soft_disconnecting_idp' => generate_idp_rules(capabilities: %w(passport), protected_recommended_segments: %w(SEGMENT_3)),
     }
   }
   let(:segment_matcher) { double('segment_matcher') }
   let(:transaction_grouper) { double('transaction_grouper') }
 
   before(:each) do
-    @recommendations_engine = RecommendationsEngine.new(idp_rules, segment_matcher, transaction_grouper)
+    @recommendations_engine = RecommendationsEngine.new(idp_rules, segment_matcher, transaction_grouper, 15)
+  end
+
+  it 'should hide IDPs disconnecting for registration' do
+    allow(segment_matcher).to receive(:find_matching_segments).with(user_profile).and_return(%w(SEGMENT_3))
+    allow(transaction_grouper).to receive(:get_transaction_group).with('test-rp').and_return(TransactionGroups::PROTECTED)
+
+    recommended_idps = @recommendations_engine.get_suggested_idps_for_registration(idps, user_profile, 'test-rp')
+
+    expected_suggestions = { recommended: [not_hidden_soft_disconnecting_idp], unlikely: [], user_segments: %w(SEGMENT_3) }
+    expect(recommended_idps).to eql expected_suggestions
   end
 
   it 'should return recommendations given a user profile' do
     allow(segment_matcher).to receive(:find_matching_segments).with(user_profile).and_return(%w(SEGMENT_1))
     allow(transaction_grouper).to receive(:get_transaction_group).with('test-rp').and_return(TransactionGroups::PROTECTED)
 
-    recommended_idps = @recommendations_engine.get_suggested_idps(idps, user_profile, 'test-rp')
+    recommended_idps = @recommendations_engine.get_suggested_idps_for_registration(idps, user_profile, 'test-rp')
 
     expected_suggestions = { recommended: [idp_one], unlikely: [idp_two], user_segments: %w(SEGMENT_1) }
     expect(recommended_idps).to eql expected_suggestions

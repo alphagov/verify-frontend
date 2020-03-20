@@ -33,4 +33,14 @@ describe IdentityProvider do
     idp = IdentityProvider.new('simpleId' => 'simpleId1', 'entityId' => 'entityId1', 'authenticationEnabled' => false)
     expect(idp.authentication_enabled).to eql false
   end
+
+  it 'provides provide registration until date if it is supplied' do
+    idp = IdentityProvider.new('simpleId' => 'simpleId1', 'entityId' => 'entityId1', 'provideRegistrationUntil' => '2020-03-10T11:15:30+00:00')
+    expect(idp.provide_registration_until.year).to eql 2020
+    expect(idp.provide_registration_until.month).to eql 3
+    expect(idp.provide_registration_until.day).to eql 10
+    expect(idp.provide_registration_until.hour).to eql 11
+    expect(idp.provide_registration_until.min).to eql 15
+    expect(idp.provide_registration_until.second).to eql 30
+  end
 end
