@@ -2,14 +2,16 @@ require 'idp_recommendations/segment_matcher'
 require 'idp_recommendations/transaction_grouper'
 
 class RecommendationsEngine
-  def initialize(idp_rules, segment_matcher, transaction_grouper)
+  def initialize(idp_rules, segment_matcher, transaction_grouper, hide_soft_disconnecting_idps_mins)
     @idp_rules = idp_rules
     @segment_matcher = segment_matcher
     @transaction_grouper = transaction_grouper
+    @hide_soft_disconnecting_idps_mins = hide_soft_disconnecting_idps_mins
   end
 
-  def get_suggested_idps(idps, user_profile, transaction_simple_id)
-    capable_idps = idps.select { |idp| is_capable?(idp, user_profile) }
+  def get_suggested_idps_for_registration(idps, user_profile, transaction_simple_id)
+    viewable_idps = idps.reject { |idp| is_hidden_for_registration?(idp) }
+    capable_idps = viewable_idps.select { |idp| is_capable?(idp, user_profile) }
     transaction_group = @transaction_grouper.get_transaction_group(transaction_simple_id)
     user_segments = @segment_matcher.find_matching_segments(user_profile)
 
@@ -20,16 +22,22 @@ class RecommendationsEngine
   end
 
   def recommended?(idp, enabled_idps, user_profile, transaction_simple_id)
-    suggested_idps = get_suggested_idps(enabled_idps, user_profile, transaction_simple_id)
+    suggested_idps = get_suggested_idps_for_registration(enabled_idps, user_profile, transaction_simple_id)
     suggested_idps[:recommended].include? idp
   end
 
   def any?(idps, user_profile, transaction_simple_id)
-    suggested_idps = get_suggested_idps(idps, user_profile, transaction_simple_id)
+    suggested_idps = get_suggested_idps_for_registration(idps, user_profile, transaction_simple_id)
     suggested_idps[:recommended].any? || suggested_idps[:unlikely].any?
   end
 
 private
+
+  def is_hidden_for_registration?(idp)
+    return false if idp.provide_registration_until.nil?
+
+    idp.provide_registration_until - @hide_soft_disconnecting_idps_mins.minutes < DateTime.now
+  end
 
   def is_capable?(idp, user_profile)
     @idp_rules[idp.simple_id].capabilities.each do |characteristic_set|

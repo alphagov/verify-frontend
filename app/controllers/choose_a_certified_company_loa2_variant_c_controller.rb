@@ -11,7 +11,7 @@ class ChooseACertifiedCompanyLoa2VariantCController < RedirectToIdpWarningContro
   def index
     session[:selected_answers]&.delete('interstitial')
     idps = current_identity_providers_for_loa_by_variant('c')
-    suggestions = recommendation_engine.get_suggested_idps(idps, selected_evidence, current_transaction_simple_id)
+    suggestions = recommendation_engine.get_suggested_idps_for_registration(idps, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
     @recommended_idps = order_with_unavailable_last(@recommended_idps)
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
