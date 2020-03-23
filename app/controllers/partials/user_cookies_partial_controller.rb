@@ -79,4 +79,19 @@ private
   rescue MultiJson::ParseError
     nil
   end
+
+  def ab_test_variant_value
+    cookies[CookieNames::AB_TEST].value
+  end
+
+  # Clean up users' existing cookies, remove in March 2020
+  def eat_journey_hint_cookie(cookie)
+    yummy_cookie = cookie
+
+    bad_crumbs = %w(CANCEL FAILED FAILED_UPLIFT PENDING OTHER entity_id)
+
+    bad_crumbs.each { |old_status| yummy_cookie.delete(old_status) }
+
+    yummy_cookie
+  end
 end
