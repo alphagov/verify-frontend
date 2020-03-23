@@ -23,6 +23,7 @@
           <div class="govuk-radios__item">
             <%= f.radio_button :selection, false, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input"}%>
             <%= f.label :selection_false, t('hub.start.answer_no'), class: "govuk-label govuk-radios__label"%>
+            <span class="govuk-hint govuk-radios__hint"><%= t('hub.start.answer_no_hint') %></span>
           </div>
         </div>
       </fieldset>

@@ -325,6 +325,7 @@ cy:
       heading: Mewngofnodi gyda GOV.UK Verify
       answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
+      answer_no_hint: ""
       continue: Parhau
       error_message: Dewiswch opsiwn
     signin:

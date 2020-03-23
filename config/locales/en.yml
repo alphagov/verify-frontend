@@ -325,7 +325,8 @@ en:
       title: Start
       heading: Sign in with GOV.UK Verify
       answer_yes: This is my first time using GOV.UK Verify
-      answer_no: I’ve used GOV.UK Verify before
+      answer_no: I've already signed up for Verify
+      answer_no_hint: This includes if you've got part way through creating an identity account
       continue: Continue
       error_message: Please select an option
     signin:
