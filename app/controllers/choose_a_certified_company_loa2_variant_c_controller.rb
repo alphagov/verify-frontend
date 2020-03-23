@@ -29,7 +29,7 @@ class ChooseACertifiedCompanyLoa2VariantCController < RedirectToIdpWarningContro
 
   def select_idp
     if params[:entity_id].present?
-      select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
+      select_viewable_idp_for_registration(params.fetch('entity_id')) do |decorated_idp|
         session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa_by_variant('c'), selected_evidence, current_transaction_simple_id)
         # TODO - do the spinny thing page
         do_redirect(decorated_idp)

@@ -6,7 +6,7 @@ describe AboutLoa1Controller do
   let(:identity_provider_display_decorator) { double(:IdentityProviderDisplayDecorator) }
 
   before(:each) do
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
   end
 
   context 'GET about#certified_companies' do
@@ -14,7 +14,7 @@ describe AboutLoa1Controller do
 
     before(:each) do
       stub_const('IDENTITY_PROVIDER_DISPLAY_DECORATOR', identity_provider_display_decorator)
-      stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
+      stub_api_idp_list_for_registration(default_idps, 'LEVEL_1')
     end
 
     it 'renders the certified companies LOA1 template when LEVEL_1 is the requested LOA' do

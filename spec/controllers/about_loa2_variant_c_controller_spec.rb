@@ -11,7 +11,7 @@ describe AboutLoa2VariantCController do
     experiment = 'short_hub_2019_q3-preview'
     variant = 'variant_c_2_idp_short_hub'
     set_session_and_cookies_with_loa_and_variant('LEVEL_2', experiment, variant)
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
   end
 
   context 'GET about' do

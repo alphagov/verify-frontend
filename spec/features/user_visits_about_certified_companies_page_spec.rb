@@ -10,7 +10,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
   context 'loa2' do
     before(:each) do
       stub_transactions_list
-      stub_api_idp_list_for_loa(default_idps, 'LEVEL_2')
+      stub_api_idp_list_for_registration(default_idps, 'LEVEL_2')
       set_session_and_session_cookies!
     end
 
@@ -51,7 +51,7 @@ RSpec.describe 'When the user visits the about certified companies page' do
   context 'loa1' do
     before(:each) do
       stub_transactions_list
-      stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
+      stub_api_idp_list_for_registration(default_idps, 'LEVEL_1')
       set_session_and_session_cookies!
       set_loa_in_session('LEVEL_1')
     end

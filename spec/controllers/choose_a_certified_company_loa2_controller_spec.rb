@@ -23,7 +23,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
   context '#index' do
     it 'renders the certified companies LOA2 template when LEVEL_2 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_2')
-      stub_api_idp_list_for_loa([stub_idp_loa1, stub_idp_one_doc])
+      stub_api_idp_list_for_registration([stub_idp_loa1, stub_idp_one_doc])
       session[:selected_answers] = {
         'documents' => { 'driving_licence' => true, 'mobile_phone' => true },
         'device_type' => { 'device_type_other' => true }
@@ -42,7 +42,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
 
     it 'removes interstitial answer when IDP picker page is rendered' do
       set_session_and_cookies_with_loa('LEVEL_2')
-      stub_api_idp_list_for_loa([stub_idp_loa1, stub_idp_one_doc])
+      stub_api_idp_list_for_registration([stub_idp_loa1, stub_idp_one_doc])
       session[:selected_answers] = {
         'documents' => { 'driving_licence' => true, 'mobile_phone' => true },
         'device_type' => { 'device_type_other' => true },
@@ -59,7 +59,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
   context '#select_idp' do
     before :each do
       set_session_and_cookies_with_loa('LEVEL_2')
-      stub_api_idp_list_for_loa([stub_idp_loa1, stub_idp_one_doc])
+      stub_api_idp_list_for_registration([stub_idp_loa1, stub_idp_one_doc])
     end
 
     it 'sets selected IDP in user session' do
@@ -117,7 +117,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
   context '#about' do
     it 'returns 404 page if no display data exists for IDP' do
       set_session_and_cookies_with_loa('LEVEL_2')
-      stub_api_idp_list_for_loa([stub_idp_loa1, stub_idp_one_doc])
+      stub_api_idp_list_for_registration([stub_idp_loa1, stub_idp_one_doc])
 
       get :about, params: { locale: 'en', company: 'unknown-idp' }
 

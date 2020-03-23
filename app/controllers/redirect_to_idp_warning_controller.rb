@@ -92,6 +92,6 @@ private
   end
 
   def idp_is_providing_registrations?(idp)
-    current_identity_providers_for_loa.any? { |check_idp| check_idp.simple_id == idp.simple_id }
+    current_available_identity_providers_for_registration.any? { |check_idp| check_idp.simple_id == idp.simple_id }
   end
 end

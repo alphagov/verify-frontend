@@ -336,8 +336,8 @@ module ApiTestHelper
         .to_return(body: an_error_response(code).to_json, status: 500)
   end
 
-  def stub_api_idp_list_for_loa(idps = default_idps, loa = 'LEVEL_2')
-    stub_request(:get, config_api_uri(idp_list_for_loa_endpoint(default_transaction_entity_id, loa))).to_return(body: idps.to_json)
+  def stub_api_idp_list_for_registration(idps = default_idps, loa = 'LEVEL_2')
+    stub_request(:get, config_api_uri(idp_list_for_registration_endpoint(default_transaction_entity_id, loa))).to_return(body: idps.to_json)
   end
 
   def stub_api_idp_list_for_sign_in(idps = default_idps)
@@ -367,7 +367,7 @@ module ApiTestHelper
       { 'simpleId' => 'stub-idp-two', 'entityId' => 'other-entity-id', 'levelsOfAssurance' => %w(LEVEL_2) },
       { 'simpleId' => 'stub-idp-three', 'entityId' => 'a-different-entity-id', 'levelsOfAssurance' => %w(LEVEL_2) },
     ]
-    stub_api_idp_list_for_loa(idps)
+    stub_api_idp_list_for_registration(idps)
   end
 
   def stub_hub_config_healthcheck(status: 200)

@@ -45,7 +45,7 @@ RSpec.feature 'When the user submits the feedback page' do
 
     it 'when session has timed out should show invalid session link' do
       set_session_and_session_cookies!
-      stub_api_idp_list_for_loa
+      stub_api_idp_list_for_registration
 
       expired_start_time = 2.hours.ago.to_i * 1000
       page.set_rack_session(start_time: expired_start_time)
@@ -87,7 +87,7 @@ RSpec.feature 'When the user submits the feedback page' do
   context 'user session valid' do
     before :each do
       set_session_and_session_cookies!
-      stub_api_idp_list_for_loa
+      stub_api_idp_list_for_registration
     end
 
     it 'should show user link back to start page' do
