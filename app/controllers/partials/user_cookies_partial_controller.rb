@@ -73,6 +73,10 @@ private
     nil
   end
 
+  def ab_test_variant_value
+    cookies[CookieNames::AB_TEST].value
+  end
+
   # Clean up users' existing cookies, remove in March 2020
   def eat_journey_hint_cookie(cookie)
     yummy_cookie = cookie
