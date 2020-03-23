@@ -359,7 +359,6 @@ cy:
     about_certified_companies:
       title: Am gwmnïau ardystiedig
       a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
-      dont_need_to_be_existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni oherwydd maent wedi adeiladu systemau newydd, diogel i ddilysu hunaniaeth.
       a_certified_company_will_verify_security: Rydych yn dewis o restr o gwmnïau ardystiedig i ddilysu eich hunaniaeth. Maent i gyd wedi cwrdd â safonnau diogelwch a osodwyd gan y llywodraeth.
       a_certified_company_will_verify_security_start: Rydych yn dechrau drwy ddewis cwmni i ddilysu eich hunaniaeth. Mae’r cwmnïau rydych yn dewis ohonnynt wedi cwrdd â safonnau diogelwch a osodwyd gan y llywodraeth.
       ensure_privacy: Nid yw’r cwmni ardystiedig yn gwybod pa wasanaeth o’r llywodraeth rydych yn ei ddefnyddio ac nid yw’r adran o’r llywodraeth yn gwybod pa gwmni wnaeth ddilysu eich hunaniaeth. Mae hyn yn sicrhau eich preifatrwydd.
@@ -522,7 +521,6 @@ cy:
     choose_a_certified_company:
       title: Dewiswch gwmni ardystiedig
       heading: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
-      existing_customer: Nid oes angen i chi fod yn gwsmer presennol gyda chwmni.
       personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
       why_companies: Pam fod dewis o gwmnïau
       choose_idp: Dewiswch %{display_name}
