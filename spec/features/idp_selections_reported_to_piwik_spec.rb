@@ -30,7 +30,7 @@ RSpec.describe 'When the user selects an IDP' do
 
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
     stub_transactions_list
     stub_session_idp_authn_request(originating_ip, location, false)
     stub_idp_select_request(idp_1_entity_id)

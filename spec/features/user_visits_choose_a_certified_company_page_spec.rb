@@ -4,7 +4,7 @@ require 'api_test_helper'
 describe 'When the user visits the choose a certified company page' do
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list_for_loa(default_idps)
+    stub_api_idp_list_for_registration(default_idps)
   end
 
   context 'user has two docs and a mobile' do
@@ -21,10 +21,10 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     it 'marks the unavailable IDP as unavailable' do
-      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one',
-                                   'entityId' => 'http://idcorp.com',
-                                   'levelsOfAssurance' => %w(LEVEL_2),
-                                   'temporarilyUnavailable' => true }])
+      stub_api_idp_list_for_registration([{ 'simpleId' => 'stub-idp-one',
+                                            'entityId' => 'http://idcorp.com',
+                                            'levelsOfAssurance' => %w(LEVEL_2),
+                                            'temporarilyUnavailable' => true }])
       visit '/choose-a-certified-company'
       expect(page).to have_content t('hub.certified_companies_unavailable.title', count: 1, company: 'IDCorp')
     end
@@ -82,7 +82,7 @@ describe 'When the user visits the choose a certified company page' do
 
   context 'user is from an LOA1 service' do
     before(:each) do
-      stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
+      stub_api_idp_list_for_registration(default_idps, 'LEVEL_1')
       page.set_rack_session(
         transaction_simple_id: 'test-rp',
         requested_loa: 'LEVEL_1',
@@ -105,10 +105,10 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     it 'unavailable LEVEL_1 recommended IDPs are marked as unavailable' do
-      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one',
-                                   'entityId' => 'http://idcorp.com',
-                                   'levelsOfAssurance' => %w(LEVEL_1),
-                                   'temporarilyUnavailable' => true }], 'LEVEL_1')
+      stub_api_idp_list_for_registration([{ 'simpleId' => 'stub-idp-one',
+                                           'entityId' => 'http://idcorp.com',
+                                           'levelsOfAssurance' => %w(LEVEL_1),
+                                           'temporarilyUnavailable' => true }], 'LEVEL_1')
       visit '/choose-a-certified-company'
       expect(page).to have_content t('hub.certified_companies_unavailable.title', count: 1, company: 'IDCorp')
     end
@@ -198,7 +198,7 @@ describe 'When the user visits the choose a certified company page' do
   context 'Google Analytics elements are rendered correctly' do
     context 'when coming from an LOA2 service' do
       before :each do
-        stub_api_idp_list_for_loa(default_idps, 'LEVEL_2')
+        stub_api_idp_list_for_registration(default_idps, 'LEVEL_2')
         page.set_rack_session(
           transaction_simple_id: 'test-rp',
           requested_loa: 'LEVEL_2',
@@ -227,7 +227,7 @@ describe 'When the user visits the choose a certified company page' do
 
     context 'when coming from an LOA1 service' do
       before :each do
-        stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
+        stub_api_idp_list_for_registration(default_idps, 'LEVEL_1')
         page.set_rack_session(
           transaction_simple_id: 'test-rp',
           requested_loa: 'LEVEL_1',

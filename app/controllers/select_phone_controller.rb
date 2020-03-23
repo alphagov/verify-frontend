@@ -11,7 +11,7 @@ class SelectPhoneController < ApplicationController
     @form = SelectPhoneForm.new(params['select_phone_form'] || {})
     if @form.valid?
       selected_answer_store.store_selected_answers('phone', @form.selected_answers)
-      idps_available = IDP_RECOMMENDATION_ENGINE.any?(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
+      idps_available = IDP_RECOMMENDATION_ENGINE.any?(current_available_identity_providers_for_registration, selected_evidence, current_transaction_simple_id)
       redirect_to idps_available ? choose_a_certified_company_path : verify_will_not_work_for_you_path
     else
       flash.now[:errors] = @form.errors.full_messages.join(', ')

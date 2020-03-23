@@ -5,7 +5,7 @@ RSpec.feature 'When user visits document selection page' do
   before(:each) do
     experiment = { "short_hub_2019_q3-preview" => "short_hub_2019_q3-preview_variant_c_2_idp_short_hub" }
     set_session_and_ab_session_cookies!(experiment)
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
     visit '/select-documents'
   end
 

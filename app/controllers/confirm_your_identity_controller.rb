@@ -12,7 +12,7 @@ class ConfirmYourIdentityController < ApplicationController
       cookie_error('missing verify-front-journey-hint')
     else
       @transaction_name = current_transaction.name
-      @identity_providers = journey_hint_entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_loa, journey_hint_entity_id)
+      @identity_providers = journey_hint_entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_registration, journey_hint_entity_id)
 
       if @identity_providers.empty?
         cookie_error("invalid verify-front-journey-hint entity-id #{journey_hint_entity_id}")

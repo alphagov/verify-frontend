@@ -34,7 +34,7 @@ describe ChooseACertifiedCompanyLoa2VariantCController do
     variant = 'variant_c_2_idp_short_hub'
     stub_api_select_idp
     set_session_and_cookies_with_loa_and_variant('LEVEL_2', experiment, variant)
-    stub_api_idp_list_for_loa([stub_idp_one, stub_idp_three])
+    stub_api_idp_list_for_registration([stub_idp_one, stub_idp_three])
   end
 
   context '#index' do

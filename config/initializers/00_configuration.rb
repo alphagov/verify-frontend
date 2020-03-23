@@ -28,7 +28,7 @@ CONFIG = Configuration.load! do
   option_int 'read_timeout', 'READ_TIMEOUT', default: 60
   option_int 'connect_timeout', 'CONNECT_TIMEOUT', default: 4
 
-  option_int 'hide_idps_disconnecting_for_registration_minutes_before', 'HIDE_IDPS_DISCONNECTING_FOR_REGISTRATION_MINUTES_BEFORE', default: 15
+  option_int 'hide_idps_disconnecting_for_registration_minutes_before', 'HIDE_IDPS_DISCONNECTING_FOR_REGISTRATION_MINUTES_BEFORE', default: 30
 
   option_string 'rules_directory', 'RULES_DIRECTORY', default: "#{FED_CONFIG_DIR}/idp-rules/"
   option_string 'segment_definitions', 'SEGMENT_DEFINITIONS', default: "#{FED_CONFIG_DIR}/segment_definitions.yml"

@@ -4,7 +4,7 @@ require 'api_test_helper'
 RSpec.feature 'user visits the choose a certified company about idp page', type: :feature do
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
   end
 
   let(:selected_answers) {
@@ -23,7 +23,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
   }
   scenario 'user chooses a recommended idp' do
     entity_id = 'my-entity-id'
-    stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
+    stub_api_idp_list_for_registration([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
     given_a_session_with_selected_answers
     visit choose_a_certified_company_about_path('stub-idp-one')
     expect(page).to have_content('ID Corp is the premier identity proofing service around.')
@@ -45,7 +45,7 @@ RSpec.feature 'user visits the choose a certified company about idp page', type:
 
   scenario 'user clicks back link' do
     entity_id = 'my-entity-id'
-    stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
+    stub_api_idp_list_for_registration([{ 'simpleId' => 'stub-idp-one', 'entityId' => entity_id, 'levelsOfAssurance' => %w(LEVEL_1 LEVEL_2) }])
     given_a_session_with_selected_answers
     visit choose_a_certified_company_about_path('stub-idp-one')
     click_link t('navigation.back')

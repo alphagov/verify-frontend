@@ -7,7 +7,7 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
 
   def index
     session[:selected_answers]&.delete('interstitial')
-    suggestions = recommendation_engine.get_suggested_idps_for_registration(current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
+    suggestions = recommendation_engine.get_suggested_idps_for_registration(current_available_identity_providers_for_registration, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
     @recommended_idps = order_with_unavailable_last(@recommended_idps)
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
@@ -19,8 +19,8 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
 
   def select_idp
     if params[:entity_id].present?
-      select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
-        session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa, selected_evidence, current_transaction_simple_id)
+      select_viewable_idp_for_registration(params.fetch('entity_id')) do |decorated_idp|
+        session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_available_identity_providers_for_registration, selected_evidence, current_transaction_simple_id)
         redirect_to warning_or_question_page(decorated_idp)
       end
     else

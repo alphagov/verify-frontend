@@ -4,7 +4,7 @@ require 'cookie_names'
 RSpec.describe 'When the user visits the about choosing a company page' do
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
   end
 
   it 'will include the appropriate feedback source' do

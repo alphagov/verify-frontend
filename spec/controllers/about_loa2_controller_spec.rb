@@ -8,7 +8,7 @@ describe AboutLoa2Controller do
 
   before(:each) do
     stub_request(:get, CONFIG.config_api_host + '/config/transactions/enabled')
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
   end
 
   context 'GET about#certified_companies' do
