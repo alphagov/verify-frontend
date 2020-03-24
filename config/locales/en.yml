@@ -361,7 +361,7 @@ en:
     about_certified_companies:
       title: About certified companies
       a_certified_company_will_verify: A company that meets government privacy standards will verify your identity.
-      a_certified_company_will_verify_security: You choose from a list of companies certified to verify your identity. The companies have met security standards set by government.
+      a_certified_company_will_verify_security: You select a company certified to verify your identity. The companies have met security standards set by government.
       a_certified_company_will_verify_security_start: You start by choosing a company to verify your identity. The companies you choose from have met security standards set by government.
       ensure_privacy: The certified company doesn’t know which government service you’re accessing, and the government department doesn’t know which company verified your identity. This ensures your privacy.
       no_charge: You do not need to pay to use GOV.UK Verify.
@@ -369,24 +369,16 @@ en:
       details_html: |
         <p class="govuk-body">These companies can make sure it's really you by checking documents like passports and driving licences against official records. They can also access information like credit records.</p>
         <p class="govuk-body">These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
-        <p class="govuk-body">There's more than one company so that:</p>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>you can choose who verifies your identity</li>
-          <li>everyone's information is not stored in one place</li>
-        </ul>
+        <p class="govuk-body">There's more than one company so that everyone's information is not stored in one place.
       loa1_details_html: |
         <p class="govuk-body">These companies can make sure it's really you by checking documents like passports and driving licences against official records. They can also access information like credit records.</p>
         <p class="govuk-body">These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
-        <p class="govuk-body">There's more than one company so that:</p>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>you can choose who verifies your identity</li>
-          <li>everyone's information is not stored in one place</li>
-        </ul>
+        <p class="govuk-body">There's more than one company so that everyone's information is not stored in one place.
     about_identity_accounts:
       title: About identity accounts
       content_html: |
-        <p class="govuk-body">Verifying your identity takes about 15 minutes, but you only have to do it once.</p>
-        <p class="govuk-body">You’ll then have an identity account with the company you choose.</p>
+        <p class="govuk-body">You only have to verify your identity once.</p>
+        <p class="govuk-body">You’ll then have an identity account with the company you use.</p>
         <p class="govuk-body">You can then access other government services in less than 1 minute wherever you see the GOV.UK Verify logo.</p>
       content_loa1_html: |
         <p class="govuk-body">Verifying your identity takes about 5 minutes to complete.</p>
@@ -409,7 +401,7 @@ en:
         <li>your identity documents are valid</li>
         <li>it’s you providing your details, and not someone pretending to be you</li>
         </ul>
-        <p class="govuk-body">We need to ask you some questions to check if the companies can verify you. We’ll then send you to the website of the company you choose.</p>
+        <p class="govuk-body">We need to ask you some questions to check if the companies can verify you. We’ll then send you to the website of the company you select.</p>
     select_documents:
       title: Select all the documents you have
       title_photo_documents: Your photo identity document
@@ -417,7 +409,7 @@ en:
       documents_from_other_countries: The companies can use identity documents from other countries to verify you.
       no_documents_message: Your document choices have been set to ‘no’.
       legend: Do you have these documents with you?
-      highlight: The more identity documents you can provide now, the more likely it is that the company you choose can verify you successfully.
+      highlight: The more identity documents you can provide now, the more likely it is that the company you use can verify you successfully.
       documents_option_yes: 'Yes'
       documents_option_yes_expired: Yes, but it's expired
       valid_UK_driving_licence: Do you have a valid UK photocard driving licence, full or provisional?
@@ -525,11 +517,11 @@ en:
       heading: You won’t be able to use GOV.UK Verify
       explanation: You need a current UK address to get your identity verified.
     choose_a_certified_company:
-      title: Choose a certified company
-      heading: Choose a company to verify your identity
+      title: Select a certified company
+      heading: Select a company to verify your identity
       personal_information: The company will ask you to provide personal information and evidence. It will then check it's correct.
-      why_companies: Find out why there’s a choice of companies
-      choose_idp: "Choose %{display_name}"
+      why_companies: Why you need to use a company
+      choose_idp: "Select %{display_name}"
       idp_count_html: "Based on your answers, %{company_count} can verify you now:"
       company_html:
         zero: no&nbsp;companies
@@ -546,15 +538,13 @@ en:
         information_provided_by: Information provided by %{display_name}
         close: close
     why_companies:
-      title: Why there’s a choice of companies
-      choose_a_company: Choose a company
+      title: Why you need to use a company
+      choose_a_company: Select a company
       content_html: |
-        <p class="govuk-body">It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
-        <p class="govuk-body">When verifying your identity, these companies access information like credit records. They can also check that any documents you provide, such as passports and driving licences, are valid.</p>
+        <p class="govuk-body">When verifying your identity, the companies access information like credit records. They can also check that any documents you provide, such as passports and driving licences, are valid.</p>
         <p class="govuk-body">These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
       content_loa1_html: |
-        <p class="govuk-body">It’s your right to choose who you want to deal with from these companies. It’s also your right to change which company you deal with at any time.</p>
-        <p class="govuk-body">When verifying your identity, these companies access information like credit records. They can also check that any documents you provide, such as passports and driving licences, are valid.</p>
+        <p class="govuk-body">When verifying your identity, the companies access information like credit records. They can also check that any documents you provide, such as passports and driving licences, are valid.</p>
         <p class="govuk-body">These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
     redirect_to_idp_warning:
       title: "You'll now be redirected"
