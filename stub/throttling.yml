@@ -1,0 +1,6 @@
+idps:
+  alternatives:
+    - name: 'stub-idp-one'
+      percent: 50
+    - name: 'stub-idp-two'
+      percent: 50

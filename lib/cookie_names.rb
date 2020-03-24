@@ -9,6 +9,7 @@ module CookieNames
   AB_TEST = 'ab_test'.freeze
   AB_TEST_TRIAL = 'ab_test_trial'.freeze
   ANALYTICS_SESSION_COOKIE_PREFIX = '_pk_id.'.freeze
+  THROTTLING = 'throttling'.freeze
 
   def self.session_cookies
     [SESSION_ID_COOKIE_NAME, SESSION_COOKIE_NAME]

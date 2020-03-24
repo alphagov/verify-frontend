@@ -45,6 +45,42 @@ describe 'When the user visits the choose a certified company page' do
       end
     end
 
+    it 'displays only one IDP and saves it in the cookie' do
+      stub_const("THROTTLING_ENABLED", true)
+      expect(cookie_value(CookieNames::THROTTLING)).to be_nil
+      visit '/choose-a-certified-company'
+
+      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '1 company')
+      expect(cookie_value(CookieNames::THROTTLING)).not_to be_nil
+    end
+
+    it 'displays only one IDP if the throttling cookie is corrupted' do
+      idp_in_cookie = "non-existing-idp"
+      visit "/test-throttling-cookie/#{idp_in_cookie}"
+      stub_const("THROTTLING_ENABLED", true)
+
+      visit '/choose-a-certified-company'
+
+      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '1 company')
+      expect(cookie_value(CookieNames::THROTTLING)).not_to eq(idp_in_cookie)
+    end
+
+    it 'displays only one IDP from the throttling cookie' do
+      idp_in_cookie = "idps_stub-idp-two"
+      visit "/test-throttling-cookie/#{idp_in_cookie}"
+      stub_const("THROTTLING_ENABLED", true)
+
+      visit '/choose-a-certified-company'
+
+      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '1 company')
+      within('#matching-idps') do
+        expect(page).to have_button('Choose Bob’s Identity Service')
+      end
+    end
+
     it 'does not show an IDP if the IDP profile has a subset of the user evidence, but not an exact match' do
       additional_documents = selected_answers[:documents].clone
       additional_documents[:driving_licence] = false
