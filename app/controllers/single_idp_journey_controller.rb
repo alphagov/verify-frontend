@@ -68,7 +68,7 @@ class SingleIdpJourneyController < ApplicationController
         logger.error "Could not get the RP URL for single IDP with transaction_id #{transaction_id} " + referrer_string
         redirect_to verify_services_path
       elsif !valid_request?(transaction_id, idp_entity_id, uuid)
-        redirect_to verify_services_path
+        redirect_to(rp_url)
       else
         save_to_cookie(transaction_id, idp_entity_id, uuid)
         FEDERATION_REPORTER.report_started_single_idp_journey(request)
