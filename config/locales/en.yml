@@ -369,11 +369,11 @@ en:
       details_html: |
         <p class="govuk-body">These companies can make sure it's really you by checking documents like passports and driving licences against official records. They can also access information like credit records.</p>
         <p class="govuk-body">These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
-        <p class="govuk-body">There's more than one company so that everyone's information is not stored in one place.
+        <p class="govuk-body">There's more than one company so that everyone's information is not stored in one place.</p>
       loa1_details_html: |
         <p class="govuk-body">These companies can make sure it's really you by checking documents like passports and driving licences against official records. They can also access information like credit records.</p>
         <p class="govuk-body">These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
-        <p class="govuk-body">There's more than one company so that everyone's information is not stored in one place.
+        <p class="govuk-body">There's more than one company so that everyone's information is not stored in one place.</p>
     about_identity_accounts:
       title: About identity accounts
       content_html: |
@@ -517,11 +517,11 @@ en:
       heading: You won’t be able to use GOV.UK Verify
       explanation: You need a current UK address to get your identity verified.
     choose_a_certified_company:
-      title: Select a certified company
-      heading: Select a company to verify your identity
+      title: Choose a certified company
+      heading: Choose a company to verify your identity
       personal_information: The company will ask you to provide personal information and evidence. It will then check it's correct.
       why_companies: Why you need to use a company
-      choose_idp: "Select %{display_name}"
+      choose_idp: "Choose %{display_name}"
       idp_count_html: "Based on your answers, %{company_count} can verify you now:"
       company_html:
         zero: no&nbsp;companies
@@ -539,7 +539,7 @@ en:
         close: close
     why_companies:
       title: Why you need to use a company
-      choose_a_company: Select a company
+      choose_a_company: Choose a company
       content_html: |
         <p class="govuk-body">When verifying your identity, the companies access information like credit records. They can also check that any documents you provide, such as passports and driving licences, are valid.</p>
         <p class="govuk-body">These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
