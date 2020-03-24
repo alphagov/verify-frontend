@@ -116,7 +116,7 @@ describe SingleIdpJourneyController do
         }
       }
       it 'should redirect to the service start page and not set a cookie when an incorrect idp is supplied' do
-        expect(Rails.logger).to receive(:error).with(/The IDP is not valid or disabled for transaction_id http:\/\/www.test-rp.gov.uk\/SAML2\/MD and idp_entity_id fake-stub-idp/)
+        expect(Rails.logger).to receive(:warn).with(/The IDP is not valid or disabled for transaction_id http:\/\/www.test-rp.gov.uk\/SAML2\/MD and idp_entity_id fake-stub-idp/)
         expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url'])
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
@@ -209,7 +209,7 @@ describe SingleIdpJourneyController do
         uuid: UUID_ONE
       }
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
-      expect(Rails.logger).to receive(:error).with(/The IDP is not valid or disabled for transaction_id http:\/\/www.test-rp.gov.uk\/SAML2\/MD and idp_entity_id disabled-idp/)
+      expect(Rails.logger).to receive(:warn).with(/The IDP is not valid or disabled for transaction_id http:\/\/www.test-rp.gov.uk\/SAML2\/MD and idp_entity_id disabled-idp/)
       expect(subject).to redirect_to(start_path)
     end
 
