@@ -78,7 +78,7 @@ private
 
   def set_throttling_cookie
     idp_name = THROTTLING.get_ab_test_name(rand)
-    cookies.encrypted[CookieNames::THROTTLING] = { value: idp_name, expires: 7.days.from_now }
+    cookies.encrypted[CookieNames::THROTTLING] = { value: idp_name, expires: 21.days.from_now }
     idp_name
   end
 end
