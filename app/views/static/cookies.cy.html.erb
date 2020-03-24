@@ -54,6 +54,13 @@ end %>
           <td class="govuk-table__cell">90 munud</td>
         </tr>
       <% end %>
+      <% if THROTTLING_ENABLED %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell"><var>throttling</var></td>
+          <td class="govuk-table__cell">This cookie allows us to remember you and to distribute the traffic more evenly.</td>
+          <td class="govuk-table__cell">7 days</td>
+        </tr>
+      <% end %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell"><var>x_verify_locale</var></td>
         <td class="govuk-table__cell">Mae hyn yn nodi os ydych yn defnyddio fersiwn Saesneg neu Gymraeg o GOV.UK Verify. Rydym yn defnyddio hyn i ddangos y safle i chi yn eich dewis iaith</td>

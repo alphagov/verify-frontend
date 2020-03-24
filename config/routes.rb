@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     post 'test-initiate-journey' => 'test_saml#initiate_journey_session'
     post 'another-idp-endpoint' => 'test_saml#idp_request'
     get 'test-journey-hint' => 'test_journey_hint_cookie#index', as: :test_journey_hint
+    get 'test-throttling-cookie/:idp' => 'test_throttling_cookie#set_cookie'
     post 'test-journey-hint' => 'test_journey_hint_cookie#set_cookie', as: :test_journey_hint_submit
     get 'test-single-idp-journey' => 'test_single_idp_journey#index'
     # route analytics through frontend URI, as like prod, to not violate our csp policy

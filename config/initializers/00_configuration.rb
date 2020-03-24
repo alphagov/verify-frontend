@@ -47,6 +47,9 @@ CONFIG = Configuration.load! do
   option_string 'cycle_three_attributes_directory', 'CYCLE_THREE_ATTRIBUTES_DIRECTORY', default: "#{FED_CONFIG_DIR}/cycle-three-attributes/"
   option_string 'ab_test_file', 'AB_TEST_FILE', allow_missing: true
 
+  option_bool 'throttling_enabled', 'THROTTLING_ENABLED', default: false
+  option_string 'throttling_file', 'THROTTLING_FILE', allow_missing: true
+
   option_string 'saml_proxy_host', 'SAML_PROXY_HOST'
   option_bool 'feedback_disabled', 'FEEDBACK_DISABLED', default: false
   # Feature flags

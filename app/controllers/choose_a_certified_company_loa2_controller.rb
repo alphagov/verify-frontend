@@ -8,8 +8,18 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   def index
     session[:selected_answers]&.delete('interstitial')
     suggestions = recommendation_engine.get_suggested_idps_for_registration(current_available_identity_providers_for_registration, selected_evidence, current_transaction_simple_id)
-    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
-    @recommended_idps = order_with_unavailable_last(@recommended_idps)
+    if THROTTLING_ENABLED
+      throttled_idp_name = users_idp(suggestions)
+      throttled_idp_name = throttled_idp_name.split("idps_")[1]
+      throttled_idp = suggestions[:recommended].select { |idp| idp.simple_id == throttled_idp_name }
+      if throttled_idp.length == 1
+        recommended_idps(recommended: throttled_idp)
+      else
+        recommended_idps(suggestions)
+      end
+    else
+      recommended_idps(suggestions)
+    end
     @non_recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely])
     @non_recommended_idps = order_with_unavailable_last(@non_recommended_idps)
     session[:user_segments] = suggestions[:user_segments]
@@ -48,5 +58,27 @@ private
 
   def recommendation_engine
     IDP_RECOMMENDATION_ENGINE
+  end
+
+  def recommended_idps(list)
+    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(list[:recommended])
+    @recommended_idps = order_with_unavailable_last(@recommended_idps)
+  end
+
+  def users_idp(suggested_list)
+    cookie = cookies.encrypted[CookieNames::THROTTLING]
+    list = suggested_list[:recommended].map { |idp| "idps_#{idp.simple_id}" }
+
+    if list.include?(cookie)
+      cookie
+    else
+      set_throttling_cookie
+    end
+  end
+
+  def set_throttling_cookie
+    idp_name = THROTTLING.get_ab_test_name(rand)
+    cookies.encrypted[CookieNames::THROTTLING] = { value: idp_name, expires: 7.days.from_now }
+    idp_name
   end
 end
