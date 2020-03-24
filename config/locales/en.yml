@@ -381,9 +381,9 @@ en:
         <p class="govuk-body">You’ll then have an identity account with the company you use.</p>
         <p class="govuk-body">You can then access other government services in less than 1 minute wherever you see the GOV.UK Verify logo.</p>
       content_loa1_html: |
-        <p class="govuk-body">Verifying your identity takes about 5 minutes to complete.</p>
-        <p class="govuk-body">You’ll then have an identity account with the certified company.</p>
-        <p class="govuk-body">You can use this identity account to access other government services wherever you see the GOV.UK Verify logo.</p>
+        <p class="govuk-body">You only have to verify your identity once.</p>
+        <p class="govuk-body">You’ll then have an identity account with the company you use.</p>
+        <p class="govuk-body">You can then access other government services wherever you see the GOV.UK Verify logo.</p>
       summary: Where you can use your identity account
       details_loa1_html: |
         <p class="govuk-body">GOV.UK Verify is new, and government services are joining all the time.</p>
