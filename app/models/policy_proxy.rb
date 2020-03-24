@@ -25,7 +25,6 @@ class PolicyProxy
       PARAM_JOURNEY_TYPE => journey_type,
       PARAM_VARIANT => variant
     }
-
     @api_client.post(select_idp_endpoint(session_id), body)
   end
 

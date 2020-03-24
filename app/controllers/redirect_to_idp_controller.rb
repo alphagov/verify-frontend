@@ -84,15 +84,13 @@ private
   end
 
   def recommended
-    begin
-      if session.fetch(:selected_idp_was_recommended)
-        '(recommended)'
-      else
-        '(not recommended)'
-      end
-    rescue KeyError
-      '(idp recommendation key not set)'
+    if session.fetch(:selected_idp_was_recommended)
+      '(recommended)'
+    else
+      '(not recommended)'
     end
+  rescue KeyError
+    '(idp recommendation key not set)'
   end
 
   def select_idp(entity_id, idp_name)
