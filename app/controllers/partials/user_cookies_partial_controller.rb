@@ -1,21 +1,21 @@
 module UserCookiesPartialController
   def set_secure_cookie(name, value)
     cookies[name] = {
-        value: value,
-        httponly: true,
-        secure: Rails.configuration.x.cookies.secure
+      value: value,
+      httponly: true,
+      secure: Rails.configuration.x.cookies.secure
     }
   end
 
   def set_visitor_cookie
-    cookies[CookieNames::PIWIK_USER_ID] = SecureRandom.hex(8) unless cookies.has_key? CookieNames::PIWIK_USER_ID
+    cookies[CookieNames::PIWIK_USER_ID] = SecureRandom.hex(8) unless cookies.key? CookieNames::PIWIK_USER_ID
   end
 
   def store_locale_in_cookie
     cookies.signed[CookieNames::VERIFY_LOCALE] = {
-        value: I18n.locale,
-        httponly: true,
-        secure: Rails.configuration.x.cookies.secure
+      value: I18n.locale,
+      httponly: true,
+      secure: Rails.configuration.x.cookies.secure
     }
   end
 
@@ -74,7 +74,10 @@ private
   end
 
   def ab_test_variant_value
-    cookies[CookieNames::AB_TEST].value
+    ab_test_variant = ''
+    JSON.parse(cookies[CookieNames::AB_TEST]).map { |key, value| ab_test_variant = "#{ab_test_variant} #{key}: #{value}," }
+    Rails.logger.info("ab_test_variant = #{ab_test_variant}")
+    ab_test_variant
   end
 
   # Clean up users' existing cookies, remove in March 2020
