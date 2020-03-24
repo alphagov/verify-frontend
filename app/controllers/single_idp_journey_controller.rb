@@ -161,7 +161,7 @@ private
     end
 
     unless valid_idp_choice?(single_idp_idp_list, idp_entity_id)
-      logger.error "The IDP is not valid or disabled for transaction_id #{transaction_id} and idp_entity_id #{idp_entity_id}" + referrer_string
+      logger.warn "The IDP is not valid or disabled for transaction_id #{transaction_id} and idp_entity_id #{idp_entity_id}" + referrer_string
       return false
     end
 
