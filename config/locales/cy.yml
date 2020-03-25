@@ -68,6 +68,7 @@ cy:
     proxy_node_error: proxy-node-error-cy
     accessibility: accessibility-cy
     select_documents_advice: select-documents-advice-cy
+    completed_registration: completed-cy/:idp
   common:
     logo: "logo %{name}"
   title:
@@ -833,6 +834,12 @@ cy:
       alternative_two: gweld ffyrdd eraill i %{service_display_name}
     accessibility:
       title: Accessibility
+    completed_registration:
+      title: You've successfully proved your identity
+      heading: You’ve successfully proved your identity with %{idp_name}
+      message_one: You now need to return to the government service you were trying to access.
+      message_two: When the service asks you to prove your identity, you can do so by signing in to your %{idp_name} identity account.
+      select_service: Select the service you need
   errors:
     cookie_expired:
       title: Mae eich sesiwn wedi amseru allan
