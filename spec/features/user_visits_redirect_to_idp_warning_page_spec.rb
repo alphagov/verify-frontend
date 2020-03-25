@@ -143,7 +143,7 @@ RSpec.describe 'When the user visits the redirect to IDP warning page' do
     visit '/redirect-to-idp-warning'
 
     expect(page.body).to have_content t('hub.redirect_to_idp_warning.continue_website', display_name: 'IDCorp')
-    expect(page.body).to include t('hub.redirect_to_idp_warning.identity_account_use_html', display_name: 'IDCorp')
+    expect(page.body).to include t('hub.redirect_to_idp_warning.queue_warning_html', idp: 'IDCorp')
   end
 
   context 'with JS enabled', js: true do

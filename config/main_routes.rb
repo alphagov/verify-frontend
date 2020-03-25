@@ -78,6 +78,7 @@ constraints IsLoa2 do
   get 'confirmation_non_matching_journey', to: 'confirmation_loa2#non_matching_journey', as: :confirmation_non_matching_journey
 end
 
+get 'what_happens_next', to: 'what_happens_next#index', as: :what_happens_next
 get 'accessibility', to: 'static#accessibility', as: :accessibility
 get 'privacy_notice', to: 'static#privacy_notice', as: :privacy_notice
 get 'verify_services', to: 'static#verify_services', as: :verify_services

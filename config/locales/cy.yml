@@ -5,6 +5,7 @@ cy:
     prove_identity_retry: profi-hunaniaeth-ailgeisio
     begin_registration: dechrau-cofrestru
     begin_sign_in: dechrau-mewngofnodi
+    what_happens_next: what-happens-next-cy
     about: am
     sign_in: mewngofnodi
     about_certified_companies: am-gwmniau-ardystiedig
@@ -355,6 +356,15 @@ cy:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
       other_services: Gwasanaethau eraill
+    what_happens_next:
+      title: What happens next
+      heading: What happens next
+      what_happens: |
+        <ol class="govuk-list govuk-list--number">
+          <li>You'll now go to the %{idp} website and answer questions about yourself.</li>
+          <li>Once you’re verified, you’ll have an identity account that you can use wherever you see the GOV.UK Verify logo.</li>
+          <li>You’ll then need to go back to the government service you need to access and sign in using your new identity account details.</li>
+        </ol> 
     about:
       title: Am
       verify_is_a_service: Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
@@ -561,11 +571,11 @@ cy:
         <p class="govuk-body">Nid oes effaith ar eich sgor credyd.</p>
     redirect_to_idp_warning:
       title: Byddwch nawr yn cael eich ailgyfeirio
-      create_account: Crëwch eich cyfrif hunaniaeth %{display_name}
+      heading: "%{idp} is currently experiencing long wait times"
       continue_website: Parhau i wefan %{display_name}
-      identity_account_use_html: |
-              <p class="govuk-body">Byddwch nawr yn gwirio pwy ydych chi ar wefan %{display_name}</p>
-              <p class="govuk-body">Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio lle bynnag gwelwch y logo 'GOV.UK Verify' </p>
+      queue_warning_html: |
+        <p class="govuk-body">A lot of people are currently trying to prove their identity with %{idp}. It may take several hours or more for you to get through.</p>
+        <p class="govuk-body">We’re working to improve the wait times as fast as we can.</p>
       service_use: Yna byddwch yn gallu %{service_name}.
       other_ways_link: ffyrdd eraill i %{transaction}
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
