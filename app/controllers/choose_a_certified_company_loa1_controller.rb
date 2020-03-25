@@ -30,7 +30,7 @@ private
     if interstitial_question_flag_enabled_for(decorated_idp)
       redirect_to_idp_question_path
     else
-      redirect_to_idp_warning_path
+      what_happens_next_path
     end
   end
 

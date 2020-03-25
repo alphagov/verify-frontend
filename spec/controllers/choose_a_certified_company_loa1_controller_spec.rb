@@ -73,11 +73,11 @@ describe ChooseACertifiedCompanyLoa1Controller do
       expect(session[:selected_idp_was_recommended]).to eql(true)
     end
 
-    it 'redirects to IDP warning page by default' do
+    it 'redirects to what_happens_next page by default' do
       stub_api_idp_list_for_registration([stub_idp_no_interstitial], 'LEVEL_1')
       post :select_idp, params: { locale: 'en', entity_id: 'http://idcorp-two.com' }
 
-      expect(subject).to redirect_to redirect_to_idp_warning_path
+      expect(subject).to redirect_to what_happens_next_path
     end
 
     it 'redirects to IDP question page for LOA1 users when IDP flag is enabled' do
