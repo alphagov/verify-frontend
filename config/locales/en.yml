@@ -72,6 +72,7 @@ en:
     proxy_node_error: proxy-node-error
     accessibility: accessibility
     select_documents_advice: select-documents-advice
+    completed_registration: completed/:idp
   common:
     logo: "%{name} logo"
   title:
@@ -822,6 +823,12 @@ en:
       alternative_two: see other ways to %{service_display_name}
     accessibility:
       title: Accessibility
+    completed_registration:
+      title: You've successfully proved your identity
+      heading: You’ve successfully proved your identity with %{idp_name}
+      message_one: You now need to return to the government service you were trying to access.
+      message_two: When the service asks you to prove your identity, you can do so by signing in to your %{idp_name} identity account.
+      select_service: Select the service you need
   errors:
     cookie_expired:
       title: Your session has timed out

@@ -116,6 +116,8 @@ get 'paused_registration', to: 'paused_registration#index', as: :paused_registra
 get 'paused_registration_resume_link', to: 'paused_registration#from_resume_link', as: :paused_registration_resume_link
 get 'resume_registration', to: 'paused_registration#resume', as: :resume_registration
 post 'resume_registration', to: 'paused_registration#resume_with_idp', as: :resume_registration_submit
+get 'completed_registration', to: 'completed_registration#index', as: :completed_registration
+
 
 if SINGLE_IDP_FEATURE
   get 'redirect_to_single_idp', to: 'redirect_to_idp#single_idp', as: :redirect_to_single_idp
