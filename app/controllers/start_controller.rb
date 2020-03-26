@@ -1,13 +1,29 @@
+require 'partials/journey_hinting_partial_controller'
+require 'partials/viewable_idp_partial_controller'
+
 class StartController < ApplicationController
+  include JourneyHintingPartialController
+  include ViewableIdpPartialController
+
   layout 'slides'
   before_action :set_device_type_evidence
 
   def index
     restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::VERIFY)
+    journey_hint_entity_id = attempted_entity_id
     @form = StartForm.new({})
     @journey_hint = flash[:journey_hint]
-    render :start
+    if journey_hint_entity_id.nil?
+      render :start
+    else
+      @identity_providers = journey_hint_entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_registration, journey_hint_entity_id)
+      if @identity_providers.empty?
+        return render :start
+      end
+      render 'shared/sign_in_hint', layout: 'main_layout'
+    end
   end
+
 
   def request_post
     @form = StartForm.new(params['start_form'] || {})
