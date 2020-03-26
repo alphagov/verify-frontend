@@ -26,9 +26,8 @@ class StartController < ApplicationController
   end
 
   def ignore_hint
-    # TODO: Delete the ATTEMPT from the cookie journey hint
-    @form = StartForm.new({})
-    render :start
+    remove_attempt_journey_hint
+    redirect_to start_path
   end
 
   def request_post

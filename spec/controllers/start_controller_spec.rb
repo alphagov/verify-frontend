@@ -101,6 +101,16 @@ describe StartController do
       expect(subject).to render_template(:start, 'layouts/slides')
     end
 
+    it 'renders the normal start page if attempt is missing' do
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
+        'SUCCESS' => 'http://idcorp.com',
+      }.to_json
+      stub_api_idp_list_for_sign_in
+
+      get :index, params: { locale: 'en' }
+      expect(subject).to render_template(:start, 'layouts/slides')
+    end
+
     it 'allows to disregard the hint and deletes the ATTEMPT' do
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
         'ATTEMPT' => 'http://idcorp.com',
@@ -111,10 +121,22 @@ describe StartController do
 
       cookie_hint = MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT])
 
-      expect(subject).to render_template(:start, 'layouts/slides')
+      expect(subject).to redirect_to start_path
       expect(cookie_hint['ATTEMPT']).to be_nil
       expect(cookie_hint['SUCCESS']).to eq 'http://some-entity-id'
-      expect(subject).to render_template(:start, 'layouts/slides')
+    end
+
+    it 'allows to disregard the hint and does not fail if attempt does not exist' do
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
+        'SUCCESS' => 'http://idcorp.com'
+      }.to_json
+
+      get :ignore_hint, params: { locale: 'en' }
+
+      cookie_hint = MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT])
+
+      expect(subject).to redirect_to start_path
+      expect(cookie_hint['ATTEMPT']).to be_nil
     end
   end
 end

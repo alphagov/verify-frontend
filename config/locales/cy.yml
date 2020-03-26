@@ -70,6 +70,7 @@ cy:
     accessibility: accessibility-cy
     select_documents_advice: select-documents-advice-cy
     completed_registration: completed-cy/:idp
+    prove_identity_ignore_hint: profi-hunaniaeth/ignore-hint
   common:
     logo: "logo %{name}"
   title:

@@ -74,6 +74,7 @@ en:
     accessibility: accessibility
     select_documents_advice: select-documents-advice
     completed_registration: completed/:idp
+    prove_identity_ignore_hint: prove-identity/ignore-hint
   common:
     logo: "%{name} logo"
   title:

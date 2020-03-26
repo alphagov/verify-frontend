@@ -1,9 +1,11 @@
 require 'partials/journey_hinting_partial_controller'
 require 'partials/viewable_idp_partial_controller'
+require 'partials/user_cookies_partial_controller'
 
 class ProveIdentityController < ApplicationController
   include JourneyHintingPartialController
   include ViewableIdpPartialController
+  include UserCookiesPartialController
 
   def index
     journey_hint_entity_id = attempted_entity_id
@@ -20,8 +22,8 @@ class ProveIdentityController < ApplicationController
   end
 
   def ignore_hint
-    # TODO: Delete the ATTEMPT from the cookie journey hint
-    render :prove_identity
+    remove_attempt_journey_hint
+    redirect_to prove_identity_path
   end
 
   def retry_eidas_journey
