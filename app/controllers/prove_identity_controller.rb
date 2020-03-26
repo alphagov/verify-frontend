@@ -10,12 +10,18 @@ class ProveIdentityController < ApplicationController
     if journey_hint_entity_id.nil?
       render :prove_identity
     else
-      @identity_providers = journey_hint_entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_registration, journey_hint_entity_id)
+      @identity_providers = journey_hint_entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
       if @identity_providers.empty?
         return render :prove_identity
       end
+
       render 'shared/sign_in_hint'
     end
+  end
+
+  def ignore_hint
+    # TODO: Delete the ATTEMPT from the cookie journey hint
+    render :prove_identity
   end
 
   def retry_eidas_journey

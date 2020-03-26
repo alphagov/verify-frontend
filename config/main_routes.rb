@@ -15,6 +15,7 @@ get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
 constraints IsLoa1 do
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
+  get 'start_ignore_hint', to: 'start#ignore_hint', as: :start_ignore_hint
   get 'begin_registration', to: 'start#register', as: :begin_registration
   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#index', as: :choose_a_certified_company
   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa1#select_idp', as: :choose_a_certified_company_submit
@@ -38,8 +39,10 @@ end
 constraints IsLoa2 do
   get 'prove_identity', to: 'prove_identity#index', as: :prove_identity
   get 'prove_identity_retry', to: 'prove_identity#retry_eidas_journey', as: :prove_identity_retry
+  get 'prove_identity_ignore_hint', to: 'prove_identity#ignore_hint', as: :prove_identity_ignore_hint
   get 'start', to: 'start#index', as: :start
   post 'start', to: 'start#request_post', as: :start
+  get 'start_ignore_hint', to: 'start#ignore_hint', as: :start_ignore_hint
   get 'begin_registration', to: 'start#register', as: :begin_registration
 
   get 'about', to: 'about_loa2#index', as: :about
