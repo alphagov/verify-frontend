@@ -11,6 +11,31 @@ RSpec.describe 'When the user visits the start page' do
     expect_feedback_source_to_be(page, 'START_PAGE', '/start')
   end
 
+  it 'will display the hint page if an attempt hint present' do
+    set_session_and_session_cookies!
+    set_journey_hint_cookie('http://idcorp.com')
+    stub_api_idp_list_for_sign_in
+    visit '/start'
+    expect(page).to have_content t('hub.sign_in_hint.heading')
+    expect(page).to have_css 'html[lang=en]'
+  end
+
+  it 'will reset the hint and display start page when user ignores the hint' do
+    set_session_and_session_cookies!
+    set_journey_hint_cookie('http://idcorp.com')
+    stub_api_idp_list_for_sign_in
+    visit '/start'
+    expect(page).to have_content t('hub.sign_in_hint.heading')
+    expect(page).to have_css 'html[lang=en]'
+    expect(page).to have_current_path '/start'
+
+    click_link t('hub.sign_in_hint.other_way_button')
+
+    expect(page).to have_content t('hub.start.heading')
+    expect(page).to have_css 'html[lang=en]'
+    expect(page).to have_current_path '/start'
+  end
+
   it 'will display the start page in Welsh' do
     set_session_and_session_cookies!
     visit '/dechrau'

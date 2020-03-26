@@ -55,7 +55,6 @@ class FeedbackSourceMapper
       'ACCESSIBILITY_PAGE' => 'accessibility',
       'COMPLETED_REGISTRATION' => 'completed_registration',
       'WHAT_HAPPENS_NEXT_PAGE' => 'what_happens_next',
-      'SIGN_IN_HINT' => 'sign_in_hint',
   }.freeze
   end
 

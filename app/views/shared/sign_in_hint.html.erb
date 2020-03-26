@@ -1,21 +1,26 @@
 <%= page_title 'hub.sign_in_hint.title' %>
-<% content_for :feedback_source, 'SIGN_IN_HINT' %>
+<% content_for :feedback_source, 'START_PAGE' %>
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale)  %>">
+  <div class="govuk-grid-column-full js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale)  %>">
 
-    <h1 class="govuk-heading-l"><%= t('hub.signin.sign_in_idp', display_name: @identity_providers[0].display_name) %></h1>
-    <p><%= t 'hub.confirm_your_identity.need_to_signin_again', transaction_name: @transaction_name %></p>
+    <h1 class="govuk-heading-l"><%= t 'hub.sign_in_hint.heading'  %></h1>
+    <p><%= t('hub.sign_in_hint.intro', idp_name: @identity_provider.display_name ) %></p>
+    <p><%= t('hub.sign_in_hint.continue_with_idp', idp_name: @identity_provider.display_name ) %></p>
+    <div class="idp-choice no-border">
+      <%= image_tag @identity_provider.logo_path, class: "company-logo" %>
+    </div>
+    <%= form_for(@identity_provider, url: sign_in_submit_path, html: {class: 'idp-option js-idp-form', id: nil}) do |f| %>
+      <%= hidden_field_tag 'entity_id', @identity_provider.entity_id, id: nil, class: 'js-entity-id' %>
+                <%= f.button t('hub.sign_in_hint.button', idp_name: @identity_provider.display_name),
+                             class: 'govuk-button govuk-!-margin-right-1',
+                             name: @identity_provider.entity_id,
+                             id: nil,
+                             type: 'submit',
+                             value: @identity_provider.display_name
+                %>
+    <%= button_link_to t('hub.sign_in_hint.other_way_button'), { controller: controller_name, action: 'ignore_hint'}, class: 'govuk-button govuk-button--secondary' %>
+    <% end %>
   </div>
 </div>
-<div class="govuk-grid-row">
-  <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers, non_repudiation: true} %>
-</div>
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <%= render partial: 'shared/continue_to_idp_form' %>
 
-    <p>
-      <%= raw t('hub.confirm_your_identity.use_other_idp', sign_in_link: link_to(t('hub.confirm_your_identity.sign_in_link_message'), sign_in_path)) %>
-    </p>
-  </div>
-</div>
+<%= render partial: 'shared/continue_to_idp_form' %>

@@ -12,8 +12,8 @@ class ProveIdentityController < ApplicationController
     if journey_hint_entity_id.nil?
       render :prove_identity
     else
-      @identity_providers = journey_hint_entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
-      if @identity_providers.empty?
+      @identity_provider = retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id).first
+      if @identity_provider.nil?
         return render :prove_identity
       end
 
