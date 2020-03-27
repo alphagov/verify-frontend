@@ -562,7 +562,7 @@ en:
       heading: "%{idp} is currently experiencing long wait times"
       continue_website: Continue to the %{display_name} website
       queue_warning_html: |
-        <p class="govuk-body">A lot of people are currently trying to prove their identity with %{idp}. It may take several hours or more for you to get through.</p>
+        <p class="govuk-body">A lot of people are currently trying to prove their identity with %{idp}. It may take a while for you to get through.</p>
         <p class="govuk-body">We’re working to improve the wait times as fast as we can.</p>
       service_use: You'll then be able to %{service_name}.
       other_ways_link: "other ways to %{transaction}"
