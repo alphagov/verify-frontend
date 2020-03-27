@@ -24,7 +24,6 @@ RSpec.describe 'When the user visits the failed registration page and' do
       expect_page_to_have_main_content
       expect(page).to have_content t('hub.failed_registration.continue_text', rp_name: 'Test RP')
       expect(page).to have_link t('navigation.continue'), href: redirect_to_service_error_path
-      expect(page).to have_link t('hub.failed_registration.try_another_company'), href: select_documents_path
     end
 
     it 'includes expected content for LOA1 journey' do
@@ -34,7 +33,6 @@ RSpec.describe 'When the user visits the failed registration page and' do
       expect_page_to_have_main_content
       expect(page).to have_content t('hub.failed_registration.continue_text', rp_name: 'Test RP')
       expect(page).to have_link t('navigation.continue'), href: redirect_to_service_error_path
-      expect(page).to have_link t('hub.failed_registration.try_another_company'), href: choose_a_certified_company_path
     end
   end
 
@@ -50,7 +48,6 @@ RSpec.describe 'When the user visits the failed registration page and' do
       expect_page_to_have_main_content
       expect(page).to have_content t('hub.failed_registration.other_ways_summary',
                                           other_ways_description: 'test GOV.UK Verify user journeys')
-      expect(page).to have_link t('hub.failed_registration.start_again'), href: select_documents_path
     end
 
     it 'includes expected content when LOA1 journey' do
@@ -60,7 +57,6 @@ RSpec.describe 'When the user visits the failed registration page and' do
       expect_page_to_have_main_content
       expect(page).to have_content t('hub.failed_registration.other_ways_summary',
                                           other_ways_description: 'test GOV.UK Verify user journeys')
-      expect(page).to have_link t('hub.failed_registration.start_again'), href: choose_a_certified_company_path
     end
   end
 
@@ -74,7 +70,6 @@ RSpec.describe 'When the user visits the failed registration page and' do
       visit '/cofrestru-wedi-methu'
       expect(page).to have_content "This is a custom fail page in welsh."
       expect(page).to have_content "Custom text to be provided by RP."
-      expect(page).to have_link t('hub.failed_registration.start_again', locale: :cy), href: select_documents_cy_path
     end
 
     it 'includes expected content when custom fail LOA2 journey' do
@@ -82,15 +77,12 @@ RSpec.describe 'When the user visits the failed registration page and' do
       visit '/failed-registration'
       expect(page).to have_content "This is a custom fail page."
       expect(page).to have_content "Custom text to be provided by RP."
-      expect(page).to have_link t('hub.failed_registration.start_again'), href: select_documents_path
     end
   end
-
 
   def expect_page_to_have_main_content
     expect_feedback_source_to_be(page, 'FAILED_REGISTRATION_PAGE', '/failed-registration')
     expect(page).to have_title t('hub.failed_registration.title')
     expect(page).to have_content t('hub.failed_registration.heading', idp_name: 'IDCorp')
-    expect(page).to have_content t('hub.failed_registration.contact_details_intro', idp_name: 'IDCorp')
   end
 end
