@@ -66,6 +66,14 @@ module UserCookiesPartialController
                                                                   expires: 18.months.from_now }
   end
 
+  def remove_success_journey_hint
+    journey_hint_value_hash = journey_hint_value || {}
+    journey_hint_value_hash.delete('SUCCESS')
+
+    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_value_hash.to_json,
+                                                                  expires: 18.months.from_now }
+  end
+
   def set_single_idp_journey_cookie(data)
     cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = {
       value: data.to_json,

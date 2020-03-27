@@ -68,7 +68,7 @@ describe ProveIdentityController do
       expect(subject).to render_template(:prove_identity)
     end
 
-    it 'allows to disregard the hint and deletes the ATTEMPT' do
+    it 'allows to disregard the hint and deletes the SUCCESS' do
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
         'ATTEMPT' => 'http://idcorp.com',
         'SUCCESS' => 'http://some-entity-id'
@@ -79,8 +79,8 @@ describe ProveIdentityController do
       cookie_hint = MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT])
 
       expect(subject).to redirect_to prove_identity_path
-      expect(cookie_hint['ATTEMPT']).to be_nil
-      expect(cookie_hint['SUCCESS']).to eq 'http://some-entity-id'
+      expect(cookie_hint['ATTEMPT']).to eq 'http://idcorp.com'
+      expect(cookie_hint['SUCCESS']).to be_nil
     end
 
     it 'allows to disregard the hint and does not fail if attempt does not exist' do

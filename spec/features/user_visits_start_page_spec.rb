@@ -22,7 +22,7 @@ RSpec.describe 'When the user visits the start page' do
 
   it 'will reset the hint and display start page when user ignores the hint' do
     set_session_and_session_cookies!
-    set_journey_hint_cookie('http://idcorp.com')
+    set_journey_hint_cookie('http://idcorp.com', 'SUCCESS')
     stub_api_idp_list_for_sign_in
     visit '/start'
     expect(page).to have_content t('hub.sign_in_hint.heading')

@@ -26,7 +26,7 @@ class StartController < ApplicationController
   end
 
   def ignore_hint
-    remove_attempt_journey_hint
+    remove_success_journey_hint
     redirect_to start_path
   end
 
