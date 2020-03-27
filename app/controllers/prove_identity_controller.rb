@@ -8,7 +8,7 @@ class ProveIdentityController < ApplicationController
   include UserCookiesPartialController
 
   def index
-    journey_hint_entity_id = attempted_entity_id
+    journey_hint_entity_id = success_entity_id
     if journey_hint_entity_id.nil?
       render :prove_identity
     else

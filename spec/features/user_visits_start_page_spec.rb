@@ -11,9 +11,9 @@ RSpec.describe 'When the user visits the start page' do
     expect_feedback_source_to_be(page, 'START_PAGE', '/start')
   end
 
-  it 'will display the hint page if an attempt hint present' do
+  it 'will display the hint page if an success hint present' do
     set_session_and_session_cookies!
-    set_journey_hint_cookie('http://idcorp.com')
+    set_journey_hint_cookie('http://idcorp.com', 'SUCCESS')
     stub_api_idp_list_for_sign_in
     visit '/start'
     expect(page).to have_content t('hub.sign_in_hint.heading')

@@ -83,7 +83,7 @@ describe StartController do
   context 'when sign-in hint is present' do
     it 'renders the hint when IDP valid' do
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        'ATTEMPT' => 'http://idcorp.com',
+        'SUCCESS' => 'http://idcorp.com',
       }.to_json
       stub_api_idp_list_for_sign_in
 
@@ -93,7 +93,7 @@ describe StartController do
 
     it 'renders the normal start page if IDP is invalid' do
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        'ATTEMPT' => 'invalid',
+        'SUCCESS' => 'invalid',
       }.to_json
       stub_api_idp_list_for_sign_in
 
@@ -101,9 +101,9 @@ describe StartController do
       expect(subject).to render_template(:start, 'layouts/slides')
     end
 
-    it 'renders the normal start page if attempt is missing' do
+    it 'renders the normal start page if success is missing' do
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        'SUCCESS' => 'http://idcorp.com',
+        'ATTEMPT' => 'http://idcorp.com',
       }.to_json
       stub_api_idp_list_for_sign_in
 

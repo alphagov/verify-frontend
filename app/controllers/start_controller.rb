@@ -10,7 +10,7 @@ class StartController < ApplicationController
 
   def index
     restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::VERIFY)
-    journey_hint_entity_id = attempted_entity_id
+    journey_hint_entity_id = success_entity_id
     @form = StartForm.new({})
     @journey_hint = flash[:journey_hint]
     if journey_hint_entity_id.nil?
