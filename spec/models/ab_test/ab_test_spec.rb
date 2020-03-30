@@ -5,12 +5,10 @@ require 'models/ab_test/experiment'
 module AbTest
   describe AbTest do
     context '#report' do
-      let(:federation_reporter) { double(:federation_reporter) }
       let(:excluded_rp_simple_id) { 'RP is excluded from AB test'.freeze }
-      let(:request) { double(:request) }
+      let(:request) { RequestStub.new(nil, nil) }
       before(:each) {
         stub_const('RP_CONFIG', 'ab_test_blacklist' => excluded_rp_simple_id)
-        stub_const('FEDERATION_REPORTER', federation_reporter)
         allow(request).to receive(:session).and_return(transaction_simple_id: 'rp')
       }
 
@@ -19,32 +17,32 @@ module AbTest
           allow(request).to receive(:cookies).and_return(CookieNames::AB_TEST => { logos: 'logos_no' }.to_json)
         }
 
-        it 'should report to piwik if there are multiple alternatives' do
+        it 'should set the flash variable if there are multiple alternatives' do
           alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }, { 'name' => 'no', 'percent' => 25 }] } }
           stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
-          expect(federation_reporter).to receive(:report_ab_test).with('rp', request, 'logos_no')
           subject.report_ab_test_details(request, 'logos')
+          expect(request.flash).to eq(ab_test_variant: 'logos_no')
         end
 
-        it 'should not report to piwik if the experiment is concluded' do
+        it 'should not set the flash variable if the experiment is concluded' do
           alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }] } }
           stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
-          expect(federation_reporter).to_not receive(:report_ab_test)
           subject.report_ab_test_details(request, 'logos')
+          expect(request.flash).to eq({})
         end
 
-        it 'should not report to piwik if there is no alternative' do
+        it 'should not set the flash variable if there is no alternative' do
           stub_const('AB_TESTS', {})
-          expect(federation_reporter).to_not receive(:report_ab_test)
           subject.report_ab_test_details(request, 'logos')
+          expect(request.flash).to eq({})
         end
 
-        it 'should not report to piwik if RP is in AB test blacklist' do
+        it 'should not set the flash variable if RP is in AB test blacklist' do
           allow(request).to receive(:session).and_return(transaction_simple_id: excluded_rp_simple_id)
           alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }, { 'name' => 'no', 'percent' => 25 }] } }
           stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
-          expect(federation_reporter).to_not receive(:report_ab_test)
           subject.report_ab_test_details(request, 'logos')
+          expect(request.flash).to eq({})
         end
       end
 
@@ -53,13 +51,27 @@ module AbTest
           allow(request).to receive(:cookies).and_return(CookieNames::AB_TEST => { logos: 'logos_not_an_alternative' }.to_json)
         }
 
-        it 'should report to piwik if there are multiple alternatives' do
+        it 'should set the flash variable if there are multiple alternatives' do
           alternatives = { 'logos' => { 'alternatives' => [{ 'name' => 'yes', 'percent' => 75 }, { 'name' => 'no', 'percent' => 25 }] } }
           stub_const('AB_TESTS', 'logos' => Experiment.new(alternatives))
-          expect(federation_reporter).to receive(:report_ab_test).with('rp', request, 'logos_yes')
           subject.report_ab_test_details(request, 'logos')
+          expect(request.flash).to eq(ab_test_variant: 'logos_yes')
         end
       end
     end
+  end
+
+  class RequestStub
+    attr_accessor :flash
+
+    def initialize(session, cookies)
+      @session = session
+      @cookies = cookies
+      @flash = {}
+    end
+
+    def session; end
+
+    def cookies; end
   end
 end
