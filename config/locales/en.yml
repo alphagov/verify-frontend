@@ -844,7 +844,7 @@ en:
     sign_in_hint:
       title: Sign in to continue
       heading: Sign in to continue
-      intro: Someone on this device recently selected %{idp_name}.
+      intro: Someone on this device previously selected %{idp_name}.
       continue_with_idp: Continue with %{idp_name} if you've created an identity account with them.
       button: Sign in with %{idp_name}
       other_way_button: Choose another way to sign in
