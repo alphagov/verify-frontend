@@ -4,6 +4,8 @@ require 'api_test_helper'
 require 'variant_test_helper'
 
 describe AboutLoa2VariantCController do
+  before { skip("Short hub AB test temporarily teared down") }
+
   let(:identity_provider_display_decorator) { double(:IdentityProviderDisplayDecorator) }
 
   before(:each) do

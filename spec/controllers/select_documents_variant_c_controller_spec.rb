@@ -7,6 +7,8 @@ require 'piwik_test_helper'
 require 'models/display/viewable_identity_provider'
 
 describe SelectDocumentsVariantCController do
+  before { skip("Short hub AB test temporarily teared down") }
+
   before(:each) do
     experiment = 'short_hub_2019_q3-preview'
     variant = 'variant_c_2_idp_short_hub'
