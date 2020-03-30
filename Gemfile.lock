@@ -68,7 +68,6 @@ GEM
     clamp (1.0.1)
     codacy-coverage (2.1.0)
       simplecov
-    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crack (0.4.3)
@@ -412,4 +411,4 @@ RUBY VERSION
    ruby 2.6.5p114
 
 BUNDLED WITH
-   2.0.2
+   2.1.4

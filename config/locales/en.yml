@@ -850,11 +850,9 @@ en:
       feedback_message: Use the %{feedback_link} to ask a question, report a problem or suggest an improvement.
       feedback: feedback
     session_timeout:
-      title: Your session has timed out
-      return_to_service: Please go back to your service to start again.
-      start_again: Start again
-      feedback_message: Use the %{feedback_link} to ask a question, report a problem or suggest an improvement.
-      feedback: feedback
+      title: Continue to the government service you need
+      return_to_service: Please go to the government service you were trying to access to continue.
+      start_again: Continue
     something_went_wrong:
       title: Something went wrong
       heading: Sorry, something went wrong
