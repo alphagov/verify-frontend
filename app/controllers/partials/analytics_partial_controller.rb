@@ -40,6 +40,7 @@ private
       Analytics::CustomVariable.build_for_js_client(:rp, current_transaction.analytics_description),
       Analytics::CustomVariable.build_for_js_client(:loa_requested, session[:requested_loa])
     ]
+    @piwik_custom_variables.push(ab_test_variant) unless ab_test_variant.nil?
   end
 
   def custom_variables_for_img_tracker
@@ -47,6 +48,13 @@ private
     loa_requested_custom_variable = Analytics::CustomVariable.build(:loa_requested, session[:requested_loa])
     @piwik_custom_variables_img_tracker =
       current_transaction_custom_variable.merge(loa_requested_custom_variable)
+    @piwik_custom_variables_img_tracker.merge!(ab_test_variant) unless ab_test_variant.nil?
+  end
+
+  def ab_test_variant
+    unless flash[:ab_test_variant].nil?
+      Analytics::CustomVariable.build(:ab_test, flash[:ab_test_variant])
+    end
   end
 
   def report_user_outcome_to_piwik(response_status)

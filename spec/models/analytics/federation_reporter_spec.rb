@@ -255,28 +255,6 @@ module Analytics
       end
     end
 
-    describe '#report_ab_test' do
-      before(:each) do
-        RP_DISPLAY_REPOSITORY = double
-        transaction = double
-        allow(transaction).to receive(:analytics_description).and_return('description')
-        allow(RP_DISPLAY_REPOSITORY).to receive(:get_translations).with('test-rp').and_return(transaction)
-      end
-
-      it 'should report an ab test custom variable' do
-        alternative_name = 'alternative_name'
-        expect(analytics_reporter).to receive(:report_action)
-          .with(
-            request,
-            'The user has started an AB test',
-            1 => %w(RP description),
-            2 => %w(LOA_REQUESTED LEVEL_2),
-            6 => ['AB_TEST', alternative_name]
-          )
-        federation_reporter.report_ab_test('test-rp', request, alternative_name)
-      end
-    end
-
     describe '#report_external_ab_test' do
       before(:each) do
         transaction = double

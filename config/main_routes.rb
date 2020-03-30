@@ -8,10 +8,8 @@ get 'begin_sign_in', to: 'start#sign_in', as: :begin_sign_in
 
 # HUH-233 short hub 2019 q3 multivariate tests - LOA2 only
 SHORT_HUB_2019_Q3 = "short_hub_2019_q3-preview".freeze
-short_hub_v3_control_a_piwik = SelectRoute.new(SHORT_HUB_2019_Q3, 'control_a', is_start_of_test: true, experiment_loa: 'LEVEL_2')
-short_hub_v3_variant_c_piwik = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_c_2_idp_short_hub', is_start_of_test: true, experiment_loa: 'LEVEL_2')
-short_hub_v3_control_a = SelectRoute.new(SHORT_HUB_2019_Q3, 'control_a', is_start_of_test: false, experiment_loa: 'LEVEL_2')
-short_hub_v3_variant_c = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_c_2_idp_short_hub', is_start_of_test: false, experiment_loa: 'LEVEL_2')
+short_hub_v3_control_a = SelectRoute.new(SHORT_HUB_2019_Q3, 'control_a', experiment_loa: 'LEVEL_2')
+short_hub_v3_variant_c = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_c_2_idp_short_hub', experiment_loa: 'LEVEL_2')
 
 constraints IsLoa1 do
   get 'start', to: 'start#index', as: :start
@@ -131,18 +129,9 @@ end
 # Control A = unaffected
 # Variant C = 2 IDPs and new shorter hub journey
 
-# HUH-233: implement piwik control A starting route
-constraints short_hub_v3_control_a_piwik do
-  get 'about', to: 'about_loa2#index', as: :about
-end
-
-# HUH-234: implement piwik variant C starting route
-constraints short_hub_v3_variant_c_piwik do
-  get 'about', to: 'about_loa2_variant_c#index', as: :about
-end
-
 # HUH-233: implement control A route
 constraints short_hub_v3_control_a do
+  get 'about', to: 'about_loa2#index', as: :about
   get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
   get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
@@ -165,6 +154,7 @@ end
 
 # HUH-234: implement appropriate variant C routes
 constraints short_hub_v3_variant_c do
+  get 'about', to: 'about_loa2_variant_c#index', as: :about
   get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
   post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
 

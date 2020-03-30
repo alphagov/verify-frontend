@@ -45,7 +45,7 @@ module AbTest
 
     if experiment_is_valid(transaction_id, experiment_name)
       alternative_name = self.get_alternative_name(request, experiment_name)
-      FEDERATION_REPORTER.report_ab_test(transaction_id, request, alternative_name)
+      request.flash[:ab_test_variant] = alternative_name
     end
   end
 
