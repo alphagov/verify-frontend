@@ -65,6 +65,38 @@ describe AuthnResponseController do
 
       expect(subject).to render_template(:something_went_wrong)
     end
+
+    it 'when the hub session times out with success SAML response' do
+      set_session_and_cookies_with_loa('LEVEL_2')
+      success_status = '
+        <saml2p:Status xsi:type="saml2p:StatusType">
+          <saml2p:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success" xsi:type="saml2p:StatusCodeType"/>
+        </saml2p:Status>'
+
+      saml = Base64.strict_encode64(success_status)
+      allow(SAML_PROXY_API).to receive(:idp_authn_response).and_raise(Api::SessionTimeoutError)
+
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => saml, locale: 'en' }
+
+      expect(subject).to render_template('errors/timeout_with_success')
+    end
+
+    it 'when the hub session times out with failed SAML response' do
+      set_session_and_cookies_with_loa('LEVEL_2')
+      failed_status = '
+        <saml2p:Status xsi:type="saml2p:StatusType">
+          <saml2p:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Responder" xsi:type="saml2p:StatusCodeType">
+            <saml2p:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:AuthnFailed" xsi:type="saml2p:StatusCodeType"/>
+          </saml2p:StatusCode>
+        </saml2p:Status>'
+
+      saml = Base64.strict_encode64(failed_status)
+      allow(SAML_PROXY_API).to receive(:idp_authn_response).and_raise(Api::SessionTimeoutError)
+
+      post :idp_response, params: { 'RelayState' => 'my-session-id-cookie', 'SAMLResponse' => saml, locale: 'en' }
+
+      expect(subject).to render_template('errors/timeout_with_fail')
+    end
   end
 
   context 'country' do

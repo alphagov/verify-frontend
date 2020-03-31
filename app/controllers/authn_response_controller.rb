@@ -26,7 +26,12 @@ class AuthnResponseController < SamlController
   def idp_response
     raise_error_if_params_invalid(params, session[:verify_session_id])
 
-    response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params['SAMLResponse'])
+    begin
+      response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params['SAMLResponse'])
+    rescue Api::SessionTimeoutError
+      return render_timeout_error_page
+    end
+
     status = response.idp_result
     remove_resume_link_journey_hint unless journey_hint_value.nil?
 
@@ -157,5 +162,17 @@ private
 
   def store_assertion_expiry(status, response)
     session[:assertion_expiry] = response.assertion_expiry if status == SUCCESS
+  end
+
+  def render_timeout_error_page
+    if saml_success?
+      render 'errors/timeout_with_success'
+    else
+      render 'errors/timeout_with_fail'
+    end
+  end
+
+  def saml_success?
+    true
   end
 end
