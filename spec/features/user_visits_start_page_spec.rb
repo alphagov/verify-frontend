@@ -102,7 +102,7 @@ RSpec.describe 'When the user visits the start page' do
       expired_start_time = 2.hours.ago.to_i * 1000
       page.set_rack_session(start_time: expired_start_time)
       visit '/start'
-      expect(page).to have_content t('hub.transaction_list.title')
+      expect(page).to have_content t('errors.session_timeout.return_to_service')
       expect(page).to have_link 'test GOV.UK Verify user journeys', href: 'http://localhost:50130/test-rp'
       expect(page).to have_http_status :bad_request
       expect(page).to have_link 'feedback', href: '/feedback?feedback-source=EXPIRED_ERROR_PAGE'

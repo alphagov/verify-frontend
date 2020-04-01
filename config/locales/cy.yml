@@ -851,10 +851,6 @@ cy:
       message_two: When the service asks you to prove your identity, you can do so by signing in to your %{idp_name} identity account.
       select_service: Select the service you need
   errors:
-    cookie_expired:
-      title: Mae eich sesiwn wedi amseru allan
-      feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
-      feedback: adborth
     no_cookies:
       title: Cwcis Ar Goll
       heading: GOV.UK Verify

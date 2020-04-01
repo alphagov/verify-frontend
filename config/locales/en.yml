@@ -840,10 +840,6 @@ en:
       message_two: When the service asks you to prove your identity, you can do so by signing in to your %{idp_name} identity account.
       select_service: Select the service you need
   errors:
-    cookie_expired:
-      title: Your session has timed out
-      feedback_message: Use the %{feedback_link} to ask a question, report a problem or suggest an improvement.
-      feedback: feedback
     no_cookies:
       title: Cookies Missing
       heading: GOV.UK Verify
