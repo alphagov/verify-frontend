@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     post 'test-rp', to: proc { |_| [200, {}, ['OK']] }
     post 'test-idp-request-endpoint' => 'test_saml#idp_request'
     post 'test-initiate-journey' => 'test_saml#initiate_journey_session'
+    get 'test-session-expiry' => 'test_saml#test_expiry'
     post 'another-idp-endpoint' => 'test_saml#idp_request'
     get 'test-journey-hint' => 'test_journey_hint_cookie#index', as: :test_journey_hint
     get 'test-throttling-cookie/:idp' => 'test_throttling_cookie#set_cookie'

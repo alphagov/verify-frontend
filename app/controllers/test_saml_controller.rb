@@ -13,6 +13,11 @@ class TestSamlController < ApplicationController
     render 'index'
   end
 
+  def test_expiry
+    session[:start_time] = (Time.now - Integer(CONFIG.session_cookie_duration).hours - 1.minute).to_i * 1000
+    redirect_to start_path
+  end
+
   def idp_request
     @saml_request = params['SAMLRequest']
     @relay_state = params['RelayState']
