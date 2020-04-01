@@ -25,6 +25,7 @@ class AuthnResponseController < SamlController
 
   def idp_response
     raise_error_if_params_invalid(params, session[:verify_session_id])
+    #@other_ways_text = current_transaction.other_ways_text
 
     begin
       response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params['SAMLResponse'])

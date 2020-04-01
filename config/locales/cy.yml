@@ -870,7 +870,19 @@ cy:
       feedback: adborth
     session_timeout:
       title: Mae eich sesiwn wedi amseru allan
+      failure_title: Use an alternative way to %{service}
       return_to_service: Dylech fynd yn ôl at eich gwasanaeth i ddechrau eto.
+      successfully_verified: You’ve successfully verified your identity with %{idp}. 
+      return_steps: |
+          <ol class="govuk-list govuk-list--number">
+            <li>Return to the government service you were trying to access.</li>
+            <li>When prompted to prove your identity, sign in with your new identity account details.</li>
+          </ol>
+      unable_to_verify: '%{idp} was not able to verify your identity. You can still %{service}.'
+      verify_other_idp: '%{other_idp} may still be able to verify you.'
+      other_ways_heading: View other ways to %{service}
+      try_again: Try again with %{other_idp}.
+      continue_to_service: Continue to %{service}
       start_again: Dechrau eto
       feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
       feedback: adborth

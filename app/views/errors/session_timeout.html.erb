@@ -4,8 +4,23 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-l"><%= t 'errors.session_timeout.title' %></h1>
-    <h2 class="govuk-heading-m"><%= t 'errors.session_timeout.return_to_service' %></h2>
-    <p class="govuk-body"><%= link_to t('errors.session_timeout.start_again'), @redirect_to_destination, class: 'govuk-button' %></p>
+    <% if @status_code == 'success' %>
+      <h1 class="govuk-heading-l"><%= t 'errors.session_timeout.title' %></h1>
+      <p class="govuk-body"><%= t 'errors.session_timeout.return_to_service' %></p>
+      <p class="govuk-body"><%= t('errors.session_timeout.successfully_verified', idp: @idp) %></p>
+      <p class="govuk-body"><%= t 'errors.session_timeout.return_steps' %></p>
+      <p class="govuk-body"><%= link_to t('errors.session_timeout.continue_to_service', service: @service_name ), @redirect_to_destination, class: 'govuk-button' %></p>
+    <% elsif @status_code = 'failure' %>
+      <h1 class="govuk-heading-l"><%= t('errors.session_timeout.failure_title', service: @service_name) %></h1>
+      <p class="govuk-body"><%= t('errors.session_timeout.unable_to_verify', idp: @idp, service: @service_name) %></p>
+      <p class="govuk-body"><%= t('errors.session_timeout.verify_other_idp', other_idp: @other_idp) %></p>
+      <p class="govuk-body"><%= link_to t('errors.session_timeout.try_again', other_idp: @other_idp), @redirect_to_destination, class: 'govuk-button' %></p>
+      <h2 class="govuk-heading-m"><%= t('errors.session_timeout.other_ways_heading', service: @service_name) %></h2>
+      <p><%= raw @other_ways_text %></p>
+    <% else %>
+      <h1 class="govuk-heading-l"><%= t 'errors.session_timeout.title' %></h1>
+      <h2 class="govuk-heading-m"><%= t 'errors.session_timeout.return_to_service' %></h2>
+      <p class="govuk-body"><%= link_to t('errors.session_timeout.start_again'), @redirect_to_destination, class: 'govuk-button' %></p>
+    <% end %>
   </div>
 </div>
