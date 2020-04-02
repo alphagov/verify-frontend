@@ -17,7 +17,7 @@ class SessionValidator
   private
 
     def validate_expiry(session, session_start_time)
-      if session_start_time <= @session_duration.hours.ago
+      if session_start_time <= @session_duration.minutes.ago
         session_id = session[:verify_session_id]
         ValidationFailure.session_expired(session_id)
       else
