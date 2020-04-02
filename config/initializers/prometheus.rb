@@ -9,4 +9,7 @@ if CONFIG.prometheus_enabled
 
   api_request_reporter = Prometheus::ApiRequestReporter.new
   event_subscriber.subscribe(/api_request/, api_request_reporter)
+
+  session_timeout_reporter = Prometheus::SessionTimeoutReporter.new
+  event_subscriber.subscribe(/session_timeout/, session_timeout_reporter)
 end

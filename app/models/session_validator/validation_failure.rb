@@ -4,8 +4,9 @@ class SessionValidator
       ValidationFailure.new(:something_went_wrong, :internal_server_error, message)
     end
 
-    def self.session_expired(session_id)
-      message = "session \"#{session_id}\" has expired"
+    def self.session_expired(session, minutes_ago)
+      message = "session \"#{session[:verify_session_id]}\" has expired #{minutes_ago} minutes ago"
+      ActiveSupport::Notifications.instrument('session_timeout', minutes_ago: minutes_ago, service: session[:transaction_entity_id], idp: session[:selected_idp_name])
       ValidationFailure.new(:session_timeout, :bad_request, message)
     end
 
