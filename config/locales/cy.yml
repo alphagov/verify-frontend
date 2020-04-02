@@ -1,8 +1,10 @@
 cy:
   routes:
     start: dechrau
+    start_ignore_hint: dechrau/ignore-hint
     prove_identity: profi-hunaniaeth
     prove_identity_retry: profi-hunaniaeth-ailgeisio
+    prove_identity_ignore_hint: profi-hunaniaeth/ignore-hint
     begin_registration: dechrau-cofrestru
     begin_sign_in: dechrau-mewngofnodi
     what_happens_next: what-happens-next-cy
@@ -850,6 +852,13 @@ cy:
       message_one: You now need to return to the government service you were trying to access.
       message_two: When the service asks you to prove your identity, you can do so by signing in to your %{idp_name} identity account.
       select_service: Select the service you need
+    sign_in_hint:
+      title: Sign in to continue
+      heading: Sign in to continue
+      intro: Someone on this device previously selected %{idp_name}.
+      continue_with_idp: Continue with %{idp_name} if you've created an identity account with them.
+      button: Sign in with %{idp_name}
+      other_way_button: Choose another way to sign in
   errors:
     no_cookies:
       title: Cwcis Ar Goll

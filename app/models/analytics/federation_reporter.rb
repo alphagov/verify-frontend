@@ -58,6 +58,15 @@ module Analytics
       )
     end
 
+    def report_sign_in_journey_ignored(current_transaction, request, idp_display_name)
+      report = "HINT_DELETED | sign-in | #{current_transaction} | #{idp_display_name}"
+      report_action(
+        current_transaction,
+        request,
+        report
+      )
+    end
+
     def report_user_idp_attempt(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, hint_followed:)
       segment_list = user_segments.nil? ? 'nil' : user_segments.sort.join(', ')
       report = "ATTEMPT_#{attempt_number} | #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{segment_list} |"
