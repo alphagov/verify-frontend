@@ -6,7 +6,7 @@ class SessionValidator
 
     def self.session_expired(session_id)
       message = "session \"#{session_id}\" has expired"
-      ValidationFailure.new(:cookie_expired, :bad_request, message)
+      ValidationFailure.new(:session_timeout, :bad_request, message)
     end
 
     def self.no_cookies
