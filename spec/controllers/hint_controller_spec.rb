@@ -65,7 +65,7 @@ describe HintController do
                                        'levelsOfAssurance' => %w(LEVEL_1),
                                        'temporarilyUnavailable' => true }
                                      ],
-                                     'https://prod-left.tax.service.gov.uk/SAML2/PERTAX')
+                                     'https://tax.service.gov.uk/SAML2/PERTAX')
     end
 
     context 'user has previously succesfully signed in' do
@@ -116,7 +116,7 @@ describe HintController do
 
     context 'list of available identity providers is empty' do
       it 'json object should not contain simpleId and displayName' do
-        stub_api_idp_list_for_sign_in_without_session([], 'https://prod-left.tax.service.gov.uk/SAML2/PERTAX')
+        stub_api_idp_list_for_sign_in_without_session([], 'https://tax.service.gov.uk/SAML2/PERTAX')
         cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
           'SUCCESS' => 'http://idcorp-two.com',
         }.to_json
