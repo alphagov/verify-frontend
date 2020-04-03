@@ -18,7 +18,7 @@ class SessionValidator
 
     def validate_expiry(session, session_start_time)
       if session_start_time <= @session_duration.minutes.ago
-        minutes_ago = ((DateTime.now - session_start_time) * 24 * 60).to_i
+        minutes_ago = ((DateTime.now - session_start_time) * 24 * 60).to_i - @session_duration
         ValidationFailure.session_expired(session, minutes_ago)
       else
         SuccessfulValidation
