@@ -134,7 +134,7 @@ RSpec.describe 'When the user visits the start page' do
       page.set_rack_session(start_time: expired_start_time)
       visit '/start'
       expect(page).to have_content t('errors.session_timeout.return_to_service')
-      expect(page).to have_http_status :bad_request
+      expect(page).to have_http_status :forbidden
       expect(page).to have_link 'feedback', href: '/feedback-landing?feedback-source=EXPIRED_ERROR_PAGE'
     end
   end

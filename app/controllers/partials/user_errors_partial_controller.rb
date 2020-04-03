@@ -1,6 +1,13 @@
 module UserErrorsPartialController
   def render_error(partial, status)
     set_locale
+    if partial == :session_timeout
+      @redirect_to_destination = if CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
+                                   '/redirect-to-service/error'
+                                 else
+                                   session[:transaction_homepage]
+                                 end
+    end
     respond_to do |format|
       format.html { render "errors/#{partial}", status: status, layout: 'application' }
       format.json { render json: {}, status: status }
