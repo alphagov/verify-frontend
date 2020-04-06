@@ -11,6 +11,12 @@ RSpec.configure do |config|
   config.before(:each, js: true) do
     page.driver.browser.manage.window.resize_to(1280, 1024)
   end
+  # HUB-580: To run feature tests separately
+  # Due to our multi-threading logic in the loading_cache for
+  # transactions translations we have to boot up the application
+  # to avoid deadlocks after each test
+  VerifyFrontend::Application.eager_load!
+
   config.include AbstractController::Translation
 end
 
