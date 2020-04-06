@@ -1,6 +1,5 @@
 module Analytics
   class FederationReporter
-    AB_TEST_ACTION_NAME = 'The user has started an AB test'.freeze
     EXTERNAL_AB_TEST_ACTION_NAME = 'The user has started an external AB test'.freeze
 
     def initialize(analytics_reporter)
@@ -41,20 +40,6 @@ module Analytics
       )
     end
 
-    def report_ab_test(transaction_id, request, alternative_name)
-      unless transaction_id.nil?
-        current_transaction = RP_DISPLAY_REPOSITORY.get_translations(transaction_id)
-        ab_test_custom_var = Analytics::CustomVariable.build(:ab_test, alternative_name)
-
-        report_action(
-          current_transaction,
-          request,
-          AB_TEST_ACTION_NAME,
-          ab_test_custom_var
-        )
-      end
-    end
-
     def report_external_ab_test(request, ab_test_name)
       ab_test_custom_var = Analytics::CustomVariable.build(:ab_test, ab_test_name)
 
@@ -70,6 +55,15 @@ module Analytics
         current_transaction,
         request,
         "Sign In Journey Hint Shown - #{idp_display_name}"
+      )
+    end
+
+    def report_sign_in_journey_ignored(current_transaction, request, idp_display_name)
+      report = "HINT_DELETED | sign-in | #{current_transaction} | #{idp_display_name}"
+      report_action(
+        current_transaction,
+        request,
+        report
       )
     end
 

@@ -10,6 +10,13 @@ Rails.application.configure do
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
+
+  # HUB-580: The way we use caching for the transaction translations requires us
+  # to either refactor it or enable eager_load to initialize the cache and not ending
+  # up with a deadlock when Capybara uses a single tread and preventing us to run
+  # feature tests separately. For now, this has been done for feature tests only in
+  # the feature_helper file.
+  # IMPACT: The test runtime increases by 3 seconds
   config.eager_load = false
 
   # Configure static file server for tests with Cache-Control for performance.

@@ -1,10 +1,13 @@
 cy:
   routes:
     start: dechrau
+    start_ignore_hint: dechrau/ignore-hint
     prove_identity: profi-hunaniaeth
     prove_identity_retry: profi-hunaniaeth-ailgeisio
+    prove_identity_ignore_hint: profi-hunaniaeth/ignore-hint
     begin_registration: dechrau-cofrestru
     begin_sign_in: dechrau-mewngofnodi
+    what_happens_next: what-happens-next-cy
     about: am
     sign_in: mewngofnodi
     about_certified_companies: am-gwmniau-ardystiedig
@@ -68,6 +71,7 @@ cy:
     proxy_node_error: proxy-node-error-cy
     accessibility: accessibility-cy
     select_documents_advice: select-documents-advice-cy
+    completed_registration: completed-cy/:idp
   common:
     logo: "logo %{name}"
   title:
@@ -325,6 +329,7 @@ cy:
       heading: Mewngofnodi gyda GOV.UK Verify
       answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
+      answer_no_hint: ""
       continue: Parhau
       error_message: Dewiswch opsiwn
     signin:
@@ -353,6 +358,15 @@ cy:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
       other_services: Gwasanaethau eraill
+    what_happens_next:
+      title: What happens next
+      heading: What happens next
+      what_happens: |
+        <ol class="govuk-list govuk-list--number">
+          <li>You'll now go to the %{idp} website and answer questions about yourself.</li>
+          <li>Once you’re verified, you’ll have an identity account that you can use wherever you see the GOV.UK Verify logo.</li>
+          <li>You’ll then need to go back to the government service you need to access and sign in using your new identity account details.</li>
+        </ol> 
     about:
       title: Am
       verify_is_a_service: Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
@@ -559,11 +573,11 @@ cy:
         <p class="govuk-body">Nid oes effaith ar eich sgor credyd.</p>
     redirect_to_idp_warning:
       title: Byddwch nawr yn cael eich ailgyfeirio
-      create_account: Crëwch eich cyfrif hunaniaeth %{display_name}
+      heading: "%{idp} is currently experiencing long wait times"
       continue_website: Parhau i wefan %{display_name}
-      identity_account_use_html: |
-              <p class="govuk-body">Byddwch nawr yn gwirio pwy ydych chi ar wefan %{display_name}</p>
-              <p class="govuk-body">Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio lle bynnag gwelwch y logo 'GOV.UK Verify' </p>
+      queue_warning_html: |
+        <p class="govuk-body">A lot of people are currently trying to prove their identity with %{idp}. It may take several hours or more for you to get through.</p>
+        <p class="govuk-body">We’re working to improve the wait times as fast as we can.</p>
       service_use: Yna byddwch yn gallu %{service_name}.
       other_ways_link: ffyrdd eraill i %{transaction}
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
@@ -832,11 +846,20 @@ cy:
       alternative_two: gweld ffyrdd eraill i %{service_display_name}
     accessibility:
       title: Accessibility
+    completed_registration:
+      title: You've successfully proved your identity
+      heading: You’ve successfully proved your identity with %{idp_name}
+      message_one: You now need to return to the government service you were trying to access.
+      message_two: When the service asks you to prove your identity, you can do so by signing in to your %{idp_name} identity account.
+      select_service: Select the service you need
+    sign_in_hint:
+      title: Sign in to continue
+      heading: Sign in to continue
+      intro: Someone on this device previously selected %{idp_name}.
+      continue_with_idp: Continue with %{idp_name} if you've created an identity account with them.
+      button: Sign in with %{idp_name}
+      other_way_button: Choose another way to sign in
   errors:
-    cookie_expired:
-      title: Mae eich sesiwn wedi amseru allan
-      feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
-      feedback: adborth
     no_cookies:
       title: Cwcis Ar Goll
       heading: GOV.UK Verify

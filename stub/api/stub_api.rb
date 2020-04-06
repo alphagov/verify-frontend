@@ -58,7 +58,7 @@ class StubApi < Sinatra::Base
     end
   end
 
-  get '/config/idps/idp-list/:transaction_id/:level_of_assurance' do
+  get '/config/idps/idp-list-for-registration/:transaction_id/:level_of_assurance' do
     if params['level_of_assurance'] == 'LEVEL_1'
     '[{
         "simpleId":"stub-idp-one",

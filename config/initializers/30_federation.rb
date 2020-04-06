@@ -70,6 +70,7 @@ Rails.application.config.after_initialize do
   ABC_VARIANTS_CONFIG = YAML.load_file(CONFIG.abc_variants_config)
 
   FEEDBACK_DISABLED = CONFIG.feedback_disabled
+  THROTTLING_ENABLED = CONFIG.throttling_enabled
 
   # Feature flags
   IDP_FEATURE_FLAGS_CHECKER = IdpConfiguration::IdpFeatureFlagsLoader.new(YamlLoader.new)

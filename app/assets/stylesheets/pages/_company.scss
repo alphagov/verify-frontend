@@ -95,6 +95,10 @@
   border-bottom: 1px solid govuk-colour("dark-grey");
   @include govuk-clearfix;
 
+  &.no-border {
+    border: none;
+  }
+
   .company-logo {
     width: auto;
     padding: 0;

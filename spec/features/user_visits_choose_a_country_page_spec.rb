@@ -5,7 +5,7 @@ RSpec.describe 'When the user visits the choose a country page' do
   let(:originating_ip) { '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>' }
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
     stub_transactions_list
     stub_countries_list
   end

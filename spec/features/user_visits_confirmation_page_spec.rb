@@ -9,7 +9,7 @@ RSpec.describe 'When user visits the confirmation page' do
     )
     set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
     set_session_and_session_cookies!
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
   end
 
   it 'includes the appropriate feedback source, title and content' do

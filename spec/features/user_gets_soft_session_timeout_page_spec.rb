@@ -4,7 +4,7 @@ require 'api_test_helper'
 RSpec.describe 'When the user visits a page that triggers an API call when the session has soft timed out' do
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
   end
 
   it 'should render the soft session timeout page when SESSION_TIMEOUT received from the API and have a correct link' do

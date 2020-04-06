@@ -7,13 +7,15 @@ require 'piwik_test_helper'
 require 'models/display/viewable_identity_provider'
 
 describe SelectDocumentsVariantCController do
+  before { skip("Short hub AB test temporarily teared down") }
+
   before(:each) do
     experiment = 'short_hub_2019_q3-preview'
     variant = 'variant_c_2_idp_short_hub'
     set_session_and_cookies_with_loa_and_variant('LEVEL_2', experiment, variant)
-    stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one',
-      'entityId' => 'http://idcorp.com',
-      'levelsOfAssurance' => %w(LEVEL_2) }], 'LEVEL_2')
+    stub_api_idp_list_for_registration([{ 'simpleId' => 'stub-idp-one',
+                                          'entityId' => 'http://idcorp.com',
+                                          'levelsOfAssurance' => %w(LEVEL_2) }], 'LEVEL_2')
     session[:selected_answers] = {
       'device_type' => { device_type_other: true }
     }

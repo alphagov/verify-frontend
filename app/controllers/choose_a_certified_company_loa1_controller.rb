@@ -6,7 +6,7 @@ class ChooseACertifiedCompanyLoa1Controller < ApplicationController
   skip_before_action :render_cross_gov_ga, only: %i{about}
 
   def index
-    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_identity_providers_for_loa)
+    @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_registration)
     @recommended_idps = order_with_unavailable_last(@recommended_idps)
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
     render 'choose_a_certified_company/choose_a_certified_company_LOA1'
@@ -15,7 +15,7 @@ class ChooseACertifiedCompanyLoa1Controller < ApplicationController
   def select_idp
     if params[:entity_id].present?
       selected_answer_store.store_selected_answers('interstitial', {})
-      select_viewable_idp_for_loa(params.fetch('entity_id')) do |decorated_idp|
+      select_viewable_idp_for_registration(params.fetch('entity_id')) do |decorated_idp|
         session[:selected_idp_was_recommended] = true
         redirect_to warning_or_question_page(decorated_idp)
       end
@@ -30,7 +30,7 @@ private
     if interstitial_question_flag_enabled_for(decorated_idp)
       redirect_to_idp_question_path
     else
-      redirect_to_idp_warning_path
+      what_happens_next_path
     end
   end
 

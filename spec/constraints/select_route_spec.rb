@@ -24,7 +24,7 @@ describe SelectRoute do
     end
 
     it 'evaluates true when experiment and route both match' do
-      expect(experiment_stub).to receive(:alternative_name).with(ALTERNATIVE_NAME).and_return(ALTERNATIVE_NAME)
+      expect(experiment_stub).to receive(:alternative_name).twice.with(ALTERNATIVE_NAME).and_return(ALTERNATIVE_NAME)
 
       cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
       request = RequestStub.new(session, cookies)
@@ -51,7 +51,7 @@ describe SelectRoute do
 
   context 'reporting for any LOA' do
     before(:each) do
-      select_route = SelectRoute.new(EXP_NAME, 'variant', is_start_of_test: true)
+      select_route = SelectRoute.new(EXP_NAME, 'variant')
     end
 
     it 'executes ab_reporter when experiment matches' do
@@ -84,7 +84,7 @@ describe SelectRoute do
 
       cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
 
-      select_route = SelectRoute.new(EXP_NAME, 'variant', is_start_of_test: true, experiment_loa: 'LEVEL_1')
+      select_route = SelectRoute.new(EXP_NAME, 'variant', experiment_loa: 'LEVEL_1')
     end
 
     it 'executes ab_reporter when LOA matches' do
@@ -164,10 +164,16 @@ private
     def to_str
       'request example'
     end
+
+    def flash
+      {}
+    end
   end
 
   class MockExperiment
     def alternative_name(something); end
+
+    def concluded?; end
   end
 
   def create_ab_test_cookie(experiment_name, alternative_name)

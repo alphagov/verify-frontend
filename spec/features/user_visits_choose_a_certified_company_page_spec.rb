@@ -4,7 +4,7 @@ require 'api_test_helper'
 describe 'When the user visits the choose a certified company page' do
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list_for_loa(default_idps)
+    stub_api_idp_list_for_registration(default_idps)
   end
 
   context 'user has two docs and a mobile' do
@@ -21,10 +21,10 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     it 'marks the unavailable IDP as unavailable' do
-      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one',
-                                   'entityId' => 'http://idcorp.com',
-                                   'levelsOfAssurance' => %w(LEVEL_2),
-                                   'temporarilyUnavailable' => true }])
+      stub_api_idp_list_for_registration([{ 'simpleId' => 'stub-idp-one',
+                                            'entityId' => 'http://idcorp.com',
+                                            'levelsOfAssurance' => %w(LEVEL_2),
+                                            'temporarilyUnavailable' => true }])
       visit '/choose-a-certified-company'
       expect(page).to have_content t('hub.certified_companies_unavailable.title', count: 1, company: 'IDCorp')
     end
@@ -42,6 +42,42 @@ describe 'When the user visits the choose a certified company page' do
       expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '3 companies')
       within('#matching-idps') do
         expect(page).to have_button('Choose IDCorp')
+      end
+    end
+
+    it 'displays only one IDP and saves it in the cookie' do
+      stub_const("THROTTLING_ENABLED", true)
+      expect(cookie_value(CookieNames::THROTTLING)).to be_nil
+      visit '/choose-a-certified-company'
+
+      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '1 company')
+      expect(cookie_value(CookieNames::THROTTLING)).not_to be_nil
+    end
+
+    it 'displays only one IDP if the throttling cookie is corrupted' do
+      idp_in_cookie = "non-existing-idp"
+      visit "/test-throttling-cookie/#{idp_in_cookie}"
+      stub_const("THROTTLING_ENABLED", true)
+
+      visit '/choose-a-certified-company'
+
+      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '1 company')
+      expect(cookie_value(CookieNames::THROTTLING)).not_to eq(idp_in_cookie)
+    end
+
+    it 'displays only one IDP from the throttling cookie' do
+      idp_in_cookie = "idps_stub-idp-two"
+      visit "/test-throttling-cookie/#{idp_in_cookie}"
+      stub_const("THROTTLING_ENABLED", true)
+
+      visit '/choose-a-certified-company'
+
+      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '1 company')
+      within('#matching-idps') do
+        expect(page).to have_button('Choose Bob’s Identity Service')
       end
     end
 
@@ -82,7 +118,7 @@ describe 'When the user visits the choose a certified company page' do
 
   context 'user is from an LOA1 service' do
     before(:each) do
-      stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
+      stub_api_idp_list_for_registration(default_idps, 'LEVEL_1')
       page.set_rack_session(
         transaction_simple_id: 'test-rp',
         requested_loa: 'LEVEL_1',
@@ -105,10 +141,10 @@ describe 'When the user visits the choose a certified company page' do
     end
 
     it 'unavailable LEVEL_1 recommended IDPs are marked as unavailable' do
-      stub_api_idp_list_for_loa([{ 'simpleId' => 'stub-idp-one',
-                                   'entityId' => 'http://idcorp.com',
-                                   'levelsOfAssurance' => %w(LEVEL_1),
-                                   'temporarilyUnavailable' => true }], 'LEVEL_1')
+      stub_api_idp_list_for_registration([{ 'simpleId' => 'stub-idp-one',
+                                           'entityId' => 'http://idcorp.com',
+                                           'levelsOfAssurance' => %w(LEVEL_1),
+                                           'temporarilyUnavailable' => true }], 'LEVEL_1')
       visit '/choose-a-certified-company'
       expect(page).to have_content t('hub.certified_companies_unavailable.title', count: 1, company: 'IDCorp')
     end
@@ -198,7 +234,7 @@ describe 'When the user visits the choose a certified company page' do
   context 'Google Analytics elements are rendered correctly' do
     context 'when coming from an LOA2 service' do
       before :each do
-        stub_api_idp_list_for_loa(default_idps, 'LEVEL_2')
+        stub_api_idp_list_for_registration(default_idps, 'LEVEL_2')
         page.set_rack_session(
           transaction_simple_id: 'test-rp',
           requested_loa: 'LEVEL_2',
@@ -227,7 +263,7 @@ describe 'When the user visits the choose a certified company page' do
 
     context 'when coming from an LOA1 service' do
       before :each do
-        stub_api_idp_list_for_loa(default_idps, 'LEVEL_1')
+        stub_api_idp_list_for_registration(default_idps, 'LEVEL_1')
         page.set_rack_session(
           transaction_simple_id: 'test-rp',
           requested_loa: 'LEVEL_1',

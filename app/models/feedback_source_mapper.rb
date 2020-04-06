@@ -53,6 +53,8 @@ class FeedbackSourceMapper
       'PAUSED_REGISTRATION_PAGE' => 'paused_registration',
       'TIMEOUT_PAGE' => 'further_information_timeout',
       'ACCESSIBILITY_PAGE' => 'accessibility',
+      'COMPLETED_REGISTRATION' => 'completed_registration',
+      'WHAT_HAPPENS_NEXT_PAGE' => 'what_happens_next',
   }.freeze
   end
 

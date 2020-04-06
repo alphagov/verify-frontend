@@ -31,7 +31,6 @@ module UserCookiesPartialController
     return if idp_entity_id.nil?
 
     journey_hint_by_status_value = journey_hint_value || {}
-    journey_hint_by_status_value = eat_journey_hint_cookie(journey_hint_by_status_value) unless journey_hint_by_status_value.empty?
     journey_hint_by_status_value['SUCCESS'] = idp_entity_id if status == 'SUCCESS'
     journey_hint_by_status_value['STATE'] = { IDP: idp_entity_id,
                                               RP: rp_entity_id.nil? ? session[:transaction_entity_id] : rp_entity_id,
@@ -53,6 +52,14 @@ module UserCookiesPartialController
   def remove_resume_link_journey_hint
     journey_hint_value_hash = journey_hint_value || {}
     journey_hint_value_hash.delete('RESUMELINK')
+
+    cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_value_hash.to_json,
+                                                                  expires: 18.months.from_now }
+  end
+
+  def remove_success_journey_hint
+    journey_hint_value_hash = journey_hint_value || {}
+    journey_hint_value_hash.delete('SUCCESS')
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_value_hash.to_json,
                                                                   expires: 18.months.from_now }

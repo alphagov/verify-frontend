@@ -68,7 +68,7 @@ class SingleIdpJourneyController < ApplicationController
         logger.error "Could not get the RP URL for single IDP with transaction_id #{transaction_id} " + referrer_string
         redirect_to verify_services_path
       elsif !valid_request?(transaction_id, idp_entity_id, uuid)
-        redirect_to verify_services_path
+        redirect_to(rp_url)
       else
         save_to_cookie(transaction_id, idp_entity_id, uuid)
         FEDERATION_REPORTER.report_started_single_idp_journey(request)
@@ -161,7 +161,7 @@ private
     end
 
     unless valid_idp_choice?(single_idp_idp_list, idp_entity_id)
-      logger.error "The IDP is not valid or disabled for transaction_id #{transaction_id} and idp_entity_id #{idp_entity_id}" + referrer_string
+      logger.warn "The IDP is not valid or disabled for transaction_id #{transaction_id} and idp_entity_id #{idp_entity_id}" + referrer_string
       return false
     end
 

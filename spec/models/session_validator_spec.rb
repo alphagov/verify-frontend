@@ -87,8 +87,8 @@ describe SessionValidator do
     cookies[CookieNames::SESSION_ID_COOKIE_NAME] = 'my-session-id'
     validation = session_validator.validate(cookies, session)
     expect(validation).to_not be_ok
-    expect(validation.type).to eql :cookie_expired
-    expect(validation.message).to eql 'session "my-session-id" has expired'
+    expect(validation.type).to eql :session_timeout
+    expect(validation.message).to eql 'session "my-session-id" has expired 118 minutes ago'
   end
 
   it "will fail validation if session id in session is set to 'no-current-session'" do

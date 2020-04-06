@@ -97,15 +97,15 @@ RSpec.describe 'When the user visits the start page' do
     it 'will display the timeout expiration error when the session start cookie is old' do
       session_id_cookie = create_cookie_hash[CookieNames::SESSION_ID_COOKIE_NAME]
       allow(Rails.logger).to receive(:info)
-      expect(Rails.logger).to receive(:info).with("session \"#{session_id_cookie}\" has expired").at_least(:once)
+      expect(Rails.logger).to receive(:info).with("session \"#{session_id_cookie}\" has expired 30 minutes ago").at_least(:once)
       set_session_and_session_cookies!
       expired_start_time = 2.hours.ago.to_i * 1000
       page.set_rack_session(start_time: expired_start_time)
       visit '/start'
-      expect(page).to have_content t('hub.transaction_list.title')
-      expect(page).to have_link 'test GOV.UK Verify user journeys', href: 'http://localhost:50130/test-rp'
-      expect(page).to have_http_status :bad_request
-      expect(page).to have_link 'feedback', href: '/feedback?feedback-source=EXPIRED_ERROR_PAGE'
+      expect(page).to have_content t('errors.session_timeout.return_to_service')
+      expect(page).to have_http_status :forbidden
+      expect(page).to have_link 'feedback', href: '/feedback-landing?feedback-source=EXPIRED_ERROR_PAGE'
+      expect(page).to have_link 'Continue', href: 'http://www.test-rp.gov.uk/'
     end
   end
 

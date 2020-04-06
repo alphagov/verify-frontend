@@ -6,8 +6,8 @@ module ViewableIdpPartialController
     end
   end
 
-  def select_viewable_idp_for_loa(entity_id)
-    for_viewable_idp(entity_id, current_identity_providers_for_loa) do |decorated_idp|
+  def select_viewable_idp_for_registration(entity_id)
+    for_viewable_idp(entity_id, current_available_identity_providers_for_registration) do |decorated_idp|
       store_selected_idp_for_session(decorated_idp.identity_provider)
       yield decorated_idp
     end
@@ -32,8 +32,8 @@ module ViewableIdpPartialController
     end
   end
 
-  def current_identity_providers_for_loa
-    CONFIG_PROXY.get_idp_list_for_loa(session[:transaction_entity_id], session[:requested_loa]).idps
+  def current_available_identity_providers_for_registration
+    CONFIG_PROXY.get_available_idp_list_for_registration(session[:transaction_entity_id], session[:requested_loa]).idps
   end
 
   def current_identity_providers_for_sign_in
@@ -52,8 +52,8 @@ module ViewableIdpPartialController
     current_identity_providers_for_sign_in.reject(&:authentication_enabled)
   end
 
-  def current_identity_providers_for_rp_sign_in(rp_entity_id)
-    CONFIG_PROXY.get_idp_list_for_sign_in(rp_entity_id).idps
+  def current_identity_providers_for_registration_rp_loa2(rp_entity_id)
+    CONFIG_PROXY.get_available_idp_list_for_registration(rp_entity_id, 'LEVEL_2').idps
   end
 
   def current_identity_providers_for_single_idp

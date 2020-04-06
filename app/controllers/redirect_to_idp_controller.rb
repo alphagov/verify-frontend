@@ -67,7 +67,7 @@ class RedirectToIdpController < ApplicationController
       FEDERATION_REPORTER.report_single_idp_journey_selection(current_transaction, request, session[:selected_idp_name])
       render :redirect_to_idp
     else
-      render_error 'session_timeout', :forbidden
+      render_error 'session_error', :bad_request
     end
   end
 

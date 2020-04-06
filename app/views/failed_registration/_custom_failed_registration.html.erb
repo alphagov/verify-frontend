@@ -1,18 +1,8 @@
 <h1 class="govuk-heading-l"><%= raw transaction.custom_fail_heading  %></h1>
 
-<p><%= raw(transaction.custom_fail_what_next_content % { idp_name: idp.display_name }) %></p>
+<p class="govuk-body"><%= raw(transaction.custom_fail_what_next_content % { idp_name: idp.display_name }) %></p>
 
 <h2 class="govuk-heading-m">
   <%= raw transaction.custom_fail_other_options %>
 </h2>
 
-<h2 class="govuk-heading-m"><%= raw transaction.custom_fail_try_another_summary %></h2>
-<div>
-  <%= raw(transaction.custom_fail_try_another_text % { idp_name: idp.display_name }) %>
-  <%= link_to t('hub.failed_registration.start_again'), start_again_path %>
-</div>
-
-<h2 class="govuk-heading-m"><%= raw(transaction.custom_fail_contact_details_intro % { idp_name: idp.display_name }) %></h2>
-<div>
-  <%= raw idp.contact_details %>
-</div>

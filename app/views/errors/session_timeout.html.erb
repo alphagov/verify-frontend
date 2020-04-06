@@ -7,6 +7,5 @@
     <h1 class="govuk-heading-l"><%= t 'errors.session_timeout.title' %></h1>
     <h2 class="govuk-heading-m"><%= t 'errors.session_timeout.return_to_service' %></h2>
     <p class="govuk-body"><%= link_to t('errors.session_timeout.start_again'), @redirect_to_destination, class: 'govuk-button' %></p>
-    <p class="govuk-body"><%= raw t('errors.session_timeout.feedback_message', feedback_link: link_to(t('errors.session_timeout.feedback'), feedback_path('feedback-source': feedback_source))) %></p>
   </div>
 </div>

@@ -13,9 +13,9 @@ describe RedirectToIdpController do
   context 'single idp journey without cookies' do
     subject { get :single_idp, params: { locale: 'en' } }
 
-    it 'renders a session timeout page' do
+    it 'renders a session error page' do
       cookies.delete CookieNames::VERIFY_SINGLE_IDP_JOURNEY
-      expect(subject).to render_template(:session_timeout)
+      expect(subject).to render_template(:session_error)
       subject
     end
   end

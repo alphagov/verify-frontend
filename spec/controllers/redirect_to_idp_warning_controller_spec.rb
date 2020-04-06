@@ -6,7 +6,7 @@ require 'piwik_test_helper'
 describe RedirectToIdpWarningController do
   before :each do
     stub_api_select_idp
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     set_session_and_cookies_with_loa('LEVEL_2')
     session[:selected_idp_was_recommended] = [true, false].sample
@@ -39,7 +39,7 @@ describe RedirectToIdpWarningController do
             'levelsOfAssurance' => %w(LEVEL_2),
         },
       ]
-      stub_api_idp_list_for_loa(stub_idp)
+      stub_api_idp_list_for_registration(stub_idp)
       set_selected_idp(
         'simple_id' => 'stub-idp-two',
         'entity_id' => 'http://idcorp.com',

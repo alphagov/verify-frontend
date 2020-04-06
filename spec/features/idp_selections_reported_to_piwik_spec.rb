@@ -30,7 +30,7 @@ RSpec.describe 'When the user selects an IDP' do
 
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list_for_loa
+    stub_api_idp_list_for_registration
     stub_transactions_list
     stub_session_idp_authn_request(originating_ip, location, false)
     stub_idp_select_request(idp_1_entity_id)
@@ -43,6 +43,7 @@ RSpec.describe 'When the user selects an IDP' do
 
     visit '/choose-a-certified-company'
     click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
+    click_link t('navigation.continue')
     click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
     expect(piwik_registration_virtual_page).to have_been_made.once
@@ -59,12 +60,14 @@ RSpec.describe 'When the user selects an IDP' do
     )
     visit '/choose-a-certified-company'
     click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
+    click_link t('navigation.continue')
     click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
     expect(idcorp_piwik_request).to have_been_made.once
 
     visit '/choose-a-certified-company'
     click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-two.name'))
+    click_link t('navigation.continue')
     click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-two.name'))
 
     expect(idcorp_and_bobs_piwik_request).to have_been_made.once
@@ -82,6 +85,7 @@ RSpec.describe 'When the user selects an IDP' do
     page.set_rack_session(selected_idp_names: idps)
     visit '/choose-a-certified-company'
     click_button t('hub.choose_a_certified_company.choose_idp', display_name: t('idps.stub-idp-one.name'))
+    click_link t('navigation.continue')
     click_button t('hub.redirect_to_idp_warning.continue_website', display_name: t('idps.stub-idp-one.name'))
 
     expect(idcorp_piwik_request).to have_been_made.once
