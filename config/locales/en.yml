@@ -863,9 +863,15 @@ en:
       feedback_message: Use the %{feedback_link} to ask a question, report a problem or suggest an improvement.
       feedback: feedback
     session_timeout:
-      title: Continue to the government service you need
-      return_to_service: Please go to the government service you were trying to access to continue.
-      start_again: Continue
+      title: Return to the government service you need
+      return_to_service_html: |
+        <p class="govuk-body">Sorry, something went wrong.</p>
+        <p class="govuk-body">You need to try again.</p>
+        <ol class="govuk-list govuk-list--number">
+            <li>Return to the government service you were trying to use.</li>
+            <li>When you’re asked to prove your identity, create a new identity account or sign in with an existing one.</li>
+        </ol>
+      start_again: Return to the service
     something_went_wrong:
       title: Something went wrong
       heading: Sorry, something went wrong
