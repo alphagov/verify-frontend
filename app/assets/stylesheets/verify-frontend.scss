@@ -38,3 +38,9 @@
   display: none;
   visibility: hidden;
 }
+
+.page-with-back-button {
+  @include govuk-media-query($from: tablet) {
+    margin-top: -50px;
+  }
+}

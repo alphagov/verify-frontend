@@ -2,8 +2,8 @@
 <% content_for :feedback_source, 'SIGN_IN_PAGE' %>
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-    <p><%= link_to t('navigation.back'), start_path, class: 'govuk-back-link' %></p>
+  <div class="govuk-grid-column-two-thirds page-with-back-button">
+    <%= link_to t('navigation.back'), start_path, class: 'govuk-back-link' %>
 
     <h1 class="govuk-heading-l"><%= t 'hub.signin.heading' %></h1>
     <p class="lede"><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), begin_registration_path, id: 'begin-registration-route') %></p>
@@ -30,18 +30,23 @@
         </div>
       </div>
     <% end %>
-    <div class="govuk-grid-row">
-      <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
-        <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
-        <%= render partial: 'shared/continue_to_idp_form' %>
-      </div>
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
+      <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
+      <%= render partial: 'shared/continue_to_idp_form' %>
     </div>
     <% if @unavailable_identity_providers.any? %>
       <%= render partial: 'shared/unavailable_idp_list', locals: {unavailable_identity_providers: @unavailable_identity_providers} %>
     <% end %>
-
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>
-    
+
     <% if @disconnected_idps.any? %>
       <%= render partial: 'shared/disconnected_idp_list', locals: {disconnected_identity_providers: @disconnected_idps} %>
     <% end %>
