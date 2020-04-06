@@ -81,6 +81,24 @@ describe 'When the user visits the choose a certified company page' do
       end
     end
 
+    it 'displays all IDPs if last status is FAILED' do
+      idp_in_cookie = "idps_stub-idp-two"
+      visit "/test-throttling-cookie/#{idp_in_cookie}"
+      stub_const("THROTTLING_ENABLED", true)
+      set_journey_hint_cookie(nil, 'FAILED')
+
+      visit '/choose-a-certified-company'
+
+      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_content t('hub.choose_a_certified_company.idp_count_html', company_count: '3 companies')
+
+      within('#matching-idps') do
+        expect(page).to have_button('Choose Bob’s Identity Service')
+        expect(page).to have_button('Choose Carol’s Secure ID')
+        expect(page).to have_button('Choose IDCorp')
+      end
+    end
+
     it 'does not show an IDP if the IDP profile has a subset of the user evidence, but not an exact match' do
       additional_documents = selected_answers[:documents].clone
       additional_documents[:driving_licence] = false

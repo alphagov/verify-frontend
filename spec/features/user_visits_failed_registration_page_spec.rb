@@ -50,7 +50,7 @@ RSpec.describe 'When the user visits the failed registration page and' do
       expect_page_to_have_main_content
       expect(page).to have_content t('hub.failed_registration.other_ways_summary',
                                           other_ways_description: 'test GOV.UK Verify user journeys')
-      expect(page).to have_link t('hub.failed_registration.start_again'), href: select_documents_path
+      expect(page).to have_link t('hub.failed_registration.start_again'), href: choose_a_certified_company_path
     end
 
     it 'includes expected content when LOA1 journey' do

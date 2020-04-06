@@ -68,7 +68,7 @@ describe HintController do
                                      'https://tax.service.gov.uk/SAML2/PERTAX')
     end
 
-    context 'user has previously succesfully signed in' do
+    context 'user has previously successfully signed in' do
       it 'json object should include simpleId and displayName' do
         cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
           'SUCCESS' => 'http://idcorp-two.com',
