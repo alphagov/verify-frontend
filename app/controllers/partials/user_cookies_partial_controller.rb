@@ -80,13 +80,6 @@ private
     nil
   end
 
-  def ab_test_variant_value
-    ab_test_variant = ''
-    JSON.parse(cookies[CookieNames::AB_TEST]).map { |key, value| ab_test_variant = "#{ab_test_variant} #{key}: #{value}," }
-    Rails.logger.info("ab_test_variant = #{ab_test_variant}")
-    ab_test_variant
-  end
-
   # Clean up users' existing cookies, remove in March 2020
   def eat_journey_hint_cookie(cookie)
     yummy_cookie = cookie

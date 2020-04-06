@@ -272,7 +272,8 @@ describe RedirectToIdpController do
                                     'LEVEL_1',
                                     false,
                                     nil,
-                                    'sign-in-last-sucessful-idp'
+                                    'sign-in-last-sucessful-idp',
+                                    nil
                                   )
 
         subject
