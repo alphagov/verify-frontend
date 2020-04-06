@@ -40,14 +40,14 @@ RSpec.describe 'When the user visits the start page' do
     end
 
     it 'will display the generic error when start time is missing from session' do
+      cookie_hash = create_cookie_hash
+      set_cookies!(cookie_hash)
       set_session!(transaction_simple_id: 'test-rp',
                    verify_session_id: 'my-session-id-cookie',
                    identity_providers: [{ 'simple_id' => 'stub-idp-one' }],
                    transaction_entity_id: 'test-rp')
-      cookie_hash = create_cookie_hash
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with('start_time not in session').at_least(:once)
-      set_cookies!(cookie_hash)
       visit '/start'
       expect(page).to have_content t('errors.something_went_wrong.heading')
       expect(page).to have_http_status :internal_server_error
