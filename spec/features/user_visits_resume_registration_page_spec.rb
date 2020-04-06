@@ -22,6 +22,7 @@ RSpec.describe 'When the user visits the resume registration page and ' do
 
   before(:each) do
     set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session)
+    stub_api_idp_list_for_registration
     stub_api_idp_list_for_sign_in
     set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-one')
     stub_translations

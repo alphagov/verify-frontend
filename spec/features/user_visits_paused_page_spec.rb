@@ -19,7 +19,7 @@ RSpec.describe 'When the user is sent to the paused registration page' do
   }
 
   before(:each) do
-    stub_api_idp_list_for_sign_in
+    stub_api_idp_list_for_registration
     set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: 'stub-idp-one')
     set_journey_hint_cookie(idp_entity_id, 'PENDING', 'en', rp_entity_id)
     stub_translations
