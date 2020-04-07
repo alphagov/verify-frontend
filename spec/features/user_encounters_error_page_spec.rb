@@ -99,7 +99,7 @@ RSpec.describe 'user encounters error page' do
         visit('/test-saml')
         click_button 'saml-post'
         expect(page).to have_content t('errors.session_timeout.title')
-        expect(page).to have_content t('errors.session_timeout.return_to_service')
+        expect(page.body).to include t('errors.session_timeout.return_to_service_html')
         expect(page).to have_css "#piwik-custom-url", text: "errors/timeout-error"
         expect(page).to have_css "a[href*=EXPIRED_ERROR_PAGE]"
         expect(page.status_code).to eq(403)

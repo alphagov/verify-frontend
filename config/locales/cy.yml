@@ -875,7 +875,7 @@ cy:
       feedback: adborth
     session_timeout:
       title: Mae eich sesiwn wedi amseru allan
-      return_to_service: Dylech fynd yn ôl at eich gwasanaeth i ddechrau eto.
+      return_to_service_html: Dylech fynd yn ôl at eich gwasanaeth i ddechrau eto.
       start_again: Dechrau eto
       feedback_message: Defnyddiwch yr %{feedback_link} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant.
       feedback: adborth
