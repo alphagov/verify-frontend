@@ -2,7 +2,7 @@
 <% content_for :feedback_source, 'CONTINUE_TO_YOUR_IDP_PAGE' %>
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds js-continue-to-idp no-right-hand-logo" data-location="<%= url_for(controller: 'single_idp_journey', action: 'continue_ajax', locale: I18n.locale)  %>">
+  <div class="govuk-grid-column-full js-continue-to-idp" data-location="<%= url_for(controller: 'single_idp_journey', action: 'continue_ajax', locale: I18n.locale)  %>">
       <h1 class="govuk-heading-l"><%= t 'hub.single_idp_journey.heading', display_name: @idp.display_name %></h1>
 
       <p class="govuk-body"><%= t 'hub.single_idp_journey.intro', idp_display_name: @idp.display_name, service_display_name: @service_name %></p>
@@ -11,7 +11,7 @@
             <%= hidden_field_tag 'entity_id', @idp.entity_id, id: nil, class: 'js-entity-id' %>
             <%= hidden_field_tag 'singleIdpJourneyIdentifier', @uuid %>
             <%= button_tag t('hub.single_idp_journey.continue_button', display_name: @idp.display_name),
-                          class: 'govuk-button',
+                          class: 'govuk-button verify-inverse-btn button',
                           id: 'continue-to-idp-button',
                           type: 'submit'
             %>

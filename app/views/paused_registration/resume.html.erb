@@ -3,7 +3,7 @@
 <% content_for :feedback_source, 'RESUME_PAGE' %>
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds js-continue-to-idp" data-location="<%= url_for(controller: 'paused_registration', action: 'resume_with_idp_ajax', locale: I18n.locale)  %>">
+  <div class="govuk-grid-column-full js-continue-to-idp" data-location="<%= url_for(controller: 'paused_registration', action: 'resume_with_idp_ajax', locale: I18n.locale)  %>">
     <h1 class="govuk-heading-l"><%= t 'hub.paused_registration.resume.heading', display_name: @idp.display_name %></h1>
 
     <p class="govuk-body"><%= t 'hub.paused_registration.resume.intro', display_name: @idp.display_name, service_name: @transaction[:name] %></p>
