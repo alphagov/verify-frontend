@@ -1,7 +1,7 @@
   <% identity_providers.each_with_index do |identity_provider, idx| %>
     <%= form_for(identity_provider, url: sign_in_submit_path, html: {class: 'idp-option js-idp-form', id: nil}) do |f| %>
       <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil, class: 'js-entity-id' %>
-      <div class="govuk-grid-column-one-third company-wrapper <%= idx % 3 == 0 ? 'clear-left' : nil %>">
+      <div class="<%= identity_providers.length == 1 ? 'govuk-grid-column-one-half' : 'govuk-grid-column-one-third' %> company-wrapper <%= idx % 3 == 0 ? 'clear-left' : nil %>">
         <div class="company">
           <div class="company-inner">
             <div class="company-logo">

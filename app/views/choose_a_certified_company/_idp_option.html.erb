@@ -2,7 +2,7 @@
   <%= form_for(identity_provider, url: choose_a_certified_company_submit_path, html: {class: nil, id: nil}) do |f| %>
     <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil %>
     <div class="company-logo">
-      <div class="">
+      <div>
         <%= image_submit_tag(identity_provider.logo_path, alt: "#{identity_provider.display_name} logo") %>
       </div>
       <p class="govuk-body-s">
