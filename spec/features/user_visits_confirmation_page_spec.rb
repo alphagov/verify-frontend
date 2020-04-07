@@ -7,8 +7,8 @@ RSpec.describe 'When user visits the confirmation page' do
       selected_idp_was_recommended: true,
       transaction_simple_id: 'test-rp'
     )
-    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
     set_session_and_session_cookies!
+    set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
     stub_api_idp_list_for_registration
   end
 

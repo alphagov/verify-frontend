@@ -155,8 +155,8 @@ RSpec.describe 'When the user visits the confirm-your-identity page' do
         selected_idp_was_recommended: true,
         selected_answers: { phone: { mobile_phone: true, smart_phone: true }, documents: { passport: true } },
       )
-      set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
       set_up_session('stub-idp-one')
+      set_selected_idp_in_session(entity_id: 'http://idcorp.com', simple_id: 'stub-idp-one')
 
       visit '/redirect-to-idp-warning'
 
