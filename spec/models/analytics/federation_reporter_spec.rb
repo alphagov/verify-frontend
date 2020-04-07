@@ -364,7 +364,7 @@ module Analytics
 
     describe '#report_sign_in_journey_ignored' do
       it 'should report that the sign in hint was ignored' do
-        transaction_simple_id = current_transaction
+        transaction_simple_id = 'test-rp'
         idp_name = 'stub-idp'
         expect(analytics_reporter).to receive(:report_action)
                                           .with(
@@ -374,7 +374,7 @@ module Analytics
                                             2 => %w(LOA_REQUESTED LEVEL_2)
                                           )
 
-        federation_reporter.report_sign_in_journey_ignored(current_transaction, request, idp_name)
+        federation_reporter.report_sign_in_journey_ignored(current_transaction, request, idp_name, transaction_simple_id)
       end
     end
   end

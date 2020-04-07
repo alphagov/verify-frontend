@@ -58,8 +58,8 @@ module Analytics
       )
     end
 
-    def report_sign_in_journey_ignored(current_transaction, request, idp_display_name)
-      report = "HINT_DELETED | sign-in | #{current_transaction} | #{idp_display_name}"
+    def report_sign_in_journey_ignored(current_transaction, request, idp_display_name, transaction_simple_id)
+      report = "HINT_DELETED | sign-in | #{transaction_simple_id} | #{idp_display_name}"
       report_action(
         current_transaction,
         request,
