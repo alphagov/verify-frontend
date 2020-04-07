@@ -1,14 +1,16 @@
+require 'partials/journey_hinting_partial_controller'
 require 'partials/viewable_idp_partial_controller'
 
 class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
+  include JourneyHintingPartialController
   include ViewableIdpPartialController
   skip_before_action :render_cross_gov_ga, only: %i{about}
 
   def index
     session[:selected_answers]&.delete('interstitial')
     suggestions = recommendation_engine.get_suggested_idps_for_registration(current_available_identity_providers_for_registration, selected_evidence, current_transaction_simple_id)
-    if THROTTLING_ENABLED
+    if THROTTLING_ENABLED && !is_last_status?(FAILED_STATUS)
       throttled_idp_name = users_idp(suggestions)
       throttled_idp_name = throttled_idp_name.split("idps_")[1]
       throttled_idp = suggestions[:recommended].select { |idp| idp.simple_id == throttled_idp_name }

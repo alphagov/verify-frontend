@@ -36,6 +36,10 @@ describe ChooseACertifiedCompanyLoa2Controller do
     }.freeze
   }
 
+  RSpec::Matchers.define :has_length do |x|
+    match { |list| list.length == x }
+  end
+
   context '#index' do
     it 'renders the certified companies LOA2 template when LEVEL_2 is the requested LOA' do
       set_session_and_cookies_with_loa('LEVEL_2')
@@ -156,6 +160,40 @@ describe ChooseACertifiedCompanyLoa2Controller do
       expect(subject).to render_template(:choose_a_certified_company_LOA2)
       expect(stub_piwik_request).to have_been_made.once
       expect(cookies.encrypted[CookieNames::THROTTLING]).to eq(throttled_idp_name)
+    end
+
+    it 'does not throttle IDPs when last status is FAILED' do
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
+          'SUCCESS' => 'http://idcorp-two.com',
+          'STATE' => { 'STATUS' => 'FAILED' }
+      }.to_json
+
+      set_session_and_cookies_with_loa('LEVEL_2')
+      stub_api_idp_list_for_registration([stub_idp_one, stub_idp_two])
+      session[:selected_answers] = {
+          'documents' => { 'passport' => true, 'driving_licence' => true, 'mobile_phone' => true },
+          'device_type' => { 'device_type_other' => true }
+      }
+      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(2, 'LEVEL_2', 'analytics description for test-rp')
+
+      expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).with(has_length(2)) do |idps|
+        idps.each { |idp| expect(idp.levels_of_assurance).to include 'LEVEL_2' }
+      end
+
+      expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).with(has_length(0)) do
+        []
+      end
+
+      throttled_idp_name = "idps_stub-idp-one"
+      cookies.encrypted[CookieNames::THROTTLING] = throttled_idp_name
+
+      expect(THROTTLING).not_to receive(:get_ab_test_name)
+      expect(cookies.encrypted[CookieNames::THROTTLING]).to eq(throttled_idp_name)
+
+      get :index, params: { locale: 'en' }
+
+      expect(subject).to render_template(:choose_a_certified_company_LOA2)
+      expect(stub_piwik_request).to have_been_made.once
     end
   end
 
