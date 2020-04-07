@@ -78,7 +78,8 @@ describe ProveIdentityVariantController do
       expect(FEDERATION_REPORTER).to receive(:report_sign_in_journey_ignored).with(
         a_kind_of(Display::RpDisplayData),
         a_kind_of(ActionDispatch::Request),
-        "IDCorp"
+        "IDCorp",
+        "test-rp"
       )
 
       get :ignore_hint, params: { locale: 'en' }
