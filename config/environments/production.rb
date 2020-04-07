@@ -22,7 +22,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -45,7 +45,7 @@ Rails.application.configure do
   config.force_ssl = true
 
   # Log level is configurable depending on environment.
-  config.log_level = ENV.fetch('LOG_LEVEL', :warn).to_sym
+  config.log_level = ENV.fetch("LOG_LEVEL", :warn).to_sym
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -72,6 +72,6 @@ Rails.application.configure do
   #Cookie Configuration
   config.x.cookies.secure = true
 
-  build_number_file = File.expand_path('../../.build-number', __dir__)
+  build_number_file = File.expand_path("../../.build-number", __dir__)
   config.assets.prefix = "/assets/#{File.read(build_number_file).chomp}"
 end

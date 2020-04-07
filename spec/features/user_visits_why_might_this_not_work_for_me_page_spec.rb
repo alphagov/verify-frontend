@@ -1,36 +1,36 @@
-require 'feature_helper'
-require 'api_test_helper'
+require "feature_helper"
+require "api_test_helper"
 
-RSpec.describe 'When the user visits the why-might-this-not-work-for-me page' do
+RSpec.describe "When the user visits the why-might-this-not-work-for-me page" do
   before(:each) do
     set_session_and_session_cookies!
-    page.set_rack_session(transaction_simple_id: 'test-rp')
+    page.set_rack_session(transaction_simple_id: "test-rp")
   end
 
-  it 'displays the page in Welsh' do
-    visit '/pam-efallai-na-fydd-hyn-yn-gweithio-i-mi'
-    expect(page).to have_content('If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys here')
-    expect(page).to have_css 'html[lang=cy]'
+  it "displays the page in Welsh" do
+    visit "/pam-efallai-na-fydd-hyn-yn-gweithio-i-mi"
+    expect(page).to have_content("If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys here")
+    expect(page).to have_css "html[lang=cy]"
   end
 
-  it 'includes other ways text' do
-    visit '/why-might-this-not-work-for-me'
+  it "includes other ways text" do
+    visit "/why-might-this-not-work-for-me"
 
-    expect(page).to have_content('If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys here')
-    expect(page).to have_content('test GOV.UK Verify user journeys')
-    expect(page).to have_link 'here', href: 'http://www.example.com'
+    expect(page).to have_content("If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys here")
+    expect(page).to have_content("test GOV.UK Verify user journeys")
+    expect(page).to have_link "here", href: "http://www.example.com"
   end
 
-  it 'includes the appropriate feedback source' do
-    visit '/why-might-this-not-work-for-me'
+  it "includes the appropriate feedback source" do
+    visit "/why-might-this-not-work-for-me"
 
-    expect_feedback_source_to_be(page, 'WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE', '/why-might-this-not-work-for-me')
+    expect_feedback_source_to_be(page, "WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE", "/why-might-this-not-work-for-me")
   end
 
-  it 'redirects to select documents page if user clicks try to verify link' do
+  it "redirects to select documents page if user clicks try to verify link" do
     visit why_might_this_not_work_for_me_path
 
-    click_link 'I’d like to try to verify my identity using GOV.UK Verify'
+    click_link "I’d like to try to verify my identity using GOV.UK Verify"
 
     expect(page).to have_current_path(select_documents_path)
   end

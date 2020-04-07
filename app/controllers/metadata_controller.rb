@@ -7,7 +7,7 @@ class MetadataController < ApplicationController
     render xml: exception, status: 500
   end
 
-  METADATA_CONTENT_TYPE = 'application/samlmetadata+xml'.freeze
+  METADATA_CONTENT_TYPE = "application/samlmetadata+xml".freeze
 
   def service_providers
     do_not_cache
@@ -27,7 +27,7 @@ class MetadataController < ApplicationController
 private
 
   def do_not_cache
-    response.headers['Cache-Control'] = 'no-cache, no-store, no-transform'
+    response.headers["Cache-Control"] = "no-cache, no-store, no-transform"
   end
 
   def metadata_client

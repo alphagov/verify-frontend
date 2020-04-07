@@ -1,4 +1,4 @@
-require 'uri'
+require "uri"
 
 class TestAnalyticsController < ApplicationController
   skip_before_action :validate_session
@@ -6,7 +6,7 @@ class TestAnalyticsController < ApplicationController
 
   def forward
     if PUBLIC_PIWIK.enabled? && INTERNAL_PIWIK.enabled?
-      client = PoolingClient.new(INTERNAL_PIWIK.url, 'User-Agent' => request.user_agent)
+      client = PoolingClient.new(INTERNAL_PIWIK.url, "User-Agent" => request.user_agent)
       uri = INTERNAL_PIWIK.url
       uri.query = request.query_parameters.to_param
       begin

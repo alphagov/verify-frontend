@@ -1,4 +1,4 @@
-require 'service_status'
+require "service_status"
 class ServiceStatusFilter
   def initialize(app)
     @app = app

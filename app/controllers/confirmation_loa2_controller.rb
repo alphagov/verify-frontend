@@ -1,6 +1,6 @@
 class ConfirmationLoa2Controller < ApplicationController
   before_action { @hide_feedback_link = true }
-  layout 'slides'
+  layout "slides"
 
   def matching_journey
     journey_confirmation(true)
@@ -8,7 +8,7 @@ class ConfirmationLoa2Controller < ApplicationController
 
   def non_matching_journey
     journey_confirmation(false)
-    report_to_analytics('Outcome - Matching Not Used By Service')
+    report_to_analytics("Outcome - Matching Not Used By Service")
   end
 
 private

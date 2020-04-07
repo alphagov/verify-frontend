@@ -11,14 +11,14 @@ class SamlProxyApi
   end
 
   def x_forwarded_for
-    { 'X-Forwarded-For' => originating_ip }
+    { "X-Forwarded-For" => originating_ip }
   end
 
   def forward_country_authn_response(relay_state, saml_response)
     body = {
         PARAM_SAML_REQUEST => saml_response,
         PARAM_RELAY_STATE => relay_state,
-        PARAM_IP_SEEN_BY_FRONTEND => originating_ip
+        PARAM_IP_SEEN_BY_FRONTEND => originating_ip,
     }
     response = @api_client.post(COUNTRY_AUTHN_RESPONSE_ENDPOINT, body)
     CountryAuthnResponse.validated_response(response)
@@ -38,7 +38,7 @@ class SamlProxyApi
     body = {
         PARAM_RELAY_STATE => session_id,
         PARAM_SAML_REQUEST => saml_response,
-        PARAM_IP_SEEN_BY_FRONTEND => originating_ip
+        PARAM_IP_SEEN_BY_FRONTEND => originating_ip,
     }
     response = @api_client.post(IDP_AUTHN_RESPONSE_ENDPOINT, body)
 
@@ -57,7 +57,7 @@ class SamlProxyApi
     body = {
         PARAM_SAML_REQUEST => saml_request,
         PARAM_RELAY_STATE => relay_state,
-        PARAM_IP_SEEN_BY_FRONTEND => originating_ip
+        PARAM_IP_SEEN_BY_FRONTEND => originating_ip,
     }
     @api_client.post(NEW_SESSION_ENDPOINT, body)
   end

@@ -3,23 +3,23 @@ class RedirectToServiceController < ApplicationController
 
   def signing_in
     redirect_to_service(
-      'hub.redirect_to_service.signing_in.title',
-      'hub.redirect_to_service.signing_in.transition_heading'
+      "hub.redirect_to_service.signing_in.title",
+      "hub.redirect_to_service.signing_in.transition_heading",
     )
   end
 
   def start_again
     redirect_to_service(
-      'hub.redirect_to_service.start_again.title',
-      'hub.redirect_to_service.start_again.transition_heading'
+      "hub.redirect_to_service.start_again.title",
+      "hub.redirect_to_service.start_again.transition_heading",
     )
   end
 
   def error
     redirect_to_service(
-      'hub.redirect_to_service.start_again.title',
-      'hub.redirect_to_service.start_again.transition_heading',
-      is_error: true
+      "hub.redirect_to_service.start_again.title",
+      "hub.redirect_to_service.start_again.transition_heading",
+      is_error: true,
     )
   end
 
@@ -35,7 +35,7 @@ private
     @rp_name = current_transaction.rp_name
     @transition_message = t(transition_heading_key, rp_name: @rp_name)
     reset_session_cookies
-    render 'redirect_to_service'
+    render "redirect_to_service"
   end
 
   def reset_session_cookies

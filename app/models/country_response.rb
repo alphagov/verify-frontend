@@ -10,7 +10,7 @@ class CountryResponse < Api::Response
     return if @countries.empty?
 
     if @countries.none?(&:valid?)
-      errors.add(:countries, 'are malformed')
+      errors.add(:countries, "are malformed")
     end
   end
 end

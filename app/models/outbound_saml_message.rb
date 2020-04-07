@@ -4,9 +4,9 @@ class OutboundSamlMessage < Api::Response
   validates_inclusion_of :registration, in: [true, false]
 
   def initialize(hash)
-    @location = hash['postEndpoint']
-    @saml_request = hash['samlMessage']
-    @relay_state = hash['relayState']
-    @registration = hash['registration']
+    @location = hash["postEndpoint"]
+    @saml_request = hash["samlMessage"]
+    @relay_state = hash["relayState"]
+    @registration = hash["registration"]
   end
 end

@@ -1,6 +1,6 @@
 module Analytics
   class FederationReporter
-    EXTERNAL_AB_TEST_ACTION_NAME = 'The user has started an external AB test'.freeze
+    EXTERNAL_AB_TEST_ACTION_NAME = "The user has started an external AB test".freeze
 
     def initialize(analytics_reporter)
       @analytics_reporter = analytics_reporter
@@ -10,7 +10,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        'The user has reached the start page'
+        "The user has reached the start page",
       )
     end
 
@@ -18,8 +18,8 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        'The user started a sign-in journey',
-        Analytics::CustomVariable.build(:journey_type, 'SIGN_IN')
+        "The user started a sign-in journey",
+        Analytics::CustomVariable.build(:journey_type, "SIGN_IN"),
       )
     end
 
@@ -27,16 +27,16 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        'The user started a registration journey',
-        Analytics::CustomVariable.build(:journey_type, 'REGISTRATION')
+        "The user started a registration journey",
+        Analytics::CustomVariable.build(:journey_type, "REGISTRATION"),
       )
     end
 
     def report_started_single_idp_journey(request)
       report_action_without_current_transaction(
         request,
-        'The user has started a single idp journey',
-        Analytics::CustomVariable.build(:journey_type, 'SINGLE_IDP')
+        "The user has started a single idp journey",
+        Analytics::CustomVariable.build(:journey_type, "SINGLE_IDP"),
       )
     end
 
@@ -46,7 +46,7 @@ module Analytics
       report_action_without_current_transaction(
         request,
         EXTERNAL_AB_TEST_ACTION_NAME,
-        ab_test_custom_var
+        ab_test_custom_var,
       )
     end
 
@@ -54,7 +54,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        "Sign In Journey Hint Shown - #{idp_display_name}"
+        "Sign In Journey Hint Shown - #{idp_display_name}",
       )
     end
 
@@ -63,42 +63,42 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        report
+        report,
       )
     end
 
     def report_user_idp_attempt(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, hint_followed:)
-      segment_list = user_segments.nil? ? 'nil' : user_segments.sort.join(', ')
+      segment_list = user_segments.nil? ? "nil" : user_segments.sort.join(", ")
       report = "ATTEMPT_#{attempt_number} | #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{segment_list} |"
       report << journey_hint_details(hint_followed)
       report_action(
         current_transaction,
         request,
-        report
+        report,
       )
     end
 
     def report_user_idp_outcome(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, hint_followed:, response_status:)
-      segment_list = user_segments.nil? ? 'nil' : user_segments.sort.join(', ')
+      segment_list = user_segments.nil? ? "nil" : user_segments.sort.join(", ")
       report = "OUTCOME_#{attempt_number} | #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{segment_list} |"
       report << journey_hint_details(hint_followed)
       report << " #{response_status} |"
       report_action(
         current_transaction,
         request,
-        report
+        report,
       )
     end
 
     def report_idp_registration(current_transaction:, request:, idp_name:, idp_name_history:, evidence:, recommended:, user_segments:)
-      list_of_evidence = evidence.sort.join(', ')
-      list_of_segments = user_segments.nil? ? nil : user_segments.sort.join(', ')
+      list_of_evidence = evidence.sort.join(", ")
+      list_of_segments = user_segments.nil? ? nil : user_segments.sort.join(", ")
       idp_name_history ||= [idp_name]
       report_action(
         current_transaction,
         request,
         "#{idp_name} was chosen for registration #{recommended} with segment(s) #{list_of_segments} and evidence #{list_of_evidence}",
-        Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(','))
+        Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(",")),
       )
     end
 
@@ -106,7 +106,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        "Sign In - #{idp_display_name}"
+        "Sign In - #{idp_display_name}",
       )
     end
 
@@ -114,7 +114,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        "Single IDP selected - #{idp_display_name}"
+        "Single IDP selected - #{idp_display_name}",
       )
     end
 
@@ -122,7 +122,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        "Resume - #{idp_display_name}"
+        "Resume - #{idp_display_name}",
       )
     end
 
@@ -130,7 +130,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        "Sign In - #{idp_display_name} - Hint #{hint_followed ? 'Followed' : 'Ignored'}"
+        "Sign In - #{idp_display_name} - Hint #{hint_followed ? 'Followed' : 'Ignored'}",
       )
     end
 
@@ -138,8 +138,8 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        'Cycle3 submitted',
-        Analytics::CustomVariable.build(:cycle_three_attribute, attribute)
+        "Cycle3 submitted",
+        Analytics::CustomVariable.build(:cycle_three_attribute, attribute),
       )
     end
 
@@ -147,7 +147,7 @@ module Analytics
       report_action(
         current_transaction,
         request,
-        'Matching Outcome - Cancelled Cycle3'
+        "Matching Outcome - Cancelled Cycle3",
       )
     end
 
@@ -155,9 +155,9 @@ module Analytics
       report_event(
         current_transaction,
         request,
-        'Engagement',
-        'IDPs Recommended',
-        number_of_idps_recommended
+        "Engagement",
+        "IDPs Recommended",
+        number_of_idps_recommended,
       )
     end
 
@@ -165,9 +165,9 @@ module Analytics
       report_event(
         current_transaction,
         request,
-        'Single IDP',
-        'redirected to IDP',
-        "Service: #{service_id}, UUID: #{uuid}"
+        "Single IDP",
+        "redirected to IDP",
+        "Service: #{service_id}, UUID: #{uuid}",
       )
     end
 
@@ -175,9 +175,9 @@ module Analytics
       report_event(
         current_transaction,
         request,
-        'Single IDP',
-        'invalid cookie',
-        'Missing or malformed cookie'
+        "Single IDP",
+        "invalid cookie",
+        "Missing or malformed cookie",
       )
     end
 
@@ -185,18 +185,18 @@ module Analytics
       report_event(
         current_transaction,
         request,
-        'Single IDP',
-        'change of service',
-        "Expected service: #{expected_service}, Actual service: #{actual_service}, UUID: #{uuid}"
+        "Single IDP",
+        "change of service",
+        "Expected service: #{expected_service}, Actual service: #{actual_service}, UUID: #{uuid}",
       )
     end
 
     def report_hint_present(request, hint_present)
       report_event_without_current_transaction(
         request,
-        'Engagement',
-        'Journey hint present',
-        hint_present ? 'yes' : 'no'
+        "Engagement",
+        "Journey hint present",
+        hint_present ? "yes" : "no",
       )
     end
 
@@ -205,7 +205,7 @@ module Analytics
         @analytics_reporter.report_action(
           request,
           action,
-          universal_custom_variables(current_transaction, request).merge(extra_custom_vars)
+          universal_custom_variables(current_transaction, request).merge(extra_custom_vars),
         )
       rescue Display::FederationTranslator::TranslationError => e
         Rails.logger.warn e
@@ -216,7 +216,7 @@ module Analytics
       @analytics_reporter.report_action(
         request,
         action,
-        extra_custom_vars
+        extra_custom_vars,
       )
     end
 
@@ -227,7 +227,7 @@ module Analytics
           universal_custom_variables(current_transaction, request),
           event_category,
           event_name,
-          event_action
+          event_action,
         )
       rescue Display::FederationTranslator::TranslationError => e
         Rails.logger.warn e
@@ -237,18 +237,18 @@ module Analytics
     def report_event_without_current_transaction(request, event_category, event_name, event_action)
       @analytics_reporter.report_event(
         request,
-        '',
+        "",
         event_category,
         event_name,
-        event_action
+        event_action,
       )
     end
 
   private
 
-    HINT_NOT_PRESENT = ' not present | not followed |'.freeze
-    HINT_FOLLOWED = ' present | followed |'.freeze
-    HINT_NOT_FOLLOWED = ' present | not followed |'.freeze
+    HINT_NOT_PRESENT = " not present | not followed |".freeze
+    HINT_FOLLOWED = " present | followed |".freeze
+    HINT_NOT_FOLLOWED = " present | not followed |".freeze
 
     def journey_hint_details(hint)
       return HINT_NOT_PRESENT if hint.nil?

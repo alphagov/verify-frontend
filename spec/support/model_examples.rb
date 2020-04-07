@@ -2,7 +2,7 @@ RSpec.shared_examples "delegates to display_data" do |field, klass|
   describe "##{field}" do
     it "returns the display_data #{field}" do
       display_data = double(:display_data)
-      expected = 'hi'
+      expected = "hi"
       expect(display_data).to receive(field).and_return expected
 
       subject = Class.new(klass) do

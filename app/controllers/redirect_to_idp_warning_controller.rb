@@ -1,5 +1,5 @@
-require 'partials/idp_selection_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
+require "partials/idp_selection_partial_controller"
+require "partials/analytics_cookie_partial_controller"
 
 class RedirectToIdpWarningController < ApplicationController
   include IdpSelectionPartialController
@@ -15,7 +15,7 @@ class RedirectToIdpWarningController < ApplicationController
     if !idp_is_providing_registrations?(@idp)
       something_went_wrong("IDP with entity id: #{@idp.entity_id} is not providing registrations", :bad_request)
     elsif @idp.viewable?
-      render 'redirect_to_idp_warning'
+      render "redirect_to_idp_warning"
     else
       something_went_wrong("Couldn't display IDP with entity id: #{@idp.entity_id}")
     end
@@ -44,7 +44,7 @@ class RedirectToIdpWarningController < ApplicationController
 private
 
   def select_registration(idp)
-    POLICY_PROXY.select_idp(session['verify_session_id'], idp.entity_id, session['requested_loa'], true, analytics_session_id, session[:journey_type])
+    POLICY_PROXY.select_idp(session["verify_session_id"], idp.entity_id, session["requested_loa"], true, analytics_session_id, session[:journey_type])
     set_journey_hint_followed(idp.entity_id)
     set_attempt_journey_hint(idp.entity_id)
     register_idp_selections(idp.display_name)
@@ -62,12 +62,12 @@ private
   def recommended
     begin
       if session.fetch(:selected_idp_was_recommended)
-        '(recommended)'
+        "(recommended)"
       else
-        '(not recommended)'
+        "(not recommended)"
       end
     rescue KeyError
-      '(idp recommendation key not set)'
+      "(idp recommendation key not set)"
     end
   end
 
@@ -84,11 +84,11 @@ private
   end
 
   def user_has_no_docs?
-    selected_answer_store.selected_evidence_for('documents').empty?
+    selected_answer_store.selected_evidence_for("documents").empty?
   end
 
   def user_has_foreign_doc_only?
-    selected_answer_store.selected_evidence_for('documents') == [:non_uk_id_document]
+    selected_answer_store.selected_evidence_for("documents") == [:non_uk_id_document]
   end
 
   def idp_is_providing_registrations?(idp)

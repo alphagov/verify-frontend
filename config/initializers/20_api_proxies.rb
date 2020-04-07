@@ -1,5 +1,5 @@
-require 'originating_ip_store'
-require 'api'
+require "originating_ip_store"
+require "api"
 
 Rails.application.config.after_initialize do
   config_api_client = Api::Client.new(CONFIG.config_api_host, Api::HubResponseHandler.new)

@@ -1,5 +1,5 @@
-require 'connection_pool'
-require 'http'
+require "connection_pool"
+require "http"
 
 class PoolingClient
   attr_reader :client_pool

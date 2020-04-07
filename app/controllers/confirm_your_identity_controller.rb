@@ -1,5 +1,5 @@
-require 'partials/viewable_idp_partial_controller'
-require 'partials/journey_hinting_partial_controller'
+require "partials/viewable_idp_partial_controller"
+require "partials/journey_hinting_partial_controller"
 
 class ConfirmYourIdentityController < ApplicationController
   include ViewableIdpPartialController
@@ -9,7 +9,7 @@ class ConfirmYourIdentityController < ApplicationController
     journey_hint_entity_id = attempted_entity_id
 
     if journey_hint_entity_id.nil?
-      cookie_error('missing verify-front-journey-hint')
+      cookie_error("missing verify-front-journey-hint")
     else
       @transaction_name = current_transaction.name
       @identity_providers = journey_hint_entity_id.nil? ? [] : retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_registration, journey_hint_entity_id)

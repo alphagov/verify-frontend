@@ -1,5 +1,5 @@
-require 'concurrent'
-require 'date'
+require "concurrent"
+require "date"
 
 class LoadingCache
   include Concurrent::Async
@@ -11,7 +11,7 @@ class LoadingCache
   def fetch(&blk)
     result = self.await.fetch_object(&blk)
     if(result.fulfilled?)
-      return result.value
+      result.value
     else
       raise result.reason
     end

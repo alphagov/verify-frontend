@@ -1,6 +1,6 @@
-require 'spec_helper'
-require 'prometheus'
-require 'prometheus/controller_action_reporter'
+require "spec_helper"
+require "prometheus"
+require "prometheus/controller_action_reporter"
 
 module Prometheus
   describe ControllerActionReporter do
@@ -18,33 +18,33 @@ module Prometheus
                               .and_return(total_summary)
     end
 
-    it 'should send total duration of event' do
-      payload = { controller: 'SomeController', action: 'someAction' }
+    it "should send total duration of event" do
+      payload = { controller: "SomeController", action: "someAction" }
       duration = 0.060
       start = Time.now
       finish = start + duration
       allow(view_summary).to receive(:observe)
       expect(total_summary).to receive(:observe).with(duration, labels: { controller: "SomeController", action: "someAction" })
-      reporter.report('event_name', start, finish, 'notification_id', payload)
+      reporter.report("event_name", start, finish, "notification_id", payload)
     end
 
-    it 'should send time spent rendering view' do
+    it "should send time spent rendering view" do
       view_runtime = 50.12
-      payload = { controller: 'AnotherController', action: 'anotherAction', view_runtime: view_runtime }
+      payload = { controller: "AnotherController", action: "anotherAction", view_runtime: view_runtime }
       expect(view_summary).to receive(:observe).with(view_runtime / 1_000, labels: { controller: "AnotherController", action: "anotherAction" })
       allow(total_summary).to receive(:observe)
-      reporter.report('event_name', Time.now, Time.now, 'notification_id', payload)
+      reporter.report("event_name", Time.now, Time.now, "notification_id", payload)
     end
 
-    it 'should not send view rendering time if none is provided' do
+    it "should not send view rendering time if none is provided" do
       # Rails only sets view_runtime when rendering a view,
       # so it isn't set for redirects or AJAX responses.
       view_runtime = nil
-      payload = { controller: 'AnotherController', action: 'anotherAction', view_runtime: view_runtime }
+      payload = { controller: "AnotherController", action: "anotherAction", view_runtime: view_runtime }
       allow(total_summary).to receive(:observe)
       expect(view_summary).not_to receive(:observe)
       expect(payload[:view_runtime]).to be_nil
-      reporter.report('event_name', Time.now, Time.now, 'notification_id', payload)
+      reporter.report("event_name", Time.now, Time.now, "notification_id", payload)
     end
   end
 end

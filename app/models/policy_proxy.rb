@@ -22,7 +22,7 @@ class PolicyProxy
       PARAM_REGISTRATION => registration,
       PARAM_REQUESTED_LOA => requested_loa,
       PARAM_ANALYTICS_SESSION_ID => analytics_session_id,
-      PARAM_JOURNEY_TYPE => journey_type
+      PARAM_JOURNEY_TYPE => journey_type,
     }
 
     @api_client.post(select_idp_endpoint(session_id), body)
@@ -41,7 +41,7 @@ class PolicyProxy
   def submit_cycle_three_value(session_id, value)
     body = {
       PARAM_CYCLE_3_INPUT => value,
-      PARAM_PRINCIPAL_IP => originating_ip
+      PARAM_PRINCIPAL_IP => originating_ip,
     }
     @api_client.post(cycle_three_submit_endpoint(session_id), body)
   end
@@ -56,10 +56,10 @@ class PolicyProxy
   end
 
   def select_a_country(session_id, country)
-    @api_client.post(select_a_country_endpoint(session_id, country), '')
+    @api_client.post(select_a_country_endpoint(session_id, country), "")
   end
 
   def restart_journey(session_id)
-    @api_client.post(restart_journey_endpoint(session_id), '')
+    @api_client.post(restart_journey_endpoint(session_id), "")
   end
 end

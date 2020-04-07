@@ -1,6 +1,6 @@
-require 'spec_helper'
-require 'prometheus'
-require 'prometheus/api_request_reporter'
+require "spec_helper"
+require "prometheus"
+require "prometheus/api_request_reporter"
 
 module Prometheus
   describe ApiRequestReporter do
@@ -18,14 +18,14 @@ module Prometheus
                               .and_return(summary)
     end
 
-    it 'should send total duration of event' do
-      payload = { path: '/endpoint', method: 'get' }
+    it "should send total duration of event" do
+      payload = { path: "/endpoint", method: "get" }
       duration = 0.060
       start = Time.now
       finish = start + duration
       expect(counter).to receive(:increment).with(labels: { method: "get" })
       expect(summary).to receive(:observe).with(duration, labels: { method: "get" })
-      reporter.report('event_name', start, finish, 'notification_id', payload)
+      reporter.report("event_name", start, finish, "notification_id", payload)
     end
   end
 end

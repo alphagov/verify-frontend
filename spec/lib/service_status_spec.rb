@@ -1,6 +1,6 @@
-require 'spec_helper'
-require 'tempfile'
-require 'service_status'
+require "spec_helper"
+require "tempfile"
+require "service_status"
 describe ServiceStatus do
   it "is availble when zdd file doesn't exist" do
     file = Tempfile.new

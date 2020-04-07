@@ -1,7 +1,7 @@
-require 'partials/idp_selection_partial_controller'
-require 'partials/single_idp_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
-require 'partials/viewable_idp_partial_controller'
+require "partials/idp_selection_partial_controller"
+require "partials/single_idp_partial_controller"
+require "partials/analytics_cookie_partial_controller"
+require "partials/viewable_idp_partial_controller"
 
 class RedirectToIdpController < ApplicationController
   include IdpSelectionPartialController
@@ -30,14 +30,14 @@ class RedirectToIdpController < ApplicationController
   end
 
   def sign_in_with_last_successful_idp
-    session[:journey_type] = 'sign-in-last-sucessful-idp'
+    session[:journey_type] = "sign-in-last-sucessful-idp"
     simple_id = flash[:journey_hint]
     return render_not_found unless simple_id
 
-    simple_id.slice!('idp_')
+    simple_id.slice!("idp_")
 
     decorated_idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(
-      current_available_identity_providers_for_sign_in.detect { |idp| idp.simple_id == simple_id }
+      current_available_identity_providers_for_sign_in.detect { |idp| idp.simple_id == simple_id },
     )
     if decorated_idp.viewable?
       store_selected_idp_for_session(decorated_idp.identity_provider)
@@ -60,14 +60,14 @@ class RedirectToIdpController < ApplicationController
 
   def single_idp
     if valid_cookie?
-      uuid = MultiJson.load(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).fetch('uuid', nil)
+      uuid = MultiJson.load(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).fetch("uuid", nil)
       request_form_for_single_idp_journey(uuid)
       increase_attempt_number
       report_user_idp_attempt_to_piwik
       FEDERATION_REPORTER.report_single_idp_journey_selection(current_transaction, request, session[:selected_idp_name])
       render :redirect_to_idp
     else
-      render_error 'session_error', :bad_request
+      render_error "session_error", :bad_request
     end
   end
 
@@ -86,17 +86,17 @@ private
   def recommended
     begin
       if session.fetch(:selected_idp_was_recommended)
-        '(recommended)'
+        "(recommended)"
       else
-        '(not recommended)'
+        "(not recommended)"
       end
     rescue KeyError
-      '(idp recommendation key not set)'
+      "(idp recommendation key not set)"
     end
   end
 
   def select_idp(entity_id, idp_name)
-    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'], false, analytics_session_id, session[:journey_type])
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session["requested_loa"], false, analytics_session_id, session[:journey_type])
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
   end

@@ -7,7 +7,7 @@ module Api
     end
 
     def validate
-      raise ModelError, self.errors.full_messages.join(', ') unless self.valid?
+      raise ModelError, self.errors.full_messages.join(", ") unless self.valid?
     end
 
     ModelError = Class.new(StandardError)

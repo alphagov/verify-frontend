@@ -1,12 +1,12 @@
-require 'feature_helper'
-require 'api_test_helper'
+require "feature_helper"
+require "api_test_helper"
 
-RSpec.describe 'locale is set based on multiple sources', type: :feature do
+RSpec.describe "locale is set based on multiple sources", type: :feature do
   let(:selected_entity) {
     {
-      'entity_id' => 'http://idcorp.com',
-      'simple_id' => 'stub-entity-one',
-      'levels_of_assurance' => %w(LEVEL_1 LEVEL_2)
+      "entity_id" => "http://idcorp.com",
+      "simple_id" => "stub-entity-one",
+      "levels_of_assurance" => %w(LEVEL_1 LEVEL_2),
     }
   }
   before(:each) do
@@ -19,21 +19,21 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
   end
 
   context "when I visit a page" do
-    it 'will set the locale cookie to en if the language is English' do
-      set_locale_cookie_to('en')
-      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of 'en'
+    it "will set the locale cookie to en if the language is English" do
+      set_locale_cookie_to("en")
+      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of "en"
     end
 
-    it 'will set the locale cookie to cy if the page language is Welsh' do
-      set_locale_cookie_to('cy')
-      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of 'cy'
+    it "will set the locale cookie to cy if the page language is Welsh" do
+      set_locale_cookie_to("cy")
+      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of "cy"
     end
 
-    it 'will change the value of the locale cookie when the user changes from English to Welsh' do
-      set_locale_cookie_to('en')
-      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of 'en'
-      first('.available-languages').click_link('Cymraeg')
-      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of 'cy'
+    it "will change the value of the locale cookie when the user changes from English to Welsh" do
+      set_locale_cookie_to("en")
+      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of "en"
+      first(".available-languages").click_link("Cymraeg")
+      expect(cookie_value(CookieNames::VERIFY_LOCALE)).to have_a_signed_value_of "cy"
     end
   end
 
@@ -43,8 +43,8 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
         set_locale_cookie_to(locale)
         stub_session_creation
 
-        visit('/test-saml')
-        click_button 'saml-post'
+        visit("/test-saml")
+        click_button "saml-post"
 
         expect(current_path).to eql(public_send("start_#{locale}_path"))
       end
@@ -56,21 +56,21 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
         stub_matching_outcome
         stub_api_authn_response(session[:verify_session_id])
 
-        visit('/test-saml')
-        click_button 'saml-response-post'
+        visit("/test-saml")
+        click_button "saml-response-post"
 
         expect(current_path).to eql(public_send("response_processing_#{locale}_path"))
       end
     end
 
-    include_examples "submitting SAML", 'en'
-    include_examples "submitting SAML", 'cy'
+    include_examples "submitting SAML", "en"
+    include_examples "submitting SAML", "cy"
 
-    it 'will render the start page in English when no cookie or form parameters are set' do
+    it "will render the start page in English when no cookie or form parameters are set" do
       stub_session_creation
 
-      visit('/test-saml')
-      click_button 'saml-post'
+      visit("/test-saml")
+      click_button "saml-post"
 
       expect(current_path).to eql(start_en_path)
     end
@@ -86,7 +86,7 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
         end
         stub_session_creation
 
-        visit('/test-saml')
+        visit("/test-saml")
         click_button "saml-post-with-#{form_locale}-language"
 
         expect(current_path).to eql(public_send("start_#{form_locale}_path"))
@@ -104,18 +104,18 @@ RSpec.describe 'locale is set based on multiple sources', type: :feature do
         stub_matching_outcome
         stub_api_authn_response(session[:verify_session_id])
 
-        visit('/test-saml')
+        visit("/test-saml")
         click_button "saml-response-post-with-#{form_locale}-language"
 
         expect(current_path).to eql(public_send("response_processing_#{form_locale}_path"))
       end
     end
 
-    include_examples "submitting SAML with form params", 'en', 'en'
-    include_examples "submitting SAML with form params", 'en', 'cy'
-    include_examples "submitting SAML with form params", 'cy', 'en'
-    include_examples "submitting SAML with form params", 'cy', 'cy'
-    include_examples "submitting SAML with form params", 'cy'
-    include_examples "submitting SAML with form params", 'en'
+    include_examples "submitting SAML with form params", "en", "en"
+    include_examples "submitting SAML with form params", "en", "cy"
+    include_examples "submitting SAML with form params", "cy", "en"
+    include_examples "submitting SAML with form params", "cy", "cy"
+    include_examples "submitting SAML with form params", "cy"
+    include_examples "submitting SAML with form params", "en"
   end
 end

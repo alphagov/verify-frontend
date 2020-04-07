@@ -17,11 +17,11 @@ module Display
       def correlate(data)
         transactions_name_homepage = filter_transactions(data, @rps_name_homepage).map do |transaction|
           name = translate_name(transaction)
-          Transaction.new(name, transaction.fetch('serviceHomepage'), transaction.fetch('loaList'))
+          Transaction.new(name, transaction.fetch("serviceHomepage"), transaction.fetch("loaList"))
         end
         transactions_name_only = filter_transactions(data, @rps_name_only).map do |transaction|
           name = translate_name(transaction)
-          Transaction.new(name, nil, transaction.fetch('loaList'))
+          Transaction.new(name, nil, transaction.fetch("loaList"))
         end
         Transactions.new(transactions_name_homepage, transactions_name_only)
       rescue KeyError => e
@@ -32,12 +32,12 @@ module Display
     private
 
       def translate_name(transaction)
-        simple_id = transaction.fetch('simpleId')
+        simple_id = transaction.fetch("simpleId")
         @rp_display_repository.get_translations(simple_id).name
       end
 
       def filter_transactions(transactions, simple_ids)
-        simple_ids.map { |simple_id| transactions.select { |tx| tx['simpleId'] == simple_id } }.flatten
+        simple_ids.map { |simple_id| transactions.select { |tx| tx["simpleId"] == simple_id } }.flatten
       end
     end
   end

@@ -1,5 +1,5 @@
-require 'analytics/custom_variable'
-require 'cookies/cookies'
+require "analytics/custom_variable"
+require "cookies/cookies"
 
 module AbTest
   def self.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
@@ -16,7 +16,7 @@ module AbTest
   end
 
   def self.current_transaction_is_excluded_from_ab_test(current_transaction_simple_id)
-    RP_CONFIG.fetch('ab_test_blacklist').include?(current_transaction_simple_id)
+    RP_CONFIG.fetch("ab_test_blacklist").include?(current_transaction_simple_id)
   end
 
   def self.is_missing_experiments?(experiment_selection_hash)

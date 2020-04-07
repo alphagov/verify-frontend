@@ -5,7 +5,7 @@ end
 def build_experiment_hash
   if !env_var_set? then return {}.freeze end
 
-  experiments = YAML.load_file(CONFIG.ab_test_file)['experiments']
+  experiments = YAML.load_file(CONFIG.ab_test_file)["experiments"]
   if !experiments then return {}.freeze end
 
   experiments.inject({}) do |ab_tests, experiment|

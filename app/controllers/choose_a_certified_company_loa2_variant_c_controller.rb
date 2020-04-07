@@ -1,5 +1,5 @@
-require 'partials/viewable_idp_partial_controller'
-require 'partials/variant_partial_controller'
+require "partials/viewable_idp_partial_controller"
+require "partials/variant_partial_controller"
 
 class ChooseACertifiedCompanyLoa2VariantCController < RedirectToIdpWarningController
   include ChooseACertifiedCompanyAbout
@@ -9,8 +9,8 @@ class ChooseACertifiedCompanyLoa2VariantCController < RedirectToIdpWarningContro
   skip_before_action :render_cross_gov_ga, only: %i{about}
 
   def index
-    session[:selected_answers]&.delete('interstitial')
-    idps = current_identity_providers_for_loa_by_variant('c')
+    session[:selected_answers]&.delete("interstitial")
+    idps = current_identity_providers_for_loa_by_variant("c")
     suggestions = recommendation_engine.get_suggested_idps_for_registration(idps, selected_evidence, current_transaction_simple_id)
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended])
     @recommended_idps = order_with_unavailable_last(@recommended_idps)
@@ -21,7 +21,7 @@ class ChooseACertifiedCompanyLoa2VariantCController < RedirectToIdpWarningContro
     idps_available = IDP_RECOMMENDATION_ENGINE_variant_c.any?(idps, selected_evidence, current_transaction_simple_id)
     if idps_available
       session[:user_segments] = suggestions[:user_segments]
-      render 'choose_a_certified_company_variant_c/choose_a_certified_company_LOA2'
+      render "choose_a_certified_company_variant_c/choose_a_certified_company_LOA2"
     else
       redirect_to select_documents_advice_path
     end
@@ -29,13 +29,13 @@ class ChooseACertifiedCompanyLoa2VariantCController < RedirectToIdpWarningContro
 
   def select_idp
     if params[:entity_id].present?
-      select_viewable_idp_for_registration(params.fetch('entity_id')) do |decorated_idp|
-        session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa_by_variant('c'), selected_evidence, current_transaction_simple_id)
+      select_viewable_idp_for_registration(params.fetch("entity_id")) do |decorated_idp|
+        session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_identity_providers_for_loa_by_variant("c"), selected_evidence, current_transaction_simple_id)
         # TODO - do the spinny thing page
         do_redirect(decorated_idp)
       end
     else
-      render 'errors/something_went_wrong', status: 400
+      render "errors/something_went_wrong", status: 400
     end
   end
 

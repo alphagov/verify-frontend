@@ -4,7 +4,7 @@ class SessionValidator
       missing_cookies = missing_session_cookies(
         cookies, [
           ::CookieNames::SESSION_ID_COOKIE_NAME,
-          ::CookieNames::SESSION_COOKIE_NAME
+          ::CookieNames::SESSION_COOKIE_NAME,
         ]
       )
       if missing_cookies.any?

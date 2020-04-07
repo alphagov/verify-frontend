@@ -1,4 +1,4 @@
-require 'partials/journey_hinting_partial_controller'
+require "partials/journey_hinting_partial_controller"
 
 module IdpSelectionPartialController
   include JourneyHintingPartialController
@@ -76,7 +76,7 @@ module IdpSelectionPartialController
       transaction_simple_id: session[:transaction_simple_id],
       attempt_number: session[:attempt_number],
       journey_type: session[:journey_type],
-      hint_followed: session[:user_followed_journey_hint]
+      hint_followed: session[:user_followed_journey_hint],
     )
   end
 
@@ -88,7 +88,7 @@ module IdpSelectionPartialController
       idp_name_history: session[:selected_idp_names],
       evidence: selected_answer_store.selected_evidence,
       recommended: recommended,
-      user_segments: session[:user_segments]
+      user_segments: session[:user_segments],
     )
   end
 
@@ -96,7 +96,7 @@ module IdpSelectionPartialController
     IdentityProviderRequest.new(
       outbound_saml_message,
       selected_identity_provider.simple_id,
-      selected_answer_store.selected_answers
+      selected_answer_store.selected_answers,
     )
   end
 
@@ -105,7 +105,7 @@ module IdpSelectionPartialController
       outbound_saml_message,
       selected_identity_provider.simple_id,
       selected_answer_store.selected_answers,
-      uuid
+      uuid,
     )
   end
 

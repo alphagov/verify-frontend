@@ -3,6 +3,6 @@ class SelectIdpResponse < Api::Response
   validates_presence_of :encrypted_entity_id
 
   def initialize(hash)
-    @encrypted_entity_id = hash['encryptedEntityId']
+    @encrypted_entity_id = hash["encryptedEntityId"]
   end
 end

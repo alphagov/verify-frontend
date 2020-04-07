@@ -1,6 +1,6 @@
-require 'spec_helper'
-require 'prometheus'
-require 'prometheus/session_timeout_reporter'
+require "spec_helper"
+require "prometheus"
+require "prometheus/session_timeout_reporter"
 
 module Prometheus
   describe SessionTimeoutReporter do
@@ -18,12 +18,12 @@ module Prometheus
                               .and_return(summary)
     end
 
-    it 'should send total session timeouts' do
+    it "should send total session timeouts" do
       minutes_ago = 10
-      payload = { minutes_ago: minutes_ago, service: 'test-rp', idp: 'stub-idp' }
-      expect(counter).to receive(:increment).with(labels: { service: 'test-rp', idp: 'stub-idp' })
-      expect(summary).to receive(:observe).with(minutes_ago, labels: { service: 'test-rp', idp: 'stub-idp' })
-      reporter.report('event_name', 'start', 'finish', 'notification_id', payload)
+      payload = { minutes_ago: minutes_ago, service: "test-rp", idp: "stub-idp" }
+      expect(counter).to receive(:increment).with(labels: { service: "test-rp", idp: "stub-idp" })
+      expect(summary).to receive(:observe).with(minutes_ago, labels: { service: "test-rp", idp: "stub-idp" })
+      reporter.report("event_name", "start", "finish", "notification_id", payload)
     end
   end
 end

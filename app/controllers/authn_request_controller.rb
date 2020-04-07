@@ -1,6 +1,6 @@
-require 'ab_test/ab_test'
-require 'partials/journey_hinting_partial_controller'
-require 'partials/user_errors_partial_controller'
+require "ab_test/ab_test"
+require "partials/journey_hinting_partial_controller"
+require "partials/user_errors_partial_controller"
 
 class AuthnRequestController < SamlController
   include JourneyHintingPartialController
@@ -28,7 +28,7 @@ private
   def create_session
     reset_session
     store_rp_request_data
-    session_id = SAML_PROXY_API.create_session(params['SAMLRequest'], params['RelayState'])
+    session_id = SAML_PROXY_API.create_session(params["SAMLRequest"], params["RelayState"])
     set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, session_id)
     set_session_id(session_id)
     sign_in_process_details = POLICY_PROXY.get_sign_in_process_details(session_id)
@@ -73,38 +73,38 @@ private
 
   def preferred_journey_hint(session_journey_hint, session_journey_hint_rp)
     default_value = session[:transaction_simple_id] == session_journey_hint_rp ? session_journey_hint : nil
-    params.fetch('journey_hint', default_value)
+    params.fetch("journey_hint", default_value)
   end
 
   def redirect_for_journey_hint(hint)
     redirect_params = {}
-    if params['_ga'].present?
-      redirect_params = { _ga: params['_ga'] }
+    if params["_ga"].present?
+      redirect_params = { _ga: params["_ga"] }
     end
     if !cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY].nil? && SINGLE_IDP_FEATURE
       redirect_to continue_to_your_idp_path(redirect_params)
-    elsif (is_last_status?(PENDING_STATUS) || resume_link?) && hint != 'submission_confirmation'
+    elsif (is_last_status?(PENDING_STATUS) || resume_link?) && hint != "submission_confirmation"
       redirect_to resume_registration_path(redirect_params)
     else
       case hint
-      when 'uk_idp_start'
+      when "uk_idp_start"
         flash[:journey_hint] = hint
         redirect_to start_path(redirect_params)
-      when 'registration'
+      when "registration"
         flash[:journey_hint] = hint
         redirect_to start_path(redirect_params) # Change temporarily, original value = begin_registration_path
-      when 'uk_idp_sign_in'
+      when "uk_idp_sign_in"
         flash[:journey_hint] = hint
         redirect_to start_path(redirect_params) # Change temporarily, original value = begin_sign_in_path
-      when 'eidas_sign_in'
+      when "eidas_sign_in"
         do_eidas_sign_in_redirect(redirect_params)
-      when 'submission_confirmation'
+      when "submission_confirmation"
         redirect_to confirm_your_identity_path(redirect_params)
       when successful_idp_hint?
         flash[:journey_hint] = hint
         redirect_to redirect_to_idp_sign_in_with_last_successful_idp_path(redirect_params)
       else
-        logger.info "Unrecognised journey_hint value: #{hint}" unless hint.nil? || hint.eql?('unspecified')
+        logger.info "Unrecognised journey_hint value: #{hint}" unless hint.nil? || hint.eql?("unspecified")
         do_default_redirect(redirect_params)
       end
     end
@@ -124,15 +124,15 @@ private
 
   def store_rp_request_data
     RequestStore.store[:rp_referer] = request.referer
-    RequestStore.store[:rp_saml_request] = params.fetch('SAMLRequest', nil)
-    RequestStore.store[:rp_relay_state] = params.fetch('RelayState', nil)
+    RequestStore.store[:rp_saml_request] = params.fetch("SAMLRequest", nil)
+    RequestStore.store[:rp_relay_state] = params.fetch("RelayState", nil)
   end
 
   def raise_error_if_params_invalid
-    something_went_wrong_warn("Missing/empty SAML message from #{request.referer}", :bad_request) if params['SAMLRequest'].blank?
+    something_went_wrong_warn("Missing/empty SAML message from #{request.referer}", :bad_request) if params["SAMLRequest"].blank?
   end
 
   def successful_idp_hint?
-    ->(hint) { hint && hint.start_with?('idp_') }
+    ->(hint) { hint && hint.start_with?("idp_") }
   end
 end

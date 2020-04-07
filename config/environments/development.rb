@@ -2,7 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Specify app log level
-  config.log_level = ENV.fetch('LOG_LEVEL').to_sym
+  config.log_level = ENV.fetch("LOG_LEVEL").to_sym
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

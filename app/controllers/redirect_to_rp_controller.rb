@@ -5,8 +5,8 @@ class RedirectToRpController < ApplicationController
   def redirect_to_rp
     simple_id = params[:transaction_simple_id]
     begin
-      rp_url = REDIRECT_TO_RP_LIST[simple_id]['url']
-      ab_test = REDIRECT_TO_RP_LIST[simple_id]['ab_test']
+      rp_url = REDIRECT_TO_RP_LIST[simple_id]["url"]
+      ab_test = REDIRECT_TO_RP_LIST[simple_id]["ab_test"]
     rescue StandardError
       redirect_to start_path
       return

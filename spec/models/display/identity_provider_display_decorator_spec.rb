@@ -1,33 +1,33 @@
-require 'active_support/core_ext/module/delegation'
-require 'models/display/identity_provider_display_decorator'
-require 'models/display/viewable_identity_provider'
-require 'models/display/not_viewable_identity_provider'
-require 'logger_helper'
+require "active_support/core_ext/module/delegation"
+require "models/display/identity_provider_display_decorator"
+require "models/display/viewable_identity_provider"
+require "models/display/not_viewable_identity_provider"
+require "logger_helper"
 
 module Display
   describe IdentityProviderDisplayDecorator do
     let(:repository) { double(:repository) }
-    let(:decorator) { IdentityProviderDisplayDecorator.new(repository, '/stub-logos') }
+    let(:decorator) { IdentityProviderDisplayDecorator.new(repository, "/stub-logos") }
 
-    it 'takes an IDP object and a repository with knowledge of IDPs and returns the IDP with display data' do
-      idp = double(:idp_one, 'simple_id' => 'test-simple-id', 'entity_id' => 'test-entity-id')
+    it "takes an IDP object and a repository with knowledge of IDPs and returns the IDP with display data" do
+      idp = double(:idp_one, "simple_id" => "test-simple-id", "entity_id" => "test-entity-id")
 
       display_data = double(:display_data)
-      expect(repository).to receive(:fetch).with('test-simple-id').and_return display_data
+      expect(repository).to receive(:fetch).with("test-simple-id").and_return display_data
       result = decorator.decorate(idp)
       expected_result = ViewableIdentityProvider.new(
         idp,
         display_data,
-        '/stub-logos/test-simple-id.png',
-        '/stub-logos/white/test-simple-id.png'
+        "/stub-logos/test-simple-id.png",
+        "/stub-logos/white/test-simple-id.png",
         )
       expect(result).to eql expected_result
     end
 
-    it 'returns a decorated IDP that is not viewable if display data is missing' do
-      idp = double(:idp_one, 'simple_id' => 'test-simple-id', 'entity_id' => 'test-entity-id')
+    it "returns a decorated IDP that is not viewable if display data is missing" do
+      idp = double(:idp_one, "simple_id" => "test-simple-id", "entity_id" => "test-entity-id")
       expect(stub_logger).to receive(:error).at_least(:once)
-      allow(repository).to receive(:fetch).with('test-simple-id').and_raise(KeyError)
+      allow(repository).to receive(:fetch).with("test-simple-id").and_raise(KeyError)
 
       result = decorator.decorate(idp)
       expected_result = NotViewableIdentityProvider.new(idp)
@@ -37,8 +37,8 @@ module Display
     it "will skip IDP if translations can't be found" do
       expect(stub_logger).to receive(:error).at_least(:once)
 
-      allow(repository).to receive(:fetch).with('test-simple-id').and_raise(KeyError)
-      idp = double(:idp_one, 'simple_id' => 'test-simple-id', 'entity_id' => 'test-entity-id')
+      allow(repository).to receive(:fetch).with("test-simple-id").and_raise(KeyError)
+      idp = double(:idp_one, "simple_id" => "test-simple-id", "entity_id" => "test-entity-id")
       idp_list = [idp]
       result = decorator.decorate_collection(idp_list)
       expect(result).to eql []

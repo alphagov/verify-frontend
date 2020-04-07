@@ -1,12 +1,12 @@
-require 'redirect_with_see_other'
-require 'cookies/cookies'
-require 'errors/warning_level_error'
-require 'partials/user_characteristics_partial_controller'
-require 'partials/user_errors_partial_controller'
-require 'partials/user_cookies_partial_controller'
-require 'partials/user_session_partial_controller'
-require 'partials/transactions_partial_controller'
-require 'partials/analytics_partial_controller'
+require "redirect_with_see_other"
+require "cookies/cookies"
+require "errors/warning_level_error"
+require "partials/user_characteristics_partial_controller"
+require "partials/user_errors_partial_controller"
+require "partials/user_cookies_partial_controller"
+require "partials/user_session_partial_controller"
+require "partials/transactions_partial_controller"
+require "partials/analytics_partial_controller"
 
 class ApplicationController < ActionController::Base
   include DeviceType
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   before_action :store_originating_ip
   before_action :set_piwik_custom_variables
   before_action :render_cross_gov_ga
-  after_action :store_locale_in_cookie, if: -> { request.method == 'GET' }
+  after_action :store_locale_in_cookie, if: -> { request.method == "GET" }
   after_action :delete_new_visit_flag
 
   helper_method :transaction_taxon_list
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   helper_method :public_piwik
   helper_method :cross_gov_ga
 
-  rescue_from StandardError, with: :something_went_wrong unless Rails.env == 'development'
+  rescue_from StandardError, with: :something_went_wrong unless Rails.env == "development"
   rescue_from Errors::WarningLevelError, with: :something_went_wrong_warn
   rescue_from Api::SessionError, with: :session_error
   rescue_from Api::UpstreamError, with: :upstream_error

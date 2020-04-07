@@ -3,7 +3,7 @@ module UserCookiesPartialController
     cookies[name] = {
         value: value,
         httponly: true,
-        secure: Rails.configuration.x.cookies.secure
+        secure: Rails.configuration.x.cookies.secure,
     }
   end
 
@@ -15,13 +15,13 @@ module UserCookiesPartialController
     cookies.signed[CookieNames::VERIFY_LOCALE] = {
         value: I18n.locale,
         httponly: true,
-        secure: Rails.configuration.x.cookies.secure
+        secure: Rails.configuration.x.cookies.secure,
     }
   end
 
   def set_attempt_journey_hint(idp_entity_id)
     journey_hint_value_hash = journey_hint_value || {}
-    journey_hint_value_hash['ATTEMPT'] = idp_entity_id
+    journey_hint_value_hash["ATTEMPT"] = idp_entity_id
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_value_hash.to_json,
                                                                   expires: 18.months.from_now }
@@ -31,8 +31,8 @@ module UserCookiesPartialController
     return if idp_entity_id.nil?
 
     journey_hint_by_status_value = journey_hint_value || {}
-    journey_hint_by_status_value['SUCCESS'] = idp_entity_id if status == 'SUCCESS'
-    journey_hint_by_status_value['STATE'] = { IDP: idp_entity_id,
+    journey_hint_by_status_value["SUCCESS"] = idp_entity_id if status == "SUCCESS"
+    journey_hint_by_status_value["STATE"] = { IDP: idp_entity_id,
                                               RP: rp_entity_id.nil? ? session[:transaction_entity_id] : rp_entity_id,
                                               STATUS: status }
 
@@ -41,8 +41,8 @@ module UserCookiesPartialController
 
   def set_resume_link_journey_hint(idp_simple_id)
     journey_hint_value_hash = journey_hint_value || {}
-    journey_hint_value_hash['RESUMELINK'] = {
-      IDP: idp_simple_id
+    journey_hint_value_hash["RESUMELINK"] = {
+      IDP: idp_simple_id,
     }
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_value_hash.to_json,
@@ -51,7 +51,7 @@ module UserCookiesPartialController
 
   def remove_resume_link_journey_hint
     journey_hint_value_hash = journey_hint_value || {}
-    journey_hint_value_hash.delete('RESUMELINK')
+    journey_hint_value_hash.delete("RESUMELINK")
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_value_hash.to_json,
                                                                   expires: 18.months.from_now }
@@ -59,7 +59,7 @@ module UserCookiesPartialController
 
   def remove_success_journey_hint
     journey_hint_value_hash = journey_hint_value || {}
-    journey_hint_value_hash.delete('SUCCESS')
+    journey_hint_value_hash.delete("SUCCESS")
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_value_hash.to_json,
                                                                   expires: 18.months.from_now }
@@ -68,7 +68,7 @@ module UserCookiesPartialController
   def set_single_idp_journey_cookie(data)
     cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = {
       value: data.to_json,
-      expires: 90.minutes.from_now
+      expires: 90.minutes.from_now,
     }
   end
 

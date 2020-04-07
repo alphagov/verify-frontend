@@ -1,5 +1,5 @@
-require 'session_validator/successful_validation'
-require 'session_validator/validation_failure'
+require "session_validator/successful_validation"
+require "session_validator/validation_failure"
 
 class SessionValidator
   class SessionIdValidator

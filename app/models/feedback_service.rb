@@ -8,7 +8,7 @@ class FeedbackService
     ticket = {
                subject: subject(form),
                comment: { value: comment_value(session_id, form) },
-               requester: { name: presented_name(form), email: presented_email(form) }
+               requester: { name: presented_name(form), email: presented_email(form) },
              }
     @zendesk_client.submit(session_id, ticket)
   end
@@ -40,11 +40,11 @@ With email: <%= presented_email(form) %>
   end
 
   def subject(form)
-    form.reply_required? ? '[GOV.UK Verify] Enquiry' : '[GOV.UK Verify] Feedback'
+    form.reply_required? ? "[GOV.UK Verify] Enquiry" : "[GOV.UK Verify] Feedback"
   end
 
   def presented_name(form)
-    form.reply_required? ? form.name : ''
+    form.reply_required? ? form.name : ""
   end
 
   def presented_email(form)

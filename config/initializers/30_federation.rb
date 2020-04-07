@@ -1,7 +1,7 @@
-require 'yaml_loader'
-require 'idp_recommendations/idp_profiles_loader'
-require 'idp_recommendations/segment_matcher'
-require 'idp_recommendations/recommendations_engine'
+require "yaml_loader"
+require "idp_recommendations/idp_profiles_loader"
+require "idp_recommendations/segment_matcher"
+require "idp_recommendations/recommendations_engine"
 
 Rails.application.config.after_initialize do
   # Federation localisation and display
@@ -19,12 +19,12 @@ Rails.application.config.after_initialize do
 
   EIDAS_SCHEME_DISPLAY_DECORATOR = Display::EidasSchemeDisplayDecorator.new(
     EIDAS_SCHEME_REPOSITORY,
-    CONFIG.eidas_scheme_logos_directory
+    CONFIG.eidas_scheme_logos_directory,
   )
 
   COUNTRY_DISPLAY_DECORATOR = Display::CountryDisplayDecorator.new(
     COUNTRY_DISPLAY_REPOSITORY,
-    CONFIG.country_flags_directory
+    CONFIG.country_flags_directory,
   )
 
   # Cycle Three display
@@ -34,10 +34,10 @@ Rails.application.config.after_initialize do
 
   # RP/transactions config
   RP_CONFIG = YAML.load_file(CONFIG.rp_config)
-  CONTINUE_ON_FAILED_REGISTRATION_RPS = RP_CONFIG.fetch('allow_continue_on_failed_registration', [])
-  rps_name_and_homepage = RP_CONFIG['transaction_type']['display_name_and_homepage'] || []
-  rps_name_only = RP_CONFIG['transaction_type']['display_name_only'] || []
-  REDIRECT_TO_RP_LIST = RP_CONFIG['redirect_to_rp'] || []
+  CONTINUE_ON_FAILED_REGISTRATION_RPS = RP_CONFIG.fetch("allow_continue_on_failed_registration", [])
+  rps_name_and_homepage = RP_CONFIG["transaction_type"]["display_name_and_homepage"] || []
+  rps_name_only = RP_CONFIG["transaction_type"]["display_name_only"] || []
+  REDIRECT_TO_RP_LIST = RP_CONFIG["redirect_to_rp"] || []
   DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
   TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
 

@@ -1,5 +1,5 @@
-require 'cookies/cookies'
-require 'ab_test/ab_test'
+require "cookies/cookies"
+require "ab_test/ab_test"
 
 class SelectRoute
   def initialize(experiment_name, route, config = { experiment_loa: nil,
@@ -37,6 +37,6 @@ private
   def extract_experiment_route_from_cookie(ab_test_cookie)
     experiment_name = Cookies.parse_json(ab_test_cookie)[@experiment_name]
 
-    AB_TESTS[@experiment_name] ? AB_TESTS[@experiment_name].alternative_name(experiment_name) : 'default'
+    AB_TESTS[@experiment_name] ? AB_TESTS[@experiment_name].alternative_name(experiment_name) : "default"
   end
 end

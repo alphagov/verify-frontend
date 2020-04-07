@@ -1,4 +1,4 @@
-require 'partials/eidas_validation_partial_controller'
+require "partials/eidas_validation_partial_controller"
 
 class RedirectToCountryController < ApplicationController
   include EidasValidationPartialController

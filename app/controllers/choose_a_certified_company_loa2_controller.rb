@@ -1,5 +1,5 @@
-require 'partials/journey_hinting_partial_controller'
-require 'partials/viewable_idp_partial_controller'
+require "partials/journey_hinting_partial_controller"
+require "partials/viewable_idp_partial_controller"
 
 class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
@@ -8,7 +8,7 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
   skip_before_action :render_cross_gov_ga, only: %i{about}
 
   def index
-    session[:selected_answers]&.delete('interstitial')
+    session[:selected_answers]&.delete("interstitial")
     suggestions = recommendation_engine.get_suggested_idps_for_registration(current_available_identity_providers_for_registration, selected_evidence, current_transaction_simple_id)
     if THROTTLING_ENABLED && !is_last_status?(FAILED_STATUS)
       throttled_idp_name = users_idp(suggestions)
@@ -26,17 +26,17 @@ class ChooseACertifiedCompanyLoa2Controller < ApplicationController
     @non_recommended_idps = order_with_unavailable_last(@non_recommended_idps)
     session[:user_segments] = suggestions[:user_segments]
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
-    render 'choose_a_certified_company/choose_a_certified_company_LOA2'
+    render "choose_a_certified_company/choose_a_certified_company_LOA2"
   end
 
   def select_idp
     if params[:entity_id].present?
-      select_viewable_idp_for_registration(params.fetch('entity_id')) do |decorated_idp|
+      select_viewable_idp_for_registration(params.fetch("entity_id")) do |decorated_idp|
         session[:selected_idp_was_recommended] = recommendation_engine.recommended?(decorated_idp.identity_provider, current_available_identity_providers_for_registration, selected_evidence, current_transaction_simple_id)
         redirect_to warning_or_question_page(decorated_idp)
       end
     else
-      render 'errors/something_went_wrong', status: 400
+      render "errors/something_went_wrong", status: 400
     end
   end
 

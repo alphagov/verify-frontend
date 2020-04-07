@@ -38,7 +38,7 @@ private
   def custom_variables_for_js
     @piwik_custom_variables = [
       Analytics::CustomVariable.build_for_js_client(:rp, current_transaction.analytics_description),
-      Analytics::CustomVariable.build_for_js_client(:loa_requested, session[:requested_loa])
+      Analytics::CustomVariable.build_for_js_client(:loa_requested, session[:requested_loa]),
     ]
     @piwik_custom_variables.push(Analytics::CustomVariable.build_for_js_client(:ab_test, flash[:ab_test_variant])) unless ab_test_variant.nil?
   end
@@ -67,7 +67,7 @@ private
       attempt_number: session[:attempt_number],
       journey_type: session[:journey_type],
       hint_followed: session[:user_followed_journey_hint],
-      response_status: response_status
+      response_status: response_status,
     )
   end
 end
