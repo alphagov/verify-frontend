@@ -2,6 +2,7 @@ module UserErrorsPartialController
   def render_error(partial, status)
     set_locale
     if partial == :session_timeout
+      @other_ways_description = current_transaction.other_ways_description
       @redirect_to_destination = if CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
                                    '/redirect-to-service/error'
                                  else
@@ -29,7 +30,7 @@ module UserErrorsPartialController
                                else
                                  session[:transaction_homepage]
                                end
-    render_error('session_timeout', :forbidden)
+    render_error(:session_timeout, :forbidden)
   end
 
   def session_error(exception)
