@@ -192,6 +192,12 @@ class StubApi < Sinatra::Base
         "serviceHomepage":"http://example.com/test-rp-loa1",
         "loaList":["LEVEL_1","LEVEL_2"],
         "headlessStartpage":"http://example.com/test-rp-loa1/success"
+      }],
+      {
+        "simpleId": "loa2-loa1-test-rp",
+        "serviceHomepage":"http://example.com/test-rp-loa2-loa1",
+        "loaList":["LEVEL_2","LEVEL_1"],
+        "headlessStartpage":"http://example.com/test-rp-loa2-loa1/success"
       }]'
    end
 
@@ -207,6 +213,12 @@ class StubApi < Sinatra::Base
         "redirectUrl":"http://example.com/test-rp-loa1",
         "loaList":["LEVEL_1","LEVEL_2"],
         "entityId": "http://example.com/test-rp-loa1"
+      }],
+      {
+        "simpleId": "loa2-loa1-test-rp",
+        "redirectUrl":"http://example.com/test-rp-loa1",
+        "loaList":["LEVEL_2","LEVEL_1",],
+        "entityId": "http://example.com/test-rp-loa2-loa1"
       }]'
   end
 
