@@ -6,12 +6,12 @@ class SessionValidator
 
     def self.session_expired(session, minutes_ago)
       message = "session \"#{session[:verify_session_id]}\" has expired #{minutes_ago} minutes ago"
-      ActiveSupport::Notifications.instrument('session_timeout', minutes_ago: minutes_ago, service: session[:transaction_entity_id], idp: session[:selected_idp_name])
+      ActiveSupport::Notifications.instrument("session_timeout", minutes_ago: minutes_ago, service: session[:transaction_entity_id], idp: session[:selected_idp_name])
       ValidationFailure.new(:session_timeout, :forbidden, message)
     end
 
     def self.no_cookies
-      message = 'No session cookies can be found'
+      message = "No session cookies can be found"
       ValidationFailure.new(:no_cookies, :forbidden, message)
     end
 
@@ -26,12 +26,12 @@ class SessionValidator
     end
 
     def self.session_id_missing
-      message = 'Session ID in the rails session is missing'
+      message = "Session ID in the rails session is missing"
       ValidationFailure.new(:something_went_wrong, :internal_server_error, message)
     end
 
     def self.session_id_mismatch
-      message = 'Session ID in cookie does not match value in session'
+      message = "Session ID in cookie does not match value in session"
       ValidationFailure.new(:something_went_wrong, :bad_request, message)
     end
 

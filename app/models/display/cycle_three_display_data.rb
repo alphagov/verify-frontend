@@ -1,7 +1,7 @@
 module Display
   class CycleThreeDisplayData < DisplayData
     def prefix
-      'cycle3'
+      "cycle3"
     end
 
     content :name

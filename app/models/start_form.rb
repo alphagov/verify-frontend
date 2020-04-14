@@ -9,14 +9,14 @@ class StartForm
   end
 
   def registration?
-    self.selection == 'true'
+    self.selection == "true"
   end
 
 private
 
   def answer_required
     if @selection.blank?
-      errors.add(:selection_true, I18n.t('hub.start.error_message'))
+      errors.add(:selection_true, I18n.t("hub.start.error_message"))
     end
   end
 end

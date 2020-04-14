@@ -1,8 +1,8 @@
-require 'rails_helper'
-require 'capybara/rspec'
-require 'webmock/rspec'
-require 'rack_session_access/capybara'
-require 'support/cookie_matchers'
+require "rails_helper"
+require "capybara/rspec"
+require "webmock/rspec"
+require "rack_session_access/capybara"
+require "support/cookie_matchers"
 WebMock.disable_net_connect!(allow_localhost: true)
 
 RACK_COOKIE_DATE_FORMAT = "%a, %d %b %Y".freeze
@@ -20,13 +20,13 @@ RSpec.configure do |config|
   config.include AbstractController::Translation
 end
 
-require 'selenium/webdriver'
+require "selenium/webdriver"
 Capybara.register_driver :firefox_headless do |app|
   options = ::Selenium::WebDriver::Firefox::Options.new
   # Stop firefox getting upgraded to version 63 which does not work with Selenium.
-  options.add_preference('app.update.auto', false)
-  options.add_preference('app.update.enabled', false)
-  options.add_argument('--headless')
+  options.add_preference("app.update.auto", false)
+  options.add_preference("app.update.enabled", false)
+  options.add_argument("--headless")
 
   Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
 end
@@ -39,7 +39,7 @@ module FeatureHelper
   end
 
   def expect_feedback_source_to_be(page, source, feedback_source_path)
-    expect(page).to have_link id: t('feedback_link.id'), href: "/feedback-landing?feedback-source=#{source}"
+    expect(page).to have_link id: t("feedback_link.id"), href: "/feedback-landing?feedback-source=#{source}"
     expect(FEEDBACK_SOURCE_MAPPER.page_from_source(source, :en)).to eql(feedback_source_path)
   end
 
@@ -50,7 +50,7 @@ module FeatureHelper
 
   def set_cookies!(hash)
     driver = Capybara.current_session.driver
-    visit '/test-saml' if is_selenium_driver?
+    visit "/test-saml" if is_selenium_driver?
     hash.each do |key, value|
       if is_selenium_driver?
         driver.browser.manage.add_cookie(name: key, value: value)
@@ -75,18 +75,18 @@ module FeatureHelper
   end
 
   def default_session_id
-    'my-session-id-cookie'
+    "my-session-id-cookie"
   end
 
   def create_cookie_hash
     {
-        CookieNames::SESSION_COOKIE_NAME => 'my-session-cookie',
+        CookieNames::SESSION_COOKIE_NAME => "my-session-cookie",
         CookieNames::SESSION_ID_COOKIE_NAME => default_session_id,
     }
   end
 
   def create_cookie_hash_with_piwik_session
-    create_cookie_hash.merge('_pk_id.1.ffff' => piwik_session_cookie_value)
+    create_cookie_hash.merge("_pk_id.1.ffff" => piwik_session_cookie_value)
   end
 
   def piwik_session_cookie_value
@@ -95,7 +95,7 @@ module FeatureHelper
   end
 
   def piwik_session_id
-    'cdf47f93f1419b32'
+    "cdf47f93f1419b32"
   end
 
   def start_time_in_millis
@@ -122,19 +122,19 @@ module FeatureHelper
 
   def set_loa_in_session(loa)
     page.set_rack_session(
-      requested_loa: loa
+      requested_loa: loa,
     )
   end
 
   def set_selected_idp_in_session(selected_idp)
     page.set_rack_session(
-      selected_provider: SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
+      selected_provider: SelectedProviderData.new(JourneyType::VERIFY, selected_idp),
     )
   end
 
   def set_selected_country_in_session(selected_country)
     page.set_rack_session(
-      selected_provider: SelectedProviderData.new(JourneyType::EIDAS, selected_country)
+      selected_provider: SelectedProviderData.new(JourneyType::EIDAS, selected_country),
     )
   end
 
@@ -154,55 +154,55 @@ module FeatureHelper
     current_uri.query ? CGI::parse(current_uri.query) : {}
   end
 
-  def set_journey_hint_cookie(entity_id, status = nil, locale = 'en', rp_entity_id = nil, resume_link_entity_id = nil)
-    visit '/test-journey-hint'
-    fill_in 'entity-id', with: entity_id
-    fill_in 'status', with: status
-    fill_in 'locale', with: locale
-    fill_in 'rp-entity-id', with: rp_entity_id
-    fill_in 'resume-link-simple-id', with: resume_link_entity_id
+  def set_journey_hint_cookie(entity_id, status = nil, locale = "en", rp_entity_id = nil, resume_link_entity_id = nil)
+    visit "/test-journey-hint"
+    fill_in "entity-id", with: entity_id
+    fill_in "status", with: status
+    fill_in "locale", with: locale
+    fill_in "rp-entity-id", with: rp_entity_id
+    fill_in "resume-link-simple-id", with: resume_link_entity_id
 
-    click_button 'journey-hint-post'
+    click_button "journey-hint-post"
   end
 
   def cookie_header(cookie_name)
-    set_cookies_headers = page.response_headers['Set-Cookie'].split(/\n/)
+    set_cookies_headers = page.response_headers["Set-Cookie"].split(/\n/)
     set_cookies_headers.detect { |header| header.match(/^#{cookie_name}/) }
   end
 
-  def initialise_journey_hint(journey_hint, journey_hint_rp = 'test-rp')
-    post '/test-initiate-journey', params: { journey_hint: journey_hint, journey_hint_rp: journey_hint_rp }
+  def initialise_journey_hint(journey_hint, journey_hint_rp = "test-rp")
+    post "/test-initiate-journey", params: { journey_hint: journey_hint, journey_hint_rp: journey_hint_rp }
   end
 
 private
 
   def default_session
     {
-      transaction_simple_id: 'test-rp',
+      transaction_simple_id: "test-rp",
       start_time: start_time_in_millis,
       verify_session_id: default_session_id,
-      requested_loa: 'LEVEL_2',
-      transaction_entity_id: 'http://www.test-rp.gov.uk/SAML2/MD',
-      transaction_homepage: 'http://www.test-rp.gov.uk/',
+      requested_loa: "LEVEL_2",
+      transaction_entity_id: "http://www.test-rp.gov.uk/SAML2/MD",
+      transaction_homepage: "http://www.test-rp.gov.uk/",
       selected_answers: { device_type: { device_type_other: true } },
     }
   end
 
   def variant_session
     {
-        transaction_simple_id: 'test-rp',
+        transaction_simple_id: "test-rp",
         start_time: start_time_in_millis,
         verify_session_id: default_session_id,
-        requested_loa: 'LEVEL_2',
-        transaction_entity_id: 'http://www.test-rp.gov.uk/SAML2/MD',
-        transaction_homepage: 'http://www.test-rp.gov.uk/',
+        requested_loa: "LEVEL_2",
+        transaction_entity_id: "http://www.test-rp.gov.uk/SAML2/MD",
+        transaction_homepage: "http://www.test-rp.gov.uk/",
         selected_answers: { documents: { driving_licence: false }, device_type: { device_type_other: true } },
     }
   end
 
-  def navigate_to_feedback_form(locale = 'en')
-    click_link id: t('feedback_link.id')
-    click_link t('hub.feedback_landing.feedback_form.heading', locale: locale)
+  def navigate_to_feedback_form(locale = "en")
+    click_link id: t("feedback_link.id")
+    click_link t("hub.feedback_landing.feedback_form.heading", locale: locale)
   end
 end
 

@@ -1,4 +1,4 @@
-require 'zendesk_api'
+require "zendesk_api"
 
 class ZendeskClient
   def initialize(client, logger)
@@ -8,7 +8,7 @@ class ZendeskClient
 
   def submit(session_id, ticket)
     ticket_created = @client.tickets.create!(ticket)
-    session_id = session_id.nil? ? 'session-cookie-is-null-or-invalid' : session_id
+    session_id = session_id.nil? ? "session-cookie-is-null-or-invalid" : session_id
     @logger.info("Feedback sent for session id #{session_id}, zendesk with ticket id #{ticket_created.id}")
     true
   rescue ZendeskAPI::Error::ClientError => e

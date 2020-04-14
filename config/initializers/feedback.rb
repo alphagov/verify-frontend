@@ -1,8 +1,8 @@
-require 'zendesk_api'
-require 'zendesk_client'
+require "zendesk_api"
+require "zendesk_client"
 
-if Rails.env == 'test'
-  require 'feedback/dummy_zendesk_client'
+if Rails.env == "test"
+  require "feedback/dummy_zendesk_client"
   DUMMY_ZENDESK_CLIENT = Feedback::DummyZendeskClient.new
   ZENDESK_CLIENT = ZendeskClient.new(DUMMY_ZENDESK_CLIENT, Rails.logger)
 else

@@ -1,4 +1,4 @@
-require 'prometheus'
+require "prometheus"
 
 if CONFIG.prometheus_enabled
   event_source = ActiveSupport::Notifications

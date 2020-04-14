@@ -5,12 +5,12 @@ class IdentityProvider
   validates_presence_of :simple_id, :entity_id, :levels_of_assurance
 
   def initialize(hash)
-    @simple_id = hash['simpleId']
-    @entity_id = hash['entityId']
-    @levels_of_assurance = hash['levelsOfAssurance']
-    @authentication_enabled = hash.fetch('authenticationEnabled', true)
-    @unavailable = hash.fetch('temporarilyUnavailable', false)
-    @provide_registration_until = DateTime.parse(hash['provideRegistrationUntil']) unless hash['provideRegistrationUntil'].nil?
+    @simple_id = hash["simpleId"]
+    @entity_id = hash["entityId"]
+    @levels_of_assurance = hash["levelsOfAssurance"]
+    @authentication_enabled = hash.fetch("authenticationEnabled", true)
+    @unavailable = hash.fetch("temporarilyUnavailable", false)
+    @provide_registration_until = DateTime.parse(hash["provideRegistrationUntil"]) unless hash["provideRegistrationUntil"].nil?
   end
 
   def ==(other)
@@ -35,11 +35,11 @@ class IdentityProvider
     return object if object.is_a? IdentityProvider
 
     if object.is_a?(Hash) || (object.is_a?(SelectedProviderData) && object.is_selected_verify_idp?)
-      new('simpleId' => object['simple_id'],
-          'entityId' => object['entity_id'],
-          'levelsOfAssurance' => object['levels_of_assurance'],
-          'authenticationEnabled' => object['authentication_enabled'],
-          'temporarilyUnavailable' => object['unavailable'])
+      new("simpleId" => object["simple_id"],
+          "entityId" => object["entity_id"],
+          "levelsOfAssurance" => object["levels_of_assurance"],
+          "authenticationEnabled" => object["authentication_enabled"],
+          "temporarilyUnavailable" => object["unavailable"])
     end
   end
 end

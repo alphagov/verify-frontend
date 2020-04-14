@@ -1,4 +1,4 @@
-require 'pooling_client'
+require "pooling_client"
 
 module Analytics
   class PiwikClient
@@ -28,7 +28,7 @@ module Analytics
         Rails.logger.debug("Reporting analytics with params: #{params}, headers: #{headers}")
         response
       rescue HTTP::Error => e
-        Rails.logger.error('Analytics reporting error: ' + e.message)
+        Rails.logger.error("Analytics reporting error: " + e.message)
       end
     end
 

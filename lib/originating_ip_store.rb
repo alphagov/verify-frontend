@@ -1,9 +1,9 @@
-require 'request_store'
+require "request_store"
 module OriginatingIpStore
-  UNDETERMINED_IP = '<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>'.freeze
+  UNDETERMINED_IP = "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>".freeze
 
   def self.store(request)
-    originating_ip = request.headers.fetch('X-Forwarded-For') { UNDETERMINED_IP }
+    originating_ip = request.headers.fetch("X-Forwarded-For") { UNDETERMINED_IP }
     RequestStore.store[:originating_ip] = originating_ip
   end
 

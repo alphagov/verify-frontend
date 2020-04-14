@@ -16,23 +16,23 @@ class FeedbackForm
     @what = sanitizer.sanitize hash[:what]
     @details = sanitizer.sanitize hash[:details]
 
-    allowed_replies = ['true', 'false', nil]
-    @reply = allowed_replies.include?(hash[:reply]) ? hash[:reply] : 'false'
+    allowed_replies = ["true", "false", nil]
+    @reply = allowed_replies.include?(hash[:reply]) ? hash[:reply] : "false"
 
     @name = sanitizer.sanitize hash[:name]
     @email = sanitizer.sanitize hash[:email]
 
     @referer = sanitizer.sanitize hash[:referer]
     @user_agent = sanitizer.sanitize hash[:user_agent]
-    @js_disabled = hash[:js_disabled] == 'true' ? 'true' : 'false'
+    @js_disabled = hash[:js_disabled] == "true" ? "true" : "false"
   end
 
   def data_to_submit
-    ''
+    ""
   end
 
   def reply_required?
-    @reply == 'true'
+    @reply == "true"
   end
 
   def long_limit
@@ -44,38 +44,38 @@ class FeedbackForm
   end
 
   def js_enabled?
-    js_disabled == 'false'
+    js_disabled == "false"
   end
 
 private
 
   def reply_should_be_present
     if @reply.blank?
-      errors.add(:reply_true, I18n.t('hub.feedback.errors.reply'))
+      errors.add(:reply_true, I18n.t("hub.feedback.errors.reply"))
     end
   end
 
   def what_should_be_present
     if what_missing?
-      errors.add(:what, I18n.t('hub.feedback.errors.what'))
+      errors.add(:what, I18n.t("hub.feedback.errors.what"))
     end
   end
 
   def details_should_be_present
     if details_missing?
-      errors.add(:details, I18n.t('hub.feedback.errors.details'))
+      errors.add(:details, I18n.t("hub.feedback.errors.details"))
     end
   end
 
   def name_should_be_present
     if reply_required? && name_missing?
-      errors.add(:name, I18n.t('hub.feedback.errors.name'))
+      errors.add(:name, I18n.t("hub.feedback.errors.name"))
     end
   end
 
   def email_format_should_be_valid
     if reply_required? && (email_missing? || !EmailValidator.valid?(email, strict_mode: true))
-      errors.add(:email, I18n.t('hub.feedback.errors.email'))
+      errors.add(:email, I18n.t("hub.feedback.errors.email"))
     end
   end
 
@@ -97,25 +97,25 @@ private
 
   def length_of_what
     if what.present? && what.length > LONG_TEXT_LIMIT
-      errors.add(:what, I18n.t('hub.feedback.errors.too_long', max_length: LONG_TEXT_LIMIT))
+      errors.add(:what, I18n.t("hub.feedback.errors.too_long", max_length: LONG_TEXT_LIMIT))
     end
   end
 
   def length_of_details
     if details.present? && details.length > LONG_TEXT_LIMIT
-      errors.add(:details, I18n.t('hub.feedback.errors.too_long', max_length: LONG_TEXT_LIMIT))
+      errors.add(:details, I18n.t("hub.feedback.errors.too_long", max_length: LONG_TEXT_LIMIT))
     end
   end
 
   def length_of_name
     if name.present? && name.length > SHORT_TEXT_LIMIT
-      errors.add(:name, I18n.t('hub.feedback.errors.too_long', max_length: SHORT_TEXT_LIMIT))
+      errors.add(:name, I18n.t("hub.feedback.errors.too_long", max_length: SHORT_TEXT_LIMIT))
     end
   end
 
   def length_of_email
     if email.present? && email.length > SHORT_TEXT_LIMIT
-      errors.add(:email, I18n.t('hub.feedback.errors.too_long', max_length: SHORT_TEXT_LIMIT))
+      errors.add(:email, I18n.t("hub.feedback.errors.too_long", max_length: SHORT_TEXT_LIMIT))
     end
   end
 end

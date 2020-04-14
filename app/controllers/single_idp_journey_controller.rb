@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require 'partials/user_cookies_partial_controller'
-require 'partials/idp_selection_partial_controller'
-require 'partials/viewable_idp_partial_controller'
-require 'partials/retrieve_federation_data_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
-require 'partials/single_idp_partial_controller'
+require "partials/user_cookies_partial_controller"
+require "partials/idp_selection_partial_controller"
+require "partials/viewable_idp_partial_controller"
+require "partials/retrieve_federation_data_partial_controller"
+require "partials/analytics_cookie_partial_controller"
+require "partials/single_idp_partial_controller"
 
 class SingleIdpJourneyController < ApplicationController
   before_action :do_not_cache
 
-  layout 'slides', except: :rp_start_page
+  layout "slides", except: :rp_start_page
 
   include IdpSelectionPartialController
   include ViewableIdpPartialController
@@ -24,11 +24,11 @@ class SingleIdpJourneyController < ApplicationController
 
   def continue_to_your_idp
     if valid_cookie? && valid_selection?
-      @idp = retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_single_idp, single_idp_cookie['idp_entity_id']).first
+      @idp = retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_single_idp, single_idp_cookie["idp_entity_id"]).first
       @service_name = current_transaction.name
-      @uuid = single_idp_cookie.fetch('uuid', nil)
-      session[:journey_type] = 'single-idp'
-      set_additional_piwik_custom_variable(:journey_type, 'SINGLE_IDP')
+      @uuid = single_idp_cookie.fetch("uuid", nil)
+      session[:journey_type] = "single-idp"
+      set_additional_piwik_custom_variable(:journey_type, "SINGLE_IDP")
       FEDERATION_REPORTER.report_single_idp_success(current_transaction, request, session[:transaction_entity_id], @uuid)
       render
     else
@@ -40,7 +40,7 @@ class SingleIdpJourneyController < ApplicationController
     if params_are_missing(%w(entity_id))
       redirect_to start_path
     else
-      select_viewable_idp_for_single_idp_journey(params.fetch('entity_id')) do |decorated_idp|
+      select_viewable_idp_for_single_idp_journey(params.fetch("entity_id")) do |decorated_idp|
         select_idp(decorated_idp.entity_id, decorated_idp.display_name)
         redirect_to redirect_to_single_idp_path
       end
@@ -48,9 +48,9 @@ class SingleIdpJourneyController < ApplicationController
   end
 
   def continue_ajax
-    select_viewable_idp_for_single_idp_journey(params.fetch('entityId')) do |decorated_idp|
+    select_viewable_idp_for_single_idp_journey(params.fetch("entityId")) do |decorated_idp|
       select_idp(decorated_idp.entity_id, decorated_idp.display_name)
-      ajax_idp_redirection_single_idp_journey_request(single_idp_cookie&.fetch('uuid', nil))
+      ajax_idp_redirection_single_idp_journey_request(single_idp_cookie&.fetch("uuid", nil))
     end
   end
 
@@ -58,9 +58,9 @@ class SingleIdpJourneyController < ApplicationController
     if params_are_missing(%w(serviceId idpEntityId singleIdpJourneyIdentifier))
       redirect_to verify_services_path
     else
-      transaction_id = params['serviceId']
-      idp_entity_id = params['idpEntityId']
-      uuid = params['singleIdpJourneyIdentifier'].to_s.downcase
+      transaction_id = params["serviceId"]
+      idp_entity_id = params["idpEntityId"]
+      uuid = params["singleIdpJourneyIdentifier"].to_s.downcase
 
       rp_url = get_single_idp_url(get_service_list, transaction_id)
 
@@ -79,15 +79,15 @@ class SingleIdpJourneyController < ApplicationController
   end
 
   def rp_start_page
-    @simple_id_value = params.fetch('transaction_simple_id', nil)
+    @simple_id_value = params.fetch("transaction_simple_id", nil)
 
     @transaction = CONFIG_PROXY.get_transaction_by_simple_id(@simple_id_value) unless @simple_id_value.nil?
     return render "errors/404" if @transaction.nil?
 
     @hide_available_languages = true
-    @headless_start_page = @transaction.nil? ? nil : @transaction.fetch('headlessStartpage')
-    @translation = CONFIG_PROXY.get_transaction_translations(@simple_id_value, params['locale'])
-    @english_translation = CONFIG_PROXY.get_transaction_translations(@simple_id_value, 'en')
+    @headless_start_page = @transaction.nil? ? nil : @transaction.fetch("headlessStartpage")
+    @translation = CONFIG_PROXY.get_transaction_translations(@simple_id_value, params["locale"])
+    @english_translation = CONFIG_PROXY.get_transaction_translations(@simple_id_value, "en")
     return render "errors/404" if @translation[:single_idp_start_page_content_html].nil?
 
     render
@@ -116,7 +116,7 @@ private
     data = {
         transaction_id: transaction_id,
         idp_entity_id: idp_entity_id,
-        uuid: uuid
+        uuid: uuid,
     }
     set_single_idp_journey_cookie(data)
   end
@@ -124,9 +124,9 @@ private
   def valid_selection?
     return false if cookie_value_is_missing(%w(idp_entity_id transaction_id uuid))
 
-    idp_entity_id = single_idp_cookie.fetch('idp_entity_id', nil)
-    transaction_id = single_idp_cookie.fetch('transaction_id', nil)
-    uuid = single_idp_cookie.fetch('uuid', nil)
+    idp_entity_id = single_idp_cookie.fetch("idp_entity_id", nil)
+    transaction_id = single_idp_cookie.fetch("transaction_id", nil)
+    uuid = single_idp_cookie.fetch("uuid", nil)
     single_idp_rp_list = get_service_list
 
     unless current_identity_providers_for_single_idp.select(&:unavailable).select { |idp| idp.entity_id == idp_entity_id }.empty?
@@ -173,7 +173,7 @@ private
   end
 
   def select_idp(entity_id, idp_name)
-    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'], false, analytics_session_id, session[:journey_type])
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session["requested_loa"], false, analytics_session_id, session[:journey_type])
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
   end
@@ -199,6 +199,6 @@ private
   end
 
   def do_not_cache
-    response.headers['Cache-Control'] = 'no-cache, no-store, no-transform'
+    response.headers["Cache-Control"] = "no-cache, no-store, no-transform"
   end
 end

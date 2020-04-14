@@ -4,7 +4,7 @@ module AbTest
     def initialize(config)
       experiment_title = config.keys.first
       @alternatives = creates_alternatives(config, experiment_title)
-      @default = name(experiment_title, config.values.first['alternatives'].first)
+      @default = name(experiment_title, config.values.first["alternatives"].first)
       @total = @alternatives.values.inject(:+).to_f
     end
 
@@ -37,8 +37,8 @@ module AbTest
 
     def creates_alternatives(config, experiment_title)
       alternatives = {}
-      list_of_alternatives = config.values.first['alternatives']
-      list_of_alternatives.each { |alternative| alternatives[name(experiment_title, alternative)] = alternative['percent'] }
+      list_of_alternatives = config.values.first["alternatives"]
+      list_of_alternatives.each { |alternative| alternatives[name(experiment_title, alternative)] = alternative["percent"] }
       alternatives
     end
 

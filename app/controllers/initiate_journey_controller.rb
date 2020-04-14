@@ -1,4 +1,4 @@
-require 'partials/user_errors_partial_controller'
+require "partials/user_errors_partial_controller"
 
 class InitiateJourneyController < ApplicationController
   include UserErrorsPartialController
@@ -8,11 +8,11 @@ class InitiateJourneyController < ApplicationController
 
   def index
     reset_session
-    simple_id_value = params.fetch('transaction_simple_id', nil)
-    journey_hint_value = params.fetch('journey_hint', nil)
+    simple_id_value = params.fetch("transaction_simple_id", nil)
+    journey_hint_value = params.fetch("journey_hint", nil)
 
     transaction = CONFIG_PROXY.get_transaction_by_simple_id(simple_id_value)
-    start_page = transaction.nil? ? nil : transaction.fetch('headlessStartpage') || transaction.fetch('serviceHomepage')
+    start_page = transaction.nil? ? nil : transaction.fetch("headlessStartpage") || transaction.fetch("serviceHomepage")
 
     if !start_page.nil?
       if valid_journey_hint?(journey_hint_value)
@@ -39,9 +39,9 @@ private
   end
 
   def valid_journey_hint?(journey_hint)
-    return true if journey_hint&.starts_with?('idp_')
+    return true if journey_hint&.starts_with?("idp_")
 
-    [nil, 'uk_idp_start', 'registration', 'uk_idp_sign_in', 'eidas_sign_in', 'submission_confirmation'].include?(journey_hint)
+    [nil, "uk_idp_start", "registration", "uk_idp_sign_in", "eidas_sign_in", "submission_confirmation"].include?(journey_hint)
   end
 
   def invalid_parameters_message(simple_id_value, journey_hint_value)

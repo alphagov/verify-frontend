@@ -76,7 +76,9 @@ group :test, :development do
   gem 'headless'
   gem 'thin'
 
-  gem 'govuk-lint'
+  gem 'rubocop-govuk'
+  gem 'scss_lint-govuk'
+
   gem 'geckodriver-helper'
 
   gem 'codacy-coverage', :require => false

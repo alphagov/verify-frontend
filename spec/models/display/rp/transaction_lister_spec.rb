@@ -1,10 +1,10 @@
-require 'spec_helper'
-require 'models/display/rp/transaction_lister'
+require "spec_helper"
+require "models/display/rp/transaction_lister"
 
 module Display
   module Rp
     describe TransactionLister do
-      it 'should create a list of transactions with name and homepage if public' do
+      it "should create a list of transactions with name and homepage if public" do
         transactions_proxy = double(:transactions_proxy)
         correlator = double(:correlator)
 
@@ -19,7 +19,7 @@ module Display
         expect(list).to eq correlated_data
       end
 
-      it 'should create a empty list of transactions when an error has been raised' do
+      it "should create a empty list of transactions when an error has been raised" do
         transactions_proxy = double(:transactions_proxy)
         correlator = double(:correlator)
 

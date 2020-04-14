@@ -17,7 +17,7 @@ class PublishHubConfigController < ApplicationController
 
   def certificates
     do_not_cache
-    response = publish_hub_config_client.certificates(request.path.split('/hub/config/config/certificates/').last)
+    response = publish_hub_config_client.certificates(request.path.split("/hub/config/config/certificates/").last)
     render json: response.to_s, status: response.status
   end
 
@@ -28,7 +28,7 @@ private
   end
 
   def do_not_cache
-    response.headers['Cache-Control'] = 'no-cache, no-store, no-transform'
+    response.headers["Cache-Control"] = "no-cache, no-store, no-transform"
   end
 
   def publish_hub_config_client

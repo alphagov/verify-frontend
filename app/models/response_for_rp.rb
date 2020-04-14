@@ -3,8 +3,8 @@ class ResponseForRp < Api::Response
   validates_presence_of :location, :saml_message
 
   def initialize(hash)
-    @location = hash['postEndpoint']
-    @saml_message = hash['samlMessage']
-    @relay_state = hash['relayState']
+    @location = hash["postEndpoint"]
+    @saml_message = hash["samlMessage"]
+    @relay_state = hash["relayState"]
   end
 end

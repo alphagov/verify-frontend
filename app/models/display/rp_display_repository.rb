@@ -1,4 +1,4 @@
-require 'loading_cache'
+require "loading_cache"
 module Display
   class RpDisplayRepository
     def initialize(translator, logger)

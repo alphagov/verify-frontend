@@ -62,7 +62,7 @@ RSpec.configure do |config|
   # to individual examples or groups you care about by tagging them with
   # `:focus` metadata. When nothing is tagged with `:focus`, all examples
   # get run.
-  config.filter_run :focus unless ENV['RAILS_ENV'] == 'test'
+  config.filter_run :focus unless ENV["RAILS_ENV"] == "test"
   config.run_all_when_everything_filtered = true
 =begin
   # Allows RSpec to persist some state between runs in order to support
@@ -101,13 +101,13 @@ RSpec.configure do |config|
     I18n.locale = :en if defined? I18n
   end
 end
-$:.unshift File.expand_path('../app/', __dir__)
-$:.unshift File.expand_path('../spec/support/', __dir__)
-$:.unshift File.expand_path('../app/models', __dir__)
-$:.unshift File.expand_path('../app/services', __dir__)
+$:.unshift File.expand_path("../app/", __dir__)
+$:.unshift File.expand_path("../spec/support/", __dir__)
+$:.unshift File.expand_path("../app/models", __dir__)
+$:.unshift File.expand_path("../app/services", __dir__)
 
-require 'active_support'
-require 'active_support/core_ext'
+require "active_support"
+require "active_support/core_ext"
 
-require 'codacy-coverage'
+require "codacy-coverage"
 Codacy::Reporter.start

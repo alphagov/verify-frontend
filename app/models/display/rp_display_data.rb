@@ -1,4 +1,4 @@
-require 'display/display_data'
+require "display/display_data"
 module Display
   class RpDisplayData < ::Display::DisplayData
     prefix :rps
@@ -15,7 +15,7 @@ module Display
     content :custom_fail_try_another_text, default: nil
     content :custom_fail_contact_details_intro, default: nil
     content :idp_disconnected_hint_html, default: nil
-    content :taxon_name, default: -> { I18n.translate('hub.transaction_list.other_services') }
+    content :taxon_name, default: -> { I18n.translate("hub.transaction_list.other_services") }
     alias_method :taxon, :taxon_name
   end
 end

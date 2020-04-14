@@ -10,7 +10,7 @@ class SessionValidator
         session_start_time = Time.at(Integer(session_start_time_integer) / 1000).to_datetime
         validate_expiry(session, session_start_time)
       rescue KeyError
-        ValidationFailure.something_went_wrong('start_time not in session')
+        ValidationFailure.something_went_wrong("start_time not in session")
       end
     end
 

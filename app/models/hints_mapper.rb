@@ -1,11 +1,11 @@
 class HintsMapper
   ANSWER_TO_HINT_MAPPING = {
-    'mobile_phone' => 'mobile',
-    'smart_phone' => 'apps',
-    'passport' => 'ukpassport',
-    'driving_licence' => 'ukphotolicence_gb',
-    'ni_driving_licence' => 'ukphotolicence_ni',
-    'non_uk_id_document' => 'nonukid'
+    "mobile_phone" => "mobile",
+    "smart_phone" => "apps",
+    "passport" => "ukpassport",
+    "driving_licence" => "ukphotolicence_gb",
+    "ni_driving_licence" => "ukphotolicence_ni",
+    "non_uk_id_document" => "nonukid",
   }.freeze
 
   def self.map_answers_to_hints(answers_hash)
@@ -18,7 +18,7 @@ class HintsMapper
         result << hint unless hint.nil?
       end
       if(no_licences.subset?(result))
-        result << 'not_ukphotolicence'
+        result << "not_ukphotolicence"
       end
     end
     result
@@ -26,7 +26,7 @@ class HintsMapper
 
   def self.create_hint(evidence_name, answer)
     hint_suffix = ANSWER_TO_HINT_MAPPING[evidence_name]
-    hint_prefix = answer ? 'has_' : 'not_'
+    hint_prefix = answer ? "has_" : "not_"
     hint_prefix + hint_suffix unless hint_suffix.nil?
   end
 end

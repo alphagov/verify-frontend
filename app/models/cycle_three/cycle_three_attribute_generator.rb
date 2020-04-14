@@ -1,4 +1,4 @@
-require 'cycle_three/cycle_three_attribute'
+require "cycle_three/cycle_three_attribute"
 
 module CycleThree
   class CycleThreeAttributeGenerator
@@ -14,10 +14,10 @@ module CycleThree
       attribute_classes = {}
       begin
         @file_loader.load(directory_path).map do |attribute|
-          pattern = attribute.fetch('pattern')
-          length = attribute['length']
-          nullable = attribute['nullable']
-          simple_id = attribute.fetch('name')
+          pattern = attribute.fetch("pattern")
+          length = attribute["length"]
+          nullable = attribute["nullable"]
+          simple_id = attribute.fetch("name")
           display_data = @cycle_display_data_repo.fetch(simple_id)
           attribute_classes[simple_id] = class_of(simple_id, Regexp.new(pattern), length, nullable, display_data)
         end

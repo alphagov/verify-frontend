@@ -1,6 +1,6 @@
-require 'partials/user_cookies_partial_controller'
-require 'partials/viewable_idp_partial_controller'
-require 'partials/journey_hinting_partial_controller'
+require "partials/user_cookies_partial_controller"
+require "partials/viewable_idp_partial_controller"
+require "partials/journey_hinting_partial_controller"
 
 class CompletedRegistrationController < ApplicationController
   include UserCookiesPartialController
@@ -17,13 +17,13 @@ class CompletedRegistrationController < ApplicationController
       redirect_to verify_services_path
     else
       # Hack - we need and IDP list, but the current API needs a transaction
-      session[:transaction_entity_id] = 'https://wwwm.universal-credit.service.gov.uk'
+      session[:transaction_entity_id] = "https://wwwm.universal-credit.service.gov.uk"
       identity_providers = current_available_identity_providers_for_sign_in
       session[:transaction_entity_id] = nil
 
       entity_id = retrieve_decorated_singleton_idp_array_by_simple_id(identity_providers, idp_simple_id).first.entity_id
       set_attempt_journey_hint(entity_id)
-      set_journey_hint_by_status(entity_id, 'SUCCESS')
+      set_journey_hint_by_status(entity_id, "SUCCESS")
       render :index
     end
   end

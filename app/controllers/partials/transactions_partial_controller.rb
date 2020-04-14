@@ -12,11 +12,11 @@ module TransactionsPartialController
   end
 
   def loa1_transactions_list
-    Display::Rp::TransactionFilter.new.filter_by_loa(transactions_list, 'LEVEL_1')
+    Display::Rp::TransactionFilter.new.filter_by_loa(transactions_list, "LEVEL_1")
   end
 
   def loa2_transactions_list
-    Display::Rp::TransactionFilter.new.filter_by_loa(transactions_list, 'LEVEL_2')
+    Display::Rp::TransactionFilter.new.filter_by_loa(transactions_list, "LEVEL_2")
   end
 
   def current_transaction

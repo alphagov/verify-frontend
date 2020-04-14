@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-require 'partials/user_cookies_partial_controller'
+require "partials/user_cookies_partial_controller"
 
 class AuthnResponseController < SamlController
   protect_from_forgery except: %i[idp_response country_response]
 
-  SIGNING_IN_STATE = 'SIGN_IN_WITH_IDP'
-  REGISTERING_STATE = 'REGISTER_WITH_IDP'
-  RESUMING_STATE = 'RESUME_WITH_IDP'
-  SINGLE_IDP_STATE = 'SINGLE_IDP'
-  SUCCESS = 'SUCCESS'
-  MATCHING_JOURNEY_SUCCESS = 'MATCHING_JOURNEY_SUCCESS'
-  NON_MATCHING_JOURNEY_SUCCESS = 'NON_MATCHING_JOURNEY_SUCCESS'
-  CANCEL = 'CANCEL'
-  FAILED = 'FAILED'
-  FAILED_UPLIFT = 'FAILED_UPLIFT'
-  PENDING = 'PENDING'
-  OTHER = 'OTHER'
-  SINGLE_IDP_JOURNEY_TYPE = 'single-idp'
-  RESUMING_JOURNEY_TYPE = 'resuming'
+  SIGNING_IN_STATE = "SIGN_IN_WITH_IDP"
+  REGISTERING_STATE = "REGISTER_WITH_IDP"
+  RESUMING_STATE = "RESUME_WITH_IDP"
+  SINGLE_IDP_STATE = "SINGLE_IDP"
+  SUCCESS = "SUCCESS"
+  MATCHING_JOURNEY_SUCCESS = "MATCHING_JOURNEY_SUCCESS"
+  NON_MATCHING_JOURNEY_SUCCESS = "NON_MATCHING_JOURNEY_SUCCESS"
+  CANCEL = "CANCEL"
+  FAILED = "FAILED"
+  FAILED_UPLIFT = "FAILED_UPLIFT"
+  PENDING = "PENDING"
+  OTHER = "OTHER"
+  SINGLE_IDP_JOURNEY_TYPE = "single-idp"
+  RESUMING_JOURNEY_TYPE = "resuming"
 
   ACCEPTED_IDP_RESPONSES = [SUCCESS, MATCHING_JOURNEY_SUCCESS, NON_MATCHING_JOURNEY_SUCCESS, CANCEL, FAILED_UPLIFT, PENDING].freeze
   ACCEPTED_COUNTRY_RESPONSES = [SUCCESS, NON_MATCHING_JOURNEY_SUCCESS, CANCEL, FAILED_UPLIFT].freeze
@@ -26,7 +26,7 @@ class AuthnResponseController < SamlController
   def idp_response
     raise_error_if_params_invalid(params, session[:verify_session_id])
 
-    response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params['SAMLResponse'])
+    response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params["SAMLResponse"])
     status = response.idp_result
     remove_resume_link_journey_hint unless journey_hint_value.nil?
 
@@ -38,10 +38,10 @@ class AuthnResponseController < SamlController
   end
 
   def country_response
-    params['RelayState'] ||= session[:verify_session_id] if session[:transaction_supports_eidas]
+    params["RelayState"] ||= session[:verify_session_id] if session[:transaction_supports_eidas]
     raise_error_if_params_invalid(params, session[:verify_session_id])
 
-    response = SAML_PROXY_API.forward_country_authn_response(params['RelayState'], params['SAMLResponse'])
+    response = SAML_PROXY_API.forward_country_authn_response(params["RelayState"], params["SAMLResponse"])
     status = response.country_result
 
     return handle_country_response(status, response) if ACCEPTED_COUNTRY_RESPONSES.include?(status)
@@ -52,11 +52,11 @@ class AuthnResponseController < SamlController
 private
 
   def raise_error_if_params_invalid(response_params, session_id)
-    raise Errors::WarningLevelError, 'Empty IDP response' if response_params.empty?
+    raise Errors::WarningLevelError, "Empty IDP response" if response_params.empty?
 
-    relay_state = response_params['RelayState']
+    relay_state = response_params["RelayState"]
     error_message = "Relay state should match session id. Relay state was #{relay_state.inspect}"
-    error_message += ' and SAML was missing' unless response_params.key?('SAMLResponse')
+    error_message += " and SAML was missing" unless response_params.key?("SAMLResponse")
     raise Errors::WarningLevelError, error_message if relay_state != session_id
   end
 
@@ -90,7 +90,7 @@ private
       CANCEL => "Cancel - #{user_state(response)}",
       FAILED_UPLIFT => "Failed Uplift - #{user_state(response)}",
       PENDING => "Paused - #{user_state(response)}",
-      FAILED => "Failure - #{user_state(response)}"
+      FAILED => "Failure - #{user_state(response)}",
     }.fetch(status)
   end
 
@@ -124,7 +124,7 @@ private
       CANCEL => is_registration ? cancelled_registration_path : start_path,
       FAILED_UPLIFT => failed_uplift_path,
       PENDING => paused_registration_path,
-      FAILED => failed_page_redirects(is_registration)
+      FAILED => failed_page_redirects(is_registration),
     }.fetch(status)
   end
 
@@ -147,7 +147,7 @@ private
       NON_MATCHING_JOURNEY_SUCCESS => redirect_to_service_signing_in_path,
       CANCEL => is_registration ? failed_registration_path : start_path,
       FAILED_UPLIFT => failed_uplift_path,
-      FAILED => is_registration ? failed_registration_path : failed_country_sign_in_path
+      FAILED => is_registration ? failed_registration_path : failed_country_sign_in_path,
     }.fetch(status)
   end
 

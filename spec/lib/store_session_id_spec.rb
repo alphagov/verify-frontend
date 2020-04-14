@@ -1,13 +1,13 @@
-require 'spec_helper'
-require 'store_session_id'
-require 'rails_helper'
-require 'raven'
+require "spec_helper"
+require "store_session_id"
+require "rails_helper"
+require "raven"
 
 describe StoreSessionId do
-  it 'reads the session cookie from the users' do
-    session_id = 'foobarbaz'
+  it "reads the session cookie from the users" do
+    session_id = "foobarbaz"
     env = {
-      "HTTP_COOKIE" => "#{CookieNames::SESSION_ID_COOKIE_NAME}=#{session_id};"
+      "HTTP_COOKIE" => "#{CookieNames::SESSION_ID_COOKIE_NAME}=#{session_id};",
     }
     app = double(:app)
     expect(app).to receive(:call).with(env)

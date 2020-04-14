@@ -10,7 +10,7 @@ class IdpListResponse < Api::Response
     return if @idps.empty?
 
     if @idps.none?(&:valid?)
-      errors.add(:identity_providers, 'are malformed')
+      errors.add(:identity_providers, "are malformed")
     end
   end
 end

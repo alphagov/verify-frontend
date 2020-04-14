@@ -25,7 +25,7 @@ module UserSessionPartialController
 
   def current_selected_provider_data
     selected_provider_data = SelectedProviderData.from_session(session[:selected_provider])
-    raise(Errors::WarningLevelError, 'No selected identity provider data in session') if selected_provider_data.nil?
+    raise(Errors::WarningLevelError, "No selected identity provider data in session") if selected_provider_data.nil?
 
     selected_provider_data
   end
@@ -33,7 +33,7 @@ module UserSessionPartialController
   def user_journey_type
     journey_type = current_selected_provider_data.journey_type
 
-    raise(Errors::WarningLevelError, 'Unknown selected user journey type in session') unless
+    raise(Errors::WarningLevelError, "Unknown selected user journey type in session") unless
         JourneyType::VALID_JOURNEY_TYPES.include?(journey_type)
 
     journey_type
@@ -45,7 +45,7 @@ module UserSessionPartialController
 
   def selected_identity_provider
     selected_provider_data = current_selected_provider_data
-    raise(Errors::WarningLevelError, 'No selected IDP in session') unless selected_provider_data.is_selected_verify_idp?
+    raise(Errors::WarningLevelError, "No selected IDP in session") unless selected_provider_data.is_selected_verify_idp?
 
     IdentityProvider.from_session(selected_provider_data.identity_provider)
   end
@@ -57,7 +57,7 @@ module UserSessionPartialController
 
   def selected_country
     selected_provider_data = current_selected_provider_data
-    raise(Errors::WarningLevelError, 'No selected Country in session') unless selected_provider_data.is_selected_country?
+    raise(Errors::WarningLevelError, "No selected Country in session") unless selected_provider_data.is_selected_country?
 
     Country.from_session(selected_provider_data.identity_provider)
   end

@@ -1,4 +1,4 @@
-require 'uri'
+require "uri"
 
 class Piwik
   attr_reader :url, :site_id

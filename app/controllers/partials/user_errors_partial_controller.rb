@@ -4,13 +4,13 @@ module UserErrorsPartialController
     if partial == :session_timeout
       @other_ways_description = current_transaction.other_ways_description
       @redirect_to_destination = if CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
-                                   '/redirect-to-service/error'
+                                   "/redirect-to-service/error"
                                  else
                                    session[:transaction_homepage]
                                  end
     end
     respond_to do |format|
-      format.html { render "errors/#{partial}", status: status, layout: 'application' }
+      format.html { render "errors/#{partial}", status: status, layout: "application" }
       format.json { render json: {}, status: status }
     end
   end
@@ -18,7 +18,7 @@ module UserErrorsPartialController
   def render_not_found
     set_locale
     respond_to do |format|
-      format.html { render 'errors/404', status: 404 }
+      format.html { render "errors/404", status: 404 }
       format.json { render json: {}, status: 404 }
     end
   end
@@ -26,16 +26,17 @@ module UserErrorsPartialController
   def session_timeout(exception)
     logger.info(exception)
     @redirect_to_destination = if CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
-                                 '/redirect-to-service/error'
+                                 "/redirect-to-service/error"
                                else
                                  session[:transaction_homepage]
                                end
-    render_error(:session_timeout, :forbidden)
+
+    render_error("session_timeout", :forbidden)
   end
 
   def session_error(exception)
     logger.warn(exception)
-    render_error('session_error', :bad_request)
+    render_error("session_error", :bad_request)
   end
 
   def upstream_error(exception)
@@ -48,7 +49,7 @@ module UserErrorsPartialController
 
   def raise_unknown_format
     logger.warn("Received a request with unexpected accept headers - #{request.headers['ACCEPT']}")
-    render plain: 'Unable to serve the requested format', status: 406
+    render plain: "Unable to serve the requested format", status: 406
   end
 
   # How often do we have the information needed to redirect the user back to the
@@ -77,14 +78,14 @@ module UserErrorsPartialController
     logger.error(exception)
     logger.info("Something went wrong: #{exception.try(:message) || exception}")
     check_whether_recoverable
-    render_error('something_went_wrong', status)
+    render_error("something_went_wrong", status)
   end
 
   def something_went_wrong_warn(exception, status = :internal_server_error)
     logger.warn(exception)
     logger.info("Something went wrong: #{exception.try(:message) || exception}")
     check_whether_recoverable
-    render_error('something_went_wrong', status)
+    render_error("something_went_wrong", status)
   end
 
   def eidas_scheme_unavailable_error(exception)
@@ -92,7 +93,7 @@ module UserErrorsPartialController
     @other_ways_text = current_transaction.other_ways_text
 
     logger.warn(exception)
-    render_error('eidas_scheme_unavailable', :internal_server_error)
+    render_error("eidas_scheme_unavailable", :internal_server_error)
   end
 
 private

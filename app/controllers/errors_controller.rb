@@ -4,7 +4,7 @@ class ErrorsController < ApplicationController
 
   def page_not_found
     respond_to do |format|
-      format.html { render '404', status: 404 }
+      format.html { render "404", status: 404 }
       format.all { head 404 }
     end
   end

@@ -1,6 +1,6 @@
-require 'spec_helper'
-require 'display_data_examples'
-require 'display/display_data'
+require "spec_helper"
+require "display_data_examples"
+require "display/display_data"
 
 module Display
   describe CycleThreeDisplayData do

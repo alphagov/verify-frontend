@@ -1,4 +1,4 @@
-require 'idp_recommendations/idp_rules'
+require "idp_recommendations/idp_rules"
 
 class IdpProfilesLoader
   def initialize(yaml_loader)
@@ -20,7 +20,7 @@ class IdpProfilesLoader
 private
 
   def get_idp_names(idp)
-    idp['simpleIds']
+    idp["simpleIds"]
   end
 
   def get_idp_rules(idp)

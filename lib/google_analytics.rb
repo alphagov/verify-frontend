@@ -1,4 +1,4 @@
-require 'uri'
+require "uri"
 
 class GoogleAnalytics
   attr_reader :tracker_id, :cross_domain_list

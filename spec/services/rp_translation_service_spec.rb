@@ -1,10 +1,10 @@
-require 'feature_helper'
-require 'api_test_helper'
-require 'rp_translation_service'
-require 'models/config_proxy'
-require 'i18n'
+require "feature_helper"
+require "api_test_helper"
+require "rp_translation_service"
+require "models/config_proxy"
+require "i18n"
 
-describe 'RpTranslationService' do
+describe "RpTranslationService" do
   let(:config_proxy) { instance_double("ConfigProxy") }
   before(:each) do
     stub_const("CONFIG_PROXY", config_proxy)
@@ -12,28 +12,28 @@ describe 'RpTranslationService' do
     I18n.backend = I18n::Backend::Simple.new
   end
 
-  it 'should update I18n with translations for a particular transaction in all locales' do
+  it "should update I18n with translations for a particular transaction in all locales" do
     translations = {
       name: "test GOV.UK Verify user journeys",
       rp_name: "Test RP",
       analytics_description: "analytics description for test-rp",
-      other_ways_text: "<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul class=\"govuk-list govuk-list--bullet\"><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+      other_ways_text: '<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href="http://www.example.com">here</a>.</p><p>Tell us your:</p><ul class="govuk-list govuk-list--bullet"><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>',
       other_ways_description: "test GOV.UK Verify user journeys",
       tailored_text: "External data source: EN: This is tailored text for test-rp",
       taxon_name: "Benefits",
-      custom_fail_heading: '',
-      custom_fail_what_next_content: '',
-      custom_fail_other_options: '',
-      custom_fail_try_another_summary: '',
-      custom_fail_try_another_text: '',
-      custom_fail_contact_details_intro: ''
+      custom_fail_heading: "",
+      custom_fail_what_next_content: "",
+      custom_fail_other_options: "",
+      custom_fail_try_another_summary: "",
+      custom_fail_try_another_text: "",
+      custom_fail_contact_details_intro: "",
     }
     translations_cy = translations.map { |key, value| [key, value + " cy"] }.to_h
-    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', "en").and_return(translations)
-    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', "cy").and_return(translations_cy)
+    expect(config_proxy).to receive(:get_transaction_translations).with("test-rp", "en").and_return(translations)
+    expect(config_proxy).to receive(:get_transaction_translations).with("test-rp", "cy").and_return(translations_cy)
 
     translation_service = RpTranslationService.new
-    translation_service.update_rp_translations('test-rp')
+    translation_service.update_rp_translations("test-rp")
 
     translations.keys.each do |key|
       expect(I18n.t("rps.test-rp.#{key}", locale: :en)).to eq(translations.fetch(key))
@@ -42,58 +42,58 @@ describe 'RpTranslationService' do
     end
   end
 
-  it 'should keep existing translations when config proxy returns an empty hash' do
+  it "should keep existing translations when config proxy returns an empty hash" do
     translations = {
         name: "test GOV.UK Verify user journeys",
         rp_name: "Test RP",
         analytics_description: "analytics description for test-rp",
-        other_ways_text: "<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul class=\"govuk-list govuk-list--bullet\"><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        other_ways_text: '<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href="http://www.example.com">here</a>.</p><p>Tell us your:</p><ul class="govuk-list govuk-list--bullet"><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>',
         other_ways_description: "test GOV.UK Verify user journeys",
         tailored_text: "External data source: EN: This is tailored text for test-rp",
         taxon_name: "Benefits",
-        custom_fail_heading: '',
-        custom_fail_what_next_content: '',
-        custom_fail_other_options: '',
-        custom_fail_try_another_summary: '',
-        custom_fail_try_another_text: '',
-        custom_fail_contact_details_intro: ''
+        custom_fail_heading: "",
+        custom_fail_what_next_content: "",
+        custom_fail_other_options: "",
+        custom_fail_try_another_summary: "",
+        custom_fail_try_another_text: "",
+        custom_fail_contact_details_intro: "",
     }
-    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', 'en').and_return(translations, {})
-    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', 'cy').and_return(translations, {})
+    expect(config_proxy).to receive(:get_transaction_translations).with("test-rp", "en").and_return(translations, {})
+    expect(config_proxy).to receive(:get_transaction_translations).with("test-rp", "cy").and_return(translations, {})
 
     translation_service = RpTranslationService.new
-    translation_service.update_rp_translations('test-rp')
-    translation_service.update_rp_translations('test-rp')
+    translation_service.update_rp_translations("test-rp")
+    translation_service.update_rp_translations("test-rp")
 
     expect(I18n.t("rps.test-rp.name")).to eq("test GOV.UK Verify user journeys")
     expect(I18n.t("rps.test-rp.rp_name")).to eq("Test RP")
   end
 
-  it 'should only update individual translations when config proxy returns partial translations' do
+  it "should only update individual translations when config proxy returns partial translations" do
     translations = {
         name: "test GOV.UK Verify user journeys",
         rp_name: "Test RP",
         analytics_description: "analytics description for test-rp",
-        other_ways_text: "<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href=\"http://www.example.com\">here</a>.</p><p>Tell us your:</p><ul class=\"govuk-list govuk-list--bullet\"><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>",
+        other_ways_text: '<p>If you can’t verify your identity using GOV.UK Verify, you can test GOV.UK Verify user journeys <a href="http://www.example.com">here</a>.</p><p>Tell us your:</p><ul class="govuk-list govuk-list--bullet"><li>name</li><li>age</li></ul><p>Include any other relevant details if you have them.</p>',
         other_ways_description: "test GOV.UK Verify user journeys",
         tailored_text: "External data source: EN: This is tailored text for test-rp",
         taxon_name: "Benefits",
-        custom_fail_heading: '',
-        custom_fail_what_next_content: '',
-        custom_fail_other_options: '',
-        custom_fail_try_another_summary: '',
-        custom_fail_try_another_text: '',
-        custom_fail_contact_details_intro: ''
+        custom_fail_heading: "",
+        custom_fail_what_next_content: "",
+        custom_fail_other_options: "",
+        custom_fail_try_another_summary: "",
+        custom_fail_try_another_text: "",
+        custom_fail_contact_details_intro: "",
     }
     partial_translations = {
-        rp_name: "Updated Test RP"
+        rp_name: "Updated Test RP",
     }
-    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', 'en').and_return(translations, partial_translations)
-    expect(config_proxy).to receive(:get_transaction_translations).with('test-rp', 'cy').and_return(translations, partial_translations)
+    expect(config_proxy).to receive(:get_transaction_translations).with("test-rp", "en").and_return(translations, partial_translations)
+    expect(config_proxy).to receive(:get_transaction_translations).with("test-rp", "cy").and_return(translations, partial_translations)
 
     translation_service = RpTranslationService.new
-    translation_service.update_rp_translations('test-rp')
-    translation_service.update_rp_translations('test-rp')
+    translation_service.update_rp_translations("test-rp")
+    translation_service.update_rp_translations("test-rp")
 
     expect(I18n.t("rps.test-rp.name")).to eq("test GOV.UK Verify user journeys")
     expect(I18n.t("rps.test-rp.rp_name")).to eq("Updated Test RP")

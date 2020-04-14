@@ -16,7 +16,7 @@ class SelectPhoneForm
     Evidence::PHONE_ATTRIBUTES.each do |attr|
       result = public_send(attr)
       if %w(true false).include?(result)
-        answers[attr] = result == 'true'
+        answers[attr] = result == "true"
       end
     end
     answers
@@ -26,33 +26,33 @@ private
 
   def mobile_phone_must_be_present_when_required
     if mobile_phone.nil? && smart_phone_not_specified?
-      errors.add(:mobile_phone_true, I18n.t('hub.select_phone.errors.mobile_phone'))
+      errors.add(:mobile_phone_true, I18n.t("hub.select_phone.errors.mobile_phone"))
     end
   end
 
   def smart_phone_not_specified_when_required
     if has_mobile_phone? && smart_phone_not_specified?
-      errors.add(:smart_phone_true, I18n.t('hub.select_phone.errors.smart_phone'))
+      errors.add(:smart_phone_true, I18n.t("hub.select_phone.errors.smart_phone"))
     end
   end
 
   def invalid_selection
     if has_no_mobile_phone? && has_smart_phone?
-      errors.add(:mobile_phone_true, I18n.t('hub.select_phone.errors.invalid_selection'))
-      errors.add(:smart_phone_true, I18n.t('hub.select_phone.errors.invalid_selection'))
+      errors.add(:mobile_phone_true, I18n.t("hub.select_phone.errors.invalid_selection"))
+      errors.add(:smart_phone_true, I18n.t("hub.select_phone.errors.invalid_selection"))
     end
   end
 
   def has_smart_phone?
-    smart_phone == 'true'
+    smart_phone == "true"
   end
 
   def has_mobile_phone?
-    mobile_phone == 'true'
+    mobile_phone == "true"
   end
 
   def has_no_mobile_phone?
-    mobile_phone == 'false'
+    mobile_phone == "false"
   end
 
   def smart_phone_not_specified?

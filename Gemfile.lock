@@ -113,10 +113,6 @@ GEM
       archive-zip (~> 0.7)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    govuk-lint (3.11.0)
-      rubocop (~> 0.64)
-      rubocop-rspec (~> 1.28)
-      scss_lint
     hashdiff (0.3.8)
     hashie (3.6.0)
     headless (2.3.1)
@@ -134,7 +130,7 @@ GEM
     inflection (1.0.0)
     insist (1.0.0)
     io-like (0.3.0)
-    jaro_winkler (1.5.2)
+    jaro_winkler (1.5.4)
     jasmine (3.3.0)
       jasmine-core (~> 3.3.0)
       phantomjs
@@ -177,8 +173,8 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
-    parallel (1.15.0)
-    parser (2.6.2.0)
+    parallel (1.19.1)
+    parser (2.7.1.0)
       ast (~> 2.4.0)
     phantomjs (2.1.1.0)
     pkgr (1.5.1)
@@ -197,7 +193,6 @@ GEM
       stud
     prometheus-client (0.10.0.pre.alpha.1)
       concurrent-ruby
-    psych (3.1.0)
     public_suffix (3.0.3)
     puma (4.3.3)
       nio4r (~> 2.0)
@@ -270,17 +265,24 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rubocop (0.66.0)
+    rubocop (0.77.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
-      parser (>= 2.5, != 2.5.1.1)
-      psych (>= 3.1.0)
+      parser (>= 2.6)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 1.6)
-    rubocop-rspec (1.32.0)
-      rubocop (>= 0.60.0)
-    ruby-progressbar (1.10.0)
+      unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-govuk (2.0.0)
+      rubocop (= 0.77)
+      rubocop-rails (~> 2)
+      rubocop-rspec (~> 1.28)
+    rubocop-rails (2.5.1)
+      activesupport
+      rack (>= 1.1)
+      rubocop (>= 0.72.0)
+    rubocop-rspec (1.38.1)
+      rubocop (>= 0.68.1)
+    ruby-progressbar (1.10.1)
     ruby-xz (0.2.3)
       ffi (~> 1.9)
       io-like (~> 0.3)
@@ -294,9 +296,10 @@ GEM
     sassc (2.0.1)
       ffi (~> 1.9)
       rake
-    scss_lint (0.57.1)
-      rake (>= 0.9, < 13)
+    scss_lint (0.59.0)
       sass (~> 3.5, >= 3.5.5)
+    scss_lint-govuk (0.2.0)
+      scss_lint
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -332,7 +335,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
-    unicode-display_width (1.5.0)
+    unicode-display_width (1.6.0)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -368,7 +371,6 @@ DEPENDENCIES
   dotenv-rails
   email_validator (~> 1.6)
   geckodriver-helper
-  govuk-lint
   headless
   http (~> 2.0.0)
   jasmine
@@ -390,7 +392,9 @@ DEPENDENCIES
   route_translator (~> 5.0)
   rspec (~> 3.5.0)
   rspec-rails (~> 3.5.0)
+  rubocop-govuk
   sassc (~> 2.0.1)
+  scss_lint-govuk
   selenium-webdriver
   sentry-raven
   spring

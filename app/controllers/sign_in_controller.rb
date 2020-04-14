@@ -1,6 +1,6 @@
-require 'partials/idp_selection_partial_controller'
-require 'partials/viewable_idp_partial_controller'
-require 'partials/analytics_cookie_partial_controller'
+require "partials/idp_selection_partial_controller"
+require "partials/viewable_idp_partial_controller"
+require "partials/analytics_cookie_partial_controller"
 
 class SignInController < ApplicationController
   include IdpSelectionPartialController
@@ -20,7 +20,7 @@ class SignInController < ApplicationController
     @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_sign_in)
 
     @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      current_unavailable_identity_providers_for_sign_in
+      current_unavailable_identity_providers_for_sign_in,
     )
 
     @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_disconnected_identity_providers_for_sign_in)
@@ -29,7 +29,7 @@ class SignInController < ApplicationController
   end
 
   def select_idp
-    select_viewable_idp_for_sign_in(params.fetch('entity_id')) do |decorated_idp|
+    select_viewable_idp_for_sign_in(params.fetch("entity_id")) do |decorated_idp|
       set_journey_hint_followed(decorated_idp.entity_id)
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       redirect_to redirect_to_idp_sign_in_path
@@ -37,7 +37,7 @@ class SignInController < ApplicationController
   end
 
   def select_idp_ajax
-    select_viewable_idp_for_sign_in(params.fetch('entityId')) do |decorated_idp|
+    select_viewable_idp_for_sign_in(params.fetch("entityId")) do |decorated_idp|
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       ajax_idp_redirection_sign_in_request(decorated_idp.entity_id)
     end
@@ -46,14 +46,14 @@ class SignInController < ApplicationController
 private
 
   def sign_in(entity_id, idp_name)
-    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session['requested_loa'], false, analytics_session_id, session[:journey_type])
+    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session["requested_loa"], false, analytics_session_id, session[:journey_type])
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
   end
 
   def get_disconnection_hint_text(idp_name)
     if current_transaction.idp_disconnected_hint_html.nil?
-      t('hub.signin.company_no_longer_verifies_text', company: idp_name, link: link_to(t('hub.signin.company_no_longer_verifies_link'), begin_registration_path))
+      t("hub.signin.company_no_longer_verifies_text", company: idp_name, link: link_to(t("hub.signin.company_no_longer_verifies_link"), begin_registration_path))
     else
       format(current_transaction.idp_disconnected_hint_html, company: idp_name, begin_registration_path: begin_registration_path)
     end

@@ -9,10 +9,10 @@ module Display
 
       def correlate(transactions)
         transactions.map do |transaction|
-          simple_id = transaction.fetch('simpleId')
+          simple_id = transaction.fetch("simpleId")
           display_data = @rp_display_repository.get_translations(simple_id)
-          Transaction.new(display_data.name, transaction.fetch('loaList').min,
-                          display_data.taxon, transaction.fetch('entityId'), simple_id)
+          Transaction.new(display_data.name, transaction.fetch("loaList").min,
+                          display_data.taxon, transaction.fetch("entityId"), simple_id)
         end
       rescue KeyError => e
         Rails.logger.error e

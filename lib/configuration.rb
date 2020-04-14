@@ -24,9 +24,9 @@ class Configuration
   def option_bool(name, envvar, options = {})
     option(name, envvar, options) do |value|
       case value
-      when 'true'
+      when "true"
         true
-      when 'false'
+      when "false"
         false
       else
         raise InvalidEnvVarError, "Boolean Environment Variable '#{envvar}' must be 'true' or 'false'"

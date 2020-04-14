@@ -1,21 +1,21 @@
 module PolicyEndpoints
-  PATH = '/policy/received-authn-request'.freeze
+  PATH = "/policy/received-authn-request".freeze
   PATH_PREFIX = Pathname(PATH)
-  SIGN_IN_PROCESS_DETAILS_SUFFIX = 'sign-in-process-details'.freeze
-  SELECT_IDP_SUFFIX = 'select-identity-provider'.freeze
-  MATCHING_OUTCOME_SUFFIX = 'response-from-idp/response-processing-details'.freeze
-  RESTART_JOURNEY_SUFFIX = 'restart-journey'.freeze
-  PARAM_PRINCIPAL_IP = 'principalIpAddress'.freeze
-  PARAM_CYCLE_3_INPUT = 'cycle3Input'.freeze
-  PARAM_SELECTED_ENTITY_ID = 'selectedIdpEntityId'.freeze
-  PARAM_REGISTRATION = 'registration'.freeze
-  PARAM_REQUESTED_LOA = 'requestedLoa'.freeze
-  PARAM_ANALYTICS_SESSION_ID = 'analyticsSessionId'.freeze
-  PARAM_JOURNEY_TYPE = 'journeyType'.freeze
-  CYCLE_THREE_SUFFIX = 'cycle-3-attribute'.freeze
+  SIGN_IN_PROCESS_DETAILS_SUFFIX = "sign-in-process-details".freeze
+  SELECT_IDP_SUFFIX = "select-identity-provider".freeze
+  MATCHING_OUTCOME_SUFFIX = "response-from-idp/response-processing-details".freeze
+  RESTART_JOURNEY_SUFFIX = "restart-journey".freeze
+  PARAM_PRINCIPAL_IP = "principalIpAddress".freeze
+  PARAM_CYCLE_3_INPUT = "cycle3Input".freeze
+  PARAM_SELECTED_ENTITY_ID = "selectedIdpEntityId".freeze
+  PARAM_REGISTRATION = "registration".freeze
+  PARAM_REQUESTED_LOA = "requestedLoa".freeze
+  PARAM_ANALYTICS_SESSION_ID = "analyticsSessionId".freeze
+  PARAM_JOURNEY_TYPE = "journeyType".freeze
+  CYCLE_THREE_SUFFIX = "cycle-3-attribute".freeze
   CYCLE_THREE_SUBMIT_SUFFIX = "#{CYCLE_THREE_SUFFIX}/submit".freeze
   CYCLE_THREE_CANCEL_SUFFIX = "#{CYCLE_THREE_SUFFIX}/cancel".freeze
-  COUNTRIES_PATH = '/policy/countries'.freeze
+  COUNTRIES_PATH = "/policy/countries".freeze
   COUNTRIES_PATH_PREFIX = Pathname(COUNTRIES_PATH)
 
   def policy_endpoint(session_id, suffix)

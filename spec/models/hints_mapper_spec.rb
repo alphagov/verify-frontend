@@ -1,11 +1,11 @@
-require 'spec_helper'
-require 'models/hints_mapper'
+require "spec_helper"
+require "models/hints_mapper"
 
 describe HintsMapper do
-  it 'should produce a list of hints from answers hash' do
+  it "should produce a list of hints from answers hash" do
     answers_hash = {
-      phone: { 'mobile_phone' => true, 'smart_phone' => false },
-      documents: { 'passport' => true, 'driving_licence' => true, 'ni_driving_licence' => true, 'non_uk_id_document' => false }
+      phone: { "mobile_phone" => true, "smart_phone" => false },
+      documents: { "passport" => true, "driving_licence" => true, "ni_driving_licence" => true, "non_uk_id_document" => false },
     }
 
     hints = HintsMapper.map_answers_to_hints(answers_hash)
@@ -13,9 +13,9 @@ describe HintsMapper do
     expect(hints).to eql(%w(has_ukpassport has_ukphotolicence_gb has_ukphotolicence_ni not_nonukid not_apps has_mobile).to_set)
   end
 
-  it 'should produce a list of hints for no licences from answers hash' do
+  it "should produce a list of hints for no licences from answers hash" do
     answers_hash = {
-        documents: { 'driving_licence' => false, 'ni_driving_licence' => false }
+        documents: { "driving_licence" => false, "ni_driving_licence" => false },
     }
 
     hints = HintsMapper.map_answers_to_hints(answers_hash)
@@ -23,9 +23,9 @@ describe HintsMapper do
     expect(hints).to eql(%w(not_ukphotolicence_gb not_ukphotolicence_ni not_ukphotolicence).to_set)
   end
 
-  it 'should produce not_ukphotolicense_gb and not_ukphotolicense hints when answers indicate NO GB licence' do
+  it "should produce not_ukphotolicense_gb and not_ukphotolicense hints when answers indicate NO GB licence" do
     answers_hash = {
-        documents: { 'driving_licence' => false }
+        documents: { "driving_licence" => false },
     }
 
     hints = HintsMapper.map_answers_to_hints(answers_hash)
@@ -33,7 +33,7 @@ describe HintsMapper do
     expect(hints).to eql(%w(not_ukphotolicence_gb not_ukphotolicence).to_set)
   end
 
-  it 'should ignore unknown evidences' do
+  it "should ignore unknown evidences" do
     answers_hash = { phone: { dummy_evidence: true } }
 
     hints = HintsMapper.map_answers_to_hints(answers_hash)
@@ -41,7 +41,7 @@ describe HintsMapper do
     expect(hints).to be_empty
   end
 
-  it 'should handle an empty answers hash' do
+  it "should handle an empty answers hash" do
     answers_hash = {}
 
     hints = HintsMapper.map_answers_to_hints(answers_hash)

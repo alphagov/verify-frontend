@@ -4,7 +4,7 @@ class RedirectToIdpQuestionLoa2Controller < ApplicationController
   def index
     @idp = decorated_idp
     @form = InterstitialQuestionForm.new({})
-    render 'redirect_to_idp_question/redirect_to_idp_question_LOA2'
+    render "redirect_to_idp_question/redirect_to_idp_question_LOA2"
   end
 
   def interstitial_selected_path
@@ -16,6 +16,6 @@ class RedirectToIdpQuestionLoa2Controller < ApplicationController
   end
 
   def invalid_interstitial_path
-    'redirect_to_idp_question/redirect_to_idp_question_LOA2'
+    "redirect_to_idp_question/redirect_to_idp_question_LOA2"
   end
 end

@@ -1,4 +1,4 @@
-require 'raven/processor'
+require "raven/processor"
 module Raven
   class Processor::Cookies < Processor
     def process(data)

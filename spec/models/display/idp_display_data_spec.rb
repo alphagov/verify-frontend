@@ -1,7 +1,7 @@
-require 'spec_helper'
-require 'display_data_examples'
-require 'display/display_data'
-require 'display/idp_display_data'
+require "spec_helper"
+require "display_data_examples"
+require "display/display_data"
+require "display/idp_display_data"
 
 module Display
   describe IdpDisplayData do

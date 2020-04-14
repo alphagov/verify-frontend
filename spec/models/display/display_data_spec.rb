@@ -1,6 +1,6 @@
-require 'spec_helper'
-require 'rails_helper'
-require 'display/display_data'
+require "spec_helper"
+require "rails_helper"
+require "display/display_data"
 
 module Display
   describe DisplayData do
@@ -9,7 +9,7 @@ module Display
     def store_translation(key, value)
       keys = key.split(".")
       hash = keys.reverse.inject(value) { |a, n| { n => a } }
-      I18n.backend.store_translations('en', hash)
+      I18n.backend.store_translations("en", hash)
     end
 
     before(:each) do
@@ -22,11 +22,11 @@ module Display
     end
 
     describe "::prefix" do
-      it 'defines the prefix to the localisation key' do
+      it "defines the prefix to the localisation key" do
         derived_class = Class.new(Display::DisplayData) do
           prefix :bob
         end
-        expect(derived_class.new('simpleid', translator).prefix).to eql :bob
+        expect(derived_class.new("simpleid", translator).prefix).to eql :bob
       end
     end
 
@@ -36,46 +36,46 @@ module Display
           prefix :foo
           content :bob
         end
-        store_translation('foo.simpleid.bob', 'foobar')
-        expect(derived_class.new('simpleid', translator).bob).to eql 'foobar'
+        store_translation("foo.simpleid.bob", "foobar")
+        expect(derived_class.new("simpleid", translator).bob).to eql "foobar"
       end
 
-      it 'will raise an error when prefix is undefined' do
+      it "will raise an error when prefix is undefined" do
         derived_class = Class.new(Display::DisplayData) do
           content :bob
         end
         expect {
-          derived_class.new('simpleid', double(:translator)).bob
+          derived_class.new("simpleid", double(:translator)).bob
         }.to raise_error NotImplementedError
       end
 
       context "will support defaults" do
-        it 'as values if translation is not found' do
+        it "as values if translation is not found" do
           derived_class = Class.new(Display::DisplayData) do
             prefix :foo
-            content :bob, default: 'foobarbaz'
+            content :bob, default: "foobarbaz"
           end
-          expect(derived_class.new('simpleid', translator).bob).to eql 'foobarbaz'
+          expect(derived_class.new("simpleid", translator).bob).to eql "foobarbaz"
         end
 
-        it 'as procs if translation is not found' do
+        it "as procs if translation is not found" do
           derived_class = Class.new(Display::DisplayData) do
             prefix :foo
             content :bob, default: -> { "foobar" }
           end
-          expect(derived_class.new('simpleid', translator).bob).to eql 'foobar'
+          expect(derived_class.new("simpleid", translator).bob).to eql "foobar"
         end
 
-        it 'as procs that are instance_evaled if translation is not found' do
+        it "as procs that are instance_evaled if translation is not found" do
           derived_class = Class.new(Display::DisplayData) do
             prefix :foo
             content :bob, default: -> { prefix.to_s + " foobar" }
           end
-          expect(derived_class.new('simpleid', translator).bob).to eql 'foo foobar'
+          expect(derived_class.new("simpleid", translator).bob).to eql "foo foobar"
         end
       end
 
-      it 'content will not be shared between derived classes' do
+      it "content will not be shared between derived classes" do
         derived_class_one = Class.new(Display::DisplayData) do
           prefix :foo
           content :bob

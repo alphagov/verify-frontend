@@ -4,11 +4,11 @@ class WillItWorkForMeController < ApplicationController
   end
 
   def will_it_work_for_me
-    @form = WillItWorkForMeForm.new(params['will_it_work_for_me_form'] || {})
+    @form = WillItWorkForMeForm.new(params["will_it_work_for_me_form"] || {})
     if @form.valid?
       redirect_to next_page
     else
-      flash.now[:errors] = @form.errors.full_messages.join(', ')
+      flash.now[:errors] = @form.errors.full_messages.join(", ")
       render :index
     end
   end
@@ -39,11 +39,11 @@ private
       end
     else
       case @form.not_resident_reason
-      when 'AddressButNotResident'
+      when "AddressButNotResident"
         may_not_work_if_you_live_overseas_path
-      when 'NoAddress'
+      when "NoAddress"
         will_not_work_without_uk_address_path
-      when 'MovedRecently'
+      when "MovedRecently"
         why_might_this_not_work_for_me_path
       else
         raise ArgumentError.new("Invalid Reason '#{@form.not_resident_reason}' for field 'not_resident_reason'.")

@@ -1,4 +1,4 @@
-require 'partials/viewable_idp_partial_controller'
+require "partials/viewable_idp_partial_controller"
 
 class ChooseACertifiedCompanyLoa1Controller < ApplicationController
   include ChooseACertifiedCompanyAbout
@@ -9,18 +9,18 @@ class ChooseACertifiedCompanyLoa1Controller < ApplicationController
     @recommended_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_registration)
     @recommended_idps = order_with_unavailable_last(@recommended_idps)
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
-    render 'choose_a_certified_company/choose_a_certified_company_LOA1'
+    render "choose_a_certified_company/choose_a_certified_company_LOA1"
   end
 
   def select_idp
     if params[:entity_id].present?
-      selected_answer_store.store_selected_answers('interstitial', {})
-      select_viewable_idp_for_registration(params.fetch('entity_id')) do |decorated_idp|
+      selected_answer_store.store_selected_answers("interstitial", {})
+      select_viewable_idp_for_registration(params.fetch("entity_id")) do |decorated_idp|
         session[:selected_idp_was_recommended] = true
         redirect_to warning_or_question_page(decorated_idp)
       end
     else
-      render 'errors/something_went_wrong', status: 400
+      render "errors/something_went_wrong", status: 400
     end
   end
 

@@ -1,4 +1,4 @@
-require 'idp_configuration/idp_feature_flags_checker'
+require "idp_configuration/idp_feature_flags_checker"
 
 module IdpConfiguration
   class IdpFeatureFlagsLoader
@@ -19,7 +19,7 @@ module IdpConfiguration
   private
 
     def idps_with_flag_set(profiles, flag)
-      profiles.select { |data| data[flag] }.flat_map { |data| data.fetch('simpleIds') }
+      profiles.select { |data| data[flag] }.flat_map { |data| data.fetch("simpleIds") }
     end
   end
 end

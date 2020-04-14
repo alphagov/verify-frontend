@@ -3,7 +3,7 @@ module Display
     :country,
     :display_data,
     :flag_path,
-    :schemes
+    :schemes,
   ) do
     delegate :entity_id, to: :country
     delegate :simple_id, to: :country

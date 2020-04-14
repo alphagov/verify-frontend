@@ -1,7 +1,7 @@
 class SegmentMatcher
   def initialize(segment_config)
-    @segments = segment_config['segments']
-    @segment_definitions = segment_config['segment_definitions']
+    @segments = segment_config["segments"]
+    @segment_definitions = segment_config["segment_definitions"]
   end
 
   def find_matching_segments(user_profile)

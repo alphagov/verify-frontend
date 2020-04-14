@@ -1,5 +1,5 @@
-require 'idp_recommendations/segment_matcher'
-require 'idp_recommendations/transaction_grouper'
+require "idp_recommendations/segment_matcher"
+require "idp_recommendations/transaction_grouper"
 
 class RecommendationsEngine
   def initialize(idp_rules, segment_matcher, transaction_grouper, hide_soft_disconnecting_idps_mins)

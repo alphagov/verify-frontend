@@ -17,14 +17,14 @@ class InterstitialQuestionForm
   end
 
   def is_yes_selected?
-    self.interstitial_question_result == 'true'
+    self.interstitial_question_result == "true"
   end
 
 private
 
   def answer_required
     if @interstitial_question_result.blank?
-      errors.add(:interstitial_question_result_true, I18n.t('hub.redirect_to_idp_question.validation_message'))
+      errors.add(:interstitial_question_result_true, I18n.t("hub.redirect_to_idp_question.validation_message"))
     end
   end
 end

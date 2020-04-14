@@ -1,7 +1,7 @@
 module AnalyticsCookiePartialController
   def analytics_session_id
     cookie_value = cookies.fetch(analytics_cookie_name, nil)
-    cookie_value.split('.').first unless cookie_value.nil?
+    cookie_value.split(".").first unless cookie_value.nil?
   end
 
 private
