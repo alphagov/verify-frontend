@@ -93,13 +93,20 @@ RSpec.describe "user encounters error page" do
         expect(page.status_code).to eq(400)
       end
 
-      it "will present a session timeout error page when the API returns session timeout" do
-        error_body = { errorId: "0", exceptionType: "SESSION_TIMEOUT" }
-        stub_request(:post, api_saml_endpoint).to_return(body: error_body.to_json, status: 400)
-        visit("/test-saml")
-        click_button "saml-post"
-        expect(page).to have_content t("errors.session_timeout.title")
-        expect(page.body).to include t("errors.session_timeout.return_to_service_html")
+
+      it 'will present a session timeout error page when the API returns session timeout' do
+        stub_saml_proxy_authn_request_endpoint
+        stub_policy_sign_in_process_details
+        stub_transaction_details
+
+        visit('/test-saml')
+        click_button 'saml-post'
+        visit('/test-saml')
+        click_button 'saml-post-trigger-session-expiry'
+
+        expect(page).to have_content t('errors.session_timeout.try_again', other_ways_description: t('rps.test-rp.other_ways_description'))
+        expect(page.body).to include t('errors.session_timeout.return_to_service_html')
+        expect(page).to have_link t('errors.session_timeout.start_again'), href: "http://www.test-rp.gov.uk/"
         expect(page).to have_css "#piwik-custom-url", text: "errors/timeout-error"
         expect(page).to have_css "a[href*=EXPIRED_ERROR_PAGE]"
         expect(page.status_code).to eq(403)

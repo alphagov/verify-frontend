@@ -236,7 +236,7 @@ module ApiTestHelper
     stub_request(:post, saml_proxy_api_uri(NEW_SESSION_ENDPOINT)).with(body: authn_request_body).to_return(body: default_session_id.to_json, status: 200)
   end
 
-  def stub_policy_sign_in_process_details(options)
+  def stub_policy_sign_in_process_details(options = {})
     stub_request(:get, policy_api_uri(sign_in_process_details_endpoint(default_session_id))).to_return(body: sign_in_process_details_stub_response(options).to_json, status: 200)
   end
 

@@ -26,7 +26,7 @@ class StubApi < Sinatra::Base
     status 200
     "{
       \"simpleId\":\"test-rp\",
-      \"serviceHomepage\":\"www.example.com\",
+      \"serviceHomepage\":\"http://localhost:50300/test-saml\",
       \"loaList\":[\"#{level_of_assurance}\"],
       \"headlessStartpage\":\"http://example.com/success\"
     }"
