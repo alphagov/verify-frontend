@@ -17,10 +17,6 @@ gem 'autoprefixer-rails'
 gem 'uglifier', '~> 2.7.0'
 gem 'jquery-rails'
 
-gem 'govuk_template'
-gem 'govuk_frontend_toolkit'
-gem 'govuk_elements_rails'
-
 gem 'mini_racer'
 
 # Use statsd-ruby to talk collect and send metrics to graphite
