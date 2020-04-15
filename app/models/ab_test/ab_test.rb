@@ -44,8 +44,9 @@ module AbTest
     transaction_id = request.session[:transaction_simple_id]
 
     if experiment_is_valid(transaction_id, experiment_name)
-      alternative_name = self.get_alternative_name(request, experiment_name)
+      alternative_name = get_alternative_name(request, experiment_name)
       request.flash[:ab_test_variant] = alternative_name
+      alternative_name
     end
   end
 

@@ -8,16 +8,10 @@ get "begin_sign_in", to: "start#sign_in", as: :begin_sign_in
 
 # TEMPORARY TEAR DOWN
 # HUH-233 short hub 2019 q3 multivariate tests - LOA2 only
-#SHORT_HUB_2019_Q3 = "short_hub_2019_q3-preview".freeze
-#short_hub_v3_control_a = SelectRoute.new(SHORT_HUB_2019_Q3, 'control_a', experiment_loa: 'LEVEL_2')
-#short_hub_v3_variant_c = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_c_2_idp_short_hub', experiment_loa: 'LEVEL_2')
-
-
+#short_hub_v3_preview = AbTestConstraint.configure(ab_test_name: "short_hub_2019_q3-preview", experiment_loa: "LEVEL_2")
+#short_hub_v3 = AbTestConstraint.configure(ab_test_name: "short_hub_2019_q3", experiment_loa: "LEVEL_2")
 # A/B test HUB-563 - sign-in hint
-SIGN_IN_HINT = "sign_in_hint".freeze
-sign_in_hint_control = SelectRoute.new(SIGN_IN_HINT, "control", experiment_loa: "LEVEL_2")
-sign_in_hint_variant = SelectRoute.new(SIGN_IN_HINT, "variant", experiment_loa: "LEVEL_2")
-
+sign_in_hint = AbTestConstraint.configure(ab_test_name: "sign_in_hint", experiment_loa: "LEVEL_2")
 constraints IsLoa1 do
   get "start", to: "start#index", as: :start
   post "start", to: "start#request_post", as: :start
@@ -42,7 +36,7 @@ constraints IsLoa1 do
 end
 
 constraints IsLoa2 do
-  constraints sign_in_hint_control do
+  constraints sign_in_hint.use(alternative: "control") do
     get "prove_identity", to: "prove_identity#index", as: :prove_identity
     get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
     get "start", to: "start#index", as: :start
@@ -50,7 +44,7 @@ constraints IsLoa2 do
     get "begin_registration", to: "start#register", as: :begin_registration
   end
 
-  constraints sign_in_hint_variant do
+  constraints sign_in_hint.use(alternative: "variant") do
     get "prove_identity", to: "prove_identity_variant#index", as: :prove_identity
     get "prove_identity_retry", to: "prove_identity_variant#retry_eidas_journey", as: :prove_identity_retry
     get "prove_identity_ignore_hint", to: "prove_identity_variant#ignore_hint", as: :prove_identity_ignore_hint
@@ -60,11 +54,11 @@ constraints IsLoa2 do
     get "begin_registration", to: "start_variant#register", as: :begin_registration
   end
 
-  # get 'prove_identity', to: 'prove_identity#index', as: :prove_identity
-  # get 'prove_identity_retry', to: 'prove_identity#retry_eidas_journey', as: :prove_identity_retry
-  # get 'start', to: 'start#index', as: :start
-  # post 'start', to: 'start#request_post', as: :start
-  # get 'begin_registration', to: 'start#register', as: :begin_registration
+  # get "prove_identity", to: "prove_identity#index", as: :prove_identity
+  # get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
+  # get "start", to: "start#index", as: :start
+  # post "start", to: "start#request_post", as: :start
+  # get "begin_registration", to: "start#register", as: :begin_registration
 
   get "about", to: "about_loa2#index", as: :about
   get "about_certified_companies", to: "about_loa2#certified_companies", as: :about_certified_companies
@@ -142,7 +136,6 @@ get "resume_registration", to: "paused_registration#resume", as: :resume_registr
 post "resume_registration", to: "paused_registration#resume_with_idp", as: :resume_registration_submit
 get "completed_registration", to: "completed_registration#index", as: :completed_registration
 
-
 if SINGLE_IDP_FEATURE
   get "redirect_to_single_idp", to: "redirect_to_idp#single_idp", as: :redirect_to_single_idp
   get "continue_to_your_idp", to: "single_idp_journey#continue_to_your_idp", as: :continue_to_your_idp
@@ -157,41 +150,41 @@ end
 # # Variant C = 2 IDPs and new shorter hub journey
 
 # # HUH-233: implement control A route
-# constraints short_hub_v3_control_a do
-#   get 'about', to: 'about_loa2#index', as: :about
-#   get 'about_certified_companies', to: 'about_loa2#certified_companies', as: :about_certified_companies
-#   get 'about_identity_accounts', to: 'about_loa2#identity_accounts', as: :about_identity_accounts
-#   get 'about_choosing_a_company', to: 'about_loa2#choosing_a_company', as: :about_choosing_a_company
+# constraints short_hub_v3.use(alternative: "control_a") do
+#   get "about", to: "about_loa2#index", as: :about
+#   get "about_certified_companies", to: "about_loa2#certified_companies", as: :about_certified_companies
+#   get "about_identity_accounts", to: "about_loa2#identity_accounts", as: :about_identity_accounts
+#   get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
 
-#   get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
-#   post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+#   get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
+#   post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
 
-#   get 'select_documents', to: 'select_documents#index', as: :select_documents
-#   get 'select_documents_none', to: 'select_documents#no_documents', as: :select_documents_no_documents
-#   post 'select_documents', to: 'select_documents#select_documents', as: :select_documents_submit
+#   get "select_documents", to: "select_documents#index", as: :select_documents
+#   get "select_documents_none", to: "select_documents#no_documents", as: :select_documents_no_documents
+#   post "select_documents", to: "select_documents#select_documents", as: :select_documents_submit
 
-#   get 'select_phone', to: 'select_phone#index', as: :select_phone
-#   post 'select_phone', to: 'select_phone#select_phone', as: :select_phone_submit
-#   get 'verify_will_not_work_for_you', to: 'select_phone#verify_will_not_work_for_you', as: :verify_will_not_work_for_you
+#   get "select_phone", to: "select_phone#index", as: :select_phone
+#   post "select_phone", to: "select_phone#select_phone", as: :select_phone_submit
+#   get "verify_will_not_work_for_you", to: "select_phone#verify_will_not_work_for_you", as: :verify_will_not_work_for_you
 
-#   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#index', as: :choose_a_certified_company
-#   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2#about', as: :choose_a_certified_company_about
-#   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2#select_idp', as: :choose_a_certified_company_submit
+#   get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
+#   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
+#   post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
 # end
 
 # # HUH-234: implement appropriate variant C routes
-# constraints short_hub_v3_variant_c do
-#   get 'about', to: 'about_loa2_variant_c#index', as: :about
-#   get 'will_it_work_for_me', to: 'will_it_work_for_me#index', as: :will_it_work_for_me
-#   post 'will_it_work_for_me', to: 'will_it_work_for_me#will_it_work_for_me', as: :will_it_work_for_me_submit
+# constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do
+#   get "about", to: "about_loa2_variant_c#index", as: :about
+#   get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
+#   post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
 
-#   get 'select_documents', to: 'select_documents_variant_c#index', as: :select_documents
+#   get "select_documents", to: "select_documents_variant_c#index", as: :select_documents
 
-#   get 'select_documents_none', to: 'select_documents_variant_c#no_documents', as: :select_documents_no_documents
-#   post 'select_documents', to: 'select_documents_variant_c#select_documents', as: :select_documents_submit
-#   get 'select_documents_advice', to: 'select_documents_variant_c#advice', as: :select_documents_advice
+#   get "select_documents_none", to: "select_documents_variant_c#no_documents", as: :select_documents_no_documents
+#   post "select_documents", to: "select_documents_variant_c#select_documents", as: :select_documents_submit
+#   get "select_documents_advice", to: "select_documents_variant_c#advice", as: :select_documents_advice
 
-#   get 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant_c#index', as: :choose_a_certified_company
-#   get 'choose_a_certified_company/:company', to: 'choose_a_certified_company_loa2_variant_c#about', as: :choose_a_certified_company_about
-#   post 'choose_a_certified_company', to: 'choose_a_certified_company_loa2_variant_c#select_idp', as: :choose_a_certified_company_submit
+#   get "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#index", as: :choose_a_certified_company
+#   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2_variant_c#about", as: :choose_a_certified_company_about
+#   post "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#select_idp", as: :choose_a_certified_company_submit
 # end

@@ -1,4 +1,5 @@
 module UserCookiesPartialController
+  include AbTestConstraint
   def set_secure_cookie(name, value)
     cookies[name] = {
         value: value,
@@ -78,5 +79,9 @@ private
     MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT])
   rescue MultiJson::ParseError
     nil
+  end
+
+  def ab_test_with_alternative_name
+    AbTest.report_ab_test_details(request, experiment_name)
   end
 end

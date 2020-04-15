@@ -46,7 +46,13 @@ class SignInController < ApplicationController
 private
 
   def sign_in(entity_id, idp_name)
-    POLICY_PROXY.select_idp(session[:verify_session_id], entity_id, session["requested_loa"], false, analytics_session_id, session[:journey_type])
+    POLICY_PROXY.select_idp(session[:verify_session_id],
+                            entity_id,
+                            session[:requested_loa],
+                            false,
+                            analytics_session_id,
+                            session[:journey_type],
+                            ab_test_with_alternative_name)
     set_attempt_journey_hint(entity_id)
     session[:selected_idp_name] = idp_name
   end
