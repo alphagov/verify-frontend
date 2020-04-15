@@ -55,7 +55,8 @@ RSpec.describe "When the user visits the redirect to IDP warning page" do
       encrypted_entity_id,
       PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
       PolicyEndpoints::PARAM_REGISTRATION => true, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-      PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil
+      PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
+      PolicyEndpoints::PARAM_VARIANT => nil
     )
   }
 
@@ -63,6 +64,8 @@ RSpec.describe "When the user visits the redirect to IDP warning page" do
     stub_api_idp_list_for_registration
     session = default_session.merge(user_segments: %w(test-segment))
     set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session, session: session)
+    allow_any_instance_of(UserCookiesPartialController)
+      .to receive(:ab_test_with_alternative_name).and_return(nil)
   end
 
   it "includes the appropriate feedback source and page title" do

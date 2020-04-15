@@ -16,7 +16,8 @@ RSpec.describe "When the user visits the resume registration page and " do
       encrypted_entity_id,
       PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
       PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-      PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => "resuming"
+      PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => "resuming",
+      PolicyEndpoints::PARAM_VARIANT => nil
     )
   }
 
@@ -27,6 +28,8 @@ RSpec.describe "When the user visits the resume registration page and " do
     set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: "stub-idp-one")
     stub_translations
     stub_transaction_details
+    allow_any_instance_of(UserCookiesPartialController)
+      .to receive(:ab_test_with_alternative_name).and_return(nil)
   end
 
   context "has a cookie containing a PENDING state and valid IDP identifiers" do

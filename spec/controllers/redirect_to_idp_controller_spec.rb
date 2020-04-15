@@ -56,7 +56,7 @@ describe RedirectToIdpController do
     end
 
     it "reports idp registration and doesn't error out if idp_was_recommended key not present" do
-      bobs_identity_service_idp_name = "Bob’s Identity Service"
+      bobs_identity_service_idp_name = "Bob's Identity Service"
       idp_was_recommended = "(idp recommendation key not set)"
       evidence = { driving_licence: true, passport: true }
 
@@ -265,15 +265,17 @@ describe RedirectToIdpController do
       it "sets the selected IdP in Policy and the users session before rendering redirect_to_idp" do
         RedirectToIdpController.any_instance.stub(:flash) { { journey_hint: "idp_stub-idp-two" } }
 
+        allow_any_instance_of(UserCookiesPartialController)
+          .to receive(:ab_test_with_alternative_name).and_return(nil)
+
         expect(POLICY_PROXY).to receive(:select_idp)
-                                  .with(
-                                    instance_of(String),
-                                    "http://idcorp-two.com",
-                                    "LEVEL_1",
-                                    false,
-                                    nil,
-                                    "sign-in-last-sucessful-idp",
-                                  )
+                                  .with(instance_of(String),
+                                        "http://idcorp-two.com",
+                                        "LEVEL_1",
+                                        false,
+                                        nil,
+                                        "sign-in-last-sucessful-idp",
+                                        nil)
 
         subject
 

@@ -41,10 +41,12 @@ RSpec.describe "user selects an IDP on the sign in page" do
     expect(page).to have_content("relay state is 'a-relay-state'")
     expect(page).to have_content("registration is 'false'")
     expect(cookie_value("verify-front-journey-hint")).to_not be_nil
+
     expect(a_request(:post, policy_api_uri(select_idp_endpoint(default_session_id)))
              .with(body: { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
                            PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-                           PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil })).to have_been_made.once
+                           PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
+                           PolicyEndpoints::PARAM_VARIANT => nil })).to have_been_made.once
     expect(a_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
              .with(headers: { "X_FORWARDED_FOR" => originating_ip })).to have_been_made.once
   end
@@ -101,6 +103,10 @@ RSpec.describe "user selects an IDP on the sign in page" do
   let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
   let(:encrypted_entity_id) { "an-encrypted-entity-id" }
 
+  before(:each) do
+    allow_any_instance_of(UserCookiesPartialController)
+      .to receive(:ab_test_with_alternative_name).and_return(nil)
+  end
   context "with JS enabled", js: true do
     it "will redirect the user to the IDP" do
       page.set_rack_session(transaction_simple_id: "test-rp")
