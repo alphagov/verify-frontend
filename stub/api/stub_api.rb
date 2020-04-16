@@ -192,7 +192,7 @@ class StubApi < Sinatra::Base
         "serviceHomepage":"http://example.com/test-rp-loa1",
         "loaList":["LEVEL_1","LEVEL_2"],
         "headlessStartpage":"http://example.com/test-rp-loa1/success"
-      }],
+      },
       {
         "simpleId": "loa2-loa1-test-rp",
         "serviceHomepage":"http://example.com/test-rp-loa2-loa1",
