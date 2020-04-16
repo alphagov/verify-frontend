@@ -42,3 +42,7 @@ Layout/LeadingCommentSpace:
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     Default: ()
+
+Style/StringLiterals:
+  Exclude:
+    - 'config/initializers/*.rb'

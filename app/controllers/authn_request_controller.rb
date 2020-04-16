@@ -63,11 +63,11 @@ private
   end
 
   def set_requested_loa(levels_of_assurance)
-    if levels_of_assurance.include? "LEVEL_1"
-      puts requested_loa = "LEVEL_1"
-    else
-      requested_loa = levels_of_assurance.first
-    end
+    requested_loa = if levels_of_assurance.include? "LEVEL_1"
+                      "LEVEL_1"
+                    else
+                      levels_of_assurance.first
+                    end
     session[:requested_loa] = requested_loa
   end
 
