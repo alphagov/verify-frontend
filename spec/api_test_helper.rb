@@ -61,6 +61,10 @@ module ApiTestHelper
         "simpleId" => "test-rp-with-custom-hint", "serviceHomepage" => "http://localhost:50130/test-rp-with-custom-hint",
         "loaList" => %w(LEVEL_2), "headlessStartpage" => "http://localhost:50130/success?rp-name=test-rp-with-custom-hint"
       },
+      {
+        "simpleId" => "loa1-test-rp", "serviceHomepage" => "http://localhost:50130/loa1-test-rp",
+        "loaList" => %w(LEVEL_1 LEVEL_2), "headlessStartpage" => "http://localhost:50130/success?rp-name=loa1-test-rp"
+      },
     ]
 
     stub_request(:get, api_transactions_endpoint).to_return(body: transactions.to_json, status: 200)
@@ -113,6 +117,8 @@ module ApiTestHelper
       }'
     stub_request(:get, api_translations_endpoint("test-rp-noc3", "en")).to_return(body: test_rp_noc3_translations, status: 200)
     stub_request(:get, api_translations_endpoint("test-rp-noc3", "cy")).to_return(body: "{}", status: 200)
+    stub_request(:get, api_translations_endpoint("loa1-test-rp", "en")).to_return(body: test_rp_noc3_translations, status: 200)
+    stub_request(:get, api_translations_endpoint("loa1-test-rp", "cy")).to_return(body: "{}", status: 200)
     stub_request(:get, api_translations_endpoint("headless-rp", "en")).to_return(body: en_translation_data, status: 200)
     stub_request(:get, api_translations_endpoint("headless-rp", "cy")).to_return(body: "{}", status: 200)
     stub_request(:get, api_translations_endpoint("test-rp-with-continue-on-fail", "en")).to_return(body: en_translation_data, status: 200)

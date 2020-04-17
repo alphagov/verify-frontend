@@ -35,6 +35,19 @@ describe "user sends authn requests" do
       expect(page.get_rack_session["transaction_supports_eidas"]).to eql false
     end
 
+    it "will redirect the user to /choose-a-country for an eidas journey where eidas is enabled and RP LOA is LEVEL_1" do
+      stub_session_creation("simpleId" => "loa1-test-rp", "transactionSupportsEidas" => true)
+      stub_transactions_list
+      stub_countries_list
+
+      visit("/test-saml")
+      click_button "saml-post-eidas"
+
+      expect(page).to have_title t("hub.choose_a_country.title")
+      expect(page.get_rack_session["requested_loa"]).to eql "LEVEL_1"
+      expect(page.get_rack_session["transaction_supports_eidas"]).to eql true
+    end
+
     it "will redirect the user to /choose-a-country for an eidas journey where eidas is enabled" do
       stub_session_creation("transactionSupportsEidas" => true)
       stub_transactions_list
