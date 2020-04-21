@@ -14,6 +14,10 @@ describe "ConfigProxy" do
               "loaList" => %w(LEVEL_2), "headlessStartpage" => "http://localhost:50130/success?rp-name=test-rp"
           },
           {
+            "simpleId" => "loa1-test-rp", "serviceHomepage" => "http://localhost:50130/loa1-test-rp",
+            "loaList" => %w(LEVEL_2), "headlessStartpage" => "http://localhost:50130/success?rp-name=loa1-test-rp"
+        },
+          {
               "simpleId" => "test-rp-noc3", "serviceHomepage" => "http://localhost:50130/test-rp-noc3",
               "loaList" => %w(LEVEL_2), "headlessStartpage" => nil
           },

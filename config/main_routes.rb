@@ -19,6 +19,8 @@ sign_in_hint_control = SelectRoute.new(SIGN_IN_HINT, "control", experiment_loa: 
 sign_in_hint_variant = SelectRoute.new(SIGN_IN_HINT, "variant", experiment_loa: "LEVEL_2")
 
 constraints IsLoa1 do
+  get "prove_identity", to: "prove_identity#index", as: :prove_identity
+  get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
   get "start", to: "start#index", as: :start
   post "start", to: "start#request_post", as: :start
   get "begin_registration", to: "start#register", as: :begin_registration
