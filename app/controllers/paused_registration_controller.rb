@@ -121,7 +121,11 @@ private
   def get_rp_details(last_rp_value)
     return nil if last_rp_value.nil?
 
-    CONFIG_PROXY.get_transaction_details(last_rp_value)
+    begin
+      CONFIG_PROXY.get_transaction_details(last_rp_value)
+    rescue APIResponseMismatchError
+      logger.warn "last_rp_value not found: #{last_rp_value}"
+    end
   end
 
   def get_translated_service_name(simple_id)

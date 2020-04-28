@@ -154,6 +154,18 @@ describe PausedRegistrationController do
       expect(subject).to redirect_to start_path
     end
 
+    it "redirects to start page when invalid RP present in cookie" do
+      front_journey_hint_cookie = {
+          STATE: {
+              IDP: :valid_idp,
+              RP: :'we-changed-our-entityID',
+              STATUS: "PENDING",
+          },
+      }
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+      expect(subject).to redirect_to start_path
+    end
+
     it "should render error page when user has no session" do
       session.clear
 
