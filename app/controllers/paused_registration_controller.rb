@@ -46,7 +46,7 @@ class PausedRegistrationController < ApplicationController
   def resume
     set_transaction_from_session
     @idp = get_idp_from_cookie
-    if @idp.nil?
+    if @idp.nil? || @transaction.nil?
       redirect_to start_path
     else
       journey_type = "resuming"
@@ -102,26 +102,35 @@ private
 
   def set_transaction_from_session
     selected_rp = get_rp_details(current_transaction_entity_id)
-    @transaction = {
-      name: current_transaction.name,
-      homepage: current_transaction_homepage,
-      start_page: preferred_start_page(selected_rp),
-    }
+    if selected_rp != nil
+      @transaction = {
+        name: current_transaction.name,
+        homepage: current_transaction_homepage,
+        start_page: preferred_start_page(selected_rp),
+      }
+    end
   end
 
   def set_transaction_from_cookie
     selected_rp = get_rp_details(last_rp)
-    @transaction = {
-      name: get_translated_service_name(selected_rp.simple_id),
-      homepage: selected_rp.transaction_homepage,
-      start_page: preferred_start_page(selected_rp),
-    }
+    if selected_rp != nil
+      @transaction = {
+        name: get_translated_service_name(selected_rp.simple_id),
+        homepage: selected_rp.transaction_homepage,
+        start_page: preferred_start_page(selected_rp),
+      }
+    end
   end
 
   def get_rp_details(last_rp_value)
     return nil if last_rp_value.nil?
 
-    CONFIG_PROXY.get_transaction_details(last_rp_value)
+    begin
+      CONFIG_PROXY.get_transaction_details(last_rp_value)
+    rescue StandardError
+      logger.warn "Error trying to retrieve transaction details for #{last_rp_value}"
+      nil
+    end
   end
 
   def get_translated_service_name(simple_id)
