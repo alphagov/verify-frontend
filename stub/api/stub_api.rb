@@ -22,7 +22,7 @@ class StubApi < Sinatra::Base
   end
 
   get '/config/transactions/:entity_id/display-data' do
-    level_of_assurance = params['entity_id'] == 'http://www.test-rp-loa1.gov.uk/SAML2/MD' ? 'LEVEL_1' : 'LEVEL_2'
+    level_of_assurance = params['entity_id'] == 'http://www.test-rp-loa1.gov.uk/SAML2/MD' ? 'LEVEL_1' : "LEVEL_2"
     status 200
     "{
       \"simpleId\":\"test-rp\",

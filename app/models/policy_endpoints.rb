@@ -12,6 +12,7 @@ module PolicyEndpoints
   PARAM_REQUESTED_LOA = "requestedLoa".freeze
   PARAM_ANALYTICS_SESSION_ID = "analyticsSessionId".freeze
   PARAM_JOURNEY_TYPE = "journeyType".freeze
+  PARAM_VARIANT = "abTestVariant".freeze
   CYCLE_THREE_SUFFIX = "cycle-3-attribute".freeze
   CYCLE_THREE_SUBMIT_SUFFIX = "#{CYCLE_THREE_SUFFIX}/submit".freeze
   CYCLE_THREE_CANCEL_SUFFIX = "#{CYCLE_THREE_SUFFIX}/cancel".freeze

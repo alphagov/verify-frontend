@@ -35,16 +35,18 @@ RSpec.describe "user selects an IDP on the sign in page" do
     click_link("begin-registration-route")
   end
 
-  def then_im_at_the_idp
+  def then_im_at_the_idp(ab_value: nil)
     expect(page).to have_current_path(location)
     expect(page).to have_content("SAML Request is 'a-saml-request'")
     expect(page).to have_content("relay state is 'a-relay-state'")
     expect(page).to have_content("registration is 'false'")
     expect(cookie_value("verify-front-journey-hint")).to_not be_nil
+
     expect(a_request(:post, policy_api_uri(select_idp_endpoint(default_session_id)))
              .with(body: { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
                            PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-                           PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil })).to have_been_made.once
+                           PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
+                           PolicyEndpoints::PARAM_VARIANT => ab_value })).to have_been_made.once
     expect(a_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
              .with(headers: { "X_FORWARDED_FOR" => originating_ip })).to have_been_made.once
   end
@@ -87,6 +89,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
 
   let(:idp_entity_id) { "http://idcorp.com" }
   let(:idp_display_name) { "IDCorp" }
+  let(:current_ab_test_value) { "sign_in_hint_control" }
   let(:transaction_analytics_description) { "analytics description for test-rp" }
   let(:body) {
     [
@@ -97,11 +100,16 @@ RSpec.describe "user selects an IDP on the sign in page" do
       { "simpleId" => "stub-idp-four", "entityId" => "idp-four" },
     ]
   }
+
   let(:location) { "/test-idp-request-endpoint" }
   let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
   let(:encrypted_entity_id) { "an-encrypted-entity-id" }
 
   context "with JS enabled", js: true do
+    before(:each) do
+      allow_any_instance_of(UserCookiesPartialController)
+        .to receive(:ab_test_with_alternative_name).and_return(nil)
+    end
     it "will redirect the user to the IDP" do
       page.set_rack_session(transaction_simple_id: "test-rp")
       given_api_requests_have_been_mocked!
@@ -109,6 +117,21 @@ RSpec.describe "user selects an IDP on the sign in page" do
       expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
       when_i_select_an_idp
       then_im_at_the_idp
+      and_piwik_was_sent_a_signin_event
+      and_the_language_hint_is_set
+      and_the_hints_are_not_set
+      expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
+    end
+
+    it "will redirect the user to the IDP when there is an ab_test_value" do
+      allow_any_instance_of(UserCookiesPartialController)
+       .to receive(:ab_test_with_alternative_name).and_return(current_ab_test_value)
+      page.set_rack_session(transaction_simple_id: "test-rp")
+      given_api_requests_have_been_mocked!
+      given_im_on_the_sign_in_page
+      expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
+      when_i_select_an_idp
+      then_im_at_the_idp(ab_value: current_ab_test_value)
       and_piwik_was_sent_a_signin_event
       and_the_language_hint_is_set
       and_the_hints_are_not_set

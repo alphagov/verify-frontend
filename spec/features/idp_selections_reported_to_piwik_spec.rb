@@ -36,6 +36,8 @@ RSpec.describe "When the user selects an IDP" do
     stub_idp_select_request(idp_1_entity_id)
     stub_idp_select_request(idp_2_entity_id)
     given_a_session_with_selected_answers
+    allow_any_instance_of(UserCookiesPartialController)
+      .to receive(:ab_test_with_alternative_name).and_return(nil)
   end
 
   it "reports the IDP name to piwik" do
@@ -97,6 +99,7 @@ def stub_idp_select_request(idp_entity_id)
     encrypted_entity_id,
     PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
     PolicyEndpoints::PARAM_REGISTRATION => true, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-    PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => nil, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil
+    PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => nil, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
+    PolicyEndpoints::PARAM_VARIANT => nil
   )
 end
