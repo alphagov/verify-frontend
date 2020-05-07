@@ -14,11 +14,11 @@ class StartController < ApplicationController
     @form = StartForm.new({})
     @journey_hint = flash[:journey_hint]
     if journey_hint_entity_id.nil?
-      render "start/start"
+      render :start
     else
       @identity_provider = retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id).first
       if @identity_provider.nil?
-        return render "start/start"
+        return render :start
       end
 
       render "shared/sign_in_hint", layout: "main_layout"
@@ -45,7 +45,7 @@ class StartController < ApplicationController
       end
     else
       flash.now[:errors] = @form.errors.full_messages.join(", ")
-      render "start/start"
+      render :start
     end
   end
 

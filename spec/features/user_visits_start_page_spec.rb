@@ -5,10 +5,10 @@ require "cookie_names"
 RSpec.describe "When the user visits the start page" do
   context "when session is valid" do
     before(:each) do
-      set_session_and_ab_session_cookies!("sign_in_hint" => "sign_in_hint_variant")
+      set_session_and_session_cookies!
     end
 
-    it "will display the start page in English on variant" do
+    it "will display the start page in English" do
       set_session_and_session_cookies!
       visit "/start"
       expect(page).to have_content t("hub.start.heading")

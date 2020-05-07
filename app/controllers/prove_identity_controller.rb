@@ -10,11 +10,11 @@ class ProveIdentityController < ApplicationController
   def index
     journey_hint_entity_id = success_entity_id
     if journey_hint_entity_id.nil?
-      render "prove_identity/prove_identity"
+      render :prove_identity
     else
       @identity_provider = retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id).first
       if @identity_provider.nil?
-        return render "prove_identity/prove_identity"
+        return render :prove_identity
       end
 
       render "shared/sign_in_hint"

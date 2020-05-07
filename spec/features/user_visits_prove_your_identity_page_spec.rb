@@ -1,7 +1,7 @@
 require "feature_helper"
 require "api_test_helper"
 
-RSpec.describe "When the user visits the prove identity page on variant" do
+RSpec.describe "When the user visits the prove identity page" do
   before(:each) do
     stub_request(:get, "http://api.com:50240/config/transactions/enabled").to_return(
       status: 200,
@@ -12,7 +12,7 @@ RSpec.describe "When the user visits the prove identity page on variant" do
 
   context "will display the prove identity page" do
     before(:each) do
-      set_session_and_ab_session_cookies!("sign_in_hint" => "sign_in_hint_variant")
+      set_session_and_session_cookies!
     end
 
     it "in English" do
