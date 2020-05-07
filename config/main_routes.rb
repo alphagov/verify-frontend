@@ -12,12 +12,6 @@ get "begin_sign_in", to: "start#sign_in", as: :begin_sign_in
 #short_hub_v3_control_a = SelectRoute.new(SHORT_HUB_2019_Q3, 'control_a', experiment_loa: 'LEVEL_2')
 #short_hub_v3_variant_c = SelectRoute.new(SHORT_HUB_2019_Q3, 'variant_c_2_idp_short_hub', experiment_loa: 'LEVEL_2')
 
-
-# A/B test HUB-563 - sign-in hint
-SIGN_IN_HINT = "sign_in_hint".freeze
-sign_in_hint_control = SelectRoute.new(SIGN_IN_HINT, "control", experiment_loa: "LEVEL_2")
-sign_in_hint_variant = SelectRoute.new(SIGN_IN_HINT, "variant", experiment_loa: "LEVEL_2")
-
 constraints IsLoa1 do
   get "prove_identity", to: "prove_identity#index", as: :prove_identity
   get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
@@ -50,16 +44,6 @@ constraints IsLoa2 do
     get "start", to: "start#index", as: :start
     post "start", to: "start#request_post", as: :start
     get "begin_registration", to: "start#register", as: :begin_registration
-  end
-
-  constraints sign_in_hint_variant do
-    get "prove_identity", to: "prove_identity_variant#index", as: :prove_identity
-    get "prove_identity_retry", to: "prove_identity_variant#retry_eidas_journey", as: :prove_identity_retry
-    get "prove_identity_ignore_hint", to: "prove_identity_variant#ignore_hint", as: :prove_identity_ignore_hint
-    get "start", to: "start_variant#index", as: :start
-    post "start", to: "start_variant#request_post", as: :start
-    get "start_ignore_hint", to: "start_variant#ignore_hint", as: :start_ignore_hint
-    get "begin_registration", to: "start_variant#register", as: :begin_registration
   end
 
   # get 'prove_identity', to: 'prove_identity#index', as: :prove_identity

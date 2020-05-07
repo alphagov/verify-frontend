@@ -15,11 +15,6 @@ class AuthnRequestController < SamlController
     session_journey_hint_rp = session.fetch(:journey_hint_rp, nil)
     create_session
 
-    # HUB-113: Temporarily disabling to allow the perf team to analyze the data
-    # session[:new_visit] = true
-    AbTest.set_or_update_ab_test_cookie(current_transaction_simple_id, cookies)
-
-
     redirect_for_journey_hint preferred_journey_hint(session_journey_hint_value, session_journey_hint_rp)
   end
 
