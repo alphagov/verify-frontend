@@ -11,7 +11,7 @@ get "begin_sign_in", to: "start#sign_in", as: :begin_sign_in
 #short_hub_v3_preview = AbTestConstraint.configure(ab_test_name: "short_hub_2019_q3-preview", experiment_loa: "LEVEL_2")
 #short_hub_v3 = AbTestConstraint.configure(ab_test_name: "short_hub_2019_q3", experiment_loa: "LEVEL_2")
 # A/B test HUB-563 - sign-in hint
-sign_in_hint = AbTestConstraint.configure(ab_test_name: "sign_in_hint", experiment_loa: "LEVEL_2")
+#sign_in_hint = AbTestConstraint.configure(ab_test_name: "sign_in_hint", experiment_loa: "LEVEL_2")
 constraints IsLoa1 do
   get "prove_identity", to: "prove_identity#index", as: :prove_identity
   get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
@@ -54,31 +54,14 @@ constraints IsLoa2 do
   #  get "start_ignore_hint", to: "start_variant#ignore_hint", as: :start_ignore_hint
   #  get "begin_registration", to: "start_variant#register", as: :begin_registration
   #end
-  constraints sign_in_hint.use(alternative: "control") do
-    get "prove_identity", to: "prove_identity#index", as: :prove_identity
-    get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
-    get "prove_identity_ignore_hint", to: "prove_identity#ignore_hint", as: :prove_identity_ignore_hint
-    get "start", to: "start#index", as: :start
-    post "start", to: "start#request_post", as: :start
-    get "start_ignore_hint", to: "start#ignore_hint", as: :start_ignore_hint
-    get "begin_registration", to: "start#register", as: :begin_registration
-  end
 
-  constraints sign_in_hint.use(alternative: "variant") do
-    get "prove_identity", to: "prove_identity#index", as: :prove_identity
-    get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
-    get "prove_identity_ignore_hint", to: "prove_identity#ignore_hint", as: :prove_identity_ignore_hint
-    get "start", to: "start#index", as: :start
-    post "start", to: "start#request_post", as: :start
-    get "start_ignore_hint", to: "start#ignore_hint", as: :start_ignore_hint
-    get "begin_registration", to: "start#register", as: :begin_registration
-  end
-
-  # get "prove_identity", to: "prove_identity#index", as: :prove_identity
-  # get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
-  # get "start", to: "start#index", as: :start
-  # post "start", to: "start#request_post", as: :start
-  # get "begin_registration", to: "start#register", as: :begin_registration
+  get "prove_identity", to: "prove_identity#index", as: :prove_identity
+  get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
+  get "prove_identity_ignore_hint", to: "prove_identity#ignore_hint", as: :prove_identity_ignore_hint
+  get "start", to: "start#index", as: :start
+  post "start", to: "start#request_post", as: :start
+  get "start_ignore_hint", to: "start#ignore_hint", as: :start_ignore_hint
+  get "begin_registration", to: "start#register", as: :begin_registration
 
   get "about", to: "about_loa2#index", as: :about
   get "about_certified_companies", to: "about_loa2#certified_companies", as: :about_certified_companies

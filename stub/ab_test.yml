@@ -19,12 +19,6 @@
 #
 
 experiments:
-  - sign_in_hint:
-      alternatives:
-        - name: 'control'
-          percent: 100
-        - name: 'variant'
-          percent: 0
   - short_hub_2019_q3-preview:
       alternatives:
         - name: 'control_a'
