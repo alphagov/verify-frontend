@@ -1,7 +1,7 @@
 require "feature_helper"
 require "api_test_helper"
 
-RSpec.describe "When the user visits the prove identity page" do
+RSpec.describe "When the user visits the prove identity page on variant" do
   before(:each) do
     stub_request(:get, "http://api.com:50240/config/transactions/enabled").to_return(
       status: 200,
@@ -12,7 +12,7 @@ RSpec.describe "When the user visits the prove identity page" do
 
   context "will display the prove identity page" do
     before(:each) do
-      set_session_and_session_cookies!
+      set_session_and_ab_session_cookies!("sign_in_hint" => "sign_in_hint_variant")
     end
 
     it "in English" do
@@ -20,6 +20,29 @@ RSpec.describe "When the user visits the prove identity page" do
       expect(page).to have_content t("hub.prove_identity.heading")
       expect(page).to have_css "html[lang=en]"
       expect_feedback_source_to_be(page, "PROVE_IDENTITY_PAGE", "/prove-identity")
+    end
+
+    it "will display the hint page if an success hint present" do
+      set_journey_hint_cookie("http://idcorp.com", "SUCCESS")
+      stub_api_idp_list_for_sign_in
+      visit "/prove-identity"
+      expect(page).to have_content t("hub.sign_in_hint.heading")
+      expect(page).to have_css "html[lang=en]"
+    end
+
+    it "will reset the hint and display prove-identity page when user ignores the hint" do
+      set_journey_hint_cookie("http://idcorp.com", "SUCCESS")
+      stub_api_idp_list_for_sign_in
+      visit "/prove-identity"
+      expect(page).to have_content t("hub.sign_in_hint.heading")
+      expect(page).to have_css "html[lang=en]"
+      expect(page).to have_current_path "/prove-identity"
+
+      click_link t("hub.sign_in_hint.other_way_button")
+
+      expect(page).to have_content t("hub.prove_identity.heading")
+      expect(page).to have_css "html[lang=en]"
+      expect(page).to have_current_path "/prove-identity"
     end
 
     it "in Welsh" do
