@@ -1,9 +1,7 @@
 require "partials/journey_hinting_partial_controller"
-require "partials/viewable_idp_partial_controller"
 
 class StartController < ApplicationController
   include JourneyHintingPartialController
-  include ViewableIdpPartialController
 
   layout "slides"
   before_action :set_device_type_evidence
@@ -12,27 +10,11 @@ class StartController < ApplicationController
     restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::VERIFY)
     @form = StartForm.new({})
     @journey_hint = flash[:journey_hint]
-
-    journey_hint_entity_id = success_entity_id
-    if journey_hint_entity_id.nil?
-      render :start
-    else
-      @identity_provider = decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
-      if @identity_provider.nil?
-        return render :start
-      end
-
-      render "shared/sign_in_hint", layout: "main_layout"
-    end
+    render :start unless try_render_journey_hint
   end
 
   def ignore_hint
-    journey_hint_entity_id = success_entity_id
-    remove_success_journey_hint
-    idp = journey_hint_entity_id && decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
-    unless idp.nil?
-      FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name, session[:transaction_simple_id])
-    end
+    remove_hint_and_report
     redirect_to start_path
   end
 

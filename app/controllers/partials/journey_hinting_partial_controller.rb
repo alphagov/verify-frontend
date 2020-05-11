@@ -1,13 +1,11 @@
+require "partials/viewable_idp_partial_controller"
+
 # Shared methods for controllers which use the journey hint cookie to give users IDP suggestions
 module JourneyHintingPartialController
+  include ViewableIdpPartialController
+
   PENDING_STATUS = "PENDING".freeze
   FAILED_STATUS = "FAILED".freeze
-
-  def journey_hint_value
-    MultiJson.load(cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT])
-  rescue MultiJson::ParseError
-    nil
-  end
 
   def attempted_entity_id
     journey_hint_value.nil? ? nil : journey_hint_value["ATTEMPT"]
@@ -60,5 +58,25 @@ module JourneyHintingPartialController
   def decorate_idp_by_simple_id(providers, simple_id)
     retrieved_idp = providers.select { |idp| idp.simple_id == simple_id }.first
     retrieved_idp && IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(retrieved_idp)
+  end
+
+  def try_render_journey_hint
+    journey_hint_entity_id = success_entity_id
+    unless journey_hint_entity_id.nil?
+      @identity_provider = decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
+      return render "shared/sign_in_hint" unless @identity_provider.nil?
+    end
+
+    false
+  end
+
+  def remove_hint_and_report
+    journey_hint_entity_id = success_entity_id
+    idp = journey_hint_entity_id && decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
+    unless idp.nil?
+      FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name, session[:transaction_simple_id])
+    end
+
+    remove_success_journey_hint
   end
 end
