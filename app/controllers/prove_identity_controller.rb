@@ -12,7 +12,7 @@ class ProveIdentityController < ApplicationController
     if journey_hint_entity_id.nil?
       render :prove_identity
     else
-      @identity_provider = retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id).first
+      @identity_provider = decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
       if @identity_provider.nil?
         return render :prove_identity
       end
@@ -24,10 +24,14 @@ class ProveIdentityController < ApplicationController
   def ignore_hint
     journey_hint_entity_id = success_entity_id
     remove_success_journey_hint
-    idp = retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id).first unless journey_hint_entity_id.nil?
-    unless idp.nil?
-      FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name, session[:transaction_simple_id])
+
+    unless journey_hint_entity_id.nil?
+      idp = decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
+      unless idp.nil?
+        FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name, session[:transaction_simple_id])
+      end
     end
+
     redirect_to prove_identity_path
   end
 

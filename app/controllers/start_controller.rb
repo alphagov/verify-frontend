@@ -10,13 +10,14 @@ class StartController < ApplicationController
 
   def index
     restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::VERIFY)
-    journey_hint_entity_id = success_entity_id
     @form = StartForm.new({})
     @journey_hint = flash[:journey_hint]
+
+    journey_hint_entity_id = success_entity_id
     if journey_hint_entity_id.nil?
       render :start
     else
-      @identity_provider = retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id).first
+      @identity_provider = decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
       if @identity_provider.nil?
         return render :start
       end
@@ -28,7 +29,7 @@ class StartController < ApplicationController
   def ignore_hint
     journey_hint_entity_id = success_entity_id
     remove_success_journey_hint
-    idp = retrieve_decorated_singleton_idp_array_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id).first unless journey_hint_entity_id.nil?
+    idp = journey_hint_entity_id && decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
     unless idp.nil?
       FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name, session[:transaction_simple_id])
     end

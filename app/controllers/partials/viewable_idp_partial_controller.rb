@@ -52,7 +52,7 @@ module ViewableIdpPartialController
     current_identity_providers_for_sign_in.reject(&:authentication_enabled)
   end
 
-  def current_identity_providers_for_registration_rp_loa2(rp_entity_id)
+  def current_available_identity_providers_for_registration_loa2(rp_entity_id)
     CONFIG_PROXY.get_available_idp_list_for_registration(rp_entity_id, "LEVEL_2").idps
   end
 

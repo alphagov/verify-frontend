@@ -52,11 +52,13 @@ module JourneyHintingPartialController
     !hinted_id.nil? && hinted_id == entity_id_followed_by_user
   end
 
-  def retrieve_decorated_singleton_idp_array_by_entity_id(providers, entity_id)
-    IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(providers.select { |idp| idp.entity_id == entity_id })
+  def decorate_idp_by_entity_id(providers, entity_id)
+    retrieved_idp = providers.select { |idp| idp.entity_id == entity_id }.first
+    retrieved_idp && IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(retrieved_idp)
   end
 
-  def retrieve_decorated_singleton_idp_array_by_simple_id(providers, simple_id)
-    IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(providers.select { |idp| idp.simple_id == simple_id })
+  def decorate_idp_by_simple_id(providers, simple_id)
+    retrieved_idp = providers.select { |idp| idp.simple_id == simple_id }.first
+    retrieved_idp && IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(retrieved_idp)
   end
 end

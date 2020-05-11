@@ -11,7 +11,7 @@ class SignInController < ApplicationController
   def index
     entity_id = success_entity_id
     all_identity_providers = current_available_identity_providers_for_sign_in + current_disconnected_identity_providers_for_sign_in
-    @suggested_idp = entity_id && retrieve_decorated_singleton_idp_array_by_entity_id(all_identity_providers, entity_id).first
+    @suggested_idp = entity_id && decorate_idp_by_entity_id(all_identity_providers, entity_id)
     unless @suggested_idp.nil?
       FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp.display_name)
       @idp_disconnected_hint_html = get_disconnection_hint_text(@suggested_idp.display_name)

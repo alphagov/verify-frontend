@@ -36,10 +36,7 @@ class HintController < ApplicationController
     identity_providers = current_available_identity_providers_for_sign_in
 
     if identity_providers.any?
-      idp = retrieve_decorated_singleton_idp_array_by_entity_id(
-        identity_providers,
-        entity_id,
-      ).first
+      idp = decorate_idp_by_entity_id(identity_providers, entity_id)
 
       if idp.nil?
         logger.info "No IDP found for entity ID #{entity_id} and identity providers #{identity_providers}"

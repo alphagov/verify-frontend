@@ -24,7 +24,7 @@ class SingleIdpJourneyController < ApplicationController
 
   def continue_to_your_idp
     if valid_cookie? && valid_selection?
-      @idp = retrieve_decorated_singleton_idp_array_by_entity_id(current_identity_providers_for_single_idp, single_idp_cookie["idp_entity_id"]).first
+      @idp = decorate_idp_by_entity_id(current_identity_providers_for_single_idp, single_idp_cookie["idp_entity_id"])
       @service_name = current_transaction.name
       @uuid = single_idp_cookie.fetch("uuid", nil)
       session[:journey_type] = "single-idp"
