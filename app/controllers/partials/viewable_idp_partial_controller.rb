@@ -33,7 +33,7 @@ module ViewableIdpPartialController
   end
 
   def current_available_identity_providers_for_registration
-    CONFIG_PROXY.get_available_idp_list_for_registration(session[:transaction_entity_id], session[:requested_loa]).idps
+    CONFIG_PROXY.get_available_idp_list_for_registration(session[:transaction_entity_id], session[:requested_loa]).idps.reject { |idp| idps_tried.include? idp.simple_id }
   end
 
   def current_identity_providers_for_sign_in
@@ -62,5 +62,9 @@ module ViewableIdpPartialController
 
   def order_with_unavailable_last(idps)
     idps.reject(&:unavailable) + idps.select(&:unavailable)
+  end
+
+  def idps_tried
+    session[:idps_tried] = Set.new session[:idps_tried]
   end
 end
