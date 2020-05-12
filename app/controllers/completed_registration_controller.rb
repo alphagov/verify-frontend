@@ -21,7 +21,7 @@ class CompletedRegistrationController < ApplicationController
       identity_providers = current_available_identity_providers_for_sign_in
       session[:transaction_entity_id] = nil
 
-      entity_id = retrieve_decorated_singleton_idp_array_by_simple_id(identity_providers, idp_simple_id).first.entity_id
+      entity_id = decorate_idp_by_simple_id(identity_providers, idp_simple_id).entity_id
       set_attempt_journey_hint(entity_id)
       set_journey_hint_by_status(entity_id, "SUCCESS")
       render :index

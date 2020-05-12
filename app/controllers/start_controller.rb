@@ -1,4 +1,8 @@
+require "partials/journey_hinting_partial_controller"
+
 class StartController < ApplicationController
+  include JourneyHintingPartialController
+
   layout "slides"
   before_action :set_device_type_evidence
 
@@ -6,7 +10,12 @@ class StartController < ApplicationController
     restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::VERIFY)
     @form = StartForm.new({})
     @journey_hint = flash[:journey_hint]
-    render :start
+    render :start unless try_render_journey_hint
+  end
+
+  def ignore_hint
+    remove_hint_and_report
+    redirect_to start_path
   end
 
   def request_post
