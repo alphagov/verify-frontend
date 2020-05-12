@@ -46,6 +46,7 @@ describe ProveIdentityController do
 
       get :index, params: { locale: "en" }
       expect(subject).to render_template("shared/sign_in_hint")
+      expect(subject).to render_template("layouts/main_layout")
     end
 
     it "renders the normal prove-identity page if IDP is invalid" do

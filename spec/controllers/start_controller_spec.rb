@@ -88,7 +88,8 @@ describe StartController do
       stub_api_idp_list_for_sign_in
 
       get :index, params: { locale: "en" }
-      expect(subject).to render_template("shared/sign_in_hint", "layouts/main_layout")
+      expect(subject).to render_template("shared/sign_in_hint")
+      expect(subject).to render_template("layouts/main_layout")
     end
 
     it "renders the normal start page if IDP is invalid" do
@@ -98,7 +99,8 @@ describe StartController do
       stub_api_idp_list_for_sign_in
 
       get :index, params: { locale: "en" }
-      expect(subject).to render_template(:start, "layouts/slides")
+      expect(subject).to render_template(:start)
+      expect(subject).to render_template("layouts/slides")
     end
 
     it "renders the normal start page if success is missing" do
@@ -108,7 +110,8 @@ describe StartController do
       stub_api_idp_list_for_sign_in
 
       get :index, params: { locale: "en" }
-      expect(subject).to render_template(:start, "layouts/slides")
+      expect(subject).to render_template(:start)
+      expect(subject).to render_template("layouts/slides")
     end
 
     it "allows to disregard the hint and deletes the SUCCESS" do
