@@ -9,7 +9,9 @@ get "begin_sign_in", to: "start#sign_in", as: :begin_sign_in
 # TEMPORARY TEAR DOWN
 # HUH-233 short hub 2019 q3 multivariate tests - LOA2 only
 SHORT_HUB_2019_Q3 = "short_hub_2019_q3-preview".freeze
+# rubocop:disable UselessAssignment
 short_hub_v3_preview = AbTestConstraint.configure(ab_test_name: "short_hub_2019_q3-preview", experiment_loa: "LEVEL_2")
+# rubocop:enable UselessAssignment
 short_hub_v3 = AbTestConstraint.configure(ab_test_name: "short_hub_2019_q3", experiment_loa: "LEVEL_2")
 
 constraints IsLoa1 do

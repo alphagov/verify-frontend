@@ -2,7 +2,6 @@ require "feature_helper"
 require "api_test_helper"
 
 describe "When the user visits the choose a certified company variant page" do
-
   let(:stub_idp_one) {
     {
         "simpleId" => "stub-idp-one",

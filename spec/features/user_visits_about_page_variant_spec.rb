@@ -4,7 +4,6 @@ require "piwik_test_helper"
 require "api_test_helper"
 
 RSpec.describe "When the user visits the about page" do
-
   context "session cookie also contains variant c" do
     before(:each) do
       stub_api_idp_list_for_registration

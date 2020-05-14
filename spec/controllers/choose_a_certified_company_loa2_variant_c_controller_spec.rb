@@ -4,7 +4,6 @@ require "api_test_helper"
 require "piwik_test_helper"
 
 describe ChooseACertifiedCompanyLoa2VariantCController do
-
   let(:stub_idp_one) {
     {
         "simpleId" => "stub-idp-one",

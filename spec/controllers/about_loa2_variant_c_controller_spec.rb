@@ -4,7 +4,6 @@ require "api_test_helper"
 require "variant_test_helper"
 
 describe AboutLoa2VariantCController do
-
   let(:identity_provider_display_decorator) { double(:IdentityProviderDisplayDecorator) }
 
   before(:each) do
