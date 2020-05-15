@@ -2,8 +2,6 @@ require "feature_helper"
 require "api_test_helper"
 
 RSpec.feature "When user visits document selection page" do
-  before { skip("Short hub AB test temporarily teared down") }
-
   before(:each) do
     experiment = { "short_hub_2019_q3-preview" => "short_hub_2019_q3-preview_variant_c_2_idp_short_hub" }
     set_session_and_ab_session_cookies!(experiment)

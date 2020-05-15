@@ -2,8 +2,6 @@ require "feature_helper"
 require "api_test_helper"
 
 describe "When the user visits the choose a certified company variant page" do
-  before { skip("Short hub AB test temporarily teared down") }
-
   let(:stub_idp_one) {
     {
         "simpleId" => "stub-idp-one",
