@@ -14,10 +14,13 @@ RSpec.describe "When the user visits the resume registration page and " do
   let(:select_idp_stub_request) {
     stub_session_select_idp_request(
       encrypted_entity_id,
-      PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
-      PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-      PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => "resuming",
-      PolicyEndpoints::PARAM_VARIANT => nil
+      PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
+      PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
+      PolicyEndpoints::PARAM_REGISTRATION => false,
+      PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
+      PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => instance_of(String), # no longer comes from matomo
+      PolicyEndpoints::PARAM_JOURNEY_TYPE => "resuming",
+      PolicyEndpoints::PARAM_VARIANT => nil,
     )
   }
 

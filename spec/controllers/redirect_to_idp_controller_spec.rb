@@ -269,13 +269,13 @@ describe RedirectToIdpController do
           .to receive(:ab_test_with_alternative_name).and_return(nil)
 
         expect(POLICY_PROXY).to receive(:select_idp)
-                                  .with(instance_of(String),
-                                        "http://idcorp-two.com",
-                                        "LEVEL_1",
-                                        false,
-                                        nil,
-                                        "sign-in-last-sucessful-idp",
-                                        nil)
+                                  .with(instance_of(String),          # sessionId
+                                        "http://idcorp-two.com",      # entityId
+                                        "LEVEL_1",                    # LOA
+                                        false,                        # registration
+                                        instance_of(String),          # analyticsSessionId - not from matomo
+                                        "sign-in-last-sucessful-idp", # journeyType
+                                        nil)                          # variant
 
         subject
 

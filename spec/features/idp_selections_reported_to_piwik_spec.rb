@@ -1,6 +1,7 @@
 require "feature_helper"
 require "api_test_helper"
 require "piwik_test_helper"
+require "securerandom"
 
 RSpec.describe "When the user selects an IDP" do
   let(:selected_answers) {
@@ -97,9 +98,12 @@ end
 def stub_idp_select_request(idp_entity_id)
   stub_session_select_idp_request(
     encrypted_entity_id,
-    PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
-    PolicyEndpoints::PARAM_REGISTRATION => true, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-    PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => nil, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
-    PolicyEndpoints::PARAM_VARIANT => nil
+    PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
+    PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
+    PolicyEndpoints::PARAM_REGISTRATION => true,
+    PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
+    PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => instance_of(String), # no longer comes from matomo
+    PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
+    PolicyEndpoints::PARAM_VARIANT => nil,
   )
 end
