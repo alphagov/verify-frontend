@@ -220,11 +220,11 @@ describe ChooseACertifiedCompanyLoa2Controller do
       expect(session[:selected_idp_was_recommended]).to eql(true)
     end
 
-    it "redirects to what_happens_next page by default" do
+    it "redirects to IDP warning page by default" do
       session[:selected_answers] = { "documents" => { "driving_licence" => true, "passport" => true } }
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp-loa1.com" }
 
-      expect(subject).to redirect_to what_happens_next_path
+      expect(subject).to redirect_to redirect_to_idp_warning_path
     end
 
     it "redirects to IDP question page when user has one doc and IDP flag is enabled" do
