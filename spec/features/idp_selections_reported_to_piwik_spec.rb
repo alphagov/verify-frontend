@@ -1,7 +1,6 @@
 require "feature_helper"
 require "api_test_helper"
 require "piwik_test_helper"
-require "securerandom"
 
 RSpec.describe "When the user selects an IDP" do
   let(:selected_answers) {
