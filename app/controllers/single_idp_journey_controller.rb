@@ -177,7 +177,7 @@ private
                             entity_id,
                             session[:requested_loa],
                             false,
-                            analytics_session_id,
+                            persistent_session_id,
                             session[:journey_type],
                             ab_test_with_alternative_name)
     set_attempt_journey_hint(entity_id)

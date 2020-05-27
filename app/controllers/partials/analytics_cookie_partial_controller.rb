@@ -2,7 +2,7 @@ require "securerandom"
 
 # persistent session id is taken from matomo if available, and generated if not
 module AnalyticsCookiePartialController
-  def analytics_session_id
+  def persistent_session_id
     cookie_value = cookies.fetch(CookieNames::PERSISTENT_SESSION_ID_COOKIE_NAME, nil)
     if cookie_value.nil?
       matomo_value = cookies.fetch(analytics_cookie_name, nil)
