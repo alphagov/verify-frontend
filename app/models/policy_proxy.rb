@@ -21,7 +21,7 @@ class PolicyProxy
       PARAM_PRINCIPAL_IP => originating_ip,
       PARAM_REGISTRATION => registration,
       PARAM_REQUESTED_LOA => requested_loa,
-      PARAM_ANALYTICS_SESSION_ID => persistent_session_id,
+      PARAM_PERSISTENT_SESSION_ID => persistent_session_id,
       PARAM_JOURNEY_TYPE => journey_type,
       PARAM_VARIANT => variant,
     }

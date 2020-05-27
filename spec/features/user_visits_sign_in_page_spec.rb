@@ -47,7 +47,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
                            PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
                            PolicyEndpoints::PARAM_REGISTRATION => false,
                            PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-                           PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => instance_of(String), # no longer comes from matomo
+                           PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String), # no longer comes from matomo
                            PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
                            PolicyEndpoints::PARAM_VARIANT => ab_value })).to have_been_made.once
     expect(a_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))

@@ -57,7 +57,7 @@ RSpec.describe "When the user visits the redirect to IDP warning page" do
       PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
       PolicyEndpoints::PARAM_REGISTRATION => true,
       PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-      PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => instance_of(String), # no longer comes from matomo
+      PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String), # no longer comes from matomo
       PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
       PolicyEndpoints::PARAM_VARIANT => nil,
     )
