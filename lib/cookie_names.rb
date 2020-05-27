@@ -1,7 +1,7 @@
 module CookieNames
   SESSION_COOKIE_NAME = "_verify-frontend_session".freeze
   SESSION_ID_COOKIE_NAME = "x_govuk_session_cookie".freeze
-  PERSISTENT_SESSION_ID_COOKIE_NAME = "_verify-persistent-session-id".freeze
+  PERSISTENT_SESSION_ID_COOKIE_NAME = "verify-persistent-session-id".freeze
   VERIFY_FRONT_JOURNEY_HINT = "verify-front-journey-hint".freeze
   VERIFY_SINGLE_IDP_JOURNEY = "verify-single-idp-journey".freeze
   VERIFY_LOCALE = "x_verify_locale".freeze
