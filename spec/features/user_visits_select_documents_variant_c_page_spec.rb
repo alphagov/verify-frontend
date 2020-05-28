@@ -24,7 +24,83 @@ RSpec.feature "When user visits document selection page" do
 
   it "redirects to the idp picker page when selects 3 documents" do
     visit "/select-documents"
+    expect_reporter_to_receive(
+      evidence: %I(has_valid_passport has_driving_license has_credit_card device_type_other),
+      attempts: 1,
+    )
+    check "Your current driving licence, full or provisional, with your photo on it", allow_label_click: true
+    check "Your valid passport", allow_label_click: true
+    check "Your credit or debit card", allow_label_click: true
+    click_button t("navigation.continue")
 
+    expect(page).to have_title t("hub_variant_c.choose_a_certified_company.title")
+    expect(page).to have_current_path(choose_a_certified_company_path)
+  end
+
+  it "redirects to the select advice page when selects 2 documents" do
+    visit "/select-documents"
+    expect_reporter_to_receive(
+      evidence: %I(has_driving_license has_credit_card device_type_other),
+      attempts: 1,
+    )
+    check "Your current driving licence, full or provisional, with your photo on it", allow_label_click: true
+    check "Your credit or debit card", allow_label_click: true
+    click_button t("navigation.continue")
+
+    expect(page).to have_title t("hub_variant_c.select_documents.title")
+    expect(page).to have_current_path(select_documents_advice_path)
+  end
+
+  it "redirects to the select advice page when selects 2 documents and None of the above is checked" do
+    visit "/select-documents"
+    expect_reporter_to_receive(
+      evidence: %I(has_driving_license has_credit_card device_type_other),
+      attempts: 1,
+    )
+    check "Your current driving licence, full or provisional, with your photo on it", allow_label_click: true
+    check "Your credit or debit card", allow_label_click: true
+    check "None of the above", allow_label_click: true
+    click_button t("navigation.continue")
+
+    expect(page).to have_current_path(select_documents_advice_path)
+  end
+
+  it "increments attempts" do
+    visit "/select-documents"
+    expect_reporter_to_receive(
+      evidence: %I(device_type_other),
+      attempts: 1,
+    )
+    check "None of the above", allow_label_click: true
+    click_button t("navigation.continue")
+
+    expect(page).to have_current_path(select_documents_advice_path)
+    visit "/select-documents"
+    expect_reporter_to_receive(
+      evidence: %I(has_driving_license device_type_other),
+      attempts: 2,
+    )
+    check "Your current driving licence, full or provisional, with your photo on it", allow_label_click: true
+    click_button t("navigation.continue")
+
+    expect(page).to have_current_path(select_documents_advice_path)
+
+    visit "/select-documents"
+    expect_reporter_to_receive(
+      evidence: %I(has_driving_license has_credit_card device_type_other),
+      attempts: 3,
+    )
+    check "Your current driving licence, full or provisional, with your photo on it", allow_label_click: true
+    check "Your credit or debit card", allow_label_click: true
+    click_button t("navigation.continue")
+
+    expect(page).to have_current_path(select_documents_advice_path)
+
+    visit "/select-documents"
+    expect_reporter_to_receive(
+      evidence: %I(has_valid_passport has_driving_license has_credit_card device_type_other),
+      attempts: 4,
+    )
     check "Your current driving licence, full or provisional, with your photo on it", allow_label_click: true
     check "Your valid passport", allow_label_click: true
     check "Your credit or debit card", allow_label_click: true
@@ -33,13 +109,13 @@ RSpec.feature "When user visits document selection page" do
     expect(page).to have_current_path(choose_a_certified_company_path)
   end
 
-  it "redirects to the select advice page when selects 2 documents" do
-    visit "/select-documents"
-
-    check "Your current driving licence, full or provisional, with your photo on it", allow_label_click: true
-    check "Your credit or debit card", allow_label_click: true
-    click_button t("navigation.continue")
-
-    expect(page).to have_current_path(select_documents_advice_path)
+  def expect_reporter_to_receive(evidence:, attempts:)
+    expect(FEDERATION_REPORTER).to receive(:report_user_evidence_attempt)
+    .with(
+      current_transaction: a_kind_of(Display::RpDisplayData),
+      request: a_kind_of(ActionDispatch::Request),
+      attempt_number: attempts,
+      evidence_list: evidence,
+    )
   end
 end

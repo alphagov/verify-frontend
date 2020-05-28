@@ -362,6 +362,27 @@ module Analytics
       end
     end
 
+    describe "#report_user_evidence_attempt" do
+      attempt_number = 1
+      evidence_list = %w(passport credit_card)
+
+      it "should report attempt correctly when idp selected if first registration" do
+        expect(analytics_reporter).to receive(:report_action)
+          .with(
+            request,
+            "EVIDENCE_ATTEMPT_#{attempt_number} | CREDIT_CARD_PASSPORT |",
+            1 => %w(RP description),
+            2 => %w(LOA_REQUESTED LEVEL_2),
+          )
+        federation_reporter.report_user_evidence_attempt(
+          current_transaction: current_transaction,
+          request: request,
+          attempt_number: attempt_number,
+          evidence_list: evidence_list,
+        )
+      end
+    end
+
     describe "#report_sign_in_journey_ignored" do
       it "should report that the sign in hint was ignored" do
         transaction_simple_id = "test-rp"

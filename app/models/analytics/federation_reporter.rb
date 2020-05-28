@@ -151,6 +151,17 @@ module Analytics
       )
     end
 
+    def report_user_evidence_attempt(attempt_number:, current_transaction:, request:, evidence_list: [])
+      list_of_evidence = evidence_list.map { |evidence| evidence.to_s.gsub("has_", "") }
+                                      .sort.join("_")
+                                      .upcase
+      report_action(
+        current_transaction,
+        request,
+        "EVIDENCE_ATTEMPT_#{attempt_number} | #{list_of_evidence} |",
+      )
+    end
+
     def report_number_of_idps_recommended(current_transaction, request, number_of_idps_recommended)
       report_event(
         current_transaction,
@@ -201,15 +212,13 @@ module Analytics
     end
 
     def report_action(current_transaction, request, action, extra_custom_vars = {})
-      begin
-        @analytics_reporter.report_action(
-          request,
-          action,
-          universal_custom_variables(current_transaction, request).merge(extra_custom_vars),
-        )
-      rescue Display::FederationTranslator::TranslationError => e
-        Rails.logger.warn e
-      end
+      @analytics_reporter.report_action(
+        request,
+        action,
+        universal_custom_variables(current_transaction, request).merge(extra_custom_vars),
+      )
+    rescue Display::FederationTranslator::TranslationError => e
+      Rails.logger.warn e
     end
 
     def report_action_without_current_transaction(request, action, extra_custom_vars = {})
@@ -221,17 +230,15 @@ module Analytics
     end
 
     def report_event(current_transaction, request, event_category, event_name, event_action)
-      begin
-        @analytics_reporter.report_event(
-          request,
-          universal_custom_variables(current_transaction, request),
-          event_category,
-          event_name,
-          event_action,
-        )
-      rescue Display::FederationTranslator::TranslationError => e
-        Rails.logger.warn e
-      end
+      @analytics_reporter.report_event(
+        request,
+        universal_custom_variables(current_transaction, request),
+        event_category,
+        event_name,
+        event_action,
+      )
+    rescue Display::FederationTranslator::TranslationError => e
+      Rails.logger.warn e
     end
 
     def report_event_without_current_transaction(request, event_category, event_name, event_action)
