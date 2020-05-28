@@ -48,7 +48,7 @@ private
                             idp.entity_id,
                             session[:requested_loa],
                             true,
-                            analytics_session_id,
+                            persistent_session_id,
                             session[:journey_type],
                             ab_test_with_alternative_name)
     set_journey_hint_followed(idp.entity_id)

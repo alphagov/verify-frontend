@@ -19,7 +19,7 @@ describe PolicyProxy do
       ip_address = "1.1.1.1"
       body = { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => "an-entity-id", PolicyEndpoints::PARAM_PRINCIPAL_IP => ip_address,
                PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-               PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => "an-analytics-session-id", PolicyEndpoints::PARAM_JOURNEY_TYPE => "a-journey-type",
+               PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => "an-analytics-session-id", PolicyEndpoints::PARAM_JOURNEY_TYPE => "a-journey-type",
                PolicyEndpoints::PARAM_VARIANT => nil }
       expect(api_client).to receive(:post)
         .with(endpoint(PolicyProxy::SELECT_IDP_SUFFIX), body)
@@ -31,7 +31,7 @@ describe PolicyProxy do
       ip_address = "1.1.1.1"
       body = { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => "an-entity-id", PolicyEndpoints::PARAM_PRINCIPAL_IP => ip_address,
                PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_1",
-               PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => "an-analytics-session-id", PolicyEndpoints::PARAM_JOURNEY_TYPE => "a-journey-type",
+               PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => "an-analytics-session-id", PolicyEndpoints::PARAM_JOURNEY_TYPE => "a-journey-type",
                PolicyEndpoints::PARAM_VARIANT => nil }
       expect(api_client).to receive(:post)
                                 .with(endpoint(PolicyProxy::SELECT_IDP_SUFFIX), body)
@@ -43,7 +43,7 @@ describe PolicyProxy do
       ip_address = "1.1.1.1"
       body = { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => "an-entity-id", PolicyEndpoints::PARAM_PRINCIPAL_IP => ip_address,
                PolicyEndpoints::PARAM_REGISTRATION => true, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-               PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => "an-analytics-session-id", PolicyEndpoints::PARAM_JOURNEY_TYPE => "a-journey-type",
+               PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => "an-analytics-session-id", PolicyEndpoints::PARAM_JOURNEY_TYPE => "a-journey-type",
                PolicyEndpoints::PARAM_VARIANT => nil }
       expect(api_client).to receive(:post)
         .with(endpoint(PolicyProxy::SELECT_IDP_SUFFIX), body)
