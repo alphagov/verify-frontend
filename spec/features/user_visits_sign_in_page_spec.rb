@@ -43,9 +43,12 @@ RSpec.describe "user selects an IDP on the sign in page" do
     expect(cookie_value("verify-front-journey-hint")).to_not be_nil
 
     expect(a_request(:post, policy_api_uri(select_idp_endpoint(default_session_id)))
-             .with(body: { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
-                           PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-                           PolicyEndpoints::PARAM_ANALYTICS_SESSION_ID => piwik_session_id, PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
+             .with(body: { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
+                           PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
+                           PolicyEndpoints::PARAM_REGISTRATION => false,
+                           PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
+                           PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String), # no longer comes from matomo
+                           PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
                            PolicyEndpoints::PARAM_VARIANT => ab_value })).to have_been_made.once
     expect(a_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
              .with(headers: { "X_FORWARDED_FOR" => originating_ip })).to have_been_made.once
