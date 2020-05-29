@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require "partials/user_cookies_partial_controller"
+require "partials/analytics_cookie_partial_controller"
 
 class AuthnResponseController < SamlController
+  include AnalyticsCookiePartialController
+
   protect_from_forgery except: %i[idp_response country_response]
 
   SIGNING_IN_STATE = "SIGN_IN_WITH_IDP"
@@ -26,7 +29,7 @@ class AuthnResponseController < SamlController
   def idp_response
     raise_error_if_params_invalid(params, session[:verify_session_id])
 
-    response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params["SAMLResponse"])
+    response = SAML_PROXY_API.idp_authn_response(session[:verify_session_id], params["SAMLResponse"], persistent_session_id, session[:journey_type])
     status = response.idp_result
     remove_resume_link_journey_hint unless journey_hint_value.nil?
 
