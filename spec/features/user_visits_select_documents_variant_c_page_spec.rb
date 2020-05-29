@@ -37,7 +37,17 @@ RSpec.feature "When user visits document selection page" do
     expect(page).to have_current_path(choose_a_certified_company_path)
   end
 
-  it "redirects to the select advice page when selects 2 documents" do
+  it "redirects to the idp picker page when user selects phone and passport documents" do
+    visit "/select-documents"
+
+    check "Your valid passport", allow_label_click: true
+    check "A phone or tablet that can download an app", allow_label_click: true
+    click_button t("navigation.continue")
+
+    expect(page).to have_current_path(choose_a_certified_company_path)
+  end
+
+  it "redirects to the select advice page when selects 2 documents there not both (phone & passport)" do
     visit "/select-documents"
     expect_reporter_to_receive(
       evidence: %i(has_driving_license has_credit_card device_type_other),
