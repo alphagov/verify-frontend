@@ -8,6 +8,8 @@ describe SamlProxyApi do
   let(:api_client) { double(:api_client) }
   let(:originating_ip_store) { double(:originating_ip_store) }
   let(:session_id) { "my-session-id" }
+  let(:journey_type) { "sign-in" }
+  let(:persistent_session_id) { "my-persistent_session_id" }
   let(:cookies) {
     {
         CookieNames::SESSION_ID_COOKIE_NAME => session_id,
@@ -88,7 +90,9 @@ describe SamlProxyApi do
   describe "#idp_authn_response" do
     it "should return a confirmation result" do
       ip_address = "1.2.3.4"
-      expected_request = { "samlRequest" => "saml-response", "relayState" => "my-session-id", SamlProxyApi::PARAM_IP_SEEN_BY_FRONTEND => ip_address }
+      expected_request = { "samlRequest" => "saml-response", "relayState" => "my-session-id",
+        SamlProxyApi::PARAM_IP_SEEN_BY_FRONTEND => ip_address, SamlProxyApi::PARAM_PERSISTENT_SESSION_ID => "my-persistent_session_id",
+        "journeyType" => "sign-in" }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:post)
         .with(SamlProxyApi::IDP_AUTHN_RESPONSE_ENDPOINT, expected_request)
@@ -98,7 +102,7 @@ describe SamlProxyApi do
           "loaAchieved" => "LEVEL_2",
         )
 
-      response = saml_proxy_api.idp_authn_response(session_id, "saml-response")
+      response = saml_proxy_api.idp_authn_response(session_id, "saml-response", persistent_session_id, journey_type)
 
       attributes = {
           idp_result: "some-location",
@@ -110,20 +114,24 @@ describe SamlProxyApi do
 
     it "should raise an error when fields are missing from the api response" do
       ip_address = "1.2.3.4"
-      expected_request = { "samlRequest" => "saml-response", "relayState" => "my-session-id", SamlProxyApi::PARAM_IP_SEEN_BY_FRONTEND => ip_address }
+      expected_request = { "samlRequest" => "saml-response", "relayState" => "my-session-id",
+        SamlProxyApi::PARAM_IP_SEEN_BY_FRONTEND => ip_address, SamlProxyApi::PARAM_PERSISTENT_SESSION_ID => "my-persistent_session_id",
+        "journeyType" => "sign-in" }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:post)
         .with(SamlProxyApi::IDP_AUTHN_RESPONSE_ENDPOINT, expected_request)
         .and_return({})
 
       expect {
-        saml_proxy_api.idp_authn_response(session_id, "saml-response")
+        saml_proxy_api.idp_authn_response(session_id, "saml-response", persistent_session_id, journey_type)
       }.to raise_error Api::Response::ModelError, "Idp result can't be blank, Is registration is not included in the list"
     end
 
     it "should raise an error when loa_achieved is not an accepted value" do
       ip_address = "1.2.3.4"
-      expected_request = { "samlRequest" => "saml-response", "relayState" => "my-session-id", SamlProxyApi::PARAM_IP_SEEN_BY_FRONTEND => ip_address }
+      expected_request = { "samlRequest" => "saml-response", "relayState" => "my-session-id",
+         SamlProxyApi::PARAM_IP_SEEN_BY_FRONTEND => ip_address, SamlProxyApi::PARAM_PERSISTENT_SESSION_ID => "my-persistent_session_id",
+         "journeyType" => "sign-in" }
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
       expect(api_client).to receive(:post)
         .with(SamlProxyApi::IDP_AUTHN_RESPONSE_ENDPOINT, expected_request)
@@ -134,7 +142,7 @@ describe SamlProxyApi do
         )
 
       expect {
-        saml_proxy_api.idp_authn_response(session_id, "saml-response")
+        saml_proxy_api.idp_authn_response(session_id, "saml-response", persistent_session_id, journey_type)
       }.to raise_error Api::Response::ModelError, "Loa achieved is not included in the list"
     end
   end

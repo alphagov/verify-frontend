@@ -88,7 +88,10 @@ describe AuthnResponseController do
       set_session_and_cookies_with_loa("LEVEL_1")
       session[:verify_session_id] = "non-existent"
 
-      post :country_response, params: { "RelayState" => "my-session-id-cookie", "SAMLResponse" => "a-saml-response", locale: "en" }
+      post :country_response, params: {
+        "RelayState" => "my-session-id-cookie", "SAMLResponse" => "a-saml-response",
+        locale: "en"
+      }
 
       expect(subject).to render_template(:something_went_wrong)
     end

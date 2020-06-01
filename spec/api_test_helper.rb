@@ -317,6 +317,8 @@ module ApiTestHelper
         PARAM_SAML_REQUEST => "my-saml-response",
         PARAM_RELAY_STATE => relay_state,
         PARAM_IP_SEEN_BY_FRONTEND => "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>",
+        PARAM_PERSISTENT_SESSION_ID => instance_of(String),
+        PARAM_JOURNEY_TYPE => nil,
     }
 
     stub_request(:post, saml_proxy_api_uri(IDP_AUTHN_RESPONSE_ENDPOINT))

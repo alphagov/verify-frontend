@@ -5,6 +5,8 @@ module SamlProxyEndpoints
   PARAM_SAML_REQUEST = "samlRequest".freeze
   PARAM_RELAY_STATE = "relayState".freeze
   PARAM_IP_SEEN_BY_FRONTEND = "principalIpAsSeenByFrontend".freeze
+  PARAM_JOURNEY_TYPE = "journeyType".freeze
+  PARAM_PERSISTENT_SESSION_ID = "analyticsSessionId".freeze
   RESPONSE_FOR_RP_PATH = "/SAML2/SSO/API/SENDER/RESPONSE".freeze
   AUTHN_REQUEST_PATH = "/SAML2/SSO/API/SENDER/AUTHN_REQ".freeze
   ERROR_RESPONSE_FOR_RP_PATH = "/SAML2/SSO/API/SENDER/ERROR_RESPONSE".freeze
