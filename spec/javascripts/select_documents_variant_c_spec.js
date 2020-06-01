@@ -13,32 +13,17 @@ describe('Analytics for select document variant c', function () {
   };
 
   describe('page with disclosure', function() {
-    var htmlWithMarkup = '<details id="progressive_disclosure" class="govuk-details govuk-!-padding-top-6" data-module="govuk-details">' +
-                          '<summary piwik_event_tracking="progressive_disclosure" class="govuk-details__summary">' +
-                            '<span class="govuk-details__summary-text">What GOV.UK Verify uses these for</span>' +
-                          '</summary>' +
-                          '<div class="govuk-details__text">' +
-                            '<p class="govuk-body">' +
-                            'The companies can check your passport and driving licence against official records.' +
-                            'They can also confirm your personal details by accessing information like credit records.' +
-                            "This will help them be sure it's really you." +
-                            '</p>' +
-                            '<p class="govuk-body">' +
-                            'If you only have one photo identity document (ID), you will also need to download a free app and take' +
-                            'pictures of it. This will prove that the ID is yours.' +
-                            '</p>' +
-                            '<p class="govuk-body">' +
-                            'The companies will only use your credit or debit card details as more evidence of your identity.' +
-                            'They cannot see your transactions and cannot charge your account.' +
-                            '</p>' +
-                          '</div>' +
-                        '</details>';
-
       beforeEach(function () {
-          setUp(htmlWithMarkup);
+          setUp('<details id="progressive_disclosure" class="govuk-details govuk-!-padding-top-6" data-module="govuk-details">' +
+          '<summary piwik_event_tracking="progressive_disclosure" class="govuk-details__summary">' +
+            '<span class="govuk-details__summary-text">What GOV.UK Verify uses these for</span>' +
+          '</summary>' +
+          '<div class="govuk-details__text">' +
+          '</div>' +
+        '</details>');
       });
 
-      it('should report to Piwik when evidence is selected', function () {
+      it('should report to Piwik when disclosure link is selected', function () {
         $('#progressive_disclosure').click();
         expect(_paq.push).toHaveBeenCalled();
 
