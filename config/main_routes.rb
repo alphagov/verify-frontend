@@ -79,7 +79,6 @@ constraints IsLoa2 do
   get "confirmation_non_matching_journey", to: "confirmation_loa2#non_matching_journey", as: :confirmation_non_matching_journey
 end
 
-get "what_happens_next", to: "what_happens_next#index", as: :what_happens_next
 get "accessibility", to: "static#accessibility", as: :accessibility
 get "privacy_notice", to: "static#privacy_notice", as: :privacy_notice
 get "verify_services", to: "static#verify_services", as: :verify_services
@@ -119,6 +118,7 @@ get "paused_registration_resume_link", to: "paused_registration#from_resume_link
 get "resume_registration", to: "paused_registration#resume", as: :resume_registration
 post "resume_registration", to: "paused_registration#resume_with_idp", as: :resume_registration_submit
 get "completed_registration", to: "completed_registration#index", as: :completed_registration
+
 
 if SINGLE_IDP_FEATURE
   get "redirect_to_single_idp", to: "redirect_to_idp#single_idp", as: :redirect_to_single_idp

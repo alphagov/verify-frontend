@@ -103,7 +103,7 @@ RSpec.describe "When the user visits the redirect to IDP warning page" do
     expect(page).to have_content t("errors.something_went_wrong.heading")
   end
 
-  it 'goes to "redirect-to-idp" page on submit' do
+  it "goes to 'redirect-to-idp' page on submit" do
     given_a_session_with_document_answers
 
     visit "/redirect-to-idp-warning"
@@ -126,7 +126,7 @@ RSpec.describe "When the user visits the redirect to IDP warning page" do
     expect(cookie_value("verify-front-journey-hint")).to_not be_nil
   end
 
-  it 'goes to "redirect-to-idp" page on submit for non-recommended idp' do
+  it "goes to 'redirect-to-idp' page on submit for non-recommended idp" do
     given_a_session_with_non_recommended_idp
 
     visit "/redirect-to-idp-warning"
@@ -149,7 +149,7 @@ RSpec.describe "When the user visits the redirect to IDP warning page" do
     visit "/redirect-to-idp-warning"
 
     expect(page.body).to have_content t("hub.redirect_to_idp_warning.continue_website", display_name: "IDCorp")
-    expect(page.body).to include t("hub.redirect_to_idp_warning.queue_warning_html", idp: "IDCorp")
+    expect(page.body).to include t("hub.redirect_to_idp_warning.identity_account_use_html", display_name: "IDCorp")
   end
 
   context "with JS enabled", js: true do
