@@ -30,7 +30,7 @@ class RedirectToIdpController < ApplicationController
   end
 
   def sign_in_with_last_successful_idp
-    session[:journey_type] = "sign-in-last-sucessful-idp"
+    session[:journey_type] = "sign-in-last-successful-idp"
     simple_id = flash[:journey_hint]
     return render_not_found unless simple_id
 

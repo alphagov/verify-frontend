@@ -7,7 +7,7 @@ describe PublishHubConfigClient do
   let(:host) { "http://api.com" }
   let(:api_client) { PublishHubConfigClient.new(host) }
 
-  it "should return 200 for a sucessful healthcheck" do
+  it "should return 200 for a successful healthcheck" do
     stub_request(:get, "#{host}/service-status").and_return(status: 200, body: "")
     result = api_client.healthcheck
     expect(result.status).to eql(200)
