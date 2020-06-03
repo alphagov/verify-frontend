@@ -45,7 +45,6 @@ private
   end
 
   def increase_attempt_number
-    session[:evidence_attempt_number] = 0 if session[:evidence_attempt_number].nil?
-    session[:evidence_attempt_number] = session[:evidence_attempt_number] + 1
+    session[:evidence_attempt_number] = (session[:evidence_attempt_number] || 0) + 1
   end
 end
