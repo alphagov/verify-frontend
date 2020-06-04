@@ -57,6 +57,8 @@ The PR is also deployed to Heroku as [a review app](https://devcenter.heroku.com
 * `app.json` - Heroku [application manifest](https://devcenter.heroku.com/articles/app-json-schema)
 * `heroku-startup.sh` - startup script used to start the app and api, on the port supplied by Heroku
 
+To view or rebuild a Heroku review app [sign into Heroku](https://id.heroku.com/login) using the credentials stored in `verify-blackbox-passwords`. The file inside blackbox is called `heroku-verify-build-bot`. Once logged in it will bring up the dashboard, click on `verify-frontend`. On the left is the column for review apps based on PR's raised and the option under them to open or create a review app.
+
 ## Cross GOV.UK Domain Google Analytics
 
 To track user journeys across the whole of GOV.UK, including Verify, Google Analytics code has been introduced to the Verify Frontend.
