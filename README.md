@@ -10,6 +10,12 @@ The frontend for GOV.UK Verify
 
 Once you’ve cloned this then `bundle` will install the requirements.
 
+Alternatively, build a Docker container with a command such as:
+
+```bash
+docker build . --network host -t verify-frontend
+```
+
 ## Running the application
 
 You can start the application without having any of the closed source components installed with:
@@ -30,6 +36,12 @@ and start your journey from the test-rp.
 This will [lint the application code](https://github.com/alphagov/govuk-lint) and run the tests.
 
 If you need to run the javascript-enabled tests that require a browser, you will need to have Chrome installed. The stable release of Chrome should work.
+
+To run the tests under Docker, use a command such as:
+
+```bash
+docker run verify-frontend /verify-frontend/pre-commit.sh
+```
 
 ## Editing .travis.yml
 
