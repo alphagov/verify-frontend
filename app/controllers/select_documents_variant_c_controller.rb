@@ -24,13 +24,19 @@ class SelectDocumentsVariantCController < ApplicationController
   end
 
   def advice
-    suggestions = IDP_RECOMMENDATION_ENGINE_variant_c.get_suggested_idps_for_registration(current_identity_providers_for_loa_by_variant("c"), selected_evidence, current_transaction_simple_id)
-    @evidence = selected_evidence
-    @advice_codes = segment_advice(suggestions[:user_segments])
-    @other_ways_description = current_transaction.other_ways_description
-    @other_ways_text = current_transaction.other_ways_text
+    answers = selected_answer_store.selected_answers.fetch("documents", {})
+    mappings = t("hub_variant_c.select_documents").select { |k, _| k.to_s.start_with?("has") }.transform_keys!(&:to_s)
+    @documents = answers.transform_keys(&mappings.method(:[]))
 
     render :advice
+  end
+
+  def prove_your_identity_another_way
+    @other_ways_description = current_transaction.other_ways_description
+    @other_ways_text = current_transaction.other_ways_text
+    @service_name = current_transaction.name
+
+    render :prove_your_identity_another_way
   end
 
 private

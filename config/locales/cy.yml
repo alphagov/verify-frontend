@@ -70,6 +70,7 @@ cy:
     proxy_node_error: proxy-node-error-cy
     accessibility: accessibility-cy
     select_documents_advice: select-documents-advice-cy
+    prove_your_identity_another_way: prove-your-identity-another-way-cy
     completed_registration: completed-cy/:idp
   common:
     logo: "logo %{name}"
@@ -114,11 +115,11 @@ cy:
       heading: Which of these do you have available right now?
       explanation: This will help us tell you if GOV.UK Verify will work for you. The more items you have, the more likely it is that you can verify your identity.
       select_all_that_apply: "Select all that apply:"
-      documents_option_valid_passport: Your valid passport
-      documents_option_driving_license: Your current driving licence, full or provisional, with your photo on it
-      documents_option_phone_can_app: A phone or tablet that can download an app
-      documents_option_credit_card: Your credit or debit card
-      documents_option_nothing: None of the above
+      has_valid_passport: Your valid passport
+      has_driving_license: Your current driving licence, full or provisional, with your photo on it
+      has_phone_can_app: A phone or tablet that can download an app
+      has_credit_card: Your credit or debit card
+      has_nothing: None of the above
       further_explanation:
         title: What GOV.UK Verify uses these for
         content_html: |
@@ -139,6 +140,10 @@ cy:
         no_selection: Select the items you have available right now
     select_documents_advice:
       advice_html:
+        heading: Based on your answers, you cannot use GOV.UK Verify
+        sub_heading: Make sure you selected all the things you have with you.
+        provided: Things you have with you
+        not_provided: Things you do not have with you
         3-more-things-special-heading: |
           <h1 class="govuk-heading-l">Based on your answers, GOV.UK Verify will not work for you</h1>
 
@@ -247,7 +252,15 @@ cy:
 
           <p class="govuk-body">If you have these elsewhere, try again when you have them with you.</p>
 
-      what_to_do_other_ways_heading: What to do if you do not have these items
+      what_to_do_next:
+        heading: What to do next
+        change_your_answers_link: change your answers
+        prove_your_identity_link: prove your identity another way
+        sub_heading_html: <p class="govuk-body">You can still %{service_name}.</p>
+        content_html: |
+          <p class="govuk-body">If you have more of these things with you, %{change_your_answers_link}.</p>
+          <p class="govuk-body">If you have more of them but they’re somewhere else, come back when you have them with you.</p>
+          <p class="govuk-body">If you do not have any more of them, %{prove_your_identity_link}.</p>
     choose_a_certified_company:
       title: Pick a certified company
       heading: Pick a company to verify you
@@ -357,6 +370,15 @@ cy:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
       other_services: Gwasanaethau eraill
+    what_happens_next:
+      title: What happens next
+      heading: What happens next
+      what_happens: |
+        <ol class="govuk-list govuk-list--number">
+          <li>You'll now go to the %{idp} website and answer questions about yourself.</li>
+          <li>Once you’re verified, you’ll have an identity account that you can use wherever you see the GOV.UK Verify logo.</li>
+          <li>You’ll then need to go back to the government service you need to access and sign in using your new identity account details.</li>
+        </ol>
     about:
       title: Am
       verify_is_a_service: Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.

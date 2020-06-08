@@ -74,6 +74,7 @@ en:
     proxy_node_error: proxy-node-error
     accessibility: accessibility
     select_documents_advice: select-documents-advice
+    prove_your_identity_another_way: prove-your-identity-another-way
     completed_registration: completed/:idp
   common:
     logo: "%{name} logo"
@@ -140,6 +141,10 @@ en:
         no_selection: Select the items you have available right now
     select_documents_advice:
       advice_html:
+        heading: Based on your answers, you cannot use GOV.UK Verify
+        sub_heading: Make sure you selected all the things you have with you.
+        specified: Things you have with you
+        unspecified: Things you do not have with you
         3-more-things-special-heading: |
           <h1 class="govuk-heading-l">Based on your answers, GOV.UK Verify will not work for you</h1>
 
@@ -248,7 +253,15 @@ en:
 
           <p class="govuk-body">If you have these elsewhere, try again when you have them with you.</p>
 
-      what_to_do_other_ways_heading: What to do if you do not have these items
+      what_to_do_next:
+        heading: What to do next
+        change_your_answers_link: change your answers
+        prove_your_identity_link: prove your identity another way
+        sub_heading_html: <p class="govuk-body">You can still %{service_name}.</p>
+        content_html: |
+          <p class="govuk-body">If you have more of these things with you, %{change_your_answers_link}.</p>
+          <p class="govuk-body">If you have more of them but they’re somewhere else, come back when you have them with you.</p>
+          <p class="govuk-body">If you do not have any more of them, %{prove_your_identity_link}.</p>
     choose_a_certified_company:
       title: Pick a certified company
       heading: Pick a company to verify you
@@ -358,6 +371,15 @@ en:
       title: Find the service you were using to start again
       hint: Follow the instructions you received.
       other_services: Other services
+    what_happens_next:
+      title: What happens next
+      heading: What happens next
+      what_happens_next_html: |
+        <ol class="govuk-list govuk-list--number">
+          <li>You'll now go to the %{idp} website and answer questions about yourself.</li>
+          <li>Once you’re verified, you’ll have an identity account that you can use wherever you see the GOV.UK Verify logo.</li>
+          <li>You’ll then need to go back to the government service you need to access and sign in using your new identity account details.</li>
+        </ol>
     about:
       title: About
       verify_is_a_service: GOV.UK Verify is a secure way to prove who you are online. It aims to protect people from the growing problem of online identity theft.

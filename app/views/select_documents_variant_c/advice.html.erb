@@ -1,30 +1,34 @@
 <%= page_title 'hub_variant_c.select_documents.title' %>
-<% content_for :feedback_source, 'SELECT_DOCUMENTS_PAGE' %>
-
+<% content_for :feedback_source, 'SELECT_DOCUMENTS_ADVICE_PAGE' %>
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <!-- short codes: <%= @advice_codes %> -->
 
-    <!-- special case -->
-    <% if @advice_codes.include?('3-more-things-and-req-photo-id') %>
-      <%= raw t 'hub_variant_c.select_documents_advice.advice_html.3-more-things-special-heading' %>
-      <div class="other-ways-to-complete-transaction">
-        <%= raw @other_ways_text %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-grid-column-full govuk-heading-l">
+        <%=t "hub_variant_c.select_documents_advice.advice_html.heading" %>
+        <div class="govuk-body govuk-!-padding-top-4"><%=t "hub_variant_c.select_documents_advice.advice_html.sub_heading" %></div>
       </div>
-    <% end %>
 
-    <% @advice_codes.each do |code| %>
-      <%= raw t('hub_variant_c.select_documents_advice.advice_html.' + code,
-                try_again_link_start: "<a href='"+ html_escape(url_for(select_documents_path)) + "'>",
-                try_again_link_end: "</a>") %>
-    <% end %>
+      <% @documents.group_by(&:last).each do |key, value| %>
+        <div class="govuk-grid-column-one-half">
+          <h2 class="govuk-heading-s">
+            <%= t "hub_variant_c.select_documents_advice.advice_html.#{key ? 'specified' : 'unspecified'}" %>
+          </h2>
+          <ul id=<%="#evidence_#{key ? 'specified' : 'unspecified'}"%> class="govuk-list">
+            <% value.map(&:first).each do |evidence| %>
+              <li><%=evidence%></li><hr>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-    <% unless @advice_codes.include?('3-more-things-and-req-photo-id') %>
-      <h2 class="govuk-heading-m"><%= t 'hub_variant_c.select_documents_advice.what_to_do_other_ways_heading' %></h2>
-      <div class="other-ways-to-complete-transaction">
-        <%= raw @other_ways_text %>
+      <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m"><%=t("hub_variant_c.select_documents_advice.what_to_do_next.heading")%></h2>
+          <%= t("hub_variant_c.select_documents_advice.what_to_do_next.content_html",
+            change_your_answers_link: link_to(t("hub_variant_c.select_documents_advice.what_to_do_next.change_your_answers_link"), select_documents_path, class: "govuk-link"),
+            prove_your_identity_link: link_to(t("hub_variant_c.select_documents_advice.what_to_do_next.prove_your_identity_link"), prove_your_identity_another_way_path, class: "govuk-link")
+          ) %>
       </div>
-    <% end %>
-
+    </div>
   </div>
 </div>
