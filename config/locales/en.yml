@@ -115,11 +115,11 @@ en:
       heading: Which of these do you have available right now?
       explanation: This will help us tell you if GOV.UK Verify will work for you. The more items you have, the more likely it is that you can verify your identity.
       select_all_that_apply: "Select all that apply:"
-      documents_option_valid_passport: Your valid passport
-      documents_option_driving_license: Your current driving licence, full or provisional, with your photo on it
-      documents_option_phone_can_app: A phone or tablet that can download an app
-      documents_option_credit_card: Your credit or debit card
-      documents_option_nothing: None of the above
+      has_valid_passport: Your valid passport
+      has_driving_license: Your current driving licence, full or provisional, with your photo on it
+      has_phone_can_app: A phone or tablet that can download an app
+      has_credit_card: Your credit or debit card
+      has_nothing: None of the above
       further_explanation:
         title: What GOV.UK Verify uses these for
         content_html: |
