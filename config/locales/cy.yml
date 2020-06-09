@@ -148,7 +148,6 @@ cy:
         heading: What to do next
         change_your_answers_link: change your answers
         prove_your_identity_link: prove your identity another way
-        sub_heading_html: <p class="govuk-body">You can still %{service_name}.</p>
         content_html: |
           <p class="govuk-body">If you have more of these things with you, %{change_your_answers_link}.</p>
           <p class="govuk-body">If you have more of them but they’re somewhere else, come back when you have them with you.</p>
@@ -178,6 +177,9 @@ cy:
         title: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
+    prove_your_identity_another_way:
+      heading: Prove your identity another way
+      sub_heading: You can still %{service_name}.
   hub:
     other_ways_title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
@@ -262,15 +264,6 @@ cy:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
       other_services: Gwasanaethau eraill
-    what_happens_next:
-      title: What happens next
-      heading: What happens next
-      what_happens: |
-        <ol class="govuk-list govuk-list--number">
-          <li>You'll now go to the %{idp} website and answer questions about yourself.</li>
-          <li>Once you’re verified, you’ll have an identity account that you can use wherever you see the GOV.UK Verify logo.</li>
-          <li>You’ll then need to go back to the government service you need to access and sign in using your new identity account details.</li>
-        </ol>
     about:
       title: Am
       verify_is_a_service: Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.

@@ -149,7 +149,6 @@ en:
         heading: What to do next
         change_your_answers_link: change your answers
         prove_your_identity_link: prove your identity another way
-        sub_heading_html: <p class="govuk-body">You can still %{service_name}.</p>
         content_html: |
           <p class="govuk-body">If you have more of these things with you, %{change_your_answers_link}.</p>
           <p class="govuk-body">If you have more of them but they’re somewhere else, come back when you have them with you.</p>
@@ -179,6 +178,9 @@ en:
         title: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
+    prove_your_identity_another_way:
+      heading: Prove your identity another way
+      sub_heading: You can still %{service_name}
   hub:
     other_ways_title: Other ways to access the service
     other_ways_heading: Other ways to %{other_ways_description}
@@ -263,15 +265,6 @@ en:
       title: Find the service you were using to start again
       hint: Follow the instructions you received.
       other_services: Other services
-    what_happens_next:
-      title: What happens next
-      heading: What happens next
-      what_happens_next_html: |
-        <ol class="govuk-list govuk-list--number">
-          <li>You'll now go to the %{idp} website and answer questions about yourself.</li>
-          <li>Once you’re verified, you’ll have an identity account that you can use wherever you see the GOV.UK Verify logo.</li>
-          <li>You’ll then need to go back to the government service you need to access and sign in using your new identity account details.</li>
-        </ol>
     about:
       title: About
       verify_is_a_service: GOV.UK Verify is a secure way to prove who you are online. It aims to protect people from the growing problem of online identity theft.

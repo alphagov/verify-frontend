@@ -14,11 +14,13 @@
           <h2 class="govuk-heading-s">
             <%= t "hub_variant_c.select_documents_advice.advice_html.#{key ? 'specified' : 'unspecified'}" %>
           </h2>
-          <ul id=<%="#evidence_#{key ? 'specified' : 'unspecified'}"%> class="govuk-list">
+          <dl id=<%="#evidence_#{key ? 'specified' : 'unspecified'}"%> class="govuk-summary-list">
             <% value.map(&:first).each do |evidence| %>
-              <li><%=evidence%></li><hr>
+              <div class="govuk-summary-list__row">
+                <dd class="govuk-summary-list__value"><%=evidence%></dd>
+              </div>
             <% end %>
-          </ul>
+          </dl>
         </div>
       <% end %>
 
