@@ -1,0 +1,11 @@
+<%= page_title 'hub_variant_c.select_documents.title' %>
+<% content_for :feedback_source, 'PROVE_YOUR_IDENTITY_ANOTHER_WAY_PAGE' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t("hub_variant_c.prove_your_identity_another_way.heading") %></h1>
+    <p class="govuk-body"><%= t("hub_variant_c.prove_your_identity_another_way.sub_heading", service_name: @service_name) %></p>
+
+    <%= render partial: 'shared/other_ways', locals: {other_ways_text: @other_ways_text, other_ways_description: @other_ways_description} %>
+  </div>
+</div>

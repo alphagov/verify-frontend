@@ -165,6 +165,7 @@ constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do
   get "select_documents_none", to: "select_documents_variant_c#no_documents", as: :select_documents_no_documents
   post "select_documents", to: "select_documents_variant_c#select_documents", as: :select_documents_submit
   get "select_documents_advice", to: "select_documents_variant_c#advice", as: :select_documents_advice
+  get "prove_your_identity_another_way", to: "select_documents_variant_c#prove_your_identity_another_way", as: :prove_your_identity_another_way
 
   get "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#index", as: :choose_a_certified_company
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2_variant_c#about", as: :choose_a_certified_company_about

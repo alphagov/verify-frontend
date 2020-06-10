@@ -34,7 +34,14 @@ describe SelectDocumentsVariantCController do
     end
 
     it "redirects to the company picker when at least three documents are available" do
-      evidence = { has_valid_passport: "t", has_credit_card: "t", has_phone_can_app: "t" }.freeze
+      evidence = { has_driving_license: "t", has_credit_card: "t", has_phone_can_app: "t" }.freeze
+      post :select_documents, params: { locale: "en", select_documents_variant_c_form: evidence }
+
+      expect(subject).to redirect_to choose_a_certified_company_path
+    end
+
+    it "redirects to the company picker when passport and phone are available" do
+      evidence = { has_valid_passport: "t", has_phone_can_app: "t" }.freeze
       post :select_documents, params: { locale: "en", select_documents_variant_c_form: evidence }
 
       expect(subject).to redirect_to choose_a_certified_company_path

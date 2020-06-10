@@ -74,6 +74,7 @@ en:
     proxy_node_error: proxy-node-error
     accessibility: accessibility
     select_documents_advice: select-documents-advice
+    prove_your_identity_another_way: prove-your-identity-another-way
     completed_registration: completed/:idp
   common:
     logo: "%{name} logo"
@@ -115,11 +116,11 @@ en:
       heading: Which of these do you have available right now?
       explanation: This will help us tell you if GOV.UK Verify will work for you. The more items you have, the more likely it is that you can verify your identity.
       select_all_that_apply: "Select all that apply:"
-      documents_option_valid_passport: Your valid passport
-      documents_option_driving_license: Your current driving licence, full or provisional, with your photo on it
-      documents_option_phone_can_app: A phone or tablet that can download an app
-      documents_option_credit_card: Your credit or debit card
-      documents_option_nothing: None of the above
+      has_valid_passport: Your valid passport
+      has_driving_license: Your current driving licence, full or provisional, with your photo on it
+      has_phone_can_app: A phone or tablet that can download an app
+      has_credit_card: Your credit or debit card
+      has_nothing: None of the above
       further_explanation:
         title: What GOV.UK Verify uses these for
         content_html: |
@@ -140,115 +141,18 @@ en:
         no_selection: Select the items you have available right now
     select_documents_advice:
       advice_html:
-        3-more-things-special-heading: |
-          <h1 class="govuk-heading-l">Based on your answers, GOV.UK Verify will not work for you</h1>
-
-          <p class="govuk-body">If you don't have the items you need to set up an identity account, you can try another way to access the service.</p>
-
-        3-more-things-and-req-photo-id: |
-          <h2 class="govuk-heading-m">Try again with GOV.UK Verify</h2>
-
-          <p class="govuk-body">To set up an identity account, you need 3 of the following items:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>your valid passport</li>
-            <li>your current driving licence, full or provisional, with your photo on it</li>
-            <li>a phone or tablet that can download an app</li>
-            <li>your credit or debit card</li>
-          </ul>
-
-        2-more-things-of-doc-cc-app: |
-          <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
-
-          <p class="govuk-body">To set up an identity account, you also need 2 of these 3 items:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>another photo ID</li>
-            <li>your credit or debit card</li>
-            <li>a phone or tablet that can download an app</li>
-          </ul>
-
-        2-more-things-and-req-photo-id-and-card: |
-          <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
-
-          <p class="govuk-body">To set up an identity account, you also need either:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>2 photo IDs</li>
-            <li>1 photo ID and your credit or debit card</li>
-          </ul>
-
-        2-more-things-and-req-photo-id-and-app: |
-          <h1 class="govuk-heading-l">Based on your answers, you need 2 more items</h1>
-
-          <p class="govuk-body">To set up an identity account, you also need either:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>2 photo IDs</li>
-            <li>1 photo ID and a phone or tablet that can download an app</li>
-          </ul>
-
-        1-more-thing-req-photo-id: |
-          <h1 class="govuk-heading-l">Based on your answers you need a photo ID</h1>
-
-          <p class="govuk-body">To set up an identity account, you also need either:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>a passport - this can be up to 6 months past the expiry date</li>
-            <li>a valid driving licence with your photo on it</li>
-          </ul>
-
-        1-more-thing-of-cc-and-app: |
-          <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
-
-          <p class="govuk-body">To set up an identity account, you also need either:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>your credit or debit card</li>
-            <li>a phone or tablet that can download an app</li>
-          </ul>
-
-        1-more-thing-of-photo-id-and-cc: |
-          <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
-
-          <p class="govuk-body">To set up an identity account, you also need either:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>a second photo ID</li>
-            <li>your credit or debit card</li>
-          </ul>
-
-        1-more-thing-of-photo-id-and-app: |
-          <h1 class="govuk-heading-l">Based on your answers, you need 1 more item</h1>
-
-          <p class="govuk-body">To set up an identity account, you also need either:</p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>a second photo ID</li>
-            <li>a phone or tablet that can download an app</li>
-          </ul>
-
-        cc-explanation: |
-          <p class="govuk-body">The card is only used as evidence of your address. The company you choose cannot see your transactions or charge your account.</p>
-
-        app-explanation: |
-          <p class="govuk-body">The app lets you upload pictures of yourself and your photo ID. This helps your chosen company be confident it’s you answering the questions.</p>
-
-        if-int-id-req-app-and-1-thing: |
-          <!-- shortcode was 'if-int-id-req-app-and-1-thing' -->
-
-        if-int-id-photo-req-app: |
-          <!-- shortcode was 'if-int-id-photo-req-app' -->
-
-        if-int-id-req-app: |
-          <!-- shortcode was 'if-int-id-req-app' -->
-
-        offer-try-again: |
-          <p class="govuk-body">If you have these now, you can %{try_again_link_start}try again%{try_again_link_end}.</p>
-
-          <p class="govuk-body">If you have these elsewhere, try again when you have them with you.</p>
-
-      what_to_do_other_ways_heading: What to do if you do not have these items
+        heading: Based on your answers, you cannot use GOV.UK Verify
+        sub_heading: Make sure you selected all the things you have with you.
+        specified: Things you have with you
+        unspecified: Things you do not have with you
+      what_to_do_next:
+        heading: What to do next
+        change_your_answers_link: change your answers
+        prove_your_identity_link: prove your identity another way
+        content_html: |
+          <p class="govuk-body">If you have more of these things with you, %{change_your_answers_link}.</p>
+          <p class="govuk-body">If you have more of them but they’re somewhere else, come back when you have them with you.</p>
+          <p class="govuk-body">If you do not have any more of them, %{prove_your_identity_link}.</p>
     choose_a_certified_company:
       title: Pick a certified company
       heading: Pick a company to verify you
@@ -274,6 +178,9 @@ en:
         title: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
+    prove_your_identity_another_way:
+      heading: Prove your identity another way
+      sub_heading: You can still %{service_name}
   hub:
     other_ways_title: Other ways to access the service
     other_ways_heading: Other ways to %{other_ways_description}
