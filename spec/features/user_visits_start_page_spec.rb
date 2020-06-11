@@ -130,7 +130,7 @@ RSpec.describe "When the user visits the start page" do
       allow(Rails.logger).to receive(:info)
       expect(Rails.logger).to receive(:info).with("session \"#{session_id_cookie}\" has expired 30 minutes ago").at_least(:once)
       set_session_and_session_cookies!
-      expired_start_time = 2.hours.ago.to_i * 1000
+      expired_start_time = (Integer(CONFIG.session_cookie_duration_mins) + 30).minutes.ago.to_i * 1000
       page.set_rack_session(start_time: expired_start_time)
       visit "/start"
       expect(page.body).to include t("errors.session_timeout.return_to_service_html")

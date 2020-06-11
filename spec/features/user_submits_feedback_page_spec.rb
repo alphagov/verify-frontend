@@ -47,7 +47,7 @@ RSpec.feature "When the user submits the feedback page" do
       set_session_and_session_cookies!
       stub_api_idp_list_for_registration
 
-      expired_start_time = 2.hours.ago.to_i * 1000
+      expired_start_time = (Integer(CONFIG.session_cookie_duration_mins) + 30).minutes.ago.to_i * 1000
       page.set_rack_session(start_time: expired_start_time)
 
       visit feedback_path

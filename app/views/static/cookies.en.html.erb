@@ -57,7 +57,7 @@ end %>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">verify-single-idp-journey</td>
           <td class="govuk-table__cell">This cookie tells us that you have been referred directly from an identity provider. It tells us which provider has referred you, and passes a unique identifier back to that provider.</td>
-          <td class="govuk-table__cell">90 minutes</td>
+          <td class="govuk-table__cell"><%= CONFIG.session_cookie_duration_mins %> minutes</td>
         </tr>
       <% end %>
       <% if THROTTLING_ENABLED %>
@@ -111,7 +111,7 @@ end %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">_pk_ses</td>
         <td class="govuk-table__cell">This works with _pk_id to count the number of times you visit the website</td>
-        <td class="govuk-table__cell">90 minutes</td>
+        <td class="govuk-table__cell"><%= CONFIG.session_cookie_duration_mins %> minutes</td>
       </tr>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">_pk_ref</td>

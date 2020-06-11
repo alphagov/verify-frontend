@@ -14,7 +14,7 @@ class TestSamlController < ApplicationController
   end
 
   def test_expiry
-    session[:start_time] = (Time.now - Integer(CONFIG.session_cookie_duration).minutes - 1.minute).to_i * 1000
+    session[:start_time] = (Time.now - Integer(CONFIG.session_cookie_duration_mins).minutes - 1.minute).to_i * 1000
     redirect_to start_path
   end
 
