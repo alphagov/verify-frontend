@@ -3,9 +3,9 @@ namespace :lint do
   task :ruby do
     sh "rubocop app config lib spec", verbose: false do |ok, _|
       if ok
-        green("Ruby linting PASSED")
+        RakeLint.green("Ruby linting PASSED")
       else
-        red("Ruby linting FAILED")
+        RakeLint.red("Ruby linting FAILED")
         exit(1)
       end
     end
@@ -20,21 +20,23 @@ namespace :lint do
     end
     sh "scss-lint", *scss_files, verbose: false do |ok, _|
       if ok
-        green("SASS linting PASSED")
+        RakeLint.green("SASS linting PASSED")
       else
-        red("SASS linting FAILED")
+        RakeLint.red("SASS linting FAILED")
         exit(1)
       end
     end
   end
+end
 
-private
+class RakeLint
+  class << RakeLint
+    def green(msg)
+      puts ENV["TERM"] ? "#{`tput setaf 2`}#{msg}#{`tput sgr0`}" : msg
+    end
 
-  def green(msg)
-    puts ENV["TERM"] ? "#{`tput setaf 2`}#{msg}#{`tput sgr0`}" : msg
-  end
-
-  def red(msg)
-    puts ENV["TERM"] ? "#{`tput setaf 1`}#{msg}#{`tput sgr0`}" : msg
+    def red(msg)
+      puts ENV["TERM"] ? "#{`tput setaf 1`}#{msg}#{`tput sgr0`}" : msg
+    end
   end
 end

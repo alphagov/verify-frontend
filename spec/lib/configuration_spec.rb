@@ -101,7 +101,6 @@ describe Configuration do
       expect(config.foobaz).to eql 10
     end
 
-
     it "can't be missing" do
       expect {
         Configuration.load! do

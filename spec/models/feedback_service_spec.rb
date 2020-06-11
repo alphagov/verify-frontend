@@ -69,15 +69,13 @@ With email: #{email}
     expect(form).to receive(:details).and_return(details)
     expect(form).to receive(:reply_required?).and_return(true).exactly(5).times
 
-
     expected_ticket = {
                         subject: "[GOV.UK Verify] Enquiry",
                         comment: { value: enquiry_comment_value },
                         requester: { name: name, email: email },
                       }
+
     expect(zendesk_client).to receive(:submit).with(session_id, expected_ticket).and_return true
-
-
     expect(feedback_service.submit!(session_id, form)).to eql(true)
   end
 
@@ -91,14 +89,13 @@ With email: #{email}
     expect(form).to receive(:details).and_return(details)
     expect(form).to receive(:reply_required?).and_return(false).exactly(5).times
 
-
     expected_ticket = {
                         subject: "[GOV.UK Verify] Feedback",
                         comment: { value: feedback_comment_value },
                         requester: { name: "", email: default_email },
                       }
-    expect(zendesk_client).to receive(:submit).with(session_id, expected_ticket).and_return true
 
+    expect(zendesk_client).to receive(:submit).with(session_id, expected_ticket).and_return true
     expect(feedback_service.submit!(session_id, form)).to eql(true)
   end
 end

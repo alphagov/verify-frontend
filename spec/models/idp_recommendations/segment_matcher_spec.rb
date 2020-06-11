@@ -18,7 +18,6 @@ describe SegmentMatcher do
     }
   }
 
-
   before(:each) do
     @segment_matcher = SegmentMatcher.new(segments)
   end

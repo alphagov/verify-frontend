@@ -46,7 +46,6 @@ module Display
       let(:public_simple_id_4_loa) { %w(LEVEL_2') }
       let(:private_simple_id_loa) { %w(LEVEL_2') }
 
-
       let(:display_data_correlator) {
         DisplayDataCorrelator.new(rp_display_repository, [public_simple_id], [private_simple_id])
       }

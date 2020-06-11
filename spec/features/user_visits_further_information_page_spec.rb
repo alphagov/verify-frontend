@@ -10,7 +10,6 @@ RSpec.describe "user visits further information page" do
   let(:attribute_field_name) { t("cycle3.NationalInsuranceNumber.field_name") }
   let(:attribute_name) { t("cycle3.NationalInsuranceNumber.name") }
 
-
   it "should also be in welsh" do
     stub_cycle_three_attribute_request("NationalInsuranceNumber")
     visit further_information_cy_path

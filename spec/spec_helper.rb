@@ -47,7 +47,6 @@ RSpec.configure do |config|
     mocks.verify_doubled_constant_names = true
   end
 
-
   # Limits the available syntax to the non-monkey patched syntax that is
   # recommended. For more details, see:
   #   - http://rspec.info/blog/2012/06/rspecs-new-expectation-syntax/

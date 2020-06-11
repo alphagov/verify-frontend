@@ -20,7 +20,6 @@ RSpec.describe "When the user visits a page" do
     expect(PUBLIC_PIWIK).to receive(:url).and_return(@server_url).at_least(2).times
   end
 
-
   context "when JS is enabled", js: true do
     it "sends a page view to analytics" do
       expect(request_log).to receive(:log).with(

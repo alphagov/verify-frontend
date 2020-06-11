@@ -2,6 +2,10 @@ inherit_gem:
   rubocop-govuk: 
     - config/default.yml
 
+inherit_mode:
+  merge:
+    - Exclude
+
 AllCops:
   Exclude:
     - 'lib/node_modules'
@@ -24,11 +28,26 @@ Style/MixinUsage:
     - 'config/routes.rb'
     - 'config/main_routes.rb'
 
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
 Layout/AccessModifierIndentation:
   EnforcedStyle: 'outdent'
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 160
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
 
 Style/FrozenStringLiteralComment:
   Enabled: false

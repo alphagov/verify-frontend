@@ -170,7 +170,6 @@ describe PausedRegistrationController do
       expect(subject).to redirect_to start_path
     end
 
-
     it "should render error page when user has no session" do
       session.clear
       expect(subject).to render_template(:something_went_wrong)

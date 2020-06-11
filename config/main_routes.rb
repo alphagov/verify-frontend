@@ -119,7 +119,6 @@ get "resume_registration", to: "paused_registration#resume", as: :resume_registr
 post "resume_registration", to: "paused_registration#resume_with_idp", as: :resume_registration_submit
 get "completed_registration", to: "completed_registration#index", as: :completed_registration
 
-
 if SINGLE_IDP_FEATURE
   get "redirect_to_single_idp", to: "redirect_to_idp#single_idp", as: :redirect_to_single_idp
   get "continue_to_your_idp", to: "single_idp_journey#continue_to_your_idp", as: :continue_to_your_idp

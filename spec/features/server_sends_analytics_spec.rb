@@ -8,7 +8,6 @@ RSpec.describe "When a page with a virtual page view is visited" do
     set_session_and_session_cookies!
     stub_api_idp_list_for_registration
 
-
     Capybara.current_session.driver.header("User-Agent", "my user agent")
     Capybara.current_session.driver.header("Accept-Language", "en-US,en;q=0.5")
     Capybara.current_session.driver.header("X-Forwarded-For", "1.1.1.1")
