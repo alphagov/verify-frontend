@@ -22,8 +22,7 @@ RSpec.feature "user visits select documents advice pages", type: :feature do
 
     expect(page).to have_current_path(select_documents_advice_path)
       .and have_content(t("hub_variant_c.select_documents_advice.advice_html.heading"))
-      .and have_content(t("hub_variant_c.select_documents_advice.advice_html.sub_heading"))
-      .and have_content(t("hub_variant_c.select_documents_advice.advice_html.unspecified"))
+      .and have_content("You said you have none of these things with you right now:")
       .and have_content(t("hub_variant_c.select_documents_advice.what_to_do_next.heading"))
     expect_things_you_do_not_have_column_to_contain(
       t("hub_variant_c.select_documents.has_valid_passport"),

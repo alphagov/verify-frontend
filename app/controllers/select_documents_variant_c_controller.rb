@@ -26,7 +26,8 @@ class SelectDocumentsVariantCController < ApplicationController
   def advice
     answers = selected_answer_store.selected_answers.fetch("documents", {})
     mappings = t("hub_variant_c.select_documents").select { |k, _| k.to_s.start_with?("has") }.transform_keys!(&:to_s)
-    @documents = answers.transform_keys(&mappings.method(:[]))
+    documents = answers.transform_keys(&mappings.method(:[]))
+    @documents = documents.sort_by { |_, v| v ? 0 : 1 }.to_h
 
     render :advice
   end

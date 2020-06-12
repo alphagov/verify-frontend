@@ -116,10 +116,10 @@ en:
       heading: Which of these do you have available right now?
       explanation: This will help us tell you if GOV.UK Verify will work for you. The more items you have, the more likely it is that you can verify your identity.
       select_all_that_apply: "Select all that apply:"
-      has_valid_passport: Your valid passport
-      has_driving_license: Your current driving licence, full or provisional, with your photo on it
+      has_valid_passport: A valid passport
+      has_driving_license: A valid driving licence, full or provisional, with your photo on it
       has_phone_can_app: A phone or tablet that can download an app
-      has_credit_card: Your credit or debit card
+      has_credit_card: A credit or debit card
       has_nothing: None of the above
       further_explanation:
         title: What GOV.UK Verify uses these for
@@ -143,6 +143,9 @@ en:
       advice_html:
         heading: Based on your answers, you cannot use GOV.UK Verify
         sub_heading: Make sure you selected all the things you have with you.
+        none_heading_html: |
+          <p class="govuk-body">To set up an identity account, you need to provide evidence for the companies to check.</p>
+          <p class="govuk-body govuk-!-margin-bottom-0">You said you have none of these things with you right now:</p>
         specified: Things you have with you
         unspecified: Things you do not have with you
       what_to_do_next:
@@ -180,7 +183,7 @@ en:
         close: close
     prove_your_identity_another_way:
       heading: Prove your identity another way
-      sub_heading: You can still %{service_name}
+      sub_heading: You can still %{service_name}.
   hub:
     other_ways_title: Other ways to access the service
     other_ways_heading: Other ways to %{other_ways_description}
