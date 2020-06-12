@@ -51,7 +51,7 @@ end %>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell"><var>verify-single-idp-journey</var></td>
           <td class="govuk-table__cell">Mae'r cwci hwn yn dweud wrthym eich bod wedi cael eich cyfeirio'n uniongyrchol gan ddarparwr hunaniaeth. Mae'n dweud wrthym pa ddarparwr sydd wedi eich cyfeirio, ac yn rhoi dynodwr unigryw yn ôl i'r darparwr hwnnw.</td>
-          <td class="govuk-table__cell">90 munud</td>
+          <td class="govuk-table__cell"><%= CONFIG.session_cookie_duration_mins %> munud</td>
         </tr>
       <% end %>
       <% if THROTTLING_ENABLED %>
@@ -105,7 +105,7 @@ end %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell"><var>_pk_ses</var></td>
         <td class="govuk-table__cell">Mae hyn yn gweithio gyda _pk_id i gyfrif y nifer o weithiau y byddwch yn ymweld â'r wefan</td>
-        <td class="govuk-table__cell">90 munud</td>
+        <td class="govuk-table__cell"><%= CONFIG.session_cookie_duration_mins %> munud</td>
       </tr>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell"><var>_pk_ref</var></td>

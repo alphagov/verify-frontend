@@ -69,7 +69,7 @@ module UserCookiesPartialController
   def set_single_idp_journey_cookie(data)
     cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = {
       value: data.to_json,
-      expires: 90.minutes.from_now,
+      expires: Integer(CONFIG.session_cookie_duration_mins).minutes.from_now,
     }
   end
 
