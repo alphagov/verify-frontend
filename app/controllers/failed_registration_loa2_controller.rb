@@ -8,6 +8,12 @@ class FailedRegistrationLoa2Controller < ApplicationController
     @transaction = current_transaction
     @custom_fail = current_transaction.custom_fail_heading.present?
     @idp_recommendation_engine = IDP_RECOMMENDATION_ENGINE
-    render choose_partial_for_loa2
+    render view_for_loa2
+  end
+
+private
+
+  def view_for_loa2
+    choose_view "LOA2"
   end
 end

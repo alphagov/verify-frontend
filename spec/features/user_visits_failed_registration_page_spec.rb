@@ -73,6 +73,7 @@ RSpec.describe "When the user visits the failed registration page and" do
         expect(page).to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
       end
     end
+
     context "there are no more IDPs to try" do
       it "includes expected content when LOA2 journey" do
         set_loa_in_session("LEVEL_2")
@@ -95,6 +96,7 @@ RSpec.describe "When the user visits the failed registration page and" do
         expect(page).not_to have_link t("hub.failed_registration.start_again"), href: choose_a_certified_company_path
       end
     end
+
     it "starts a new session and IDPs are available again" do
       set_loa_in_session("LEVEL_2")
       visit "/failed-registration"
@@ -115,6 +117,7 @@ RSpec.describe "When the user visits the failed registration page and" do
       expect_page_to_have_main_content_non_continue
     end
   end
+
   context "relying party is not allowed to continue on fail and is custom fail rp" do
     before(:each) do
       page.set_rack_session(transaction_simple_id: CUSTOM_FAIL_PAGE_RP)

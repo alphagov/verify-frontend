@@ -5,17 +5,9 @@ module FailedRegistrationPartialController
   include ViewableIdpPartialController
   include UserCharacteristicsPartialController
 
-  def choose_partial_for_loa1
-    choose_partial "LOA1"
-  end
+protected
 
-  def choose_partial_for_loa2
-    choose_partial "LOA2"
-  end
-
-private
-
-  def choose_partial(loa_suffix)
+  def choose_view(loa_suffix)
     if continue_on_failed_registration_rp?
       "failed_registration/index_continue_on_failed_registration_#{loa_suffix}"
     else
@@ -24,6 +16,8 @@ private
       "failed_registration/index_#{loa_suffix}"
     end
   end
+
+private
 
   def continue_on_failed_registration_rp?
     CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
