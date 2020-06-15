@@ -68,7 +68,7 @@ constraints IsLoa2 do
   # post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
 
   get "why_companies", to: "why_companies_loa2#index", as: :why_companies
-  get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
+  # get "failed_registration", to: "failed_registration_loa2_variant_c#index", as: :failed_registration
   get "cancelled_registration", to: "cancelled_registration_loa2#index", as: :cancelled_registration
   post "redirect_to_idp_warning", to: "redirect_to_idp_warning#continue", as: :redirect_to_idp_warning_submit
   get "redirect_to_idp_warning", to: "redirect_to_idp_warning#index", as: :redirect_to_idp_warning
@@ -151,6 +151,7 @@ constraints short_hub_v3.use(alternative: "control_a") do
   get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
   post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
+  get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
 end
 
 # HUH-234: implement appropriate variant C routes
@@ -170,10 +171,5 @@ constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do
   get "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#index", as: :choose_a_certified_company
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2_variant_c#about", as: :choose_a_certified_company_about
   post "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#select_idp", as: :choose_a_certified_company_submit
-  constraints IsLoa1 do
-    get "failed_registration", to: "failed_registration_loa1_variant_c#index", as: :failed_registration
-  end
-  constraints IsLoa2 do
-    get "failed_registration", to: "failed_registration_loa2_variant_c#index", as: :failed_registration
-  end
+  get "failed_registration", to: "failed_registration_loa2_variant_c#index", as: :failed_registration
 end
