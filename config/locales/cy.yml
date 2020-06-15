@@ -780,7 +780,7 @@ cy:
       error_message: Gall hyn fod oherwydd bod eich sesiwn wedi’i amseru allan neu roedd gwall yn y system.
       start_again: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.
     proxy_node_error:
-      start_again: Gan eich bod yn defnyddio gwasanaeth diogel o wlad Ewropeaidd arall, bydd angen i chi fynd yn ôl i'r dudalen lle dechreuoch  ddefnyddio'r gwasanaeth hwnnw.
+      start_again: Gan eich bod yn defnyddio gwasanaeth diogel o wlad Ewropeaidd arall, bydd angen i chi fynd yn ôl i'r dudalen lle dechreuoch ddefnyddio'r gwasanaeth hwnnw.
     page_not_found:
       title: Ni ellir dod o hyd i’r dudalen hon
       heading: Ni ellir dod o hyd i’r dudalen hon

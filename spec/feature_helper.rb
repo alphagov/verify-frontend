@@ -32,6 +32,7 @@ Capybara.register_driver :firefox_headless do |app|
 end
 
 Capybara.javascript_driver = :firefox_headless
+Capybara.server = :puma, { Silent: true }
 
 module FeatureHelper
   def current_time_in_millis

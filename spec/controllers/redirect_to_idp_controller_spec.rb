@@ -103,7 +103,6 @@ describe RedirectToIdpController do
         session[:journey_type] = "registration"
         session[:user_followed_journey_hint] = nil
 
-
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
                                            .with(current_transaction: a_kind_of(Display::RpDisplayData),
                                                  request: a_kind_of(ActionDispatch::Request),
@@ -126,7 +125,6 @@ describe RedirectToIdpController do
         session[:attempt_number] = 1
         session[:journey_type] = "registration"
         session[:user_followed_journey_hint] = nil
-
 
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
                                            .with(current_transaction: a_kind_of(Display::RpDisplayData),
@@ -263,7 +261,8 @@ describe RedirectToIdpController do
       subject { get :sign_in_with_last_successful_idp, params: { locale: "en" } }
 
       it "sets the selected IdP in Policy and the users session before rendering redirect_to_idp" do
-        RedirectToIdpController.any_instance.stub(:flash) { { journey_hint: "idp_stub-idp-two" } }
+        allow_any_instance_of(RedirectToIdpController)
+            .to receive(:flash).and_return({ journey_hint: "idp_stub-idp-two" })
 
         allow_any_instance_of(UserCookiesPartialController)
           .to receive(:ab_test_with_alternative_name).and_return(nil)
@@ -285,7 +284,7 @@ describe RedirectToIdpController do
       end
 
       it "returns a 404 if the hint is missing" do
-        RedirectToIdpController.any_instance.stub(:flash) { {} }
+        allow_any_instance_of(RedirectToIdpController).to receive(:flash).and_return({})
         expect(POLICY_PROXY).to_not receive(:select_idp)
 
         subject
@@ -294,7 +293,7 @@ describe RedirectToIdpController do
       end
 
       it "returns a 404 if the hint is wrong" do
-        RedirectToIdpController.any_instance.stub(:flash) { { journey_hint: "idp_sausages" } }
+        allow_any_instance_of(RedirectToIdpController).to receive(:flash).and_return({ journey_hint: "idp_sausages" })
         expect(POLICY_PROXY).to_not receive(:select_idp)
 
         subject

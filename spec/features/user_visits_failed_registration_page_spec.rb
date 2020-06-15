@@ -86,7 +86,6 @@ RSpec.describe "When the user visits the failed registration page and" do
     end
   end
 
-
   def expect_page_to_have_main_content
     expect_feedback_source_to_be(page, "FAILED_REGISTRATION_PAGE", "/failed-registration")
     expect(page).to have_title t("hub.failed_registration.title")

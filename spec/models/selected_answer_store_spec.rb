@@ -40,7 +40,6 @@ RSpec.describe SelectedAnswerStore do
     expect(store.selected_evidence).to eql %i[passport mobile_phone]
   end
 
-
   it "should overwrite stale answers with new ones" do
     session = {}
     old_answers = {

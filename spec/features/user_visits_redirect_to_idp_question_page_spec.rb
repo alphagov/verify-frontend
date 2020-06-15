@@ -48,13 +48,12 @@ RSpec.describe "When the user visits the redirect to IDP question page" do
 
   it 'goes to "redirect-to-idp-warning" page if the user answers the question and javascript is enabled', js: true do
     stub_session_idp_authn_request(originating_ip, idp_location, false)
+    stub_api_idp_list_for_registration
 
     choose "interstitial_question_form_interstitial_question_result_true", allow_label_click: true
-
-    expected_answers = selected_answers.update("interstitial" => { "interstitial_yes" => true })
-
     click_button t("navigation.continue")
 
+    expected_answers = selected_answers.update("interstitial" => { "interstitial_yes" => true })
     expect(page).to have_current_path(redirect_to_idp_warning_path)
     expect(page.get_rack_session["selected_answers"]).to eql(expected_answers)
   end

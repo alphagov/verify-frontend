@@ -169,7 +169,6 @@ RSpec.feature "When the user visits the feedback page" do
     expect(DUMMY_ZENDESK_CLIENT.tickets.last.comment).to include "User agent: #{user_agent}"
   end
 
-
   it "should keep the referer if form submission fails validation" do
     set_session_and_session_cookies!
     visit start_path

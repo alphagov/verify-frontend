@@ -196,6 +196,7 @@ describe "When the user visits the choose a certified company page" do
     )
 
     visit "/choose-a-certified-company"
+    page.find_by_id("non-matching-idps-trigger").click
 
     expect(page).to have_content t("hub.choose_a_certified_company.idp_count_html", company_count: "2 companies")
     within("#matching-idps") do
@@ -238,6 +239,7 @@ describe "When the user visits the choose a certified company page" do
       )
 
       visit "/choose-a-certified-company"
+      page.find_by_id("non-matching-idps-trigger").click
 
       within("#matching-idps") do
         expect(page).to_not have_button("Choose Bob’s Identity Service")

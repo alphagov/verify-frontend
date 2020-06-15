@@ -93,7 +93,6 @@ RSpec.describe "user encounters error page" do
         expect(page.status_code).to eq(400)
       end
 
-
       it "will present a session timeout error page when the API returns session timeout" do
         stub_saml_proxy_authn_request_endpoint
         stub_policy_sign_in_process_details

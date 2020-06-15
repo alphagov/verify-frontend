@@ -17,9 +17,7 @@ require "sprockets/railtie"
 require "prometheus/middleware/collector"
 require "prometheus/middleware/exporter"
 
-
 Bundler.require(*Rails.groups)
-
 
 module VerifyFrontend
   class Application < Rails::Application
