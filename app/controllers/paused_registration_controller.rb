@@ -115,11 +115,16 @@ private
     selected_rp = get_rp_details(last_rp)
     return if selected_rp == nil
 
-    @transaction = {
-      name: get_translated_service_name(selected_rp.simple_id),
-      homepage: selected_rp.transaction_homepage,
-      start_page: preferred_start_page(selected_rp),
-    }
+    begin
+      @transaction = {
+        name: get_translated_service_name(selected_rp.simple_id),
+        homepage: selected_rp.transaction_homepage,
+        start_page: preferred_start_page(selected_rp),
+      }
+    rescue StandardError => e
+      logger.warn e.message
+      nil
+    end
   end
 
   def get_rp_details(last_rp_value)
