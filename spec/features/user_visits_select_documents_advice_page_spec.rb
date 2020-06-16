@@ -1,6 +1,5 @@
 require "feature_helper"
 require "api_test_helper"
-require "models/selected_answer_store"
 
 RSpec.feature "user visits select documents advice pages", type: :feature do
   before(:each) do

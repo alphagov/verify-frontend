@@ -33,7 +33,6 @@ class SelectDocumentsVariantCController < ApplicationController
   end
 
   def prove_your_identity_another_way
-    @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
     @service_name = current_transaction.name
 

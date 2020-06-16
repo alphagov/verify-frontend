@@ -7,7 +7,7 @@
       <div class="govuk-grid-column-full govuk-heading-l">
         <%=t "hub_variant_c.select_documents_advice.advice_html.heading" %>
         <div class="govuk-body govuk-!-padding-top-4">
-          <%=t "hub_variant_c.select_documents_advice.advice_html.#{ @documents.values.any? ? 'sub_heading' : 'none_heading_html'}" %>
+          <%=t "hub_variant_c.select_documents_advice.advice_html.#{ @documents.values.any? ? 'sub_heading' : 'no_evidence_intro_html'}" %>
         </div>
       </div>
       <% @documents.group_by(&:last).each do |key, values| %>

@@ -143,7 +143,7 @@ en:
       advice_html:
         heading: Based on your answers, you cannot use GOV.UK Verify
         sub_heading: Make sure you selected all the things you have with you.
-        none_heading_html: |
+        no_evidence_intro_html: |
           <p class="govuk-body">To set up an identity account, you need to provide evidence for the companies to check.</p>
           <p class="govuk-body govuk-!-margin-bottom-0">You said you have none of these things with you right now:</p>
         specified: Things you have with you
