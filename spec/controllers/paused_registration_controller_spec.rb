@@ -142,7 +142,12 @@ describe PausedRegistrationController do
       expect(subject).to render_template(:resume)
     end
 
-    it "redirects to start page when invalid/disabled IDP present in cookie" do
+    it "should render error page when user has no session" do
+      session.clear
+      expect(subject).to render_template(:something_went_wrong)
+    end
+
+    it "redirects user to the start page when invalid/disabled IDP present in cookie" do
       front_journey_hint_cookie = {
           STATE: {
               IDP: :'a-non-existent-idp-identifier',
@@ -154,25 +159,48 @@ describe PausedRegistrationController do
       expect(subject).to redirect_to start_path
     end
 
-    it "redirects to start page when invalid RP present in cookie" do
-      stub_missing_transaction_details
+    it "redirects user to the start page when RP present in cookie but is obsoleted / disabled in config service" do
       front_journey_hint_cookie = {
           STATE: {
               IDP: :valid_idp,
-              RP: :'we-changed-our-entityID',
+              RP: :'obsolete-rp-our-entityID',
               STATUS: "PENDING",
           },
-          RESUMELINK: {
-              IDP: "stub-idp-two",
-          },
       }
+      stub_missing_transaction_details
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+
+      expect(subject).to redirect_to start_path
+    end
+
+    it "redirects user to the start page when RP present in cookie and there is a SESSION_ERROR error" do
+      front_journey_hint_cookie = {
+        STATE: {
+            IDP: :valid_idp,
+            RP: :'rp-entityID',
+            STATUS: "PENDING",
+        },
+      }
+      error_body = { clientMessage: "Failure", exceptionType: "EXPECTED_SESSION_STARTED_STATE_ACTUAL_IDP_SELECTED_STATE", errorId: "0", Referer: "" }
+      stub_missing_transaction_details(body: error_body, status: 400)
+
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
       expect(subject).to redirect_to start_path
     end
 
-    it "should render error page when user has no session" do
-      session.clear
-      expect(subject).to render_template(:something_went_wrong)
+    it "redirects user to the start page when RP present in cookie and there is a SESSION_TIMEOUT error" do
+      front_journey_hint_cookie = {
+        STATE: {
+            IDP: :valid_idp,
+            RP: :'rp-entityID',
+            STATUS: "PENDING",
+        },
+      }
+      error_body = { clientMessage: "Failure", exceptionType: "SESSION_TIMEOUT", errorId: "0", Referer: "" }
+      stub_missing_transaction_details(body: error_body, status: 400)
+
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+      expect(subject).to redirect_to start_path
     end
   end
 end

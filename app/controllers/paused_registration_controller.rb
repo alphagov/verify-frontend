@@ -102,7 +102,7 @@ private
 
   def set_transaction_from_session
     selected_rp = get_rp_details(current_transaction_entity_id)
-    return if selected_rp == nil
+    return if selected_rp.nil?
 
     @transaction = {
       name: current_transaction.name,
@@ -113,29 +113,22 @@ private
 
   def set_transaction_from_cookie
     selected_rp = get_rp_details(last_rp)
-    return if selected_rp == nil
+    return if selected_rp.nil?
 
-    begin
-      @transaction = {
-        name: get_translated_service_name(selected_rp.simple_id),
-        homepage: selected_rp.transaction_homepage,
-        start_page: preferred_start_page(selected_rp),
-      }
-    rescue StandardError => e
-      logger.warn e.message
-      nil
-    end
+    @transaction = {
+      name: get_translated_service_name(selected_rp.simple_id),
+      homepage: selected_rp.transaction_homepage,
+      start_page: preferred_start_page(selected_rp),
+    }
   end
 
   def get_rp_details(last_rp_value)
     return nil if last_rp_value.nil?
 
-    begin
-      CONFIG_PROXY.get_transaction_details(last_rp_value)
-    rescue StandardError
-      logger.warn "Error trying to retrieve transaction details for #{last_rp_value} from config service"
-      nil
-    end
+    CONFIG_PROXY.get_transaction_details(last_rp_value)
+  rescue Api::Error => e
+    logger.warn "Error trying to retrieve transaction details for #{last_rp_value}. #{e}"
+    nil
   end
 
   def get_translated_service_name(simple_id)

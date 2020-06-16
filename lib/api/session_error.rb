@@ -1,5 +1,5 @@
 module Api
-  class SessionError < StandardError
+  class SessionError < Api::Error
     TYPE = "SESSION_ERROR".freeze
 
     #This was called SESSION_ERROR by frontend api

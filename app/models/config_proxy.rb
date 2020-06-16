@@ -16,7 +16,7 @@ class ConfigProxy
       translations_for_locale = TransactionTranslationResponse.validated_response(response)
 
       translations_for_locale.to_h
-    rescue StandardError
+    rescue Api::Error, TypeError
       {}
     end
   end
