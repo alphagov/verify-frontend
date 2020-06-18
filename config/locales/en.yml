@@ -496,6 +496,18 @@ en:
       extra_security: Government services requiring extra evidence
     failed_registration:
       title: Unable to verify your identity
+      alt_heading: "%{idp} could not verify your identity"
+      you_can_still: You can still %{service}
+      your_account_with_heading: Your account with %{idp}
+      your_account_with_text: "%{idp} will not contact you or use your data for anything that is not related to your account. You can contact %{idp} for more help."
+      remaining_idps:
+        heading: Try verifying with another company
+        text: Another company may still be able to verify you.
+        link_text: Pick another company.
+        different_way: Try a different way to %{service}
+      last_idp:
+        text: However, you will not be able to use GOV.UK Verify to prove who you are, as the companies could not verify your identify.
+        different_way: Use a different way to %{service}
       heading: "%{idp_name} was unable to verify your identity"
       try_another_company: Try another certified company
       reasons_html: You can still %{service_name}

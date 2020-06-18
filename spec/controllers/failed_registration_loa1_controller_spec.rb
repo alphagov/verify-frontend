@@ -20,6 +20,7 @@ describe FailedRegistrationLoa1Controller do
     end
 
     it "index view when rp is not allowed to continue on failed" do
+      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
       set_rp_to(A_NON_CONTINUE_ON_FAILED_REGISTRATION_RP)
       expect(subject).to render_template(:index_LOA1)
     end

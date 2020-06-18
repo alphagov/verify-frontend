@@ -1,19 +1,16 @@
-<h1 class="govuk-heading-l"><%= t 'hub.failed_registration.heading', idp_name: idp.display_name %></h1>
+<h1 class="govuk-heading-l"><%= t 'hub.failed_registration.alt_heading', idp: idp.display_name %></h1>
+<p class="govuk-body"><%= t 'hub.failed_registration.you_can_still', service: @transaction.name %></p>
 
-<p class="govuk-body"><%= t 'hub.failed_registration.reasons_html', service_name: @transaction.name %></p>
+<%= render partial: @remaining_options_partial %>
 
-<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.try_another_summary' %></h2>
-<div>
-  <p class="govuk-body"><%= t 'hub.failed_registration.try_another_text', idp_name: @idp.display_name %></p>
-  <p class="govuk-body"><%= link_to t('hub.failed_registration.start_again'), start_again_path %></p>
-</div>
-
-<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.other_ways_summary', other_ways_description: raw(transaction.other_ways_description) %></h2>
 <div class="govuk-body">
   <%= raw transaction.other_ways_text %>
 </div>
 
-<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.contact_details_intro', idp_name: idp.display_name %></h2>
+<h2 class="govuk-heading-m"><%= t 'hub.failed_registration.your_account_with_heading', idp: idp.display_name %></h2>
+
+<p class="govuk-body"><%= t 'hub.failed_registration.your_account_with_text', idp: idp.display_name %></p>
+
 <div class="govuk-body">
   <%= raw idp.contact_details %>
 </div>

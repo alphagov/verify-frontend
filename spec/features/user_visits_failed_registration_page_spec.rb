@@ -21,7 +21,7 @@ RSpec.describe "When the user visits the failed registration page and" do
       set_loa_in_session("LEVEL_2")
       visit "/failed-registration"
 
-      expect_page_to_have_main_content
+      expect_page_to_have_main_content_continue_on_fail
       expect(page).to have_content t("hub.failed_registration.continue_text", rp_name: "Test RP")
       expect(page).to have_link t("navigation.continue"), href: redirect_to_service_error_path
       expect(page).to have_link t("hub.failed_registration.try_another_company"), href: select_documents_path
@@ -31,7 +31,7 @@ RSpec.describe "When the user visits the failed registration page and" do
       set_loa_in_session("LEVEL_1")
       visit "/failed-registration"
 
-      expect_page_to_have_main_content
+      expect_page_to_have_main_content_continue_on_fail
       expect(page).to have_content t("hub.failed_registration.continue_text", rp_name: "Test RP")
       expect(page).to have_link t("navigation.continue"), href: redirect_to_service_error_path
       expect(page).to have_link t("hub.failed_registration.try_another_company"), href: choose_a_certified_company_path
@@ -42,25 +42,79 @@ RSpec.describe "When the user visits the failed registration page and" do
     before(:each) do
       page.set_rack_session(transaction_simple_id: DONT_CONTINUE_ON_FAILED_REGISTRATION_RP)
     end
+    context "there are more IDPs to try" do
+      before(:each) do
+        session = default_session
+        session[:selected_answers] = {
+            "documents" => { "driving_licence" => true, "passport" => true },
+            "phone" => { "mobile_phone" => true },
+            "device_type" => { "device_type_other" => true },
+        }
+        page.set_rack_session(session)
+      end
+      it "includes expected content when LOA2 journey" do
+        set_loa_in_session("LEVEL_2")
+        visit "/failed-registration"
 
-    it "includes expected content when LOA2 journey" do
+        expect_page_to_have_main_content_non_continue
+        expect(page).to have_content t("hub.failed_registration.remaining_idps.different_way",
+                                       service: "test GOV.UK Verify user journeys")
+        expect(page).to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
+      end
+
+      it "includes expected content when LOA1 journey" do
+        set_loa_in_session("LEVEL_1")
+        stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+        visit "/failed-registration"
+
+        expect_page_to_have_main_content_non_continue
+        expect(page).to have_content t("hub.failed_registration.remaining_idps.different_way",
+                                       service: "test GOV.UK Verify user journeys")
+        expect(page).to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
+      end
+    end
+
+    context "there are no more IDPs to try" do
+      it "includes expected content when LOA2 journey" do
+        set_loa_in_session("LEVEL_2")
+        visit "/failed-registration"
+
+        expect_page_to_have_main_content_non_continue_for_no_idps
+        expect(page).to have_content t("hub.failed_registration.last_idp.different_way",
+                                       service: "test GOV.UK Verify user journeys")
+        expect(page).not_to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
+      end
+
+      it "includes expected content when LOA1 journey" do
+        set_loa_in_session("LEVEL_1")
+        stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+        visit "/failed-registration"
+
+        expect_page_to_have_main_content_non_continue_for_no_idps
+        expect(page).to have_content t("hub.failed_registration.last_idp.different_way",
+                                       service: "test GOV.UK Verify user journeys")
+        expect(page).not_to have_link t("hub.failed_registration.start_again"), href: choose_a_certified_company_path
+      end
+    end
+
+    it "starts a new session and IDPs are available again" do
+      set_loa_in_session("LEVEL_2")
+      visit "/failed-registration"
+      expect_page_to_have_main_content_non_continue_for_no_idps
+
+      session = default_session
+      session[:selected_answers] = {
+          "documents" => { "driving_licence" => true, "passport" => true },
+          "phone" => { "mobile_phone" => true },
+          "device_type" => { "device_type_other" => true },
+      }
+      set_session! session
+      set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
+      page.set_rack_session(transaction_simple_id: DONT_CONTINUE_ON_FAILED_REGISTRATION_RP)
       set_loa_in_session("LEVEL_2")
       visit "/failed-registration"
 
-      expect_page_to_have_main_content
-      expect(page).to have_content t("hub.failed_registration.other_ways_summary",
-                                     other_ways_description: "test GOV.UK Verify user journeys")
-      expect(page).to have_link t("hub.failed_registration.start_again"), href: choose_a_certified_company_path
-    end
-
-    it "includes expected content when LOA1 journey" do
-      set_loa_in_session("LEVEL_1")
-      visit "/failed-registration"
-
-      expect_page_to_have_main_content
-      expect(page).to have_content t("hub.failed_registration.other_ways_summary",
-                                     other_ways_description: "test GOV.UK Verify user journeys")
-      expect(page).to have_link t("hub.failed_registration.start_again"), href: choose_a_certified_company_path
+      expect_page_to_have_main_content_non_continue
     end
   end
 
@@ -86,10 +140,24 @@ RSpec.describe "When the user visits the failed registration page and" do
     end
   end
 
-  def expect_page_to_have_main_content
+  def expect_page_to_have_main_content_continue_on_fail
     expect_feedback_source_to_be(page, "FAILED_REGISTRATION_PAGE", "/failed-registration")
     expect(page).to have_title t("hub.failed_registration.title")
     expect(page).to have_content t("hub.failed_registration.heading", idp_name: "IDCorp")
     expect(page).to have_content t("hub.failed_registration.contact_details_intro", idp_name: "IDCorp")
+  end
+
+  def expect_page_to_have_main_content_non_continue
+    expect_feedback_source_to_be(page, "FAILED_REGISTRATION_PAGE", "/failed-registration")
+    expect(page).to have_title t("hub.failed_registration.title")
+    expect(page).to have_content t("hub.failed_registration.alt_heading", idp: "IDCorp")
+    expect(page).to have_content t("hub.failed_registration.remaining_idps.different_way", service: "test GOV.UK Verify user journeys")
+  end
+
+  def expect_page_to_have_main_content_non_continue_for_no_idps
+    expect_feedback_source_to_be(page, "FAILED_REGISTRATION_PAGE", "/failed-registration")
+    expect(page).to have_title t("hub.failed_registration.title")
+    expect(page).to have_content t("hub.failed_registration.alt_heading", idp: "IDCorp")
+    expect(page).to have_content t("hub.failed_registration.last_idp.different_way", service: "test GOV.UK Verify user journeys")
   end
 end
