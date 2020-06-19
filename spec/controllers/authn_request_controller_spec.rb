@@ -39,10 +39,4 @@ describe AuthnRequestController do
     post :rp_request, params: { "SAMLRequest" => nil, "RelayState" => "my-relay-state" }
     expect(response).to have_http_status :bad_request
   end
-
-  it "will set hint in flash and redirect to redirect_to_idp_sign_in_with_last_successful_idp_path if idp hint" do
-    post :rp_request, params: { "_ga" => :ga_id, "journey_hint" => "idp_simple_id", "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state" }
-    expect(response).to redirect_to redirect_to_idp_sign_in_with_last_successful_idp_path(_ga: :ga_id)
-    expect(flash[:journey_hint]).to eq("idp_simple_id")
-  end
 end

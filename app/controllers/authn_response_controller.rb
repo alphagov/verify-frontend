@@ -20,8 +20,6 @@ class AuthnResponseController < SamlController
   FAILED_UPLIFT = "FAILED_UPLIFT"
   PENDING = "PENDING"
   OTHER = "OTHER"
-  SINGLE_IDP_JOURNEY_TYPE = "single-idp"
-  RESUMING_JOURNEY_TYPE = "resuming"
 
   ACCEPTED_IDP_RESPONSES = [SUCCESS, MATCHING_JOURNEY_SUCCESS, NON_MATCHING_JOURNEY_SUCCESS, CANCEL, FAILED_UPLIFT, PENDING].freeze
   ACCEPTED_COUNTRY_RESPONSES = [SUCCESS, NON_MATCHING_JOURNEY_SUCCESS, CANCEL, FAILED_UPLIFT].freeze
@@ -101,9 +99,9 @@ private
     return REGISTERING_STATE if response.is_registration
 
     case session[:journey_type]
-    when RESUMING_JOURNEY_TYPE
+    when JourneyType::Verify::RESUMING
       RESUMING_STATE
-    when SINGLE_IDP_JOURNEY_TYPE
+    when JourneyType::Verify::SINGLE_IDP
       SINGLE_IDP_STATE
     else
       SIGNING_IN_STATE
@@ -111,11 +109,11 @@ private
   end
 
   def path_for_success(is_registration)
-    is_registration || journey_type?(SINGLE_IDP_JOURNEY_TYPE) ? confirmation_path : response_processing_path
+    is_registration || journey_type?(JourneyType::Verify::SINGLE_IDP) ? confirmation_path : response_processing_path
   end
 
   def path_for_success_non_matching(is_registration)
-    is_registration || journey_type?(SINGLE_IDP_JOURNEY_TYPE) ? confirmation_non_matching_journey_path : redirect_to_service_signing_in_path
+    is_registration || journey_type?(JourneyType::Verify::SINGLE_IDP) ? confirmation_non_matching_journey_path : redirect_to_service_signing_in_path
   end
 
   def idp_redirects(status, response)
@@ -132,7 +130,7 @@ private
   end
 
   def failed_page_redirects(is_registration)
-    if is_registration || journey_type?(SINGLE_IDP_JOURNEY_TYPE)
+    if is_registration || journey_type?(JourneyType::Verify::SINGLE_IDP)
       failed_registration_path
     else
       failed_sign_in_path
