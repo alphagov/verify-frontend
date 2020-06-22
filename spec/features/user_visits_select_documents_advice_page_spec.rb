@@ -10,7 +10,9 @@ RSpec.feature "user visits select documents advice pages", type: :feature do
 
   it "includes the appropriate feedback source" do
     visit select_documents_advice_path
-    expect_feedback_source_to_be(page, "SELECT_DOCUMENTS_ADVICE_PAGE", "/select-documents-advice")
+
+    expect(page).to have_title t("hub_variant_c.select_documents.title")
+    expect_feedback_source_to_be(page, "SELECT_DOCUMENTS_ADVICE_PAGE", select_documents_advice_path)
   end
 
   it "lists things you do not have with you when 'None of the above is checked'" do
@@ -23,11 +25,12 @@ RSpec.feature "user visits select documents advice pages", type: :feature do
       .and have_content(t("hub_variant_c.select_documents_advice.advice_html.heading"))
       .and have_content("You said you have none of these things with you right now:")
       .and have_content(t("hub_variant_c.select_documents_advice.what_to_do_next.heading"))
+
     expect_things_you_do_not_have_column_to_contain(
-      t("hub_variant_c.select_documents.has_valid_passport"),
-      t("hub_variant_c.select_documents.has_driving_license"),
-      t("hub_variant_c.select_documents.has_phone_can_app"),
-      t("hub_variant_c.select_documents.has_credit_card"),
+      t("hub_variant_c.select_documents.has_valid_passport").downcase,
+      t("hub_variant_c.select_documents.has_driving_license").downcase,
+      t("hub_variant_c.select_documents.has_phone_can_app").downcase,
+      t("hub_variant_c.select_documents.has_credit_card").downcase,
     )
   end
 
