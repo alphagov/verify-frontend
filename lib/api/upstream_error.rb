@@ -1,5 +1,5 @@
 module Api
-  class UpstreamError < StandardError
+  class UpstreamError < Api::Error
     attr_reader :hub_type
 
     def initialize(hub_type = nil)

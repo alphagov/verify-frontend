@@ -258,8 +258,8 @@ module ApiTestHelper
     stub_request(:get, config_api_uri(transaction_display_data_endpoint(default_transaction_entity_id))).to_return(body: transaction_details_stub_response(options).to_json, status: 200)
   end
 
-  def stub_missing_transaction_details
-    stub_request(:get, config_api_uri(transaction_display_data_endpoint(default_transaction_entity_id))).to_return(body: { message: "NONE", type: "NONE", id: "NONE", Referer: "" }.to_json, status: 404)
+  def stub_missing_transaction_details(body: { clientMessage: "NONE", exceptionType: "NONE", errorId: "NONE", Referer: "" }, status: 400)
+    stub_request(:get, config_api_uri(transaction_display_data_endpoint(default_transaction_entity_id))).to_return(body: body.to_json, status: status)
   end
 
   def transaction_details_stub_response(options)

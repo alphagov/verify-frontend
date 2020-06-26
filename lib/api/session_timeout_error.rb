@@ -1,5 +1,5 @@
 module Api
-  class SessionTimeoutError < StandardError
+  class SessionTimeoutError < Api::Error
     TYPE = "SESSION_TIMEOUT".freeze
   end
 end
