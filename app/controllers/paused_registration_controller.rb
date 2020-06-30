@@ -49,7 +49,7 @@ class PausedRegistrationController < ApplicationController
     if @idp.nil? || @transaction.nil?
       redirect_to start_path
     else
-      journey_type = "resuming"
+      journey_type = JourneyType::Verify::RESUMING
       session[:journey_type] = journey_type
       set_additional_piwik_custom_variable(:journey_type, journey_type.upcase)
       render :resume

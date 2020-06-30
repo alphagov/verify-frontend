@@ -38,12 +38,6 @@ describe "pages redirect with journey hint parameter", type: :request do
       post "/SAML2/SSO", params: { "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state" }
       expect(response).to redirect_to start_path
     end
-
-    it "will redirect the user to IDP sign in when journey hint parameter is set to idp_simple_id" do
-      stub_session_creation
-      post "/SAML2/SSO", params: { "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state", "journey_hint" => "idp_something" }
-      expect(response).to redirect_to redirect_to_idp_sign_in_with_last_successful_idp_path
-    end
   end
 
   context "when transaction is Eidas enabled" do

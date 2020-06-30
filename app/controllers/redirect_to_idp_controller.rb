@@ -29,27 +29,6 @@ class RedirectToIdpController < ApplicationController
     render :redirect_to_idp
   end
 
-  def sign_in_with_last_successful_idp
-    session[:journey_type] = "sign-in-last-sucessful-idp"
-    simple_id = flash[:journey_hint]
-    return render_not_found unless simple_id
-
-    simple_id.slice!("idp_")
-
-    decorated_idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(
-      current_available_identity_providers_for_sign_in.detect { |idp| idp.simple_id == simple_id },
-    )
-    if decorated_idp.viewable?
-      store_selected_idp_for_session(decorated_idp.identity_provider)
-      set_journey_hint_followed(decorated_idp.entity_id)
-      select_idp(decorated_idp.entity_id, decorated_idp.display_name)
-    else
-      logger.error "Viewable IdP not found for simple ID #{simple_id}"
-      return render_not_found
-    end
-    sign_in
-  end
-
   def resume
     request_form
     increase_attempt_number

@@ -77,8 +77,8 @@ def stub_piwik_idp_registration(idp_name, selected_answers: {}, recommended: fal
   segments = segments.sort.join(", ")
   idp_selection_custom_variable = "\"5\":[\"IDP_SELECTION\",\"#{idp_list}\"]"
   piwik_request = {
-    "action_name" => "#{idp_name} was chosen for registration (#{recommended_str}) with segment(s) #{segments} and evidence #{evidence}",
-  }
+                      "action_name" => "#{idp_name} was chosen for registration (#{recommended_str}) with segment(s) #{segments} and evidence #{evidence}",
+                  }
   stub_piwik_request(piwik_request, {}, loa, [idp_selection_custom_variable])
 end
 

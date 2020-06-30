@@ -1,8 +1,23 @@
 require "feature_helper"
 require "cookie_names"
 require "api_test_helper"
+require "piwik_test_helper"
+require "sign_in_helper"
 
 RSpec.describe "when user submits start page form" do
+  let(:idp_entity_id) { "http://idcorp.com" }
+  let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
+  let(:location) { "/test-idp-request-endpoint" }
+  let(:idp_display_name) { "IDCorp" }
+
+  def and_the_language_hint_is_set
+    expect(page).to have_content("language hint was 'en'")
+  end
+
+  def and_the_hints_are_not_set
+    expect(page).to have_content("hints are ''")
+  end
+
   before :each do
     set_session_and_session_cookies!
   end
@@ -52,5 +67,20 @@ RSpec.describe "when user submits start page form" do
     visit "/start"
     click_button("next-button")
     expect(page).to have_content t("hub.start.error_message")
+  end
+
+  it "will redirect to the IDP when the user chooses a hinted IDP", js: true do
+    allow_any_instance_of(UserCookiesPartialController)
+    .to receive(:ab_test_with_alternative_name).and_return(nil)
+    stub_session_idp_authn_request(originating_ip, location, false)
+    set_journey_hint_cookie(idp_entity_id, "SUCCESS")
+    stub_api_idp_list_for_sign_in
+    stub_api_select_idp
+    visit "/start"
+    when_i_select_an_idp idp_display_name
+    then_im_at_the_idp journey_type: JourneyType::Verify::SIGN_IN_LAST_SUCCESSFUL_IDP
+    and_the_language_hint_is_set
+    and_the_hints_are_not_set
+    expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
   end
 end

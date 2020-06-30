@@ -1,6 +1,7 @@
 require "feature_helper"
 require "api_test_helper"
 require "piwik_test_helper"
+require "sign_in_helper"
 
 RSpec.describe "user selects an IDP on the sign in page" do
   def given_api_requests_have_been_mocked!
@@ -13,7 +14,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
   end
 
   def given_im_on_the_sign_in_page(locale = "en")
-    set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session)
+    set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session, session: default_session.merge!({ journey_type: "sign-in" }))
     stub_api_idp_list_for_sign_in
     visit "/#{t('routes.sign_in', locale: locale)}"
   end
@@ -25,33 +26,8 @@ RSpec.describe "user selects an IDP on the sign in page" do
     visit "/#{t('routes.sign_in', locale: 'en')}"
   end
 
-  def when_i_select_an_idp
-    # There may be multiple identical buttons due to the journey hint
-    # so we can't use 'click_button'
-    all(:button, idp_display_name)[0].click
-  end
-
   def when_i_click_start_now
     click_link("begin-registration-route")
-  end
-
-  def then_im_at_the_idp(ab_value: nil)
-    expect(page).to have_current_path(location)
-    expect(page).to have_content("SAML Request is 'a-saml-request'")
-    expect(page).to have_content("relay state is 'a-relay-state'")
-    expect(page).to have_content("registration is 'false'")
-    expect(cookie_value("verify-front-journey-hint")).to_not be_nil
-
-    expect(a_request(:post, policy_api_uri(select_idp_endpoint(default_session_id)))
-             .with(body: { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
-                           PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
-                           PolicyEndpoints::PARAM_REGISTRATION => false,
-                           PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
-                           PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String), # no longer comes from matomo
-                           PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
-                           PolicyEndpoints::PARAM_VARIANT => ab_value })).to have_been_made.once
-    expect(a_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
-             .with(headers: { "X_FORWARDED_FOR" => originating_ip })).to have_been_made.once
   end
 
   def and_piwik_was_sent_a_signin_event
@@ -113,12 +89,12 @@ RSpec.describe "user selects an IDP on the sign in page" do
       allow_any_instance_of(UserCookiesPartialController)
         .to receive(:ab_test_with_alternative_name).and_return(nil)
     end
+
     it "will redirect the user to the IDP" do
-      page.set_rack_session(transaction_simple_id: "test-rp")
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
       expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
-      when_i_select_an_idp
+      when_i_select_an_idp idp_display_name
       then_im_at_the_idp
       and_piwik_was_sent_a_signin_event
       and_the_language_hint_is_set
@@ -129,11 +105,10 @@ RSpec.describe "user selects an IDP on the sign in page" do
     it "will redirect the user to the IDP when there is an ab_test_value" do
       allow_any_instance_of(UserCookiesPartialController)
        .to receive(:ab_test_with_alternative_name).and_return(current_ab_test_value)
-      page.set_rack_session(transaction_simple_id: "test-rp")
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
       expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
-      when_i_select_an_idp
+      when_i_select_an_idp idp_display_name
       then_im_at_the_idp(ab_value: current_ab_test_value)
       and_piwik_was_sent_a_signin_event
       and_the_language_hint_is_set
@@ -142,7 +117,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
     end
 
     it "will redirect the user to the about page of the registration journey and update the Piwik Custom Variables" do
-      page.set_rack_session(transaction_simple_id: "test-rp", requested_loa: "LEVEL_2")
       given_api_requests_have_been_mocked!
       given_the_piwik_request_has_been_stubbed
       given_im_on_the_sign_in_page
@@ -152,7 +126,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
     end
 
     it "will not render a suggested IDP" do
-      page.set_rack_session(transaction_simple_id: "test-rp")
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
       expect(page).not_to have_text "The last certified company used on this device was"
@@ -165,7 +138,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
       end
 
       it "will not render a suggested IDP" do
-        page.set_rack_session(transaction_simple_id: "test-rp")
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
         expect(page).not_to have_text "The last certified company used on this device was"
@@ -179,7 +151,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
       end
 
       it "will render a suggested IDP" do
-        page.set_rack_session(transaction_simple_id: "test-rp")
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
         expect(page).to have_text "You can use an identity account you set up with any of these companies:"
@@ -189,12 +160,11 @@ RSpec.describe "user selects an IDP on the sign in page" do
       end
 
       it "will redirect the user to the hinted IDP" do
-        page.set_rack_session(transaction_simple_id: "test-rp")
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
         then_piwik_was_sent_a_journey_hint_shown_event_for(idp_display_name)
         expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
-        when_i_select_an_idp
+        when_i_select_an_idp idp_display_name
         then_im_at_the_idp
         and_piwik_was_sent_a_signin_hint_followed_event
         and_the_language_hint_is_set
@@ -211,7 +181,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
       hinted_idp_name = "Bob’s Identity Service"
 
       it "will redirect the user to a non-hinted IDP if hint ignored" do
-        page.set_rack_session(transaction_simple_id: "test-rp")
         given_api_requests_have_been_mocked!
         given_im_on_the_sign_in_page
         then_piwik_was_sent_a_journey_hint_shown_event_for(hinted_idp_name)
@@ -220,7 +189,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
         expect(page).to have_button("Select #{hinted_idp_name}", count: 2)
 
         expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
-        when_i_select_an_idp
+        when_i_select_an_idp idp_display_name
         then_im_at_the_idp
         and_piwik_was_sent_a_signin_hint_ignored_event
         and_the_language_hint_is_set

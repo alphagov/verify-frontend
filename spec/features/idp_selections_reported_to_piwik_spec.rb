@@ -51,7 +51,13 @@ RSpec.describe "When the user selects an IDP" do
   end
 
   it "appends the IDP name on subsequent selections" do
-    idcorp_piwik_request = idcorp_registration_piwik_request
+    idcorp_piwik_request = stub_piwik_idp_registration(
+      "IDCorp",
+      selected_answers: selected_answers,
+      recommended: true,
+      segments: %w(non-protected-segment-3),
+    )
+
     idcorp_and_bobs_piwik_request = stub_piwik_idp_registration(
       "Bob’s Identity Service",
       selected_answers: selected_answers,
@@ -59,6 +65,8 @@ RSpec.describe "When the user selects an IDP" do
       idp_list: "IDCorp,Bob’s Identity Service",
       segments: %w(non-protected-segment-3),
     )
+
+    stub_idp_select_request("other-entity-id", instance_of(String))
     visit "/choose-a-certified-company"
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
     click_button t("hub.redirect_to_idp_warning.continue_website", display_name: t("idps.stub-idp-one.name"))
@@ -69,7 +77,6 @@ RSpec.describe "When the user selects an IDP" do
     page.find_by_id("non-matching-idps-trigger").click
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-two.name"))
     click_button t("hub.redirect_to_idp_warning.continue_website", display_name: t("idps.stub-idp-two.name"))
-
     expect(idcorp_and_bobs_piwik_request).to have_been_made.once
   end
 
@@ -91,7 +98,7 @@ RSpec.describe "When the user selects an IDP" do
   end
 end
 
-def stub_idp_select_request(idp_entity_id)
+def stub_idp_select_request(idp_entity_id, journey_type = nil)
   stub_session_select_idp_request(
     encrypted_entity_id,
     PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
@@ -99,7 +106,7 @@ def stub_idp_select_request(idp_entity_id)
     PolicyEndpoints::PARAM_REGISTRATION => true,
     PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
     PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String), # no longer comes from matomo
-    PolicyEndpoints::PARAM_JOURNEY_TYPE => nil,
+    PolicyEndpoints::PARAM_JOURNEY_TYPE => journey_type,
     PolicyEndpoints::PARAM_VARIANT => nil,
   )
 end
