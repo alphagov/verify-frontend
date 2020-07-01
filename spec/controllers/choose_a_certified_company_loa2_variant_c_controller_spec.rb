@@ -30,7 +30,7 @@ describe ChooseACertifiedCompanyLoa2VariantCController do
 
   before(:each) do
     stub_request(:get, CONFIG.config_api_host + "/config/transactions/enabled")
-    experiment = "short_hub_2019_q3-preview"
+    experiment = "short_hub_2019_q3"
     variant = "variant_c_2_idp_short_hub"
     stub_api_select_idp
     set_session_and_cookies_with_loa_and_variant("LEVEL_2", experiment, variant)

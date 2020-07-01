@@ -8,7 +8,7 @@ describe AboutLoa2VariantCController do
 
   before(:each) do
     stub_request(:get, CONFIG.config_api_host + "/config/transactions/enabled")
-    experiment = "short_hub_2019_q3-preview"
+    experiment = "short_hub_2019_q3"
     variant = "variant_c_2_idp_short_hub"
     set_session_and_cookies_with_loa_and_variant("LEVEL_2", experiment, variant)
     stub_api_idp_list_for_registration
