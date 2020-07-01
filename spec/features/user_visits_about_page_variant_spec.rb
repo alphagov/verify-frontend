@@ -8,7 +8,7 @@ RSpec.describe "When the user visits the about page" do
     before(:each) do
       stub_api_idp_list_for_registration
       page.set_rack_session(transaction_simple_id: "test-rp")
-      experiment = { "short_hub_2019_q3-preview" => "short_hub_2019_q3-preview_variant_c_2_idp_short_hub" }
+      experiment = { "short_hub_2019_q3" => "short_hub_2019_q3_variant_c_2_idp_short_hub" }
       set_session_and_ab_session_cookies!(experiment)
     end
 

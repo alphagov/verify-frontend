@@ -7,7 +7,7 @@ post "sign_in", to: "sign_in#select_idp", as: :sign_in_submit
 get "begin_sign_in", to: "start#sign_in", as: :begin_sign_in
 
 # HUH-233 short hub 2019 q3 multivariate tests - LOA2 only
-SHORT_HUB_2019_Q3 = "short_hub_2019_q3-preview".freeze
+SHORT_HUB_2019_Q3 = "short_hub_2019_q3".freeze
 short_hub_v3 = AbTestConstraint.configure(ab_test_name: SHORT_HUB_2019_Q3, experiment_loa: "LEVEL_2")
 
 constraints IsLoa1 do
