@@ -1,6 +1,6 @@
 # Dockerfile for Heroku Review App (deployed as part of a PR)
 # TODO refactor common code with ./Dockerfile
-FROM ruby:2.6.5
+FROM ruby:2.6.6
 
 ENV RAILS_SERVE_STATIC_FILES true
 ENV RAILS_LOG_TO_STDOUT true
