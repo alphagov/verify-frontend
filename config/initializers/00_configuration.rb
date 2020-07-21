@@ -25,7 +25,7 @@ CONFIG = Configuration.load! do
   option_string "internal_piwik_host", "INTERNAL_PIWIK_HOST", allow_missing: true
   option_string "public_piwik_host", "PUBLIC_PIWIK_HOST", allow_missing: true
   option_int "piwik_site_id", "PIWIK_SITE_ID", default: 1
-  option_int "read_timeout", "READ_TIMEOUT", default: 60
+  option_int "read_timeout", "READ_TIMEOUT", default: 30
   option_int "connect_timeout", "CONNECT_TIMEOUT", default: 4
 
   option_int "hide_idps_disconnecting_for_registration_minutes_before", "HIDE_IDPS_DISCONNECTING_FOR_REGISTRATION_MINUTES_BEFORE", default: 30
