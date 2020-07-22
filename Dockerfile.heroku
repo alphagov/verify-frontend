@@ -7,6 +7,7 @@ ENV RAILS_LOG_TO_STDOUT true
 ENV RAILS_ENV production
 ENV SECRET_KEY_BASE notused
 ENV STUB_MODE true
+ENV OPENSSL_CONF /etc/ssl/
 
 ADD Gemfile Gemfile
 
