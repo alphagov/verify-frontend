@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
-ruby '2.6.5'
+ruby '2.6.6'
 
 gem 'rails', '~> 5.2.4'
 gem 'rails-i18n', '~> 5.1'
-gem 'route_translator', '~> 5.0'
+gem 'route_translator', '~> 8.0'
 
 # Server
 gem 'puma'
