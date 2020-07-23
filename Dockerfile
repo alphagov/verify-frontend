@@ -5,7 +5,9 @@
 FROM ruby:2.6.6
 
 RUN apt-get update && apt-get install -y firefox-esr nodejs
-ENV OPENSSL_CONF /etc/ssl/
+RUN touch /tmp/libssl.conf
+ENV OPENSSL_CONF /tmp/libssl.conf
+
 
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
