@@ -55,17 +55,17 @@ pre-commit install
 ```
 
 ## Deploying the application
-The application is deployed using our [CI/CD pipeline](https://deployer.tools.signin.service.gov.uk/teams/main/pipelines/deploy-verify-hub?groups=build-apps&groups=default). 
+The application is deployed using our [CI/CD pipeline](https://cd.gds-reliability.engineering/teams/verify/pipelines/deploy-verify-hub?groups=build-apps&groups=default).
 Any changes merged to master are automatically deployed. This repo has an active branch protection for `master`. Any changes need to be raised via PR and approved by two other developers.
 
 ## PR reviews
-When a PR is raised, it's automatically tested using Travis (runs the ./pre-commit.sh script on the branch and against master) which is configured in the [.travis file](/.travis). The test results are shown directly on the PR. 
+When a PR is raised, it's automatically tested using Travis (runs the ./pre-commit.sh script on the branch and against master) which is configured in the [.travis file](/.travis). The test results are shown directly on the PR.
 
 In addition to the Travis tests we have also enabled Codacy to check coding style. Again, the results are shown within the PR. Codacy is configured using the [.rubocop.yml file](/.rubocop.yml).
 
 The PR is also deployed to Heroku as [a review app](https://devcenter.heroku.com/articles/github-integration-review-apps). The app is destroyed when the PR is closed/merged or after 5 days of inactivity. It uses docker to run both the Rails app and the stub API server. The Heroku deployment is configured using the 4 files:
 * `Dockerfile.heroku` - to configure the docker image of frontend
-* `heroku.yml` - Heroku [deployment manifest](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml) 
+* `heroku.yml` - Heroku [deployment manifest](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml)
 * `app.json` - Heroku [application manifest](https://devcenter.heroku.com/articles/app-json-schema)
 * `heroku-startup.sh` - startup script used to start the app and api, on the port supplied by Heroku
 
@@ -81,9 +81,9 @@ by setting the `cross_gov_ga_domain_names` variable in the `site.tf` for the rel
 
 # GOV.UK Design System 3
 
-[GOV.UK frontend](https://github.com/alphagov/govuk-frontend) is included in the repository under 
+[GOV.UK frontend](https://github.com/alphagov/govuk-frontend) is included in the repository under
 `lib/node_modules`.  This is installed using `npm`.
-Should you have to update the GOV.UK frontend in the future you'll need to run npm within the lib directory and 
+Should you have to update the GOV.UK frontend in the future you'll need to run npm within the lib directory and
 commit the results. e.g.
 
 ```
