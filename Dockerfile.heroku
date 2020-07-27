@@ -7,8 +7,6 @@ ENV RAILS_LOG_TO_STDOUT true
 ENV RAILS_ENV production
 ENV SECRET_KEY_BASE notused
 ENV STUB_MODE true
-RUN touch /tmp/libssl.conf
-ENV OPENSSL_CONF /tmp/libssl.conf
 
 ADD Gemfile Gemfile
 
