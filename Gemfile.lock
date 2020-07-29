@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/alphagov/rails_same_site_cookie.git
+  remote: https://github.com/alphagov/rails-same-site-cookie.git
   revision: 704c1958bf2518ba8248fe3d21a49361e38e911a
   ref: 704c1958bf2518ba8248fe3d21a49361e38e911a
   specs:

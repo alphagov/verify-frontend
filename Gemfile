@@ -47,7 +47,7 @@ gem 'browser'
 # has started causing issues for endusers.  This gem works round the
 # issue.  See Chromium issue: https://www.chromium.org/updates/same-site
 
-gem 'rails_same_site_cookie', :git => "https://github.com/alphagov/rails_same_site_cookie.git", :ref => "704c1958bf2518ba8248fe3d21a49361e38e911a"
+gem 'rails_same_site_cookie', :git => "https://github.com/alphagov/rails-same-site-cookie.git", :ref => "704c1958bf2518ba8248fe3d21a49361e38e911a"
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
