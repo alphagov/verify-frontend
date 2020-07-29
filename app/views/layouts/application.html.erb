@@ -43,7 +43,7 @@
                   <%= link_to t('cookie_message.link'), cookies_path %>
                 </p>
             </div>
-            <script>document.cookie = 'seen_cookie_message=yes; expires=' + new Date(new Date(Date.now()).setMonth(new Date(Date.now()).getMonth() + 1)) + ';'</script>
+            <script>document.cookie = 'seen_cookie_message=yes; expires=' + new Date(new Date(Date.now()).setMonth(new Date(Date.now()).getMonth() + 1)) + ';SameSite=None;secure'</script>
             </div>
           </div>
         </div>

@@ -41,7 +41,7 @@
       cookieString = cookieString + "; expires=" + date.toGMTString();
     }
     if (document.location.protocol == 'https:') {
-      cookieString = cookieString + "; Secure";
+      cookieString = cookieString + "; SameSite=None; Secure";
     }
     document.cookie = cookieString;
   };
