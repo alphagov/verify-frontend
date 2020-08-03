@@ -95,7 +95,7 @@ GEM
     execjs (2.7.0)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
-    ffi (1.13.1)
+    ffi (1.12.2)
     geckodriver-helper (0.24.0)
       archive-zip (~> 0.7)
     globalid (0.4.2)
@@ -338,6 +338,7 @@ DEPENDENCIES
   connection_pool
   dotenv-rails
   email_validator (~> 1.6)
+  ffi (= 1.12.2)
   geckodriver-helper
   headless
   http (~> 2.0.0)
