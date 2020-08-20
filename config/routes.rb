@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     get "test-single-idp-journey" => "test_single_idp_journey#index"
     # route analytics through frontend URI, as like prod, to not violate our csp policy
     get "analytics", to: "test_analytics#forward"
+    post "analytics", to: "test_analytics#forward"
     # fake basic csp reporter so reports can be logged (in development.log)
     # has to be routed through the frontend as currently Firefox requires the reporter
     # to be hosted in the same place as the place serving the pages

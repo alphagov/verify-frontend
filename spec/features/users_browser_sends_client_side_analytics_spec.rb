@@ -9,6 +9,7 @@ RSpec.describe "When the user visits a page" do
   before(:all) do
     Rails.application.routes.append do
       get "piwik.php", to: MockPiwikMiddleware.new, as: :test_piwik
+      post "piwik.php", to: MockPiwikMiddleware.new, as: :test_piwik_post
     end
     Rails.application.reload_routes!
   end
