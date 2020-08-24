@@ -24,7 +24,7 @@ module Analytics
 
     def do_report(params, headers)
       begin
-        response = client.get(@path, params: params, headers: headers)
+        response = client.post(@path, params: params, headers: headers)
         Rails.logger.debug("Reporting analytics with params: #{params}, headers: #{headers}")
         response
       rescue HTTP::Error => e
