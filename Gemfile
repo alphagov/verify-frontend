@@ -67,6 +67,7 @@ group :test, :development do
   # Automated testing
   gem 'rspec', '~> 3.9.0'
   gem 'rspec-rails', '~> 3.9.0'
+  gem 'rspec-json_expectations'
   gem 'capybara', '~> 3.30'
   gem 'webmock', require: false
   gem 'jasmine'
