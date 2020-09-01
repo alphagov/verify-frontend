@@ -13,4 +13,4 @@ cache:
     - $HOME/.phantomjs
 
 addons:
-    firefox: latest
+    firefox: 78.0
