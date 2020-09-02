@@ -4,7 +4,15 @@
 # TODO this should be enforced via technical measures (i.e. factoring out common code).
 FROM ruby:2.6.6
 
-RUN apt-get update && apt-get install -y firefox-esr nodejs
+RUN apt-get update && apt-get install -y nodejs libgtk-3-dev
+
+RUN wget https://ftp.mozilla.org/pub/firefox/releases/78.0/linux-x86_64/en-GB/firefox-78.0.tar.bz2
+RUN tar xvf firefox-78.0.tar.bz2
+RUN mv firefox/ /usr/lib/firefox
+RUN ln -s  /usr/lib/firefox/firefox /usr/bin/firefox
+RUN rm firefox-78.0.tar.bz2
+RUN apt-get install -y firefox-esr
+RUN firefox -v
 
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
