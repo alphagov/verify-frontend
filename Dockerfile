@@ -21,4 +21,7 @@ RUN mkdir -p log tmp
 
 RUN bundle exec rake assets:precompile
 
+RUN touch /tmp/libssl.conf
+ENV OPENSSL_CONF /tmp/libssl.conf
+
 CMD bundle exec puma -e development -p 80
