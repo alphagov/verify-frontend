@@ -31,17 +31,11 @@ and start your journey from the test-rp.
 
 ## Running the tests
 
-`./pre-commit.sh`
+`./pre-commit-local.sh` runs tests in a docker container which uses the specified `firefox-esr`
 
 This will [lint the application code](https://github.com/alphagov/govuk-lint) and run the tests.
 
 If you need to run the javascript-enabled tests that require a browser, you will need to have Chrome installed. The stable release of Chrome should work.
-
-To run the tests under Docker, use a command such as:
-
-```bash
-docker run verify-frontend /verify-frontend/pre-commit.sh
-```
 
 ## Editing .travis.yml
 
