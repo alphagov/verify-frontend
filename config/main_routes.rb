@@ -41,7 +41,6 @@ constraints IsLoa2 do
   get "prove_identity_ignore_hint", to: "prove_identity#ignore_hint", as: :prove_identity_ignore_hint
   get "start", to: "start#index", as: :start
   post "start", to: "start#request_post", as: :start
-  get "start_ignore_hint", to: "start#ignore_hint", as: :start_ignore_hint
   get "begin_registration", to: "start#register", as: :begin_registration
 
   # get "about", to: "about_loa2#index", as: :about
@@ -79,6 +78,7 @@ constraints IsLoa2 do
   get "confirmation_non_matching_journey", to: "confirmation_loa2#non_matching_journey", as: :confirmation_non_matching_journey
 end
 
+get "start_ignore_hint", to: "start#ignore_hint", as: :start_ignore_hint
 get "accessibility", to: "static#accessibility", as: :accessibility
 get "privacy_notice", to: "static#privacy_notice", as: :privacy_notice
 get "verify_services", to: "static#verify_services", as: :verify_services
