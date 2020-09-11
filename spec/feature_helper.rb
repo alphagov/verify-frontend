@@ -175,6 +175,18 @@ module FeatureHelper
     post "/test-initiate-journey", params: { journey_hint: journey_hint, journey_hint_rp: journey_hint_rp }
   end
 
+  def default_session_loa1
+    {
+      transaction_simple_id: "test-rp",
+      start_time: start_time_in_millis,
+      verify_session_id: default_session_id,
+      requested_loa: "LEVEL_1",
+      transaction_entity_id: "http://www.test-rp.gov.uk/SAML2/MD",
+      transaction_homepage: "http://www.test-rp.gov.uk/",
+      selected_answers: { device_type: { device_type_other: true } },
+    }
+  end
+
 private
 
   def default_session

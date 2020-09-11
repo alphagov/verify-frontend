@@ -83,4 +83,35 @@ RSpec.describe "when user submits start page form" do
     and_the_hints_are_not_set
     expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
   end
+
+  it "will return the user to the start when ignoring the hint at LOA2", js: true do
+    allow_any_instance_of(UserCookiesPartialController)
+    .to receive(:ab_test_with_alternative_name).and_return(nil)
+    stub_session_idp_authn_request(originating_ip, location, false)
+    set_journey_hint_cookie(idp_entity_id, "SUCCESS")
+    stub_api_idp_list_for_sign_in
+    stub_api_select_idp
+    visit "/start"
+    expect(page).to have_title t("hub.sign_in_hint.title")
+    expect(page).to have_content t("hub.sign_in_hint.heading")
+    visit "/start/ignore-hint"  # the "choose another way" button
+    expect(page).to have_title t("hub.start.title")
+    expect(page).to have_content t("hub.start.heading")
+  end
+
+  it "will return the user to the start when ignoring the hint at LOA1", js: true do
+    set_session_and_session_cookies!(session: default_session_loa1)
+    allow_any_instance_of(UserCookiesPartialController)
+    .to receive(:ab_test_with_alternative_name).and_return(nil)
+    stub_session_idp_authn_request(originating_ip, location, false)
+    set_journey_hint_cookie(idp_entity_id, "SUCCESS")
+    stub_api_idp_list_for_sign_in
+    stub_api_select_idp
+    visit "/start"
+    expect(page).to have_title t("hub.sign_in_hint.title")
+    expect(page).to have_content t("hub.sign_in_hint.heading")
+    visit "/start/ignore-hint"  # the "choose another way" button
+    expect(page).to have_title t("hub.start.title")
+    expect(page).to have_content t("hub.start.heading")
+  end
 end
