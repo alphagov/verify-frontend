@@ -120,6 +120,7 @@ cy:
       has_phone_can_app: A phone or tablet that can download an app
       has_credit_card: A credit or debit card
       has_nothing: None of the above
+      has_driving_license_and_credit_card: A full or provisional driving licence with your photo on it and a credit or debit card
       further_explanation:
         title: What GOV.UK Verify uses these for
         content_html: |
@@ -140,8 +141,8 @@ cy:
         no_selection: Select the items you have available right now
     select_documents_advice:
       advice_html:
-        heading: Based on your answers, you cannot use GOV.UK Verify
-        sub_heading: Make sure you selected all the things you have with you.
+        heading: You Need More Evidence to Verify Your Identity
+        sub_heading: 'To use GOV.UK Verify, you also need either:'
         no_evidence_intro_html: |
           <p class="govuk-body">To set up an identity account, you need to provide evidence for the companies to check.</p>
           <p class="govuk-body govuk-!-margin-bottom-0">You said you have none of these things with you right now:</p>
@@ -149,12 +150,12 @@ cy:
         unspecified: Things you do not have with you
       what_to_do_next:
         heading: What to do next
-        change_your_answers_link: change your answers
-        prove_your_identity_link: prove your identity another way
+        change_your_answers_link: go back and change your answers
+        prove_your_identity_link: Prove your identity another way
         content_html: |
-          <p class="govuk-body">If you have more of these things with you, %{change_your_answers_link}.</p>
-          <p class="govuk-body">If you have more of them but they’re somewhere else, come back when you have them with you.</p>
-          <p class="govuk-body">If you do not have any more of them, %{prove_your_identity_link}.</p>
+          <p class="govuk-body">If you have these things with you, %{change_your_answers_link}.</p>
+          <p class="govuk-body">If you have these things but they’re somewhere else, come back when you have them with you.</p>
+          <p class="govuk-body">%{prove_your_identity_link} if you do not have these things.</p>
     choose_a_certified_company:
       title: Pick a certified company
       heading: Pick a company to verify you
