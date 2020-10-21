@@ -4,7 +4,7 @@
 # TODO this should be enforced via technical measures (i.e. factoring out common code).
 FROM ruby:2.6.6
 
-RUN apt-get update && apt-get install -y firefox-esr nodejs
+RUN apt-get update && apt-get install -y firefox-esr nodejs git
 
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
@@ -23,5 +23,9 @@ RUN bundle exec rake assets:precompile
 
 RUN touch /tmp/libssl.conf
 ENV OPENSSL_CONF /tmp/libssl.conf
+
+# Get the current git head reference and set it as
+# release for Sentry
+RUN export RELEASE_VER=$(git rev-parse HEAD)
 
 CMD bundle exec puma -e development -p 80
