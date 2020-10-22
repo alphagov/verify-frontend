@@ -141,7 +141,7 @@ cy:
         no_selection: Select the items you have available right now
     select_documents_advice:
       advice_html:
-        heading: You Need More Evidence to Verify Your Identity
+        heading: You need more evidence to verify your identity
         sub_heading: 'To use GOV.UK Verify, you also need either:'
         no_evidence_intro_html: |
           <p class="govuk-body">To set up an identity account, you need to provide evidence for the companies to check.</p>
