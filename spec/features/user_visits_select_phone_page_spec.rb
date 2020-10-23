@@ -2,7 +2,7 @@ require "feature_helper"
 require "api_test_helper"
 require "uri"
 
-RSpec.describe "When the user visits the select phone page" do
+xdescribe "When the user visits the select phone page" do
   let(:selected_answers) {
     {
       documents: { passport: true, driving_licence: true },

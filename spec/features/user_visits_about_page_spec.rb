@@ -3,7 +3,7 @@ require "cookie_names"
 require "piwik_test_helper"
 require "api_test_helper"
 
-RSpec.describe "When the user visits the about page" do
+xdescribe "When the user visits the about page" do
   before(:each) do
     set_session_and_session_cookies!
     stub_api_idp_list_for_registration

@@ -3,7 +3,7 @@ require "controller_helper"
 require "api_test_helper"
 require "piwik_test_helper"
 
-describe ChooseACertifiedCompanyLoa2Controller do
+xdescribe ChooseACertifiedCompanyLoa2Controller do
   let(:stub_idp_loa1) {
     {
         "simpleId" => "stub-idp-loa1",

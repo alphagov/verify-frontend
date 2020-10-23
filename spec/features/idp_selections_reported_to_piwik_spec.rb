@@ -6,23 +6,21 @@ RSpec.describe "When the user selects an IDP" do
   let(:selected_answers) {
     {
       device_type: { device_type_other: true },
-      phone: { mobile_phone: true, smart_phone: true },
-      documents: { driving_licence: true, passport: true },
+      documents: { has_phone_can_app: true, has_valid_passport: true },
     }
   }
   let(:location) { "/test-idp-request-endpoint" }
   let(:idp_1_entity_id) { "http://idcorp.com" }
   let(:idp_2_entity_id) { "other-entity-id" }
+  let(:idp_3_entity_id) { "a-different-entity-id" }
   let(:idp_1_simple_id) { "stub-idp-one" }
   let(:idp_2_simple_id) { "stub-idp-two" }
   let(:given_a_session_with_selected_answers) {
-    page.set_rack_session(
-      selected_answers: selected_answers,
-    )
+    page.set_rack_session(selected_answers: selected_answers)
   }
 
   let(:idcorp_registration_piwik_request) {
-    stub_piwik_idp_registration("IDCorp", selected_answers: selected_answers, recommended: true, segments: %w(non-protected-segment-3))
+    stub_piwik_idp_registration("IDCorp", selected_answers: selected_answers, recommended: true, segments: %w(pp_app))
   }
 
   let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
@@ -35,6 +33,7 @@ RSpec.describe "When the user selects an IDP" do
     stub_session_idp_authn_request(originating_ip, location, false)
     stub_idp_select_request(idp_1_entity_id)
     stub_idp_select_request(idp_2_entity_id)
+    stub_idp_select_request(idp_3_entity_id)
     given_a_session_with_selected_answers
     allow_any_instance_of(UserCookiesPartialController)
       .to receive(:ab_test_with_alternative_name).and_return(nil)
@@ -45,38 +44,40 @@ RSpec.describe "When the user selects an IDP" do
 
     visit "/choose-a-certified-company"
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
-    click_button t("hub.redirect_to_idp_warning.continue_website", display_name: t("idps.stub-idp-one.name"))
+    click_button t("navigation.continue", display_name: t("navigation.continue"))
 
     expect(piwik_registration_virtual_page).to have_been_made.once
   end
 
+  # TODO: Can't get this test to pass - don't fully understand
   it "appends the IDP name on subsequent selections" do
     idcorp_piwik_request = stub_piwik_idp_registration(
       "IDCorp",
       selected_answers: selected_answers,
       recommended: true,
-      segments: %w(non-protected-segment-3),
+      segments: %w(pp_app),
     )
 
     idcorp_and_bobs_piwik_request = stub_piwik_idp_registration(
-      "Bob’s Identity Service",
+      "Carol’s Secure ID",
       selected_answers: selected_answers,
       recommended: false,
-      idp_list: "IDCorp,Bob’s Identity Service",
-      segments: %w(non-protected-segment-3),
+      idp_list: "IDCorp,Carol’s Secure ID",
+      segments: %w(pp_app),
     )
 
-    stub_idp_select_request("other-entity-id", instance_of(String))
+    stub_idp_select_request(idp_2_entity_id, instance_of(String))
     visit "/choose-a-certified-company"
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
-    click_button t("hub.redirect_to_idp_warning.continue_website", display_name: t("idps.stub-idp-one.name"))
+    click_button t("navigation.continue", display_name: t("idps.stub-idp-one.name"))
 
     expect(idcorp_piwik_request).to have_been_made.once
 
+    #stub_idp_select_request(idp_3_entity_id, instance_of(String))
     visit "/choose-a-certified-company"
     page.find_by_id("non-matching-idps-trigger").click
-    click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-two.name"))
-    click_button t("hub.redirect_to_idp_warning.continue_website", display_name: t("idps.stub-idp-two.name"))
+    click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-three.name"))
+    click_button t("navigation.continue", display_name: t("idps.stub-idp-three.name"))
     expect(idcorp_and_bobs_piwik_request).to have_been_made.once
   end
 
@@ -87,12 +88,12 @@ RSpec.describe "When the user selects an IDP" do
       recommended: true,
       selected_answers: selected_answers,
       idp_list: idps.join(","),
-      segments: %w(non-protected-segment-3),
+      segments: %w(pp_app),
     )
     page.set_rack_session(selected_idp_names: idps)
     visit "/choose-a-certified-company"
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
-    click_button t("hub.redirect_to_idp_warning.continue_website", display_name: t("idps.stub-idp-one.name"))
+    click_button t("navigation.continue", display_name: t("navigation.continue"))
 
     expect(idcorp_piwik_request).to have_been_made.once
   end

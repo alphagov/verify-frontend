@@ -2,7 +2,7 @@ require "feature_helper"
 require "api_test_helper"
 require "cookie_names"
 
-RSpec.describe "When the user visits the about certified companies page" do
+xdescribe "When the user visits the about certified companies page" do
   let(:simple_id) { "stub-idp-one" }
   let(:simple_id_loa1) { "stub-idp-loa1" }
   let(:idp_entity_id) { "http://idcorp.com" }
