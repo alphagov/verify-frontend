@@ -134,21 +134,20 @@ constraints short_hub_v3.use(alternative: "control_a") do
 end
 
 # HUB-595: implement appropriate variant C routes
-constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do
-  get "about", to: "about_loa2_variant_c#index", as: :about
-  get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
-  get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
-  post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
+# constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do; end
+get "about", to: "about_loa2_variant_c#index", as: :about
+get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
+get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
+post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
 
-  get "select_documents", to: "select_documents_variant_c#index", as: :select_documents
+get "select_documents", to: "select_documents_variant_c#index", as: :select_documents
 
-  get "select_documents_none", to: "select_documents_variant_c#no_documents", as: :select_documents_no_documents
-  post "select_documents", to: "select_documents_variant_c#select_documents", as: :select_documents_submit
-  get "select_documents_advice", to: "select_documents_variant_c#advice", as: :select_documents_advice
-  get "prove_your_identity_another_way", to: "select_documents_variant_c#prove_your_identity_another_way", as: :prove_your_identity_another_way
+get "select_documents_none", to: "select_documents_variant_c#no_documents", as: :select_documents_no_documents
+post "select_documents", to: "select_documents_variant_c#select_documents", as: :select_documents_submit
+get "select_documents_advice", to: "select_documents_variant_c#advice", as: :select_documents_advice
+get "prove_your_identity_another_way", to: "select_documents_variant_c#prove_your_identity_another_way", as: :prove_your_identity_another_way
 
-  get "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#index", as: :choose_a_certified_company
-  get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2_variant_c#about", as: :choose_a_certified_company_about
-  post "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#select_idp", as: :choose_a_certified_company_submit
-  get "failed_registration", to: "failed_registration_loa2_variant_c#index", as: :failed_registration
-end
+get "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#index", as: :choose_a_certified_company
+get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2_variant_c#about", as: :choose_a_certified_company_about
+post "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#select_idp", as: :choose_a_certified_company_submit
+get "failed_registration", to: "failed_registration_loa2_variant_c#index", as: :failed_registration
