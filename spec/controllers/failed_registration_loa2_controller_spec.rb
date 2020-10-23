@@ -3,7 +3,7 @@ require "controller_helper"
 require "spec_helper"
 require "api_test_helper"
 
-describe FailedRegistrationLoa2Controller do
+xdescribe FailedRegistrationLoa2Controller do
   WITH_CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp-with-continue-on-fail".freeze
   WITH_NON_CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp".freeze
 

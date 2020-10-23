@@ -1,7 +1,7 @@
 require "feature_helper"
 require "api_test_helper"
 
-describe "When the user visits the choose a certified company page" do
+xdescribe "When the user visits the choose a certified company page" do
   before(:each) do
     set_session_and_session_cookies!
     stub_api_idp_list_for_registration(default_idps)

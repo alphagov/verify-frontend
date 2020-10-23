@@ -1,7 +1,7 @@
 require "feature_helper"
 require "api_test_helper"
 
-RSpec.describe "When the user visits the failed registration page and" do
+xdescribe "When the user visits the failed registration page and" do
   CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp-with-continue-on-fail".freeze
   DONT_CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp".freeze
   CUSTOM_FAIL_PAGE_RP = "test-rp-no-demo".freeze

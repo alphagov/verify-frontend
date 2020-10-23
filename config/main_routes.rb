@@ -111,14 +111,13 @@ end
 
 # HUB-595: implement control A route
 constraints short_hub_v3.use(alternative: "control_a") do
-  get "about", to: "about_loa2#index", as: :about
   get "about_certified_companies", to: "about_loa2#certified_companies", as: :about_certified_companies
   get "about_identity_accounts", to: "about_loa2#identity_accounts", as: :about_identity_accounts
+  get "about", to: "about_loa2#index", as: :about
+=begin
   get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
-
   get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
   post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
-
   get "select_documents", to: "select_documents#index", as: :select_documents
   get "select_documents_none", to: "select_documents#no_documents", as: :select_documents_no_documents
   post "select_documents", to: "select_documents#select_documents", as: :select_documents_submit
@@ -126,11 +125,11 @@ constraints short_hub_v3.use(alternative: "control_a") do
   get "select_phone", to: "select_phone#index", as: :select_phone
   post "select_phone", to: "select_phone#select_phone", as: :select_phone_submit
   get "verify_will_not_work_for_you", to: "select_phone#verify_will_not_work_for_you", as: :verify_will_not_work_for_you
-
+  get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
+=end
   get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
   post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
-  get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
 end
 
 # HUB-595: implement appropriate variant C routes
@@ -139,14 +138,11 @@ get "about", to: "about_loa2_variant_c#index", as: :about
 get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
 get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
 post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
-
 get "select_documents", to: "select_documents_variant_c#index", as: :select_documents
-
 get "select_documents_none", to: "select_documents_variant_c#no_documents", as: :select_documents_no_documents
 post "select_documents", to: "select_documents_variant_c#select_documents", as: :select_documents_submit
 get "select_documents_advice", to: "select_documents_variant_c#advice", as: :select_documents_advice
 get "prove_your_identity_another_way", to: "select_documents_variant_c#prove_your_identity_another_way", as: :prove_your_identity_another_way
-
 get "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#index", as: :choose_a_certified_company
 get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2_variant_c#about", as: :choose_a_certified_company_about
 post "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#select_idp", as: :choose_a_certified_company_submit

@@ -1,7 +1,7 @@
 require "feature_helper"
 require "api_test_helper"
 
-RSpec.feature "When user visits document selection page" do
+xfeature "When user visits document selection page" do
   before(:each) do
     set_session_and_session_cookies!
     visit "/select-documents"

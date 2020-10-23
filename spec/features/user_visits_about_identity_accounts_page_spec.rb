@@ -2,7 +2,7 @@ require "feature_helper"
 require "api_test_helper"
 require "cookie_names"
 
-RSpec.describe "When the user visits the about identity accounts page" do
+xdescribe "When the user visits the about identity accounts page" do
   before(:each) do
     set_session_and_session_cookies!
     stub_transactions_list
