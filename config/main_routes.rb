@@ -7,8 +7,8 @@ post "sign_in", to: "sign_in#select_idp", as: :sign_in_submit
 get "begin_sign_in", to: "start#sign_in", as: :begin_sign_in
 
 # HUB-595 short hub 2019 q3 A/B test (short_hub_2019_q3)
-SHORT_HUB_2019_Q3 = "short_hub_2019_q3".freeze
-short_hub_v3 = AbTestConstraint.configure(ab_test_name: SHORT_HUB_2019_Q3, experiment_loa: "LEVEL_2")
+# SHORT_HUB_2019_Q3 = "short_hub_2019_q3".freeze
+# short_hub_v3 = AbTestConstraint.configure(ab_test_name: SHORT_HUB_2019_Q3, experiment_loa: "LEVEL_2")
 
 constraints IsLoa1 do
   get "prove_identity", to: "prove_identity#index", as: :prove_identity
@@ -110,11 +110,11 @@ if SINGLE_IDP_FEATURE
 end
 
 # HUB-595: implement control A route
-constraints short_hub_v3.use(alternative: "control_a") do
+# constraints short_hub_v3.use(alternative: "control_a") do; end
+=begin
   get "about_certified_companies", to: "about_loa2#certified_companies", as: :about_certified_companies
   get "about_identity_accounts", to: "about_loa2#identity_accounts", as: :about_identity_accounts
   get "about", to: "about_loa2#index", as: :about
-=begin
   get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
   get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
   post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
@@ -126,12 +126,10 @@ constraints short_hub_v3.use(alternative: "control_a") do
   post "select_phone", to: "select_phone#select_phone", as: :select_phone_submit
   get "verify_will_not_work_for_you", to: "select_phone#verify_will_not_work_for_you", as: :verify_will_not_work_for_you
   get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
-=end
   get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
   post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
-end
-
+=end
 # HUB-595: implement appropriate variant C routes
 # constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do; end
 get "about", to: "about_loa2_variant_c#index", as: :about

@@ -117,6 +117,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
     end
 
     it "will redirect the user to the about page of the registration journey and update the Piwik Custom Variables" do
+      stub_api_idp_list_for_registration
       given_api_requests_have_been_mocked!
       given_the_piwik_request_has_been_stubbed
       given_im_on_the_sign_in_page
