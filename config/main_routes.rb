@@ -144,4 +144,4 @@ get "prove_your_identity_another_way", to: "select_documents_variant_c#prove_you
 get "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#index", as: :choose_a_certified_company
 get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2_variant_c#about", as: :choose_a_certified_company_about
 post "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#select_idp", as: :choose_a_certified_company_submit
-get "failed_registration", to: "failed_registration_loa2_variant_c#index", as: :failed_registration
+get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
