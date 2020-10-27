@@ -132,7 +132,7 @@ end
 =end
 # HUB-595: implement appropriate variant C routes
 # constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do; end
-get "about", to: "about_loa2_variant_c#index", as: :about
+get "about", to: "about_loa2#index", as: :about
 get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
 get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
 post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
