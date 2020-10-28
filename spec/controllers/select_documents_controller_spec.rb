@@ -1,40 +1,50 @@
 require "rails_helper"
 require "controller_helper"
+require "feature_helper"
 require "spec_helper"
 require "api_test_helper"
 require "piwik_test_helper"
 require "models/display/viewable_identity_provider"
 
-xdescribe SelectDocumentsController do
+describe SelectDocumentsController do
   before(:each) do
-    set_session_and_cookies_with_loa("LEVEL_2")
+    experiment = "short_hub_2019_q3"
+    variant = "variant_c_2_idp_short_hub"
+    set_session_and_cookies_with_loa_and_variant("LEVEL_2", experiment, variant)
+    stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one",
+      "entityId" => "http://idcorp.com",
+      "levelsOfAssurance" => %w(LEVEL_2) }], "LEVEL_2")
+
+    session[:selected_answers] = {
+      "device_type" => { device_type_other: true },
+    }
   end
 
   context "when form is valid" do
-    it "redirects to other identity documents page when further documents are required" do
-      further_documents_evidence = { passport: "false", any_driving_licence: "false" }.freeze
-      post :select_documents, params: { locale: "en", select_documents_form: further_documents_evidence }
-
-      expect(subject).to redirect_to other_identity_documents_path
+    it "redirects to the advice page when less than three documents are selected" do
+      evidence = { has_valid_passport: "t", has_credit_card: "t", has_nothing: "t" }.freeze
+      expect_federation_reporter_to_receive_user_evidence_when_posted(evidence)
+      expect(subject).to redirect_to select_documents_advice_path
     end
 
-    it "redirects to select phone page when no further documents are required" do
-      no_further_documents_evidence = { passport: "true", any_driving_licence: "false" }.freeze
-      post :select_documents, params: { locale: "en", select_documents_form: no_further_documents_evidence }
-
-      expect(subject).to redirect_to select_phone_path
+    it "redirects to the advice page when None of the above is selected" do
+      evidence = { has_nothing: "t" }
+      expect_federation_reporter_to_receive_user_evidence_when_posted(evidence)
+      expect(subject).to redirect_to select_documents_advice_path
     end
 
-    it "captures form values in session cookie" do
-      documents_evidence = { passport: "true",
-                             any_driving_licence: "true",
-                             driving_licence: "great_britain" }.freeze
-      post :select_documents, params: { locale: "en", select_documents_form: documents_evidence }
+    it "redirects to the company picker when at least three documents are available" do
+      evidence = { has_driving_license: "t", has_credit_card: "t", has_phone_can_app: "t" }.freeze
+      post :select_documents, params: { locale: "en", select_documents_form: evidence }
 
-      subject
-      expect(session[:selected_answers]["documents"]).to eq(passport: true,
-                                                            driving_licence: true,
-                                                            ni_driving_licence: false)
+      expect(subject).to redirect_to choose_a_certified_company_path
+    end
+
+    it "redirects to the company picker when passport and phone are available" do
+      evidence = { has_valid_passport: "t", has_phone_can_app: "t" }.freeze
+      post :select_documents, params: { locale: "en", select_documents_form: evidence }
+
+      expect(subject).to redirect_to choose_a_certified_company_path
     end
   end
 
@@ -45,12 +55,19 @@ xdescribe SelectDocumentsController do
       expect(subject).to render_template(:index)
     end
 
-    it "does not capture form values in session cookie" do
-      expect(session[:selected_answers]).to eq(nil)
-    end
-
     it "does not report to Piwik" do
-      expect(ANALYTICS_REPORTER).not_to receive(:report_action)
+      expect(FEDERATION_REPORTER).not_to receive(:report_action)
     end
+  end
+
+  def expect_federation_reporter_to_receive_user_evidence_when_posted(evidence)
+    expect(FEDERATION_REPORTER).to receive(:report_user_evidence_attempt)
+    .with(
+      current_transaction: a_kind_of(Display::RpDisplayData),
+      request: a_kind_of(ActionDispatch::Request),
+      attempt_number: 1,
+      evidence_list: { device_type_other: true }.merge!(evidence).keys - %i(has_nothing),
+    )
+    post :select_documents, params: { locale: "en", select_documents_form: evidence }
   end
 end
