@@ -1,0 +1,23 @@
+<%= page_title 'hub.about.title' %>
+<% content_for :feedback_source, 'ABOUT_PAGE' %>
+
+<h1 class="govuk-heading-l"><%= t 'hub_variant_c.about_what_is_verify.heading' %></h1>
+<p><%= t 'hub_variant_c.about_what_is_verify.content' %></p>
+<%= raw @tailored_text %>
+
+<h2 class="govuk-heading-m"><%= t 'hub_variant_c.about_how_it_works.heading' %></h2>
+<p><%= t 'hub_variant_c.about_how_it_works.content' %></p>
+
+<ul class="list-companies">
+  <% @identity_providers.each do |idp| %>
+    <li>
+      <%= image_tag idp.white_logo_path, alt: t('common.logo', name: idp.display_name) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= raw t 'hub_variant_c.about_company.content_html' %>
+
+<div class="actions">
+  <%= button_link_to t("navigation.continue"), choose_a_certified_company_path, id: 'next-button', class: 'govuk-button' %>
+</div>

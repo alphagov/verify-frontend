@@ -1,9 +1,7 @@
 class FeedbackSourceMapper
   def initialize(product_page_url)
     @page_to_source_mappings = {
-      "ABOUT_CERTIFIED_COMPANIES_PAGE" => "about_certified_companies",
       "ABOUT_CHOOSING_A_COMPANY_PAGE" => "about_choosing_a_company",
-      "ABOUT_IDENTITY_ACCOUNTS_PAGE" => "about_identity_accounts",
       "ABOUT_PAGE" => "about",
       "CHOOSE_A_CERTIFIED_COMPANY_PAGE" => "choose_a_certified_company",
       "CHOOSE_A_COUNTRY_PAGE" => "choose_a_country",
