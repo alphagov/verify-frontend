@@ -139,7 +139,7 @@ get "select_documents", to: "select_documents#index", as: :select_documents
 post "select_documents", to: "select_documents#select_documents", as: :select_documents_submit
 get "select_documents_advice", to: "select_documents#advice", as: :select_documents_advice
 get "prove_your_identity_another_way", to: "select_documents#prove_your_identity_another_way", as: :prove_your_identity_another_way
-get "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#index", as: :choose_a_certified_company
-get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2_variant_c#about", as: :choose_a_certified_company_about
-post "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#select_idp", as: :choose_a_certified_company_submit
+get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
+get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
+post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
 get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration

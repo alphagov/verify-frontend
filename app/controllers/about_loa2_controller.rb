@@ -9,8 +9,7 @@ class AboutLoa2Controller < ApplicationController
 
   def index
     @tailored_text = current_transaction.tailored_text
-    variant_c_idps = current_identity_providers_for_loa_by_variant("c")
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(variant_c_idps)
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_sign_in)
     render "about/about_combined_LOA2"
   end
 

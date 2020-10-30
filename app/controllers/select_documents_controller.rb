@@ -14,7 +14,7 @@ class SelectDocumentsController < ApplicationController
     @form = SelectDocumentsForm.from_post(params["select_documents_form"] || {})
     if @form.valid?
       selected_answer_store.store_selected_answers("documents", @form.to_session_storage)
-      idps_available = IDP_RECOMMENDATION_ENGINE_variant_c.any?(current_identity_providers_for_loa_by_variant("c"), selected_evidence, current_transaction_simple_id)
+      idps_available = IDP_RECOMMENDATION_ENGINE.any?(current_available_identity_providers_for_signin, selected_evidence, current_transaction_simple_id)
       report_user_evidence_to_piwik(selected_evidence)
       redirect_to idps_available ? choose_a_certified_company_path : select_documents_advice_path
     else
