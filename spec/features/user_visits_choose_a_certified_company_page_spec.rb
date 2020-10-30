@@ -1,22 +1,48 @@
 require "feature_helper"
 require "api_test_helper"
 
-xdescribe "When the user visits the choose a certified company page" do
+describe "When the user visits the choose a certified company variant page" do
+  let(:stub_idp_one) {
+    {
+        "simpleId" => "stub-idp-one",
+        "entityId" => "http://idcorp-one.com",
+        "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2),
+    }.freeze
+  }
+
+  let(:stub_idp_two) {
+    {
+        "simpleId" => "stub-idp-two",
+        "entityId" => "http://idcorp-two.com",
+        "levelsOfAssurance" => %w(LEVEL_2),
+    }.freeze
+  }
+
+  let(:stub_idp_three) {
+    {
+        "simpleId" => "stub-idp-three",
+        "entityId" => "http://idcorp-three.com",
+        "levelsOfAssurance" => %w(LEVEL_2),
+    }.freeze
+  }
+
   before(:each) do
-    set_session_and_session_cookies!
-    stub_api_idp_list_for_registration(default_idps)
+    experiment = { "short_hub_2019_q3" => "short_hub_2019_q3_variant_c_2_idp_short_hub" }
+    set_session_and_ab_session_cookies!(experiment)
+    stub_api_idp_list_for_registration([stub_idp_one, stub_idp_three])
   end
 
   context "user has two docs and a mobile" do
     selected_answers = {
         device_type: { device_type_other: true },
-        documents: { passport: true, driving_licence: true },
-        phone: { mobile_phone: true },
+        documents: { has_valid_passport: true, has_driving_license: true, has_phone_can_app: true },
     }
     before :each do
       page.set_rack_session(
-        transaction_simple_id: "test-rp",
-        selected_answers: selected_answers,
+        page.get_rack_session.merge(
+          transaction_simple_id: "test-rp",
+          selected_answers: selected_answers,
+        ),
       )
     end
 
@@ -31,7 +57,6 @@ xdescribe "When the user visits the choose a certified company page" do
 
     it "includes the appropriate feedback source" do
       visit "/choose-a-certified-company"
-
       expect_feedback_source_to_be(page, "CHOOSE_A_CERTIFIED_COMPANY_PAGE", "/choose-a-certified-company")
     end
 
@@ -39,82 +64,11 @@ xdescribe "When the user visits the choose a certified company page" do
       visit "/choose-a-certified-company"
 
       expect(page).to have_current_path(choose_a_certified_company_path)
-      expect(page).to have_content t("hub.choose_a_certified_company.idp_count_html", company_count: "3 companies")
+      expect(page).to have_content t("hub_variant_c.choose_a_certified_company.idp_count")
       within("#matching-idps") do
         expect(page).to have_button("Choose IDCorp")
-      end
-    end
-
-    it "displays only one IDP and saves it in the cookie" do
-      stub_const("THROTTLING_ENABLED", true)
-      expect(cookie_value(CookieNames::THROTTLING)).to be_nil
-      visit "/choose-a-certified-company"
-
-      expect(page).to have_current_path(choose_a_certified_company_path)
-      expect(page).to have_content t("hub.choose_a_certified_company.idp_count_html", company_count: "1 company")
-      expect(cookie_value(CookieNames::THROTTLING)).not_to be_nil
-    end
-
-    it "displays only one IDP if the throttling cookie is corrupted" do
-      idp_in_cookie = "non-existing-idp"
-      visit "/test-throttling-cookie/#{idp_in_cookie}"
-      stub_const("THROTTLING_ENABLED", true)
-
-      visit "/choose-a-certified-company"
-
-      expect(page).to have_current_path(choose_a_certified_company_path)
-      expect(page).to have_content t("hub.choose_a_certified_company.idp_count_html", company_count: "1 company")
-      expect(cookie_value(CookieNames::THROTTLING)).not_to eq(idp_in_cookie)
-    end
-
-    it "displays only one IDP from the throttling cookie" do
-      idp_in_cookie = "idps_stub-idp-two"
-      visit "/test-throttling-cookie/#{idp_in_cookie}"
-      stub_const("THROTTLING_ENABLED", true)
-
-      visit "/choose-a-certified-company"
-
-      expect(page).to have_current_path(choose_a_certified_company_path)
-      expect(page).to have_content t("hub.choose_a_certified_company.idp_count_html", company_count: "1 company")
-      within("#matching-idps") do
-        expect(page).to have_button("Choose Bob’s Identity Service")
-      end
-    end
-
-    it "displays all IDPs if last status is FAILED" do
-      idp_in_cookie = "idps_stub-idp-two"
-      visit "/test-throttling-cookie/#{idp_in_cookie}"
-      stub_const("THROTTLING_ENABLED", true)
-      set_journey_hint_cookie(nil, "FAILED")
-
-      visit "/choose-a-certified-company"
-
-      expect(page).to have_current_path(choose_a_certified_company_path)
-      expect(page).to have_content t("hub.choose_a_certified_company.idp_count_html", company_count: "3 companies")
-
-      within("#matching-idps") do
-        expect(page).to have_button("Choose Bob’s Identity Service")
         expect(page).to have_button("Choose Carol’s Secure ID")
-        expect(page).to have_button("Choose IDCorp")
-      end
-    end
-
-    it "does not show an IDP if the IDP profile has a subset of the user evidence, but not an exact match" do
-      additional_documents = selected_answers[:documents].clone
-      additional_documents[:driving_licence] = false
-      page.set_rack_session(
-        transaction_simple_id: "test-rp",
-        selected_answers: {
-          selected_answers: additional_documents,
-          phone: selected_answers[:phone],
-          device_type: { device_type_other: true },
-        },
-      )
-
-      visit "/choose-a-certified-company"
-
-      within("#matching-idps") do
-        expect(page).to_not have_button("Choose IDCorp")
+        expect(page).not_to have_button("Bob’s Identity Service")
       end
     end
 
@@ -126,10 +80,10 @@ xdescribe "When the user visits the choose a certified company page" do
       expect(page).to have_current_path(choose_a_certified_company_about_path("stub-idp-one"))
     end
 
-    it "displays the page in Welsh" do
+    it "displays the page in Welsh but actually the text is still English" do
       visit "/dewis-cwmni-ardystiedig"
 
-      expect(page).to have_title t("hub.choose_a_certified_company.title", locale: :cy)
+      expect(page).to have_title t("hub_variant_c.choose_a_certified_company.title", locale: :cy)
       expect(page).to have_css "html[lang=cy]"
     end
   end
@@ -160,94 +114,43 @@ xdescribe "When the user visits the choose a certified company page" do
 
     it "unavailable LEVEL_1 recommended IDPs are marked as unavailable" do
       stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one",
-                                           "entityId" => "http://idcorp.com",
-                                           "levelsOfAssurance" => %w(LEVEL_1),
-                                           "temporarilyUnavailable" => true }], "LEVEL_1")
+                                            "entityId" => "http://idcorp.com",
+                                            "levelsOfAssurance" => %w(LEVEL_1),
+                                            "temporarilyUnavailable" => true }], "LEVEL_1")
       visit "/choose-a-certified-company"
       expect(page).to have_content t("hub.certified_companies_unavailable.title", count: 1, company: "IDCorp")
     end
   end
 
-  it "displays no IDPs if no recommendations" do
+  it "redirects away if no IDP recommendations" do
     page.set_rack_session(
       transaction_simple_id: "test-rp",
       selected_answers: {
         device_type: { device_type_other: true },
-        documents: { passport: false },
       },
     )
 
     visit "/choose-a-certified-company"
 
-    expect(page).to have_current_path(choose_a_certified_company_path)
-    expect(page).to_not have_css("#non-matching-idps")
-    expect(page).to have_content t("hub.choose_a_certified_company.idp_count_html", company_count: "no companies")
+    expect(page).to have_current_path(select_documents_advice_path)
   end
 
   it "recommends some IDPs with a recommended profile, hides non-recommended profiles, and omits non-matching profiles" do
-    stub_api_no_docs_idps
     page.set_rack_session(
       transaction_simple_id: "test-rp",
       selected_answers: {
-        device_type: { device_type_other: true },
-        documents: { driving_licence: true },
-        phone: { mobile_phone: true },
+        "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => true },
+        "device_type" => { "device_type_other" => true },
       },
     )
 
     visit "/choose-a-certified-company"
-    page.find_by_id("non-matching-idps-trigger").click
 
-    expect(page).to have_content t("hub.choose_a_certified_company.idp_count_html", company_count: "2 companies")
+    expect(page).to have_content t("hub_variant_c.choose_a_certified_company.idp_count")
     within("#matching-idps") do
-      expect(page).to have_button("Choose No Docs IDP")
       expect(page).to have_button("Choose IDCorp")
-      expect(page).to_not have_button("Bob’s Identity Service")
-    end
-
-    within("#non-matching-idps") do
-      expect(page).to have_button("Bob’s Identity Service")
-    end
-
-    expect(page).to_not have_button("Choose Carol’s Secure ID")
-  end
-
-  context "IDP profile is in a demo period" do
-    selected_answers = {
-      device_type: { device_type_other: true },
-      documents: { passport: true, driving_licence: true },
-      phone: { mobile_phone: true },
-    }
-
-    it "shows the IDP if the RP is not protected" do
-      page.set_rack_session(
-        transaction_simple_id: "test-rp",
-        selected_answers: selected_answers,
-      )
-
-      visit "/choose-a-certified-company"
-
-      within("#matching-idps") do
-        expect(page).to have_button("Choose Bob’s Identity Service")
-      end
-    end
-
-    it "shows the IDP as unlikely if the RP is protected" do
-      page.set_rack_session(
-        transaction_simple_id: "test-rp-no-demo",
-        selected_answers: selected_answers,
-      )
-
-      visit "/choose-a-certified-company"
-      page.find_by_id("non-matching-idps-trigger").click
-
-      within("#matching-idps") do
-        expect(page).to_not have_button("Choose Bob’s Identity Service")
-      end
-
-      within("#non-matching-idps") do
-        expect(page).to have_button("Choose Bob’s Identity Service")
-      end
+      expect(page).to have_button("Choose Carol’s Secure ID")
+      expect(page).not_to have_button("Bob’s Identity Service")
     end
   end
 
@@ -260,8 +163,7 @@ xdescribe "When the user visits the choose a certified company page" do
           requested_loa: "LEVEL_2",
           selected_answers: {
             device_type: { device_type_other: true },
-            documents: { passport: true, driving_licence: true },
-            phone: { mobile_phone: true },
+            documents: { has_valid_passport: true, has_driving_license: true, has_phone_can_app: true },
           },
           )
       end
