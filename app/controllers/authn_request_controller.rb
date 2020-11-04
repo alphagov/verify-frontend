@@ -32,6 +32,7 @@ private
     set_session_id(session_id)
     sign_in_process_details = POLICY_PROXY.get_sign_in_process_details(session_id)
     set_transaction_supports_eidas(sign_in_process_details.transaction_supports_eidas)
+    set_before_eu_exit(sign_in_process_details.before_eu_exit)
     set_transaction_entity_id(sign_in_process_details.transaction_entity_id)
     transaction_data = CONFIG_PROXY.get_transaction_details(sign_in_process_details.transaction_entity_id)
     set_transaction_simple_id(transaction_data.simple_id)
@@ -47,6 +48,10 @@ private
 
   def set_session_id(session_id)
     session[:verify_session_id] = session_id
+  end
+
+  def set_before_eu_exit(before_eu_exit)
+    session[:before_eu_exit] = before_eu_exit
   end
 
   def set_transaction_supports_eidas(transaction_supports_eidas)
@@ -111,14 +116,21 @@ private
   end
 
   def do_eidas_sign_in_redirect(redirect_params = {})
+    logger.info("phil1 do_eidas_sign_in_redirect before eu exit? " + session[:before_eu_exit].to_s)
     return redirect_to start_path(redirect_params) unless session[:transaction_supports_eidas]
+    return redirect_to eu_exit_path(redirect_params) unless session[:before_eu_exit]
 
     redirect_to choose_a_country_path(redirect_params)
   end
 
   def do_default_redirect(redirect_params = {})
-    return redirect_to start_path(redirect_params) unless session[:transaction_supports_eidas]
+    logger.info("phil tx supports eidas? " + session[:transaction_supports_eidas].to_s)
+    logger.info("phil before eu exit? " + session[:before_eu_exit].to_s)
 
+    # send to the blue sign-in page if tx config does not support eidas
+    return redirect_to start_path(redirect_params) unless (session[:transaction_supports_eidas] && session[:before_eu_exit])
+
+    # send to hub or eidas choice page
     redirect_to prove_identity_path(redirect_params)
   end
 
