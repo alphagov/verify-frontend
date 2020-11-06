@@ -15,7 +15,8 @@ class RedirectToIdpWarningController < ApplicationController
     if !idp_is_providing_registrations?(@idp)
       something_went_wrong("IDP with entity id: #{@idp.entity_id} is not providing registrations", :bad_request)
     elsif @idp.viewable?
-      render "redirect_to_idp_warning"
+      select_registration(@idp)
+      redirect_to redirect_to_idp_register_path
     else
       something_went_wrong("Couldn't display IDP with entity id: #{@idp.entity_id}")
     end
