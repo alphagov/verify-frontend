@@ -222,3 +222,7 @@ end
 RSpec.configure do |c|
   c.include FeatureHelper
 end
+
+RSpec::Matchers.define :a_list_of_size do |x|
+  match { |actual| actual.length == x }
+end

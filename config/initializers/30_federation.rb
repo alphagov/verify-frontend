@@ -55,10 +55,6 @@ Rails.application.config.after_initialize do
   transaction_grouper = TransactionGroups::TransactionGrouper.new(RP_CONFIG)
   IDP_RECOMMENDATION_ENGINE = RecommendationsEngine.new(idp_rules, segment_matcher, transaction_grouper, CONFIG.hide_idps_disconnecting_for_registration_minutes_before)
 
-  # ABC testing variation config
-  # HUH-234 variant c
-  ABC_VARIANTS_CONFIG = YAML.load_file(CONFIG.abc_variants_config)
-
   FEEDBACK_DISABLED = CONFIG.feedback_disabled
   THROTTLING_ENABLED = CONFIG.throttling_enabled
 

@@ -1,7 +1,7 @@
 require "rails_helper"
 require "controller_helper"
 require "api_test_helper"
-require "variant_test_helper"
+require "support/list_size_matcher"
 
 describe AboutLoa2Controller do
   let(:identity_provider_display_decorator) { double(:IdentityProviderDisplayDecorator) }
