@@ -153,7 +153,7 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
     it "will preserve the language from redirect-to-idp-warning" do
       page.set_rack_session(
         selected_idp_was_recommended: true,
-        selected_answers: { phone: { mobile_phone: true, smart_phone: true }, documents: { passport: true } },
+        selected_answers: { documents: { has_phone_can_app: true, has_valid_passport: true } },
       )
       set_up_session("stub-idp-one")
       set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")

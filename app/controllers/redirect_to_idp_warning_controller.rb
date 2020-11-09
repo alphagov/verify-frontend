@@ -50,8 +50,7 @@ private
                             session[:requested_loa],
                             true,
                             persistent_session_id,
-                            session[:journey_type],
-                            ab_test_with_alternative_name)
+                            session[:journey_type])
     set_journey_hint_followed(idp.entity_id)
     set_attempt_journey_hint(idp.entity_id)
     register_idp_selections(idp.display_name)
