@@ -208,6 +208,7 @@ en:
       title: Choose a country
       heading: Use a digital identity from another European country
       description: You can use a digital identity from another European country to access services on GOV.UK.
+      eu_exit_warn: You will not be able to use your European digital identity to access services on GOV.UK after the UK leaves the EU on 1 January 2021.
       country_not_listed_heading: My country isn't listed
       country_not_listed_description: "If your country's digital identity scheme isn't available yet, see how else you can "
       country_not_listed_link: "%{other_ways_description}."

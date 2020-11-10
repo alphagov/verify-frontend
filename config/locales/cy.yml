@@ -207,6 +207,7 @@ cy:
       title: Dewiswch wlad
       heading: Defnyddio hunaniaeth digidol o wlad Ewropeaidd arall
       description: Gallwch ddefnyddio hunaniaeth digidol o wlad Ewropeaidd arall i gael mynediad i wasanaethau ar GOV.UK.
+      eu_exit_warn: You will not be able to use your European digital identity to access services on GOV.UK after the UK leaves the EU on 1 January 2021.
       country_not_listed_heading: Nid yw fy ngwlad wedi'i restru
       country_not_listed_description: "Os nad yw cynllun hunaniaeth ddigidol eich gwlad ar gael eto, gwelwch sut arall y gallwch "
       country_not_listed_link: "%{other_ways_description}."
