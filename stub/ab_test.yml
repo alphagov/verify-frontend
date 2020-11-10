@@ -9,27 +9,11 @@
 #         - name: 'no_logo'
 #           percent: 25
 #         - name: 'no_logo_privacy'
-#           percent: 0
-#   - idp_ordering:
-#       alternatives:
-#         - name: 'alphabetical'
-#           percent: 75
-#         - name: 'popularity'
-#           percent: 25
 #
-# Experiments should follow the above structure.
-# While a test is running, only the percentages should change. Only use whole numbers.
-# To make all users see the winning alternative, all the other alternatives should be removed, e.g.
-#
-#  experiments:
-#   - about_companies:
-#       alternatives:
-#         - name: 'no_logo'
-#           percent: 100
-#
+# Only the percentages should be changed, and they must be whole numbers, no decimals.
 # The value reported to Piwik will be the experiment name followed by the alternative name, e.g. "about_companies_with_logo"
-# Only the current experiment should have multiple alternatives so that Piwik reports just that experiment.
 # The first alternative will be used as the default for any issues.
+#
 # This file must exist and must contain at least:
 # experiments:
 #
@@ -47,7 +31,3 @@ experiments:
           percent: 0
         - name: 'variant_c_2_idp_short_hub'
           percent: 100
-
-# Note that the 'preview' short_hub_2019_q3 experiment will need to appear simultaneously
-# with the 'real' experiment', until a verify-frontend that does not depend upon the existence
-# of the 'preview' has been deployed.
