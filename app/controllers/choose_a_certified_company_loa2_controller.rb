@@ -1,9 +1,7 @@
 require "partials/viewable_idp_partial_controller"
-require "partials/variant_partial_controller"
 class ChooseACertifiedCompanyLoa2Controller < ChooseACertifiedCompanyRedirectController
   include ChooseACertifiedCompanyAbout
   include ViewableIdpPartialController
-  include VariantPartialController
 
   skip_before_action :render_cross_gov_ga, only: %i{about}
 

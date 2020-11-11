@@ -1,9 +1,7 @@
 require "partials/viewable_idp_partial_controller"
-require "partials/variant_partial_controller"
 
 class SelectDocumentsController < ApplicationController
   include ViewableIdpPartialController
-  include VariantPartialController
 
   def index
     @form = SelectDocumentsForm.from_session_storage(selected_answer_store.selected_answers.fetch("documents", {}))

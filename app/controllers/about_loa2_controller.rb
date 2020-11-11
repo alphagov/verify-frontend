@@ -3,7 +3,6 @@ require "partials/variant_partial_controller"
 
 class AboutLoa2Controller < ApplicationController
   include ViewableIdpPartialController
-  include VariantPartialController
 
   layout "slides", except: [:choosing_a_company]
 
