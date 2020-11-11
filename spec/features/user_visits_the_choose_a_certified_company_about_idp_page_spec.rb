@@ -28,6 +28,7 @@ RSpec.feature "user visits the choose a certified company about idp page", type:
     entity_id = "my-entity-id"
     stub_session_idp_authn_request(originating_ip, idp_location, false)
     select_idp_stub_request(entity_id)
+    stub_api_idp_list_for_sign_in [{ "simpleId" => "stub-idp-one", "entityId" => entity_id, "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2) }]
     stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one", "entityId" => entity_id, "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2) }])
 
     given_a_session_with_selected_answers

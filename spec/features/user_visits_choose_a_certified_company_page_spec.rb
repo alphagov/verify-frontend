@@ -29,7 +29,7 @@ describe "When the user visits the choose a certified company variant page" do
   before(:each) do
     experiment = { "short_hub_2019_q3" => "short_hub_2019_q3_variant_c_2_idp_short_hub" }
     set_session_and_ab_session_cookies!(experiment)
-    stub_api_idp_list_for_registration([stub_idp_one, stub_idp_three])
+    stub_api_idp_list_for_registration([stub_idp_one, stub_idp_two])
   end
 
   context "user has two docs and a mobile" do
@@ -65,10 +65,11 @@ describe "When the user visits the choose a certified company variant page" do
 
       expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page).to have_content t("hub_variant_c.choose_a_certified_company.idp_count")
+
       within("#matching-idps") do
         expect(page).to have_button("Choose IDCorp")
-        expect(page).to have_button("Choose Carol’s Secure ID")
-        expect(page).not_to have_button("Bob’s Identity Service")
+        expect(page).to have_button("Choose Bob’s Identity Service")
+        expect(page).not_to have_button("Carol’s Secure ID")
       end
     end
 
@@ -149,8 +150,8 @@ describe "When the user visits the choose a certified company variant page" do
     expect(page).to have_content t("hub_variant_c.choose_a_certified_company.idp_count")
     within("#matching-idps") do
       expect(page).to have_button("Choose IDCorp")
-      expect(page).to have_button("Choose Carol’s Secure ID")
-      expect(page).not_to have_button("Bob’s Identity Service")
+      expect(page).to have_button("Choose Bob’s Identity Service")
+      expect(page).not_to have_button("Carol’s Secure ID")
     end
   end
 

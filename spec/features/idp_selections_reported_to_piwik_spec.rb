@@ -28,12 +28,11 @@ RSpec.describe "When the user selects an IDP" do
 
   before(:each) do
     set_session_and_session_cookies!
+    stub_api_select_idp
+    stub_api_idp_list_for_sign_in
     stub_api_idp_list_for_registration
     stub_transactions_list
     stub_session_idp_authn_request(originating_ip, location, false)
-    stub_idp_select_request(idp_1_entity_id)
-    stub_idp_select_request(idp_2_entity_id)
-    stub_idp_select_request(idp_3_entity_id)
     given_a_session_with_selected_answers
     allow_any_instance_of(UserCookiesPartialController)
       .to receive(:ab_test_with_alternative_name).and_return(nil)
@@ -73,7 +72,6 @@ RSpec.describe "When the user selects an IDP" do
 
     expect(idcorp_piwik_request).to have_been_made.once
 
-    #stub_idp_select_request(idp_3_entity_id, instance_of(String))
     visit "/choose-a-certified-company"
     page.find_by_id("non-matching-idps-trigger").click
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-three.name"))

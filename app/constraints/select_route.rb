@@ -19,8 +19,6 @@ class SelectRoute
     end
   end
 
-private
-
   def cookie_matches_experiment?(request)
     request_experiment_route = extract_experiment_route_from_cookie(request.cookies[CookieNames::AB_TEST])
     if @trial_enabled && request.cookies[CookieNames::AB_TEST_TRIAL] == @experiment_name
@@ -29,6 +27,8 @@ private
       @experiment_route == request_experiment_route
     end
   end
+
+private
 
   def loa_matches_experiment?(request)
     @experiment_loa.nil? || request.session[:requested_loa] == @experiment_loa

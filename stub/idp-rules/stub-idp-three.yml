@@ -2,11 +2,11 @@ simpleIds: [ "stub-idp-three" ]
 
 segments:
   protected:
-    recommended: ["dl_app_cc", "pp_app_cc", "pp_dl_cc", "pp_dl_app", "pp_dl_app_cc"]
-    unlikely:    ["pp_app"]
+    recommended: []
+    unlikely:    ["pp_app", "dl_app_cc", "pp_app_cc", "pp_dl_cc", "pp_dl_app", "pp_dl_app_cc"]
   non_protected:
-    recommended: ["dl_app_cc", "pp_app_cc", "pp_dl_cc", "pp_dl_app", "pp_dl_app_cc"]
-    unlikely:    ["pp_app"]
+    recommended: []
+    unlikely:    ["pp_app", "dl_app_cc", "pp_app_cc", "pp_dl_cc", "pp_dl_app", "pp_dl_app_cc"]
 
 capabilities:
   - []
