@@ -22,11 +22,6 @@ constraints IsLoa1 do
   get "why_companies", to: "why_companies_loa1#index", as: :why_companies
   get "failed_registration", to: "failed_registration_loa1#index", as: :failed_registration
   get "cancelled_registration", to: "cancelled_registration_loa1#index", as: :cancelled_registration
-  get "redirect_to_idp_question", to: "redirect_to_idp_question_loa1#index", as: :redirect_to_idp_question
-  post "redirect_to_idp_question", to: "redirect_to_idp_question_loa1#continue", as: :redirect_to_idp_question_submit
-  post "redirect_to_idp_warning", to: "redirect_to_idp_warning#continue", as: :redirect_to_idp_warning_submit
-  get "redirect_to_idp_warning", to: "redirect_to_idp_warning#index", as: :redirect_to_idp_warning
-  get "idp_wont_work_for_you_one_doc", to: "redirect_to_idp_question_loa1#idp_wont_work_for_you", as: :idp_wont_work_for_you_one_doc
   get "confirmation", to: "confirmation_loa1#matching_journey", as: :confirmation
   get "about", to: "about_loa1#index", as: :about
   get "about_choosing_a_company", to: "about_loa1#choosing_a_company", as: :about_choosing_a_company
@@ -50,11 +45,6 @@ constraints IsLoa2 do
   get "verify_will_not_work_for_you", to: "select_phone#verify_will_not_work_for_you", as: :verify_will_not_work_for_you
   get "why_companies", to: "why_companies_loa2#index", as: :why_companies
   get "cancelled_registration", to: "cancelled_registration_loa2#index", as: :cancelled_registration
-  post "redirect_to_idp_warning", to: "redirect_to_idp_warning#continue", as: :redirect_to_idp_warning_submit
-  get "redirect_to_idp_warning", to: "redirect_to_idp_warning#index", as: :redirect_to_idp_warning
-  get "redirect_to_idp_question", to: "redirect_to_idp_question_loa2#index", as: :redirect_to_idp_question
-  post "redirect_to_idp_question", to: "redirect_to_idp_question_loa2#continue", as: :redirect_to_idp_question_submit
-  get "idp_wont_work_for_you_one_doc", to: "redirect_to_idp_question_loa2#idp_wont_work_for_you", as: :idp_wont_work_for_you_one_doc
   get "confirmation", to: "confirmation_loa2#matching_journey", as: :confirmation
   get "confirmation_non_matching_journey", to: "confirmation_loa2#non_matching_journey", as: :confirmation_non_matching_journey
 end
@@ -135,7 +125,6 @@ get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_
 get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
 post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
 get "select_documents", to: "select_documents#index", as: :select_documents
-#get "select_documents_none", to: "select_documents#no_documents", as: :select_documents_no_documents
 post "select_documents", to: "select_documents#select_documents", as: :select_documents_submit
 get "select_documents_advice", to: "select_documents#advice", as: :select_documents_advice
 get "prove_your_identity_another_way", to: "select_documents#prove_your_identity_another_way", as: :prove_your_identity_another_way

@@ -29,11 +29,12 @@ describe ChooseACertifiedCompanyLoa2Controller do
   }
 
   before(:each) do
-    stub_request(:get, CONFIG.config_api_host + "/config/transactions/enabled")
     stub_api_select_idp
     set_session_and_cookies_with_loa("LEVEL_2")
-    stub_api_idp_list_for_sign_in(default_idps)
-    stub_api_idp_list_for_registration([stub_idp_one, stub_idp_three])
+    stub_api_idp_list_for_sign_in [stub_idp_one, stub_idp_two, stub_idp_three]
+    stub_api_idp_list_for_registration [stub_idp_one, stub_idp_three]
+    allow_any_instance_of(UserCookiesPartialController)
+        .to receive(:ab_test_with_alternative_name).and_return(nil)
   end
 
   context "#index" do
