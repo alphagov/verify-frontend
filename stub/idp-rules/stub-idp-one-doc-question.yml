@@ -5,10 +5,10 @@ show_interstitial_question: true
 
 segments:
   protected:
-    recommended: ["other"]
+    recommended: []
     unlikely: []
   non_protected:
-    recommended: ["other", "non-protected-segment-3"]
+    recommended: []
     unlikely: []
 
 capabilities:

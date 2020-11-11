@@ -149,28 +149,5 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
       expect(page).to have_current_path("/cadarnhau-eich-hunaniaeth")
       expect(page).to have_css "html[lang=cy]"
     end
-
-    it "will preserve the language from redirect-to-idp-warning" do
-      page.set_rack_session(
-        selected_idp_was_recommended: true,
-        selected_answers: { documents: { has_phone_can_app: true, has_valid_passport: true } },
-      )
-      set_up_session("stub-idp-one")
-      set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
-
-      visit "/redirect-to-idp-warning"
-
-      first(".available-languages").click_link("Cymraeg")
-      expect(page).to have_current_path("/ailgyfeirio-i-rybudd-idp")
-      click_button "IDCorp"
-
-      stub_session_creation
-      visit "/test-saml"
-      click_button "saml-post-journey-hint-non-repudiation"
-
-      expect(page).to have_title t("hub.confirm_your_identity.title", locale: :cy)
-      expect(page).to have_current_path("/cadarnhau-eich-hunaniaeth")
-      expect(page).to have_css "html[lang=cy]"
-    end
   end
 end
