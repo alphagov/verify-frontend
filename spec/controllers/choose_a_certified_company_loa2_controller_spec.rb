@@ -33,8 +33,6 @@ describe ChooseACertifiedCompanyLoa2Controller do
     set_session_and_cookies_with_loa("LEVEL_2")
     stub_api_idp_list_for_sign_in [stub_idp_one, stub_idp_two, stub_idp_three]
     stub_api_idp_list_for_registration [stub_idp_one, stub_idp_two]
-    allow_any_instance_of(UserCookiesPartialController)
-        .to receive(:ab_test_with_alternative_name).and_return(nil)
   end
 
   context "#index" do

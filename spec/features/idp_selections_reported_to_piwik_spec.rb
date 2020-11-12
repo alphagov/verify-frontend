@@ -34,8 +34,6 @@ RSpec.describe "When the user selects an IDP" do
     stub_transactions_list
     stub_session_idp_authn_request(originating_ip, location, false)
     given_a_session_with_selected_answers
-    allow_any_instance_of(UserCookiesPartialController)
-      .to receive(:ab_test_with_alternative_name).and_return(nil)
   end
 
   it "reports the IDP name to piwik" do

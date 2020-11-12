@@ -85,11 +85,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
   let(:encrypted_entity_id) { "an-encrypted-entity-id" }
 
   context "with JS enabled", js: true do
-    before(:each) do
-      allow_any_instance_of(UserCookiesPartialController)
-        .to receive(:ab_test_with_alternative_name).and_return(nil)
-    end
-
     it "will redirect the user to the IDP" do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
