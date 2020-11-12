@@ -4,35 +4,11 @@ require "api_test_helper"
 require "piwik_test_helper"
 
 describe ChooseACertifiedCompanyLoa2Controller do
-  let(:stub_idp_one) {
-    {
-        "simpleId" => "stub-idp-one",
-        "entityId" => "http://idcorp-one.com",
-        "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2),
-    }.freeze
-  }
-
-  let(:stub_idp_two) {
-    {
-        "simpleId" => "stub-idp-two",
-        "entityId" => "http://idcorp-two.com",
-        "levelsOfAssurance" => %w(LEVEL_2),
-    }.freeze
-  }
-
-  let(:stub_idp_three) {
-    {
-        "simpleId" => "stub-idp-three",
-        "entityId" => "http://idcorp-three.com",
-        "levelsOfAssurance" => %w(LEVEL_2),
-    }.freeze
-  }
-
   before(:each) do
     stub_api_select_idp
     set_session_and_cookies_with_loa("LEVEL_2")
-    stub_api_idp_list_for_sign_in [stub_idp_one, stub_idp_two, stub_idp_three]
-    stub_api_idp_list_for_registration [stub_idp_one, stub_idp_two]
+    stub_api_idp_list_for_sign_in
+    stub_api_idp_list_for_registration
   end
 
   context "#index" do
@@ -81,8 +57,8 @@ describe ChooseACertifiedCompanyLoa2Controller do
 
   context "#select_idp" do
     it "sets selected IDP in user session" do
-      post :select_idp, params: { locale: "en", entity_id: "http://idcorp-one.com" }
-      expect(session[:selected_provider].entity_id).to eql("http://idcorp-one.com")
+      post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
+      expect(session[:selected_provider].entity_id).to eql("http://idcorp.com")
     end
 
     it "checks whether IDP was recommended" do
@@ -90,7 +66,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
           "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
           "device_type" => { "device_type_other" => true },
       }
-      post :select_idp, params: { locale: "en", entity_id: "http://idcorp-one.com" }
+      post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
       expect(session[:selected_idp_was_recommended]).to eql(true)
     end
 
@@ -99,7 +75,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
           "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
           "device_type" => { "device_type_other" => true },
       }
-      post :select_idp, params: { locale: "en", entity_id: "http://idcorp-one.com" }
+      post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
 
       expect(subject).to redirect_to redirect_to_idp_register_path
     end

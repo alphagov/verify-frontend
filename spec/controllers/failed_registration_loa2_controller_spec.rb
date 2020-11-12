@@ -6,21 +6,7 @@ require "api_test_helper"
 describe FailedRegistrationLoa2Controller do
   WITH_CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp-with-continue-on-fail".freeze
   WITH_NON_CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp".freeze
-  let(:stub_idp_one) {
-    {
-      simpleId: "stub-idp-one",
-      entityId: "http://idcorp-one.com",
-      levelsOfAssurance: %w(LEVEL_1 LEVEL_2),
-    }.freeze
-  }
 
-  let(:stub_idp_three) {
-    {
-      simpleId: "stub-idp-three",
-      entityId: "http://idcorp-three.com",
-      levelsOfAssurance: %w(LEVEL_2),
-    }.freeze
-  }
   before(:each) do
     set_selected_idp(entity_id: "http://idcorp.com", simple_id: "stub-idp-one", levels_of_assurance: %w(LEVEL_1 LEVEL_2))
     session[:selected_idp_was_recommended] = true
@@ -34,7 +20,7 @@ describe FailedRegistrationLoa2Controller do
     end
 
     it "index view when rp is not allowed to continue on failed" do
-      stub_api_idp_list_for_registration([stub_idp_one, stub_idp_three])
+      stub_api_idp_list_for_registration(default_idps)
       set_rp_to(WITH_NON_CONTINUE_ON_FAILED_REGISTRATION_RP)
 
       expect(subject).to render_template(:index_LOA2)

@@ -5,25 +5,10 @@ describe "When the user visits the failed registration page and" do
   CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp-with-continue-on-fail".freeze
   DONT_CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp".freeze
   CUSTOM_FAIL_PAGE_RP = "test-rp-no-demo".freeze
-  let(:stub_idp_one) {
-    {
-      simpleId: "stub-idp-one",
-      entityId: "http://idcorp-one.com",
-      levelsOfAssurance: %w(LEVEL_1 LEVEL_2),
-    }.freeze
-  }
 
-  let(:stub_idp_three) {
-    {
-      simpleId: "stub-idp-three",
-      entityId: "http://idcorp-three.com",
-      levelsOfAssurance: %w(LEVEL_2),
-    }.freeze
-  }
   before(:each) do
-    experiment = { "short_hub_2019_q3" => "short_hub_2019_q3_variant_c_2_idp_short_hub" }
-    set_session_and_ab_session_cookies!(experiment)
-    stub_api_idp_list_for_registration([stub_idp_one, stub_idp_three])
+    set_session_and_session_cookies!
+    stub_api_idp_list_for_registration
     set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
   end
 
