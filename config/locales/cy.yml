@@ -14,8 +14,6 @@ cy:
     about_choosing_a_company: am-ddewis-cwmni
     select_documents: dewis-dogfennau
     select_documents_none: dewis-dogfennau-dim
-    other_identity_documents: dogfennau-hunaniaeth-eraill
-    select_phone: dewis-ffon
     will_it_work_for_me: a-fydd-yn-gweithio-i-mi
     verify_will_not_work_for_you: ni-fydd-verify-yn-gweithio-i-chi
     may_not_work_if_you_live_overseas: efallai-na-fydd-yn-gweithio-os-ydych-yn-byw-dramor
@@ -350,26 +348,6 @@ cy:
       driving_licence_details:
         great_britain: Prydain Fawr
         northern_ireland: Gogledd Iwerddon
-    other_documents:
-      title_other_identity_documents: Dogfennau hunaniaeth eraill
-      non_uk_id_document: Oes gennych chi pasbort sydd ddim yn un o'r DU, cerdyn ID neu drwydded yrru?
-      errors:
-        non_uk_docs: Tell us if you have a non-UK passport, ID card or driving licence
-    select_phone:
-      title: Oes gennych ffôn symudol neu lechen?
-      explanation: Gall cwmnïau ardystiedig anfon codau diogelwch i’ch ffôn symudol.
-      question:
-        mobile_phone: Oes gennych ffôn symudol neu lechen?
-        mobile_phone_option_yes: Oes
-        mobile_phone_option_reluctant_yes: Gallaf, ond mae'n well gennyf beidio
-        smart_phone: Allwch chi osod apps ar eich dyfais?
-        smart_phone_option_yes: Gallaf
-        smart_phone_subtitle: Mae rhai cwmnïau ardystiedig yn gofyn i chi lawrlwytho app am ddim a defnyddio camera eich ffôn fel rhan o ddilysu eich hunaniaeth.
-      errors:
-        no_selection: Dylech ateb pob cwestiwn
-        invalid_selection: Dylech edrych dros eich dewis
-        mobile_phone: Please tell us if you have a mobile phone or tablet
-        smart_phone: Please tell us if you can install apps
     will_it_work_for_me:
       title: Allai i gael fy nilysu?
       heading: Amdanoch chi
