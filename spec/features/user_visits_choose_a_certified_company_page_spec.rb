@@ -2,40 +2,15 @@ require "feature_helper"
 require "api_test_helper"
 
 describe "When the user visits the choose a certified company variant page" do
-  let(:stub_idp_one) {
-    {
-        "simpleId" => "stub-idp-one",
-        "entityId" => "http://idcorp-one.com",
-        "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2),
-    }.freeze
-  }
-
-  let(:stub_idp_two) {
-    {
-        "simpleId" => "stub-idp-two",
-        "entityId" => "http://idcorp-two.com",
-        "levelsOfAssurance" => %w(LEVEL_2),
-    }.freeze
-  }
-
-  let(:stub_idp_three) {
-    {
-        "simpleId" => "stub-idp-three",
-        "entityId" => "http://idcorp-three.com",
-        "levelsOfAssurance" => %w(LEVEL_2),
-    }.freeze
-  }
-
   before(:each) do
-    experiment = { "short_hub_2019_q3" => "short_hub_2019_q3_variant_c_2_idp_short_hub" }
-    set_session_and_ab_session_cookies!(experiment)
-    stub_api_idp_list_for_registration([stub_idp_one, stub_idp_two])
+    set_session_and_session_cookies!
+    stub_api_idp_list_for_registration
   end
 
   context "user has two docs and a mobile" do
     selected_answers = {
-        device_type: { device_type_other: true },
-        documents: { has_valid_passport: true, has_driving_license: true, has_phone_can_app: true },
+      device_type: { device_type_other: true },
+      documents: { has_valid_passport: true, has_driving_license: true, has_phone_can_app: true },
     }
     before :each do
       page.set_rack_session(

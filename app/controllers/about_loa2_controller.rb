@@ -1,5 +1,4 @@
 require "partials/viewable_idp_partial_controller"
-require "partials/variant_partial_controller"
 
 class AboutLoa2Controller < ApplicationController
   include ViewableIdpPartialController

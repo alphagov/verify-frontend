@@ -3,9 +3,11 @@ require "api_test_helper"
 
 RSpec.feature "When user visits document selection page" do
   before(:each) do
-    experiment = { "short_hub_2019_q3" => "short_hub_2019_q3_variant_c_2_idp_short_hub" }
-    set_session_and_ab_session_cookies!(experiment)
+    set_session_and_session_cookies!
     stub_api_idp_list_for_registration
+    page.set_rack_session(
+      selected_answers: { documents: { driving_licence: false }, device_type: { device_type_other: true } },
+    )
     visit "/select-documents"
   end
 
@@ -23,7 +25,6 @@ RSpec.feature "When user visits document selection page" do
   end
 
   it "redirects to the idp picker page when selects 3 documents" do
-    visit "/select-documents"
     expect_reporter_to_receive(
       evidence: %i(has_valid_passport has_driving_license has_credit_card device_type_other),
       attempts: 1,
@@ -39,8 +40,6 @@ RSpec.feature "When user visits document selection page" do
   end
 
   it "redirects to the idp picker page when user selects phone and passport documents" do
-    visit "/select-documents"
-
     check t("hub_variant_c.select_documents.has_valid_passport"), allow_label_click: true
     check t("hub_variant_c.select_documents.has_phone_can_app"), allow_label_click: true
 
@@ -49,7 +48,6 @@ RSpec.feature "When user visits document selection page" do
   end
 
   it "redirects to the select advice page when selects 2 documents there not both (phone & passport)" do
-    visit "/select-documents"
     expect_reporter_to_receive(
       evidence: %i(has_driving_license has_credit_card device_type_other),
       attempts: 1,
@@ -64,7 +62,6 @@ RSpec.feature "When user visits document selection page" do
   end
 
   it "redirects to the select advice page when selects 2 documents and None of the above is checked" do
-    visit "/select-documents"
     expect_reporter_to_receive(
       evidence: %i(has_driving_license has_credit_card device_type_other),
       attempts: 1,

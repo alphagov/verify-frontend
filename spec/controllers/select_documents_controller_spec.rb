@@ -8,13 +8,8 @@ require "models/display/viewable_identity_provider"
 
 describe SelectDocumentsController do
   before(:each) do
-    experiment = "short_hub_2019_q3"
-    variant = "variant_c_2_idp_short_hub"
-    set_session_and_cookies_with_loa_and_variant("LEVEL_2", experiment, variant)
-    stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one",
-      "entityId" => "http://idcorp.com",
-      "levelsOfAssurance" => %w(LEVEL_2) }], "LEVEL_2")
-
+    set_session_and_cookies_with_loa("LEVEL_2")
+    stub_api_idp_list_for_registration
     session[:selected_answers] = {
       "device_type" => { device_type_other: true },
     }

@@ -117,7 +117,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
       given_the_piwik_request_has_been_stubbed
       given_im_on_the_sign_in_page
       when_i_click_start_now
-      #expect(page).to have_title t("hub.about.title")
+      expect(page).to have_title t("hub.about.title")
       expect_to_have_updated_the_piwik_journey_type_variable
     end
 
@@ -171,7 +171,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
 
     context "with a different valid idp-hint cookie" do
       before :each do
-        set_journey_hint_cookie("other-entity-id", "SUCCESS")
+        set_journey_hint_cookie("http://idcorp-two.com", "SUCCESS")
       end
 
       hinted_idp_name = "Bob’s Identity Service"
@@ -198,7 +198,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
       hinted_idp_name = "Disconnected IDP"
 
       before :each do
-        set_journey_hint_cookie("disconnected-entity-id", "SUCCESS")
+        set_journey_hint_cookie("http://idcorp-disconnected.com", "SUCCESS")
       end
 
       it "will tell the user the hinted IDP is disconnected" do
