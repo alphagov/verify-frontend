@@ -54,7 +54,6 @@ describe ChooseACertifiedCompanyLoa1Controller do
       set_session_and_cookies_with_loa("LEVEL_1")
       stub_api_idp_list_for_sign_in [stub_idp_loa1, stub_idp_loa1_with_interstitial]
       stub_api_idp_list_for_registration([stub_idp_loa1, stub_idp_loa1_with_interstitial], "LEVEL_1")
-      allow_any_instance_of(UserCookiesPartialController).to receive(:ab_test_with_alternative_name).and_return(nil)
     end
 
     it "resets interstitial answer to no value when IDP is selected" do

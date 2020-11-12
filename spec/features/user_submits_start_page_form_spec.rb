@@ -70,8 +70,6 @@ RSpec.describe "when user submits start page form" do
   end
 
   it "will redirect to the IDP when the user chooses a hinted IDP", js: true do
-    allow_any_instance_of(UserCookiesPartialController)
-    .to receive(:ab_test_with_alternative_name).and_return(nil)
     stub_session_idp_authn_request(originating_ip, location, false)
     set_journey_hint_cookie(idp_entity_id, "SUCCESS")
     stub_api_idp_list_for_sign_in
@@ -85,8 +83,6 @@ RSpec.describe "when user submits start page form" do
   end
 
   it "will return the user to the start when ignoring the hint at LOA2", js: true do
-    allow_any_instance_of(UserCookiesPartialController)
-    .to receive(:ab_test_with_alternative_name).and_return(nil)
     stub_session_idp_authn_request(originating_ip, location, false)
     set_journey_hint_cookie(idp_entity_id, "SUCCESS")
     stub_api_idp_list_for_sign_in
@@ -100,9 +96,6 @@ RSpec.describe "when user submits start page form" do
   end
 
   it "will return the user to the start when ignoring the hint at LOA1", js: true do
-    set_session_and_session_cookies!(session: default_session_loa1)
-    allow_any_instance_of(UserCookiesPartialController)
-    .to receive(:ab_test_with_alternative_name).and_return(nil)
     stub_session_idp_authn_request(originating_ip, location, false)
     set_journey_hint_cookie(idp_entity_id, "SUCCESS")
     stub_api_idp_list_for_sign_in

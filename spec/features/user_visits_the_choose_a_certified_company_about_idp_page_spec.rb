@@ -5,8 +5,6 @@ RSpec.feature "user visits the choose a certified company about idp page", type:
   before(:each) do
     set_session_and_session_cookies!
     stub_api_idp_list_for_registration
-    allow_any_instance_of(UserCookiesPartialController)
-    .to receive(:ab_test_with_alternative_name).and_return(nil)
   end
   let(:idp_location) { "/test-idp-request-endpoint" }
   let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
