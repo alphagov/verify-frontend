@@ -18,8 +18,6 @@ en:
     about_choosing_a_company: about-choosing-a-company
     select_documents: select-documents
     select_documents_none: select-documents-none
-    other_identity_documents: other-identity-documents
-    select_phone: select-phone
     will_it_work_for_me: will-it-work-for-me
     verify_will_not_work_for_you: verify-will-not-work-for-you
     may_not_work_if_you_live_overseas: may-not-work-if-you-live-overseas
@@ -347,27 +345,6 @@ en:
       driving_licence_details:
         great_britain: Great Britain
         northern_ireland: Northern Ireland
-    other_documents:
-      title: Other identity documents
-      title_other_identity_documents: Other identity documents
-      non_uk_id_document: Do you have a non-UK passport, ID card or driving licence?
-      errors:
-        non_uk_docs: Tell us if you have a non-UK passport, ID card or driving licence
-    select_phone:
-      title: Do you have a mobile phone or tablet?
-      explanation: Some companies send security codes to your mobile.
-      question:
-        mobile_phone: Do you have a mobile phone or tablet?
-        mobile_phone_option_yes: 'Yes'
-        mobile_phone_option_reluctant_yes: "Yes, but I'd prefer not to"
-        smart_phone: Can you install apps on your device?
-        smart_phone_option_yes: 'Yes'
-        smart_phone_subtitle: "Some companies ask you to download a free app and use your phone's camera as part of verifying your identity."
-      errors:
-        no_selection: Please answer all the questions
-        invalid_selection: Check your selection
-        mobile_phone: Tell us if you have a mobile phone or tablet
-        smart_phone: Tell us if you can install apps
     will_it_work_for_me:
       title: Can I be verified?
       heading: About you
