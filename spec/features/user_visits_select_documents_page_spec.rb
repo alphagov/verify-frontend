@@ -30,18 +30,18 @@ RSpec.feature "When user visits document selection page" do
       attempts: 1,
     )
 
-    check t("hub_variant_c.select_documents.has_driving_license"), allow_label_click: true
-    check t("hub_variant_c.select_documents.has_valid_passport"), allow_label_click: true
-    check t("hub_variant_c.select_documents.has_credit_card"), allow_label_click: true
+    check t("hub.select_documents.has_driving_license"), allow_label_click: true
+    check t("hub.select_documents.has_valid_passport"), allow_label_click: true
+    check t("hub.select_documents.has_credit_card"), allow_label_click: true
     click_button t("navigation.continue")
 
-    expect(page).to have_title t("hub_variant_c.choose_a_certified_company.title")
+    expect(page).to have_title t("hub.choose_a_certified_company.title")
     expect(page).to have_current_path(choose_a_certified_company_path)
   end
 
   it "redirects to the idp picker page when user selects phone and passport documents" do
-    check t("hub_variant_c.select_documents.has_valid_passport"), allow_label_click: true
-    check t("hub_variant_c.select_documents.has_phone_can_app"), allow_label_click: true
+    check t("hub.select_documents.has_valid_passport"), allow_label_click: true
+    check t("hub.select_documents.has_phone_can_app"), allow_label_click: true
 
     click_button t("navigation.continue")
     expect(page).to have_current_path(choose_a_certified_company_path)
@@ -53,11 +53,11 @@ RSpec.feature "When user visits document selection page" do
       attempts: 1,
     )
 
-    check t("hub_variant_c.select_documents.has_driving_license"), allow_label_click: true
-    check t("hub_variant_c.select_documents.has_credit_card"), allow_label_click: true
+    check t("hub.select_documents.has_driving_license"), allow_label_click: true
+    check t("hub.select_documents.has_credit_card"), allow_label_click: true
     click_button t("navigation.continue")
 
-    expect(page).to have_title t("hub_variant_c.select_documents.title")
+    expect(page).to have_title t("hub.select_documents.title")
     expect(page).to have_current_path(select_documents_advice_path)
   end
 
@@ -67,9 +67,9 @@ RSpec.feature "When user visits document selection page" do
       attempts: 1,
     )
 
-    check t("hub_variant_c.select_documents.has_driving_license"), allow_label_click: true
-    check t("hub_variant_c.select_documents.has_credit_card"), allow_label_click: true
-    check t("hub_variant_c.select_documents.has_nothing"), allow_label_click: true
+    check t("hub.select_documents.has_driving_license"), allow_label_click: true
+    check t("hub.select_documents.has_credit_card"), allow_label_click: true
+    check t("hub.select_documents.has_nothing"), allow_label_click: true
 
     click_button t("navigation.continue")
 
@@ -82,7 +82,7 @@ RSpec.feature "When user visits document selection page" do
       evidence: %i(device_type_other),
       attempts: 1,
     )
-    check t("hub_variant_c.select_documents.has_nothing"), allow_label_click: true
+    check t("hub.select_documents.has_nothing"), allow_label_click: true
     click_button t("navigation.continue")
     expect(page).to have_current_path(select_documents_advice_path)
 
@@ -91,7 +91,7 @@ RSpec.feature "When user visits document selection page" do
       evidence: %i(has_driving_license device_type_other),
       attempts: 2,
     )
-    check t("hub_variant_c.select_documents.has_driving_license"), allow_label_click: true
+    check t("hub.select_documents.has_driving_license"), allow_label_click: true
     click_button t("navigation.continue")
     expect(page).to have_current_path(select_documents_advice_path)
 
@@ -100,8 +100,8 @@ RSpec.feature "When user visits document selection page" do
       evidence: %i(has_driving_license has_credit_card device_type_other),
       attempts: 3,
     )
-    check t("hub_variant_c.select_documents.has_driving_license"), allow_label_click: true
-    check t("hub_variant_c.select_documents.has_credit_card"), allow_label_click: true
+    check t("hub.select_documents.has_driving_license"), allow_label_click: true
+    check t("hub.select_documents.has_credit_card"), allow_label_click: true
     click_button t("navigation.continue")
     expect(page).to have_current_path(select_documents_advice_path)
 
@@ -110,9 +110,9 @@ RSpec.feature "When user visits document selection page" do
       evidence: %i(has_valid_passport has_driving_license has_credit_card device_type_other),
       attempts: 4,
     )
-    check t("hub_variant_c.select_documents.has_driving_license"), allow_label_click: true
-    check t("hub_variant_c.select_documents.has_valid_passport"), allow_label_click: true
-    check t("hub_variant_c.select_documents.has_credit_card"), allow_label_click: true
+    check t("hub.select_documents.has_driving_license"), allow_label_click: true
+    check t("hub.select_documents.has_valid_passport"), allow_label_click: true
+    check t("hub.select_documents.has_credit_card"), allow_label_click: true
     click_button t("navigation.continue")
     expect(page).to have_current_path(choose_a_certified_company_path)
   end

@@ -25,7 +25,7 @@ class SelectDocumentsController < ApplicationController
     answers = selected_answer_store.selected_answers.fetch("documents", {})
     documents = answers.group_by(&:last)[false].to_h
     combine_cc_and_dl(documents)
-    mappings = t("hub_variant_c.select_documents").select { |k, _| k.to_s.start_with?("has") }.transform_keys!(&:to_s)
+    mappings = t("hub.select_documents").select { |k, _| k.to_s.start_with?("has") }.transform_keys!(&:to_s)
     @documents = documents.transform_keys(&mappings.method(:[]))
     render :advice
   end

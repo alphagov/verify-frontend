@@ -1,12 +1,12 @@
 <%= page_title 'hub.about.title' %>
 <% content_for :feedback_source, 'ABOUT_PAGE' %>
 
-<h1 class="govuk-heading-l"><%= t 'hub_variant_c.about_what_is_verify.heading' %></h1>
-<p><%= t 'hub_variant_c.about_what_is_verify.content' %></p>
+<h1 class="govuk-heading-l"><%= t 'hub.about_what_is_verify.heading' %></h1>
+<p><%= t 'hub.about_what_is_verify.content' %></p>
 <%= raw @tailored_text %>
 
-<h2 class="govuk-heading-m"><%= t 'hub_variant_c.about_how_it_works.heading' %></h2>
-<p><%= t 'hub_variant_c.about_how_it_works.content' %></p>
+<h2 class="govuk-heading-m"><%= t 'hub.about_how_it_works.heading' %></h2>
+<p><%= t 'hub.about_how_it_works.content' %></p>
 
 <ul class="list-companies">
   <% @identity_providers.each do |idp| %>
@@ -16,7 +16,7 @@
   <% end %>
 </ul>
 
-<%= raw t 'hub_variant_c.about_company.content_html' %>
+<%= raw t 'hub.about_company.content_html' %>
 
 <div class="actions">
   <%= button_link_to t("navigation.continue"), choose_a_certified_company_path, id: 'next-button', class: 'govuk-button' %>

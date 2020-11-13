@@ -98,7 +98,9 @@ cy:
     support_links: Dolenni cymorth
     help: Help
     built_by_the: Adeiladwyd gan yr
-  hub_variant_c:
+  hub:
+    about:
+      title: About
     about_what_is_verify:
       heading: What GOV.UK Verify is
       content: GOV.UK Verify is a secure way to prove who you are online. It helps protect you against online identity theft.
@@ -169,6 +171,7 @@ cy:
           It usually takes 15 minutes to prove who you are.
           You can then use your account to sign in to other government services too.
         </p>
+      choose_idp: "Choose %{display_name}"
       show_all_companies: Companies that are unlikely to verify you
       filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
       about_idp: About %{display_name}
@@ -182,9 +185,8 @@ cy:
     prove_your_identity_another_way:
       heading: Prove your identity another way
       sub_heading: You can still %{service_name}.
-  hub:
-    other_ways_title: Ffyrdd eraill i gael mynediad i’r gwasanaeth
-    other_ways_heading: Ffyrdd eraill i %{other_ways_description}
+    other_ways_title: Other ways to access the service
+    other_ways_heading: Other ways to %{other_ways_description}
     other_ways_after_eidas:
       title: Gwlad heb ei rhestru
       heading: Ffyrdd eraill o %{other_ways_description}
@@ -266,45 +268,6 @@ cy:
       title: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
       other_services: Gwasanaethau eraill
-    about:
-      title: Am
-      verify_is_a_service: Mae GOV.UK Verify yn wasanaeth diogel a adeiladwyd i frwydro yn erbyn y broblem gynyddol o ddwyn hunaniaeth ar-lein.
-    about_certified_companies:
-      title: Am gwmnïau ardystiedig
-      a_certified_company_will_verify: Bydd cwmni ardystiedig yn gwirio eich hunaniaeth. Maent i gyd wedi bodloni safonau diogelwch a osodir gan y llywodraeth.
-      a_certified_company_will_verify_security: Rydych yn dewis o restr o gwmnïau ardystiedig i ddilysu eich hunaniaeth. Maent i gyd wedi cwrdd â safonnau diogelwch a osodwyd gan y llywodraeth.
-      a_certified_company_will_verify_security_start: Rydych yn dechrau drwy ddewis cwmni i ddilysu eich hunaniaeth. Mae’r cwmnïau rydych yn dewis ohonnynt wedi cwrdd â safonnau diogelwch a osodwyd gan y llywodraeth.
-      ensure_privacy: Nid yw’r cwmni ardystiedig yn gwybod pa wasanaeth o’r llywodraeth rydych yn ei ddefnyddio ac nid yw’r adran o’r llywodraeth yn gwybod pa gwmni wnaeth ddilysu eich hunaniaeth. Mae hyn yn sicrhau eich preifatrwydd.
-      no_charge: Nid oes tâl am y gwasanaeth hwn.
-      summary: Sut y gall cwmnïau wirio hunaniaeth
-      details_html: |
-        <p class="govuk-body">Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd. Maent yn gallu gwirio bod gwybodaeth o basbortau a thrwyddedau gyrru yn gywir.</p>
-        <p class="govuk-body">Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
-        <p class="govuk-body">Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
-        <p class="govuk-body">Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
-      loa1_details_html: |
-        <p class="govuk-body">Gall y cwmnïau hyn ddefnyddio eu data eu hunain, a gallant gael mynediad at ddata fel cofnodion credyd.</p>
-        <p class="govuk-body">Ni fydd unrhyw effaith ar eich sgôr credyd.</p>
-        <p class="govuk-body">Mae cwmnïau ardystiedig yn bodloni safonau preifatrwydd y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth bersonol. Ni fyddant yn rhannu neu werthu eich data at unrhyw ddibenion eraill heb eich caniatâd.</p>
-        <p class="govuk-body">Mae mwy nag un cwmni ardystiedig yn golygu eich bod chi’n dewis pwy sy’n dilysu eich hunaniaeth, ac mae’n golygu bod y system yn ei gyfanrwydd yn gryfach.</p>
-    about_identity_accounts:
-      title: Am gyfrifon hunaniaeth
-      content_html: |
-        <p class="govuk-body">Mae dilysu eich hunaniaeth yn cymryd tua 15 munud i'w gwblhau, ond dim ond unwaith mae angen i chi ei wneud.</p>
-        <p class="govuk-body">Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
-        <p class="govuk-body">Yna gallwch gael mynediad i wasanaethau eraill y llywodraeth mewn llai na munud lle bynnag y byddwch yn gweld y logo GOV.UK Verify.</p>
-      content_loa1_html: |
-        <p class="govuk-body">Mae dilysu eich hunaniaeth yn cymryd tua 5 munud i'w gwblhau.</p>
-        <p class="govuk-body">Yna bydd gennych gyfrif hunaniaeth gyda'r cwmni ardystiedig.</p>
-        <p class="govuk-body">Gallwch ddefnyddio'r cyfrif hunaniaeth hwn i gael mynediad i wasanaethau eraill y llywodraeth ble bynnag rydych yn gweld y logo GOV.UK Verify.</p>
-      summary: Ble allwch chi ddefnyddio eich cyfrif hunaniaeth
-      details_loa1_html: |
-        <p class="govuk-body">Mae GOV.UK Verify yn newydd ac mae gwasanaethau'r llywodraeth yn ymuno drwy'r amser.</p>
-        <p class="govuk-body">Gallwch ddefnyddio eich cyfrif hunaniaeth i gael mynediad i:</p>
-      details: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
-      details_loa1_uplift_list: "Pan fyddwch yn defnyddio'r gwasanaethau llywodraeth hyn, bydd gofyn i chi ddarparu mwy o dystiolaeth gan fod angen i'r gwasanaethau hyn fod yn hyderus nad yw rhywun arall yn defnyddio eich hunaniaeth: "
-      navigation:
-        start_now: Dechrau nawr
     about_choosing_a_company:
       title: Am ddewis cwmni
       heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
@@ -316,38 +279,6 @@ cy:
         </ul>
         <p class="govuk-body">Fodd bynnag, mae gan bob cwmni ddulliau gwahanol ar gyfer pob un o'r camau hyn.</p>
         <p class="govuk-body">Felly byddwn nawr yn gofyn rhai cwestiynau i chi wirio pa gwmnïau all eich dilysu. Byddwn wedyn yn eich anfon at wefan y cwmni rydych yn ei ddewis.</p>
-    select_documents:
-      title: Dewiswch yr holl ddogfennau sydd gennych
-      title_photo_documents: Eich dogfennau hunaniaeth gyda llun
-      explanation: Mae cwmnïau ardystiedig yn defnyddio gwybodaeth o wahanol ddogfennau hunaniaeth i’ch dilysu.
-      sub_heading: Mae cwmniau ardystiedig yn defnyddio gwybodaeth o ddogfennau hunaniaeth i'ch dilysu.
-      documents_from_other_countries: Mae rhai cwmniau ardystiedig yn gallu defnyddio dogfennau hunaniaeth o wledydd eraill i'ch dilysu
-      no_documents_message: Mae eich dewisiadau dogfennau wedi cael eu gosod i ‘na’.
-      legend: Ydy’r dogfennau hyn gyda chi?
-      highlight: Y mwyaf o ddogfennau hunaniaeth y gallwch eu darparu, y mwyaf tebygol yw y bydd y cwmni yn gallu eich dilysu'n llwyddiannus.
-      documents_option_yes: Oes
-      documents_option_yes_expired: Oes, ond mae wedi dod i ben
-      valid_UK_driving_licence: Oes gennych chi drwydded yrru y DU gyda llun, llawn neu dros dro dilys?
-      uk_passport: Oes gennych chi basport y DU?
-      question:
-        driving_licence: Trwydded yrru Prydain Fawr (GB) gyda llun (llawn neu dros dro)
-        ni_driving_licence: Trwydded yrru Gogledd Iwerddon (NI) gyda llun (llawn neu dros dro)
-        passport: Pasport y DU
-        non_uk_id_document: Dogfen hunaniaeth sydd ddim o'r DU (pasbort, cerdyn ID neu trwydded yrru)
-        uk_bank_account_details: Manylion cyfrif banc y DU
-        debit_card: Cerdyn debyd
-        credit_card: Cerdyn credyd
-        no_documents: Nid oes gennyf y dogfennau hyn gyda mi
-      errors:
-        no_selection: Dewiswch y dogfennau sydd gennych
-        no_driving_license_selection: Please select if you have a driving license
-        no_passport_selection: Please select if you have a passport
-        no_driving_licence_issuer_selection: Please select the issuer of your driving license
-      neither_documents: Nid yw'r un o'r dogfennau hyn gennyf
-      where_driving_licence_issued: Ble cyhoeddwyd eich trwydded yrru?
-      driving_licence_details:
-        great_britain: Prydain Fawr
-        northern_ireland: Gogledd Iwerddon
     will_it_work_for_me:
       title: Allai i gael fy nilysu?
       heading: Amdanoch chi
@@ -410,31 +341,6 @@ cy:
       title: Ni fydd GOV.UK Verify yn gweithio i chi
       heading: Ni fyddwch yn gallu defnyddio GOV.UK Verify
       explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi’i ddilysu.
-      verify_wont_work_but_there_is_still_a_way: Ni all 'GOV.UK Verify' cadarnhau pwy ydych chi oherwydd mai angen o leiaf un cyfeiriad yn y DU arnoch.  %{other_ways_text}
-    choose_a_certified_company:
-      title: Dewiswch gwmni ardystiedig
-      heading: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
-      personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
-      why_companies: Pam fod dewis o gwmnïau
-      choose_idp: Dewiswch %{display_name}
-      idp_count_html: "Yn seiliedig ar eich atebion, gall %{company_count} eich dilysu nawr:"
-      company_html:
-        zero: no&nbsp;cwmni
-        one: 1&nbsp;cwmni
-        two: 2&nbsp;gwmni
-        few: "%{count}&nbsp;o gwmnïau"
-        many: "%{count}&nbsp;o gwmnïau"
-        other: "%{count}&nbsp;o gwmnïau"
-      show_all_companies: Cwmniau sy’n annhebygol o’ch dilysu chi
-      filtered_idps_message_html: Rydym wedi tynnu allan %{company_count}, oherwydd eu bod yn annhebygol o allu eich dilysu yn seiliedig ar eich atebion.
-      about_idp: Am %{display_name}
-      dialog:
-        information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
-        close: cau
-      about:
-        title: Am %{display_name}
-        information_provided_by: Gwybodaeth a ddarparwyd gan %{display_name}
-        close: cau
     why_companies:
       title: Pam fod dewis o gwmnïau
       choose_a_company: Dewiswch gwmni

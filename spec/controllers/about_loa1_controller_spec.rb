@@ -19,7 +19,7 @@ describe AboutLoa1Controller do
       stub_const("IDENTITY_PROVIDER_DISPLAY_DECORATOR", identity_provider_display_decorator)
     end
 
-    it "renders the LOA1 certified companies for variant C on the combined about view" do
+    it "renders the LOA1 certified companies for on the combined about view" do
       expect(identity_provider_display_decorator).to receive(:decorate_collection).with(a_list_of_size(7)).and_return([])
       expect(subject).to render_template(:about_combined_LOA1)
     end

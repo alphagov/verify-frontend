@@ -47,6 +47,6 @@ private
   end
 
   def add_documents_error
-    errors.add(:has_valid_passport, I18n.t("hub_variant_c.select_documents.errors.no_selection"))
+    errors.add(:has_valid_passport, I18n.t("hub.select_documents.errors.no_selection"))
   end
 end
