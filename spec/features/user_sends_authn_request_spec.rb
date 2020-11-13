@@ -3,9 +3,8 @@ require "api_test_helper"
 require "piwik_test_helper"
 
 AB_TEST_COOKIE_DEFAULTS = {
-  "short_hub_2019_q3" => "short_hub_2019_q3_control_a",
-  "select_documents_v2" => "select_documents_v2_control",
-  "about_companies" => "about_companies_with_logo",
+  "short_hub_2019_q3-preview" => "short_hub_2019_q3-preview_control_a",
+  "short_hub_2019_q3" => "short_hub_2019_q3_variant_c_2_idp_short_hub",
 }.freeze
 
 describe "user sends authn requests" do
