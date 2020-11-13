@@ -1,7 +1,7 @@
 require "feature_helper"
 require "api_test_helper"
 
-describe "When the user visits the choose a certified company variant page" do
+describe "When the user visits the choose a certified company page" do
   before(:each) do
     set_session_and_session_cookies!
     stub_api_idp_list_for_registration
@@ -39,7 +39,7 @@ describe "When the user visits the choose a certified company variant page" do
       visit "/choose-a-certified-company"
 
       expect(page).to have_current_path(choose_a_certified_company_path)
-      expect(page).to have_content t("hub_variant_c.choose_a_certified_company.idp_count")
+      expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
 
       within("#matching-idps") do
         expect(page).to have_button("Choose IDCorp")
@@ -59,7 +59,7 @@ describe "When the user visits the choose a certified company variant page" do
     it "displays the page in Welsh but actually the text is still English" do
       visit "/dewis-cwmni-ardystiedig"
 
-      expect(page).to have_title t("hub_variant_c.choose_a_certified_company.title", locale: :cy)
+      expect(page).to have_title t("hub.choose_a_certified_company.title", locale: :cy)
       expect(page).to have_css "html[lang=cy]"
     end
   end
@@ -122,7 +122,7 @@ describe "When the user visits the choose a certified company variant page" do
 
     visit "/choose-a-certified-company"
 
-    expect(page).to have_content t("hub_variant_c.choose_a_certified_company.idp_count")
+    expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
     within("#matching-idps") do
       expect(page).to have_button("Choose IDCorp")
       expect(page).to have_button("Choose Bob’s Identity Service")

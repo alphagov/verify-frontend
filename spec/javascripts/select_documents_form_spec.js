@@ -1,4 +1,4 @@
-describe('Analytics for select document variant c', function () {
+describe('Analytics for select document', function () {
   function setUp(html) {
       spyOn(_paq, 'push');
       setFixtures(html);
