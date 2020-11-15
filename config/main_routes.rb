@@ -19,8 +19,8 @@ constraints IsLoa1 do
   get "failed_registration", to: "failed_registration_loa1#index", as: :failed_registration
   get "cancelled_registration", to: "cancelled_registration_loa1#index", as: :cancelled_registration
   get "confirmation", to: "confirmation_loa1#matching_journey", as: :confirmation
-  get "about", to: "about_loa1#index", as: :about
-  get "about_choosing_a_company", to: "about_loa1#choosing_a_company", as: :about_choosing_a_company
+  get "about", to: "about_loa#index", as: :about
+  get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
   get "confirmation_non_matching_journey", to: "confirmation_loa1#non_matching_journey", as: :confirmation_non_matching_journey
 end
 
@@ -45,8 +45,8 @@ constraints IsLoa2 do
   get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
   get "cancelled_registration", to: "cancelled_registration_loa2#index", as: :cancelled_registration
   get "confirmation", to: "confirmation_loa2#matching_journey", as: :confirmation
-  get "about", to: "about_loa2#index", as: :about
-  get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
+  get "about", to: "about_loa#index", as: :about
+  get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
   get "confirmation_non_matching_journey", to: "confirmation_loa2#non_matching_journey", as: :confirmation_non_matching_journey
   get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
   post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
