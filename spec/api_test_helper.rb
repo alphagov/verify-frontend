@@ -403,12 +403,12 @@ private
   def default_idps
     [
       { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-two", "entityId" => "other-entity-id", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-three", "entityId" => "a-different-entity-id", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-demo", "entityId" => "demo-entity-id", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-loa1", "entityId" => "loa1-entity-id", "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2) },
-      { "simpleId" => "stub-idp-loa1-with-interstitial", "entityId" => "loa1-entity-id-with-interstitial", "levelsOfAssurance" => %w(LEVEL_1) },
-      { "simpleId" => "stub-idp-disconnected", "entityId" => "disconnected-entity-id", "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2), "authenticationEnabled" => false },
+      { "simpleId" => "stub-idp-two", "entityId" => "http://idcorp-two.com", "levelsOfAssurance" => %w(LEVEL_2) },
+      { "simpleId" => "stub-idp-three", "entityId" => "http://idcorp-three.com", "levelsOfAssurance" => %w(LEVEL_2) },
+      { "simpleId" => "stub-idp-demo", "entityId" => "http://idcorp-demo.com", "levelsOfAssurance" => %w(LEVEL_2) },
+      { "simpleId" => "stub-idp-loa1", "entityId" => "http://idcorp-loa1.com", "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2) },
+      { "simpleId" => "stub-idp-loa1-with-interstitial", "entityId" => "http://idcorp-loa1-with-interstitial.com", "levelsOfAssurance" => %w(LEVEL_1) },
+      { "simpleId" => "stub-idp-disconnected", "entityId" => "http://idcorp-disconnected.com", "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2), "authenticationEnabled" => false },
     ]
   end
 end
