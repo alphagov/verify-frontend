@@ -18,6 +18,8 @@ en:
     about_choosing_a_company: about-choosing-a-company
     select_documents: select-documents
     select_documents_none: select-documents-none
+    other_identity_documents: other-identity-documents
+    select_phone: select-phone
     will_it_work_for_me: will-it-work-for-me
     verify_will_not_work_for_you: verify-will-not-work-for-you
     may_not_work_if_you_live_overseas: may-not-work-if-you-live-overseas
@@ -99,9 +101,7 @@ en:
     support_links: Support links
     help: Help
     built_by_the: Built by the
-  hub:
-    about:
-      title: About
+  hub_variant_c:
     about_what_is_verify:
       heading: What GOV.UK Verify is
       content: GOV.UK Verify is a secure way to prove who you are online. It helps protect you against online identity theft.
@@ -172,7 +172,6 @@ en:
           It usually takes 15 minutes to prove who you are.
           You can then use your account to sign in to other government services too.
         </p>
-      choose_idp: "Choose %{display_name}"
       show_all_companies: Companies that are unlikely to verify you
       filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
       about_idp: About %{display_name}
@@ -186,6 +185,7 @@ en:
     prove_your_identity_another_way:
       heading: Prove your identity another way
       sub_heading: You can still %{service_name}.
+  hub:
     other_ways_title: Other ways to access the service
     other_ways_heading: Other ways to %{other_ways_description}
     other_ways_after_eidas:
@@ -269,6 +269,43 @@ en:
       title: Find the service you were using to start again
       hint: Follow the instructions you received.
       other_services: Other services
+    about:
+      title: About
+      verify_is_a_service: GOV.UK Verify is a secure way to prove who you are online. It aims to protect people from the growing problem of online identity theft.
+    about_certified_companies:
+      title: About certified companies
+      a_certified_company_will_verify: A company that meets government privacy standards will verify your identity.
+      a_certified_company_will_verify_security: You select a company certified to verify your identity. The companies have met security standards set by government.
+      a_certified_company_will_verify_security_start: You start by choosing a company to verify your identity. The companies you choose from have met security standards set by government.
+      ensure_privacy: The certified company doesn’t know which government service you’re accessing, and the government department doesn’t know which company verified your identity. This ensures your privacy.
+      no_charge: You do not need to pay to use GOV.UK Verify.
+      summary: How the companies can verify identities
+      details_html: |
+        <p class="govuk-body">These companies can make sure it's really you by checking documents like passports and driving licences against official records. They can also access information like credit records.</p>
+        <p class="govuk-body">These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
+        <p class="govuk-body">There's more than one company so that everyone's information is not stored in one place.</p>
+      loa1_details_html: |
+        <p class="govuk-body">These companies can make sure it's really you by checking documents like passports and driving licences against official records. They can also access information like credit records.</p>
+        <p class="govuk-body">These companies meet government privacy standards, so you can trust them with your personal information. They won’t share or sell your information for any other purpose without your consent.</p>
+        <p class="govuk-body">There's more than one company so that everyone's information is not stored in one place.</p>
+    about_identity_accounts:
+      title: About identity accounts
+      content_html: |
+        <p class="govuk-body">You only have to verify your identity once.</p>
+        <p class="govuk-body">You’ll then have an identity account with the company you use.</p>
+        <p class="govuk-body">You can then access other government services in less than 1 minute wherever you see the GOV.UK Verify logo.</p>
+      content_loa1_html: |
+        <p class="govuk-body">You only have to verify your identity once.</p>
+        <p class="govuk-body">You’ll then have an identity account with the company you use.</p>
+        <p class="govuk-body">You can then access other government services wherever you see the GOV.UK Verify logo.</p>
+      summary: Where you can use your identity account
+      details_loa1_html: |
+        <p class="govuk-body">GOV.UK Verify is new, and government services are joining all the time.</p>
+        <p class="govuk-body">You can use your identity account to access:</p>
+      details: "The current services using GOV.UK Verify are:"
+      details_loa1_uplift_list: "When you access these government services, you'll be asked to provide more evidence as these services need to be confident someone isn't pretending to be you:"
+      navigation:
+        start_now: Start now
     about_choosing_a_company:
       title: About choosing a company
       heading: Finding the right company to verify you
@@ -279,6 +316,58 @@ en:
         <li>it’s you providing your details, and not someone pretending to be you</li>
         </ul>
         <p class="govuk-body">We need to ask you some questions to check if the companies can verify you. We’ll then send you to the website of the company you select.</p>
+    select_documents:
+      title: Select all the documents you have
+      title_photo_documents: Your photo identity document
+      explanation: Certified companies use information from different identity documents to verify you.
+      documents_from_other_countries: The companies can use identity documents from other countries to verify you.
+      no_documents_message: Your document choices have been set to ‘no’.
+      legend: Do you have these documents with you?
+      highlight: The more identity documents you can provide now, the more likely it is that the company you use can verify you successfully.
+      documents_option_yes: 'Yes'
+      documents_option_yes_expired: Yes, but it's expired
+      valid_UK_driving_licence: Do you have a valid UK photocard driving licence, full or provisional?
+      uk_passport: Do you have a UK passport?
+      question:
+        driving_licence: Great Britain (GB) photocard driving licence (full or provisional)
+        ni_driving_licence: Northern Ireland (NI) photocard driving licence (full or provisional)
+        passport: UK passport
+        non_uk_id_document: Non-UK identity document (passport, ID card or driving licence)
+        uk_bank_account_details: UK bank account details
+        debit_card: Debit card
+        credit_card: Credit card
+        no_documents: I don’t have any of these documents with me
+      errors:
+        no_selection: Please select the documents you have
+        no_driving_license_selection: Select if you have a driving licence
+        no_passport_selection: Select if you have a UK passport
+        no_driving_licence_issuer_selection: Select where your driving licence was issued
+      neither_documents: I don't have either of these documents
+      where_driving_licence_issued: Where was your driving licence issued?
+      driving_licence_details:
+        great_britain: Great Britain
+        northern_ireland: Northern Ireland
+    other_documents:
+      title: Other identity documents
+      title_other_identity_documents: Other identity documents
+      non_uk_id_document: Do you have a non-UK passport, ID card or driving licence?
+      errors:
+        non_uk_docs: Tell us if you have a non-UK passport, ID card or driving licence
+    select_phone:
+      title: Do you have a mobile phone or tablet?
+      explanation: Some companies send security codes to your mobile.
+      question:
+        mobile_phone: Do you have a mobile phone or tablet?
+        mobile_phone_option_yes: 'Yes'
+        mobile_phone_option_reluctant_yes: "Yes, but I'd prefer not to"
+        smart_phone: Can you install apps on your device?
+        smart_phone_option_yes: 'Yes'
+        smart_phone_subtitle: "Some companies ask you to download a free app and use your phone's camera as part of verifying your identity."
+      errors:
+        no_selection: Please answer all the questions
+        invalid_selection: Check your selection
+        mobile_phone: Tell us if you have a mobile phone or tablet
+        smart_phone: Tell us if you can install apps
     will_it_work_for_me:
       title: Can I be verified?
       heading: About you
@@ -341,6 +430,27 @@ en:
       title: GOV.UK Verify will not work for you
       heading: You won’t be able to use GOV.UK Verify
       explanation: You need a current UK address to get your identity verified.
+    choose_a_certified_company:
+      title: Choose a certified company
+      heading: Choose a company to verify your identity
+      personal_information: The company will ask you to provide personal information and evidence. It will then check it's correct.
+      why_companies: Why you need to use a company
+      choose_idp: "Choose %{display_name}"
+      idp_count_html: "Based on your answers, %{company_count} can verify you now:"
+      company_html:
+        zero: no&nbsp;companies
+        one: 1&nbsp;company
+        other: "%{count}&nbsp;companies"
+      show_all_companies: Companies that are unlikely to verify you
+      filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
+      about_idp: About %{display_name}
+      dialog:
+        information_provided_by: Information provided by %{display_name}
+        close: close
+      about:
+        title: About %{display_name}
+        information_provided_by: Information provided by %{display_name}
+        close: close
     why_companies:
       title: Why you need to use a company
       choose_a_company: Choose a company

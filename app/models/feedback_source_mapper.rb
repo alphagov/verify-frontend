@@ -1,7 +1,9 @@
 class FeedbackSourceMapper
   def initialize(product_page_url)
     @page_to_source_mappings = {
+      "ABOUT_CERTIFIED_COMPANIES_PAGE" => "about_certified_companies",
       "ABOUT_CHOOSING_A_COMPANY_PAGE" => "about_choosing_a_company",
+      "ABOUT_IDENTITY_ACCOUNTS_PAGE" => "about_identity_accounts",
       "ABOUT_PAGE" => "about",
       "CHOOSE_A_CERTIFIED_COMPANY_PAGE" => "choose_a_certified_company",
       "CHOOSE_A_COUNTRY_PAGE" => "choose_a_country",
@@ -27,6 +29,7 @@ class FeedbackSourceMapper
       "SELECT_DOCUMENTS_PAGE" => "select_documents",
       "SELECT_DOCUMENTS_PAGE_PHOTO_DOCUMENTS" => "select_documents",
       "UNLIKELY_TO_VERIFY_PAGE" => "unlikely_to_verify",
+      "SELECT_PHONE_PAGE" => "select_phone",
       "VERIFY_WILL_NOT_WORK_FOR_YOU" => "verify_will_not_work_for_you",
       "PROVE_YOUR_IDENTITY_ANOTHER_WAY_PAGE" => "prove_your_identity_another_way",
       "SIGN_IN_PAGE" => "sign_in",
@@ -40,6 +43,7 @@ class FeedbackSourceMapper
       "MAY_NOT_WORK_IF_YOU_LIVE_OVERSEAS_PAGE" => "may_not_work_if_you_live_overseas",
       "WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE" => "why_might_this_not_work_for_me",
       "WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE" => "will_not_work_without_uk_address",
+      "OTHER_IDENTITY_DOCUMENTS_PAGE" => "other_identity_documents",
       "PRODUCT_PAGE" => product_page_url,
       "NO_IDPS_AVAILABLE" => "no_idps_available",
       "CANCELLED_REGISTRATION" => "cancelled_registration",

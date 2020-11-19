@@ -1,0 +1,54 @@
+<%= page_title 'hub.redirect_to_idp_question.title' %>
+<% content_for :feedback_source, 'REDIRECT_TO_IDP_WARNING_PAGE' %>
+
+<div class="govuk-grid-row js-continue-to-idp" data-location="<%= url_for(controller: 'redirect_to_idp_warning', action: 'continue_ajax', locale: I18n.locale)  %>">
+  <div class="govuk-grid-column-two-thirds">
+
+    <%= render 'shared/form-errors', errors: flash[:errors], form: @form %>
+
+    <h1 class="govuk-heading-l"><%= t 'hub.redirect_to_idp_question.loa1_heading', display_name: @idp.display_name %></h1>
+    <%= raw @idp.interstitial_question %>
+
+    <%= form_for @form, url: redirect_to_idp_question_submit_path, html: {id: 'interstitial-question-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
+        <%= content_tag :div, class: form_question_class do %>
+        <div class="govuk-form-group <% if @form.errors.include?(:interstitial_question_result_true) %>govuk-form-group--error<% end %>">
+          <fieldset class="govuk-fieldset">
+            <div class="govuk-radios">
+              <% if @form.errors.include?(:interstitial_question_result_true) %>
+                <span class="govuk-error-message">
+                  <%= @form.errors[:interstitial_question_result_true].first %>
+                </span>
+              <% end %>
+              <div class="govuk-radios__item">
+                <%= f.radio_button :interstitial_question_result, true, {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}, class: "govuk-radios__input", id: "interstitial_question_form_interstitial_question_result_true"}%>
+                <%= f.label :interstitial_question_result_true, t('hub.redirect_to_idp_question.answer_yes'), class: "govuk-label govuk-radios__label"%>
+              </div>
+              <div class="govuk-radios__item">
+                <%= f.radio_button :interstitial_question_result, false, {required: true, data: { msg: t('hub.redirect_to_idp_question.validation_message')}, class: "govuk-radios__input"}%>
+                <%= f.label :interstitial_question_result_false, t('hub.redirect_to_idp_question.answer_no'), class: "govuk-label govuk-radios__label"%>
+              </div>
+            </div>
+          </fieldset>
+          </div>
+        <% end %>
+
+        <div id="validation-error-message-js"></div>
+
+        <div id="interstitial_question_details" class="hidden panel">
+          <%= t 'hub.redirect_to_idp_question.warning_html', display_name: @idp.display_name, choose_another_company_link: link_to(t('hub.redirect_to_idp_question.choose_another_certified_company_link'), choose_a_certified_company_path)%>
+        </div>
+
+        <div class="form-group-tight">
+            <%= button_tag t('navigation.continue'),
+                           class: 'govuk-button',
+                           id: 'continue-to-idp-button',
+                           type: 'submit'
+            %>
+        </div>
+    <% end %>
+    <div>
+      <%= t 'hub.redirect_to_idp_question.or_html', choose_another_company_link: link_to(t('hub.redirect_to_idp_question.choose_another_certified_company_link'), choose_a_certified_company_path)%>
+    </div>
+  </div>
+  <%= render partial: 'shared/continue_to_idp_form' %>
+</div>

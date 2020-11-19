@@ -85,6 +85,11 @@ RSpec.describe "user selects an IDP on the sign in page" do
   let(:encrypted_entity_id) { "an-encrypted-entity-id" }
 
   context "with JS enabled", js: true do
+    before(:each) do
+      allow_any_instance_of(UserCookiesPartialController)
+        .to receive(:ab_test_with_alternative_name).and_return(nil)
+    end
+
     it "will redirect the user to the IDP" do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
@@ -112,7 +117,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
     end
 
     it "will redirect the user to the about page of the registration journey and update the Piwik Custom Variables" do
-      stub_api_idp_list_for_registration
       given_api_requests_have_been_mocked!
       given_the_piwik_request_has_been_stubbed
       given_im_on_the_sign_in_page
@@ -171,7 +175,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
 
     context "with a different valid idp-hint cookie" do
       before :each do
-        set_journey_hint_cookie("http://idcorp-two.com", "SUCCESS")
+        set_journey_hint_cookie("other-entity-id", "SUCCESS")
       end
 
       hinted_idp_name = "Bob’s Identity Service"
@@ -198,7 +202,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
       hinted_idp_name = "Disconnected IDP"
 
       before :each do
-        set_journey_hint_cookie("http://idcorp-disconnected.com", "SUCCESS")
+        set_journey_hint_cookie("disconnected-entity-id", "SUCCESS")
       end
 
       it "will tell the user the hinted IDP is disconnected" do
