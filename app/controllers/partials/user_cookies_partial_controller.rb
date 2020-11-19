@@ -82,8 +82,6 @@ private
   end
 
   def ab_test_with_alternative_name
-    return unless AbTest.respond_to?(:report_ab_test_details) && experiment_name.present?
-
     AbTest.report_ab_test_details(request, experiment_name)
   end
 end

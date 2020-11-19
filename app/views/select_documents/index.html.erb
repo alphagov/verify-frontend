@@ -1,63 +1,100 @@
-<%= page_title 'hub.select_documents.title' %>
+<%= page_title 'hub.select_documents.title_photo_documents' %>
 <% content_for :feedback_source, 'SELECT_DOCUMENTS_PAGE' %>
+
+<div id="no-documents-message" class="govuk-visually-hidden" aria-live="assertive" data-no-documents-message="<%= h t('hub.select_documents.no_documents_message') %>"></div>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
     <%= render 'shared/form-errors', errors: flash[:errors], form: @form %>
 
-    <%= form_for @form, url: select_documents_submit_path, html: {id: 'validate-select-documents', novalidate: 'novalidate', 'data-msg': t('hub.select_documents.errors.no_selection')} do |f| %>
-      <div class="govuk-form-group<% if @form.errors.include?(:has_valid_passport) %> govuk-form-group--error<% end %>">
-        <fieldset class="govuk-fieldset">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h1 class="govuk-fieldset__heading"><%= t 'hub.select_documents.heading' %></h1>
+    <h1 class="govuk-heading-l"><%= t 'hub.select_documents.title_photo_documents' %></h1>
+    <div class="govuk-inset-text">
+      <%= t 'hub.select_documents.highlight' %>
+    </div>
+
+    <%= form_for @form, url: select_documents_submit_path, html: {id: 'validate-select-documents', class: 'select-documents-form', novalidate: 'novalidate', 'data-msg': t('hub.select_documents.errors.no_selection')} do |f| %>
+      <div class="govuk-form-group <% if @form.errors.include?(:any_driving_licence_true) %>govuk-form-group--error<% end %>">
+        <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <h2 class="govuk-heading-m">
+              <%= t 'hub.select_documents.valid_UK_driving_licence' %>
+            </h2>
           </legend>
-          <p><%= t 'hub.select_documents.explanation' %></p>
-
-          <p><%= t 'hub.select_documents.select_all_that_apply' %></p>
-
-          <% if @form.errors.include?(:has_valid_passport) %>
+          <% if @form.errors.include?(:any_driving_licence_true) %>
             <span class="govuk-error-message">
-              <%= @form.errors[:has_valid_passport].first %>
+              <%= @form.errors[:any_driving_licence_true].first %>
             </span>
           <% end %>
-
-          <div id="checkboxes" class="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
-              <%= f.check_box :has_valid_passport,{class: "govuk-checkboxes__input", id: "select_documents_form_has_valid_passport" }, "t", "f" %>
-              <%= f.label :has_valid_passport,  t('hub.select_documents.has_valid_passport'), class: "govuk-label govuk-checkboxes__label"%>
+          <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <%= f.radio_button :any_driving_licence, true, {class: "govuk-radios__input", id: "select_documents_form_any_driving_licence_true", 'data-aria-controls': "conditional-any_driving_licence_true"}%>
+              <%= f.label :any_driving_licence_true, t('hub.select_documents.documents_option_yes'), class: "govuk-label govuk-radios__label"%>
             </div>
-            <div class="govuk-checkboxes__item">
-              <%= f.check_box :has_driving_license,{class: "govuk-checkboxes__input" }, "t", "f" %>
-              <%= f.label :has_driving_license,  t('hub.select_documents.has_driving_license'), class: "govuk-label govuk-checkboxes__label"%>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-any_driving_licence_true">
+              <div class="govuk-form-group<% if @form.errors.include?(:driving_licence_great_britain) %> govuk-form-group--error<% end %>">
+                <fieldset class="govuk-fieldset">
+                  <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                      <h2 class="govuk-heading-s"><%= t 'hub.select_documents.where_driving_licence_issued' %></h2>
+                    </legend>
+                    <% if @form.errors.include?(:driving_licence_great_britain) %>
+                      <span class="govuk-error-message">
+                        <%= @form.errors[:driving_licence_great_britain].first %>
+                      </span>
+                    <% end %>
+                    <div class="govuk-radios">
+                      <div class="govuk-radios__item">
+                        <%= f.radio_button :driving_licence, 'great_britain', {class: "govuk-radios__input", id: "select_documents_form_driving_licence_great_britain"}%>
+                        <%= f.label :driving_licence_great_britain, t('hub.select_documents.driving_licence_details.great_britain'), class: "govuk-label govuk-radios__label"%>
+                      </div>
+                      <div class="govuk-radios__item">
+                        <%= f.radio_button :driving_licence, 'northern_ireland', {class: "govuk-radios__input"}%>
+                        <%= f.label :driving_licence_northern_ireland, t('hub.select_documents.driving_licence_details.northern_ireland'), class: "govuk-label govuk-radios__label"%>
+                      </div>
+                    </div>
+                  </fieldset>
+                </fieldset>
+              </div>
             </div>
-            <div class="govuk-checkboxes__item">
-              <%= f.check_box :has_phone_can_app,{class: "govuk-checkboxes__input" }, "t", "f" %>
-              <%= f.label :has_phone_can_app,  t('hub.select_documents.has_phone_can_app'), class: "govuk-label govuk-checkboxes__label"%>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <%= f.check_box :has_credit_card,{class: "govuk-checkboxes__input" }, "t", "f" %>
-              <%= f.label :has_credit_card,  t('hub.select_documents.has_credit_card'), class: "govuk-label govuk-checkboxes__label"%>
-            </div>
-            <div class="govuk-radios__divider">or</div>
-            <div class="govuk-checkboxes__item">
-              <%= f.check_box :has_nothing,{class: "govuk-checkboxes__input" }, "t", "f" %>
-              <%= f.label :has_nothing,  t('hub.select_documents.has_nothing'), class: "govuk-label govuk-checkboxes__label"%>
+            <div class="govuk-radios__item">
+              <%= f.radio_button :any_driving_licence, false, {class: "govuk-radios__input"}%>
+              <%= f.label :any_driving_licence_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
             </div>
           </div>
         </fieldset>
-
-        <details id="progressive_disclosure"  piwik_event_tracking="progressive_disclosure" class="govuk-details govuk-!-padding-top-6" data-module="govuk-details">
-          <summary class="govuk-details__summary">
-            <span class="govuk-details__summary-text"><%= t 'hub.select_documents.further_explanation.title' %></span>
-          </summary>
-          <div class="govuk-details__text">
-            <%= t 'hub.select_documents.further_explanation.content_html' %>
+      </div>
+      
+      <div class="govuk-form-group <% if @form.errors.include?(:passport_true) %>govuk-form-group--error<% end %>">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <h2 class="govuk-heading-m"><%= t 'hub.select_documents.uk_passport' %></h2>
+          </legend>
+          <% if @form.errors.include?(:passport_true) %>
+            <span class="govuk-error-message">
+              <%= @form.errors[:passport_true].first %>
+            </span>
+          <% end %>
+          <div class="govuk-radios">
+            <div class="govuk-radios__item" >
+              <%= f.radio_button :passport, true, {class: "govuk-radios__input", id: "select_documents_form_passport_true"}%>
+              <%= f.label :passport_true, t('hub.select_documents.documents_option_yes'), class: "govuk-label govuk-radios__label"%>
+            </div>
+            <div class="govuk-radios__item">
+              <%= f.radio_button :passport, false, {class: "govuk-radios__input"}%>
+              <%= f.label :passport_false, t('option.no'), class: "govuk-label govuk-radios__label"%>
+            </div>
           </div>
-        </details>
+        </fieldset>
+      </div>
 
-        <%= f.submit t('navigation.continue'), class: 'govuk-button', id: 'next-button' %>
+      <div id="validation-error-message-js"></div>
+
+      <div class="actions">
+        <p class="govuk-body"><%= f.submit t('navigation.continue'), class: 'govuk-button', id: 'next-button' %>&nbsp;
+        <%= link_to t('hub.select_documents.neither_documents'), select_documents_no_documents_path %></p>
       </div>
     <% end %>
+
   </div>
 </div>

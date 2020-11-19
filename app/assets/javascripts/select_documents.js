@@ -4,34 +4,71 @@
     var $ = global.jQuery;
 
     var selectDocuments = {
-
         init: function () {
-            $("#select_documents_form_has_nothing").click(this.unsetAllButNothing);
-            $("#select_documents_form_has_valid_passport").click(this.unsetNothing);
-            $("#select_documents_form_has_driving_license").click(this.unsetNothing);
-            $("#select_documents_form_has_phone_can_app").click(this.unsetNothing);
-            $("#select_documents_form_has_credit_card").click(this.unsetNothing);
-            $('#progressive_disclosure').on('click', this.track_disclosure);
+            selectDocuments.$form = $('#validate-select-documents');
+            selectDocuments.$drivingLicenceDetails = $('#driving_licence_details');
+            var errorMessage = selectDocuments.$form.data('msg');
+            $.validator.addMethod('drivingLicenceDetailsValidation', function (value, element) {
+                return $('#select_documents_form_any_driving_licence_false').is(':checked') ||
+                    ($('#select_documents_form_any_driving_licence_true').is(':checked')
+                        && ($('#select_documents_form_driving_licence_great_britain').is(':checked')
+                            || $('#select_documents_form_driving_licence_northern_ireland').is(':checked')))
+            }, $.validator.format(selectDocuments.$form.data('msg')));
+
+            selectDocuments.validator = selectDocuments.$form.validate($.extend({}, GOVUK.validation.radiosValidation, {
+                rules: {
+                    'select_documents_form[any_driving_licence]': 'required',
+                    'select_documents_form[passport]': 'required',
+                    'select_documents_form[driving_licence]': 'drivingLicenceDetailsValidation'
+                },
+                groups: {
+                    primary: 'select_documents_form[any_driving_licence] select_documents_form[passport] select_documents_form[driving_licence]'
+                },
+                messages: {
+                    'select_documents_form[any_driving_licence]': errorMessage,
+                    'select_documents_form[passport]': errorMessage,
+                    'select_documents_form[driving_licence]': errorMessage
+                }
+            }));
+
+            selectDocuments.setDrivingLicenceDetailsVisibility();
+            selectDocuments.$form.find('input[name="select_documents_form[any_driving_licence]"]')
+                .on('click', selectDocuments.setDrivingLicenceDetailsVisibility)
+
+            // Changing driving license validation to false when there are validation errors
+            // on the driving license detail fields does not cause validation execution on the
+            // erroneous fields. This causes the main error message to remain visible even though
+            // there are no visible errors for the user.
+            //
+            // To work around this, we force the whole form validation on the above mentioned
+            // scenario.
+            selectDocuments.$form.find('#select_documents_form_any_driving_licence_false')
+                .on('change', function () {
+                    if (!GOVUK.selectDocuments.validator.valid()) {
+                        // the name of the api-function to validate the form is form :/
+                        // https://jqueryvalidation.org/Validator.form
+                        selectDocuments.validator.form()
+                    }
+                })
+
         },
 
-        unsetNothing: function () {
-            $("#select_documents_form_has_nothing").prop("checked", false);
+        setDrivingLicenceDetailsVisibility: function () {
+            if (selectDocuments.hasAnyDrivingLicence()) {
+                selectDocuments.$drivingLicenceDetails.removeClass('js-hidden');
+            } else {
+                selectDocuments.$drivingLicenceDetails.removeClass('form-group-error')
+                    .find('.selected').removeClass('selected').find('input').prop('checked', false);
+                selectDocuments.$drivingLicenceDetails.addClass('js-hidden');
+            }
         },
-
-        unsetAllButNothing: function () {
-            $("#select_documents_form_has_valid_passport").prop("checked", false);
-            $("#select_documents_form_has_driving_license").prop("checked", false);
-            $("#select_documents_form_has_phone_can_app").prop("checked", false);
-            $("#select_documents_form_has_credit_card").prop("checked", false);
-        },
-
-        track_disclosure: function(event) {
-        // user selects progressive disclosure link track user opens the link
-            return _paq.push(['trackEvent','Engagement','Disclosure link selected', 'Opened']);
+        hasAnyDrivingLicence: function () {
+            var input = $('input[name="select_documents_form[any_driving_licence]"]:checked');
+            return input.length === 1 && input.val() === 'true';
         }
     };
 
     GOVUK.selectDocuments = selectDocuments;
 
     global.GOVUK = GOVUK;
-}(window));
+})(window);

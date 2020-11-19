@@ -1,0 +1,29 @@
+<%= page_title 'hub_variant_c.select_documents.title' %>
+<% content_for :feedback_source, 'SELECT_DOCUMENTS_ADVICE_PAGE' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full govuk-!-margin-bottom-4">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-0"><%=t "hub_variant_c.select_documents_advice.advice_html.heading" %></h1>
+      <h2 class="govuk-heading-m govuk-!-padding-top-4 govuk-body govuk-!-margin-bottom-0">
+        <%=t "hub_variant_c.select_documents_advice.advice_html.#{@documents.values.any? ? 'sub_heading' : 'no_evidence_intro_html'}" %>
+      </h2>
+    </div>
+
+    <div class="govuk-grid-column-full govuk-!-margin-bottom-4">
+      <ul class="govuk-list govuk-list--bullet" id="evidence_unspecified">
+        <% @documents.each do |key, value| %>
+          <%= content_tag(:li, key.to_s.downcase) %>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="govuk-grid-column-full">
+      <%= t("hub_variant_c.select_documents_advice.what_to_do_next.content_html",
+        change_your_answers_link: link_to(t("hub_variant_c.select_documents_advice.what_to_do_next.change_your_answers_link"), select_documents_path, class: "govuk-link"),
+        prove_your_identity_link: link_to(t("hub_variant_c.select_documents_advice.what_to_do_next.prove_your_identity_link"), prove_your_identity_another_way_path, class: "govuk-link")
+      ) %>
+    </div>
+  </div>
+</div>
+

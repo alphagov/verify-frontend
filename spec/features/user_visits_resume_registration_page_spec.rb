@@ -31,6 +31,8 @@ RSpec.describe "When the user visits the resume registration page and " do
     set_selected_idp_in_session(entity_id: idp_entity_id, simple_id: "stub-idp-one")
     stub_translations
     stub_transaction_details
+    allow_any_instance_of(UserCookiesPartialController)
+      .to receive(:ab_test_with_alternative_name).and_return(nil)
   end
 
   context "has a cookie containing a PENDING state and valid IDP identifiers" do

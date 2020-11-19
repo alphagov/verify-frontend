@@ -59,7 +59,6 @@ RSpec.describe "When the user visits a page" do
     end
 
     it "sends an event to Piwik only when the user changes selection, on the start page" do
-      stub_api_idp_list_for_registration
       stub_transactions_list
       set_session_and_session_cookies!
       expect(request_log).to receive(:log).with(
@@ -124,7 +123,6 @@ RSpec.describe "When the user visits a page" do
     end
 
     it "sends a page view with a new_visit parameter if new session and on next page the parameter is not present" do
-      stub_api_idp_list_for_registration
       set_session_and_session_cookies!
       page.set_rack_session(new_visit: "true")
 

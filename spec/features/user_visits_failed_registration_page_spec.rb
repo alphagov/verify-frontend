@@ -1,7 +1,7 @@
 require "feature_helper"
 require "api_test_helper"
 
-describe "When the user visits the failed registration page and" do
+RSpec.describe "When the user visits the failed registration page and" do
   CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp-with-continue-on-fail".freeze
   DONT_CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp".freeze
   CUSTOM_FAIL_PAGE_RP = "test-rp-no-demo".freeze
@@ -46,9 +46,10 @@ describe "When the user visits the failed registration page and" do
       before(:each) do
         session = default_session
         session[:selected_answers] = {
-          documents: { has_driving_license: true, has_valid_passport: true, has_credit_card: true },
-          device_type: { device_type_other: true },
-       }
+            "documents" => { "driving_licence" => true, "passport" => true },
+            "phone" => { "mobile_phone" => true },
+            "device_type" => { "device_type_other" => true },
+        }
         page.set_rack_session(session)
       end
       it "includes expected content when LOA2 journey" do
@@ -103,8 +104,9 @@ describe "When the user visits the failed registration page and" do
 
       session = default_session
       session[:selected_answers] = {
-          documents: { has_driving_license: true, has_valid_passport: true, has_credit_card: true },
-          device_type: { device_type_other: true },
+          "documents" => { "driving_licence" => true, "passport" => true },
+          "phone" => { "mobile_phone" => true },
+          "device_type" => { "device_type_other" => true },
       }
       set_session! session
       set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")

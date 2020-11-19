@@ -1,0 +1,22 @@
+<%= page_title 'hub.redirect_to_idp_warning.title' %>
+<% content_for :feedback_source, 'REDIRECT_TO_IDP_WARNING_PAGE' %>
+
+<div class="govuk-grid-row js-continue-to-idp no-right-hand-logo" data-location="<%= url_for(controller: 'redirect_to_idp_warning', action: 'continue_ajax', locale: I18n.locale)  %>">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.redirect_to_idp_warning.create_account', display_name: @idp.display_name %></h1>
+
+    <%= t 'hub.redirect_to_idp_warning.identity_account_use_html', display_name: @idp.display_name %>
+    <p><%= t 'hub.redirect_to_idp_warning.service_use', service_name: @service_name %></p>
+
+    <%= form_tag('', class: 'js-idp-form') do %>
+        <%= button_tag t('hub.redirect_to_idp_warning.continue_website', display_name: @idp.display_name),
+                       class: 'govuk-button',
+                       id: 'continue-to-idp-button',
+                       type: 'submit'
+        %>
+    <% end %>
+    <%= render 'shared/logos_container' %>
+  </div>
+  <%= render partial: 'shared/continue_to_idp_form' %>
+</div>
+

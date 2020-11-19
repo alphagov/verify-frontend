@@ -40,7 +40,7 @@ private
   end
 
   def is_capable?(idp, user_profile)
-    @idp_rules[idp.simple_id]&.capabilities&.each do |characteristic_set|
+    @idp_rules[idp.simple_id].capabilities.each do |characteristic_set|
       if user_profile_contains_all_capabilities(user_profile, characteristic_set)
         return true
       end

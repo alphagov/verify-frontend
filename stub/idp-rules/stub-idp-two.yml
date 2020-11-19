@@ -4,11 +4,11 @@ send_language_hint: false
 
 segments:
   protected:
-    recommended: ["pp_app", "dl_app_cc", "pp_app_cc", "pp_dl_cc", "pp_dl_app", "pp_dl_app_cc"]
-    unlikely:    []
+    recommended: []
+    unlikely: ["protected-segment-1"]
   non_protected:
-    recommended: ["pp_app", "dl_app_cc", "pp_app_cc", "pp_dl_cc", "pp_dl_app", "pp_dl_app_cc"]
-    unlikely:    []
+    recommended: ["protected-segment-1", "other", "non-protected-segment-4", "non-protected-segment-2"]
+    unlikely: ["non-protected-segment-3"]
 
 capabilities:
   - []

@@ -24,6 +24,10 @@ RSpec.describe "When the user visits the continue to your IDP page" do
     visit "/test-single-idp-journey"
     click_button "initiate-single-idp-post"
   }
+  before(:each) do
+    allow_any_instance_of(UserCookiesPartialController)
+      .to receive(:ab_test_with_alternative_name).and_return(nil)
+  end
   context "javascript disabled" do
     before(:each) do
       set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session)

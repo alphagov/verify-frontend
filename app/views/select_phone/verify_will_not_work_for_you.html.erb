@@ -1,0 +1,11 @@
+<%= page_title 'hub.other_ways_title' %>
+<% content_for :feedback_source, 'VERIFY_WILL_NOT_WORK_FOR_YOU' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.verify_will_not_work_for_you.heading' %></h1>
+    <%= t 'hub.verify_will_not_work_for_you.content_html', other_ways_description: @other_ways_description %>
+
+    <%= render partial: 'shared/other_ways', locals: {other_ways_text: @other_ways_text, other_ways_description: @other_ways_description} %>
+  </div>
+</div>
