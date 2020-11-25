@@ -34,6 +34,17 @@ class Configuration
     end
   end
 
+  def option_datetime(name, envvar, options = {})
+    option(name, envvar, options) do |value|
+      begin
+        value.empty? ? nil : DateTime.parse(value)
+      rescue ArgumentError
+        Rails.logger.warn "DateTime Environment Variable '#{envvar}' must be a parseable DateTime i.e. '2020-12-31 22:59:59', given value was '#{value}'"
+        nil
+      end
+    end
+  end
+
 private
 
   def option(name, envvar, options = {})
