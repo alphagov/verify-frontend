@@ -7,6 +7,6 @@ class SignInProcessDetailsResponse < Api::Response
   def initialize(hash)
     @transaction_entity_id = hash["requestIssuerId"]
     @transaction_supports_eidas = hash["transactionSupportsEidas"]
-    @before_eu_exit = hash["beforeEUExit"]
+    @before_eu_exit = hash["beforeEUExit"] # this should be a timestamp not a bool
   end
 end

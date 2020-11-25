@@ -116,17 +116,12 @@ private
   end
 
   def do_eidas_sign_in_redirect(redirect_params = {})
-    logger.info("phil1 do_eidas_sign_in_redirect before eu exit? " + session[:before_eu_exit].to_s)
-    return redirect_to start_path(redirect_params) unless session[:transaction_supports_eidas]
-    return redirect_to eu_exit_path(redirect_params) unless session[:before_eu_exit]
+    return redirect_to start_path(redirect_params) unless session[:transaction_supports_eidas] && session[:before_eu_exit]
 
     redirect_to choose_a_country_path(redirect_params)
   end
 
   def do_default_redirect(redirect_params = {})
-    logger.info("phil tx supports eidas? " + session[:transaction_supports_eidas].to_s)
-    logger.info("phil before eu exit? " + session[:before_eu_exit].to_s)
-
     # send to the blue sign-in page if tx config does not support eidas
     return redirect_to start_path(redirect_params) unless (session[:transaction_supports_eidas] && session[:before_eu_exit])
 
