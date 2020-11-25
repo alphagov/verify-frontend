@@ -46,7 +46,7 @@ describe("Will it work for me form", function () {
         '</legend>' +
         '<div class="govuk-radios">' +
         '<div class="govuk-radios__item">' +
-        '<input class="govuk-radios__input" type="radio" value="MovedRecently" name="will_it_work_for_me_form[not_resident_reason]" id="will_it_work_for_me_form_not_resident_reason_movedrecently" />' +
+        '<input class="govuk-radios__input" type="radio" value="MovedRecently" name="will_it_work_for_me_form[not_resident_reason]" id="will_it_work_for_me_form_not_resident_reason_moved_recently" />' +
         '<label class="govuk-label govuk-radios__label" for="will_it_work_for_me_form_not_resident_reason_moved_recently">I moved to the UK in the last 12 months</label>' +
         '</div>' +
         '<div class="govuk-radios__item">' +
