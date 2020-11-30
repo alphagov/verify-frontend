@@ -61,4 +61,7 @@ CONFIG = Configuration.load! do
 
   # Enables dev/test routes when compiled for a production env (i.e. when RAILS_ENV=production)
   option_bool "stub_mode", "STUB_MODE", default: false
+
+  option_datetime "eidas_disabled_after", "EIDAS_DISABLED_AFTER", allow_missing: true
 end
+Rails.logger.info "eidas_disabled_after: #{CONFIG.eidas_disabled_after}"
