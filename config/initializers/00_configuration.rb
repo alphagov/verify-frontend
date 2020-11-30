@@ -33,12 +33,6 @@ CONFIG = Configuration.load! do
   option_string "rules_directory", "RULES_DIRECTORY", default: "#{FED_CONFIG_DIR}/idp-rules/"
   option_string "segment_definitions", "SEGMENT_DEFINITIONS", default: "#{FED_CONFIG_DIR}/segment_definitions.yml"
 
-  # begin abc-testing-modifications
-  option_string "abc_variants_config", "ABC_VARIANTS_CONFIG", default: "#{FED_CONFIG_DIR}/special-cases/abc-variants.yml"
-  option_string "rules_variant_c_directory", "RULES_C_DIRECTORY", default: "#{FED_CONFIG_DIR}/idp-rules-variant-c/"
-  option_string "segment_definitions_variant_c", "SEGMENT_DEFINITIONS_VARIANT_C", default: "#{FED_CONFIG_DIR}/segment_definitions_variant_c.yml"
-  # end abc-testing-modifications
-
   option_string "zendesk_url", "ZENDESK_URL"
   option_string "zendesk_username", "ZENDESK_USERNAME"
   option_string "zendesk_token", "ZENDESK_TOKEN"

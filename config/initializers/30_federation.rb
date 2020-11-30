@@ -47,27 +47,13 @@ Rails.application.config.after_initialize do
   idp_rules_loader = IdpProfilesLoader.new(yaml_loader)
   idp_rules = idp_rules_loader.parse_config_files(CONFIG.rules_directory)
 
-  # HUH-234 variant c
-  idp_rules_variant_c = idp_rules_loader.parse_config_files(CONFIG.rules_variant_c_directory)
-
   # Segment Definitions
   segment_config = YAML.load_file(CONFIG.segment_definitions)
   segment_matcher = SegmentMatcher.new(segment_config)
 
-  # HUH-234 variant c
-  segment_config_variant_c = YAML.load_file(CONFIG.segment_definitions_variant_c)
-  segment_matcher_variant_c = SegmentMatcher.new(segment_config_variant_c)
-
   # Recommendation Engines
   transaction_grouper = TransactionGroups::TransactionGrouper.new(RP_CONFIG)
   IDP_RECOMMENDATION_ENGINE = RecommendationsEngine.new(idp_rules, segment_matcher, transaction_grouper, CONFIG.hide_idps_disconnecting_for_registration_minutes_before)
-
-  # HUH-234 variant c
-  IDP_RECOMMENDATION_ENGINE_variant_c = RecommendationsEngine.new(idp_rules_variant_c, segment_matcher_variant_c, transaction_grouper, CONFIG.hide_idps_disconnecting_for_registration_minutes_before)
-
-  # ABC testing variation config
-  # HUH-234 variant c
-  ABC_VARIANTS_CONFIG = YAML.load_file(CONFIG.abc_variants_config)
 
   FEEDBACK_DISABLED = CONFIG.feedback_disabled
   THROTTLING_ENABLED = CONFIG.throttling_enabled

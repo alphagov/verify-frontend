@@ -1,54 +1,52 @@
 class SelectDocumentsForm
   include ActiveModel::Model
 
-  attr_reader :driving_licence, :ni_driving_licence, :passport, :any_driving_licence
-  validate :any_driving_license_must_be_present, :passport_must_be_present
-  validate :driving_licence_details_present
+  attr_accessor :has_valid_passport, :has_driving_license, :has_phone_can_app, :has_credit_card, :has_nothing
+  validate :must_choose_something
 
-  def initialize(hash)
-    @driving_licence = hash[:driving_licence]
-    @passport = hash[:passport]
-    @any_driving_licence = hash[:any_driving_licence]
+  def self.from_post(hash)
+    instance = self.new
+    instance.has_nothing = hash[:has_nothing] == "t"
+    instance.has_valid_passport = @has_nothing ? false : hash[:has_valid_passport] == "t"
+    instance.has_driving_license = @has_nothing ? false :  hash[:has_driving_license] == "t"
+    instance.has_phone_can_app = @has_nothing ? false : hash[:has_phone_can_app] == "t"
+    instance.has_credit_card = @has_nothing ? false : hash[:has_credit_card] == "t"
+
+    instance
   end
 
-  def selected_answers
+  def self.from_session_storage(hash)
+    instance = self.new
+    instance.has_valid_passport = hash["has_valid_passport"]
+    instance.has_driving_license = hash["has_driving_license"]
+    instance.has_phone_can_app = hash["has_phone_can_app"]
+    instance.has_credit_card = hash["has_credit_card"]
+    # has_nothing is set on post only – it's used for validation, but we don't pre-select
+    # it when displaying the form.
+
+    instance
+  end
+
+  def to_session_storage
     answers = {}
-    Evidence:: PHOTO_DOCUMENT_ATTRIBUTES.each do |attr|
-      result = public_send(attr)
-      if %w(true false).include?(result)
-        answers[attr] = (result == "true")
-      end
-    end
-    if any_driving_licence == "true"
-      answers[:driving_licence] = (driving_licence == "great_britain")
-      answers[:ni_driving_licence] = (driving_licence == "northern_ireland")
-    end
-    if any_driving_licence == "false"
-      answers[:driving_licence] = false
-      answers[:ni_driving_licence] = false
-    end
-    answers
-  end
 
-  def further_id_information_required?
-    passport == "false" && any_driving_licence == "false"
+    answers[:has_valid_passport] = @has_valid_passport
+    answers[:has_driving_license] = @has_driving_license
+    answers[:has_phone_can_app] = @has_phone_can_app
+    answers[:has_credit_card] = @has_credit_card
+
+    answers
   end
 
 private
 
-  def any_driving_license_must_be_present
-    errors.add(:any_driving_licence_true, I18n.t("hub.select_documents.errors.no_driving_license_selection")) unless any_driving_licence
+  def must_choose_something
+    unless has_valid_passport || has_driving_license || has_phone_can_app || has_credit_card || has_nothing
+      add_documents_error
+    end
   end
 
-  def passport_must_be_present
-    errors.add(:passport_true, I18n.t("hub.select_documents.errors.no_passport_selection")) unless passport
-  end
-
-  def driving_licence_details_present
-    errors.add(:driving_licence_great_britain, I18n.t("hub.select_documents.errors.no_driving_licence_issuer_selection")) if any_driving_licence == "true" && no_driving_licence_details?
-  end
-
-  def no_driving_licence_details?
-    !(driving_licence == "great_britain" || driving_licence == "northern_ireland")
+  def add_documents_error
+    errors.add(:has_valid_passport, I18n.t("hub.select_documents.errors.no_selection"))
   end
 end
