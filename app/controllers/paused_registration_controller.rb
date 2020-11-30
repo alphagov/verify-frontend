@@ -161,7 +161,7 @@ private
   def is_resume_link_for_pending_idp?(idp_simple_id)
     return false unless is_last_status?(PENDING_STATUS)
 
-    idp = decorate_idp_by_entity_id(current_available_identity_providers_for_registration_loa2(last_rp), last_idp)
+    idp = decorate_idp_by_entity_id(current_available_identity_providers_for_registration, last_idp)
 
     !idp.nil? && idp.simple_id == idp_simple_id
   end

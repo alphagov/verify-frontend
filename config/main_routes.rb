@@ -6,10 +6,6 @@ get "sign_in", to: "sign_in#index", as: :sign_in
 post "sign_in", to: "sign_in#select_idp", as: :sign_in_submit
 get "begin_sign_in", to: "start#sign_in", as: :begin_sign_in
 
-# HUH-233 short hub 2019 q3 multivariate tests - LOA2 only
-SHORT_HUB_2019_Q3 = "short_hub_2019_q3".freeze
-short_hub_v3 = AbTestConstraint.configure(ab_test_name: SHORT_HUB_2019_Q3, experiment_loa: "LEVEL_2")
-
 constraints IsLoa1 do
   get "prove_identity", to: "prove_identity#index", as: :prove_identity
   get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
@@ -22,19 +18,19 @@ constraints IsLoa1 do
   get "why_companies", to: "why_companies_loa1#index", as: :why_companies
   get "failed_registration", to: "failed_registration_loa1#index", as: :failed_registration
   get "cancelled_registration", to: "cancelled_registration_loa1#index", as: :cancelled_registration
-  get "redirect_to_idp_question", to: "redirect_to_idp_question_loa1#index", as: :redirect_to_idp_question
-  post "redirect_to_idp_question", to: "redirect_to_idp_question_loa1#continue", as: :redirect_to_idp_question_submit
-  post "redirect_to_idp_warning", to: "redirect_to_idp_warning#continue", as: :redirect_to_idp_warning_submit
-  get "redirect_to_idp_warning", to: "redirect_to_idp_warning#index", as: :redirect_to_idp_warning
-  get "idp_wont_work_for_you_one_doc", to: "redirect_to_idp_question_loa1#idp_wont_work_for_you", as: :idp_wont_work_for_you_one_doc
   get "confirmation", to: "confirmation_loa1#matching_journey", as: :confirmation
-  get "about", to: "about_loa1#index", as: :about
-  get "about_certified_companies", to: "about_loa1#certified_companies", as: :about_certified_companies
-  get "about_identity_accounts", to: "about_loa1#identity_accounts", as: :about_identity_accounts
-  get "about_choosing_a_company", to: "about_loa1#choosing_a_company", as: :about_choosing_a_company
+  get "about", to: "about_loa#index", as: :about
+  get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
   get "confirmation_non_matching_journey", to: "confirmation_loa1#non_matching_journey", as: :confirmation_non_matching_journey
 end
 
+# HUB-595 short hub 2019 q3 A/B test (short_hub_2019_q3)
+# SHORT_HUB_2019_Q3 = "short_hub_2019_q3".freeze
+# short_hub_v3 = AbTestConstraint.configure(ab_test_name: SHORT_HUB_2019_Q3, experiment_loa: "LEVEL_2")
+# HUB-595: implement control A route
+# constraints short_hub_v3.use(alternative: "control_a") do; end
+# HUB-595: implement appropriate variant C routes
+# constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do; end
 constraints IsLoa2 do
   get "prove_identity", to: "prove_identity#index", as: :prove_identity
   get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
@@ -42,40 +38,25 @@ constraints IsLoa2 do
   get "start", to: "start#index", as: :start
   post "start", to: "start#request_post", as: :start
   get "begin_registration", to: "start#register", as: :begin_registration
-
-  # get "about", to: "about_loa2#index", as: :about
-  # get "about_certified_companies", to: "about_loa2#certified_companies", as: :about_certified_companies
-  # get "about_identity_accounts", to: "about_loa2#identity_accounts", as: :about_identity_accounts
-  # get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
-
-  # get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
-  # post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
+  get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
+  get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
+  post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
+  get "why_companies", to: "why_companies_loa2#index", as: :why_companies
+  get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
+  get "cancelled_registration", to: "cancelled_registration_loa2#index", as: :cancelled_registration
+  get "confirmation", to: "confirmation_loa2#matching_journey", as: :confirmation
+  get "about", to: "about_loa#index", as: :about
+  get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
+  get "confirmation_non_matching_journey", to: "confirmation_loa2#non_matching_journey", as: :confirmation_non_matching_journey
+  get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
+  post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
+  get "select_documents", to: "select_documents#index", as: :select_documents
+  post "select_documents", to: "select_documents#select_documents", as: :select_documents_submit
+  get "select_documents_advice", to: "select_documents#advice", as: :select_documents_advice
+  get "prove_your_identity_another_way", to: "select_documents#prove_your_identity_another_way", as: :prove_your_identity_another_way
   get "why_might_this_not_work_for_me", to: "will_it_work_for_me#why_might_this_not_work_for_me", as: :why_might_this_not_work_for_me
   get "may_not_work_if_you_live_overseas", to: "will_it_work_for_me#may_not_work_if_you_live_overseas", as: :may_not_work_if_you_live_overseas
   get "will_not_work_without_uk_address", to: "will_it_work_for_me#will_not_work_without_uk_address", as: :will_not_work_without_uk_address
-  # get "select_documents", to: "select_documents#index", as: :select_documents
-  # get "select_documents_none", to: "select_documents#no_documents", as: :select_documents_no_documents
-  # post "select_documents", to: "select_documents#select_documents", as: :select_documents_submit
-  get "other_identity_documents", to: "other_identity_documents#index", as: :other_identity_documents
-  post "other_identity_documents", to: "other_identity_documents#select_other_documents", as: :other_identity_documents_submit
-  get "select_phone", to: "select_phone#index", as: :select_phone
-  post "select_phone", to: "select_phone#select_phone", as: :select_phone_submit
-  get "verify_will_not_work_for_you", to: "select_phone#verify_will_not_work_for_you", as: :verify_will_not_work_for_you
-
-  # get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
-  # get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
-  # post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
-
-  get "why_companies", to: "why_companies_loa2#index", as: :why_companies
-  # get "failed_registration", to: "failed_registration_loa2_variant_c#index", as: :failed_registration
-  get "cancelled_registration", to: "cancelled_registration_loa2#index", as: :cancelled_registration
-  post "redirect_to_idp_warning", to: "redirect_to_idp_warning#continue", as: :redirect_to_idp_warning_submit
-  get "redirect_to_idp_warning", to: "redirect_to_idp_warning#index", as: :redirect_to_idp_warning
-  get "redirect_to_idp_question", to: "redirect_to_idp_question_loa2#index", as: :redirect_to_idp_question
-  post "redirect_to_idp_question", to: "redirect_to_idp_question_loa2#continue", as: :redirect_to_idp_question_submit
-  get "idp_wont_work_for_you_one_doc", to: "redirect_to_idp_question_loa2#idp_wont_work_for_you", as: :idp_wont_work_for_you_one_doc
-  get "confirmation", to: "confirmation_loa2#matching_journey", as: :confirmation
-  get "confirmation_non_matching_journey", to: "confirmation_loa2#non_matching_journey", as: :confirmation_non_matching_journey
 end
 
 get "start_ignore_hint", to: "start#ignore_hint", as: :start_ignore_hint
@@ -124,52 +105,4 @@ if SINGLE_IDP_FEATURE
   get "continue_to_your_idp", to: "single_idp_journey#continue_to_your_idp", as: :continue_to_your_idp
   post "continue_to_your_idp", to: "single_idp_journey#continue"
   get "single_idp_start_page", to: "single_idp_journey#rp_start_page", as: :single_idp_start_page
-end
-
-# HUH-233 short hub 2019 q3 multivariate tests - LOA2 only
-# Control A = unaffected
-# Variant C = 2 IDPs and new shorter hub journey
-
-# HUH-233: implement control A route
-constraints short_hub_v3.use(alternative: "control_a") do
-  get "about", to: "about_loa2#index", as: :about
-  get "about_certified_companies", to: "about_loa2#certified_companies", as: :about_certified_companies
-  get "about_identity_accounts", to: "about_loa2#identity_accounts", as: :about_identity_accounts
-  get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
-
-  get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
-  post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
-
-  get "select_documents", to: "select_documents#index", as: :select_documents
-  get "select_documents_none", to: "select_documents#no_documents", as: :select_documents_no_documents
-  post "select_documents", to: "select_documents#select_documents", as: :select_documents_submit
-
-  get "select_phone", to: "select_phone#index", as: :select_phone
-  post "select_phone", to: "select_phone#select_phone", as: :select_phone_submit
-  get "verify_will_not_work_for_you", to: "select_phone#verify_will_not_work_for_you", as: :verify_will_not_work_for_you
-
-  get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
-  get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
-  post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
-  get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
-end
-
-# HUH-234: implement appropriate variant C routes
-constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do
-  get "about", to: "about_loa2_variant_c#index", as: :about
-  get "about_choosing_a_company", to: "about_loa2#choosing_a_company", as: :about_choosing_a_company
-  get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
-  post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
-
-  get "select_documents", to: "select_documents_variant_c#index", as: :select_documents
-
-  get "select_documents_none", to: "select_documents_variant_c#no_documents", as: :select_documents_no_documents
-  post "select_documents", to: "select_documents_variant_c#select_documents", as: :select_documents_submit
-  get "select_documents_advice", to: "select_documents_variant_c#advice", as: :select_documents_advice
-  get "prove_your_identity_another_way", to: "select_documents_variant_c#prove_your_identity_another_way", as: :prove_your_identity_another_way
-
-  get "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#index", as: :choose_a_certified_company
-  get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2_variant_c#about", as: :choose_a_certified_company_about
-  post "choose_a_certified_company", to: "choose_a_certified_company_loa2_variant_c#select_idp", as: :choose_a_certified_company_submit
-  get "failed_registration", to: "failed_registration_loa2_variant_c#index", as: :failed_registration
 end
