@@ -1,5 +1,5 @@
 (function (global) {
-    var allButtons = $('#matching-idps button.button');
+    var allButtons = $('#matching-idps button.govuk-button');
     var numberOfVisibleButtons = 0;
 
     var isVisible = function(element) {
@@ -23,7 +23,7 @@
     }
     else if (numberOfVisibleButtons === 0) {
         var eventAction = 'None';
-    } 
+    }
     else {
         var eventAction = numberOfVisibleButtons.toString();
     }
@@ -39,7 +39,7 @@
             var buttonOrder = parseInt($(e.target).data('order'))
             _paq.push(['trackEvent', 'Engagement', buttonOrder, 'IDP order click']);
         }
-        
+
     })
 
 })(window);
