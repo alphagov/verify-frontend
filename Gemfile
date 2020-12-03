@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.6.6'
 
-gem 'rails', '~> 5.2.4'
-gem 'rails-i18n', '~> 5.1'
-gem 'route_translator', '~> 8.0'
+gem 'rails', '~> 5.2.4.4'
+gem 'rails-i18n', '~> 5.1.3'
+gem 'route_translator', '~> 8.2.1'
 
 # Server
 gem 'puma'
@@ -43,7 +43,7 @@ gem 'multi_json'
 
 gem 'browser'
 
-# SameSite is now a thing in Google Chrome and Chromium browsers which 
+# SameSite is now a thing in Google Chrome and Chromium browsers which
 # has started causing issues for endusers.  This gem works round the
 # issue.  See Chromium issue: https://www.chromium.org/updates/same-site
 
@@ -70,7 +70,7 @@ group :test, :development do
 
   # Automated testing
   gem 'rspec', '~> 3.9.0'
-  gem 'rspec-rails', '~> 3.9.0'
+  gem 'rspec-rails', '~> 3.9.1'
   gem 'capybara', '~> 3.30'
   gem 'webmock', require: false
   gem 'jasmine'
