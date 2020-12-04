@@ -42,28 +42,28 @@ describe AuthnRequestController do
 
   context "authn request without sign in hint" do
     it "will route to blue start path when transaction enabled for eidas and past eu exit date" do
-      stub_session_creation({ "transactionSupportsEidas" => true })
+      stub_session_creation("transactionSupportsEidas" => true)
       allow(CONFIG).to receive(:eidas_disabled_after).and_return(DateTime.now - 1.day)
       post :rp_request, params: { "_ga" => :ga_id, "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state" }
       expect(response).to redirect_to start_path(_ga: :ga_id)
     end
 
     it "will route to blue start path when transaction not enabled for eidas and past eu exit date" do
-      stub_session_creation({ "transactionSupportsEidas" => false })
+      stub_session_creation("transactionSupportsEidas" => false)
       allow(CONFIG).to receive(:eidas_disabled_after).and_return(DateTime.now - 1.day)
       post :rp_request, params: { "_ga" => :ga_id, "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state" }
       expect(response).to redirect_to start_path(_ga: :ga_id)
     end
 
     it "will route to prove identity page when transaction enabled for eidas and before eu exit date" do
-      stub_session_creation({ "transactionSupportsEidas" => true })
+      stub_session_creation("transactionSupportsEidas" => true)
       allow(CONFIG).to receive(:eidas_disabled_after).and_return(DateTime.now + 1.day)
       post :rp_request, params: { "_ga" => :ga_id, "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state" }
       expect(response).to redirect_to prove_identity_path(_ga: :ga_id)
     end
 
     it "will route to prove identity page when transaction enabled for eidas and no eu exit config set" do
-      stub_session_creation({ "transactionSupportsEidas" => true })
+      stub_session_creation("transactionSupportsEidas" => true)
       allow(CONFIG).to receive(:eidas_disabled_after).and_return(nil)
       post :rp_request, params: { "_ga" => :ga_id, "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state" }
       expect(response).to redirect_to prove_identity_path(_ga: :ga_id)
@@ -72,21 +72,21 @@ describe AuthnRequestController do
 
   context "authn request with journey_hint set to eidas_sign_in" do
     it "will route to blue start path when transaction enabled for eidas and past eu exit date" do
-      stub_session_creation({ "transactionSupportsEidas" => true })
+      stub_session_creation("transactionSupportsEidas" => true)
       allow(CONFIG).to receive(:eidas_disabled_after).and_return(DateTime.now - 1.day)
       post :rp_request, params: { "_ga" => :ga_id, "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state", "journey_hint" => "eidas_sign_in" }
       expect(response).to redirect_to start_path(_ga: :ga_id)
     end
 
     it "will route to blue start path when transaction not enabled for eidas and past eu exit date" do
-      stub_session_creation({ "transactionSupportsEidas" => false })
+      stub_session_creation("transactionSupportsEidas" => false)
       allow(CONFIG).to receive(:eidas_disabled_after).and_return(DateTime.now - 1.day)
       post :rp_request, params: { "_ga" => :ga_id, "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state", "journey_hint" => "eidas_sign_in" }
       expect(response).to redirect_to start_path(_ga: :ga_id)
     end
 
     it "will route to prove identity page when transaction enabled for eidas and before eu exit date" do
-      stub_session_creation({ "transactionSupportsEidas" => true })
+      stub_session_creation("transactionSupportsEidas" => true)
       allow(CONFIG).to receive(:eidas_disabled_after).and_return(DateTime.now + 1.day)
       post :rp_request, params: { "_ga" => :ga_id, "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state", "journey_hint" => "eidas_sign_in" }
       expect(response).to redirect_to choose_a_country_path(_ga: :ga_id)
