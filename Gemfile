@@ -6,16 +6,16 @@ gem 'rails-i18n', '~> 5.1.3'
 gem 'route_translator', '~> 8.2.1'
 
 # Server
+gem 'connection_pool'
+gem 'http', '~> 2.0.0'
 gem 'puma'
 gem 'rack-handlers'
-gem 'http', '~> 2.0.0'
-gem 'connection_pool'
 
 # Assets
-gem 'sassc', '~> 2.0.1'
 gem 'autoprefixer-rails'
-gem 'uglifier', '~> 2.7.0'
 gem 'jquery-rails'
+gem 'sassc', '~> 2.0.1'
+gem 'uglifier', '~> 2.7.0'
 
 gem 'mini_racer'
 
@@ -35,19 +35,18 @@ gem 'sentry-raven'
 gem 'logstash-logger'
 gem 'request_store', '~> 1.3.1'
 
-gem 'zendesk_api'
 gem 'email_validator', '~> 1.6'
+gem 'zendesk_api'
 
 # Use multi_json because pkgr forces the json gem to < 2.0, which is an old specification of JSON (doesn't allow top level strings)
 gem 'multi_json'
 
 gem 'browser'
 
-# SameSite is now a thing in Google Chrome and Chromium browsers which
-# has started causing issues for endusers.  This gem works round the
-# issue.  See Chromium issue: https://www.chromium.org/updates/same-site
-
-gem 'rails_same_site_cookie', :git => "https://github.com/alphagov/rails-same-site-cookie.git", :ref => "704c1958bf2518ba8248fe3d21a49361e38e911a"
+# Google Chrome and Chromium browsers now treat cookies as SameSite=Lax by default
+# which causes issues for end users. This gem fixes the issue by making all cookies
+# specify SameSite=None. See Chromium issue: https://www.chromium.org/updates/same-site
+gem 'rails_same_site_cookie', { git: "https://github.com/alphagov/rails-same-site-cookie.git", ref: "704c1958bf2518ba8248fe3d21a49361e38e911a" }
 
 # Gem ffi in Ruby 2.6.6 requires a version of the system library `/usr/lib/libffi.dylib` that's not available on MacOS Mojave.
 # Revert the gem to a previous version that works with the library available on our dev machines.
@@ -69,18 +68,18 @@ group :test, :development do
   gem 'dotenv-rails'
 
   # Automated testing
-  gem 'rspec', '~> 3.9.0'
-  gem 'rspec-rails', '~> 3.9.1'
   gem 'capybara', '~> 3.30'
-  gem 'webmock', require: false
   gem 'jasmine'
   gem 'jasmine-jquery-rails'
-  gem 'selenium-webdriver'
   gem 'rails-controller-testing'
+  gem 'rspec', '~> 3.9.0'
+  gem 'rspec-rails', '~> 3.9.1'
+  gem 'selenium-webdriver'
+  gem 'webmock', require: false
 
+  gem 'headless'
   gem 'rack-test'
   gem 'rack_session_access'
-  gem 'headless'
   gem 'thin'
 
   gem 'rubocop-govuk', '~> 3.6.0'
@@ -88,11 +87,11 @@ group :test, :development do
 
   gem 'geckodriver-helper'
 
-  gem 'codacy-coverage', :require => false
+  gem 'codacy-coverage', { require: false }
 end
 
 platforms :mswin, :mingw, :x64_mingw do
-  gem 'windows-pr'
-  gem 'win32-process'
   gem 'tzinfo-data'
+  gem 'win32-process'
+  gem 'windows-pr'
 end
