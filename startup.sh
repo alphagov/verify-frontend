@@ -18,4 +18,4 @@ then
 fi
 
 bundle check || bundle install
-bundle exec puma -e development -d -p 50300
+bundle exec puma -e development -p 50300 &
