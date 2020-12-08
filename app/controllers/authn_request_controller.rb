@@ -133,6 +133,8 @@ private
   end
 
   def before_eidas_shutdown?
+    logger.info "from ENV.fetch: " + ENV.fetch("EIDAS_DISABLED_AFTER", "looks like EIDAS_DISABLED_AFTER wasn't set")
+    logger.info CONFIG.eidas_disabled_after.nil? ? "CONFIG.eidas_disabled_after is nil" : "CONFIG.eidas_disabled_after = #{CONFIG.eidas_disabled_after}"
     CONFIG.eidas_disabled_after.nil? || DateTime.now < CONFIG.eidas_disabled_after
   end
 end
