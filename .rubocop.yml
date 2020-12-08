@@ -28,6 +28,10 @@ Style/MixinUsage:
     - 'config/routes.rb'
     - 'config/main_routes.rb'
 
+Style/StringLiterals:
+  Exclude:
+    - 'Gemfile'
+
 Style/HashEachMethods:
   Enabled: false
 
