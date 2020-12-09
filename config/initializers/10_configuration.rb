@@ -58,4 +58,4 @@ CONFIG = Configuration.load! do
 
   option_datetime "eidas_disabled_after", "EIDAS_DISABLED_AFTER", allow_missing: true
 end
-Rails.logger.info "eidas_disabled_after: #{CONFIG.eidas_disabled_after}"
+Rails.logger.info "eidas_disabled_after value is #{CONFIG.eidas_disabled_after.nil? ? 'nil' : CONFIG.eidas_disabled_after}"
