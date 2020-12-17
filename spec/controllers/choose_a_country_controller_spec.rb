@@ -42,5 +42,14 @@ describe ChooseACountryController do
       expect(Rails.logger).to receive(:warn).with("Transaction does not support Eidas")
       get :choose_a_country, params: { locale: "en" }
     end
+
+    it "shows an error if eIDAS is supported but eIDAS has been disabled" do
+      allow(Rails.logger).to receive(:error)
+      allow(Rails.logger).to receive(:warn)
+      allow(CONFIG).to receive(:eidas_disabled_after).and_return(1.day.ago)
+      expect(Rails.logger).not_to receive(:error)
+      expect(Rails.logger).to receive(:warn).with("Transaction does not support Eidas")
+      get :choose_a_country, params: { locale: "en" }
+    end
   end
 end
