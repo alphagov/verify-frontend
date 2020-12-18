@@ -30,5 +30,14 @@ describe RedirectToCountryController do
       expect(response).to have_http_status(:internal_server_error)
       expect(subject).to render_template(:something_went_wrong)
     end
+
+    it "will redirect to an error page when the country is valid but eIDAS has been disabled" do
+      stub_select_country_request("yy")
+      allow(CONFIG).to receive(:eidas_disabled_after).and_return(1.day.ago)
+
+      post :choose_a_country_submit, params: { locale: "en", country: "YY" }
+      expect(response).to have_http_status(:forbidden)
+      expect(subject).to render_template(:something_went_wrong)
+    end
   end
 end
