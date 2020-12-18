@@ -57,7 +57,7 @@ RSpec.feature "When user visits document selection page" do
     check t("hub.select_documents.has_credit_card"), allow_label_click: true
     click_button t("navigation.continue")
 
-    expect(page).to have_title t("hub.select_documents.title")
+    expect(page).to have_title t("hub.select_documents_advice.title")
     expect(page).to have_current_path(select_documents_advice_path)
   end
 
