@@ -141,6 +141,7 @@ en:
       errors:
         no_selection: Select the items you have available right now
     select_documents_advice:
+      title: Advice about your documents
       advice_html:
         heading: You need more evidence to verify your identity
         sub_heading: 'To use GOV.UK Verify, you also need either:'
