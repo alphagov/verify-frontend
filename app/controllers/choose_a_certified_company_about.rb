@@ -8,7 +8,6 @@ module ChooseACertifiedCompanyAbout
     matching_idp = current_available_identity_providers_for_registration.detect { |idp| idp.simple_id == simple_id }
     @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
     if @idp.viewable?
-      @recommended = IDP_RECOMMENDATION_ENGINE.recommended?(@idp, current_available_identity_providers_for_registration, selected_evidence, current_transaction_simple_id)
       render "choose_a_certified_company/about"
     else
       render "errors/404", status: 404

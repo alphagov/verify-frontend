@@ -28,9 +28,12 @@ private
   end
 
   def suggested_idps
-    @suggested_idps ||= @idp_recommendation_engine.get_suggested_idps_for_registration(current_available_identity_providers_for_registration,
-                                                                                       selected_evidence,
-                                                                                       current_transaction_simple_id)
+    @suggested_idps ||= @idp_recommendation_engine.get_suggested_idps_for_registration(
+      current_available_identity_providers_for_registration,
+      selected_evidence,
+      current_transaction_simple_id,
+      idps_tried,
+    )
   end
 
   def possible_idps
