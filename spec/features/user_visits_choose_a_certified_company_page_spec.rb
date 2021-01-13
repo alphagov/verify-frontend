@@ -48,6 +48,21 @@ describe "When the user visits the choose a certified company page" do
       end
     end
 
+    it "doesn't display IDPs the user has previously failed to register with" do
+      page.set_rack_session(page.get_rack_session.merge(idps_tried: ["stub-idp-two"]))
+
+      visit "/choose-a-certified-company"
+
+      expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
+
+      within("#matching-idps") do
+        expect(page).to have_button("Choose IDCorp")
+        expect(page).not_to have_button("Choose Bob’s Identity Service")
+        expect(page).not_to have_button("Carol’s Secure ID")
+      end
+    end
+
     it "redirects to the choose a certified company about page when selecting About link" do
       visit "/choose-a-certified-company"
 
