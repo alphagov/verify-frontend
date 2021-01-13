@@ -46,7 +46,7 @@ describe "recommendations engine" do
       allow(segment_matcher).to receive(:find_matching_segments).with(user_profile).and_return(%w(SEGMENT_3))
       allow(transaction_grouper).to receive(:get_transaction_group).with("test-rp").and_return(TransactionGroups::PROTECTED)
 
-      recommended_idps = @recommendations_engine.get_suggested_idps_for_registration(idps, user_profile, "test-rp", Set['idp4'])
+      recommended_idps = @recommendations_engine.get_suggested_idps_for_registration(idps, user_profile, "test-rp", Set["idp4"])
 
       expected_suggestions = { recommended: [not_hidden_soft_disconnecting_idp], unlikely: [], user_segments: %w(SEGMENT_3) }
       expect(recommended_idps).to eql expected_suggestions
@@ -85,7 +85,7 @@ describe "recommendations engine" do
     end
 
     it "should return false if registration with the idp has been tried before and failed" do
-      result = @recommendations_engine.recommended?(idp_one, idps, user_profile, "test-rp", Set['idp'])
+      result = @recommendations_engine.recommended?(idp_one, idps, user_profile, "test-rp", Set["idp"])
       expect(result).to eql false
     end
   end
@@ -112,7 +112,7 @@ describe "recommendations engine" do
     end
 
     it "should return false if only recommended IDP has already been tried and failed" do
-      result = @recommendations_engine.any?([idp_one], user_profile, "test-rp", Set['idp'])
+      result = @recommendations_engine.any?([idp_one], user_profile, "test-rp", Set["idp"])
       expect(result).to eql false
     end
   end

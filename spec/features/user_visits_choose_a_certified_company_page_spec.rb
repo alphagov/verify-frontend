@@ -49,7 +49,7 @@ describe "When the user visits the choose a certified company page" do
     end
 
     it "doesn't display IDPs the user has previously failed to register with" do
-      page.set_rack_session(page.get_rack_session.merge(idps_tried: ["stub-idp-two"]))
+      page.set_rack_session(page.get_rack_session.merge(idps_tried: %w[stub-idp-two]))
 
       visit "/choose-a-certified-company"
 
