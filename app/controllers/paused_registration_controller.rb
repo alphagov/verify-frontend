@@ -97,6 +97,10 @@ private
     enabled_idp_list = get_idp_list(last_rp)
     idp = get_idp_choice(enabled_idp_list, last_idp)
     @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
+    if not @idp.viewable?
+      logger.error "IDP from cookie not viewable. IDP found was '#{@idp}' from enabled IDP list '#{enabled_idp_list}'. Journey hint value: '#{journey_hint_value}'"
+      render :without_user_session
+    end
     render :with_user_session
   end
 
