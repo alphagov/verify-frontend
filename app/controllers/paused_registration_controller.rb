@@ -99,7 +99,7 @@ private
     @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
     if not @idp.viewable?
       logger.error "IDP from cookie not viewable. IDP found was '#{@idp}' from enabled IDP list '#{enabled_idp_list}'. Journey hint value: '#{journey_hint_value}'"
-      render :without_user_session
+      render :without_user_session && return
     end
     render :with_user_session
   end
