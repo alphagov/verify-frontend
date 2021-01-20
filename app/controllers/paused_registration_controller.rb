@@ -95,10 +95,10 @@ private
   def with_cookie
     set_transaction_from_cookie
 
-    if (idp = last_idp_from_those_offering_registration)
+    if (idp = get_idp_from_idps_available_for_registration)
       @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
       render :with_user_session
-    elsif (idp = last_idp_from_those_offering_sign_in)
+    elsif (idp = get_idp_from_idps_available_for_sign_in)
       @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
       render :idp_no_longer_providing_registrations
     else
@@ -155,11 +155,11 @@ private
     list.idps
   end
 
-  def last_idp_from_those_offering_sign_in
+  def get_idp_from_idps_available_for_sign_in
     get_idp_choice(get_idp_list_for_sign_in, last_idp)
   end
 
-  def last_idp_from_those_offering_registration
+  def get_idp_from_idps_available_for_registration
     get_idp_choice(get_idp_list_for_registration(last_rp), last_idp)
   end
 
