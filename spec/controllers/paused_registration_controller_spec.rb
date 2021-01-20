@@ -11,59 +11,90 @@ describe PausedRegistrationController do
   before(:each) do
     set_selected_idp("entity_id" => "http://idcorp.com", "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_1 LEVEL_2))
     set_session_and_cookies_with_loa("LEVEL_2", "test-rp")
-    stub_api_idp_list_for_registration
+    stub_api_idp_list_for_registration(
+      [
+        { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => %w(LEVEL_2) },
+        { "simpleId" => "stub-idp-two", "entityId" => "http://idcorp-two.com", "levelsOfAssurance" => %w(LEVEL_2) },
+      ],
+    )
     stub_transaction_details
   end
 
   context "user visits pause page" do
     subject { get :index, params: { locale: "en" } }
 
-    it "renders paused registration page when session is present" do
-      expect(subject).to render_template(:with_user_session)
+    context "with session present" do
+      it "renders paused registration page" do
+        expect(subject).to render_template(:with_user_session)
+      end
     end
 
-    it "renders paused registration page when cookie is present but no session" do
-      session.delete(:selected_provider)
+    context "with no session" do
+      before do
+        session.delete(:selected_provider)
+        stub_translations
+        stub_api_idp_list_for_sign_in
+      end
 
-      stub_translations
-      stub_api_idp_list_for_sign_in
-
-      front_journey_hint_cookie = {
+      it "renders paused registration page when cookie is present but no session" do
+        front_journey_hint_cookie = {
           STATE: {
-              IDP: valid_idp,
-              RP: valid_rp,
-              STATUS: "PENDING",
+            IDP: valid_idp,
+            RP: valid_rp,
+            STATUS: "PENDING",
           },
-      }
+        }
 
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
 
-      expect(subject).to render_template(:with_user_session)
-    end
+        expect(subject).to render_template(:with_user_session)
+      end
 
-    it "renders paused registration without session page when there is no idp selected and no pending cookie" do
-      session.delete(:selected_provider)
-
-      stub_translations
-      stub_api_idp_list_for_sign_in
-
-      front_journey_hint_cookie = {
+      it "renders paused registration without session page when there is no idp selected and no pending cookie" do
+        front_journey_hint_cookie = {
           STATE: {
-              IDP: valid_idp,
-              RP: valid_rp,
-              STATUS: "OTHER",
+            IDP: valid_idp,
+            RP: valid_rp,
+            STATUS: "OTHER",
           },
-      }
+        }
 
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
 
-      expect(subject).to render_template(:without_user_session)
-    end
+        expect(subject).to render_template(:without_user_session)
+      end
 
-    it "should render paused registration without session page when there is no idp selected" do
-      session.delete(:selected_provider)
+      it "should render paused registration without session page when there is no idp selected" do
+        expect(subject).to render_template(:without_user_session)
+      end
 
-      expect(subject).to render_template(:without_user_session)
+      it "should render IDP no longer providing registrations page when no session and the selected IDP is sign in only" do
+        front_journey_hint_cookie = {
+          STATE: {
+            IDP: "http://idcorp-three.com",
+            RP: valid_rp,
+            STATUS: "PENDING",
+          },
+        }
+
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+
+        expect(subject).to render_template(:idp_no_longer_providing_registrations)
+      end
+
+      it "should raise when IDP not found in registering or sign in IDPs" do
+        front_journey_hint_cookie = {
+          STATE: {
+            IDP: "http://this-should-never-happen.com",
+            RP: valid_rp,
+            STATUS: "PENDING",
+          },
+        }
+
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+
+        expect(subject).to render_template(:something_went_wrong)
+      end
     end
   end
 

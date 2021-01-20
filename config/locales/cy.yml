@@ -604,6 +604,10 @@ cy:
           <p class="govuk-body">Bydd angen yr e-bost neu'r enw defnyddiwr a'r cyfrinair a ddefnyddiwyd gennych i greu cyfrif gyda %{idp_name}.</p>
         continue_verifying: 'Parhau i wirio gyda %{idp_name}'
         return_html: 'Neu dychwelyd i <a href="%{rp_start_page}">%{rp_name}</a>.'
+      idp_no_longer_providing_registrations:
+        title: "Verification Paused %{idp_name}"
+        heading: "%{idp_name} are no longer providing registrations"
+        return_html: 'You can return to <a href="%{rp_start_page}">%{rp_name}</a> and register with a different certified company.'
       without_session:
         title: Dilysu Wedi'i Oedi
         heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.

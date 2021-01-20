@@ -1,0 +1,11 @@
+<%= page_title 'hub.paused_registration.idp_no_longer_providing_registrations.title', idp_name: @idp.display_name %>
+<% content_for :feedback_source, 'PAUSED_REGISTRATION_PAGE' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t 'hub.paused_registration.idp_no_longer_providing_registrations.heading', idp_name: @idp.display_name %></h1>
+
+    <p><%= t 'hub.paused_registration.idp_no_longer_providing_registrations.return_html', rp_name: @transaction[:name], rp_start_page: @transaction[:homepage] %></p>
+
+  </div>
+</div>

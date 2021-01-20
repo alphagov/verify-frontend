@@ -599,6 +599,10 @@ en:
           <p class="govuk-body">You'll need the email or username and password you used to create an account with %{idp_name}.</p>
         continue_verifying: 'Continue verifying with %{idp_name}'
         return_html: 'Or return to <a href="%{rp_start_page}">%{rp_name}</a>.'
+      idp_no_longer_providing_registrations:
+        title: "Verification Paused %{idp_name}"
+        heading: "%{idp_name} are no longer providing registrations"
+        return_html: 'You can return to <a href="%{rp_start_page}">%{rp_name}</a> and register with a different certified company.'
       without_session:
         title: Verification Paused
         heading: The certified company has saved your information
