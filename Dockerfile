@@ -26,6 +26,7 @@ ENV OPENSSL_CONF /tmp/libssl.conf
 
 # Get the current git head reference and set it as
 # release for Sentry
-RUN export RELEASE_VER=$(git rev-parse HEAD)
+ARG release=local-dev
+ENV SENTRY_RELEASE $release
 
 CMD bundle exec puma -e development -p 80
