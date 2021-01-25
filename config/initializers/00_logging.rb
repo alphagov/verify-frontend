@@ -19,7 +19,7 @@ Raven.configure do |config|
   config.ssl_verification = false
   config.processors << Raven::Processor::Cookies
   config.current_environment = ENV.fetch("SENTRY_ENV", "unspecified")
-  config.release = ENV.fetch("RELEASE_VER", "unknown")
+  config.release = ENV.fetch("SENTRY_RELEASE", "unknown")
 end
 
 Rails.logger.extend(ActiveSupport::Logger.broadcast(Support::Raven::Logger.new))
