@@ -148,7 +148,7 @@
       }
     }
 
-    button {
+    button a {
       width: 65%;
     }
   }
@@ -168,10 +168,10 @@
       text-align: center;
 
       @include govuk-media-query($from: tablet) {
-        min-width: 230px;
+        min-width: 200px;
 
         @include govuk-if-ie8 {
-          min-width: 260px;
+          min-width: 230px;
         }
       }
 
