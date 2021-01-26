@@ -99,9 +99,10 @@ private
     @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
     if not @idp.viewable?
       logger.error "IDP from cookie not viewable. IDP found was '#{@idp}' from enabled IDP list '#{enabled_idp_list}'. Journey hint value: '#{journey_hint_value}'. Referer: '#{request.referer}'"
-      render :without_user_session && return
+      render :without_user_session
+    else
+      render :with_user_session
     end
-    render :with_user_session
   end
 
   def set_transaction_from_session
