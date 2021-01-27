@@ -606,8 +606,13 @@ cy:
         return_html: 'Neu dychwelyd i <a href="%{rp_start_page}">%{rp_name}</a>.'
       idp_no_longer_providing_registrations:
         title: "Verification Paused %{idp_name}"
-        heading: "%{idp_name} are no longer providing registrations"
-        return_html: 'You can return to <a href="%{rp_start_page}">%{rp_name}</a> and register with a different certified company.'
+        heading: "You can no longer verify your identity with %{idp_name}"
+        return_html: |
+          Go back to <a href="%{rp_start_page}">the service you were trying to access</a> where you can choose either:
+          <ul class="govuk-list govuk-list--bullet">
+              <li>a new identity provider</li>
+              <li>another way to prove your identity</li>
+          </ul>
       without_session:
         title: Dilysu Wedi'i Oedi
         heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.
