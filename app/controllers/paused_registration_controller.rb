@@ -95,7 +95,10 @@ private
   def with_cookie
     set_transaction_from_cookie
 
-    if (idp = get_idp_from_idps_available_for_registration)
+    if last_verify_journey_type == JourneyType::Verify::SIGN_IN
+      @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(get_idp_from_idps_available_for_sign_in)
+      render :with_user_session
+    elsif (idp = get_idp_from_idps_available_for_registration)
       @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
       render :with_user_session
     elsif (idp = get_idp_from_idps_available_for_sign_in)

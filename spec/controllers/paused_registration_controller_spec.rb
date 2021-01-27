@@ -68,12 +68,28 @@ describe PausedRegistrationController do
         expect(subject).to render_template(:without_user_session)
       end
 
-      it "should render IDP no longer providing registrations page when no session and the selected IDP is sign in only" do
+      it "should render with session page when it's a sign in journey" do
         front_journey_hint_cookie = {
           STATE: {
             IDP: "http://idcorp-three.com",
             RP: valid_rp,
             STATUS: "PENDING",
+            VERIFY_JOURNEY_TYPE: JourneyType::Verify::SIGN_IN,
+          },
+        }
+
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
+
+        expect(subject).to render_template(:with_user_session)
+      end
+
+      it "should render IDP no longer providing registrations page when no session, the selected IDP is sign in only, and it's not a sign-in journey" do
+        front_journey_hint_cookie = {
+          STATE: {
+            IDP: "http://idcorp-three.com",
+            RP: valid_rp,
+            STATUS: "PENDING",
+            JOURNEY_TYPE: JourneyType::Verify::REGISTRATION,
           },
         }
 
