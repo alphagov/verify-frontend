@@ -32,6 +32,7 @@ RSpec.feature "user visits the choose a certified company about idp page", type:
     given_a_session_with_selected_answers
 
     visit choose_a_certified_company_about_path("stub-idp-one")
+    expect(page).to have_title t("hub.choose_a_certified_company.about.heading", display_name: t("idps.stub-idp-one.name"))
     expect(page).to have_content("ID Corp is the premier identity proofing service around.")
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
     expect(page).to have_current_path(redirect_to_idp_register_path)
@@ -41,12 +42,12 @@ RSpec.feature "user visits the choose a certified company about idp page", type:
 
   scenario "for a non-existent idp" do
     visit choose_a_certified_company_about_path("foobar")
-    expect(page).to have_content t("errors.page_not_found.title")
+    expect(page).to have_content t("errors.page_not_found.heading")
   end
 
   scenario "for an idp that is not viewable" do
     visit choose_a_certified_company_about_path("foobar")
-    expect(page).to have_content t("errors.page_not_found.title")
+    expect(page).to have_content t("errors.page_not_found.heading")
   end
 
   scenario "user clicks back link" do

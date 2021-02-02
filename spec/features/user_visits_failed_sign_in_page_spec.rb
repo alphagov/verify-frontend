@@ -16,7 +16,7 @@ RSpec.describe "When the user visits the failed sign in page" do
       visit "/failed-sign-in"
 
       expect_feedback_source_to_be(page, "FAILED_SIGN_IN_PAGE", "/failed-sign-in")
-      expect(page).to have_title t("hub.failed_sign_in.title")
+      expect(page).to have_title t("hub.failed_sign_in.heading", display_name: "IDCorp")
       expect(page).to have_content t("hub.failed_sign_in.heading", display_name: "IDCorp")
       expect(page.body).to include t("hub.failed_sign_in.reasons_html")
       expect(page).to have_link t("hub.failed_sign_in.start_again"), href: start_path
@@ -40,7 +40,7 @@ RSpec.describe "When the user visits the failed sign in page" do
       visit "/failed-country-sign-in"
 
       expect_feedback_source_to_be(page, "FAILED_COUNTRY_SIGN_IN_PAGE", "/failed-country-sign-in")
-      expect(page).to have_title t("hub.failed_country_sign_in.title")
+      expect(page).to have_title t("hub.failed_country_sign_in.heading", country_name: "Stub Country")
       expect(page).to have_content t("hub.failed_country_sign_in.heading", country_name: "Stub Country")
       expect(page.body).to have_content t("hub.failed_country_sign_in.online")
       expect(page).to have_link t("hub.failed_country_sign_in.online_link"), href: prove_identity_retry_path

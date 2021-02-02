@@ -17,7 +17,7 @@
                         'data-order': order
           %>
       <% else %>
-          <h3 class="heading-small"><%= t 'hub.certified_companies_unavailable.title', count: 1, company: identity_provider.display_name %></h3>
+          <h3 class="heading-small"><%= t 'hub.certified_companies_unavailable.heading', count: 1, company: identity_provider.display_name %></h3>
           <p><%= t 'hub.certified_companies_unavailable.verify_another_company_text' %></p>
       <% end %>
     </div>

@@ -88,10 +88,10 @@ RSpec.describe "when user submits start page form" do
     stub_api_idp_list_for_sign_in
     stub_api_select_idp
     visit "/start"
-    expect(page).to have_title t("hub.sign_in_hint.title")
+    expect(page).to have_title t("hub.sign_in_hint.heading")
     expect(page).to have_content t("hub.sign_in_hint.heading")
     visit "/start/ignore-hint"  # the "choose another way" button
-    expect(page).to have_title t("hub.start.title")
+    expect(page).to have_title t("hub.start.heading")
     expect(page).to have_content t("hub.start.heading")
   end
 
@@ -101,10 +101,10 @@ RSpec.describe "when user submits start page form" do
     stub_api_idp_list_for_sign_in
     stub_api_select_idp
     visit "/start"
-    expect(page).to have_title t("hub.sign_in_hint.title")
+    expect(page).to have_title t("hub.sign_in_hint.heading")
     expect(page).to have_content t("hub.sign_in_hint.heading")
     visit "/start/ignore-hint"  # the "choose another way" button
-    expect(page).to have_title t("hub.start.title")
+    expect(page).to have_title t("hub.start.heading")
     expect(page).to have_content t("hub.start.heading")
   end
 end

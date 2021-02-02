@@ -32,7 +32,7 @@ RSpec.describe "When the user visits the redirect to service page" do
 
     it "should redirect to service when path is error" do
       visit redirect_to_service_error_path
-      verify_redirect_to_service t("hub.redirect_to_service.start_again.title")
+      verify_redirect_to_service t("hub.redirect_to_service.start_again.heading")
 
       click_button t("navigation.continue")
       expect(page).to have_current_path("/test-rp")
@@ -70,7 +70,7 @@ RSpec.describe "When the user visits the redirect to service page" do
 
     it "should redirect to service when path is signing-in" do
       visit redirect_to_service_signing_in_path
-      verify_redirect_to_service t("hub.redirect_to_service.signing_in.title")
+      verify_redirect_to_service t("hub.redirect_to_service.signing_in.heading")
 
       click_button t("navigation.continue")
       expect(page).to have_current_path("/test-rp")
@@ -78,7 +78,7 @@ RSpec.describe "When the user visits the redirect to service page" do
 
     it "should redirect to service when path is start-again" do
       visit redirect_to_service_start_again_path
-      verify_redirect_to_service t("hub.redirect_to_service.start_again.title")
+      verify_redirect_to_service t("hub.redirect_to_service.start_again.heading")
 
       click_button t("navigation.continue")
       expect(page).to have_current_path("/test-rp")

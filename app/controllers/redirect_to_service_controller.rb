@@ -3,21 +3,21 @@ class RedirectToServiceController < ApplicationController
 
   def signing_in
     redirect_to_service(
-      "hub.redirect_to_service.signing_in.title",
+      "hub.redirect_to_service.signing_in.heading",
       "hub.redirect_to_service.signing_in.transition_heading",
     )
   end
 
   def start_again
     redirect_to_service(
-      "hub.redirect_to_service.start_again.title",
+      "hub.redirect_to_service.start_again.heading",
       "hub.redirect_to_service.start_again.transition_heading",
     )
   end
 
   def error
     redirect_to_service(
-      "hub.redirect_to_service.start_again.title",
+      "hub.redirect_to_service.start_again.heading",
       "hub.redirect_to_service.start_again.transition_heading",
       is_error: true,
     )

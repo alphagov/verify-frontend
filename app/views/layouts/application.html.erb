@@ -11,7 +11,7 @@
     <title><%= display_page_title %> - GOV.UK Verify - GOV.UK</title>
 
     <%= tag('meta', name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover') %>
-    
+
     <%= tag('meta', name: 'verify|title', content: content_for(:page_title_in_english)) %>
 
     <%= csrf_meta_tags %>
@@ -31,9 +31,9 @@
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
     <a href="#content" class="govuk-skip-link"><%= t 'navigation.skip_link' %></a>
-    
+
     <% if cookies[:seen_cookie_message].nil? %>
-      
+
       <div id="global-cookie-message">
         <div class="govuk-width-container">
           <div class="govuk-grid-row">
@@ -70,24 +70,24 @@
         </div>
       </div>
     </header>
-    
+
     <div class="govuk-width-container">
-      <main class="govuk-main-wrapper govuk-!-padding-top-0" id="content" role="main">        
+      <main class="govuk-main-wrapper govuk-!-padding-top-0" id="content" role="main">
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-two-thirds">&nbsp;</div>
           <div class="govuk-grid-column-one-third hide-mobile">
             <%= render 'shared/available_languages' unless @hide_available_languages %>
           </div>
         </div>
-        
+
           <%= content_for?(:main) ? yield(:main) : yield %>
 
           <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
-              <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>      
+              <%= render 'shared/feedback_landing_link' if feedback_source.present? && !@hide_feedback_link %>
             </div>
           </div>
-        
+
           <div class="verify-logo-right">
             <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation' %>
           </div>
@@ -103,14 +103,14 @@
             <h2 class="govuk-visually-hidden"><%= t 'footer.support_links' %></h2>
             <ul class="govuk-footer__inline-list">
               <li class="govuk-footer__inline-list-item"><a href="https://www.gov.uk/help" hreflang="en"><%= t 'footer.help' %></a></li>
-              <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.accessibility.title'), accessibility_path) %></li>
-              <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.cookies.title'), cookies_path) %></li>
-              <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.privacy_notice.title'), privacy_notice_path) %></li>
+              <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.accessibility.heading'), accessibility_path) %></li>
+              <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.cookies.heading'), cookies_path) %></li>
+              <li class="govuk-footer__inline-list-item"><%= link_to(t('hub.privacy_notice.heading'), privacy_notice_path) %></li>
               <li class="govuk-footer__inline-list-item">
               <% if feedback_source.present? %>
-                  <%= raw link_to(t('hub.feedback.title'), feedback_path('feedback-source' => feedback_source)) %>
+                  <%= raw link_to(t('hub.feedback.heading'), feedback_path('feedback-source' => feedback_source)) %>
               <% else %>
-                  <%= link_to(t('hub.feedback.title'), feedback_path) %>
+                  <%= link_to(t('hub.feedback.heading'), feedback_path) %>
               <% end %>
               </li>
               <li class="govuk-footer__inline-list-item"><%= t 'footer.built_by_the' %> <a href="https://gds.blog.gov.uk" lang="en" hreflang="en">Government Digital Service</a></li>
@@ -131,7 +131,7 @@
         </div>
       </div>
     </footer>
-    
+
     <%= javascript_include_tag 'application', nonce: true %>
     <script>window.GOVUKFrontend.initAll()</script>
   </body>

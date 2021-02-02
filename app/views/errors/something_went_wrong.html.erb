@@ -1,4 +1,4 @@
-<%= page_title 'errors.something_went_wrong.title' %>
+<%= page_title 'errors.something_went_wrong.heading' %>
 <% content_for :feedback_source, 'ERROR_PAGE' %>
 <% content_for :piwik_custom_path, 'errors/generic-error' %>
 
@@ -8,7 +8,7 @@
     <p class="govuk-body"><%= t 'errors.something_went_wrong.error_message' %></p>
     <p class="govuk-body"><%= t 'errors.something_went_wrong.start_again' %></p>
     <% if transaction_taxon_list.any? %>
-      <h2 class="govuk-heading-m"><%= t 'hub.transaction_list.title' %></h2>
+      <h2 class="govuk-heading-m"><%= t 'hub.transaction_list.heading' %></h2>
       <%= render partial: 'shared/transaction_list' %>
     <% end %>
   </div>

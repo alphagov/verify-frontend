@@ -16,7 +16,7 @@ describe "user sends authn requests" do
       visit("/test-saml")
       click_button "saml-post"
 
-      expect(page).to have_title t("hub.start.title")
+      expect(page).to have_title t("hub.start.heading")
 
       expect(page.get_rack_session["transaction_simple_id"]).to eql "test-rp"
       expect(page.get_rack_session["verify_session_id"]).to eql default_session_id
@@ -40,7 +40,7 @@ describe "user sends authn requests" do
       visit("/test-saml")
       click_button "saml-post-eidas"
 
-      expect(page).to have_title t("hub.choose_a_country.title")
+      expect(page).to have_title t("hub.choose_a_country.heading")
       expect(page.get_rack_session["requested_loa"]).to eql "LEVEL_1"
       expect(page.get_rack_session["transaction_supports_eidas"]).to eql true
     end
@@ -53,7 +53,7 @@ describe "user sends authn requests" do
       visit("/test-saml")
       click_button "saml-post-eidas"
 
-      expect(page).to have_title t("hub.choose_a_country.title")
+      expect(page).to have_title t("hub.choose_a_country.heading")
       expect(page.get_rack_session["transaction_supports_eidas"]).to eql true
     end
 
@@ -68,7 +68,7 @@ describe "user sends authn requests" do
       visit("/test-saml")
       click_button "saml-post-journey-hint-registration"
 
-      expect(page).to have_title t("hub.start.title")
+      expect(page).to have_title t("hub.start.heading")
       # expect(stub_piwik_request).to have_been_made.once
     end
 
@@ -83,7 +83,7 @@ describe "user sends authn requests" do
       visit("/test-saml")
       click_button "saml-post-journey-hint-sign-in"
 
-      expect(page).to have_title t("hub.start.title")
+      expect(page).to have_title t("hub.start.heading")
       # expect(stub_piwik_request).to have_been_made.once
     end
 
@@ -98,7 +98,7 @@ describe "user sends authn requests" do
       visit("/test-saml")
       click_button "saml-post-journey-hint-sign-in"
 
-      expect(page).to have_title t("hub.single_idp_journey.title", display_name: "IDCorp")
+      expect(page).to have_title t("hub.single_idp_journey.heading", display_name: "IDCorp")
     end
 
     it "will set ab_test cookie" do
@@ -168,7 +168,7 @@ describe "user sends authn requests" do
     visit("/test-saml")
     click_button "saml-post"
 
-    expect(page).to have_title t("hub.start.title")
+    expect(page).to have_title t("hub.start.heading")
     expect(page.get_rack_session.has_key?(:journey_hint)).to be false
   end
 
@@ -179,7 +179,7 @@ describe "user sends authn requests" do
     visit("/test-saml")
     click_button "saml-post"
 
-    expect(page).to have_title t("hub.start.title")
+    expect(page).to have_title t("hub.start.heading")
     expect(page.get_rack_session.has_key?(:journey_hint)).to be false
   end
 
@@ -190,7 +190,7 @@ describe "user sends authn requests" do
       visit("/test-saml?_ga=123456")
       click_button "saml-post"
 
-      expect(page).to have_title t("hub.start.title")
+      expect(page).to have_title t("hub.start.heading")
       expect(page).to have_current_path start_path(_ga: "123456")
       expect(page).to have_selector "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
       expect(page).to have_selector "span#cross-gov-ga-domain-list", text: '["www.gov.uk"]'

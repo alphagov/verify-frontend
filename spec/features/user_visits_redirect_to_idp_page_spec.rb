@@ -66,6 +66,6 @@ RSpec.describe "When the user visits the redirect to IDP page" do
     given_a_session_with_a_hints_enabled_idp
     stub_session_idp_authn_request(originating_ip, location, false)
     visit redirect_to_idp_register_path
-    expect(page).to have_title t("hub.redirect_to_idp.title")
+    expect(page).to have_title t("hub.redirect_to_idp.heading")
   end
 end

@@ -5,32 +5,32 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   describe "#page_title" do
     it "should output English page title by default" do
-      helper.page_title("hub.start.title")
-      expect(helper.content_for(:page_title)).to eql I18n.t("hub.start.title")
+      helper.page_title("hub.start.heading")
+      expect(helper.content_for(:page_title)).to eql t("hub.start.heading")
     end
 
     it 'should start with "Error:" when there are page errors' do
       flash[:errors] = ["some error"]
-      expected_title = "Error: #{I18n.t('hub.start.title', locale: 'en')}"
-      helper.page_title("hub.start.title", locale: :en)
+      expected_title = "Error: #{t('hub.start.heading', locale: 'en')}"
+      helper.page_title("hub.start.heading", locale: :en)
       expect(helper.content_for(:page_title)).to eql expected_title
     end
 
     it "should output Welsh page title if locale specified" do
-      helper.page_title("hub.start.title", locale: :cy)
-      expect(helper.content_for(:page_title)).to eql I18n.t("hub.start.title", locale: "cy")
+      helper.page_title("hub.start.heading", locale: :cy)
+      expect(helper.content_for(:page_title)).to eql t("hub.start.heading", locale: "cy")
     end
 
     it "should always output English page title and level of assurance for analytics" do
-      title = "#{I18n.t('hub.start.title', locale: 'en')} - GOV.UK Verify - GOV.UK - LEVEL_1"
+      title = "#{t('hub.start.heading', locale: 'en')} - GOV.UK Verify - GOV.UK - LEVEL_1"
       session["requested_loa"] = "LEVEL_1"
-      helper.page_title("hub.start.title", locale: :cy)
+      helper.page_title("hub.start.heading", locale: :cy)
       expect(helper.content_for(:page_title_in_english)).to eql title
     end
 
     it "should just output English page title when requested_loa not in session" do
-      title = "#{I18n.t('hub.start.title', locale: 'en')} - GOV.UK Verify - GOV.UK"
-      helper.page_title("hub.start.title", locale: :cy)
+      title = "#{t('hub.start.heading', locale: 'en')} - GOV.UK Verify - GOV.UK"
+      helper.page_title("hub.start.heading", locale: :cy)
       expect(helper.content_for(:page_title_in_english)).to eql title
     end
   end

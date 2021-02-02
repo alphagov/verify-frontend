@@ -100,8 +100,6 @@ en:
     help: Help
     built_by_the: Built by the
   hub:
-    about:
-      title: About
     about_what_is_verify:
       heading: What GOV.UK Verify is
       content: GOV.UK Verify is a secure way to prove who you are online. It helps protect you against online identity theft.
@@ -112,7 +110,6 @@ en:
       content_html: <p class="govuk-body">The company will ask you questions and check your identity documents.</p>
                     <p class="govuk-body">It will never share your information for any other purpose without your consent.</p>
     select_documents:
-      title: Your documents
       heading: Which of these do you have available right now?
       explanation: This will help us tell you if GOV.UK Verify will work for you. The more items you have, the more likely it is that you can verify your identity.
       select_all_that_apply: "Select all that apply:"
@@ -123,7 +120,7 @@ en:
       has_nothing: None of the above
       has_driving_license_and_credit_card: A full or provisional driving licence with your photo on it and a credit or debit card
       further_explanation:
-        title: What GOV.UK Verify uses these for
+        heading: What GOV.UK Verify uses these for
         content_html: |
           <p class="govuk-body">
             The companies can check your passport and driving licence against official records.
@@ -141,7 +138,6 @@ en:
       errors:
         no_selection: Select the items you have available right now
     select_documents_advice:
-      title: Advice about your documents
       advice_html:
         heading: You need more evidence to verify your identity
         sub_heading: 'To use GOV.UK Verify, you also need either:'
@@ -159,8 +155,7 @@ en:
           <p class="govuk-body">If you have these things but they’re somewhere else, come back when you have them with you.</p>
           <p class="govuk-body">%{prove_your_identity_link} if you do not have these things.</p>
     choose_a_certified_company:
-      title: Pick a certified company
-      heading: Pick a company to verify you
+      heading: Pick a certified company to verify you
       intro: One of these companies will create your identity account.
       idp_count: You can pick either company.
       idp_explanation: "There’s more than one so that:"
@@ -181,16 +176,14 @@ en:
         information_provided_by: Information provided by %{display_name}
         close: close
       about:
-        title: About %{display_name}
+        heading: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
     prove_your_identity_another_way:
       heading: Prove your identity another way
       sub_heading: You can still %{service_name}.
-    other_ways_title: Other ways to access the service
     other_ways_heading: Other ways to %{other_ways_description}
     other_ways_after_eidas:
-      title: Country not listed
       heading: Other ways to %{other_ways_description}
       explanation: If your digital identity scheme isn't available yet, you can prove who you are another way so you can %{other_ways_description}.
       verify:
@@ -206,7 +199,6 @@ en:
         button: "Use GOV.UK Verify"
       cannot_verify: What to do if you cannot use GOV.UK Verify
     choose_a_country:
-      title: Choose a country
       heading: Use a digital identity from another European country
       description: You can use a digital identity from another European country to access services on GOV.UK.
       eu_exit_warn: You will not be able to use a digital identity from another European country to access services on GOV.UK after 31 December 2020.
@@ -215,11 +207,9 @@ en:
       country_not_listed_link: "%{other_ways_description}."
       select_label: "Select %{scheme_name}"
     redirect_to_country:
-      title: Redirect to country
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
     prove_identity:
-      title: Prove your identity to continue
       heading: Prove your identity to continue
       header_content: Choose how you want to prove your identity so you can
       use_verify:
@@ -238,7 +228,6 @@ en:
           <p class="govuk-body">If you’re part of an ID scheme in a participating country, you may be able to use it here.</p>
         button_text: Select your European digital identity
     start:
-      title: Start
       heading: Sign in with GOV.UK Verify
       answer_yes: This is my first time using GOV.UK Verify
       answer_no: I've already signed up for Verify
@@ -246,7 +235,6 @@ en:
       continue: Continue
       error_message: Please select an option
     signin:
-      title: Sign in with a certified company
       heading: Who do you have an identity account with?
       back: Back
       about_link: set one up now
@@ -260,19 +248,17 @@ en:
       company_no_longer_verifies_text: If you have an identity account with %{company}, you’ll need to %{link}.
       company_no_longer_verifies_link: verify your identity with another company
     cookies:
-      title: Cookies
+      heading: Cookies
     privacy_notice:
-      title: Privacy notice
+      heading: Privacy notice
     verify_services:
-      title: Verify services
       heading: GOV.UK Verify
       message: "The current services using GOV.UK Verify are:"
     transaction_list:
-      title: Find the service you were using to start again
+      heading: Find the service you were using to start again
       hint: Follow the instructions you received.
       other_services: Other services
     about_choosing_a_company:
-      title: About choosing a company
       heading: Finding the right company to verify you
       content_html: |
         <p class="govuk-body">These companies have built secure systems to verify identities. These systems work by checking:</p>
@@ -282,14 +268,13 @@ en:
         </ul>
         <p class="govuk-body">We need to ask you some questions to check if the companies can verify you. We’ll then send you to the website of the company you select.</p>
     will_it_work_for_me:
-      title: Can I be verified?
       heading: About you
       question:
         option_yes: 'Yes'
         above_age_threshold: Are you 20 or over?
         resident_last_12_months: Have you lived in the UK for the last 12 months?
         not_resident_reason:
-          title: Which of these applies to you?
+          sub_heading: Which of these applies to you?
           recently: I moved to the UK in the last 12 months
           not_resident: I have an address in the UK but I don’t live there
           no_address: I don’t have a UK address
@@ -299,7 +284,6 @@ en:
           resident_12_months: Tell us if you've lived in the UK for the last 12 months
           not_resident_reason: Select an option
     idp_wont_work_for_you_one_doc:
-      title: "%{idp_name} cannot verify your identity"
       heading: "%{idp_name} cannot verify your identity"
       choose_another_company: You have to choose a different certified company to verify your identity.
       choose_another_certified_company_link: Choose another company
@@ -308,7 +292,6 @@ en:
       content_html: |
         <p class="govuk-body">Based on your answers, the companies will not be able to verify your identity.</p>
     may_not_work_if_you_live_overseas:
-      title: You might not be able to have your identity verified
       heading: You might not be able to have your identity verified
       try_to_verify: I’d like to try to verify my identity using GOV.UK Verify
       explanation1: To verify an identity, these companies access credit records and ask you to confirm this information. Most people living outside the UK have a limited activity history on their UK credit record, so companies might not be able to check your identity in this way.
@@ -325,7 +308,6 @@ en:
       mail_order_account: mail order account
       youll_also_need: You’ll also need a UK passport or a UK driving licence.
     why_might_this_not_work_for_me:
-      title: Why might this not work for me
       heading: You might not be able to have your identity verified
       try_to_verify: I’d like to try to verify my identity using GOV.UK Verify
       explanation: To verify an identity, these companies access credit records and ask you to confirm this information. Most young people and newcomers to the UK have a limited credit history, so some companies might not be able to check their identity in this way.
@@ -340,11 +322,10 @@ en:
       registered_to_vote: you’re registered to vote
       youll_also_need: You’ll also need a UK passport or a UK driving licence.
     will_not_work_without_uk_address:
-      title: GOV.UK Verify will not work for you
       heading: You won’t be able to use GOV.UK Verify
       explanation: You need a current UK address to get your identity verified.
     why_companies:
-      title: Why you need to use a company
+      heading: Why you need to use a company
       choose_a_company: Choose a company
       content_html: |
         <p class="govuk-body">When verifying your identity, the companies access information like credit records. They can also check that any documents you provide, such as passports and driving licences, are valid.</p>
@@ -353,7 +334,7 @@ en:
         <p class="govuk-body">When verifying your identity, the companies access information like credit records. They can also check that any documents you provide, such as passports and driving licences, are valid.</p>
         <p class="govuk-body">These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
     redirect_to_idp_warning:
-      title: "You'll now be redirected"
+      heading: "You'll now be redirected"
       create_account: Create your %{display_name} identity account
       continue_website: Continue to the %{display_name} website
       identity_account_use_html: |
@@ -363,7 +344,6 @@ en:
       other_ways_link: "other ways to %{transaction}"
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, there are %{other_ways_link}"
     redirect_to_idp_question:
-      title: "Extra question"
       heading: Verifying with %{display_name}
       loa1_heading: Setting up a %{display_name} account
       answer_yes: "Yes"
@@ -376,20 +356,16 @@ en:
       or_html: or %{choose_another_company_link}
       validation_message: Select an option
     confirm_your_identity:
-      title: Confirm your identity
       use_other_idp: If this isn’t the company that verified you, %{sign_in_link}.
       sign_in_link_message: sign in with a different certified company
       need_to_signin_again: In order to %{transaction_name}, you need to sign in again with your certified company. You don’t need to register again.
     confirmation:
-      title: Your identity has been verified
       message: "You can sign in wherever you see the GOV.UK Verify logo with your %{display_name} identity account username and password."
       continue_to_rp: "You can now %{transaction_name}."
       heading: "%{display_name} has verified your identity"
       add_security_loa1: When you access some government services, you'll be asked to provide more evidence, but you only need to do this once.
       extra_security: Government services requiring extra evidence
     failed_registration:
-      title: Unable to verify your identity
-      alt_heading: "%{idp} could not verify your identity"
       you_can_still: You can still %{service}
       your_account_with_heading: Your account with %{idp}
       your_account_with_text: "%{idp} will not contact you or use your data for anything that is not related to your account. You can contact %{idp} for more help."
@@ -416,21 +392,18 @@ en:
       try_another_summary: Try verifying with another certified company
       contact_details_intro: "Contact %{idp_name}"
     failed_country_sign_in:
-      title: Unable to sign you in
       heading: "Your identity scheme in %{country_name} was unable to confirm your identity"
       other_ways: "There are other ways you can %{other_ways_description}."
       online_link: Other ways to prove your identity online
       online: Online
       offline: Offline
     failed_sign_in:
-      title: Unable to sign you in
       heading: "%{display_name} couldn’t sign you in"
       reasons_html: |
         <p class="govuk-body">You may have selected the wrong company. Check your emails and text messages for confirmation of who verified you.</p>
         <p class="govuk-body">You can be verified by another company at any time. You won’t lose any data on GOV.UK services you’ve used.</p>
       start_again: "Start again"
     failed_uplift:
-      title: Failed to uplift
       heading: "%{display_name} was not able to validate the evidence you provided"
       reasons_html: |
         <p class="govuk-body">There are a few reasons why this might happen, including:</p>
@@ -447,7 +420,6 @@ en:
       other_ways_summary: "View other ways to %{other_ways_description}"
       contact_summary: "Contact %{idp_name}"
     response_processing:
-      title: Please wait
       heading: "%{rp_name} is processing your details"
       bear_with_us: "This may take a few seconds, please bear with us."
       matching_error:
@@ -457,24 +429,22 @@ en:
         online: Online
         offline: Offline
     forgot_company:
-      title: Advice for forgotten company
+      heading: Advice for forgotten company
     redirect_to_service:
       heading: Continue to next step
       signing_in:
-        title: "Please wait. Signing you in"
+        heading: "Please wait. Signing you in"
         transition_heading: "%{rp_name} is processing your details"
       start_again:
-        title: "Please wait. Starting again."
+        heading: "Please wait. Starting again."
         transition_heading: "Starting again"
       no_javascript: Because Javascript is not enabled on your browser, you must press the continue button
       please_wait: This may take a few seconds, please bear with us.
       loading: "Loading…"
     redirect_to_idp:
-      title: Loading
       heading: Continue to next step
       description: Because Javascript is not enabled on your browser, you must press the continue button
     feedback_landing:
-      title: Help
       basic_heading: Get help using GOV.UK Verify
       heading: Get help accessing %{service_name}
       idps:
@@ -488,7 +458,6 @@ en:
         heading: Give feedback on GOV.UK Verify
         paragraph: Ask a question, report a problem or suggest an improvement GOV.UK Verify can make. The support team aims to respond to questions in 5 working days.
     feedback:
-      title: Feedback
       heading: Send your feedback to GOV.UK Verify
       introduction_html: |
         <p class="govuk-body">Use this form to ask a question, report a problem or suggest an improvement GOV.UK Verify can make.</p>
@@ -517,11 +486,9 @@ en:
         reply: Tell us if you want a reply
       send_message: Send message
     feedback_disabled:
-      title: Feedback Disabled
       heading: Feedback is disabled on this environment
       error_content: You are currently using a non-production version of Verify, where feedback has been disabled.
     feedback_sent:
-      title: Feedback
       heading: Thank you for your feedback
       message_email: We've received your message, and we'll reply as soon as possible.
       session_valid_link: Return to GOV.UK Verify
@@ -529,7 +496,7 @@ en:
       session_not_valid_link: start again
       product_page: Return to the GOV.UK Verify product page
     certified_companies_unavailable:
-      title:
+      heading:
         one: "%{company} is temporarily unavailable with GOV.UK Verify"
         other: These companies are temporarily unavailable with GOV.UK Verify
       verify_another_company_html: You can try again later or %{link}.
@@ -537,11 +504,11 @@ en:
       verify_another_company_text: You can try again later or verify your identity with another certified company.
       company_text: "%{company} is unavailable"
     certified_companies_disconnected:
-      title: The following companies are no longer part of GOV.UK Verify
+      heading: The following companies are no longer part of GOV.UK Verify
       verify_another_company_html: If you had an identity account with one of these companies, you'll need to %{link}.
       verify_another_company_link: verify your identity with a different company
     further_information:
-      title: Enter your %{cycle_three_name}
+      heading: Enter your %{cycle_three_name}
       first_time: This is the first time you’ve signed in.
       help_with_your: Where to find your %{cycle_three_name}
       cancel: Cancel and return to %{transaction_name}
@@ -549,7 +516,6 @@ en:
       attribute_validation_message: Enter a valid %{cycle_three_name}
       null_attribute: I don’t have an %{cycle_three_name}
       timeout:
-        title: "You've been signed out"
         heading: "You've been signed out"
         intro: "To keep your information safe, you've been signed out after a period of inactivity."
         continue: "To continue to %{service_name}, you'll need to sign in again with %{idp_name}."
@@ -557,13 +523,11 @@ en:
         other_ways_text: You can also see
         other_ways_link: other ways to %{service_name}
     no_idps_available:
-      title: No IDPS available
       heading: GOV.UK Verify won’t work for you
       text: Based on your answers, none of the certified companies can verify you.
       details_html: You can %{href}; the more accurately you answer the questions, the more likely it is that a certified company can verify you.
       details_link: change your answers to the questions
     cancelled_registration:
-      title: Verify registration cancelled
       heading: "You cancelled your identity verification with %{idp_name}"
       next: 'What do you want to do next?'
       what_next: 'You can still %{service_name}.'
@@ -581,7 +545,6 @@ en:
         contact_verify: 'Contact GOV.UK Verify'
     paused_registration:
       with_session:
-        title: "Verification Paused %{idp_name}"
         heading: "Your %{idp_name} identity account has been saved"
         restart_instructions_html: |
           <p class="govuk-body">To return you can:</p>
@@ -603,7 +566,6 @@ en:
               <li>another way to prove your identity</li>
           </ul>
       without_session:
-        title: Verification Paused
         heading: The certified company has saved your information
         restart_instructions_html: |
           <p class="govuk-body">To return you can:</p>
@@ -614,7 +576,6 @@ en:
           </ul>
           <p class="govuk-body">You'll need the email or username and password you used to create an account.</p>
       from_resume_link:
-        title: "Verification Paused %{idp_name} - Link"
         heading: "Your %{idp_name} identity account has been saved"
         restart_instructions_html: |
           <p class="govuk-body">To return you can:</p>
@@ -625,7 +586,6 @@ en:
           </ul>
           <p class="govuk-body">You'll need the email or username and password you used to create an account.</p>
       resume:
-        title: "Continue verifying with %{display_name}"
         heading: "Continue verifying with %{display_name}"
         intro: "You'll need to finish verifying your identity with %{display_name} to %{service_name}."
         continue: "Continue with %{display_name}"
@@ -634,7 +594,6 @@ en:
         alternative_start: "sign in with another certified company"
         alternative_other_ways: "see other ways to %{service_name}"
     single_idp_journey:
-      title: Continue with %{display_name}
       heading: Prove your identity with %{display_name}
       intro: "%{idp_display_name} will confirm your identity with GOV.UK Verify, and you can continue to %{service_display_name}."
       continue_button: Continue with %{display_name}
@@ -642,15 +601,13 @@ en:
       alternative_one: use a different certified company
       alternative_two: see other ways to %{service_display_name}
     accessibility:
-      title: Accessibility
+      heading: Accessibility
     completed_registration:
-      title: You've successfully proved your identity
       heading: You’ve successfully proved your identity with %{idp_name}
       message_one: You now need to return to the government service you were trying to access.
       message_two: When the service asks you to prove your identity, you can do so by signing in to your %{idp_name} identity account.
       select_service: Select the service you need
     sign_in_hint:
-      title: Sign in to continue
       heading: Sign in to continue
       intro: The last company selected on this device was %{idp_name}.
       continue_with_idp: Continue with %{idp_name} if you've created an identity account with them.
@@ -658,13 +615,11 @@ en:
       other_way_button: Choose another way to sign in
   errors:
     no_cookies:
-      title: Cookies Missing
-      heading: GOV.UK Verify
+      heading: Cookies Missing
       access_restriction: GOV.UK Verify can only be accessed from a government service.
       read_more_html: 'Read the <a href="https://www.gov.uk/verify">Introduction to GOV.UK Verify</a> for more information.'
       enable_cookies: If you can’t access GOV.UK Verify from a service, enable your cookies.
     session_error:
-      title: Something went wrong
       heading: You need to start again
       security: For security reasons, if you use the back button to return from a certified company, you must start again.
       start_again: Start again
@@ -679,20 +634,17 @@ en:
         </ol>
       start_again: Return to the service
     something_went_wrong:
-      title: Something went wrong
       heading: Sorry, something went wrong
       error_message: This may be because your session timed out or there was a system error.
       start_again: Because this is a secure service, you’ll need to start again.
     proxy_node_error:
       start_again: Because you were using a secure service from another European country, you’ll need to go back to the page where you started using that service.
     page_not_found:
-      title: This page can’t be found
       heading: This page can’t be found
       reason_pre: "This may be because:"
       reason_one: the link you clicked is broken
       reason_two: you entered an incorrect web address
     eidas_scheme_unavailable:
-      title: Identity scheme unavailable
       heading: "Your identity scheme in %{country_name} is currently unavailable"
       other_ways: "Try again later or choose another way to "
       other_ways_link: "prove your identity online"

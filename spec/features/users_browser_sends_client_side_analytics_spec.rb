@@ -24,7 +24,7 @@ RSpec.describe "When the user visits a page" do
     it "sends a page view to analytics" do
       expect(request_log).to receive(:log).with(
         hash_including(
-          "action_name" => "Start - GOV.UK Verify - GOV.UK - LEVEL_2",
+          "action_name" => "Sign in with GOV.UK Verify - GOV.UK Verify - GOV.UK - LEVEL_2",
           "idsite" => "5",
         ),
       )
@@ -36,7 +36,7 @@ RSpec.describe "When the user visits a page" do
     it "and in Welsh sends the page title in English to analytics" do
       expect(request_log).to receive(:log).with(
         hash_including(
-          "action_name" => "Start - GOV.UK Verify - GOV.UK - LEVEL_2",
+          "action_name" => "Sign in with GOV.UK Verify - GOV.UK Verify - GOV.UK - LEVEL_2",
           "idsite" => "5",
         ),
       )
@@ -64,7 +64,7 @@ RSpec.describe "When the user visits a page" do
       set_session_and_session_cookies!
       expect(request_log).to receive(:log).with(
         hash_including(
-          "action_name" => "Start - GOV.UK Verify - GOV.UK - LEVEL_2",
+          "action_name" => "Sign in with GOV.UK Verify - GOV.UK Verify - GOV.UK - LEVEL_2",
         ),
       )
       expect(request_log).to receive(:log).with(
@@ -93,7 +93,7 @@ RSpec.describe "When the user visits a page" do
       page.set_rack_session(new_visit: "true")
       expect(request_log).to receive(:log).with(
         hash_including(
-          "action_name" => "Start - GOV.UK Verify - GOV.UK - LEVEL_2",
+          "action_name" => "Sign in with GOV.UK Verify - GOV.UK Verify - GOV.UK - LEVEL_2",
           "url" => /start/,
           "new_visit" => "1",
         ),
@@ -106,7 +106,7 @@ RSpec.describe "When the user visits a page" do
       page.set_rack_session(new_visit: "true")
       expect(request_log).to receive(:log).with(
         hash_including(
-          "action_name" => "Start - GOV.UK Verify - GOV.UK - LEVEL_2",
+          "action_name" => "Sign in with GOV.UK Verify - GOV.UK Verify - GOV.UK - LEVEL_2",
           "url" => /start/,
           "new_visit" => "1",
         ),
@@ -115,7 +115,7 @@ RSpec.describe "When the user visits a page" do
 
       expect(request_log).to receive(:log).with(
         hash_including(
-          "action_name" => "Start - GOV.UK Verify - GOV.UK - LEVEL_2",
+          "action_name" => "Sign in with GOV.UK Verify - GOV.UK Verify - GOV.UK - LEVEL_2",
           "url" => /start/,
           "new_visit" => "0",
         ),
@@ -123,14 +123,14 @@ RSpec.describe "When the user visits a page" do
       visit "/start"
     end
 
-    it "sends a page view with a new_visit parameter if new session and on next page the parameter is not present" do
+    it "sends a page view with a new_visit parameter What GOV.UK Verify is" do
       stub_api_idp_list_for_registration
       set_session_and_session_cookies!
       page.set_rack_session(new_visit: "true")
 
       expect(request_log).to receive(:log).with(
         hash_including(
-          "action_name" => "Start - GOV.UK Verify - GOV.UK - LEVEL_2",
+          "action_name" => "Sign in with GOV.UK Verify - GOV.UK Verify - GOV.UK - LEVEL_2",
           "url" => /start/,
           "new_visit" => "1",
         ),
@@ -139,7 +139,7 @@ RSpec.describe "When the user visits a page" do
 
       expect(request_log).to receive(:log).with(
         hash_including(
-          "action_name" => "About - GOV.UK Verify - GOV.UK - LEVEL_2",
+          "action_name" => "What GOV.UK Verify is - GOV.UK Verify - GOV.UK - LEVEL_2",
           "url" => /about/,
           "new_visit" => "0",
         ),
@@ -160,7 +160,7 @@ RSpec.describe "When the user visits a page" do
       expect(image_src).to match(/idsite=5/)
       expect(image_src).to match(/rec=1/)
       expect(image_src).to match(/rand=\d+/)
-      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
+      expect(image_src).to match(/action_name=Sign\+in\+with\+GOV\.UK\+Verify\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
       expect(image_src).to_not include("url")
     end
 
@@ -170,7 +170,7 @@ RSpec.describe "When the user visits a page" do
       noscript_image = page.find(:id, "piwik-noscript-tracker")
       expect(noscript_image).to_not be_nil
       image_src = noscript_image["src"]
-      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
+      expect(image_src).to match(/action_name=Sign\+in\+with\+GOV\.UK\+Verify\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
     end
 
     it "sends a page view with a custom url for error pages" do
@@ -202,7 +202,7 @@ RSpec.describe "When the user visits a page" do
       expect(image_src).to match(/rec=1/)
       expect(image_src).to match(/new_visit=1/)
       expect(image_src).to match(/rand=\d+/)
-      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
+      expect(image_src).to match(/action_name=Sign\+in\+with\+GOV\.UK\+Verify\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
     end
 
     it "sends a page view with a new_visit parameter when new visit but not on the following refresh" do
@@ -213,14 +213,14 @@ RSpec.describe "When the user visits a page" do
       expect(noscript_image).to_not be_nil
       image_src = noscript_image["src"]
       expect(image_src).to match(/new_visit=1/)
-      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
+      expect(image_src).to match(/action_name=Sign\+in\+with\+GOV\.UK\+Verify\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
 
       visit "/start"
       noscript_image = page.find(:id, "piwik-noscript-tracker")
       expect(noscript_image).to_not be_nil
       image_src = noscript_image["src"]
       expect(image_src).to match(/new_visit=0/)
-      expect(image_src).to match(/action_name=Start\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
+      expect(image_src).to match(/action_name=Sign\+in\+with\+GOV\.UK\+Verify\+-\+GOV\.UK\+Verify\+-\+GOV\.UK\+-\+LEVEL_2/)
     end
   end
 end

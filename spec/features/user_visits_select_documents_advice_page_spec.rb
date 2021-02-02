@@ -10,7 +10,7 @@ RSpec.feature "user visits select documents advice pages", type: :feature do
   it "includes the appropriate feedback source" do
     visit select_documents_advice_path
 
-    expect(page).to have_title t("hub.select_documents_advice.title")
+    expect(page).to have_title t("hub.select_documents_advice.advice_html.heading")
     expect_feedback_source_to_be(page, "SELECT_DOCUMENTS_ADVICE_PAGE", select_documents_advice_path)
   end
 

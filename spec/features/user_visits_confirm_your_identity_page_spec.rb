@@ -31,13 +31,13 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
 
     it "displays the page in Welsh" do
       visit "/cadarnhau-eich-hunaniaeth"
-      expect(page).to have_title t("hub.confirm_your_identity.title", locale: :cy)
+      expect(page).to have_title t("hub.signin.sign_in_idp", display_name: "Welsh IDCorp", locale: :cy)
       expect(page).to have_css "html[lang=cy]"
     end
 
     it "displays the page in English" do
       visit "/confirm-your-identity"
-      expect(page).to have_title t("hub.confirm_your_identity.title")
+      expect(page).to have_title t("hub.signin.sign_in_idp", display_name: "IDCorp")
       expect(page).to have_css "html[lang=en]"
     end
 
@@ -112,7 +112,7 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
       set_session_and_session_cookies!
       stub_api_idp_list_for_sign_in
       visit "/confirm-your-identity"
-      expect(page).to have_title t("hub.signin.title")
+      expect(page).to have_title t("hub.signin.heading")
       expect(page).to have_current_path(sign_in_path)
     end
 
@@ -120,7 +120,7 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
       set_session_and_session_cookies!
       stub_api_idp_list_for_sign_in
       visit "/confirm-your-identity"
-      expect(page).to have_title t("hub.signin.title")
+      expect(page).to have_title t("hub.signin.heading")
       expect(page).to have_current_path(sign_in_path)
     end
 
@@ -128,7 +128,7 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
       set_up_session("bad-entity-id")
       stub_api_idp_list_for_sign_in
       visit "/confirm-your-identity"
-      expect(page).to have_title t("hub.signin.title")
+      expect(page).to have_title t("hub.signin.heading")
       expect(page).to have_current_path(sign_in_path)
     end
   end
@@ -145,7 +145,7 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
 
       visit "/test-saml"
       click_button "saml-post-journey-hint-non-repudiation"
-      expect(page).to have_title t("hub.confirm_your_identity.title", locale: :cy)
+      expect(page).to have_title t("hub.signin.sign_in_idp", display_name: "Welsh IDCorp", locale: :cy)
       expect(page).to have_current_path("/cadarnhau-eich-hunaniaeth")
       expect(page).to have_css "html[lang=cy]"
     end

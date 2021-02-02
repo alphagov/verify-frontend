@@ -1,6 +1,5 @@
-<%= page_title 'hub.feedback_landing.title' %>
+<%= page_title { @feedback_landing_heading } %>
 <% content_for :feedback_source, flash['feedback_source'] %>
-
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -8,7 +7,7 @@
     <h2 class="govuk-heading-m"><%= link_to(t('hub.feedback_landing.idps.heading'), t('hub.feedback_landing.idps.href')) %></h2>
     <p><%= raw t('hub.feedback_landing.idps.description', bank_holidays: link_to(t('hub.feedback_landing.idps.bank_holidays'), "http://www.gov.uk/bank-holidays")) %></p>
 
-    <% unless @other_ways_text.nil? %>
+    <% if @other_ways_text.present? %>
       <h2 class="govuk-heading-m"><%= raw @other_ways_heading %></h2>
       <p><%= raw @other_ways_text %></p>
     <% end %>

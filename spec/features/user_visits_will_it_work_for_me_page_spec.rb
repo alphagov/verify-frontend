@@ -25,9 +25,9 @@ RSpec.describe "When the user visits the will it work for me page" do
     it "when js is on", js: true do
       visit "/will-it-work-for-me"
       choose "will_it_work_for_me_form_above_age_threshold_false", allow_label_click: true
-      expect(page).to_not have_content t("hub.will_it_work_for_me.question.not_resident_reason.title")
+      expect(page).to_not have_content t("hub.will_it_work_for_me.question.not_resident_reason.sub_heading")
       choose "will_it_work_for_me_form_resident_last_12_months_false", allow_label_click: true
-      expect(page).to have_content t("hub.will_it_work_for_me.question.not_resident_reason.title")
+      expect(page).to have_content t("hub.will_it_work_for_me.question.not_resident_reason.sub_heading")
       click_button t("navigation.continue")
 
       expect(page).to have_current_path(will_it_work_for_me_path)

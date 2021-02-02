@@ -27,7 +27,7 @@ RSpec.describe "user encounters error page" do
     visit "/test-saml"
     click_button "saml-post"
     expect(page).to have_content t("errors.something_went_wrong.heading")
-    expect(page).to_not have_content t("hub.transaction_list.title")
+    expect(page).to_not have_content t("hub.transaction_list.heading")
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
     expect(page.status_code).to eq(500)
   end
