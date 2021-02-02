@@ -553,12 +553,6 @@ cy:
       example_text: "Enghraifft: %{example}"
       attribute_validation_message: Rhowch %{cycle_three_name} dilys
       null_attribute: Nid oes gennyf %{cycle_three_name}
-      modal:
-        heading: Byddwch yn cael eich allgofnodi'n fuan
-        text: Er mwyn cadw'ch gwybodaeth yn ddiogel, byddwch yn cael eich allgofnodi'n awtomatig
-        extra_text: Bydd angen i chi fewngofnodi eto gyda %{idp_name}.
-        button_continue: Parhau
-        button_signout: Allgofnodi nawr
       timeout:
         title: "Rydych wedi cael eich allgofnodi"
         heading: "Rydych wedi cael eich allgofnodi"
