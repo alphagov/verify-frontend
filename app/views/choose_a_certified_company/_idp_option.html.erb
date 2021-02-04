@@ -1,31 +1,32 @@
-<div class="idp-choice">
+<div class="idp-choice govuk-grid-row">
   <%= form_for(identity_provider, url: choose_a_certified_company_submit_path, html: {class: nil, id: nil}) do |f| %>
     <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil %>
-    <div class="company-logo">
-      <div>
-        <%= image_submit_tag(identity_provider.logo_path, alt: "#{identity_provider.display_name} logo") %>
-      </div>
-      <p class="govuk-body-s">
-        <%= link_to(t('hub.choose_a_certified_company.about_idp', display_name: identity_provider.display_name), choose_a_certified_company_about_path(identity_provider.simple_id)) %>
-      </p>
+    <div class="govuk-grid-column-one-third company-logo">
+      <%= image_submit_tag(identity_provider.logo_path, alt: "#{identity_provider.display_name} logo") %>
     </div>
-    <% unless identity_provider.unavailable %>
-        <div class="idp-option">
+
+    <div class="govuk-grid-column-one-third">
+      <% unless identity_provider.unavailable %>
           <%= f.button t('hub.choose_a_certified_company.choose_idp', display_name: identity_provider.display_name),
-                        class: recommended ? 'govuk-button' : 'govuk-button govuk-button--secondary',
-                        role: recommended ? nil : 'link',
+                        class: "govuk-button#{ ' govuk-button--secondary' unless recommended }",
+                        role: "#{'link' unless recommended}",
                         name: identity_provider.simple_id,
                         id: nil,
                         type: 'submit',
                         value: identity_provider.display_name,
                         'data-order': order
           %>
-        </div>
-    <% else %>
-        <h3 class="heading-small"><%= t 'hub.certified_companies_unavailable.title', count: 1, company: identity_provider.display_name %></h3>
-        <p><%=
-          t 'hub.certified_companies_unavailable.verify_another_company_text'
-        %></p>
-    <% end %>
+      <% else %>
+          <h3 class="heading-small"><%= t 'hub.certified_companies_unavailable.title', count: 1, company: identity_provider.display_name %></h3>
+          <p><%= t 'hub.certified_companies_unavailable.verify_another_company_text' %></p>
+      <% end %>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <%= button_link_to t('hub.choose_a_certified_company.about_idp', display_name: identity_provider.display_name),
+                          choose_a_certified_company_about_path(identity_provider.simple_id),
+                          id: 'about-button',
+                          class: 'govuk-button govuk-button--secondary'
+      %>
+    </div>
   <% end %>
 </div>

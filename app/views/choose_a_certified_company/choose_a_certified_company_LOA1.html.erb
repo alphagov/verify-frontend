@@ -1,17 +1,19 @@
 <%= page_title 'hub.choose_a_certified_company.title' %>
 <% content_for :feedback_source, 'CHOOSE_A_CERTIFIED_COMPANY_PAGE' %>
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-thirds">
     <h1 class="govuk-heading-l"><%= t 'hub.choose_a_certified_company.heading' %></h1>
     <p class="govuk-body"><%= t 'hub.choose_a_certified_company.personal_information' %></p>
 
     <ul class="govuk-list govuk-list--bullet">
       <li><%= link_to(t('hub.choose_a_certified_company.why_companies'), why_companies_path) %></li>
     </ul>
-
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <div id="matching-idps">
       <% @recommended_idps.each.with_index do |identity_provider, index| %>
-          <%= render partial: 'choose_a_certified_company/idp_option', locals: {recommended: true, identity_provider: identity_provider, order: index + 1} %>
+        <%= render partial: 'choose_a_certified_company/idp_option', locals: {recommended: true, identity_provider: identity_provider, order: index + 1} %>
       <% end %>
     </div>
   </div>
