@@ -19,6 +19,12 @@ else
   git secrets --register-aws
 fi
 
+if [[ $1 == "--chrome" ]]; then
+  browser=chrome
+else
+  browser=firefox
+fi
+
 export RAILS_ENV=test
 
 for focus in fdescribe fcontext fit fspecify fexample; do
@@ -41,7 +47,7 @@ success=$?
 
 # Stub API tests
 BUNDLE_GEMFILE=stub/api/Gemfile bundle
-BUNDLE_GEMFILE=stub/api/Gemfile bundle exec rspec --pattern stub/api/**/*_spec.rb
+BUNDLE_GEMFILE=stub/api/Gemfile BROWSER=$browser bundle exec rspec --pattern stub/api/**/*_spec.rb
 success=$((success || $?))
 
 rm -Rf coverage/

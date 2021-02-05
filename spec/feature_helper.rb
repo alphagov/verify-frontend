@@ -1,9 +1,15 @@
 require "rails_helper"
 require "capybara/rspec"
 require "webmock/rspec"
+require "webdrivers/chromedriver"
 require "rack_session_access/capybara"
 require "support/cookie_matchers"
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(
+  allow_localhost: true,
+  allow: ["chromedriver.storage.googleapis.com",
+          %r{github.com/mozilla/geckodriver/releases.*},
+          %r{github-releases.githubusercontent.com/.*geckodriver}],
+)
 
 RACK_COOKIE_DATE_FORMAT = "%a, %d %b %Y".freeze
 
@@ -21,17 +27,21 @@ RSpec.configure do |config|
 end
 
 require "selenium/webdriver"
-Capybara.register_driver :firefox_headless do |app|
+if ENV["BROWSER"] == "chrome"
+  browser = :chrome
+  options = ::Selenium::WebDriver::Chrome::Options.new
+else
+  browser = :firefox
   options = ::Selenium::WebDriver::Firefox::Options.new
-  # Stop firefox getting upgraded to version 63 which does not work with Selenium.
-  options.add_preference("app.update.auto", false)
-  options.add_preference("app.update.enabled", false)
-  options.add_argument("--headless")
-
-  Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
 end
 
-Capybara.javascript_driver = :firefox_headless
+Capybara.register_driver :browser do |app|
+  options.add_argument("--headless")
+
+  Capybara::Selenium::Driver.new(app, browser: browser, options: options)
+end
+
+Capybara.javascript_driver = :browser
 Capybara.server = :puma, { Silent: true }
 
 module FeatureHelper
