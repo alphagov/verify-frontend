@@ -1,5 +1,7 @@
 module ApplicationHelper
   def page_title(title_key = nil, locale_data = {}, extra_string = nil)
+    raise ArgumentError.new("Missing page title") if title_key.nil? && !block_given?
+
     title = ""
     title << "#{t('title.error', locale_data)}: " if flash[:errors]
     title << (block_given? ? yield : t(title_key, locale_data))

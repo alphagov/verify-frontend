@@ -16,6 +16,11 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(helper.content_for(:page_title)).to eql expected_title
     end
 
+    it "raise ArgumentError when called with nil" do
+      expect { helper.page_title(nil) }
+        .to raise_error ArgumentError, "Missing page title"
+    end
+
     it "should output Welsh page title if locale specified" do
       helper.page_title("hub.start.heading", locale: :cy)
       expect(helper.content_for(:page_title)).to eql t("hub.start.heading", locale: "cy")
