@@ -27,14 +27,14 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
 
     it "should always output English page title and level of assurance for analytics" do
-      title = "#{t('hub.start.heading', locale: 'en')} - GOV.UK Verify - GOV.UK - LEVEL_1"
+      title = "#{t('hub.start.heading', locale: 'en')} - GOV.UK Verify - LEVEL_1"
       session["requested_loa"] = "LEVEL_1"
       helper.page_title("hub.start.heading", locale: :cy)
       expect(helper.content_for(:page_title_in_english)).to eql title
     end
 
     it "should just output English page title when requested_loa not in session" do
-      title = "#{t('hub.start.heading', locale: 'en')} - GOV.UK Verify - GOV.UK"
+      title = "#{t('hub.start.heading', locale: 'en')} - GOV.UK Verify"
       helper.page_title("hub.start.heading", locale: :cy)
       expect(helper.content_for(:page_title_in_english)).to eql title
     end
