@@ -15,6 +15,7 @@
               <%= @form.errors[:selection_true].first %>
             </span>
         <% end %>
+        <h2 class="govuk-heading-m"><%= t 'hub.start.sub_heading' %></h2>
         <div class="govuk-radios">
           <div class="govuk-radios__item">
             <%= f.radio_button :selection, true, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input", id: "start_form_selection_true"}%>

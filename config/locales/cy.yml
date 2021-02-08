@@ -239,6 +239,7 @@ cy:
     start:
       title: Dechrau
       heading: Mewngofnodi gyda GOV.UK Verify
+      sub_heading: Have you used GOV.UK Verify before?
       answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
       answer_no_hint: ""
