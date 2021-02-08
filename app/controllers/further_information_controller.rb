@@ -1,6 +1,5 @@
 class FurtherInformationController < ApplicationController
   def index
-    @seconds_to_timeout = get_seconds_to_timeout
     return redirect_to further_information_timeout_path if expired?
 
     session_id = session[:verify_session_id]
@@ -20,7 +19,6 @@ class FurtherInformationController < ApplicationController
       FEDERATION_REPORTER.report_cycle_three(current_transaction, request, @cycle_three_attribute.simple_id)
       redirect_to response_processing_path
     else
-      @seconds_to_timeout = get_seconds_to_timeout
       @transaction_name = current_transaction.name
       flash.now[:errors] = @cycle_three_attribute.errors.full_messages.join(", ")
       render "index"
@@ -56,9 +54,5 @@ private
 
   def expired?
     !session[:assertion_expiry].nil? && Time.parse(session[:assertion_expiry]) <= Time.now.utc
-  end
-
-  def get_seconds_to_timeout
-    (Time.parse(session[:assertion_expiry]) - Time.now.utc).to_i unless session[:assertion_expiry].nil?
   end
 end
