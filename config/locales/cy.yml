@@ -598,6 +598,15 @@ cy:
           <p class="govuk-body">Bydd angen yr e-bost neu'r enw defnyddiwr a'r cyfrinair a ddefnyddiwyd gennych i greu cyfrif gyda %{idp_name}.</p>
         continue_verifying: 'Parhau i wirio gyda %{idp_name}'
         return_html: 'Neu dychwelyd i <a href="%{rp_start_page}">%{rp_name}</a>.'
+      idp_no_longer_providing_registrations:
+        title: "Verification Paused %{idp_name}"
+        heading: "You can no longer verify your identity with %{idp_name}"
+        return_html: |
+          Go back to <a href="%{rp_start_page}">the service you were trying to access</a> where you can choose either:
+          <ul class="govuk-list govuk-list--bullet">
+              <li>a new identity provider</li>
+              <li>another way to prove your identity</li>
+          </ul>
       without_session:
         title: Dilysu Wedi'i Oedi
         heading: Mae eich cwmni ardystiedig wedi arbed eich gwybodaeth.

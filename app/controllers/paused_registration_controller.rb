@@ -94,14 +94,18 @@ private
 
   def with_cookie
     set_transaction_from_cookie
-    enabled_idp_list = get_idp_list(last_rp)
-    idp = get_idp_choice(enabled_idp_list, last_idp)
-    @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
-    if not @idp.viewable?
-      logger.error "IDP from cookie not viewable. IDP found was '#{@idp}' from enabled IDP list '#{enabled_idp_list}'. Journey hint value: '#{journey_hint_value}'. Referer: '#{request.referer}'"
-      render :without_user_session
-    else
+
+    if last_verify_journey_type == JourneyType::Verify::SIGN_IN
+      @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(get_idp_from_idps_available_for_sign_in)
       render :with_user_session
+    elsif (idp = get_idp_from_idps_available_for_registration)
+      @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
+      render :with_user_session
+    elsif (idp = get_idp_from_idps_available_for_sign_in)
+      @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(idp)
+      render :idp_no_longer_providing_registrations
+    else
+      raise(Errors::WarningLevelError, "IDP not found in those providing registration or sign in. IDP was '#{last_idp}'")
     end
   end
 
@@ -140,11 +144,26 @@ private
     CONFIG_PROXY.get_transaction_translations(simple_id, params[:locale]).fetch(:name, nil)
   end
 
-  def get_idp_list(transaction_id)
+  def get_idp_list_for_registration(transaction_id)
     list = CONFIG_PROXY.get_available_idp_list_for_registration(transaction_id, "LEVEL_2")
     return nil if list.nil?
 
     list.idps
+  end
+
+  def get_idp_list_for_sign_in
+    list = CONFIG_PROXY.get_idp_list_for_sign_in(last_rp)
+    return nil if list.nil?
+
+    list.idps
+  end
+
+  def get_idp_from_idps_available_for_sign_in
+    get_idp_choice(get_idp_list_for_sign_in, last_idp)
+  end
+
+  def get_idp_from_idps_available_for_registration
+    get_idp_choice(get_idp_list_for_registration(last_rp), last_idp)
   end
 
   def preferred_start_page(selected_rp)

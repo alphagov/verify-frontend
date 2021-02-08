@@ -36,6 +36,7 @@ module UserCookiesPartialController
     journey_hint_by_status_value["STATE"] = { IDP: idp_entity_id,
                                               RP: rp_entity_id.nil? ? session[:transaction_entity_id] : rp_entity_id,
                                               STATUS: status }
+    journey_hint_by_status_value["STATE"][:VERIFY_JOURNEY_TYPE] = session[:journey_type] if status == "PENDING"
 
     cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { value: journey_hint_by_status_value.to_json, expires: 18.months.from_now }
   end

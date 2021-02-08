@@ -174,7 +174,8 @@ describe AuthnResponseController do
       let(:cookie_with_pending_status) {
         { STATE: { IDP: "http://idcorp.com",
                    RP: "http://www.test-rp.gov.uk/SAML2/MD",
-                   STATUS: "PENDING" } }.to_json
+                   STATUS: "PENDING",
+                   VERIFY_JOURNEY_TYPE: "sign-in" } }.to_json
       }
       it { should eq cookie_with_pending_status }
     end
@@ -184,7 +185,8 @@ describe AuthnResponseController do
       let(:cookie_with_pending_status) {
         { STATE: { IDP: "http://idcorp.com",
                    RP: "http://www.test-rp.gov.uk/SAML2/MD",
-                   STATUS: "PENDING" } }.to_json
+                   STATUS: "PENDING",
+                   VERIFY_JOURNEY_TYPE: "sign-in" } }.to_json
       }
       it { should eq cookie_with_pending_status }
       it { expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be_nil }
