@@ -9,13 +9,15 @@
 
   <%= form_for @form, url: start_path, html: {id: 'start-page-form', class: 'js-validate', novalidate: 'novalidate'} do |f| %>
     <%= content_tag :div, class: form_question_class do %>
+      <% if @form.errors.include?(:selection_true) %>
+          <span class="govuk-error-message">
+            <%= @form.errors[:selection_true].first %>
+          </span>
+      <% end %>
       <fieldset class="govuk-fieldset">
-        <% if @form.errors.include?(:selection_true) %>
-            <span class="govuk-error-message">
-              <%= @form.errors[:selection_true].first %>
-            </span>
-        <% end %>
-        <h2 class="govuk-heading-m"><%= t 'hub.start.sub_heading' %></h2>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h2 class="govuk-fieldset__heading"><%= t 'hub.start.sub_heading' %></h2>
+        </legend>
         <div class="govuk-radios">
           <div class="govuk-radios__item">
             <%= f.radio_button :selection, true, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input", id: "start_form_selection_true"}%>
