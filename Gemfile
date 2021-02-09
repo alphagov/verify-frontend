@@ -68,13 +68,14 @@ group :test, :development do
   gem 'dotenv-rails'
 
   # Automated testing
-  gem 'capybara', '~> 3.30'
+  gem 'capybara', '~> 3.35'
   gem 'jasmine'
   gem 'jasmine-jquery-rails'
   gem 'rails-controller-testing'
-  gem 'rspec', '~> 3.9.0'
-  gem 'rspec-rails', '~> 3.9.1'
-  gem 'selenium-webdriver'
+  gem 'rspec', '~> 3.10'
+  gem 'rspec-rails', '~> 4.0'
+  gem 'selenium-webdriver', '~> 3'
+  gem 'webdrivers', '~> 4.0'
   gem 'webmock', require: false
 
   gem 'headless'
@@ -84,8 +85,6 @@ group :test, :development do
 
   gem 'rubocop-govuk', '~> 3.6.0'
   gem 'scss_lint-govuk'
-
-  gem 'geckodriver-helper'
 
   gem 'codacy-coverage', { require: false }
 end
