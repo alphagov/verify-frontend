@@ -1,5 +1,32 @@
 #!/usr/bin/env bash
 
+show_help() {
+  cat << EOF
+Usage:
+
+  Options:
+    -c, --chrome    Tell this script to run tests using chrome driver
+
+    -h, --help      Show's this help message
+EOF
+}
+
+CHROME=false
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -c | --chrome)          CHROME=true
+                                ;;
+        -h | --help)            show_help
+                                exit 0
+                                ;;
+        * )                     echo -e "Unknown option $1...\n"
+                                show_help
+                                exit 1
+    esac
+    shift
+done
+
 . scripts/deploy.sh
 
 if [[ ! $(git secrets 2>/dev/null) ]]; then
@@ -19,7 +46,7 @@ else
   git secrets --register-aws
 fi
 
-if [[ $1 == "--chrome" ]]; then
+if [[ $CHROME == "true" ]]; then
   browser=chrome
 else
   browser=firefox
