@@ -599,13 +599,13 @@ cy:
         continue_verifying: 'Parhau i wirio gyda %{idp_name}'
         return_html: 'Neu dychwelyd i <a href="%{rp_start_page}">%{rp_name}</a>.'
       idp_no_longer_providing_registrations:
-        title: "Verification Paused %{idp_name}"
-        heading: "You can no longer verify your identity with %{idp_name}"
+        title: "Dilysu Wedi'i Oedi %{idp_name}"
+        heading: "Ni allwch ddilysu eich hunaniaeth gyda %{idp_name} bellach."
         return_html: |
-          Go back to <a href="%{rp_start_page}">the service you were trying to access</a> where you can choose either:
+          Ewch yn ôl i'r <a href="%{rp_start_page}">gwasanaeth roeddech yn ceisio ei ddefnyddio</a> lle gallwch ddewis naill ai:
           <ul class="govuk-list govuk-list--bullet">
-              <li>a new identity provider</li>
-              <li>another way to prove your identity</li>
+              <li>darparwr hunaniaeth newydd</li>
+              <li>ffordd arall i brofi eich hunaniaeth</li>
           </ul>
       without_session:
         title: Dilysu Wedi'i Oedi
