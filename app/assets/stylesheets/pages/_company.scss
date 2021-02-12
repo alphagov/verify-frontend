@@ -44,13 +44,11 @@
 .company-logo {
   position: relative;
   width: 50%;
-  padding-bottom: 25%;
-  margin: 0 auto 15px;
+  margin: 0 auto;
 
   @include govuk-media-query($from: tablet) {
-    margin: 0 auto 15px;
+    margin: 0 auto;
     width: 80%;
-    padding-bottom: 40%;
   }
 }
 
@@ -69,16 +67,21 @@
   }
 }
 
+.govuk-button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.govuk-grid-column-one-third {
+  margin-top: 15px;
+}
+
 .company .govuk-button {
   margin: 0 0 20px;
 
   @include govuk-media-query($from: mobile) {
     width: 65%;
   }
-}
-
-.company dialog .govuk-button {
-  margin: 0 0 15px;
 }
 
 .company-about {
@@ -91,7 +94,8 @@
 }
 
 .idp-choice {
-  padding: 15px 0;
+  padding-top: 10px;
+  padding-bottom: 5px;
   border-bottom: 1px solid govuk-colour("dark-grey");
   @include govuk-clearfix;
 
@@ -112,7 +116,7 @@
   }
 
   @include govuk-media-query($from: tablet) {
-    padding-left: 230px;
+    padding-left: 220px;
     min-height: 96px;
     position: relative;
 
@@ -123,9 +127,9 @@
       top: 0;
       bottom: 0;
       margin: auto;
-      width: 200px;
-      height: 96px;
       text-align: center;
+      width: 200px;
+      height: 76px;
     }
   }
 
