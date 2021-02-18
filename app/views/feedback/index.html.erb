@@ -1,4 +1,4 @@
-<%= page_title 'hub.feedback.title' %>
+<%= page_title 'hub.feedback.heading' %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -6,7 +6,7 @@
     <%= render 'shared/form-errors', errors: flash[:errors], form: @form %>
 
     <h1 class="govuk-heading-l"><%= t 'hub.feedback.heading' %></h1>
-    
+
     <%= t 'hub.feedback.introduction_html' %>
 
     <% if @has_email_sending_error %>

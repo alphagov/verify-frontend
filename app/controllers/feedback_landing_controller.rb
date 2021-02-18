@@ -5,7 +5,7 @@ class FeedbackLandingController < ApplicationController
 
   def index
     flash["feedback_referer"] = request.referer
-    flash["feedback_source"] = params["feedback-source"].nil? ? flash["feedback_source"] : params["feedback-source"]
+    flash["feedback_source"] = params["feedback-source"] || flash["feedback_source"]
     @feedback_landing_heading = t("hub.feedback_landing.basic_heading")
 
     return if current_transaction_simple_id.nil?

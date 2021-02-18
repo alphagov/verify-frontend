@@ -140,22 +140,22 @@ describe "When the user visits the failed registration page and" do
 
   def expect_page_to_have_main_content_continue_on_fail
     expect_feedback_source_to_be(page, "FAILED_REGISTRATION_PAGE", "/failed-registration")
-    expect(page).to have_title t("hub.failed_registration.title")
+    expect(page).to have_title t("hub.failed_registration.heading", idp_name: "IDCorp")
     expect(page).to have_content t("hub.failed_registration.heading", idp_name: "IDCorp")
     expect(page).to have_content t("hub.failed_registration.contact_details_intro", idp_name: "IDCorp")
   end
 
   def expect_page_to_have_main_content_non_continue
     expect_feedback_source_to_be(page, "FAILED_REGISTRATION_PAGE", "/failed-registration")
-    expect(page).to have_title t("hub.failed_registration.title")
-    expect(page).to have_content t("hub.failed_registration.alt_heading", idp: "IDCorp")
+    expect(page).to have_title t("hub.failed_registration.heading", idp_name: "IDCorp")
+    expect(page).to have_content t("hub.failed_registration.heading", idp_name: "IDCorp")
     expect(page).to have_content t("hub.failed_registration.remaining_idps.different_way", service: "test GOV.UK Verify user journeys")
   end
 
   def expect_page_to_have_main_content_non_continue_for_no_idps
     expect_feedback_source_to_be(page, "FAILED_REGISTRATION_PAGE", "/failed-registration")
-    expect(page).to have_title t("hub.failed_registration.title")
-    expect(page).to have_content t("hub.failed_registration.alt_heading", idp: "IDCorp")
+    expect(page).to have_title t("hub.failed_registration.heading", idp_name: "IDCorp")
+    expect(page).to have_content t("hub.failed_registration.heading", idp_name: "IDCorp")
     expect(page).to have_content t("hub.failed_registration.last_idp.different_way", service: "test GOV.UK Verify user journeys")
   end
 end

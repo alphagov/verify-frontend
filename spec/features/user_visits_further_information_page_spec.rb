@@ -13,7 +13,7 @@ RSpec.describe "user visits further information page" do
   it "should also be in welsh" do
     stub_cycle_three_attribute_request("NationalInsuranceNumber")
     visit further_information_cy_path
-    expect(page).to have_title t("hub.further_information.title", cycle_three_name: attribute_field_name, locale: :cy)
+    expect(page).to have_title t("hub.further_information.heading", cycle_three_name: attribute_field_name, locale: :cy)
     expect(page).to have_css "html[lang=cy]"
   end
 
@@ -24,7 +24,7 @@ RSpec.describe "user visits further information page" do
 
     rp_name = t("rps.test-rp.name")
 
-    expect(page).to have_title t("hub.further_information.title", cycle_three_name: attribute_field_name)
+    expect(page).to have_title t("hub.further_information.heading", cycle_three_name: attribute_field_name)
     expect(page).to have_css ".govuk-label", text: attribute_field_name
     expect(page).to have_css "span.govuk-hint", text: t("hub.further_information.example_text", example: t("cycle3.NationalInsuranceNumber.example"))
     expect(page).to have_content t("hub.further_information.first_time")

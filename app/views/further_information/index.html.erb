@@ -1,4 +1,4 @@
-<%= page_title 'hub.further_information.title', cycle_three_name: @cycle_three_attribute.field_name %>
+<%= page_title 'hub.further_information.heading', cycle_three_name: @cycle_three_attribute.field_name %>
 <% content_for :feedback_source, 'CYCLE_3_PAGE' %>
 
 <div class="govuk-grid-row">
@@ -26,7 +26,7 @@
                 <%= @cycle_three_attribute.errors[:cycle_three_data].first %>
               </span>
             <% end %>
-          
+
           <%= f.text_field :cycle_three_data, required: true, pattern: h(@cycle_three_attribute.pattern.source),
                             class: 'govuk-input govuk-!-width-three-quarters',
                             'data-msg': t('hub.further_information.attribute_validation_message',

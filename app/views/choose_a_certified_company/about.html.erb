@@ -1,4 +1,4 @@
-<% page_title 'hub.choose_a_certified_company.about.title', { :display_name => @idp.display_name } %>
+<% page_title 'hub.choose_a_certified_company.about.heading', { :display_name => @idp.display_name } %>
 <% content_for :feedback_source, "CHOOSE_A_CERTIFIED_COMPANY_ABOUT_#{@idp.simple_id.upcase}_PAGE" %>
 <%= link_to t('navigation.back'), choose_a_certified_company_path, class: 'govuk-back-link' %>
 <div class="govuk-grid-row">

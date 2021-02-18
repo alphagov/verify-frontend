@@ -27,7 +27,7 @@ RSpec.describe "When the user visits the choose a country page" do
 
   def then_im_at_the_interstitial_page(locale = "en")
     expect(page).to have_current_path("/#{t('routes.redirect_to_country', locale: locale)}")
-    expect(page).to have_title t("hub.redirect_to_country.title")
+    expect(page).to have_title t("hub.redirect_to_country.heading")
     expect(page).to have_content t("hub.redirect_to_country.heading")
     expect(page).to have_content t("hub.redirect_to_country.description")
     expect(page).to have_css("input[id=SAMLRequest]", visible: false)
@@ -110,7 +110,7 @@ RSpec.describe "When the user visits the choose a country page" do
     given_a_session_supporting_eidas
     visit "/dewiswch-wlad"
 
-    expect(page).to have_title t("hub.choose_a_country.title", locale: :cy)
+    expect(page).to have_title t("hub.choose_a_country.heading", locale: :cy)
     expect(page).to have_css "html[lang=cy]"
   end
 end

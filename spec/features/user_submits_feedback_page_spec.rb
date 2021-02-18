@@ -22,11 +22,11 @@ RSpec.feature "When the user submits the feedback page" do
       fill_in "feedback_form_email", with: "bob@smith.com"
 
       click_button t("hub.feedback.send_message")
-      expect(page).to have_title t("hub.feedback_sent.title")
+      expect(page).to have_title t("hub.feedback_sent.heading")
       expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
       expect(page).to have_content t("hub.feedback_sent.message_email")
       expect(page).to have_content session_not_valid_link
-      expect(page).to have_content t("hub.transaction_list.title")
+      expect(page).to have_content t("hub.transaction_list.heading")
     end
 
     it "when user does not provide email should not say message has been sent and show invalid session link" do
@@ -40,7 +40,7 @@ RSpec.feature "When the user submits the feedback page" do
       expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
       expect(page).to_not have_content t("hub.feedback_sent.message_email")
       expect(page).to have_content session_not_valid_link
-      expect(page).to have_content t("hub.transaction_list.title")
+      expect(page).to have_content t("hub.transaction_list.heading")
     end
 
     it "when session has timed out should show invalid session link" do
@@ -58,7 +58,7 @@ RSpec.feature "When the user submits the feedback page" do
 
       click_button t("hub.feedback.send_message")
       expect(page).to have_content session_not_valid_link
-      expect(page).to have_content t("hub.transaction_list.title")
+      expect(page).to have_content t("hub.transaction_list.heading")
     end
   end
 
@@ -80,7 +80,7 @@ RSpec.feature "When the user submits the feedback page" do
     allow_any_instance_of(FeedbackService).to receive(:submit!).and_return(true)
 
     click_button t("hub.feedback.send_message")
-    expect(page).to have_title t("hub.feedback_sent.title")
+    expect(page).to have_title t("hub.feedback_sent.heading")
     expect(page).to have_link t("hub.feedback_sent.product_page"), href: "https://govuk-verify.cloudapps.digital/"
   end
 
@@ -153,7 +153,7 @@ RSpec.feature "When the user submits the feedback page" do
       choose "feedback_form_reply_false"
       click_button t("hub.feedback.send_message", locale: :cy)
 
-      expect(page).to have_title t("hub.feedback_sent.title", locale: :cy)
+      expect(page).to have_title t("hub.feedback_sent.heading", locale: :cy)
       expect(page).to have_css "html[lang=cy]"
       expect(page).to have_link t("hub.feedback_sent.session_valid_link", locale: :cy), href: select_documents_cy_path
     end

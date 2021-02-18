@@ -14,7 +14,7 @@ RSpec.feature "When the user visits the feedback page" do
 
     click_button t("hub.feedback.send_message")
 
-    expect(page).to have_title t("hub.feedback_sent.title")
+    expect(page).to have_title t("hub.feedback_sent.heading")
 
     expect(page).to have_link t("hub.feedback_sent.product_page"), href: "https://govuk-verify.cloudapps.digital/"
   end
@@ -27,7 +27,7 @@ RSpec.feature "When the user visits the feedback page" do
 
   it "should show errors for all input fields when missing input", js: true do
     visit feedback_path
-    expect(page).to have_title t("hub.feedback.title")
+    expect(page).to have_title t("hub.feedback.heading")
 
     click_button t("hub.feedback.send_message")
 
@@ -46,7 +46,7 @@ RSpec.feature "When the user visits the feedback page" do
 
   it "should show errors for email address when not valid", js: true do
     visit feedback_path
-    expect(page).to have_title t("hub.feedback.title")
+    expect(page).to have_title t("hub.feedback.heading")
 
     choose "feedback_form_reply_true", allow_label_click: true
     fill_in "feedback_form_email", with: "foo@bar"
@@ -62,7 +62,7 @@ RSpec.feature "When the user visits the feedback page" do
 
   it "should show errors for all input fields when missing input and user wants a reply" do
     visit feedback_path
-    expect(page).to have_title t("hub.feedback.title")
+    expect(page).to have_title t("hub.feedback.heading")
 
     choose "feedback_form_reply_true", allow_label_click: true
     click_button t("hub.feedback.send_message")
@@ -89,7 +89,7 @@ RSpec.feature "When the user visits the feedback page" do
 
   it "should not show errors for name and email when missing input and user does not want a reply" do
     visit feedback_path
-    expect(page).to have_title t("hub.feedback.title")
+    expect(page).to have_title t("hub.feedback.heading")
 
     choose "feedback_form_reply_false", allow_label_click: true
     click_button t("hub.feedback.send_message")
@@ -101,7 +101,7 @@ RSpec.feature "When the user visits the feedback page" do
 
   it "should not show errors for reply when it is not selected" do
     visit feedback_path
-    expect(page).to have_title t("hub.feedback.title")
+    expect(page).to have_title t("hub.feedback.heading")
 
     click_button t("hub.feedback.send_message")
 
@@ -198,7 +198,7 @@ RSpec.feature "When the user visits the feedback page" do
 
   it "should also be in welsh" do
     visit feedback_cy_path
-    expect(page).to have_title t("hub.feedback.title", locale: :cy)
+    expect(page).to have_title t("hub.feedback.heading", locale: :cy)
     expect(page).to have_css "html[lang=cy]"
   end
 end

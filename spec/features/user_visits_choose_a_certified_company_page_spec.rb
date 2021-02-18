@@ -27,7 +27,7 @@ describe "When the user visits the choose a certified company page" do
                                             "levelsOfAssurance" => %w(LEVEL_2),
                                             "temporarilyUnavailable" => true }])
       visit "/choose-a-certified-company"
-      expect(page).to have_content t("hub.certified_companies_unavailable.title", count: 1, company: "IDCorp")
+      expect(page).to have_content t("hub.certified_companies_unavailable.heading", count: 1, company: "IDCorp")
     end
 
     it "includes the appropriate feedback source" do
@@ -39,6 +39,7 @@ describe "When the user visits the choose a certified company page" do
       visit "/choose-a-certified-company"
 
       expect(page).to have_current_path(choose_a_certified_company_path)
+      expect(page).to have_title t("hub.choose_a_certified_company.heading")
       expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
 
       within("#matching-idps") do
@@ -74,7 +75,7 @@ describe "When the user visits the choose a certified company page" do
     it "displays the page in Welsh but actually the text is still English" do
       visit "/dewis-cwmni-ardystiedig"
 
-      expect(page).to have_title t("hub.choose_a_certified_company.title", locale: :cy)
+      expect(page).to have_title t("hub.choose_a_certified_company.heading", locale: :cy)
       expect(page).to have_css "html[lang=cy]"
     end
   end
@@ -109,7 +110,7 @@ describe "When the user visits the choose a certified company page" do
                                             "levelsOfAssurance" => %w(LEVEL_1),
                                             "temporarilyUnavailable" => true }], "LEVEL_1")
       visit "/choose-a-certified-company"
-      expect(page).to have_content t("hub.certified_companies_unavailable.title", count: 1, company: "IDCorp")
+      expect(page).to have_content t("hub.certified_companies_unavailable.heading", count: 1, company: "IDCorp")
     end
   end
 

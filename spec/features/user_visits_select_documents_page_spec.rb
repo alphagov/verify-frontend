@@ -16,12 +16,12 @@ RSpec.feature "When user visits document selection page" do
   end
 
   it "should have a header about photo identity documents" do
-    expect(page).to have_content("Which of these do you have available right now?")
+    expect(page).to have_content t("hub.select_documents.heading")
   end
 
   it "should have a header about photo identity documents in Welsh if user selects Welsh" do
     visit "/dewis-dogfennau"
-    expect(page).to have_content("Which of these do you have available right now?")
+    expect(page).to have_content t("hub.select_documents.heading")
   end
 
   it "redirects to the idp picker page when selects 3 documents" do
@@ -35,7 +35,7 @@ RSpec.feature "When user visits document selection page" do
     check t("hub.select_documents.has_credit_card"), allow_label_click: true
     click_button t("navigation.continue")
 
-    expect(page).to have_title t("hub.choose_a_certified_company.title")
+    expect(page).to have_title t("hub.choose_a_certified_company.heading")
     expect(page).to have_current_path(choose_a_certified_company_path)
   end
 
@@ -57,7 +57,7 @@ RSpec.feature "When user visits document selection page" do
     check t("hub.select_documents.has_credit_card"), allow_label_click: true
     click_button t("navigation.continue")
 
-    expect(page).to have_title t("hub.select_documents_advice.title")
+    expect(page).to have_title t("hub.select_documents_advice.advice_html.heading")
     expect(page).to have_current_path(select_documents_advice_path)
   end
 

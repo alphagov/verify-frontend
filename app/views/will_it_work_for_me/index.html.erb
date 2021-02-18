@@ -1,4 +1,4 @@
-<%= page_title 'hub.will_it_work_for_me.title' %>
+<%= page_title 'hub.will_it_work_for_me.heading' %>
 <% content_for :feedback_source, 'WILL_IT_WORK_FOR_ME_PAGE' %>
 
 <div class="govuk-grid-row">
@@ -61,7 +61,7 @@
                   <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                       <h2 class="govuk-heading-s">
-                        <%= t 'hub.will_it_work_for_me.question.not_resident_reason.title' %>
+                        <%= t 'hub.will_it_work_for_me.question.not_resident_reason.sub_heading' %>
                       </h2>
                     </legend>
                     <% if @form.errors.include?(:not_resident_reason_moved_recently) %>
@@ -89,7 +89,7 @@
               </div>
             </div>
           </fieldset>
-        </div>       
+        </div>
 
         <div class="govuk-error-message" id="validation-error-message-js"></div>
 

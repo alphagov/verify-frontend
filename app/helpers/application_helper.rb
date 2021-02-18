@@ -1,9 +1,11 @@
 module ApplicationHelper
-  def page_title(title_key, locale_data = {}, extra_string = nil)
+  def page_title(title_key = nil, locale_data = {}, extra_string = nil)
+    raise ArgumentError.new("Missing page title") if title_key.nil? && !block_given?
+
     title = ""
     title << "#{t('title.error', locale_data)}: " if flash[:errors]
-    title << t(title_key, locale_data)
-    en_title = [t(title_key, locale_data.merge(locale: :en)), extra_string, "GOV.UK Verify", "GOV.UK"]
+    title << (block_given? ? yield : t(title_key, locale_data))
+    en_title = [t(title_key, locale_data.merge(locale: :en)), extra_string, "GOV.UK Verify"]
     en_title << session[:requested_loa] if session[:requested_loa]
     content_for :page_title, title
     analytics_title en_title.compact.join(" - ")

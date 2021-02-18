@@ -1,4 +1,4 @@
-<%= page_title 'hub.single_idp_journey.title', display_name: @idp.display_name %>
+<%= page_title 'hub.single_idp_journey.heading', display_name: @idp.display_name %>
 <% content_for :feedback_source, 'CONTINUE_TO_YOUR_IDP_PAGE' %>
 
 <div class="govuk-grid-row">
@@ -16,7 +16,7 @@
                           type: 'submit'
             %>
         <% end %>
-        
+
         <p class="govuk-body"><%= t('hub.single_idp_journey.alternatives') %></p>
         <ul class="govuk-list govuk-list--bullet">
           <li><%= link_to t('hub.single_idp_journey.alternative_one'), start_path %></li>
