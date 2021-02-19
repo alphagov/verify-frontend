@@ -14,7 +14,7 @@
 
   @include govuk-media-query($from: tablet) {
     border: 5px solid $govuk-border-colour;
-    margin-bottom: 30px;
+    height: 100%;
   }
 }
 
@@ -71,10 +71,6 @@
 
 .company .govuk-button {
   margin: 0 0 20px;
-
-  @include govuk-media-query($from: mobile) {
-    width: 65%;
-  }
 }
 
 .company dialog .govuk-button {
@@ -155,8 +151,6 @@
     }
   }
 
-
-
   .idp-option {
     text-align: center;
 
@@ -186,5 +180,26 @@
       display: inline-block;
       margin-top: 40px;
     }
+  }
+}
+
+@include govuk-media-query($from:tablet) {
+  .idp-option-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 1em;
+    row-gap: 2em;
+    margin-bottom: govuk-spacing(6);
+  }
+
+  .idp-option {
+    width: calc((100% / 3) - 1em);
+    flex-wrap: wrap;
+    display: flex;
+  }
+
+  .company-wrapper {
+    width: 100%;
   }
 }
