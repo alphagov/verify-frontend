@@ -44,7 +44,8 @@
 .company-logo {
   position: relative;
   width: 50%;
-  margin: 0 auto;
+  padding-bottom: 25%;
+  margin: 0 auto 15px;
 
   @include govuk-media-query($from: tablet) {
     margin: 0 auto 15px;
