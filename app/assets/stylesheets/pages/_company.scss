@@ -71,10 +71,6 @@
 
 .company .govuk-button {
   margin: 0 0 20px;
-
-  @include govuk-media-query($from: mobile) {
-    width: 65%;
-  }
 }
 
 .company-about {
@@ -84,22 +80,6 @@
 
 .company-disconnect-text {
   text-align: left;
-}
-
-.company-logo + .govuk-button {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.govuk-grid-column-one-third > .govuk-button {
-  width: 100%;
-  margin-bottom: 10px;
-  margin-top: 15px;
-}
-
-.idp-choice > .govuk-grid-row {
-  margin-bottom: 0;
-  padding-bottom: 0;
 }
 
 .idp-choice {
@@ -199,5 +179,26 @@
       display: inline-block;
       margin-top: 40px;
     }
+  }
+}
+
+@include govuk-media-query($from:tablet) {
+  .idp-option-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 1em;
+    row-gap: 2em;
+    margin-bottom: govuk-spacing(6);
+  }
+
+  .idp-option {
+    width: calc((100% / 3) - 1em);
+    flex-wrap: wrap;
+    display: flex;
+  }
+
+  .company-wrapper {
+    width: 100%;
   }
 }

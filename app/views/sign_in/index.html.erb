@@ -34,7 +34,7 @@
 </div>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
+  <div class="js-continue-to-idp idp-option-list" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
       <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
       <%= render partial: 'shared/continue_to_idp_form' %>
     </div>
