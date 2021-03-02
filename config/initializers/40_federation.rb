@@ -10,21 +10,9 @@ Rails.application.config.after_initialize do
   repository_factory = Display::RepositoryFactory.new(I18n, yaml_loader)
   IDP_DISPLAY_REPOSITORY = repository_factory.create_idp_repository(CONFIG.idp_display_locales)
   RP_DISPLAY_REPOSITORY = repository_factory.create_rp_repository
-  COUNTRY_DISPLAY_REPOSITORY = repository_factory.create_country_repository(CONFIG.country_display_locales)
-  EIDAS_SCHEME_REPOSITORY = repository_factory.create_eidas_scheme_repository(CONFIG.eidas_schemes_directory)
   IDENTITY_PROVIDER_DISPLAY_DECORATOR = Display::IdentityProviderDisplayDecorator.new(
     IDP_DISPLAY_REPOSITORY,
     CONFIG.logo_directory,
-  )
-
-  EIDAS_SCHEME_DISPLAY_DECORATOR = Display::EidasSchemeDisplayDecorator.new(
-    EIDAS_SCHEME_REPOSITORY,
-    CONFIG.eidas_scheme_logos_directory,
-  )
-
-  COUNTRY_DISPLAY_DECORATOR = Display::CountryDisplayDecorator.new(
-    COUNTRY_DISPLAY_REPOSITORY,
-    CONFIG.country_flags_directory,
   )
 
   # Cycle Three display

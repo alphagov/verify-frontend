@@ -16,8 +16,6 @@ module PolicyEndpoints
   CYCLE_THREE_SUFFIX = "cycle-3-attribute".freeze
   CYCLE_THREE_SUBMIT_SUFFIX = "#{CYCLE_THREE_SUFFIX}/submit".freeze
   CYCLE_THREE_CANCEL_SUFFIX = "#{CYCLE_THREE_SUFFIX}/cancel".freeze
-  COUNTRIES_PATH = "/policy/countries".freeze
-  COUNTRIES_PATH_PREFIX = Pathname(COUNTRIES_PATH)
 
   def policy_endpoint(session_id, suffix)
     PATH_PREFIX.join(session_id, suffix).to_s
@@ -49,13 +47,5 @@ module PolicyEndpoints
 
   def restart_journey_endpoint(session_id)
     policy_endpoint(session_id, RESTART_JOURNEY_SUFFIX)
-  end
-
-  def countries_endpoint(session_id)
-    COUNTRIES_PATH_PREFIX.join(session_id).to_s
-  end
-
-  def select_a_country_endpoint(session_id, country)
-    COUNTRIES_PATH_PREFIX.join(session_id, country).to_s
   end
 end

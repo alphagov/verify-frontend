@@ -6,10 +6,6 @@ CONFIG = Configuration.load! do
   option_string "product_page_url", "VERIFY_PRODUCT_PAGE", default: "https://govuk-verify.cloudapps.digital/"
   option_string "cycle_3_display_locales", "CYCLE_3_DISPLAY_LOCALES", default: "#{FED_CONFIG_DIR}/display-locales/cycle_3/"
   option_string "idp_display_locales", "IDP_DISPLAY_LOCALES", default: "#{FED_CONFIG_DIR}/display-locales/idps/"
-  option_string "country_display_locales", "COUNTRY_DISPLAY_LOCALES", default: "#{FED_CONFIG_DIR}/display-locales/countries/"
-  option_string "country_flags_directory", "COUNTRY_FLAGS_DIRECTORY", default: "/eidas/country-flags"
-  option_string "eidas_schemes_directory", "EIDAS_SCHEMES_DIRECTORY", default: "#{FED_CONFIG_DIR}/eidas/schemes/"
-  option_string "eidas_scheme_logos_directory", "EIDAS_SCHEME_LOGOS_DIRECTORY", default: "/eidas/scheme-logos"
   option_string "session_cookie_duration_mins", "SESSION_COOKIE_DURATION_IN_MINUTES", default: 150
   option_string "config_api_host", "CONFIG_API_HOST"
   option_string "policy_host", "POLICY_HOST"
@@ -55,7 +51,4 @@ CONFIG = Configuration.load! do
 
   # Enables dev/test routes when compiled for a production env (i.e. when RAILS_ENV=production)
   option_bool "stub_mode", "STUB_MODE", default: false
-
-  option_datetime "eidas_disabled_after", "EIDAS_DISABLED_AFTER", allow_missing: true
 end
-Rails.logger.info "eidas_disabled_after value is #{CONFIG.eidas_disabled_after.nil? ? 'nil' : CONFIG.eidas_disabled_after}"

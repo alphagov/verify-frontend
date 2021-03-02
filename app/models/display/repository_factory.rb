@@ -9,14 +9,6 @@ module Display
       create_from_directory(Display::IdpDisplayData, directory)
     end
 
-    def create_country_repository(directory)
-      create_from_directory(Display::CountryDisplayData, directory)
-    end
-
-    def create_eidas_scheme_repository(directory)
-      create_without_translation(directory, Display::EidasSchemeDisplayData)
-    end
-
     def create_rp_repository
       RpDisplayRepository.new(@translator, Rails.logger)
     end

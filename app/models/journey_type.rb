@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 module JourneyType
-  EIDAS = "EIDAS"
   VERIFY = "VERIFY"
 
-  VALID_JOURNEY_TYPES = [EIDAS, VERIFY].freeze
+  VALID_JOURNEY_TYPES = [VERIFY].freeze
   module Verify
     SIGN_IN = "sign-in"
     REGISTRATION = "registration"

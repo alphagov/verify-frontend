@@ -41,7 +41,7 @@ private
   def valid_journey_hint?(journey_hint)
     return true if journey_hint&.starts_with?("idp_")
 
-    [nil, "uk_idp_start", "registration", "uk_idp_sign_in", "eidas_sign_in", "submission_confirmation"].include?(journey_hint)
+    [nil, "uk_idp_start", "registration", "uk_idp_sign_in", "submission_confirmation"].include?(journey_hint)
   end
 
   def invalid_parameters_message(simple_id_value, journey_hint_value)

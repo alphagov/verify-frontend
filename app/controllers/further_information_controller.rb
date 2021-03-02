@@ -28,7 +28,7 @@ class FurtherInformationController < ApplicationController
   def timeout
     @idp_name = selected_provider.display_name
     @transaction_name = current_transaction.name
-    @journey_hint = user_journey_type?(JourneyType::VERIFY) ? "submission_confirmation" : "eidas_sign_in"
+    @journey_hint = "submission_confirmation"
   end
 
   def cancel

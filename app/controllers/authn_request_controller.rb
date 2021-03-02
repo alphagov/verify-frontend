@@ -31,7 +31,6 @@ private
     set_secure_cookie(CookieNames::SESSION_ID_COOKIE_NAME, session_id)
     set_session_id(session_id)
     sign_in_process_details = POLICY_PROXY.get_sign_in_process_details(session_id)
-    set_transaction_supports_eidas(sign_in_process_details.transaction_supports_eidas)
     set_transaction_entity_id(sign_in_process_details.transaction_entity_id)
     transaction_data = CONFIG_PROXY.get_transaction_details(sign_in_process_details.transaction_entity_id)
     set_transaction_simple_id(transaction_data.simple_id)
@@ -47,10 +46,6 @@ private
 
   def set_session_id(session_id)
     session[:verify_session_id] = session_id
-  end
-
-  def set_transaction_supports_eidas(transaction_supports_eidas)
-    session[:transaction_supports_eidas] = transaction_supports_eidas
   end
 
   def set_transaction_simple_id(simple_id)
@@ -99,8 +94,6 @@ private
       when "uk_idp_sign_in"
         flash[:journey_hint] = hint
         redirect_to start_path(redirect_params) # Change temporarily, original value = begin_sign_in_path
-      when "eidas_sign_in"
-        do_eidas_sign_in_redirect(redirect_params)
       when "submission_confirmation"
         redirect_to confirm_your_identity_path(redirect_params)
       else
@@ -110,16 +103,8 @@ private
     end
   end
 
-  def do_eidas_sign_in_redirect(redirect_params = {})
-    return redirect_to start_path(redirect_params) unless session[:transaction_supports_eidas] && before_eidas_shutdown?
-
-    redirect_to choose_a_country_path(redirect_params)
-  end
-
   def do_default_redirect(redirect_params = {})
-    return redirect_to start_path(redirect_params) unless session[:transaction_supports_eidas] && before_eidas_shutdown?
-
-    redirect_to prove_identity_path(redirect_params)
+    redirect_to start_path(redirect_params)
   end
 
   def store_rp_request_data
@@ -130,9 +115,5 @@ private
 
   def raise_error_if_params_invalid
     something_went_wrong_warn("Missing/empty SAML message from #{request.referer}", :bad_request) if params["SAMLRequest"].blank?
-  end
-
-  def before_eidas_shutdown?
-    CONFIG.eidas_disabled_after.nil? || DateTime.now < CONFIG.eidas_disabled_after
   end
 end

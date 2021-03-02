@@ -23,8 +23,6 @@ en:
     may_not_work_if_you_live_overseas: may-not-work-if-you-live-overseas
     why_might_this_not_work_for_me: why-might-this-not-work-for-me
     will_not_work_without_uk_address: will-not-work-without-uk-address
-    choose_a_country: choose-a-country
-    redirect_to_country: redirect-to-country
     choose_a_certified_company: choose-a-certified-company
     why_companies: why-companies
     unlikely_to_verify: unlikely-to-verify
@@ -41,10 +39,8 @@ en:
     confirmation_non_matching_journey: confirmation-redirect-to-service
     failed_registration: failed-registration
     failed_sign_in: failed-sign-in
-    failed_country_sign_in: failed-country-sign-in
     failed_uplift: failed-uplift
     other_ways_to_access_service: other-ways-to-access-service
-    other_ways_after_eidas: country-not-listed
     forgot_company: forgot-company
     response_processing: response-processing
     redirect_to_idp_sign_in: redirect-to-idp/sign-in
@@ -183,32 +179,6 @@ en:
       heading: Prove your identity another way
       sub_heading: You can still %{service_name}.
     other_ways_heading: Other ways to %{other_ways_description}
-    other_ways_after_eidas:
-      heading: Other ways to %{other_ways_description}
-      explanation: If your digital identity scheme isn't available yet, you can prove who you are another way so you can %{other_ways_description}.
-      verify:
-        heading: "Use GOV.UK Verify"
-        explanation_html: |
-          <p>To create an account, you must choose a company to verify your identity. The company will check your personal details and identity documents.</p>
-          <p>GOV.UK Verify works best if you:</p>
-          <ul>
-          <li>have a UK address</li>
-          <li>are over 20</li>
-          <li>have at least one photo identity document, from any country</li>
-          </ul>
-        button: "Use GOV.UK Verify"
-      cannot_verify: What to do if you cannot use GOV.UK Verify
-    choose_a_country:
-      heading: Use a digital identity from another European country
-      description: You can use a digital identity from another European country to access services on GOV.UK.
-      eu_exit_warn: You will not be able to use a digital identity from another European country to access services on GOV.UK after 31 December 2020.
-      country_not_listed_heading: My country isn't listed
-      country_not_listed_description: "If your country's digital identity scheme isn't available yet, see how else you can "
-      country_not_listed_link: "%{other_ways_description}."
-      select_label: "Select %{scheme_name}"
-    redirect_to_country:
-      heading: Continue to next step
-      description: Because Javascript is not enabled on your browser, you must press the continue button
     prove_identity:
       heading: Prove your identity to continue
       header_content: Choose how you want to prove your identity so you can
@@ -222,11 +192,6 @@ en:
           </ul>
           <p class="govuk-body">A certified identity provider will check your identity when you register with GOV.UK Verify. They’ve all met security standards set by government.</p>
         button_text: Use GOV.UK Verify
-      use_eidas:
-        heading: Use a digital identity from another European country
-        content_html: |
-          <p class="govuk-body">If you’re part of an ID scheme in a participating country, you may be able to use it here.</p>
-        button_text: Select your European digital identity
     start:
       heading: Sign in with GOV.UK Verify
       sub_heading: Have you used GOV.UK Verify before?
@@ -392,12 +357,6 @@ en:
       try_another_text: "Other companies use different methods from %{idp_name} and may therefore stand a better chance of verifying your identity."
       try_another_summary: Try verifying with another certified company
       contact_details_intro: "Contact %{idp_name}"
-    failed_country_sign_in:
-      heading: "Your identity scheme in %{country_name} was unable to confirm your identity"
-      other_ways: "There are other ways you can %{other_ways_description}."
-      online_link: Other ways to prove your identity online
-      online: Online
-      offline: Offline
     failed_sign_in:
       heading: "%{display_name} couldn’t sign you in"
       reasons_html: |
@@ -638,17 +597,11 @@ en:
       heading: Sorry, something went wrong
       error_message: This may be because your session timed out or there was a system error.
       start_again: Because this is a secure service, you’ll need to start again.
-    proxy_node_error:
-      start_again: Because you were using a secure service from another European country, you’ll need to go back to the page where you started using that service.
     page_not_found:
       heading: This page can’t be found
       reason_pre: "This may be because:"
       reason_one: the link you clicked is broken
       reason_two: you entered an incorrect web address
-    eidas_scheme_unavailable:
-      heading: "Your identity scheme in %{country_name} is currently unavailable"
-      other_ways: "Try again later or choose another way to "
-      other_ways_link: "prove your identity online"
     no_selection: Please answer all the questions
     form:
       there_is_a_problem: There is a problem
