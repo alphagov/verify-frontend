@@ -229,6 +229,7 @@ en:
         button_text: Select your European digital identity
     start:
       heading: Sign in with GOV.UK Verify
+      sub_heading: Have you used GOV.UK Verify before?
       answer_yes: This is my first time using GOV.UK Verify
       answer_no: I've already signed up for Verify
       answer_no_hint: This includes if you've got part way through creating an identity account

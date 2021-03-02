@@ -229,6 +229,7 @@ cy:
         button_text: Dewiswch eich hunaniaeth digidol Ewropeaidd
     start:
       heading: Mewngofnodi gyda GOV.UK Verify
+      sub_heading: Ydych chi wedi defnyddio GOV.UK Verify o'r blaen?
       answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
       answer_no_hint: ""
