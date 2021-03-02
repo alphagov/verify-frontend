@@ -69,53 +69,6 @@ RSpec.describe "When the user visits the prove identity page" do
         expect(page).to have_current_path(start_path)
         expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to eq("stub-idp")
       end
-
-      it "should redirect to start page and restart journey if country is selected" do
-        set_selected_country_in_session("stub-country")
-        stub_restart_journey
-
-        visit "/prove-identity"
-        click_on t("hub.prove_identity.use_verify.button_text")
-
-        expect(page).to have_current_path(start_path)
-        expect(page.get_rack_session.key?("selected_provider")).to be_falsey
-      end
-    end
-
-    context "when selecting eIDAS option" do
-      before(:each) do
-        page.set_rack_session transaction_supports_eidas: true
-        stub_countries_list
-      end
-
-      it "should redirect to choose_a_country page" do
-        visit "/prove-identity"
-        click_on t("hub.prove_identity.use_eidas.button_text")
-
-        expect(page).to have_current_path(choose_a_country_path)
-        expect(page.get_rack_session.key?("selected_provider")).to be_falsey
-      end
-
-      it "should redirect to choose_a_country page and not restart journey if country is selected" do
-        set_selected_country_in_session("stub-country")
-
-        visit "/prove-identity"
-        click_on t("hub.prove_identity.use_eidas.button_text")
-
-        expect(page).to have_current_path(choose_a_country_path)
-        expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to eq("stub-country")
-      end
-
-      it "should redirect to choose_a_country page and restart journey if IDP is selected" do
-        set_selected_idp_in_session("stub-idp")
-        stub_restart_journey
-
-        visit "/prove-identity"
-        click_on t("hub.prove_identity.use_eidas.button_text")
-
-        expect(page).to have_current_path(choose_a_country_path)
-        expect(page.get_rack_session.key?("selected_provider")).to be_falsey
-      end
     end
   end
 

@@ -106,33 +106,4 @@ describe PolicyProxy do
       policy_proxy.cycle_three_cancel(session_id)
     end
   end
-
-  describe("#get_countries") do
-    countries_json = [
-      { "entityId" => "http://netherlandsEntity.nl", "simpleId" => "NL", "enabled" => false },
-      { "entityId" => "http://spainEntity.es", "simpleId" => "ES", "enabled" => true },
-    ]
-    let(:api_response) { countries_json }
-
-    it "should retrieve countries" do
-      expect(api_client).to receive(:get).with("/policy/countries/my-session-id").and_return(api_response)
-
-      response = policy_proxy.get_countries(session_id)
-      expect(response.countries.count).to eq(2)
-      response.countries.each do |country|
-        case country.simple_id
-        when "ES"
-          expect(country).to have_attributes(simple_id: "ES",
-                                             entity_id: "http://spainEntity.es",
-                                             enabled: true)
-        when "NL"
-          expect(country).to have_attributes(simple_id: "NL",
-                                             entity_id: "http://netherlandsEntity.nl",
-                                             enabled: false)
-        else
-          raise("Invalid list of countries")
-        end
-      end
-    end
-  end
 end
