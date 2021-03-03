@@ -2,7 +2,7 @@ en:
   idps:
     stub-idp-loa1-with-interstitial:
       name: "LOA1 Corp Interstitial"
-      about: "<p>Bob’s Identity Service is the premier identity proofing service around. Come get some.</p>"
+      about: "<p>Bob's Identity Service is the premier identity proofing service around. Come get some.</p>"
       requirements:
         - a UK passport
         - a UK photocard driving licence
@@ -17,7 +17,7 @@ cy:
   idps:
     stub-idp-loa1-with-interstitial:
       name: "Welsh LOA1 Corp Interstitial"
-      about: "<p>Bob’s Identity Service is the premier identity proofing service around. Come get some.</p>"
+      about: "<p>Bob's Identity Service is the premier identity proofing service around. Come get some.</p>"
       requirements:
         - a UK passport
         - a UK photocard driving licence

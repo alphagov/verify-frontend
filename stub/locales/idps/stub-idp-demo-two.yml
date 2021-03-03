@@ -3,7 +3,7 @@ en:
     stub-idp-demo-two:
       name: "Stub IDP Demo Two"
       about: |
-        <p> Stub Idp Demo Two Content </p>
+        <p> Stub IDP Demo Two Content </p>
       requirements:
         - a UK passport
       contact_details: |

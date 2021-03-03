@@ -174,7 +174,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
         set_journey_hint_cookie("http://idcorp-two.com", "SUCCESS")
       end
 
-      hinted_idp_name = "Bob’s Identity Service"
+      hinted_idp_name = "Bob's Identity Service"
 
       it "will redirect the user to a non-hinted IDP if hint ignored" do
         given_api_requests_have_been_mocked!

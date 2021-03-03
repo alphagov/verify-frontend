@@ -44,7 +44,7 @@ describe "When the user visits the choose a certified company page" do
 
       within("#matching-idps") do
         expect(page).to have_button("Choose IDCorp")
-        expect(page).to have_button("Choose Bob’s Identity Service")
+        expect(page).to have_button("Choose Bob's Identity Service")
         expect(page).not_to have_button("Carol’s Secure ID")
       end
     end
@@ -59,7 +59,7 @@ describe "When the user visits the choose a certified company page" do
 
       within("#matching-idps") do
         expect(page).to have_button("Choose IDCorp")
-        expect(page).not_to have_button("Choose Bob’s Identity Service")
+        expect(page).not_to have_button("Choose Bob's Identity Service")
         expect(page).not_to have_button("Carol’s Secure ID")
       end
     end
@@ -141,7 +141,7 @@ describe "When the user visits the choose a certified company page" do
     expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
     within("#matching-idps") do
       expect(page).to have_button("Choose IDCorp")
-      expect(page).to have_button("Choose Bob’s Identity Service")
+      expect(page).to have_button("Choose Bob's Identity Service")
       expect(page).not_to have_button("Carol’s Secure ID")
     end
   end

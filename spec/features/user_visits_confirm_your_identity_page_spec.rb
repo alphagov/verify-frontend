@@ -94,13 +94,13 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
         click_link "sign in with a different certified company"
         new_idp_location = "/another-idp-endpoint"
         stub_api_and_analytics(new_idp_location)
-        click_button "Select Bob’s Identity Service"
+        click_button "Select Bob's Identity Service"
         click_button t("navigation.continue")
         expect(page).to have_current_path(new_idp_location)
 
         # The new IDP is displayed for non-repudiation
         visit "/confirm-your-identity"
-        click_button "Sign in with Bob’s Identity Service"
+        click_button "Sign in with Bob's Identity Service"
         click_button t("navigation.continue")
         expect(page).to have_current_path(new_idp_location)
       end

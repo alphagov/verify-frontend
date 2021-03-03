@@ -32,7 +32,7 @@ describe RedirectToIdpController do
     subject { get :register, params: { locale: "en" } }
 
     it "reports idp registration details to piwik" do
-      bobs_identity_service_idp_name = "Bob’s Identity Service"
+      bobs_identity_service_idp_name = "Bob's Identity Service"
       idp_was_recommended = "(recommended)"
       evidence = { driving_licence: true, passport: true }
 
@@ -94,7 +94,7 @@ describe RedirectToIdpController do
       subject { get :register, params: { locale: "en" } }
 
       it "reports idp registration attempt details to piwik" do
-        bobs_identity_service_idp_name = "Bob’s Identity Service"
+        bobs_identity_service_idp_name = "Bob's Identity Service"
 
         set_selected_idp bobs_identity_service
         session[:selected_idp_name] = bobs_identity_service_idp_name
@@ -116,7 +116,7 @@ describe RedirectToIdpController do
       end
 
       it "reports idp second attempt details to piwik" do
-        bobs_identity_service_idp_name = "Bob’s Identity Service"
+        bobs_identity_service_idp_name = "Bob's Identity Service"
 
         set_selected_idp bobs_identity_service
         session[:selected_idp_name] = bobs_identity_service_idp_name
@@ -143,7 +143,7 @@ describe RedirectToIdpController do
       bobs_identity_service = { "simple_id" => "stub-idp-two",
                                 "entity_id" => "http://idcorp.com",
                                 "levels_of_assurance" => %w(LEVEL_1 LEVEL_2) }
-      bobs_identity_service_idp_name = "Bob’s Identity Service"
+      bobs_identity_service_idp_name = "Bob's Identity Service"
 
       before :each do
         stub_session_idp_authn_request("<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>", "idp-location", false)
@@ -224,7 +224,7 @@ describe RedirectToIdpController do
       bobs_identity_service = { "simple_id" => "stub-idp-two",
                                 "entity_id" => "http://idcorp.com",
                                 "levels_of_assurance" => %w(LEVEL_1 LEVEL_2) }
-      bobs_identity_service_idp_name = "Bob’s Identity Service"
+      bobs_identity_service_idp_name = "Bob's Identity Service"
 
       before :each do
         stub_session_idp_authn_request("<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>", "idp-location", false)

@@ -78,7 +78,7 @@ describe HintController do
 
         expect(body["found"]).to eq("true")
         expect(body["simpleId"]).to eq("stub-idp-two")
-        expect(body["displayName"]).to eq("Bob’s Identity Service")
+        expect(body["displayName"]).to eq("Bob's Identity Service")
         expect(successful_idp.content_type).to eq("application/json")
         expect(successful_idp).to have_http_status(200)
       end
