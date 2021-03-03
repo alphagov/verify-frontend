@@ -36,6 +36,9 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  # Add additional assets
+  config.assets.paths << Rails.root.join("../verify-frontend-federation-config/configuration")
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
