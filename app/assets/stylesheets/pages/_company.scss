@@ -1,6 +1,6 @@
 // Company
-// Used the sign-in page
-// =====================
+// Used the sign-in page and sign-in hint
+// ======================================
 
 .company-wrapper {
   &.clear-left {
@@ -50,7 +50,7 @@
   @include govuk-media-query($from: tablet) {
     margin: 0 auto 15px;
     width: 80%;
-    padding-bottom: 42%;
+    padding-bottom: 40%;
   }
 }
 
@@ -66,6 +66,12 @@
   img,
   input[type="image"] {
     max-width: 100%;
+  }
+}
+
+.sign-in-idp-list .company-logo-inner {
+  input[type="image"] {
+    max-height: 96px;
   }
 }
 
@@ -86,26 +92,8 @@
   text-align: left;
 }
 
-.company-logo + .govuk-button {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.govuk-grid-column-one-third > .govuk-button {
-  width: 100%;
-  margin-bottom: 10px;
-  margin-top: 15px;
-}
-
-.idp-choice > .govuk-grid-row {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.idp-choice {
-  padding-top: 15px;
-  padding-bottom: 5px;
-  margin-bottom: 0;
+.company-choice {
+  padding: 15px 0;
   border-bottom: 1px solid govuk-colour("dark-grey");
   @include govuk-clearfix;
 
@@ -122,7 +110,6 @@
       cursor: pointer;
       width: 67.5%;
     }
-
   }
 
   @include govuk-media-query($from: tablet) {
@@ -138,8 +125,7 @@
       bottom: 0;
       margin: auto;
       width: 200px;
-      height: 74px;
-      text-align: center;
+      height: 96px;
     }
   }
 
@@ -163,14 +149,13 @@
       }
     }
 
-    button a {
-      margin: 0 auto;
+    button {
+      width: 65%;
     }
   }
 
 
-
-  .idp-option {
+  .company-option {
     text-align: center;
 
     @include govuk-media-query($from: tablet) {
@@ -183,10 +168,10 @@
       text-align: center;
 
       @include govuk-media-query($from: tablet) {
-        min-width: 200px;
+        min-width: 230px;
 
         @include govuk-if-ie8 {
-          min-width: 230px;
+          min-width: 260px;
         }
       }
 

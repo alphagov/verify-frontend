@@ -1,0 +1,88 @@
+// IDP
+// Used the sign-up pages
+// ======================
+
+.idp-list {
+  @include govuk-media-query($until: tablet) {
+    padding: 0 30px;
+  }
+}
+
+.idp-logo {
+  position: relative;
+  width: 50%;
+  padding-bottom: 25%;
+  margin: 0 auto 15px;
+
+  @include govuk-media-query($from: tablet) {
+    width: 80%;
+    padding-bottom: 40%;
+  }
+}
+
+.idp-choice {
+  @include govuk-clearfix;
+
+  margin: 0;
+  padding: 20px 0;
+  border-bottom: 1px solid govuk-colour("dark-grey");
+
+  &.no-border {
+    border: none;
+  }
+
+  .idp-logo {
+    position: unset;
+    width: auto;
+    margin: auto auto 10px;
+    padding: 0;
+    text-align: center;
+
+    input[type="image"] {
+      cursor: pointer;
+      width: 67.5%;
+    }
+  }
+
+  @include govuk-media-query($from: tablet) {
+    height: 75px;
+
+    .idp-logo {
+      text-align: left;
+    }
+  }
+
+  @include govuk-media-query($from: mobile) {
+    .idp-logo {
+      input[type="image"] {
+        width: 140px;
+        height: 70px;
+      }
+    }
+  }
+}
+
+.idp-button {
+  .govuk-button {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  @include govuk-media-query($from: tablet) {
+    max-width: 265px;
+
+    .govuk-button {
+      margin: 10px auto;
+    }
+  }
+
+  @include govuk-media-query($until: tablet) {
+    padding: 0;
+  }
+
+  @include govuk-media-query($until: mobile) {
+    .govuk-button {
+      margin-top: 5px;
+    }
+  }
+}
