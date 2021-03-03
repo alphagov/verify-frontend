@@ -154,7 +154,8 @@ cy:
           <p class="govuk-body">If you have these things but they’re somewhere else, come back when you have them with you.</p>
           <p class="govuk-body">%{prove_your_identity_link} if you do not have these things.</p>
     choose_a_certified_company:
-      heading: Pick a company to verify you
+      heading: Dewiswch gwmni ardystiedig i ddilysu eich hunaniaeth
+      personal_information: Maent yn gofyn i chi ddarparu gwybodaeth bersonol a thystiolaeth, ac yna gwirio ei fod yn gywir gan ddefnyddio'r systemau newydd, diogel y maent wedi eu hadeiladu.
       intro: One of these companies will create your identity account.
       idp_count: You can pick either company.
       idp_explanation: "There’s more than one so that:"
@@ -167,8 +168,12 @@ cy:
           It usually takes 15 minutes to prove who you are.
           You can then use your account to sign in to other government services too.
         </p>
-      choose_idp: "Choose %{display_name}"
-      show_all_companies: Companies that are unlikely to verify you
+      choose_idp: "Dewiswch %{display_name}"
+      show_all_companies: Cwmniau sy’n annhebygol o’ch dilysu chi
+      company_html:
+        zero: no&nbsp;cwmni
+        one: 1&nbsp;cwmni
+        other: "%{count}&nbsp;o gwmnïau"
       filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
       about_idp: About %{display_name}
       dialog:
@@ -618,7 +623,7 @@ cy:
       heading: Sign in to continue
       intro: The last company selected on this device was %{idp_name}.
       continue_with_idp: Continue with %{idp_name} if you've created an identity account with them.
-      button: Sign in with %{idp_name}
+      button: Llofnodi i mewn gyda %{display_name}
       other_way_button: Choose another way to sign in
   errors:
     no_cookies:

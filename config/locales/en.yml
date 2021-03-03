@@ -156,6 +156,7 @@ en:
           <p class="govuk-body">%{prove_your_identity_link} if you do not have these things.</p>
     choose_a_certified_company:
       heading: Pick a certified company to verify you
+      personal_information: The company will ask you to provide personal information and evidence. It will then check it's correct.
       intro: One of these companies will create your identity account.
       idp_count: You can pick either company.
       idp_explanation: "There’s more than one so that:"
@@ -171,6 +172,10 @@ en:
       choose_idp: "Choose %{display_name}"
       show_all_companies: Companies that are unlikely to verify you
       filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
+      company_html:
+        zero: no&nbsp;companies
+        one: 1&nbsp;company
+        other: "%{count}&nbsp;companies"
       about_idp: About %{display_name}
       dialog:
         information_provided_by: Information provided by %{display_name}
