@@ -63,13 +63,13 @@ RSpec.feature "user visits select documents advice pages", type: :feature do
 
   it "navigates to select documents page" do
     visit select_documents_advice_path
-    click_link t("hub.select_documents_advice.what_to_do_next.change_your_answers_link", select_documents_path)
+    click_link t("hub.select_documents_advice.what_to_do_next.change_your_answers_link")
     expect(page).to have_current_path(select_documents_path)
   end
 
   it "navigates to prove your identity another way page" do
     visit select_documents_advice_path
-    click_link t("hub.select_documents_advice.what_to_do_next.prove_your_identity_link", prove_your_identity_another_way_path)
+    click_link t("hub.select_documents_advice.what_to_do_next.prove_your_identity_link")
     expect(page).to have_current_path(prove_your_identity_another_way_path)
   end
 
