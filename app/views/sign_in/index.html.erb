@@ -7,48 +7,55 @@
 
     <h1 class="govuk-heading-l"><%= t 'hub.signin.heading' %></h1>
     <p class="lede"><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), begin_registration_path, id: 'begin-registration-route') %></p>
-
-    <% unless @suggested_idp.nil? %>
-      <p><%= t 'hub.signin.last_certified', company_name: @suggested_idp.display_name %></p>
-
-      <% if @suggested_idp.authentication_enabled %>
-        <div class="govuk-grid-row">
-          <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
-            <%= render partial: 'shared/idp_list', locals: {identity_providers: [@suggested_idp]} %>
-          </div>
-        </div>
-      <% else %>
-        <div class="govuk-grid-row">
-          <div>
-            <%= render partial: 'shared/disconnected_suggested_idp_list', locals: {identity_provider: @suggested_idp} %>
-          </div>
-        </div>
-      <% end %>
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-full">
-          <p><%= t 'hub.signin.any_certified_company' %></p>
-        </div>
-      </div>
-    <% end %>
   </div>
 </div>
+
+<% unless @suggested_idp.nil? %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p><%= t 'hub.signin.last_certified', company_name: @suggested_idp.display_name %></p>
+    </div>
+  </div>
+
+  <% if @suggested_idp.authentication_enabled %>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full sign-in-hint idp-list">
+        <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
+          <%= render partial: 'shared/idp_list', locals: { identity_providers: [@suggested_idp], full_provider_count: @identity_providers.length } %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="govuk-grid-row">
+      <div>
+        <%= render partial: 'shared/disconnected_suggested_idp_list', locals: { identity_provider: @suggested_idp } %>
+      </div>
+    </div>
+  <% end %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <p><%= t 'hub.signin.any_certified_company' %></p>
+    </div>
+  </div>
+<% end %>
+
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full sign-in-idp-list">
+  <div class="govuk-grid-column-full idp-list">
     <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
-      <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers} %>
+      <%= render partial: 'shared/idp_list', locals: { identity_providers: @identity_providers } %>
       <%= render partial: 'shared/continue_to_idp_form' %>
     </div>
     <% if @unavailable_identity_providers.any? %>
-      <%= render partial: 'shared/unavailable_idp_list', locals: {unavailable_identity_providers: @unavailable_identity_providers} %>
+      <%= render partial: 'shared/unavailable_idp_list', locals: { unavailable_identity_providers: @unavailable_identity_providers } %>
     <% end %>
   </div>
 </div>
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
+  <div class="govuk-grid-column-full idp-list">
     <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>
 
     <% if @disconnected_idps.any? %>
-      <%= render partial: 'shared/disconnected_idp_list', locals: {disconnected_identity_providers: @disconnected_idps} %>
+      <%= render partial: 'shared/disconnected_idp_list', locals: { disconnected_identity_providers: @disconnected_idps } %>
     <% end %>
   </div>
 </div>

@@ -12,9 +12,25 @@
   border-bottom: 1px solid $govuk-border-colour;
   text-align: center;
 
+  &.no-border {
+    border: none;
+  }
+
+  &.no-border-mobile {
+    @include govuk-media-query($until: tablet) {
+      border: none;
+    }
+  }
+
   @include govuk-media-query($from: tablet) {
     border: 5px solid $govuk-border-colour;
     margin-bottom: 30px;
+  }
+
+  @include govuk-media-query($until: tablet) {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-bottom: 5px;
   }
 }
 
@@ -33,33 +49,36 @@
 }
 
 .company-inner {
-  padding: 5px 0 18px;
-
   @include govuk-media-query($from: tablet) {
     padding: 20px;
   }
 }
 
+.sign-in-hint .company {
+  @include govuk-media-query($until: tablet) {
+    border: none;
+  }
+}
 
 .company-logo {
-  position: relative;
   width: 50%;
-  padding-bottom: 25%;
-  margin: 0 auto 15px;
+  margin: 0 auto;
 
   @include govuk-media-query($from: tablet) {
-    margin: 0 auto 15px;
+    position: relative;
     width: 80%;
     padding-bottom: 40%;
   }
 }
 
 .company-logo-inner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  @include govuk-media-query($from: tablet) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 }
 
 .company-logo-inner {
@@ -69,17 +88,21 @@
   }
 }
 
-.sign-in-idp-list .company-logo-inner {
-  input[type="image"] {
-    max-height: 96px;
+.idp-list .company-logo-inner {
+  @include govuk-media-query($from: tablet) {
+    img,
+    input[type="image"] {
+      max-height: 100px;
+    }
   }
 }
 
 .company .govuk-button {
-  margin: 0 0 20px;
+  width: 100%;
+  margin-top: 11px;
 
-  @include govuk-media-query($from: mobile) {
-    width: 65%;
+  @include govuk-media-query($from: tablet) {
+    margin: 20px 0 10px 0;
   }
 }
 
@@ -93,6 +116,7 @@
 }
 
 .company-choice {
+  text-align: left;
   padding: 15px 0;
   border-bottom: 1px solid govuk-colour("dark-grey");
   @include govuk-clearfix;
@@ -130,6 +154,8 @@
   }
 
   @include govuk-media-query($from: mobile) {
+    text-align: center;
+
     .company-logo {
       input[type="image"] {
         width: 140px;
