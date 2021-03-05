@@ -1,0 +1,21 @@
+<div class="idp-box <%= "no-border" if hide_border %> <%= "no-border-mobile" if hide_border_mobile %>">
+  <% if !disabled && !hide_button %>
+    <%= form_for(identity_provider, url: url, html: { class: 'js-idp-form idp-form', id: nil }) do |f| %>
+      <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil, class: 'js-entity-id' %>
+      <%= image_submit_tag(identity_provider.logo_path, alt: t('common.logo', name: identity_provider.display_name), class: 'idp-image') %>
+      <%= f.button t(sign_in_text ? 'hub.signin.sign_in_idp' : 'hub.signin.select_idp', display_name: identity_provider.display_name),
+                   class: 'govuk-button idp-option-button',
+                   name: identity_provider.entity_id,
+                   id: nil,
+                   type: 'submit',
+                   value: identity_provider.display_name %>
+    <% end %>
+  <% else %>
+    <div class="idp-form">
+      <%= image_tag(identity_provider.logo_path, alt: t('common.logo', name: identity_provider.display_name), class: 'idp-image') %>
+      <% if disabled %>
+        <p class="subtitle idp-option-button"><%= t('hub.certified_companies_unavailable.company_text', company: identity_provider.display_name) %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

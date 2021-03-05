@@ -5,16 +5,10 @@
 
     <h1 class="govuk-heading-l"><%= t('hub.signin.sign_in_idp', display_name: @identity_providers[0].display_name) %></h1>
     <p><%= t 'hub.confirm_your_identity.need_to_signin_again', transaction_name: @transaction_name %></p>
-  </div>
-</div>
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full idp-list">
-    <%= render partial: 'shared/idp_list', locals: { identity_providers: @identity_providers, non_repudiation: true } %>
-  </div>
-</div>
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+
+    <%= render partial: 'shared/idp_grid', locals: { identity_providers: @identity_providers, url: sign_in_submit_path, large_size: true, sign_in_text: true, hide_border: true } %>
     <%= render partial: 'shared/continue_to_idp_form' %>
+
     <p><%= raw t('hub.confirm_your_identity.use_other_idp', sign_in_link: link_to(t('hub.confirm_your_identity.sign_in_link_message'), sign_in_path)) %></p>
   </div>
 </div>

@@ -1,24 +1,24 @@
 <%= page_title 'hub.sign_in_hint.heading' %>
 <% content_for :feedback_source, 'START_PAGE' %>
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full idp-list js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale)  %>">
+  <div class="govuk-grid-column-full idp-list js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
 
-    <h1 class="govuk-heading-l"><%= t 'hub.sign_in_hint.heading'  %></h1>
-    <p><%= t('hub.sign_in_hint.intro', idp_name: @identity_provider.display_name ) %></p>
-    <p><%= t('hub.sign_in_hint.continue_with_idp', idp_name: @identity_provider.display_name ) %></p>
+    <h1 class="govuk-heading-l"><%= t 'hub.sign_in_hint.heading' %></h1>
+    <p><%= t('hub.sign_in_hint.intro', idp_name: @identity_provider.display_name) %></p>
+    <p><%= t('hub.sign_in_hint.continue_with_idp', idp_name: @identity_provider.display_name) %></p>
     <div class="company-choice no-border">
       <%= image_tag @identity_provider.logo_path, class: "company-logo" %>
     </div>
-    <%= form_for(@identity_provider, url: sign_in_submit_path, html: {class: 'company-option js-idp-form', id: nil}) do |f| %>
+    <%= form_for(@identity_provider, url: sign_in_submit_path, html: { class: 'company-option js-idp-form', id: nil }) do |f| %>
       <%= hidden_field_tag 'entity_id', @identity_provider.entity_id, id: nil, class: 'js-entity-id' %>
-                <%= f.button t('hub.sign_in_hint.button', idp_name: @identity_provider.display_name),
-                             class: 'govuk-button govuk-!-margin-right-1',
-                             name: @identity_provider.entity_id,
-                             id: nil,
-                             type: 'submit',
-                             value: @identity_provider.display_name
-                %>
-    <%= button_link_to t('hub.sign_in_hint.other_way_button'), { controller: controller_name, action: 'ignore_hint'}, class: 'govuk-button govuk-button--secondary' %>
+      <%= f.button t('hub.sign_in_hint.button', idp_name: @identity_provider.display_name),
+                   class: 'govuk-button govuk-!-margin-right-1',
+                   name: @identity_provider.entity_id,
+                   id: nil,
+                   type: 'submit',
+                   value: @identity_provider.display_name
+      %>
+      <%= button_link_to t('hub.sign_in_hint.other_way_button'), { controller: controller_name, action: 'ignore_hint' }, class: 'govuk-button govuk-button--secondary' %>
     <% end %>
   </div>
 </div>

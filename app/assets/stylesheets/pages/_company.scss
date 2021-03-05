@@ -54,12 +54,6 @@
   }
 }
 
-.sign-in-hint .company {
-  @include govuk-media-query($until: tablet) {
-    border: none;
-  }
-}
-
 .company-logo {
   width: 50%;
   margin: 0 auto;
@@ -209,6 +203,76 @@
     .company-app-install {
       display: inline-block;
       margin-top: 40px;
+    }
+  }
+}
+
+// --- Custom ---
+
+.idp-box {
+  padding: 25px 0 30px 25px;
+  border-bottom: 1px solid govuk-colour("dark-grey");
+
+  &.no-border {
+    border: none;
+  }
+
+  &.no-border-mobile {
+    @include govuk-media-query($until: tablet) {
+      border: none;
+    }
+  }
+
+  @include govuk-media-query($from: tablet) {
+    padding: 20px 20px 30px 20px;
+    border: 5px solid $govuk-border-colour;
+  }
+}
+
+.idp-option-button {
+  margin: 20px 0 0 0;
+}
+
+.idp-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.idp-image {
+  margin: auto;
+  max-width: 45%;
+
+  @include govuk-media-query($from: tablet) {
+    max-width: 80%;
+  }
+}
+
+.idp-box-row {
+  @include govuk-media-query($from: tablet) {
+    margin-bottom: 30px;
+  }
+}
+
+.idp-box-column {
+  @include govuk-media-query($until: tablet) {
+    padding: 0 30px;
+  }
+}
+
+.disconnected-company-logo {
+  text-align: center;
+
+  img {
+    max-width: 50%;
+  }
+
+  @include govuk-media-query($from: tablet) {
+    text-align: right;
+
+    img {
+      max-width: 70%;
+      padding-right: 20px;
     }
   }
 }

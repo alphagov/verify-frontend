@@ -1,0 +1,23 @@
+<% column_class = "govuk-grid-column-one-third"
+   column_class = "govuk-grid-column-one-half" if local_assigns.fetch(:medium_size, false)
+   column_class = "govuk-grid-column-two-thirds" if local_assigns.fetch(:large_size, false)
+   column_class = "govuk-grid-column-full" if local_assigns.fetch(:full_size, false) %>
+
+<% row_count = local_assigns.fetch(:big_size, false) ? 2 : 3 %>
+<% last_idx = identity_providers.length - 1 %>
+
+<% identity_providers.each_with_index do |idp, idx| %>
+  <% if idx % row_count == 0 %>
+    <div class="govuk-grid-row idp-box-row">
+  <% end %>
+  <div class="<%= column_class %> idp-box-column">
+    <%= render partial: 'shared/idp_option_box', locals: {
+      identity_provider: idp, url: local_assigns.fetch(:url, nil), hide_border_mobile: idx == last_idx,
+      disabled: local_assigns.fetch(:disabled, false), hide_button: local_assigns.fetch(:hide_button, false),
+      sign_in_text: local_assigns.fetch(:sign_in_text, false), hide_border: local_assigns.fetch(:hide_border, false)
+    } %>
+  </div>
+  <% if idx % row_count == row_count - 1 || idx == last_idx %>
+    </div>
+  <% end %>
+<% end %>
