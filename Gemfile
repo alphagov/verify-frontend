@@ -87,6 +87,7 @@ group :test, :development do
   gem 'scss_lint-govuk'
 
   gem 'codacy-coverage', { require: false }
+  gem 'pry', '~> 0.13.1'
 end
 
 platforms :mswin, :mingw, :x64_mingw do

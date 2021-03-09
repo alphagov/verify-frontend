@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   before_action :set_visitor_cookie
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :exception, except: [:warn]
   before_action :set_locale
   before_action :store_originating_ip
   before_action :set_piwik_custom_variables

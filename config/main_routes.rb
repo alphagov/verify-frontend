@@ -3,6 +3,8 @@ def add_routes(routes_name)
 end
 
 get "sign_in", to: "sign_in#index", as: :sign_in
+get "sign_in_warning", to: "sign_in#warn", as: :sign_in_warning
+post "sign_in_warning", to: "sign_in#warn", as: :sign_in_warning
 post "sign_in", to: "sign_in#select_idp", as: :sign_in_submit
 get "begin_sign_in", to: "start#sign_in", as: :begin_sign_in
 

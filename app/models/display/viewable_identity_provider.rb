@@ -9,6 +9,7 @@ module Display
              :simple_id,
              :model_name,
              :to_key,
+             :provide_authentication_until,
              :authentication_enabled,
              :unavailable,
              to: :identity_provider
