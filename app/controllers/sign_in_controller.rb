@@ -8,6 +8,8 @@ class SignInController < ApplicationController
   include AnalyticsCookiePartialController
   include ActionView::Helpers::UrlHelper
 
+  protect_from_forgery except: :warn_idp_disconnecting
+
   def index
     entity_id = success_entity_id
     all_identity_providers = current_available_identity_providers_for_sign_in + current_disconnected_identity_providers_for_sign_in
@@ -32,18 +34,47 @@ class SignInController < ApplicationController
     select_viewable_idp_for_sign_in(params.fetch("entity_id")) do |decorated_idp|
       set_journey_hint_followed(decorated_idp.entity_id)
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      redirect_to redirect_to_idp_sign_in_path
+      if idp_disconnecting(decorated_idp)
+        redirect_to sign_in_warning_path
+      else
+        redirect_to redirect_to_idp_sign_in_path
+      end
     end
+  end
+
+  def confirm_idp
+    redirect_to redirect_to_idp_sign_in_path
   end
 
   def select_idp_ajax
     select_viewable_idp_for_sign_in(params.fetch("entityId")) do |decorated_idp|
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      ajax_idp_redirection_sign_in_request(decorated_idp.entity_id)
+      if idp_disconnecting(decorated_idp)
+        redirect_obj = {
+          "location" => sign_in_warning_path.to_s,
+          "saml_request" => "",
+          "relay_state" => "",
+          "registration" => false,
+          "hints" => [],
+          "language_hint" => "",
+        }
+        render json: redirect_obj
+      else
+        ajax_idp_redirection_sign_in_request(decorated_idp.entity_id)
+      end
     end
   end
 
+  def warn_idp_disconnecting
+    @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
+  end
+
 private
+
+  def idp_disconnecting(idp)
+    disconnection_time = idp.provide_authentication_until
+    disconnection_time && DateTime.now > disconnection_time - 1.month
+  end
 
   def sign_in(entity_id, idp_name)
     POLICY_PROXY.select_idp(session[:verify_session_id],
