@@ -31,36 +31,19 @@ class SignInController < ApplicationController
   def select_idp
     select_viewable_idp_for_sign_in(params.fetch("entity_id")) do |decorated_idp|
       set_journey_hint_followed(decorated_idp.entity_id)
-      idp_reg_expiry = if decorated_idp.provide_authentication_until.nil? || decorated_idp.provide_authentication_until == true
-                         DateTime.now + 6.month
-                       else
-                         DateTime.parse(decorated_idp.provide_authentication_until)
-                       end
-      if (idp_reg_expiry - 1.month) > DateTime.now || session[:warning_shown] == true
+      if idp_disconnecting(decorated_idp) && !session[:warning_shown]
+        redirect_to sign_in_warning_path
+      else
         session[:warning_shown] = nil
         sign_in(decorated_idp.entity_id, decorated_idp.display_name)
         redirect_to redirect_to_idp_sign_in_path
-      else
-        session[:expiring_entity_id] = decorated_idp.entity_id
-        redirect_to sign_in_warning_path
       end
     end
   end
 
   def select_idp_ajax
     select_viewable_idp_for_sign_in(params.fetch("entityId")) do |decorated_idp|
-      idp_reg_expiry = if decorated_idp.provide_authentication_until == nil || decorated_idp.provide_authentication_until == true
-                         DateTime.now + 6.month
-                       else
-                         DateTime.parse(decorated_idp.provide_authentication_until)
-                       end
-
-      if (idp_reg_expiry - 1.month) > DateTime.now || session[:warning_shown] == true
-        session[:warning_shown] = nil
-        sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-        ajax_idp_redirection_sign_in_request(decorated_idp.entity_id)
-      else
-        session[:expiring_entity_id] = decorated_idp.entity_id
+      if idp_disconnecting(decorated_idp) && !session[:warning_shown]
         redirect_obj = {
           "location" => sign_in_warning_path.to_s,
           "saml_request" => "",
@@ -70,16 +53,18 @@ class SignInController < ApplicationController
           "language_hint" => "",
         }
         render json: redirect_obj
+      else
+        session[:warning_shown] = nil
+        sign_in(decorated_idp.entity_id, decorated_idp.display_name)
+        ajax_idp_redirection_sign_in_request(decorated_idp.entity_id)
       end
     end
   end
 
   def warn
     logger.warn(request)
-    select_viewable_idp_for_sign_in(session[:expiring_entity_id]) do |decorated_idp|
-      @idp = decorated_idp
-      session[:warning_shown] = true
-    end
+    session[:warning_shown] = true
+    @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
   end
 
 private
@@ -102,5 +87,10 @@ private
     else
       format(current_transaction.idp_disconnected_hint_html, company: idp_name, begin_registration_path: begin_registration_path)
     end
+  end
+
+  def idp_disconnecting(idp)
+    disconnection_time = idp.provide_authentication_until
+    !disconnection_time.nil? && DateTime.now > disconnection_time - 1.month
   end
 end

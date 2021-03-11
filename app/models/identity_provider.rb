@@ -9,8 +9,8 @@ class IdentityProvider
     @entity_id = hash["entityId"]
     @levels_of_assurance = hash["levelsOfAssurance"]
     @authentication_enabled = hash.fetch("authenticationEnabled", true)
-    @provide_authentication_until = hash.fetch("provideAuthenticationUntil", true)
     @unavailable = hash.fetch("temporarilyUnavailable", false)
+    @provide_authentication_until = DateTime.parse hash["provideAuthenticationUntil"] unless hash["provideAuthenticationUntil"].nil?
     @provide_registration_until = DateTime.parse(hash["provideRegistrationUntil"]) unless hash["provideRegistrationUntil"].nil?
   end
 
@@ -40,7 +40,8 @@ class IdentityProvider
           "entityId" => object["entity_id"],
           "levelsOfAssurance" => object["levels_of_assurance"],
           "authenticationEnabled" => object["authentication_enabled"],
-          "temporarilyUnavailable" => object["unavailable"])
+          "temporarilyUnavailable" => object["unavailable"],
+          "provideAuthenticationUntil" => object["provide_authentication_until"])
     end
   end
 end

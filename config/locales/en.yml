@@ -249,17 +249,17 @@ en:
       company_no_longer_verifies_title: "%{company} is no longer a part of GOV.UK Verify"
       company_no_longer_verifies_text: If you have an identity account with %{company}, you’ll need to %{link}.
       company_no_longer_verifies_link: verify your identity with another company
-    signinwarning:
-      heading: Changes to your %{company_name} identity account
-      warning_html: |
-        <p>%{company_name} will stop being a GOV.UK Verify identity provider on %{expiry_date}. 
-        You will not be able to use your %{company_name} identity account to access 
-        government services after then.</p>
-        
-        <p>%{company_name} will delete your account and any of your personal data when this happens.</p>
-      afterheading: What to do after your account has been deleted
-      aftertext_html: You can verify your identity and %{afterlink} with one of the current identity providers. You might also be able to prove your identity in another way to access some services.
-      afterlink: create a new account
+      warning:
+        heading: Changes to your %{company_name} identity account
+        warning_html: |
+          <p>%{company_name} will stop being a GOV.UK Verify identity provider on %{expiry_date}.
+          You will not be able to use your %{company_name} identity account to access
+          government services after then.</p>
+
+          <p>%{company_name} will delete your account and any of your personal data when this happens.</p>
+        afterheading: What to do after your account has been deleted
+        aftertext_html: You can verify your identity and %{afterlink} with one of the current identity providers. You might also be able to prove your identity in another way to access some services.
+        afterlink: create a new account
     cookies:
       heading: Cookies
     privacy_notice:
