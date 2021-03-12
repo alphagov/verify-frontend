@@ -9,7 +9,7 @@ cy:
     begin_sign_in: dechrau-mewngofnodi
     about: am
     sign_in: mewngofnodi
-    sign_in_warning: mewngofnodi-warning
+    sign_in_warning: rhybudd-mewngofnodi
     sign_in_confirm: mewngofnodi-confirm
     about_certified_companies: am-gwmniau-ardystiedig
     about_identity_accounts: am-gyfrifon-hunaniaeth
@@ -251,16 +251,18 @@ cy:
       company_no_longer_verifies_text: Os oes gennych gyfrif hunaniaeth gyda %{company}, bydd angen i chi o %{link}.
       company_no_longer_verifies_link: dilysu eich hunaniaeth gyda chwmni arall
       warning:
-        heading: Changes to your %{company_name} identity account
+        heading: Newidiadau i'ch cyfrif hunaniaeth %{company_name}
         warning_html: |
-          <p>%{company_name} will stop being a GOV.UK Verify identity provider on %{expiry_date}.
-          You will not be able to use your %{company_name} identity account to access
-          government services after then.</p>
+          <p>Bydd % {company_name} yn rhoi'r gorau i fod yn ddarparwr hunaniaeth GOV.UK Verify ar % {expiry_date}.
+          Ni fyddwch yn gallu defnyddio'ch cyfrif hunaniaeth % {company_name} i gael mynediad at wasanaethau'r
+          llywodraeth ar ôl hynny.</p>
 
-          <p>%{company_name} will delete your account and any of your personal data when this happens.</p>
-        after_heading: What to do after your account has been deleted
-        after_text: You can verify your identity and %{afterlink} with one of the current identity providers. You might also be able to prove your identity in another way to access some services.
-        after_link: create a new account
+          <p>Bydd % {company_name} yn dileu eich cyfrif a'ch data personol pan fydd hyn yn digwydd.</p>
+        after_heading: Beth i'w wneud ar ôl i'ch cyfrif cael ei ddileu
+        after_text: |
+          Gallwch wirio'ch hunaniaeth a %{afterlink} gydag un o'r darparwyr hunaniaeth cyfredol.
+          Efallai y byddwch hefyd yn gallu profi'ch hunaniaeth mewn ffordd arall i gael mynediad at rai gwasanaethau.
+        after_link: creu cyfrif newydd
     cookies:
       heading: Cwcis
     privacy_notice:
