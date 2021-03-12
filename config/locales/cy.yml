@@ -250,17 +250,17 @@ cy:
       company_no_longer_verifies_title: "Nid yw %{company} bellach yn rhan o GOV.UK Verify"
       company_no_longer_verifies_text: Os oes gennych gyfrif hunaniaeth gyda %{company}, bydd angen i chi o %{link}.
       company_no_longer_verifies_link: dilysu eich hunaniaeth gyda chwmni arall
-    signinwarning:
-      heading: Changes to your %{company_name} identity account
-      warning_html: |
-        <p>%{company_name} will stop being a GOV.UK Verify identity provider on %{expiry_date}. 
-        You will not be able to use your %{company_name} identity account to access 
-        government services after then.</p>
-        
-        <p>%{company_name} will delete your account and any of your personal data when this happens.</p>
-      afterheading: What to do after your account has been deleted
-      aftertext_html: You can verify your identity and %{afterlink} with one of the current identity providers. You might also be able to prove your identity in another way to access some services.
-      afterlink: create a new account
+      warning:
+        heading: Changes to your %{company_name} identity account
+        warning_html: |
+          <p>%{company_name} will stop being a GOV.UK Verify identity provider on %{expiry_date}.
+          You will not be able to use your %{company_name} identity account to access
+          government services after then.</p>
+
+          <p>%{company_name} will delete your account and any of your personal data when this happens.</p>
+        after_heading: What to do after your account has been deleted
+        after_text: You can verify your identity and %{afterlink} with one of the current identity providers. You might also be able to prove your identity in another way to access some services.
+        after_link: create a new account
     cookies:
       heading: Cwcis
     privacy_notice:
