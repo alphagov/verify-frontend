@@ -1,12 +1,12 @@
-<%= page_title 'hub.signin.heading' %>
+<%= page_title 'hub.signin.warning.heading', company_name:  @idp.display_name %>
 <% content_for :feedback_source, 'SIGN_IN_PAGE' %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds page-with-back-button">
     <%= link_to t('navigation.back'), start_path, class: 'govuk-back-link' %>
 
-    <h1 class="govuk-heading-l"><%= t 'hub.signinwarning.heading', company_name:  @idp.display_name %></h1>
-    <p><%= t 'hub.signinwarning.warning_html', company_name:  @idp.display_name, expiry_date: @idp.provide_authentication_until.strftime("%e %B %Y") %></p>
+    <h1 class="govuk-heading-l"><%= t 'hub.signin.warning.heading', company_name:  @idp.display_name %></h1>
+    <p><%= t 'hub.signin.warning.warning_html', company_name:  @idp.display_name, expiry_date: @idp.provide_authentication_until.strftime("%e %B %Y") %></p>
 
     <%= form_for(@idp, url: sign_in_confirm_path) do |f| %>
       <% button_text = local_assigns.fetch(:non_repudiation, false) ? 'hub.signin.sign_in_idp' : 'hub.signin.select_idp' %>
@@ -19,8 +19,8 @@
       <%= hidden_field_tag 'entity_id', @idp.entity_id, id: nil %>
     <% end %>
   
-    <h1 class="govuk-heading-l"><%= t 'hub.signinwarning.afterheading' %></h1>
+    <h1 class="govuk-heading-l"><%= t 'hub.signin.warning.after_heading' %></h1>
     
-    <p><%= t 'hub.signinwarning.aftertext_html', afterlink: link_to(t('hub.signinwarning.afterlink'), begin_registration_path, id: 'begin-registration-route') %> </p>
+    <p><%= t 'hub.signin.warning.after_text', afterlink: link_to(t('hub.signin.warning.after_link'), begin_registration_path, id: 'begin-registration-route') %> </p>
   </div>
 </div>
