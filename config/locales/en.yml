@@ -259,7 +259,7 @@ en:
 
           <p>%{company_name} will delete your account and any of your personal data when this happens.</p>
         after_heading: What to do after your account has been deleted
-        after_text: You can verify your identity and %{afterlink} with one of the current identity providers. You might also be able to prove your identity in another way to access some services.
+        after_text_html: You can verify your identity and %{afterlink} with one of the current identity providers. You might also be able to prove your identity in another way to access some services.
         after_link: create a new account
     cookies:
       heading: Cookies
