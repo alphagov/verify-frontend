@@ -259,7 +259,7 @@ cy:
 
           <p>Bydd % {company_name} yn dileu eich cyfrif a'ch data personol pan fydd hyn yn digwydd.</p>
         after_heading: Beth i'w wneud ar ôl i'ch cyfrif cael ei ddileu
-        after_text: |
+        after_text_html: |
           Gallwch wirio'ch hunaniaeth a %{afterlink} gydag un o'r darparwyr hunaniaeth cyfredol.
           Efallai y byddwch hefyd yn gallu profi'ch hunaniaeth mewn ffordd arall i gael mynediad at rai gwasanaethau.
         after_link: creu cyfrif newydd
