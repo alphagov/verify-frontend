@@ -31,7 +31,7 @@ and start your journey from the test-rp.
 
 ## Running the tests
 
-`./pre-commit-local.sh` runs tests in a docker container which uses the specified `firefox-esr`
+`./pre-commit-docker.sh` runs tests in a docker container which uses the specified `firefox-esr`
 
 This will [lint the application code](https://github.com/alphagov/govuk-lint) and run the tests.
 

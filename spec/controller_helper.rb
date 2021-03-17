@@ -20,11 +20,3 @@ end
 def set_selected_idp(selected_idp)
   session[:selected_provider] = SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
 end
-
-def set_selected_country(selected_country)
-  session[:selected_provider] = SelectedProviderData.new(JourneyType::EIDAS, selected_country)
-end
-
-def set_session_supports_eidas
-  session[:transaction_supports_eidas] = true
-end

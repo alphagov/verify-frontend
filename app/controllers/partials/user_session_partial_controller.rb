@@ -55,27 +55,12 @@ module UserSessionPartialController
     !selected_provider_data.nil?
   end
 
-  def selected_country
-    selected_provider_data = current_selected_provider_data
-    raise(Errors::WarningLevelError, "No selected Country in session") unless selected_provider_data.is_selected_country?
-
-    Country.from_session(selected_provider_data.identity_provider)
-  end
-
   def selected_provider
-    if current_selected_provider_data.is_selected_verify_idp?
-      IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
-    else
-      COUNTRY_DISPLAY_DECORATOR.decorate(selected_country)
-    end
+    IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider)
   end
 
   def store_selected_idp_for_session(selected_idp)
     session[:selected_provider] = SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
-  end
-
-  def store_selected_country_for_session(selected_country)
-    session[:selected_provider] = SelectedProviderData.new(JourneyType::EIDAS, selected_country)
   end
 
   def restart_journey

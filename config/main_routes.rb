@@ -11,7 +11,6 @@ get "begin_sign_in", to: "start#sign_in", as: :begin_sign_in
 
 constraints IsLoa1 do
   get "prove_identity", to: "prove_identity#index", as: :prove_identity
-  get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
   get "start", to: "start#index", as: :start
   post "start", to: "start#request_post", as: :start
   get "begin_registration", to: "start#register", as: :begin_registration
@@ -36,7 +35,6 @@ end
 # constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do; end
 constraints IsLoa2 do
   get "prove_identity", to: "prove_identity#index", as: :prove_identity
-  get "prove_identity_retry", to: "prove_identity#retry_eidas_journey", as: :prove_identity_retry
   get "prove_identity_ignore_hint", to: "prove_identity#ignore_hint", as: :prove_identity_ignore_hint
   get "start", to: "start#index", as: :start
   post "start", to: "start#request_post", as: :start
@@ -69,13 +67,9 @@ get "verify_services", to: "static#verify_services", as: :verify_services
 get "proxy_node_error", to: "errors#proxy_node_error", as: :proxy_node_error
 get "cookies", to: "static#cookies", as: :cookies
 get "confirm_your_identity", to: "confirm_your_identity#index", as: :confirm_your_identity
-get "choose_a_country", to: "choose_a_country#choose_a_country", as: :choose_a_country
-post "redirect_to_country", to: "redirect_to_country#choose_a_country_submit", as: :choose_a_country_submit
 get "failed_uplift", to: "failed_uplift#index", as: :failed_uplift
 get "failed_sign_in", to: "failed_sign_in#idp", as: :failed_sign_in
-get "failed_country_sign_in", to: "failed_sign_in#country", as: :failed_country_sign_in
 get "other_ways_to_access_service", to: "other_ways_to_access_service#index", as: :other_ways_to_access_service
-get "other_ways_after_eidas", to: "other_ways_to_access_service#after_eidas", as: :other_ways_after_eidas
 get "forgot_company", to: "static#forgot_company", as: :forgot_company
 get "response_processing", to: "response_processing#index", as: :response_processing
 get "redirect_to_idp_register", to: "redirect_to_idp#register", as: :redirect_to_idp_register
@@ -85,7 +79,6 @@ get "redirect_to_idp_resume", to: "redirect_to_idp#resume", as: :redirect_to_idp
 get "redirect_to_service_signing_in" => "redirect_to_service#signing_in", as: :redirect_to_service_signing_in
 get "redirect_to_service_start_again" => "redirect_to_service#start_again", as: :redirect_to_service_start_again
 get "redirect_to_service_error" => "redirect_to_service#error", as: :redirect_to_service_error
-get "redirect_to_country" => "choose_a_country#choose_a_country", as: :redirect_to_country
 get "feedback_landing", to: "feedback_landing#index", as: :feedback_landing
 get "feedback", to: "feedback#index", as: :feedback
 post "feedback", to: "feedback#submit", as: :feedback_submit

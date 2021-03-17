@@ -27,18 +27,6 @@ module ApiTestHelper
     config_api_uri("/config/transactions/#{simple_id}/translations/#{locale}")
   end
 
-  def api_countries_endpoint(session_id)
-    policy_api_uri("/policy/countries/#{session_id}")
-  end
-
-  def api_select_country_endpoint(session_id, country_code)
-    policy_api_uri("/policy/countries/#{session_id}/#{country_code}")
-  end
-
-  def set_transaction_supports_eidas
-    page.set_rack_session transaction_supports_eidas: true
-  end
-
   def stub_transactions_list
     transactions = [
       {
@@ -172,28 +160,6 @@ module ApiTestHelper
     stub_request(:get, api_translations_endpoint("test-rp-custom-hint", "cy")).to_return(body: " {}", status: 200)
   end
 
-  def stub_countries_list
-    countries = [
-        { "entityId" => "http://netherlandsEnitity.nl", "simpleId" => "NL", "enabled" => true },
-        { "entityId" => "http://spainEnitity.es", "simpleId" => "ES", "enabled" => true },
-        { "entityId" => "http://stub-country.uk", "simpleId" => "YY", "enabled" => true },
-        { "entityId" => "http://swedenEnitity.se", "simpleId" => "SE", "enabled" => false },
-    ]
-
-    stub_request(:get, api_countries_endpoint(default_session_id)).to_return(body: countries.to_json, status: 200)
-  end
-
-  def stub_select_country_request(country_code)
-    stub_request(:post, api_select_country_endpoint(default_session_id, country_code))
-        .to_return(body: "")
-  end
-
-  def stub_session_country_authn_request(originating_ip, country_location, registration)
-    stub_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
-        .with(headers: { "X_FORWARDED_FOR" => originating_ip })
-        .to_return(body: an_authn_request(country_location, registration).to_json)
-  end
-
   def an_authn_request(location, registration)
     {
         "postEndpoint" => location,
@@ -249,7 +215,6 @@ module ApiTestHelper
   def sign_in_process_details_stub_response(options)
     defaults = {
       "requestIssuerId" => default_transaction_entity_id,
-      "transactionSupportsEidas" => false,
     }
     defaults.merge(options)
   end
@@ -324,23 +289,6 @@ module ApiTestHelper
     stub_request(:post, saml_proxy_api_uri(IDP_AUTHN_RESPONSE_ENDPOINT))
         .with(body: authn_response_body)
         .to_return(body: response.to_json, status: 200)
-  end
-
-  def stub_api_country_authn_response(relay_state, response = { "result" => "SUCCESS", "isRegistration" => false })
-    authn_response_body = {
-        PARAM_SAML_REQUEST => "my-saml-response",
-        PARAM_RELAY_STATE => relay_state,
-        PARAM_IP_SEEN_BY_FRONTEND => "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>",
-    }
-
-    stub_request(:post, saml_proxy_api_uri(COUNTRY_AUTHN_RESPONSE_ENDPOINT))
-        .with(body: authn_response_body)
-        .to_return(body: response.to_json, status: 200)
-  end
-
-  def stub_api_bad_request_response_to_country_authn_request
-    stub_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
-        .to_return(body: "", status: 500)
   end
 
   def stub_api_returns_error(code)

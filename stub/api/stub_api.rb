@@ -13,11 +13,9 @@ class StubApi < Sinatra::Base
 
   get '/policy/received-authn-request/:session_id/sign-in-process-details' do
     entity_id = params['session_id'] == 'my-loa1-relay-state' ? 'http://www.test-rp-loa1.gov.uk/SAML2/MD' : 'http://www.test-rp.gov.uk/SAML2/MD'
-    transactionSupportsEidas = params['session_id'] == 'my-loa1-relay-state' ? false : true
     status 200
     "{
       \"requestIssuerId\":\"#{entity_id}\",
-      \"transactionSupportsEidas\":#{transactionSupportsEidas}
     }"
   end
 
@@ -164,14 +162,6 @@ class StubApi < Sinatra::Base
     }'
   end
 
-  post '/SAML2/SSO/API/RECEIVER/EidasResponse/POST' do
-    '{
-      "result":"blah",
-      "isRegistration":false,
-      "loaAchieved":"LEVEL_2"
-    }'
-  end
-
   post '/SAML2/SSO/API/RECEIVER/Response/POST' do
     '{
        "result":"blah",
@@ -241,45 +231,6 @@ class StubApi < Sinatra::Base
   end
 
   post '/policy/received-authn-request/my-relay-state/select-identity-provider' do
-    status 200
-    ''
-  end
-
-  get '/api/countries/blah' do
-    '[{
-        "entityId":"http://nl-proxy-node-demo.cloudapps.digital/ServiceMetadata",
-        "simpleId":"NL",
-        "enabled":true
-      },
-      {
-        "entityId":"http://se-eidas.redsara.es/EidasNode/ServiceMetadata",
-        "simpleId":"ES",
-        "enabled":true
-      },
-      {
-        "entityId":"http://eunode.eidastest.se/EidasNode/ServiceMetadata",
-        "simpleId":"SE",
-        "enabled":false
-      }
-     ]'
-  end
-
-  get '/policy/countries/:session_id' do
-    '[
-      {
-        "entityId":"http://localhost:50140/stub-country/ServiceMetadata",
-        "simpleId":"YY",
-        "enabled":true
-      }
-     ]'
-  end
-
-  post '/api/countries/:session_id/:countryCode' do
-    status 200
-    ''
-  end
-
-  post '/policy/countries/:session_id/:countryCode' do
     status 200
     ''
   end

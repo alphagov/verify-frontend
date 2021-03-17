@@ -51,15 +51,6 @@ class PolicyProxy
     @api_client.post(cycle_three_cancel_endpoint(session_id), nil)
   end
 
-  def get_countries(session_id)
-    response = @api_client.get(countries_endpoint(session_id))
-    CountryResponse.validated_response(response)
-  end
-
-  def select_a_country(session_id, country)
-    @api_client.post(select_a_country_endpoint(session_id, country), "")
-  end
-
   def restart_journey(session_id)
     @api_client.post(restart_journey_endpoint(session_id), "")
   end

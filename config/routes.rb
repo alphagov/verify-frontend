@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   get "initiate-journey/:transaction_simple_id", to: "initiate_journey#index", as: :initiate_journey
   post "SAML2/SSO" => "authn_request#rp_request"
   post "SAML2/SSO/Response/POST" => "authn_response#idp_response"
-  post "SAML2/SSO/EidasResponse/POST" => "authn_response#country_response"
   match "/404", to: "errors#page_not_found", via: :all
 
   if %w(test development).include?(Rails.env) || STUB_MODE
@@ -49,7 +48,6 @@ Rails.application.routes.draw do
 
   put "redirect-to-idp-warning", to: "redirect_to_idp_warning#continue_ajax", as: :redirect_to_idp_warning_submit_ajax
   put "select-idp", to: "sign_in#select_idp_ajax", as: :select_idp_submit_ajax
-  put "redirect-to-country", to: "redirect_to_country#choose_a_country_submit_ajax", as: :redirect_to_country_ajax
   put "resume-with-idp", to: "paused_registration#resume_with_idp_ajax", as: :resume_with_idp_ajax
   # Used for tracking ab tests that start in Gov.uk
   get "redirect-to-rp/:transaction_simple_id", to: "redirect_to_rp#redirect_to_rp"

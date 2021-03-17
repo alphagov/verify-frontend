@@ -9,10 +9,6 @@ class SelectedProviderData < SimpleDelegator
     @identity_provider = identity_provider
   end
 
-  def is_selected_country?
-    @journey_type == JourneyType::EIDAS
-  end
-
   def is_selected_verify_idp?
     @journey_type == JourneyType::VERIFY
   end

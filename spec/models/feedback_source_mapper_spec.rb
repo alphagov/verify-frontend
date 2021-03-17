@@ -36,18 +36,6 @@ describe FeedbackSourceMapper do
     expect(@feedback_source_mapper.page_from_source("CHOOSE_A_CERTIFIED_COMPANY_PAGE", :en)).to eql(choose_a_certified_company_path)
   end
 
-  it "should map choose a country feedback source to choose a country page" do
-    expect(@feedback_source_mapper.page_from_source("CHOOSE_A_COUNTRY_PAGE", :en)).to eql(choose_a_country_path)
-  end
-
-  it "should map eidas scheme unavailable feedback source to redirect to country page" do
-    expect(@feedback_source_mapper.page_from_source("EIDAS_SCHEME_UNAVAILABLE_PAGE", :en)).to eql(redirect_to_country_path)
-  end
-
-  it "should map proxy node error feedback source to proxy node error page" do
-    expect(@feedback_source_mapper.page_from_source("PROXY_NODE_ERROR_PAGE", :en)).to eql(proxy_node_error_path)
-  end
-
   it "should map feedback source to corresponding welsh path" do
     expect(@feedback_source_mapper.page_from_source("CONFIRM_YOUR_IDENTITY", :cy)).to eql("/cadarnhau-eich-hunaniaeth")
   end

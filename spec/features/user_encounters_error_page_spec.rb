@@ -4,7 +4,6 @@ require "api_test_helper"
 RSpec.describe "user encounters error page" do
   let(:api_saml_endpoint) { saml_proxy_api_uri(new_session_endpoint) }
   let(:api_select_idp_endpoint) { policy_api_uri(select_idp_endpoint(default_session_id)) }
-  let(:api_select_country_endpoint) { policy_api_uri(select_a_country_endpoint(default_session_id, "YY")) }
 
   it "will present the user with a list of transactions" do
     stub_session_creation_error
@@ -127,23 +126,6 @@ RSpec.describe "user encounters error page" do
         expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
         expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
         expect(page.status_code).to eq(500)
-      end
-    end
-
-    context "country" do
-      before :each do
-        set_transaction_supports_eidas
-        stub_countries_list
-      end
-
-      it "will present eIDAS scheme unavailable error page when country metadata cannot be reached" do
-        error_body = { errorId: "0", exceptionType: "METADATA_PROVIDER_EXCEPTION" }
-        stub_request(:post, api_select_country_endpoint).to_return(body: error_body.to_json, status: 400)
-
-        visit choose_a_country_path
-        click_button "Select Stub IDP Demo"
-
-        expect(page).to have_content t "errors.eidas_scheme_unavailable.heading", country_name: "Stub Country"
       end
     end
   end

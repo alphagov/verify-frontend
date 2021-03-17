@@ -24,17 +24,6 @@ describe StartController do
       expect(subject).to render_template(:start)
       expect(stub_restart_journey_request).to have_not_been_made
     end
-
-    it "will restart journey when it is not Verify" do
-      set_selected_country "stub-country"
-      stub_restart_journey
-
-      get :index, params: { locale: "en" }
-
-      expect(subject).to render_template(:start)
-      expect(stub_restart_journey_request).to have_been_made.once
-      expect(session[:selected_provider]).to be_nil
-    end
   end
 
   context "when form is valid" do

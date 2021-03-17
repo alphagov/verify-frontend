@@ -48,12 +48,6 @@
   <div><%= submit_tag 'saml-post-trigger-session-expiry' %></div>
   <small>(needs a valid session first)</small>
 <% end -%>
-<%= form_tag(@form_action) do -%>
-    <%= hidden_field_tag('SAMLRequest', 'my-saml-request') %>
-    <%= hidden_field_tag('RelayState', 'my-relay-state') %>
-    <%= hidden_field_tag('journey_hint', 'eidas_sign_in') %>
-    <div><%= submit_tag 'saml-post-eidas' %></div>
-<% end -%>
 <%= form_tag('/SAML2/SSO/Response/POST') do -%>
     <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
     <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
@@ -70,21 +64,4 @@
     <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
     <%= hidden_field_tag('language', 'cy') %>
     <div><%= submit_tag 'saml-response-post-with-cy-language' %></div>
-<% end -%>
-<%= form_tag('/SAML2/SSO/EidasResponse/POST') do -%>
-    <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
-    <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
-    <div><%= submit_tag 'saml-eidas-response-post' %></div>
-<% end -%>
-<%= form_tag('/SAML2/SSO/EidasResponse/POST') do -%>
-    <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
-    <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
-    <%= hidden_field_tag('language', 'en') %>
-    <div><%= submit_tag 'saml-eidas-response-post-with-en-language' %></div>
-<% end -%>
-<%= form_tag('/SAML2/SSO/EidasResponse/POST') do -%>
-    <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
-    <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
-    <%= hidden_field_tag('language', 'cy') %>
-    <div><%= submit_tag 'saml-eidas-response-post-with-cy-language' %></div>
 <% end -%>

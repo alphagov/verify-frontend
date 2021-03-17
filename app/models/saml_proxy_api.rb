@@ -14,16 +14,6 @@ class SamlProxyApi
     { "X-Forwarded-For" => originating_ip }
   end
 
-  def forward_country_authn_response(relay_state, saml_response)
-    body = {
-        PARAM_SAML_REQUEST => saml_response,
-        PARAM_RELAY_STATE => relay_state,
-        PARAM_IP_SEEN_BY_FRONTEND => originating_ip,
-    }
-    response = @api_client.post(COUNTRY_AUTHN_RESPONSE_ENDPOINT, body)
-    CountryAuthnResponse.validated_response(response)
-  end
-
   def response_for_rp(session_id)
     response = @api_client.get(response_for_rp_endpoint(session_id), headers: x_forwarded_for)
     ResponseForRp.validated_response(response)

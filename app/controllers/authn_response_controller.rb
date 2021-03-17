@@ -6,7 +6,7 @@ require "partials/analytics_cookie_partial_controller"
 class AuthnResponseController < SamlController
   include AnalyticsCookiePartialController
 
-  protect_from_forgery except: %i[idp_response country_response]
+  protect_from_forgery except: %i[idp_response]
 
   SIGNING_IN_STATE = "SIGN_IN_WITH_IDP"
   REGISTERING_STATE = "REGISTER_WITH_IDP"
@@ -22,7 +22,6 @@ class AuthnResponseController < SamlController
   OTHER = "OTHER"
 
   ACCEPTED_IDP_RESPONSES = [SUCCESS, MATCHING_JOURNEY_SUCCESS, NON_MATCHING_JOURNEY_SUCCESS, CANCEL, FAILED_UPLIFT, PENDING].freeze
-  ACCEPTED_COUNTRY_RESPONSES = [SUCCESS, NON_MATCHING_JOURNEY_SUCCESS, CANCEL, FAILED_UPLIFT].freeze
 
   def idp_response
     raise_error_if_params_invalid(params, session[:verify_session_id])
@@ -36,18 +35,6 @@ class AuthnResponseController < SamlController
     logger.info("IDP response status of '#{status}' for session ID '#{session[:verify_session_id]}' not in "\
       "accepted IDP response statuses. Falling back to 'FAILED'")
     handle_idp_response(FAILED, response)
-  end
-
-  def country_response
-    params["RelayState"] ||= session[:verify_session_id] if session[:transaction_supports_eidas]
-    raise_error_if_params_invalid(params, session[:verify_session_id])
-
-    response = SAML_PROXY_API.forward_country_authn_response(params["RelayState"], params["SAMLResponse"])
-    status = response.country_result
-
-    return handle_country_response(status, response) if ACCEPTED_COUNTRY_RESPONSES.include?(status)
-
-    handle_country_response(FAILED, response)
   end
 
 private
@@ -67,10 +54,6 @@ private
     set_journey_status(status)
     clear_single_idp_cookie
     redirect_to idp_redirects(status, response)
-  end
-
-  def handle_country_response(status, response)
-    redirect_to country_redirects(status, response)
   end
 
   def analytics_reporters(status, response)
@@ -139,17 +122,6 @@ private
 
   def journey_type?(journey_type)
     session[:journey_type] == journey_type
-  end
-
-  def country_redirects(status, response)
-    is_registration = response.is_registration
-    {
-      SUCCESS => is_registration ? confirmation_path : response_processing_path,
-      NON_MATCHING_JOURNEY_SUCCESS => redirect_to_service_signing_in_path,
-      CANCEL => is_registration ? failed_registration_path : start_path,
-      FAILED_UPLIFT => failed_uplift_path,
-      FAILED => is_registration ? failed_registration_path : failed_country_sign_in_path,
-    }.fetch(status)
   end
 
   def clear_single_idp_cookie
