@@ -41,7 +41,7 @@ module ViewableIdpPartialController
   end
 
   def current_available_identity_providers_for_sign_in
-    current_identity_providers_for_sign_in.select(&:authentication_enabled).reject(&:unavailable)
+    current_identity_providers_for_sign_in.select(&:authentication_enabled).reject { |idp| idp.unavailable || (idp.provide_authentication_until.present? && idp.provide_authentication_until < 2.hours.from_now) }
   end
 
   def current_unavailable_identity_providers_for_sign_in
@@ -49,7 +49,7 @@ module ViewableIdpPartialController
   end
 
   def current_disconnected_identity_providers_for_sign_in
-    current_identity_providers_for_sign_in.reject(&:authentication_enabled)
+    current_identity_providers_for_sign_in.select { |idp| !idp.authentication_enabled || (idp.provide_authentication_until.present? && idp.provide_authentication_until < 2.hours.from_now) }
   end
 
   def current_available_identity_providers_for_registration_loa2(rp_entity_id)
