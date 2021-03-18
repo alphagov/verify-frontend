@@ -36,6 +36,27 @@ describe SignInController do
     end
   end
 
+  context "With IDPs expiring in less than 2 hours" do
+    before(:example) do
+      stub_api_idp_list_for_sign_in([{ "simpleId" => "stub-idp-one",
+                                      "entityId" => "http://idcorp.com",
+                                      "levelsOfAssurance" => %w(LEVEL_1),
+                                      "provideAuthenticationUntil" => 1.hours.from_now.to_s },
+                                     { "simpleId" => "stub-idp-two",
+                                      "entityId" => "http://idcorp-two.com",
+                                      "levelsOfAssurance" => %w(LEVEL_1) }])
+      set_session_and_cookies_with_loa("LEVEL_1")
+    end
+
+    it "will have one available IDP" do
+      expect(subject.current_available_identity_providers_for_sign_in.length).to eq(1)
+    end
+
+    it "will have one unavilable IDP" do
+      expect(subject.current_disconnected_identity_providers_for_sign_in.length).to eq(1)
+    end
+  end
+
   context "Without Expiring IDPs" do
     before(:example) do
       stub_api_idp_list_for_sign_in([{ "simpleId" => "stub-idp-one",
