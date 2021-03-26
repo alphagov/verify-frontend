@@ -18,7 +18,7 @@ docker build . --network host -t verify-frontend
 
 ### Additional prerequisites
 
-If running on OS X, you'll also need to used [homebrew](https://brew.sh/) to install this dependency:
+If running on OS X, you'll also need to use [homebrew](https://brew.sh/) to install this dependency:
 
 ```bash
 brew install shared-mime-info
