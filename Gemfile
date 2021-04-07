@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.6.6'
+ruby '2.7.3'
 
 gem 'rails', '~> 5.2.4.4'
 gem 'rails-i18n', '~> 5.1.3'
@@ -76,7 +76,7 @@ group :test, :development do
   gem 'rspec-rails', '~> 4.0'
   gem 'selenium-webdriver', '~> 3'
   gem 'webdrivers', '~> 4.0'
-  gem 'webmock', require: false
+  gem 'webmock', '= 3.10.0', require: false
 
   gem 'headless'
   gem 'rack-test'
