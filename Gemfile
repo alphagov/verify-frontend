@@ -7,7 +7,7 @@ gem 'route_translator', '~> 8.2.1'
 
 # Server
 gem 'connection_pool'
-gem 'http', '~> 2.0.0'
+gem 'http', '~> 4.4.1'
 gem 'puma'
 gem 'rack-handlers'
 
@@ -76,7 +76,7 @@ group :test, :development do
   gem 'rspec-rails', '~> 4.0'
   gem 'selenium-webdriver', '~> 3'
   gem 'webdrivers', '~> 4.0'
-  gem 'webmock', '= 3.10.0', require: false
+  gem 'webmock', require: false
 
   gem 'headless'
   gem 'rack-test'
