@@ -1,41 +1,41 @@
 source 'https://rubygems.org'
 ruby '2.7.3'
 
-gem 'rails', '~> 5.2.4.4'
-gem 'rails-i18n', '~> 5.1.3'
-gem 'route_translator', '~> 8.2.1'
+gem 'rails'
+gem 'rails-i18n'
+gem 'route_translator'
 
 # Server
 gem 'connection_pool'
-gem 'http', '~> 4.4.1'
+gem 'http'
 gem 'puma'
 gem 'rack-handlers'
 
 # Assets
 gem 'autoprefixer-rails'
 gem 'jquery-rails'
-gem 'sassc', '~> 2.0.1'
-gem 'uglifier', '~> 2.7.0'
+gem 'sassc'
+gem 'uglifier'
 
 gem 'mini_racer'
 
 # Use statsd-ruby to talk collect and send metrics to graphite
-gem 'statsd-ruby', '~> 1.3.0'
+gem 'statsd-ruby'
 
 # Use prometheus-client to expose metrics to prometheus
 #
 # prometheus/client_ruby had a massive rewrite in
 # https://github.com/prometheus/client_ruby/pull/95
 # This is the prerelease version of that work
-gem 'prometheus-client', '~> 0.10.0.pre.alpha.1'
+gem 'prometheus-client'
 
 # Use sentry-raven for sending logs to Sentry via the raven protocol
 gem 'sentry-raven'
 
 gem 'logstash-logger'
-gem 'request_store', '~> 1.3.1'
+gem 'request_store'
 
-gem 'email_validator', '~> 1.6'
+gem 'email_validator'
 gem 'zendesk_api'
 
 # Use multi_json because pkgr forces the json gem to < 2.0, which is an old specification of JSON (doesn't allow top level strings)
@@ -50,11 +50,11 @@ gem 'rails_same_site_cookie', { git: "https://github.com/alphagov/rails-same-sit
 
 # Gem ffi in Ruby 2.6.6 requires a version of the system library `/usr/lib/libffi.dylib` that's not available on MacOS Mojave.
 # Revert the gem to a previous version that works with the library available on our dev machines.
-gem 'ffi', '1.12.2'
+gem 'ffi'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 3.7'
+  gem 'web-console'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -68,14 +68,14 @@ group :test, :development do
   gem 'dotenv-rails'
 
   # Automated testing
-  gem 'capybara', '~> 3.35'
+  gem 'capybara'
   gem 'jasmine'
   gem 'jasmine-jquery-rails'
   gem 'rails-controller-testing'
-  gem 'rspec', '~> 3.10'
-  gem 'rspec-rails', '~> 4.0'
-  gem 'selenium-webdriver', '~> 3'
-  gem 'webdrivers', '~> 4.0'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
   gem 'webmock', require: false
 
   gem 'headless'
@@ -83,11 +83,11 @@ group :test, :development do
   gem 'rack_session_access'
   gem 'thin'
 
-  gem 'rubocop-govuk', '~> 3.6.0'
+  gem 'rubocop-govuk'
   gem 'scss_lint-govuk'
 
   gem 'codacy-coverage', { require: false }
-  gem 'pry', '~> 0.13.1'
+  gem 'pry'
 end
 
 platforms :mswin, :mingw, :x64_mingw do
