@@ -13,11 +13,11 @@ module ConfigEndpoints
     PATH_PREFIX.join(IDP_LIST_REGISTRATION_SUFFIX % { transaction_name: CGI.escape(transaction_id), loa: CGI.escape(loa) }).to_s
   end
 
-  def idp_list_for_sign_in_endpoint(transaction_id)
+  def idp_list_for_sign_in_endpoint(transaction_id, session)
     begin
       PATH_PREFIX.join(IDP_LIST_SIGN_IN_SUFFIX % { transaction_name: CGI.escape(transaction_id) }).to_s
     rescue TypeError
-      Rails.logger.error("TypeError thrown by #idp_list_for_sign_in_endpoint - see HUB-920. Session was #{session.inspect}")
+      Rails.logger.error("TypeError thrown by #idp_list_for_sign_in_endpoint - see HUB-920. Session was #{session.each {}}")
       raise
     end
   end
