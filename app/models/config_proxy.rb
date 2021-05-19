@@ -40,8 +40,8 @@ class ConfigProxy
     IdpListResponse.validated_response(response)
   end
 
-  def get_idp_list_for_sign_in(transaction_id, session = "Not passed in")
-    response = @api_client.get(idp_list_for_sign_in_endpoint(transaction_id, session))
+  def get_idp_list_for_sign_in(transaction_id)
+    response = @api_client.get(idp_list_for_sign_in_endpoint(transaction_id))
     IdpListResponse.validated_response(response)
   end
 
