@@ -485,7 +485,7 @@ cy:
       verify_another_company_text: Gallwch geisio nes ymlaen eto neu wirio'ch hunaniaeth gyda chwmni ardystiedig arall.
       company_text: Nid yw %{company} ar gael
     certified_companies_disconnected:
-      sub_heading: Nid yw'r cwmnïau canlynol bellach yn rhan o GOV.UK Verify
+      heading: Nid yw'r cwmnïau canlynol bellach yn rhan o GOV.UK Verify
       verify_another_company_html: Os oedd gennych gyfrif hunaniaeth gydag un o'r cwmnïau hyn, bydd angen i chi %{link}.
       verify_another_company_link: dilysu eich hunaniaeth gyda chwmni arall
     further_information:
