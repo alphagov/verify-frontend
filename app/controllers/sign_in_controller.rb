@@ -8,7 +8,7 @@ class SignInController < ApplicationController
   include AnalyticsCookiePartialController
   include ActionView::Helpers::UrlHelper
 
-  protect_from_forgery except: :warn_idp_disconnecting
+  protect_from_forgery with: :exception, except: :warn_idp_disconnecting
 
   def index
     entity_id = success_entity_id
