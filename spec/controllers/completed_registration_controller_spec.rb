@@ -10,6 +10,11 @@ describe CompletedRegistrationController do
 
   context "#index" do
     it "renders the page when the IDP is valid" do
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
+        value: { "RESUMELINK": { IDP: :valid_idp_simple_id } }.to_json,
+        expires: 18.months.from_now,
+      }
+
       stub_api_idp_list_for_sign_in_without_session([
         { "simpleId" => "stub-idp-one",
           "entityId" => entity_id,
@@ -24,6 +29,7 @@ describe CompletedRegistrationController do
 
       expect(cookie_hint["ATTEMPT"]).to eq(entity_id)
       expect(cookie_hint["SUCCESS"]).to eq(entity_id)
+      expect((cookie_hint.has_key? "RESUMELINK")).to be false
     end
 
     it "redirects to the verify services page and does not set the journey hint cookie if IDP invalid" do
