@@ -22,11 +22,11 @@ RSpec.describe "When the user visits the about page" do
     expect(page).to have_link(t("navigation.continue"))
   end
 
-  it "will display the Welsh about page but it will actually contain some content in English" do
+  it "will display the about page in Welsh." do
     visit "/am"
 
     expect(page).to have_content("Neidio i'r prif gynnwys")
-    expect(page).to have_content "You create an identity account with a company that meets government privacy and security standards."
+    expect(page).to have_content "Gallwch greu cyfrif hunaniaeth gyda chwmni sydd yn cwrdd â safonau preifatrwydd a diogelwch y llywodraeth."
     expect(page).to have_link("Parhau", href: "/a-fydd-yn-gweithio-i-mi")
     expect(page).to have_css "html[lang=cy]"
   end
