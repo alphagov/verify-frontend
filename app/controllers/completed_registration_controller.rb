@@ -24,6 +24,7 @@ class CompletedRegistrationController < ApplicationController
       entity_id = decorate_idp_by_simple_id(identity_providers, idp_simple_id).entity_id
       set_attempt_journey_hint(entity_id)
       set_journey_hint_by_status(entity_id, "SUCCESS")
+      remove_resume_link_journey_hint
       render :index
     end
   end

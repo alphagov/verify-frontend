@@ -11,12 +11,12 @@ describe PausedRegistrationController do
   before(:each) do
     set_selected_idp("entity_id" => "http://idcorp.com", "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_1 LEVEL_2))
     set_session_and_cookies_with_loa("LEVEL_2", "test-rp")
-    stub_api_idp_list_for_registration(
-      [
-        { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => %w(LEVEL_2) },
-        { "simpleId" => "stub-idp-two", "entityId" => "http://idcorp-two.com", "levelsOfAssurance" => %w(LEVEL_2) },
-      ],
-    )
+    idps = [
+      { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => %w(LEVEL_2) },
+      { "simpleId" => "stub-idp-two", "entityId" => "http://idcorp-two.com", "levelsOfAssurance" => %w(LEVEL_2) },
+    ]
+    stub_api_idp_list_for_registration(idps)
+    stub_api_idp_list_for_sign_in(idps)
     stub_transaction_details
   end
 
@@ -248,6 +248,31 @@ describe PausedRegistrationController do
 
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = front_journey_hint_cookie.to_json
       expect(subject).to redirect_to start_path
+    end
+  end
+
+  context "user POSTs to resume_with_idp with invalid session" do
+    subject { post :resume_with_idp, params: { locale: "en", entity_id: valid_idp } }
+
+    it "should render error page" do
+      stub_api_select_idp
+      session.delete("transaction_entity_id")
+
+      expect(subject).to render_template(:something_went_wrong)
+    end
+  end
+
+  context "user PUTs to resume_with_idp_ajax with invalid session" do
+    subject { put :resume_with_idp_ajax, params: { locale: "en", entityId: valid_idp } }
+
+    it "should render error page" do
+      stub_api_select_idp
+      stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
+      stub_session_idp_authn_request("127.0.0.1", "idp-location", true)
+
+      session.delete("transaction_entity_id")
+
+      expect(subject).to render_template(:something_went_wrong)
     end
   end
 end

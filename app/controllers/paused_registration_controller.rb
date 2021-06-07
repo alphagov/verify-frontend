@@ -14,7 +14,7 @@ class PausedRegistrationController < ApplicationController
   include AnalyticsCookiePartialController
 
   # Validate the session manually within the action, as we don't want the normal 'no session' page.
-  skip_before_action :validate_session, except: :resume
+  skip_before_action :validate_session, only: %i[index from_resume_link]
   skip_before_action :set_piwik_custom_variables, except: :resume
   layout "slides", only: :resume
 
