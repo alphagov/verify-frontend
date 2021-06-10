@@ -589,7 +589,7 @@ cy:
       select_service: Dewiswch y gwasanaeth rydych angen
     sign_in_hint:
       heading: Mewngofnodwch i barhau
-      intro: Y cwmni olaf gafodd ei ddewis ar y ddyfais hon oedd %{idp_enw}.
+      intro: Y cwmni olaf gafodd ei ddewis ar y ddyfais hon oedd %{idp_name}.
       continue_with_idp: Parhau gyda %{idp_name} os ydych wedi creu cyfrif hunaniaeth gyda hwy.
       button: Mewngofnodwch gyda %{idp_name}
       other_way_button: Dewiswch ffordd arall o fewngofnodi
