@@ -15,7 +15,7 @@ class StubApi < Sinatra::Base
     entity_id = params['session_id'] == 'my-loa1-relay-state' ? 'http://www.test-rp-loa1.gov.uk/SAML2/MD' : 'http://www.test-rp.gov.uk/SAML2/MD'
     status 200
     "{
-      \"requestIssuerId\":\"#{entity_id}\",
+      \"requestIssuerId\":\"#{entity_id}\"
     }"
   end
 
