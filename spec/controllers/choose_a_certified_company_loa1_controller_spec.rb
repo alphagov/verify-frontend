@@ -27,6 +27,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
       levelsOfAssurance: %w(LEVEL_1),
     }.freeze
   }
+
   context "#index" do
     before :each do
       stub_api_idp_list_for_registration([stub_idp_loa1, stub_idp_loa1_with_interstitial], "LEVEL_1")
@@ -42,7 +43,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
       get :index, params: { locale: "en" }
 
-      expect(subject).to render_template(:choose_a_certified_company_LOA1)
+      expect(subject).to render_template(:choose_a_certified_company)
       expect(stub_piwik_request).to have_been_made.once
     end
   end

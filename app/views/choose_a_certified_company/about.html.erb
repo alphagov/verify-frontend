@@ -8,6 +8,6 @@
       <p class="subtitle"><%= t 'hub.choose_a_certified_company.about.information_provided_by', display_name: @idp.display_name %></p>
       <%= raw @idp.about_content %>
     </div>
-    <%= render partial: 'choose_a_certified_company/select_idp_form', locals: {recommended: @recommended, identity_provider: @idp} %>
+    <%= render partial: 'choose_a_certified_company/select_idp_form', locals: { identity_provider: @idp } %>
   </div>
 </div>

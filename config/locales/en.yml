@@ -168,7 +168,11 @@ en:
         </p>
       choose_idp: "Choose %{display_name}"
       show_all_companies: Companies that are unlikely to verify you
-      filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
+      filtered_idps:
+        message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
+        company:
+          one: 1 company
+          other: "%{count} companies"
       about_idp: About %{display_name}
       dialog:
         information_provided_by: Information provided by %{display_name}

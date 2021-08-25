@@ -1,5 +1,5 @@
 (function (global) {
-    var allButtons = $('#matching-idps button.govuk-button');
+    var allButtons = $('#recommended-idps button.govuk-button');
     var numberOfVisibleButtons = 0;
 
     var isVisible = function(element) {

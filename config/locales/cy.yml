@@ -166,7 +166,14 @@ cy:
         </p>
       choose_idp: "Dewis %{display_name}"
       show_all_companies: Cwmnïau sydd yn anhebygol o'ch gwirio
-      filtered_idps_message_html: "Rydym wedi hidlo %{company_count}, gan eu bod yn anhebygol o allu eich gwirio yn seiliedig ar eich atebion."
+      filtered_idps:
+        message_html: "Rydym wedi hidlo %{company_count}, gan eu bod yn anhebygol o allu eich gwirio yn seiliedig ar eich atebion."
+        company:
+          one: 1 gwmni
+          two: cwmnïau hyn
+          few: cwmnïau hyn
+          many: cwmnïau hyn
+          other: cwmnïau hyn
       about_idp: Am %{display_name}
       dialog:
         information_provided_by: Gwybodaeth wedi ei darparu gan %{display_name}

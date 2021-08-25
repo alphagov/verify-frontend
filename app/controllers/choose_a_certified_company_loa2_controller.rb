@@ -16,7 +16,8 @@ class ChooseACertifiedCompanyLoa2Controller < ChooseACertifiedCompanyRedirectCon
     idps_available = IDP_RECOMMENDATION_ENGINE.any?(idps, selected_evidence, current_transaction_simple_id, idps_tried)
     if idps_available
       session[:user_segments] = suggestions[:user_segments]
-      render "choose_a_certified_company/choose_a_certified_company_LOA2"
+      @show_non_recommended_idps = true
+      render "choose_a_certified_company/choose_a_certified_company"
     else
       redirect_to select_documents_advice_path
     end

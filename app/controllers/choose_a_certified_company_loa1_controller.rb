@@ -9,7 +9,8 @@ class ChooseACertifiedCompanyLoa1Controller < ChooseACertifiedCompanyRedirectCon
     @recommended_idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_registration))
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
 
-    render "choose_a_certified_company/choose_a_certified_company_LOA1"
+    @show_non_recommended_idps = false
+    render "choose_a_certified_company/choose_a_certified_company"
   end
 
   def select_idp
