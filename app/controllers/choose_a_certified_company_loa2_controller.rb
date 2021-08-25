@@ -14,13 +14,12 @@ class ChooseACertifiedCompanyLoa2Controller < ChooseACertifiedCompanyRedirectCon
     @non_recommended_idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely]))
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
 
-    idps_available = IDP_RECOMMENDATION_ENGINE.any?(idps, selected_evidence, current_transaction_simple_id)
-    if idps_available
-      session[:user_segments] = suggestions[:user_segments]
+    if @recommended_idps.any?
       @show_non_recommended_idps = true
-      render "choose_a_certified_company/choose_a_certified_company"
+      session[:user_segments] = suggestions[:user_segments]
+      render "choose_a_certified_company/index"
     else
-      redirect_to select_documents_advice_path
+      redirect_to no_idps_available_path
     end
   end
 

@@ -5,6 +5,6 @@ class TestSingleIdpJourneyController < ApplicationController
   layout "test"
 
   def index
-    render "index"
+    render :index
   end
 end

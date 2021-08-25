@@ -10,7 +10,7 @@ class ChooseACertifiedCompanyLoa1Controller < ChooseACertifiedCompanyRedirectCon
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
 
     @show_non_recommended_idps = false
-    render "choose_a_certified_company/choose_a_certified_company"
+    render "choose_a_certified_company/index"
   end
 
   def select_idp

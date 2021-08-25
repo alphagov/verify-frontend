@@ -8,7 +8,7 @@ class TestJourneyHintCookieController < ApplicationController
 
   def index
     @current_cookie = journey_hint_value.as_json
-    render "index"
+    render :index
   end
 
   def set_cookie

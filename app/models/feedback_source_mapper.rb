@@ -19,7 +19,6 @@ class FeedbackSourceMapper
       "REDIRECT_TO_IDP_WARNING_PAGE" => "redirect_to_idp_warning",
       "MATCHING_ERROR_PAGE" => "response_processing",
       "ACCOUNT_CREATION_FAILED_PAGE" => "response_processing",
-      "SELECT_DOCUMENTS_ADVICE_PAGE" => "select_documents_advice",
       "SELECT_DOCUMENTS_PAGE" => "select_documents",
       "SELECT_DOCUMENTS_PAGE_PHOTO_DOCUMENTS" => "select_documents",
       "UNLIKELY_TO_VERIFY_PAGE" => "unlikely_to_verify",

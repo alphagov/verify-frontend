@@ -43,7 +43,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
       get :index, params: { locale: "en" }
 
-      expect(subject).to render_template(:choose_a_certified_company)
+      expect(subject).to render_template("choose_a_certified_company/index")
       expect(stub_piwik_request).to have_been_made.once
     end
   end

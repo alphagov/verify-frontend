@@ -4,7 +4,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <%= render 'shared/form-errors', errors: flash[:errors], form: @cycle_three_attribute %>
+    <%= render 'shared/form_errors', errors: flash[:errors], form: @cycle_three_attribute %>
 
     <h1 class="govuk-heading-l"><%= @transaction_name.slice(0,1).upcase + @transaction_name.slice(1..-1)%></h1>
     <% if @cycle_three_attribute.intro_html %>

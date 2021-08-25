@@ -16,7 +16,6 @@ cy:
     about_choosing_a_company: am-ddewis-cwmni
     about_documents: am-ddogfennau
     select_documents: dewis-dogfennau
-    select_documents_none: dewis-dogfennau-dim
     will_it_work_for_me: a-fydd-yn-gweithio-i-mi
     verify_will_not_work_for_you: ni-fydd-verify-yn-gweithio-i-chi
     may_not_work_if_you_live_overseas: efallai-na-fydd-yn-gweithio-os-ydych-yn-byw-dramor
@@ -63,7 +62,6 @@ cy:
     paused_registration_resume_link: wedi-oedi/:idp
     single_idp_start_page: single-start-welsh/:transaction_simple_id
     accessibility: accessibility-cy
-    select_documents_advice: select-documents-advice-cy
     prove_your_identity_another_way: prove-your-identity-another-way-cy
     completed_registration: completed-cy/:idp
   common:
@@ -138,49 +136,22 @@ cy:
           link_text: Profwch eich hunaniaeth mewn ffordd arall
           text_html: "%{link_text} os nad oes gennych y pethau hyn."
     select_documents:
-      heading: Pa un o'r rhain sydd ar gael gennych nawr?
-      explanation: Bydd hyn ein helpu i'ch hysbysu os bydd GOV.UK Verify yn gweithio i chi. Y mwy o eitemau sydd gennych, y mwyaf tebygol  y gallwch wirio eich hunaniaeth.
-      select_all_that_apply: "Dewiswch yr holl sydd yn berthnasol:"
-      has_valid_passport: Pasbort dilys
-      has_driving_license: Trwydded yrru ddilys, llawn neu dros dro, gydag eich llun arno
-      has_phone_can_app: Ffôn neu dabled sydd yn gallu llawrlwytho ap
-      has_credit_card: Cerdyn credyd neu ddebyd
-      has_nothing: Dim o'r uchod
-      has_driving_license_and_credit_card: Trwydded yrru ddilys, llawn neu dros dro, gydag eich llun arno a cherdyn credyd neu ddebyd
+      heading: Before you start
+      explanation: To set up an identity account, you need to provide evidence for the companies to check.
+      documents:
+        heading: "When creating the account you'll be asked for:"
+        list_html: |
+          <ul class="govuk-list govuk-list--bullet">
+            <li>a valid passport</li>
+            <li>a valid driving licence, full or provisional, with your photo on it</li>
+          </ul>
       further_explanation:
-        heading: Beth mae GOV.UK Verify yn defnyddio y rhain ar gyfer
-        content_html: |
-          <p class="govuk-body">
-            Mae'r cwmnïau yn gallu gwirio eich pasbort a thrwydded yrru yn erbyn cofnodion swyddogol.
-            Gallent hefyd gadarnhau eich manylion personol drwy weld gwybodaeth megis cofnodion credyd.
-            Bydd hyn yn ei helpu i sicrhau mai chi ydyw.
-          </p>
-          <p class="govuk-body">
-            Os oes gennych un ddogfen hunaniaeth gyda llun (ID) yn unig, fe fydd angen i chi lawrlwytho ap am ddim a chymryd lluniau ohono. Fe fydd hyn yn profi fod yr ID yn perthyn i chi.
-          </p>
-          <p class="govuk-body">
-            Fe fydd y cwmnïau ond yn defnyddio eich manylion cerdyn credyd neu ddebyd fel tystiolaeth bellach o'ch hunaniaeth.
-            Ni allent weld eich trafodion neu godi tâl ar eich cyfrif.
-          </p>
-      errors:
-        no_selection: Dewiswch yr eitemau sydd gennych ar gael nawr
-    select_documents_advice:
-      advice_html:
-        heading: Rydych angen mwy o dystiolaeth i wirio eich hunaniaeth
-        sub_heading: 'I ddefnyddio GOV.UK Verify, byddwch hefyd angen un ai:'
-        no_evidence_intro_html: |
-          <p class="govuk-body">I greu cyfrif hunaniaeth, bydd angen tystiolaeth arnoch i'r cwmnïau ei gwirio.</p>
-          <p class="govuk-body govuk-!-margin-bottom-0">Fe wnaethoch ddweud nad oes gennych yr un o'r pethau hyn ar hyn o bryd:</p>
-        specified: Pethau sydd gennych ar hyn o bryd
-        unspecified: Pethau nad oes gennych ar hyn o bryd
-      what_to_do_next:
-        heading: Beth i wneud nesaf
-        change_your_answers_link: ewch nôl a newid eich atebion
-        prove_your_identity_link: Profwch eich hunaniaeth mewn ffordd arall
-        content_html: |
-          <p class="govuk-body">Os oes gennych y pethau hyn gyda chi, %{change_your_answers_link}.</p>
-          <p class="govuk-body">Os oes gennych y pethau hyn ond eu bod yn rhywle arall, dewch yn ôl pan maent gyda chi.</p>
-          <p class="govuk-body">%{prove_your_identity_link} os nad oes gennych y pethau hyn</p>
+        doc_checking: The companies can check your passport and driving licence against official records. They can also confirm your personal details by accessing information like credit records. This will help them be sure it's really you.
+        requirements: If you only have one photo identity document (ID), you'll also need a phone or a tablet to download a free app and take pictures of it. This will let you prove the ID is yours.
+        come_back_later: If you have these things but they’re somewhere else, come back when you have them with you.
+      prove_identity_another_way:
+        link_text: Prove your identity another way
+        text_html: "%{link_text} if you do not have these things."
     choose_a_certified_company:
       heading: Dewiswch gwmni i'ch gwirio
       intro: Bydd un o'r cwmniau hyn yn creu eich cyfrif hunaniaeth.

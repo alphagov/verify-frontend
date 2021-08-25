@@ -21,7 +21,7 @@ class FurtherInformationController < ApplicationController
     else
       @transaction_name = current_transaction.name
       flash.now[:errors] = @cycle_three_attribute.errors.full_messages.join(", ")
-      render "index"
+      render :index
     end
   end
 

@@ -20,7 +20,6 @@ en:
     about_choosing_a_company: about-choosing-a-company
     about_documents: about-documents
     select_documents: select-documents
-    select_documents_none: select-documents-none
     will_it_work_for_me: will-it-work-for-me
     verify_will_not_work_for_you: verify-will-not-work-for-you
     may_not_work_if_you_live_overseas: may-not-work-if-you-live-overseas
@@ -67,7 +66,6 @@ en:
     paused_registration_resume_link: paused/:idp
     single_idp_start_page: single-start/:transaction_simple_id
     accessibility: accessibility
-    select_documents_advice: select-documents-advice
     prove_your_identity_another_way: prove-your-identity-another-way
     completed_registration: completed/:idp
   common:
@@ -138,50 +136,22 @@ en:
           link_text: Prove your identity another way
           text_html: "%{link_text} if you do not have these things."
     select_documents:
-      heading: Which of these do you have available right now?
-      explanation: This will help us tell you if GOV.UK Verify will work for you. The more items you have, the more likely it is that you can verify your identity.
-      select_all_that_apply: "Select all that apply:"
-      has_valid_passport: A valid passport
-      has_driving_license: A valid driving licence, full or provisional, with your photo on it
-      has_phone_can_app: A phone or tablet that can download an app
-      has_credit_card: A credit or debit card
-      has_nothing: None of the above
-      has_driving_license_and_credit_card: A full or provisional driving licence with your photo on it and a credit or debit card
+      heading: Before you start
+      explanation: To set up an identity account, you need to provide evidence for the companies to check.
+      documents:
+        heading: "When creating the account you'll be asked for:"
+        list_html: |
+          <ul class="govuk-list govuk-list--bullet">
+            <li>a valid passport</li>
+            <li>a valid driving licence, full or provisional, with your photo on it</li>
+          </ul>
       further_explanation:
-        heading: What GOV.UK Verify uses these for
-        content_html: |
-          <p class="govuk-body">
-            The companies can check your passport and driving licence against official records.
-            They can also confirm your personal details by accessing information like credit records.
-            This will help them be sure it's really you.
-          </p>
-          <p class="govuk-body">
-            If you only have one photo identity document (ID), you will also need to download a free app and take
-            pictures of it. This will prove that the ID is yours.
-          </p>
-          <p class="govuk-body">
-            The companies will only use your credit or debit card details as more evidence of your identity.
-            They cannot see your transactions and cannot charge your account.
-          </p>
-      errors:
-        no_selection: Select the items you have available right now
-    select_documents_advice:
-      advice_html:
-        heading: You need more evidence to verify your identity
-        sub_heading: 'To use GOV.UK Verify, you also need either:'
-        no_evidence_intro_html: |
-          <p class="govuk-body">To set up an identity account, you need to provide evidence for the companies to check.</p>
-          <p class="govuk-body govuk-!-margin-bottom-0">You said you have none of these things with you right now:</p>
-        specified: Things you have with you
-        unspecified: Things you do not have with you
-      what_to_do_next:
-        heading: What to do next
-        change_your_answers_link: go back and change your answers
-        prove_your_identity_link: Prove your identity another way
-        content_html: |
-          <p class="govuk-body">If you have these things with you, %{change_your_answers_link}.</p>
-          <p class="govuk-body">If you have these things but they’re somewhere else, come back when you have them with you.</p>
-          <p class="govuk-body">%{prove_your_identity_link} if you do not have these things.</p>
+        doc_checking: The companies can check your passport and driving licence against official records. They can also confirm your personal details by accessing information like credit records. This will help them be sure it's really you.
+        requirements: If you only have one photo identity document (ID), you'll also need a phone or a tablet to download a free app and take pictures of it. This will let you prove the ID is yours.
+        come_back_later: If you have these things but they’re somewhere else, come back when you have them with you.
+      prove_identity_another_way:
+        link_text: Prove your identity another way
+        text_html: "%{link_text} if you do not have these things."
     choose_a_certified_company:
       heading: Pick a certified company to verify you
       intro: One of these companies will create your identity account.

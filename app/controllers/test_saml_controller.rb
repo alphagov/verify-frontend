@@ -10,7 +10,8 @@ class TestSamlController < ApplicationController
     if params["_ga"].present?
       @form_action = @form_action + "?_ga=" + params["_ga"]
     end
-    render "index"
+
+    render :index
   end
 
   def test_expiry

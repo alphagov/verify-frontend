@@ -33,8 +33,6 @@ constraints IsLoa2 do
   get "about_documents", to: "about#about_documents", as: :about_documents
   get "prove_your_identity_another_way", to: "about#prove_your_identity_another_way", as: :prove_your_identity_another_way
   get "select_documents", to: "select_documents#index", as: :select_documents
-  post "select_documents", to: "select_documents#select_documents", as: :select_documents_submit
-  get "select_documents_advice", to: "select_documents#advice", as: :select_documents_advice
   get "why_might_this_not_work_for_me", to: "will_it_work_for_me#why_might_this_not_work_for_me", as: :why_might_this_not_work_for_me
   get "may_not_work_if_you_live_overseas", to: "will_it_work_for_me#may_not_work_if_you_live_overseas", as: :may_not_work_if_you_live_overseas
   get "will_not_work_without_uk_address", to: "will_it_work_for_me#will_not_work_without_uk_address", as: :will_not_work_without_uk_address
