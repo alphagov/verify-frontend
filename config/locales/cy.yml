@@ -22,7 +22,6 @@ cy:
     why_might_this_not_work_for_me: pam-efallai-na-fydd-hyn-yn-gweithio-i-mi
     will_not_work_without_uk_address: ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du
     choose_a_certified_company: dewis-cwmni-ardystiedig
-    why_companies: pam-cwmniau
     unlikely_to_verify: anhebygol-i-ddilysu
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
     redirect_to_idp_question: ailgyfeirio-i-gwestiwn-idp
@@ -312,21 +311,6 @@ cy:
     will_not_work_without_uk_address:
       heading: Ni fyddwch yn gallu defnyddio GOV.UK Verify
       explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi’i ddilysu.
-    why_companies:
-      heading: Pam fod dewis o gwmnïau
-      choose_a_company: Dewiswch gwmni
-      content_html: |
-        <p class="govuk-body">Mae mwy nag un cwmni ardystiedig yn golygu system mwy diogel - nid yw gwybodaeth yn cael ei gadw mewn un lle, ond mae’n cael ei rannu mewn nifer o wahannol lefydd, sydd yn ei gwneud yn fwy diogel.</p>
-        <p class="govuk-body">Eich hawl chi yw dewis pwy ydych chi eisiau delio â hwy o’r cwmnïau hyn. Eich hawl chi yw hefyd newid pa gwmni rydych yn deilo ag ef ar unrhyw adeg.</p>
-        <p class="govuk-body">Wrth ddilysu eich hunaniaeth, gall y cwmnïau hyn ddefnyddio eu cofnodion eu hunain, ac maent wedi cael eu hardystio i gael mynediad i wybodaeth fel cofnodion credyd. Maent yn gwneud hyn i wirio bod y wybodaeth rydych yn ei ddarparu o basbortau a thrwyddedau gyrru yn gywir.</p>
-        <p class="govuk-body">Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
-        <p class="govuk-body">Nid oes effaith ar eich sgor credyd.</p>
-      content_loa1_html: |
-        <p class="govuk-body">Mae mwy nag un cwmni ardystiedig yn golygu system mwy diogel - nid yw gwybodaeth yn cael ei gadw mewn un lle, ond mae’n cael ei rannu mewn nifer o wahannol lefydd, sydd yn ei gwneud yn fwy diogel.</p>
-        <p class="govuk-body">Eich hawl chi yw dewis pwy ydych chi eisiau delio â hwy o’r cwmnïau hyn. Eich hawl chi yw hefyd newid pa gwmni rydych yn deilo ag ef ar unrhyw adeg.</p>
-        <p class="govuk-body">Wrth ddilysu eich hunaniaeth, gall y cwmniau hyn ddefnyddio eu cofnodion eu hunain ac maent wedi cael eu hardystio i gael mynediad i wybodaeth fel cofnodion credyd. Maent yn gwneud hyn i wirio gwybodaeth rydych yn ei ddarparu.</p>
-        <p class="govuk-body">Mae cwmnïau ardystiedig yn bodloni safoau preifatrwydd llym y llywodraeth, felly gallwch ymddiried ynddynt gyda’ch gwybodaeth. Ni fyddant yn defnyddio eich gwybodaeth ar gyfer unrhyw ddibenion eraill heb eich caniatâd.</p>
-        <p class="govuk-body">Nid oes effaith ar eich sgor credyd.</p>
     redirect_to_idp_warning:
       heading: Byddwch nawr yn cael eich ailgyfeirio
       create_account: Crëwch eich cyfrif hunaniaeth %{display_name}

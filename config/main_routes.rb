@@ -17,7 +17,6 @@ constraints IsLoa1 do
   get "choose_a_certified_company", to: "choose_a_certified_company_loa1#index", as: :choose_a_certified_company
   post "choose_a_certified_company", to: "choose_a_certified_company_loa1#select_idp", as: :choose_a_certified_company_submit
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa1#about", as: :choose_a_certified_company_about
-  get "why_companies", to: "why_companies_loa1#index", as: :why_companies
   get "failed_registration", to: "failed_registration_loa1#index", as: :failed_registration
   get "cancelled_registration", to: "cancelled_registration_loa1#index", as: :cancelled_registration
   get "confirmation", to: "confirmation_loa1#matching_journey", as: :confirmation
@@ -42,7 +41,6 @@ constraints IsLoa2 do
   get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
   post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
-  get "why_companies", to: "why_companies_loa2#index", as: :why_companies
   get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
   get "cancelled_registration", to: "cancelled_registration_loa2#index", as: :cancelled_registration
   get "confirmation", to: "confirmation_loa2#matching_journey", as: :confirmation
