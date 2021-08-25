@@ -60,15 +60,15 @@ module ViewableIdpPartialController
     idps.reject(&:unavailable) + idps.select(&:unavailable)
   end
 
-  def idps_tried
-    Set.new session[:idps_tried]
-  end
-
   def idp_already_tried?(idp)
     idps_tried.include? idp.simple_id
   end
 
   def idp_disconnecting_for_sign_in?(idp)
     idp.provide_authentication_until.present? && idp.provide_authentication_until < 2.hours.from_now
+  end
+
+  def idps_tried
+    Set.new session[:idps_tried]
   end
 end

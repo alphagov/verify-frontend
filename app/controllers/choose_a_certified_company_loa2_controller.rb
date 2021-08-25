@@ -9,12 +9,12 @@ class ChooseACertifiedCompanyLoa2Controller < ChooseACertifiedCompanyRedirectCon
   def index
     session[:selected_answers]&.delete("interstitial")
     idps = current_available_identity_providers_for_registration
-    suggestions = IDP_RECOMMENDATION_ENGINE.get_suggested_idps_for_registration(idps, selected_evidence, current_transaction_simple_id, idps_tried)
+    suggestions = IDP_RECOMMENDATION_ENGINE.get_suggested_idps_for_registration(idps, selected_evidence, current_transaction_simple_id)
     @recommended_idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended]))
     @non_recommended_idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely]))
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
 
-    idps_available = IDP_RECOMMENDATION_ENGINE.any?(idps, selected_evidence, current_transaction_simple_id, idps_tried)
+    idps_available = IDP_RECOMMENDATION_ENGINE.any?(idps, selected_evidence, current_transaction_simple_id)
     if idps_available
       session[:user_segments] = suggestions[:user_segments]
       @show_non_recommended_idps = true
@@ -33,7 +33,6 @@ class ChooseACertifiedCompanyLoa2Controller < ChooseACertifiedCompanyRedirectCon
         current_available_identity_providers_for_registration,
         selected_evidence,
         current_transaction_simple_id,
-        idps_tried,
       )
 
       # TODO - do the spinny thing page

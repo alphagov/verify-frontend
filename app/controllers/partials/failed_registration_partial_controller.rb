@@ -32,7 +32,6 @@ private
       current_available_identity_providers_for_registration,
       selected_evidence,
       current_transaction_simple_id,
-      idps_tried,
     )
   end
 
