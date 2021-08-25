@@ -2,7 +2,7 @@ require "rails_helper"
 require "controller_helper"
 require "api_test_helper"
 
-describe CancelledRegistrationLoa1Controller do
+describe CancelledRegistrationController do
   subject { get :index, params: { locale: "en" } }
 
   before :each do
@@ -12,6 +12,12 @@ describe CancelledRegistrationLoa1Controller do
   it "renders the cancelled registration LOA1 template when LEVEL_1 is the requested LOA" do
     set_session_and_cookies_with_loa("LEVEL_1")
 
-    expect(subject).to render_template(:cancelled_registration_LOA1)
+    expect(subject).to render_template(:cancelled_registration)
+  end
+
+  it "renders the cancelled registration LOA2 template when LEVEL_2 is the requested LOA" do
+    set_session_and_cookies_with_loa("LEVEL_2")
+
+    expect(subject).to render_template(:cancelled_registration)
   end
 end
