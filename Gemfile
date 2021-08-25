@@ -73,7 +73,7 @@ group :test, :development do
   gem 'jasmine-jquery-rails'
   gem 'rails-controller-testing'
   gem 'rspec', '~> 3.10'
-  gem 'rspec-rails', '~> 4.0'
+  gem 'rspec-rails', '~> 5.0'
   gem 'selenium-webdriver', '~> 3'
   gem 'webdrivers', '~> 4.0'
   gem 'webmock', require: false
