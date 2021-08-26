@@ -71,4 +71,8 @@ module ViewableIdpPartialController
   def idps_tried
     Set.new session[:idps_tried]
   end
+
+  def mark_idp_as_tried(idp_simple_id)
+    session[:idps_tried] = Set.new(session[:idps_tried]).add(idp_simple_id).to_a
+  end
 end

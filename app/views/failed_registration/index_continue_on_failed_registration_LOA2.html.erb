@@ -1,8 +1,0 @@
-<%= page_title 'hub.failed_registration.heading', idp_name: @idp.display_name %>
-<% content_for :feedback_source, 'FAILED_REGISTRATION_PAGE' %>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <%= render partial: 'failed_registration/continue_rp', locals: {idp: @idp, transaction: @transaction, try_another_company_path: select_documents_path} %>
-  </div>
-</div>

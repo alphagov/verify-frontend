@@ -17,7 +17,6 @@ constraints IsLoa1 do
   get "choose_a_certified_company", to: "choose_a_certified_company_loa1#index", as: :choose_a_certified_company
   post "choose_a_certified_company", to: "choose_a_certified_company_loa1#select_idp", as: :choose_a_certified_company_submit
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa1#about", as: :choose_a_certified_company_about
-  get "failed_registration", to: "failed_registration_loa1#index", as: :failed_registration
   get "about", to: "about_loa#index", as: :about
   get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
 end
@@ -38,7 +37,6 @@ constraints IsLoa2 do
   get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
   post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
-  get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
   get "about", to: "about_loa#index", as: :about
   get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
   get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
@@ -74,6 +72,7 @@ get "redirect_to_service_error" => "redirect_to_service#error", as: :redirect_to
 get "feedback_landing", to: "feedback_landing#index", as: :feedback_landing
 get "confirmation", to: "confirmation#matching_journey", as: :confirmation
 get "confirmation_non_matching_journey", to: "confirmation#non_matching_journey", as: :confirmation_non_matching_journey
+get "failed_registration", to: "failed_registration#index", as: :failed_registration
 get "feedback", to: "feedback#index", as: :feedback
 post "feedback", to: "feedback#submit", as: :feedback_submit
 get "feedback_sent", to: "feedback_sent#index", as: :feedback_sent
