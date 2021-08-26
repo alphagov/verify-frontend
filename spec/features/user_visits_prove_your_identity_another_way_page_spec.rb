@@ -17,7 +17,7 @@ RSpec.feature "when user visits prove your identity another way page", type: :fe
   it "shows prove your identity another way header and you can still service name sub header" do
     visit prove_your_identity_another_way_path
 
-    expect(page).to have_content t("hub.prove_your_identity_another_way.heading")
-    expect(page).to have_content t("hub.prove_your_identity_another_way.sub_heading", service_name: service_name)
+    expect(page).to have_content t("hub.about.prove_your_identity_another_way.heading")
+    expect(page).to have_content t("hub.about.prove_your_identity_another_way.sub_heading", service_name: service_name)
   end
 end

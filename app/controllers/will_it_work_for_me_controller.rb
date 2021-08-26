@@ -33,7 +33,7 @@ private
   def next_page
     if @form.resident_last_12_months?
       if @form.above_age_threshold?
-        select_documents_path
+        about_documents_path
       else
         why_might_this_not_work_for_me_path
       end

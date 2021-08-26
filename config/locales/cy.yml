@@ -14,6 +14,7 @@ cy:
     about_certified_companies: am-gwmniau-ardystiedig
     about_identity_accounts: am-gyfrifon-hunaniaeth
     about_choosing_a_company: am-ddewis-cwmni
+    about_documents: am-ddogfennau
     select_documents: dewis-dogfennau
     select_documents_none: dewis-dogfennau-dim
     will_it_work_for_me: a-fydd-yn-gweithio-i-mi
@@ -62,7 +63,6 @@ cy:
     resume_registration: ail-ddechrau-cofrestru
     paused_registration_resume_link: wedi-oedi/:idp
     single_idp_start_page: single-start-welsh/:transaction_simple_id
-    proxy_node_error: proxy-node-error-cy
     accessibility: accessibility-cy
     select_documents_advice: select-documents-advice-cy
     prove_your_identity_another_way: prove-your-identity-another-way-cy
@@ -96,15 +96,48 @@ cy:
     help: Help
     built_by_the: Adeiladwyd gan yr
   hub:
-    about_what_is_verify:
-      heading: Be ydy GOV.UK Verify
-      content: Mae GOV.UK Verify yn ffordd ddiogel o brofi pwy ydych chi ar-lein. Mae’n helpu eich gwarchod yn erbyn dwyn hunaniaeth ar-lein.
-    about_how_it_works:
-      heading: Sut y mae'n gweithio
-      content: Gallwch greu cyfrif hunaniaeth gyda chwmni sydd yn cwrdd â safonau preifatrwydd a diogelwch y llywodraeth.
-    about_company:
-      content_html: <p class="govuk-body">Bydd y cwmni yn gofyn cwestiynau i chi a gwirio eich dogfennau hunaniaeth.</p>
-        <p class="govuk-body">Ni fyddant fyth yn rhannu eich gwybodaeth ar gyfer unrhyw bwrpas arall heb eich caniatâd.</p>
+    about:
+      verify:
+        what_it_is:
+          heading: Be ydy GOV.UK Verify
+          content: Mae GOV.UK Verify yn ffordd ddiogel o brofi pwy ydych chi ar-lein. Mae’n helpu eich gwarchod yn erbyn dwyn hunaniaeth ar-lein.
+        how_it_works:
+          heading: Sut y mae'n gweithio
+          content: Gallwch greu cyfrif hunaniaeth gyda chwmni sydd yn cwrdd â safonau preifatrwydd a diogelwch y llywodraeth.
+        company:
+          content_html: |
+            <p class="govuk-body">Bydd y cwmni yn gofyn cwestiynau i chi a gwirio eich dogfennau hunaniaeth.</p>
+            <p class="govuk-body">Ni fyddant fyth yn rhannu eich gwybodaeth ar gyfer unrhyw bwrpas arall heb eich caniatâd.</p>
+      choosing_a_company:
+        heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
+        content_html: |
+          <p class="govuk-body">Mae cwmnïau ardystiedig wedi adeiladu systemau newydd, diogel i ddilysu hunaniaeth. Mae'r systemau hyn yn gweithio trwy wirio:</p>
+          <ul class="govuk-list govuk-list--bullet">
+          <li>bod eich dogfennau hunaniaeth yn ddilys</li>
+          <li>mai chi sy'n darparu eich manylion, dim rhywun sy'n honni bod yn chi</li>
+          </ul>
+          <p class="govuk-body">Fodd bynnag, mae gan bob cwmni ddulliau gwahanol ar gyfer pob un o'r camau hyn.</p>
+          <p class="govuk-body">Felly byddwn nawr yn gofyn rhai cwestiynau i chi wirio pa gwmnïau all eich dilysu. Byddwn wedyn yn eich anfon at wefan y cwmni rydych yn ei ddewis.</p>
+      prove_your_identity_another_way:
+        heading: Profwch eich hunaniaeth mewn ffordd arall
+        sub_heading: Gallwch ddal %{service_name}.
+      documents:
+        heading: Cyn i chi ddechrau
+        explanation: I sefydlu cyfrif hunaniaeth, byddwch angen darparu tystiolaeth i'r  cwmnïau allu gwirio.
+        document_list:
+          heading: "Wrth greu'r cyfrif byddwch yn cael eich gofyn am:"
+          list_html: |
+            <ul class="govuk-list govuk-list--bullet">
+              <li>pasbort dilys</li>
+              <li>thrwydded yrru ddilys, llawn neu dros dro, gyda'ch llun arno</li>
+            </ul>
+        further_explanation:
+          doc_checking: Gall y cwmnïau wirio eich pasbort a thrwydded yrru yn erbyn cofnodion swyddogol. Gallant hefyd gadarnhau eich manylion personol drwy gyrchu gwybodaeth megis cofnodion credyd. Bydd hyn yn eu helpu i fod yn sicr mai chi ydyw.
+          requirements: Os mai dim ond un ddogfen hunaniaeth â llun (ID) sydd gennych, byddwch angen un ai ffôn neu dabled i lawr_lwytho ap am ddim a chymryd lluniau ohono. Bydd hyn yn gadael i chi brofi mai chi sy'n berchen ar yr ID.
+          come_back_later: Os oes gennych y pethau hyn ond eu bod yn rhywle arall, dewch nôl  pan fydd gennych hwy gyda chi.
+        prove_identity_another_way:
+          link_text: Profwch eich hunaniaeth mewn ffordd arall
+          text_html: "%{link_text} os nad oes gennych y pethau hyn."
     select_documents:
       heading: Pa un o'r rhain sydd ar gael gennych nawr?
       explanation: Bydd hyn ein helpu i'ch hysbysu os bydd GOV.UK Verify yn gweithio i chi. Y mwy o eitemau sydd gennych, y mwyaf tebygol  y gallwch wirio eich hunaniaeth.
@@ -181,9 +214,6 @@ cy:
         heading: Am %{display_name}
         information_provided_by: Gwybodaeth wedi ei darparu gan %{display_name}
         close: cau
-    prove_your_identity_another_way:
-      heading: Profwch eich hunaniaeth mewn ffordd arall
-      sub_heading: Gallwch ddal %{service_name}.
     other_ways_title: Ffyrdd eraill o gael mynediad i’r gwasanaeth
     other_ways_heading: Ffyrdd eraill i %{other_ways_description}
     prove_identity:
@@ -244,16 +274,6 @@ cy:
       heading: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
       other_services: Gwasanaethau eraill
-    about_choosing_a_company:
-      heading: Dod o hyd i’r cwmni iawn i’ch dilysu chi
-      content_html: |
-        <p class="govuk-body">Mae cwmnïau ardystiedig wedi adeiladu systemau newydd, diogel i ddilysu hunaniaeth. Mae'r systemau hyn yn gweithio trwy wirio:</p>
-        <ul class="govuk-list govuk-list--bullet">
-        <li>bod eich dogfennau hunaniaeth yn ddilys</li>
-        <li>mai chi sy'n darparu eich manylion, dim rhywun sy'n honni bod yn chi</li>
-        </ul>
-        <p class="govuk-body">Fodd bynnag, mae gan bob cwmni ddulliau gwahanol ar gyfer pob un o'r camau hyn.</p>
-        <p class="govuk-body">Felly byddwn nawr yn gofyn rhai cwestiynau i chi wirio pa gwmnïau all eich dilysu. Byddwn wedyn yn eich anfon at wefan y cwmni rydych yn ei ddewis.</p>
     will_it_work_for_me:
       heading: Amdanoch chi
       question:
@@ -316,8 +336,8 @@ cy:
       create_account: Crëwch eich cyfrif hunaniaeth %{display_name}
       continue_website: Parhau i wefan %{display_name}
       identity_account_use_html: |
-              <p class="govuk-body">Byddwch nawr yn gwirio pwy ydych chi ar wefan %{display_name}</p>
-              <p class="govuk-body">Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio lle bynnag gwelwch y logo 'GOV.UK Verify' </p>
+        <p class="govuk-body">Byddwch nawr yn gwirio pwy ydych chi ar wefan %{display_name}</p>
+        <p class="govuk-body">Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio lle bynnag gwelwch y logo 'GOV.UK Verify' </p>
       service_use: Yna byddwch yn gallu %{service_name}.
       other_ways_link: ffyrdd eraill i %{transaction}
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
@@ -604,8 +624,6 @@ cy:
       heading: Mae’n ddrwg gennym, mae rhywbeth wedi mynd o’i le
       error_message: Gall hyn fod oherwydd bod eich sesiwn wedi’i amseru allan neu roedd gwall yn y system.
       start_again: Oherwydd bod hwn yn wasanaeth diogel, bydd angen i chi ddechrau eto.
-    proxy_node_error:
-      start_again: Gan eich bod yn defnyddio gwasanaeth diogel o wlad Ewropeaidd arall, bydd angen i chi fynd yn ôl i'r dudalen lle dechreuoch ddefnyddio'r gwasanaeth hwnnw.
     page_not_found:
       heading: Ni ellir dod o hyd i’r dudalen hon
       reason_pre: "Gallai hyn fod oherwydd:"

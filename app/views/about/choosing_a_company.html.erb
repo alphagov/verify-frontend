@@ -1,11 +1,12 @@
-<%= page_title 'hub.about_choosing_a_company.heading' %>
+<%= page_title 'hub.about.choosing_a_company.heading' %>
 <% content_for :feedback_source, 'ABOUT_CHOOSING_A_COMPANY_PAGE' %>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-l"><%= t 'hub.about_choosing_a_company.heading' %></h1>
-    <%= t 'hub.about_choosing_a_company.content_html' %>
+    <h1 class="govuk-heading-l"><%= t 'hub.about.choosing_a_company.heading' %></h1>
+    <%= t 'hub.about.choosing_a_company.content_html' %>
     <div class="actions">
-      <%= button_link_to t('navigation.continue'), will_it_work_for_me_path, id: 'next-button', class: 'govuk-button' %>
+      <%= button_link_to t('navigation.continue'), @continue_path, id: 'next-button', class: 'govuk-button' %>
     </div>
   </div>
 </div>
