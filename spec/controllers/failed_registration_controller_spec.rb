@@ -9,19 +9,19 @@ describe FailedRegistrationController do
   WITH_CUSTOM_FAILED_REGISTRATION_MESSAGE_RP = "test-rp-no-demo".freeze
 
   before(:each) do
-    set_selected_idp(entity_id: "http://idcorp.com", simple_id: "stub-idp-one", levels_of_assurance: %w(LEVEL_1 LEVEL_2))
+    set_selected_idp(entity_id: "http://idcorp.com", simple_id: "stub-idp-one", levels_of_assurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2])
   end
 
   subject { get :index, params: { locale: "en" } }
 
   context "renders LOA1" do
     before :each do
-      set_session_and_cookies_with_loa("LEVEL_1")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
       session[:selected_idp_was_recommended] = false
     end
 
     it "non continue on failed registration view when rp is not allowed to continue on failed" do
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
       set_transaction(WITH_NON_CONTINUE_ON_FAILED_REGISTRATION_RP)
       expect(subject).to render_template(:non_continue_on_failed_registration_rp)
     end
@@ -35,7 +35,7 @@ describe FailedRegistrationController do
 
   context "renders LOA2" do
     before :each do
-      set_session_and_cookies_with_loa("LEVEL_2")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
       session[:selected_idp_was_recommended] = false
     end
 

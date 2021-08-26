@@ -27,15 +27,15 @@ module Display
       let(:public_simple_id_3) { "test-rp-3" }
       let(:public_simple_id_4) { "test-rp-4" }
 
-      let(:public_simple_id_loa) { %w(LEVEL_1) }
-      let(:public_simple_id_2_loa) { %w(LEVEL_1) }
-      let(:public_simple_id_3_loa) { %w(LEVEL_1 LEVEL_2) }
-      let(:public_simple_id_4_loa) { %w(LEVEL_2) }
+      let(:public_simple_id_loa) { [LevelOfAssurance::LOA1] }
+      let(:public_simple_id_2_loa) { [LevelOfAssurance::LOA1] }
+      let(:public_simple_id_3_loa) { [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }
+      let(:public_simple_id_4_loa) { [LevelOfAssurance::LOA2] }
 
-      let(:expected_public_simple_id_loa) { "LEVEL_1" }
-      let(:expected_public_simple_id_2_loa) { "LEVEL_1" }
-      let(:expected_public_simple_id_3_loa) { "LEVEL_1" }
-      let(:expected_public_simple_id_4_loa) { "LEVEL_2" }
+      let(:expected_public_simple_id_loa) { LevelOfAssurance::LOA1 }
+      let(:expected_public_simple_id_2_loa) { LevelOfAssurance::LOA1 }
+      let(:expected_public_simple_id_3_loa) { LevelOfAssurance::LOA1 }
+      let(:expected_public_simple_id_4_loa) { LevelOfAssurance::LOA2 }
 
       let(:public_taxon) { "Taxon 1" }
       let(:public_taxon_2) { "Taxon 2" }
@@ -68,28 +68,28 @@ module Display
         expect(rp_display_repository).to receive(:get_translations).with(public_simple_id_4).and_return(display_data_4)
         transaction_data = [
           {
-              "simpleId" => public_simple_id,
-              "serviceHomepage" => homepage,
-              "loaList" => public_simple_id_loa,
-              "entityId" => entityId,
+            "simpleId" => public_simple_id,
+            "serviceHomepage" => homepage,
+            "loaList" => public_simple_id_loa,
+            "entityId" => entityId,
           },
           {
-              "simpleId" => public_simple_id_2,
-              "serviceHomepage" => homepage_2,
-              "loaList" => public_simple_id_2_loa,
-              "entityId" => entityId_2,
+            "simpleId" => public_simple_id_2,
+            "serviceHomepage" => homepage_2,
+            "loaList" => public_simple_id_2_loa,
+            "entityId" => entityId_2,
           },
           {
-              "simpleId" => public_simple_id_3,
-              "serviceHomepage" => homepage_3,
-              "loaList" => public_simple_id_3_loa,
-              "entityId" => entityId_3,
+            "simpleId" => public_simple_id_3,
+            "serviceHomepage" => homepage_3,
+            "loaList" => public_simple_id_3_loa,
+            "entityId" => entityId_3,
           },
           {
-              "simpleId" => public_simple_id_4,
-              "serviceHomepage" => homepage_4,
-              "loaList" => public_simple_id_4_loa,
-              "entityId" => entityId_4,
+            "simpleId" => public_simple_id_4,
+            "serviceHomepage" => homepage_4,
+            "loaList" => public_simple_id_4_loa,
+            "entityId" => entityId_4,
           },
         ]
         correlator = ServiceListDataCorrelator.new(rp_display_repository)

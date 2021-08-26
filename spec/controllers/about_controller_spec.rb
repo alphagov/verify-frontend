@@ -9,8 +9,8 @@ describe AboutController do
   context "LOA1" do
     before(:each) do
       stub_request(:get, CONFIG.config_api_host + "/config/transactions/enabled")
-      set_session_and_cookies_with_loa("LEVEL_1")
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
+      stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
     end
 
     context "GET about" do
@@ -30,7 +30,7 @@ describe AboutController do
   context "LOA2" do
     before(:each) do
       stub_request(:get, CONFIG.config_api_host + "/config/transactions/enabled")
-      set_session_and_cookies_with_loa("LEVEL_2")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
       stub_api_idp_list_for_registration
     end
 

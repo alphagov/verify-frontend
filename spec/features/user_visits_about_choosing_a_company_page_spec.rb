@@ -33,8 +33,8 @@ RSpec.describe "When the user visits the about choosing a company page" do
 
   context "LOA1" do
     before(:each) do
-      set_loa_in_session("LEVEL_1")
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      set_loa_in_session(LevelOfAssurance::LOA1)
+      stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
     end
 
     it "will take user to the IDP picker when they click 'Continue'" do

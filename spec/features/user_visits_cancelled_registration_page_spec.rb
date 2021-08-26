@@ -10,7 +10,7 @@ RSpec.describe "When user visits cancelled registration page" do
   end
 
   it "the page is rendered with the correct content for LOA2 journey" do
-    set_loa_in_session("LEVEL_2")
+    set_loa_in_session(LevelOfAssurance::LOA2)
 
     visit("/cancelled-registration")
 
@@ -21,7 +21,7 @@ RSpec.describe "When user visits cancelled registration page" do
   end
 
   it "the page is rendered with the correct content for LOA1 journey" do
-    set_loa_in_session("LEVEL_1")
+    set_loa_in_session(LevelOfAssurance::LOA1)
 
     visit("/cancelled-registration")
 

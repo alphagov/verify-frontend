@@ -6,7 +6,7 @@ require "piwik_test_helper"
 describe ChooseACertifiedCompanyLoa2Controller do
   before(:each) do
     stub_api_select_idp
-    set_session_and_cookies_with_loa("LEVEL_2")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
     stub_api_idp_list_for_sign_in
     stub_api_idp_list_for_registration
   end
@@ -17,10 +17,10 @@ describe ChooseACertifiedCompanyLoa2Controller do
         "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
         "device_type" => { "device_type_other" => true },
       }
-      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(2, "LEVEL_2", "analytics description for test-rp")
+      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(2, LevelOfAssurance::LOA2, "analytics description for test-rp")
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).twice do |idps|
-        idps.each { |idp| expect(idp.levels_of_assurance).to include "LEVEL_2" }
+        idps.each { |idp| expect(idp.levels_of_assurance).to include LevelOfAssurance::LOA2 }
       end
 
       get :index, params: { locale: "en" }
@@ -34,7 +34,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
           "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => false, "has_credit_card" => false },
           "device_type" => { "device_type_other" => true },
       }
-      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(0, "LEVEL_2", "analytics description for test-rp")
+      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(0, LevelOfAssurance::LOA2, "analytics description for test-rp")
       get :index, params: { locale: "en" }
 
       expect(stub_piwik_request).to have_been_made.once
@@ -47,7 +47,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
           "device_type" => { "device_type_other" => true },
           "interstitial" => { "interstitial_yes" => true },
       }
-      stub_piwik_report_number_of_recommended_idps(2, "LEVEL_2", "analytics description for test-rp")
+      stub_piwik_report_number_of_recommended_idps(2, LevelOfAssurance::LOA2, "analytics description for test-rp")
 
       get :index, params: { locale: "en" }
 

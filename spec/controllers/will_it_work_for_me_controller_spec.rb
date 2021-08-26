@@ -68,7 +68,7 @@ describe WillItWorkForMeController do
     subject { post :will_it_work_for_me, params: { locale: "en", will_it_work_for_me_form: invalid_form_answers } }
 
     it "stores flash errors" do
-      set_session_and_cookies_with_loa("LEVEL_1")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
       expect(subject).to render_template(:index)
       expect(flash[:errors]).not_to be_empty
     end

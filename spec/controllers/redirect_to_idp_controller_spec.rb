@@ -6,7 +6,7 @@ require "piwik_test_helper"
 describe RedirectToIdpController do
   before :each do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-    set_session_and_cookies_with_loa("LEVEL_2")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
     session[:selected_idp_was_recommended] = [true, false].sample
   end
 
@@ -23,7 +23,7 @@ describe RedirectToIdpController do
   context "continuing to idp with javascript disabled" do
     bobs_identity_service = { "simple_id" => "stub-idp-two",
                               "entity_id" => "http://idcorp.com",
-                              "levels_of_assurance" => %w(LEVEL_1 LEVEL_2) }
+                              "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }
     before :each do
       stub_session_idp_authn_request("<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>", "idp-location", true)
       stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
@@ -84,7 +84,7 @@ describe RedirectToIdpController do
     describe "#register" do
       bobs_identity_service = { "simple_id" => "stub-idp-two",
                                 "entity_id" => "http://idcorp.com",
-                                "levels_of_assurance" => %w(LEVEL_1 LEVEL_2) }
+                                "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }
 
       before :each do
         stub_session_idp_authn_request("<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>", "idp-location", true)
@@ -142,7 +142,7 @@ describe RedirectToIdpController do
     describe "#sign_in" do
       bobs_identity_service = { "simple_id" => "stub-idp-two",
                                 "entity_id" => "http://idcorp.com",
-                                "levels_of_assurance" => %w(LEVEL_1 LEVEL_2) }
+                                "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }
       bobs_identity_service_idp_name = "Bob’s Identity Service"
 
       before :each do
@@ -223,7 +223,7 @@ describe RedirectToIdpController do
     context "continuing to idp with javascript disabled when signing in" do
       bobs_identity_service = { "simple_id" => "stub-idp-two",
                                 "entity_id" => "http://idcorp.com",
-                                "levels_of_assurance" => %w(LEVEL_1 LEVEL_2) }
+                                "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }
       bobs_identity_service_idp_name = "Bob’s Identity Service"
 
       before :each do

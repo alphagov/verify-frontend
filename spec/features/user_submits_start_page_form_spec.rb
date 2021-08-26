@@ -56,7 +56,7 @@ RSpec.describe "when user submits start page form" do
     piwik_request = {
         "rec" => "1",
         "apiv" => "1",
-        "_cvar" => '{"1":["RP","analytics description for test-rp"],"2":["LOA_REQUESTED","LEVEL_2"],"3":["JOURNEY_TYPE","SIGN_IN"]}',
+        "_cvar" => %[{"1":["RP","analytics description for test-rp"],"2":["LOA_REQUESTED","#{LevelOfAssurance::LOA2}"],"3":["JOURNEY_TYPE","SIGN_IN"]}],
         "action_name" => "The user started a sign-in journey",
     }
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
@@ -79,7 +79,7 @@ RSpec.describe "when user submits start page form" do
     then_im_at_the_idp journey_type: JourneyType::SIGN_IN_LAST_SUCCESSFUL_IDP
     and_the_language_hint_is_set
     and_the_hints_are_not_set
-    expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
+    expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => [LevelOfAssurance::LOA2])
   end
 
   it "will return the user to the start when ignoring the hint at LOA2", js: true do

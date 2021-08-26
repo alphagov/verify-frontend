@@ -34,7 +34,7 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
   end
 
   it "will redirect the user to /confirmation when successfully registered" do
-    api_request = stub_api_authn_response(session_id, "result" => "SUCCESS", "isRegistration" => true, "loaAchieved" => "LEVEL_2")
+    api_request = stub_api_authn_response(session_id, "result" => "SUCCESS", "isRegistration" => true, "loaAchieved" => LevelOfAssurance::LOA2)
     stub_session
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
@@ -86,7 +86,7 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
   it "will redirect the user to /response-processing on successful sign in at the IDP" do
     stub_session
     stub_matching_outcome
-    api_request = stub_api_authn_response(session_id, "result" => "SUCCESS", "isRegistration" => false, "loaAchieved" => "LEVEL_2")
+    api_request = stub_api_authn_response(session_id, "result" => "SUCCESS", "isRegistration" => false, "loaAchieved" => LevelOfAssurance::LOA2)
 
     visit("/test-saml?session-id=#{session_id}")
     click_button "saml-response-post"

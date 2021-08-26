@@ -4,13 +4,13 @@ require "spec_helper"
 describe LoaMatch do
   context "LOA1" do
     it "returns true if LEVEL_1" do
-      match_result = LoaMatch::IsLoa1.call(a_request_with_loa("LEVEL_1"))
+      match_result = LoaMatch::IsLoa1.call(a_request_with_loa(LevelOfAssurance::LOA1))
 
       expect(match_result).to be(true)
     end
 
     it "returns false if not LEVEL_1" do
-      match_result = LoaMatch::IsLoa1.call(a_request_with_loa("LEVEL_2"))
+      match_result = LoaMatch::IsLoa1.call(a_request_with_loa(LevelOfAssurance::LOA2))
 
       expect(match_result).to be(false)
     end
@@ -18,13 +18,13 @@ describe LoaMatch do
 
   context "LOA2" do
     it "returns true if LEVEL_2" do
-      match_result = LoaMatch::IsLoa2.call(a_request_with_loa("LEVEL_2"))
+      match_result = LoaMatch::IsLoa2.call(a_request_with_loa(LevelOfAssurance::LOA2))
 
       expect(match_result).to be(true)
     end
 
     it "returns false if not LEVEL_2" do
-      match_result = LoaMatch::IsLoa2.call(a_request_with_loa("LEVEL_1"))
+      match_result = LoaMatch::IsLoa2.call(a_request_with_loa(LevelOfAssurance::LOA1))
 
       expect(match_result).to be(false)
     end

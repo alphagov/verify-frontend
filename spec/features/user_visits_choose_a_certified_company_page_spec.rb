@@ -24,7 +24,7 @@ describe "When the user visits the choose a certified company page" do
     it "marks the unavailable IDP as unavailable" do
       stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one",
                                             "entityId" => "http://idcorp.com",
-                                            "levelsOfAssurance" => %w(LEVEL_2),
+                                            "levelsOfAssurance" => [LevelOfAssurance::LOA2],
                                             "temporarilyUnavailable" => true }])
       visit "/choose-a-certified-company"
       expect(page).to have_content t("hub.certified_companies_unavailable.heading", count: 1, company: "IDCorp")
@@ -82,10 +82,10 @@ describe "When the user visits the choose a certified company page" do
 
   context "user is from an LOA1 service" do
     before(:each) do
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
       page.set_rack_session(
         transaction_simple_id: "test-rp",
-        requested_loa: "LEVEL_1",
+        requested_loa: LevelOfAssurance::LOA1,
         selected_answers: {
           device_type: { device_type_other: true },
           documents: { passport: true, driving_licence: true },
@@ -107,8 +107,8 @@ describe "When the user visits the choose a certified company page" do
     it "unavailable LEVEL_1 recommended IDPs are marked as unavailable" do
       stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one",
                                             "entityId" => "http://idcorp.com",
-                                            "levelsOfAssurance" => %w(LEVEL_1),
-                                            "temporarilyUnavailable" => true }], "LEVEL_1")
+                                            "levelsOfAssurance" => [LevelOfAssurance::LOA1],
+                                            "temporarilyUnavailable" => true }], LevelOfAssurance::LOA1)
       visit "/choose-a-certified-company"
       expect(page).to have_content t("hub.certified_companies_unavailable.heading", count: 1, company: "IDCorp")
     end
@@ -156,10 +156,10 @@ describe "When the user visits the choose a certified company page" do
   context "Google Analytics elements are rendered correctly" do
     context "when coming from an LOA2 service" do
       before :each do
-        stub_api_idp_list_for_registration(default_idps, "LEVEL_2")
+        stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA2)
         page.set_rack_session(
           transaction_simple_id: "test-rp",
-          requested_loa: "LEVEL_2",
+          requested_loa: LevelOfAssurance::LOA2,
           selected_answers: {
             device_type: { device_type_other: true },
             documents: { has_valid_passport: true, has_driving_license: true, has_phone_can_app: true },
@@ -184,10 +184,10 @@ describe "When the user visits the choose a certified company page" do
 
     context "when coming from an LOA1 service" do
       before :each do
-        stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+        stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
         page.set_rack_session(
           transaction_simple_id: "test-rp",
-          requested_loa: "LEVEL_1",
+          requested_loa: LevelOfAssurance::LOA1,
           selected_answers: {
             device_type: { device_type_other: true },
             documents: { passport: true, driving_licence: true },

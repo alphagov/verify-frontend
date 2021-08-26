@@ -20,7 +20,7 @@ module Display
       let(:homepage) { "https://example-homepage/" }
       let(:headless_startpage) { "https://example-homepage/headless" }
 
-      let(:loa_list) { %w(LEVEL_1) }
+      let(:loa_list) { [LevelOfAssurance::LOA1] }
 
       let(:taxon_benefits) { "Benefits" }
       let(:taxon_working_jobs_and_pensions) { "Working, jobs and pensions" }

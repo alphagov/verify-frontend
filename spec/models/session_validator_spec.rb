@@ -12,7 +12,7 @@ describe SessionValidator do
   let(:session) {
     {
       transaction_simple_id: "simple-id",
-      requested_loa: "LEVEL_1",
+      requested_loa: LevelOfAssurance::LOA1,
     }
   }
 
@@ -22,7 +22,7 @@ describe SessionValidator do
       start_time: Time.now.to_i * 1000,
       verify_session_id: "session_id",
       identity_providers: [{ "simple_id" => "stub-idp-one" }],
-      requested_loa: "LEVEL_1",
+      requested_loa: LevelOfAssurance::LOA1,
       transaction_entity_id: "test-rp",
     }
   }

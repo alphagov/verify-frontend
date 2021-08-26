@@ -5,7 +5,7 @@ require "piwik_test_helper"
 
 describe ProveIdentityController do
   before(:each) do
-    set_session_and_cookies_with_loa("LEVEL_2")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
   end
 
   it "renders prove identity page" do

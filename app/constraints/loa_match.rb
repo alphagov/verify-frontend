@@ -1,6 +1,6 @@
 module LoaMatch
   IsLoa1 = ->(request) {
-    request.session[:requested_loa] == "LEVEL_1"
+    request.session[:requested_loa] == LevelOfAssurance::LOA1
   }
 
   IsLoa2 = ->(request) {

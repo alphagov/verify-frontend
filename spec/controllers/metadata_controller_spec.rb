@@ -20,7 +20,7 @@ describe MetadataController do
 
     expect(test_rp_object.nil?).to be false
     expect(test_rp_object["name"]).to eq("test GOV.UK Verify user journeys")
-    expect(test_rp_object["loa"]).to eq("LEVEL_2")
+    expect(test_rp_object["loa"]).to eq(LevelOfAssurance::LOA2)
     expect(test_rp_object["serviceCategory"]).to eq("Benefits")
 
     another_test_rp_object =
@@ -29,7 +29,7 @@ describe MetadataController do
     expect(another_test_rp_object.nil?).to be false
     expect(another_test_rp_object["name"])
       .to eq("Test GOV.UK Verify user journeys (forceauthn & no cycle3)")
-    expect(another_test_rp_object["loa"]).to eq("LEVEL_2")
+    expect(another_test_rp_object["loa"]).to eq(LevelOfAssurance::LOA2)
     expect(another_test_rp_object["serviceCategory"]).to eq("Benefits")
   end
 end

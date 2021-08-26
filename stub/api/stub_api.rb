@@ -3,6 +3,11 @@
 require 'sinatra'
 require 'json'
 
+APP_HOME = File.join(File.dirname(__FILE__), '../../')
+$LOAD_PATH << File.join(APP_HOME, 'app/models')
+
+require 'level_of_assurance'
+
 class StubApi < Sinatra::Base
   set :protection, :except => :path_traversal
 
@@ -20,7 +25,7 @@ class StubApi < Sinatra::Base
   end
 
   get '/config/transactions/:entity_id/display-data' do
-    level_of_assurance = params['entity_id'] == 'http://www.test-rp-loa1.gov.uk/SAML2/MD' ? 'LEVEL_1' : "LEVEL_2"
+    level_of_assurance = params['entity_id'] == 'http://www.test-rp-loa1.gov.uk/SAML2/MD' ? LevelOfAssurance::LOA1 : LevelOfAssurance::LOA2
     status 200
     "{
       \"simpleId\":\"test-rp\",
@@ -57,100 +62,108 @@ class StubApi < Sinatra::Base
   end
 
   get '/config/idps/idp-list-for-registration/:transaction_id/:level_of_assurance' do
-    if params['level_of_assurance'] == 'LEVEL_1'
-    '[{
-        "simpleId":"stub-idp-one",
-        "entityId":"http://example.com/stub-idp-one",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     },
-     {
-        "simpleId":"stub-idp-loa1",
-        "entityId":"http://stub-idp-loa1.com",
-        "levelsOfAssurance": ["LEVEL_1"]
-     },
-     {
-        "simpleId":"stub-idp-loa1-with-interstitial",
-        "entityId":"http://stub-idp-loa1-with-interstitial.com",
-        "levelsOfAssurance": ["LEVEL_1"]
-     }]'
+    if params['level_of_assurance'] == LevelOfAssurance::LOA1
+      %[
+        [{
+          "simpleId":"stub-idp-one",
+          "entityId":"http://example.com/stub-idp-one",
+          "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+        },
+        {
+          "simpleId":"stub-idp-loa1",
+          "entityId":"http://stub-idp-loa1.com",
+          "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}"]
+        },
+        {
+          "simpleId":"stub-idp-loa1-with-interstitial",
+          "entityId":"http://stub-idp-loa1-with-interstitial.com",
+          "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}"]
+        }]
+      ]
     else
-    '[{
-        "simpleId":"stub-idp-one",
-        "entityId":"http://example.com/stub-idp-one",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     },
-     {
-        "simpleId":"stub-idp-two",
-        "entityId":"http://example.com/stub-idp-two",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     },
-     {
-        "simpleId":"stub-idp-three",
-        "entityId":"http://example.com/stub-idp-three",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     }]'
+      %[
+        [{
+          "simpleId":"stub-idp-one",
+          "entityId":"http://example.com/stub-idp-one",
+          "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+        },
+        {
+          "simpleId":"stub-idp-two",
+          "entityId":"http://example.com/stub-idp-two",
+          "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+        },
+        {
+          "simpleId":"stub-idp-three",
+          "entityId":"http://example.com/stub-idp-three",
+          "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+        }]
+      ]
     end
   end
 
   get '/config/idps/idp-list-for-sign-in/:transaction_id' do
-    '[{
+    %[
+      [{
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     },
-     {
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+      },
+      {
         "simpleId":"stub-idp-loa1",
         "entityId":"http://stub-idp-loa1.com",
-        "levelsOfAssurance": ["LEVEL_1"]
-     },
-     {
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}"]
+      },
+      {
         "simpleId":"stub-idp-loa1-with-interstitial",
         "entityId":"http://stub-idp-loa1-with-interstitial.com",
-        "levelsOfAssurance": ["LEVEL_1"]
-     },
-     {
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}"]
+      },
+      {
         "simpleId":"stub-idp-two",
         "entityId":"http://example.com/stub-idp-two",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     },
-     {
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+      },
+      {
         "simpleId":"stub-idp-three",
         "entityId":"http://example.com/stub-idp-three",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     }]'
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+      }]
+    ]
   end
 
   get '/config/idps/idp-list-for-single-idp/:transaction_id' do
-    '[{
+    %[
+      [{
         "simpleId":"stub-idp-one",
         "entityId":"http://example.com/stub-idp-one",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     },
-     {
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+      },
+      {
         "simpleId":"stub-idp-loa1",
         "entityId":"http://stub-idp-loa1.com",
-        "levelsOfAssurance": ["LEVEL_1"]
-     },
-     {
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}"]
+      },
+      {
         "simpleId":"stub-idp-loa1-with-interstitial",
         "entityId":"http://stub-idp-loa1-with-interstitial.com",
-        "levelsOfAssurance": ["LEVEL_1"]
-     },
-     {
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}"]
+      },
+      {
         "simpleId":"stub-idp-two",
         "entityId":"http://example.com/stub-idp-two",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     },
-     {
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+      },
+      {
         "simpleId":"stub-idp-three",
         "entityId":"http://example.com/stub-idp-three",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     },
-     {
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+      },
+      {
         "simpleId":"stub-idp-one",
         "entityId":"http://idcorp.com",
-        "levelsOfAssurance": ["LEVEL_1", "LEVEL_2"]
-     }]'
+        "levelsOfAssurance": ["#{LevelOfAssurance::LOA1}", "#{LevelOfAssurance::LOA2}"]
+      }]
+    ]
   end
 
   get '/SAML2/SSO/API/SENDER/AUTHN_REQ' do
@@ -163,53 +176,57 @@ class StubApi < Sinatra::Base
   end
 
   post '/SAML2/SSO/API/RECEIVER/Response/POST' do
-    '{
-       "result":"blah",
-      "isRegistration":false,
-      "loaAchieved":"LEVEL_2"
-    }'
+    %[{
+        "result":"blah",
+        "isRegistration":false,
+        "loaAchieved":"#{LevelOfAssurance::LOA2}"
+      }]
   end
 
-   get '/config/transactions/enabled' do
-    '[{
+  get '/config/transactions/enabled' do
+    %[
+      [{
         "simpleId":"test-rp",
         "serviceHomepage":"http://example.com/test-rp",
-        "loaList":["LEVEL_2"],
+        "loaList":["#{LevelOfAssurance::LOA2}"],
         "headlessStartpage":"http://example.com/test-rp/success"
       },
       {
         "simpleId": "loa1-test-rp",
         "serviceHomepage":"http://example.com/test-rp-loa1",
-        "loaList":["LEVEL_1","LEVEL_2"],
+        "loaList":["#{LevelOfAssurance::LOA1}","#{LevelOfAssurance::LOA2}"],
         "headlessStartpage":"http://example.com/test-rp-loa1/success"
       },
       {
         "simpleId": "loa2-loa1-test-rp",
         "serviceHomepage":"http://example.com/test-rp-loa2-loa1",
-        "loaList":["LEVEL_2","LEVEL_1"],
+        "loaList":["#{LevelOfAssurance::LOA2}","#{LevelOfAssurance::LOA1}"],
         "headlessStartpage":"http://example.com/test-rp-loa2-loa1/success"
-      }]'
-   end
+      }]
+    ]
+  end
 
   get '/config/transactions/single-idp-enabled-list' do
-    '[{
+    %[
+      [{
         "simpleId":"test-rp",
         "redirectUrl":"http://example.com/test-saml",
-        "loaList":["LEVEL_2"],
+        "loaList":["#{LevelOfAssurance::LOA2}"],
         "entityId":"http://www.test-rp.gov.uk/SAML2/MD"
       },
       {
         "simpleId": "loa1-test-rp",
         "redirectUrl":"http://example.com/test-rp-loa1",
-        "loaList":["LEVEL_1","LEVEL_2"],
+        "loaList":["#{LevelOfAssurance::LOA1}","#{LevelOfAssurance::LOA2}"],
         "entityId": "http://example.com/test-rp-loa1"
-      }],
+      },
       {
         "simpleId": "loa2-loa1-test-rp",
         "redirectUrl":"http://example.com/test-rp-loa1",
-        "loaList":["LEVEL_2","LEVEL_1",],
+        "loaList":["#{LevelOfAssurance::LOA2}","#{LevelOfAssurance::LOA1}",],
         "entityId": "http://example.com/test-rp-loa2-loa1"
-      }]'
+      }]
+    ]
   end
 
   get '/config/certificates/:entity_id/certs/signing' do

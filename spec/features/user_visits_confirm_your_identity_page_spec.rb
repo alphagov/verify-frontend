@@ -9,14 +9,14 @@ end
 
 def set_up_session(idp_entity_id)
   stub_api_and_analytics(idp_location)
-  stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+  stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
   set_session_and_session_cookies!
   set_journey_hint_cookie(idp_entity_id)
   page.set_rack_session(
     transaction_simple_id: "test-rp",
     selected_idp_name: "Demo IDP",
     selected_idp_names: [],
-    requested_loa: "LEVEL_1",
+    requested_loa: LevelOfAssurance::LOA1,
     )
 end
 
