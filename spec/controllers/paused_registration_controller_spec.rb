@@ -74,7 +74,7 @@ describe PausedRegistrationController do
             IDP: "http://idcorp-three.com",
             RP: valid_rp,
             STATUS: "PENDING",
-            VERIFY_JOURNEY_TYPE: JourneyType::Verify::SIGN_IN,
+            VERIFY_JOURNEY_TYPE: JourneyType::SIGN_IN,
           },
         }
 
@@ -89,7 +89,7 @@ describe PausedRegistrationController do
             IDP: "http://idcorp-three.com",
             RP: valid_rp,
             STATUS: "PENDING",
-            JOURNEY_TYPE: JourneyType::Verify::REGISTRATION,
+            JOURNEY_TYPE: JourneyType::REGISTRATION,
           },
         }
 

@@ -49,7 +49,7 @@ class PausedRegistrationController < ApplicationController
     if @idp.nil? || @transaction.nil?
       redirect_to start_path
     else
-      journey_type = JourneyType::Verify::RESUMING
+      journey_type = JourneyType::RESUMING
       session[:journey_type] = journey_type
       set_additional_piwik_custom_variable(:journey_type, journey_type.upcase)
       render :resume
@@ -95,7 +95,7 @@ private
   def with_cookie
     set_transaction_from_cookie
 
-    if last_verify_journey_type == JourneyType::Verify::SIGN_IN
+    if last_verify_journey_type == JourneyType::SIGN_IN
       @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(get_idp_from_idps_available_for_sign_in)
       render :with_user_session
     elsif (idp = get_idp_from_idps_available_for_registration)

@@ -82,9 +82,9 @@ private
     return REGISTERING_STATE if response.is_registration
 
     case session[:journey_type]
-    when JourneyType::Verify::RESUMING
+    when JourneyType::RESUMING
       RESUMING_STATE
-    when JourneyType::Verify::SINGLE_IDP
+    when JourneyType::SINGLE_IDP
       SINGLE_IDP_STATE
     else
       SIGNING_IN_STATE
@@ -92,11 +92,11 @@ private
   end
 
   def path_for_success(is_registration)
-    is_registration || journey_type?(JourneyType::Verify::SINGLE_IDP) ? confirmation_path : response_processing_path
+    is_registration || is_journey_type?(JourneyType::SINGLE_IDP) ? confirmation_path : response_processing_path
   end
 
   def path_for_success_non_matching(is_registration)
-    is_registration || journey_type?(JourneyType::Verify::SINGLE_IDP) ? confirmation_non_matching_journey_path : redirect_to_service_signing_in_path
+    is_registration || is_journey_type?(JourneyType::SINGLE_IDP) ? confirmation_non_matching_journey_path : redirect_to_service_signing_in_path
   end
 
   def idp_redirects(status, response)
@@ -113,14 +113,14 @@ private
   end
 
   def failed_page_redirects(is_registration)
-    if is_registration || journey_type?(JourneyType::Verify::SINGLE_IDP)
+    if is_registration || is_journey_type?(JourneyType::SINGLE_IDP)
       failed_registration_path
     else
       failed_sign_in_path
     end
   end
 
-  def journey_type?(journey_type)
+  def is_journey_type?(journey_type)
     session[:journey_type] == journey_type
   end
 
