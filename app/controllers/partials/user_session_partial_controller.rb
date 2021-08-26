@@ -23,6 +23,18 @@ module UserSessionPartialController
     session[:transaction_homepage]
   end
 
+  def requested_loa
+    session[:requested_loa]
+  end
+
+  def is_journey_loa1?
+    session[:requested_loa] == "LEVEL_1"
+  end
+
+  def is_journey_loa2?
+    session[:requested_loa] == "LEVEL_2"
+  end
+
   def current_selected_provider_data
     selected_provider_data = SelectedProviderData.from_session(session[:selected_provider])
     raise(Errors::WarningLevelError, "No selected identity provider data in session") if selected_provider_data.nil?

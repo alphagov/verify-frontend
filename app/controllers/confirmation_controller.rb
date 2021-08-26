@@ -1,4 +1,4 @@
-class ConfirmationLoa1Controller < ApplicationController
+class ConfirmationController < ApplicationController
   before_action { @hide_feedback_link = true }
   layout "slides"
 
@@ -17,6 +17,7 @@ private
     @idp_name = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_identity_provider).display_name
     @transaction_name = current_transaction.name
     @redirect_path = matching ? response_processing_path : redirect_to_service_signing_in_path
-    render :confirmation_LOA1
+    @show_services_need_more_evidence = is_journey_loa1?
+    render :confirmation
   end
 end

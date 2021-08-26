@@ -18,10 +18,8 @@ constraints IsLoa1 do
   post "choose_a_certified_company", to: "choose_a_certified_company_loa1#select_idp", as: :choose_a_certified_company_submit
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa1#about", as: :choose_a_certified_company_about
   get "failed_registration", to: "failed_registration_loa1#index", as: :failed_registration
-  get "confirmation", to: "confirmation_loa1#matching_journey", as: :confirmation
   get "about", to: "about_loa#index", as: :about
   get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
-  get "confirmation_non_matching_journey", to: "confirmation_loa1#non_matching_journey", as: :confirmation_non_matching_journey
 end
 
 # HUB-595 short hub 2019 q3 A/B test (short_hub_2019_q3)
@@ -41,10 +39,8 @@ constraints IsLoa2 do
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
   post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
   get "failed_registration", to: "failed_registration_loa2#index", as: :failed_registration
-  get "confirmation", to: "confirmation_loa2#matching_journey", as: :confirmation
   get "about", to: "about_loa#index", as: :about
   get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
-  get "confirmation_non_matching_journey", to: "confirmation_loa2#non_matching_journey", as: :confirmation_non_matching_journey
   get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
   post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
   get "select_documents", to: "select_documents#index", as: :select_documents
@@ -76,6 +72,8 @@ get "redirect_to_service_signing_in" => "redirect_to_service#signing_in", as: :r
 get "redirect_to_service_start_again" => "redirect_to_service#start_again", as: :redirect_to_service_start_again
 get "redirect_to_service_error" => "redirect_to_service#error", as: :redirect_to_service_error
 get "feedback_landing", to: "feedback_landing#index", as: :feedback_landing
+get "confirmation", to: "confirmation#matching_journey", as: :confirmation
+get "confirmation_non_matching_journey", to: "confirmation#non_matching_journey", as: :confirmation_non_matching_journey
 get "feedback", to: "feedback#index", as: :feedback
 post "feedback", to: "feedback#submit", as: :feedback_submit
 get "feedback_sent", to: "feedback_sent#index", as: :feedback_sent
