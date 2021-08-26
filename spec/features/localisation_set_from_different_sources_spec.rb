@@ -6,7 +6,7 @@ RSpec.describe "locale is set based on multiple sources", type: :feature do
     {
       "entity_id" => "http://idcorp.com",
       "simple_id" => "stub-entity-one",
-      "levels_of_assurance" => %w(LEVEL_1 LEVEL_2),
+      "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
     }
   }
   before(:each) do

@@ -145,7 +145,7 @@ private
   end
 
   def get_idp_list_for_registration(transaction_id)
-    list = CONFIG_PROXY.get_available_idp_list_for_registration(transaction_id, "LEVEL_2")
+    list = CONFIG_PROXY.get_available_idp_list_for_registration(transaction_id, LevelOfAssurance::LOA2)
     return nil if list.nil?
 
     list.idps

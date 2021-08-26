@@ -15,7 +15,7 @@ def then_im_at_the_idp(ab_value: nil, journey_type: "sign-in")
              .with(body: { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
                            PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
                            PolicyEndpoints::PARAM_REGISTRATION => false,
-                           PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
+                           PolicyEndpoints::PARAM_REQUESTED_LOA => LevelOfAssurance::LOA2,
                            PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String), # no longer comes from matomo
                            PolicyEndpoints::PARAM_JOURNEY_TYPE => journey_type,
                            PolicyEndpoints::PARAM_VARIANT => ab_value })).to have_been_made.once

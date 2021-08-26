@@ -18,37 +18,37 @@ describe PolicyProxy do
     it "should select an IDP for the session" do
       ip_address = "1.1.1.1"
       body = { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => "an-entity-id", PolicyEndpoints::PARAM_PRINCIPAL_IP => ip_address,
-               PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
+               PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => LevelOfAssurance::LOA2,
                PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => "an-analytics-session-id", PolicyEndpoints::PARAM_JOURNEY_TYPE => "a-journey-type",
                PolicyEndpoints::PARAM_VARIANT => nil }
       expect(api_client).to receive(:post)
         .with(endpoint(PolicyProxy::SELECT_IDP_SUFFIX), body)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      policy_proxy.select_idp(session_id, "an-entity-id", "LEVEL_2", false, "an-analytics-session-id", "a-journey-type")
+      policy_proxy.select_idp(session_id, "an-entity-id", LevelOfAssurance::LOA2, false, "an-analytics-session-id", "a-journey-type")
     end
 
     it "should select an IDP for the session with LOA1" do
       ip_address = "1.1.1.1"
       body = { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => "an-entity-id", PolicyEndpoints::PARAM_PRINCIPAL_IP => ip_address,
-               PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_1",
+               PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => LevelOfAssurance::LOA1,
                PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => "an-analytics-session-id", PolicyEndpoints::PARAM_JOURNEY_TYPE => "a-journey-type",
                PolicyEndpoints::PARAM_VARIANT => nil }
       expect(api_client).to receive(:post)
                                 .with(endpoint(PolicyProxy::SELECT_IDP_SUFFIX), body)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      policy_proxy.select_idp(session_id, "an-entity-id", "LEVEL_1", false, "an-analytics-session-id", "a-journey-type")
+      policy_proxy.select_idp(session_id, "an-entity-id", LevelOfAssurance::LOA1, false, "an-analytics-session-id", "a-journey-type")
     end
 
     it "should select an IDP for the session when registering" do
       ip_address = "1.1.1.1"
       body = { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => "an-entity-id", PolicyEndpoints::PARAM_PRINCIPAL_IP => ip_address,
-               PolicyEndpoints::PARAM_REGISTRATION => true, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
+               PolicyEndpoints::PARAM_REGISTRATION => true, PolicyEndpoints::PARAM_REQUESTED_LOA => LevelOfAssurance::LOA2,
                PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => "an-analytics-session-id", PolicyEndpoints::PARAM_JOURNEY_TYPE => "a-journey-type",
                PolicyEndpoints::PARAM_VARIANT => nil }
       expect(api_client).to receive(:post)
         .with(endpoint(PolicyProxy::SELECT_IDP_SUFFIX), body)
       expect(originating_ip_store).to receive(:get).and_return(ip_address)
-      policy_proxy.select_idp(session_id, "an-entity-id", "LEVEL_2", true, "an-analytics-session-id", "a-journey-type")
+      policy_proxy.select_idp(session_id, "an-entity-id", LevelOfAssurance::LOA2, true, "an-analytics-session-id", "a-journey-type")
     end
   end
 

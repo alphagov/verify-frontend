@@ -5,7 +5,7 @@ require "piwik_test_helper"
 
 describe StartController do
   before(:each) do
-    set_session_and_cookies_with_loa("LEVEL_2")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
   end
 
   context "when rendering start page" do
@@ -31,7 +31,7 @@ describe StartController do
       stub_piwik_request = stub_piwik_journey_type_request(
         "SIGN_IN",
         "The user started a sign-in journey",
-        "LEVEL_2",
+        LevelOfAssurance::LOA2,
       )
       post :request_post, params: { locale: "en", start_form: { selection: false } }
       expect(subject).to redirect_to("/sign-in")
@@ -42,7 +42,7 @@ describe StartController do
       stub_piwik_request = stub_piwik_journey_type_request(
         "REGISTRATION",
         "The user started a registration journey",
-        "LEVEL_2",
+        LevelOfAssurance::LOA2,
       )
       post :request_post, params: { locale: "en", start_form: { selection: true } }
       expect(subject).to redirect_to("/about")
@@ -62,7 +62,7 @@ describe StartController do
     stub_piwik_request = stub_piwik_journey_type_request(
       "REGISTRATION",
       "The user started a registration journey",
-      "LEVEL_2",
+      LevelOfAssurance::LOA2,
     )
     get :register, params: { locale: "en" }
     expect(subject).to redirect_to("/about")

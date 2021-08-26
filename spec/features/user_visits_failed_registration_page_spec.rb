@@ -28,7 +28,7 @@ describe "When the user visits the failed registration page and" do
       end
 
       it "includes expected content for an LOA2 journey" do
-        set_loa_in_session("LEVEL_2")
+        set_loa_in_session(LevelOfAssurance::LOA2)
         visit "/failed-registration"
 
         expect_page_to_have_main_content_non_continue
@@ -38,8 +38,8 @@ describe "When the user visits the failed registration page and" do
       end
 
       it "includes expected content for an LOA1 journey" do
-        set_loa_in_session("LEVEL_1")
-        stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+        set_loa_in_session(LevelOfAssurance::LOA1)
+        stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
         visit "/failed-registration"
 
         expect_page_to_have_main_content_non_continue
@@ -51,7 +51,7 @@ describe "When the user visits the failed registration page and" do
 
     context "there are no more IDPs to try" do
       it "includes expected content when LOA2 journey" do
-        set_loa_in_session("LEVEL_2")
+        set_loa_in_session(LevelOfAssurance::LOA2)
         visit "/failed-registration"
 
         expect_page_to_have_main_content_non_continue_for_no_idps
@@ -61,8 +61,8 @@ describe "When the user visits the failed registration page and" do
       end
 
       it "includes expected content when LOA1 journey" do
-        set_loa_in_session("LEVEL_1")
-        stub_api_idp_list_for_registration([], "LEVEL_1")
+        set_loa_in_session(LevelOfAssurance::LOA1)
+        stub_api_idp_list_for_registration([], LevelOfAssurance::LOA1)
         visit "/failed-registration"
 
         expect_page_to_have_main_content_non_continue_for_no_idps
@@ -73,7 +73,7 @@ describe "When the user visits the failed registration page and" do
     end
 
     it "starts a new session and IDPs are available again" do
-      set_loa_in_session("LEVEL_2")
+      set_loa_in_session(LevelOfAssurance::LOA2)
       visit "/failed-registration"
       expect_page_to_have_main_content_non_continue_for_no_idps
 
@@ -86,7 +86,7 @@ describe "When the user visits the failed registration page and" do
       set_session! session
       set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
       page.set_rack_session(transaction_simple_id: DEFAULT_FAILED_REGISTRATION_PAGE_RP)
-      set_loa_in_session("LEVEL_2")
+      set_loa_in_session(LevelOfAssurance::LOA2)
       visit "/failed-registration"
 
       expect_page_to_have_main_content_non_continue
@@ -99,7 +99,7 @@ describe "When the user visits the failed registration page and" do
     end
 
     it "includes expected content when custom fail LOA2 journey in Welsh" do
-      set_loa_in_session("LEVEL_2")
+      set_loa_in_session(LevelOfAssurance::LOA2)
       visit "/cofrestru-wedi-methu"
       expect(page).to have_content "This is a custom fail page in welsh."
       expect(page).to have_content "Custom text to be provided by RP."
@@ -107,7 +107,7 @@ describe "When the user visits the failed registration page and" do
     end
 
     it "includes expected content when custom fail LOA2 journey" do
-      set_loa_in_session("LEVEL_2")
+      set_loa_in_session(LevelOfAssurance::LOA2)
       visit "/failed-registration"
       expect(page).to have_content "This is a custom fail page."
       expect(page).to have_content "Custom text to be provided by RP."

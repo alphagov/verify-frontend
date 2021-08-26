@@ -14,7 +14,7 @@ RSpec.describe "When the user visits the continue to your IDP page" do
       PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
       PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
       PolicyEndpoints::PARAM_REGISTRATION => false,
-      PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
+      PolicyEndpoints::PARAM_REQUESTED_LOA => LevelOfAssurance::LOA2,
       PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String), # no longer comes from matomo
       PolicyEndpoints::PARAM_JOURNEY_TYPE => "single-idp",
       PolicyEndpoints::PARAM_VARIANT => nil,
@@ -77,7 +77,7 @@ RSpec.describe "When the user visits the continue to your IDP page" do
         transaction_simple_id: "test-rp-noc3",
         start_time: start_time_in_millis,
         verify_session_id: default_session_id,
-        requested_loa: "LEVEL_2",
+        requested_loa: LevelOfAssurance::LOA2,
         transaction_entity_id: "some-other-entity-id",
         selected_answers: { device_type: { device_type_other: true } },
       }

@@ -13,7 +13,7 @@ module Analytics
     let(:transaction_description) { "description" }
 
     before(:each) do
-      allow(request).to receive(:session).and_return(requested_loa: "LEVEL_2")
+      allow(request).to receive(:session).and_return(requested_loa: LevelOfAssurance::LOA2)
       allow(current_transaction).to receive(:analytics_description).and_return(transaction_description)
     end
 
@@ -25,7 +25,7 @@ module Analytics
                                             request,
                                             "Sign In - #{idp_display_name}",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                           )
 
         federation_reporter.report_sign_in_idp_selection(current_transaction, request, idp_display_name)
@@ -43,7 +43,7 @@ module Analytics
                                             request,
                                             "#{idp_name} was chosen for registration (recommended) with segment(s) segment1 and evidence passport",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                             5 => ["IDP_SELECTION", idp_history_str],
                                           )
         federation_reporter.report_idp_registration(
@@ -63,7 +63,7 @@ module Analytics
                                             request,
                                             "#{idp_name} was chosen for registration (not recommended) with segment(s) segment1 and evidence passport",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                             5 => ["IDP_SELECTION", idp_history_str],
                                           )
         federation_reporter.report_idp_registration(
@@ -83,7 +83,7 @@ module Analytics
                                             request,
                                             "#{idp_name} was chosen for registration (idp recommendation key not set) with segment(s) segment1 and evidence passport",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                             5 => ["IDP_SELECTION", idp_history_str],
                                           )
         federation_reporter.report_idp_registration(
@@ -103,7 +103,7 @@ module Analytics
                                             request,
                                             "#{idp_name} was chosen for registration (recommended) with segment(s) segment1, segment2 and evidence driving_licence, passport",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                             5 => ["IDP_SELECTION", idp_history_str],
                                           )
         federation_reporter.report_idp_registration(
@@ -123,7 +123,7 @@ module Analytics
                                             request,
                                             "#{idp_name} was chosen for registration (recommended) with segment(s) segment1 and evidence passport",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                             5 => ["IDP_SELECTION", idp_name],
                                         )
         federation_reporter.report_idp_registration(
@@ -150,7 +150,7 @@ module Analytics
                                             request,
                                             "ATTEMPT_#{attempt_number} | registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} |#{FederationReporter::HINT_NOT_PRESENT}",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                           )
         federation_reporter.report_user_idp_attempt(
           current_transaction: current_transaction,
@@ -170,7 +170,7 @@ module Analytics
                                             request,
                                             "ATTEMPT_#{attempt_number} | registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} |#{FederationReporter::HINT_NOT_FOLLOWED}",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                           )
         federation_reporter.report_user_idp_attempt(
           current_transaction: current_transaction,
@@ -190,7 +190,7 @@ module Analytics
                                             request,
                                             "ATTEMPT_#{attempt_number} | sign-in | #{transaction_simple_id} | #{idp_name} | nil |#{FederationReporter::HINT_FOLLOWED}",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                           )
         federation_reporter.report_user_idp_attempt(
           current_transaction: current_transaction,
@@ -210,7 +210,7 @@ module Analytics
                                             request,
                                             "ATTEMPT_#{attempt_number} | single-idp | #{transaction_simple_id} | #{idp_name} | nil |#{FederationReporter::HINT_NOT_FOLLOWED}",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                           )
         federation_reporter.report_user_idp_attempt(
           current_transaction: current_transaction,
@@ -239,7 +239,7 @@ module Analytics
                                             request,
                                             "OUTCOME_#{attempt_number} | registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} |#{FederationReporter::HINT_NOT_PRESENT} #{response_status} |",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                           )
         federation_reporter.report_user_idp_outcome(
           current_transaction: current_transaction,
@@ -281,7 +281,7 @@ module Analytics
                                             request,
                                             "Cycle3 submitted",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                             4 => ["CYCLE_3", attribute_name],
                                           )
         federation_reporter.report_cycle_three(current_transaction, request, attribute_name)
@@ -295,7 +295,7 @@ module Analytics
                                             request,
                                             "Matching Outcome - Cancelled Cycle3",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                           )
         federation_reporter.report_cycle_three_cancel(current_transaction, request)
       end
@@ -308,7 +308,7 @@ module Analytics
                                             request,
                                             "The user started a sign-in journey",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                             3 => %w(JOURNEY_TYPE SIGN_IN),
                                           )
 
@@ -323,7 +323,7 @@ module Analytics
                                             request,
                                             "The user started a registration journey",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                             3 => %w(JOURNEY_TYPE REGISTRATION),
                                           )
 
@@ -351,7 +351,7 @@ module Analytics
                                             request,
                                             {
                                                 1 => %w(RP description),
-                                                2 => %w(LOA_REQUESTED LEVEL_2),
+                                                2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                             },
                                             "Engagement",
                                             "IDPs Recommended",
@@ -372,7 +372,7 @@ module Analytics
             request,
             "EVIDENCE_ATTEMPT_#{attempt_number} | CREDIT_CARD_PASSPORT |",
             1 => %w(RP description),
-            2 => %w(LOA_REQUESTED LEVEL_2),
+            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
           )
         federation_reporter.report_user_evidence_attempt(
           current_transaction: current_transaction,
@@ -392,7 +392,7 @@ module Analytics
                                             request,
                                             "HINT_DELETED | sign-in | #{transaction_simple_id} | #{idp_name}",
                                             1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
+                                            2 => ["LOA_REQUESTED", LevelOfAssurance::LOA2],
                                           )
 
         federation_reporter.report_sign_in_journey_ignored(current_transaction, request, idp_name, transaction_simple_id)

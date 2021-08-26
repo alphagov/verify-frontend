@@ -8,7 +8,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
     {
       simpleId: "stub-idp-loa1",
       entityId: "http://idcorp-loa1.com",
-      levelsOfAssurance: %w(LEVEL_1 LEVEL_2),
+      levelsOfAssurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
     }.freeze
   }
 
@@ -16,7 +16,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
     {
       simpleId: "stub-idp-loa1-with-interstitial",
       entityId: "http://idcorp-loa1-with-interstitial.com",
-      levelsOfAssurance: %w(LEVEL_1 LEVEL_2),
+      levelsOfAssurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
     }.freeze
   }
 
@@ -24,21 +24,21 @@ describe ChooseACertifiedCompanyLoa1Controller do
     {
       simpleId: "stub-idp-two",
       entityId: "http://idcorp-two.com",
-      levelsOfAssurance: %w(LEVEL_1),
+      levelsOfAssurance: [LevelOfAssurance::LOA1],
     }.freeze
   }
 
   context "#index" do
     before :each do
-      stub_api_idp_list_for_registration([stub_idp_loa1, stub_idp_loa1_with_interstitial], "LEVEL_1")
+      stub_api_idp_list_for_registration([stub_idp_loa1, stub_idp_loa1_with_interstitial], LevelOfAssurance::LOA1)
     end
 
     it "renders IDP list" do
-      set_session_and_cookies_with_loa("LEVEL_1", "test-rp")
-      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(2, "LEVEL_1", "analytics description for test-rp")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1, "test-rp")
+      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(2, LevelOfAssurance::LOA1, "analytics description for test-rp")
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).once do |idps|
-        idps.each { |idp| expect(idp.levels_of_assurance).to include "LEVEL_1" }
+        idps.each { |idp| expect(idp.levels_of_assurance).to include LevelOfAssurance::LOA1 }
       end
 
       get :index, params: { locale: "en" }
@@ -51,9 +51,9 @@ describe ChooseACertifiedCompanyLoa1Controller do
   context "#select_idp" do
     before :each do
       stub_api_select_idp
-      set_session_and_cookies_with_loa("LEVEL_1")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
       stub_api_idp_list_for_sign_in
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
     end
 
     it "resets interstitial answer to no value when IDP is selected" do
@@ -76,7 +76,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
     end
 
     it "redirects to IDP warning page by default" do
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp-two.com" }
 
       expect(subject).to redirect_to redirect_to_idp_register_path
@@ -98,8 +98,8 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
   context "#about" do
     it "returns 404 page if no display data exists for IDP" do
-      set_session_and_cookies_with_loa("LEVEL_1")
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
+      stub_api_idp_list_for_registration(default_idps, LevelOfAssurance::LOA1)
 
       get :about, params: { locale: "en", company: "unknown-idp" }
 

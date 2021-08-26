@@ -28,7 +28,7 @@ RSpec.describe "When a page with a virtual page view is visited" do
         "User-Agent" => "my user agent",
         "Accept-Language" => "en-US,en;q=0.5",
     }
-    stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers, "LEVEL_2", ['"3":["JOURNEY_TYPE","REGISTRATION"]'])
+    stubbed_piwik_request = stub_piwik_request(piwik_request, piwik_headers, LevelOfAssurance::LOA2, ['"3":["JOURNEY_TYPE","REGISTRATION"]'])
 
     expect(stubbed_piwik_request).to have_been_made.at_least_once
   end

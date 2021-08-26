@@ -9,11 +9,11 @@ describe PausedRegistrationController do
   let(:valid_idp_simple_id) { "stub-idp-one" }
 
   before(:each) do
-    set_selected_idp("entity_id" => "http://idcorp.com", "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_1 LEVEL_2))
-    set_session_and_cookies_with_loa("LEVEL_2", "test-rp")
+    set_selected_idp("entity_id" => "http://idcorp.com", "simple_id" => "stub-idp-one", "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2])
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA2, "test-rp")
     idps = [
-      { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-two", "entityId" => "http://idcorp-two.com", "levelsOfAssurance" => %w(LEVEL_2) },
+      { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
+      { "simpleId" => "stub-idp-two", "entityId" => "http://idcorp-two.com", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
     ]
     stub_api_idp_list_for_registration(idps)
     stub_api_idp_list_for_sign_in(idps)

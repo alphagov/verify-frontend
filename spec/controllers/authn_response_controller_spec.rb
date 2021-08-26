@@ -51,7 +51,7 @@ describe AuthnResponseController do
     end
 
     it "when relay state does not equal session id in the idp response" do
-      set_session_and_cookies_with_loa("LEVEL_1")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
 
       post :idp_response, params: { "RelayState" => "wrong_session_id", "SAMLResponse" => "a-saml-response", locale: "en" }
 
@@ -59,7 +59,7 @@ describe AuthnResponseController do
     end
 
     it "when idp response is empty" do
-      set_session_and_cookies_with_loa("LEVEL_1")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
 
       post :idp_response, params: {}
 
@@ -72,7 +72,7 @@ describe AuthnResponseController do
       IdpAuthnResponse.new(
         "result" => status,
         "isRegistration" => "registration",
-        "loaAchieved" => "LEVEL_1",
+        "loaAchieved" => LevelOfAssurance::LOA1,
       )
     }
     let(:post_endpoint) { :idp_response }
@@ -80,7 +80,7 @@ describe AuthnResponseController do
       {
         "entity_id" => "http://idcorp.com",
         "simple_id" => "stub-entity-one",
-        "levels_of_assurance" => %w(LEVEL_1 LEVEL_2),
+        "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
       }
     }
     before(:each) do

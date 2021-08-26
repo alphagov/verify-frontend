@@ -18,7 +18,7 @@ describe CompletedRegistrationController do
       stub_api_idp_list_for_sign_in_without_session([
         { "simpleId" => "stub-idp-one",
           "entityId" => entity_id,
-          "levelsOfAssurance" => %w(LEVEL_2) },
+          "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
         ],
                                                     transaction_id)
       get :index, params: { locale: "en", idp: valid_idp_simple_id }

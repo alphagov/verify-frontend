@@ -4,8 +4,8 @@ shared_examples "tracking cookie" do
 
   before(:each) do
     stub_const("SAML_PROXY_API", saml_proxy_api)
-    set_session_and_cookies_with_loa("LEVEL_1")
-    stub_piwik_request_with_rp_and_loa({}, "LEVEL_1")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
+    stub_piwik_request_with_rp_and_loa({}, LevelOfAssurance::LOA1)
   end
 
   subject(:cookie_after_request) do

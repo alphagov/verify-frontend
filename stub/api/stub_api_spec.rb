@@ -5,15 +5,15 @@ require_relative 'stub_api.rb'
 
 require 'active_model'
 
-APP_HOME = File.join(File.dirname(__FILE__), '../../')
-$LOAD_PATH << File.join(APP_HOME, 'app/models')
 $LOAD_PATH << File.join(APP_HOME, 'lib')
+$LOAD_PATH << File.join(APP_HOME, 'app/models')
 
 require 'api/response'
 require 'identity_provider'
 require 'idp_list_response'
 require 'select_idp_response'
 require 'outbound_saml_message'
+require 'level_of_assurance'
 require 'idp_authn_response'
 
 describe StubApi do
@@ -29,7 +29,7 @@ describe StubApi do
 
   context '#get /config/idps/idp-list-for-registration for test-rp at LOA1' do
     it 'should respond with valid IdpListResponse', skip_before: true do
-      get '/config/idps/idp-list-for-registration/#{CGI.escape "http://www.test-rp.gov.uk/SAML2/MD"}/LEVEL_1'
+      get "/config/idps/idp-list-for-registration/#{CGI.escape "http://www.test-rp.gov.uk/SAML2/MD"}/#{LevelOfAssurance::LOA1}"
       expect(last_response).to be_ok
       response = IdpListResponse.new(last_response_json)
       expect(response).to be_valid

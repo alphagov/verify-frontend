@@ -56,13 +56,13 @@ describe HintController do
       stub_api_idp_list_for_sign_in_without_session([
                                      { "simpleId" => "stub-idp-one",
                                        "entityId" => "http://idcorp.com",
-                                       "levelsOfAssurance" => %w(LEVEL_1) },
+                                       "levelsOfAssurance" => [LevelOfAssurance::LOA1] },
                                      { "simpleId" => "stub-idp-two",
                                        "entityId" => "http://idcorp-two.com",
-                                       "levelsOfAssurance" => %w(LEVEL_1) },
+                                       "levelsOfAssurance" => [LevelOfAssurance::LOA1] },
                                      { "simpleId" => "stub-idp-broken",
                                        "entityId" => "http://idcorp-broken.com",
-                                       "levelsOfAssurance" => %w(LEVEL_1),
+                                       "levelsOfAssurance" => [LevelOfAssurance::LOA1],
                                        "temporarilyUnavailable" => true },
                                      ],
                                                     "https://tax.service.gov.uk/SAML2/PERTAX")

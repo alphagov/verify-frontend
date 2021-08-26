@@ -3,7 +3,7 @@ require "piwik_test_helper"
 
 shared_examples "response_processing" do |matching_outcome, piwik_action, redirect_path|
   it "redirects to #{redirect_path} and reports \"#{piwik_action}\" to Piwik for matching outcome #{matching_outcome}" do
-    set_session_and_cookies_with_loa("LEVEL_1")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
     stub_piwik_request({ "action_name" => piwik_action }, {}, "LEVEL_1")
     stub_matching_outcome(matching_outcome)
     get :index, params: { locale: "en" }
@@ -13,7 +13,7 @@ end
 
 shared_examples "response_processing_errors" do |matching_outcome, piwik_action, error_feedback_source|
   it "renders error page and reports \"#{piwik_action}\" to Piwik for matching outcome #{matching_outcome}" do
-    set_session_and_cookies_with_loa("LEVEL_1")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
     set_selected_idp(simple_id: "stub-idp-one")
     stub_piwik_request({ "action_name" => piwik_action }, {}, "LEVEL_1")
     stub_matching_outcome(matching_outcome)

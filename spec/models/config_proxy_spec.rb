@@ -11,15 +11,15 @@ describe "ConfigProxy" do
       transactions_json = [
           {
               "simpleId" => "test-rp", "serviceHomepage" => "http://localhost:50130/test-rp",
-              "loaList" => %w(LEVEL_2), "headlessStartpage" => "http://localhost:50130/success?rp-name=test-rp"
+              "loaList" => [LevelOfAssurance::LOA2], "headlessStartpage" => "http://localhost:50130/success?rp-name=test-rp"
           },
           {
             "simpleId" => "loa1-test-rp", "serviceHomepage" => "http://localhost:50130/loa1-test-rp",
-            "loaList" => %w(LEVEL_2), "headlessStartpage" => "http://localhost:50130/success?rp-name=loa1-test-rp"
+            "loaList" => [LevelOfAssurance::LOA2], "headlessStartpage" => "http://localhost:50130/success?rp-name=loa1-test-rp"
         },
           {
               "simpleId" => "test-rp-noc3", "serviceHomepage" => "http://localhost:50130/test-rp-noc3",
-              "loaList" => %w(LEVEL_2), "headlessStartpage" => nil
+              "loaList" => [LevelOfAssurance::LOA2], "headlessStartpage" => nil
           },
       ]
       expect(api_client).to receive(:get).with(config_proxy.transactions_endpoint).and_return(transactions_json)
@@ -30,7 +30,7 @@ describe "ConfigProxy" do
 
       expect(rp).to include("simpleId" => "test-rp",
                             "serviceHomepage" => "http://localhost:50130/test-rp",
-                            "loaList" => %w(LEVEL_2),
+                            "loaList" => [LevelOfAssurance::LOA2],
                             "headlessStartpage" => "http://localhost:50130/success?rp-name=test-rp")
     end
 

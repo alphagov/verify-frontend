@@ -84,11 +84,11 @@ describe SelectRoute do
 
       cookies = create_ab_test_cookie(EXP_NAME, ALTERNATIVE_NAME)
 
-      select_route = SelectRoute.new(EXP_NAME, "variant", experiment_loa: "LEVEL_1")
+      select_route = SelectRoute.new(EXP_NAME, "variant", experiment_loa: LevelOfAssurance::LOA1)
     end
 
     it "executes ab_reporter when LOA matches" do
-      session = { transaction_simple_id: "test-rp", requested_loa: "LEVEL_1" }
+      session = { transaction_simple_id: "test-rp", requested_loa: LevelOfAssurance::LOA1 }
       request = RequestStub.new(session, cookies)
       expect(AbTest).to receive(:report_ab_test_details).with(request, EXP_NAME)
 
@@ -97,7 +97,7 @@ describe SelectRoute do
 
     it "does not execute ab_reporter when experiment does not match" do
       expect(AbTest).not_to receive(:report_ab_test_details)
-      session = { transaction_simple_id: "test-rp", requested_loa: "LEVEL_2" }
+      session = { transaction_simple_id: "test-rp", requested_loa: LevelOfAssurance::LOA2 }
       request = RequestStub.new(session, cookies)
 
       select_route.matches?(request)
@@ -108,7 +108,7 @@ describe SelectRoute do
     cookies = nil
 
     it "evaluates to true when trial_enabled flag is set to true and trial cookie matches experiment" do
-      session = { transaction_simple_id: "test-rp", requested_loa: "LEVEL_1" }
+      session = { transaction_simple_id: "test-rp", requested_loa: LevelOfAssurance::LOA1 }
 
       cookies = create_ab_test_trial_cookie("app_transparency")
       request = RequestStub.new(session, cookies)
@@ -119,7 +119,7 @@ describe SelectRoute do
     end
 
     it "evaluates to false when trial_enabled flag is set to false and trial cookie matches experiment" do
-      session = { transaction_simple_id: "test-rp", requested_loa: "LEVEL_1" }
+      session = { transaction_simple_id: "test-rp", requested_loa: LevelOfAssurance::LOA1 }
 
       cookies = create_ab_test_trial_cookie("app_transparency")
       request = RequestStub.new(session, cookies)
@@ -130,7 +130,7 @@ describe SelectRoute do
     end
 
     it "evaluates to false when trial_enabled flag is set to true but trial cookie does not match experiment" do
-      session = { transaction_simple_id: "test-rp", requested_loa: "LEVEL_1" }
+      session = { transaction_simple_id: "test-rp", requested_loa: LevelOfAssurance::LOA1 }
 
       cookies = create_ab_test_trial_cookie("wrong one")
       request = RequestStub.new(session, cookies)
@@ -141,7 +141,7 @@ describe SelectRoute do
     end
 
     it "evaluates to false when trial_enabled flag is set to true but trial cookie does not exist" do
-      session = { transaction_simple_id: "test-rp", requested_loa: "LEVEL_1" }
+      session = { transaction_simple_id: "test-rp", requested_loa: LevelOfAssurance::LOA1 }
 
       request = RequestStub.new(session, {})
 

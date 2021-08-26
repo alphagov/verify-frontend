@@ -13,11 +13,11 @@ RSpec.describe "user selects an IDP on the sign in page" do
     set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session, session: default_session.merge!({ journey_type: "sign-in" }))
     stub_api_idp_list_for_sign_in([{ "simpleId" => "stub-idp-one",
                                       "entityId" => "http://idcorp.com",
-                                      "levelsOfAssurance" => %w(LEVEL_2),
+                                      "levelsOfAssurance" => [LevelOfAssurance::LOA2],
                                       "provideAuthenticationUntil" => 10.day.from_now.to_s },
                                    {  "simpleId" => "stub-idp-two",
                                       "entityId" => "http://idcorp-two.com",
-                                      "levelsOfAssurance" => %w(LEVEL_2),
+                                      "levelsOfAssurance" => [LevelOfAssurance::LOA2],
                                       "provideAuthenticationUntil" => 10.day.from_now.to_s }])
     visit "/#{t('routes.sign_in', locale: locale)}"
   end
@@ -43,7 +43,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
       expect(page).to have_current_path(sign_in_warning_path)
       expect(page).to have_button(t("hub.signin.select_idp", display_name: idp_display_name))
       expect(page).to have_link(t("hub.signin.warning.after_link"), href: begin_registration_path)
-      expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
+      expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => [LevelOfAssurance::LOA2])
     end
   end
 end

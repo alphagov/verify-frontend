@@ -157,7 +157,7 @@ describe SingleIdpJourneyController do
 
   context "#index" do
     before :each do
-      set_session_and_cookies_with_loa("LEVEL_2")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
       stub_transactions_for_single_idp_list
       stub_api_idp_list_for_single_idp_journey
     end
@@ -217,7 +217,7 @@ describe SingleIdpJourneyController do
       stub_api_idp_list_for_single_idp_journey(VALID_TEST_RP,
                                                [{ "simpleId" => "stub-idp-one",
                                                   "entityId" => "http://idcorp.com",
-                                                  "levelsOfAssurance" => %w(LEVEL_2),
+                                                  "levelsOfAssurance" => [LevelOfAssurance::LOA2],
                                                   "temporarilyUnavailable" => true }])
       single_idp_cookie = {
         transaction_id: VALID_TEST_RP,
@@ -272,11 +272,11 @@ describe SingleIdpJourneyController do
     valid_idp = {
         "simple_id" => "stub-idp-one",
         "entity_id" => VALID_STUB_IDP,
-        "levels_of_assurance" => %w(LEVEL_1 LEVEL_2),
+        "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
     }
 
     before :each do
-      set_session_and_cookies_with_loa("LEVEL_2")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
       stub_transactions_for_single_idp_list
       stub_api_idp_list_for_single_idp_journey
     end
@@ -320,7 +320,7 @@ describe SingleIdpJourneyController do
 
   context "#continue_ajax" do
     before :each do
-      set_session_and_cookies_with_loa("LEVEL_2")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
       stub_transactions_for_single_idp_list
       stub_api_idp_list_for_single_idp_journey
     end
@@ -329,7 +329,7 @@ describe SingleIdpJourneyController do
       valid_idp = {
         "simple_id" => "stub-idp-one",
         "entity_id" => VALID_STUB_IDP,
-        "levels_of_assurance" => %w(LEVEL_1 LEVEL_2),
+        "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
       }
 
       stub_api_select_idp

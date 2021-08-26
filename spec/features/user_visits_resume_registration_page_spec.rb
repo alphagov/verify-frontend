@@ -17,7 +17,7 @@ RSpec.describe "When the user visits the resume registration page and " do
       PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
       PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
       PolicyEndpoints::PARAM_REGISTRATION => false,
-      PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
+      PolicyEndpoints::PARAM_REQUESTED_LOA => LevelOfAssurance::LOA2,
       PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String), # no longer comes from matomo
       PolicyEndpoints::PARAM_JOURNEY_TYPE => JourneyType::RESUMING,
       PolicyEndpoints::PARAM_VARIANT => nil,

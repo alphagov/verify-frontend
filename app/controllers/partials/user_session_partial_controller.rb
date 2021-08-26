@@ -28,11 +28,11 @@ module UserSessionPartialController
   end
 
   def is_journey_loa1?
-    session[:requested_loa] == "LEVEL_1"
+    session[:requested_loa] == LevelOfAssurance::LOA1
   end
 
   def is_journey_loa2?
-    session[:requested_loa] == "LEVEL_2"
+    session[:requested_loa] == LevelOfAssurance::LOA2
   end
 
   def current_selected_provider_data

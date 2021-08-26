@@ -40,11 +40,11 @@ module Display
       let(:public_simple_id_4) { "test-rp-4" }
       let(:private_simple_id) { "some-simple-id" }
 
-      let(:public_simple_id_loa) { %w(LEVEL_1') }
-      let(:public_simple_id_2_loa) { %w(LEVEL_1') }
-      let(:public_simple_id_3_loa) { %w(LEVEL_1 LEVEL_2) }
-      let(:public_simple_id_4_loa) { %w(LEVEL_2') }
-      let(:private_simple_id_loa) { %w(LEVEL_2') }
+      let(:public_simple_id_loa) { [LevelOfAssurance::LOA1] }
+      let(:public_simple_id_2_loa) { [LevelOfAssurance::LOA1] }
+      let(:public_simple_id_3_loa) { [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }
+      let(:public_simple_id_4_loa) { [LevelOfAssurance::LOA2] }
+      let(:private_simple_id_loa) { [LevelOfAssurance::LOA2] }
 
       let(:display_data_correlator) {
         DisplayDataCorrelator.new(rp_display_repository, [public_simple_id], [private_simple_id])

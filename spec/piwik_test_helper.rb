@@ -1,6 +1,6 @@
 def stub_piwik_request(extra_parameters = {},
                        extra_headers = {},
-                       loa = "LEVEL_2",
+                       loa = LevelOfAssurance::LOA2,
                        extra_custom_variables = [],
                        transaction_analytics_description = "analytics description for test-rp")
   piwik_request = {
@@ -69,7 +69,7 @@ def create_custom_variable_param(loa, extra_custom_variables, transaction_analyt
   param
 end
 
-def stub_piwik_idp_registration(idp_name, selected_answers: {}, recommended: false, idp_list: idp_name, loa: "LEVEL_2", segments: %w(other))
+def stub_piwik_idp_registration(idp_name, selected_answers: {}, recommended: false, idp_list: idp_name, loa: LevelOfAssurance::LOA2, segments: %w(other))
   recommended_str = recommended ? "recommended" : "not recommended"
   evidence = selected_answers.values.flat_map { |answer_set|
     answer_set.select { |_, v| v }.map { |item| item[0] }
@@ -87,7 +87,7 @@ def stub_piwik_cycle_three(attribute_name)
   piwik_request = {
     "action_name" => "Cycle3 submitted",
   }
-  stub_piwik_request(piwik_request, {}, "LEVEL_2", [cycle_three_custom_variable])
+  stub_piwik_request(piwik_request, {}, LevelOfAssurance::LOA2, [cycle_three_custom_variable])
 end
 
 def stub_piwik_cycle_three_cancel
@@ -97,7 +97,7 @@ def stub_piwik_cycle_three_cancel
   stub_piwik_request(piwik_request)
 end
 
-def stub_piwik_request_with_rp_and_loa(extra_parameters = {}, loa = "LEVEL_2")
+def stub_piwik_request_with_rp_and_loa(extra_parameters = {}, loa = LevelOfAssurance::LOA2)
   stub_piwik_request(extra_parameters, {}, loa)
 end
 
@@ -151,7 +151,7 @@ def stub_piwik_report_single_idp_service_mismatch(expected_service, actual_servi
   stub_piwik_request(piwik_request, "User-Agent" => "Rails Testing")
 end
 
-def stub_piwik_journey_type_request(journey_type, action_name, loa = "LEVEL_2")
+def stub_piwik_journey_type_request(journey_type, action_name, loa = LevelOfAssurance::LOA2)
   journey_custom_variable = "\"3\":[\"JOURNEY_TYPE\",\"#{journey_type}\"]"
 
   piwik_request = {

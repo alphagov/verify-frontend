@@ -31,23 +31,23 @@ module ApiTestHelper
     transactions = [
       {
         "simpleId" => "test-rp", "serviceHomepage" => "http://localhost:50130/test-rp",
-        "loaList" => %w(LEVEL_2), "headlessStartpage" => "http://localhost:50130/success?rp-name=test-rp"
+        "loaList" => [LevelOfAssurance::LOA2], "headlessStartpage" => "http://localhost:50130/success?rp-name=test-rp"
       },
       {
         "simpleId" => "test-rp-noc3", "serviceHomepage" => "http://localhost:50130/test-rp-noc3",
-        "loaList" => %w(LEVEL_2), "headlessStartpage" => nil
+        "loaList" => [LevelOfAssurance::LOA2], "headlessStartpage" => nil
       },
       {
         "simpleId" => "headless-rp", "serviceHomepage" => "http://localhost:50130/headless-rp",
-        "loaList" => %w(LEVEL_2), "headlessStartpage" => nil
+        "loaList" => [LevelOfAssurance::LOA2], "headlessStartpage" => nil
       },
       {
         "simpleId" => "test-rp-with-custom-hint", "serviceHomepage" => "http://localhost:50130/test-rp-with-custom-hint",
-        "loaList" => %w(LEVEL_2), "headlessStartpage" => "http://localhost:50130/success?rp-name=test-rp-with-custom-hint"
+        "loaList" => [LevelOfAssurance::LOA2], "headlessStartpage" => "http://localhost:50130/success?rp-name=test-rp-with-custom-hint"
       },
       {
         "simpleId" => "loa1-test-rp", "serviceHomepage" => "http://localhost:50130/loa1-test-rp",
-        "loaList" => %w(LEVEL_1 LEVEL_2), "headlessStartpage" => "http://localhost:50130/success?rp-name=loa1-test-rp"
+        "loaList" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2], "headlessStartpage" => "http://localhost:50130/success?rp-name=loa1-test-rp"
       },
     ]
 
@@ -156,10 +156,10 @@ module ApiTestHelper
 
   def an_authn_request(location, registration)
     {
-        "postEndpoint" => location,
-        "samlMessage" => "a-saml-request",
-        "relayState" => "a-relay-state",
-        "registration" => registration,
+      "postEndpoint" => location,
+      "samlMessage" => "a-saml-request",
+      "relayState" => "a-relay-state",
+      "registration" => registration,
     }
   end
 
@@ -173,13 +173,13 @@ module ApiTestHelper
 
   def stub_session_idp_authn_request(originating_ip, idp_location, registration)
     stub_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
-        .with(headers: { "X_FORWARDED_FOR" => originating_ip })
-        .to_return(body: an_authn_request(idp_location, registration).to_json)
+      .with(headers: { "X_FORWARDED_FOR" => originating_ip })
+      .to_return(body: an_authn_request(idp_location, registration).to_json)
   end
 
   def an_error_response(code)
     {
-        exceptionType: code,
+      exceptionType: code,
     }
   end
 
@@ -195,9 +195,9 @@ module ApiTestHelper
 
   def stub_saml_proxy_authn_request_endpoint
     authn_request_body = {
-        PARAM_SAML_REQUEST => "my-saml-request",
-        PARAM_RELAY_STATE => "my-relay-state",
-        PARAM_IP_SEEN_BY_FRONTEND => "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>",
+      PARAM_SAML_REQUEST => "my-saml-request",
+      PARAM_RELAY_STATE => "my-relay-state",
+      PARAM_IP_SEEN_BY_FRONTEND => "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>",
     }
     stub_request(:post, saml_proxy_api_uri(NEW_SESSION_ENDPOINT)).with(body: authn_request_body).to_return(body: default_session_id.to_json, status: 200)
   end
@@ -223,10 +223,10 @@ module ApiTestHelper
 
   def transaction_details_stub_response(options)
     defaults = {
-        "simpleId" => "test-rp",
-        "serviceHomepage" => "http://www.test-rp.gov.uk/",
-        "loaList" => %w(LEVEL_1 LEVEL_2),
-        "headlessStartpage" => "http://www.test-rp.gov.uk/success",
+      "simpleId" => "test-rp",
+      "serviceHomepage" => "http://www.test-rp.gov.uk/",
+      "loaList" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
+      "headlessStartpage" => "http://www.test-rp.gov.uk/success",
     }
     defaults.merge(options)
   end
@@ -241,18 +241,18 @@ module ApiTestHelper
 
   def stub_response_for_rp
     response_body = {
-        "postEndpoint" => "/test-rp",
-        "samlMessage" => "a saml message",
-        "relayState" => "a relay state",
+      "postEndpoint" => "/test-rp",
+      "samlMessage" => "a saml message",
+      "relayState" => "a relay state",
     }
     stub_request(:get, saml_proxy_api_uri(response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
   end
 
   def stub_error_response_for_rp
     response_body = {
-        "postEndpoint" => "/test-rp",
-        "samlMessage" => "a saml message",
-        "relayState" => "a relay state",
+      "postEndpoint" => "/test-rp",
+      "samlMessage" => "a saml message",
+      "relayState" => "a relay state",
     }
     stub_request(:get, saml_proxy_api_uri(error_response_for_rp_endpoint(default_session_id))).with(headers: x_forwarded_for).to_return(body: response_body.to_json)
   end
@@ -273,24 +273,24 @@ module ApiTestHelper
 
   def stub_api_authn_response(relay_state, response = { "result" => "SUCCESS", "isRegistration" => false })
     authn_response_body = {
-        PARAM_SAML_REQUEST => "my-saml-response",
-        PARAM_RELAY_STATE => relay_state,
-        PARAM_IP_SEEN_BY_FRONTEND => "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>",
-        PARAM_PERSISTENT_SESSION_ID => instance_of(String),
-        PARAM_JOURNEY_TYPE => nil,
+      PARAM_SAML_REQUEST => "my-saml-response",
+      PARAM_RELAY_STATE => relay_state,
+      PARAM_IP_SEEN_BY_FRONTEND => "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>",
+      PARAM_PERSISTENT_SESSION_ID => instance_of(String),
+      PARAM_JOURNEY_TYPE => nil,
     }
 
     stub_request(:post, saml_proxy_api_uri(IDP_AUTHN_RESPONSE_ENDPOINT))
-        .with(body: authn_response_body)
-        .to_return(body: response.to_json, status: 200)
+      .with(body: authn_response_body)
+      .to_return(body: response.to_json, status: 200)
   end
 
   def stub_api_returns_error(code)
     stub_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
-        .to_return(body: an_error_response(code).to_json, status: 500)
+      .to_return(body: an_error_response(code).to_json, status: 500)
   end
 
-  def stub_api_idp_list_for_registration(idps = default_idps, loa = "LEVEL_2")
+  def stub_api_idp_list_for_registration(idps = default_idps, loa = LevelOfAssurance::LOA2)
     stub_request(:get, config_api_uri(idp_list_for_registration_endpoint(default_transaction_entity_id, loa))).to_return(body: idps.to_json)
   end
 
@@ -316,10 +316,10 @@ module ApiTestHelper
 
   def stub_api_no_docs_idps
     idps = [
-      { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-no-docs", "entityId" => "http://idcorp.nodoc.com", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-two", "entityId" => "other-entity-id", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-three", "entityId" => "a-different-entity-id", "levelsOfAssurance" => %w(LEVEL_2) },
+      { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
+      { "simpleId" => "stub-idp-no-docs", "entityId" => "http://idcorp.nodoc.com", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
+      { "simpleId" => "stub-idp-two", "entityId" => "other-entity-id", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
+      { "simpleId" => "stub-idp-three", "entityId" => "a-different-entity-id", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
     ]
     stub_api_idp_list_for_registration(idps)
   end
@@ -344,13 +344,13 @@ private
 
   def default_idps
     [
-      { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-two", "entityId" => "http://idcorp-two.com", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-three", "entityId" => "http://idcorp-three.com", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-demo", "entityId" => "http://idcorp-demo.com", "levelsOfAssurance" => %w(LEVEL_2) },
-      { "simpleId" => "stub-idp-loa1", "entityId" => "http://idcorp-loa1.com", "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2) },
-      { "simpleId" => "stub-idp-loa1-with-interstitial", "entityId" => "http://idcorp-loa1-with-interstitial.com", "levelsOfAssurance" => %w(LEVEL_1) },
-      { "simpleId" => "stub-idp-disconnected", "entityId" => "http://idcorp-disconnected.com", "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2), "authenticationEnabled" => false },
+      { "simpleId" => "stub-idp-one", "entityId" => "http://idcorp.com", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
+      { "simpleId" => "stub-idp-two", "entityId" => "http://idcorp-two.com", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
+      { "simpleId" => "stub-idp-three", "entityId" => "http://idcorp-three.com", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
+      { "simpleId" => "stub-idp-demo", "entityId" => "http://idcorp-demo.com", "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
+      { "simpleId" => "stub-idp-loa1", "entityId" => "http://idcorp-loa1.com", "levelsOfAssurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] },
+      { "simpleId" => "stub-idp-loa1-with-interstitial", "entityId" => "http://idcorp-loa1-with-interstitial.com", "levelsOfAssurance" => [LevelOfAssurance::LOA1] },
+      { "simpleId" => "stub-idp-disconnected", "entityId" => "http://idcorp-disconnected.com", "levelsOfAssurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2], "authenticationEnabled" => false },
     ]
   end
 end

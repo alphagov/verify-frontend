@@ -14,7 +14,7 @@ RSpec.describe "When the user is sent to the paused registration page" do
     stub_session_select_idp_request(
       encrypted_entity_id,
       PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
-      PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2"
+      PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => LevelOfAssurance::LOA2
     )
   }
 

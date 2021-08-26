@@ -8,13 +8,13 @@ describe SignInController do
     before(:example) do
       stub_api_idp_list_for_sign_in([{ "simpleId" => "stub-idp-one",
                                       "entityId" => "http://idcorp.com",
-                                      "levelsOfAssurance" => %w(LEVEL_1),
+                                      "levelsOfAssurance" => [LevelOfAssurance::LOA1],
                                       "provideAuthenticationUntil" => (1.months + 1.day).from_now.to_s },
                                      { "simpleId" => "stub-idp-two",
                                       "entityId" => "http://idcorp-two.com",
-                                      "levelsOfAssurance" => %w(LEVEL_1),
+                                      "levelsOfAssurance" => [LevelOfAssurance::LOA1],
                                       "provideAuthenticationUntil" => (1.months - 1.day).from_now.to_s }])
-      set_session_and_cookies_with_loa("LEVEL_1")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
     end
 
     it "will redirect to the selected IDP before warning threshold" do
@@ -40,12 +40,12 @@ describe SignInController do
     before(:example) do
       stub_api_idp_list_for_sign_in([{ "simpleId" => "stub-idp-one",
                                       "entityId" => "http://idcorp.com",
-                                      "levelsOfAssurance" => %w(LEVEL_1),
+                                      "levelsOfAssurance" => [LevelOfAssurance::LOA1],
                                       "provideAuthenticationUntil" => 1.hours.from_now.to_s },
                                      { "simpleId" => "stub-idp-two",
                                       "entityId" => "http://idcorp-two.com",
-                                      "levelsOfAssurance" => %w(LEVEL_1) }])
-      set_session_and_cookies_with_loa("LEVEL_1")
+                                      "levelsOfAssurance" => [LevelOfAssurance::LOA1] }])
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
     end
 
     it "will have one available IDP" do
@@ -61,15 +61,15 @@ describe SignInController do
     before(:example) do
       stub_api_idp_list_for_sign_in([{ "simpleId" => "stub-idp-one",
                                       "entityId" => "http://idcorp.com",
-                                      "levelsOfAssurance" => %w(LEVEL_1) },
+                                      "levelsOfAssurance" => [LevelOfAssurance::LOA1] },
                                      { "simpleId" => "stub-idp-two",
                                       "entityId" => "http://idcorp-two.com",
-                                      "levelsOfAssurance" => %w(LEVEL_1) },
+                                      "levelsOfAssurance" => [LevelOfAssurance::LOA1] },
                                      { "simpleId" => "stub-idp-broken",
                                       "entityId" => "http://idcorp-broken.com",
-                                      "levelsOfAssurance" => %w(LEVEL_1),
+                                      "levelsOfAssurance" => [LevelOfAssurance::LOA1],
                                       "temporarilyUnavailable" => true }])
-      set_session_and_cookies_with_loa("LEVEL_1")
+      set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
     end
 
     context "#index" do

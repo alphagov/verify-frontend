@@ -10,7 +10,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
   end
 
   def given_the_piwik_request_has_been_stubbed
-    @stub_piwik_journey_request = stub_piwik_journey_type_request("REGISTRATION", "The user started a registration journey", "LEVEL_2")
+    @stub_piwik_journey_request = stub_piwik_journey_type_request("REGISTRATION", "The user started a registration journey", LevelOfAssurance::LOA2)
   end
 
   def given_im_on_the_sign_in_page(locale = "en")
@@ -94,7 +94,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
       and_piwik_was_sent_a_signin_event
       and_the_language_hint_is_set
       and_the_hints_are_not_set
-      expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
+      expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => [LevelOfAssurance::LOA2])
     end
 
     it "will redirect the user to the IDP when there is an ab_test_value" do
@@ -108,7 +108,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
       and_piwik_was_sent_a_signin_event
       and_the_language_hint_is_set
       and_the_hints_are_not_set
-      expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
+      expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => [LevelOfAssurance::LOA2])
     end
 
     it "will redirect the user to the about page of the registration journey and update the Piwik Custom Variables" do
@@ -165,7 +165,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
         and_piwik_was_sent_a_signin_hint_followed_event
         and_the_language_hint_is_set
         and_the_hints_are_not_set
-        expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
+        expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => [LevelOfAssurance::LOA2])
       end
     end
 
@@ -190,7 +190,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
         and_piwik_was_sent_a_signin_hint_ignored_event
         and_the_language_hint_is_set
         and_the_hints_are_not_set
-        expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
+        expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => [LevelOfAssurance::LOA2])
       end
     end
 

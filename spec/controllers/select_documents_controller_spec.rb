@@ -8,7 +8,7 @@ require "models/display/viewable_identity_provider"
 
 describe SelectDocumentsController do
   before(:each) do
-    set_session_and_cookies_with_loa("LEVEL_2")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
     stub_api_idp_list_for_registration
     session[:selected_answers] = {
       "device_type" => { device_type_other: true },

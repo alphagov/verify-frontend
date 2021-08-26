@@ -99,7 +99,7 @@ describe SamlProxyApi do
         .and_return(
           "result" => "some-location",
           "isRegistration" => false,
-          "loaAchieved" => "LEVEL_2",
+          "loaAchieved" => LevelOfAssurance::LOA2,
         )
 
       response = saml_proxy_api.idp_authn_response(session_id, "saml-response", persistent_session_id, journey_type)
@@ -107,7 +107,7 @@ describe SamlProxyApi do
       attributes = {
           idp_result: "some-location",
           is_registration: false,
-          loa_achieved: "LEVEL_2",
+          loa_achieved: LevelOfAssurance::LOA2,
       }
       expect(response).to have_attributes(attributes)
     end

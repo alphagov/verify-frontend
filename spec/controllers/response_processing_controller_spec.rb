@@ -19,14 +19,14 @@ describe ResponseProcessingController do
   include_examples "response_processing_errors",  MatchingOutcomeResponse::USER_ACCOUNT_CREATION_FAILED, "Unknown User Outcome - Account Creation Failed", "ACCOUNT_CREATION_FAILED_PAGE"
 
   it "renders index when matching outcome response is wait" do
-    set_session_and_cookies_with_loa("LEVEL_1")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
     stub_matching_outcome(MatchingOutcomeResponse::WAIT)
     expect(subject).to render_template(nil)
     get :index, params: { locale: "en" }
   end
 
   it "raises error exception" do
-    set_session_and_cookies_with_loa("LEVEL_1")
+    set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
     allow(POLICY_PROXY).to receive(:matching_outcome).with(anything).and_return("SOMETHING")
     expect(subject).to receive(:something_went_wrong).with('Unknown matching response "SOMETHING"')
     get :index, params: { locale: "en" }

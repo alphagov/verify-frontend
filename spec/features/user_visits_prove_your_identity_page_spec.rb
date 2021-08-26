@@ -5,7 +5,7 @@ RSpec.describe "When the user visits the prove identity page" do
   before(:each) do
     stub_request(:get, "http://api.com:50240/config/transactions/enabled").to_return(
       status: 200,
-      body: '[{"simpleId":"test-rp","serviceHomepage":"http://localhost:50130/test-rp","loaList":["LEVEL_2"]}]',
+      body: %[[{"simpleId":"test-rp","serviceHomepage":"http://localhost:50130/test-rp","loaList":["#{LevelOfAssurance::LOA2}"]}]],
       headers: {},
     )
   end

@@ -57,8 +57,8 @@ private
   end
 
   def set_requested_loa(levels_of_assurance)
-    requested_loa = if levels_of_assurance.include? "LEVEL_1"
-                      "LEVEL_1"
+    requested_loa = if levels_of_assurance.include? LevelOfAssurance::LOA1
+                      LevelOfAssurance::LOA1
                     else
                       levels_of_assurance.first
                     end

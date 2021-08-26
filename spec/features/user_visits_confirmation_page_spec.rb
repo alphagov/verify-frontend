@@ -45,14 +45,14 @@ RSpec.describe "When user visits the confirmation page" do
 
   it "displays government services requiring extra security when LOA is level one" do
     stub_transactions_list
-    set_loa_in_session("LEVEL_1")
+    set_loa_in_session(LevelOfAssurance::LOA1)
     visit "/confirmation"
     expect(page).to have_text t("hub.confirmation.extra_security")
   end
 
   it "does not display government services requiring extra security when LOA is level two" do
     stub_transactions_list
-    set_loa_in_session("LEVEL_2")
+    set_loa_in_session(LevelOfAssurance::LOA2)
     visit "/confirmation"
     expect(page).not_to have_text t("hub.confirmation.extra_security")
   end
