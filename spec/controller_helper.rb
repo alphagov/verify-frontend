@@ -18,7 +18,7 @@ def set_session_and_cookies_with_loa_and_variant(loa_request, experiment, varian
 end
 
 def set_selected_idp(selected_idp)
-  session[:selected_provider] = SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
+  session[:selected_provider] = SelectedProviderData.new(selected_idp)
 end
 
 def set_transaction(transaction_id)

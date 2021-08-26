@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 module JourneyType
-  VERIFY = "VERIFY"
-
-  VALID_JOURNEY_TYPES = [VERIFY].freeze
   module Verify
     SIGN_IN = "sign-in"
     REGISTRATION = "registration"
