@@ -91,8 +91,8 @@ module FeatureHelper
 
   def create_cookie_hash
     {
-        CookieNames::SESSION_COOKIE_NAME => "my-session-cookie",
-        CookieNames::SESSION_ID_COOKIE_NAME => default_session_id,
+      CookieNames::SESSION_COOKIE_NAME => "my-session-cookie",
+      CookieNames::SESSION_ID_COOKIE_NAME => default_session_id,
     }
   end
 
@@ -138,9 +138,7 @@ module FeatureHelper
   end
 
   def set_selected_idp_in_session(selected_idp)
-    page.set_rack_session(
-      selected_provider: SelectedProviderData.new(JourneyType::VERIFY, selected_idp),
-    )
+    page.set_rack_session(selected_provider: SelectedProviderData.new(selected_idp))
   end
 
   def set_session_cookies!
@@ -207,13 +205,13 @@ private
 
   def variant_session
     {
-        transaction_simple_id: "test-rp",
-        start_time: start_time_in_millis,
-        verify_session_id: default_session_id,
-        requested_loa: "LEVEL_2",
-        transaction_entity_id: "http://www.test-rp.gov.uk/SAML2/MD",
-        transaction_homepage: "http://www.test-rp.gov.uk/",
-        selected_answers: { documents: { driving_licence: false }, device_type: { device_type_other: true } },
+      transaction_simple_id: "test-rp",
+      start_time: start_time_in_millis,
+      verify_session_id: default_session_id,
+      requested_loa: "LEVEL_2",
+      transaction_entity_id: "http://www.test-rp.gov.uk/SAML2/MD",
+      transaction_homepage: "http://www.test-rp.gov.uk/",
+      selected_answers: { documents: { driving_licence: false }, device_type: { device_type_other: true } },
     }
   end
 

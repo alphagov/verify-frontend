@@ -30,7 +30,6 @@ class FeedbackSourceMapper
       "FORGOT_COMPANY_PAGE" => "forgot_company",
       "PRIVACY_NOTICE_PAGE" => "privacy_notice",
       "VERIFY_SERVICES_PAGE" => "verify_services",
-      "WHY_COMPANIES_PAGE" => "why_companies",
       "WILL_IT_WORK_FOR_ME_PAGE" => "will_it_work_for_me",
       "MAY_NOT_WORK_IF_YOU_LIVE_OVERSEAS_PAGE" => "may_not_work_if_you_live_overseas",
       "WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE" => "why_might_this_not_work_for_me",

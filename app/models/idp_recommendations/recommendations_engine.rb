@@ -9,10 +9,9 @@ class RecommendationsEngine
     @hide_soft_disconnecting_idps_mins = hide_soft_disconnecting_idps_mins
   end
 
-  def get_suggested_idps_for_registration(idps, user_profile, transaction_simple_id, idps_tried)
+  def get_suggested_idps_for_registration(idps, user_profile, transaction_simple_id)
     viewable_idps = idps.reject { |idp| is_hidden_for_registration?(idp) }
-    not_tried_idps = viewable_idps.reject { |idp| has_already_tried_registration_and_failed?(idp, idps_tried) }
-    capable_idps = not_tried_idps.select { |idp| is_capable?(idp, user_profile) }
+    capable_idps = viewable_idps.select { |idp| is_capable?(idp, user_profile) }
     transaction_group = @transaction_grouper.get_transaction_group(transaction_simple_id)
     user_segments = @segment_matcher.find_matching_segments(user_profile)
 
@@ -22,13 +21,13 @@ class RecommendationsEngine
     { recommended: recommended_idps, unlikely: unlikely_idps, user_segments: user_segments }
   end
 
-  def recommended?(idp, enabled_idps, user_profile, transaction_simple_id, idps_tried)
-    suggested_idps = get_suggested_idps_for_registration(enabled_idps, user_profile, transaction_simple_id, idps_tried)
+  def recommended?(idp, enabled_idps, user_profile, transaction_simple_id)
+    suggested_idps = get_suggested_idps_for_registration(enabled_idps, user_profile, transaction_simple_id)
     suggested_idps[:recommended].include? idp
   end
 
-  def any?(idps, user_profile, transaction_simple_id, idps_tried)
-    suggested_idps = get_suggested_idps_for_registration(idps, user_profile, transaction_simple_id, idps_tried)
+  def any?(idps, user_profile, transaction_simple_id)
+    suggested_idps = get_suggested_idps_for_registration(idps, user_profile, transaction_simple_id)
     suggested_idps[:recommended].any? || suggested_idps[:unlikely].any?
   end
 
@@ -61,9 +60,5 @@ private
   def is_unlikely_for_segment(idp, user_segments, transaction_group)
     segments_for_idp = @idp_rules[idp.simple_id].unlikely_segments(transaction_group)
     !(segments_for_idp & user_segments).empty?
-  end
-
-  def has_already_tried_registration_and_failed?(idp, idps_tried)
-    idps_tried === idp.simple_id
   end
 end

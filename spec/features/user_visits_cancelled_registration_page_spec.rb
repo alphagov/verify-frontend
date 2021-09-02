@@ -14,6 +14,7 @@ RSpec.describe "When user visits cancelled registration page" do
 
     visit("/cancelled-registration")
 
+    expect(page).not_to have_link t("feedback_link.feedback_form")
     expect(page).to have_title t("hub.cancelled_registration.heading", idp_name: "IDCorp")
     expect(page).to have_link t("hub.cancelled_registration.send_feedback")
     expect(page).to have_link t("hub.cancelled_registration.about_choosing_a_company"), href: about_choosing_a_company_path
@@ -24,6 +25,7 @@ RSpec.describe "When user visits cancelled registration page" do
 
     visit("/cancelled-registration")
 
+    expect(page).not_to have_link t("feedback_link.feedback_form")
     expect(page).to have_title t("hub.cancelled_registration.heading", idp_name: "IDCorp")
     expect(page).to have_link t("hub.cancelled_registration.send_feedback")
     expect(page).to have_link t("hub.cancelled_registration.about_choosing_a_company"), href: about_choosing_a_company_path

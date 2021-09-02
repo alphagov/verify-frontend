@@ -23,6 +23,18 @@ module UserSessionPartialController
     session[:transaction_homepage]
   end
 
+  def requested_loa
+    session[:requested_loa]
+  end
+
+  def is_journey_loa1?
+    session[:requested_loa] == "LEVEL_1"
+  end
+
+  def is_journey_loa2?
+    session[:requested_loa] == "LEVEL_2"
+  end
+
   def current_selected_provider_data
     selected_provider_data = SelectedProviderData.from_session(session[:selected_provider])
     raise(Errors::WarningLevelError, "No selected identity provider data in session") if selected_provider_data.nil?
@@ -30,29 +42,12 @@ module UserSessionPartialController
     selected_provider_data
   end
 
-  def user_journey_type
-    journey_type = current_selected_provider_data.journey_type
-
-    raise(Errors::WarningLevelError, "Unknown selected user journey type in session") unless
-        JourneyType::VALID_JOURNEY_TYPES.include?(journey_type)
-
-    journey_type
-  end
-
-  def user_journey_type?(journey_type)
-    journey_type == current_selected_provider_data.journey_type
-  end
-
   def selected_identity_provider
-    selected_provider_data = current_selected_provider_data
-    raise(Errors::WarningLevelError, "No selected IDP in session") unless selected_provider_data.is_selected_verify_idp?
-
-    IdentityProvider.from_session(selected_provider_data.identity_provider)
+    IdentityProvider.from_session(current_selected_provider_data.identity_provider)
   end
 
   def identity_provider_selected?
-    selected_provider_data = SelectedProviderData.from_session(session[:selected_provider])
-    !selected_provider_data.nil?
+    !SelectedProviderData.from_session(session[:selected_provider]).nil?
   end
 
   def selected_provider
@@ -60,11 +55,6 @@ module UserSessionPartialController
   end
 
   def store_selected_idp_for_session(selected_idp)
-    session[:selected_provider] = SelectedProviderData.new(JourneyType::VERIFY, selected_idp)
-  end
-
-  def restart_journey
-    POLICY_PROXY.restart_journey(session[:verify_session_id])
-    session.delete(:selected_provider)
+    session[:selected_provider] = SelectedProviderData.new(selected_idp)
   end
 end

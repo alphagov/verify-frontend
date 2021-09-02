@@ -7,7 +7,6 @@ class StartController < ApplicationController
   before_action :set_device_type_evidence
 
   def index
-    restart_journey if identity_provider_selected? && !user_journey_type?(JourneyType::VERIFY)
     @form = StartForm.new({})
     @journey_hint = flash[:journey_hint]
     render :start unless try_render_journey_hint
@@ -34,13 +33,13 @@ class StartController < ApplicationController
 
   def register
     FEDERATION_REPORTER.report_registration(current_transaction, request)
-    session[:journey_type] = JourneyType::Verify::REGISTRATION
+    session[:journey_type] = JourneyType::REGISTRATION
     redirect_to about_path
   end
 
   def sign_in
     FEDERATION_REPORTER.report_sign_in(current_transaction, request)
-    session[:journey_type] = JourneyType::Verify::SIGN_IN
+    session[:journey_type] = JourneyType::SIGN_IN
     redirect_to sign_in_path
   end
 end

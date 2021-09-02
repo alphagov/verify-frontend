@@ -71,7 +71,7 @@ RSpec.describe "When the user selects an IDP" do
     expect(idcorp_piwik_request).to have_been_made.once
 
     visit "/choose-a-certified-company"
-    page.find_by_id("non-matching-idps-trigger").click
+    page.find_by_id("non-recommended-idps-trigger").click
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-three.name"))
     click_button t("navigation.continue", display_name: t("idps.stub-idp-three.name"))
     expect(idcorp_and_bobs_piwik_request).to have_been_made.once

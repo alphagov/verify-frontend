@@ -32,16 +32,12 @@ module ViewableIdpPartialController
     end
   end
 
-  def current_available_identity_providers_for_registration
-    CONFIG_PROXY.get_available_idp_list_for_registration(session[:transaction_entity_id], session[:requested_loa]).idps.reject { |idp| idps_tried.include? idp.simple_id }
-  end
-
   def current_identity_providers_for_sign_in
     CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps
   end
 
   def current_available_identity_providers_for_sign_in
-    current_identity_providers_for_sign_in.select(&:authentication_enabled).reject { |idp| idp.unavailable || (idp.provide_authentication_until.present? && idp.provide_authentication_until < 2.hours.from_now) }
+    current_identity_providers_for_sign_in.select(&:authentication_enabled).reject { |idp| idp.unavailable || idp_disconnecting_for_sign_in?(idp) }
   end
 
   def current_unavailable_identity_providers_for_sign_in
@@ -49,11 +45,11 @@ module ViewableIdpPartialController
   end
 
   def current_disconnected_identity_providers_for_sign_in
-    current_identity_providers_for_sign_in.select { |idp| !idp.authentication_enabled || (idp.provide_authentication_until.present? && idp.provide_authentication_until < 2.hours.from_now) }
+    current_identity_providers_for_sign_in.select { |idp| !idp.authentication_enabled || idp_disconnecting_for_sign_in?(idp) }
   end
 
-  def current_available_identity_providers_for_registration_loa2(rp_entity_id)
-    CONFIG_PROXY.get_available_idp_list_for_registration(rp_entity_id, "LEVEL_2").idps
+  def current_available_identity_providers_for_registration
+    CONFIG_PROXY.get_available_idp_list_for_registration(session[:transaction_entity_id], session[:requested_loa]).idps.reject { |idp| idp_already_tried?(idp) }
   end
 
   def current_identity_providers_for_single_idp
@@ -64,7 +60,19 @@ module ViewableIdpPartialController
     idps.reject(&:unavailable) + idps.select(&:unavailable)
   end
 
+  def idp_already_tried?(idp)
+    idps_tried.include? idp.simple_id
+  end
+
+  def idp_disconnecting_for_sign_in?(idp)
+    idp.provide_authentication_until.present? && idp.provide_authentication_until < 2.hours.from_now
+  end
+
   def idps_tried
-    session[:idps_tried] = Set.new session[:idps_tried]
+    Set.new session[:idps_tried]
+  end
+
+  def mark_idp_as_tried(idp_simple_id)
+    session[:idps_tried] = Set.new(session[:idps_tried]).add(idp_simple_id).to_a
   end
 end

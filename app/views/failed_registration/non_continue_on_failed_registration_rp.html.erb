@@ -1,0 +1,33 @@
+<%= page_title 'hub.failed_registration.heading', idp_name: @idp.display_name %>
+<% content_for :feedback_source, 'FAILED_REGISTRATION_PAGE' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <%= page_title 'hub.failed_registration.heading', idp_name: @idp.display_name %>
+    <h1 class="govuk-heading-l"><%= t 'hub.failed_registration.heading', idp_name: @idp.display_name %></h1>
+    <p class="govuk-body"><%= t 'hub.failed_registration.you_can_still', service: @transaction.name %></p>
+
+    <% if @tried_all_idps %>
+      <p class="govuk-body"><%= t 'hub.failed_registration.last_idp.text' %></p>
+      <h2 class="govuk-heading-m"><%= t 'hub.failed_registration.last_idp.different_way', service: @transaction.name %></h2>
+    <% else %>
+      <h2 class="govuk-heading-m"><%= t 'hub.failed_registration.remaining_idps.heading' %></h2>
+      <p><%= t 'hub.failed_registration.remaining_idps.text' %></p>
+      <p><%= link_to t('hub.failed_registration.remaining_idps.link_text'), choose_a_certified_company_path %></p>
+      <h2 class="govuk-heading-m"><%= t 'hub.failed_registration.remaining_idps.different_way', service: @transaction.name %></h2>
+    <% end %>
+
+    <div class="govuk-body">
+      <%= raw @transaction.other_ways_text %>
+    </div>
+
+    <h2 class="govuk-heading-m"><%= t 'hub.failed_registration.your_account_with_heading', idp: @idp.display_name %></h2>
+
+    <p class="govuk-body"><%= t 'hub.failed_registration.your_account_with_text', idp: @idp.display_name %></p>
+
+    <div class="govuk-body">
+      <%= raw @idp.contact_details %>
+    </div>
+  </div>
+</div>

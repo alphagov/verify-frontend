@@ -26,7 +26,6 @@ en:
     why_might_this_not_work_for_me: why-might-this-not-work-for-me
     will_not_work_without_uk_address: will-not-work-without-uk-address
     choose_a_certified_company: choose-a-certified-company
-    why_companies: why-companies
     unlikely_to_verify: unlikely-to-verify
     redirect_to_idp_warning: redirect-to-idp-warning
     redirect_to_idp_question: redirect-to-idp-question
@@ -168,7 +167,11 @@ en:
         </p>
       choose_idp: "Choose %{display_name}"
       show_all_companies: Companies that are unlikely to verify you
-      filtered_idps_message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
+      filtered_idps:
+        message_html: "We’ve filtered out %{company_count}, as they’re unlikely to be able to verify you based on your answers."
+        company:
+          one: 1 company
+          other: "%{count} companies"
       about_idp: About %{display_name}
       dialog:
         information_provided_by: Information provided by %{display_name}
@@ -303,15 +306,6 @@ en:
     will_not_work_without_uk_address:
       heading: You won’t be able to use GOV.UK Verify
       explanation: You need a current UK address to get your identity verified.
-    why_companies:
-      heading: Why you need to use a company
-      choose_a_company: Choose a company
-      content_html: |
-        <p class="govuk-body">When verifying your identity, the companies access information like credit records. They can also check that any documents you provide, such as passports and driving licences, are valid.</p>
-        <p class="govuk-body">These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
-      content_loa1_html: |
-        <p class="govuk-body">When verifying your identity, the companies access information like credit records. They can also check that any documents you provide, such as passports and driving licences, are valid.</p>
-        <p class="govuk-body">These companies meet strict government privacy standards, so you can trust them with your information. They won’t use your information for any other purpose without your consent.</p>
     redirect_to_idp_warning:
       heading: "You'll now be redirected"
       create_account: Create your %{display_name} identity account

@@ -42,7 +42,7 @@ describe "When the user visits the choose a certified company page" do
       expect(page).to have_title t("hub.choose_a_certified_company.heading")
       expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
 
-      within("#matching-idps") do
+      within("#recommended-idps") do
         expect(page).to have_button("Choose IDCorp")
         expect(page).to have_button("Choose Bob’s Identity Service")
         expect(page).not_to have_button("Carol’s Secure ID")
@@ -57,7 +57,7 @@ describe "When the user visits the choose a certified company page" do
       expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
 
-      within("#matching-idps") do
+      within("#recommended-idps") do
         expect(page).to have_button("Choose IDCorp")
         expect(page).not_to have_button("Choose Bob’s Identity Service")
         expect(page).not_to have_button("Carol’s Secure ID")
@@ -99,7 +99,7 @@ describe "When the user visits the choose a certified company page" do
 
       expect(page).to have_current_path(choose_a_certified_company_path)
 
-      within("#matching-idps") do
+      within("#recommended-idps") do
         expect(page).to have_button("Choose LOA1 Corp")
       end
     end
@@ -127,7 +127,7 @@ describe "When the user visits the choose a certified company page" do
     expect(page).to have_current_path(select_documents_advice_path)
   end
 
-  it "recommends some IDPs with a recommended profile, hides non-recommended profiles, and omits non-matching profiles" do
+  it "Shows recommended IDPs, hides non-recommended IDPs" do
     page.set_rack_session(
       transaction_simple_id: "test-rp",
       selected_answers: {
@@ -137,12 +137,19 @@ describe "When the user visits the choose a certified company page" do
     )
 
     visit "/choose-a-certified-company"
+    find("span", text: t("hub.choose_a_certified_company.show_all_companies")).click
 
     expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
-    within("#matching-idps") do
+    within("#recommended-idps") do
       expect(page).to have_button("Choose IDCorp")
       expect(page).to have_button("Choose Bob’s Identity Service")
       expect(page).not_to have_button("Carol’s Secure ID")
+    end
+
+    within("#non-recommended-idps") do
+      expect(page).not_to have_button("Choose IDCorp")
+      expect(page).not_to have_button("Choose Bob’s Identity Service")
+      expect(page).to have_button("Carol’s Secure ID")
     end
   end
 

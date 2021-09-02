@@ -27,7 +27,7 @@ class SingleIdpJourneyController < ApplicationController
       @idp = decorate_idp_by_entity_id(current_identity_providers_for_single_idp, single_idp_cookie["idp_entity_id"])
       @service_name = current_transaction.name
       @uuid = single_idp_cookie.fetch("uuid", nil)
-      session[:journey_type] = JourneyType::Verify::SINGLE_IDP
+      session[:journey_type] = JourneyType::SINGLE_IDP
       set_additional_piwik_custom_variable(:journey_type, "SINGLE_IDP")
       FEDERATION_REPORTER.report_single_idp_success(current_transaction, request, session[:transaction_entity_id], @uuid)
       render
