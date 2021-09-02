@@ -47,7 +47,7 @@ module UserSessionPartialController
   end
 
   def identity_provider_selected?
-    !SelectedProviderData.from_session(session[:selected_provider]).nil?
+    SelectedProviderData.from_session(session[:selected_provider]).present?
   end
 
   def selected_provider

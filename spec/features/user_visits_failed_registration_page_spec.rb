@@ -126,7 +126,7 @@ describe "When the user visits the failed registration page and" do
       visit "/cofrestru-wedi-methu"
       expect(page).to have_content "This is a custom fail page in welsh."
       expect(page).to have_content "Custom text to be provided by RP."
-      expect(page).to have_link t("hub.failed_registration.start_again", locale: :cy), href: select_documents_cy_path
+      expect(page).to have_link t("hub.failed_registration.start_again", locale: :cy), href: choose_a_certified_company_cy_path
     end
 
     it "includes expected content when custom fail LOA2 journey" do
@@ -134,7 +134,7 @@ describe "When the user visits the failed registration page and" do
       visit "/failed-registration"
       expect(page).to have_content "This is a custom fail page."
       expect(page).to have_content "Custom text to be provided by RP."
-      expect(page).to have_link t("hub.failed_registration.start_again"), href: select_documents_path
+      expect(page).to have_link t("hub.failed_registration.start_again"), href: choose_a_certified_company_path
     end
   end
 

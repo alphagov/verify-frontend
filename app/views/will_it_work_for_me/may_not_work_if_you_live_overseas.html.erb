@@ -25,7 +25,7 @@
 
     <p><%= t 'hub.may_not_work_if_you_live_overseas.youll_also_need' %></p>
 
-    <p><%= link_to t('hub.may_not_work_if_you_live_overseas.try_to_verify'), select_documents_path %></p>
+    <p><%= link_to t('hub.may_not_work_if_you_live_overseas.try_to_verify'), about_documents_path %></p>
 
     <%= render partial: 'shared/other_ways', locals: { other_ways_text: @other_ways_text, other_ways_description: @other_ways_description } %>
   </div>

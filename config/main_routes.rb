@@ -19,13 +19,6 @@ constraints IsLoa1 do
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa1#about", as: :choose_a_certified_company_about
 end
 
-# HUB-595 short hub 2019 q3 A/B test (short_hub_2019_q3)
-# SHORT_HUB_2019_Q3 = "short_hub_2019_q3".freeze
-# short_hub_v3 = AbTestConstraint.configure(ab_test_name: SHORT_HUB_2019_Q3, experiment_loa: "LEVEL_2")
-# HUB-595: implement control A route
-# constraints short_hub_v3.use(alternative: "control_a") do; end
-# HUB-595: implement appropriate variant C routes
-# constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do; end
 constraints IsLoa2 do
   get "prove_identity", to: "prove_identity#index", as: :prove_identity
   get "prove_identity_ignore_hint", to: "prove_identity#ignore_hint", as: :prove_identity_ignore_hint
@@ -79,7 +72,6 @@ get "further_information_timeout", to: "further_information#timeout", as: :furth
 post "further_information", to: "further_information#submit", as: :further_information_submit
 post "further_information_cancel", to: "further_information#cancel", as: :further_information_cancel
 post "further_information_null_attribute", to: "further_information#submit_null_attribute", as: :further_information_null_attribute_submit
-get "no_idps_available", to: "no_idps_available#index", as: :no_idps_available
 get "cancelled_registration", to: "cancelled_registration#index", as: :cancelled_registration
 get "paused_registration", to: "paused_registration#index", as: :paused_registration
 get "paused_registration_resume_link", to: "paused_registration#from_resume_link", as: :paused_registration_resume_link

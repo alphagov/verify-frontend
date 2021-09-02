@@ -59,7 +59,6 @@ en:
     further_information_timeout: further-information/timeout
     further_information_cancel: further-information/cancel
     further_information_null_attribute: futher-information/null-attribute
-    no_idps_available: no-idps-available
     cancelled_registration: cancelled-registration
     select_proof_of_address: select-proof-of-address
     confirming_it_is_you: confirming-it-is-you
@@ -509,11 +508,6 @@ en:
         start_again: Sign in with %{idp_name}
         other_ways_text: You can also see
         other_ways_link: other ways to %{service_name}
-    no_idps_available:
-      heading: GOV.UK Verify won’t work for you
-      text: Based on your answers, none of the certified companies can verify you.
-      details_html: You can %{href}; the more accurately you answer the questions, the more likely it is that a certified company can verify you.
-      details_link: change your answers to the questions
     cancelled_registration:
       heading: "You cancelled your identity verification with %{idp_name}"
       next: 'What do you want to do next?'

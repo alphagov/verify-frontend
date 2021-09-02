@@ -55,7 +55,6 @@ cy:
     further_information_timeout: gwybodaeth-bellach/timeout
     further_information_cancel: gwybodaeth-bellach/dileu
     further_information_null_attribute: gwybodaeth-bellach/null-attribute
-    no_idps_available: dim-idps-ar-gael
     cancelled_registration: cofrestru-wedi-ganslo
     select_proof_of_address: tystiolaeth-o'ch-cyfeiriad
     confirming_it_is_you: cadarnhau-mai-chi-ydyw
@@ -513,11 +512,6 @@ cy:
         start_again: Mewngofnodi gyda %{idp_name}
         other_ways_text: Gallwch hefyd weld
         other_ways_link: ffyrdd eraill i %{service_name}
-    no_idps_available:
-      heading: Ni fydd GOV.UK Verify yn gweithio i chi
-      text: Yn seiliedig ar eich atebion ni all yr un o'r cwmniau ardystiedig eich dilysu.
-      details_html: Gallwch %{href}; y mwyaf cywir y gallwch ateb y cwestiynau y mwyaf tebygol yw hi y bydd cwmni ardystiedig yn gallu eich dilysu.
-      details_link: newid eich atebion i'r cwestiynau
     cancelled_registration:
       heading: "Gwnaethoch ganslo eich dilysiad hunaniaeth gyda %{idp_name}"
       what_next: 'Gallwch ddal %{service_name}.'

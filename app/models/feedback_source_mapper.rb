@@ -36,7 +36,6 @@ class FeedbackSourceMapper
       "WHY_THIS_MIGHT_NOT_WORK_FOR_ME_PAGE" => "why_might_this_not_work_for_me",
       "WILL_NOT_WORK_WITHOUT_UK_ADDRESS_PAGE" => "will_not_work_without_uk_address",
       "PRODUCT_PAGE" => product_page_url,
-      "NO_IDPS_AVAILABLE" => "no_idps_available",
       "CANCELLED_REGISTRATION" => "cancelled_registration",
       "PROOF_OF_ADDRESS" => "select_proof_of_address",
       "CONFIRMING_IT_IS_YOU_PAGE" => "confirming_it_is_you",
