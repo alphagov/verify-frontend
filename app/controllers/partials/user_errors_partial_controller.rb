@@ -1,17 +1,16 @@
 module UserErrorsPartialController
   def render_error(partial, status)
-    set_locale
-    if partial == :session_timeout
-      @other_ways_description = current_transaction.other_ways_description
-      @redirect_to_destination = if CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
-                                   "/redirect-to-service/error"
-                                 else
-                                   session[:transaction_homepage]
-                                 end
-    end
-    respond_to do |format|
-      format.html { render "errors/#{partial}", status: status, layout: "application" }
-      format.json { render json: {}, status: status }
+    case partial
+    when :session_timeout
+      session_timeout(nil, status)
+    when :no_cookies
+      render_partial("no_cookies", status)
+    when :session_error
+      session_error(nil)
+    when :something_went_wrong
+      something_went_wrong(nil, status)
+    else
+      raise ArgumentError "Unknown error type specified: '#{partial}'"
     end
   end
 
@@ -23,20 +22,34 @@ module UserErrorsPartialController
     end
   end
 
-  def session_timeout(exception)
-    logger.info(exception)
-    @redirect_to_destination = if CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
-                                 "/redirect-to-service/error"
-                               else
-                                 session[:transaction_homepage]
-                               end
+  def session_timeout(exception = nil, status = :forbidden)
+    @other_ways_description = current_transaction.other_ways_description
+    @redirect_to_destination = session[:transaction_homepage]
 
-    render_error("session_timeout", :forbidden)
+    logger.info(exception) if exception
+    render_partial("session_timeout", status)
   end
 
-  def session_error(exception)
+  def session_error(exception = nil)
+    logger.warn(exception) if exception
+    render_partial("session_error", :bad_request)
+  end
+
+  def something_went_wrong(exception = nil, status = :internal_server_error)
+    if exception
+      logger.error(exception)
+      logger.info("Something went wrong: #{exception.try(:message) || exception}")
+    end
+
+    check_whether_recoverable
+    render_partial("something_went_wrong", status)
+  end
+
+  def something_went_wrong_warn(exception, status = :internal_server_error)
     logger.warn(exception)
-    render_error("session_error", :bad_request)
+    logger.info("Something went wrong: #{exception.try(:message) || exception}")
+    check_whether_recoverable
+    render_partial("something_went_wrong", status)
   end
 
   def upstream_error(exception)
@@ -46,6 +59,16 @@ module UserErrorsPartialController
   def raise_unknown_format
     logger.warn("Received a request with unexpected accept headers - #{request.headers['ACCEPT']}")
     render plain: "Unable to serve the requested format", status: 406
+  end
+
+private
+
+  def render_partial(partial, status)
+    set_locale
+    respond_to do |format|
+      format.html { render "errors/#{partial}", status: status, layout: "application" }
+      format.json { render json: {}, status: status }
+    end
   end
 
   # How often do we have the information needed to redirect the user back to the
@@ -68,19 +91,5 @@ module UserErrorsPartialController
       # catch all errors.
       logger.info("Failed to recover: #{e.message}")
     end
-  end
-
-  def something_went_wrong(exception, status = :internal_server_error)
-    logger.error(exception)
-    logger.info("Something went wrong: #{exception.try(:message) || exception}")
-    check_whether_recoverable
-    render_error("something_went_wrong", status)
-  end
-
-  def something_went_wrong_warn(exception, status = :internal_server_error)
-    logger.warn(exception)
-    logger.info("Something went wrong: #{exception.try(:message) || exception}")
-    check_whether_recoverable
-    render_error("something_went_wrong", status)
   end
 end

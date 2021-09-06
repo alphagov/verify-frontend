@@ -4,8 +4,7 @@ require "spec_helper"
 require "api_test_helper"
 
 describe FailedRegistrationController do
-  WITH_CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp-with-continue-on-fail".freeze
-  WITH_NON_CONTINUE_ON_FAILED_REGISTRATION_RP = "test-rp".freeze
+  WITH_DEFAULT_FAILED_REGISTRATION_MESSAGE_RP = "test-rp".freeze
   WITH_CUSTOM_FAILED_REGISTRATION_MESSAGE_RP = "test-rp-no-demo".freeze
 
   before(:each) do
@@ -20,16 +19,10 @@ describe FailedRegistrationController do
       session[:selected_idp_was_recommended] = false
     end
 
-    it "non continue on failed registration view when rp is not allowed to continue on failed" do
+    it "displays the default failed registration message" do
       stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
-      set_transaction(WITH_NON_CONTINUE_ON_FAILED_REGISTRATION_RP)
-      expect(subject).to render_template(:non_continue_on_failed_registration_rp)
-    end
-
-    it "continue on failed registration view when rp is allowed to continue on failed" do
-      set_transaction(WITH_CONTINUE_ON_FAILED_REGISTRATION_RP)
-
-      expect(subject).to render_template(:continue_on_failed_registration_rp)
+      set_transaction(WITH_DEFAULT_FAILED_REGISTRATION_MESSAGE_RP)
+      expect(subject).to render_template(:failed_registration)
     end
   end
 
@@ -39,25 +32,17 @@ describe FailedRegistrationController do
       session[:selected_idp_was_recommended] = false
     end
 
-    context "rp is not allowed to continue on fail" do
-      it "rp doesn't have a custom fail message" do
-        stub_api_idp_list_for_registration(default_idps)
-        set_transaction(WITH_NON_CONTINUE_ON_FAILED_REGISTRATION_RP)
+    it "displays the default failed registration message" do
+      stub_api_idp_list_for_registration(default_idps)
+      set_transaction(WITH_DEFAULT_FAILED_REGISTRATION_MESSAGE_RP)
 
-        expect(subject).to render_template(:non_continue_on_failed_registration_rp)
-      end
-
-      it "rp has a custom fail message" do
-        set_transaction(WITH_CUSTOM_FAILED_REGISTRATION_MESSAGE_RP)
-
-        expect(subject).to render_template(:custom_failed_registration)
-      end
+      expect(subject).to render_template(:failed_registration)
     end
 
-    it "continue on failed registration view when rp is allowed to continue on failed" do
-      set_transaction(WITH_CONTINUE_ON_FAILED_REGISTRATION_RP)
+    it "displays the RP's custom failed registration message" do
+      set_transaction(WITH_CUSTOM_FAILED_REGISTRATION_MESSAGE_RP)
 
-      expect(subject).to render_template(:continue_on_failed_registration_rp)
+      expect(subject).to render_template(:custom_failed_registration)
     end
   end
 end
