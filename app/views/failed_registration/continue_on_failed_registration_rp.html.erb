@@ -18,7 +18,7 @@
     <h2 class="govuk-heading-m govuk-!-margin-top-4"><%= t 'hub.failed_registration.try_another_summary' %></h2>
     <div>
       <p class="govuk-body"><%= t 'hub.failed_registration.try_another_text', idp_name: @idp.display_name %></p>
-      <p><%= link_to t('hub.failed_registration.try_another_company'), @try_another_company_path, class: "govuk-link" %></p>
+      <p><%= link_to t('hub.failed_registration.try_another_company'), choose_a_certified_company_path, class: "govuk-link" %></p>
     </div>
 
     <h2 class="govuk-heading-m"><%= t 'hub.failed_registration.contact_details_intro', idp_name: @idp.display_name %></h2>

@@ -4,7 +4,7 @@ require "will_it_work_for_me_examples"
 require "piwik_test_helper"
 
 describe WillItWorkForMeController do
-  proceed_to_select_document_answers = { above_age_threshold: "true", resident_last_12_months: "true" }.freeze
+  proceed_to_about_document_answers = { above_age_threshold: "true", resident_last_12_months: "true" }.freeze
   not_old_enough_answers = { above_age_threshold: "false", resident_last_12_months: "true" }.freeze
   not_old_enough_and_no_address_answers = { above_age_threshold: "false", resident_last_12_months: "false", not_resident_reason: "NoAddress" }.freeze
   not_old_enough_and_not_resident_answers = { above_age_threshold: "false", resident_last_12_months: "false", not_resident_reason: "AddressButNotResident" }.freeze
@@ -58,10 +58,10 @@ describe WillItWorkForMeController do
                      :may_not_work_if_you_live_overseas_path
 
     include_examples "will_it_work_for_me",
-                     "redirects to select documents path if user is over 20 and lives in the UK",
+                     "redirects to about documents path if user is over 20 and lives in the UK",
                      "user is over 20 years old, and lives in the UK",
-                     proceed_to_select_document_answers,
-                     :select_documents_path
+                     proceed_to_about_document_answers,
+                     :about_documents_path
   end
 
   context "when form is invalid" do

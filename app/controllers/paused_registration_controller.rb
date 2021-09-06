@@ -187,6 +187,6 @@ private
 
     idp = decorate_idp_by_entity_id(current_available_identity_providers_for_registration, last_idp)
 
-    !idp.nil? && idp.simple_id == idp_simple_id
+    idp&.simple_id == idp_simple_id
   end
 end

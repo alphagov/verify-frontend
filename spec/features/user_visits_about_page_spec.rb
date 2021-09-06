@@ -17,7 +17,7 @@ RSpec.describe "When the user visits the about page" do
     expect(page).to have_content "The company will ask you questions and check your identity documents."
     expect(page).to have_content "It will never share your information for any other purpose without your consent."
 
-    expect_feedback_source_to_be(page, "ABOUT_PAGE", "/about")
+    expect_feedback_source_to_be(page, "ABOUT_VERIFY_PAGE", "/about")
 
     expect(page).to have_link(t("navigation.continue"))
   end

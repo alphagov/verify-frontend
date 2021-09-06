@@ -1,0 +1,24 @@
+<%= page_title 'hub.about.documents.heading' %>
+<% content_for :feedback_source, 'ABOUT_DOCUMENTS_PAGE' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l"><%= t 'hub.about.documents.heading' %></h1>
+    <p><%= t 'hub.about.documents.explanation' %></p>
+
+    <p><%= t 'hub.about.documents.document_list.heading' %></p>
+    <p><%= t 'hub.about.documents.document_list.list_html' %></p>
+
+    <p><%= t 'hub.about.documents.further_explanation.doc_checking' %></p>
+    <p><%= t 'hub.about.documents.further_explanation.requirements' %></p>
+    <p><%= t 'hub.about.documents.further_explanation.come_back_later' %></p>
+
+    <%= button_link_to t("navigation.continue"), choose_a_certified_company_path, id: 'next-button', class: 'govuk-button' %>
+
+    <p class="govuk-!-margin-top-4"><%= t('hub.about.documents.prove_identity_another_way.text_html',
+                                          link_text: link_to(t('hub.about.documents.prove_identity_another_way.link_text'), prove_your_identity_another_way_path, class: "govuk-link")
+                                        ) %>
+    </p>
+  </div>
+</div>

@@ -21,6 +21,6 @@ RSpec.describe "When the user visits the may-not-work-if-you-live-overseas page"
 
     click_link "I’d like to try to verify my identity using GOV.UK Verify"
 
-    expect(page).to have_current_path(select_documents_path)
+    expect(page).to have_current_path(about_documents_path)
   end
 end

@@ -17,17 +17,8 @@ constraints IsLoa1 do
   get "choose_a_certified_company", to: "choose_a_certified_company_loa1#index", as: :choose_a_certified_company
   post "choose_a_certified_company", to: "choose_a_certified_company_loa1#select_idp", as: :choose_a_certified_company_submit
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa1#about", as: :choose_a_certified_company_about
-  get "about", to: "about_loa#index", as: :about
-  get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
 end
 
-# HUB-595 short hub 2019 q3 A/B test (short_hub_2019_q3)
-# SHORT_HUB_2019_Q3 = "short_hub_2019_q3".freeze
-# short_hub_v3 = AbTestConstraint.configure(ab_test_name: SHORT_HUB_2019_Q3, experiment_loa: "LEVEL_2")
-# HUB-595: implement control A route
-# constraints short_hub_v3.use(alternative: "control_a") do; end
-# HUB-595: implement appropriate variant C routes
-# constraints short_hub_v3.use(alternative: "variant_c_2_idp_short_hub") do; end
 constraints IsLoa2 do
   get "prove_identity", to: "prove_identity#index", as: :prove_identity
   get "prove_identity_ignore_hint", to: "prove_identity#ignore_hint", as: :prove_identity_ignore_hint
@@ -37,14 +28,13 @@ constraints IsLoa2 do
   get "choose_a_certified_company", to: "choose_a_certified_company_loa2#index", as: :choose_a_certified_company
   get "choose_a_certified_company/:company", to: "choose_a_certified_company_loa2#about", as: :choose_a_certified_company_about
   post "choose_a_certified_company", to: "choose_a_certified_company_loa2#select_idp", as: :choose_a_certified_company_submit
-  get "about", to: "about_loa#index", as: :about
-  get "about_choosing_a_company", to: "about_loa#choosing_a_company", as: :about_choosing_a_company
   get "will_it_work_for_me", to: "will_it_work_for_me#index", as: :will_it_work_for_me
   post "will_it_work_for_me", to: "will_it_work_for_me#will_it_work_for_me", as: :will_it_work_for_me_submit
+  get "about_documents", to: "about#about_documents", as: :about_documents
+  get "prove_your_identity_another_way", to: "about#prove_your_identity_another_way", as: :prove_your_identity_another_way
   get "select_documents", to: "select_documents#index", as: :select_documents
   post "select_documents", to: "select_documents#select_documents", as: :select_documents_submit
   get "select_documents_advice", to: "select_documents#advice", as: :select_documents_advice
-  get "prove_your_identity_another_way", to: "select_documents#prove_your_identity_another_way", as: :prove_your_identity_another_way
   get "why_might_this_not_work_for_me", to: "will_it_work_for_me#why_might_this_not_work_for_me", as: :why_might_this_not_work_for_me
   get "may_not_work_if_you_live_overseas", to: "will_it_work_for_me#may_not_work_if_you_live_overseas", as: :may_not_work_if_you_live_overseas
   get "will_not_work_without_uk_address", to: "will_it_work_for_me#will_not_work_without_uk_address", as: :will_not_work_without_uk_address
@@ -54,8 +44,9 @@ get "start_ignore_hint", to: "start#ignore_hint", as: :start_ignore_hint
 get "accessibility", to: "static#accessibility", as: :accessibility
 get "privacy_notice", to: "static#privacy_notice", as: :privacy_notice
 get "verify_services", to: "static#verify_services", as: :verify_services
-get "proxy_node_error", to: "errors#proxy_node_error", as: :proxy_node_error
 get "cookies", to: "static#cookies", as: :cookies
+get "about", to: "about#about_verify", as: :about
+get "about_choosing_a_company", to: "about#about_choosing_a_company", as: :about_choosing_a_company
 get "confirm_your_identity", to: "confirm_your_identity#index", as: :confirm_your_identity
 get "failed_uplift", to: "failed_uplift#index", as: :failed_uplift
 get "failed_sign_in", to: "failed_sign_in#idp", as: :failed_sign_in
@@ -81,7 +72,6 @@ get "further_information_timeout", to: "further_information#timeout", as: :furth
 post "further_information", to: "further_information#submit", as: :further_information_submit
 post "further_information_cancel", to: "further_information#cancel", as: :further_information_cancel
 post "further_information_null_attribute", to: "further_information#submit_null_attribute", as: :further_information_null_attribute_submit
-get "no_idps_available", to: "no_idps_available#index", as: :no_idps_available
 get "cancelled_registration", to: "cancelled_registration#index", as: :cancelled_registration
 get "paused_registration", to: "paused_registration#index", as: :paused_registration
 get "paused_registration_resume_link", to: "paused_registration#from_resume_link", as: :paused_registration_resume_link

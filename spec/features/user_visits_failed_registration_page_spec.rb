@@ -24,7 +24,7 @@ describe "When the user visits the failed registration page and" do
       expect_page_to_have_main_content_continue_on_fail
       expect(page).to have_content t("hub.failed_registration.continue_text", rp_name: "Test RP")
       expect(page).to have_link t("navigation.continue"), href: redirect_to_service_error_path
-      expect(page).to have_link t("hub.failed_registration.try_another_company"), href: select_documents_path
+      expect(page).to have_link t("hub.failed_registration.try_another_company"), href: choose_a_certified_company_path
     end
 
     it "includes expected content for LOA1 journey" do
@@ -86,7 +86,7 @@ describe "When the user visits the failed registration page and" do
 
       it "includes expected content when LOA1 journey" do
         set_loa_in_session("LEVEL_1")
-        stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+        stub_api_idp_list_for_registration([], "LEVEL_1")
         visit "/failed-registration"
 
         expect_page_to_have_main_content_non_continue_for_no_idps
@@ -126,7 +126,7 @@ describe "When the user visits the failed registration page and" do
       visit "/cofrestru-wedi-methu"
       expect(page).to have_content "This is a custom fail page in welsh."
       expect(page).to have_content "Custom text to be provided by RP."
-      expect(page).to have_link t("hub.failed_registration.start_again", locale: :cy), href: select_documents_cy_path
+      expect(page).to have_link t("hub.failed_registration.start_again", locale: :cy), href: choose_a_certified_company_cy_path
     end
 
     it "includes expected content when custom fail LOA2 journey" do
@@ -134,7 +134,7 @@ describe "When the user visits the failed registration page and" do
       visit "/failed-registration"
       expect(page).to have_content "This is a custom fail page."
       expect(page).to have_content "Custom text to be provided by RP."
-      expect(page).to have_link t("hub.failed_registration.start_again"), href: select_documents_path
+      expect(page).to have_link t("hub.failed_registration.start_again"), href: choose_a_certified_company_path
     end
   end
 

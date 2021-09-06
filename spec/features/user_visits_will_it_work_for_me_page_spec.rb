@@ -33,5 +33,15 @@ RSpec.describe "When the user visits the will it work for me page" do
       expect(page).to have_current_path(will_it_work_for_me_path)
       expect(page).to have_css "#validation-error-message-js", text: "Please answer all the questions"
     end
+
+    it "will redirect user to the about documents page if they're eligible" do
+      visit "/will-it-work-for-me"
+      choose "will_it_work_for_me_form_above_age_threshold_true", allow_label_click: true
+      choose "will_it_work_for_me_form_resident_last_12_months_true", allow_label_click: true
+
+      click_button t("navigation.continue")
+
+      expect(page).to have_current_path(about_documents_path)
+    end
   end
 end

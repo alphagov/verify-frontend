@@ -18,6 +18,7 @@ en:
     about_certified_companies: about-certified-companies
     about_identity_accounts: about-identity-accounts
     about_choosing_a_company: about-choosing-a-company
+    about_documents: about-documents
     select_documents: select-documents
     select_documents_none: select-documents-none
     will_it_work_for_me: will-it-work-for-me
@@ -58,7 +59,6 @@ en:
     further_information_timeout: further-information/timeout
     further_information_cancel: further-information/cancel
     further_information_null_attribute: futher-information/null-attribute
-    no_idps_available: no-idps-available
     cancelled_registration: cancelled-registration
     select_proof_of_address: select-proof-of-address
     confirming_it_is_you: confirming-it-is-you
@@ -66,7 +66,6 @@ en:
     resume_registration: resume-registration
     paused_registration_resume_link: paused/:idp
     single_idp_start_page: single-start/:transaction_simple_id
-    proxy_node_error: proxy-node-error
     accessibility: accessibility
     select_documents_advice: select-documents-advice
     prove_your_identity_another_way: prove-your-identity-another-way
@@ -97,15 +96,47 @@ en:
     help: Help
     built_by_the: Built by the
   hub:
-    about_what_is_verify:
-      heading: What GOV.UK Verify is
-      content: GOV.UK Verify is a secure way to prove who you are online. It helps protect you against online identity theft.
-    about_how_it_works:
-      heading: How it works
-      content: You create an identity account with a company that meets government privacy and security standards.
-    about_company:
-      content_html: <p class="govuk-body">The company will ask you questions and check your identity documents.</p>
-                    <p class="govuk-body">It will never share your information for any other purpose without your consent.</p>
+    about:
+      verify:
+        what_it_is:
+          heading: What GOV.UK Verify is
+          content: GOV.UK Verify is a secure way to prove who you are online. It helps protect you against online identity theft.
+        how_it_works:
+          heading: How it works
+          content: You create an identity account with a company that meets government privacy and security standards.
+        company:
+          content_html: |
+            <p class="govuk-body">The company will ask you questions and check your identity documents.</p>
+            <p class="govuk-body">It will never share your information for any other purpose without your consent.</p>
+      choosing_a_company:
+        heading: Finding the right company to verify you
+        content_html: |
+          <p class="govuk-body">These companies have built secure systems to verify identities. These systems work by checking:</p>
+          <ul class="govuk-list govuk-list--bullet">
+          <li>your identity documents are valid</li>
+          <li>it’s you providing your details, and not someone pretending to be you</li>
+          </ul>
+          <p class="govuk-body">We need to ask you some questions to check if the companies can verify you. We’ll then send you to the website of the company you select.</p>
+      prove_your_identity_another_way:
+        heading: Prove your identity another way
+        sub_heading: You can still %{service_name}.
+      documents:
+        heading: Before you start
+        explanation: To set up an identity account, you need to provide evidence for the companies to check.
+        document_list:
+          heading: "When creating the account you'll be asked for:"
+          list_html: |
+            <ul class="govuk-list govuk-list--bullet">
+              <li>a valid passport</li>
+              <li>a valid driving licence, full or provisional, with your photo on it</li>
+            </ul>
+        further_explanation:
+          doc_checking: The companies can check your passport and driving licence against official records. They can also confirm your personal details by accessing information like credit records. This will help them be sure it's really you.
+          requirements: If you only have one photo identity document (ID), you'll also need a phone or a tablet to download a free app and take pictures of it. This will let you prove the ID is yours.
+          come_back_later: If you have these things but they’re somewhere else, come back when you have them with you.
+        prove_identity_another_way:
+          link_text: Prove your identity another way
+          text_html: "%{link_text} if you do not have these things."
     select_documents:
       heading: Which of these do you have available right now?
       explanation: This will help us tell you if GOV.UK Verify will work for you. The more items you have, the more likely it is that you can verify your identity.
@@ -180,9 +211,6 @@ en:
         heading: About %{display_name}
         information_provided_by: Information provided by %{display_name}
         close: close
-    prove_your_identity_another_way:
-      heading: Prove your identity another way
-      sub_heading: You can still %{service_name}.
     other_ways_heading: Other ways to %{other_ways_description}
     prove_identity:
       heading: Prove your identity to continue
@@ -240,15 +268,6 @@ en:
       heading: Find the service you were using to start again
       hint: Follow the instructions you received.
       other_services: Other services
-    about_choosing_a_company:
-      heading: Finding the right company to verify you
-      content_html: |
-        <p class="govuk-body">These companies have built secure systems to verify identities. These systems work by checking:</p>
-        <ul class="govuk-list govuk-list--bullet">
-        <li>your identity documents are valid</li>
-        <li>it’s you providing your details, and not someone pretending to be you</li>
-        </ul>
-        <p class="govuk-body">We need to ask you some questions to check if the companies can verify you. We’ll then send you to the website of the company you select.</p>
     will_it_work_for_me:
       heading: About you
       question:
@@ -322,8 +341,8 @@ en:
       answer_yes: "Yes"
       answer_no: "No"
       warning_html: |
-         <p class="error-message">%{display_name} may not be able to verify you</p>
-         <p class="govuk-body">We recommend that you %{choose_another_company_link}.</p>
+        <p class="error-message">%{display_name} may not be able to verify you</p>
+        <p class="govuk-body">We recommend that you %{choose_another_company_link}.</p>
       choose_another_certified_company_link: choose another company
       identity_documents: You need your identity documents with you so you can enter details from them, or take a picture of them.
       or_html: or %{choose_another_company_link}
@@ -489,11 +508,6 @@ en:
         start_again: Sign in with %{idp_name}
         other_ways_text: You can also see
         other_ways_link: other ways to %{service_name}
-    no_idps_available:
-      heading: GOV.UK Verify won’t work for you
-      text: Based on your answers, none of the certified companies can verify you.
-      details_html: You can %{href}; the more accurately you answer the questions, the more likely it is that a certified company can verify you.
-      details_link: change your answers to the questions
     cancelled_registration:
       heading: "You cancelled your identity verification with %{idp_name}"
       next: 'What do you want to do next?'
