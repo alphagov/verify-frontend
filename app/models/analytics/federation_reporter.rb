@@ -217,7 +217,7 @@ module Analytics
         action,
         universal_custom_variables(current_transaction, request).merge(extra_custom_vars),
       )
-    rescue Display::FederationTranslator::TranslationError => e
+    rescue I18n::MissingTranslationData => e
       Rails.logger.warn e
     end
 
@@ -237,7 +237,7 @@ module Analytics
         event_name,
         event_action,
       )
-    rescue Display::FederationTranslator::TranslationError => e
+    rescue I18n::MissingTranslationData => e
       Rails.logger.warn e
     end
 
