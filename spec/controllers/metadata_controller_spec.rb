@@ -6,12 +6,12 @@ require "api_test_helper"
 describe MetadataController do
   subject { get :service_list, params: { locale: "en" } }
 
-  it "json array should contain 4 objects with correct values" do
+  it "JSON array should contain 4 objects with correct values" do
     stub_transactions_for_single_idp_list
 
     body = JSON.parse(subject.body)
 
-    expect(body.size).to eq(4)
+    expect(body.size).to eq(3)
     expect(subject.content_type).to eq("application/json")
     expect(subject).to have_http_status(200)
 

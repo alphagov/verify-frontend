@@ -375,19 +375,12 @@ cy:
         text: Fodd bynnag, ni fyddwch yn gallu defnyddio GOV.UK Verify ar gyfer profi pwy ydych chi, gan nad oedd y cwmnïau yn gallu gwirio eich hunaniaeth.
         different_way: Defnyddiwch ffordd arall i %{service}
       heading: Roedd %{idp_name} yn methu dilysu eich hunaniaeth
-      try_another_company: Rhowch gynnig ar gwmni ardystiedig arall
       reasons_html: Gallwch barhau i ddal %{service_name}
       what_to_do_next_intro: "Gallwch roi cynnig ar y canlynol:"
       what_to_do_next: Beth i’w wneud nesaf
       problems_verifying_your_identity: Problemau gyda dilysu eich hunaniaeth
-      continue_heading: Mynd ymlaen i %{transaction_name}
-      continue_idp_text: Roedd %{idp_name} yn methu dilysu eich hunaniaeth.
-      continue_text: Mynd ymlaen i %{rp_name} i ddarganfod sut.
       start_again: Dod o hyd i gwmni arall i’ch gwirio
       other_ways_summary: Gweld ffyrdd eraill o %{other_ways_description}
-      try_another_text: Mae cwmniau eraill yn defnyddio dulliau gwahanol i %{idp_name} ac felly gyda gwell siawns o ddilysu eich hunaniaeth.
-      try_another_summary: Ceisiwch wirio gyda chwmni ardystiedig arall
-      contact_details_intro: Cysylltwch â %{idp_name}
     failed_sign_in:
       heading: Ni all %{display_name} eich mewngofnodi
       reasons_html: |

@@ -6,7 +6,7 @@ require "loading_cache"
 
 module Display
   describe RpDisplayRepository do
-    let(:translator) { double("Display::FederationTranslator") }
+    let(:translator) { double("I18n") }
     let(:logger) { double(:logger) }
     let(:rp_display_repo) { RpDisplayRepository.new(translator, logger) }
     let(:rp_translation_service) { instance_double("RpTranslationService") }

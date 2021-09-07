@@ -14,19 +14,13 @@ class FailedRegistrationController < ApplicationController
 private
 
   def choose_view
-    if continue_on_failed_registration_rp?
-      "failed_registration/continue_on_failed_registration_rp"
-    elsif is_journey_loa2? && current_transaction.custom_fail_heading.present?
+    if is_journey_loa2? && current_transaction.custom_fail_heading.present?
       "failed_registration/custom_failed_registration"
     else
       @tried_all_idps = tried_all_idps?
-      "failed_registration/non_continue_on_failed_registration_rp"
+      "failed_registration/failed_registration"
     end
   end
-end
-
-def continue_on_failed_registration_rp?
-  CONTINUE_ON_FAILED_REGISTRATION_RPS.include?(current_transaction_simple_id)
 end
 
 def tried_all_idps?
