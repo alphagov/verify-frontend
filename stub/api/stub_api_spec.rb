@@ -27,9 +27,9 @@ describe StubApi do
     JSON.parse(last_response.body)
   end
 
-  context '#get /config/idps/idp-list-for-registration/http%3A%2F%2Fwww.test-rp.gov.uk%2FSAML2%2FMD/LEVEL_1' do
+  context '#get /config/idps/idp-list-for-registration for test-rp at LOA1' do
     it 'should respond with valid IdpListResponse', skip_before: true do
-      get '/config/idps/idp-list-for-registration/http%3A%2F%2Fwww.test-rp.gov.uk%2FSAML2%2FMD/LEVEL_1'
+      get '/config/idps/idp-list-for-registration/#{CGI.escape "http://www.test-rp.gov.uk/SAML2/MD"}/LEVEL_1'
       expect(last_response).to be_ok
       response = IdpListResponse.new(last_response_json)
       expect(response).to be_valid
