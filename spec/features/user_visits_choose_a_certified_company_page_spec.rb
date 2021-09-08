@@ -22,10 +22,10 @@ describe "When the user visits the choose a certified company page" do
     end
 
     it "marks the unavailable IDP as unavailable" do
-      stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one",
-                                            "entityId" => "http://idcorp.com",
-                                            "levelsOfAssurance" => [LevelOfAssurance::LOA2],
-                                            "temporarilyUnavailable" => true }])
+      stub_api_idp_list_for_registration([{ simpleId: "stub-idp-one",
+                                            entityId: "http://idcorp.com",
+                                            levelsOfAssurance: [LevelOfAssurance::LOA2],
+                                            temporarilyUnavailable: true }])
       visit "/choose-a-certified-company"
       expect(page).to have_content t("hub.certified_companies_unavailable.heading", count: 1, company: "IDCorp")
     end
@@ -105,10 +105,10 @@ describe "When the user visits the choose a certified company page" do
     end
 
     it "unavailable LEVEL_1 recommended IDPs are marked as unavailable" do
-      stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one",
-                                            "entityId" => "http://idcorp.com",
-                                            "levelsOfAssurance" => [LevelOfAssurance::LOA1],
-                                            "temporarilyUnavailable" => true }], LevelOfAssurance::LOA1)
+      stub_api_idp_list_for_registration([{ simpleId: "stub-idp-one",
+                                            entityId: "http://idcorp.com",
+                                            levelsOfAssurance: [LevelOfAssurance::LOA1],
+                                            temporarilyUnavailable: true }], LevelOfAssurance::LOA1)
       visit "/choose-a-certified-company"
       expect(page).to have_content t("hub.certified_companies_unavailable.heading", count: 1, company: "IDCorp")
     end
@@ -164,7 +164,7 @@ describe "When the user visits the choose a certified company page" do
             device_type: { device_type_other: true },
             documents: { has_valid_passport: true, has_driving_license: true, has_phone_can_app: true },
           },
-          )
+        )
       end
 
       it "should render GA elements on choose certified company page" do
@@ -193,7 +193,7 @@ describe "When the user visits the choose a certified company page" do
             documents: { passport: true, driving_licence: true },
             phone: { mobile_phone: true },
           },
-          )
+        )
       end
 
       it "should render GA elements on choose certified company page" do

@@ -17,26 +17,26 @@ describe AuthnRequestController do
   end
 
   context "where GA cross domain tracking parameter is included in request" do
-    include_examples "idp_authn_request_redirects", "_ga" => "123456"
+    include_examples "idp_authn_request_redirects", _ga: "123456"
   end
 
   it "will redirect the user to default start page and maintain _ga parameter if cookie is missing" do
-    post :rp_request, params: { "_ga" => :ga_id, "SAMLRequest" => "my-saml-request", "RelayState" => "my-relay-state" }
+    post :rp_request, params: { _ga: :ga_id, SAMLRequest: "my-saml-request", RelayState: "my-relay-state" }
     expect(response).to redirect_to start_path(_ga: :ga_id)
   end
 
   it "will show error page when SAMLRequest param is missing" do
-    post :rp_request, params: { "RelayState" => "my-relay-state" }
+    post :rp_request, params: { RelayState: "my-relay-state" }
     expect(response).to have_http_status :bad_request
   end
 
   it "will show error page when SAMLRequest param is empty string" do
-    post :rp_request, params: { "SAMLRequest" => "", "RelayState" => "my-relay-state" }
+    post :rp_request, params: { SAMLRequest: "", RelayState: "my-relay-state" }
     expect(response).to have_http_status :bad_request
   end
 
   it "will show error page when SAMLRequest param is nil" do
-    post :rp_request, params: { "SAMLRequest" => nil, "RelayState" => "my-relay-state" }
+    post :rp_request, params: { SAMLRequest: nil, RelayState: "my-relay-state" }
     expect(response).to have_http_status :bad_request
   end
 end

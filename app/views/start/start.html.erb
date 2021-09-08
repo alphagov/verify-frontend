@@ -1,6 +1,6 @@
 <%= page_title 'hub.start.heading', {}, @journey_hint %>
 <% content_for :body_classes, 'hub-start' %>
-<% content_for :feedback_source, 'START_PAGE' %>
+<% content_for :feedback_source, :START_PAGE %>
 <% # Uses slide layout %>
 
   <%= render 'shared/form-errors', errors: flash[:errors], form: @form %>

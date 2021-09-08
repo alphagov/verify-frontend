@@ -51,12 +51,12 @@ class SignInController < ApplicationController
       sign_in(decorated_idp.entity_id, decorated_idp.display_name)
       if idp_disconnecting(decorated_idp)
         redirect_obj = {
-          "location" => sign_in_warning_path.to_s,
-          "saml_request" => "",
-          "relay_state" => "",
-          "registration" => false,
-          "hints" => [],
-          "language_hint" => "",
+          location: sign_in_warning_path.to_s,
+          saml_request: "",
+          relay_state: "",
+          registration: false,
+          hints: [],
+          language_hint: "",
         }
         render json: redirect_obj
       else

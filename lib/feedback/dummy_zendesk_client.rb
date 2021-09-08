@@ -19,7 +19,7 @@ module Feedback
     def create!(options)
       if should_raise_error?(options)
         @logger.info("Simulating Zendesk ticket creation failure: #{options.inspect}")
-        raise ZendeskAPI::Error::RecordInvalid.new(body: { "details" => "sample error message from Zendesk" })
+        raise ZendeskAPI::Error::RecordInvalid.new(body: { details: "sample error message from Zendesk" })
       else
         @logger.info("Zendesk ticket created: #{options.inspect}")
         @last = DummyTicket.new(options)

@@ -11,14 +11,14 @@ RSpec.describe "user selects an IDP on the sign in page" do
 
   def given_im_on_the_sign_in_page(locale = "en")
     set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session, session: default_session.merge!({ journey_type: "sign-in" }))
-    stub_api_idp_list_for_sign_in([{ "simpleId" => "stub-idp-one",
-                                      "entityId" => "http://idcorp.com",
-                                      "levelsOfAssurance" => [LevelOfAssurance::LOA2],
-                                      "provideAuthenticationUntil" => 10.day.from_now.to_s },
-                                   {  "simpleId" => "stub-idp-two",
-                                      "entityId" => "http://idcorp-two.com",
-                                      "levelsOfAssurance" => [LevelOfAssurance::LOA2],
-                                      "provideAuthenticationUntil" => 10.day.from_now.to_s }])
+    stub_api_idp_list_for_sign_in([{ simpleId: "stub-idp-one",
+                                     entityId: "http://idcorp.com",
+                                     levelsOfAssurance: [LevelOfAssurance::LOA2],
+                                     provideAuthenticationUntil: 10.day.from_now.to_s },
+                                   { simpleId: "stub-idp-two",
+                                     entityId: "http://idcorp-two.com",
+                                     levelsOfAssurance: [LevelOfAssurance::LOA2],
+                                     provideAuthenticationUntil: 10.day.from_now.to_s }])
     visit "/#{t('routes.sign_in', locale: locale)}"
   end
 

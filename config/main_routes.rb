@@ -57,9 +57,9 @@ get "redirect_to_idp_register", to: "redirect_to_idp#register", as: :redirect_to
 get "redirect_to_idp_sign_in", to: "redirect_to_idp#sign_in", as: :redirect_to_idp_sign_in
 get "redirect_to_idp_sign_in_with_last_successful_idp", to: "redirect_to_idp#sign_in_with_last_successful_idp", as: :redirect_to_idp_sign_in_with_last_successful_idp
 get "redirect_to_idp_resume", to: "redirect_to_idp#resume", as: :redirect_to_idp_resume
-get "redirect_to_service_signing_in" => "redirect_to_service#signing_in", as: :redirect_to_service_signing_in
-get "redirect_to_service_start_again" => "redirect_to_service#start_again", as: :redirect_to_service_start_again
-get "redirect_to_service_error" => "redirect_to_service#error", as: :redirect_to_service_error
+get "redirect_to_service_signing_in", to: "redirect_to_service#signing_in", as: :redirect_to_service_signing_in
+get "redirect_to_service_start_again", to: "redirect_to_service#start_again", as: :redirect_to_service_start_again
+get "redirect_to_service_error", to: "redirect_to_service#error", as: :redirect_to_service_error
 get "feedback_landing", to: "feedback_landing#index", as: :feedback_landing
 get "confirmation", to: "confirmation#matching_journey", as: :confirmation
 get "confirmation_non_matching_journey", to: "confirmation#non_matching_journey", as: :confirmation_non_matching_journey

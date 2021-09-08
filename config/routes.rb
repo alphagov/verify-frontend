@@ -13,23 +13,23 @@ Rails.application.routes.draw do
   end
 
   get "initiate-journey/:transaction_simple_id", to: "initiate_journey#index", as: :initiate_journey
-  post "SAML2/SSO" => "authn_request#rp_request"
-  post "SAML2/SSO/Response/POST" => "authn_response#idp_response"
+  post "SAML2/SSO", to: "authn_request#rp_request"
+  post "SAML2/SSO/Response/POST", to: "authn_response#idp_response"
   match "/404", to: "errors#page_not_found", via: :all
 
   if %w(test development).include?(Rails.env) || STUB_MODE
-    mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
-    get "test-saml" => "test_saml#index"
-    get "/" => "test_saml#index"
+    mount JasmineRails::Engine, to: "/specs" if defined?(JasmineRails)
+    get "test-saml", to: "test_saml#index"
+    get "/", to: "test_saml#index"
     post "test-rp", to: proc { |_| [200, {}, ["OK"]] }
-    post "test-idp-request-endpoint" => "test_saml#idp_request"
-    post "test-initiate-journey" => "test_saml#initiate_journey_session"
-    get "test-session-expiry" => "test_saml#test_expiry"
-    post "another-idp-endpoint" => "test_saml#idp_request"
-    get "test-journey-hint" => "test_journey_hint_cookie#index", as: :test_journey_hint
-    get "test-throttling-cookie/:idp" => "test_throttling_cookie#set_cookie"
-    post "test-journey-hint" => "test_journey_hint_cookie#set_cookie", as: :test_journey_hint_submit
-    get "test-single-idp-journey" => "test_single_idp_journey#index"
+    post "test-idp-request-endpoint", to: "test_saml#idp_request"
+    post "test-initiate-journey", to: "test_saml#initiate_journey_session"
+    get "test-session-expiry", to: "test_saml#test_expiry"
+    post "another-idp-endpoint", to: "test_saml#idp_request"
+    get "test-journey-hint", to: "test_journey_hint_cookie#index", as: :test_journey_hint
+    get "test-throttling-cookie/:idp", to: "test_throttling_cookie#set_cookie"
+    post "test-journey-hint", to: "test_journey_hint_cookie#set_cookie", as: :test_journey_hint_submit
+    get "test-single-idp-journey", to: "test_single_idp_journey#index"
     # route analytics through frontend URI, as like prod, to not violate our csp policy
     get "analytics", to: "test_analytics#forward"
     # fake basic csp reporter so reports can be logged (in development.log)

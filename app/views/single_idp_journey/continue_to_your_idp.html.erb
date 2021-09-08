@@ -1,5 +1,5 @@
 <%= page_title 'hub.single_idp_journey.heading', display_name: @idp.display_name %>
-<% content_for :feedback_source, 'CONTINUE_TO_YOUR_IDP_PAGE' %>
+<% content_for :feedback_source, :CONTINUE_TO_YOUR_IDP_PAGE %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full js-continue-to-idp" data-location="<%= url_for(controller: 'single_idp_journey', action: 'continue_ajax', locale: I18n.locale)  %>">

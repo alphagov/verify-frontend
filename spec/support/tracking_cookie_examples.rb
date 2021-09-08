@@ -21,11 +21,11 @@ shared_examples "tracking cookie" do
   context "receiving SUCCESS without previous cookie" do
     let(:cookie_with_just_success_status) {
       { SUCCESS: "http://idcorp.com",
-        STATE:  {
-                  IDP: "http://idcorp.com",
-                  RP: "http://www.test-rp.gov.uk/SAML2/MD",
-                  STATUS: "SUCCESS",
-                } }.to_json
+        STATE: {
+          IDP: "http://idcorp.com",
+          RP: "http://www.test-rp.gov.uk/SAML2/MD",
+          STATUS: "SUCCESS",
+        } }.to_json
     }
     it { should eq cookie_with_just_success_status }
   end
@@ -34,21 +34,21 @@ shared_examples "tracking cookie" do
     let(:cookie_with_new_success_status) {
       {
         SUCCESS: "http://idcorp.com",
-        STATE:  {
-                    IDP: "http://idcorp.com",
-                    RP: "http://www.test-rp.gov.uk/SAML2/MD",
-                    STATUS: "SUCCESS",
-                },
+        STATE: {
+          IDP: "http://idcorp.com",
+          RP: "http://www.test-rp.gov.uk/SAML2/MD",
+          STATUS: "SUCCESS",
+        },
       }.to_json
     }
     let!(:existing_cookie) {
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        "SUCCESS" => "http://old-idcorp.com",
-        "STATE" => {
-                      "IDP" => "http://old-idcorp.com",
-                      "RP" => "http://www.test-rp.gov.uk/SAML2/MD",
-                      "STATUS" => "SUCCESS",
-                   },
+        SUCCESS: "http://old-idcorp.com",
+        STATE: {
+          IDP: "http://old-idcorp.com",
+          RP: "http://www.test-rp.gov.uk/SAML2/MD",
+          STATUS: "SUCCESS",
+        },
       }.to_json
     }
     it { should eq cookie_with_new_success_status }
@@ -61,21 +61,21 @@ shared_examples "tracking cookie" do
         ATTEMPT: "http://attempt-idcorp.com",
         SUCCESS: "http://success-idcorp.com",
         STATE: {
-                  IDP: "http://idcorp.com",
-                  RP: "http://www.test-rp.gov.uk/SAML2/MD",
-                  STATUS: "FAILED_UPLIFT",
-               },
+          IDP: "http://idcorp.com",
+          RP: "http://www.test-rp.gov.uk/SAML2/MD",
+          STATUS: "FAILED_UPLIFT",
+        },
       }.to_json
     }
     let!(:existing_cookie) {
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        "ATTEMPT" => "http://attempt-idcorp.com",
-        "SUCCESS" => "http://success-idcorp.com",
-        "STATE" =>  {
-                      "IDP" => "http://idcorp.com",
-                      "RP" => "http://www.test-rp.gov.uk/SAML2/MD",
-                      "STATUS" => "FAILED",
-                    },
+        ATTEMPT: "http://attempt-idcorp.com",
+        SUCCESS: "http://success-idcorp.com",
+        STATE: {
+          IDP: "http://idcorp.com",
+          RP: "http://www.test-rp.gov.uk/SAML2/MD",
+          STATUS: "FAILED",
+        },
       }.to_json
     }
     it { should eq cookie_with_multiple_status }

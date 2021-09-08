@@ -15,12 +15,15 @@ describe CompletedRegistrationController do
         expires: 18.months.from_now,
       }
 
-      stub_api_idp_list_for_sign_in_without_session([
-        { "simpleId" => "stub-idp-one",
-          "entityId" => entity_id,
-          "levelsOfAssurance" => [LevelOfAssurance::LOA2] },
+      stub_api_idp_list_for_sign_in_without_session(
+        [
+          { simpleId: "stub-idp-one",
+            entityId: entity_id,
+            levelsOfAssurance: [LevelOfAssurance::LOA2] },
         ],
-                                                    transaction_id)
+        transaction_id,
+      )
+
       get :index, params: { locale: "en", idp: valid_idp_simple_id }
 
       expect(subject).to render_template(:index)

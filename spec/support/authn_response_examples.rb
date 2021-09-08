@@ -2,9 +2,9 @@ shared_examples "idp_authn_response" do |journey_hint, idp_result, piwik_action,
   let(:saml_proxy_api) { double(:saml_proxy_api) }
   let(:selected_entity) {
     {
-      "entity_id" => "https://acme.de/ServiceMetadata",
-      "simple_id" => "DE",
-      "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
+      entity_id: "https://acme.de/ServiceMetadata",
+      simple_id: "DE",
+      levels_of_assurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
     }
   }
 

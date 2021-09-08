@@ -215,10 +215,10 @@ describe SingleIdpJourneyController do
 
     it "should redirect to /start if IDP is not available" do
       stub_api_idp_list_for_single_idp_journey(VALID_TEST_RP,
-                                               [{ "simpleId" => "stub-idp-one",
-                                                  "entityId" => "http://idcorp.com",
-                                                  "levelsOfAssurance" => [LevelOfAssurance::LOA2],
-                                                  "temporarilyUnavailable" => true }])
+                                               [{ simpleId: "stub-idp-one",
+                                                  entityId: "http://idcorp.com",
+                                                  levelsOfAssurance: [LevelOfAssurance::LOA2],
+                                                  temporarilyUnavailable: true }])
       single_idp_cookie = {
         transaction_id: VALID_TEST_RP,
         idp_entity_id: VALID_STUB_IDP,
@@ -270,9 +270,9 @@ describe SingleIdpJourneyController do
 
   context "#continue" do
     valid_idp = {
-        "simple_id" => "stub-idp-one",
-        "entity_id" => VALID_STUB_IDP,
-        "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
+        simple_id: "stub-idp-one",
+        entity_id: VALID_STUB_IDP,
+        levels_of_assurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
     }
 
     before :each do
@@ -327,9 +327,9 @@ describe SingleIdpJourneyController do
 
     it "should handle missing cookie" do
       valid_idp = {
-        "simple_id" => "stub-idp-one",
-        "entity_id" => VALID_STUB_IDP,
-        "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
+        simple_id: "stub-idp-one",
+        entity_id: VALID_STUB_IDP,
+        levels_of_assurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
       }
 
       stub_api_select_idp

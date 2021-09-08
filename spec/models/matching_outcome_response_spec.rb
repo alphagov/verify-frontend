@@ -1,7 +1,7 @@
 require "spec_helper"
 require "rails_helper"
 
-describe MatchingOutcomeResponse do
+describe MatchingOutcomeResponse, skip_before: true do
   it "should be invalid with an unknown outcome value" do
     expect(MatchingOutcomeResponse.new("responseProcessingStatus" => "BANANA").valid?).to eql(false)
   end

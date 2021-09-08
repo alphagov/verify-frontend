@@ -6,7 +6,7 @@ describe FurtherInformationController do
   subject { get :index, params: { locale: "en" } }
 
   before :each do
-    set_selected_idp("entity_id" => "http://idcorp.com", "simple_id" => "stub-idp-one")
+    set_selected_idp(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
     set_session_and_cookies_with_loa(LevelOfAssurance::LOA2)
     stub_cycle_three_attribute_request("NationalInsuranceNumber")
   end

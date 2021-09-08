@@ -6,7 +6,7 @@ describe CancelledRegistrationController do
   subject { get :index, params: { locale: "en" } }
 
   before :each do
-    set_selected_idp("entity_id" => "http://idcorp.com", "simple_id" => "stub-idp-one", "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2])
+    set_selected_idp(entity_id: "http://idcorp.com", simple_id: "stub-idp-one", levels_of_assurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2])
   end
 
   it "renders the cancelled registration LOA1 template when LEVEL_1 is the requested LOA" do

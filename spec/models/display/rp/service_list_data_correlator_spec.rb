@@ -6,7 +6,7 @@ require "display/rp_display_repository"
 
 module Display
   module Rp
-    describe ServiceListDataCorrelator do
+    describe ServiceListDataCorrelator, skip_before: true do
       let(:transaction_a_name) { "Transaction A" }
       let(:transaction_2_name) { "Transaction 2" }
       let(:transaction_3_name) { "Transaction 3" }
@@ -68,28 +68,28 @@ module Display
         expect(rp_display_repository).to receive(:get_translations).with(public_simple_id_4).and_return(display_data_4)
         transaction_data = [
           {
-            "simpleId" => public_simple_id,
-            "serviceHomepage" => homepage,
-            "loaList" => public_simple_id_loa,
-            "entityId" => entityId,
+            simpleId: public_simple_id,
+            serviceHomepage: homepage,
+            loaList: public_simple_id_loa,
+            entityId: entityId,
           },
           {
-            "simpleId" => public_simple_id_2,
-            "serviceHomepage" => homepage_2,
-            "loaList" => public_simple_id_2_loa,
-            "entityId" => entityId_2,
+            simpleId: public_simple_id_2,
+            serviceHomepage: homepage_2,
+            loaList: public_simple_id_2_loa,
+            entityId: entityId_2,
           },
           {
-            "simpleId" => public_simple_id_3,
-            "serviceHomepage" => homepage_3,
-            "loaList" => public_simple_id_3_loa,
-            "entityId" => entityId_3,
+            simpleId: public_simple_id_3,
+            serviceHomepage: homepage_3,
+            loaList: public_simple_id_3_loa,
+            entityId: entityId_3,
           },
           {
-            "simpleId" => public_simple_id_4,
-            "serviceHomepage" => homepage_4,
-            "loaList" => public_simple_id_4_loa,
-            "entityId" => entityId_4,
+            simpleId: public_simple_id_4,
+            serviceHomepage: homepage_4,
+            loaList: public_simple_id_4_loa,
+            entityId: entityId_4,
           },
         ]
         correlator = ServiceListDataCorrelator.new(rp_display_repository)

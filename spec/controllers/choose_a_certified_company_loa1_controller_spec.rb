@@ -57,7 +57,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
     end
 
     it "resets interstitial answer to no value when IDP is selected" do
-      session[:selected_answers] = { "interstitial" => { "interstitial_yes" => true } }
+      session[:selected_answers] = { interstitial: { interstitial_yes: true } }
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
 
       expect(session[:selected_answers]["interstitial"]).to be_empty

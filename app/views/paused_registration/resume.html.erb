@@ -1,6 +1,6 @@
 <%= page_title 'hub.paused_registration.resume.heading', display_name: @idp.display_name %>
 <% content_for :body_classes, 'hub-start' %>
-<% content_for :feedback_source, 'RESUME_PAGE' %>
+<% content_for :feedback_source, :RESUME_PAGE %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full js-continue-to-idp" data-location="<%= url_for(controller: 'paused_registration', action: 'resume_with_idp_ajax', locale: I18n.locale)  %>">

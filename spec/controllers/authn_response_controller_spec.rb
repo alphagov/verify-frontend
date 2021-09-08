@@ -78,9 +78,9 @@ describe AuthnResponseController do
     let(:post_endpoint) { :idp_response }
     let(:selected_entity) {
       {
-        "entity_id" => "http://idcorp.com",
-        "simple_id" => "stub-entity-one",
-        "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
+        entity_id: "http://idcorp.com",
+        simple_id: "stub-entity-one",
+        levels_of_assurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
       }
     }
     before(:each) do

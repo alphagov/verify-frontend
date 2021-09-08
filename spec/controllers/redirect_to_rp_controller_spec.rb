@@ -5,7 +5,7 @@ require "piwik_test_helper"
 
 describe RedirectToRpController do
   TEST_RP = "test-rp".freeze
-  REDIRECT_TO_RP_LIST_MOCK = { TEST_RP => { "url" => "http://localhost:50300/test-saml", "ab_test" => "test_ab_test" } }.freeze
+  REDIRECT_TO_RP_LIST_MOCK = { TEST_RP.to_sym => { url: "http://localhost:50300/test-saml", ab_test: "test_ab_test" } }.freeze
 
   before :each do
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
@@ -20,7 +20,7 @@ describe RedirectToRpController do
           a_kind_of(ActionDispatch::Request),
           "test_ab_test",
         )
-        expect(subject).to redirect_to(REDIRECT_TO_RP_LIST_MOCK[TEST_RP]["url"])
+        expect(subject).to redirect_to(REDIRECT_TO_RP_LIST_MOCK[TEST_RP.to_sym][:url])
       end
     end
 

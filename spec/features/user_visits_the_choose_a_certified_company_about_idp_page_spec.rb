@@ -22,12 +22,13 @@ RSpec.feature "user visits the choose a certified company about idp page", type:
       selected_answers: selected_answers,
     )
   }
+
   scenario "user chooses a recommended idp" do
     entity_id = "my-entity-id"
     stub_session_idp_authn_request(originating_ip, idp_location, false)
     select_idp_stub_request(entity_id)
-    stub_api_idp_list_for_sign_in [{ "simpleId" => "stub-idp-one", "entityId" => entity_id, "levelsOfAssurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }]
-    stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one", "entityId" => entity_id, "levelsOfAssurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }])
+    stub_api_idp_list_for_sign_in [{ simpleId: "stub-idp-one", entityId: entity_id, levelsOfAssurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }]
+    stub_api_idp_list_for_registration([{ simpleId: "stub-idp-one", entityId: entity_id, levelsOfAssurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }])
 
     given_a_session_with_selected_answers
 
@@ -52,7 +53,7 @@ RSpec.feature "user visits the choose a certified company about idp page", type:
 
   scenario "user clicks back link" do
     entity_id = "my-entity-id"
-    stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one", "entityId" => entity_id, "levelsOfAssurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }])
+    stub_api_idp_list_for_registration([{ simpleId: "stub-idp-one", entityId: entity_id, levelsOfAssurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2] }])
     given_a_session_with_selected_answers
     visit choose_a_certified_company_about_path("stub-idp-one")
     click_link t("navigation.back")

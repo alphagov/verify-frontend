@@ -10,7 +10,7 @@ module Display
     let(:decorator) { IdentityProviderDisplayDecorator.new(repository, "/stub-logos") }
 
     it "takes an IDP object and a repository with knowledge of IDPs and returns the IDP with display data" do
-      idp = double(:idp_one, "simple_id" => "test-simple-id", "entity_id" => "test-entity-id")
+      idp = double(:idp_one, simple_id: "test-simple-id", entity_id: "test-entity-id")
 
       display_data = double(:display_data)
       expect(repository).to receive(:fetch).with("test-simple-id").and_return display_data
@@ -25,7 +25,7 @@ module Display
     end
 
     it "returns a decorated IDP that is not viewable if display data is missing" do
-      idp = double(:idp_one, "simple_id" => "test-simple-id", "entity_id" => "test-entity-id")
+      idp = double(:idp_one, simple_id: "test-simple-id", entity_id: "test-entity-id")
       expect(stub_logger).to receive(:error).at_least(:once)
       allow(repository).to receive(:fetch).with("test-simple-id").and_raise(KeyError)
 
@@ -38,7 +38,7 @@ module Display
       expect(stub_logger).to receive(:error).at_least(:once)
 
       allow(repository).to receive(:fetch).with("test-simple-id").and_raise(KeyError)
-      idp = double(:idp_one, "simple_id" => "test-simple-id", "entity_id" => "test-entity-id")
+      idp = double(:idp_one, simple_id: "test-simple-id", entity_id: "test-entity-id")
       idp_list = [idp]
       result = decorator.decorate_collection(idp_list)
       expect(result).to eql []

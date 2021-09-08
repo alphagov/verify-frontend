@@ -4,9 +4,9 @@ require "api_test_helper"
 RSpec.describe "locale is set based on multiple sources", type: :feature do
   let(:selected_entity) {
     {
-      "entity_id" => "http://idcorp.com",
-      "simple_id" => "stub-entity-one",
-      "levels_of_assurance" => [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
+      entity_id: "http://idcorp.com",
+      simple_id: "stub-entity-one",
+      levels_of_assurance: [LevelOfAssurance::LOA1, LevelOfAssurance::LOA2],
     }
   }
   before(:each) do

@@ -59,6 +59,9 @@ def create_custom_variable_param(loa, extra_custom_variables, transaction_analyt
   rp_custom_variable = "\"1\":[\"RP\",\"#{transaction_analytics_description}\"]"
   loa_custom_variable = "\"2\":[\"LOA_REQUESTED\",\"#{loa}\"]"
 
+  # rp_custom_variable = %["1" : ["RP", "#{transaction_analytics_description}"]]
+  # loa_custom_variable = %["2": ["LOA_REQUESTED", "#{loa}"]]
+
   param = "{#{rp_custom_variable},#{loa_custom_variable}"
 
   extra_custom_variables.each do |custom_variable|

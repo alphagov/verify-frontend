@@ -11,9 +11,7 @@ describe HintController do
   context "#hint" do
     context "user has a journey hint present" do
       it "json object should return true" do
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-          "SUCCESS" => "http://idcorp.com",
-        }.to_json
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { SUCCESS: "http://idcorp.com" }.to_json
 
         stub_piwik_request = stub_piwik_report_journey_hint_present("yes")
 
@@ -25,9 +23,7 @@ describe HintController do
       end
 
       it "json object should return true even if the value is not set" do
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-          "SUCCESS" => "",
-        }.to_json
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { SUCCESS: "" }.to_json
 
         stub_piwik_request = stub_piwik_report_journey_hint_present("yes")
 
@@ -53,26 +49,26 @@ describe HintController do
 
   context "#last_successful_idp" do
     before(:each) do
-      stub_api_idp_list_for_sign_in_without_session([
-                                     { "simpleId" => "stub-idp-one",
-                                       "entityId" => "http://idcorp.com",
-                                       "levelsOfAssurance" => [LevelOfAssurance::LOA1] },
-                                     { "simpleId" => "stub-idp-two",
-                                       "entityId" => "http://idcorp-two.com",
-                                       "levelsOfAssurance" => [LevelOfAssurance::LOA1] },
-                                     { "simpleId" => "stub-idp-broken",
-                                       "entityId" => "http://idcorp-broken.com",
-                                       "levelsOfAssurance" => [LevelOfAssurance::LOA1],
-                                       "temporarilyUnavailable" => true },
-                                     ],
-                                                    "https://tax.service.gov.uk/SAML2/PERTAX")
+      stub_api_idp_list_for_sign_in_without_session(
+        [
+          { simpleId: "stub-idp-one",
+            entityId: "http://idcorp.com",
+            levelsOfAssurance: [LevelOfAssurance::LOA1] },
+          { simpleId: "stub-idp-two",
+            entityId: "http://idcorp-two.com",
+            levelsOfAssurance: [LevelOfAssurance::LOA1] },
+          { simpleId: "stub-idp-broken",
+            entityId: "http://idcorp-broken.com",
+            levelsOfAssurance: [LevelOfAssurance::LOA1],
+            temporarilyUnavailable: true },
+        ],
+        "https://tax.service.gov.uk/SAML2/PERTAX",
+      )
     end
 
     context "user has previously successfully signed in" do
       it "json object should include simpleId and displayName" do
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-          "SUCCESS" => "http://idcorp-two.com",
-        }.to_json
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { SUCCESS: "http://idcorp-two.com" }.to_json
 
         body = JSON.parse(successful_idp.body)
 
@@ -84,9 +80,7 @@ describe HintController do
       end
 
       it "should return not found if last succesful entity ID not in available providers" do
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-          "SUCCESS" => "http://not-available.com",
-        }.to_json
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { SUCCESS: "http://not-available.com" }.to_json
 
         body = JSON.parse(successful_idp.body)
 
@@ -100,9 +94,7 @@ describe HintController do
 
     context "user has not previously successfully signed in" do
       it "json object should not contain simpleId and displayName" do
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-          "ATTEMPT" => "http://idcorp-two.com",
-        }.to_json
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { ATTEMPT: "http://idcorp-two.com" }.to_json
 
         body = JSON.parse(successful_idp.body)
 
@@ -117,9 +109,7 @@ describe HintController do
     context "list of available identity providers is empty" do
       it "json object should not contain simpleId and displayName" do
         stub_api_idp_list_for_sign_in_without_session([], "https://tax.service.gov.uk/SAML2/PERTAX")
-        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-          "SUCCESS" => "http://idcorp-two.com",
-        }.to_json
+        cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { SUCCESS: "http://idcorp-two.com" }.to_json
 
         body = JSON.parse(successful_idp.body)
 

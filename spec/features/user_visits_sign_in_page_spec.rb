@@ -72,11 +72,11 @@ RSpec.describe "user selects an IDP on the sign in page" do
   let(:transaction_analytics_description) { "analytics description for test-rp" }
   let(:body) {
     [
-      { "simpleId" => "stub-idp-zero", "entityId" => "idp-zero" },
-      { "simpleId" => "stub-idp-one", "entityId" => idp_entity_id },
-      { "simpleId" => "stub-idp-two", "entityId" => "idp-two" },
-      { "simpleId" => "stub-idp-three", "entityId" => "idp-three" },
-      { "simpleId" => "stub-idp-four", "entityId" => "idp-four" },
+      { simpleId: "stub-idp-zero", entityId: "idp-zero" },
+      { simpleId: "stub-idp-one", entityId: idp_entity_id },
+      { simpleId: "stub-idp-two", entityId: "idp-two" },
+      { simpleId: "stub-idp-three", entityId: "idp-three" },
+      { simpleId: "stub-idp-four", entityId: "idp-four" },
     ]
   }
 
