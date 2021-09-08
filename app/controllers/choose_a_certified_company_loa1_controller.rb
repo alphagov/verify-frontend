@@ -16,7 +16,7 @@ class ChooseACertifiedCompanyLoa1Controller < ChooseACertifiedCompanyRedirectCon
   def select_idp
     return render "errors/something_went_wrong", status: 400 unless params[:entity_id].present?
 
-    selected_answer_store.store_selected_answers("interstitial", {})
+    selected_answer_store.store_selected_answers(:interstitial, {})
     select_viewable_idp_for_registration(params.fetch("entity_id")) do |decorated_idp|
       session[:selected_idp_was_recommended] = true
       do_redirect(decorated_idp)

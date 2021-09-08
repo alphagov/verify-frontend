@@ -9,9 +9,9 @@ RSpec.describe SelectedAnswerStore do
       driving_licence: false,
     }
     store = SelectedAnswerStore.new(session)
-    store.store_selected_answers("documents", document_answers)
-    expect(session[:selected_answers]).to eql("documents" => document_answers)
-    expect(store.selected_answers).to eql("documents" => document_answers)
+    store.store_selected_answers(:documents, document_answers)
+    expect(session[:selected_answers]).to eql(documents: document_answers)
+    expect(store.selected_answers).to eql(documents: document_answers)
   end
 
   it "should return selected evidence for a given stage" do
@@ -21,8 +21,8 @@ RSpec.describe SelectedAnswerStore do
       driving_licence: false,
     }
     store = SelectedAnswerStore.new(session)
-    store.store_selected_answers("documents", document_answers)
-    expect(store.selected_evidence_for("documents")).to eql [:passport]
+    store.store_selected_answers(:documents, document_answers)
+    expect(store.selected_evidence_for(:documents)).to eql [:passport]
   end
 
   it "should return all selected evidence" do
@@ -35,8 +35,8 @@ RSpec.describe SelectedAnswerStore do
       mobile_phone: true,
     }
     store = SelectedAnswerStore.new(session)
-    store.store_selected_answers("documents", document_answers)
-    store.store_selected_answers("phone", phone_answers)
+    store.store_selected_answers(:documents, document_answers)
+    store.store_selected_answers(:phone, phone_answers)
     expect(store.selected_evidence).to eql %i[passport mobile_phone]
   end
 
@@ -51,10 +51,10 @@ RSpec.describe SelectedAnswerStore do
     }
 
     store = SelectedAnswerStore.new(session)
-    store.store_selected_answers("documents", old_answers)
-    store.store_selected_answers("documents", new_answers)
+    store.store_selected_answers(:documents, old_answers)
+    store.store_selected_answers(:documents, new_answers)
 
-    expect(session[:selected_answers]).to eql("documents" => new_answers)
-    expect(store.selected_answers).to eql("documents" => new_answers)
+    expect(session[:selected_answers]).to eql(documents: new_answers)
+    expect(store.selected_answers).to eql(documents: new_answers)
   end
 end

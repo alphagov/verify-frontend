@@ -12,7 +12,7 @@ function abTest (experimentDetails) {
     if (document.cookie.indexOf("ab_test") >= 0) {
       var abCookie = JSON.parse(getCookie("ab_test"));
 
-      var routes = { 'control': experimentDetails.control.route };
+      var routes = { control: experimentDetails.control.route };
 
       for(var i = 0; i < experimentDetails.alternatives.length; i++) {
           var alternative = experimentDetails.alternatives[i];

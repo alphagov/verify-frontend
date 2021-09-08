@@ -71,9 +71,7 @@ describe StartController do
 
   context "when sign-in hint is present" do
     it "renders the hint when IDP valid" do
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        "SUCCESS" => "http://idcorp.com",
-      }.to_json
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { SUCCESS: "http://idcorp.com" }.to_json
       stub_api_idp_list_for_sign_in
 
       get :index, params: { locale: "en" }
@@ -82,9 +80,7 @@ describe StartController do
     end
 
     it "renders the normal start page if IDP is invalid" do
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        "SUCCESS" => "invalid",
-      }.to_json
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { SUCCESS: "invalid" }.to_json
       stub_api_idp_list_for_sign_in
 
       get :index, params: { locale: "en" }
@@ -93,9 +89,7 @@ describe StartController do
     end
 
     it "renders the normal start page if success is missing" do
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        "ATTEMPT" => "http://idcorp.com",
-      }.to_json
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { ATTEMPT: "http://idcorp.com" }.to_json
       stub_api_idp_list_for_sign_in
 
       get :index, params: { locale: "en" }
@@ -105,8 +99,8 @@ describe StartController do
 
     it "allows to disregard the hint and deletes the SUCCESS" do
       cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        "ATTEMPT" => "http://idcorp.com",
-        "SUCCESS" => "http://idcorp.com",
+        ATTEMPT: "http://idcorp.com",
+        SUCCESS: "http://idcorp.com",
       }.to_json
       stub_api_idp_list_for_sign_in
 
@@ -127,9 +121,7 @@ describe StartController do
     end
 
     it "allows to disregard the hint and does not fail if success does not exist" do
-      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = {
-        "ATTEMPT" => "http://idcorp.com",
-      }.to_json
+      cookies.encrypted[CookieNames::VERIFY_FRONT_JOURNEY_HINT] = { ATTEMPT: "http://idcorp.com" }.to_json
       stub_api_idp_list_for_sign_in
 
       expect(FEDERATION_REPORTER).not_to receive(:report_sign_in_journey_ignored)

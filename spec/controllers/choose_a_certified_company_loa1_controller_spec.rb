@@ -60,7 +60,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
       session[:selected_answers] = { interstitial: { interstitial_yes: true } }
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
 
-      expect(session[:selected_answers]["interstitial"]).to be_empty
+      expect(session[:selected_answers][:interstitial]).to be_empty
     end
 
     it "sets selected IDP in user session" do

@@ -4,14 +4,14 @@ class SelectDocumentsController < ApplicationController
   include ViewableIdpPartialController
 
   def index
-    @form = SelectDocumentsForm.from_session_storage(selected_answer_store.selected_answers.fetch("documents", {}))
+    @form = SelectDocumentsForm.from_session_storage(selected_answer_store.selected_answers.fetch(:documents, {}))
     render :index
   end
 
   def select_documents
     @form = SelectDocumentsForm.from_post(params["select_documents_form"] || {})
     if @form.valid?
-      selected_answer_store.store_selected_answers("documents", @form.to_session_storage)
+      selected_answer_store.store_selected_answers(:documents, @form.to_session_storage)
       idps_available = IDP_RECOMMENDATION_ENGINE.any?(current_available_identity_providers_for_registration, selected_evidence, current_transaction_simple_id)
       report_user_evidence_to_piwik(selected_evidence)
       redirect_to idps_available ? choose_a_certified_company_path : select_documents_advice_path
@@ -22,10 +22,10 @@ class SelectDocumentsController < ApplicationController
   end
 
   def advice
-    answers = selected_answer_store.selected_answers.fetch("documents", {})
-    documents = answers.group_by(&:last)[false].to_h
+    answers = selected_answer_store.selected_answers.fetch(:documents, {})
+    documents = answers.group_by(&:last)[false].to_h.symbolize_keys!
     combine_cc_and_dl(documents)
-    mappings = t("hub.select_documents").select { |k, _| k.to_s.start_with?("has") }.transform_keys!(&:to_s)
+    mappings = t("hub.select_documents").select { |k, _| k.to_s.start_with?("has") }.transform_keys!(&:to_sym)
     @documents = documents.transform_keys(&mappings.method(:[]))
     render :advice
   end
@@ -56,10 +56,10 @@ private
   # card and driving license for the bullet points under
   # specific circumstances.
   def combine_cc_and_dl(documents)
-    if documents.has_key?("has_driving_license") && documents.has_key?("has_credit_card") && documents.size < 4
-      documents.delete("has_driving_license")
-      documents.delete("has_credit_card")
-      documents["has_driving_license_and_credit_card"] = false
+    if documents.has_key?(:has_driving_license) && documents.has_key?(:has_credit_card) && documents.size < 4
+      documents.delete(:has_driving_license)
+      documents.delete(:has_credit_card)
+      documents[:has_driving_license_and_credit_card] = false
     end
   end
 end

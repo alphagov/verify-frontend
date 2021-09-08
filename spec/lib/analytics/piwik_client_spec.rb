@@ -17,7 +17,7 @@ module Analytics
       expect(a_request(:get, url).with(query: params)).to have_been_made.once
     end
 
-    it "should log errors and continue" do
+    it "shofailed_registration_controller_spec.rbuld log errors and continue" do
       rails = double(:rails)
       stub_const("Rails", rails)
       logger = double(:logger)

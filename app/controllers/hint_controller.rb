@@ -17,7 +17,7 @@ class HintController < ApplicationController
 
     FEDERATION_REPORTER.report_hint_present(request, !entity_id.nil?)
 
-    json_object = { 'status': "OK", 'value': !entity_id.nil? }
+    json_object = { status: "OK", value: !entity_id.nil? }
 
     render json: json_object.to_json, callback: params["callback"]
   end
@@ -27,7 +27,7 @@ class HintController < ApplicationController
 
     entity_id = success_entity_id
 
-    return render json: { 'found': "false" }.to_json, callback: params["callback"] if entity_id.nil?
+    return render json: { found: "false" }.to_json, callback: params["callback"] if entity_id.nil?
 
     # Ugly and temporary hack (due to time constraints)
     # We need the list of enabled IDPs, but these lists are mapped against a transaction
@@ -40,16 +40,16 @@ class HintController < ApplicationController
 
       if idp.nil?
         logger.info "No IDP found for entity ID #{entity_id} and identity providers #{identity_providers}"
-        json_object = { 'found': "false" }
+        json_object = { found: "false" }
       else
         json_object = {
-          'found': "true",
-          'simpleId': idp.simple_id,
-          'displayName': idp.display_name,
+          found: "true",
+          simpleId: idp.simple_id,
+          displayName: idp.display_name,
         }
       end
     else
-      json_object = { 'found': "false" }
+      json_object = { found: "false" }
     end
 
     render json: json_object.to_json, callback: params["callback"]

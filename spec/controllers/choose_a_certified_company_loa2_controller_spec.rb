@@ -14,8 +14,8 @@ describe ChooseACertifiedCompanyLoa2Controller do
   context "#index" do
     it "renders both IDPs when the user has chosen 3 docs" do
       session[:selected_answers] = {
-        "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
-        "device_type" => { "device_type_other" => true },
+        documents: { has_driving_license: true, has_phone_can_app: true, has_valid_passport: true, has_credit_card: false },
+        device_type: { device_type_other: true },
       }
       stub_piwik_request = stub_piwik_report_number_of_recommended_idps(2, LevelOfAssurance::LOA2, "analytics description for test-rp")
 
@@ -31,8 +31,8 @@ describe ChooseACertifiedCompanyLoa2Controller do
 
     it "redirects away and logs to piwik when the user has chosen 2 docs" do
       session[:selected_answers] = {
-          "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => false, "has_credit_card" => false },
-          "device_type" => { "device_type_other" => true },
+        documents: { has_driving_license: true, has_phone_can_app: true, has_valid_passport: false, has_credit_card: false },
+        device_type: { device_type_other: true },
       }
       stub_piwik_request = stub_piwik_report_number_of_recommended_idps(0, LevelOfAssurance::LOA2, "analytics description for test-rp")
       get :index, params: { locale: "en" }
@@ -43,15 +43,15 @@ describe ChooseACertifiedCompanyLoa2Controller do
 
     it "removes interstitial answer when IDP picker page is rendered" do
       session[:selected_answers] = {
-          "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
-          "device_type" => { "device_type_other" => true },
-          "interstitial" => { "interstitial_yes" => true },
+          documents: { has_driving_license: true, has_phone_can_app: true, has_valid_passport: true, has_credit_card: false },
+          device_type: { device_type_other: true },
+          interstitial: { interstitial_yes: true },
       }
       stub_piwik_report_number_of_recommended_idps(2, LevelOfAssurance::LOA2, "analytics description for test-rp")
 
       get :index, params: { locale: "en" }
 
-      expect(session[:selected_answers]["interstitial"]).to be_nil
+      expect(session[:selected_answers][:interstitial]).to be_nil
     end
   end
 
@@ -63,8 +63,8 @@ describe ChooseACertifiedCompanyLoa2Controller do
 
     it "checks whether IDP was recommended" do
       session[:selected_answers] = {
-          "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
-          "device_type" => { "device_type_other" => true },
+        documents: { has_driving_license: true, has_phone_can_app: true, has_valid_passport: true, has_credit_card: false },
+        device_type: { device_type_other: true },
       }
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
       expect(session[:selected_idp_was_recommended]).to eql(true)
@@ -72,8 +72,8 @@ describe ChooseACertifiedCompanyLoa2Controller do
 
     it "redirects to IDP redirect page by default" do
       session[:selected_answers] = {
-          "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
-          "device_type" => { "device_type_other" => true },
+        documents: { has_driving_license: true, has_phone_can_app: true, has_valid_passport: true, has_credit_card: false },
+        device_type: { device_type_other: true },
       }
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
 

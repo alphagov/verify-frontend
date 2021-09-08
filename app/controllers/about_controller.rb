@@ -25,7 +25,7 @@ class AboutController < ApplicationController
       has_credit_card: true,
     }
 
-    selected_answer_store.store_selected_answers("documents", selected_documents)
+    selected_answer_store.store_selected_answers(:documents, selected_documents)
     render :documents
   end
 

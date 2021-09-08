@@ -131,8 +131,8 @@ describe "When the user visits the choose a certified company page" do
     page.set_rack_session(
       transaction_simple_id: "test-rp",
       selected_answers: {
-        "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => true },
-        "device_type" => { "device_type_other" => true },
+        documents: { has_driving_license: true, has_phone_can_app: true, has_valid_passport: true, has_credit_card: true },
+        device_type: { device_type_other: true },
       },
     )
 

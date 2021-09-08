@@ -4,11 +4,11 @@ class SelectedAnswerStore
   end
 
   def store_selected_answers(stage, answers)
-    selected_answers[stage] = answers
+    selected_answers_from_session[stage] = answers
   end
 
   def selected_answers
-    @session[:selected_answers] ||= {}
+    selected_answers_from_session.symbolize_keys
   end
 
   def selected_evidence
@@ -29,5 +29,9 @@ private
 
   def as_evidence_array(hash)
     hash.select { |_, value| value }.keys.map(&:to_sym)
+  end
+
+  def selected_answers_from_session
+    @session[:selected_answers] ||= {}
   end
 end

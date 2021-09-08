@@ -8,6 +8,6 @@ module UserCharacteristicsPartialController
   end
 
   def set_device_type_evidence
-    selected_answer_store.store_selected_answers("device_type", device_type)
+    selected_answer_store.store_selected_answers(:device_type, device_type)
   end
 end

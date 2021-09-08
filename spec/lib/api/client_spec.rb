@@ -7,8 +7,8 @@ require "connection_pool"
 
 module Api
   describe Client do
-    let(:request_body) { { "a" => 1, "b" => 2 } }
-    let(:response_body) { { "c" => 3 } }
+    let(:request_body) { { a: 1, b: 2 } }
+    let(:response_body) { { c: 3 } }
     let(:host) { "http://api.com" }
     let(:path) { "/endpoint" }
     let(:response_handler) { double(:response_handler) }
@@ -24,10 +24,10 @@ module Api
       end
 
       it "set params if provided them" do
-        stub_request(:get, "#{host}#{path}").with(query: { "param1" => "value1" }).and_return(status: 200, body: "{}")
+        stub_request(:get, "#{host}#{path}").with(query: { param1: "value1" }).and_return(status: 200, body: "{}")
         expect(response_handler).to receive(:handle_response).with(HTTP::Response::Status[200], "{}").and_return(response_body)
-        response = api_client.get(path, params: { "param1" => "value1" })
-        expect(a_request(:get, "#{host}#{path}").with(query: { "param1" => "value1" })).to have_been_made.once
+        response = api_client.get(path, params: { param1: "value1" })
+        expect(a_request(:get, "#{host}#{path}").with(query: { param1: "value1" })).to have_been_made.once
         expect(response).to eql response_body
       end
 
@@ -60,7 +60,7 @@ module Api
         api_client.post(path, request_body)
         api_client.post(path, request_body)
         api_client.post(path, request_body)
-        expect(a_request(:post, "#{host}#{path}").with(headers: { "User-Agent" => "Verify Frontend Micro Service Client" }))
+        expect(a_request(:post, "#{host}#{path}").with(headers: { 'User-Agent': "Verify Frontend Micro Service Client" }))
           .to have_been_made.times(4)
       end
     end

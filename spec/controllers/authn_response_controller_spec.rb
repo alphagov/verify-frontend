@@ -53,7 +53,7 @@ describe AuthnResponseController do
     it "when relay state does not equal session id in the idp response" do
       set_session_and_cookies_with_loa(LevelOfAssurance::LOA1)
 
-      post :idp_response, params: { "RelayState" => "wrong_session_id", "SAMLResponse" => "a-saml-response", locale: "en" }
+      post :idp_response, params: { RelayState: "wrong_session_id", SAMLResponse: "a-saml-response", locale: "en" }
 
       expect(subject).to render_template(:something_went_wrong)
     end
@@ -70,9 +70,9 @@ describe AuthnResponseController do
   describe "idp tracking cookie" do
     let(:idp_authn_response) {
       IdpAuthnResponse.new(
-        "result" => status,
-        "isRegistration" => "registration",
-        "loaAchieved" => LevelOfAssurance::LOA1,
+        result: status,
+        isRegistration: "registration",
+        loaAchieved: LevelOfAssurance::LOA1,
       )
     }
     let(:post_endpoint) { :idp_response }
