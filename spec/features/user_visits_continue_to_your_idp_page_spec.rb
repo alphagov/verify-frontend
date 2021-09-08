@@ -74,18 +74,18 @@ RSpec.describe "When the user visits the continue to your IDP page" do
   context "with JS enabled", js: true do
     def single_idp_session
       {
-          transaction_simple_id: "test-rp-noc3",
-          start_time: start_time_in_millis,
-          verify_session_id: default_session_id,
-          requested_loa: "LEVEL_2",
-          transaction_entity_id: "some-other-entity-id",
-          selected_answers: { device_type: { device_type_other: true } },
+        transaction_simple_id: "test-rp-noc3",
+        start_time: start_time_in_millis,
+        verify_session_id: default_session_id,
+        requested_loa: "LEVEL_2",
+        transaction_entity_id: "some-other-entity-id",
+        selected_answers: { device_type: { device_type_other: true } },
       }
     end
 
     before(:each) do
       set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session, session: single_idp_session)
-      stub_transactions_for_single_idp_list
+      stub_transactions_for_single_idp_list(Capybara.current_session.server.port)
       stub_api_idp_list_for_single_idp_journey("some-other-entity-id")
       visit "/test-single-idp-journey"
       # javascript driver needs a redirect to a real page
