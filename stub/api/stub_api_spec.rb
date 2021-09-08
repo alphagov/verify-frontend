@@ -7,6 +7,7 @@ require 'active_model'
 
 APP_HOME = File.join(File.dirname(__FILE__), '../../')
 $LOAD_PATH << File.join(APP_HOME, 'app/models')
+$LOAD_PATH << File.join(APP_HOME, 'lib')
 
 require 'api/response'
 require 'identity_provider'
@@ -23,7 +24,7 @@ describe StubApi do
   end
 
   def last_response_json
-   JSON.parse(last_response.body)
+    JSON.parse(last_response.body)
   end
 
   context '#get /config/idps/idp-list-for-registration/http%3A%2F%2Fwww.test-rp.gov.uk%2FSAML2%2FMD/LEVEL_1' do
@@ -61,5 +62,4 @@ describe StubApi do
       expect(response).to be_an(Array)
     end
   end
-
 end
