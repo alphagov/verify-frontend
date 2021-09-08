@@ -230,7 +230,7 @@ class StubApi < Sinatra::Base
      }'
   end
 
-  post '/policy/received-authn-request/my-relay-state/select-identity-provider' do
+  post '/policy/received-authn-request/:relay-state/select-identity-provider' do
     status 200
     ''
   end
