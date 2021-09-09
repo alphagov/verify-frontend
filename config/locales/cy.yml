@@ -25,7 +25,6 @@ cy:
     choose_a_certified_company: dewis-cwmni-ardystiedig
     unlikely_to_verify: anhebygol-i-ddilysu
     redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
-    redirect_to_idp_question: ailgyfeirio-i-gwestiwn-idp
     redirect_to_single_idp: redirect-to-single-idp-cy
     continue_to_your_idp: parhau-ich-idp
     idp_wont_work_for_you_one_doc: nid-yw-idp-yn-gweithio-i-chi-un-ddogfen
@@ -340,18 +339,6 @@ cy:
       service_use: Yna byddwch yn gallu %{service_name}.
       other_ways_link: ffyrdd eraill i %{transaction}
       no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
-    redirect_to_idp_question:
-      heading: Dilysu gyda %{display_name}
-      loa1_heading: Sefydlu cyfrif %{display_name}
-      answer_yes: Ydw
-      answer_no: Na
-      warning_html: |
-        <p class="error-message">Efallai na fydd %{display_name} yn gallu eich dilysu</p>
-        <p class="govuk-body">Rydym yn argymell eich bod yn %{choose_another_company_link}.</p>
-      choose_another_certified_company_link: dewis cwmni ardystiedig arall
-      identity_documents: Rydych angen eich dogfennau hunaniaeth gyda chi oherwydd bydd yn rhaid i chi ychwanegu eu manylion.
-      or_html: neu %{choose_another_company_link}
-      validation_message: Dewiswch opsiwn
     confirm_your_identity:
       use_other_idp: Os nad hwn yw’r cwmni a wnaeth eich dilysu, %{sign_in_link}.
       sign_in_link_message: llofnodwch i mewn gyda chwmni ardystiedig gwahanol
