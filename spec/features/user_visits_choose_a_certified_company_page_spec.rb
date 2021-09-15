@@ -114,7 +114,7 @@ describe "When the user visits the choose a certified company page" do
     end
   end
 
-  it "redirects away if no IDP recommendations" do
+  it "renders an error page if no IDP recommendations" do
     page.set_rack_session(
       transaction_simple_id: "test-rp",
       selected_answers: {
@@ -124,7 +124,9 @@ describe "When the user visits the choose a certified company page" do
 
     visit "/choose-a-certified-company"
 
-    expect(page).to have_current_path(select_documents_advice_path)
+    expect(page).to have_current_path(choose_a_certified_company_path)
+    expect(page).to have_content t("errors.something_went_wrong.heading")
+    expect(page.status_code).to eq(500)
   end
 
   it "Shows recommended IDPs, hides non-recommended IDPs" do

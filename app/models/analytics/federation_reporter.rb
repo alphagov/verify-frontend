@@ -90,14 +90,13 @@ module Analytics
       )
     end
 
-    def report_idp_registration(current_transaction:, request:, idp_name:, idp_name_history:, evidence:, recommended:, user_segments:)
-      list_of_evidence = evidence.sort.join(", ")
+    def report_idp_registration(current_transaction:, request:, idp_name:, idp_name_history:, recommended:, user_segments:)
       list_of_segments = user_segments.nil? ? nil : user_segments.sort.join(", ")
       idp_name_history ||= [idp_name]
       report_action(
         current_transaction,
         request,
-        "#{idp_name} was chosen for registration #{recommended} with segment(s) #{list_of_segments} and evidence #{list_of_evidence}",
+        "#{idp_name} was chosen for registration #{recommended} with segment(s) #{list_of_segments}",
         Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(",")),
       )
     end
@@ -148,17 +147,6 @@ module Analytics
         current_transaction,
         request,
         "Matching Outcome - Cancelled Cycle3",
-      )
-    end
-
-    def report_user_evidence_attempt(attempt_number:, current_transaction:, request:, evidence_list: [])
-      list_of_evidence = evidence_list.map { |evidence| evidence.to_s.gsub("has_", "") }
-                                      .sort.join("_")
-                                      .upcase
-      report_action(
-        current_transaction,
-        request,
-        "EVIDENCE_ATTEMPT_#{attempt_number} | #{list_of_evidence} |",
       )
     end
 

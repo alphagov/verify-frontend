@@ -34,48 +34,40 @@ describe RedirectToIdpController do
     it "reports idp registration details to piwik" do
       bobs_identity_service_idp_name = "Bob’s Identity Service"
       idp_was_recommended = "(recommended)"
-      evidence = { driving_licence: true, passport: true }
 
       set_selected_idp bobs_identity_service
       session[:selected_idp_name] = bobs_identity_service_idp_name
       session[:selected_idp_names] = [bobs_identity_service_idp_name]
-      session[:selected_answers] = { "documents" => evidence }
       session[:selected_idp_was_recommended] = idp_was_recommended
       session[:user_segments] = %w(test-segment)
 
       expect(FEDERATION_REPORTER).to receive(:report_idp_registration)
-        .with(current_transaction: a_kind_of(Display::RpDisplayData),
-              request: a_kind_of(ActionDispatch::Request),
-              idp_name: bobs_identity_service_idp_name,
-              idp_name_history: [bobs_identity_service_idp_name],
-              evidence: evidence.keys,
-              recommended: idp_was_recommended,
-              user_segments: %w(test-segment))
-
+                                       .with(current_transaction: a_kind_of(Display::RpDisplayData),
+                                             request: a_kind_of(ActionDispatch::Request),
+                                             idp_name: bobs_identity_service_idp_name,
+                                             idp_name_history: [bobs_identity_service_idp_name],
+                                             recommended: idp_was_recommended,
+                                             user_segments: %w(test-segment))
       subject
     end
 
     it "reports idp registration and doesn't error out if idp_was_recommended key not present" do
       bobs_identity_service_idp_name = "Bob's Identity Service"
       idp_was_recommended = "(idp recommendation key not set)"
-      evidence = { driving_licence: true, passport: true }
 
       set_selected_idp bobs_identity_service
       session[:selected_idp_name] = bobs_identity_service_idp_name
       session[:selected_idp_names] = [bobs_identity_service_idp_name]
-      session[:selected_answers] = { "documents" => evidence }
       session[:user_segments] = %w(test-segment)
       session.delete(:selected_idp_was_recommended)
 
       expect(FEDERATION_REPORTER).to receive(:report_idp_registration)
-                                         .with(current_transaction: a_kind_of(Display::RpDisplayData),
-                                               request: a_kind_of(ActionDispatch::Request),
-                                               idp_name: bobs_identity_service_idp_name,
-                                               idp_name_history: [bobs_identity_service_idp_name],
-                                               evidence: evidence.keys,
-                                               recommended: idp_was_recommended,
-                                               user_segments: %w(test-segment))
-
+                                       .with(current_transaction: a_kind_of(Display::RpDisplayData),
+                                             request: a_kind_of(ActionDispatch::Request),
+                                             idp_name: bobs_identity_service_idp_name,
+                                             idp_name_history: [bobs_identity_service_idp_name],
+                                             recommended: idp_was_recommended,
+                                             user_segments: %w(test-segment))
       subject
     end
   end
@@ -104,14 +96,14 @@ describe RedirectToIdpController do
         session[:user_followed_journey_hint] = nil
 
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
-                                           .with(current_transaction: a_kind_of(Display::RpDisplayData),
-                                                 request: a_kind_of(ActionDispatch::Request),
-                                                 idp_name: bobs_identity_service_idp_name,
-                                                 user_segments: %w(test-segment),
-                                                 transaction_simple_id: "test-rp",
-                                                 attempt_number: 1,
-                                                 journey_type: "registration",
-                                                 hint_followed: nil)
+                                         .with(current_transaction: a_kind_of(Display::RpDisplayData),
+                                               request: a_kind_of(ActionDispatch::Request),
+                                               idp_name: bobs_identity_service_idp_name,
+                                               user_segments: %w(test-segment),
+                                               transaction_simple_id: "test-rp",
+                                               attempt_number: 1,
+                                               journey_type: "registration",
+                                               hint_followed: nil)
         subject
       end
 
@@ -127,14 +119,14 @@ describe RedirectToIdpController do
         session[:user_followed_journey_hint] = nil
 
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
-                                           .with(current_transaction: a_kind_of(Display::RpDisplayData),
-                                                 request: a_kind_of(ActionDispatch::Request),
-                                                 idp_name: bobs_identity_service_idp_name,
-                                                 user_segments: %w(test-segment),
-                                                 transaction_simple_id: "test-rp",
-                                                 attempt_number: 2,
-                                                 journey_type: "registration",
-                                                 hint_followed: nil)
+                                         .with(current_transaction: a_kind_of(Display::RpDisplayData),
+                                               request: a_kind_of(ActionDispatch::Request),
+                                               idp_name: bobs_identity_service_idp_name,
+                                               user_segments: %w(test-segment),
+                                               transaction_simple_id: "test-rp",
+                                               attempt_number: 2,
+                                               journey_type: "registration",
+                                               hint_followed: nil)
         subject
       end
     end
@@ -162,14 +154,14 @@ describe RedirectToIdpController do
         session[:user_followed_journey_hint] = nil
 
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
-                                           .with(current_transaction: a_kind_of(Display::RpDisplayData),
-                                                 request: a_kind_of(ActionDispatch::Request),
-                                                 idp_name: bobs_identity_service_idp_name,
-                                                 user_segments: %w(test-segment),
-                                                 transaction_simple_id: "test-rp",
-                                                 attempt_number: 1,
-                                                 journey_type: "sign-in",
-                                                 hint_followed: nil)
+                                         .with(current_transaction: a_kind_of(Display::RpDisplayData),
+                                               request: a_kind_of(ActionDispatch::Request),
+                                               idp_name: bobs_identity_service_idp_name,
+                                               user_segments: %w(test-segment),
+                                               transaction_simple_id: "test-rp",
+                                               attempt_number: 1,
+                                               journey_type: "sign-in",
+                                               hint_followed: nil)
         subject
       end
 
@@ -180,19 +172,19 @@ describe RedirectToIdpController do
         session[:user_followed_journey_hint] = false
 
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
-                                           .with(current_transaction: a_kind_of(Display::RpDisplayData),
-                                                 request: a_kind_of(ActionDispatch::Request),
-                                                 idp_name: bobs_identity_service_idp_name,
-                                                 user_segments: %w(test-segment),
-                                                 transaction_simple_id: "test-rp",
-                                                 attempt_number: 1,
-                                                 journey_type: "sign-in",
-                                                 hint_followed: false)
+                                         .with(current_transaction: a_kind_of(Display::RpDisplayData),
+                                               request: a_kind_of(ActionDispatch::Request),
+                                               idp_name: bobs_identity_service_idp_name,
+                                               user_segments: %w(test-segment),
+                                               transaction_simple_id: "test-rp",
+                                               attempt_number: 1,
+                                               journey_type: "sign-in",
+                                               hint_followed: false)
         expect(FEDERATION_REPORTER).to receive(:report_sign_in_idp_selection_after_journey_hint)
-                                           .with(a_kind_of(Display::RpDisplayData),
-                                                 a_kind_of(ActionDispatch::Request),
-                                                 bobs_identity_service_idp_name,
-                                                 false)
+                                         .with(a_kind_of(Display::RpDisplayData),
+                                               a_kind_of(ActionDispatch::Request),
+                                               bobs_identity_service_idp_name,
+                                               false)
         subject
       end
 
@@ -203,19 +195,19 @@ describe RedirectToIdpController do
         session[:user_followed_journey_hint] = true
 
         expect(FEDERATION_REPORTER).to receive(:report_user_idp_attempt)
-                                           .with(current_transaction: a_kind_of(Display::RpDisplayData),
-                                                 request: a_kind_of(ActionDispatch::Request),
-                                                 idp_name: bobs_identity_service_idp_name,
-                                                 user_segments: %w(test-segment),
-                                                 transaction_simple_id: "test-rp",
-                                                 attempt_number: 1,
-                                                 journey_type: "sign-in",
-                                                 hint_followed: true)
+                                         .with(current_transaction: a_kind_of(Display::RpDisplayData),
+                                               request: a_kind_of(ActionDispatch::Request),
+                                               idp_name: bobs_identity_service_idp_name,
+                                               user_segments: %w(test-segment),
+                                               transaction_simple_id: "test-rp",
+                                               attempt_number: 1,
+                                               journey_type: "sign-in",
+                                               hint_followed: true)
         expect(FEDERATION_REPORTER).to receive(:report_sign_in_idp_selection_after_journey_hint)
-                                           .with(a_kind_of(Display::RpDisplayData),
-                                                 a_kind_of(ActionDispatch::Request),
-                                                 bobs_identity_service_idp_name,
-                                                 true)
+                                         .with(a_kind_of(Display::RpDisplayData),
+                                               a_kind_of(ActionDispatch::Request),
+                                               bobs_identity_service_idp_name,
+                                               true)
         subject
       end
     end
@@ -238,9 +230,9 @@ describe RedirectToIdpController do
 
       it "reports idp selection details to piwik" do
         expect(FEDERATION_REPORTER).to receive(:report_sign_in_idp_selection)
-                                           .with(a_kind_of(Display::RpDisplayData),
-                                                 a_kind_of(ActionDispatch::Request),
-                                                 bobs_identity_service_idp_name)
+                                         .with(a_kind_of(Display::RpDisplayData),
+                                               a_kind_of(ActionDispatch::Request),
+                                               bobs_identity_service_idp_name)
 
         subject
       end

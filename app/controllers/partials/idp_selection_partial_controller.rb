@@ -86,7 +86,6 @@ module IdpSelectionPartialController
       request: request,
       idp_name: session[:selected_idp_name],
       idp_name_history: session[:selected_idp_names],
-      evidence: selected_answer_store.selected_evidence,
       recommended: recommended,
       user_segments: session[:user_segments],
     )

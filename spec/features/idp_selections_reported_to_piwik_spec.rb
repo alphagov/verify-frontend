@@ -20,7 +20,7 @@ RSpec.describe "When the user selects an IDP" do
   }
 
   let(:idcorp_registration_piwik_request) {
-    stub_piwik_idp_registration("IDCorp", selected_answers: selected_answers, recommended: true, segments: %w(pp_app))
+    stub_piwik_idp_registration("IDCorp", recommended: true, segments: %w(pp_app))
   }
 
   let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
@@ -48,19 +48,10 @@ RSpec.describe "When the user selects an IDP" do
 
   # TODO: Can't get this test to pass - don't fully understand
   it "appends the IDP name on subsequent selections" do
-    idcorp_piwik_request = stub_piwik_idp_registration(
-      "IDCorp",
-      selected_answers: selected_answers,
-      recommended: true,
-      segments: %w(pp_app),
-    )
+    idcorp_piwik_request = stub_piwik_idp_registration("IDCorp", recommended: true, segments: %w(pp_app))
 
     idcorp_and_bobs_piwik_request = stub_piwik_idp_registration(
-      "Carol’s Secure ID",
-      selected_answers: selected_answers,
-      recommended: false,
-      idp_list: "IDCorp,Carol’s Secure ID",
-      segments: %w(pp_app),
+      "Carol’s Secure ID", recommended: false, idp_list: "IDCorp,Carol’s Secure ID", segments: %w(pp_app)
     )
 
     stub_idp_select_request(idp_2_entity_id, instance_of(String))
@@ -80,12 +71,9 @@ RSpec.describe "When the user selects an IDP" do
   it "truncates IdP names" do
     idps = %w(A B C D E)
     idcorp_piwik_request = stub_piwik_idp_registration(
-      "IDCorp",
-      recommended: true,
-      selected_answers: selected_answers,
-      idp_list: idps.join(","),
-      segments: %w(pp_app),
+      "IDCorp", recommended: true, idp_list: idps.join(","), segments: %w(pp_app)
     )
+
     page.set_rack_session(selected_idp_names: idps)
     visit "/choose-a-certified-company"
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
