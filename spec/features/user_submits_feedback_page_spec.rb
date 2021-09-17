@@ -145,7 +145,7 @@ RSpec.feature "When the user submits the feedback page" do
     end
 
     it "should show feedback sent in Welsh and have the appropriate link back to Verify" do
-      visit select_documents_cy_path
+      visit about_documents_cy_path
       navigate_to_feedback_form :cy
 
       fill_in "feedback_form_what", with: what_text_field
@@ -155,7 +155,7 @@ RSpec.feature "When the user submits the feedback page" do
 
       expect(page).to have_title t("hub.feedback_sent.heading", locale: :cy)
       expect(page).to have_css "html[lang=cy]"
-      expect(page).to have_link t("hub.feedback_sent.session_valid_link", locale: :cy), href: select_documents_cy_path
+      expect(page).to have_link t("hub.feedback_sent.session_valid_link", locale: :cy), href: about_documents_cy_path
     end
 
     it "should be able to direct user back to the relevant page if user switches to Welsh on the feedback page" do

@@ -15,13 +15,11 @@ class ChooseACertifiedCompanyLoa2Controller < ChooseACertifiedCompanyRedirectCon
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
 
     idps_available = IDP_RECOMMENDATION_ENGINE.any?(idps, selected_evidence, current_transaction_simple_id)
-    if idps_available
-      session[:user_segments] = suggestions[:user_segments]
-      @show_non_recommended_idps = true
-      render "choose_a_certified_company/choose_a_certified_company"
-    else
-      redirect_to select_documents_advice_path
-    end
+    return something_went_wrong("No IDPs available for registration") unless idps_available
+
+    session[:user_segments] = suggestions[:user_segments]
+    @show_non_recommended_idps = true
+    render "choose_a_certified_company/choose_a_certified_company"
   end
 
   def select_idp

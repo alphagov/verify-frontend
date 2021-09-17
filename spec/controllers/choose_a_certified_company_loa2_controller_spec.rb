@@ -38,7 +38,7 @@ describe ChooseACertifiedCompanyLoa2Controller do
       get :index, params: { locale: "en" }
 
       expect(stub_piwik_request).to have_been_made.once
-      expect(subject).to redirect_to select_documents_advice_path
+      expect(subject).to render_template("errors/something_went_wrong")
     end
 
     it "removes interstitial answer when IDP picker page is rendered" do
