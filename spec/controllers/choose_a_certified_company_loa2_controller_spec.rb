@@ -40,19 +40,6 @@ describe ChooseACertifiedCompanyLoa2Controller do
       expect(stub_piwik_request).to have_been_made.once
       expect(subject).to render_template("errors/something_went_wrong")
     end
-
-    it "removes interstitial answer when IDP picker page is rendered" do
-      session[:selected_answers] = {
-          "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
-          "device_type" => { "device_type_other" => true },
-          "interstitial" => { "interstitial_yes" => true },
-      }
-      stub_piwik_report_number_of_recommended_idps(2, "LEVEL_2", "analytics description for test-rp")
-
-      get :index, params: { locale: "en" }
-
-      expect(session[:selected_answers]["interstitial"]).to be_nil
-    end
   end
 
   context "#select_idp" do

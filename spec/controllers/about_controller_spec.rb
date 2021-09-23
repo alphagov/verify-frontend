@@ -21,7 +21,7 @@ describe AboutController do
       end
 
       it "renders the certified companies for on the combined about view" do
-        expect(identity_provider_display_decorator).to receive(:decorate_collection).with(a_list_of_size(7)).and_return([])
+        expect(identity_provider_display_decorator).to receive(:decorate_collection).with(a_list_of_size(6)).and_return([])
         expect(subject).to render_template(:how_verify_works)
       end
     end
@@ -42,7 +42,7 @@ describe AboutController do
       end
 
       it "renders the LOA2 certified companies for the combined about view" do
-        expect(identity_provider_display_decorator).to receive(:decorate_collection).with(a_list_of_size(7)).and_return([])
+        expect(identity_provider_display_decorator).to receive(:decorate_collection).with(a_list_of_size(6)).and_return([])
         expect(subject).to render_template(:how_verify_works)
       end
     end

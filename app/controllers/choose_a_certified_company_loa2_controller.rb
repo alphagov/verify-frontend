@@ -7,7 +7,6 @@ class ChooseACertifiedCompanyLoa2Controller < ChooseACertifiedCompanyRedirectCon
   skip_before_action :render_cross_gov_ga, only: %i{about}
 
   def index
-    session[:selected_answers]&.delete("interstitial")
     idps = current_available_identity_providers_for_registration
     suggestions = IDP_RECOMMENDATION_ENGINE.get_suggested_idps_for_registration(idps, selected_evidence, current_transaction_simple_id)
     @recommended_idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended]))

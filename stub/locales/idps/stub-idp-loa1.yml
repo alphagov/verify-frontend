@@ -8,11 +8,6 @@ en:
         - a UK photocard driving licence
       contact_details: |
         <strong id="stub-idp-two-contact-details">5 Somewhere Avenue</strong>
-      interstitial_question: |
-        <p>I have a question for you in English</p>
-        <h2 class="govuk-heading-m">Are you sure you want to continue?</h2>
-      interstitial_explanation: |
-        <p>LOA1 Corp will not work for you.</p>
 cy:
   idps:
     stub-idp-loa1:
@@ -21,8 +16,3 @@ cy:
       requirements:
         - a UK passport
         - a UK photocard driving licence
-      interstitial_question: |
-        <p>I have a question for you in Welsh</p>
-        <h2 class="govuk-heading-m">Are you sure you want to continue?</h2>
-      interstitial_explanation: |
-        <p>LOA1 Corp will not work for you.</p>
