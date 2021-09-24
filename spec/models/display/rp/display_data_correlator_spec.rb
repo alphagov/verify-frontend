@@ -1,33 +1,34 @@
 require "spec_helper"
 require "rails_helper"
 require "models/display/rp/display_data_correlator"
-require "display/rp_display_repository"
+require "models/display/rp_display_repository"
+require "models/display/rp_display_data"
 
 module Display
   module Rp
-    describe DisplayDataCorrelator do
+    describe DisplayDataCorrelator, skip_before: true do
       let(:transaction_a_name) { "Transaction A" }
       let(:transaction_2_name) { "Transaction 2" }
       let(:transaction_3_name) { "Transaction 3" }
       let(:transaction_4_name) { "Transaction 4" }
       let(:transaction_b_name) { "Private Transaction B" }
       let(:transaction_a_display_data) do
-        instance_double("Display::RpDisplayData", name: transaction_a_name)
+        instance_double(Display::RpDisplayData, name: transaction_a_name)
       end
       let(:transaction_b_display_data) do
-        instance_double("Display::RpDisplayData", name: transaction_b_name)
+        instance_double(Display::RpDisplayData, name: transaction_b_name)
       end
       let(:transaction_2_display_data) do
-        instance_double("Display::RpDisplayData", name: transaction_2_name)
+        instance_double(Display::RpDisplayData, name: transaction_2_name)
       end
       let(:transaction_3_display_data) do
-        instance_double("Display::RpDisplayData", name: transaction_3_name)
+        instance_double(Display::RpDisplayData, name: transaction_3_name)
       end
       let(:transaction_4_display_data) do
-        instance_double("Display::RpDisplayData", name: transaction_4_name)
+        instance_double(Display::RpDisplayData, name: transaction_4_name)
       end
       let(:rp_display_repository) do
-        instance_double("Display::RpDisplayRepository")
+        instance_double(Display::RpDisplayRepository)
       end
       let(:homepage) { "http://transaction-a.com" }
       let(:homepage_2) { "http://transaction-2.com" }
@@ -47,7 +48,7 @@ module Display
       let(:private_simple_id_loa) { %w(LEVEL_2') }
 
       let(:display_data_correlator) {
-        DisplayDataCorrelator.new(rp_display_repository, [public_simple_id], [private_simple_id])
+        DisplayDataCorrelator.new(rp_display_repository, [public_simple_id])
       }
 
       before(:each) do
@@ -60,12 +61,12 @@ module Display
 
       it "returns the transactions with display name and homepage in the order listed in the relying_parties_config" do
         transaction_data = [
-              { "simpleId" => public_simple_id, "serviceHomepage" => homepage, "loaList" => public_simple_id_loa },
-              { "simpleId" => public_simple_id_2, "serviceHomepage" => homepage_2, "loaList" => public_simple_id_2_loa },
-              { "simpleId" => public_simple_id_3, "serviceHomepage" => homepage_3, "loaList" => public_simple_id_3_loa },
-              { "simpleId" => public_simple_id_4, "serviceHomepage" => homepage_4, "loaList" => public_simple_id_4_loa },
+          { "simpleId" => public_simple_id, "serviceHomepage" => homepage, "loaList" => public_simple_id_loa },
+          { "simpleId" => public_simple_id_2, "serviceHomepage" => homepage_2, "loaList" => public_simple_id_2_loa },
+          { "simpleId" => public_simple_id_3, "serviceHomepage" => homepage_3, "loaList" => public_simple_id_3_loa },
+          { "simpleId" => public_simple_id_4, "serviceHomepage" => homepage_4, "loaList" => public_simple_id_4_loa },
         ]
-        correlator = DisplayDataCorrelator.new(rp_display_repository, [public_simple_id_4, public_simple_id_2, public_simple_id, public_simple_id_3], [])
+        correlator = DisplayDataCorrelator.new(rp_display_repository, [public_simple_id_4, public_simple_id_2, public_simple_id, public_simple_id_3])
         actual_result = correlator.correlate(transaction_data)
         expected_result = DisplayDataCorrelator::Transactions.new(
           [
@@ -74,7 +75,6 @@ module Display
             DisplayDataCorrelator::Transaction.new(transaction_a_name, homepage, public_simple_id_loa),
             DisplayDataCorrelator::Transaction.new(transaction_3_name, homepage_3, public_simple_id_3_loa),
           ],
-          [],
         )
         expect(actual_result).to eq expected_result
       end
@@ -88,14 +88,13 @@ module Display
         actual_result = display_data_correlator.correlate(transaction_data)
         expected_result = DisplayDataCorrelator::Transactions.new(
           [DisplayDataCorrelator::Transaction.new(transaction_a_name, homepage, public_simple_id_loa)],
-          [DisplayDataCorrelator::Transaction.new(transaction_b_name, nil, private_simple_id_loa)],
         )
         expect(actual_result).to eq expected_result
       end
 
-      it "should return transactions with two empty lists when the transactions property is absent" do
-        transaction_data = {}
-        expect(display_data_correlator.correlate(transaction_data)).to eq(DisplayDataCorrelator::Transactions.new([], []))
+      it "should return transactions with an empty list when the transactions property is absent" do
+        transaction_data = []
+        expect(display_data_correlator.correlate(transaction_data)).to eq(DisplayDataCorrelator::Transactions.new([]))
       end
     end
   end

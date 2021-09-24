@@ -18,10 +18,6 @@ module Display
           []
         end
 
-        def name_only
-          []
-        end
-
         def any?
           false
         end
