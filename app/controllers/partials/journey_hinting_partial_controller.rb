@@ -68,7 +68,7 @@ module JourneyHintingPartialController
     journey_hint_entity_id = success_entity_id
     unless journey_hint_entity_id.nil?
       session[:journey_type] = JourneyType::SIGN_IN_LAST_SUCCESSFUL_IDP
-      @identity_provider = decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
+      @identity_provider = decorate_idp_by_entity_id(identity_providers_available_for_sign_in, journey_hint_entity_id)
       return render "shared/sign_in_hint", layout: "main_layout" unless @identity_provider.nil?
     end
 
@@ -77,7 +77,7 @@ module JourneyHintingPartialController
 
   def remove_hint_and_report
     journey_hint_entity_id = success_entity_id
-    idp = journey_hint_entity_id && decorate_idp_by_entity_id(current_available_identity_providers_for_sign_in, journey_hint_entity_id)
+    idp = journey_hint_entity_id && decorate_idp_by_entity_id(identity_providers_available_for_sign_in, journey_hint_entity_id)
     unless idp.nil?
       FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name, session[:transaction_simple_id])
     end

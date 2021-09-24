@@ -80,9 +80,9 @@ private
     from_resume_link_idp_value = resume_link_idp
     if from_resume_link_idp_value.nil?
       last_idp_value = last_idp
-      last_idp_value && decorate_idp_by_entity_id(current_available_identity_providers_for_registration, last_idp_value)
+      last_idp_value && decorate_idp_by_entity_id(identity_providers_available_for_registration, last_idp_value)
     else
-      decorate_idp_by_simple_id(current_available_identity_providers_for_registration, from_resume_link_idp_value)
+      decorate_idp_by_simple_id(identity_providers_available_for_registration, from_resume_link_idp_value)
     end
   end
 
@@ -185,7 +185,7 @@ private
   def is_resume_link_for_pending_idp?(idp_simple_id)
     return false unless is_last_status?(PENDING_STATUS)
 
-    idp = decorate_idp_by_entity_id(current_available_identity_providers_for_registration, last_idp)
+    idp = decorate_idp_by_entity_id(identity_providers_available_for_registration, last_idp)
 
     idp&.simple_id == idp_simple_id
   end

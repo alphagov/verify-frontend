@@ -39,7 +39,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
       given_api_requests_have_been_mocked!
       given_im_on_the_sign_in_page
       expect_any_instance_of(SignInController).to receive(:select_idp_ajax).and_call_original
-      all(:button, idp_display_name)[0].click
+      click_button t("hub.signin.select_idp", display_name: idp_display_name)
       expect(page).to have_current_path(sign_in_warning_path)
       expect(page).to have_button(t("hub.signin.select_idp", display_name: idp_display_name))
       expect(page).to have_link(t("hub.signin.warning.after_link"), href: begin_registration_path)

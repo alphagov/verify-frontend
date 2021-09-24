@@ -7,7 +7,7 @@ class AboutController < ApplicationController
 
   def about_verify
     @tailored_text = current_transaction.tailored_text
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_registration)
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(identity_providers_available_for_registration)
     @next_page_path = is_journey_loa1? ? choose_a_certified_company_path : will_it_work_for_me_path
     render :how_verify_works
   end

@@ -24,7 +24,7 @@ private
 end
 
 def tried_all_idps?
-  possible_idps = current_available_identity_providers_for_registration
+  possible_idps = identity_providers_available_for_registration
 
   if is_journey_loa2?
     suggested_idps = IDP_RECOMMENDATION_ENGINE.get_suggested_idps_for_registration(

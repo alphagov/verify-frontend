@@ -7,7 +7,7 @@ class ChooseACertifiedCompanyLoa2Controller < ChooseACertifiedCompanyRedirectCon
   skip_before_action :render_cross_gov_ga, only: %i{about}
 
   def index
-    idps = current_available_identity_providers_for_registration
+    idps = identity_providers_available_for_registration
     suggestions = IDP_RECOMMENDATION_ENGINE.get_suggested_idps_for_registration(idps, selected_evidence, current_transaction_simple_id)
     @recommended_idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:recommended]))
     @non_recommended_idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(suggestions[:unlikely]))
@@ -27,7 +27,7 @@ class ChooseACertifiedCompanyLoa2Controller < ChooseACertifiedCompanyRedirectCon
     select_viewable_idp_for_registration(params.fetch("entity_id")) do |decorated_idp|
       session[:selected_idp_was_recommended] = IDP_RECOMMENDATION_ENGINE.recommended?(
         decorated_idp.identity_provider,
-        current_available_identity_providers_for_registration,
+        identity_providers_available_for_registration,
         selected_evidence,
         current_transaction_simple_id,
       )

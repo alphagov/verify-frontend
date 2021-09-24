@@ -6,7 +6,7 @@ class ChooseACertifiedCompanyLoa1Controller < ChooseACertifiedCompanyRedirectCon
   skip_before_action :render_cross_gov_ga, only: %i{about}
 
   def index
-    @recommended_idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_registration))
+    @recommended_idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(identity_providers_available_for_registration))
     FEDERATION_REPORTER.report_number_of_idps_recommended(current_transaction, request, @recommended_idps.length)
 
     @show_non_recommended_idps = false

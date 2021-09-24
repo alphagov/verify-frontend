@@ -12,20 +12,20 @@ class SignInController < ApplicationController
 
   def index
     entity_id = success_entity_id
-    all_identity_providers = current_available_identity_providers_for_sign_in + current_disconnected_identity_providers_for_sign_in
+    all_identity_providers = identity_providers_available_for_sign_in + identity_providers_disconnected_for_sign_in
     @suggested_idp = entity_id && decorate_idp_by_entity_id(all_identity_providers, entity_id)
     unless @suggested_idp.nil?
       FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp.display_name)
       @idp_disconnected_hint_html = get_disconnection_hint_text(@suggested_idp.display_name)
     end
 
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_available_identity_providers_for_sign_in)
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(identity_providers_available_for_sign_in)
 
     @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      current_unavailable_identity_providers_for_sign_in,
+      identity_providers_unavailable_for_sign_in,
     )
 
-    @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(current_disconnected_identity_providers_for_sign_in)
+    @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(identity_providers_disconnected_for_sign_in)
 
     render :index
   end

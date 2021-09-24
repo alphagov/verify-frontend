@@ -4,7 +4,7 @@ module ChooseACertifiedCompanyAbout
   include ViewableIdpPartialController
 
   def about
-    selected_idp = current_available_identity_providers_for_registration.detect { |idp| idp.simple_id == params[:company] }
+    selected_idp = identity_providers_available_for_registration.detect { |idp| idp.simple_id == params[:company] }
     @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_idp)
     if @idp.viewable?
       render "choose_a_certified_company/about"

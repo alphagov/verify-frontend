@@ -49,11 +49,11 @@ describe SignInController do
     end
 
     it "will have one available IDP" do
-      expect(subject.current_available_identity_providers_for_sign_in.length).to eq(1)
+      expect(subject.identity_providers_available_for_sign_in.length).to eq(1)
     end
 
     it "will have one unavilable IDP" do
-      expect(subject.current_disconnected_identity_providers_for_sign_in.length).to eq(1)
+      expect(subject.identity_providers_disconnected_for_sign_in.length).to eq(1)
     end
   end
 
@@ -113,11 +113,11 @@ describe SignInController do
       end
 
       it "will have one temporarily unavailable IDP" do
-        expect(subject.current_unavailable_identity_providers_for_sign_in.length).to eq(1)
+        expect(subject.identity_providers_unavailable_for_sign_in.length).to eq(1)
       end
 
       it "will have two available IDPs" do
-        expect(subject.current_available_identity_providers_for_sign_in.length).to eq(2)
+        expect(subject.identity_providers_available_for_sign_in.length).to eq(2)
       end
 
       context "with idp journey hint cookie" do

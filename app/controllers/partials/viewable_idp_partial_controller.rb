@@ -1,20 +1,20 @@
 module ViewableIdpPartialController
   def select_viewable_idp_for_sign_in(entity_id)
-    for_viewable_idp(entity_id, current_available_identity_providers_for_sign_in) do |decorated_idp|
+    for_viewable_idp(entity_id, identity_providers_available_for_sign_in) do |decorated_idp|
       store_selected_idp_for_session(decorated_idp.identity_provider)
       yield decorated_idp
     end
   end
 
   def select_viewable_idp_for_registration(entity_id)
-    for_viewable_idp(entity_id, current_available_identity_providers_for_registration) do |decorated_idp|
+    for_viewable_idp(entity_id, identity_providers_available_for_registration) do |decorated_idp|
       store_selected_idp_for_session(decorated_idp.identity_provider)
       yield decorated_idp
     end
   end
 
   def select_viewable_idp_for_single_idp_journey(entity_id)
-    for_viewable_idp(entity_id, current_identity_providers_for_single_idp) do |decorated_idp|
+    for_viewable_idp(entity_id, identity_providers_for_single_idp) do |decorated_idp|
       store_selected_idp_for_session(decorated_idp.identity_provider)
       yield decorated_idp
     end
@@ -32,27 +32,23 @@ module ViewableIdpPartialController
     end
   end
 
-  def current_identity_providers_for_sign_in
-    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps
+  def identity_providers_available_for_sign_in
+    identity_providers_for_sign_in.select(&:authentication_enabled).reject { |idp| idp.unavailable || idp_disconnecting_for_sign_in?(idp) }
   end
 
-  def current_available_identity_providers_for_sign_in
-    current_identity_providers_for_sign_in.select(&:authentication_enabled).reject { |idp| idp.unavailable || idp_disconnecting_for_sign_in?(idp) }
+  def identity_providers_unavailable_for_sign_in
+    identity_providers_for_sign_in.select(&:unavailable)
   end
 
-  def current_unavailable_identity_providers_for_sign_in
-    current_identity_providers_for_sign_in.select(&:unavailable)
+  def identity_providers_disconnected_for_sign_in
+    identity_providers_for_sign_in.select { |idp| !idp.authentication_enabled || idp_disconnecting_for_sign_in?(idp) }
   end
 
-  def current_disconnected_identity_providers_for_sign_in
-    current_identity_providers_for_sign_in.select { |idp| !idp.authentication_enabled || idp_disconnecting_for_sign_in?(idp) }
-  end
-
-  def current_available_identity_providers_for_registration
+  def identity_providers_available_for_registration
     CONFIG_PROXY.get_available_idp_list_for_registration(session[:transaction_entity_id], session[:requested_loa]).idps.reject { |idp| idp_already_tried?(idp) }
   end
 
-  def current_identity_providers_for_single_idp
+  def identity_providers_for_single_idp
     CONFIG_PROXY.get_idp_list_for_single_idp(session[:transaction_entity_id]).idps
   end
 
@@ -60,12 +56,12 @@ module ViewableIdpPartialController
     idps.reject(&:unavailable) + idps.select(&:unavailable)
   end
 
-  def idp_already_tried?(idp)
-    idps_tried.include? idp.simple_id
-  end
-
   def idp_disconnecting_for_sign_in?(idp)
     idp.provide_authentication_until.present? && idp.provide_authentication_until < 2.hours.from_now
+  end
+
+  def idp_already_tried?(idp)
+    idps_tried.include? idp.simple_id
   end
 
   def idps_tried
@@ -74,5 +70,11 @@ module ViewableIdpPartialController
 
   def mark_idp_as_tried(idp_simple_id)
     session[:idps_tried] = Set.new(session[:idps_tried]).add(idp_simple_id).to_a
+  end
+
+private
+
+  def identity_providers_for_sign_in
+    CONFIG_PROXY.get_idp_list_for_sign_in(session[:transaction_entity_id]).idps
   end
 end

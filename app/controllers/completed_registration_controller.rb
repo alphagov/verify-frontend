@@ -18,7 +18,7 @@ class CompletedRegistrationController < ApplicationController
     else
       # Hack - we need and IDP list, but the current API needs a transaction
       session[:transaction_entity_id] = "https://wwwm.universal-credit.service.gov.uk"
-      identity_providers = current_available_identity_providers_for_sign_in
+      identity_providers = identity_providers_available_for_sign_in
       session[:transaction_entity_id] = nil
 
       entity_id = decorate_idp_by_simple_id(identity_providers, idp_simple_id).entity_id
