@@ -10,8 +10,3 @@ transaction_type:
     - test-rp-noc3
     - loa1-test-rp
     - loa2-loa1-test-rp
-
-redirect_to_rp:
-  test-rp:
-    url: 'http://localhost:50300/test-saml'
-    ab_test: 'test_ab_test'
