@@ -11,12 +11,11 @@ class RecommendationsEngine
 
   def get_suggested_idps_for_registration(idps, user_profile, transaction_simple_id)
     viewable_idps = idps.reject { |idp| is_hidden_for_registration?(idp) }
-    capable_idps = viewable_idps.select { |idp| is_capable?(idp, user_profile) }
     transaction_group = @transaction_grouper.get_transaction_group(transaction_simple_id)
     user_segments = @segment_matcher.find_matching_segments(user_profile)
 
-    recommended_idps = capable_idps.select { |idp| is_recommended_for_segment(idp, user_segments, transaction_group) }
-    unlikely_idps = capable_idps.select { |idp| is_unlikely_for_segment(idp, user_segments, transaction_group) }
+    recommended_idps = viewable_idps.select { |idp| is_recommended_for_segment(idp, user_segments, transaction_group) }
+    unlikely_idps = viewable_idps.select { |idp| is_unlikely_for_segment(idp, user_segments, transaction_group) }
 
     { recommended: recommended_idps, unlikely: unlikely_idps, user_segments: user_segments }
   end
@@ -37,19 +36,6 @@ private
     return false if idp.provide_registration_until.nil?
 
     idp.provide_registration_until - @hide_soft_disconnecting_idps_mins.minutes < DateTime.now
-  end
-
-  def is_capable?(idp, user_profile)
-    @idp_rules[idp.simple_id]&.capabilities&.each do |characteristic_set|
-      if user_profile_contains_all_capabilities(user_profile, characteristic_set)
-        return true
-      end
-    end
-    false
-  end
-
-  def user_profile_contains_all_capabilities(user_profile, capabilities)
-    capabilities.all? { |characteristic| user_profile.include? characteristic.to_sym }
   end
 
   def is_recommended_for_segment(idp, user_segments, transaction_group)

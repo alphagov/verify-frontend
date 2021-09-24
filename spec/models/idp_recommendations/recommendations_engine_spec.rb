@@ -9,18 +9,18 @@ describe "recommendations engine" do
   let(:idp_four) { double(:idp_four, simple_id: "idp4", provide_registration_until: nil) }
   let(:hidden_soft_disconnecting_idp) { double(:hidden_soft_disconnecting_idp, simple_id: "hidden_soft_disconnecting_idp", provide_registration_until: DateTime.now + 14.minutes) }
   let(:not_hidden_soft_disconnecting_idp) { double(:not_hidden_soft_disconnecting_idp, simple_id: "not_hidden_soft_disconnecting_idp", provide_registration_until: DateTime.now + 17.minutes) }
-  let(:less_capable_idp) { double(:less_capable_idp, simple_id: "less_capable_idp", provide_registration_until: nil) }
-  let(:idps) { [idp_one, idp_two, idp_three, idp_four, less_capable_idp, hidden_soft_disconnecting_idp, not_hidden_soft_disconnecting_idp] }
+  let(:equally_capable_idp) { double(:equally_capable_idp, simple_id: "equally_capable_idp", provide_registration_until: nil) }
+  let(:idps) { [idp_one, idp_two, idp_three, idp_four, equally_capable_idp, hidden_soft_disconnecting_idp, not_hidden_soft_disconnecting_idp] }
   let(:user_profile) { %i(driving_licence passport) }
   let(:idp_rules) {
     {
-      "idp" => generate_idp_rules(capabilities: %w(passport), protected_recommended_segments: %w(SEGMENT_1)),
-      "idp2" => generate_idp_rules(capabilities: %w(passport), protected_unlikely_segments: %w(SEGMENT_1 SEGMENT_2)),
-      "idp3" => generate_idp_rules(capabilities: %w(passport)),
-      "idp4" => generate_idp_rules(capabilities: %w(passport), protected_recommended_segments: %w(SEGMENT_3)),
-      "less_capable_idp" => generate_idp_rules(capabilities: %w(passport smart_phone), protected_recommended_segments: %w(SEGMENT_1)),
-      "hidden_soft_disconnecting_idp" => generate_idp_rules(capabilities: %w(passport), protected_recommended_segments: %w(SEGMENT_3)),
-      "not_hidden_soft_disconnecting_idp" => generate_idp_rules(capabilities: %w(passport), protected_recommended_segments: %w(SEGMENT_3)),
+      "idp" => generate_idp_rules(protected_recommended_segments: %w(SEGMENT_1)),
+      "idp2" => generate_idp_rules(protected_unlikely_segments: %w(SEGMENT_1 SEGMENT_2)),
+      "idp3" => generate_idp_rules,
+      "idp4" => generate_idp_rules(protected_recommended_segments: %w(SEGMENT_3)),
+      "equally_capable_idp" => generate_idp_rules(protected_recommended_segments: %w(SEGMENT_1)),
+      "hidden_soft_disconnecting_idp" => generate_idp_rules(protected_recommended_segments: %w(SEGMENT_3)),
+      "not_hidden_soft_disconnecting_idp" => generate_idp_rules(protected_recommended_segments: %w(SEGMENT_3)),
     }
   }
   let(:segment_matcher) { double("segment_matcher") }
@@ -48,7 +48,7 @@ describe "recommendations engine" do
 
     recommended_idps = @recommendations_engine.get_suggested_idps_for_registration(idps, user_profile, "test-rp")
 
-    expected_suggestions = { recommended: [idp_one], unlikely: [idp_two], user_segments: %w(SEGMENT_1) }
+    expected_suggestions = { recommended: [idp_one, equally_capable_idp], unlikely: [idp_two], user_segments: %w(SEGMENT_1) }
     expect(recommended_idps).to eql expected_suggestions
   end
 
@@ -96,13 +96,11 @@ describe "recommendations engine" do
     end
   end
 
-  def generate_idp_rules(capabilities: [],
-                         protected_recommended_segments: [],
+  def generate_idp_rules(protected_recommended_segments: [],
                          protected_unlikely_segments: [],
                          non_protected_recommended_segments: [],
                          non_protected_unlikely_segments: [])
     IdpRules.new(
-      "capabilities" => [capabilities],
       "segments" => {
         "protected" => {
           "recommended" => protected_recommended_segments,
