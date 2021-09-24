@@ -46,14 +46,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
     expect(stub_piwik_request("action_name" => "Sign In Journey Hint Shown - #{idp_name}")).to have_been_made.once
   end
 
-  def and_the_language_hint_is_set
-    expect(page).to have_content("language hint was 'en'")
-  end
-
-  def and_the_hints_are_not_set
-    expect(page).to have_content("hints are ''")
-  end
-
   def then_im_at_the_interstitial_page(locale = "en")
     expect(page).to have_current_path("/#{t('routes.redirect_to_idp_sign_in', locale: locale)}")
   end
@@ -92,8 +84,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
       when_i_select_an_idp idp_display_name
       then_im_at_the_idp
       and_piwik_was_sent_a_signin_event
-      and_the_language_hint_is_set
-      and_the_hints_are_not_set
       expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
     end
 
@@ -106,8 +96,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
       when_i_select_an_idp idp_display_name
       then_im_at_the_idp(ab_value: current_ab_test_value)
       and_piwik_was_sent_a_signin_event
-      and_the_language_hint_is_set
-      and_the_hints_are_not_set
       expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
     end
 
@@ -163,8 +151,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
         when_i_select_an_idp idp_display_name
         then_im_at_the_idp
         and_piwik_was_sent_a_signin_hint_followed_event
-        and_the_language_hint_is_set
-        and_the_hints_are_not_set
         expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
       end
     end
@@ -188,8 +174,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
         when_i_select_an_idp idp_display_name
         then_im_at_the_idp
         and_piwik_was_sent_a_signin_hint_ignored_event
-        and_the_language_hint_is_set
-        and_the_hints_are_not_set
         expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
       end
     end

@@ -44,7 +44,6 @@ Rails.application.config.after_initialize do
   THROTTLING_ENABLED = CONFIG.throttling_enabled
 
   # Feature flags
-  IDP_FEATURE_FLAGS_CHECKER = IdpConfiguration::IdpFeatureFlagsLoader.new(YamlLoader.new).load(CONFIG.rules_directory, %i[send_hints send_language_hint])
   SINGLE_IDP_FEATURE = CONFIG.single_idp_feature
   PUBLISH_HUB_CONFIG_ENABLED = CONFIG.publish_hub_config_enabled
 

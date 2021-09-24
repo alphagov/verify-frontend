@@ -55,8 +55,6 @@ class SignInController < ApplicationController
           "saml_request" => "",
           "relay_state" => "",
           "registration" => false,
-          "hints" => [],
-          "language_hint" => "",
         }
         render json: redirect_obj
       else

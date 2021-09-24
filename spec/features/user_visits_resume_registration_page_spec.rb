@@ -107,7 +107,6 @@ RSpec.describe "When the user visits the resume registration page and " do
       expect(page).to have_content("SAML Request is 'a-saml-request'")
       expect(page).to have_content("relay state is 'a-relay-state'")
       expect(page).to have_content("registration is 'false'")
-      expect(page).to have_content("language hint was 'en'")
       expect(select_idp_stub_request).to have_been_made.once
     end
   end

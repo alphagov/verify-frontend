@@ -34,17 +34,6 @@
           else {
             $samlForm.find('input[name=singleIdpJourneyIdentifier]').remove();
           }
-          
-
-          if (response.hints) {
-            $.each(response.hints, function (index, hint) {
-              $samlForm.append($('<input name="hint" type="hidden">').val(hint));
-            });
-          }
-
-          if (response.language_hint) {
-            $samlForm.append($('<input name="language" type="hidden">').val(response.language_hint));
-          }
 
           $samlForm.submit();
         }).fail(function() {
