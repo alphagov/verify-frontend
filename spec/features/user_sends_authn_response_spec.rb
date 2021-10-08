@@ -33,8 +33,11 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
   end
 
   it "will redirect the user to /confirmation when successfully registered" do
-    api_request = stub_api_authn_response(session_id, "result" => "SUCCESS", "isRegistration" => true, "loaAchieved" => "LEVEL_2")
+    authn_response = { result: "SUCCESS", isRegistration: true, loaAchieved: "LEVEL_2", journey_type: JourneyType::REGISTRATION }
+    api_request = stub_api_authn_response(session_id, authn_response)
+
     stub_session
+    set_journey_type_in_session JourneyType::REGISTRATION
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
     visit("/test-saml?session-id=#{session_id}")
@@ -43,13 +46,17 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
     expect(page).to have_current_path "/confirmation"
     expect(api_request).to have_been_made.once
     expect(a_request(:get, INTERNAL_PIWIK.url)
-      .with(query: hash_including("action_name" => "Success - REGISTER_WITH_IDP at LOA LEVEL_2"))).to have_been_made.once
+             .with(query: hash_including("action_name" => "Success - REGISTER_WITH_IDP at LOA LEVEL_2"))).to have_been_made.once
   end
 
   it "will redirect the user to /cancelled-registration when they cancel at the IDP" do
     set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
+    set_journey_type_in_session JourneyType::REGISTRATION
     page.set_rack_session transaction_simple_id: "test-rp"
-    api_request = stub_api_authn_response(session_id, "result" => "CANCEL", "isRegistration" => true, "loaAchieved" => nil)
+
+    authn_response = { result: "CANCEL", isRegistration: true, loaAchieved: nil, journey_type: JourneyType::REGISTRATION }
+    api_request = stub_api_authn_response(session_id, authn_response)
+
     visit("/test-saml?session-id=#{session_id}")
     click_button "saml-response-post"
 
@@ -59,8 +66,12 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
 
   it "will redirect the user to /failed-registration when they failed registration at the IDP" do
     set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
+    set_journey_type_in_session JourneyType::REGISTRATION
     page.set_rack_session transaction_simple_id: "test-rp"
-    api_request = stub_api_authn_response(session_id, "result" => "OTHER", "isRegistration" => true, "loaAchieved" => nil)
+
+    authn_response = { result: "OTHER", isRegistration: true, loaAchieved: nil, journey_type: JourneyType::REGISTRATION }
+    api_request = stub_api_authn_response(session_id, authn_response)
+
     visit("/test-saml?session-id=#{session_id}")
     click_button "saml-response-post"
 
@@ -69,7 +80,9 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
   end
 
   it "will redirect the user to /failed-sign-in when they failed sign in at the IDP" do
-    api_request = stub_api_authn_response(session_id, "result" => "OTHER", "isRegistration" => false, "loaAchieved" => nil)
+    authn_response = { result: "OTHER", isRegistration: false, loaAchieved: nil, journey_type: JourneyType::SIGN_IN }
+    api_request = stub_api_authn_response(session_id, authn_response)
+    set_journey_type_in_session JourneyType::SIGN_IN
     set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
 
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
@@ -85,7 +98,9 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
   it "will redirect the user to /response-processing on successful sign in at the IDP" do
     stub_session
     stub_matching_outcome
-    api_request = stub_api_authn_response(session_id, "result" => "SUCCESS", "isRegistration" => false, "loaAchieved" => "LEVEL_2")
+    set_journey_type_in_session JourneyType::SIGN_IN
+    authn_response = { result: "SUCCESS", isRegistration: false, loaAchieved: "LEVEL_2", journey_type: JourneyType::SIGN_IN }
+    api_request = stub_api_authn_response(session_id, authn_response)
 
     visit("/test-saml?session-id=#{session_id}")
     click_button "saml-response-post"
@@ -93,15 +108,17 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
     expect(page).to have_current_path "/response-processing"
     expect(api_request).to have_been_made.once
     expect(a_request(:get, INTERNAL_PIWIK.url)
-               .with(query: hash_including("action_name" => "Success - SIGN_IN_WITH_IDP at LOA LEVEL_2"))).to have_been_made.once
+             .with(query: hash_including("action_name" => "Success - SIGN_IN_WITH_IDP at LOA LEVEL_2"))).to have_been_made.once
   end
 
   it "will redirect the user to /paused on pending response" do
     stub_session
     stub_transaction_details
+    set_journey_type_in_session JourneyType::REGISTRATION
     set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
     stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including)
-    stub_api_request = stub_api_authn_response(session_id, "result" => "PENDING", "isRegistration" => true)
+    authn_response = { result: "PENDING", isRegistration: true, journey_type: JourneyType::REGISTRATION }
+    stub_api_request = stub_api_authn_response(session_id, authn_response)
 
     visit("/test-saml?session-id=#{session_id}")
     click_button "saml-response-post"
@@ -109,6 +126,6 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
     expect(page).to have_current_path "/paused"
     expect(stub_api_request).to have_been_made.once
     expect(a_request(:get, INTERNAL_PIWIK.url)
-               .with(query: hash_including("action_name" => "Paused - REGISTER_WITH_IDP"))).to have_been_made.once
+             .with(query: hash_including("action_name" => "Paused - REGISTER_WITH_IDP"))).to have_been_made.once
   end
 end

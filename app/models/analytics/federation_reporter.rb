@@ -98,27 +98,27 @@ module Analytics
       )
     end
 
-    def report_sign_in_idp_selection(current_transaction, request, idp_display_name)
+    def report_sign_in_idp_selection(current_transaction:, request:, idp_name:)
       report_action(
         current_transaction,
         request,
-        "Sign In - #{idp_display_name}",
+        "Sign In - #{idp_name}",
       )
     end
 
-    def report_single_idp_journey_selection(current_transaction, request, idp_display_name)
+    def report_single_idp_journey_selection(current_transaction:, request:, idp_name:)
       report_action(
         current_transaction,
         request,
-        "Single IDP selected - #{idp_display_name}",
+        "Single IDP selected - #{idp_name}",
       )
     end
 
-    def report_idp_resume_journey_selection(current_transaction, request, idp_display_name)
+    def report_idp_resume_journey_selection(current_transaction:, request:, idp_name:)
       report_action(
         current_transaction,
         request,
-        "Resume - #{idp_display_name}",
+        "Resume - #{idp_name}",
       )
     end
 

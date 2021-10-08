@@ -19,8 +19,16 @@ module UserSessionPartialController
     session[:transaction_entity_id]
   end
 
+  def set_transaction_entity_id(entity_id)
+    session[:transaction_entity_id] = entity_id
+  end
+
   def current_transaction_homepage
     session[:transaction_homepage]
+  end
+
+  def journey_type
+    session[:journey_type]
   end
 
   def requested_loa

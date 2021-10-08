@@ -9,7 +9,7 @@ end
 
 def set_up_session(idp_entity_id)
   stub_api_and_analytics
-  stub_api_idp_list_for_registration(loa: "LEVEL_1")
+  stub_api_idp_list_for_sign_in
   set_session_and_session_cookies!
   set_journey_hint_cookie(idp_entity_id)
   page.set_rack_session(
@@ -66,7 +66,9 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
         visit confirm_your_identity_path
 
         click_button "Sign in with IDCorp"
-        expect(page).to have_current_path("/redirect-to-idp/sign-in")
+        expect(page).to have_current_path(sign_in_path)
+        expect(page).to have_title t("hub.redirect_to_idp.heading")
+
         click_button t("navigation.continue")
         expect(page).to have_current_path(ApiTestHelper::IDP_LOCATION)
       end
@@ -140,6 +142,7 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
   describe "when the user changes language" do
     it "will preserve the language from sign-in" do
       set_up_session("stub-idp-one")
+      set_journey_type_in_session(JourneyType::SIGN_IN)
       stub_api_idp_list_for_sign_in
       stub_session_creation
       visit "/sign-in"

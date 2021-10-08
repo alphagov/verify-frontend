@@ -1,34 +1,8 @@
 module ViewableIdpPartialController
-  def select_viewable_idp_for_sign_in(entity_id)
-    for_viewable_idp(entity_id, identity_providers_available_for_sign_in) do |decorated_idp|
+  def select_viewable_idp(entity_id)
+    for_viewable_idp(entity_id, get_idp_list_for_journey) do |decorated_idp|
       store_selected_idp_for_session(decorated_idp.identity_provider)
       yield decorated_idp
-    end
-  end
-
-  def select_viewable_idp_for_registration(entity_id)
-    for_viewable_idp(entity_id, identity_providers_available_for_registration) do |decorated_idp|
-      store_selected_idp_for_session(decorated_idp.identity_provider)
-      yield decorated_idp
-    end
-  end
-
-  def select_viewable_idp_for_single_idp_journey(entity_id)
-    for_viewable_idp(entity_id, identity_providers_for_single_idp) do |decorated_idp|
-      store_selected_idp_for_session(decorated_idp.identity_provider)
-      yield decorated_idp
-    end
-  end
-
-  def for_viewable_idp(entity_id, identity_provider_list)
-    matching_idp = identity_provider_list.detect { |idp| idp.entity_id == entity_id }
-    idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
-    if idp.viewable?
-      yield idp
-    else
-      simple_id = matching_idp.nil? ? nil : matching_idp.simple_id
-      logger.error "Viewable IdP not found for entity ID #{entity_id} with simple ID #{simple_id}"
-      render_not_found
     end
   end
 
@@ -75,12 +49,16 @@ module ViewableIdpPartialController
   end
 
   def idps_tried
-    session[:idps_tried] = Set.new(session[:idps_tried]) unless session[:idps_tried].is_a? Set
-    session[:idps_tried]
+    session[:idps_tried] = Set.new(session[:idps_tried])
   end
 
   def mark_idp_as_tried(idp_simple_id)
     idps_tried.add(idp_simple_id)
+  end
+
+  def track_selected_idp(idp_name)
+    selected_idps << idp_name
+    selected_idps.shift if selected_idps.size > 5
   end
 
 private
@@ -105,5 +83,33 @@ private
 
   def idp_already_tried?(idp)
     idps_tried.include? idp.simple_id
+  end
+
+  def selected_idps
+    session[:selected_idp_names] = [] unless session[:selected_idp_names]
+    session[:selected_idp_names]
+  end
+
+  def get_idp_list_for_journey
+    case session[:journey_type]
+    when JourneyType::SIGN_IN, JourneyType::SIGN_IN_LAST_SUCCESSFUL_IDP
+      identity_providers_available_for_sign_in
+    when JourneyType::REGISTRATION, JourneyType::RESUMING
+      identity_providers_available_for_registration
+    when JourneyType::SINGLE_IDP
+      identity_providers_for_single_idp
+    else
+      raise ArgumentError.new("Unsupported journey type '#{session[:journey_type]}'")
+    end
+  end
+
+  def for_viewable_idp(entity_id, identity_provider_list)
+    matching_idp = identity_provider_list.detect { |idp| idp.entity_id == entity_id }
+    idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(matching_idp)
+    if idp.viewable?
+      yield idp
+    else
+      something_went_wrong("Viewable IDP not found for entity ID #{entity_id} with simple ID #{matching_idp&.simple_id}", :not_found)
+    end
   end
 end

@@ -1,66 +1,39 @@
-require "partials/idp_selection_partial_controller"
-require "partials/viewable_idp_partial_controller"
-require "partials/analytics_cookie_partial_controller"
-
-class SignInController < ApplicationController
-  include IdpSelectionPartialController
-  include ViewableIdpPartialController
-  include AnalyticsCookiePartialController
+class SignInController < IdpSelectionController
   include ActionView::Helpers::UrlHelper
 
   protect_from_forgery with: :exception, except: :warn_idp_disconnecting
 
+  helper_method :get_disconnection_hint_text
+
   def index
-    entity_id = success_entity_id
-    all_identity_providers = identity_providers_available_for_sign_in + identity_providers_disconnected_for_sign_in
-    @suggested_idp = entity_id && decorate_idp_by_entity_id(all_identity_providers, entity_id)
-    unless @suggested_idp.nil?
+    all_idps = identity_providers_for_sign_in
+
+    if success_entity_id
+      @suggested_idp = decorate_idp_by_entity_id(all_idps[:available] + all_idps[:disconnected], success_entity_id)
       FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp.display_name)
-      @idp_disconnected_hint_html = get_disconnection_hint_text(@suggested_idp.display_name)
     end
 
-    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(identity_providers_available_for_sign_in)
-
-    @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(
-      identity_providers_unavailable_for_sign_in,
-    )
-
-    @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(identity_providers_disconnected_for_sign_in)
+    @available_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(all_idps[:available])
+    @unavailable_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(all_idps[:unavailable])
+    @disconnected_idps = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(all_idps[:disconnected])
 
     render :index
   end
 
   def select_idp
-    select_viewable_idp_for_sign_in(params.fetch("entity_id")) do |decorated_idp|
-      set_journey_hint_followed(decorated_idp.entity_id)
-      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      if idp_disconnecting(decorated_idp)
-        redirect_to sign_in_warning_path
-      else
-        redirect_to redirect_to_idp_sign_in_path
-      end
+    unless select_idp_for_sign_in(params.fetch("entity_id", nil)) { redirect_to_idp }
+      redirect_to sign_in_warning_path
+    end
+  end
+
+  def select_idp_ajax
+    unless select_idp_for_sign_in(params.fetch("entityId", nil)) { ajax_idp_redirection_request }
+      render json: { location: sign_in_warning_path }
     end
   end
 
   def confirm_idp
-    redirect_to redirect_to_idp_sign_in_path
-  end
-
-  def select_idp_ajax
-    select_viewable_idp_for_sign_in(params.fetch("entityId")) do |decorated_idp|
-      sign_in(decorated_idp.entity_id, decorated_idp.display_name)
-      if idp_disconnecting(decorated_idp)
-        redirect_obj = {
-          "location" => sign_in_warning_path.to_s,
-          "saml_request" => "",
-          "relay_state" => "",
-          "registration" => false,
-        }
-        render json: redirect_obj
-      else
-        ajax_idp_redirection_sign_in_request(decorated_idp.entity_id)
-      end
-    end
+    redirect_to_idp
   end
 
   def warn_idp_disconnecting
@@ -69,21 +42,24 @@ class SignInController < ApplicationController
 
 private
 
-  def idp_disconnecting(idp)
-    disconnection_time = idp.provide_authentication_until
-    disconnection_time && DateTime.now > disconnection_time - 1.month
+  def select_idp_for_sign_in(entity_id)
+    register_idp_selection_in_session(entity_id) do |decorated_idp|
+      unless idp_disconnecting_for_sign_in(decorated_idp)
+        if has_journey_hint?
+          FEDERATION_REPORTER.report_sign_in_idp_selection_after_journey_hint(current_transaction, request, session[:selected_idp_name], session[:user_followed_journey_hint])
+        else
+          FEDERATION_REPORTER.report_sign_in_idp_selection(current_transaction: current_transaction, request: request, idp_name: session[:selected_idp_name])
+        end
+
+        yield decorated_idp
+        return true
+      end
+    end
   end
 
-  def sign_in(entity_id, idp_name)
-    POLICY_PROXY.select_idp(session[:verify_session_id],
-                            entity_id,
-                            session[:requested_loa],
-                            false,
-                            persistent_session_id,
-                            session[:journey_type],
-                            ab_test_with_alternative_name)
-    set_attempt_journey_hint(entity_id)
-    session[:selected_idp_name] = idp_name
+  def idp_disconnecting_for_sign_in(idp)
+    disconnection_time = idp.provide_authentication_until
+    disconnection_time && DateTime.now > disconnection_time - 1.month
   end
 
   def get_disconnection_hint_text(idp_name)

@@ -62,7 +62,22 @@ RSpec.describe "When the user visits the continue to your IDP page" do
       visit continue_to_your_idp_path
       click_button t("hub.single_idp_journey.continue_button", display_name: idp_display_name)
 
-      expect(page).to have_current_path(redirect_to_single_idp_path)
+      expect(page).to have_current_path(continue_to_your_idp_path)
+      expect(stub_select_idp_request).to have_been_made.once
+      expect(stub_piwik_request("action_name" => "Single IDP selected - #{idp_display_name}")).to have_been_made.once
+    end
+
+    it "redirects the user to the IDP on clicking Continue" do
+      set_single_idp_journey_cookie
+      stub_select_idp_request
+      stub_session_idp_authn_request
+
+      visit continue_to_your_idp_path
+      click_button t("hub.single_idp_journey.continue_button", display_name: idp_display_name)
+      expect(page).to have_title t("hub.redirect_to_idp.heading")
+
+      click_button t("navigation.continue")
+      expect(page).to have_current_path(ApiTestHelper::IDP_LOCATION)
       expect(stub_select_idp_request).to have_been_made.once
       expect(stub_piwik_request("action_name" => "Single IDP selected - #{idp_display_name}")).to have_been_made.once
     end

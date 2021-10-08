@@ -7,11 +7,12 @@ class ConfirmYourIdentityController < ApplicationController
 
   def index
     journey_hint_idp_entity_id = attempted_entity_id
+    session[:journey_type] = JourneyType::SIGN_IN
 
     if journey_hint_idp_entity_id.nil?
       cookie_error("missing verify-front-journey-hint")
     else
-      idp = decorate_idp_by_entity_id(identity_providers_available_for_registration, journey_hint_idp_entity_id)
+      idp = decorate_idp_by_entity_id(identity_providers_available_for_sign_in, journey_hint_idp_entity_id)
 
       if idp.nil?
         cookie_error("invalid verify-front-journey-hint entity-id #{journey_hint_idp_entity_id}")

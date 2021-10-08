@@ -1,0 +1,35 @@
+<p><%= t 'hub.signin.last_certified', company_name: identity_provider.display_name %></p>
+
+<% if identity_provider.authentication_enabled %>
+  <div class="govuk-grid-row">
+    <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale) %>">
+      <%= render partial: 'shared/idp_list', locals: { identity_providers: [identity_provider] } %>
+    </div>
+  </div>
+<% else %>
+  <div class="govuk-grid-row">
+    <div>
+      <div class="company-full-width">
+        <div class="column-full company">
+          <div class="govuk-grid-column-one-third company-wrapper company-inner">
+            <div class="company-logo">
+              <div class="company-logo-inner">
+                <%= image_tag(identity_provider.logo_path, alt: idp_tagline(identity_provider)) %>
+              </div>
+            </div>
+          </div>
+
+          <div class="govuk-grid-column-two-thirds company-disconnect-text">
+            <h2 class="govuk-heading-m"><%= t('hub.signin.company_no_longer_verifies_title', company: identity_provider.display_name) %></h2>
+            <p><%= raw get_disconnection_hint_text(identity_provider.display_name) %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <p><%= t 'hub.signin.any_certified_company' %></p>
+  </div>
+</div>

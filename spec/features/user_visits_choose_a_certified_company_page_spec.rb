@@ -8,7 +8,71 @@ describe "When the user visits the choose a certified company page" do
     stub_api_idp_list_for_registration
   end
 
-  context "user does a registration journey" do
+  context "redirect to IDP" do
+    let(:encrypted_entity_id) { "an-encrypted-entity-id" }
+    let(:idp_entity_id) { "http://idcorp.com" }
+    let(:idp_display_name) { "IDCorp" }
+
+    context "with JS enabled", js: true do
+      it "will redirect the user to the IDP" do
+        stub_session_idp_authn_request(registration: true)
+        stub_session_select_idp_request(encrypted_entity_id)
+        set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session)
+        set_journey_type_in_session(JourneyType::REGISTRATION)
+
+        visit choose_a_certified_company_path
+
+        expect_any_instance_of(ChooseACertifiedCompanyController).to receive(:select_idp_ajax).and_call_original
+        click_button t("hub.choose_a_certified_company.choose_idp", display_name: idp_display_name)
+
+        expect(page).to have_current_path(ApiTestHelper::IDP_LOCATION)
+        expect(page).to have_content("SAML Request is 'a-saml-request'")
+        expect(page).to have_content("relay state is 'a-relay-state'")
+        expect(page).to have_content("registration is 'true'")
+        expect(cookie_value("verify-front-journey-hint")).to_not be_nil
+
+        expect(a_request(:post, policy_api_uri(select_idp_endpoint(default_session_id)))
+                 .with(body: { PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
+                               PolicyEndpoints::PARAM_PRINCIPAL_IP => ApiTestHelper::ORIGINATING_IP,
+                               PolicyEndpoints::PARAM_REGISTRATION => true,
+                               PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
+                               PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String),
+                               PolicyEndpoints::PARAM_JOURNEY_TYPE => "registration",
+                               PolicyEndpoints::PARAM_VARIANT => nil })).to have_been_made.once
+
+        expect(a_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
+                 .with(headers: { "X_FORWARDED_FOR" => ApiTestHelper::ORIGINATING_IP })).to have_been_made.once
+
+        expect(stub_piwik_report_user_idp_attempt(idp_display_name, default_transaction_id, JourneyType::REGISTRATION)).to have_been_made.once
+        expect(stub_piwik_idp_registration(idp_display_name)).to have_been_made.once
+
+        expect(page.get_rack_session_key("selected_provider")["identity_provider"])
+          .to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
+      end
+    end
+
+    it "redirects the user to IDP on clicking Continue" do
+      stub_api_select_idp
+      set_journey_type_in_session(JourneyType::REGISTRATION)
+      stub_session_idp_authn_request(registration: true)
+
+      visit choose_a_certified_company_path
+
+      click_button t("hub.choose_a_certified_company.choose_idp", display_name: idp_display_name)
+      expect(page).to have_current_path choose_a_certified_company_path
+      expect(page).to have_title t("hub.redirect_to_idp.heading")
+
+      click_button t("navigation.continue")
+      expect(page).to have_http_status 200
+      expect(page).to have_current_path(ApiTestHelper::IDP_LOCATION)
+      expect(page).to have_content("SAML Request is 'a-saml-request'")
+      expect(page).to have_content("relay state is 'a-relay-state'")
+      expect(page).to have_content("registration is 'true'")
+      expect(cookie_value("verify-front-journey-hint")).to_not be_nil
+    end
+  end
+
+  context "user is trying to access an LOA2 service" do
     before :each do
       page.set_rack_session transaction_simple_id: "test-rp"
     end
@@ -18,7 +82,7 @@ describe "When the user visits the choose a certified company page" do
                                             "entityId" => "http://idcorp.com",
                                             "levelsOfAssurance" => %w(LEVEL_2),
                                             "temporarilyUnavailable" => true }])
-      visit "/choose-a-certified-company"
+      visit choose_a_certified_company_path
       expect(page).to have_content t("hub.certified_companies_unavailable.heading", count: 1, company: "IDCorp")
     end
 
@@ -33,12 +97,12 @@ describe "When the user visits the choose a certified company page" do
     end
 
     it "includes the appropriate feedback source" do
-      visit "/choose-a-certified-company"
-      expect_feedback_source_to_be(page, "CHOOSE_A_CERTIFIED_COMPANY_PAGE", "/choose-a-certified-company")
+      visit choose_a_certified_company_path
+      expect_feedback_source_to_be(page, "CHOOSE_A_CERTIFIED_COMPANY_PAGE", choose_a_certified_company_path)
     end
 
     it "displays recommended IDPs" do
-      visit "/choose-a-certified-company"
+      visit choose_a_certified_company_path
 
       expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page).to have_title t("hub.choose_a_certified_company.heading")
@@ -54,7 +118,7 @@ describe "When the user visits the choose a certified company page" do
     it "doesn't display IDPs the user has previously failed to register with" do
       page.set_rack_session(page.get_rack_session.merge(idps_tried: %w[stub-idp-two]))
 
-      visit "/choose-a-certified-company"
+      visit choose_a_certified_company_path
 
       expect(page).to have_current_path(choose_a_certified_company_path)
       expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
@@ -67,7 +131,7 @@ describe "When the user visits the choose a certified company page" do
     end
 
     it "redirects to the choose a certified company about page when selecting About link" do
-      visit "/choose-a-certified-company"
+      visit choose_a_certified_company_path
 
       click_link "About IDCorp"
 
@@ -92,7 +156,7 @@ describe "When the user visits the choose a certified company page" do
     end
 
     it "only LEVEL_1 recommended IDPs are displayed" do
-      visit "/choose-a-certified-company"
+      visit choose_a_certified_company_path
 
       expect(page).to have_current_path(choose_a_certified_company_path)
 
@@ -105,8 +169,9 @@ describe "When the user visits the choose a certified company page" do
       stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one",
                                             "entityId" => "http://idcorp.com",
                                             "levelsOfAssurance" => %w(LEVEL_1),
-                                            "temporarilyUnavailable" => true }], loa: "LEVEL_1")
-      visit "/choose-a-certified-company"
+                                            "temporarilyUnavailable" => true }],
+                                         loa: "LEVEL_1")
+      visit choose_a_certified_company_path
       expect(page).to have_content t("hub.certified_companies_unavailable.heading", count: 1, company: "IDCorp")
     end
   end
@@ -114,7 +179,7 @@ describe "When the user visits the choose a certified company page" do
   it "Shows recommended IDPs" do
     page.set_rack_session transaction_simple_id: "test-rp"
 
-    visit "/choose-a-certified-company"
+    visit choose_a_certified_company_path
 
     expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
     within("#recommended-idps") do
@@ -135,13 +200,13 @@ describe "When the user visits the choose a certified company page" do
       end
 
       it "should render GA elements on choose certified company page" do
-        visit "/choose-a-certified-company"
+        visit choose_a_certified_company_path
 
         expect(page).to have_css "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
       end
 
       it "should not render GA elements on about page" do
-        visit "/choose-a-certified-company"
+        visit choose_a_certified_company_path
 
         click_link "About IDCorp"
 
@@ -159,13 +224,13 @@ describe "When the user visits the choose a certified company page" do
       end
 
       it "should render GA elements on choose certified company page" do
-        visit "/choose-a-certified-company"
+        visit choose_a_certified_company_path
 
         expect(page).to have_css "span#cross-gov-ga-tracker-id", text: "UA-XXXXX-Y"
       end
 
       it "should not render GA elements on about page" do
-        visit "/choose-a-certified-company"
+        visit choose_a_certified_company_path
 
         click_link "About IDCorp"
 

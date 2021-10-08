@@ -19,11 +19,14 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <div id="recommended-idps">
-        <% @recommended_idps.each.with_index do |identity_provider, index| %>
-          <%= render partial: 'choose_a_certified_company/idp_option', locals: { recommended: true, identity_provider: identity_provider, order: index + 1 } %>
-        <% end %>
+        <div class="js-continue-to-idp" data-location="<%= url_for(controller: 'choose_a_certified_company', action: 'select_idp_ajax', locale: I18n.locale) %>">
+          <% @idps.each.with_index do |identity_provider, index| %>
+            <%= render partial: 'choose_a_certified_company/idp_option', locals: { identity_provider: identity_provider, order: index + 1 } %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
+  <%= render partial: 'shared/continue_to_idp_form' %>
   <%= javascript_include_tag 'piwik_idp_picker_tracking' %>
 </div>

@@ -1,8 +1,8 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-heading-m"><%= t('hub.certified_companies_unavailable.heading',
-                                     count: unavailable_identity_providers.length,
-                                     company: unavailable_identity_providers.first.display_name) %></h2>
+                                      count: unavailable_identity_providers.length,
+                                      company: unavailable_identity_providers.first.display_name) %></h2>
     <p><%=
       t('hub.certified_companies_unavailable.verify_another_company_html', link: link_to(t('hub.certified_companies_unavailable.verify_another_company_link'), about_certified_companies_path))
     %></p>
