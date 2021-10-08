@@ -13,15 +13,12 @@ describe ChooseACertifiedCompanyLoa2Controller do
 
   context "#index" do
     it "renders both IDPs on the picker page" do
-      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(6, "LEVEL_2", "analytics description for test-rp")
-
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).once do |idps|
         idps.each { |idp| expect(idp.levels_of_assurance).to include "LEVEL_2" }
       end
 
       get :index, params: { locale: "en" }
 
-      expect(stub_piwik_request).to have_been_made.once
       expect(subject).to render_template(:choose_a_certified_company)
     end
   end
@@ -32,28 +29,13 @@ describe ChooseACertifiedCompanyLoa2Controller do
       expect(session[:selected_provider].entity_id).to eql("http://idcorp.com")
     end
 
-    it "checks whether IDP was recommended" do
-      session[:selected_answers] = {
-          "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
-          "device_type" => { "device_type_other" => true },
-      }
-      post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
-      expect(session[:selected_idp_was_recommended]).to eql(true)
-    end
-
     it "redirects to IDP redirect page by default" do
-      session[:selected_answers] = {
-          "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => false },
-          "device_type" => { "device_type_other" => true },
-      }
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
-
       expect(subject).to redirect_to redirect_to_idp_register_path
     end
 
     it "returns 404 page if IDP is non-existent" do
       post :select_idp, params: { locale: "en", entity_id: "http://notanidp.com" }
-
       expect(response).to have_http_status :not_found
     end
 

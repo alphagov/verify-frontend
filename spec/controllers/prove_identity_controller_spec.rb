@@ -56,7 +56,6 @@ describe ProveIdentityController do
         a_kind_of(Display::RpDisplayData),
         a_kind_of(ActionDispatch::Request),
         "IDCorp",
-        "test-rp",
       )
 
       get :ignore_hint, params: { locale: "en" }

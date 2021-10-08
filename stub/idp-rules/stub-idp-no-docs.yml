@@ -1,9 +1,0 @@
-simpleIds: [ "stub-idp-no-docs" ]
-
-segments:
-  protected:
-    recommended: []
-    unlikely: []
-  non_protected:
-    recommended: []
-    unlikely: []

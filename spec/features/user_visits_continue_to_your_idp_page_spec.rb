@@ -79,7 +79,6 @@ RSpec.describe "When the user visits the continue to your IDP page" do
         verify_session_id: default_session_id,
         requested_loa: "LEVEL_2",
         transaction_entity_id: "some-other-entity-id",
-        selected_answers: { device_type: { device_type_other: true } },
       }
     end
 

@@ -24,6 +24,5 @@ private
 end
 
 def tried_all_idps?
-  possible_idps = identity_providers_available_for_registration
-  (possible_idps - idps_tried.to_a).none?
+  (identity_providers_available_for_registration - idps_tried.to_a).none?
 end

@@ -1,9 +1,0 @@
-simpleIds: [ "stub-idp-loa1" ]
-
-segments:
-  protected:
-    recommended: []
-    unlikely: []
-  non_protected:
-    recommended: []
-    unlikely: []

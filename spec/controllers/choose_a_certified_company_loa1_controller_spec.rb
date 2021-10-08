@@ -19,7 +19,6 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
     it "renders IDP list" do
       set_session_and_cookies_with_loa("LEVEL_1", "test-rp")
-      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(1, "LEVEL_1", "analytics description for test-rp")
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).once do |idps|
         idps.each { |idp| expect(idp.levels_of_assurance).to include "LEVEL_1" }
@@ -28,7 +27,6 @@ describe ChooseACertifiedCompanyLoa1Controller do
       get :index, params: { locale: "en" }
 
       expect(subject).to render_template(:choose_a_certified_company)
-      expect(stub_piwik_request).to have_been_made.once
     end
   end
 
@@ -44,12 +42,6 @@ describe ChooseACertifiedCompanyLoa1Controller do
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp-loa1.com" }
 
       expect(session[:selected_provider].entity_id).to eql("http://idcorp-loa1.com")
-    end
-
-    it "checks whether IDP was recommended" do
-      post :select_idp, params: { locale: "en", entity_id: "http://idcorp-loa1.com" }
-
-      expect(session[:selected_idp_was_recommended]).to eql(true)
     end
 
     it "redirects to IDP warning page by default" do

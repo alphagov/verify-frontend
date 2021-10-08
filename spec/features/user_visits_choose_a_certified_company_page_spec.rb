@@ -1,5 +1,6 @@
 require "feature_helper"
 require "api_test_helper"
+require "piwik_test_helper"
 
 describe "When the user visits the choose a certified company page" do
   before(:each) do
@@ -9,7 +10,7 @@ describe "When the user visits the choose a certified company page" do
 
   context "user does a registration journey" do
     before :each do
-      page.set_rack_session(page.get_rack_session.merge(transaction_simple_id: "test-rp"))
+      page.set_rack_session transaction_simple_id: "test-rp"
     end
 
     it "marks the unavailable IDP as unavailable" do
@@ -19,6 +20,16 @@ describe "When the user visits the choose a certified company page" do
                                             "temporarilyUnavailable" => true }])
       visit "/choose-a-certified-company"
       expect(page).to have_content t("hub.certified_companies_unavailable.heading", count: 1, company: "IDCorp")
+    end
+
+    it "doesn't display IDPs disconnecting for registration" do
+      stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-one",
+                                            "entityId" => "http://idcorp.com",
+                                            "levelsOfAssurance" => %w(LEVEL_2),
+                                            "provideRegistrationUntil" => "1990-01-01T00:00:00+00:00" }])
+
+      visit choose_a_certified_company_path
+      expect(page).not_to have_content t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
     end
 
     it "includes the appropriate feedback source" do
@@ -34,9 +45,9 @@ describe "When the user visits the choose a certified company page" do
       expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
 
       within("#recommended-idps") do
-        expect(page).to have_button("Choose IDCorp")
-        expect(page).to have_button("Choose Bob’s Identity Service")
-        expect(page).to have_button("Carol’s Secure ID")
+        expect(page).to have_button(t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name")))
+        expect(page).to have_button(t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-two.name")))
+        expect(page).to have_button(t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-three.name")))
       end
     end
 
@@ -49,9 +60,9 @@ describe "When the user visits the choose a certified company page" do
       expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
 
       within("#recommended-idps") do
-        expect(page).not_to have_button("Choose Bob’s Identity Service")
-        expect(page).to have_button("Choose IDCorp")
-        expect(page).to have_button("Carol’s Secure ID")
+        expect(page).not_to have_button(t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-two.name")))
+        expect(page).to have_button(t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name")))
+        expect(page).to have_button(t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-three.name")))
       end
     end
 
@@ -63,7 +74,7 @@ describe "When the user visits the choose a certified company page" do
       expect(page).to have_current_path(choose_a_certified_company_about_path("stub-idp-one"))
     end
 
-    it "displays the page in Welsh but actually the text is still English" do
+    it "displays the page in Welsh" do
       visit "/dewis-cwmni-ardystiedig"
 
       expect(page).to have_title t("hub.choose_a_certified_company.heading", locale: :cy)
@@ -71,17 +82,12 @@ describe "When the user visits the choose a certified company page" do
     end
   end
 
-  context "user is from an LOA1 service" do
+  context "user is trying to access an LOA1 service" do
     before(:each) do
       stub_api_idp_list_for_registration(loa: "LEVEL_1")
       page.set_rack_session(
         transaction_simple_id: "test-rp",
         requested_loa: "LEVEL_1",
-        selected_answers: {
-          device_type: { device_type_other: true },
-          documents: { passport: true, driving_licence: true },
-          phone: { mobile_phone: true },
-        },
       )
     end
 
@@ -106,15 +112,15 @@ describe "When the user visits the choose a certified company page" do
   end
 
   it "Shows recommended IDPs" do
-    page.set_rack_session(transaction_simple_id: "test-rp")
+    page.set_rack_session transaction_simple_id: "test-rp"
 
     visit "/choose-a-certified-company"
 
     expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
     within("#recommended-idps") do
-      expect(page).to have_button("Choose IDCorp")
-      expect(page).to have_button("Choose Bob’s Identity Service")
-      expect(page).to have_button("Carol’s Secure ID")
+      expect(page).to have_button(t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name")))
+      expect(page).to have_button(t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-two.name")))
+      expect(page).to have_button(t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-three.name")))
     end
   end
 
@@ -125,10 +131,6 @@ describe "When the user visits the choose a certified company page" do
         page.set_rack_session(
           transaction_simple_id: "test-rp",
           requested_loa: "LEVEL_2",
-          selected_answers: {
-            device_type: { device_type_other: true },
-            documents: { has_valid_passport: true, has_driving_license: true, has_phone_can_app: true },
-          },
         )
       end
 
@@ -153,11 +155,6 @@ describe "When the user visits the choose a certified company page" do
         page.set_rack_session(
           transaction_simple_id: "test-rp",
           requested_loa: "LEVEL_1",
-          selected_answers: {
-            device_type: { device_type_other: true },
-            documents: { passport: true, driving_licence: true },
-            phone: { mobile_phone: true },
-          },
         )
       end
 

@@ -185,7 +185,6 @@ module FeatureHelper
       requested_loa: "LEVEL_1",
       transaction_entity_id: "http://www.test-rp.gov.uk/SAML2/MD",
       transaction_homepage: "http://www.test-rp.gov.uk/",
-      selected_answers: { device_type: { device_type_other: true } },
     }
   end
 
@@ -199,7 +198,6 @@ private
       requested_loa: "LEVEL_2",
       transaction_entity_id: "http://www.test-rp.gov.uk/SAML2/MD",
       transaction_homepage: "http://www.test-rp.gov.uk/",
-      selected_answers: { device_type: { device_type_other: true } },
     }
   end
 
@@ -211,7 +209,6 @@ private
       requested_loa: "LEVEL_2",
       transaction_entity_id: "http://www.test-rp.gov.uk/SAML2/MD",
       transaction_homepage: "http://www.test-rp.gov.uk/",
-      selected_answers: { documents: { driving_licence: false }, device_type: { device_type_other: true } },
     }
   end
 

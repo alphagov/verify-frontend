@@ -23,7 +23,7 @@ RSpec.describe "When the user selects an IDP" do
   end
 
   it "reports the IDP name to piwik" do
-    piwik_registration_virtual_page = stub_piwik_idp_registration("IDCorp", recommended: true, segments: [])
+    piwik_registration_virtual_page = stub_piwik_idp_registration("IDCorp")
 
     visit "/choose-a-certified-company"
     click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
@@ -33,10 +33,10 @@ RSpec.describe "When the user selects an IDP" do
   end
 
   it "appends the IDP name on subsequent selections" do
-    idcorp_piwik_request = stub_piwik_idp_registration(t("idps.stub-idp-one.name"), recommended: true, segments: [])
+    idcorp_piwik_request = stub_piwik_idp_registration(t("idps.stub-idp-one.name"))
 
     idcorp_and_bobs_piwik_request = stub_piwik_idp_registration(
-      t("idps.stub-idp-two.name"), recommended: true, idp_list: "#{t('idps.stub-idp-one.name')},#{t('idps.stub-idp-two.name')}", segments: []
+      t("idps.stub-idp-two.name"), idp_list: "#{t('idps.stub-idp-one.name')},#{t('idps.stub-idp-two.name')}"
     )
 
     stub_idp_select_request(idp_2_entity_id, instance_of(String))
@@ -54,7 +54,7 @@ RSpec.describe "When the user selects an IDP" do
 
   it "truncates IdP names" do
     idps = %w(A B C D E)
-    idcorp_piwik_request = stub_piwik_idp_registration("IDCorp", recommended: true, idp_list: idps.join(","), segments: [])
+    idcorp_piwik_request = stub_piwik_idp_registration("IDCorp", idp_list: idps.join(","))
 
     page.set_rack_session(selected_idp_names: idps)
     visit "/choose-a-certified-company"

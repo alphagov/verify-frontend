@@ -13,7 +13,7 @@ class RedirectToIdpController < ApplicationController
     request_form
     increase_attempt_number
     report_user_idp_attempt_to_piwik
-    report_idp_registration_to_piwik(recommended)
+    report_idp_registration_to_piwik
     render :redirect_to_idp
   end
 
@@ -60,18 +60,6 @@ private
   def request_form_for_single_idp_journey(uuid)
     saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
     @request = idp_request_initialisation_for_single_idp_journey(saml_message, uuid)
-  end
-
-  def recommended
-    begin
-      if session.fetch(:selected_idp_was_recommended)
-        "(recommended)"
-      else
-        "(not recommended)"
-      end
-    rescue KeyError
-      "(idp recommendation key not set)"
-    end
   end
 
   def select_idp(entity_id, idp_name)

@@ -62,8 +62,6 @@ private
       current_transaction: current_transaction,
       request: request,
       idp_name: session[:selected_idp_name],
-      user_segments: session[:user_segments],
-      transaction_simple_id: session[:transaction_simple_id],
       attempt_number: session[:attempt_number],
       journey_type: session[:journey_type],
       hint_followed: session[:user_followed_journey_hint],

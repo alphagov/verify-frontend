@@ -75,12 +75,18 @@ def create_custom_variable_param(loa, extra_custom_variables, transaction_analyt
   param
 end
 
-def stub_piwik_idp_registration(idp_name, recommended: false, idp_list: idp_name, loa: "LEVEL_2", segments: %w(other))
-  recommended_str = recommended ? "recommended" : "not recommended"
-  segments = segments.sort.join(", ")
+def stub_piwik_report_user_idp_attempt(idp_name, transaction_id, journey_type = JourneyType::SIGN_IN, attempt_number: 1, loa: "LEVEL_2", hint_present: false, hint_followed: false)
+  piwik_request = {
+    action_name: "ATTEMPT_#{attempt_number} | #{journey_type.downcase} | #{transaction_id} | #{idp_name} | #{'not ' unless hint_present}present | #{'not ' unless hint_followed}followed |",
+  }
+
+  stub_piwik_request(piwik_request, {}, loa)
+end
+
+def stub_piwik_idp_registration(idp_name, loa = "LEVEL_2", idp_list: idp_name)
   idp_selection_custom_variable = %["5":["IDP_SELECTION","#{idp_list}"]]
   piwik_request = {
-    action_name: "#{idp_name} was chosen for registration (#{recommended_str}) with segment(s) #{segments}",
+    action_name: "#{idp_name} was chosen for registration",
   }
 
   stub_piwik_request(piwik_request, {}, loa, [idp_selection_custom_variable])

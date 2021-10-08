@@ -26,9 +26,6 @@ CONFIG = Configuration.load! do
 
   option_int "hide_idps_disconnecting_for_registration_minutes_before", "HIDE_IDPS_DISCONNECTING_FOR_REGISTRATION_MINUTES_BEFORE", default: 30
 
-  option_string "rules_directory", "RULES_DIRECTORY", default: "#{FED_CONFIG_DIR}/idp-rules/"
-  option_string "segment_definitions", "SEGMENT_DEFINITIONS", default: "#{FED_CONFIG_DIR}/segment_definitions.yml"
-
   option_string "zendesk_url", "ZENDESK_URL"
   option_string "zendesk_username", "ZENDESK_USERNAME"
   option_string "zendesk_token", "ZENDESK_TOKEN"

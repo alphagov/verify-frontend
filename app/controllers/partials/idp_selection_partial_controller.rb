@@ -72,22 +72,18 @@ module IdpSelectionPartialController
       current_transaction: current_transaction,
       request: request,
       idp_name: session[:selected_idp_name],
-      user_segments: session[:user_segments],
-      transaction_simple_id: session[:transaction_simple_id],
       attempt_number: session[:attempt_number],
       journey_type: session[:journey_type],
       hint_followed: session[:user_followed_journey_hint],
     )
   end
 
-  def report_idp_registration_to_piwik(recommended)
+  def report_idp_registration_to_piwik
     FEDERATION_REPORTER.report_idp_registration(
       current_transaction: current_transaction,
       request: request,
       idp_name: session[:selected_idp_name],
       idp_name_history: session[:selected_idp_names],
-      recommended: recommended,
-      user_segments: session[:user_segments],
     )
   end
 

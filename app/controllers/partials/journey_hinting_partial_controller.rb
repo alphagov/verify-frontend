@@ -79,7 +79,7 @@ module JourneyHintingPartialController
     journey_hint_entity_id = success_entity_id
     idp = journey_hint_entity_id && decorate_idp_by_entity_id(identity_providers_available_for_sign_in, journey_hint_entity_id)
     unless idp.nil?
-      FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name, session[:transaction_simple_id])
+      FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name)
     end
 
     remove_success_journey_hint
