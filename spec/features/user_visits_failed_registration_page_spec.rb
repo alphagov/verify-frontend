@@ -17,16 +17,6 @@ describe "When the user visits the failed registration page and" do
     end
 
     context "there are more IDPs to try" do
-      before(:each) do
-        session = default_session
-        session[:selected_answers] = {
-          documents: { has_driving_license: true, has_valid_passport: true, has_credit_card: true },
-          device_type: { device_type_other: true },
-        }
-
-        page.set_rack_session(session)
-      end
-
       it "includes expected content for an LOA2 journey" do
         set_loa_in_session("LEVEL_2")
         visit "/failed-registration"
@@ -52,6 +42,7 @@ describe "When the user visits the failed registration page and" do
     context "there are no more IDPs to try" do
       it "includes expected content when LOA2 journey" do
         set_loa_in_session("LEVEL_2")
+        stub_api_idp_list_for_registration([])
         visit "/failed-registration"
 
         expect_page_to_have_main_content_non_continue_for_no_idps
@@ -73,17 +64,14 @@ describe "When the user visits the failed registration page and" do
     end
 
     it "starts a new session and IDPs are available again" do
+      idp = { simpleId: "stub-idp-two", entityId: "http://idcorp.com", levelsOfAssurance: %w(LEVEL_2) }
+
+      stub_api_idp_list_for_registration([])
       set_loa_in_session("LEVEL_2")
       visit "/failed-registration"
       expect_page_to_have_main_content_non_continue_for_no_idps
 
-      session = default_session
-      session[:selected_answers] = {
-        documents: { has_driving_license: true, has_valid_passport: true, has_credit_card: true },
-        device_type: { device_type_other: true },
-      }
-
-      set_session! session
+      stub_api_idp_list_for_registration([idp])
       set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
       page.set_rack_session(transaction_simple_id: DEFAULT_FAILED_REGISTRATION_PAGE_RP)
       set_loa_in_session("LEVEL_2")

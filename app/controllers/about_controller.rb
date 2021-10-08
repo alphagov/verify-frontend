@@ -18,14 +18,6 @@ class AboutController < ApplicationController
   end
 
   def about_documents
-    selected_documents = {
-      has_valid_passport: true,
-      has_driving_license: true,
-      has_phone_can_app: true,
-      has_credit_card: true,
-    }
-
-    selected_answer_store.store_selected_answers("documents", selected_documents)
     render :documents
   end
 

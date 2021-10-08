@@ -25,16 +25,5 @@ end
 
 def tried_all_idps?
   possible_idps = identity_providers_available_for_registration
-
-  if is_journey_loa2?
-    suggested_idps = IDP_RECOMMENDATION_ENGINE.get_suggested_idps_for_registration(
-      possible_idps,
-      selected_evidence,
-      current_transaction_simple_id,
-    )
-
-    possible_idps = suggested_idps[:recommended] + suggested_idps[:unlikely]
-  end
-
   (possible_idps - idps_tried.to_a).none?
 end

@@ -26,29 +26,4 @@
     </div>
   </div>
   <%= javascript_include_tag 'piwik_idp_picker_tracking' %>
-
-  <% if @show_non_recommended_idps && @non_recommended_idps.any? %>
-    <div id="non-recommended-idps">
-      <div class="govuk-grid-row">
-        <div class="grid-row">
-          <div class="column-two-thirds govuk-!-padding-top-3">
-            <p class="govuk-body">
-              <%= t 'hub.choose_a_certified_company.filtered_idps.message_html',
-                    company_count: t('hub.choose_a_certified_company.filtered_idps.company', count: @non_recommended_idps.length) %>
-            </p>
-          </div>
-        </div>
-        <details class="govuk-details" data-module="govuk-details">
-          <summary id="non-recommended-idps-trigger" class="govuk-details__summary">
-            <span class="govuk-details__summary-text"><%= t 'hub.choose_a_certified_company.show_all_companies' %></span>
-          </summary>
-          <div class="govuk-details__text">
-            <% @non_recommended_idps.each.with_index do |identity_provider, index| %>
-              <%= render partial: 'choose_a_certified_company/idp_option', locals: { recommended: false, identity_provider: identity_provider, order: index + 1 } %>
-            <% end %>
-          </div>
-        </details>
-      </div>
-    </div>
-  <% end %>
 </div>

@@ -4,7 +4,6 @@ class StartController < ApplicationController
   include JourneyHintingPartialController
 
   layout "slides"
-  before_action :set_device_type_evidence
 
   def index
     @form = StartForm.new({})

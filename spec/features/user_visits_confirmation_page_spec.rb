@@ -4,7 +4,6 @@ require "api_test_helper"
 RSpec.describe "When user visits the confirmation page" do
   before(:each) do
     page.set_rack_session(
-      selected_idp_was_recommended: true,
       transaction_simple_id: "test-rp",
     )
     set_session_and_session_cookies!
