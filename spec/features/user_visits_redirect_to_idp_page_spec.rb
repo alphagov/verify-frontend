@@ -16,7 +16,7 @@ RSpec.describe "When the user visits the redirect to IDP page" do
   end
 
   it "should have a correct title" do
-    stub_session_idp_authn_request(originating_ip, location, false)
+    stub_session_idp_authn_request
     visit redirect_to_idp_register_path
     expect(page).to have_title t("hub.redirect_to_idp.heading")
   end

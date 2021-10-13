@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
 module ApiTestHelper
   include ConfigEndpoints
   include SamlProxyEndpoints
   include PolicyEndpoints
+
+  ORIGINATING_IP = "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>"
+  IDP_LOCATION = "/test-idp-request-endpoint"
 
   def saml_proxy_api_uri(path)
     URI.join(CONFIG.saml_proxy_host, path)
@@ -171,7 +176,7 @@ module ApiTestHelper
     stub.to_return(body: { "encryptedEntityId" => encrypted_entity_id }.to_json, status: 201)
   end
 
-  def stub_session_idp_authn_request(originating_ip, idp_location, registration)
+  def stub_session_idp_authn_request(originating_ip = ORIGINATING_IP, idp_location = IDP_LOCATION, registration: false)
     stub_request(:get, saml_proxy_api_uri(authn_request_endpoint(default_session_id)))
       .with(headers: { "X_FORWARDED_FOR" => originating_ip })
       .to_return(body: an_authn_request(idp_location, registration).to_json)

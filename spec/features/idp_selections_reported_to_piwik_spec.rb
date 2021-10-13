@@ -3,14 +3,11 @@ require "api_test_helper"
 require "piwik_test_helper"
 
 RSpec.describe "When the user selects an IDP" do
-  let(:location) { "/test-idp-request-endpoint" }
   let(:idp_1_entity_id) { "http://idcorp.com" }
   let(:idp_2_entity_id) { "other-entity-id" }
   let(:idp_3_entity_id) { "a-different-entity-id" }
   let(:idp_1_simple_id) { "stub-idp-one" }
   let(:idp_2_simple_id) { "stub-idp-two" }
-
-  let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
   let(:encrypted_entity_id) { "an-encrypted-entity-id" }
 
   before(:each) do
@@ -19,7 +16,7 @@ RSpec.describe "When the user selects an IDP" do
     stub_api_idp_list_for_sign_in
     stub_api_idp_list_for_registration
     stub_transactions_list
-    stub_session_idp_authn_request(originating_ip, location, false)
+    stub_session_idp_authn_request
   end
 
   it "reports the IDP name to piwik" do
@@ -69,7 +66,7 @@ def stub_idp_select_request(idp_entity_id, journey_type = nil)
   stub_session_select_idp_request(
     encrypted_entity_id,
     PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id,
-    PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
+    PolicyEndpoints::PARAM_PRINCIPAL_IP => ApiTestHelper::ORIGINATING_IP,
     PolicyEndpoints::PARAM_REGISTRATION => true,
     PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2",
     PolicyEndpoints::PARAM_PERSISTENT_SESSION_ID => instance_of(String), # no longer comes from matomo

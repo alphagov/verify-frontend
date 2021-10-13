@@ -47,7 +47,7 @@ describe "user sends authn requests" do
     end
 
     it "will redirect the user to /sign-in when journey hint is set to sign_in" do
-      stub_api_idp_list_for_sign_in(default_idps)
+      stub_api_idp_list_for_sign_in
       stub_session_creation
       # stub_piwik_request = stub_piwik_journey_type_request(
       #   'SIGN_IN',
@@ -147,7 +147,7 @@ describe "user sends authn requests" do
   end
 
   it "will redirect the user to /start when journey hint is set to uk_idp_sign_in in session" do
-    stub_api_idp_list_for_sign_in(default_idps)
+    stub_api_idp_list_for_sign_in
     stub_session_creation
     page.set_rack_session(journey_hint: "uk_idp_sign_in", journey_hint_rp: "test-rp")
     visit("/test-saml")

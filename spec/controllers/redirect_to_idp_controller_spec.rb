@@ -24,7 +24,7 @@ describe RedirectToIdpController do
                               "entity_id" => "http://idcorp.com",
                               "levels_of_assurance" => %w(LEVEL_1 LEVEL_2) }
     before :each do
-      stub_session_idp_authn_request("<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>", "idp-location", true)
+      stub_session_idp_authn_request(registration: true)
       stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
     end
 
@@ -53,7 +53,7 @@ describe RedirectToIdpController do
                                 "levels_of_assurance" => %w(LEVEL_1 LEVEL_2) }
 
       before :each do
-        stub_session_idp_authn_request("<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>", "idp-location", true)
+        stub_session_idp_authn_request(registration: true)
         stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
       end
 
@@ -106,7 +106,7 @@ describe RedirectToIdpController do
       bobs_identity_service_idp_name = "Bob’s Identity Service"
 
       before :each do
-        stub_session_idp_authn_request("<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>", "idp-location", false)
+        stub_session_idp_authn_request
         stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
         set_selected_idp bobs_identity_service
@@ -180,7 +180,7 @@ describe RedirectToIdpController do
       bobs_identity_service_idp_name = "Bob’s Identity Service"
 
       before :each do
-        stub_session_idp_authn_request("<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>", "idp-location", false)
+        stub_session_idp_authn_request
         stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 
         set_selected_idp bobs_identity_service
