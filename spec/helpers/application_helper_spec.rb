@@ -16,7 +16,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(helper.content_for(:page_title)).to eql expected_title
     end
 
-    it "raise ArgumentError when called with nil" do
+    it "raises ArgumentError when called with nil" do
       expect { helper.page_title(nil) }
         .to raise_error ArgumentError, "Missing page title"
     end

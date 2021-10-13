@@ -79,7 +79,6 @@ describe "When the user visits the failed registration page and" do
       visit "/failed-registration"
       expect_page_to_have_main_content_non_continue_for_no_idps
 
-      set_session!
       stub_api_idp_list_for_registration
       set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
       page.set_rack_session(transaction_simple_id: DEFAULT_FAILED_REGISTRATION_PAGE_RP)

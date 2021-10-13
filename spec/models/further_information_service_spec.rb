@@ -1,7 +1,7 @@
 require "rails_helper"
 require "further_information_service"
 
-RSpec.describe FurtherInformationService do
+RSpec.describe FurtherInformationService, skip_before: true do
   let(:display_data_repo) { double(:display_data_repo) }
   let(:policy_proxy) { instance_double("PolicyProxy") }
   let(:service) { FurtherInformationService.new(policy_proxy, display_data_repo) }

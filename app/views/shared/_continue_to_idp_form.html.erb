@@ -1,7 +1,7 @@
-<%= form_tag({}, {id: 'post-to-idp', class: 'hidden', authenticity_token: false, enforce_utf8: false}) do %>
-    <input name=SAMLRequest type=hidden>
-    <input name=RelayState type=hidden>
-    <input name=registration type=hidden>
-    <input name=singleIdpJourneyIdentifier type=hidden>
-    <input type=submit>
+<%= form_tag({}, { id: 'post-to-idp', class: 'hidden', authenticity_token: false, enforce_utf8: false }) do %>
+  <input name=SAMLRequest type=hidden>
+  <input name=RelayState type=hidden>
+  <input name=registration type=hidden>
+  <input name=singleIdpJourneyIdentifier type=hidden>
+  <input type=submit>
 <% end %>

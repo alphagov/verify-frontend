@@ -10,7 +10,7 @@ module UserErrorsPartialController
     when :something_went_wrong
       something_went_wrong(nil, status)
     else
-      raise ArgumentError "Unknown error type specified: '#{partial}'"
+      raise ArgumentError.new("Unknown error type specified: '#{partial}'")
     end
   end
 
