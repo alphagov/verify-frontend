@@ -29,7 +29,7 @@ describe "When the user visits the failed registration page and" do
 
       it "includes expected content for an LOA1 journey" do
         set_loa_in_session("LEVEL_1")
-        stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+        stub_api_idp_list_for_registration(loa: "LEVEL_1")
         visit "/failed-registration"
 
         expect_page_to_have_main_content_non_continue

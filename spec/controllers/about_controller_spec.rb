@@ -10,7 +10,7 @@ describe AboutController do
     before(:each) do
       stub_request(:get, CONFIG.config_api_host + "/config/transactions/enabled")
       set_session_and_cookies_with_loa("LEVEL_1")
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      stub_api_idp_list_for_registration(loa: "LEVEL_1")
     end
 
     context "GET about" do

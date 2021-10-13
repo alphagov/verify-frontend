@@ -14,7 +14,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
 
   context "#index" do
     before :each do
-      stub_api_idp_list_for_registration([stub_idp_loa1], "LEVEL_1")
+      stub_api_idp_list_for_registration([stub_idp_loa1], loa: "LEVEL_1")
     end
 
     it "renders IDP list" do
@@ -37,7 +37,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
       stub_api_select_idp
       set_session_and_cookies_with_loa("LEVEL_1")
       stub_api_idp_list_for_sign_in
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      stub_api_idp_list_for_registration(loa: "LEVEL_1")
     end
 
     it "sets selected IDP in user session" do
@@ -75,7 +75,7 @@ describe ChooseACertifiedCompanyLoa1Controller do
   context "#about" do
     it "returns 404 page if no display data exists for IDP" do
       set_session_and_cookies_with_loa("LEVEL_1")
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      stub_api_idp_list_for_registration(loa: "LEVEL_1")
 
       get :about, params: { locale: "en", company: "unknown-idp" }
 
