@@ -20,8 +20,6 @@ module Display
              :special_no_docs_instructions,
              :no_docs_requirement,
              :contact_details,
-             :interstitial_question,
-             :interstitial_explanation,
              :mobile_app_installation,
              :tagline,
              to: :display_data

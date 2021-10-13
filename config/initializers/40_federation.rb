@@ -22,11 +22,9 @@ Rails.application.config.after_initialize do
 
   # RP/transactions config
   RP_CONFIG = YAML.load_file(CONFIG.rp_config)
-  rps_name_and_homepage = RP_CONFIG["transaction_type"]["display_name_and_homepage"] || []
-  rps_name_only = RP_CONFIG["transaction_type"]["display_name_only"] || []
-  REDIRECT_TO_RP_LIST = RP_CONFIG["redirect_to_rp"] || []
-  DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
-  TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(RP_DISPLAY_REPOSITORY, rps_name_and_homepage.clone, rps_name_only.clone)
+  relying_parties = RP_CONFIG["transaction_type"]["display_name_and_homepage"] || []
+  DATA_CORRELATOR = Display::Rp::DisplayDataCorrelator.new(RP_DISPLAY_REPOSITORY, relying_parties.clone)
+  TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(RP_DISPLAY_REPOSITORY, relying_parties.clone)
 
   SERVICE_LIST_DATA_CORRELATOR = Display::Rp::ServiceListDataCorrelator.new(RP_DISPLAY_REPOSITORY)
 
@@ -46,8 +44,6 @@ Rails.application.config.after_initialize do
   THROTTLING_ENABLED = CONFIG.throttling_enabled
 
   # Feature flags
-  IDP_FEATURE_FLAGS_CHECKER = IdpConfiguration::IdpFeatureFlagsLoader.new(YamlLoader.new)
-                                 .load(CONFIG.rules_directory, %i[send_hints send_language_hint show_interstitial_question show_interstitial_question_loa1])
   SINGLE_IDP_FEATURE = CONFIG.single_idp_feature
   PUBLISH_HUB_CONFIG_ENABLED = CONFIG.publish_hub_config_enabled
 

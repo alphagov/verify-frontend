@@ -16,7 +16,6 @@ describe FailedRegistrationController do
   context "renders LOA1" do
     before :each do
       set_session_and_cookies_with_loa("LEVEL_1")
-      session[:selected_idp_was_recommended] = false
     end
 
     it "displays the default failed registration message" do
@@ -29,7 +28,6 @@ describe FailedRegistrationController do
   context "renders LOA2" do
     before :each do
       set_session_and_cookies_with_loa("LEVEL_2")
-      session[:selected_idp_was_recommended] = false
     end
 
     it "displays the default failed registration message" do

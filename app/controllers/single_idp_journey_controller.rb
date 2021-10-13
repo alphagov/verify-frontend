@@ -24,7 +24,7 @@ class SingleIdpJourneyController < ApplicationController
 
   def continue_to_your_idp
     if valid_cookie? && valid_selection?
-      @idp = decorate_idp_by_entity_id(current_identity_providers_for_single_idp, single_idp_cookie["idp_entity_id"])
+      @idp = decorate_idp_by_entity_id(identity_providers_for_single_idp, single_idp_cookie["idp_entity_id"])
       @service_name = current_transaction.name
       @uuid = single_idp_cookie.fetch("uuid", nil)
       session[:journey_type] = JourneyType::SINGLE_IDP
@@ -129,7 +129,7 @@ private
     uuid = single_idp_cookie.fetch("uuid", nil)
     single_idp_rp_list = get_service_list
 
-    unless current_identity_providers_for_single_idp.select(&:unavailable).select { |idp| idp.entity_id == idp_entity_id }.empty?
+    unless identity_providers_for_single_idp.select(&:unavailable).select { |idp| idp.entity_id == idp_entity_id }.empty?
       logger.info "IDP #{idp_entity_id} is unavailable so not valid for single IDP" + referrer_string
       return false
     end

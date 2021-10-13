@@ -33,7 +33,7 @@ class HintController < ApplicationController
     # We need the list of enabled IDPs, but these lists are mapped against a transaction
     # at this stage there's no transaction but we know this is called from PTA page
     session[:transaction_entity_id] = "https://tax.service.gov.uk/SAML2/PERTAX"
-    identity_providers = current_available_identity_providers_for_sign_in
+    identity_providers = identity_providers_available_for_sign_in
 
     if identity_providers.any?
       idp = decorate_idp_by_entity_id(identity_providers, entity_id)

@@ -4,10 +4,9 @@ module Display
       Transaction = Struct.new(:name, :taxon, :homepage, :loa_list, :headless_startpage)
       Taxon = Struct.new(:name, :transactions)
 
-      def initialize(rp_display_repository, rps_with_homepage_link, rps_with_name_only)
+      def initialize(rp_display_repository, relying_parties)
         @rp_display_repository = rp_display_repository
-        @rps_with_homepage_link = rps_with_homepage_link
-        @rps_with_name_only = rps_with_name_only
+        @relying_parties = relying_parties
       end
 
       def correlate(data)
@@ -15,8 +14,7 @@ module Display
         transaction_list = map_to_transactions(data)
         transaction_list = sort_transactions(transaction_list)
         taxon_groups = group_by_taxon(transaction_list)
-        taxons = sort_taxons(taxon_groups)
-        taxons
+        sort_taxons(taxon_groups)
       rescue KeyError => e
         Rails.logger.error e
         []
@@ -28,19 +26,17 @@ module Display
         data.map do |item|
           simple_id = item.fetch("simpleId")
           display_data = @rp_display_repository.get_translations(simple_id)
-          name_only = @rps_with_name_only.include?(simple_id)
-          homepage = name_only ? nil : item.fetch("serviceHomepage", nil)
-          headless_startpage = name_only ? nil : item.fetch("headlessStartpage", nil)
+          homepage = item.fetch("serviceHomepage", nil)
+          headless_start_page = item.fetch("headlessStartpage", nil)
           # if there's no homepage, move the transaction down to the 'Other service' taxon
           taxon = homepage.nil? ? other_services_translation : display_data.taxon
           loa_list = item.fetch("loaList")
-          Transaction.new(display_data.name, taxon, homepage, loa_list, headless_startpage)
+          Transaction.new(display_data.name, taxon, homepage, loa_list, headless_start_page)
         end
       end
 
       def filter_for_allowed_transactions(data)
-        all_allowed_rps = @rps_with_homepage_link + @rps_with_name_only
-        data.keep_if { |transaction| all_allowed_rps.include? transaction.fetch("simpleId") }
+        data.keep_if { |transaction| @relying_parties.include? transaction.fetch("simpleId") }
       end
 
       def sort_transactions(transactions)
@@ -75,8 +71,8 @@ module Display
 
       def group_by_taxon(transactions)
         transactions
-            .group_by { |transaction| transaction[:taxon] }
-            .map { |name, taxon_transactions| Taxon.new(name, taxon_transactions) }
+          .group_by { |transaction| transaction[:taxon] }
+          .map { |name, taxon_transactions| Taxon.new(name, taxon_transactions) }
       end
     end
   end

@@ -29,7 +29,7 @@ class ChooseACertifiedCompanyRedirectController < ApplicationController
   end
 
   def idp_is_providing_registrations?(idp)
-    current_available_identity_providers_for_registration.any? { |check_idp| check_idp.simple_id == idp.simple_id }
+    identity_providers_available_for_registration.any? { |check_idp| check_idp.simple_id == idp.simple_id }
   end
 
   def other_ways_description

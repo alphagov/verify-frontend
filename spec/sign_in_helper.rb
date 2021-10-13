@@ -1,4 +1,4 @@
-def when_i_select_an_idp idp_display_name
+def when_i_select_an_idp(idp_display_name)
   # There may be multiple identical buttons due to the journey hint
   # so we can't use 'click_button'
   all(:button, idp_display_name)[0].click

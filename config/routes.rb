@@ -46,11 +46,8 @@ Rails.application.routes.draw do
     end
   end
 
-  put "redirect-to-idp-warning", to: "redirect_to_idp_warning#continue_ajax", as: :redirect_to_idp_warning_submit_ajax
   put "select-idp", to: "sign_in#select_idp_ajax", as: :select_idp_submit_ajax
   put "resume-with-idp", to: "paused_registration#resume_with_idp_ajax", as: :resume_with_idp_ajax
-  # Used for tracking ab tests that start in Gov.uk
-  get "redirect-to-rp/:transaction_simple_id", to: "redirect_to_rp#redirect_to_rp"
   get "service-status", to: "service_status#index", as: :service_status
   get "hint", to: "hint#ajax_request"
   get "successful-idp", to: "hint#last_successful_idp"

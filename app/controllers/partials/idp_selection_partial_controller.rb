@@ -44,7 +44,7 @@ module IdpSelectionPartialController
     report_idp_registration_to_piwik(recommended)
     outbound_saml_message = SAML_PROXY_API.authn_request(session[:verify_session_id])
     idp_request = idp_request_initialisation(outbound_saml_message)
-    render json: idp_request.to_json(methods: :hints)
+    render json: idp_request
   end
 
   def ajax_idp_redirection_single_idp_journey_request(uuid)
@@ -92,20 +92,11 @@ module IdpSelectionPartialController
   end
 
   def idp_request_initialisation(outbound_saml_message)
-    IdentityProviderRequest.new(
-      outbound_saml_message,
-      selected_identity_provider.simple_id,
-      selected_answer_store.selected_answers,
-    )
+    IdentityProviderRequest.new(outbound_saml_message)
   end
 
   def idp_request_initialisation_for_single_idp_journey(outbound_saml_message, uuid)
-    IdentityProviderRequest.new(
-      outbound_saml_message,
-      selected_identity_provider.simple_id,
-      selected_answer_store.selected_answers,
-      uuid,
-    )
+    IdentityProviderRequest.new(outbound_saml_message, uuid)
   end
 
   def increase_attempt_number

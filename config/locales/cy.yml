@@ -22,7 +22,6 @@ cy:
     will_not_work_without_uk_address: ni-fydd-yn-gweithio-heb-gyfeiriad-yn-y-du
     choose_a_certified_company: dewis-cwmni-ardystiedig
     unlikely_to_verify: anhebygol-i-ddilysu
-    redirect_to_idp_warning: ailgyfeirio-i-rybudd-idp
     redirect_to_single_idp: redirect-to-single-idp-cy
     continue_to_your_idp: parhau-ich-idp
     idp_wont_work_for_you_one_doc: nid-yw-idp-yn-gweithio-i-chi-un-ddogfen
@@ -282,16 +281,6 @@ cy:
     will_not_work_without_uk_address:
       heading: Ni fyddwch yn gallu defnyddio GOV.UK Verify
       explanation: Rydych angen cyfeiriad presennol yn y DU i gael eich hunaniaeth wedi’i ddilysu.
-    redirect_to_idp_warning:
-      heading: Byddwch nawr yn cael eich ailgyfeirio
-      create_account: Crëwch eich cyfrif hunaniaeth %{display_name}
-      continue_website: Parhau i wefan %{display_name}
-      identity_account_use_html: |
-        <p class="govuk-body">Byddwch nawr yn gwirio pwy ydych chi ar wefan %{display_name}</p>
-        <p class="govuk-body">Byddant yn rhoi cyfrif hunaniaeth i chi y gallwch ei ddefnyddio lle bynnag gwelwch y logo 'GOV.UK Verify' </p>
-      service_use: Yna byddwch yn gallu %{service_name}.
-      other_ways_link: ffyrdd eraill i %{transaction}
-      no_docs_other_ways_message_html: "%{idp_no_docs_requirement}, mae %{other_ways_link}"
     confirm_your_identity:
       use_other_idp: Os nad hwn yw’r cwmni a wnaeth eich dilysu, %{sign_in_link}.
       sign_in_link_message: llofnodwch i mewn gyda chwmni ardystiedig gwahanol

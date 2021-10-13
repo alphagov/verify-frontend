@@ -10,7 +10,6 @@ RSpec.describe "User returns from an IDP with an AuthnResponse" do
   let(:stub_session) {
     set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
     page.set_rack_session(
-      selected_idp_was_recommended: true,
       transaction_simple_id: "test-rp",
       transaction_homepage: "www.example.com",
     )

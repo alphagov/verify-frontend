@@ -4,16 +4,16 @@ en:
       name: "IDCorp"
       tagline: "a really cool identity provider"
       about: |
-          <p>ID Corp is the premier identity proofing service around.</p>
-          <ul class="govuk-list govuk-list--bullet">
-            <li>Identity</li>
-            <li>Verification</li>
-          </ul>
-          <ol>
-            <li>Tell us about yourself</li>
-            <li>Create a password</li>
-          </ol>
-          <p>Once you get verified you can transact with online government services.</p>
+        <p>ID Corp is the premier identity proofing service around.</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Identity</li>
+          <li>Verification</li>
+        </ul>
+        <ol>
+          <li>Tell us about yourself</li>
+          <li>Create a password</li>
+        </ol>
+        <p>Once you get verified you can transact with online government services.</p>
       requirements:
         - a UK passport
         - a UK photocard driving licence
@@ -25,22 +25,16 @@ en:
           <br/>Saturday and Sunday, 8am to 5pm
           <br/>Closed on bank holidays
         </p>
-      interstitial_question: |
-        <p>FancyPants can use existing customers data to verify them.</p>
-        <h2 class="govuk-heading-m">Are you a FancyPants customer?</h2>
-        <p>You will need FancyPants stuff</p>
-      mobile_app_installation:
-        You <b>will</b> have to download an app for IDCorp
 cy:
   idps:
     stub-idp-one:
       name: "Welsh IDCorp"
       about: |
-           <p>ID Corp is the premier identity proofing service around.</p>
-           <ul class="govuk-list govuk-list--bullet">
-             <li>Identity</li>
-             <li>Verification</li>
-           </ul>
+        <p>ID Corp is the premier identity proofing service around.</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Identity</li>
+          <li>Verification</li>
+        </ul>
       requirements:
         - a UK passport
         - a UK photocard driving licence
@@ -52,7 +46,3 @@ cy:
           <br/>Saturday and Sunday, 8am to 5pm
           <br/>Closed on bank holidays
         </p>
-      interstitial_question: |
-        <p>FancyPants can use existing customers data to verify them.</p>
-        <h2 class="govuk-heading-m">Are you a FancyPants customer?</h2>
-        <p>You will need FancyPants stuff</p>

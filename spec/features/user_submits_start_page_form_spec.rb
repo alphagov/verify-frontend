@@ -10,14 +10,6 @@ RSpec.describe "when user submits start page form" do
   let(:location) { "/test-idp-request-endpoint" }
   let(:idp_display_name) { "IDCorp" }
 
-  def and_the_language_hint_is_set
-    expect(page).to have_content("language hint was 'en'")
-  end
-
-  def and_the_hints_are_not_set
-    expect(page).to have_content("hints are ''")
-  end
-
   before :each do
     set_session_and_session_cookies!
   end
@@ -77,8 +69,6 @@ RSpec.describe "when user submits start page form" do
     visit "/start"
     when_i_select_an_idp idp_display_name
     then_im_at_the_idp journey_type: JourneyType::SIGN_IN_LAST_SUCCESSFUL_IDP
-    and_the_language_hint_is_set
-    and_the_hints_are_not_set
     expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
   end
 

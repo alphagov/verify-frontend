@@ -6,7 +6,7 @@ require "display/rp_display_data"
 
 module Display
   module Rp
-    describe TransactionTaxonCorrelator do
+    describe TransactionTaxonCorrelator, skip_before: true do
       let(:simple_id_1) { "test-rp-1" }
       let(:simple_id_2) { "test-rp-2" }
       let(:simple_id_a) { "test-rp-a" }
@@ -26,17 +26,17 @@ module Display
       let(:taxon_working_jobs_and_pensions) { "Working, jobs and pensions" }
       let(:taxon_other_services) { "Other services" }
       let(:repository) { instance_double(Display::RpDisplayRepository) }
-      let(:display_data_1) { instance_double("Display::RpDisplayData", name: transaction_1_name) }
-      let(:display_data_2) { instance_double("Display::RpDisplayData", name: transaction_2_name) }
-      let(:display_data_a) { instance_double("Display::RpDisplayData", name: transaction_a_name) }
-      let(:display_data_b) { instance_double("Display::RpDisplayData", name: transaction_b_name) }
+      let(:display_data_1) { instance_double(Display::RpDisplayData, name: transaction_1_name) }
+      let(:display_data_2) { instance_double(Display::RpDisplayData, name: transaction_2_name) }
+      let(:display_data_a) { instance_double(Display::RpDisplayData, name: transaction_a_name) }
+      let(:display_data_b) { instance_double(Display::RpDisplayData, name: transaction_b_name) }
 
       before(:each) do
         @old_backend = I18n.backend
         I18n.backend = I18n::Backend::Simple.new
         I18n.backend.store_translations("hub.transaction_list.other_services", taxon_other_services)
 
-        @correlator = TransactionTaxonCorrelator.new(repository, [simple_id_1, simple_id_2, simple_id_a, simple_id_b], [])
+        @correlator = TransactionTaxonCorrelator.new(repository, [simple_id_1, simple_id_2, simple_id_a, simple_id_b])
       end
 
       after(:each) do
@@ -138,7 +138,7 @@ module Display
 
       it "should create an other services taxon for transactions without a homepage if it does not already exist" do
         transaction_data = [
-            { "simpleId" => simple_id_1, "loaList" => loa_list },
+          { "simpleId" => simple_id_1, "loaList" => loa_list },
         ]
 
         expect(repository).to receive(:get_translations).with(simple_id_1).and_return display_data_1
@@ -147,12 +147,12 @@ module Display
         actual_result = @correlator.correlate(transaction_data)
 
         expected_result = [
-            TransactionTaxonCorrelator::Taxon.new(
-              taxon_other_services,
-              [
-                  TransactionTaxonCorrelator::Transaction.new(transaction_1_name, taxon_other_services, nil, loa_list),
-              ],
-            ),
+          TransactionTaxonCorrelator::Taxon.new(
+            taxon_other_services,
+            [
+              TransactionTaxonCorrelator::Transaction.new(transaction_1_name, taxon_other_services, nil, loa_list),
+            ],
+          ),
         ]
         expect(actual_result).to eq expected_result
       end
@@ -179,19 +179,19 @@ module Display
         actual_result = @correlator.correlate(transaction_data)
 
         expected_result = [
-            TransactionTaxonCorrelator::Taxon.new(
-              taxon_other_services,
-              [
-                TransactionTaxonCorrelator::Transaction.new(
-                  transaction_1_name, taxon_other_services, homepage,
-                  loa_list, headless_startpage
-                ),
-                TransactionTaxonCorrelator::Transaction.new(
-                  transaction_2_name, taxon_other_services, nil,
-                  loa_list, nil
-                ),
-              ],
-            ),
+          TransactionTaxonCorrelator::Taxon.new(
+            taxon_other_services,
+            [
+              TransactionTaxonCorrelator::Transaction.new(
+                transaction_1_name, taxon_other_services, homepage,
+                loa_list, headless_startpage
+              ),
+              TransactionTaxonCorrelator::Transaction.new(
+                transaction_2_name, taxon_other_services, nil,
+                loa_list, nil
+              ),
+            ],
+          ),
         ]
         expect(actual_result).to eq expected_result
       end
@@ -258,10 +258,10 @@ module Display
 
       it "should sort the transactions within a taxon alphabetically" do
         transaction_data = [
-            { "simpleId" => simple_id_2, "serviceHomepage" => homepage, "loaList" => loa_list },
-            { "simpleId" => simple_id_b, "serviceHomepage" => homepage, "loaList" => loa_list },
-            { "simpleId" => simple_id_a, "serviceHomepage" => homepage, "loaList" => loa_list },
-            { "simpleId" => simple_id_1, "serviceHomepage" => homepage, "loaList" => loa_list },
+          { "simpleId" => simple_id_2, "serviceHomepage" => homepage, "loaList" => loa_list },
+          { "simpleId" => simple_id_b, "serviceHomepage" => homepage, "loaList" => loa_list },
+          { "simpleId" => simple_id_a, "serviceHomepage" => homepage, "loaList" => loa_list },
+          { "simpleId" => simple_id_1, "serviceHomepage" => homepage, "loaList" => loa_list },
         ]
 
         expect(repository).to receive(:get_translations).with(simple_id_1).and_return display_data_1
@@ -276,15 +276,15 @@ module Display
         actual_result = @correlator.correlate(transaction_data)
 
         expected_results = [
-            TransactionTaxonCorrelator::Taxon.new(
-              taxon_benefits,
-              [
-                  TransactionTaxonCorrelator::Transaction.new(transaction_1_name, taxon_benefits, homepage, loa_list),
-                  TransactionTaxonCorrelator::Transaction.new(transaction_2_name, taxon_benefits, homepage, loa_list),
-                  TransactionTaxonCorrelator::Transaction.new(transaction_a_name, taxon_benefits, homepage, loa_list),
-                  TransactionTaxonCorrelator::Transaction.new(transaction_b_name, taxon_benefits, homepage, loa_list),
-              ],
-            ),
+          TransactionTaxonCorrelator::Taxon.new(
+            taxon_benefits,
+            [
+              TransactionTaxonCorrelator::Transaction.new(transaction_1_name, taxon_benefits, homepage, loa_list),
+              TransactionTaxonCorrelator::Transaction.new(transaction_2_name, taxon_benefits, homepage, loa_list),
+              TransactionTaxonCorrelator::Transaction.new(transaction_a_name, taxon_benefits, homepage, loa_list),
+              TransactionTaxonCorrelator::Transaction.new(transaction_b_name, taxon_benefits, homepage, loa_list),
+            ],
+          ),
         ]
 
         expect(actual_result).to eq expected_results
@@ -307,13 +307,13 @@ module Display
         ]
 
         expect(repository).to receive(:get_translations).with(simple_id_1).and_return display_data_1
-        expect(repository).to receive(:get_translations).with(simple_id_2).and_return display_data_2
+        expect(repository).to_not receive(:get_translations).with(simple_id_2)
         expect(repository).to_not receive(:get_translations).with(simple_id_a)
 
         expect(display_data_1).to receive(:taxon).and_return(taxon_benefits)
         expect(display_data_2).to_not receive(:taxon)
 
-        test_correlator = TransactionTaxonCorrelator.new(repository, [simple_id_1], [simple_id_2])
+        test_correlator = TransactionTaxonCorrelator.new(repository, [simple_id_1])
         actual_result = test_correlator.correlate(transaction_data)
 
         expected_results = [
@@ -323,15 +323,6 @@ module Display
               TransactionTaxonCorrelator::Transaction.new(
                 transaction_1_name, taxon_benefits, homepage,
                 loa_list, headless_startpage
-              ),
-            ],
-          ),
-          TransactionTaxonCorrelator::Taxon.new(
-            taxon_other_services,
-            [
-              TransactionTaxonCorrelator::Transaction.new(
-                transaction_2_name, taxon_other_services,
-                nil, loa_list, nil
               ),
             ],
           ),

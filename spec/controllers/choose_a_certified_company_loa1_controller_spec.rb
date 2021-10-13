@@ -12,30 +12,14 @@ describe ChooseACertifiedCompanyLoa1Controller do
     }.freeze
   }
 
-  let(:stub_idp_loa1_with_interstitial) {
-    {
-      simpleId: "stub-idp-loa1-with-interstitial",
-      entityId: "http://idcorp-loa1-with-interstitial.com",
-      levelsOfAssurance: %w(LEVEL_1 LEVEL_2),
-    }.freeze
-  }
-
-  let(:stub_idp_no_interstitial) {
-    {
-      simpleId: "stub-idp-two",
-      entityId: "http://idcorp-two.com",
-      levelsOfAssurance: %w(LEVEL_1),
-    }.freeze
-  }
-
   context "#index" do
     before :each do
-      stub_api_idp_list_for_registration([stub_idp_loa1, stub_idp_loa1_with_interstitial], "LEVEL_1")
+      stub_api_idp_list_for_registration([stub_idp_loa1], "LEVEL_1")
     end
 
     it "renders IDP list" do
       set_session_and_cookies_with_loa("LEVEL_1", "test-rp")
-      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(2, "LEVEL_1", "analytics description for test-rp")
+      stub_piwik_request = stub_piwik_report_number_of_recommended_idps(1, "LEVEL_1", "analytics description for test-rp")
 
       expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).once do |idps|
         idps.each { |idp| expect(idp.levels_of_assurance).to include "LEVEL_1" }
@@ -56,13 +40,6 @@ describe ChooseACertifiedCompanyLoa1Controller do
       stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
     end
 
-    it "resets interstitial answer to no value when IDP is selected" do
-      session[:selected_answers] = { "interstitial" => { "interstitial_yes" => true } }
-      post :select_idp, params: { locale: "en", entity_id: "http://idcorp.com" }
-
-      expect(session[:selected_answers]["interstitial"]).to be_empty
-    end
-
     it "sets selected IDP in user session" do
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp-loa1.com" }
 
@@ -76,7 +53,6 @@ describe ChooseACertifiedCompanyLoa1Controller do
     end
 
     it "redirects to IDP warning page by default" do
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
       post :select_idp, params: { locale: "en", entity_id: "http://idcorp-two.com" }
 
       expect(subject).to redirect_to redirect_to_idp_register_path

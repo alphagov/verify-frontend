@@ -1,7 +1,6 @@
 require "redirect_with_see_other"
 require "cookies/cookies"
 require "errors/warning_level_error"
-require "partials/user_characteristics_partial_controller"
 require "partials/user_errors_partial_controller"
 require "partials/user_cookies_partial_controller"
 require "partials/user_session_partial_controller"
@@ -9,9 +8,7 @@ require "partials/transactions_partial_controller"
 require "partials/analytics_partial_controller"
 
 class ApplicationController < ActionController::Base
-  include DeviceType
   include UserErrorsPartialController
-  include UserCharacteristicsPartialController
   include UserCookiesPartialController
   include UserSessionPartialController
   include TransactionsPartialController

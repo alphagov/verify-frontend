@@ -7,18 +7,9 @@ describe "When the user visits the choose a certified company page" do
     stub_api_idp_list_for_registration
   end
 
-  context "user has two docs and a mobile" do
-    selected_answers = {
-      device_type: { device_type_other: true },
-      documents: { has_valid_passport: true, has_driving_license: true, has_phone_can_app: true },
-    }
+  context "user does a registration journey" do
     before :each do
-      page.set_rack_session(
-        page.get_rack_session.merge(
-          transaction_simple_id: "test-rp",
-          selected_answers: selected_answers,
-        ),
-      )
+      page.set_rack_session(page.get_rack_session.merge(transaction_simple_id: "test-rp"))
     end
 
     it "marks the unavailable IDP as unavailable" do
@@ -45,7 +36,7 @@ describe "When the user visits the choose a certified company page" do
       within("#recommended-idps") do
         expect(page).to have_button("Choose IDCorp")
         expect(page).to have_button("Choose Bob’s Identity Service")
-        expect(page).not_to have_button("Carol’s Secure ID")
+        expect(page).to have_button("Carol’s Secure ID")
       end
     end
 
@@ -58,9 +49,9 @@ describe "When the user visits the choose a certified company page" do
       expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
 
       within("#recommended-idps") do
-        expect(page).to have_button("Choose IDCorp")
         expect(page).not_to have_button("Choose Bob’s Identity Service")
-        expect(page).not_to have_button("Carol’s Secure ID")
+        expect(page).to have_button("Choose IDCorp")
+        expect(page).to have_button("Carol’s Secure ID")
       end
     end
 
@@ -114,43 +105,15 @@ describe "When the user visits the choose a certified company page" do
     end
   end
 
-  it "renders an error page if no IDP recommendations" do
-    page.set_rack_session(
-      transaction_simple_id: "test-rp",
-      selected_answers: {
-        device_type: { device_type_other: true },
-      },
-    )
+  it "Shows recommended IDPs" do
+    page.set_rack_session(transaction_simple_id: "test-rp")
 
     visit "/choose-a-certified-company"
-
-    expect(page).to have_current_path(choose_a_certified_company_path)
-    expect(page).to have_content t("errors.something_went_wrong.heading")
-    expect(page.status_code).to eq(500)
-  end
-
-  it "Shows recommended IDPs, hides non-recommended IDPs" do
-    page.set_rack_session(
-      transaction_simple_id: "test-rp",
-      selected_answers: {
-        "documents" => { "has_driving_license" => true, "has_phone_can_app" => true, "has_valid_passport" => true, "has_credit_card" => true },
-        "device_type" => { "device_type_other" => true },
-      },
-    )
-
-    visit "/choose-a-certified-company"
-    find("span", text: t("hub.choose_a_certified_company.show_all_companies")).click
 
     expect(page).to have_content t("hub.choose_a_certified_company.idp_count")
     within("#recommended-idps") do
       expect(page).to have_button("Choose IDCorp")
       expect(page).to have_button("Choose Bob’s Identity Service")
-      expect(page).not_to have_button("Carol’s Secure ID")
-    end
-
-    within("#non-recommended-idps") do
-      expect(page).not_to have_button("Choose IDCorp")
-      expect(page).not_to have_button("Choose Bob’s Identity Service")
       expect(page).to have_button("Carol’s Secure ID")
     end
   end
