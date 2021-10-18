@@ -1,15 +1,15 @@
 require "feature_helper"
 require "api_test_helper"
 
-def stub_api_and_analytics(idp_location)
+def stub_api_and_analytics(idp_location = ApiTestHelper::IDP_LOCATION)
   stub_session_select_idp_request("an-encrypted-entity-id")
-  stub_session_idp_authn_request(originating_ip, idp_location, false)
+  stub_session_idp_authn_request(ApiTestHelper::ORIGINATING_IP, idp_location)
   stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
 end
 
 def set_up_session(idp_entity_id)
-  stub_api_and_analytics(idp_location)
-  stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+  stub_api_and_analytics
+  stub_api_idp_list_for_registration(loa: "LEVEL_1")
   set_session_and_session_cookies!
   set_journey_hint_cookie(idp_entity_id)
   page.set_rack_session(
@@ -21,9 +21,6 @@ def set_up_session(idp_entity_id)
 end
 
 RSpec.describe "When the user visits the confirm-your-identity page" do
-  let(:idp_location) { "/test-idp-request-endpoint" }
-  let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
-
   describe "and the journey hint cookie is set" do
     before(:each) do
       set_up_session("http://idcorp.com")
@@ -36,29 +33,29 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
     end
 
     it "displays the page in English" do
-      visit "/confirm-your-identity"
+      visit confirm_your_identity_path
       expect(page).to have_title t("hub.signin.sign_in_idp", display_name: "IDCorp")
       expect(page).to have_css "html[lang=en]"
     end
 
     it "includes the appropriate feedback source" do
-      visit "/confirm-your-identity"
-      expect_feedback_source_to_be(page, "CONFIRM_YOUR_IDENTITY", "/confirm-your-identity")
+      visit confirm_your_identity_path
+      expect_feedback_source_to_be(page, "CONFIRM_YOUR_IDENTITY", confirm_your_identity_path)
     end
 
     it "includes rp display name in text" do
-      visit "/confirm-your-identity"
+      visit confirm_your_identity_path
       expect(page).to have_text t("hub.confirm_your_identity.need_to_signin_again", transaction_name: "test GOV.UK Verify user journeys")
     end
 
     it "should include a link to sign-in in case listed idp is incorrect" do
       stub_api_idp_list_for_sign_in
-      visit "/confirm-your-identity"
+      visit confirm_your_identity_path
       expect(page).to have_link t("hub.confirm_your_identity.sign_in_link_message"), href: "/sign-in"
     end
 
     it "should display only the idp that the user last verified with" do
-      visit "/confirm-your-identity"
+      visit confirm_your_identity_path
       expect(page).to have_button "Sign in with IDCorp"
       expect(page).to have_css(".company", count: 1)
     end
@@ -66,20 +63,21 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
     describe "and js is disabled" do
       it "should display the interstitial page" do
         stub_api_idp_list_for_sign_in
-        visit "/confirm-your-identity"
+        visit confirm_your_identity_path
+
         click_button "Sign in with IDCorp"
         expect(page).to have_current_path("/redirect-to-idp/sign-in")
         click_button t("navigation.continue")
-        expect(page).to have_current_path(idp_location)
+        expect(page).to have_current_path(ApiTestHelper::IDP_LOCATION)
       end
     end
 
     describe "and js is enabled", js: true do
       it "should redirect to the IDP sign in page" do
         stub_api_idp_list_for_sign_in
-        visit "/confirm-your-identity"
+        visit confirm_your_identity_path
         click_button "Sign in with IDCorp"
-        expect(page).to have_current_path(idp_location)
+        expect(page).to have_current_path(ApiTestHelper::IDP_LOCATION)
       end
     end
 
@@ -87,20 +85,26 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
       it "should update the cookie" do
         stub_api_idp_list_for_sign_in
         # User has previously chosen IDCorp
-        visit "/confirm-your-identity"
+        visit confirm_your_identity_path
         expect(page).to have_button("Sign in with IDCorp")
 
         # User returns to sign in page and selects a new IDP
         click_link "sign in with a different certified company"
         new_idp_location = "/another-idp-endpoint"
         stub_api_and_analytics(new_idp_location)
+
         click_button "Select Bob’s Identity Service"
+        expect(page).to have_title t("hub.redirect_to_idp.heading")
+
         click_button t("navigation.continue")
         expect(page).to have_current_path(new_idp_location)
 
         # The new IDP is displayed for non-repudiation
-        visit "/confirm-your-identity"
+        visit confirm_your_identity_path
+
         click_button "Sign in with Bob’s Identity Service"
+        expect(page).to have_title t("hub.redirect_to_idp.heading")
+
         click_button t("navigation.continue")
         expect(page).to have_current_path(new_idp_location)
       end
@@ -111,7 +115,7 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
     it "should redirect to sign in page when the journey cookie is not set" do
       set_session_and_session_cookies!
       stub_api_idp_list_for_sign_in
-      visit "/confirm-your-identity"
+      visit confirm_your_identity_path
       expect(page).to have_title t("hub.signin.heading")
       expect(page).to have_current_path(sign_in_path)
     end
@@ -119,7 +123,7 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
     it "should redirect to sign in page when the journey cookie has a nil value" do
       set_session_and_session_cookies!
       stub_api_idp_list_for_sign_in
-      visit "/confirm-your-identity"
+      visit confirm_your_identity_path
       expect(page).to have_title t("hub.signin.heading")
       expect(page).to have_current_path(sign_in_path)
     end
@@ -127,7 +131,7 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
     it "should redirect to sign in page when the journey cookie has an invalid entity ID" do
       set_up_session("bad-entity-id")
       stub_api_idp_list_for_sign_in
-      visit "/confirm-your-identity"
+      visit confirm_your_identity_path
       expect(page).to have_title t("hub.signin.heading")
       expect(page).to have_current_path(sign_in_path)
     end

@@ -6,7 +6,7 @@ require "sign_in_helper"
 RSpec.describe "user selects an IDP on the sign in page" do
   def given_api_requests_have_been_mocked!
     stub_session_select_idp_request(encrypted_entity_id)
-    stub_session_idp_authn_request(originating_ip, location, false)
+    stub_session_idp_authn_request
   end
 
   def given_the_piwik_request_has_been_stubbed
@@ -51,6 +51,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
   end
 
   def when_i_choose_to_continue
+    expect(page).to have_title t("hub.redirect_to_idp.heading")
     click_button t("navigation.continue")
   end
 
@@ -60,6 +61,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
 
   let(:idp_entity_id) { "http://idcorp.com" }
   let(:idp_display_name) { "IDCorp" }
+  let(:encrypted_entity_id) { "an-encrypted-entity-id" }
   let(:current_ab_test_value) { "sign_in_hint_control" }
   let(:transaction_analytics_description) { "analytics description for test-rp" }
   let(:body) {
@@ -71,10 +73,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
       { "simpleId" => "stub-idp-four", "entityId" => "idp-four" },
     ]
   }
-
-  let(:location) { "/test-idp-request-endpoint" }
-  let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
-  let(:encrypted_entity_id) { "an-encrypted-entity-id" }
 
   context "with JS enabled", js: true do
     it "will redirect the user to the IDP" do

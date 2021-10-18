@@ -147,9 +147,23 @@ class StubApi < Sinatra::Base
 
   post '/SAML2/SSO/API/RECEIVER/Response/POST' do
     {
-      result: "blah",
+      result: "SUCCESS",
       isRegistration: false,
       loaAchieved: "LEVEL_2"
+    }.to_json
+  end
+
+  get '/SAML2/SSO/API/SENDER/RESPONSE' do
+    {
+      postEndpoint: "http://localhost:50300",
+      samlMessage: "saml-message",
+      relayState: params['sessionId']
+    }.to_json
+  end
+
+  get '/policy/received-authn-request/:session_id/response-from-idp/response-processing-details' do
+    {
+      responseProcessingStatus: 'SEND_SUCCESSFUL_MATCH_RESPONSE_TO_TRANSACTION'
     }.to_json
   end
 
@@ -177,7 +191,7 @@ class StubApi < Sinatra::Base
   get '/config/transactions/single-idp-enabled-list' do
     [{
        simpleId: "test-rp",
-       redirectUrl: "http://example.com/test-saml",
+       redirectUrl: "http://localhost:50300/test-saml",
        loaList: ["LEVEL_2"],
        entityId: "http://www.test-rp.gov.uk/SAML2/MD"
      },

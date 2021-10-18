@@ -11,14 +11,14 @@ describe PublishHubConfigController do
   context "#service-status" do
     it "should return 200 response" do
       request.headers[:'X-Self-Service-Authentication'] = authentication_header
-      stub_hub_config_healthcheck
+      stub_hub_config_health_check
       get :service_status, params: { locale: "en" }
       expect(response).to have_http_status(:ok)
     end
 
     it "should return same response code as the upstream healthcheck" do
       request.headers[:'X-Self-Service-Authentication'] = authentication_header
-      stub_hub_config_healthcheck(status: 502)
+      stub_hub_config_health_check(status: 502)
       get :service_status, params: { locale: "en" }
       expect(response).to have_http_status(502)
     end

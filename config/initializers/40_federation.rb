@@ -1,7 +1,4 @@
 require "yaml_loader"
-require "idp_recommendations/idp_profiles_loader"
-require "idp_recommendations/segment_matcher"
-require "idp_recommendations/recommendations_engine"
 
 Rails.application.config.after_initialize do
   # Federation localisation and display
@@ -27,18 +24,6 @@ Rails.application.config.after_initialize do
   TRANSACTION_TAXON_CORRELATOR = Display::Rp::TransactionTaxonCorrelator.new(RP_DISPLAY_REPOSITORY, relying_parties.clone)
 
   SERVICE_LIST_DATA_CORRELATOR = Display::Rp::ServiceListDataCorrelator.new(RP_DISPLAY_REPOSITORY)
-
-  # IDP Recommendations
-  idp_rules_loader = IdpProfilesLoader.new(yaml_loader)
-  idp_rules = idp_rules_loader.parse_config_files(CONFIG.rules_directory)
-
-  # Segment Definitions
-  segment_config = YAML.load_file(CONFIG.segment_definitions)
-  segment_matcher = SegmentMatcher.new(segment_config)
-
-  # Recommendation Engines
-  transaction_grouper = TransactionGroups::TransactionGrouper.new(RP_CONFIG)
-  IDP_RECOMMENDATION_ENGINE = RecommendationsEngine.new(idp_rules, segment_matcher, transaction_grouper, CONFIG.hide_idps_disconnecting_for_registration_minutes_before)
 
   FEEDBACK_DISABLED = CONFIG.feedback_disabled
   THROTTLING_ENABLED = CONFIG.throttling_enabled

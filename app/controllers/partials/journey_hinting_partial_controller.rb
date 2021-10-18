@@ -3,6 +3,7 @@ require "partials/viewable_idp_partial_controller"
 # Shared methods for controllers which use the journey hint cookie to give users IDP suggestions
 module JourneyHintingPartialController
   include ViewableIdpPartialController
+
   PENDING_STATUS = "PENDING".freeze
   FAILED_STATUS = "FAILED".freeze
 
@@ -55,7 +56,7 @@ module JourneyHintingPartialController
   end
 
   def decorate_idp_by_entity_id(providers, entity_id)
-    retrieved_idp = providers.select { |idp| idp.entity_id == entity_id }.first
+    retrieved_idp = providers.detect { |idp| idp.entity_id == entity_id }
     retrieved_idp && IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(retrieved_idp)
   end
 
@@ -79,7 +80,7 @@ module JourneyHintingPartialController
     journey_hint_entity_id = success_entity_id
     idp = journey_hint_entity_id && decorate_idp_by_entity_id(identity_providers_available_for_sign_in, journey_hint_entity_id)
     unless idp.nil?
-      FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name, session[:transaction_simple_id])
+      FEDERATION_REPORTER.report_sign_in_journey_ignored(current_transaction, request, idp.display_name)
     end
 
     remove_success_journey_hint

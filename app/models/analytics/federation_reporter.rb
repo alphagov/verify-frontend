@@ -58,8 +58,8 @@ module Analytics
       )
     end
 
-    def report_sign_in_journey_ignored(current_transaction, request, idp_display_name, transaction_simple_id)
-      report = "HINT_DELETED | sign-in | #{transaction_simple_id} | #{idp_display_name}"
+    def report_sign_in_journey_ignored(current_transaction, request, idp_display_name)
+      report = "HINT_DELETED | sign-in | #{current_transaction.simple_id} | #{idp_display_name}"
       report_action(
         current_transaction,
         request,
@@ -67,9 +67,8 @@ module Analytics
       )
     end
 
-    def report_user_idp_attempt(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, hint_followed:)
-      segment_list = user_segments.nil? ? "nil" : user_segments.sort.join(", ")
-      report = "ATTEMPT_#{attempt_number} | #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{segment_list} |"
+    def report_user_idp_attempt(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, hint_followed:)
+      report = "ATTEMPT_#{attempt_number} | #{journey_type} | #{current_transaction.simple_id} | #{idp_name} |"
       report << journey_hint_details(hint_followed)
       report_action(
         current_transaction,
@@ -78,9 +77,8 @@ module Analytics
       )
     end
 
-    def report_user_idp_outcome(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, user_segments:, transaction_simple_id:, hint_followed:, response_status:)
-      segment_list = user_segments.nil? ? "nil" : user_segments.sort.join(", ")
-      report = "OUTCOME_#{attempt_number} | #{journey_type} | #{transaction_simple_id} | #{idp_name} | #{segment_list} |"
+    def report_user_idp_outcome(journey_type:, attempt_number:, current_transaction:, request:, idp_name:, hint_followed:, response_status:)
+      report = "OUTCOME_#{attempt_number} | #{journey_type} | #{current_transaction.simple_id} | #{idp_name} |"
       report << journey_hint_details(hint_followed)
       report << " #{response_status} |"
       report_action(
@@ -90,13 +88,12 @@ module Analytics
       )
     end
 
-    def report_idp_registration(current_transaction:, request:, idp_name:, idp_name_history:, recommended:, user_segments:)
-      list_of_segments = user_segments.nil? ? nil : user_segments.sort.join(", ")
+    def report_idp_registration(current_transaction:, request:, idp_name:, idp_name_history:)
       idp_name_history ||= [idp_name]
       report_action(
         current_transaction,
         request,
-        "#{idp_name} was chosen for registration #{recommended} with segment(s) #{list_of_segments}",
+        "#{idp_name} was chosen for registration",
         Analytics::CustomVariable.build(:idp_selection, idp_name_history.join(",")),
       )
     end
@@ -147,16 +144,6 @@ module Analytics
         current_transaction,
         request,
         "Matching Outcome - Cancelled Cycle3",
-      )
-    end
-
-    def report_number_of_idps_recommended(current_transaction, request, number_of_idps_recommended)
-      report_event(
-        current_transaction,
-        request,
-        "Engagement",
-        "IDPs Recommended",
-        number_of_idps_recommended,
       )
     end
 

@@ -4,6 +4,12 @@ The IDP received this: <br>
 SAML Request is '<%= @saml_request %>' <br>
 relay state is '<%= @relay_state %>' <br>
 registration is '<%= @registration %>' <br>
-<% if !@single_idp.nil?%>
-single IDP journey uuid is '<%= @single_idp %>' 
+<% unless @single_idp.nil? %>
+  single IDP journey uuid is '<%= @single_idp %>'
 <% end %>
+<br>
+<%= form_tag('/SAML2/SSO/Response/POST') do -%>
+  <%= hidden_field_tag('SAMLResponse', 'my-saml-response') %>
+  <%= hidden_field_tag('RelayState', params.fetch('session-id', session[:verify_session_id])) %>
+  <div><%= submit_tag 'Send authn response' %></div>
+<% end -%>

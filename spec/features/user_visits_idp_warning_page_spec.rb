@@ -6,7 +6,7 @@ require "sign_in_helper"
 RSpec.describe "user selects an IDP on the sign in page" do
   def given_api_requests_have_been_mocked!
     stub_session_select_idp_request(encrypted_entity_id)
-    stub_session_idp_authn_request(originating_ip, location, false)
+    stub_session_idp_authn_request
   end
 
   def given_im_on_the_sign_in_page(locale = "en")
@@ -30,8 +30,6 @@ RSpec.describe "user selects an IDP on the sign in page" do
   let(:idp_display_name) { "IDCorp" }
   let(:current_ab_test_value) { "sign_in_hint_control" }
   let(:transaction_analytics_description) { "analytics description for test-rp" }
-  let(:location) { "/test-idp-request-endpoint" }
-  let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
   let(:encrypted_entity_id) { "an-encrypted-entity-id" }
 
   context "with JS enabled", js: true do

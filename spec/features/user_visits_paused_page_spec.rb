@@ -6,17 +6,8 @@ RSpec.describe "When the user is sent to the paused registration page" do
   let(:idp_display_name) { "IDCorp" }
   let(:idp_display_name_welsh) { "Welsh IDCorp" }
   let(:rp_entity_id) { "http://www.test-rp.gov.uk/SAML2/MD" }
-  let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
   let(:idp_entity_id) { "http://idcorp.com" }
   let(:encrypted_entity_id) { "an-encrypted-entity-id" }
-
-  let(:select_idp_stub_request) {
-    stub_session_select_idp_request(
-      encrypted_entity_id,
-      PolicyEndpoints::PARAM_SELECTED_ENTITY_ID => idp_entity_id, PolicyEndpoints::PARAM_PRINCIPAL_IP => originating_ip,
-      PolicyEndpoints::PARAM_REGISTRATION => false, PolicyEndpoints::PARAM_REQUESTED_LOA => "LEVEL_2"
-    )
-  }
 
   before(:each) do
     stub_api_idp_list_for_registration

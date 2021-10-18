@@ -7,71 +7,79 @@ describe "When the user visits the failed registration page and" do
 
   before(:each) do
     set_session_and_session_cookies!
-    stub_api_idp_list_for_registration
     set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
   end
 
-  context "relying party uses standard failed registration page" do
+  context "IDPs available" do
     before(:each) do
-      page.set_rack_session(transaction_simple_id: DEFAULT_FAILED_REGISTRATION_PAGE_RP)
+      stub_api_idp_list_for_registration
     end
 
-    context "there are more IDPs to try" do
-      it "includes expected content for an LOA2 journey" do
-        set_loa_in_session("LEVEL_2")
-        visit "/failed-registration"
-
-        expect_page_to_have_main_content_non_continue
-        expect(page).to have_content t("hub.failed_registration.remaining_idps.different_way",
-                                       service: "test GOV.UK Verify user journeys")
-        expect(page).to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
+    context "relying party uses standard failed registration page" do
+      before(:each) do
+        page.set_rack_session(transaction_simple_id: DEFAULT_FAILED_REGISTRATION_PAGE_RP)
       end
 
-      it "includes expected content for an LOA1 journey" do
-        set_loa_in_session("LEVEL_1")
-        stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
-        visit "/failed-registration"
+      context "there are more IDPs to try" do
+        before(:each) do
+          session = default_session
+          page.set_rack_session(session)
+        end
 
-        expect_page_to_have_main_content_non_continue
-        expect(page).to have_content t("hub.failed_registration.remaining_idps.different_way",
-                                       service: "test GOV.UK Verify user journeys")
-        expect(page).to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
+        it "includes expected content for an LOA2 journey" do
+          set_loa_in_session("LEVEL_2")
+          visit "/failed-registration"
+
+          expect_page_to_have_main_content_non_continue
+          expect(page).to have_content t("hub.failed_registration.remaining_idps.different_way",
+                                         service: "test GOV.UK Verify user journeys")
+          expect(page).to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
+        end
+
+        it "includes expected content for an LOA1 journey" do
+          set_loa_in_session("LEVEL_1")
+          stub_api_idp_list_for_registration(loa: "LEVEL_1")
+          visit "/failed-registration"
+
+          expect_page_to_have_main_content_non_continue
+          expect(page).to have_content t("hub.failed_registration.remaining_idps.different_way",
+                                         service: "test GOV.UK Verify user journeys")
+          expect(page).to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
+        end
       end
     end
+  end
 
-    context "there are no more IDPs to try" do
-      it "includes expected content when LOA2 journey" do
-        set_loa_in_session("LEVEL_2")
-        stub_api_idp_list_for_registration([])
-        visit "/failed-registration"
+  context "there are no more IDPs to try" do
+    before(:each) do
+      stub_api_idp_list_for_registration([])
+    end
 
-        expect_page_to_have_main_content_non_continue_for_no_idps
-        expect(page).to have_content t("hub.failed_registration.last_idp.different_way",
-                                       service: "test GOV.UK Verify user journeys")
-        expect(page).not_to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
-      end
+    it "includes expected content for an LOA2 journey" do
+      set_loa_in_session("LEVEL_2")
+      visit "/failed-registration"
 
-      it "includes expected content when LOA1 journey" do
-        set_loa_in_session("LEVEL_1")
-        stub_api_idp_list_for_registration([], "LEVEL_1")
-        visit "/failed-registration"
+      expect_page_to_have_main_content_non_continue_for_no_idps
+      expect(page).to have_content t("hub.failed_registration.last_idp.different_way", service: "test GOV.UK Verify user journeys")
+      expect(page).not_to have_link t("hub.failed_registration.remaining_idps.link_text"), href: choose_a_certified_company_path
+    end
 
-        expect_page_to_have_main_content_non_continue_for_no_idps
-        expect(page).to have_content t("hub.failed_registration.last_idp.different_way",
-                                       service: "test GOV.UK Verify user journeys")
-        expect(page).not_to have_link t("hub.failed_registration.start_again"), href: choose_a_certified_company_path
-      end
+    it "includes expected content for an LOA1 journey" do
+      set_loa_in_session("LEVEL_1")
+      stub_api_idp_list_for_registration([], loa: "LEVEL_1")
+      visit "/failed-registration"
+
+      expect_page_to_have_main_content_non_continue_for_no_idps
+      expect(page).to have_content t("hub.failed_registration.last_idp.different_way", service: "test GOV.UK Verify user journeys")
+      expect(page).not_to have_link t("hub.failed_registration.start_again"), href: choose_a_certified_company_path
     end
 
     it "starts a new session and IDPs are available again" do
-      idp = { simpleId: "stub-idp-two", entityId: "http://idcorp.com", levelsOfAssurance: %w(LEVEL_2) }
-
-      stub_api_idp_list_for_registration([])
       set_loa_in_session("LEVEL_2")
       visit "/failed-registration"
       expect_page_to_have_main_content_non_continue_for_no_idps
 
-      stub_api_idp_list_for_registration([idp])
+      stub_api_idp_list_for_registration
       set_selected_idp_in_session(entity_id: "http://idcorp.com", simple_id: "stub-idp-one")
       page.set_rack_session(transaction_simple_id: DEFAULT_FAILED_REGISTRATION_PAGE_RP)
       set_loa_in_session("LEVEL_2")

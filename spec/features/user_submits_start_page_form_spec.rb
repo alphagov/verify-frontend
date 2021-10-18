@@ -6,8 +6,6 @@ require "sign_in_helper"
 
 RSpec.describe "when user submits start page form" do
   let(:idp_entity_id) { "http://idcorp.com" }
-  let(:originating_ip) { "<PRINCIPAL IP ADDRESS COULD NOT BE DETERMINED>" }
-  let(:location) { "/test-idp-request-endpoint" }
   let(:idp_display_name) { "IDCorp" }
 
   before :each do
@@ -62,7 +60,7 @@ RSpec.describe "when user submits start page form" do
   end
 
   it "will redirect to the IDP when the user chooses a hinted IDP", js: true do
-    stub_session_idp_authn_request(originating_ip, location, false)
+    stub_session_idp_authn_request
     set_journey_hint_cookie(idp_entity_id, "SUCCESS")
     stub_api_idp_list_for_sign_in
     stub_api_select_idp
@@ -73,7 +71,7 @@ RSpec.describe "when user submits start page form" do
   end
 
   it "will return the user to the start when ignoring the hint at LOA2", js: true do
-    stub_session_idp_authn_request(originating_ip, location, false)
+    stub_session_idp_authn_request
     set_journey_hint_cookie(idp_entity_id, "SUCCESS")
     stub_api_idp_list_for_sign_in
     stub_api_select_idp
@@ -86,7 +84,7 @@ RSpec.describe "when user submits start page form" do
   end
 
   it "will return the user to the start when ignoring the hint at LOA1", js: true do
-    stub_session_idp_authn_request(originating_ip, location, false)
+    stub_session_idp_authn_request
     set_journey_hint_cookie(idp_entity_id, "SUCCESS")
     stub_api_idp_list_for_sign_in
     stub_api_select_idp

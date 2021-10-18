@@ -1,9 +1,0 @@
-simpleIds: [ "stub-idp-four" ]
-
-segments:
-  protected:
-    recommended: []
-    unlikely: []
-  non_protected:
-    recommended: []
-    unlikely: []

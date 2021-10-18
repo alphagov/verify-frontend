@@ -18,16 +18,6 @@ class ChooseACertifiedCompanyRedirectController < ApplicationController
     end
   end
 
-  def recommended
-    if session.fetch(:selected_idp_was_recommended)
-      "(recommended)"
-    else
-      "(not recommended)"
-    end
-  rescue KeyError
-    "(idp recommendation key not set)"
-  end
-
   def idp_is_providing_registrations?(idp)
     identity_providers_available_for_registration.any? { |check_idp| check_idp.simple_id == idp.simple_id }
   end

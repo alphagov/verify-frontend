@@ -268,7 +268,7 @@ describe PausedRegistrationController do
     it "should render error page" do
       stub_api_select_idp
       stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-      stub_session_idp_authn_request("127.0.0.1", "idp-location", true)
+      stub_session_idp_authn_request("127.0.0.1", "idp-location", registration: true)
 
       session.delete("transaction_entity_id")
 

@@ -9,7 +9,7 @@ module Analytics
     let(:analytics_reporter) { double(:analytics_reporter) }
     let(:federation_reporter) { FederationReporter.new(analytics_reporter) }
     let(:request) { double(:request) }
-    let(:current_transaction) { double("current transaction") }
+    let(:current_transaction) { double("current transaction", simple_id: "test-rp") }
     let(:transaction_description) { "description" }
 
     before(:each) do
@@ -37,11 +37,11 @@ module Analytics
       idp_history = ["Previous IdP", "IDCorp"]
       idp_history_str = idp_history.join(",")
 
-      it "should report correctly if IdP was recommended" do
+      it "should report correctly when an IDP is selected for registration" do
         expect(analytics_reporter).to receive(:report_action)
                                         .with(
                                           request,
-                                          "#{idp_name} was chosen for registration (recommended) with segment(s) segment1",
+                                          "#{idp_name} was chosen for registration",
                                           1 => %w(RP description),
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                           5 => ["IDP_SELECTION", idp_history_str],
@@ -52,48 +52,6 @@ module Analytics
           request: request,
           idp_name: idp_name,
           idp_name_history: idp_history,
-          recommended: "(recommended)",
-          user_segments: %w(segment1),
-        )
-      end
-
-      it "should report correctly if IdP was not recommended" do
-        expect(analytics_reporter).to receive(:report_action)
-                                        .with(
-                                          request,
-                                          "#{idp_name} was chosen for registration (not recommended) with segment(s) segment1",
-                                          1 => %w(RP description),
-                                          2 => %w(LOA_REQUESTED LEVEL_2),
-                                          5 => ["IDP_SELECTION", idp_history_str],
-                                        )
-
-        federation_reporter.report_idp_registration(
-          current_transaction: current_transaction,
-          request: request,
-          idp_name: idp_name,
-          idp_name_history: idp_history,
-          recommended: "(not recommended)",
-          user_segments: %w(segment1),
-        )
-      end
-
-      it "should report correctly if IdP recommendation key not found in session" do
-        expect(analytics_reporter).to receive(:report_action)
-                                        .with(
-                                          request,
-                                          "#{idp_name} was chosen for registration (idp recommendation key not set) with segment(s) segment1",
-                                          1 => %w(RP description),
-                                          2 => %w(LOA_REQUESTED LEVEL_2),
-                                          5 => ["IDP_SELECTION", idp_history_str],
-                                        )
-
-        federation_reporter.report_idp_registration(
-          current_transaction: current_transaction,
-          request: request,
-          idp_name: idp_name,
-          idp_name_history: idp_history,
-          recommended: "(idp recommendation key not set)",
-          user_segments: %w(segment1),
         )
       end
 
@@ -101,7 +59,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
                                         .with(
                                           request,
-                                          "#{idp_name} was chosen for registration (recommended) with segment(s) segment1, segment2",
+                                          "#{idp_name} was chosen for registration",
                                           1 => %w(RP description),
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                           5 => ["IDP_SELECTION", idp_history_str],
@@ -112,16 +70,14 @@ module Analytics
           request: request,
           idp_name: idp_name,
           idp_name_history: idp_history,
-          recommended: "(recommended)",
-          user_segments: %w(segment1 segment2),
         )
       end
 
-      it "should report default idp history to the chosen idp" do
+      it "should report default IDP history to the chosen IDP" do
         expect(analytics_reporter).to receive(:report_action)
                                         .with(
                                           request,
-                                          "#{idp_name} was chosen for registration (recommended) with segment(s) segment1",
+                                          "#{idp_name} was chosen for registration",
                                           1 => %w(RP description),
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                           5 => ["IDP_SELECTION", idp_name],
@@ -132,8 +88,6 @@ module Analytics
           request: request,
           idp_name: idp_name,
           idp_name_history: nil,
-          recommended: "(recommended)",
-          user_segments: %w(segment1),
         )
       end
     end
@@ -141,14 +95,12 @@ module Analytics
     describe "#report_user_idp_attempt" do
       idp_name = "IDCorp"
       attempt_number = "1"
-      transaction_simple_id = "test-rp"
-      user_segments = "segment1"
 
       it "should report attempt correctly when idp selected if first registration" do
         expect(analytics_reporter).to receive(:report_action)
                                         .with(
                                           request,
-                                          "ATTEMPT_#{attempt_number} | registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} |#{FederationReporter::HINT_NOT_PRESENT}",
+                                          "ATTEMPT_#{attempt_number} | registration | test-rp | #{idp_name} |#{FederationReporter::HINT_NOT_PRESENT}",
                                           1 => %w(RP description),
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                         )
@@ -157,8 +109,6 @@ module Analytics
           current_transaction: current_transaction,
           request: request,
           idp_name: idp_name,
-          user_segments: %w(segment1),
-          transaction_simple_id: "test-rp",
           attempt_number: "1",
           journey_type: "registration",
           hint_followed: nil,
@@ -169,7 +119,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
                                         .with(
                                           request,
-                                          "ATTEMPT_#{attempt_number} | registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} |#{FederationReporter::HINT_NOT_FOLLOWED}",
+                                          "ATTEMPT_#{attempt_number} | registration | test-rp | #{idp_name} |#{FederationReporter::HINT_NOT_FOLLOWED}",
                                           1 => %w(RP description),
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                         )
@@ -178,19 +128,17 @@ module Analytics
           current_transaction: current_transaction,
           request: request,
           idp_name: idp_name,
-          user_segments: %w(segment1),
-          transaction_simple_id: "test-rp",
           attempt_number: "1",
           journey_type: "registration",
           hint_followed: false,
         )
       end
 
-      it "should report attempt correctly when segments are nil and the user followed the journey hint" do
+      it "should report attempt correctly when the user followed the journey hint" do
         expect(analytics_reporter).to receive(:report_action)
                                         .with(
                                           request,
-                                          "ATTEMPT_#{attempt_number} | sign-in | #{transaction_simple_id} | #{idp_name} | nil |#{FederationReporter::HINT_FOLLOWED}",
+                                          "ATTEMPT_#{attempt_number} | sign-in | test-rp | #{idp_name} |#{FederationReporter::HINT_FOLLOWED}",
                                           1 => %w(RP description),
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                         )
@@ -199,8 +147,6 @@ module Analytics
           current_transaction: current_transaction,
           request: request,
           idp_name: idp_name,
-          user_segments: nil,
-          transaction_simple_id: "test-rp",
           attempt_number: "1",
           journey_type: "sign-in",
           hint_followed: true,
@@ -211,7 +157,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
                                         .with(
                                           request,
-                                          "ATTEMPT_#{attempt_number} | single-idp | #{transaction_simple_id} | #{idp_name} | nil |#{FederationReporter::HINT_NOT_FOLLOWED}",
+                                          "ATTEMPT_#{attempt_number} | single-idp | test-rp | #{idp_name} |#{FederationReporter::HINT_NOT_FOLLOWED}",
                                           1 => %w(RP description),
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                         )
@@ -220,8 +166,6 @@ module Analytics
           current_transaction: current_transaction,
           request: request,
           idp_name: idp_name,
-          user_segments: nil,
-          transaction_simple_id: "test-rp",
           attempt_number: "1",
           journey_type: "single-idp",
           hint_followed: false,
@@ -232,8 +176,6 @@ module Analytics
     describe "#report_user_idp_outcome" do
       idp_name = "IDCorp"
       attempt_number = "1"
-      transaction_simple_id = "test-rp"
-      user_segments = "segment1"
       response_status = "SUCCESS"
 
       it "should report outcome correctly on response from first registration" do
@@ -241,7 +183,7 @@ module Analytics
         expect(analytics_reporter).to receive(:report_action)
                                         .with(
                                           request,
-                                          "OUTCOME_#{attempt_number} | registration | #{transaction_simple_id} | #{idp_name} | #{user_segments} |#{FederationReporter::HINT_NOT_PRESENT} #{response_status} |",
+                                          "OUTCOME_#{attempt_number} | registration | test-rp | #{idp_name} |#{FederationReporter::HINT_NOT_PRESENT} #{response_status} |",
                                           1 => %w(RP description),
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                         )
@@ -250,8 +192,6 @@ module Analytics
           current_transaction: current_transaction,
           request: request,
           idp_name: idp_name,
-          user_segments: %w(segment1),
-          transaction_simple_id: "test-rp",
           attempt_number: "1",
           journey_type: "registration",
           hint_followed: hint_followed,
@@ -352,37 +292,18 @@ module Analytics
       end
     end
 
-    describe "#report_number_of_idps_recommended" do
-      it "should report the number of IDPs that were recommended" do
-        expect(analytics_reporter).to receive(:report_event)
-                                        .with(
-                                          request,
-                                          {
-                                            1 => %w(RP description),
-                                            2 => %w(LOA_REQUESTED LEVEL_2),
-                                          },
-                                          "Engagement",
-                                          "IDPs Recommended",
-                                          5,
-                                        )
-
-        federation_reporter.report_number_of_idps_recommended(current_transaction, request, 5)
-      end
-    end
-
     describe "#report_sign_in_journey_ignored" do
       it "should report that the sign in hint was ignored" do
-        transaction_simple_id = "test-rp"
         idp_name = "stub-idp"
         expect(analytics_reporter).to receive(:report_action)
                                         .with(
                                           request,
-                                          "HINT_DELETED | sign-in | #{transaction_simple_id} | #{idp_name}",
+                                          "HINT_DELETED | sign-in | test-rp | #{idp_name}",
                                           1 => %w(RP description),
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                         )
 
-        federation_reporter.report_sign_in_journey_ignored(current_transaction, request, idp_name, transaction_simple_id)
+        federation_reporter.report_sign_in_journey_ignored(current_transaction, request, idp_name)
       end
     end
   end

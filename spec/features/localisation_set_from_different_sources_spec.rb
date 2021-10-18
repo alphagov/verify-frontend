@@ -37,13 +37,13 @@ RSpec.describe "locale is set based on multiple sources", type: :feature do
     end
   end
 
-  context "when submitting saml" do
+  context "when submitting SAML" do
     RSpec.shared_examples "submitting SAML" do |locale|
       it "will render the start page in #{locale} after SAML submission when locale cookie set to #{locale}" do
         set_locale_cookie_to(locale)
         stub_session_creation
 
-        visit("/test-saml")
+        visit "/test-saml"
         click_button "saml-post"
 
         expect(current_path).to eql(public_send("start_#{locale}_path"))
@@ -56,7 +56,7 @@ RSpec.describe "locale is set based on multiple sources", type: :feature do
         stub_matching_outcome
         stub_api_authn_response(session[:verify_session_id])
 
-        visit("/test-saml")
+        visit "/test-saml"
         click_button "saml-response-post"
 
         expect(current_path).to eql(public_send("response_processing_#{locale}_path"))
@@ -69,7 +69,7 @@ RSpec.describe "locale is set based on multiple sources", type: :feature do
     it "will render the start page in English when no cookie or form parameters are set" do
       stub_session_creation
 
-      visit("/test-saml")
+      visit "/test-saml"
       click_button "saml-post"
 
       expect(current_path).to eql(start_en_path)
@@ -86,7 +86,7 @@ RSpec.describe "locale is set based on multiple sources", type: :feature do
         end
         stub_session_creation
 
-        visit("/test-saml")
+        visit "/test-saml"
         click_button "saml-post-with-#{form_locale}-language"
 
         expect(current_path).to eql(public_send("start_#{form_locale}_path"))
@@ -104,7 +104,7 @@ RSpec.describe "locale is set based on multiple sources", type: :feature do
         stub_matching_outcome
         stub_api_authn_response(session[:verify_session_id])
 
-        visit("/test-saml")
+        visit "/test-saml"
         click_button "saml-response-post-with-#{form_locale}-language"
 
         expect(current_path).to eql(public_send("response_processing_#{form_locale}_path"))

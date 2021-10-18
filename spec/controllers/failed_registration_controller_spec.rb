@@ -19,7 +19,7 @@ describe FailedRegistrationController do
     end
 
     it "displays the default failed registration message" do
-      stub_api_idp_list_for_registration(default_idps, "LEVEL_1")
+      stub_api_idp_list_for_registration(loa: "LEVEL_1")
       set_transaction(WITH_DEFAULT_FAILED_REGISTRATION_MESSAGE_RP)
       expect(subject).to render_template(:failed_registration)
     end
@@ -31,7 +31,7 @@ describe FailedRegistrationController do
     end
 
     it "displays the default failed registration message" do
-      stub_api_idp_list_for_registration(default_idps)
+      stub_api_idp_list_for_registration
       set_transaction(WITH_DEFAULT_FAILED_REGISTRATION_MESSAGE_RP)
 
       expect(subject).to render_template(:failed_registration)
