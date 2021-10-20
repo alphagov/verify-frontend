@@ -86,8 +86,7 @@ private
   end
 
   def selected_idps
-    session[:selected_idp_names] = [] unless session[:selected_idp_names]
-    session[:selected_idp_names]
+    session[:selected_idp_names] ||= []
   end
 
   def get_idp_list_for_journey
