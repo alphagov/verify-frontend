@@ -52,9 +52,10 @@ RSpec.describe "locale is set based on multiple sources", type: :feature do
       it "will render the response processing page in #{locale} after SAML response when locale cookie set to #{locale}" do
         set_locale_cookie_to(locale)
         session = set_session!
+        set_journey_type_in_session(JourneyType::REGISTRATION)
         set_selected_idp_in_session(selected_entity)
         stub_matching_outcome
-        stub_api_authn_response(session[:verify_session_id])
+        stub_api_authn_response(session[:verify_session_id], journey_type: JourneyType::REGISTRATION)
 
         visit "/test-saml"
         click_button "saml-response-post"

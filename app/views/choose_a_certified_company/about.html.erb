@@ -8,6 +8,13 @@
       <p class="subtitle"><%= t 'hub.choose_a_certified_company.about.information_provided_by', display_name: @idp.display_name %></p>
       <%= raw @idp.about_content %>
     </div>
-    <%= render partial: 'choose_a_certified_company/select_idp_form', locals: { identity_provider: @idp } %>
+    <%= form_for(@idp, url: choose_a_certified_company_submit_path) do |f| %>
+      <%= f.button t('hub.choose_a_certified_company.choose_idp', display_name: @idp.display_name),
+                   class: 'govuk-button',
+                   name: @idp.simple_id,
+                   type: 'submit',
+                   value: @idp.display_name %>
+      <%= hidden_field_tag 'entity_id', @idp.entity_id, id: nil %>
+    <% end %>
   </div>
 </div>

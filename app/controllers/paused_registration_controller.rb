@@ -1,17 +1,9 @@
 require "partials/user_cookies_partial_controller"
-require "partials/journey_hinting_partial_controller"
-require "partials/viewable_idp_partial_controller"
 require "partials/retrieve_federation_data_partial_controller"
-require "partials/idp_selection_partial_controller"
-require "partials/analytics_cookie_partial_controller"
 
-class PausedRegistrationController < ApplicationController
-  include JourneyHintingPartialController
-  include ViewableIdpPartialController
+class PausedRegistrationController < IdpSelectionController
   include RetrieveFederationDataPartialController
-  include IdpSelectionPartialController
   include UserCookiesPartialController
-  include AnalyticsCookiePartialController
 
   # Validate the session manually within the action, as we don't want the normal 'no session' page.
   skip_before_action :validate_session, only: %i[index from_resume_link]
@@ -57,20 +49,21 @@ class PausedRegistrationController < ApplicationController
   end
 
   def resume_with_idp
-    select_viewable_idp_for_sign_in(params.fetch("entity_id")) do |decorated_idp|
-      select_resume(decorated_idp.entity_id, decorated_idp.display_name)
-      redirect_to redirect_to_idp_resume_path
-    end
+    select_idp_for_resumed_registration(params.fetch("entity_id", nil)) { redirect_to_idp }
   end
 
   def resume_with_idp_ajax
-    select_viewable_idp_for_sign_in(params.fetch("entityId")) do |decorated_idp|
-      select_resume(decorated_idp.entity_id, decorated_idp.display_name)
-      ajax_idp_redirection_resume_journey_request
-    end
+    select_idp_for_resumed_registration(params.fetch("entityId", nil)) { ajax_idp_redirection_request }
   end
 
 private
+
+  def select_idp_for_resumed_registration(entity_id)
+    register_idp_selection_in_session(entity_id) do
+      FEDERATION_REPORTER.report_idp_resume_journey_selection(current_transaction: current_transaction, request: request, idp_name: session[:selected_idp_name])
+      yield
+    end
+  end
 
   def session_is_valid?
     session_validator.validate(cookies, session).ok? && session.key?(:selected_provider) && !selected_identity_provider.nil?
@@ -168,18 +161,6 @@ private
 
   def preferred_start_page(selected_rp)
     selected_rp.headless_startpage.nil? ? selected_rp.transaction_homepage : selected_rp.headless_startpage
-  end
-
-  def select_resume(entity_id, idp_name)
-    POLICY_PROXY.select_idp(session[:verify_session_id],
-                            entity_id,
-                            session[:requested_loa],
-                            false,
-                            persistent_session_id,
-                            session[:journey_type],
-                            ab_test_with_alternative_name)
-    set_attempt_journey_hint(entity_id)
-    session[:selected_idp_name] = idp_name
   end
 
   def is_resume_link_for_pending_idp?(idp_simple_id)

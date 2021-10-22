@@ -52,10 +52,6 @@ private
     session[:transaction_simple_id] = simple_id
   end
 
-  def set_transaction_entity_id(entity_id)
-    session[:transaction_entity_id] = entity_id
-  end
-
   def set_requested_loa(levels_of_assurance)
     requested_loa = if levels_of_assurance.include? "LEVEL_1"
                       "LEVEL_1"

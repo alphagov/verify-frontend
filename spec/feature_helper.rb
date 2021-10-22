@@ -125,6 +125,10 @@ module FeatureHelper
     )
   end
 
+  def set_journey_type_in_session(journey_type)
+    page.set_rack_session({ journey_type: journey_type })
+  end
+
   def set_selected_idp_in_session(selected_idp)
     page.set_rack_session(selected_provider: SelectedProviderData.new(selected_idp))
   end

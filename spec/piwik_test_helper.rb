@@ -75,6 +75,30 @@ def create_custom_variable_param(loa, extra_custom_variables, transaction_analyt
   param
 end
 
+def stub_piwik_report_idp_resume_selection(idp_display_name, loa = "LEVEL_2")
+  piwik_request = {
+    action_name: "Resume - #{idp_display_name}",
+  }
+
+  stub_piwik_request(piwik_request, {}, loa)
+end
+
+def stub_piwik_report_single_idp_selection(idp_display_name, loa = "LEVEL_2")
+  piwik_request = {
+    action_name: "Single IDP selected - #{idp_display_name}",
+  }
+
+  stub_piwik_request(piwik_request, {}, loa)
+end
+
+def stub_piwik_report_sign_in_idp_selection(idp_display_name, loa = "LEVEL_2", hint: nil)
+  piwik_request = {
+    action_name: "Sign In - #{idp_display_name}#{" - Hint #{hint == :followed ? 'Followed' : 'Ignored'}" if hint}",
+  }
+
+  stub_piwik_request(piwik_request, {}, loa)
+end
+
 def stub_piwik_report_user_idp_attempt(idp_name, transaction_id, journey_type = JourneyType::SIGN_IN, attempt_number: 1, loa: "LEVEL_2", hint_present: false, hint_followed: false)
   piwik_request = {
     action_name: "ATTEMPT_#{attempt_number} | #{journey_type.downcase} | #{transaction_id} | #{idp_name} | #{'not ' unless hint_present}present | #{'not ' unless hint_followed}followed |",

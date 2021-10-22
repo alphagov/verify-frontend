@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
     get "test-saml" => "test_saml#index"
     get "/" => "test_saml#index"
+    post "/" => "test_saml#index"
     post "test-rp", to: proc { |_| [200, {}, ["OK"]] }
     post "test-idp-request-endpoint" => "test_saml#idp_request"
     post "test-initiate-journey" => "test_saml#initiate_journey_session"
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
   end
 
   put "select-idp", to: "sign_in#select_idp_ajax", as: :select_idp_submit_ajax
+  put "select-idp-for-registration", to: "choose_a_certified_company#select_idp_ajax", as: :select_idp_for_registration_ajax
   put "resume-with-idp", to: "paused_registration#resume_with_idp_ajax", as: :resume_with_idp_ajax
   get "service-status", to: "service_status#index", as: :service_status
   get "hint", to: "hint#ajax_request"

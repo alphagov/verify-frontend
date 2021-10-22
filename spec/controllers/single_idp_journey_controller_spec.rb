@@ -3,6 +3,7 @@ require "controller_helper"
 require "api_test_helper"
 require "piwik_test_helper"
 require "partials/user_cookies_partial_controller"
+require "select_idp_examples"
 
 describe SingleIdpJourneyController do
   VALID_TEST_RP = "http://www.test-rp.gov.uk/SAML2/MD".freeze
@@ -18,7 +19,7 @@ describe SingleIdpJourneyController do
     allow(Rails.logger).to receive(:info)
   end
 
-  context "idp hits post providing correct parameters" do
+  context "IDP hits post providing correct parameters" do
     subject {
       post :redirect_from_idp, params: {
         serviceId: VALID_TEST_RP,
@@ -26,22 +27,22 @@ describe SingleIdpJourneyController do
         singleIdpJourneyIdentifier: UUID_ONE,
       }
     }
-    it "should redirect to the rp page and sets a cookie when all parameters are present and valid" do
+
+    it "should redirect to the RP page and set a cookie when all parameters are present and valid" do
       stub_piwik_request = stub_piwik_journey_type_request_no_session(
         "SINGLE_IDP",
         "The user has started a single idp journey",
       )
-      expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IdpId #{VALID_STUB_IDP} with uuid #{UUID_ONE}")
+
+      expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IDP with entity ID #{VALID_STUB_IDP} and UUID #{UUID_ONE}")
       expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]["url"])
       expect(stub_piwik_request).to have_been_made.once
       expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
-        .to match({
-          transaction_id: VALID_TEST_RP, idp_entity_id: VALID_STUB_IDP, uuid: UUID_ONE
-        }.to_json)
+        .to match({ transaction_id: VALID_TEST_RP, idp_entity_id: VALID_STUB_IDP, uuid: UUID_ONE }.to_json)
     end
   end
 
-  context "idp hits post providing correct parameters and some additional parametes" do
+  context "idp hits post providing correct parameters and some additional parameters" do
     subject {
       post :redirect_from_idp, params: {
         serviceId: VALID_TEST_RP,
@@ -50,24 +51,25 @@ describe SingleIdpJourneyController do
         randomExtraParam: UUID_ONE,
       }
     }
+
     it "should redirect to the rp page and sets a cookie when all parameters are present and valid and ignore incorrect parameters" do
       stub_piwik_request = stub_piwik_journey_type_request_no_session(
         "SINGLE_IDP",
         "The user has started a single idp journey",
       )
-      expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IdpId #{VALID_STUB_IDP} with uuid #{UUID_ONE}")
+
+      expect(Rails.logger).to receive(:info).with("Successful Single IDP redirect to RP URL #{SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]['url']} from IDP with entity ID #{VALID_STUB_IDP} and UUID #{UUID_ONE}")
       expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]["url"])
       expect(stub_piwik_request).to have_been_made.once
       expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY])
-        .to match({
-          transaction_id: VALID_TEST_RP, idp_entity_id: VALID_STUB_IDP, uuid: UUID_ONE
-        }.to_json)
+        .to match({ transaction_id: VALID_TEST_RP, idp_entity_id: VALID_STUB_IDP, uuid: UUID_ONE }.to_json)
     end
   end
 
   context "idp hits post without providing valid parameters" do
     describe "no parameters provided" do
       subject { post :redirect_from_idp }
+
       it "should redirect to the services page and not set a cookie when an incorrect rp is supplied" do
         expect(Rails.logger).to receive(:warn).with(/Single IDP parameter serviceId is missing/)
         expect(subject).to redirect_to(verify_services_path)
@@ -83,6 +85,7 @@ describe SingleIdpJourneyController do
           rabbit: UUID_ONE,
         }
       }
+
       it "should redirect to the services page and not set a cookie when an incorrect rp is supplied" do
         expect(Rails.logger).to receive(:warn).with(/Single IDP parameter serviceId is missing/)
         expect(subject).to redirect_to(verify_services_path)
@@ -99,6 +102,7 @@ describe SingleIdpJourneyController do
           singleIdpJourneyIdentifier: UUID_ONE,
         }
       }
+
       it "should redirect to the services page and not set a cookie when an incorrect rp is supplied" do
         expect(Rails.logger).to receive(:error).with(/Could not get the RP URL for single IDP with transaction_id fake-test-rp/)
         expect(subject).to redirect_to(verify_services_path)
@@ -115,6 +119,7 @@ describe SingleIdpJourneyController do
           singleIdpJourneyIdentifier: UUID_ONE,
         }
       }
+
       it "should redirect to the service start page and not set a cookie when an incorrect idp is supplied" do
         expect(Rails.logger).to receive(:warn).with(/The IDP is not valid or disabled for transaction_id http:\/\/www.test-rp.gov.uk\/SAML2\/MD and idp_entity_id fake-stub-idp/)
         expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]["url"])
@@ -122,7 +127,7 @@ describe SingleIdpJourneyController do
       end
     end
 
-    describe "uuid contains invalid characters" do
+    describe "UUID contains invalid characters" do
       uuid_invalid_char = "85c8:)ca-1aeb-42e1-81b8-5a5d66ef4288".freeze
       subject {
         post :redirect_from_idp, params: {
@@ -131,14 +136,15 @@ describe SingleIdpJourneyController do
           singleIdpJourneyIdentifier: uuid_invalid_char,
         }
       }
-      it "redirects to the service start page without cookie when uuid has invalid characters" do
+
+      it "redirects to the service start page without cookie when UUID has invalid characters" do
         expect(Rails.logger).to receive(:error).with(/Single IDP UUID #{Regexp.quote(uuid_invalid_char)} not valid/)
         expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]["url"])
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
       end
     end
 
-    describe "uuid is an invalid length" do
+    describe "UUID is an invalid length" do
       uuid_invalid_length = "5oooo5ooow5c8d5ca-1aeb-42e1-81b8-5a5d66ef4288"
       subject {
         post :redirect_from_idp, params: {
@@ -147,7 +153,8 @@ describe SingleIdpJourneyController do
           singleIdpJourneyIdentifier: uuid_invalid_length,
         }
       }
-      it "redirects to the service start page without cookie when uuid has invalid length" do
+
+      it "redirects to the service start page without cookie when UUID has invalid length" do
         expect(Rails.logger).to receive(:error).with(/Single IDP UUID #{Regexp.quote(uuid_invalid_length)} not valid/)
         expect(subject).to redirect_to(SINGLE_IDP_ENABLED_RP_LIST_MOCK[VALID_TEST_RP]["url"])
         expect(cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY]).to be(nil)
@@ -170,6 +177,7 @@ describe SingleIdpJourneyController do
         idp_entity_id: VALID_STUB_IDP,
         uuid: UUID_ONE,
       }
+
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
       stub_piwik_event = stub_piwik_report_single_idp_success(VALID_TEST_RP, UUID_ONE)
 
@@ -197,17 +205,19 @@ describe SingleIdpJourneyController do
         transaction_id: VALID_TEST_RP,
         uuid: UUID_ONE,
       }
+
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
       expect(Rails.logger).to receive(:error).with(/Single IDP cookie value for idp_entity_id is missing/)
       expect(subject).to redirect_to(start_path)
     end
 
-    it "should redirect to /start if idp is not enabled" do
+    it "should redirect to /start if IDP is not enabled" do
       single_idp_cookie = {
         transaction_id: VALID_TEST_RP,
         idp_entity_id: "disabled-idp",
         uuid: UUID_ONE,
       }
+
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
       expect(Rails.logger).to receive(:warn).with(/The IDP is not valid or disabled for transaction_id http:\/\/www.test-rp.gov.uk\/SAML2\/MD and idp_entity_id disabled-idp/)
       expect(subject).to redirect_to(start_path)
@@ -224,6 +234,7 @@ describe SingleIdpJourneyController do
         idp_entity_id: VALID_STUB_IDP,
         uuid: UUID_ONE,
       }
+
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
       expect(Rails.logger).to receive(:info).with(/unavailable/)
       expect(subject).to redirect_to(start_path)
@@ -236,17 +247,19 @@ describe SingleIdpJourneyController do
         idp_entity_id: VALID_STUB_IDP,
         uuid: UUID_ONE,
       }
+
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
       expect(Rails.logger).to receive(:info).with(/The value of the Single IDP cookie does not match the session value of http:\/\/www.test-rp.gov.uk\/SAML2\/MD for transaction_id disabled-rp/)
       expect(subject).to redirect_to(start_path)
     end
 
-    it "should redirect to /start if uuid is in a wrong format" do
+    it "should redirect to /start if UUID is in a wrong format" do
       single_idp_cookie = {
         transaction_id: VALID_TEST_RP,
         idp_entity_id: VALID_STUB_IDP,
         uuid: "wrong-uuid",
       }
+
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
       expect(Rails.logger).to receive(:error).with(/Single IDP UUID wrong-uuid not valid/)
       expect(subject).to redirect_to(start_path)
@@ -256,10 +269,11 @@ describe SingleIdpJourneyController do
       stub_api_idp_list_for_single_idp_journey("test-rp-noc3")
       stub_piwik_event = stub_piwik_report_single_idp_service_mismatch("test-rp-noc3", VALID_TEST_RP, UUID_ONE)
       single_idp_cookie = {
-          transaction_id: "test-rp-noc3",
-          idp_entity_id: VALID_STUB_IDP,
-          uuid: UUID_ONE,
+        transaction_id: "test-rp-noc3",
+        idp_entity_id: VALID_STUB_IDP,
+        uuid: UUID_ONE,
       }
+
       cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
 
       expect(Rails.logger).to receive(:info).with(/The value of the Single IDP cookie does not match the session value of http:\/\/www.test-rp.gov.uk\/SAML2\/MD for transaction_id test-rp-noc3/)
@@ -269,34 +283,16 @@ describe SingleIdpJourneyController do
   end
 
   context "#continue" do
-    valid_idp = {
-        "simple_id" => "stub-idp-one",
-        "entity_id" => VALID_STUB_IDP,
-        "levels_of_assurance" => %w(LEVEL_1 LEVEL_2),
-    }
-
     before :each do
-      set_session_and_cookies_with_loa("LEVEL_2")
+      set_session_and_cookies_with_loa("LEVEL_2", journey_type: JourneyType::SINGLE_IDP)
       stub_transactions_for_single_idp_list
       stub_api_idp_list_for_single_idp_journey
-    end
-
-    it "should redirect to IDP website" do
-      stub_api_select_idp
-      stub_request(:get, INTERNAL_PIWIK.url).with(query: hash_including({}))
-
-      set_selected_idp(valid_idp)
-      post :continue, params: { locale: "en", entity_id: VALID_STUB_IDP }
-
-      expect(subject).to redirect_to redirect_to_single_idp_path
     end
 
     describe "missing transaction entity id in session" do
       it "should show an error page" do
         session[:transaction_entity_id] = nil
-
         post :continue, params: { locale: "en" }
-
         expect(subject).to render_template(:something_went_wrong)
       end
     end
@@ -304,7 +300,6 @@ describe SingleIdpJourneyController do
     describe "with invalid idp (entity idp id is empty)" do
       it "should redirect to the start page" do
         post :continue, params: { locale: "en", entity_id: "" }
-
         expect(subject).to redirect_to start_path
       end
     end
@@ -312,7 +307,6 @@ describe SingleIdpJourneyController do
     describe "with invalid idp (entity idp id missing)" do
       it "should redirect to the start page" do
         post :continue, params: { locale: "en" }
-
         expect(subject).to redirect_to start_path
       end
     end
@@ -320,7 +314,7 @@ describe SingleIdpJourneyController do
 
   context "#continue_ajax" do
     before :each do
-      set_session_and_cookies_with_loa("LEVEL_2")
+      set_session_and_cookies_with_loa("LEVEL_2", journey_type: JourneyType::SINGLE_IDP)
       stub_transactions_for_single_idp_list
       stub_api_idp_list_for_single_idp_journey
     end
@@ -374,5 +368,22 @@ describe SingleIdpJourneyController do
 
       expect(subject).to render_template "rp_start_page"
     end
+  end
+
+  context "select IDP" do
+    let(:single_idp_cookie) {
+      {
+        transaction_id: VALID_TEST_RP,
+        idp_entity_id: VALID_STUB_IDP,
+        uuid: UUID_ONE,
+      }
+    }
+
+    before(:each) do
+      cookies.encrypted[CookieNames::VERIFY_SINGLE_IDP_JOURNEY] = single_idp_cookie.to_json
+    end
+
+    include_examples "select_idp", JourneyType::SINGLE_IDP, :continue,
+                     :stub_api_idp_list_for_single_idp_journey, :stub_piwik_report_single_idp_selection, :report_single_idp_journey_selection, false
   end
 end

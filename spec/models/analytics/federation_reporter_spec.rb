@@ -28,7 +28,7 @@ module Analytics
                                           2 => %w(LOA_REQUESTED LEVEL_2),
                                         )
 
-        federation_reporter.report_sign_in_idp_selection(current_transaction, request, idp_display_name)
+        federation_reporter.report_sign_in_idp_selection(current_transaction: current_transaction, request: request, idp_name: idp_display_name)
       end
     end
 

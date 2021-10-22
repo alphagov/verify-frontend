@@ -1,33 +1,31 @@
 <div class="idp-choice govuk-grid-row">
-  <%= form_for(identity_provider, url: choose_a_certified_company_submit_path, html: { class: nil, id: nil }) do |f| %>
+  <%= form_for(identity_provider, url: choose_a_certified_company_submit_path, html: { class: 'js-idp-form', id: nil }) do |f| %>
     <div class="govuk-width-container">
-      <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil %>
+      <%= hidden_field_tag 'entity_id', identity_provider.entity_id, id: nil, class: 'js-entity-id' %>
       <div class="govuk-grid-column-one-third company-logo">
         <%= image_submit_tag(identity_provider.logo_path, alt: "#{identity_provider.display_name} logo") %>
       </div>
 
       <div class="govuk-grid-column-one-third">
-        <% unless identity_provider.unavailable %>
+        <% if identity_provider.unavailable %>
+          <h3 class="heading-small"><%= t 'hub.certified_companies_unavailable.heading', count: 1, company: identity_provider.display_name %></h3>
+          <p><%= t 'hub.certified_companies_unavailable.verify_another_company_text' %></p>
+        <% else %>
           <%= f.button t('hub.choose_a_certified_company.choose_idp', display_name: identity_provider.display_name),
-                       class: "govuk-button#{ ' govuk-button--secondary' unless recommended }",
-                       role: "#{'link' unless recommended}",
+                       class: "govuk-button",
                        name: identity_provider.simple_id,
                        id: nil,
                        type: 'submit',
                        value: identity_provider.display_name,
-                       'data-order': order
-          %>
-        <% else %>
-          <h3 class="heading-small"><%= t 'hub.certified_companies_unavailable.heading', count: 1, company: identity_provider.display_name %></h3>
-          <p><%= t 'hub.certified_companies_unavailable.verify_another_company_text' %></p>
+                       'data-order': order %>
         <% end %>
       </div>
+
       <div class="govuk-grid-column-one-third">
         <%= button_link_to t('hub.choose_a_certified_company.about_idp', display_name: identity_provider.display_name),
                            choose_a_certified_company_about_path(identity_provider.simple_id),
                            id: 'about-button',
-                           class: 'govuk-button govuk-button--secondary'
-        %>
+                           class: 'govuk-button govuk-button--secondary' %>
       </div>
     </div>
   <% end %>
