@@ -4,7 +4,6 @@ require "api_test_helper"
 RSpec.describe "When the user visits a page that triggers an API call when the session has soft timed out" do
   before(:each) do
     set_session_and_session_cookies!
-    set_journey_type_in_session(JourneyType::REGISTRATION)
     stub_api_idp_list_for_registration
     stub_api_select_idp
   end

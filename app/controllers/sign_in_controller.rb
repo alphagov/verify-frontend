@@ -43,6 +43,7 @@ class SignInController < IdpSelectionController
 private
 
   def select_idp_for_sign_in(entity_id)
+    session[:journey_type] = JourneyType::SIGN_IN
     register_idp_selection_in_session(entity_id) do |decorated_idp|
       unless idp_disconnecting_for_sign_in(decorated_idp)
         if has_journey_hint?

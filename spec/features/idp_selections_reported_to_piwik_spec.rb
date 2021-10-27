@@ -15,7 +15,6 @@ RSpec.describe "When the user selects an IDP" do
 
   before(:each) do
     set_session_and_session_cookies!
-    set_journey_type_in_session(JourneyType::REGISTRATION)
     stub_api_select_idp
     stub_api_idp_list_for_sign_in
     stub_api_idp_list_for_registration

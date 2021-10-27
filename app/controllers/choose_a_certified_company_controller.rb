@@ -27,6 +27,7 @@ class ChooseACertifiedCompanyController < IdpSelectionController
 private
 
   def select_idp_for_registration(entity_id)
+    session[:journey_type] = JourneyType::REGISTRATION
     register_idp_selection_in_session(entity_id) do |decorated_idp|
       track_selected_idp decorated_idp.display_name
       report_idp_registration_to_piwik
