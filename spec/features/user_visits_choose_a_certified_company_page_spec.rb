@@ -18,7 +18,6 @@ describe "When the user visits the choose a certified company page" do
         stub_session_idp_authn_request(registration: true)
         stub_session_select_idp_request(encrypted_entity_id)
         set_session_and_session_cookies!(cookie_hash: create_cookie_hash_with_piwik_session)
-        set_journey_type_in_session(JourneyType::REGISTRATION)
 
         visit choose_a_certified_company_path
 
@@ -53,7 +52,6 @@ describe "When the user visits the choose a certified company page" do
 
     it "redirects the user to IDP on clicking Continue" do
       stub_api_select_idp
-      set_journey_type_in_session(JourneyType::REGISTRATION)
       stub_session_idp_authn_request(registration: true)
 
       visit choose_a_certified_company_path

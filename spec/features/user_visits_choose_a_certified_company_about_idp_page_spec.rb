@@ -16,7 +16,6 @@ RSpec.feature "user visits the choose a certified company about idp page", type:
   scenario "user chooses a recommended IDP" do
     entity_id = "my-entity-id"
     given_a_session_with_selected_idp
-    set_journey_type_in_session(JourneyType::REGISTRATION)
     stub_session_idp_authn_request(registration: true)
     stub_select_idp_request(entity_id, JourneyType::REGISTRATION)
     stub_api_idp_list_for_sign_in [{ "simpleId" => "stub-idp-one", "entityId" => entity_id, "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2) }]

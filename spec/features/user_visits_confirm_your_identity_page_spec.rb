@@ -142,7 +142,6 @@ RSpec.describe "When the user visits the confirm-your-identity page" do
   describe "when the user changes language" do
     it "will preserve the language from sign-in" do
       set_up_session("stub-idp-one")
-      set_journey_type_in_session(JourneyType::SIGN_IN)
       stub_api_idp_list_for_sign_in
       stub_session_creation
       visit "/sign-in"
