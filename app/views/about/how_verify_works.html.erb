@@ -6,18 +6,21 @@
 <%= raw @tailored_text %>
 
 <h2 class="govuk-heading-m"><%= t 'hub.about.verify.how_it_works.heading' %></h2>
-<p><%= t 'hub.about.verify.how_it_works.content' %></p>
+<% if @identity_providers.size > 1 %>
+  <p><%= t 'hub.about.verify.how_it_works.content' %></p>
 
-<ul class="list-companies">
-  <% @identity_providers.each do |idp| %>
-    <li>
-      <%= image_tag idp.white_logo_path, alt: t('common.logo', name: idp.display_name) %>
-    </li>
-  <% end %>
-</ul>
+  <ul class="list-companies">
+    <% @identity_providers.each do |idp| %>
+      <li>
+        <%= image_tag idp.white_logo_path, alt: t('common.logo', name: idp.display_name) %>
+      </li>
+    <% end %>
+  </ul>
 
-<%= raw t 'hub.about.verify.company.content_html' %>
-
+  <%= raw t 'hub.about.verify.company.content_html' %>
+<% else %>
+  <%= raw t 'hub.about.verify.one_idp.content_html', provider_name: @identity_providers.first.display_name %>
+<% end %>
 <div class="actions">
   <%= button_link_to t("navigation.continue"), @next_page_path, id: 'next-button', class: 'govuk-button' %>
 </div>

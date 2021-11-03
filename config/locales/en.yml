@@ -99,6 +99,11 @@ en:
           content_html: |
             <p class="govuk-body">The company will ask you questions and check your identity documents.</p>
             <p class="govuk-body">It will never share your information for any other purpose without your consent.</p>
+        one_idp:
+          content_html: |
+            <p class="govuk-body">You create an identity account with the government’s chosen provider %{provider_name}.</p>
+            <p class="govuk-body">%{provider_name} will ask you questions and check your identity documents.</p>
+            <p class="govuk-body">It meets government privacy and security standards. It will never sell or share your information for any other reason without your consent.</p>
       choosing_a_company:
         heading: Finding the right company to verify you
         content_html: |
