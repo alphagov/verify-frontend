@@ -117,22 +117,23 @@ cy:
         heading: Profwch eich hunaniaeth mewn ffordd arall
         sub_heading: Gallwch ddal %{service_name}.
       documents:
-        heading: Cyn i chi ddechrau
-        explanation: I sefydlu cyfrif hunaniaeth, byddwch angen darparu tystiolaeth i'r  cwmnïau allu gwirio.
-        document_list:
-          heading: "Wrth greu'r cyfrif byddwch yn cael eich gofyn am:"
-          list_html: |
-            <ul class="govuk-list govuk-list--bullet">
-              <li>pasbort dilys</li>
-              <li>thrwydded yrru ddilys, llawn neu dros dro, gyda'ch llun arno</li>
-            </ul>
-        further_explanation:
-          doc_checking: Gall y cwmnïau wirio eich pasbort a thrwydded yrru yn erbyn cofnodion swyddogol. Gallant hefyd gadarnhau eich manylion personol drwy gyrchu gwybodaeth megis cofnodion credyd. Bydd hyn yn eu helpu i fod yn sicr mai chi ydyw.
-          requirements: Os mai dim ond un ddogfen hunaniaeth â llun (ID) sydd gennych, byddwch angen un ai ffôn neu dabled i lawr_lwytho ap am ddim a chymryd lluniau ohono. Bydd hyn yn gadael i chi brofi mai chi sy'n berchen ar yr ID.
-          come_back_later: Os oes gennych y pethau hyn ond eu bod yn rhywle arall, dewch nôl  pan fydd gennych hwy gyda chi.
         prove_identity_another_way:
           link_text: Profwch eich hunaniaeth mewn ffordd arall
           text_html: "%{link_text} os nad oes gennych y pethau hyn."
+        multi_idp:
+          heading: Cyn i chi ddechrau
+          explanation: I sefydlu cyfrif hunaniaeth, byddwch angen darparu tystiolaeth i'r  cwmnïau allu gwirio.
+          document_list:
+            heading: "Wrth greu'r cyfrif byddwch yn cael eich gofyn am:"
+            list_html: |
+              <ul class="govuk-list govuk-list--bullet">
+                <li>pasbort dilys</li>
+                <li>thrwydded yrru ddilys, llawn neu dros dro, gyda'ch llun arno</li>
+              </ul>
+          further_explanation:
+            doc_checking: Gall y cwmnïau wirio eich pasbort a thrwydded yrru yn erbyn cofnodion swyddogol. Gallant hefyd gadarnhau eich manylion personol drwy gyrchu gwybodaeth megis cofnodion credyd. Bydd hyn yn eu helpu i fod yn sicr mai chi ydyw.
+            requirements: Os mai dim ond un ddogfen hunaniaeth â llun (ID) sydd gennych, byddwch angen un ai ffôn neu dabled i lawr_lwytho ap am ddim a chymryd lluniau ohono. Bydd hyn yn gadael i chi brofi mai chi sy'n berchen ar yr ID.
+            come_back_later: Os oes gennych y pethau hyn ond eu bod yn rhywle arall, dewch nôl  pan fydd gennych hwy gyda chi.
     choose_a_certified_company:
       heading: Dewiswch gwmni i'ch gwirio
       intro: Bydd un o'r cwmniau hyn yn creu eich cyfrif hunaniaeth.
