@@ -4,6 +4,7 @@ require "api_test_helper"
 RSpec.describe "When the user visits the will it work for me page" do
   before(:each) do
     set_session_and_session_cookies!
+    stub_api_idp_list_for_registration
   end
 
   it "includes the appropriate feedback source" do

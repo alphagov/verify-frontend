@@ -99,6 +99,11 @@ en:
           content_html: |
             <p class="govuk-body">The company will ask you questions and check your identity documents.</p>
             <p class="govuk-body">It will never share your information for any other purpose without your consent.</p>
+        one_idp:
+          content_html: |
+            <p class="govuk-body">You create an identity account with the government’s chosen provider %{provider_name}.</p>
+            <p class="govuk-body">%{provider_name} will ask you questions and check your identity documents.</p>
+            <p class="govuk-body">It meets government privacy and security standards. It will never sell or share your information for any other reason without your consent.</p>
       choosing_a_company:
         heading: Finding the right company to verify you
         content_html: |
@@ -112,22 +117,38 @@ en:
         heading: Prove your identity another way
         sub_heading: You can still %{service_name}.
       documents:
-        heading: Before you start
-        explanation: To set up an identity account, you need to provide evidence for the companies to check.
-        document_list:
-          heading: "When creating the account you'll be asked for:"
-          list_html: |
+        prove_identity_another_way:
+          link_text: Prove your identity another way
+          text_html: "%{link_text} if you do not have these things."
+        multi_idp:
+          heading: Before you start
+          explanation: To set up an identity account, you need to provide evidence for the companies to check.
+          document_list:
+            heading: "When creating the account you'll be asked for:"
+            list_html: |
+              <ul class="govuk-list govuk-list--bullet">
+                <li>a valid passport</li>
+                <li>a valid driving licence, full or provisional, with your photo on it</li>
+              </ul>
+          further_explanation:
+            doc_checking: The companies can check your passport and driving licence against official records. They can also confirm your personal details by accessing information like credit records. This will help them be sure it's really you.
+            requirements: If you only have one photo identity document (ID), you'll also need a phone or a tablet to download a free app and take pictures of it. This will let you prove the ID is yours.
+            come_back_later: If you have these things but they’re somewhere else, come back when you have them with you.
+        one_idp:
+          heading: "Continue to %{idp} to verify your identity"
+          content_html: |
+            <p class="govuk-body">You'll now verify your identity on the %{idp} website.</p>
+            <p class="govuk-body">They'll give you an identity account you can use wherever you see the GOV.UK Verify logo.</p>
+            <p class="govuk-body">You’ll be asked for the following evidence for %{idp} to check:</p>
             <ul class="govuk-list govuk-list--bullet">
               <li>a valid passport</li>
               <li>a valid driving licence, full or provisional, with your photo on it</li>
             </ul>
-        further_explanation:
-          doc_checking: The companies can check your passport and driving licence against official records. They can also confirm your personal details by accessing information like credit records. This will help them be sure it's really you.
-          requirements: If you only have one photo identity document (ID), you'll also need a phone or a tablet to download a free app and take pictures of it. This will let you prove the ID is yours.
-          come_back_later: If you have these things but they’re somewhere else, come back when you have them with you.
-        prove_identity_another_way:
-          link_text: Prove your identity another way
-          text_html: "%{link_text} if you do not have these things."
+            <p class="govuk-body">%{idp} can check your passport and driving licence against official records. They can also confirm your personal details by accessing information like credit records. This will help them be sure it's really you.</p>
+            <p class="govuk-body">If you only have one photo identity document (ID), you'll also need a phone or a tablet to download a free app and take pictures of it. This will let you prove the ID is yours.</p>
+            <p class="govuk-body">If you have these things but they’re somewhere else, come back when you have them with you.</p>
+          continue_btn: "Continue to %{idp}"
+          more_link: "Read more about %{idp}"
     choose_a_certified_company:
       heading: Pick a certified company to verify you
       intro: One of these companies will create your identity account.

@@ -1,24 +1,58 @@
-<%= page_title 'hub.about.documents.heading' %>
+<% if @identity_providers.size > 1 %>
+  <%= page_title 'hub.about.documents.multi_idp.heading' %>
+<% else %>
+  <%= page_title 'hub.about.documents.one_idp.heading', idp: @identity_providers.first.display_name %>
+<% end %>
+
 <% content_for :feedback_source, 'ABOUT_DOCUMENTS_PAGE' %>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+<% if @identity_providers.size > 1 %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l"><%= t 'hub.about.documents.heading' %></h1>
-    <p><%= t 'hub.about.documents.explanation' %></p>
+      <h1 class="govuk-heading-l"><%= t 'hub.about.documents.multi_idp.heading' %></h1>
+      <p><%= t 'hub.about.documents.multi_idp.explanation' %></p>
 
-    <p><%= t 'hub.about.documents.document_list.heading' %></p>
-    <p><%= t 'hub.about.documents.document_list.list_html' %></p>
+      <p><%= t 'hub.about.documents.multi_idp.document_list.heading' %></p>
+      <p><%= t 'hub.about.documents.multi_idp.document_list.list_html' %></p>
 
-    <p><%= t 'hub.about.documents.further_explanation.doc_checking' %></p>
-    <p><%= t 'hub.about.documents.further_explanation.requirements' %></p>
-    <p><%= t 'hub.about.documents.further_explanation.come_back_later' %></p>
+      <p><%= t 'hub.about.documents.multi_idp.further_explanation.doc_checking' %></p>
+      <p><%= t 'hub.about.documents.multi_idp.further_explanation.requirements' %></p>
+      <p><%= t 'hub.about.documents.multi_idp.further_explanation.come_back_later' %></p>
 
-    <%= button_link_to t("navigation.continue"), choose_a_certified_company_path, id: 'next-button', class: 'govuk-button' %>
-
-    <p class="govuk-!-margin-top-4"><%= t('hub.about.documents.prove_identity_another_way.text_html',
-                                          link_text: link_to(t('hub.about.documents.prove_identity_another_way.link_text'), prove_your_identity_another_way_path, class: "govuk-link")
-                                        ) %>
-    </p>
+      <%= button_link_to t("navigation.continue"), choose_a_certified_company_path, id: 'next-button', class: 'govuk-button' %>
+      <p class="govuk-!-margin-top-4"><%= t('hub.about.documents.prove_identity_another_way.text_html',
+                                            link_text: link_to(t('hub.about.documents.prove_identity_another_way.link_text'), prove_your_identity_another_way_path, class: "govuk-link")
+                                          ) %>
+      </p>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l"><%= t 'hub.about.documents.one_idp.heading', idp: @identity_providers.first.display_name %></h1>
+
+      <%= raw t 'hub.about.documents.one_idp.content_html', idp: @identity_providers.first.display_name %>
+      <%= form_for(@identity_providers.first, url: choose_a_certified_company_submit_path, html: { class: 'js-idp-form', id: nil }) do |f| %>
+        <%= hidden_field_tag 'entity_id', @identity_providers.first.entity_id, id: nil, class: 'js-entity-id' %>
+        <%= f.button t("hub.about.documents.one_idp.continue_btn", idp: @identity_providers.first.display_name ),
+                     class: "govuk-button",
+                     name: @identity_providers.first.simple_id,
+                     id: nil,
+                     type: 'submit',
+                     value: @identity_providers.first.display_name %>
+      <% end %>
+      <div class="idp-choice govuk-grid-row" style="margin-top: 1em; min-height: 0; border: none">
+        <div class="govuk-width-container">
+          <div class="govuk-grid-column-one-third company-logo"><%= image_tag @identity_providers.first.logo_path, height: '60%', width: '60%', alt: t('common.logo', name: @identity_providers.first.display_name) %></div>
+          <div class="govuk-grid-column-two-third"><p class="govuk-body-s"><%= link_to t('hub.about.documents.one_idp.more_link', idp: @identity_providers.first.display_name), choose_a_certified_company_about_path(@identity_providers.first.simple_id) %></p></div>
+        </div>
+      </div>
+      <p class="govuk-!-margin-top-4"><%= t('hub.about.documents.prove_identity_another_way.text_html',
+                                            link_text: link_to(t('hub.about.documents.prove_identity_another_way.link_text'), prove_your_identity_another_way_path, class: "govuk-link")
+                                          ) %>
+      </p>
+    </div>
+  </div>
+<% end %>

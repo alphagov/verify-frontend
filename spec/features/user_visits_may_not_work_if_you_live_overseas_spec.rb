@@ -4,6 +4,7 @@ require "api_test_helper"
 RSpec.describe "When the user visits the may-not-work-if-you-live-overseas page" do
   before(:each) do
     set_session_and_session_cookies!
+    stub_api_idp_list_for_registration
     page.set_rack_session(transaction_simple_id: "test-rp")
   end
 

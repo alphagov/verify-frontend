@@ -18,6 +18,7 @@ class AboutController < ApplicationController
   end
 
   def about_documents
+    @identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(identity_providers_available_for_registration)
     render :documents
   end
 
