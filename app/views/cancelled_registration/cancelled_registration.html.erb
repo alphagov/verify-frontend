@@ -6,13 +6,14 @@
     <h1 class="govuk-heading-l"><%= t 'hub.cancelled_registration.heading', idp_name: @idp.display_name %></h1>
 
     <p><%= t 'hub.cancelled_registration.what_next', service_name: @transaction.name %></p>
+    <% if @identity_providers.size > 1 %>
+      <h2 class="govuk-heading-m"><%= t 'hub.cancelled_registration.try_another_summary' %></h2>
 
-    <h2 class="govuk-heading-m"><%= t 'hub.cancelled_registration.try_another_summary' %></h2>
-
-    <div>
-      <p><%= t 'hub.cancelled_registration.try_another_text', idp_name: @idp.display_name %></p>
-      <p><%= link_to t('hub.cancelled_registration.about_choosing_a_company'), about_choosing_a_company_path %></p>
-    </div>
+      <div>
+        <p><%= t 'hub.cancelled_registration.try_another_text', idp_name: @idp.display_name %></p>
+        <p><%= link_to t('hub.cancelled_registration.about_choosing_a_company'), about_choosing_a_company_path %></p>
+      </div>
+    <% end %>
 
     <h2 class="govuk-heading-m"><%= t 'hub.cancelled_registration.other_ways_summary', other_ways_decorated: @other_ways_decorated %></h2>
     <div>
