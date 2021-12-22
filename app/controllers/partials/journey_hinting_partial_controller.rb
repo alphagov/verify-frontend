@@ -57,6 +57,7 @@ module JourneyHintingPartialController
 
   def decorate_idp_by_entity_id(providers, entity_id)
     retrieved_idp = providers.detect { |idp| idp.entity_id == entity_id }
+    logger.info("could not decorate idp by entity_id '#{entity_id}'") if retrieved_idp.nil?
     retrieved_idp && IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(retrieved_idp)
   end
 

@@ -10,7 +10,9 @@ class SignInController < IdpSelectionController
 
     if success_entity_id
       @suggested_idp = decorate_idp_by_entity_id(all_idps[:available] + all_idps[:disconnected], success_entity_id)
-      FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp.display_name)
+      if @suggested_idp
+        FEDERATION_REPORTER.report_sign_in_journey_hint_shown(current_transaction, request, @suggested_idp.display_name)
+      end
     end
 
     @available_identity_providers = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(all_idps[:available])
