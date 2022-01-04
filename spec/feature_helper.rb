@@ -8,7 +8,8 @@ WebMock.disable_net_connect!(
   allow_localhost: true,
   allow: ["chromedriver.storage.googleapis.com",
           %r{github.com/mozilla/geckodriver/releases.*},
-          %r{github-releases.githubusercontent.com/.*geckodriver}],
+          %r{github-releases.githubusercontent.com/.*geckodriver},
+          %r{objects.githubusercontent.com/github-production-release-asset-*}],
 )
 
 RACK_COOKIE_DATE_FORMAT = "%a, %d %b %Y".freeze
