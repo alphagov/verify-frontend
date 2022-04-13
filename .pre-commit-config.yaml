@@ -1,5 +1,0 @@
-repos:
--   repo: git://github.com/alphagov/verify-travis-pre-commit-hook
-    sha: master
-    hooks:
-    -   id: travis-yml-lint
