@@ -1,0 +1,38 @@
+name: Pre-merge checks
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - ready_for_review
+      - synchronize
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7.6'
+      - uses: browser-actions/setup-firefox@latest
+      - run: firefox --version
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+        run: bundle exec rake
+  
+      - name: Install stub api tests dependencies 
+        env:
+          BUNDLE_GEMFILE: stub/api/Gemfile
+        run: bundle
+
+      - name: Run stub api tests
+        env:
+          BUNDLE_GEMFILE: stub/api/Gemfile
+          BROWSER: firefox
+        run: bundle exec rspec --pattern stub/api/**/*_spec.rb 
