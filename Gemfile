@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.7.6'
 
-gem 'rails', '~> 5.2.4.6'
+gem 'rails', '~> 5.2.8'
 gem 'rails-i18n', '~> 5.1.3'
 gem 'route_translator', '~> 8.2.1'
 
