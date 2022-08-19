@@ -1,8 +1,7 @@
 <% taxons = transaction_taxon_list %>
 <% if taxons.any? %>
+  <ul class="govuk-list">
   <% taxons.each do |taxon| %>
-    <h3  class="govuk-heading-s"><%= taxon.name %></h3>
-    <ul class="govuk-list">
       <% taxon.transactions.each do |transaction| %>
         <li>
           <% if transaction.homepage %>
@@ -13,6 +12,6 @@
           <% end %>
         </li>
       <% end %>
-    </ul>
   <% end %>
+  </ul>
 <% end %>
