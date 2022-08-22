@@ -1,6 +1,6 @@
 <% taxons = transaction_taxon_list %>
 <% if taxons.any? %>
-  <ul class="govuk-list">
+  <ul class="govuk-list govuk-list--bullet">
   <% taxons.each do |taxon| %>
       <% taxon.transactions.each do |transaction| %>
         <li>
