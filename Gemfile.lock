@@ -134,13 +134,13 @@ GEM
       concurrent-ruby (~> 1.0)
     inflection (1.0.0)
     jaro_winkler (1.5.4)
-    jasmine (3.9.2)
-      jasmine-core (~> 3.9.0)
+    jasmine (3.99.0)
+      jasmine-core (= 3.99.0)
       phantomjs
       rack (>= 2.1.4)
       rake
       webrick
-    jasmine-core (3.9.0)
+    jasmine-core (3.99.0)
     jasmine-jquery-rails (2.0.3)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
@@ -191,7 +191,7 @@ GEM
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.4)
     rack-handlers (0.7.3)
       rack
     rack-test (1.1.0)
