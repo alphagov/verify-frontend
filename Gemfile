@@ -75,7 +75,7 @@ group :test, :development do
   gem 'rspec', '~> 3.11'
   gem 'rspec-rails', '~> 5.0'
   gem 'selenium-webdriver', '~> 3'
-  gem 'webdrivers', '~> 4.0'
+  gem 'webdrivers', '~> 4.7'
   gem 'webmock', require: false
 
   gem 'headless'
