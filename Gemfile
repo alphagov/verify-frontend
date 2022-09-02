@@ -14,7 +14,7 @@ gem 'rack-handlers'
 # Assets
 gem 'autoprefixer-rails'
 gem 'jquery-rails'
-gem 'sassc', '~> 2.0.1'
+gem 'sassc', '~> 2.4.0'
 gem 'uglifier', '~> 4.2.0'
 
 gem 'mini_racer'
