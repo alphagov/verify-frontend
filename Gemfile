@@ -20,7 +20,7 @@ gem 'uglifier', '~> 4.2.0'
 gem 'mini_racer'
 
 # Use statsd-ruby to talk collect and send metrics to graphite
-gem 'statsd-ruby', '~> 1.3.0'
+gem 'statsd-ruby', '~> 1.5.0'
 
 # Use prometheus-client to expose metrics to prometheus
 #
