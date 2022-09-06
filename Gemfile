@@ -33,7 +33,7 @@ gem 'prometheus-client', '~> 0.10.0.pre.alpha.1'
 gem 'sentry-raven'
 
 gem 'logstash-logger'
-gem 'request_store', '~> 1.3.1'
+gem 'request_store', '~> 1.5.1'
 
 gem 'email_validator', '~> 1.6'
 gem 'zendesk_api'
