@@ -112,7 +112,7 @@ GEM
     faraday-net_http_persistent (1.2.0)
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
-    ffi (1.12.2)
+    ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -374,7 +374,7 @@ DEPENDENCIES
   connection_pool
   dotenv-rails
   email_validator (~> 1.6)
-  ffi (= 1.12.2)
+  ffi (= 1.15.5)
   headless
   http (~> 4.4.1)
   jasmine
