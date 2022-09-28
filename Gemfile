@@ -50,7 +50,7 @@ gem 'rails_same_site_cookie', { git: "https://github.com/alphagov/rails-same-sit
 
 # Gem ffi in Ruby 2.6.6 requires a version of the system library `/usr/lib/libffi.dylib` that's not available on MacOS Mojave.
 # Revert the gem to a previous version that works with the library available on our dev machines.
-gem 'ffi', '1.12.2'
+gem 'ffi', '1.15.5'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
