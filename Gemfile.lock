@@ -121,16 +121,14 @@ GEM
     hashdiff (1.0.1)
     hashie (4.1.0)
     headless (2.3.1)
-    http (4.4.1)
-      addressable (~> 2.3)
+    http (5.1.0)
+      addressable (~> 2.8)
       http-cookie (~> 1.0)
       http-form_data (~> 2.2)
-      http-parser (~> 1.2.0)
-    http-cookie (1.0.4)
+      llhttp-ffi (~> 0.4.0)
+    http-cookie (1.0.5)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
-    http-parser (1.2.3)
-      ffi-compiler (>= 1.0, < 2.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     inflection (1.0.0)
@@ -150,6 +148,9 @@ GEM
     libv8-node (15.14.0.1)
     libv8-node (15.14.0.1-x86_64-darwin-19)
     libv8-node (15.14.0.1-x86_64-linux)
+    llhttp-ffi (0.4.0)
+      ffi-compiler (~> 1.0)
+      rake (~> 13.0)
     logstash-event (1.2.02)
     logstash-logger (0.26.1)
       logstash-event (~> 1.2)
@@ -330,7 +331,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.7)
+    unf_ext (0.0.8.2)
     unicode-display_width (1.7.0)
     user_agent_parser (2.7.0)
     web-console (3.7.0)
@@ -376,7 +377,7 @@ DEPENDENCIES
   email_validator (~> 1.6)
   ffi (= 1.15.5)
   headless
-  http (~> 4.4.1)
+  http (~> 5.1.0)
   jasmine
   jasmine-jquery-rails
   jquery-rails

@@ -7,7 +7,7 @@ gem 'route_translator', '~> 8.2.1'
 
 # Server
 gem 'connection_pool'
-gem 'http', '~> 4.4.1'
+gem 'http', '~> 5.1.0'
 gem 'puma'
 gem 'rack-handlers'
 
