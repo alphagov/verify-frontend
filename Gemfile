@@ -83,7 +83,7 @@ group :test, :development do
   gem 'rack_session_access'
   gem 'thin'
 
-  gem 'rubocop-govuk', '~> 3.6.0'
+  gem 'rubocop-govuk', '~> 4.7.0'
   gem 'scss_lint-govuk'
 
   gem 'codacy-coverage', { require: false }
