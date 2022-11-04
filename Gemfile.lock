@@ -296,7 +296,7 @@ GEM
       sass (~> 3.5, >= 3.5.5)
     scss_lint-govuk (0.2.0)
       scss_lint
-    selenium-webdriver (4.4.0)
+    selenium-webdriver (4.6.1)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
