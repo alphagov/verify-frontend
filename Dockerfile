@@ -14,6 +14,11 @@ RUN bundle install
 
 ADD . /verify-frontend/
 
+RUN useradd frontend
+RUN chown -R frontend verify-frontend/
+
+USER frontend
+
 WORKDIR /verify-frontend
 
 # Puma needs these dockerignored dirs to write to
