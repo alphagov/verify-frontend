@@ -28,6 +28,9 @@ RUN bash -c 'source .env \
              && bundle exec rake assets:precompile' \
     && ln -s /verify-frontend/public/assets /assets
 
+RUN useradd frontend
+RUN chown -R frontend /verify-frontend/
+
+USER frontend
 # Puma needs these dockerignored dirs to write to
 RUN mkdir -p log tmp
-
