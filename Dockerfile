@@ -16,6 +16,8 @@ ADD . /verify-frontend/
 
 RUN useradd frontend
 RUN chown -R frontend verify-frontend/
+RUN mkdir /home/frontend
+RUN chown -R frontend home/
 
 USER frontend
 

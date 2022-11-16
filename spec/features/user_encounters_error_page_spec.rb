@@ -5,13 +5,15 @@ RSpec.describe "user encounters error page" do
   let(:api_saml_endpoint) { saml_proxy_api_uri(new_session_endpoint) }
   let(:api_select_idp_endpoint) { policy_api_uri(select_idp_endpoint(default_session_id)) }
 
-  it "will present the user with a list of transactions" do
+  it "will present the user with a list of static transactions" do
     stub_session_creation_error
     visit "/test-saml"
     click_button "saml-post"
     expect(page).to have_content t("errors.something_went_wrong.heading")
     expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
-    expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
+    t("hub.transaction_list.items").each do |transaction|
+      expect(page).to have_link transaction[:name], href: transaction[:homepage]
+    end
   end
 
   it "will present the user with no list of transactions if we cant read the errors" do
@@ -123,7 +125,9 @@ RSpec.describe "user encounters error page" do
         visit sign_in_path
         click_button "IDCorp"
         expect(page).to have_content t("errors.something_went_wrong.heading")
-        expect(page).to have_link "test GOV.UK Verify user journeys", href: "http://localhost:50130/test-rp"
+        t("hub.transaction_list.items").each do |transaction|
+          expect(page).to have_link transaction[:name], href: transaction[:homepage]
+        end
         expect(page).to have_css "#piwik-custom-url", text: "errors/generic-error"
         expect(page.status_code).to eq(500)
       end
