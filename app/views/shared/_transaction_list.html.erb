@@ -1,17 +1,16 @@
 <% taxons = transaction_taxon_list %>
 <% if taxons.any? %>
   <ul class="govuk-list govuk-list--bullet">
-  <% taxons.each do |taxon| %>
-      <% taxon.transactions.each do |transaction| %>
-        <li>
-          <% if transaction.homepage %>
-            <%= link_to transaction.name, transaction.homepage %>
-          <% else %>
-            <%= transaction.name %>
-            <p class="govuk-hint"><%= t 'hub.transaction_list.hint' %></p>
-          <% end %>
-        </li>
-      <% end %>
+
+  <% t('hub.transaction_list.items').each do |transaction| %>
+      <li>
+        <% if transaction[:homepage] %>
+          <%= link_to transaction[:name], transaction[:homepage] %>
+        <% else %>
+          <%= transaction[:name] %>
+          <p class="govuk-hint"><%= t 'hub.transaction_list.hint' %></p>
+        <% end %>
+      </li>
   <% end %>
   </ul>
 <% end %>
