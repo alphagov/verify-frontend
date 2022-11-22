@@ -1,4 +1,17 @@
 <% content_for :main do %>
+  <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+    <div class="govuk-notification-banner__header">
+      <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+        <%= t('decommission_banner.title') %>
+      </h2>
+    </div>
+    <div class="govuk-notification-banner__content">
+      <p class="govuk-notification-banner__heading">
+        <%= t('decommission_banner.heading') %>
+      </p>
+      <%= raw t 'decommission_banner.content_html' %>
+    </div>
+  </div>
   <div class="content-inner slides">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">

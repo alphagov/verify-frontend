@@ -78,6 +78,13 @@ cy:
     message: Defnyddiwch y %{href} i ofyn cwestiwn, hysbysu problem neu awgrymu gwelliant
     feedback_form: ffurflen adborth
     id: feedback_link_id
+  decommission_banner:
+    title: Important
+    heading: Mae GOV.UK Verify yn cau yn fuan
+    content_html: |
+      <p>O 15 Rhagfyr 2022 ni fyddwch yn gallu creu cyfrif GOV.UK Verify newydd.</p>
+      <p>O fis Ebrill 2023 ni fyddwch yn gallu mewngofnodi i unrhyw wasanaethau drwy ddefnyddio cyfrif GOV.UK Verify sydd eisoes yn bodoli.</p>
+      <p>Bydd y gwasanaeth rydych angen ei ddefnyddio yn dweud wrthych sut i brofi pwy ydych yn lle hynny.</p>
   translation_in_progress_banner:
     message: Mae GOV.UK Verify wrthi’n cael ei gyfieithu i’r Gymraeg. Rydym yn cyfieithu tudalennau bob wythnos rhwng nawr a diwedd mis Ebrill. Mae eich %{feedback_link} yn ein helpu i wella’r cyfieithiad.
     feedback: adborth

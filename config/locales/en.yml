@@ -82,6 +82,13 @@ en:
     message: Use the %{href} to ask a question, report a problem or suggest an improvement
     feedback_form: feedback form
     id: feedback_link_id
+  decommission_banner:
+    title: Important
+    heading: GOV.UK Verify is closing soon
+    content_html: |
+      <p>From 15 December 2022 you will not be able to create a new GOV.UK Verify account.</p>
+      <p>From April 2023 you will not be able to sign in to any services using an existing GOV.UK Verify account.</p>
+      <p>The service you need to use will tell you how to prove your identity instead.</p>
   footer:
     support_links: Support links
     help: Help
