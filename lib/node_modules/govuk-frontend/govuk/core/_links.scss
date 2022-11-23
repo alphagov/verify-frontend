@@ -1,6 +1,8 @@
-@import "../settings/all";
-@import "../tools/all";
-@import "../helpers/all";
+@if not mixin-exists("govuk-exports") {
+  @warn "Importing items from the core layer without first importing `base` is deprecated, and will no longer work as of GOV.UK Frontend v4.0.";
+}
+
+@import "../base";
 
 @include govuk-exports("govuk/core/links") {
 
@@ -23,6 +25,14 @@
 
   .govuk-link--text-colour {
     @include govuk-link-style-text;
+  }
+
+  .govuk-link--inverse {
+    @include govuk-link-style-inverse;
+  }
+
+  .govuk-link--no-underline {
+    @include govuk-link-style-no-underline;
   }
 
   .govuk-link--no-visited-state {

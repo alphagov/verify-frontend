@@ -1,9 +1,11 @@
-@import "../settings/all";
-@import "../tools/all";
-@import "../helpers/all";
+@if not mixin-exists("govuk-exports") {
+  @warn "Importing items from the overrides layer without first importing `base` is deprecated, and will no longer work as of GOV.UK Frontend v4.0.";
+}
 
+@import "../base";
+
+// stylelint-disable declaration-no-important
 @include govuk-exports("govuk/overrides/display") {
-
   .govuk-\!-display-inline {
     display: inline !important;
   }
@@ -18,5 +20,11 @@
 
   .govuk-\!-display-none {
     display: none !important;
+  }
+
+  @include govuk-media-query($media-type: print) {
+    .govuk-\!-display-none-print {
+      display: none !important;
+    }
   }
 }

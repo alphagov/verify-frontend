@@ -1,9 +1,6 @@
-@import "../settings/all";
-@import "../tools/all";
-@import "../helpers/all";
+@import "../base";
 
 @include govuk-exports("govuk/objects/form-group") {
-
   .govuk-form-group {
     @include govuk-clearfix;
     @include govuk-responsive-margin(6, "bottom");
