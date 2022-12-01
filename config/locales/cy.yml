@@ -193,7 +193,10 @@ cy:
           <a href="https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify" target="_blank">
           Read more about GOV.UK Verify closing (opens in new tab)</a>
           </p>
-        radio_text: Welsh ---- If you’ve previously created a GOV.UK Verify account with Digidentity or Post Office, you can use it to sign in.
+        legend:
+          Welsh ---- If you’ve previously created a GOV.UK Verify account with Digidentity or Post Office, you can use it to sign in.
+        back_to_service_html:
+          Welsh ---- You can no longer create a new GOV.UK Verify account. If you do not have one, <a href="%{rp_start_page}">return to the service you were using</a> and look for other ways to prove your identity.
       sub_heading: Ydych chi wedi defnyddio GOV.UK Verify o'r blaen?
       answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify o’r blaen

@@ -8,6 +8,7 @@ class StartController < ApplicationController
   def index
     @form = StartForm.new({})
     @journey_hint = flash[:journey_hint]
+    @redirect_to_destination = session[:transaction_homepage]
     render :start unless try_render_journey_hint
   end
 

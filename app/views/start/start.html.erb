@@ -45,5 +45,11 @@
       <div class="actions">
         <%= f.submit t('hub.start.continue'), class: 'govuk-button verify-inverse-btn button', id: 'next-button' %>
       </div>
+      <% if !SIGN_UPS_ENABLED %>
+        <p>
+          <%= t 'hub.start.no_sign_ups.back_to_service_html', rp_start_page: @redirect_to_destination %></p>
+        </p>
+      <% end %>
     </div>
+
   <% end %>
