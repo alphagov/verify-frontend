@@ -58,34 +58,36 @@ RSpec.describe "When the user visits a page" do
       expect(page).to have_content t("errors.no_cookies.enable_cookies")
     end
 
-    xit "sends an event to Piwik only when the user changes selection, on the start page" do
-      stub_api_idp_list_for_registration
-      stub_transactions_list
-      set_session_and_session_cookies!
-      expect(request_log).to receive(:log).with(
-        hash_including(
-          "action_name" => "Sign in with GOV.UK Verify - GOV.UK Verify - LEVEL_2",
-        ),
-      )
-      expect(request_log).to receive(:log).with(
-        hash_including(
-          "e_c" => "Journey",
-          "e_n" => "user_type",
-          "e_a" => "Change to First Time",
-        ),
-      ).exactly(1).times
-      expect(request_log).not_to receive(:log).with(
-        hash_including(
-          "e_c" => "Journey",
-          "e_n" => "user_type",
-          "e_a" => "Change to Sign In",
-        ),
-      )
-      visit "/start"
-      choose "start_form_selection_false", allow_label_click: true
-      choose "start_form_selection_false", allow_label_click: true
-      choose "start_form_selection_true", allow_label_click: true
-      click_button "Continue"
+    if SIGN_UPS_ENABLED
+      it "sends an event to Piwik only when the user changes selection, on the start page" do
+        stub_api_idp_list_for_registration
+        stub_transactions_list
+        set_session_and_session_cookies!
+        expect(request_log).to receive(:log).with(
+          hash_including(
+            "action_name" => "Sign in with GOV.UK Verify - GOV.UK Verify - LEVEL_2",
+          ),
+        )
+        expect(request_log).to receive(:log).with(
+          hash_including(
+            "e_c" => "Journey",
+            "e_n" => "user_type",
+            "e_a" => "Change to First Time",
+          ),
+        ).exactly(1).times
+        expect(request_log).not_to receive(:log).with(
+          hash_including(
+            "e_c" => "Journey",
+            "e_n" => "user_type",
+            "e_a" => "Change to Sign In",
+          ),
+        )
+        visit "/start"
+        choose "start_form_selection_false", allow_label_click: true
+        choose "start_form_selection_false", allow_label_click: true
+        choose "start_form_selection_true", allow_label_click: true
+        click_button "Continue"
+      end
     end
 
     it "sends a page view with a new_visit parameter if new session" do
