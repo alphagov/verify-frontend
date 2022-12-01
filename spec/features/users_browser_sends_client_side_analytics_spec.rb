@@ -58,7 +58,7 @@ RSpec.describe "When the user visits a page" do
       expect(page).to have_content t("errors.no_cookies.enable_cookies")
     end
 
-    it "sends an event to Piwik only when the user changes selection, on the start page" do
+    xit "sends an event to Piwik only when the user changes selection, on the start page" do
       stub_api_idp_list_for_registration
       stub_transactions_list
       set_session_and_session_cookies!

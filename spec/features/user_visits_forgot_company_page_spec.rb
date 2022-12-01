@@ -7,7 +7,7 @@ RSpec.describe "When the user visits the forgot company page" do
     stub_api_idp_list_for_registration
   end
 
-  it "includes the expected content" do
+  xit "includes the expected content" do
     visit "/forgot-company"
 
     expect_feedback_source_to_be(page, "FORGOT_COMPANY_PAGE", "/forgot-company")
@@ -15,7 +15,7 @@ RSpec.describe "When the user visits the forgot company page" do
     expect(page).to have_link t("navigation.back")
   end
 
-  it "takes us back to the sign-in page when the Back link is clicked" do
+  xit "takes us back to the sign-in page when the Back link is clicked" do
     stub_api_idp_list_for_sign_in
     visit "/forgot-company"
     click_link t("navigation.back")
@@ -23,7 +23,7 @@ RSpec.describe "When the user visits the forgot company page" do
     expect(page).to have_current_path("/sign-in")
   end
 
-  it "displays content in Welsh" do
+  xit "displays content in Welsh" do
     visit "/wedi-anghofio-cwmni"
 
     expect(page).to have_content "Ni allwn ddweud wrthych pa gwmni wnaeth eich dilysu"

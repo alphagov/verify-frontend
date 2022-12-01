@@ -32,8 +32,8 @@ RSpec.describe "when user submits start page form" do
     expect(page).to have_css('.company-logo input[src="/stub-logos/stub-idp-one.png"]')
     expect(page).to have_link t("hub.signin.back"), href: "/start"
     expect_feedback_source_to_be(page, "SIGN_IN_PAGE", "/sign-in")
-    expect(page).to have_link t("hub.signin.about_link"), href: "/begin-registration"
-    expect(page).to have_link t("hub.signin.forgot_company"), href: "/forgot-company"
+    # expect(page).to have_link t("hub.signin.about_link"), href: "/begin-registration"
+    # expect(page).to have_link t("hub.signin.forgot_company"), href: "/forgot-company"
   end
 
   it "will report user choice to analytics when user chooses to sign in" do
@@ -52,7 +52,7 @@ RSpec.describe "when user submits start page form" do
     expect(a_request(:get, INTERNAL_PIWIK.url).with(query: hash_including(piwik_request))).to have_been_made.once
   end
 
-  it "will prompt for an answer if no answer is given" do
+  xit "will prompt for an answer if no answer is given" do
     stub_api_idp_list_for_registration
     visit "/start"
     click_button("next-button")

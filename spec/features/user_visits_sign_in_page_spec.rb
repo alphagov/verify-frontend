@@ -97,7 +97,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
       expect(page.get_rack_session_key("selected_provider")["identity_provider"]).to include("entity_id" => idp_entity_id, "simple_id" => "stub-idp-one", "levels_of_assurance" => %w(LEVEL_2))
     end
 
-    it "will redirect the user to the about page of the registration journey and update the Piwik Custom Variables" do
+    xit "will redirect the user to the about page of the registration journey and update the Piwik Custom Variables" do
       stub_api_idp_list_for_registration
       given_api_requests_have_been_mocked!
       given_the_piwik_request_has_been_stubbed
@@ -108,7 +108,7 @@ RSpec.describe "user selects an IDP on the sign in page" do
       expect_to_have_updated_the_piwik_journey_type_variable
     end
 
-    it "will redirect the user to the about page of the registration journey with content for one IDP and update the Piwik Custom Variables" do
+    xit "will redirect the user to the about page of the registration journey with content for one IDP and update the Piwik Custom Variables" do
       stub_api_idp_list_for_registration([{ "simpleId" => "stub-idp-loa1", "entityId" => "http://idcorp-loa1.com", "levelsOfAssurance" => %w(LEVEL_1 LEVEL_2), "enabled" => true }])
       given_api_requests_have_been_mocked!
       given_the_piwik_request_has_been_stubbed
