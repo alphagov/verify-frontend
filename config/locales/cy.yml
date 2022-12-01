@@ -181,6 +181,19 @@ cy:
         button_text: Defnyddiwch GOV.UK Verify
     start:
       heading: Mewngofnodi gyda GOV.UK Verify
+      no_sign_ups:
+        heading: Welsh ---- GOV.UK Verify is closing soon
+        content_html:
+          <p>
+          Welsh ---- From April 2023 you will not be able to sign in to any services using GOV.UK Verify.
+          The services will explain what to do instead.
+          </p>
+          <p>
+          Welsh ---- Some services will stop you signing in using GOV.UK Verify sooner than this.
+          <a href="https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify" target="_blank">
+          Read more about GOV.UK Verify closing (opens in new tab)</a>
+          </p>
+        radio_text: Welsh ---- If you’ve previously created a GOV.UK Verify account with Digidentity or Post Office, you can use it to sign in.
       sub_heading: Ydych chi wedi defnyddio GOV.UK Verify o'r blaen?
       answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
