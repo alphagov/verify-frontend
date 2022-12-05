@@ -182,21 +182,20 @@ cy:
     start:
       heading: Mewngofnodi gyda GOV.UK Verify
       no_sign_ups:
-        heading: Welsh ---- GOV.UK Verify is closing soon
+        heading: Mae GOV.UK Verify yn cau yn fuan
         content_html:
           <p>
-          Welsh ---- From April 2023 you will not be able to sign in to any services using GOV.UK Verify.
-          The services will explain what to do instead.
+          O Ebrill 2023 ni fyddwch yn gallu defnyddio GOV.UK Verify i gael mynediad i unrhyw wasanaethau. Bydd y gwasanaeth rydych ei angen yn egluro beth i’w wneud yn ei le.
           </p>
           <p>
-          Welsh ---- Some services will stop you signing in using GOV.UK Verify sooner than this.
+          Bydd rhai gwasanaethau yn stopio defnyddio GOV.UK Verify cyn Ebrill.
           <a href="https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify" target="_blank">
-          Read more about GOV.UK Verify closing (opens in new tab)</a>
+          Darllenwch fwy am GOV.UK Verify yn cau (agor mewn tab newydd)</a>
           </p>
         legend:
-          Welsh ---- If you’ve previously created a GOV.UK Verify account with Digidentity or Post Office, you can use it to sign in.
+          Os ydych yn flaenorol wedi creu cyfrif hunaniaeth gyda Digidentity neu’r Swyddfa Bost, gallwch ei ddefnyddio i fewngofnodi.
         back_to_service_html:
-          Welsh ---- You can no longer create a new GOV.UK Verify account. If you do not have one, <a href="%{rp_start_page}">return to the service you were using</a> and look for other ways to prove your identity.
+           Ni allwch bellach greu cyfrif hunaniaeth newydd gyda GOV.UK Verify. Os nad oes gennych un, <a href="%{rp_start_page}">ewch yn ôl i’r gwasanaeth rydych angen ei ddefnyddio</a> a chwilio am ffyrdd eraill o brofi eich hunaniaeth.
       sub_heading: Ydych chi wedi defnyddio GOV.UK Verify o'r blaen?
       answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
