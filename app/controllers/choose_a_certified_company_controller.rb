@@ -8,7 +8,7 @@ class ChooseACertifiedCompanyController < IdpSelectionController
     if SIGN_UPS_ENABLED
       render :choose_a_certified_company
     else
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 
@@ -20,7 +20,7 @@ class ChooseACertifiedCompanyController < IdpSelectionController
     if SIGN_UPS_ENABLED
       render :about
     else
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 

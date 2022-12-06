@@ -12,7 +12,7 @@ class AboutController < ApplicationController
     if SIGN_UPS_ENABLED
       render :how_verify_works
     else
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 
@@ -21,7 +21,7 @@ class AboutController < ApplicationController
     if SIGN_UPS_ENABLED
       render :choosing_a_company
     else
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 
@@ -30,7 +30,7 @@ class AboutController < ApplicationController
     if SIGN_UPS_ENABLED
       render :documents
     else
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 
@@ -40,7 +40,7 @@ class AboutController < ApplicationController
     if SIGN_UPS_ENABLED
       render :prove_your_identity_another_way
     else
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 end

@@ -2,14 +2,14 @@ class WillItWorkForMeController < ApplicationController
   def index
     @form = WillItWorkForMeForm.new({})
     if !SIGN_UPS_ENABLED
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 
   def will_it_work_for_me
     @form = WillItWorkForMeForm.new(params["will_it_work_for_me_form"] || {})
     if !SIGN_UPS_ENABLED
-      redirect_to("/start")
+      redirect_to start_path
     end
     if @form.valid?
       redirect_to next_page
@@ -23,7 +23,7 @@ class WillItWorkForMeController < ApplicationController
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
     if !SIGN_UPS_ENABLED
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 
@@ -31,7 +31,7 @@ class WillItWorkForMeController < ApplicationController
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
     if !SIGN_UPS_ENABLED
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 
@@ -39,7 +39,7 @@ class WillItWorkForMeController < ApplicationController
     @other_ways_description = current_transaction.other_ways_description
     @other_ways_text = current_transaction.other_ways_text
     if !SIGN_UPS_ENABLED
-      redirect_to("/start")
+      redirect_to start_path
     end
   end
 
