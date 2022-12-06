@@ -1,11 +1,42 @@
 <%= page_title 'hub.signin.sign_in_idp', display_name: @identity_providers[0].display_name %>
 <% content_for :feedback_source, 'CONFIRM_YOUR_IDENTITY' %>
+
 <div class="govuk-grid-row">
+  <% if !SIGN_UPS_ENABLED %>
+    <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+      <div class="govuk-notification-banner__header">
+        <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+          <%= t('decommission_banner.title') %>
+        </h2>
+      </div>
+      <div class="govuk-notification-banner__content">
+        <h2 class="govuk-notification-banner__heading">
+          <% if SIGN_UPS_ENABLED %>
+            <%= t('decommission_banner.heading') %>
+          <% else %>
+            <%= t 'hub.start.no_sign_ups.heading' %>
+          <% end %>
+        </h2>
+        <% if SIGN_UPS_ENABLED %>
+          <%= raw t 'decommission_banner.content_html' %>
+        <% else %>
+          <%= raw t 'hub.start.no_sign_ups.content_html' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   <div class="govuk-grid-column-two-thirds js-continue-to-idp confirm-your-identity" data-location="<%= url_for(controller: 'sign_in', action: 'select_idp_ajax', locale: I18n.locale)  %>">
 
     <h1 class="govuk-heading-l"><%= t('hub.signin.sign_in_idp', display_name: @identity_providers[0].display_name) %></h1>
     <p><%= t 'hub.confirm_your_identity.need_to_signin_again', transaction_name: @transaction_name %></p>
   </div>
+  <% if !SIGN_UPS_ENABLED %>
+    <div class="govuk-grid-column-one-third">
+      <div class="verify-logo-right" style="position: unset">
+        <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation'%>
+      </div>
+    </div>
+  <% end %>
 </div>
 <div class="govuk-grid-row">
   <%= render partial: 'shared/idp_list', locals: {identity_providers: @identity_providers, non_repudiation: true} %>

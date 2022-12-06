@@ -195,6 +195,22 @@ en:
         button_text: Use GOV.UK Verify
     start:
       heading: Sign in with GOV.UK Verify
+      no_sign_ups:
+        heading: GOV.UK Verify is closing soon
+        content_html:
+          <p>
+            From April 2023 you will not be able to sign in to any services using GOV.UK Verify.
+            The services will explain what to do instead.
+          </p>
+          <p>
+            Some services will stop you signing in using GOV.UK Verify sooner than this.
+            <a href="https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify" target="_blank">
+            Read more about GOV.UK Verify closing (opens in new tab)</a>
+          </p>
+        legend:
+          If you’ve previously created a GOV.UK Verify account with Digidentity or Post Office, you can use it to sign in.
+        back_to_service_html:
+          You can no longer create a new GOV.UK Verify account. If you do not have one, <a href="%{rp_start_page}">return to the service you were using</a> and look for other ways to prove your identity.
       sub_heading: Have you used GOV.UK Verify before?
       answer_yes: This is my first time using GOV.UK Verify
       answer_no: I've already signed up for Verify

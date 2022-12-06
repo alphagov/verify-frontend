@@ -5,8 +5,10 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l"><%= t 'errors.something_went_wrong.heading' %></h1>
-    <p class="govuk-body"><%= t 'errors.session_timeout.try_again', other_ways_description: @other_ways_description %></p>
-    <p class="govuk-body"><%= t 'errors.session_timeout.return_to_service_html' %></p>
+    <% if SIGN_UPS_ENABLED %>
+      <p class="govuk-body"><%= t 'errors.session_timeout.try_again', other_ways_description: @other_ways_description %></p>
+      <p class="govuk-body"><%= t 'errors.session_timeout.return_to_service_html' %></p>
+    <% end %>
     <%= button_link_to t('errors.session_timeout.start_again'), @redirect_to_destination, class: "govuk-button" %>
   </div>
 </div>

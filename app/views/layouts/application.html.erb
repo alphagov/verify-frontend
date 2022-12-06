@@ -88,9 +88,11 @@
             </div>
           </div>
 
-          <div class="verify-logo-right">
-            <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation' %>
-          </div>
+          <% if SIGN_UPS_ENABLED %>
+            <div class="verify-logo-right">
+              <%= image_tag 'govuk-verify-small-black-text.png', srcset: "#{asset_path 'govuk-verify-small-black-text.svg'} 1x", alt: ' ', role:'presentation' %>
+            </div>
+          <% end %>
       </main>
       <%= render 'shared/piwik' %>
       <%= render 'shared/ga' %>

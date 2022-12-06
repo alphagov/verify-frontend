@@ -7,9 +7,17 @@
     </div>
     <div class="govuk-notification-banner__content">
       <h2 class="govuk-notification-banner__heading">
-        <%= t('decommission_banner.heading') %>
+        <% if SIGN_UPS_ENABLED %>
+          <%= t('decommission_banner.heading') %>
+        <% else %>
+          <%= t 'hub.start.no_sign_ups.heading' %>
+        <% end %>
       </h2>
-      <%= raw t 'decommission_banner.content_html' %>
+      <% if SIGN_UPS_ENABLED %>
+        <%= raw t 'decommission_banner.content_html' %>
+      <% else %>
+        <%= raw t 'hub.start.no_sign_ups.content_html' %>
+      <% end %>
     </div>
   </div>
   <div class="content-inner slides">

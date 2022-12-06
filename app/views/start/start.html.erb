@@ -15,18 +15,25 @@
           </span>
       <% end %>
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-          <h2 class="govuk-fieldset__heading"><%= t 'hub.start.sub_heading' %></h2>
+        <% if SIGN_UPS_ENABLED %>
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            <h2 class="govuk-fieldset__heading"><%= t 'hub.start.sub_heading' %></h2>
         </legend>
-        <div class="govuk-radios">
+        <% else %>
+          <p class="govuk-!-margin-top-0"><%= t 'hub.start.no_sign_ups.legend' %></p>
+      <% end %>
+
+    <div class="govuk-radios <%= SIGN_UPS_ENABLED ? '' : 'hidden' %>">
+            <div class="govuk-radios__item">
+              <%= f.radio_button :selection, true, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input", id: "start_form_selection_true"}%>
+              <%= f.label :selection_true, t('hub.start.answer_yes'), class: "govuk-label govuk-radios__label"%>
+            </div>
           <div class="govuk-radios__item">
-            <%= f.radio_button :selection, true, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input", id: "start_form_selection_true"}%>
-            <%= f.label :selection_true, t('hub.start.answer_yes'), class: "govuk-label govuk-radios__label"%>
-          </div>
-          <div class="govuk-radios__item">
-            <%= f.radio_button :selection, false, {required: true, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input"}%>
+            <%= f.radio_button :selection, false, {required: true, checked: !SIGN_UPS_ENABLED, data: { msg: t('hub.start.error_message')}, piwik_event_tracking: 'journey_user_type', class: "govuk-radios__input"}%>
             <%= f.label :selection_false, t('hub.start.answer_no'), class: "govuk-label govuk-radios__label"%>
-            <span class="govuk-hint govuk-radios__hint"><%= t('hub.start.answer_no_hint') %></span>
+            <% if SIGN_UPS_ENABLED %>
+              <span class="govuk-hint govuk-radios__hint"><%= t('hub.start.answer_no_hint') %></span>
+          <% end %>
           </div>
         </div>
       </fieldset>
@@ -38,5 +45,11 @@
       <div class="actions">
         <%= f.submit t('hub.start.continue'), class: 'govuk-button verify-inverse-btn button', id: 'next-button' %>
       </div>
+      <% if !SIGN_UPS_ENABLED %>
+        <p>
+          <%= t 'hub.start.no_sign_ups.back_to_service_html', rp_start_page: @redirect_to_destination %></p>
+        </p>
+      <% end %>
     </div>
+
   <% end %>

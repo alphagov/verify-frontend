@@ -5,7 +5,11 @@ class ChooseACertifiedCompanyController < IdpSelectionController
     @idps = order_with_unavailable_last(IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate_collection(identity_providers_available_for_registration))
     return something_went_wrong("No IDPs available for registration") if @idps.empty?
 
-    render :choose_a_certified_company
+    if SIGN_UPS_ENABLED
+      render :choose_a_certified_company
+    else
+      redirect_to start_path
+    end
   end
 
   def about
@@ -13,7 +17,11 @@ class ChooseACertifiedCompanyController < IdpSelectionController
     @idp = IDENTITY_PROVIDER_DISPLAY_DECORATOR.decorate(selected_idp)
     return something_went_wrong("Selected IDP is not viewable", :not_found) unless @idp.viewable?
 
-    render :about
+    if SIGN_UPS_ENABLED
+      render :about
+    else
+      redirect_to start_path
+    end
   end
 
   def select_idp

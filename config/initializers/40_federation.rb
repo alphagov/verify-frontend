@@ -31,6 +31,7 @@ Rails.application.config.after_initialize do
   # Feature flags
   SINGLE_IDP_FEATURE = CONFIG.single_idp_feature
   PUBLISH_HUB_CONFIG_ENABLED = CONFIG.publish_hub_config_enabled
+  SIGN_UPS_ENABLED = CONFIG.sign_ups_enabled
 
   STUB_MODE = CONFIG.stub_mode
 end

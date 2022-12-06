@@ -6,7 +6,11 @@
     <%= link_to t('navigation.back'), start_path, class: 'govuk-back-link' %>
 
     <h1 class="govuk-heading-l"><%= t 'hub.signin.heading' %></h1>
-    <p><%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), begin_registration_path, id: 'begin-registration-route') %></p>
+    <p>
+      <% if SIGN_UPS_ENABLED %>
+        <%= t 'hub.signin.registration_message_html', href: link_to(t('hub.signin.about_link'), begin_registration_path, id: 'begin-registration-route') %>
+      <% end %>
+    </p>
 
     <% unless @suggested_idp.nil? %>
       <%= render partial: 'sign_in/disconnected_suggested_idp', locals: { identity_provider: @suggested_idp } %>
@@ -26,8 +30,6 @@
 </div>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <p><%= link_to t('hub.signin.forgot_company'), forgot_company_path %></p>
-
     <% if @disconnected_idps.any? %>
       <%= render partial: 'sign_in/disconnected_idp_list', locals: { disconnected_identity_providers: @disconnected_idps } %>
     <% end %>

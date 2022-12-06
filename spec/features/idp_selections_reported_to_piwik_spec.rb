@@ -22,47 +22,49 @@ RSpec.describe "When the user selects an IDP" do
     stub_session_idp_authn_request
   end
 
-  it "reports the IDP name to piwik" do
-    piwik_registration_virtual_page = idcorp_registration_piwik_request
+  if SIGN_UPS_ENABLED
+    it "reports the IDP name to piwik" do
+      piwik_registration_virtual_page = idcorp_registration_piwik_request
 
-    visit "/choose-a-certified-company"
-    click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
-    click_button t("navigation.continue", display_name: t("navigation.continue"))
+      visit "/choose-a-certified-company"
+      click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
+      click_button t("navigation.continue", display_name: t("navigation.continue"))
 
-    expect(piwik_registration_virtual_page).to have_been_made.once
-  end
+      expect(piwik_registration_virtual_page).to have_been_made.once
+    end
 
-  it "appends the IDP name on subsequent selections" do
-    idcorp_piwik_request = stub_piwik_idp_registration(t("idps.stub-idp-one.name"))
+    it "appends the IDP name on subsequent selections" do
+      idcorp_piwik_request = stub_piwik_idp_registration(t("idps.stub-idp-one.name"))
 
-    idcorp_and_bobs_piwik_request = stub_piwik_idp_registration(
-      t("idps.stub-idp-two.name"), idp_list: "#{t('idps.stub-idp-one.name')},#{t('idps.stub-idp-two.name')}"
-    )
+      idcorp_and_bobs_piwik_request = stub_piwik_idp_registration(
+        t("idps.stub-idp-two.name"), idp_list: "#{t('idps.stub-idp-one.name')},#{t('idps.stub-idp-two.name')}"
+      )
 
-    stub_idp_select_request(idp_2_entity_id, instance_of(String))
-    visit "/choose-a-certified-company"
-    click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
-    click_button t("navigation.continue", display_name: t("idps.stub-idp-one.name"))
+      stub_idp_select_request(idp_2_entity_id, instance_of(String))
+      visit "/choose-a-certified-company"
+      click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
+      click_button t("navigation.continue", display_name: t("idps.stub-idp-one.name"))
 
-    expect(idcorp_piwik_request).to have_been_made.once
+      expect(idcorp_piwik_request).to have_been_made.once
 
-    visit "/choose-a-certified-company"
-    click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-two.name"))
-    click_button t("navigation.continue", display_name: t("idps.stub-idp-two.name"))
-    expect(idcorp_and_bobs_piwik_request).to have_been_made.once
-  end
+      visit "/choose-a-certified-company"
+      click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-two.name"))
+      click_button t("navigation.continue", display_name: t("idps.stub-idp-two.name"))
+      expect(idcorp_and_bobs_piwik_request).to have_been_made.once
+    end
 
-  it "truncates IdP names" do
-    idps = %w(A B C D E)
-    idps_reported = %w(B C D E IDCorp)
-    idcorp_piwik_request = stub_piwik_idp_registration("IDCorp", idp_list: idps_reported.join(","))
+    it "truncates IdP names" do
+      idps = %w(A B C D E)
+      idps_reported = %w(B C D E IDCorp)
+      idcorp_piwik_request = stub_piwik_idp_registration("IDCorp", idp_list: idps_reported.join(","))
 
-    page.set_rack_session(selected_idp_names: idps)
-    visit "/choose-a-certified-company"
-    click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
-    click_button t("navigation.continue", display_name: t("navigation.continue"))
+      page.set_rack_session(selected_idp_names: idps)
+      visit "/choose-a-certified-company"
+      click_button t("hub.choose_a_certified_company.choose_idp", display_name: t("idps.stub-idp-one.name"))
+      click_button t("navigation.continue", display_name: t("navigation.continue"))
 
-    expect(idcorp_piwik_request).to have_been_made.once
+      expect(idcorp_piwik_request).to have_been_made.once
+    end
   end
 end
 

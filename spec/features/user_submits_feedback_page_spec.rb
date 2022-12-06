@@ -104,17 +104,19 @@ RSpec.feature "When the user submits the feedback page" do
       expect(page).to have_link t("hub.feedback_sent.session_valid_link"), href: start_path
     end
 
-    it "should show user link back to page the user came from" do
-      visit about_documents_path
-      navigate_to_feedback_form
-      fill_in "feedback_form_what", with: what_text_field
-      fill_in "feedback_form_details", with: details_text_field
-      choose "feedback_form_reply_false"
+    if SIGN_UPS_ENABLED
+      it "should show user link back to page the user came from" do
+        visit about_documents_path
+        navigate_to_feedback_form
+        fill_in "feedback_form_what", with: what_text_field
+        fill_in "feedback_form_details", with: details_text_field
+        choose "feedback_form_reply_false"
 
-      click_button t("hub.feedback.send_message")
-      expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
-      expect(page).to_not have_content session_not_valid_link
-      expect(page).to have_link t("hub.feedback_sent.session_valid_link"), href: about_documents_path
+        click_button t("hub.feedback.send_message")
+        expect(page).to have_current_path(feedback_sent_path, ignore_query: true)
+        expect(page).to_not have_content session_not_valid_link
+        expect(page).to have_link t("hub.feedback_sent.session_valid_link"), href: about_documents_path
+      end
     end
 
     it "should show user link back to start page if the user came from an error page" do
@@ -144,18 +146,20 @@ RSpec.feature "When the user submits the feedback page" do
       expect(page).to have_link t("hub.feedback_sent.session_valid_link"), href: start_path
     end
 
-    it "should show feedback sent in Welsh and have the appropriate link back to Verify" do
-      visit about_documents_cy_path
-      navigate_to_feedback_form :cy
+    if SIGN_UPS_ENABLED
+      it "should show feedback sent in Welsh and have the appropriate link back to Verify" do
+        visit about_documents_cy_path
+        navigate_to_feedback_form :cy
 
-      fill_in "feedback_form_what", with: what_text_field
-      fill_in "feedback_form_details", with: details_text_field
-      choose "feedback_form_reply_false"
-      click_button t("hub.feedback.send_message", locale: :cy)
+        fill_in "feedback_form_what", with: what_text_field
+        fill_in "feedback_form_details", with: details_text_field
+        choose "feedback_form_reply_false"
+        click_button t("hub.feedback.send_message", locale: :cy)
 
-      expect(page).to have_title t("hub.feedback_sent.heading", locale: :cy)
-      expect(page).to have_css "html[lang=cy]"
-      expect(page).to have_link t("hub.feedback_sent.session_valid_link", locale: :cy), href: about_documents_cy_path
+        expect(page).to have_title t("hub.feedback_sent.heading", locale: :cy)
+        expect(page).to have_css "html[lang=cy]"
+        expect(page).to have_link t("hub.feedback_sent.session_valid_link", locale: :cy), href: about_documents_cy_path
+      end
     end
 
     it "should be able to direct user back to the relevant page if user switches to Welsh on the feedback page" do

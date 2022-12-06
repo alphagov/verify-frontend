@@ -181,6 +181,21 @@ cy:
         button_text: Defnyddiwch GOV.UK Verify
     start:
       heading: Mewngofnodi gyda GOV.UK Verify
+      no_sign_ups:
+        heading: Mae GOV.UK Verify yn cau yn fuan
+        content_html:
+          <p>
+          O Ebrill 2023 ni fyddwch yn gallu defnyddio GOV.UK Verify i gael mynediad i unrhyw wasanaethau. Bydd y gwasanaeth rydych ei angen yn egluro beth i’w wneud yn ei le.
+          </p>
+          <p>
+          Bydd rhai gwasanaethau yn stopio defnyddio GOV.UK Verify cyn Ebrill.
+          <a href="https://www.gov.uk/government/publications/introducing-govuk-verify/introducing-govuk-verify" target="_blank">
+          Darllenwch fwy am GOV.UK Verify yn cau (agor mewn tab newydd)</a>
+          </p>
+        legend:
+          Os ydych yn flaenorol wedi creu cyfrif hunaniaeth gyda Digidentity neu’r Swyddfa Bost, gallwch ei ddefnyddio i fewngofnodi.
+        back_to_service_html:
+           Ni allwch bellach greu cyfrif hunaniaeth newydd gyda GOV.UK Verify. Os nad oes gennych un, <a href="%{rp_start_page}">ewch yn ôl i’r gwasanaeth rydych angen ei ddefnyddio</a> a chwilio am ffyrdd eraill o brofi eich hunaniaeth.
       sub_heading: Ydych chi wedi defnyddio GOV.UK Verify o'r blaen?
       answer_yes: Dyma’r tro cyntaf i mi ddefnyddio Verify
       answer_no: Rwyf wedi defnyddio Verify o’r blaen
