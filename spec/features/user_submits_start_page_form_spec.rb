@@ -12,13 +12,15 @@ RSpec.describe "when user submits start page form" do
     set_session_and_session_cookies!
   end
 
-  it "will display about page when user chooses yes (registration)" do
-    stub_api_idp_list_for_registration
-    stub_request(:get, INTERNAL_PIWIK.url)
-    visit "/start"
-    choose("start_form_selection_true")
-    click_button("next-button")
-    expect(current_path).to eq("/about")
+  if SIGN_UPS_ENABLED
+    it "will display about page when user chooses yes (registration)" do
+      stub_api_idp_list_for_registration
+      stub_request(:get, INTERNAL_PIWIK.url)
+      visit "/start"
+      choose("start_form_selection_true")
+      click_button("next-button")
+      expect(current_path).to eq("/about")
+    end
   end
 
   it "will display sign in with IDP page when user chooses sign in" do

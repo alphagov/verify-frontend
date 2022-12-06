@@ -139,14 +139,16 @@ RSpec.describe "When the user visits a page" do
       )
       visit "/start"
 
-      expect(request_log).to receive(:log).with(
-        hash_including(
-          "action_name" => "What GOV.UK Verify is - GOV.UK Verify - LEVEL_2",
-          "url" => /about/,
-          "new_visit" => "0",
-        ),
-      )
-      visit "/about"
+      if SIGN_UPS_ENABLED
+        expect(request_log).to receive(:log).with(
+          hash_including(
+            "action_name" => "What GOV.UK Verify is - GOV.UK Verify - LEVEL_2",
+            "url" => /about/,
+            "new_visit" => "0",
+          ),
+        )
+        visit "/about"
+      end
     end
   end
 

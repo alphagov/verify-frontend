@@ -20,9 +20,11 @@ describe AboutController do
         stub_const("IDENTITY_PROVIDER_DISPLAY_DECORATOR", identity_provider_display_decorator)
       end
 
-      it "renders the certified companies for on the combined about view" do
-        expect(identity_provider_display_decorator).to receive(:decorate_collection).with(a_list_of_size(6)).and_return([])
-        expect(subject).to render_template(:how_verify_works)
+      if SIGN_UPS_ENABLED
+        it "renders the certified companies for on the combined about view" do
+          expect(identity_provider_display_decorator).to receive(:decorate_collection).with(a_list_of_size(6)).and_return([])
+          expect(subject).to render_template(:how_verify_works)
+        end
       end
     end
   end
@@ -41,33 +43,41 @@ describe AboutController do
         stub_const("IDENTITY_PROVIDER_DISPLAY_DECORATOR", identity_provider_display_decorator)
       end
 
-      it "renders the LOA2 certified companies for the combined about view" do
-        expect(identity_provider_display_decorator).to receive(:decorate_collection).with(a_list_of_size(6)).and_return([])
-        expect(subject).to render_template(:how_verify_works)
+      if SIGN_UPS_ENABLED
+        it "renders the LOA2 certified companies for the combined about view" do
+          expect(identity_provider_display_decorator).to receive(:decorate_collection).with(a_list_of_size(6)).and_return([])
+          expect(subject).to render_template(:how_verify_works)
+        end
       end
     end
 
     context "GET choosing a company" do
       subject { get :about_choosing_a_company, params: { locale: "en" } }
 
-      it "renders the choosing a company page" do
-        expect(subject).to render_template(:choosing_a_company)
+      if SIGN_UPS_ENABLED
+        it "renders the choosing a company page" do
+          expect(subject).to render_template(:choosing_a_company)
+        end
       end
     end
 
     context "GET about documents" do
       subject { get :about_documents, params: { locale: "en" } }
 
-      it "renders the choosing a company page" do
-        expect(subject).to render_template(:documents)
+      if SIGN_UPS_ENABLED
+        it "renders the choosing a company page" do
+          expect(subject).to render_template(:documents)
+        end
       end
     end
 
     context "GET prove identity another way" do
       subject { get :prove_your_identity_another_way, params: { locale: "en" } }
 
-      it "renders the choosing a company page" do
-        expect(subject).to render_template(:prove_your_identity_another_way)
+      if SIGN_UPS_ENABLED
+        it "renders the choosing a company page" do
+          expect(subject).to render_template(:prove_your_identity_another_way)
+        end
       end
     end
   end

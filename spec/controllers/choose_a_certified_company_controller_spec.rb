@@ -19,15 +19,17 @@ describe ChooseACertifiedCompanyController do
         stub_api_idp_list_for_registration([stub_idp_loa1], loa: "LEVEL_1")
       end
 
-      it "renders IDP list" do
-        set_session_and_cookies_with_loa("LEVEL_1", "test-rp")
+      if SIGN_UPS_ENABLED
+        it "renders IDP list" do
+          set_session_and_cookies_with_loa("LEVEL_1", "test-rp")
 
-        expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).once do |idps|
-          idps.each { |idp| expect(idp.levels_of_assurance).to include "LEVEL_1" }
+          expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection).once do |idps|
+            idps.each { |idp| expect(idp.levels_of_assurance).to include "LEVEL_1" }
+          end
+
+          get :index, params: { locale: "en" }
+          expect(subject).to render_template(:choose_a_certified_company)
         end
-
-        get :index, params: { locale: "en" }
-        expect(subject).to render_template(:choose_a_certified_company)
       end
     end
 
@@ -52,14 +54,16 @@ describe ChooseACertifiedCompanyController do
     end
 
     context "#index" do
-      it "renders the IDP picker page" do
-        expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection) do |idps|
-          idps.each { |idp| expect(idp.levels_of_assurance).to include "LEVEL_2" }
+      if SIGN_UPS_ENABLED
+        it "renders the IDP picker page" do
+          expect(IDENTITY_PROVIDER_DISPLAY_DECORATOR).to receive(:decorate_collection) do |idps|
+            idps.each { |idp| expect(idp.levels_of_assurance).to include "LEVEL_2" }
+          end
+
+          get :index, params: { locale: "en" }
+
+          expect(subject).to render_template(:choose_a_certified_company)
         end
-
-        get :index, params: { locale: "en" }
-
-        expect(subject).to render_template(:choose_a_certified_company)
       end
     end
 

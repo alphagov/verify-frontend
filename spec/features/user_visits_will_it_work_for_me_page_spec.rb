@@ -7,42 +7,46 @@ RSpec.describe "When the user visits the will it work for me page" do
     stub_api_idp_list_for_registration
   end
 
-  it "includes the appropriate feedback source" do
-    visit "/will-it-work-for-me"
-    expect_feedback_source_to_be(page, "WILL_IT_WORK_FOR_ME_PAGE", "/will-it-work-for-me")
+  if SIGN_UPS_ENABLED
+    it "includes the appropriate feedback source" do
+      visit "/will-it-work-for-me"
+      expect_feedback_source_to_be(page, "WILL_IT_WORK_FOR_ME_PAGE", "/will-it-work-for-me")
+    end
   end
 
   context "shows a validation message when form is invalid" do
-    it "when js is off" do
-      visit "/will-it-work-for-me"
+    if SIGN_UPS_ENABLED
+      it "when js is off" do
+        visit "/will-it-work-for-me"
 
-      click_button t("navigation.continue")
+        click_button t("navigation.continue")
 
-      expect(page).to have_current_path(will_it_work_for_me_path)
-      expect(page).to have_content "Tell us if you're 20 or over"
-      expect(page).to have_content "Tell us if you've lived in the UK for the last 12 months"
-    end
+        expect(page).to have_current_path(will_it_work_for_me_path)
+        expect(page).to have_content "Tell us if you're 20 or over"
+        expect(page).to have_content "Tell us if you've lived in the UK for the last 12 months"
+      end
 
-    it "when js is on", js: true do
-      visit "/will-it-work-for-me"
-      choose "will_it_work_for_me_form_above_age_threshold_false", allow_label_click: true
-      expect(page).to_not have_content t("hub.will_it_work_for_me.question.not_resident_reason.sub_heading")
-      choose "will_it_work_for_me_form_resident_last_12_months_false", allow_label_click: true
-      expect(page).to have_content t("hub.will_it_work_for_me.question.not_resident_reason.sub_heading")
-      click_button t("navigation.continue")
+      it "when js is on", js: true do
+        visit "/will-it-work-for-me"
+        choose "will_it_work_for_me_form_above_age_threshold_false", allow_label_click: true
+        expect(page).to_not have_content t("hub.will_it_work_for_me.question.not_resident_reason.sub_heading")
+        choose "will_it_work_for_me_form_resident_last_12_months_false", allow_label_click: true
+        expect(page).to have_content t("hub.will_it_work_for_me.question.not_resident_reason.sub_heading")
+        click_button t("navigation.continue")
 
-      expect(page).to have_current_path(will_it_work_for_me_path)
-      expect(page).to have_css "#validation-error-message-js", text: "Please answer all the questions"
-    end
+        expect(page).to have_current_path(will_it_work_for_me_path)
+        expect(page).to have_css "#validation-error-message-js", text: "Please answer all the questions"
+      end
 
-    it "will redirect user to the about documents page if they're eligible" do
-      visit "/will-it-work-for-me"
-      choose "will_it_work_for_me_form_above_age_threshold_true", allow_label_click: true
-      choose "will_it_work_for_me_form_resident_last_12_months_true", allow_label_click: true
+      it "will redirect user to the about documents page if they're eligible" do
+        visit "/will-it-work-for-me"
+        choose "will_it_work_for_me_form_above_age_threshold_true", allow_label_click: true
+        choose "will_it_work_for_me_form_resident_last_12_months_true", allow_label_click: true
 
-      click_button t("navigation.continue")
+        click_button t("navigation.continue")
 
-      expect(page).to have_current_path(about_documents_path)
+        expect(page).to have_current_path(about_documents_path)
+      end
     end
   end
 end
