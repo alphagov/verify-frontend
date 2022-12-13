@@ -79,7 +79,7 @@ cy:
     feedback_form: ffurflen adborth
     id: feedback_link_id
   decommission_banner:
-    title: Important
+    title: Pwysig
     heading: Mae GOV.UK Verify yn cau yn fuan
     content_html: |
       <p>O 15 Rhagfyr 2022 ni fyddwch yn gallu creu cyfrif GOV.UK Verify newydd.</p>
