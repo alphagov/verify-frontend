@@ -241,8 +241,6 @@ cy:
       items:
         - name: "defnyddio Taliadau Cefn Gwlad"
           homepage: "https://www.ruralpayments.service.gov.uk/"
-        - name: "ychwanegu tocyn sy'n cynnwys gwybodaeth am eich trwydded yrru i'ch ffôn glyfar"
-          homepage: "https://www.viewdrivingrecord.service.gov.uk/digital/index"
         - name: "mewngofnodwch i'ch 'Total Rewards Statement'"
           homepage: "https://www.totalrewardstatements.nhs.uk/"
         - name: "llofnodi eich gweithred morgais"
