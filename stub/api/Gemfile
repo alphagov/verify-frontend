@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.7.6'
-gem 'sinatra', '~> 2.2.0', require: false
+gem 'sinatra', '~> 2.2.3', require: false
 
 group :test do
   gem 'activemodel', '~> 5.2.4'
