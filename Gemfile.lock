@@ -87,7 +87,7 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    email_validator (1.6.0)
+    email_validator (2.2.4)
       activemodel
     erubi (1.12.0)
     eventmachine (1.2.7)
@@ -376,7 +376,7 @@ DEPENDENCIES
   codacy-coverage
   connection_pool
   dotenv-rails
-  email_validator (~> 1.6)
+  email_validator (~> 2.2)
   ffi (= 1.15.5)
   headless
   http (~> 5.1.1)
