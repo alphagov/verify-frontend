@@ -27,7 +27,7 @@ gem 'statsd-ruby', '~> 1.5.0'
 # prometheus/client_ruby had a massive rewrite in
 # https://github.com/prometheus/client_ruby/pull/95
 # This is the prerelease version of that work
-gem 'prometheus-client', '~> 0.10.0.pre.alpha.1'
+gem 'prometheus-client', '~> 4.0.0'
 
 # Use sentry-raven for sending logs to Sentry via the raven protocol
 gem 'sentry-raven'
