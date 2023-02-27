@@ -254,8 +254,6 @@ en:
       items:
         - name: "use Rural Payments"
           homepage: "https://www.ruralpayments.service.gov.uk/"
-        - name: "sign your mortgage deed"
-          homepage: "https://sign-your-mortgage-deed.landregistry.gov.uk/"
         - name: "sign in to your Total Rewards Statement"
           homepage: "https://www.totalrewardstatements.nhs.uk/"
       other_services: Other services
