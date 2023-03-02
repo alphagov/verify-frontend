@@ -239,8 +239,6 @@ cy:
       heading: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
       items:
-        - name: "defnyddio Taliadau Cefn Gwlad"
-          homepage: "https://www.ruralpayments.service.gov.uk/"
         - name: "mewngofnodwch i'ch 'Total Rewards Statement'"
           homepage: "https://www.totalrewardstatements.nhs.uk/"
       other_services: Gwasanaethau eraill
