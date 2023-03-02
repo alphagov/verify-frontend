@@ -252,8 +252,6 @@ en:
       heading: Find the service you were using to start again
       hint: Follow the instructions you received.
       items:
-        - name: "use Rural Payments"
-          homepage: "https://www.ruralpayments.service.gov.uk/"
         - name: "sign in to your Total Rewards Statement"
           homepage: "https://www.totalrewardstatements.nhs.uk/"
       other_services: Other services
