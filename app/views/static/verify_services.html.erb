@@ -6,6 +6,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l"><%= t 'hub.verify_services.heading' %></h1>
-    <p><%= t 'hub.verify_services.message' %><a href="<%= t 'hub.verify_services.link_url' %>"><%= t 'hub.verify_services.link_name' %></a>.</p>
+    <p><%= t 'hub.verify_services.message' %></p>
+    <%= render partial: 'shared/transaction_list' %>
   </div>
 </div>
