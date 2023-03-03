@@ -252,7 +252,8 @@ en:
       message: The only service still using GOV.UK Verify is
     transaction_list:
       heading: Find the service you were using to start again
-      hint: Follow the instructions you received.      
+      hint: Follow the instructions you received.    
+      items:  
       other_services: Other services      
     will_it_work_for_me:
       heading: About you

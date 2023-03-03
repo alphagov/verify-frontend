@@ -240,6 +240,7 @@ cy:
     transaction_list:
       heading: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
+      items:  
       other_services: Gwasanaethau eraill      
     will_it_work_for_me:
       heading: Amdanoch chi
