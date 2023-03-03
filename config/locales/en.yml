@@ -250,6 +250,10 @@ en:
       link_name: Sign in to your Total Rewards Statement
       link_url: https://www.totalrewardstatements.nhs.uk/
       message: The only service still using GOV.UK Verify is
+    transaction_list:
+      heading: Find the service you were using to start again
+      hint: Follow the instructions you received.      
+      other_services: Other services      
     will_it_work_for_me:
       heading: About you
       question:

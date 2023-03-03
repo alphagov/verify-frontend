@@ -237,6 +237,10 @@ cy:
       link_name: Mewngofnodwch i'ch 'Total Rewards Statement
       link_url: https://www.totalrewardstatements.nhs.uk/
       message: Yr unig wasanaeth sy’n dal i ddefnyddio GOV.UK Verify yw
+    transaction_list:
+      heading: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
+      hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
+      other_services: Gwasanaethau eraill      
     will_it_work_for_me:
       heading: Amdanoch chi
       question:
