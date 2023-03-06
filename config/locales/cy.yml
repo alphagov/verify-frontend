@@ -234,14 +234,16 @@ cy:
       heading: Hysbysiad preifatrwydd
     verify_services:
       heading: GOV.UK Verify
-      message: "Mae GOV.UK Verify yn newydd ac mae gwasanaethau’r llywodraeth yn ymuno drwy’r amser. Y gwasanaethau presennol sy’n defnyddio Verify yw:"
+      link_name: Mewngofnodwch i'ch 'Total Rewards Statement
+      link_url: https://www.totalrewardstatements.nhs.uk/
+      message: Yr unig wasanaeth sy’n dal i ddefnyddio GOV.UK Verify yw
     transaction_list:
       heading: Dod o hyd i’r gwasanaeth rydych yn ei ddefnyddio i ddechrau eto
       hint: Dilynnwch y cyfarwyddiadau rydych wedi’u derbyn.
-      items:
-        - name: "mewngofnodwch i'ch 'Total Rewards Statement'"
-          homepage: "https://www.totalrewardstatements.nhs.uk/"
-      other_services: Gwasanaethau eraill
+      items:  
+        - name: ""
+          homepage: ""
+      other_services: Gwasanaethau eraill      
     will_it_work_for_me:
       heading: Amdanoch chi
       question:
