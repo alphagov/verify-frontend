@@ -184,7 +184,7 @@ GEM
     parser (3.0.2.0)
       ast (~> 2.4.1)
     phantomjs (2.1.1.0)
-    prometheus-client (0.10.0)
+    prometheus-client (4.1.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -385,7 +385,7 @@ DEPENDENCIES
   logstash-logger
   mini_racer
   multi_json
-  prometheus-client (~> 0.10.0.pre.alpha.1)
+  prometheus-client (~> 4.1.0)
   pry (~> 0.14.2)
   puma
   rack-handlers
