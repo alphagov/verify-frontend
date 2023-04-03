@@ -68,7 +68,7 @@ group :test, :development do
   gem 'dotenv-rails'
 
   # Automated testing
-  gem 'capybara', '~> 3.37'
+  gem 'capybara', '~> 3.39'
   gem 'jasmine'
   gem 'jasmine-jquery-rails'
   gem 'rails-controller-testing'
