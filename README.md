@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.com/alphagov/verify-frontend.svg?branch=master)](https://travis-ci.com/alphagov/verify-frontend)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2161f0de613c449dac77fbd77b8d9703)](https://www.codacy.com/app/alphagov/verify-frontend?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=alphagov/verify-frontend&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/2161f0de613c449dac77fbd77b8d9703)](https://www.codacy.com/app/alphagov/verify-frontend?utm_source=github.com&utm_medium=referral&utm_content=alphagov/verify-frontend&utm_campaign=Badge_Coverage)
-
 # verify-frontend
+
+>**GOV.UK Verify has closed**
+>
+>This repository is out of date and has been archived
 
 The frontend for GOV.UK Verify
 
