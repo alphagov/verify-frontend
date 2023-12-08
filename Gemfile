@@ -3,7 +3,7 @@ ruby '2.7.6'
 
 gem 'rails', '~> 5.2.8.1'
 gem 'rails-i18n', '~> 5.1.3'
-gem 'route_translator', '~> 13.1.0'
+gem 'route_translator', '~> 13.2.1'
 
 # Server
 gem 'connection_pool'
