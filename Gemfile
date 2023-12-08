@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.7.6'
 
-gem 'rails', '~> 5.2.8.1'
-gem 'rails-i18n', '~> 5.1.3'
+gem 'rails', '~> 7.0.8'
+gem 'rails-i18n', '~> 7.0.8'
 gem 'route_translator', '~> 13.1.0'
 
 # Server
@@ -54,7 +54,7 @@ gem 'ffi', '1.15.5'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 3.7'
+  gem 'web-console', '~> 4.2'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
