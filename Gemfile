@@ -35,7 +35,7 @@ gem 'sentry-raven'
 gem 'logstash-logger'
 gem 'request_store', '~> 1.5.1'
 
-gem 'email_validator', '~> 1.6'
+gem 'email_validator', '~> 2.2'
 gem 'zendesk_api'
 
 # Use multi_json because pkgr forces the json gem to < 2.0, which is an old specification of JSON (doesn't allow top level strings)
